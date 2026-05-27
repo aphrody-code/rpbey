@@ -69,7 +69,7 @@ export default async function AdminDashboardPage() {
 		db
 			.select({ value: count() })
 			.from(schema.users)
-			.where(lte(schema.users.createdAt, thirtyDaysAgoIso)),
+			.where(lte(schema.users.createdAt, thirtyDaysAgo)),
 		db
 			.select({ value: count() })
 			.from(schema.profiles)
@@ -85,7 +85,7 @@ export default async function AdminDashboardPage() {
 			columns: { name: true, createdAt: true },
 		}),
 		db.query.users.findMany({
-			where: gte(schema.users.createdAt, sixMonthsAgoIso),
+			where: gte(schema.users.createdAt, sixMonthsAgo),
 			columns: { createdAt: true },
 		}),
 		db.query.tournaments.findMany({

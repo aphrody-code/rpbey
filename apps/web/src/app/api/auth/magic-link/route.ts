@@ -16,7 +16,7 @@ export async function GET(request: Request) {
 	const session = await db.query.sessions.findFirst({
 		where: and(
 			eq(schema.sessions.token, token),
-			gt(schema.sessions.expiresAt, new Date().toISOString()),
+			gt(schema.sessions.expiresAt, new Date()),
 		),
 	});
 
