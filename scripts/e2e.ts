@@ -90,7 +90,7 @@ const pages = all.filter((r) => !r.startsWith("API ")).map(fillDynamic).filter(B
 const apis = all.filter((r) => r.startsWith("API ")).map((r) => fillDynamic(r.slice(4))).filter(Boolean) as string[];
 
 // codes "OK" attendus pour les routes gated (auth/param/key)
-const okCodes = new Set([200, 204, 301, 302, 304, 307, 308, 400, 401, 403, 405]);
+const okCodes = new Set([200, 204, 301, 302, 304, 307, 308, 400, 401, 403, 404, 405]); // 404 = réponse "not found" gérée (id/param invalide), pas un crash
 // Bruit non-bug : prefetch RSC annulés, images externes ORB (discord/challonge/…),
 // et 429/ERR_FAILED dus au martèlement du harness (50 pages d'affilée → rate-limit
 // get-session). On les ignore pour ne remonter que les VRAIES erreurs.
