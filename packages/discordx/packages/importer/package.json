@@ -1,0 +1,59 @@
+{
+  "name": "@rpbey/importer",
+  "version": "0.1.1",
+  "private": false,
+  "description": "A solution to import files on the module and commonjs at the same time",
+  "keywords": [
+    "cjs",
+    "esm",
+    "importer",
+    "javascript",
+    "mjs",
+    "typescript"
+  ],
+  "homepage": "https://discordx.js.org",
+  "bugs": {
+    "url": "https://github.com/discordx-ts/discordx/issues",
+    "email": "vijayymmeena@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rpbey/discordy.git",
+    "directory": "packages/importer"
+  },
+  "license": "Apache-2.0",
+  "contributors": [
+    "Vijay Meena <vijayymmeena@gmail.com> (https://github.com/vijayymmeena)"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "index.d.ts",
+    "CHANGELOG.md",
+    "LICENSE.txt",
+    "README.md",
+    "SECURITY.md",
+    "package.json"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts --external bun --clean"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "catalog:"
+  },
+  "engines": {
+    "bun": ">=1.2.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://npm.pkg.github.com"
+  }
+}

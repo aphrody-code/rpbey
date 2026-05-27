@@ -1,0 +1,51 @@
+# Bun runtime + install configuration for the ~/vps monorepo.
+# Docs: https://bun.com/docs/runtime/bunfig
+
+[install]
+# Workspace resolution is already driven by package.json "workspaces".
+registry = "https://registry.npmjs.org/"
+
+# Lock file: text format for readable diffs.
+saveTextLockfile = true
+
+# Run up to 10 postinstall scripts in parallel (prebuilt binaries, etc.).
+concurrentScripts = 10
+
+# Préférer le cache local quand dispo (économise round-trips registry).
+# "online" pour forcer fetch ; "offline" pour bloquer. Défaut auto.
+prefer = "offline"
+
+# Bun default = "isolated" — chaque package voit uniquement ses propres deps.
+# Si un paquet tiers (ex: discord-html-transcripts 3.3.0) importe une transitive
+# non déclarée, l'ajouter explicitement au package.json qui l'utilise.
+# NOTE: pour builder Next.js website/azalee/rpb-dashboard, switcher temporairement
+# en hoisted (cf. CLAUDE.md "Bun linker isolated vs bundlers Next.js"), puis revert.
+linker = "hoisted"
+
+# CI-only: refuse to modify bun.lock (overridden locally by BUN_CONFIG_FROZEN_LOCKFILE).
+# frozenLockfile = true
+
+[install.scopes]
+# Fork canvas (aphrody-code/canvas) publié sur GitHub Packages.
+# Évite la dépendance au .npmrc local de packages/canvas/ et explicite l'auth.
+"@aphrody-code" = { url = "https://npm.pkg.github.com/", token = "$GITHUB_TOKEN" }
+"@rpbey" = { url = "https://npm.pkg.github.com/", token = "$GITHUB_TOKEN" }
+
+[install.cache]
+# Bun n'expand PAS le tilde — un literal "~" crée un dir cwd/~/.bun/install/cache
+# (4 GB de cache dupliqué constatés 2026-04-25). Chemin absolu obligatoire.
+dir = "/home/ubuntu/.bun/install/cache"
+
+[install.lockfile]
+save = true
+
+[test]
+preload = ["reflect-metadata"]
+coverage = false
+
+[run]
+bun = true
+shell = "system"
+
+# Silent mode in CI — $ bun run --silent propagates to the child.
+silent = false

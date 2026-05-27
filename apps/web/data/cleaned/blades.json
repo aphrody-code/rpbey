@@ -1,0 +1,822 @@
+[
+  {
+    "name": "AeroPegasus",
+    "spin": "R",
+    "stats": {
+      "attack": "65",
+      "defense": "25",
+      "stamina": "30",
+      "weight": 38
+    }
+  },
+  {
+    "name": "BearScratch",
+    "spin": "R",
+    "stats": {
+      "attack": "17",
+      "defense": "50",
+      "stamina": "35",
+      "weight": 29.6
+    }
+  },
+  {
+    "name": "BlackShell",
+    "spin": "R",
+    "stats": {
+      "attack": "10",
+      "defense": "65",
+      "stamina": "25",
+      "weight": 32.1
+    }
+  },
+  {
+    "name": "CaptainAmerica",
+    "spin": "R",
+    "stats": {
+      "attack": "55",
+      "defense": "28",
+      "stamina": "17",
+      "weight": 32.3
+    }
+  },
+  {
+    "name": "ClockMirage",
+    "spin": "R",
+    "stats": {
+      "attack": "10",
+      "defense": "10",
+      "stamina": "80",
+      "weight": 37.7
+    }
+  },
+  {
+    "name": "CobaltDragoon",
+    "spin": "L",
+    "stats": {
+      "attack": "60",
+      "defense": "15",
+      "stamina": "25",
+      "weight": 38
+    }
+  },
+  {
+    "name": "CobaltDrake",
+    "spin": "R",
+    "stats": {
+      "attack": "65",
+      "defense": "30",
+      "stamina": "20",
+      "weight": 38
+    }
+  },
+  {
+    "name": "CrimsonGaruda",
+    "spin": "R",
+    "stats": {
+      "attack": "45",
+      "defense": "25",
+      "stamina": "30",
+      "weight": 35
+    }
+  },
+  {
+    "name": "DarthVader",
+    "spin": "R",
+    "stats": {
+      "attack": "28",
+      "defense": "60",
+      "stamina": "12",
+      "weight": 30.4
+    }
+  },
+  {
+    "name": "DracielShield",
+    "spin": "R",
+    "stats": {
+      "attack": "30",
+      "defense": "50",
+      "stamina": "20",
+      "weight": 28
+    }
+  },
+  {
+    "name": "DragoonStorm",
+    "spin": "L",
+    "stats": {
+      "attack": "55",
+      "defense": "30",
+      "stamina": "15",
+      "weight": 25.1
+    }
+  },
+  {
+    "name": "DranBuster",
+    "spin": "R",
+    "stats": {
+      "attack": "70",
+      "defense": "20",
+      "stamina": "10",
+      "weight": 36.5
+    }
+  },
+  {
+    "name": "DranDagger",
+    "spin": "R",
+    "stats": {
+      "attack": "50",
+      "defense": "25",
+      "stamina": "25",
+      "weight": 34.7
+    }
+  },
+  {
+    "name": "DranSword",
+    "spin": "R",
+    "stats": {
+      "attack": "55",
+      "defense": "25",
+      "stamina": "20",
+      "weight": 34.6
+    }
+  },
+  {
+    "name": "DranzerSpiral",
+    "spin": "R",
+    "stats": {
+      "attack": "35",
+      "defense": "30",
+      "stamina": "35",
+      "weight": 27.7
+    }
+  },
+  {
+    "name": "DrigerSlash",
+    "spin": "R",
+    "stats": {
+      "attack": "40",
+      "defense": "35",
+      "stamina": "25",
+      "weight": 28.6
+    }
+  },
+  {
+    "name": "GeneralGrievous",
+    "spin": "R",
+    "stats": {
+      "attack": "22",
+      "defense": "50",
+      "stamina": "28",
+      "weight": 31
+    }
+  },
+  {
+    "name": "GhostCircle",
+    "spin": "R",
+    "stats": {
+      "attack": "5",
+      "defense": "40",
+      "stamina": "55",
+      "weight": 26.7
+    }
+  },
+  {
+    "name": "GillShark",
+    "spin": "R",
+    "stats": {
+      "attack": "20",
+      "defense": "25",
+      "stamina": "55",
+      "weight": 29.6
+    }
+  },
+  {
+    "name": "GoatTackle",
+    "spin": "R",
+    "stats": {
+      "attack": "13",
+      "defense": "65",
+      "stamina": "22",
+      "weight": 31.5
+    }
+  },
+  {
+    "name": "GolemRock",
+    "spin": "R",
+    "stats": {
+      "attack": "30",
+      "defense": "60",
+      "stamina": "10",
+      "weight": 34
+    }
+  },
+  {
+    "name": "HellsChain",
+    "spin": "R",
+    "stats": {
+      "attack": "35",
+      "defense": "40",
+      "stamina": "25",
+      "weight": 33.2
+    }
+  },
+  {
+    "name": "HellsHammer",
+    "spin": "R",
+    "stats": {
+      "attack": "50",
+      "defense": "25",
+      "stamina": "25",
+      "weight": 33
+    }
+  },
+  {
+    "name": "HellsScythe",
+    "spin": "R",
+    "stats": {
+      "attack": "30",
+      "defense": "35",
+      "stamina": "35",
+      "weight": 33
+    }
+  },
+  {
+    "name": "ImpactDrake",
+    "spin": "R",
+    "stats": {
+      "attack": "75",
+      "defense": "25",
+      "stamina": "10",
+      "weight": 39
+    }
+  },
+  {
+    "name": "IronMan",
+    "spin": "R",
+    "stats": {
+      "attack": "17",
+      "defense": "55",
+      "stamina": "28",
+      "weight": 32.2
+    }
+  },
+  {
+    "name": "KnightLance",
+    "spin": "R",
+    "stats": {
+      "attack": "25",
+      "defense": "60",
+      "stamina": "15",
+      "weight": 32.9
+    }
+  },
+  {
+    "name": "KnightMail",
+    "spin": "R",
+    "stats": {
+      "attack": "10",
+      "defense": "65",
+      "stamina": "35",
+      "weight": 36.5
+    }
+  },
+  {
+    "name": "KnightShield",
+    "spin": "R",
+    "stats": {
+      "attack": "20",
+      "defense": "55",
+      "stamina": "25",
+      "weight": 32.4
+    }
+  },
+  {
+    "name": "LeonClaw",
+    "spin": "R",
+    "stats": {
+      "attack": "40",
+      "defense": "40",
+      "stamina": "20",
+      "weight": 31.4
+    }
+  },
+  {
+    "name": "LeonCrest",
+    "spin": "R",
+    "stats": {
+      "attack": "15",
+      "defense": "70",
+      "stamina": "15",
+      "weight": 35
+    }
+  },
+  {
+    "name": "Lightning L-Drago [R]",
+    "spin": "L",
+    "stats": {
+      "attack": "50",
+      "defense": "30",
+      "stamina": "20",
+      "weight": 33.5
+    }
+  },
+  {
+    "name": "Lightning L-Drago [U]",
+    "spin": "L",
+    "stats": {
+      "attack": "55",
+      "defense": "25",
+      "stamina": "20",
+      "weight": 34
+    }
+  },
+  {
+    "name": "LukeSkywalker",
+    "spin": "R",
+    "stats": {
+      "attack": "23",
+      "defense": "55",
+      "stamina": "22",
+      "weight": 30.3
+    }
+  },
+  {
+    "name": "MammothTusk",
+    "spin": "R",
+    "stats": {
+      "attack": "33",
+      "defense": "35",
+      "stamina": "32",
+      "weight": 32
+    }
+  },
+  {
+    "name": "Megatron",
+    "spin": "R",
+    "stats": {
+      "attack": "27",
+      "defense": "35",
+      "stamina": "38",
+      "weight": 31.1
+    }
+  },
+  {
+    "name": "MeteorDragoon",
+    "spin": "L",
+    "stats": {
+      "attack": "75",
+      "defense": "15",
+      "stamina": "35",
+      "weight": 39
+    }
+  },
+  {
+    "name": "MoffGideon",
+    "spin": "R",
+    "stats": {
+      "attack": "32",
+      "defense": "35",
+      "stamina": "33",
+      "weight": 30.5
+    }
+  },
+  {
+    "name": "Mosasaurus",
+    "spin": "R",
+    "stats": {
+      "attack": "32",
+      "defense": "55",
+      "stamina": "13",
+      "weight": 29.9
+    }
+  },
+  {
+    "name": "MummyCurse",
+    "spin": "R",
+    "stats": {
+      "attack": "30",
+      "defense": "60",
+      "stamina": "20",
+      "weight": 37.5
+    }
+  },
+  {
+    "name": "Obi-wanKenobi",
+    "spin": "R",
+    "stats": {
+      "attack": "23",
+      "defense": "60",
+      "stamina": "17",
+      "weight": 30.6
+    }
+  },
+  {
+    "name": "OptimusPrimal",
+    "spin": "R",
+    "stats": {
+      "attack": "60",
+      "defense": "27",
+      "stamina": "13",
+      "weight": 35
+    }
+  },
+  {
+    "name": "OptimusPrime",
+    "spin": "R",
+    "stats": {
+      "attack": "22",
+      "defense": "55",
+      "stamina": "23",
+      "weight": 31.7
+    }
+  },
+  {
+    "name": "OrochiCluster",
+    "spin": "R",
+    "stats": {
+      "attack": "65",
+      "defense": "15",
+      "stamina": "20",
+      "weight": 36.6
+    }
+  },
+  {
+    "name": "PhoenixFeather",
+    "spin": "R",
+    "stats": {
+      "attack": "50",
+      "defense": "20",
+      "stamina": "30",
+      "weight": 33.3
+    }
+  },
+  {
+    "name": "PhoenixRudder",
+    "spin": "R",
+    "stats": {
+      "attack": "10",
+      "defense": "35",
+      "stamina": "60",
+      "weight": 34.5
+    }
+  },
+  {
+    "name": "PhoenixWing",
+    "spin": "R",
+    "stats": {
+      "attack": "60",
+      "defense": "25",
+      "stamina": "15",
+      "weight": 38
+    }
+  },
+  {
+    "name": "Quetzalcoatlus",
+    "spin": "R",
+    "stats": {
+      "attack": "27",
+      "defense": "23",
+      "stamina": "50",
+      "weight": 34.3
+    }
+  },
+  {
+    "name": "RedHulk",
+    "spin": "R",
+    "stats": {
+      "attack": "65",
+      "defense": "27",
+      "stamina": "8",
+      "weight": 36.3
+    }
+  },
+  {
+    "name": "RhinoHorn",
+    "spin": "R",
+    "stats": {
+      "attack": "20",
+      "defense": "50",
+      "stamina": "30",
+      "weight": 33
+    }
+  },
+  {
+    "name": "RockLeone",
+    "spin": "R",
+    "stats": {
+      "attack": "30",
+      "defense": "55",
+      "stamina": "15",
+      "weight": 29.8
+    }
+  },
+  {
+    "name": "SamuraiCalibur",
+    "spin": "R",
+    "stats": {
+      "attack": "40",
+      "defense": "30",
+      "stamina": "30",
+      "weight": 36
+    }
+  },
+  {
+    "name": "SamuraiSaber",
+    "spin": "R",
+    "stats": {
+      "attack": "65",
+      "defense": "20",
+      "stamina": "25",
+      "weight": 36.5
+    }
+  },
+  {
+    "name": "ScorpioSpear [3]",
+    "spin": "R",
+    "stats": {
+      "attack": "55",
+      "defense": "25",
+      "stamina": "30",
+      "weight": 39.7
+    }
+  },
+  {
+    "name": "ScorpioSpear [6]",
+    "spin": "R",
+    "stats": {
+      "attack": "25",
+      "defense": "55",
+      "stamina": "30",
+      "weight": 39.7
+    }
+  },
+  {
+    "name": "SharkEdge",
+    "spin": "R",
+    "stats": {
+      "attack": "60",
+      "defense": "25",
+      "stamina": "15",
+      "weight": 34.5
+    }
+  },
+  {
+    "name": "SharkScale",
+    "spin": "R",
+    "stats": {
+      "attack": "70",
+      "defense": "15",
+      "stamina": "15",
+      "weight": 37.6
+    }
+  },
+  {
+    "name": "ShelterDrake",
+    "spin": "R",
+    "stats": {
+      "attack": "25",
+      "defense": "40",
+      "stamina": "35",
+      "weight": 32
+    }
+  },
+  {
+    "name": "ShinobiKnife",
+    "spin": "R",
+    "stats": {
+      "attack": "23",
+      "defense": "50",
+      "stamina": "27",
+      "weight": 30.9
+    }
+  },
+  {
+    "name": "ShinobiShadow",
+    "spin": "R",
+    "stats": {
+      "attack": "10",
+      "defense": "70",
+      "stamina": "20",
+      "weight": 28
+    }
+  },
+  {
+    "name": "SilverWolf",
+    "spin": "R",
+    "stats": {
+      "attack": "15",
+      "defense": "30",
+      "stamina": "65",
+      "weight": 36.8
+    }
+  },
+  {
+    "name": "SphinxCowl",
+    "spin": "R",
+    "stats": {
+      "attack": "35",
+      "defense": "55",
+      "stamina": "10",
+      "weight": 32.7
+    }
+  },
+  {
+    "name": "SpiderMan",
+    "spin": "R",
+    "stats": {
+      "attack": "33",
+      "defense": "17",
+      "stamina": "50",
+      "weight": 33.3
+    }
+  },
+  {
+    "name": "Spinosorus",
+    "spin": "R",
+    "stats": {
+      "attack": "60",
+      "defense": "28",
+      "stamina": "12",
+      "weight": 36
+    }
+  },
+  {
+    "name": "Starscream",
+    "spin": "R",
+    "stats": {
+      "attack": "18",
+      "defense": "27",
+      "stamina": "55",
+      "weight": 29.5
+    }
+  },
+  {
+    "name": "StormPegasus",
+    "spin": "R",
+    "stats": {
+      "attack": "55",
+      "defense": "15",
+      "stamina": "30",
+      "weight": 31
+    }
+  },
+  {
+    "name": "T-rex",
+    "spin": "R",
+    "stats": {
+      "attack": "65",
+      "defense": "30",
+      "stamina": "5",
+      "weight": 37
+    }
+  },
+  {
+    "name": "Thanos",
+    "spin": "R",
+    "stats": {
+      "attack": "22",
+      "defense": "60",
+      "stamina": "18",
+      "weight": 29.5
+    }
+  },
+  {
+    "name": "TheMandalorian",
+    "spin": "R",
+    "stats": {
+      "attack": "40",
+      "defense": "43",
+      "stamina": "17",
+      "weight": 30
+    }
+  },
+  {
+    "name": "TriceraPress",
+    "spin": "R",
+    "stats": {
+      "attack": "20",
+      "defense": "65",
+      "stamina": "15",
+      "weight": 36.5
+    }
+  },
+  {
+    "name": "TyrannoBeat",
+    "spin": "R",
+    "stats": {
+      "attack": "65",
+      "defense": "30",
+      "stamina": "5",
+      "weight": 37
+    }
+  },
+  {
+    "name": "UnicornSting",
+    "spin": "R",
+    "stats": {
+      "attack": "35",
+      "defense": "35",
+      "stamina": "30",
+      "weight": 33.4
+    }
+  },
+  {
+    "name": "Venom",
+    "spin": "R",
+    "stats": {
+      "attack": "55",
+      "defense": "22",
+      "stamina": "23",
+      "weight": 34.3
+    }
+  },
+  {
+    "name": "VictoryValkyrie",
+    "spin": "R",
+    "stats": {
+      "attack": "55",
+      "defense": "20",
+      "stamina": "25",
+      "weight": 33.2
+    }
+  },
+  {
+    "name": "ViperTail",
+    "spin": "R",
+    "stats": {
+      "attack": "30",
+      "defense": "20",
+      "stamina": "50",
+      "weight": 34.7
+    }
+  },
+  {
+    "name": "WeissTiger",
+    "spin": "R",
+    "stats": {
+      "attack": "45",
+      "defense": "30",
+      "stamina": "25",
+      "weight": 34.6
+    }
+  },
+  {
+    "name": "WhaleWave",
+    "spin": "R",
+    "stats": {
+      "attack": "45",
+      "defense": "35",
+      "stamina": "20",
+      "weight": 38.2
+    }
+  },
+  {
+    "name": "WizardArrow",
+    "spin": "R",
+    "stats": {
+      "attack": "15",
+      "defense": "30",
+      "stamina": "55",
+      "weight": 31.8
+    }
+  },
+  {
+    "name": "WizardRod",
+    "spin": "R",
+    "stats": {
+      "attack": "15",
+      "defense": "25",
+      "stamina": "60",
+      "weight": 35.3
+    }
+  },
+  {
+    "name": "WyvernGale",
+    "spin": "R",
+    "stats": {
+      "attack": "10",
+      "defense": "40",
+      "stamina": "50",
+      "weight": 31.9
+    }
+  },
+  {
+    "name": "WyvernHover",
+    "spin": "R",
+    "stats": {
+      "attack": "13",
+      "defense": "60",
+      "stamina": "27",
+      "weight": 35
+    }
+  },
+  {
+    "name": "XenoXcalibur",
+    "spin": "R",
+    "stats": {
+      "attack": "65",
+      "defense": "25",
+      "stamina": "10",
+      "weight": 31
+    }
+  }
+]

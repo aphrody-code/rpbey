@@ -1,0 +1,67 @@
+{
+  "name": "@rpbey/di",
+  "version": "0.1.1",
+  "private": false,
+  "description": "dependency injection service with TSyringe support",
+  "keywords": [
+    "bot",
+    "decorators",
+    "dependency injection",
+    "discord",
+    "discordx",
+    "framework",
+    "javascript",
+    "tsyringe",
+    "typescript"
+  ],
+  "homepage": "https://discordx.js.org",
+  "bugs": {
+    "url": "https://github.com/discordx-ts/discordx/issues",
+    "email": "vijayymmeena@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rpbey/discordy.git",
+    "directory": "packages/di"
+  },
+  "license": "Apache-2.0",
+  "contributors": [
+    "Owen Calvin <owen.gombas@gmail.com> (https://github.com/OwenCalvin)",
+    "Vijay Meena <vijayymmeena@gmail.com> (https://github.com/vijayymmeena)",
+    "Victorique Blois <loli@victorique.moe> (https://github.com/VictoriqueMoe)"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "CHANGELOG.md",
+    "LICENSE.txt",
+    "README.md",
+    "SECURITY.md",
+    "package.json"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts --clean",
+    "build:typedoc": "bunx typedoc src/index.ts --out ../../docs/static/api/di"
+  },
+  "dependencies": {
+    "tsyringe": "^4.10.0",
+    "typedi": "^0.10.0"
+  },
+  "devDependencies": {
+    "typescript": "catalog:"
+  },
+  "engines": {
+    "bun": ">=1.2.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://npm.pkg.github.com"
+  }
+}

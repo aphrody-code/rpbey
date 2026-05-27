@@ -1,0 +1,2 @@
+[install.scopes]
+"@rpbey" = { token = "$GH_TOKEN", url = "https://npm.pkg.github.com/" }

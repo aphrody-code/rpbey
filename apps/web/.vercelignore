@@ -1,0 +1,31 @@
+# Évite l'upload massif vers Vercel — toutes les données statiques sont sur
+# cdn.rpbey.fr/static/rpb-dashboard/ (vhost VPS nginx). La lambda fetch via
+# data-cache.ts (env VERCEL=1).
+#
+# On garde data/ accessible pour les imports statiques (ex: tournament-logic.ts
+# import data/beyblade_x_logic_rules.json) — on exclut juste les gros sous-dossiers.
+
+data/bey-library/
+data/exports/
+data/satr_history/
+data/wb_history/
+data/scrapes/
+data/cleaned/
+data/backups/
+data/pools/
+data/planner/
+data/discord-*.json
+data/all_image_assets.json
+data/lighthouse-trends.db
+.next/
+node_modules/
+*.bak
+*.bak-*
+*.swp
+*.swo
+.cache/
+.swc/
+.env.local
+.env.*.local
+docs/
+.agents/

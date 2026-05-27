@@ -1,0 +1,702 @@
+[
+  {
+    "code": "BX-01",
+    "name": "Starter DranSword 3-60F",
+    "date": "July 15th, 2023"
+  },
+  {
+    "code": "BX-02",
+    "name": "Starter HellsScythe 4-60T",
+    "date": "July 15th, 2023"
+  },
+  {
+    "code": "BX-03",
+    "name": "Starter WizardArrow 4-80B",
+    "date": "July 15th, 2023"
+  },
+  {
+    "code": "BX-04",
+    "name": "Starter KnightShield 3-80N",
+    "date": "July 15th, 2023"
+  },
+  {
+    "code": "BX-05",
+    "name": "Booster WizardArrow 4-80B",
+    "date": "July 15th, 2023"
+  },
+  {
+    "code": "BX-06",
+    "name": "Booster KnightShield 3-80N",
+    "date": "July 15th, 2023"
+  },
+  {
+    "code": "BX-07",
+    "name": "Start Dash Set",
+    "date": "July 15th, 2023"
+  },
+  {
+    "code": "BX-08",
+    "name": "3on3 Deck Set",
+    "date": "July 15th, 2023"
+  },
+  {
+    "code": "BX-09",
+    "name": "Beybattle Pass",
+    "date": "July 15th, 2023"
+  },
+  {
+    "code": "BX-10",
+    "name": "Xtreme Stadium",
+    "date": "July 15th, 2023"
+  },
+  {
+    "code": "BX-11",
+    "name": "Launcher Grip",
+    "date": "July 15th, 2023"
+  },
+  {
+    "code": "BX-12",
+    "name": "3on3 Deck Case",
+    "date": "July 15th, 2023"
+  },
+  {
+    "code": "BX-13",
+    "name": "Booster KnightLance 4-80HN",
+    "date": "August 10th, 2023"
+  },
+  {
+    "code": "BX-14",
+    "name": "Random Booster Vol. 1",
+    "date": "September 9th, 2023"
+  },
+  {
+    "code": "BX-15",
+    "name": "Starter LeonClaw 5-60P",
+    "date": "October 7th, 2023"
+  },
+  {
+    "code": "BX-16",
+    "name": "Random Booster ViperTail Select",
+    "date": "October 7th, 2023"
+  },
+  {
+    "code": "BX-17",
+    "name": "Battle Entry Set",
+    "date": "October 7th, 2023"
+  },
+  {
+    "code": "BX-18",
+    "name": "String Launcher",
+    "date": "October 7th, 2023"
+  },
+  {
+    "code": "BX-19",
+    "name": "Booster RhinoHorn 3-80S",
+    "date": "November 2nd, 2023"
+  },
+  {
+    "code": "BX-20",
+    "name": "DranDagger Deck Set",
+    "date": "November 2nd, 2023"
+  },
+  {
+    "code": "BX-21",
+    "name": "HellsChain Deck Set",
+    "date": "November 2nd, 2023"
+  },
+  {
+    "code": "BX-22",
+    "name": "DranSword 3-60F Entry Package",
+    "date": "December 2nd, 2023"
+  },
+  {
+    "code": "BX-23",
+    "name": "Starter PhoenixWing 9-60GF",
+    "date": "December 27th, 2023"
+  },
+  {
+    "code": "BX-24",
+    "name": "Random Booster Vol. 2",
+    "date": "December 27th, 2023"
+  },
+  {
+    "code": "BX-25",
+    "name": "Gear Case",
+    "date": "December 27th, 2023"
+  },
+  {
+    "code": "BX-26",
+    "name": "Booster UnicornSting 5-60GP",
+    "date": "January 27th, 2024"
+  },
+  {
+    "code": "BX-27",
+    "name": "Random Booster SphinxCowl Select",
+    "date": "February 22nd, 2024"
+  },
+  {
+    "code": "BX-28",
+    "name": "String Launcher (White Ver.)",
+    "date": "March 30th, 2024"
+  },
+  {
+    "code": "BX-29",
+    "name": "Custom Grip (White Ver.)",
+    "date": "March 30th, 2024"
+  },
+  {
+    "code": "BX-30",
+    "name": "Custom Grip (Red Ver.)",
+    "date": "March 30th, 2024"
+  },
+  {
+    "code": "BX-31",
+    "name": "Random Booster Vol. 3",
+    "date": "April 27th, 2024"
+  },
+  {
+    "code": "BX-32",
+    "name": "Wide Xtreme Stadium",
+    "date": "July 13th, 2024"
+  },
+  {
+    "code": "BX-33",
+    "name": "Booster WeissTiger 3-60U",
+    "date": "June 15th, 2024"
+  },
+  {
+    "code": "BX-34",
+    "name": "Starter CobaltDragoon 2-60C",
+    "date": "July 13th, 2024"
+  },
+  {
+    "code": "BX-35",
+    "name": "Random Booster Vol. 4",
+    "date": "July 13th, 2024"
+  },
+  {
+    "code": "BX-36",
+    "name": "Random Booster WhaleWave Select",
+    "date": "September 14th, 2024"
+  },
+  {
+    "code": "BX-37",
+    "name": "Double Xtreme Stadium Set",
+    "date": "October 12th, 2024"
+  },
+  {
+    "code": "BX-38",
+    "name": "Booster CrimsonGaruda 4-70TP",
+    "date": "November 2nd, 2024"
+  },
+  {
+    "code": "BX-39",
+    "name": "Random Booster ShelterDrake Select",
+    "date": "February 15th, 2025"
+  },
+  {
+    "code": "BX-40",
+    "name": "Winder Launcher L",
+    "date": "March 29th, 2025"
+  },
+  {
+    "code": "BX-41",
+    "name": "Rubber Custom Grip (Gunmetal Ver.)",
+    "date": "March 29th, 2025"
+  },
+  {
+    "code": "BX-42",
+    "name": "Rubber Custom Grip (Blue Ver.)",
+    "date": "March 29th, 2025"
+  },
+  {
+    "code": "BX-43",
+    "name": "Gear Case (White Ver.)",
+    "date": "March 29th, 2025"
+  },
+  {
+    "code": "BX-44",
+    "name": "Booster TriceraPress M-85BS",
+    "date": "June 28th, 2025"
+  },
+  {
+    "code": "BX-45",
+    "name": "Booster SamuraiCalibur 6-70M",
+    "date": "August 9th, 2025"
+  },
+  {
+    "code": "BX-46",
+    "name": "Battle Entry Set Infinity",
+    "date": "October 11th, 2025"
+  },
+  {
+    "code": "BX-47",
+    "name": "String Launcher L (Red Ver.)",
+    "date": "October 11th, 2025"
+  },
+  {
+    "code": "BX-48",
+    "name": "Random Booster Vol. 9",
+    "date": "February 14th, 2026"
+  },
+  {
+    "code": "UX-01",
+    "name": "Starter DranBuster 1-60A",
+    "date": "March 30th, 2024"
+  },
+  {
+    "code": "UX-02",
+    "name": "Starter HellsHammer 3-70H",
+    "date": "March 30th, 2024"
+  },
+  {
+    "code": "UX-03",
+    "name": "Booster WizardRod 5-70DB",
+    "date": "March 30th, 2024"
+  },
+  {
+    "code": "UX-04",
+    "name": "Battle Entry Set U",
+    "date": "April 27th, 2024"
+  },
+  {
+    "code": "UX-05",
+    "name": "Random Booster ShinobiShadow Select",
+    "date": "May 18th, 2024"
+  },
+  {
+    "code": "UX-06",
+    "name": "Booster LeonCrest 7-60GN",
+    "date": "August 10th, 2024"
+  },
+  {
+    "code": "UX-07",
+    "name": "PhoenixRudder Deck Set",
+    "date": "August 10th, 2024"
+  },
+  {
+    "code": "UX-08",
+    "name": "Starter SilverWolf 3-80FB",
+    "date": "October 12th, 2024"
+  },
+  {
+    "code": "UX-09",
+    "name": "Starter SamuraiSaber 2-70L",
+    "date": "November 2nd, 2024"
+  },
+  {
+    "code": "UX-10",
+    "name": "Customize Set U",
+    "date": "November 2nd, 2024"
+  },
+  {
+    "code": "UX-11",
+    "name": "Starter ImpactDrake 9-60LR",
+    "date": "December 28th, 2024"
+  },
+  {
+    "code": "UX-12",
+    "name": "Random Booster Vol. 5",
+    "date": "December 28th, 2024"
+  },
+  {
+    "code": "UX-13",
+    "name": "Booster GolemRock 1-60UN",
+    "date": "January 25th, 2025"
+  },
+  {
+    "code": "UX-14",
+    "name": "Starter ScorpioSpear 0-70Z",
+    "date": "April 26th, 2025"
+  },
+  {
+    "code": "UX-15",
+    "name": "SharkScale Deck Set",
+    "date": "August 9th, 2025"
+  },
+  {
+    "code": "UX-16",
+    "name": "Random Booster ClockMirage Select",
+    "date": "October 11th, 2025"
+  },
+  {
+    "code": "UX-17",
+    "name": "Starter MeteorDragoon 3-70J",
+    "date": "December 27th, 2025"
+  },
+  {
+    "code": "UX-18",
+    "name": "Random Booster Vol. 8",
+    "date": "December 27th, 2025"
+  },
+  {
+    "code": "CX-01",
+    "name": "Starter DranBrave S6-60V",
+    "date": "March 29th, 2025"
+  },
+  {
+    "code": "CX-02",
+    "name": "Starter WizardArc R4-55LO",
+    "date": "March 29th, 2025"
+  },
+  {
+    "code": "CX-03",
+    "name": "Booster PerseusDark B6-80W",
+    "date": "March 29th, 2025"
+  },
+  {
+    "code": "CX-04",
+    "name": "Battle Entry Set C",
+    "date": "March 29th, 2025"
+  },
+  {
+    "code": "CX-05",
+    "name": "Random Booster Vol. 6",
+    "date": "April 26th, 2025"
+  },
+  {
+    "code": "CX-06",
+    "name": "Random Booster FoxBrush Select",
+    "date": "May 17th, 2025"
+  },
+  {
+    "code": "CX-07",
+    "name": "Starter PegasusBlast ATr",
+    "date": "July 19th, 2025"
+  },
+  {
+    "code": "CX-08",
+    "name": "Random Booster Vol. 7",
+    "date": "July 19th, 2025"
+  },
+  {
+    "code": "CX-09",
+    "name": "Starter SolEclipse D5-70TK",
+    "date": "September 27th, 2025"
+  },
+  {
+    "code": "CX-10",
+    "name": "Booster WolfHunt F0-60DB",
+    "date": "November 1st, 2025"
+  },
+  {
+    "code": "CX-11",
+    "name": "EmperorMight Deck Set",
+    "date": "November 1st, 2025"
+  },
+  {
+    "code": "CX-12",
+    "name": "PhoenixFlare Z9-80WW",
+    "date": "January 24th, 2026"
+  },
+  {
+    "code": "BX-01",
+    "name": "Starter DranSword 3-60F",
+    "date": "June 10th, 2023 (CoroCoro Spirit Festival)"
+  },
+  {
+    "code": "BX-02",
+    "name": "Starter HellsScythe 4-60T",
+    "date": "June 10th, 2023 (CoroCoro Spirit Festival)"
+  },
+  {
+    "code": "BX-00",
+    "name": "Booster DranzerSpiral 3-80T",
+    "date": "July 15th, 2023 (Retailer Exclusive)"
+  },
+  {
+    "code": "BX-00",
+    "name": "KnightShield (Metal Coat: Gold)",
+    "date": "July 15th, 2023 (Beyblade Battle Base Tournament Prize)"
+  },
+  {
+    "code": "BX-00",
+    "name": "3-80 (Gold Ver.)",
+    "date": "July 15th, 2023 (Beyblade Battle Base Tournament Prize)"
+  },
+  {
+    "code": "BX-00",
+    "name": "Needle (Gold Ver.)",
+    "date": "July 15th, 2023 (Beyblade Battle Base Tournament Prize)"
+  },
+  {
+    "code": "BX-00",
+    "name": "Booster CobaltDrake 4-60F (Metal Coat: Blue)",
+    "date": "September 2023 (Rare Bey Get Battle)"
+  },
+  {
+    "code": "BX-00",
+    "name": "Booster HellsScythe 4-60T (Metal Coat: Gold)",
+    "date": "September 2023 (Rare Bey Get Battle)"
+  },
+  {
+    "code": "BX-00",
+    "name": "DranSword 3-60F (Metal Coat: Bronze)",
+    "date": "December 10th, 2023 (G1 Tournament Prize)"
+  },
+  {
+    "code": "BX-00",
+    "name": "DranSword 3-60F (Metal Coat: Silver)",
+    "date": "December 10th, 2023 (G1 Tournament Prize)"
+  },
+  {
+    "code": "BX-00",
+    "name": "DranSword 3-60F (Metal Coat: Gold)",
+    "date": "December 10th, 2023 (G1 Tournament Prize)"
+  },
+  {
+    "code": "BX-23",
+    "name": "Starter PhoenixWing 9-60GF",
+    "date": "December 10th, 2023 (Toys R' Us pre-sale)"
+  },
+  {
+    "code": "BX-00",
+    "name": "PhoenixFeather",
+    "date": "December 15th, 2023 (CoroCoro Comic January 2024 issue)"
+  },
+  {
+    "code": "BX-00",
+    "name": "Booster HellsScythe 3-80F (SP X Bey)",
+    "date": "January 27th, 2024 (CoroCoro Comic Mail Order Exclusive)"
+  },
+  {
+    "code": "BX-00",
+    "name": "Booster DranSword 3-60F (Sushiro Ver.)",
+    "date": "February 14th, 2024 (Sushiro Hong Kong Exclusive)"
+  },
+  {
+    "code": "BX-00",
+    "name": "Booster LeonClaw 5-60P (Metal Coat: Gold)",
+    "date": "February 22nd, 2024 (Rare Bey Get Battle)"
+  },
+  {
+    "code": "BX-00",
+    "name": "Booster SharkEdge 5-60GF (Metal Coat: Blue)",
+    "date": "March 23rd, 2024 (Beyblade Battle Base Retail Store Exclusive)"
+  },
+  {
+    "code": "BX-00",
+    "name": "Booster DrigerSlash 4-80P",
+    "date": "April 27th, 2024"
+  },
+  {
+    "code": "BX-00",
+    "name": "Booster HellsChain 5-60HT (Metal Coat: Black)",
+    "date": "May 16th, 2024 (Rare Bey Get Battle)"
+  },
+  {
+    "code": "UX-00",
+    "name": "Booster DranBuster 1-60A (Metal Coat: Red)",
+    "date": "May 2024"
+  },
+  {
+    "code": "UX-00",
+    "name": "WizardRod (Metal Coat: Gold)",
+    "date": "June 1st, 2024 (Beyblade Battle Base Tournament Prize)"
+  },
+  {
+    "code": "UX-00",
+    "name": "5-70 (Gold Ver.)",
+    "date": "June 1st, 2024 (Beyblade Battle Base Tournament Prize)"
+  },
+  {
+    "code": "UX-00",
+    "name": "Disk Ball (Gold Ver.)",
+    "date": "June 1st, 2024 (Beyblade Battle Base Tournament Prize)"
+  },
+  {
+    "code": "BX-00",
+    "name": "DranSword (Metal Coat: Blue)",
+    "date": "June 15th, 2024 (CoroCoro Comic July 2024 issue)"
+  },
+  {
+    "code": "BX-00",
+    "name": "Bit Set F/T/B/N (Gold×Black)",
+    "date": "July 30th, 2024 (Rare Bey Get Battle)"
+  },
+  {
+    "code": "UX-00",
+    "name": "Booster AeroPegasus 3-70A",
+    "date": "July 30th, 2024 (Rare Bey Get Battle)"
+  },
+  {
+    "code": "BX-00",
+    "name": "Starter DranDagger 2-80GP (Metal Coat: Black Giants)",
+    "date": "August 3rd, 2024 (Beyblade Battle Base Retail Store Exclusive)"
+  },
+  {
+    "code": "BX-00",
+    "name": "Starter CobaltDragoon 2-60C (Metal Coat: Black)",
+    "date": "August 31st, 2024 (CoroCoro Tamashii Festival)"
+  },
+  {
+    "code": "BX-00",
+    "name": "Random Booster Lightning L-Drago 1-60F",
+    "date": "September 14th, 2024"
+  },
+  {
+    "code": "UX-00",
+    "name": "Dran Deck Starter",
+    "date": "November 9th, 2024"
+  },
+  {
+    "code": "BX-00",
+    "name": "Booster ShinobiKnife 4-60LF (Metal Coat: Blue)",
+    "date": "November 14th, 2024 (Included with Beyblade X: Xone (Nintendo Switch Package Edition)"
+  },
+  {
+    "code": "BX-00",
+    "name": "Booster PhoenixWing 9-80DB (Bladers Select Bey)",
+    "date": "November 18th, 2024 (CoroCoro Comic Mail Order Exclusive)"
+  },
+  {
+    "code": "BX-00",
+    "name": "CobaltDrake 4-60F (Clear Ver.)",
+    "date": "December 4th, 2024 (Rare Bey Get Battle)"
+  },
+  {
+    "code": "UX-00",
+    "name": "DranBuster 1-60A (Color Choice Booster)",
+    "date": "December 27th, 2024"
+  },
+  {
+    "code": "BX-00",
+    "name": "Booster DracielShield 7-60D",
+    "date": "December 28th, 2024"
+  },
+  {
+    "code": "BX-00",
+    "name": "Booster CrocCrunch 2-60Q",
+    "date": "February 5th, 2025 (CoroCoro Comic Mail Order Exclusive)"
+  },
+  {
+    "code": "BX-00",
+    "name": "Beyblade 25th Anniversary Set",
+    "date": "March 21st, 2025"
+  },
+  {
+    "code": "BX-00",
+    "name": "MammothTusk 2-80E (Metal Coat: Black)",
+    "date": "March 27th, 2025 (Rare Bey Get Battle)"
+  },
+  {
+    "code": "BX-00",
+    "name": "XenoXcalibur 3-60GF",
+    "date": "March 29th, 2025"
+  },
+  {
+    "code": "CX-00",
+    "name": "PerseusDark B (Metal Coat: Gold)",
+    "date": "April 1st, 2025 (Beyblade Battle Base Tournament Prize)"
+  },
+  {
+    "code": "CX-00",
+    "name": "6-80 (Gold Ver.)",
+    "date": "April 1st, 2025 (Beyblade Battle Base Tournament Prize)"
+  },
+  {
+    "code": "CX-00",
+    "name": "Wedge (Gold Ver.)",
+    "date": "April 1st, 2025 (Beyblade Battle Base Tournament Prize)"
+  },
+  {
+    "code": "BX-00",
+    "name": "Iron Man and Thanos Multipack Set",
+    "date": "April 26th, 2025"
+  },
+  {
+    "code": "BX-00",
+    "name": "Spider-Man and Venom Multipack Set",
+    "date": "April 26th, 2025"
+  },
+  {
+    "code": "BX-00",
+    "name": "Luke Skywalker and Darth Vader Multipack Set",
+    "date": "April 26th, 2025"
+  },
+  {
+    "code": "BX-00",
+    "name": "The Mandalorian and Moff Gideon Multipack Set",
+    "date": "April 26th, 2025"
+  },
+  {
+    "code": "BX-00",
+    "name": "Optimus Primal and Starscream Multipack Set",
+    "date": "May 17th, 2025"
+  },
+  {
+    "code": "BX-00",
+    "name": "Optimus Prime and Megatron Multipack Set",
+    "date": "May 17th, 2025"
+  },
+  {
+    "code": "BX-00",
+    "name": "Booster SamuraiSteel 5-70GF",
+    "date": "June 15th, 2025 (CoroCoro Comic Mail Order Exclusive)"
+  },
+  {
+    "code": "CX-00",
+    "name": "ValkyrieVolt S4-70V (Metal Coat: Gold)",
+    "date": "July 17th, 2025 (Rare Bey Get Battle)"
+  },
+  {
+    "code": "UX-00",
+    "name": "KnightMail 3-85BS (Metal Coat: Navy)",
+    "date": "July 17th, 2025 (Rare Bey Get Battle)"
+  },
+  {
+    "code": "BX-00",
+    "name": "Booster Rock Leone 6-80GN",
+    "date": "July 19th, 2025"
+  },
+  {
+    "code": "BX-00",
+    "name": "Spinosaurus and Quetzalcoatlus Multipack Set",
+    "date": "July 19th, 2025"
+  },
+  {
+    "code": "BX-00",
+    "name": "T. Rex and Mosasaurus Multipack Set",
+    "date": "July 19th, 2025"
+  },
+  {
+    "code": "CX-00",
+    "name": "PegasusBlast ATr (Metal Coat: Red)",
+    "date": "August 3rd, 2025"
+  },
+  {
+    "code": "CX-00",
+    "name": "WizardArc R4-55LO (Metal Coat: Black)",
+    "date": "August 9th, 2025 (Rare Bey Get Battle)"
+  },
+  {
+    "code": "CX-00",
+    "name": "Booster LeonFang T4-60A (Red Ver.)",
+    "date": "November 13th, 2025 (Included with Beyblade X: Evobattle (Nintendo Switch Package Edition)"
+  },
+  {
+    "code": "BX-00",
+    "name": "Bit Set F/T/B/N (Silver×White)",
+    "date": "November 15th, 2025 (Rare Bey Get Battle)"
+  },
+  {
+    "code": "UX-00",
+    "name": "Booster AeroPegasus 3-70A (Red Ver.)",
+    "date": "February 21st, 2026 (Rare Bey Get Battle)"
+  },
+  {
+    "code": "BX-00",
+    "name": "Starter DranSword 1-60V (Metal Coat: Black J.League Ver.)",
+    "date": "March 14th, 2026"
+  },
+  {
+    "code": "BX-00",
+    "name": "Starter CobaltDragoon 9-60F (Metal Coat: White J.League Ver.)",
+    "date": "March 14th, 2026"
+  },
+  {
+    "code": "CX-00",
+    "name": "Booster DranBrave S6-60V (Metal Coat: Black)",
+    "date": "May 30th, 2026 (Takara Tomy Mall Premium Event)"
+  }
+]

@@ -1,0 +1,86 @@
+{
+  "scoring": {
+    "xtreme_finish": {
+      "points": 3,
+      "description": "Initiated when the opponent’s Bey enters the Xtreme zone. Scored when the opponent’s Bey becomes unable to return to the battle zone."
+    },
+    "over_finish": {
+      "points": 2,
+      "description": "Initiated when the opponent’s Bey enters the over zone. Scored when the opponent’s Bey becomes unable to return to the battle zone."
+    },
+    "burst_finish": {
+      "points": 2,
+      "description": "Initiated and scored when the opponent’s Bey bursts while in the battle zone."
+    },
+    "spin_finish": {
+      "points": 1,
+      "description": "Initiated and scored when the opponent’s Bey stops spinning while in the battle zone."
+    },
+    "own_finish": {
+      "points": 1,
+      "description": "When you score an Xtreme finish or over finish against a Bey that did not touch your Bey during the battle.",
+      "is_optional": true
+    },
+    "penalty_point": {
+      "points": 1,
+      "description": "When a blader commits a launch error while they have a pending penalty."
+    }
+  },
+  "deck_rules": {
+    "size": 3,
+    "uniqueness": "A deck cannot include more than one copy of any part, except for basic lock chips.",
+    "exceptions": {
+      "basic_lock_chips": "Can be included any number of times if they have the same design/name.",
+      "metal_lock_chips": [
+        "Valkyrie",
+        "Emperor"
+      ],
+      "metal_lock_chips_limit": 1,
+      "lightning_l_drago": "Both versions (Upper and Rapid-Hit) are treated as the same part."
+    },
+    "definitions": {
+      "recolors": "Same part",
+      "retools": "Different unique parts (e.g., SharkEdge vs Crocrunch)",
+      "mold_differences": "Same part",
+      "versions": "Same part"
+    }
+  },
+  "match_types": {
+    "4_point_match": {
+      "points_to_win": 4,
+      "type": "Official"
+    },
+    "5_point_match": {
+      "points_to_win": 5
+    },
+    "7_point_match": {
+      "points_to_win": 7
+    },
+    "best_of_3_4_point": {
+      "points_to_win_set": 4,
+      "sets_to_win": 2
+    }
+  },
+  "battle_types": {
+    "1on1": {
+      "description": "One Bey for the entire match.",
+      "type": "Official"
+    },
+    "3on3": {
+      "description": "Deck of 3 Beys in fixed order.",
+      "type": "Official"
+    },
+    "counter": {
+      "description": "Deck of up to 3 Beys, winner selects first, loser counters.",
+      "type": "WBO Designed"
+    }
+  },
+  "equipment_regulations": {
+    "banned_parts": [
+      {
+        "part": "MN/Metal Needle bit",
+        "reason": "Damages stadiums"
+      }
+    ]
+  }
+}

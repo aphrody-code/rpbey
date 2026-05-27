@@ -1,0 +1,35 @@
+{
+	"$schema": "./node_modules/oxlint/configuration_schema.json",
+	"plugins": ["typescript", "import", "oxc"],
+	"categories": {
+		"correctness": "error",
+		"suspicious": "warn",
+		"perf": "off",
+		"pedantic": "off",
+		"style": "off",
+		"restriction": "off",
+		"nursery": "off"
+	},
+	"env": {
+		"node": true,
+		"es2024": true
+	},
+	"ignorePatterns": ["dist/", "node_modules/", "*.cjs", "*.mjs", "src/ffi/"],
+	"rules": {
+		"typescript/no-floating-promises": "error",
+		"typescript/no-misused-promises": "error",
+		"typescript/await-thenable": "error",
+		"typescript/no-explicit-any": "warn",
+		"typescript/no-non-null-assertion": "warn",
+		"typescript/consistent-type-imports": "warn",
+		"no-console": "off",
+		"no-debugger": "error",
+		"no-eval": "error",
+		"no-unused-vars": "warn",
+		"no-var": "error",
+		"prefer-const": "warn",
+		"import/no-cycle": "warn",
+		"import/no-self-import": "error",
+		"import/no-duplicates": "error"
+	}
+}

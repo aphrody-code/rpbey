@@ -1,0 +1,1067 @@
+{
+  "metadata": {
+    "id": 15912805,
+    "name": "Ultime Bataille Bey X ",
+    "url": "https://challonge.com/fr/WildBreakersUltimeBataille3",
+    "state": "complete",
+    "type": "double elimination",
+    "participantsCount": 38
+  },
+  "participants": [
+    {
+      "id": 257162399,
+      "name": "El Blader Dragon / DB160F PW360R CB760GP",
+      "seed": 1,
+      "finalRank": 17
+    },
+    {
+      "id": 257162145,
+      "name": "Yorel / SE360LF AP370A GR160UN",
+      "seed": 2,
+      "finalRank": 1
+    },
+    {
+      "id": 257162595,
+      "name": "Kamen 99 / GR160LR CDRAGOON770L TB960B",
+      "seed": 3,
+      "finalRank": 9
+    },
+    {
+      "id": 257162352,
+      "name": "Hane Hoshi / AP560C WR960B LL760L (-1)",
+      "seed": 4,
+      "finalRank": 17
+    },
+    {
+      "id": 257162281,
+      "name": "Rock Lee / TB160R PW560P GC080S",
+      "seed": 5,
+      "finalRank": 13
+    },
+    {
+      "id": 257162568,
+      "name": "Lezko / PW960P WR360LR ID560HT",
+      "seed": 6,
+      "finalRank": 17
+    },
+    {
+      "id": 257162286,
+      "name": "Yoorushi / WA960O TB160T SD970BS",
+      "seed": 7,
+      "finalRank": 17
+    },
+    {
+      "id": 257186119,
+      "name": "Adan / DS360F US560GP PW960GF",
+      "seed": 8,
+      "finalRank": 25
+    },
+    {
+      "id": 257162600,
+      "name": "Ame / RH580P US560FB PW960B",
+      "seed": 9,
+      "finalRank": 33
+    },
+    {
+      "id": 257162538,
+      "name": "Fred / HS960DB SW360S PW160O",
+      "seed": 10,
+      "finalRank": 7
+    },
+    {
+      "id": 257162486,
+      "name": "Centalecto / LC770DB SW360BS SE160LF",
+      "seed": 11,
+      "finalRank": 25
+    },
+    {
+      "id": 257162494,
+      "name": "Fission Fusion / PW360LR ID160LF SS960P",
+      "seed": 12,
+      "finalRank": 7
+    },
+    {
+      "id": 257162651,
+      "name": "Locain / US460HN BC360P KL480F",
+      "seed": 13,
+      "finalRank": 25
+    },
+    {
+      "id": 257162334,
+      "name": "Beyknight / HS960GN CD160L WW760R",
+      "seed": 14,
+      "finalRank": 25
+    },
+    {
+      "id": 257162638,
+      "name": "Teycoz / TB360LF SE960F PW560P",
+      "seed": 15,
+      "finalRank": 13
+    },
+    {
+      "id": 257162178,
+      "name": "Fulguris / RG770UD CG970FB GC960E",
+      "seed": 16,
+      "finalRank": 25
+    },
+    {
+      "id": 257162634,
+      "name": "Pindoufdestin / CG360P SE380GF TP460B",
+      "seed": 17,
+      "finalRank": 17
+    },
+    {
+      "id": 257162303,
+      "name": "Ackerman / PW960R KM770B TM360T",
+      "seed": 18,
+      "finalRank": 33
+    },
+    {
+      "id": 257162413,
+      "name": "Sabo / DB160LR WR960UN CDRAGOON760L",
+      "seed": 19,
+      "finalRank": 4
+    },
+    {
+      "id": 257162175,
+      "name": "ZeLn / DB160LR SW960GN PW360R",
+      "seed": 20,
+      "finalRank": 2
+    },
+    {
+      "id": 257162670,
+      "name": "Sosso / SE360LF WA960S TR180C",
+      "seed": 21,
+      "finalRank": 25
+    },
+    {
+      "id": 257162549,
+      "name": "Zeikuo / SS360U GR570H SW980UD",
+      "seed": 22,
+      "finalRank": 9
+    },
+    {
+      "id": 257162346,
+      "name": "Leirya / KM160R SW960E PW360LR",
+      "seed": 23,
+      "finalRank": 33
+    },
+    {
+      "id": 257162661,
+      "name": "Ryuga / ED160R DS360F ID960LR",
+      "seed": 24,
+      "finalRank": 17
+    },
+    {
+      "id": 257162523,
+      "name": "Sarah / SW780S WR960N WW560P",
+      "seed": 25,
+      "finalRank": 5
+    },
+    {
+      "id": 257162311,
+      "name": "Younsi (invitation pending) / GR560H SD360T KM160L (invitation pending)",
+      "seed": 26,
+      "finalRank": 13
+    },
+    {
+      "id": 257162544,
+      "name": "Xymore / TB360LR PW160R BC960C",
+      "seed": 27,
+      "finalRank": 9
+    },
+    {
+      "id": 257162534,
+      "name": "Merope / PW160R WR960UN SE360LR",
+      "seed": 28,
+      "finalRank": 17
+    },
+    {
+      "id": 257162244,
+      "name": "Camilkts / DS560GF TB160R HH360F",
+      "seed": 29,
+      "finalRank": 17
+    },
+    {
+      "id": 257162527,
+      "name": "Akitus / CD460LR CD970L SW560U",
+      "seed": 30,
+      "finalRank": 13
+    },
+    {
+      "id": 257162613,
+      "name": "Spinach / HC970T HS960B PW360R",
+      "seed": 31,
+      "finalRank": 33
+    },
+    {
+      "id": 257162561,
+      "name": "Geats / PW360T WA960B SE260LF",
+      "seed": 32,
+      "finalRank": 33
+    },
+    {
+      "id": 257162619,
+      "name": "Héry / SS360U KM560H PR160O",
+      "seed": 33,
+      "finalRank": 5
+    },
+    {
+      "id": 257162341,
+      "name": "Kamen Z / AP160LR TB970T CDragoon770P",
+      "seed": 34,
+      "finalRank": 3
+    },
+    {
+      "id": 257162162,
+      "name": "Azure / PS760U CD460G WT960P",
+      "seed": 35,
+      "finalRank": 9
+    },
+    {
+      "id": 257162338,
+      "name": "Eiko / PR770H SW780FB PW760R (-1)",
+      "seed": 36,
+      "finalRank": 25
+    },
+    {
+      "id": 257162402,
+      "name": "Kaiouss / DB160LR ID780GF TB960U",
+      "seed": 37,
+      "finalRank": 25
+    },
+    {
+      "id": 257162657,
+      "name": "Ours / GR760GB TB960UN PW360P",
+      "seed": 38,
+      "finalRank": 33
+    }
+  ],
+  "matches": [
+    {
+      "id": 404927958,
+      "identifier": "A",
+      "round": 1,
+      "player1Id": 257162561,
+      "player2Id": 257162619,
+      "winnerId": 257162619,
+      "loserId": 257162561,
+      "scores": "0-4",
+      "state": "complete"
+    },
+    {
+      "id": 404927959,
+      "identifier": "B",
+      "round": 1,
+      "player1Id": 257162244,
+      "player2Id": 257162338,
+      "winnerId": 257162244,
+      "loserId": 257162338,
+      "scores": "6-2",
+      "state": "complete"
+    },
+    {
+      "id": 404927960,
+      "identifier": "C",
+      "round": 1,
+      "player1Id": 257162534,
+      "player2Id": 257162402,
+      "winnerId": 257162534,
+      "loserId": 257162402,
+      "scores": "4-2",
+      "state": "complete"
+    },
+    {
+      "id": 404927961,
+      "identifier": "D",
+      "round": 1,
+      "player1Id": 257162613,
+      "player2Id": 257162341,
+      "winnerId": 257162341,
+      "loserId": 257162613,
+      "scores": "0-4",
+      "state": "complete"
+    },
+    {
+      "id": 404927962,
+      "identifier": "E",
+      "round": 1,
+      "player1Id": 257162527,
+      "player2Id": 257162162,
+      "winnerId": 257162527,
+      "loserId": 257162162,
+      "scores": "4-3",
+      "state": "complete"
+    },
+    {
+      "id": 404927963,
+      "identifier": "F",
+      "round": 1,
+      "player1Id": 257162544,
+      "player2Id": 257162657,
+      "winnerId": 257162544,
+      "loserId": 257162657,
+      "scores": "4-0",
+      "state": "complete"
+    },
+    {
+      "id": 404927964,
+      "identifier": "G",
+      "round": 2,
+      "player1Id": 257162399,
+      "player2Id": 257162619,
+      "winnerId": 257162619,
+      "loserId": 257162399,
+      "scores": "1-6",
+      "state": "complete"
+    },
+    {
+      "id": 404927965,
+      "identifier": "H",
+      "round": 2,
+      "player1Id": 257162178,
+      "player2Id": 257162634,
+      "winnerId": 257162634,
+      "loserId": 257162178,
+      "scores": "0-4",
+      "state": "complete"
+    },
+    {
+      "id": 404927966,
+      "identifier": "I",
+      "round": 2,
+      "player1Id": 257186119,
+      "player2Id": 257162523,
+      "winnerId": 257162523,
+      "loserId": 257186119,
+      "scores": "2-4",
+      "state": "complete"
+    },
+    {
+      "id": 404927967,
+      "identifier": "J",
+      "round": 2,
+      "player1Id": 257162600,
+      "player2Id": 257162661,
+      "winnerId": 257162661,
+      "loserId": 257162600,
+      "scores": "0-4",
+      "state": "complete"
+    },
+    {
+      "id": 404927968,
+      "identifier": "K",
+      "round": 2,
+      "player1Id": 257162352,
+      "player2Id": 257162244,
+      "winnerId": 257162352,
+      "loserId": 257162244,
+      "scores": "4-3",
+      "state": "complete"
+    },
+    {
+      "id": 404927969,
+      "identifier": "L",
+      "round": 2,
+      "player1Id": 257162651,
+      "player2Id": 257162175,
+      "winnerId": 257162175,
+      "loserId": 257162651,
+      "scores": "0-4",
+      "state": "complete"
+    },
+    {
+      "id": 404927970,
+      "identifier": "M",
+      "round": 2,
+      "player1Id": 257162281,
+      "player2Id": 257162534,
+      "winnerId": 257162534,
+      "loserId": 257162281,
+      "scores": "2-4",
+      "state": "complete"
+    },
+    {
+      "id": 404927971,
+      "identifier": "N",
+      "round": 2,
+      "player1Id": 257162494,
+      "player2Id": 257162670,
+      "winnerId": 257162494,
+      "loserId": 257162670,
+      "scores": "5-3",
+      "state": "complete"
+    },
+    {
+      "id": 404927972,
+      "identifier": "O",
+      "round": 2,
+      "player1Id": 257162145,
+      "player2Id": 257162341,
+      "winnerId": 257162145,
+      "loserId": 257162341,
+      "scores": "5-2",
+      "state": "complete"
+    },
+    {
+      "id": 404927973,
+      "identifier": "P",
+      "round": 2,
+      "player1Id": 257162638,
+      "player2Id": 257162303,
+      "winnerId": 257162638,
+      "loserId": 257162303,
+      "scores": "4-0",
+      "state": "complete"
+    },
+    {
+      "id": 404927974,
+      "identifier": "Q",
+      "round": 2,
+      "player1Id": 257162286,
+      "player2Id": 257162311,
+      "winnerId": 257162286,
+      "loserId": 257162311,
+      "scores": "5-0",
+      "state": "complete"
+    },
+    {
+      "id": 404927975,
+      "identifier": "R",
+      "round": 2,
+      "player1Id": 257162538,
+      "player2Id": 257162346,
+      "winnerId": 257162538,
+      "loserId": 257162346,
+      "scores": "4-0",
+      "state": "complete"
+    },
+    {
+      "id": 404927976,
+      "identifier": "S",
+      "round": 2,
+      "player1Id": 257162595,
+      "player2Id": 257162527,
+      "winnerId": 257162595,
+      "loserId": 257162527,
+      "scores": "6-0",
+      "state": "complete"
+    },
+    {
+      "id": 404927977,
+      "identifier": "T",
+      "round": 2,
+      "player1Id": 257162334,
+      "player2Id": 257162413,
+      "winnerId": 257162413,
+      "loserId": 257162334,
+      "scores": "0-4",
+      "state": "complete"
+    },
+    {
+      "id": 404927978,
+      "identifier": "U",
+      "round": 2,
+      "player1Id": 257162568,
+      "player2Id": 257162544,
+      "winnerId": 257162568,
+      "loserId": 257162544,
+      "scores": "5-3",
+      "state": "complete"
+    },
+    {
+      "id": 404927979,
+      "identifier": "V",
+      "round": 2,
+      "player1Id": 257162486,
+      "player2Id": 257162549,
+      "winnerId": 257162549,
+      "loserId": 257162486,
+      "scores": "0-5",
+      "state": "complete"
+    },
+    {
+      "id": 404927980,
+      "identifier": "W",
+      "round": 3,
+      "player1Id": 257162619,
+      "player2Id": 257162634,
+      "winnerId": 257162619,
+      "loserId": 257162634,
+      "scores": "4-0",
+      "state": "complete"
+    },
+    {
+      "id": 404927981,
+      "identifier": "X",
+      "round": 3,
+      "player1Id": 257162523,
+      "player2Id": 257162661,
+      "winnerId": 257162523,
+      "loserId": 257162661,
+      "scores": "5-3",
+      "state": "complete"
+    },
+    {
+      "id": 404927982,
+      "identifier": "Y",
+      "round": 3,
+      "player1Id": 257162352,
+      "player2Id": 257162175,
+      "winnerId": 257162175,
+      "loserId": 257162352,
+      "scores": "0-4",
+      "state": "complete"
+    },
+    {
+      "id": 404927983,
+      "identifier": "Z",
+      "round": 3,
+      "player1Id": 257162534,
+      "player2Id": 257162494,
+      "winnerId": 257162494,
+      "loserId": 257162534,
+      "scores": "0-5",
+      "state": "complete"
+    },
+    {
+      "id": 404927984,
+      "identifier": "AA",
+      "round": 3,
+      "player1Id": 257162145,
+      "player2Id": 257162638,
+      "winnerId": 257162145,
+      "loserId": 257162638,
+      "scores": "5-0",
+      "state": "complete"
+    },
+    {
+      "id": 404927985,
+      "identifier": "AB",
+      "round": 3,
+      "player1Id": 257162286,
+      "player2Id": 257162538,
+      "winnerId": 257162538,
+      "loserId": 257162286,
+      "scores": "3-5",
+      "state": "complete"
+    },
+    {
+      "id": 404927986,
+      "identifier": "AC",
+      "round": 3,
+      "player1Id": 257162595,
+      "player2Id": 257162413,
+      "winnerId": 257162413,
+      "loserId": 257162595,
+      "scores": "3-5",
+      "state": "complete"
+    },
+    {
+      "id": 404927987,
+      "identifier": "AD",
+      "round": 3,
+      "player1Id": 257162568,
+      "player2Id": 257162549,
+      "winnerId": 257162549,
+      "loserId": 257162568,
+      "scores": "0-4",
+      "state": "complete"
+    },
+    {
+      "id": 404927988,
+      "identifier": "AE",
+      "round": 4,
+      "player1Id": 257162619,
+      "player2Id": 257162523,
+      "winnerId": 257162523,
+      "loserId": 257162619,
+      "scores": "0-4",
+      "state": "complete"
+    },
+    {
+      "id": 404927989,
+      "identifier": "AF",
+      "round": 4,
+      "player1Id": 257162175,
+      "player2Id": 257162494,
+      "winnerId": 257162175,
+      "loserId": 257162494,
+      "scores": "5-0",
+      "state": "complete"
+    },
+    {
+      "id": 404927990,
+      "identifier": "AG",
+      "round": 4,
+      "player1Id": 257162145,
+      "player2Id": 257162538,
+      "winnerId": 257162145,
+      "loserId": 257162538,
+      "scores": "4-3",
+      "state": "complete"
+    },
+    {
+      "id": 404927991,
+      "identifier": "AH",
+      "round": 4,
+      "player1Id": 257162413,
+      "player2Id": 257162549,
+      "winnerId": 257162413,
+      "loserId": 257162549,
+      "scores": "4-3",
+      "state": "complete"
+    },
+    {
+      "id": 404927992,
+      "identifier": "AI",
+      "round": 5,
+      "player1Id": 257162523,
+      "player2Id": 257162175,
+      "winnerId": 257162175,
+      "loserId": 257162523,
+      "scores": "1-4",
+      "state": "complete"
+    },
+    {
+      "id": 404927993,
+      "identifier": "AJ",
+      "round": 5,
+      "player1Id": 257162145,
+      "player2Id": 257162413,
+      "winnerId": 257162145,
+      "loserId": 257162413,
+      "scores": "5-3",
+      "state": "complete"
+    },
+    {
+      "id": 404927994,
+      "identifier": "AK",
+      "round": 6,
+      "player1Id": 257162175,
+      "player2Id": 257162145,
+      "winnerId": 257162175,
+      "loserId": 257162145,
+      "scores": "4-2",
+      "state": "complete"
+    },
+    {
+      "id": 404927995,
+      "identifier": "AN",
+      "round": -1,
+      "player1Id": 257162486,
+      "player2Id": 257162561,
+      "winnerId": 257162486,
+      "loserId": 257162561,
+      "scores": "4-1",
+      "state": "complete"
+    },
+    {
+      "id": 404927996,
+      "identifier": "AO",
+      "round": -1,
+      "player1Id": 257162346,
+      "player2Id": 257162338,
+      "winnerId": 257162338,
+      "loserId": 257162346,
+      "scores": "2-4",
+      "state": "complete"
+    },
+    {
+      "id": 404927997,
+      "identifier": "AP",
+      "round": -1,
+      "player1Id": 257162303,
+      "player2Id": 257162402,
+      "winnerId": 257162402,
+      "loserId": 257162303,
+      "scores": "1-4",
+      "state": "complete"
+    },
+    {
+      "id": 404927998,
+      "identifier": "AQ",
+      "round": -1,
+      "player1Id": 257162670,
+      "player2Id": 257162613,
+      "winnerId": 257162670,
+      "loserId": 257162613,
+      "scores": "5-0",
+      "state": "complete"
+    },
+    {
+      "id": 404927999,
+      "identifier": "AR",
+      "round": -1,
+      "player1Id": 257162600,
+      "player2Id": 257162162,
+      "winnerId": 257162162,
+      "loserId": 257162600,
+      "scores": "0-4",
+      "state": "complete"
+    },
+    {
+      "id": 404928000,
+      "identifier": "AS",
+      "round": -1,
+      "player1Id": 257162178,
+      "player2Id": 257162657,
+      "winnerId": 257162178,
+      "loserId": 257162657,
+      "scores": "5-1",
+      "state": "complete"
+    },
+    {
+      "id": 404928001,
+      "identifier": "AT",
+      "round": -2,
+      "player1Id": 257162544,
+      "player2Id": 257162486,
+      "winnerId": 257162544,
+      "loserId": 257162486,
+      "scores": "5-3",
+      "state": "complete"
+    },
+    {
+      "id": 404928002,
+      "identifier": "AU",
+      "round": -2,
+      "player1Id": 257162334,
+      "player2Id": 257162527,
+      "winnerId": 257162527,
+      "loserId": 257162334,
+      "scores": "1-4",
+      "state": "complete"
+    },
+    {
+      "id": 404928003,
+      "identifier": "AV",
+      "round": -2,
+      "player1Id": 257162311,
+      "player2Id": 257162338,
+      "winnerId": 257162311,
+      "loserId": 257162338,
+      "scores": "4-1",
+      "state": "complete"
+    },
+    {
+      "id": 404928004,
+      "identifier": "AW",
+      "round": -2,
+      "player1Id": 257162341,
+      "player2Id": 257162402,
+      "winnerId": 257162341,
+      "loserId": 257162402,
+      "scores": "4-0",
+      "state": "complete"
+    },
+    {
+      "id": 404928005,
+      "identifier": "AX",
+      "round": -2,
+      "player1Id": 257162281,
+      "player2Id": 257162670,
+      "winnerId": 257162281,
+      "loserId": 257162670,
+      "scores": "5-0",
+      "state": "complete"
+    },
+    {
+      "id": 404928006,
+      "identifier": "AY",
+      "round": -2,
+      "player1Id": 257162651,
+      "player2Id": 257162244,
+      "winnerId": 257162244,
+      "loserId": 257162651,
+      "scores": "2-4",
+      "state": "complete"
+    },
+    {
+      "id": 404928007,
+      "identifier": "AZ",
+      "round": -2,
+      "player1Id": 257186119,
+      "player2Id": 257162162,
+      "winnerId": 257162162,
+      "loserId": 257186119,
+      "scores": "0-4",
+      "state": "complete"
+    },
+    {
+      "id": 404928008,
+      "identifier": "BA",
+      "round": -2,
+      "player1Id": 257162399,
+      "player2Id": 257162178,
+      "winnerId": 257162399,
+      "loserId": 257162178,
+      "scores": "4-3",
+      "state": "complete"
+    },
+    {
+      "id": 404928009,
+      "identifier": "BB",
+      "round": -3,
+      "player1Id": 257162534,
+      "player2Id": 257162544,
+      "winnerId": 257162544,
+      "loserId": 257162534,
+      "scores": "0-5",
+      "state": "complete"
+    },
+    {
+      "id": 404928010,
+      "identifier": "BC",
+      "round": -3,
+      "player1Id": 257162352,
+      "player2Id": 257162527,
+      "winnerId": 257162527,
+      "loserId": 257162352,
+      "scores": "3-4",
+      "state": "complete"
+    },
+    {
+      "id": 404928011,
+      "identifier": "BD",
+      "round": -3,
+      "player1Id": 257162661,
+      "player2Id": 257162311,
+      "winnerId": 257162311,
+      "loserId": 257162661,
+      "scores": "2-5",
+      "state": "complete"
+    },
+    {
+      "id": 404928012,
+      "identifier": "BE",
+      "round": -3,
+      "player1Id": 257162634,
+      "player2Id": 257162341,
+      "winnerId": 257162341,
+      "loserId": 257162634,
+      "scores": "3-4",
+      "state": "complete"
+    },
+    {
+      "id": 404928013,
+      "identifier": "BF",
+      "round": -3,
+      "player1Id": 257162568,
+      "player2Id": 257162281,
+      "winnerId": 257162281,
+      "loserId": 257162568,
+      "scores": "3-4",
+      "state": "complete"
+    },
+    {
+      "id": 404928014,
+      "identifier": "BG",
+      "round": -3,
+      "player1Id": 257162595,
+      "player2Id": 257162244,
+      "winnerId": 257162595,
+      "loserId": 257162244,
+      "scores": "4-1",
+      "state": "complete"
+    },
+    {
+      "id": 404928015,
+      "identifier": "BH",
+      "round": -3,
+      "player1Id": 257162286,
+      "player2Id": 257162162,
+      "winnerId": 257162162,
+      "loserId": 257162286,
+      "scores": "3-4",
+      "state": "complete"
+    },
+    {
+      "id": 404928016,
+      "identifier": "BI",
+      "round": -3,
+      "player1Id": 257162638,
+      "player2Id": 257162399,
+      "winnerId": 257162638,
+      "loserId": 257162399,
+      "scores": "4-1",
+      "state": "complete"
+    },
+    {
+      "id": 404928017,
+      "identifier": "BJ",
+      "round": -4,
+      "player1Id": 257162544,
+      "player2Id": 257162527,
+      "winnerId": 257162544,
+      "loserId": 257162527,
+      "scores": "5-0",
+      "state": "complete"
+    },
+    {
+      "id": 404928018,
+      "identifier": "BK",
+      "round": -4,
+      "player1Id": 257162311,
+      "player2Id": 257162341,
+      "winnerId": 257162341,
+      "loserId": 257162311,
+      "scores": "3-5",
+      "state": "complete"
+    },
+    {
+      "id": 404928019,
+      "identifier": "BL",
+      "round": -4,
+      "player1Id": 257162281,
+      "player2Id": 257162595,
+      "winnerId": 257162595,
+      "loserId": 257162281,
+      "scores": "3-5",
+      "state": "complete"
+    },
+    {
+      "id": 404928020,
+      "identifier": "BM",
+      "round": -4,
+      "player1Id": 257162162,
+      "player2Id": 257162638,
+      "winnerId": 257162162,
+      "loserId": 257162638,
+      "scores": "4-0",
+      "state": "complete"
+    },
+    {
+      "id": 404928021,
+      "identifier": "BN",
+      "round": -5,
+      "player1Id": 257162538,
+      "player2Id": 257162544,
+      "winnerId": 257162538,
+      "loserId": 257162544,
+      "scores": "4-3",
+      "state": "complete"
+    },
+    {
+      "id": 404928022,
+      "identifier": "BO",
+      "round": -5,
+      "player1Id": 257162549,
+      "player2Id": 257162341,
+      "winnerId": 257162341,
+      "loserId": 257162549,
+      "scores": "0-4",
+      "state": "complete"
+    },
+    {
+      "id": 404928023,
+      "identifier": "BP",
+      "round": -5,
+      "player1Id": 257162619,
+      "player2Id": 257162595,
+      "winnerId": 257162619,
+      "loserId": 257162595,
+      "scores": "4-2",
+      "state": "complete"
+    },
+    {
+      "id": 404928024,
+      "identifier": "BQ",
+      "round": -5,
+      "player1Id": 257162494,
+      "player2Id": 257162162,
+      "winnerId": 257162494,
+      "loserId": 257162162,
+      "scores": "4-0",
+      "state": "complete"
+    },
+    {
+      "id": 404928025,
+      "identifier": "BR",
+      "round": -6,
+      "player1Id": 257162538,
+      "player2Id": 257162341,
+      "winnerId": 257162341,
+      "loserId": 257162538,
+      "scores": "3-4",
+      "state": "complete"
+    },
+    {
+      "id": 404928026,
+      "identifier": "BS",
+      "round": -6,
+      "player1Id": 257162619,
+      "player2Id": 257162494,
+      "winnerId": 257162619,
+      "loserId": 257162494,
+      "scores": "4-0",
+      "state": "complete"
+    },
+    {
+      "id": 404928027,
+      "identifier": "BT",
+      "round": -7,
+      "player1Id": 257162523,
+      "player2Id": 257162341,
+      "winnerId": 257162341,
+      "loserId": 257162523,
+      "scores": "3-4",
+      "state": "complete"
+    },
+    {
+      "id": 404928028,
+      "identifier": "BU",
+      "round": -7,
+      "player1Id": 257162413,
+      "player2Id": 257162619,
+      "winnerId": 257162413,
+      "loserId": 257162619,
+      "scores": "4-1",
+      "state": "complete"
+    },
+    {
+      "id": 404928029,
+      "identifier": "BV",
+      "round": -8,
+      "player1Id": 257162341,
+      "player2Id": 257162413,
+      "winnerId": 257162341,
+      "loserId": 257162413,
+      "scores": "5-0",
+      "state": "complete"
+    },
+    {
+      "id": 404928030,
+      "identifier": "BW",
+      "round": -9,
+      "player1Id": 257162145,
+      "player2Id": 257162341,
+      "winnerId": 257162145,
+      "loserId": 257162341,
+      "scores": "5-3",
+      "state": "complete"
+    },
+    {
+      "id": 404928031,
+      "identifier": "AL",
+      "round": 7,
+      "player1Id": 257162175,
+      "player2Id": 257162145,
+      "winnerId": 257162145,
+      "loserId": 257162175,
+      "scores": "2-5",
+      "state": "complete"
+    },
+    {
+      "id": 404928032,
+      "identifier": "AM",
+      "round": 7,
+      "player1Id": 257162145,
+      "player2Id": 257162175,
+      "winnerId": 257162145,
+      "loserId": 257162175,
+      "scores": "4-3",
+      "state": "complete"
+    }
+  ]
+}

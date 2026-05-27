@@ -1,0 +1,849 @@
+[
+  {
+    "id": "33",
+    "name": "Aero Pegasus",
+    "image": "https://beybladeplanner.com/img/blade/AeroPegasus_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=33",
+    "category": "BLADE"
+  },
+  {
+    "id": "34",
+    "name": "Bear Scratch",
+    "image": "https://beybladeplanner.com/img/blade/BearScratch_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=34",
+    "category": "BLADE"
+  },
+  {
+    "id": "31",
+    "name": "Black Shell",
+    "image": "https://beybladeplanner.com/img/blade/BlackShell_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=31",
+    "category": "BLADE"
+  },
+  {
+    "id": "30",
+    "name": "Cobalt Dragoon",
+    "image": "https://beybladeplanner.com/img/blade/CobaltDragoon_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=30",
+    "category": "BLADE"
+  },
+  {
+    "id": "9",
+    "name": "Cobalt Drake",
+    "image": "https://beybladeplanner.com/img/blade/Cobaltdrake_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=9",
+    "category": "BLADE"
+  },
+  {
+    "id": "42",
+    "name": "Crimson Garuda",
+    "image": "https://beybladeplanner.com/img/blade/CrimsonGaruda_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=42",
+    "category": "BLADE"
+  },
+  {
+    "id": "49",
+    "name": "Croco Crunch",
+    "image": "https://beybladeplanner.com/img/blade/CrocoCrunch_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=49",
+    "category": "BLADE"
+  },
+  {
+    "id": "55",
+    "name": "Draciel Shield",
+    "image": "https://beybladeplanner.com/img/blade/DracielShield_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=55",
+    "category": "BLADE"
+  },
+  {
+    "id": "37",
+    "name": "Dragoon Storm",
+    "image": "https://beybladeplanner.com/img/blade/DragoonStorm_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=37",
+    "category": "BLADE"
+  },
+  {
+    "id": "21",
+    "name": "Dran Buster",
+    "image": "https://beybladeplanner.com/img/blade/DranBuster_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=21",
+    "category": "BLADE"
+  },
+  {
+    "id": "14",
+    "name": "Dran Dagger",
+    "image": "https://beybladeplanner.com/img/blade/DranDagger_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=14",
+    "category": "BLADE"
+  },
+  {
+    "id": "1",
+    "name": "Dran Sword",
+    "image": "https://beybladeplanner.com/img/blade/Dransword_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=1",
+    "category": "BLADE"
+  },
+  {
+    "id": "7",
+    "name": "Dranzer Spriral",
+    "image": "https://beybladeplanner.com/img/blade/Dranzerspiral_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=7",
+    "category": "BLADE"
+  },
+  {
+    "id": "24",
+    "name": "Driger Slash",
+    "image": "https://beybladeplanner.com/img/blade/DrigerSlash_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=24",
+    "category": "BLADE"
+  },
+  {
+    "id": "47",
+    "name": "Ghost Circle",
+    "image": "https://beybladeplanner.com/img/blade/GhostCircle_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=47",
+    "category": "BLADE"
+  },
+  {
+    "id": "48",
+    "name": "Golem Rock",
+    "image": "https://beybladeplanner.com/img/blade/GolemRock_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=48",
+    "category": "BLADE"
+  },
+  {
+    "id": "15",
+    "name": "Hells Chain",
+    "image": "https://beybladeplanner.com/img/blade/HellsChain_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=15",
+    "category": "BLADE"
+  },
+  {
+    "id": "22",
+    "name": "Hells Hammer",
+    "image": "https://beybladeplanner.com/img/blade/HellsHammer_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=22",
+    "category": "BLADE"
+  },
+  {
+    "id": "4",
+    "name": "Hells Scythe",
+    "image": "https://beybladeplanner.com/img/blade/Hellsscythe_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=4",
+    "category": "BLADE"
+  },
+  {
+    "id": "45",
+    "name": "Impact Drake",
+    "image": "https://beybladeplanner.com/img/blade/ImpactDrake_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=45",
+    "category": "BLADE"
+  },
+  {
+    "id": "8",
+    "name": "Knight Lance",
+    "image": "https://beybladeplanner.com/img/blade/Knightlance_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=8",
+    "category": "BLADE"
+  },
+  {
+    "id": "46",
+    "name": "Knight Mail",
+    "image": "https://beybladeplanner.com/img/blade/KnightMail_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=46",
+    "category": "BLADE"
+  },
+  {
+    "id": "6",
+    "name": "Knight Shield",
+    "image": "https://beybladeplanner.com/img/blade/Knightshield_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=6",
+    "category": "BLADE"
+  },
+  {
+    "id": "11",
+    "name": "Leon Claw",
+    "image": "https://beybladeplanner.com/img/blade/LeonClaw_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=11",
+    "category": "BLADE"
+  },
+  {
+    "id": "26",
+    "name": "Leon Crest",
+    "image": "https://beybladeplanner.com/img/blade/LionCrest_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=26",
+    "category": "BLADE"
+  },
+  {
+    "id": "38",
+    "name": "Lightning L-Drago Ru",
+    "image": "https://beybladeplanner.com/img/blade/LDragoRapid_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=38",
+    "category": "BLADE"
+  },
+  {
+    "id": "39",
+    "name": "Lightning L-Drago Up",
+    "image": "https://beybladeplanner.com/img/blade/LDragoUpper_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=39",
+    "category": "BLADE"
+  },
+  {
+    "id": "51",
+    "name": "Mammoth Tusk",
+    "image": "https://beybladeplanner.com/img/blade/MammothTusk_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=51",
+    "category": "BLADE"
+  },
+  {
+    "id": "18",
+    "name": "Phoenix Feather",
+    "image": "https://beybladeplanner.com/img/blade/PhoenixFeather_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=18",
+    "category": "BLADE"
+  },
+  {
+    "id": "27",
+    "name": "Phoenix Rudder",
+    "image": "https://beybladeplanner.com/img/blade/PhoenixRudder_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=27",
+    "category": "BLADE"
+  },
+  {
+    "id": "17",
+    "name": "Phoenix Wing",
+    "image": "https://beybladeplanner.com/img/blade/PhoenixWing_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=17",
+    "category": "BLADE"
+  },
+  {
+    "id": "52",
+    "name": "Ptera Swing",
+    "image": "https://beybladeplanner.com/img/blade/PteraSwing_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=52",
+    "category": "BLADE"
+  },
+  {
+    "id": "13",
+    "name": "Rhino Horn",
+    "image": "https://beybladeplanner.com/img/blade/RhinoHorn_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=13",
+    "category": "BLADE"
+  },
+  {
+    "id": "54",
+    "name": "Roar Tyranno",
+    "image": "https://beybladeplanner.com/img/noimage.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=54",
+    "category": "BLADE"
+  },
+  {
+    "id": "44",
+    "name": "Samurai Saber",
+    "image": "https://beybladeplanner.com/img/blade/SamuraiSaber_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=44",
+    "category": "BLADE"
+  },
+  {
+    "id": "53",
+    "name": "Samurai Steel",
+    "image": "https://beybladeplanner.com/img/blade/SamuraiSteel_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=53",
+    "category": "BLADE"
+  },
+  {
+    "id": "58",
+    "name": "Scorpio Spear",
+    "image": "https://beybladeplanner.com/img/blade/ScorpioSpear_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=58",
+    "category": "BLADE"
+  },
+  {
+    "id": "10",
+    "name": "Shark Edge",
+    "image": "https://beybladeplanner.com/img/blade/Sharkedge_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=10",
+    "category": "BLADE"
+  },
+  {
+    "id": "43",
+    "name": "Shelter Drake",
+    "image": "https://beybladeplanner.com/img/blade/ShelterDrake_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=43",
+    "category": "BLADE"
+  },
+  {
+    "id": "35",
+    "name": "Shinobi Knife",
+    "image": "https://beybladeplanner.com/img/blade/ShinobiKnife_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=35",
+    "category": "BLADE"
+  },
+  {
+    "id": "25",
+    "name": "Shinobi Shadow",
+    "image": "https://beybladeplanner.com/img/blade/ShinobiShadow_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=25",
+    "category": "BLADE"
+  },
+  {
+    "id": "36",
+    "name": "Silver Wolf",
+    "image": "https://beybladeplanner.com/img/blade/SilverWolf_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=36",
+    "category": "BLADE"
+  },
+  {
+    "id": "20",
+    "name": "Sphinx Cowl",
+    "image": "https://beybladeplanner.com/img/blade/SphinxCowl_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=20",
+    "category": "BLADE"
+  },
+  {
+    "id": "41",
+    "name": "Storm Pegasis",
+    "image": "https://beybladeplanner.com/img/blade/StormPegasis_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=41",
+    "category": "BLADE"
+  },
+  {
+    "id": "57",
+    "name": "Tricera Press",
+    "image": "https://beybladeplanner.com/img/blade/TriceraPress_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=57",
+    "category": "BLADE"
+  },
+  {
+    "id": "28",
+    "name": "Tyranno Beat",
+    "image": "https://beybladeplanner.com/img/blade/TyrannoBeat_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=28",
+    "category": "BLADE"
+  },
+  {
+    "id": "19",
+    "name": "Unicorn Sting",
+    "image": "https://beybladeplanner.com/img/blade/UnicornSting_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=19",
+    "category": "BLADE"
+  },
+  {
+    "id": "40",
+    "name": "Victory Valkyrie",
+    "image": "https://beybladeplanner.com/img/blade/VictoryValkyrie_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=40",
+    "category": "BLADE"
+  },
+  {
+    "id": "12",
+    "name": "Viper Tail",
+    "image": "https://beybladeplanner.com/img/blade/ViperTail_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=12",
+    "category": "BLADE"
+  },
+  {
+    "id": "29",
+    "name": "Weiss Tiger",
+    "image": "https://beybladeplanner.com/img/blade/WeissTiger_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=29",
+    "category": "BLADE"
+  },
+  {
+    "id": "32",
+    "name": "Whale Wave",
+    "image": "https://beybladeplanner.com/img/blade/WhaleWave_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=32",
+    "category": "BLADE"
+  },
+  {
+    "id": "5",
+    "name": "Wizard Arrow",
+    "image": "https://beybladeplanner.com/img/blade/Wizardarrow_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=5",
+    "category": "BLADE"
+  },
+  {
+    "id": "23",
+    "name": "Wizard Rod",
+    "image": "https://beybladeplanner.com/img/blade/WizardRod_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=23",
+    "category": "BLADE"
+  },
+  {
+    "id": "16",
+    "name": "Wyvern Gale",
+    "image": "https://beybladeplanner.com/img/blade/WyvernGale_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=16",
+    "category": "BLADE"
+  },
+  {
+    "id": "56",
+    "name": "Xeno Xcalibur",
+    "image": "https://beybladeplanner.com/img/blade/XenoXcalibur_p.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=56",
+    "category": "BLADE"
+  },
+  {
+    "id": "50",
+    "name": "Yell Kong",
+    "image": "https://beybladeplanner.com/img/noimage.png",
+    "detailUrl": "https://beybladeplanner.com/blade.php?id=50",
+    "category": "BLADE"
+  },
+  {
+    "id": "29",
+    "name": "0-70",
+    "image": "https://beybladeplanner.com/img/ratchet/0-70_p.png",
+    "detailUrl": "https://beybladeplanner.com/ratchet.php?id=29",
+    "category": "RATCHET"
+  },
+  {
+    "id": "23",
+    "name": "0-80",
+    "image": "https://beybladeplanner.com/img/ratchet/0-80_p.png",
+    "detailUrl": "https://beybladeplanner.com/ratchet.php?id=23",
+    "category": "RATCHET"
+  },
+  {
+    "id": "10",
+    "name": "1-60",
+    "image": "https://beybladeplanner.com/img/ratchet/1-60_p.png",
+    "detailUrl": "https://beybladeplanner.com/ratchet.php?id=10",
+    "category": "RATCHET"
+  },
+  {
+    "id": "14",
+    "name": "1-80",
+    "image": "https://beybladeplanner.com/img/ratchet/1-80_p.png",
+    "detailUrl": "https://beybladeplanner.com/ratchet.php?id=14",
+    "category": "RATCHET"
+  },
+  {
+    "id": "18",
+    "name": "2-60",
+    "image": "https://beybladeplanner.com/img/ratchet/2-60_p.png",
+    "detailUrl": "https://beybladeplanner.com/ratchet.php?id=18",
+    "category": "RATCHET"
+  },
+  {
+    "id": "20",
+    "name": "2-70",
+    "image": "https://beybladeplanner.com/img/ratchet/2-70_p.png",
+    "detailUrl": "https://beybladeplanner.com/ratchet.php?id=20",
+    "category": "RATCHET"
+  },
+  {
+    "id": "15",
+    "name": "2-80",
+    "image": "https://beybladeplanner.com/img/ratchet/2-80_p.png",
+    "detailUrl": "https://beybladeplanner.com/ratchet.php?id=15",
+    "category": "RATCHET"
+  },
+  {
+    "id": "2",
+    "name": "3-60",
+    "image": "https://beybladeplanner.com/img/ratchet/3-60_p.png",
+    "detailUrl": "https://beybladeplanner.com/ratchet.php?id=2",
+    "category": "RATCHET"
+  },
+  {
+    "id": "11",
+    "name": "3-70",
+    "image": "https://beybladeplanner.com/img/ratchet/3-70_p.png",
+    "detailUrl": "https://beybladeplanner.com/ratchet.php?id=11",
+    "category": "RATCHET"
+  },
+  {
+    "id": "3",
+    "name": "3-80",
+    "image": "https://beybladeplanner.com/img/ratchet/3-80_p.png",
+    "detailUrl": "https://beybladeplanner.com/ratchet.php?id=3",
+    "category": "RATCHET"
+  },
+  {
+    "id": "21",
+    "name": "3-85",
+    "image": "https://beybladeplanner.com/img/ratchet/3-85_p.png",
+    "detailUrl": "https://beybladeplanner.com/ratchet.php?id=21",
+    "category": "RATCHET"
+  },
+  {
+    "id": "25",
+    "name": "4-55",
+    "image": "https://beybladeplanner.com/img/ratchet/4-55_p.png",
+    "detailUrl": "https://beybladeplanner.com/ratchet.php?id=25",
+    "category": "RATCHET"
+  },
+  {
+    "id": "4",
+    "name": "4-60",
+    "image": "https://beybladeplanner.com/img/ratchet/4-60_p.png",
+    "detailUrl": "https://beybladeplanner.com/ratchet.php?id=4",
+    "category": "RATCHET"
+  },
+  {
+    "id": "13",
+    "name": "4-70",
+    "image": "https://beybladeplanner.com/img/ratchet/4-70_p.png",
+    "detailUrl": "https://beybladeplanner.com/ratchet.php?id=13",
+    "category": "RATCHET"
+  },
+  {
+    "id": "5",
+    "name": "4-80",
+    "image": "https://beybladeplanner.com/img/ratchet/4-80_p.png",
+    "detailUrl": "https://beybladeplanner.com/ratchet.php?id=5",
+    "category": "RATCHET"
+  },
+  {
+    "id": "6",
+    "name": "5-60",
+    "image": "https://beybladeplanner.com/img/ratchet/5-60_p.png",
+    "detailUrl": "https://beybladeplanner.com/ratchet.php?id=6",
+    "category": "RATCHET"
+  },
+  {
+    "id": "12",
+    "name": "5-70",
+    "image": "https://beybladeplanner.com/img/ratchet/5-70_p.png",
+    "detailUrl": "https://beybladeplanner.com/ratchet.php?id=12",
+    "category": "RATCHET"
+  },
+  {
+    "id": "7",
+    "name": "5-80",
+    "image": "https://beybladeplanner.com/img/ratchet/5-80_p.png",
+    "detailUrl": "https://beybladeplanner.com/ratchet.php?id=7",
+    "category": "RATCHET"
+  },
+  {
+    "id": "24",
+    "name": "6-60",
+    "image": "https://beybladeplanner.com/img/ratchet/6-60_p.png",
+    "detailUrl": "https://beybladeplanner.com/ratchet.php?id=24",
+    "category": "RATCHET"
+  },
+  {
+    "id": "26",
+    "name": "6-80",
+    "image": "https://beybladeplanner.com/img/ratchet/6-80_p.png",
+    "detailUrl": "https://beybladeplanner.com/ratchet.php?id=26",
+    "category": "RATCHET"
+  },
+  {
+    "id": "16",
+    "name": "7-60",
+    "image": "https://beybladeplanner.com/img/ratchet/7-60_p.png",
+    "detailUrl": "https://beybladeplanner.com/ratchet.php?id=16",
+    "category": "RATCHET"
+  },
+  {
+    "id": "28",
+    "name": "7-70",
+    "image": "https://beybladeplanner.com/img/ratchet/7-70_p.png",
+    "detailUrl": "https://beybladeplanner.com/ratchet.php?id=28",
+    "category": "RATCHET"
+  },
+  {
+    "id": "19",
+    "name": "7-80",
+    "image": "https://beybladeplanner.com/img/ratchet/7-80_p.png",
+    "detailUrl": "https://beybladeplanner.com/ratchet.php?id=19",
+    "category": "RATCHET"
+  },
+  {
+    "id": "8",
+    "name": "9-60",
+    "image": "https://beybladeplanner.com/img/ratchet/9-60_p.png",
+    "detailUrl": "https://beybladeplanner.com/ratchet.php?id=8",
+    "category": "RATCHET"
+  },
+  {
+    "id": "17",
+    "name": "9-70",
+    "image": "https://beybladeplanner.com/img/ratchet/9-70_p.png",
+    "detailUrl": "https://beybladeplanner.com/ratchet.php?id=17",
+    "category": "RATCHET"
+  },
+  {
+    "id": "9",
+    "name": "9-80",
+    "image": "https://beybladeplanner.com/img/ratchet/9-80_p.png",
+    "detailUrl": "https://beybladeplanner.com/ratchet.php?id=9",
+    "category": "RATCHET"
+  },
+  {
+    "id": "27",
+    "name": "M-85",
+    "image": "https://beybladeplanner.com/img/ratchet/M-85_p.png",
+    "detailUrl": "https://beybladeplanner.com/ratchet.php?id=27",
+    "category": "RATCHET"
+  },
+  {
+    "id": "17",
+    "name": "Accel",
+    "image": "https://beybladeplanner.com/img/bit/Accel_p.png",
+    "detailUrl": "https://beybladeplanner.com/bit.php?id=17",
+    "category": "BIT"
+  },
+  {
+    "id": "3",
+    "name": "Ball",
+    "image": "https://beybladeplanner.com/img/bit/Ball_p.png",
+    "detailUrl": "https://beybladeplanner.com/bit.php?id=3",
+    "category": "BIT"
+  },
+  {
+    "id": "30",
+    "name": "Bound Spike",
+    "image": "https://beybladeplanner.com/img/noimage.png",
+    "detailUrl": "https://beybladeplanner.com/bit.php?id=30",
+    "category": "BIT"
+  },
+  {
+    "id": "23",
+    "name": "Cyclone",
+    "image": "https://beybladeplanner.com/img/bit/Cyclone_p.png",
+    "detailUrl": "https://beybladeplanner.com/bit.php?id=23",
+    "category": "BIT"
+  },
+  {
+    "id": "19",
+    "name": "Disc Ball",
+    "image": "https://beybladeplanner.com/img/bit/DiscBall_p.png",
+    "detailUrl": "https://beybladeplanner.com/bit.php?id=19",
+    "category": "BIT"
+  },
+  {
+    "id": "24",
+    "name": "Dot",
+    "image": "https://beybladeplanner.com/img/bit/Dot_p.png",
+    "detailUrl": "https://beybladeplanner.com/bit.php?id=24",
+    "category": "BIT"
+  },
+  {
+    "id": "26",
+    "name": "Elevate",
+    "image": "https://beybladeplanner.com/img/bit/Elevate_p.png",
+    "detailUrl": "https://beybladeplanner.com/bit.php?id=26",
+    "category": "BIT"
+  },
+  {
+    "id": "1",
+    "name": "Flat",
+    "image": "https://beybladeplanner.com/img/bit/Flat_p.png",
+    "detailUrl": "https://beybladeplanner.com/bit.php?id=1",
+    "category": "BIT"
+  },
+  {
+    "id": "34",
+    "name": "Free Ball",
+    "image": "https://beybladeplanner.com/img/noimage.png",
+    "detailUrl": "https://beybladeplanner.com/bit.php?id=34",
+    "category": "BIT"
+  },
+  {
+    "id": "14",
+    "name": "Gear Ball",
+    "image": "https://beybladeplanner.com/img/bit/GearBall_p.png",
+    "detailUrl": "https://beybladeplanner.com/bit.php?id=14",
+    "category": "BIT"
+  },
+  {
+    "id": "13",
+    "name": "Gear Flat",
+    "image": "https://beybladeplanner.com/img/bit/GearFlat_p.png",
+    "detailUrl": "https://beybladeplanner.com/bit.php?id=13",
+    "category": "BIT"
+  },
+  {
+    "id": "16",
+    "name": "Gear Needle",
+    "image": "https://beybladeplanner.com/img/bit/GearNeedle_p.png",
+    "detailUrl": "https://beybladeplanner.com/bit.php?id=16",
+    "category": "BIT"
+  },
+  {
+    "id": "15",
+    "name": "Gear Point",
+    "image": "https://beybladeplanner.com/img/bit/GearPoint_p.png",
+    "detailUrl": "https://beybladeplanner.com/bit.php?id=15",
+    "category": "BIT"
+  },
+  {
+    "id": "37",
+    "name": "Gear Rush",
+    "image": "https://beybladeplanner.com/img/noimage.png",
+    "detailUrl": "https://beybladeplanner.com/bit.php?id=37",
+    "category": "BIT"
+  },
+  {
+    "id": "25",
+    "name": "Glide",
+    "image": "https://beybladeplanner.com/img/bit/Glide_p.png",
+    "detailUrl": "https://beybladeplanner.com/bit.php?id=25",
+    "category": "BIT"
+  },
+  {
+    "id": "18",
+    "name": "Hexa",
+    "image": "https://beybladeplanner.com/img/bit/Hexa_p.png",
+    "detailUrl": "https://beybladeplanner.com/bit.php?id=18",
+    "category": "BIT"
+  },
+  {
+    "id": "6",
+    "name": "High Needle",
+    "image": "https://beybladeplanner.com/img/bit/Highneedle_p.png",
+    "detailUrl": "https://beybladeplanner.com/bit.php?id=6",
+    "category": "BIT"
+  },
+  {
+    "id": "12",
+    "name": "High Taper",
+    "image": "https://beybladeplanner.com/img/bit/HighTaper_p.png",
+    "detailUrl": "https://beybladeplanner.com/bit.php?id=12",
+    "category": "BIT"
+  },
+  {
+    "id": "39",
+    "name": "Kick",
+    "image": "https://beybladeplanner.com/img/noimage.png",
+    "detailUrl": "https://beybladeplanner.com/bit.php?id=39",
+    "category": "BIT"
+  },
+  {
+    "id": "28",
+    "name": "Level",
+    "image": "https://beybladeplanner.com/img/noimage.png",
+    "detailUrl": "https://beybladeplanner.com/bit.php?id=28",
+    "category": "BIT"
+  },
+  {
+    "id": "7",
+    "name": "Low Flat",
+    "image": "https://beybladeplanner.com/img/bit/LowFlat_p.png",
+    "detailUrl": "https://beybladeplanner.com/bit.php?id=7",
+    "category": "BIT"
+  },
+  {
+    "id": "38",
+    "name": "Low Orb",
+    "image": "https://beybladeplanner.com/img/noimage.png",
+    "detailUrl": "https://beybladeplanner.com/bit.php?id=38",
+    "category": "BIT"
+  },
+  {
+    "id": "29",
+    "name": "Low Rush",
+    "image": "https://beybladeplanner.com/img/noimage.png",
+    "detailUrl": "https://beybladeplanner.com/bit.php?id=29",
+    "category": "BIT"
+  },
+  {
+    "id": "21",
+    "name": "Metal Needle",
+    "image": "https://beybladeplanner.com/img/bit/MetalNeedle_p.png",
+    "detailUrl": "https://beybladeplanner.com/bit.php?id=21",
+    "category": "BIT"
+  },
+  {
+    "id": "4",
+    "name": "Needle",
+    "image": "https://beybladeplanner.com/img/bit/Needle_p.png",
+    "detailUrl": "https://beybladeplanner.com/bit.php?id=4",
+    "category": "BIT"
+  },
+  {
+    "id": "9",
+    "name": "Orb",
+    "image": "https://beybladeplanner.com/img/bit/Orb_p.png",
+    "detailUrl": "https://beybladeplanner.com/bit.php?id=9",
+    "category": "BIT"
+  },
+  {
+    "id": "8",
+    "name": "Point",
+    "image": "https://beybladeplanner.com/img/bit/Point_p.png",
+    "detailUrl": "https://beybladeplanner.com/bit.php?id=8",
+    "category": "BIT"
+  },
+  {
+    "id": "20",
+    "name": "Quake",
+    "image": "https://beybladeplanner.com/img/bit/Quake_p.png",
+    "detailUrl": "https://beybladeplanner.com/bit.php?id=20",
+    "category": "BIT"
+  },
+  {
+    "id": "31",
+    "name": "Rubber Accel",
+    "image": "https://beybladeplanner.com/img/noimage.png",
+    "detailUrl": "https://beybladeplanner.com/bit.php?id=31",
+    "category": "BIT"
+  },
+  {
+    "id": "11",
+    "name": "Rush",
+    "image": "https://beybladeplanner.com/img/bit/Rush_p.png",
+    "detailUrl": "https://beybladeplanner.com/bit.php?id=11",
+    "category": "BIT"
+  },
+  {
+    "id": "10",
+    "name": "Spike",
+    "image": "https://beybladeplanner.com/img/bit/Spike_p.png",
+    "detailUrl": "https://beybladeplanner.com/bit.php?id=10",
+    "category": "BIT"
+  },
+  {
+    "id": "2",
+    "name": "Taper",
+    "image": "https://beybladeplanner.com/img/bit/Taper_p.png",
+    "detailUrl": "https://beybladeplanner.com/bit.php?id=2",
+    "category": "BIT"
+  },
+  {
+    "id": "27",
+    "name": "Trans Point",
+    "image": "https://beybladeplanner.com/img/noimage.png",
+    "detailUrl": "https://beybladeplanner.com/bit.php?id=27",
+    "category": "BIT"
+  },
+  {
+    "id": "32",
+    "name": "Under Needle",
+    "image": "https://beybladeplanner.com/img/noimage.png",
+    "detailUrl": "https://beybladeplanner.com/bit.php?id=32",
+    "category": "BIT"
+  },
+  {
+    "id": "22",
+    "name": "Unite",
+    "image": "https://beybladeplanner.com/img/bit/Unite_p.png",
+    "detailUrl": "https://beybladeplanner.com/bit.php?id=22",
+    "category": "BIT"
+  },
+  {
+    "id": "33",
+    "name": "Vortex",
+    "image": "https://beybladeplanner.com/img/noimage.png",
+    "detailUrl": "https://beybladeplanner.com/bit.php?id=33",
+    "category": "BIT"
+  },
+  {
+    "id": "35",
+    "name": "Wedge",
+    "image": "https://beybladeplanner.com/img/noimage.png",
+    "detailUrl": "https://beybladeplanner.com/bit.php?id=35",
+    "category": "BIT"
+  },
+  {
+    "id": "36",
+    "name": "Zap",
+    "image": "https://beybladeplanner.com/img/noimage.png",
+    "detailUrl": "https://beybladeplanner.com/bit.php?id=36",
+    "category": "BIT"
+  }
+]

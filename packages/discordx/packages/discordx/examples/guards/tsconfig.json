@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "types": ["node", "bun"],
+    "ignoreDeprecations": "6.0",
+    "emitDecoratorMetadata": false,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "noEmit": true,
+    "noImplicitAny": true,
+    "noUncheckedIndexedAccess": true,
+    "rootDir": ".",
+    "strict": true,
+    "strictNullChecks": true,
+    "target": "ESNext",
+    "moduleDetection": "force",
+    "verbatimModuleSyntax": true
+  }
+}

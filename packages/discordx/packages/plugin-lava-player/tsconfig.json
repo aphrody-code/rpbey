@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "types": ["node", "bun"],
+    "ignoreDeprecations": "6.0",
+    "module": "ESNext",
+    "target": "ESNext",
+    "noImplicitAny": true,
+    "sourceMap": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "noUncheckedIndexedAccess": true,
+    "rootDir": "src",
+    "outDir": "dist",
+    "emitDecoratorMetadata": false,
+    "experimentalDecorators": true,
+    "declaration": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "Bundler",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "moduleDetection": "force",
+    "verbatimModuleSyntax": true,
+    "types": ["bun"]
+  },
+  "exclude": ["examples", "dist"]
+}

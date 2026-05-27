@@ -1,0 +1,68 @@
+{
+  "name": "@rpbey/lava-queue",
+  "version": "0.1.1",
+  "private": false,
+  "description": "Queue system for @discordx/lava-player",
+  "keywords": [
+    "bot",
+    "discord",
+    "discordx",
+    "javascript",
+    "lava-player",
+    "lavalink",
+    "music",
+    "queue",
+    "typescript",
+    "youtube"
+  ],
+  "homepage": "https://discordx.js.org",
+  "bugs": {
+    "url": "https://github.com/discordx-ts/discordx/issues",
+    "email": "vijayymmeena@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rpbey/discordy.git",
+    "directory": "packages/lava-queue"
+  },
+  "license": "Apache-2.0",
+  "contributors": [
+    "Vijay Meena <vijayymmeena@gmail.com> (https://github.com/vijayymmeena)"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "CHANGELOG.md",
+    "LICENSE.txt",
+    "README.md",
+    "SECURITY.md",
+    "package.json"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts --clean",
+    "build:typedoc": "bunx typedoc src/index.ts --out ../../docs/static/api/lava-queue"
+  },
+  "devDependencies": {
+    "@rpbey/lava-player": "workspace:^",
+    "discord.js": "^14.26.3",
+    "typescript": "catalog:"
+  },
+  "peerDependencies": {
+    "@rpbey/lava-player": ">=0.1.0",
+    "discord.js": ">=13"
+  },
+  "engines": {
+    "bun": ">=1.2.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://npm.pkg.github.com"
+  }
+}

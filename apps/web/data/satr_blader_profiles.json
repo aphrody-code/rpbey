@@ -1,0 +1,9485 @@
+[
+  {
+    "name": "Leirya",
+    "totalWins": 28,
+    "totalLosses": 16,
+    "tournamentWins": 1,
+    "tournamentsPlayed": 9,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 1,
+        "wins": 7,
+        "losses": 0
+      },
+      {
+        "tournament": "satr_bbt13",
+        "rank": 13,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 25,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 25,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 3,
+        "wins": 6,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 13,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Sabo",
+    "totalWins": 30,
+    "totalLosses": 18,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 9,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 2,
+        "wins": 11,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt13",
+        "rank": 5,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 25,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 25,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 5,
+        "wins": 8,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Oni NOOK",
+    "totalWins": 5,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 3,
+        "wins": 5,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Phénixio",
+    "totalWins": 11,
+    "totalLosses": 10,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 5,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 4,
+        "wins": 7,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt13",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Kamen K",
+    "totalWins": 21,
+    "totalLosses": 16,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 8,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 5,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt13",
+        "rank": 25,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 13,
+        "wins": 6,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 17,
+        "wins": 5,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "zeln",
+    "totalWins": 4,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 5,
+        "wins": 4,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Eden11",
+    "totalWins": 7,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 7,
+        "wins": 5,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt13",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Eiko",
+    "totalWins": 16,
+    "totalLosses": 14,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 7,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 7,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt13",
+        "rank": 25,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 17,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 17,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Maël",
+    "totalWins": 7,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 9,
+        "wins": 7,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Meppwoah",
+    "totalWins": 5,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 9,
+        "wins": 5,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Zeikuo",
+    "totalWins": 29,
+    "totalLosses": 18,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 9,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 9,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt13",
+        "rank": 13,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 2,
+        "wins": 10,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 2,
+        "wins": 10,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Hane Hoshi",
+    "totalWins": 12,
+    "totalLosses": 14,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 7,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 9,
+        "wins": 6,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt13",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Fred",
+    "totalWins": 22,
+    "totalLosses": 12,
+    "tournamentWins": 1,
+    "tournamentsPlayed": 7,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 13,
+        "wins": 5,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt13",
+        "rank": 13,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 1,
+        "wins": 7,
+        "losses": 0
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 7,
+        "wins": 5,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Neywandow7",
+    "totalWins": 11,
+    "totalLosses": 8,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 4,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 13,
+        "wins": 5,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt13",
+        "rank": 17,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Respawn",
+    "totalWins": 26,
+    "totalLosses": 14,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 7,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 13,
+        "wins": 5,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 9,
+        "wins": 5,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 7,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 25,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 9,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 9,
+        "wins": 6,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Kreepy",
+    "totalWins": 24,
+    "totalLosses": 18,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 9,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 13,
+        "wins": 5,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt13",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 2,
+        "wins": 8,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 5,
+        "wins": 5,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Kolti",
+    "totalWins": 3,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 17,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Fulguris95",
+    "totalWins": 4,
+    "totalLosses": 6,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 3,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 17,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt13",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Bandit",
+    "totalWins": 19,
+    "totalLosses": 18,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 9,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 17,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt13",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 17,
+        "wins": 5,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 25,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 9,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 33,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Kamen Z",
+    "totalWins": 27,
+    "totalLosses": 17,
+    "tournamentWins": 1,
+    "tournamentsPlayed": 9,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt13",
+        "rank": 9,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 1,
+        "wins": 7,
+        "losses": 1
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 4,
+        "wins": 5,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 4,
+        "wins": 6,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Xymore",
+    "totalWins": 22,
+    "totalLosses": 8,
+    "tournamentWins": 1,
+    "tournamentsPlayed": 5,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 17,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 1,
+        "wins": 8,
+        "losses": 0
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 9,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 9,
+        "wins": 6,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Snipblast",
+    "totalWins": 13,
+    "totalLosses": 16,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 8,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt13",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 17,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Shishi",
+    "totalWins": 21,
+    "totalLosses": 18,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 9,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt13",
+        "rank": 25,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 5,
+        "wins": 5,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 4,
+        "wins": 5,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 17,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Rami",
+    "totalWins": 6,
+    "totalLosses": 8,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 4,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "LouLouSoNicX",
+    "totalWins": 4,
+    "totalLosses": 6,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 3,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 25,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "King Joker",
+    "totalWins": 3,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 25,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Azure",
+    "totalWins": 10,
+    "totalLosses": 14,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 7,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 25,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt13",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Shu Kurenai",
+    "totalWins": 4,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 25,
+        "wins": 4,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "ender",
+    "totalWins": 3,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 25,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt13",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Yorel",
+    "totalWins": 10,
+    "totalLosses": 12,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 6,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 25,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt13",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 33,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Moon",
+    "totalWins": 5,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 25,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt13",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Kaious",
+    "totalWins": 24,
+    "totalLosses": 17,
+    "tournamentWins": 1,
+    "tournamentsPlayed": 9,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 25,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt13",
+        "rank": 3,
+        "wins": 5,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 25,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 5,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 1,
+        "wins": 7,
+        "losses": 1
+      }
+    ]
+  },
+  {
+    "name": "Berserk",
+    "totalWins": 18,
+    "totalLosses": 18,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 9,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt13",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 13,
+        "wins": 5,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 17,
+        "wins": 5,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 9,
+        "wins": 4,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Ackerman",
+    "totalWins": 6,
+    "totalLosses": 6,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 3,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 25,
+        "wins": 4,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Yoorushi",
+    "totalWins": 13,
+    "totalLosses": 12,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 6,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt13",
+        "rank": 17,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 25,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 17,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Ghotek",
+    "totalWins": 4,
+    "totalLosses": 6,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 3,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 33,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt13",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Merope",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Lamine",
+    "totalWins": 3,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 33,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Spider_Agent42",
+    "totalWins": 7,
+    "totalLosses": 8,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 4,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 33,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt13",
+        "rank": 25,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Paimy",
+    "totalWins": 13,
+    "totalLosses": 16,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 8,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt13",
+        "rank": 5,
+        "wins": 5,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Lunar",
+    "totalWins": 7,
+    "totalLosses": 10,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 5,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt13",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 17,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Kamen X",
+    "totalWins": 3,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 33,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Nouhan Blader X",
+    "totalWins": 3,
+    "totalLosses": 8,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 4,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt13",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Kipika",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Naked Snake",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Meiden",
+    "totalWins": 14,
+    "totalLosses": 10,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 5,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 25,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 33,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 17,
+        "wins": 5,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Mr. Fantome",
+    "totalWins": 4,
+    "totalLosses": 8,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 4,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt13",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "DaDdyGriZzly",
+    "totalWins": 8,
+    "totalLosses": 12,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 6,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 25,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Geats",
+    "totalWins": 12,
+    "totalLosses": 12,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 6,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt13",
+        "rank": 17,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 25,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Locain",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Lezko",
+    "totalWins": 34,
+    "totalLosses": 18,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 9,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt13",
+        "rank": 25,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 17,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 33,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 7,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 2,
+        "wins": 7,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 2,
+        "wins": 6,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 7,
+        "wins": 4,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "winkling",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Haron",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Spinach",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Nthanb",
+    "totalWins": 14,
+    "totalLosses": 14,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 7,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt13",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 17,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 13,
+        "wins": 5,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Ramen S",
+    "totalWins": 22,
+    "totalLosses": 12,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 6,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 9,
+        "wins": 5,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 13,
+        "wins": 6,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 9,
+        "wins": 5,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 17,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Valentin",
+    "totalWins": 3,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt13",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Baptiste",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Inazo",
+    "totalWins": 14,
+    "totalLosses": 12,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 6,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 25,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 25,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 25,
+        "wins": 4,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Teycoz",
+    "totalWins": 5,
+    "totalLosses": 6,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 3,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt13",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 17,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Rock Lee",
+    "totalWins": 11,
+    "totalLosses": 8,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 4,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt13",
+        "rank": 7,
+        "wins": 5,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 5,
+        "wins": 4,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Ahrityr",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Chad Light",
+    "totalWins": 22,
+    "totalLosses": 18,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 9,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt13",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 33,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 9,
+        "wins": 5,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 4,
+        "wins": 6,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 25,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Doctor",
+    "totalWins": 18,
+    "totalLosses": 14,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 7,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt13",
+        "rank": 17,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 4,
+        "wins": 6,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 25,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "kipik",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Kineria",
+    "totalWins": 6,
+    "totalLosses": 12,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 6,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt13",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Odak",
+    "totalWins": 8,
+    "totalLosses": 8,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 4,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 5,
+        "wins": 5,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "RoroDela",
+    "totalWins": 13,
+    "totalLosses": 18,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 9,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt13",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 33,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Loriane",
+    "totalWins": 2,
+    "totalLosses": 6,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 3,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Erwan",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Liquid Snake",
+    "totalWins": 12,
+    "totalLosses": 12,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 6,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 33,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 7,
+        "wins": 6,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Ryuk",
+    "totalWins": 1,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Kamen Y",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Jasmine",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Skyne",
+    "totalWins": 4,
+    "totalLosses": 10,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 5,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt13",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Legoshi",
+    "totalWins": 8,
+    "totalLosses": 12,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 6,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Lulu",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Kany",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Anonymous",
+    "totalWins": 0,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt13",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Karu",
+    "totalWins": 0,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Fission Fusion",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Lemzo",
+    "totalWins": 0,
+    "totalLosses": 6,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 3,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt13",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Dark8ful",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Hyakutake",
+    "totalWins": 13,
+    "totalLosses": 5,
+    "tournamentWins": 1,
+    "tournamentsPlayed": 3,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt13",
+        "rank": 1,
+        "wins": 11,
+        "losses": 1
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Yuto",
+    "totalWins": 3,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt13",
+        "rank": 25,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Younsi",
+    "totalWins": 20,
+    "totalLosses": 18,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 9,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt13",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 17,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 7,
+        "wins": 5,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 7,
+        "wins": 5,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Lorn",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Camilkts",
+    "totalWins": 1,
+    "totalLosses": 6,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 3,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Aghnar",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Multi",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "sewpoo_0192",
+    "totalWins": 21,
+    "totalLosses": 18,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 9,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt13",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 13,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 7,
+        "wins": 5,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 25,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 5,
+        "wins": 6,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Brmibr",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Suqunaiop",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Virginie",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "D8J6",
+    "totalWins": 2,
+    "totalLosses": 6,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 3,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Lazzy",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Ryuga",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Yanis",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Yumiki",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Mewxy",
+    "totalWins": 27,
+    "totalLosses": 15,
+    "tournamentWins": 1,
+    "tournamentsPlayed": 8,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt13",
+        "rank": 7,
+        "wins": 6,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 3,
+        "wins": 5,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 17,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 1,
+        "wins": 7,
+        "losses": 1
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 13,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Xene Foster",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Sasane",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "tiipek",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Mexity",
+    "totalWins": 6,
+    "totalLosses": 10,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 5,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt13",
+        "rank": 13,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "LesOursduBeyblade",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "LYNN",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt12",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "kyronnah",
+    "totalWins": 9,
+    "totalLosses": 6,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 3,
+    "history": [
+      {
+        "tournament": "satr_bbt13",
+        "rank": 2,
+        "wins": 7,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "MTS",
+    "totalWins": 16,
+    "totalLosses": 12,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 6,
+    "history": [
+      {
+        "tournament": "satr_bbt13",
+        "rank": 4,
+        "wins": 9,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 49,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 25,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 13,
+        "wins": 4,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Berik",
+    "totalWins": 5,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt13",
+        "rank": 9,
+        "wins": 5,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Kamen 99",
+    "totalWins": 10,
+    "totalLosses": 8,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 4,
+    "history": [
+      {
+        "tournament": "satr_bbt13",
+        "rank": 9,
+        "wins": 5,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 33,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Samuy",
+    "totalWins": 7,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "satr_bbt13",
+        "rank": 9,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 13,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Blyrow",
+    "totalWins": 3,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt13",
+        "rank": 17,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Ichigydo",
+    "totalWins": 17,
+    "totalLosses": 12,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 6,
+    "history": [
+      {
+        "tournament": "satr_bbt13",
+        "rank": 17,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 25,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 5,
+        "wins": 7,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "zeLn",
+    "totalWins": 22,
+    "totalLosses": 15,
+    "tournamentWins": 1,
+    "tournamentsPlayed": 8,
+    "history": [
+      {
+        "tournament": "satr_bbt13",
+        "rank": 17,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 25,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 1,
+        "wins": 8,
+        "losses": 1
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 13,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Stil",
+    "totalWins": 6,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "satr_bbt13",
+        "rank": 25,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 25,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "DarkHater",
+    "totalWins": 5,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "satr_bbt13",
+        "rank": 25,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Eraidos",
+    "totalWins": 5,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "satr_bbt13",
+        "rank": 33,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Uberoxane",
+    "totalWins": 4,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "satr_bbt13",
+        "rank": 33,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "aichouxx",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt13",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "JojoKirino",
+    "totalWins": 7,
+    "totalLosses": 10,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 5,
+    "history": [
+      {
+        "tournament": "satr_bbt13",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Narugo",
+    "totalWins": 10,
+    "totalLosses": 12,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 6,
+    "history": [
+      {
+        "tournament": "satr_bbt13",
+        "rank": 33,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 17,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Blader Mystérieux",
+    "totalWins": 18,
+    "totalLosses": 10,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 5,
+    "history": [
+      {
+        "tournament": "satr_bbt13",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 7,
+        "wins": 5,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 2,
+        "wins": 8,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 13,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Stella",
+    "totalWins": 25,
+    "totalLosses": 14,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 7,
+    "history": [
+      {
+        "tournament": "satr_bbt13",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 17,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 9,
+        "wins": 6,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 25,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 17,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 25,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 9,
+        "wins": 6,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Sarah",
+    "totalWins": 10,
+    "totalLosses": 14,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 7,
+    "history": [
+      {
+        "tournament": "satr_bbt13",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 13,
+        "wins": 5,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Ishan",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt13",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Niban",
+    "totalWins": 6,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "satr_bbt13",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 13,
+        "wins": 4,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Lc_37z",
+    "totalWins": 14,
+    "totalLosses": 16,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 8,
+    "history": [
+      {
+        "tournament": "satr_bbt13",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 13,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 33,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "A2NS",
+    "totalWins": 2,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "satr_bbt13",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Magmat Valt",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt13",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Reker",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt13",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Kmn83",
+    "totalWins": 2,
+    "totalLosses": 6,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 3,
+    "history": [
+      {
+        "tournament": "satr_bbt13",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Mr. Taisho",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt13",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Docteur",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt13",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "56",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt13",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Mams93z",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt13",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "PridefulLord",
+    "totalWins": 12,
+    "totalLosses": 14,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 7,
+    "history": [
+      {
+        "tournament": "satr_bbt13",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 13,
+        "wins": 6,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 25,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "OursDuBeyblade",
+    "totalWins": 6,
+    "totalLosses": 10,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 5,
+    "history": [
+      {
+        "tournament": "satr_bbt13",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Tongy94",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt13",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "damalcs",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt13",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Chrome Ryugu",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt13",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Ismael",
+    "totalWins": 12,
+    "totalLosses": 12,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 6,
+    "history": [
+      {
+        "tournament": "satr_bbt13",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 25,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 9,
+        "wins": 6,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Nepp",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt13",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Birbir93",
+    "totalWins": 2,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "satr_bbt13",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "L'artiste",
+    "totalWins": 10,
+    "totalLosses": 16,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 8,
+    "history": [
+      {
+        "tournament": "satr_bbt13",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 25,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Malmatv",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt13",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Le Baron Kabuto",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt13",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Rayou_95",
+    "totalWins": 24,
+    "totalLosses": 16,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 8,
+    "history": [
+      {
+        "tournament": "satr_bbt13",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 5,
+        "wins": 5,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 5,
+        "wins": 9,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 25,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Yapi9575",
+    "totalWins": 17,
+    "totalLosses": 14,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 7,
+    "history": [
+      {
+        "tournament": "satr_bbt13",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt15",
+        "rank": 9,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 3,
+        "wins": 7,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Igris",
+    "totalWins": 9,
+    "totalLosses": 10,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 5,
+    "history": [
+      {
+        "tournament": "satr_bbt13",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 9,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 7,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Neo Beyknights (Kamen Z-OursDuBeyblade-D8J6)",
+    "totalWins": 6,
+    "totalLosses": 0,
+    "tournamentWins": 1,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt14",
+        "rank": 1,
+        "wins": 6,
+        "losses": 0
+      }
+    ]
+  },
+  {
+    "name": "Osaka (Odak-Mexity)",
+    "totalWins": 7,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt14",
+        "rank": 2,
+        "wins": 7,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Team Drillsoul (Berserk-PridefulLord-Igris)",
+    "totalWins": 4,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt14",
+        "rank": 3,
+        "wins": 4,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Gan Gan Galaxia (Yoorushi-zeLn-Hane Hoshi)",
+    "totalWins": 6,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt14",
+        "rank": 4,
+        "wins": 6,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Les Champions (Dodo 12-Aiga Akabane)",
+    "totalWins": 3,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt14",
+        "rank": 5,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Team Arc (Kreepy-RoroDela-Yuto)",
+    "totalWins": 3,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt14",
+        "rank": 5,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Kitty Girly (Leirya-Merope-Xymore)",
+    "totalWins": 3,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt14",
+        "rank": 7,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "blue storm (Skyne-ceratops-Bandit)",
+    "totalWins": 3,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt14",
+        "rank": 7,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Team Dragonic (Kmn83-cerberus-Rayou_95)",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt14",
+        "rank": 9,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Les Wild Phoenix (Fulguris95-Fred-Kamen 99)",
+    "totalWins": 3,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt14",
+        "rank": 9,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Initial T (Daddy Grizzly-Loulou Sonic X-Equalizer)",
+    "totalWins": 3,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt14",
+        "rank": 9,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Black Phoenix (Rami-DarkHater)",
+    "totalWins": 3,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt14",
+        "rank": 9,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Unicorn Firefly (Mid G-Ramen S-Ender)",
+    "totalWins": 3,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt14",
+        "rank": 13,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Judgement (Azure-sewpoo_0192-Doctor)",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt14",
+        "rank": 13,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Chrono Storm (Phénixio-Croustykrs-Jacob)",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt14",
+        "rank": 13,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Black Bullet (darkhoumous-Alice-gelofy)",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt14",
+        "rank": 13,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Frenchy Peach Magic (Leni-Émilie-Pierre )",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt14",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Kira-Kira Team (Meiden-Shishi-Joker)",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt14",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Omega Deck Blade (Snake-Nassim-Alex)",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt14",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Titus Prime (blader M-caillou ken-kirikou prime)",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt14",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Star Breaker (Kamen A-Kineria-Ishan)",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt14",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "FRA (MTS-Mewxy-Quentin )",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt14",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Adeptes des Vagabonds (Abdel_bma-Nono-Shinobi)",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt14",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Team Steve (Eiko-Spider_Agent42-Joker)",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt14",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Cerberus (Rock Lee-Snipblast-Shouloup)",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt14",
+        "rank": 25,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Les Swords (Yapi9575-Yonathan-Sam Valkyrie)",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt14",
+        "rank": 25,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Ahpatsum (Lunar-aichouxx-Coach 100 pitié)",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt14",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Blue Phoenix (Sabo-Stella-Paimy )",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt14",
+        "rank": 25,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Nebula (Astrale-Neku-ReikoTM)",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt14",
+        "rank": 25,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Réserviste (Tom-Antoine-Clément )",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt14",
+        "rank": 25,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "SK HaVoK (Eden11-Taisho-Nahil)",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt14",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Ahmed Al-Zamel (Zeikuo-Younsi-Renji)",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt14",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Les débutants  (hary14-lisa94-Tongy94)",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt14",
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Les bladeur en pyjama  (Tongy94-Kamen R-Jonas94)",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt14",
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "gelofy",
+    "totalWins": 9,
+    "totalLosses": 6,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 3,
+    "history": [
+      {
+        "tournament": "satr_bbt15",
+        "rank": 3,
+        "wins": 6,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Illu",
+    "totalWins": 16,
+    "totalLosses": 12,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 6,
+    "history": [
+      {
+        "tournament": "satr_bbt15",
+        "rank": 4,
+        "wins": 8,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 25,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Andjy",
+    "totalWins": 7,
+    "totalLosses": 6,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 3,
+    "history": [
+      {
+        "tournament": "satr_bbt15",
+        "rank": 7,
+        "wins": 5,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Daneb",
+    "totalWins": 6,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt15",
+        "rank": 9,
+        "wins": 6,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Lotteux",
+    "totalWins": 6,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "satr_bbt15",
+        "rank": 13,
+        "wins": 5,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "darkhoumous",
+    "totalWins": 18,
+    "totalLosses": 14,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 7,
+    "history": [
+      {
+        "tournament": "satr_bbt15",
+        "rank": 17,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 13,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 9,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 25,
+        "wins": 4,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Manon",
+    "totalWins": 3,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt15",
+        "rank": 17,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Neli",
+    "totalWins": 3,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt15",
+        "rank": 17,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Addant",
+    "totalWins": 4,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt15",
+        "rank": 17,
+        "wins": 4,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Kipik",
+    "totalWins": 9,
+    "totalLosses": 6,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 3,
+    "history": [
+      {
+        "tournament": "satr_bbt15",
+        "rank": 25,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 17,
+        "wins": 4,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Masamune",
+    "totalWins": 19,
+    "totalLosses": 14,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 7,
+    "history": [
+      {
+        "tournament": "satr_bbt15",
+        "rank": 25,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 13,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 7,
+        "wins": 5,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 25,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Black Pegasus",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt15",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "GeoBlob",
+    "totalWins": 4,
+    "totalLosses": 8,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 4,
+    "history": [
+      {
+        "tournament": "satr_bbt15",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Don Capri",
+    "totalWins": 2,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "satr_bbt15",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Kamen A",
+    "totalWins": 16,
+    "totalLosses": 12,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 6,
+    "history": [
+      {
+        "tournament": "satr_bbt15",
+        "rank": 33,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 13,
+        "wins": 6,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 25,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 13,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Mekamyu",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt15",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Imox",
+    "totalWins": 4,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "satr_bbt15",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Dee",
+    "totalWins": 3,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "satr_bbt15",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Jadoudou",
+    "totalWins": 5,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "satr_bbt15",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 17,
+        "wins": 4,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Equalizer",
+    "totalWins": 18,
+    "totalLosses": 14,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 7,
+    "history": [
+      {
+        "tournament": "satr_bbt15",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 7,
+        "wins": 5,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 13,
+        "wins": 5,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 25,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Gareth",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt15",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "MagnaDefender",
+    "totalWins": 2,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "satr_bbt15",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "levroi",
+    "totalWins": 10,
+    "totalLosses": 14,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 7,
+    "history": [
+      {
+        "tournament": "satr_bbt15",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Fabien Le Ceratops",
+    "totalWins": 2,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "satr_bbt15",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Suba",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt15",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "blader M",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt15",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Wolfi",
+    "totalWins": 2,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "satr_bbt15",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Chouloup",
+    "totalWins": 1,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "satr_bbt15",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Elijah",
+    "totalWins": 6,
+    "totalLosses": 8,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 4,
+    "history": [
+      {
+        "tournament": "satr_bbt15",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 25,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Alice",
+    "totalWins": 4,
+    "totalLosses": 6,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 3,
+    "history": [
+      {
+        "tournament": "satr_bbt15",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Saja boys",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt15",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Dimitard",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt15",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "PO97",
+    "totalWins": 13,
+    "totalLosses": 10,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 5,
+    "history": [
+      {
+        "tournament": "satr_bbt15",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 25,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 13,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 25,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "KingJoker",
+    "totalWins": 20,
+    "totalLosses": 14,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 7,
+    "history": [
+      {
+        "tournament": "satr_bbt15",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt16",
+        "rank": 17,
+        "wins": 5,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 33,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 5,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 3,
+        "wins": 5,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Leo",
+    "totalWins": 2,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "satr_bbt15",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Astro",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt15",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Cygale",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt15",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Akitus",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt15",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "BRMIBR",
+    "totalWins": 4,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "satr_bbt15",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 17,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Astrale",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt15",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Lynn",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt15",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Oriana",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt15",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Tchoupi en heure de cole",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt15",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Perspicacegirl",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt15",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "IceTea",
+    "totalWins": 5,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt16",
+        "rank": 7,
+        "wins": 5,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "rayxray",
+    "totalWins": 5,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt16",
+        "rank": 9,
+        "wins": 5,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Fafa11",
+    "totalWins": 3,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt16",
+        "rank": 17,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Vincent",
+    "totalWins": 20,
+    "totalLosses": 12,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 6,
+    "history": [
+      {
+        "tournament": "satr_bbt16",
+        "rank": 25,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 9,
+        "wins": 7,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 9,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 5,
+        "wins": 4,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Xeno",
+    "totalWins": 10,
+    "totalLosses": 8,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 4,
+    "history": [
+      {
+        "tournament": "satr_bbt16",
+        "rank": 25,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 25,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 25,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Galaxy Pegasus",
+    "totalWins": 3,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt16",
+        "rank": 25,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Eox",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt16",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Lucano",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt16",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Goblade",
+    "totalWins": 3,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt16",
+        "rank": 33,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Astralou",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt16",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Yaya",
+    "totalWins": 6,
+    "totalLosses": 10,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 5,
+    "history": [
+      {
+        "tournament": "satr_bbt16",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Tategami",
+    "totalWins": 20,
+    "totalLosses": 12,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 6,
+    "history": [
+      {
+        "tournament": "satr_bbt16",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 33,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 9,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 2,
+        "wins": 9,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Blaze",
+    "totalWins": 6,
+    "totalLosses": 6,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 3,
+    "history": [
+      {
+        "tournament": "satr_bbt16",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 17,
+        "wins": 4,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Berguiny",
+    "totalWins": 7,
+    "totalLosses": 8,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 4,
+    "history": [
+      {
+        "tournament": "satr_bbt16",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 33,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "NLN",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt16",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Snowpye",
+    "totalWins": 5,
+    "totalLosses": 6,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 3,
+    "history": [
+      {
+        "tournament": "satr_bbt16",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Baptaz",
+    "totalWins": 2,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "satr_bbt16",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "l'antagoniste",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt16",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Lucic",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt16",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Abi",
+    "totalWins": 9,
+    "totalLosses": 10,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 5,
+    "history": [
+      {
+        "tournament": "satr_bbt16",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 25,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 17,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "BBK",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt16",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "19roi",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt16",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "SuperSigmaNoGoon",
+    "totalWins": 1,
+    "totalLosses": 6,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 3,
+    "history": [
+      {
+        "tournament": "satr_bbt16",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Issa",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt16",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Matthias de la Troupe X",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt16",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Kayman",
+    "totalWins": 0,
+    "totalLosses": 6,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 3,
+    "history": [
+      {
+        "tournament": "satr_bbt16",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Yoyo",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt16",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Littlemask",
+    "totalWins": 5,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "satr_bbt16",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 13,
+        "wins": 5,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Nxzo",
+    "totalWins": 0,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "satr_bbt16",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "le_homard_au_curry_foncede",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt16",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Kamen A Senior",
+    "totalWins": 3,
+    "totalLosses": 6,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 3,
+    "history": [
+      {
+        "tournament": "satr_bbt16",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt18",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "LucasRok",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt16",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Léo",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt16",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "La Triple S (KingJoker · Chad Light · Legoshi)",
+    "totalWins": 5,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt17",
+        "rank": 2,
+        "wins": 5,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Forever (Mag · Bandit · Gundam)",
+    "totalWins": 7,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt17",
+        "rank": 3,
+        "wins": 7,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Rising Volt Tacklers (Younsi · Shishi · Hane Hoshi)",
+    "totalWins": 6,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt17",
+        "rank": 4,
+        "wins": 6,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "La Brigade Fantôme (Xeno · Kayman · Masterz)",
+    "totalWins": 3,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt17",
+        "rank": 5,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Hitadaki Yoshiro (Gelofy · Mini Gelofy · Yaya)",
+    "totalWins": 4,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt17",
+        "rank": 7,
+        "wins": 4,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Team Matcha (Yoorushi · Yorel · zeLn)",
+    "totalWins": 4,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt17",
+        "rank": 7,
+        "wins": 4,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Les Gorilles (Kipik · Eox · Ender)",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt17",
+        "rank": 9,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Les Gardiens Sentinelles (Rock Lee · darkhoumous · Alice)",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt17",
+        "rank": 9,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Chrono Storme (Phénixio · kyronnah · Dimitard)",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt17",
+        "rank": 9,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Drill Soul (Berserk · PridefulLord · Aspen)",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt17",
+        "rank": 9,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Team Steve 2.0 (Eiko · Hane Hoshi · Spider_Agent42)",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt17",
+        "rank": 13,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Zit Zitoun (Zeikuo · Tategami · Kaious)",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt17",
+        "rank": 13,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Neo Beyknight (D8J6 · Rami · OursDuBeyblade)",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt17",
+        "rank": 13,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Inazuma Japon (Inazo · Illu · Blader Mystérieux )",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt17",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Spin Slayer (Berguiny · X Shark · Aiger)",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt17",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Leteessegoat (Xymore · Clemence · Simon)",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt17",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Wild Flower (Kamen 99 · Narugo · Kamen A)",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt17",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Kurenai (Kineria · 56 · Geats)",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt17",
+        "rank": 17,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Les Pilleurs de la Ludothèque (Vincent · Grand Golem Serpent · Saucisson Solide)",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt17",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Team Koizumi (JojoKirino · Ilou · Flower)",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt17",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Élite Royale (Mewxy · MTS · Snowpye)",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt17",
+        "rank": 25,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "La Nébuleuse Noire (IceTea · RoroDela · StarKnight)",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt17",
+        "rank": 25,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Noblesse Oblige (Leirya · Merope · Snipblast)",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt17",
+        "rank": 25,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Raging Bulls (Nthanb · levroi · Lc_37z)",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt17",
+        "rank": 25,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Les Gros Salamis (Azure · Fabien Le Ceratops · sewpoo_0192)",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt17",
+        "rank": 25,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "L'équipe Fury (Equalizer · L'artiste · Antoine)",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt17",
+        "rank": 25,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Blue Phoenix (Stella · Paimy  · Sabo)",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt17",
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Les Wilds Phoenix  (Fulguris95 · Wolfi · Rayou_95)",
+    "totalWins": 3,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt17",
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Tiramisu gang  (Sarah · Masamune · Hyakutake)",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt17",
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Team Vortex  (Flanders · Skarn · Ares)",
+    "totalWins": 7,
+    "totalLosses": 1,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt17",
+        "wins": 7,
+        "losses": 1
+      }
+    ]
+  },
+  {
+    "name": "Nahil",
+    "totalWins": 17,
+    "totalLosses": 8,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 4,
+    "history": [
+      {
+        "tournament": "satr_bbt18",
+        "rank": 5,
+        "wins": 5,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 13,
+        "wins": 5,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 13,
+        "wins": 6,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Loup",
+    "totalWins": 19,
+    "totalLosses": 10,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 5,
+    "history": [
+      {
+        "tournament": "satr_bbt18",
+        "rank": 9,
+        "wins": 7,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 3,
+        "wins": 11,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Guy",
+    "totalWins": 7,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "satr_bbt18",
+        "rank": 9,
+        "wins": 5,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 25,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "sword X",
+    "totalWins": 4,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt18",
+        "rank": 13,
+        "wins": 4,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "LaLucieole",
+    "totalWins": 4,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt18",
+        "rank": 17,
+        "wins": 4,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Chidori",
+    "totalWins": 3,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt18",
+        "rank": 17,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Flanders",
+    "totalWins": 9,
+    "totalLosses": 8,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 4,
+    "history": [
+      {
+        "tournament": "satr_bbt18",
+        "rank": 25,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 25,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Aiger",
+    "totalWins": 8,
+    "totalLosses": 6,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 3,
+    "history": [
+      {
+        "tournament": "satr_bbt18",
+        "rank": 25,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 17,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Oro",
+    "totalWins": 14,
+    "totalLosses": 10,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 5,
+    "history": [
+      {
+        "tournament": "satr_bbt18",
+        "rank": 25,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 25,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 9,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "AMP",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt18",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Solid Snake",
+    "totalWins": 4,
+    "totalLosses": 8,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 4,
+    "history": [
+      {
+        "tournament": "satr_bbt18",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Charli",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt18",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Skarn",
+    "totalWins": 17,
+    "totalLosses": 10,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 5,
+    "history": [
+      {
+        "tournament": "satr_bbt18",
+        "rank": 33,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 3,
+        "wins": 6,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 17,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 13,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Sasan",
+    "totalWins": 2,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "satr_bbt18",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Lewis",
+    "totalWins": 4,
+    "totalLosses": 8,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 4,
+    "history": [
+      {
+        "tournament": "satr_bbt18",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Elliot",
+    "totalWins": 8,
+    "totalLosses": 10,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 5,
+    "history": [
+      {
+        "tournament": "satr_bbt18",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 9,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "LuluBerlu",
+    "totalWins": 1,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "satr_bbt18",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "ManuMilitary",
+    "totalWins": 1,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "satr_bbt18",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Ares",
+    "totalWins": 4,
+    "totalLosses": 8,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 4,
+    "history": [
+      {
+        "tournament": "satr_bbt18",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Neymar",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt18",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Ilou",
+    "totalWins": 6,
+    "totalLosses": 8,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 4,
+    "history": [
+      {
+        "tournament": "satr_bbt18",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 9,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Homer",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt18",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Nazha",
+    "totalWins": 6,
+    "totalLosses": 10,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 5,
+    "history": [
+      {
+        "tournament": "satr_bbt18",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt19",
+        "rank": 25,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Koto",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt18",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Mini Gelofy",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt18",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Octhor Corsaire",
+    "totalWins": 1,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "satr_bbt18",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Martin",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt18",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Blader X",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt18",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "kayman",
+    "totalWins": 5,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt19",
+        "rank": 9,
+        "wins": 5,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Tafder",
+    "totalWins": 5,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt19",
+        "rank": 13,
+        "wins": 5,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Twi",
+    "totalWins": 12,
+    "totalLosses": 8,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 4,
+    "history": [
+      {
+        "tournament": "satr_bbt19",
+        "rank": 17,
+        "wins": 5,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 4,
+        "wins": 6,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Urkel",
+    "totalWins": 4,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt19",
+        "rank": 17,
+        "wins": 4,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Sam Valkyrie",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt19",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Sokalad1",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt19",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Meilos",
+    "totalWins": 8,
+    "totalLosses": 8,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 4,
+    "history": [
+      {
+        "tournament": "satr_bbt19",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 25,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Tourouk",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt19",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Ame",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt19",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "SossoStark",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt19",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Mimi",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt19",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Robin",
+    "totalWins": 4,
+    "totalLosses": 6,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 3,
+    "history": [
+      {
+        "tournament": "satr_bbt19",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 9,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Fox",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt19",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Kanandre",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt19",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Meo",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt19",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Tackyon",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt19",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Darkspirit4",
+    "totalWins": 1,
+    "totalLosses": 8,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 4,
+    "history": [
+      {
+        "tournament": "satr_bbt19",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt20",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "WildGalaxy",
+    "totalWins": 1,
+    "totalLosses": 6,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 3,
+    "history": [
+      {
+        "tournament": "satr_bbt19",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Aleks",
+    "totalWins": 4,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt20",
+        "rank": 17,
+        "wins": 4,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "ShiroBlader",
+    "totalWins": 3,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt20",
+        "rank": 25,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "IssaBlader",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt20",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Tommy94",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt20",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Kiiro",
+    "totalWins": 3,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt20",
+        "rank": 33,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Hisunu",
+    "totalWins": 3,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt20",
+        "rank": 33,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Lekuervo",
+    "totalWins": 5,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "satr_bbt20",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 17,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Mimi X",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt20",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "VilaineThob",
+    "totalWins": 2,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "satr_bbt20",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "BaldMan",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt20",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Shio",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt20",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Mehdi",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt20",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "LaserGame",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt20",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Yolkster",
+    "totalWins": 3,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "satr_bbt20",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Clem",
+    "totalWins": 4,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "satr_bbt20",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 25,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "BooBoo",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt20",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Sword X",
+    "totalWins": 1,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "satr_bbt20",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Kish",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt20",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Akira94",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt20",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Stété",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt20",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Wasabi213",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt20",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Thesp",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt20",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Zoro",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt20",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "SS",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt20",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "John",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt20",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Azsedxo",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt20",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Nathaniel",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt20",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Marina",
+    "totalWins": 0,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "satr_bbt20",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt21",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Nuilescent",
+    "totalWins": 5,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "satr_bbt20",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 17,
+        "wins": 5,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Wasabi93",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt20",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "GoldenKinder",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt20",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Blednitsu",
+    "totalWins": 1,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "satr_bbt20",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Nourix",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt20",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Bladeuse L",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt20",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Ben",
+    "totalWins": 8,
+    "totalLosses": 0,
+    "tournamentWins": 1,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt21",
+        "rank": 1,
+        "wins": 8,
+        "losses": 0
+      }
+    ]
+  },
+  {
+    "name": "Éther",
+    "totalWins": 8,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt21",
+        "rank": 5,
+        "wins": 8,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Flower",
+    "totalWins": 4,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "satr_bbt21",
+        "rank": 25,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "BubbleCheat",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt21",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Fabevil",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt21",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Vento",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt21",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "BladerPrime",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt21",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Sufhhc",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt21",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Ena",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt21",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Shiroi",
+    "totalWins": 3,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "satr_bbt21",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "LuXx598",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt21",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Philou",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt21",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Noah",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt21",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Soka",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt21",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Vecta",
+    "totalWins": 1,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "satr_bbt21",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Armin",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt21",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Sofy",
+    "totalWins": 0,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "satr_bbt21",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "satr_bbt22",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "LightYamani",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt21",
+        "rank": 65,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Matheo",
+    "totalWins": 4,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt22",
+        "rank": 25,
+        "wins": 4,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Lydou",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt22",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "BladerPopo",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt22",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Aramis",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt22",
+        "rank": 33,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Punky",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt22",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "BladerGaga",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt22",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "BeyMael",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt22",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "TontonKnuckles",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt22",
+        "rank": 49,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Chloé",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt22",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "A2m1desfables",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt22",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Saad",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt22",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Pita",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt22",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Upolemno",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "satr_bbt22",
+        "rank": 97,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  }
+]

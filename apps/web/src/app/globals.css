@@ -1,0 +1,248 @@
+/* Reset & Mobile Fixes */
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden; /* Prevent horizontal scroll globally */
+  position: relative;
+  font-family: var(--font-google-sans-flex), system-ui, sans-serif;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  touch-action: manipulation;
+  /* background-color and color are handled by MUI CssBaseline via ThemeRegistry */
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+/* Force layout consistency */
+#__next,
+main {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Mobile responsive typography corrections */
+@media (max-width: 600px) {
+  h1,
+  h2,
+  h3,
+  h4 {
+    word-break: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.glass-morphism {
+  background: color-mix(in srgb, var(--rpb-bg, #141414) 60%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 0;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Mobile Fixes for Layout Overflows */
+@media (max-width: 600px) {
+  /* Prevent horizontal scroll on common MUI containers */
+  .MuiContainer-root,
+  .MuiGrid-container,
+  .MuiBox-root {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.7;
+  }
+  70% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.95);
+    opacity: 0.7;
+  }
+}
+
+/* ===== Beyblade X App Visual Identity ===== */
+
+/* BBX dot pattern overlay — use class="bbx-dots" on any container */
+.bbx-dots {
+  position: relative;
+}
+.bbx-dots::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.04;
+  background-image: url("/bbx-icons/pattern-dot-fill.webp");
+  background-repeat: repeat;
+  background-size: 200px;
+}
+
+/* BBX line pattern — use class="bbx-lines" */
+.bbx-lines {
+  position: relative;
+}
+.bbx-lines::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.03;
+  background-image: url("/bbx-icons/pattern-lines-fill.webp");
+  background-repeat: repeat;
+  background-size: 300px;
+}
+
+/* BBX scan lines — subtle horizontal lines across sections */
+.bbx-scanlines {
+  position: relative;
+}
+.bbx-scanlines::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.015;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(255, 255, 255, 0.5) 2px,
+    rgba(255, 255, 255, 0.5) 3px
+  );
+}
+
+/* BBX diagonal accent lines */
+.bbx-diagonal {
+  position: relative;
+}
+.bbx-diagonal::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.02;
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 20px,
+    rgba(var(--rpb-primary-rgb), 0.3) 20px,
+    rgba(var(--rpb-primary-rgb), 0.3) 21px
+  );
+}
+
+/* BBX glow accent — themed bottom-edge glow */
+.bbx-glow-red {
+  box-shadow:
+    0 2px 20px -5px rgba(var(--rpb-primary-rgb), 0.15),
+    inset 0 -1px 0 0 rgba(var(--rpb-primary-rgb), 0.1);
+}
+
+/* BBX card with type accent */
+.bbx-card-attack {
+  border-left: 3px solid var(--rpb-primary);
+}
+.bbx-card-defense {
+  border-left: 3px solid #3b82f6;
+}
+.bbx-card-stamina {
+  border-left: 3px solid #22c55e;
+}
+.bbx-card-balance {
+  border-left: 3px solid #a855f7;
+}
+
+/* BBX tab flourish — decorative underline on active tabs */
+@keyframes bbx-tab-glow {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* BBX spin animation for beyblade elements */
+@keyframes bbx-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.bbx-spin {
+  animation: bbx-spin 4s linear infinite;
+}
+.bbx-spin-slow {
+  animation: bbx-spin 12s linear infinite;
+}
+
+/* BBX flash for booster reveal */
+@keyframes bbx-flash {
+  0% {
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* BBX page section separator */
+.bbx-separator {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(var(--rpb-primary-rgb), 0.3) 20%,
+    rgba(var(--rpb-primary-rgb), 0.5) 50%,
+    rgba(var(--rpb-primary-rgb), 0.3) 80%,
+    transparent 100%
+  );
+  margin: 32px 0;
+}

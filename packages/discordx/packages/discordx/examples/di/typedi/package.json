@@ -1,0 +1,8 @@
+{
+  "name": "typedi-example",
+  "private": true,
+  "dependencies": {
+    "@rpbey/discordx": "workspace:^",
+    "typedi": "^0.10.0"
+  }
+}

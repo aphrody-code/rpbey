@@ -1,0 +1,67 @@
+{
+  "name": "@rpbey/create-discordx",
+  "version": "0.1.2",
+  "description": "Scaffold a Bun-first discordy (discordx fork) bot with one command",
+  "keywords": [
+    "bot",
+    "bun",
+    "cmd",
+    "command",
+    "discord",
+    "discord.js",
+    "discordx",
+    "discordy",
+    "framework",
+    "generator",
+    "rpbey",
+    "template"
+  ],
+  "homepage": "https://github.com/rpbey/discordy#readme",
+  "bugs": {
+    "url": "https://github.com/rpbey/discordy/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rpbey/discordy.git",
+    "directory": "packages/create-discordx"
+  },
+  "license": "Apache-2.0",
+  "author": "rpbey (https://github.com/rpbey)",
+  "contributors": [
+    "Vijay Meena <vijayymmeena@gmail.com> (https://github.com/vijayymmeena)"
+  ],
+  "main": "dist/index.js",
+  "type": "module",
+  "files": [
+    "dist",
+    "templates",
+    "LICENSE.txt",
+    "README.md",
+    "package.json"
+  ],
+  "bin": {
+    "create-discordx": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts --clean"
+  },
+  "dependencies": {
+    "ora": "^9.3.0",
+    "prompts": "^2.4.2",
+    "update-check": "^1.5.4",
+    "validate-npm-package-name": "^7.0.2"
+  },
+  "engines": {
+    "bun": ">=1.2.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://npm.pkg.github.com"
+  },
+  "devDependencies": {
+    "@types/prompts": "^2.4.9",
+    "@types/validate-npm-package-name": "^4.0.2",
+    "typescript": "catalog:"
+  },
+  "sideEffects": false
+}

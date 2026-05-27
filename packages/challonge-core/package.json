@@ -1,0 +1,27 @@
+{
+	"name": "@rose-griffon/challonge-core",
+	"version": "1.0.0",
+	"description": "Logique de brackets (modèle, manager, viewer) sans dépendances système",
+	"private": true,
+	"type": "module",
+	"main": "./dist/index.js",
+	"types": "./src/index.ts",
+	"exports": {
+		".": {
+			"types": "./src/index.ts",
+			"default": "./dist/index.js"
+		},
+		"./viewer": {
+			"types": "./src/viewer.ts",
+			"default": "./dist/viewer.js"
+		},
+		"./brackets-model": "./src/brackets-model/index.ts",
+		"./brackets-manager": "./src/brackets-manager/index.ts",
+		"./brackets-viewer": "./src/brackets-viewer/index.ts"
+	},
+	"dependencies": {
+		"i18next": "^21.6.14",
+		"i18next-browser-languagedetector": "^6.1.4",
+		"brackets-memory-db": "latest"
+	}
+}

@@ -1,0 +1,69 @@
+{
+  "name": "@rpbey/utilities",
+  "version": "0.1.1",
+  "private": false,
+  "description": "Utilities package for enhancing discordx functionality",
+  "keywords": [
+    "bot",
+    "discord",
+    "discordx",
+    "javascript",
+    "typescript",
+    "utilities"
+  ],
+  "homepage": "https://discordx.js.org",
+  "bugs": {
+    "url": "https://github.com/discordx-ts/discordx/issues",
+    "email": "vijayymmeena@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rpbey/discordy.git",
+    "directory": "packages/utilities"
+  },
+  "license": "Apache-2.0",
+  "contributors": [
+    "Vijay Meena <vijayymmeena@gmail.com> (https://github.com/vijayymmeena)"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "CHANGELOG.md",
+    "LICENSE.txt",
+    "README.md",
+    "SECURITY.md",
+    "package.json"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts --clean",
+    "build:typedoc": "bunx typedoc src/index.ts --out ../../docs/static/api/utilities"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.20"
+  },
+  "devDependencies": {
+    "@rpbey/importer": "workspace:^",
+    "@rpbey/pagination": "workspace:^",
+    "discord.js": "^14.26.3",
+    "@rpbey/discordx": "workspace:^",
+    "typescript": "catalog:"
+  },
+  "peerDependencies": {
+    "discord.js": ">=14 || ^14.0.0-dev",
+    "@rpbey/discordx": ">=0.1.0"
+  },
+  "engines": {
+    "bun": ">=1.2.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://npm.pkg.github.com"
+  }
+}

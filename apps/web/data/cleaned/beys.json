@@ -1,0 +1,1289 @@
+[
+  {
+    "code": "BX-01",
+    "blade": "DranSword",
+    "ratchet": "3-60",
+    "bit": "Flat",
+    "bitCode": "F",
+    "type": "",
+    "productType": "STARTER"
+  },
+  {
+    "code": "BX-02",
+    "blade": "HellsScythe",
+    "ratchet": "4-60",
+    "bit": "Taper",
+    "bitCode": "T",
+    "type": "",
+    "productType": "DUAL BOOSTER"
+  },
+  {
+    "code": "BX-03",
+    "blade": "WizardArrow",
+    "ratchet": "4-80",
+    "bit": "Ball",
+    "bitCode": "B",
+    "type": "",
+    "productType": "RANDOM BOOSTER"
+  },
+  {
+    "code": "BX-04",
+    "blade": "KnightShield",
+    "ratchet": "3-80",
+    "bit": "Needle",
+    "bitCode": "N",
+    "type": "",
+    "productType": "SETS"
+  },
+  {
+    "code": "BX-05",
+    "blade": "WizardArrow",
+    "ratchet": "4-80",
+    "bit": "Ball",
+    "bitCode": "B",
+    "type": "",
+    "productType": "SPECIAL PRODUCT"
+  },
+  {
+    "code": "BX-06",
+    "blade": "KnightShield",
+    "ratchet": "3-80",
+    "bit": "Needle",
+    "bitCode": "N",
+    "type": "",
+    "productType": "TOURNAMENT PRIZE"
+  },
+  {
+    "code": "BX-07",
+    "blade": "DranSword",
+    "ratchet": "3-60",
+    "bit": "Flat",
+    "bitCode": "F",
+    "type": "",
+    "productType": "COROCORO"
+  },
+  {
+    "code": "BX-08-01",
+    "blade": "HellsScythe",
+    "ratchet": "3-80",
+    "bit": "Ball",
+    "bitCode": "B",
+    "type": "",
+    "productType": "GAME"
+  },
+  {
+    "code": "BX-08-02",
+    "blade": "WizardArrow",
+    "ratchet": "4-60",
+    "bit": "Needle",
+    "bitCode": "N",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-08-03",
+    "blade": "KnightShield",
+    "ratchet": "4-80",
+    "bit": "Taper",
+    "bitCode": "T",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-13",
+    "blade": "KnightLance",
+    "ratchet": "4-80",
+    "bit": "HighNeedle",
+    "bitCode": "HN",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-14-01",
+    "blade": "SharkEdge",
+    "ratchet": "3-60",
+    "bit": "LowFlat",
+    "bitCode": "LF",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-14-02",
+    "blade": "SharkEdge",
+    "ratchet": "4-80",
+    "bit": "Needle",
+    "bitCode": "N",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-14-03",
+    "blade": "DranSword",
+    "ratchet": "3-80",
+    "bit": "Ball",
+    "bitCode": "B",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-14-04",
+    "blade": "HellsScythe",
+    "ratchet": "4-80",
+    "bit": "LowFlat",
+    "bitCode": "LF",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-14-05",
+    "blade": "KnightShield",
+    "ratchet": "4-60",
+    "bit": "LowFlat",
+    "bitCode": "LF",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-14-06",
+    "blade": "WizardArrow",
+    "ratchet": "3-60",
+    "bit": "Taper",
+    "bitCode": "T",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-15",
+    "blade": "LeonClaw",
+    "ratchet": "5-60",
+    "bit": "Point",
+    "bitCode": "P",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-16-01",
+    "blade": "ViperTail",
+    "ratchet": "5-80",
+    "bit": "Orb",
+    "bitCode": "O",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-16-02",
+    "blade": "ViperTail",
+    "ratchet": "4-60",
+    "bit": "Flat",
+    "bitCode": "F",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-16-03",
+    "blade": "ViperTail",
+    "ratchet": "3-80",
+    "bit": "HighNeedle",
+    "bitCode": "HN",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-17-01",
+    "blade": "WizardArrow",
+    "ratchet": "4-80",
+    "bit": "Ball",
+    "bitCode": "B",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-17-02",
+    "blade": "DranSword",
+    "ratchet": "3-60",
+    "bit": "Flat",
+    "bitCode": "F",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-19",
+    "blade": "RhinoHorn",
+    "ratchet": "3-80",
+    "bit": "Spike",
+    "bitCode": "S",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-20-01",
+    "blade": "DranDagger",
+    "ratchet": "4-60",
+    "bit": "Rush",
+    "bitCode": "R",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-20-02",
+    "blade": "SharkEdge",
+    "ratchet": "3-80",
+    "bit": "Flat",
+    "bitCode": "F",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-20-03",
+    "blade": "KnightShield",
+    "ratchet": "5-80",
+    "bit": "Taper",
+    "bitCode": "T",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-21-01",
+    "blade": "HellsChain",
+    "ratchet": "5-60",
+    "bit": "HighTaper",
+    "bitCode": "HT",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-21-02",
+    "blade": "KnightLance",
+    "ratchet": "3-60",
+    "bit": "LowFlat",
+    "bitCode": "LF",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-21-03",
+    "blade": "WizardArrow",
+    "ratchet": "4-80",
+    "bit": "Needle",
+    "bitCode": "N",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-22",
+    "blade": "DranSword",
+    "ratchet": "3-60",
+    "bit": "Flat",
+    "bitCode": "F",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-23",
+    "blade": "PhoenixWing",
+    "ratchet": "9-60",
+    "bit": "GearFlat",
+    "bitCode": "GF",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-24-01",
+    "blade": "WyvernGale",
+    "ratchet": "5-80",
+    "bit": "GearBall",
+    "bitCode": "GB",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-24-02",
+    "blade": "WyvernGale",
+    "ratchet": "3-60",
+    "bit": "Taper",
+    "bitCode": "T",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-24-03",
+    "blade": "KnightLance",
+    "ratchet": "4-60",
+    "bit": "GearBall",
+    "bitCode": "GB",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-24-04",
+    "blade": "ViperTail",
+    "ratchet": "5-60",
+    "bit": "Flat",
+    "bitCode": "F",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-24-05",
+    "blade": "LeonClaw",
+    "ratchet": "3-80",
+    "bit": "HighNeedle",
+    "bitCode": "HN",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-24-06",
+    "blade": "WizardArrow",
+    "ratchet": "4-80",
+    "bit": "GearBall",
+    "bitCode": "GB",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-26",
+    "blade": "UnicornSting",
+    "ratchet": "5-60",
+    "bit": "GearPoint",
+    "bitCode": "GP",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-27-01",
+    "blade": "SphinxCowl",
+    "ratchet": "9-80",
+    "bit": "GearNeedle",
+    "bitCode": "GN",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-27-02",
+    "blade": "SphinxCowl",
+    "ratchet": "4-80",
+    "bit": "HighTaper",
+    "bitCode": "HT",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-27-03",
+    "blade": "SphinxCowl",
+    "ratchet": "5-60",
+    "bit": "Orb",
+    "bitCode": "O",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-31-01",
+    "blade": "TyrannoBeat",
+    "ratchet": "4-70",
+    "bit": "Quake",
+    "bitCode": "Q",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-31-02",
+    "blade": "TyrannoBeat",
+    "ratchet": "3-60",
+    "bit": "Spike",
+    "bitCode": "S",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-31-03",
+    "blade": "HellsChain",
+    "ratchet": "9-80",
+    "bit": "Orb",
+    "bitCode": "O",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-31-04",
+    "blade": "DranDagger",
+    "ratchet": "4-70",
+    "bit": "Point",
+    "bitCode": "P",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-31-05",
+    "blade": "SharkEdge",
+    "ratchet": "1-60",
+    "bit": "Quake",
+    "bitCode": "Q",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-31-06",
+    "blade": "RhinoHorn",
+    "ratchet": "5-80",
+    "bit": "Quake",
+    "bitCode": "Q",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-33",
+    "blade": "WeissTiger",
+    "ratchet": "3-60",
+    "bit": "Unite",
+    "bitCode": "U",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-34",
+    "blade": "CobaltDragoon",
+    "ratchet": "2-60",
+    "bit": "Cyclone",
+    "bitCode": "C",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-35-01",
+    "blade": "BlackShell",
+    "ratchet": "4-60",
+    "bit": "Dot",
+    "bitCode": "D",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-35-02",
+    "blade": "BlackShell",
+    "ratchet": "9-80",
+    "bit": "Ball",
+    "bitCode": "B",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-35-03",
+    "blade": "UnicornSting",
+    "ratchet": "3-70",
+    "bit": "Dot",
+    "bitCode": "D",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-35-04",
+    "blade": "WizardRod",
+    "ratchet": "1-60",
+    "bit": "Rush",
+    "bitCode": "R",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-35-05",
+    "blade": "PhoenixWing",
+    "ratchet": "5-80",
+    "bit": "Hexa",
+    "bitCode": "H",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-35-06",
+    "blade": "ViperTail",
+    "ratchet": "5-70",
+    "bit": "Dot",
+    "bitCode": "D",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-36-01",
+    "blade": "WhaveWale",
+    "ratchet": "5-80",
+    "bit": "Elevate",
+    "bitCode": "E",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-36-02",
+    "blade": "WhaveWale",
+    "ratchet": "4-70",
+    "bit": "HighNeedle",
+    "bitCode": "HN",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-36-03",
+    "blade": "WhaveWale",
+    "ratchet": "3-80",
+    "bit": "GearBall",
+    "bitCode": "GB",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-37",
+    "blade": "BearScratch",
+    "ratchet": "5-60",
+    "bit": "Flat",
+    "bitCode": "F",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-38",
+    "blade": "CrimsonGaruda",
+    "ratchet": "4-70",
+    "bit": "Trans Point",
+    "bitCode": "TP",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-39-01",
+    "blade": "ShelterDrake",
+    "ratchet": "7-80",
+    "bit": "GearPoint",
+    "bitCode": "GP",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-39-02",
+    "blade": "ShelterDrake",
+    "ratchet": "5-70",
+    "bit": "Orb",
+    "bitCode": "O",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-39-03",
+    "blade": "ShelterDrake",
+    "ratchet": "3-60",
+    "bit": "Dot",
+    "bitCode": "D",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-44",
+    "blade": "TriceraPress",
+    "ratchet": "M-85",
+    "bit": "Bound Spike",
+    "bitCode": "BS",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "UX-01",
+    "blade": "DranBuster",
+    "ratchet": "1-60",
+    "bit": "Accel",
+    "bitCode": "A",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "UX-02",
+    "blade": "HellsHammer",
+    "ratchet": "3-70",
+    "bit": "Hexa",
+    "bitCode": "H",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "UX-03",
+    "blade": "WizardRod",
+    "ratchet": "5-70",
+    "bit": "DiskBall",
+    "bitCode": "DB",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "UX-04-01",
+    "blade": "DranBuster",
+    "ratchet": "1-60",
+    "bit": "Accel",
+    "bitCode": "A",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "UX-04-02",
+    "blade": "WizardRod",
+    "ratchet": "5-70",
+    "bit": "DiskBall",
+    "bitCode": "DB",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "UX-05-01",
+    "blade": "ShinobiShadow",
+    "ratchet": "1-80",
+    "bit": "MetalNeedle",
+    "bitCode": "MN",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "UX-05-02",
+    "blade": "ShinobiShadow",
+    "ratchet": "9-60",
+    "bit": "LowFlat",
+    "bitCode": "LF",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "UX-05-03",
+    "blade": "ShinobiShadow",
+    "ratchet": "3-70",
+    "bit": "GearPoint",
+    "bitCode": "GP",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "UX-06",
+    "blade": "LeonCrest",
+    "ratchet": "7-60",
+    "bit": "GearNeedle",
+    "bitCode": "GN",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "UX07-01",
+    "blade": "PhoenixRudder",
+    "ratchet": "9-70",
+    "bit": "Glide",
+    "bitCode": "G",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "UX07-02",
+    "blade": "SphinxCowl",
+    "ratchet": "1-80",
+    "bit": "GearFlat",
+    "bitCode": "GF",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "UX07-03",
+    "blade": "WyvernGale",
+    "ratchet": "2-60",
+    "bit": "Spike",
+    "bitCode": "S",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "UX-08",
+    "blade": "SilverWolf",
+    "ratchet": "3-80",
+    "bit": "Free Ball",
+    "bitCode": "FB",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "UX-09",
+    "blade": "SamuraiSaber",
+    "ratchet": "2-70",
+    "bit": "Level",
+    "bitCode": "L",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "UX-10",
+    "blade": "KnightMail",
+    "ratchet": "3-85",
+    "bit": "Bound Spike",
+    "bitCode": "BS",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "UX-11",
+    "blade": "ImpactDrake",
+    "ratchet": "9-60",
+    "bit": "Low Rush",
+    "bitCode": "LR",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "UX-12-01",
+    "blade": "GhostCircle",
+    "ratchet": "0-80",
+    "bit": "GearBall",
+    "bitCode": "GB",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "UX-12-02",
+    "blade": "GhostCircle",
+    "ratchet": "4-60",
+    "bit": "Hexa",
+    "bitCode": "H",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "UX-12-03",
+    "blade": "ShinobiShadow",
+    "ratchet": "3-80",
+    "bit": "Flat",
+    "bitCode": "F",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "UX-12-04",
+    "blade": "LeonClaw",
+    "ratchet": "0-80",
+    "bit": "Elevate",
+    "bitCode": "E",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "UX-12-05",
+    "blade": "PhoenixFeather",
+    "ratchet": "2-60",
+    "bit": "Needle",
+    "bitCode": "N",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "UX-12-06",
+    "blade": "WyvernGale",
+    "ratchet": "0-80",
+    "bit": "Cyclone",
+    "bitCode": "C",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "UX-13",
+    "blade": "GolemRock",
+    "ratchet": "1-60",
+    "bit": "Under Needle",
+    "bitCode": "UN",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "UX-14",
+    "blade": "ScorpioSpear",
+    "ratchet": "0-70",
+    "bit": "Zap",
+    "bitCode": "Z",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "CX-01",
+    "blade": "DranBrave",
+    "ratchet": "6-60",
+    "bit": "Vortex",
+    "bitCode": "V",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "CX-02",
+    "blade": "WizardArc",
+    "ratchet": "4-55",
+    "bit": "Low Orb",
+    "bitCode": "LO",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "CX-03",
+    "blade": "PerseusDark",
+    "ratchet": "6-80",
+    "bit": "Wedge",
+    "bitCode": "W",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "CX-04-01",
+    "blade": "DranBrave",
+    "ratchet": "6-60",
+    "bit": "Vortex",
+    "bitCode": "V",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "CX-04-02",
+    "blade": "PerseusDark",
+    "ratchet": "6-80",
+    "bit": "Wedge",
+    "bitCode": "W",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "CX-05-01",
+    "blade": "HellsReaper",
+    "ratchet": "4-70",
+    "bit": "Kick",
+    "bitCode": "K",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "CX-05-02",
+    "blade": "RhinoReaper",
+    "ratchet": "4-55",
+    "bit": "Orb",
+    "bitCode": "O",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "CX-05-03",
+    "blade": "HellsArc",
+    "ratchet": "3-85",
+    "bit": "Flat",
+    "bitCode": "F",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "CX-05-04",
+    "blade": "LeonCrest",
+    "ratchet": "9-80",
+    "bit": "Kick",
+    "bitCode": "K",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "CX-05-05",
+    "blade": "PhoenixRudder",
+    "ratchet": "4-70",
+    "bit": "LowFlat",
+    "bitCode": "LF",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "CX-05-06",
+    "blade": "WhaleWave",
+    "ratchet": "7-60",
+    "bit": "Kick",
+    "bitCode": "K",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "CX-06-01",
+    "blade": "FoxBrush",
+    "ratchet": "9-70",
+    "bit": "GearRush",
+    "bitCode": "GR",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "CX-06-02",
+    "blade": "FoxBrush",
+    "ratchet": "0-80",
+    "bit": "DiskBall",
+    "bitCode": "DB",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "CX-06-03",
+    "blade": "FoxBrush",
+    "ratchet": "2-60",
+    "bit": "Unite",
+    "bitCode": "U",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "CX-07",
+    "blade": "PegasusBlast",
+    "ratchet": "Tr",
+    "bit": "",
+    "bitCode": "Turbo",
+    "type": "OG",
+    "productType": ""
+  },
+  {
+    "code": "CX-08-01",
+    "blade": "CerberusFlame",
+    "ratchet": "5-80",
+    "bit": "Wall Ball",
+    "bitCode": "WB",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "CX-08-02",
+    "blade": "WhaleFlame",
+    "ratchet": "3-85",
+    "bit": "HighTaper",
+    "bitCode": "HT",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "CX-08-03",
+    "blade": "CerberusDark",
+    "ratchet": "1-60",
+    "bit": "Flat",
+    "bitCode": "F",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "CX-08-04",
+    "blade": "DranBuster",
+    "ratchet": "5-80",
+    "bit": "MetalNeedle",
+    "bitCode": "MN",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "CX-08-05",
+    "blade": "BlackShell",
+    "ratchet": "7-70",
+    "bit": "Wall Ball",
+    "bitCode": "WB",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "CX-08-06",
+    "blade": "CobaltDragoon",
+    "ratchet": "4-55",
+    "bit": "Wall Ball",
+    "bitCode": "WB",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-00",
+    "blade": "CobaltDrake",
+    "ratchet": "4-60",
+    "bit": "Flat",
+    "bitCode": "F",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "UX-00",
+    "blade": "AeroPegasus",
+    "ratchet": "3-70",
+    "bit": "Accel",
+    "bitCode": "A",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-00",
+    "blade": "HellsScythe",
+    "ratchet": "4-60",
+    "bit": "Taper",
+    "bitCode": "T",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-00",
+    "blade": "LeonClaw",
+    "ratchet": "5-60",
+    "bit": "Point",
+    "bitCode": "P",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-00",
+    "blade": "HellsChain",
+    "ratchet": "5-60",
+    "bit": "HighTaper",
+    "bitCode": "HT",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-00",
+    "blade": "DranzerSpiral",
+    "ratchet": "3-80",
+    "bit": "Taper",
+    "bitCode": "T",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-00",
+    "blade": "DranSword",
+    "ratchet": "3-60",
+    "bit": "Flat",
+    "bitCode": "F",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-00",
+    "blade": "DranDagger",
+    "ratchet": "2-80",
+    "bit": "GearPoint",
+    "bitCode": "GP",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-00",
+    "blade": "SharkEdge",
+    "ratchet": "5-60",
+    "bit": "GearFlat",
+    "bitCode": "GF",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-00",
+    "blade": "DranzerSpiral",
+    "ratchet": "3-80",
+    "bit": "Taper",
+    "bitCode": "T",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-00",
+    "blade": "DrigerSlash",
+    "ratchet": "4-60",
+    "bit": "Point",
+    "bitCode": "P",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-00",
+    "blade": "DragoonStorm",
+    "ratchet": "4-60",
+    "bit": "Rubber Accel",
+    "bitCode": "RA",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-00",
+    "blade": "StormPegasus",
+    "ratchet": "3-70",
+    "bit": "Rubber Accel",
+    "bitCode": "RA",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-00",
+    "blade": "VictoryValkyrie",
+    "ratchet": "2-60",
+    "bit": "Rubber Accel",
+    "bitCode": "RA",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-00",
+    "blade": "DranSword",
+    "ratchet": "3-60",
+    "bit": "Flat",
+    "bitCode": "F",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-00",
+    "blade": "Lightning L-Drago [U]",
+    "ratchet": "1-60",
+    "bit": "Flat",
+    "bitCode": "F",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-00",
+    "blade": "Lightning L-Drago [R]",
+    "ratchet": "1-60",
+    "bit": "Flat",
+    "bitCode": "F",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-00",
+    "blade": "PhoenixWing",
+    "ratchet": "9-80",
+    "bit": "DiskBall",
+    "bitCode": "DB",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-00",
+    "blade": "MammothTusk",
+    "ratchet": "2-80",
+    "bit": "Elevate",
+    "bitCode": "E",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-00",
+    "blade": "PhoenixWing",
+    "ratchet": "9-60",
+    "bit": "GearFlat",
+    "bitCode": "GF",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-00",
+    "blade": "XenoXcalibur",
+    "ratchet": "3-60",
+    "bit": "GearFlat",
+    "bitCode": "GF",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "UX-00",
+    "blade": "DranSword",
+    "ratchet": "4-80",
+    "bit": "DiskBall",
+    "bitCode": "DB",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "UX-00",
+    "blade": "DranDagger",
+    "ratchet": "9-60",
+    "bit": "LowFlat",
+    "bitCode": "LF",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "UX-00",
+    "blade": "DranBuster",
+    "ratchet": "3-70",
+    "bit": "Needle",
+    "bitCode": "N",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-00",
+    "blade": "CobaltDrake",
+    "ratchet": "4-60",
+    "bit": "Flat",
+    "bitCode": "F",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "UX-00",
+    "blade": "DranBuster",
+    "ratchet": "1-60",
+    "bit": "Accel",
+    "bitCode": "A",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "UX-00",
+    "blade": "HellsHammer",
+    "ratchet": "3-70",
+    "bit": "Hexa",
+    "bitCode": "H",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "UX-00",
+    "blade": "DranBuster",
+    "ratchet": "1-60",
+    "bit": "Accel",
+    "bitCode": "A",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "UX-00",
+    "blade": "DranBuster",
+    "ratchet": "1-60",
+    "bit": "Accel",
+    "bitCode": "A",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "UX-00",
+    "blade": "DracielShield",
+    "ratchet": "7-60",
+    "bit": "Dot",
+    "bitCode": "D",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "BX-00",
+    "blade": "SamuraiSteel",
+    "ratchet": "5-70",
+    "bit": "GearFlat",
+    "bitCode": "GF",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "UX-00",
+    "blade": "Samurai Saber",
+    "ratchet": "2-70",
+    "bit": "Level",
+    "bitCode": "L",
+    "type": "",
+    "productType": ""
+  },
+  {
+    "code": "CX-00",
+    "blade": "DranArc",
+    "ratchet": "2-70",
+    "bit": "Kick",
+    "bitCode": "K",
+    "type": "",
+    "productType": ""
+  }
+]

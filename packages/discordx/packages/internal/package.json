@@ -1,0 +1,62 @@
+{
+  "name": "@rpbey/internal",
+  "version": "0.1.1",
+  "private": false,
+  "description": "Internal methods for discordx",
+  "keywords": [
+    "bot",
+    "decorators",
+    "dependency injection",
+    "discord",
+    "discordx",
+    "framework",
+    "javascript",
+    "tsyringe",
+    "typescript"
+  ],
+  "homepage": "https://discordx.js.org",
+  "bugs": {
+    "url": "https://github.com/discordx-ts/discordx/issues",
+    "email": "vijayymmeena@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rpbey/discordy.git",
+    "directory": "packages/internal"
+  },
+  "license": "Apache-2.0",
+  "contributors": [
+    "Owen Calvin <owen.gombas@gmail.com> (https://github.com/OwenCalvin)",
+    "Vijay Meena <vijayymmeena@gmail.com> (https://github.com/vijayymmeena)"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "CHANGELOG.md",
+    "LICENSE.txt",
+    "README.md",
+    "SECURITY.md",
+    "package.json"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts --clean",
+    "build:typedoc": "bunx typedoc src/index.ts --out ../../docs/static/api/internal"
+  },
+  "devDependencies": {
+    "typescript": "catalog:"
+  },
+  "engines": {
+    "bun": ">=1.2.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://npm.pkg.github.com"
+  }
+}

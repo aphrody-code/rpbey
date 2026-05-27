@@ -1,0 +1,29 @@
+name: Build - Documentation
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "docs/**"
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@main
+        with:
+          fetch-depth: 0
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies for docs
+        run: bun install
+        working-directory: ./docs
+
+      - name: Build docs
+        run: bun run build
+        working-directory: ./docs

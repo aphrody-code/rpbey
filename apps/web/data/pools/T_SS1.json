@@ -1,0 +1,2045 @@
+{
+  "slug": "T_SS1",
+  "groupsCount": 6,
+  "participantsCount": 35,
+  "matchesCount": 85,
+  "groups": [
+    {
+      "name": "Group A",
+      "participants": [
+        {
+          "rank": 1,
+          "displayName": "VentoNaBendo",
+          "challongeUsername": "CØL_Vento",
+          "portraitUrl": "https://user-assets.challonge.com/users/images/007/083/140/small/gojo-hollow-purple.png",
+          "advanced": true,
+          "wins": 4,
+          "losses": 0,
+          "ties": 0,
+          "tb": 0,
+          "setWins": 4,
+          "setTies": 0,
+          "pts": 17,
+          "matchHistory": [
+            {
+              "matchId": "455421569",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421572",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421576",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421577",
+              "matchState": "complete",
+              "result": "W"
+            }
+          ]
+        },
+        {
+          "rank": 2,
+          "displayName": "Zeikuo",
+          "challongeUsername": "Zeikuo",
+          "portraitUrl": "https://user-assets.challonge.com/users/images/006/793/364/small/1000000068.png",
+          "advanced": true,
+          "wins": 2,
+          "losses": 2,
+          "ties": 0,
+          "tb": 1,
+          "setWins": 2,
+          "setTies": 0,
+          "pts": 10,
+          "matchHistory": [
+            {
+              "matchId": "455421569",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421571",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421574",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421578",
+              "matchState": "complete",
+              "result": "W"
+            }
+          ]
+        },
+        {
+          "rank": 3,
+          "displayName": "Masamune_Kadoya",
+          "challongeUsername": "Masamune_Kadoya",
+          "portraitUrl": "https://user-assets.challonge.com/users/images/007/642/532/small/IMG_9922.png",
+          "advanced": true,
+          "wins": 2,
+          "losses": 2,
+          "ties": 0,
+          "tb": 0,
+          "setWins": 2,
+          "setTies": 0,
+          "pts": 12,
+          "matchHistory": [
+            {
+              "matchId": "455421572",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421573",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421575",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421578",
+              "matchState": "complete",
+              "result": "L"
+            }
+          ]
+        },
+        {
+          "rank": 4,
+          "displayName": "Zeln3090",
+          "challongeUsername": "Zeln3090",
+          "portraitUrl": "https://user-assets.challonge.com/users/images/007/085/495/small/1000030295.png",
+          "advanced": false,
+          "wins": 1,
+          "losses": 3,
+          "ties": 0,
+          "tb": 1,
+          "setWins": 1,
+          "setTies": 0,
+          "pts": 9,
+          "matchHistory": [
+            {
+              "matchId": "455421570",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421571",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421573",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421576",
+              "matchState": "complete",
+              "result": "L"
+            }
+          ]
+        },
+        {
+          "rank": 5,
+          "displayName": "OrO",
+          "challongeUsername": "Orotchi",
+          "portraitUrl": "https://secure.gravatar.com/avatar/a62a6d400b5d1d98907089b6229c77b4?r=r&amp;s=18&amp;d=https://user-assets.challonge.com/misc/challonge_fireball_gray.png",
+          "advanced": false,
+          "wins": 1,
+          "losses": 3,
+          "ties": 0,
+          "tb": 0,
+          "setWins": 1,
+          "setTies": 0,
+          "pts": 6,
+          "matchHistory": [
+            {
+              "matchId": "455421570",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421574",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421575",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421577",
+              "matchState": "complete",
+              "result": "L"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Group B",
+      "participants": [
+        {
+          "rank": 1,
+          "displayName": "azurekun",
+          "challongeUsername": "azurekun",
+          "portraitUrl": "https://user-assets.challonge.com/users/images/007/181/222/small/4608415e2e540df5e38416410fb119f9.png",
+          "advanced": true,
+          "wins": 4,
+          "losses": 1,
+          "ties": 0,
+          "tb": 0,
+          "setWins": 4,
+          "setTies": 0,
+          "pts": 19,
+          "matchHistory": [
+            {
+              "matchId": "455421579",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421583",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421587",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421590",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421592",
+              "matchState": "complete",
+              "result": "W"
+            }
+          ]
+        },
+        {
+          "rank": 2,
+          "displayName": "SkarnGameMaster",
+          "challongeUsername": "SkarnGameMaster",
+          "portraitUrl": "https://user-assets.challonge.com/users/images/007/741/688/small/IMG_1043.png",
+          "advanced": true,
+          "wins": 3,
+          "losses": 2,
+          "ties": 0,
+          "tb": 1,
+          "setWins": 3,
+          "setTies": 0,
+          "pts": 19,
+          "matchHistory": [
+            {
+              "matchId": "455421581",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421583",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421585",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421589",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421591",
+              "matchState": "complete",
+              "result": "L"
+            }
+          ]
+        },
+        {
+          "rank": 3,
+          "displayName": "Upolemno",
+          "challongeUsername": null,
+          "portraitUrl": null,
+          "advanced": true,
+          "wins": 3,
+          "losses": 2,
+          "ties": 0,
+          "tb": 0,
+          "setWins": 3,
+          "setTies": 0,
+          "pts": 18,
+          "matchHistory": [
+            {
+              "matchId": "455421579",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421584",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421586",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421589",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421593",
+              "matchState": "complete",
+              "result": "W"
+            }
+          ]
+        },
+        {
+          "rank": 4,
+          "displayName": "Loup_",
+          "challongeUsername": "Loup_",
+          "portraitUrl": "https://secure.gravatar.com/avatar/e6c954deec93cf90e0e438c6492140c1?r=r&amp;s=18&amp;d=https://user-assets.challonge.com/misc/challonge_fireball_gray.png",
+          "advanced": false,
+          "wins": 2,
+          "losses": 3,
+          "ties": 0,
+          "tb": 1,
+          "setWins": 2,
+          "setTies": 0,
+          "pts": 15,
+          "matchHistory": [
+            {
+              "matchId": "455421581",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421582",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421586",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421588",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421592",
+              "matchState": "complete",
+              "result": "L"
+            }
+          ]
+        },
+        {
+          "rank": 5,
+          "displayName": "Kineria",
+          "challongeUsername": "KineriaChan",
+          "portraitUrl": "https://user-assets.challonge.com/users/images/007/038/906/small/d8kks7g-436eee08-80df-4f01-8390-0cffc028146a.png",
+          "advanced": false,
+          "wins": 2,
+          "losses": 3,
+          "ties": 0,
+          "tb": 0,
+          "setWins": 2,
+          "setTies": 0,
+          "pts": 9,
+          "matchHistory": [
+            {
+              "matchId": "455421580",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421584",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421587",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421588",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421591",
+              "matchState": "complete",
+              "result": "W"
+            }
+          ]
+        },
+        {
+          "rank": 6,
+          "displayName": "KoFeJy",
+          "challongeUsername": "KoFeJy",
+          "portraitUrl": "https://user-assets.challonge.com/users/images/007/070/529/small/Eren.png",
+          "advanced": false,
+          "wins": 1,
+          "losses": 4,
+          "ties": 0,
+          "tb": 0,
+          "setWins": 1,
+          "setTies": 0,
+          "pts": 7,
+          "matchHistory": [
+            {
+              "matchId": "455421580",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421582",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421585",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421590",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421593",
+              "matchState": "complete",
+              "result": "L"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Group C",
+      "participants": [
+        {
+          "rank": 1,
+          "displayName": "CrozyfletteCrue",
+          "challongeUsername": "CrozyfletteCrue",
+          "portraitUrl": "https://secure.gravatar.com/avatar/a7ae7b3903d3ce47be1cdb5210d40562?r=r&amp;s=18&amp;d=https://user-assets.challonge.com/misc/challonge_fireball_gray.png",
+          "advanced": true,
+          "wins": 4,
+          "losses": 1,
+          "ties": 0,
+          "tb": 0,
+          "setWins": 4,
+          "setTies": 0,
+          "pts": 17,
+          "matchHistory": [
+            {
+              "matchId": "455421595",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421599",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421602",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421603",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421606",
+              "matchState": "complete",
+              "result": "W"
+            }
+          ]
+        },
+        {
+          "rank": 2,
+          "displayName": "LightYamani",
+          "challongeUsername": "LightYamani",
+          "portraitUrl": "https://user-assets.challonge.com/users/images/001/069/258/small/1000018067.png",
+          "advanced": true,
+          "wins": 3,
+          "losses": 2,
+          "ties": 0,
+          "tb": 1,
+          "setWins": 3,
+          "setTies": 0,
+          "pts": 16,
+          "matchHistory": [
+            {
+              "matchId": "455421594",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421598",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421602",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421605",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421607",
+              "matchState": "complete",
+              "result": "L"
+            }
+          ]
+        },
+        {
+          "rank": 3,
+          "displayName": "SAtR_Younsi",
+          "challongeUsername": "SAtR_Younsi",
+          "portraitUrl": "https://user-assets.challonge.com/users/images/005/122/402/small/IMG_0934.png",
+          "advanced": true,
+          "wins": 3,
+          "losses": 2,
+          "ties": 0,
+          "tb": 0,
+          "setWins": 3,
+          "setTies": 0,
+          "pts": 13,
+          "matchHistory": [
+            {
+              "matchId": "455421596",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421598",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421600",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421604",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421606",
+              "matchState": "complete",
+              "result": "L"
+            }
+          ]
+        },
+        {
+          "rank": 4,
+          "displayName": "Lady_Barbatrucc",
+          "challongeUsername": "Lady_Barbatrucc",
+          "portraitUrl": "https://secure.gravatar.com/avatar/c03e82d38f507e39833db9e9e42b27d1?r=r&amp;s=18&amp;d=https://user-assets.challonge.com/misc/challonge_fireball_gray.png",
+          "advanced": false,
+          "wins": 2,
+          "losses": 3,
+          "ties": 0,
+          "tb": 1,
+          "setWins": 2,
+          "setTies": 0,
+          "pts": 15,
+          "matchHistory": [
+            {
+              "matchId": "455421595",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421597",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421600",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421605",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421608",
+              "matchState": "complete",
+              "result": "W"
+            }
+          ]
+        },
+        {
+          "rank": 5,
+          "displayName": "LuXx598",
+          "challongeUsername": "LuXx598",
+          "portraitUrl": "https://user-assets.challonge.com/users/images/007/712/767/small/1000125056.png",
+          "advanced": false,
+          "wins": 2,
+          "losses": 3,
+          "ties": 0,
+          "tb": 0,
+          "setWins": 2,
+          "setTies": 0,
+          "pts": 10,
+          "matchHistory": [
+            {
+              "matchId": "455421594",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421599",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421601",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421604",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421608",
+              "matchState": "complete",
+              "result": "L"
+            }
+          ]
+        },
+        {
+          "rank": 6,
+          "displayName": "LOTTEUX!",
+          "challongeUsername": "RPB_LOTTEUX_SQWA",
+          "portraitUrl": "https://user-assets.challonge.com/users/images/007/709/508/small/IMG_3200.png",
+          "advanced": false,
+          "wins": 1,
+          "losses": 4,
+          "ties": 0,
+          "tb": 0,
+          "setWins": 1,
+          "setTies": 0,
+          "pts": 9,
+          "matchHistory": [
+            {
+              "matchId": "455421596",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421597",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421601",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421603",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421607",
+              "matchState": "complete",
+              "result": "W"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Group D",
+      "participants": [
+        {
+          "rank": 1,
+          "displayName": "LeKingJoker",
+          "challongeUsername": "LeKingJoker",
+          "portraitUrl": "https://user-assets.challonge.com/users/images/005/079/960/small/806bb5f8bb4f30c1b26d6024a9189038.png",
+          "advanced": true,
+          "wins": 4,
+          "losses": 1,
+          "ties": 0,
+          "tb": 0,
+          "setWins": 4,
+          "setTies": 0,
+          "pts": 21,
+          "matchHistory": [
+            {
+              "matchId": "455421610",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421612",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421615",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421620",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421623",
+              "matchState": "complete",
+              "result": "W"
+            }
+          ]
+        },
+        {
+          "rank": 2,
+          "displayName": "Inhezia",
+          "challongeUsername": "Inhezia",
+          "portraitUrl": "https://user-assets.challonge.com/users/images/001/737/122/small/FC32771C-412C-428C-AC26-1341EE3E3673.png",
+          "advanced": true,
+          "wins": 3,
+          "losses": 2,
+          "ties": 0,
+          "tb": 1,
+          "setWins": 3,
+          "setTies": 0,
+          "pts": 17,
+          "matchHistory": [
+            {
+              "matchId": "455421609",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421614",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421616",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421619",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421623",
+              "matchState": "complete",
+              "result": "L"
+            }
+          ]
+        },
+        {
+          "rank": 3,
+          "displayName": "sewpoo_0192",
+          "challongeUsername": "sewpoo_0192",
+          "portraitUrl": "https://user-assets.challonge.com/users/images/007/002/274/small/87AE09AE-B895-4197-8E49-C7BDC744769D.png",
+          "advanced": true,
+          "wins": 3,
+          "losses": 2,
+          "ties": 0,
+          "tb": 1,
+          "setWins": 3,
+          "setTies": 0,
+          "pts": 17,
+          "matchHistory": [
+            {
+              "matchId": "455421609",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421613",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421617",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421620",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421622",
+              "matchState": "complete",
+              "result": "W"
+            }
+          ]
+        },
+        {
+          "rank": 4,
+          "displayName": "Haellyss",
+          "challongeUsername": null,
+          "portraitUrl": null,
+          "advanced": false,
+          "wins": 3,
+          "losses": 2,
+          "ties": 0,
+          "tb": 1,
+          "setWins": 3,
+          "setTies": 0,
+          "pts": 15,
+          "matchHistory": [
+            {
+              "matchId": "455421610",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421614",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421617",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421618",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421621",
+              "matchState": "complete",
+              "result": "W"
+            }
+          ]
+        },
+        {
+          "rank": 5,
+          "displayName": "Natellen",
+          "challongeUsername": "Natellen",
+          "portraitUrl": "https://user-assets.challonge.com/users/images/004/707/571/small/Emeraude_Cr%C3%A9ation.png",
+          "advanced": false,
+          "wins": 1,
+          "losses": 4,
+          "ties": 0,
+          "tb": 1,
+          "setWins": 1,
+          "setTies": 0,
+          "pts": 5,
+          "matchHistory": [
+            {
+              "matchId": "455421611",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421613",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421615",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421619",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421621",
+              "matchState": "complete",
+              "result": "L"
+            }
+          ]
+        },
+        {
+          "rank": 6,
+          "displayName": "CharlieFlanders",
+          "challongeUsername": null,
+          "portraitUrl": null,
+          "advanced": false,
+          "wins": 1,
+          "losses": 4,
+          "ties": 0,
+          "tb": 0,
+          "setWins": 1,
+          "setTies": 0,
+          "pts": 9,
+          "matchHistory": [
+            {
+              "matchId": "455421611",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421612",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421616",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421618",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421622",
+              "matchState": "complete",
+              "result": "L"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Group E",
+      "participants": [
+        {
+          "rank": 1,
+          "displayName": "Yolkster_",
+          "challongeUsername": "Yolkster_",
+          "portraitUrl": "https://user-assets.challonge.com/users/images/007/614/578/small/G7lEcswXcAAM5v2.png",
+          "advanced": true,
+          "wins": 4,
+          "losses": 1,
+          "ties": 0,
+          "tb": 1,
+          "setWins": 4,
+          "setTies": 0,
+          "pts": 20,
+          "matchHistory": [
+            {
+              "matchId": "455421625",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421627",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421630",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421635",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421638",
+              "matchState": "complete",
+              "result": "W"
+            }
+          ]
+        },
+        {
+          "rank": 2,
+          "displayName": "Tategamii",
+          "challongeUsername": "Tategamii",
+          "portraitUrl": "https://secure.gravatar.com/avatar/1b222c13b0e5da5afbd96b8adf28b96a?r=r&amp;s=18&amp;d=https://user-assets.challonge.com/misc/challonge_fireball_gray.png",
+          "advanced": true,
+          "wins": 4,
+          "losses": 1,
+          "ties": 0,
+          "tb": 0,
+          "setWins": 4,
+          "setTies": 0,
+          "pts": 18,
+          "matchHistory": [
+            {
+              "matchId": "455421626",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421627",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421631",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421633",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421637",
+              "matchState": "complete",
+              "result": "W"
+            }
+          ]
+        },
+        {
+          "rank": 3,
+          "displayName": "Clemmmm",
+          "challongeUsername": "Clemmmm",
+          "portraitUrl": "https://user-assets.challonge.com/users/images/007/711/084/small/IMG_2470.png",
+          "advanced": true,
+          "wins": 2,
+          "losses": 3,
+          "ties": 0,
+          "tb": 1,
+          "setWins": 2,
+          "setTies": 0,
+          "pts": 17,
+          "matchHistory": [
+            {
+              "matchId": "455421625",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421629",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421632",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421633",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421636",
+              "matchState": "complete",
+              "result": "L"
+            }
+          ]
+        },
+        {
+          "rank": 4,
+          "displayName": "Nera_",
+          "challongeUsername": "Nera_",
+          "portraitUrl": "https://user-assets.challonge.com/users/images/007/968/507/small/export202503111754423125.png",
+          "advanced": false,
+          "wins": 2,
+          "losses": 3,
+          "ties": 0,
+          "tb": 1,
+          "setWins": 2,
+          "setTies": 0,
+          "pts": 12,
+          "matchHistory": [
+            {
+              "matchId": "455421624",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421629",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421631",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421634",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421638",
+              "matchState": "complete",
+              "result": "L"
+            }
+          ]
+        },
+        {
+          "rank": 5,
+          "displayName": "FeedMy",
+          "challongeUsername": null,
+          "portraitUrl": null,
+          "advanced": false,
+          "wins": 2,
+          "losses": 3,
+          "ties": 0,
+          "tb": 1,
+          "setWins": 2,
+          "setTies": 0,
+          "pts": 10,
+          "matchHistory": [
+            {
+              "matchId": "455421624",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421628",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421632",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421635",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421637",
+              "matchState": "complete",
+              "result": "L"
+            }
+          ]
+        },
+        {
+          "rank": 6,
+          "displayName": "Nxzo",
+          "challongeUsername": "Nxzo",
+          "portraitUrl": "https://user-assets.challonge.com/users/images/007/994/237/small/IMG_3556.png",
+          "advanced": false,
+          "wins": 1,
+          "losses": 4,
+          "ties": 0,
+          "tb": 0,
+          "setWins": 1,
+          "setTies": 0,
+          "pts": 10,
+          "matchHistory": [
+            {
+              "matchId": "455421626",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421628",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421630",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421634",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421636",
+              "matchState": "complete",
+              "result": "W"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Group F",
+      "participants": [
+        {
+          "rank": 1,
+          "displayName": "BenVinzen",
+          "challongeUsername": "BenVinzen",
+          "portraitUrl": "https://secure.gravatar.com/avatar/2e42ab20b6fe3962724b836c38a4f11d?r=r&amp;s=18&amp;d=https://user-assets.challonge.com/misc/challonge_fireball_gray.png",
+          "advanced": true,
+          "wins": 4,
+          "losses": 1,
+          "ties": 0,
+          "tb": 0,
+          "setWins": 4,
+          "setTies": 0,
+          "pts": 18,
+          "matchHistory": [
+            {
+              "matchId": "455421639",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421643",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421647",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421650",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421652",
+              "matchState": "complete",
+              "result": "W"
+            }
+          ]
+        },
+        {
+          "rank": 2,
+          "displayName": "Kaiouss",
+          "challongeUsername": "Kaiouss",
+          "portraitUrl": "https://user-assets.challonge.com/users/images/006/911/314/small/Gc-_NQWbcAAy6hJ.png",
+          "advanced": true,
+          "wins": 3,
+          "losses": 2,
+          "ties": 0,
+          "tb": 2,
+          "setWins": 3,
+          "setTies": 0,
+          "pts": 19,
+          "matchHistory": [
+            {
+              "matchId": "455421640",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421642",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421645",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421650",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421653",
+              "matchState": "complete",
+              "result": "W"
+            }
+          ]
+        },
+        {
+          "rank": 3,
+          "displayName": "Berserk91",
+          "challongeUsername": "Berserk91",
+          "portraitUrl": "https://user-assets.challonge.com/users/images/007/708/629/small/1000100156.png",
+          "advanced": true,
+          "wins": 3,
+          "losses": 2,
+          "ties": 0,
+          "tb": 1,
+          "setWins": 3,
+          "setTies": 0,
+          "pts": 17,
+          "matchHistory": [
+            {
+              "matchId": "455421641",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421643",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421645",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421649",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421651",
+              "matchState": "complete",
+              "result": "W"
+            }
+          ]
+        },
+        {
+          "rank": 4,
+          "displayName": "CØL_Éther",
+          "challongeUsername": "CØL_Éther",
+          "portraitUrl": "https://user-assets.challonge.com/users/images/007/820/037/small/amp-nirvana.png",
+          "advanced": false,
+          "wins": 3,
+          "losses": 2,
+          "ties": 0,
+          "tb": 0,
+          "setWins": 3,
+          "setTies": 0,
+          "pts": 17,
+          "matchHistory": [
+            {
+              "matchId": "455421639",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421644",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421646",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421649",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421653",
+              "matchState": "complete",
+              "result": "L"
+            }
+          ]
+        },
+        {
+          "rank": 5,
+          "displayName": "Vincent___",
+          "challongeUsername": "Vincent___",
+          "portraitUrl": "https://secure.gravatar.com/avatar/8df361732216a79896b0579e76719019?r=r&amp;s=18&amp;d=https://user-assets.challonge.com/misc/challonge_fireball_gray.png",
+          "advanced": false,
+          "wins": 2,
+          "losses": 3,
+          "ties": 0,
+          "tb": 0,
+          "setWins": 2,
+          "setTies": 0,
+          "pts": 11,
+          "matchHistory": [
+            {
+              "matchId": "455421641",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421642",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421646",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421648",
+              "matchState": "complete",
+              "result": "W"
+            },
+            {
+              "matchId": "455421652",
+              "matchState": "complete",
+              "result": "L"
+            }
+          ]
+        },
+        {
+          "rank": 6,
+          "displayName": "KamenZ",
+          "challongeUsername": "KamenZ",
+          "portraitUrl": "https://user-assets.challonge.com/users/images/006/823/098/small/Screenshot_20250824_003952_Discord.png",
+          "advanced": false,
+          "wins": 0,
+          "losses": 5,
+          "ties": 0,
+          "tb": 0,
+          "setWins": 0,
+          "setTies": 0,
+          "pts": 5,
+          "matchHistory": [
+            {
+              "matchId": "455421640",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421644",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421647",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421648",
+              "matchState": "complete",
+              "result": "L"
+            },
+            {
+              "matchId": "455421651",
+              "matchState": "complete",
+              "result": "L"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "matches": [
+    {
+      "matchId": "455421569",
+      "groupName": "Group A",
+      "state": "complete",
+      "winner": "VentoNaBendo",
+      "loser": "Zeikuo"
+    },
+    {
+      "matchId": "455421572",
+      "groupName": "Group A",
+      "state": "complete",
+      "winner": "VentoNaBendo",
+      "loser": "Masamune_Kadoya"
+    },
+    {
+      "matchId": "455421576",
+      "groupName": "Group A",
+      "state": "complete",
+      "winner": "VentoNaBendo",
+      "loser": "Zeln3090"
+    },
+    {
+      "matchId": "455421577",
+      "groupName": "Group A",
+      "state": "complete",
+      "winner": "VentoNaBendo",
+      "loser": "OrO"
+    },
+    {
+      "matchId": "455421571",
+      "groupName": "Group A",
+      "state": "complete",
+      "winner": "Zeikuo",
+      "loser": "Zeln3090"
+    },
+    {
+      "matchId": "455421574",
+      "groupName": "Group A",
+      "state": "complete",
+      "loser": "Zeikuo",
+      "winner": "OrO"
+    },
+    {
+      "matchId": "455421578",
+      "groupName": "Group A",
+      "state": "complete",
+      "winner": "Zeikuo",
+      "loser": "Masamune_Kadoya"
+    },
+    {
+      "matchId": "455421573",
+      "groupName": "Group A",
+      "state": "complete",
+      "winner": "Masamune_Kadoya",
+      "loser": "Zeln3090"
+    },
+    {
+      "matchId": "455421575",
+      "groupName": "Group A",
+      "state": "complete",
+      "winner": "Masamune_Kadoya",
+      "loser": "OrO"
+    },
+    {
+      "matchId": "455421570",
+      "groupName": "Group A",
+      "state": "complete",
+      "winner": "Zeln3090",
+      "loser": "OrO"
+    },
+    {
+      "matchId": "455421579",
+      "groupName": "Group B",
+      "state": "complete",
+      "loser": "azurekun",
+      "winner": "Upolemno"
+    },
+    {
+      "matchId": "455421583",
+      "groupName": "Group B",
+      "state": "complete",
+      "winner": "azurekun",
+      "loser": "SkarnGameMaster"
+    },
+    {
+      "matchId": "455421587",
+      "groupName": "Group B",
+      "state": "complete",
+      "winner": "azurekun",
+      "loser": "Kineria"
+    },
+    {
+      "matchId": "455421590",
+      "groupName": "Group B",
+      "state": "complete",
+      "winner": "azurekun",
+      "loser": "KoFeJy"
+    },
+    {
+      "matchId": "455421592",
+      "groupName": "Group B",
+      "state": "complete",
+      "winner": "azurekun",
+      "loser": "Loup_"
+    },
+    {
+      "matchId": "455421581",
+      "groupName": "Group B",
+      "state": "complete",
+      "winner": "SkarnGameMaster",
+      "loser": "Loup_"
+    },
+    {
+      "matchId": "455421585",
+      "groupName": "Group B",
+      "state": "complete",
+      "winner": "SkarnGameMaster",
+      "loser": "KoFeJy"
+    },
+    {
+      "matchId": "455421589",
+      "groupName": "Group B",
+      "state": "complete",
+      "winner": "SkarnGameMaster",
+      "loser": "Upolemno"
+    },
+    {
+      "matchId": "455421591",
+      "groupName": "Group B",
+      "state": "complete",
+      "loser": "SkarnGameMaster",
+      "winner": "Kineria"
+    },
+    {
+      "matchId": "455421584",
+      "groupName": "Group B",
+      "state": "complete",
+      "winner": "Upolemno",
+      "loser": "Kineria"
+    },
+    {
+      "matchId": "455421586",
+      "groupName": "Group B",
+      "state": "complete",
+      "loser": "Upolemno",
+      "winner": "Loup_"
+    },
+    {
+      "matchId": "455421593",
+      "groupName": "Group B",
+      "state": "complete",
+      "winner": "Upolemno",
+      "loser": "KoFeJy"
+    },
+    {
+      "matchId": "455421582",
+      "groupName": "Group B",
+      "state": "complete",
+      "loser": "Loup_",
+      "winner": "KoFeJy"
+    },
+    {
+      "matchId": "455421588",
+      "groupName": "Group B",
+      "state": "complete",
+      "winner": "Loup_",
+      "loser": "Kineria"
+    },
+    {
+      "matchId": "455421580",
+      "groupName": "Group B",
+      "state": "complete",
+      "winner": "Kineria",
+      "loser": "KoFeJy"
+    },
+    {
+      "matchId": "455421595",
+      "groupName": "Group C",
+      "state": "complete",
+      "winner": "CrozyfletteCrue",
+      "loser": "Lady_Barbatrucc"
+    },
+    {
+      "matchId": "455421599",
+      "groupName": "Group C",
+      "state": "complete",
+      "loser": "CrozyfletteCrue",
+      "winner": "LuXx598"
+    },
+    {
+      "matchId": "455421602",
+      "groupName": "Group C",
+      "state": "complete",
+      "winner": "CrozyfletteCrue",
+      "loser": "LightYamani"
+    },
+    {
+      "matchId": "455421603",
+      "groupName": "Group C",
+      "state": "complete",
+      "winner": "CrozyfletteCrue",
+      "loser": "LOTTEUX!"
+    },
+    {
+      "matchId": "455421606",
+      "groupName": "Group C",
+      "state": "complete",
+      "winner": "CrozyfletteCrue",
+      "loser": "SAtR_Younsi"
+    },
+    {
+      "matchId": "455421594",
+      "groupName": "Group C",
+      "state": "complete",
+      "winner": "LightYamani",
+      "loser": "LuXx598"
+    },
+    {
+      "matchId": "455421598",
+      "groupName": "Group C",
+      "state": "complete",
+      "winner": "LightYamani",
+      "loser": "SAtR_Younsi"
+    },
+    {
+      "matchId": "455421605",
+      "groupName": "Group C",
+      "state": "complete",
+      "winner": "LightYamani",
+      "loser": "Lady_Barbatrucc"
+    },
+    {
+      "matchId": "455421607",
+      "groupName": "Group C",
+      "state": "complete",
+      "loser": "LightYamani",
+      "winner": "LOTTEUX!"
+    },
+    {
+      "matchId": "455421596",
+      "groupName": "Group C",
+      "state": "complete",
+      "winner": "SAtR_Younsi",
+      "loser": "LOTTEUX!"
+    },
+    {
+      "matchId": "455421600",
+      "groupName": "Group C",
+      "state": "complete",
+      "winner": "SAtR_Younsi",
+      "loser": "Lady_Barbatrucc"
+    },
+    {
+      "matchId": "455421604",
+      "groupName": "Group C",
+      "state": "complete",
+      "winner": "SAtR_Younsi",
+      "loser": "LuXx598"
+    },
+    {
+      "matchId": "455421597",
+      "groupName": "Group C",
+      "state": "complete",
+      "winner": "Lady_Barbatrucc",
+      "loser": "LOTTEUX!"
+    },
+    {
+      "matchId": "455421608",
+      "groupName": "Group C",
+      "state": "complete",
+      "winner": "Lady_Barbatrucc",
+      "loser": "LuXx598"
+    },
+    {
+      "matchId": "455421601",
+      "groupName": "Group C",
+      "state": "complete",
+      "winner": "LuXx598",
+      "loser": "LOTTEUX!"
+    },
+    {
+      "matchId": "455421610",
+      "groupName": "Group D",
+      "state": "complete",
+      "winner": "LeKingJoker",
+      "loser": "Haellyss"
+    },
+    {
+      "matchId": "455421612",
+      "groupName": "Group D",
+      "state": "complete",
+      "loser": "LeKingJoker",
+      "winner": "CharlieFlanders"
+    },
+    {
+      "matchId": "455421615",
+      "groupName": "Group D",
+      "state": "complete",
+      "winner": "LeKingJoker",
+      "loser": "Natellen"
+    },
+    {
+      "matchId": "455421620",
+      "groupName": "Group D",
+      "state": "complete",
+      "winner": "LeKingJoker",
+      "loser": "sewpoo_0192"
+    },
+    {
+      "matchId": "455421623",
+      "groupName": "Group D",
+      "state": "complete",
+      "winner": "LeKingJoker",
+      "loser": "Inhezia"
+    },
+    {
+      "matchId": "455421609",
+      "groupName": "Group D",
+      "state": "complete",
+      "winner": "Inhezia",
+      "loser": "sewpoo_0192"
+    },
+    {
+      "matchId": "455421614",
+      "groupName": "Group D",
+      "state": "complete",
+      "loser": "Inhezia",
+      "winner": "Haellyss"
+    },
+    {
+      "matchId": "455421616",
+      "groupName": "Group D",
+      "state": "complete",
+      "winner": "Inhezia",
+      "loser": "CharlieFlanders"
+    },
+    {
+      "matchId": "455421619",
+      "groupName": "Group D",
+      "state": "complete",
+      "winner": "Inhezia",
+      "loser": "Natellen"
+    },
+    {
+      "matchId": "455421613",
+      "groupName": "Group D",
+      "state": "complete",
+      "winner": "sewpoo_0192",
+      "loser": "Natellen"
+    },
+    {
+      "matchId": "455421617",
+      "groupName": "Group D",
+      "state": "complete",
+      "winner": "sewpoo_0192",
+      "loser": "Haellyss"
+    },
+    {
+      "matchId": "455421622",
+      "groupName": "Group D",
+      "state": "complete",
+      "winner": "sewpoo_0192",
+      "loser": "CharlieFlanders"
+    },
+    {
+      "matchId": "455421618",
+      "groupName": "Group D",
+      "state": "complete",
+      "winner": "Haellyss",
+      "loser": "CharlieFlanders"
+    },
+    {
+      "matchId": "455421621",
+      "groupName": "Group D",
+      "state": "complete",
+      "winner": "Haellyss",
+      "loser": "Natellen"
+    },
+    {
+      "matchId": "455421611",
+      "groupName": "Group D",
+      "state": "complete",
+      "winner": "Natellen",
+      "loser": "CharlieFlanders"
+    },
+    {
+      "matchId": "455421625",
+      "groupName": "Group E",
+      "state": "complete",
+      "loser": "Yolkster_",
+      "winner": "Clemmmm"
+    },
+    {
+      "matchId": "455421627",
+      "groupName": "Group E",
+      "state": "complete",
+      "winner": "Yolkster_",
+      "loser": "Tategamii"
+    },
+    {
+      "matchId": "455421630",
+      "groupName": "Group E",
+      "state": "complete",
+      "winner": "Yolkster_",
+      "loser": "Nxzo"
+    },
+    {
+      "matchId": "455421635",
+      "groupName": "Group E",
+      "state": "complete",
+      "winner": "Yolkster_",
+      "loser": "FeedMy"
+    },
+    {
+      "matchId": "455421638",
+      "groupName": "Group E",
+      "state": "complete",
+      "winner": "Yolkster_",
+      "loser": "Nera_"
+    },
+    {
+      "matchId": "455421626",
+      "groupName": "Group E",
+      "state": "complete",
+      "winner": "Tategamii",
+      "loser": "Nxzo"
+    },
+    {
+      "matchId": "455421631",
+      "groupName": "Group E",
+      "state": "complete",
+      "winner": "Tategamii",
+      "loser": "Nera_"
+    },
+    {
+      "matchId": "455421633",
+      "groupName": "Group E",
+      "state": "complete",
+      "winner": "Tategamii",
+      "loser": "Clemmmm"
+    },
+    {
+      "matchId": "455421637",
+      "groupName": "Group E",
+      "state": "complete",
+      "winner": "Tategamii",
+      "loser": "FeedMy"
+    },
+    {
+      "matchId": "455421629",
+      "groupName": "Group E",
+      "state": "complete",
+      "winner": "Clemmmm",
+      "loser": "Nera_"
+    },
+    {
+      "matchId": "455421632",
+      "groupName": "Group E",
+      "state": "complete",
+      "loser": "Clemmmm",
+      "winner": "FeedMy"
+    },
+    {
+      "matchId": "455421636",
+      "groupName": "Group E",
+      "state": "complete",
+      "loser": "Clemmmm",
+      "winner": "Nxzo"
+    },
+    {
+      "matchId": "455421624",
+      "groupName": "Group E",
+      "state": "complete",
+      "winner": "Nera_",
+      "loser": "FeedMy"
+    },
+    {
+      "matchId": "455421634",
+      "groupName": "Group E",
+      "state": "complete",
+      "winner": "Nera_",
+      "loser": "Nxzo"
+    },
+    {
+      "matchId": "455421628",
+      "groupName": "Group E",
+      "state": "complete",
+      "winner": "FeedMy",
+      "loser": "Nxzo"
+    },
+    {
+      "matchId": "455421639",
+      "groupName": "Group F",
+      "state": "complete",
+      "loser": "BenVinzen",
+      "winner": "CØL_Éther"
+    },
+    {
+      "matchId": "455421643",
+      "groupName": "Group F",
+      "state": "complete",
+      "winner": "BenVinzen",
+      "loser": "Berserk91"
+    },
+    {
+      "matchId": "455421647",
+      "groupName": "Group F",
+      "state": "complete",
+      "winner": "BenVinzen",
+      "loser": "KamenZ"
+    },
+    {
+      "matchId": "455421650",
+      "groupName": "Group F",
+      "state": "complete",
+      "winner": "BenVinzen",
+      "loser": "Kaiouss"
+    },
+    {
+      "matchId": "455421652",
+      "groupName": "Group F",
+      "state": "complete",
+      "winner": "BenVinzen",
+      "loser": "Vincent___"
+    },
+    {
+      "matchId": "455421640",
+      "groupName": "Group F",
+      "state": "complete",
+      "winner": "Kaiouss",
+      "loser": "KamenZ"
+    },
+    {
+      "matchId": "455421642",
+      "groupName": "Group F",
+      "state": "complete",
+      "loser": "Kaiouss",
+      "winner": "Vincent___"
+    },
+    {
+      "matchId": "455421645",
+      "groupName": "Group F",
+      "state": "complete",
+      "winner": "Kaiouss",
+      "loser": "Berserk91"
+    },
+    {
+      "matchId": "455421653",
+      "groupName": "Group F",
+      "state": "complete",
+      "winner": "Kaiouss",
+      "loser": "CØL_Éther"
+    },
+    {
+      "matchId": "455421641",
+      "groupName": "Group F",
+      "state": "complete",
+      "winner": "Berserk91",
+      "loser": "Vincent___"
+    },
+    {
+      "matchId": "455421649",
+      "groupName": "Group F",
+      "state": "complete",
+      "winner": "Berserk91",
+      "loser": "CØL_Éther"
+    },
+    {
+      "matchId": "455421651",
+      "groupName": "Group F",
+      "state": "complete",
+      "winner": "Berserk91",
+      "loser": "KamenZ"
+    },
+    {
+      "matchId": "455421644",
+      "groupName": "Group F",
+      "state": "complete",
+      "winner": "CØL_Éther",
+      "loser": "KamenZ"
+    },
+    {
+      "matchId": "455421646",
+      "groupName": "Group F",
+      "state": "complete",
+      "winner": "CØL_Éther",
+      "loser": "Vincent___"
+    },
+    {
+      "matchId": "455421648",
+      "groupName": "Group F",
+      "state": "complete",
+      "winner": "Vincent___",
+      "loser": "KamenZ"
+    }
+  ]
+}

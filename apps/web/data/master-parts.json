@@ -1,0 +1,2452 @@
+[
+  {
+    "id": "blade-dran-sword",
+    "name": "Dran Sword",
+    "type": "BLADE",
+    "image": "/images/blade_bx_01_dran_sword.webp",
+    "weight": 35,
+    "system": "BX",
+    "spin": "Right",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-hells-scythe",
+    "name": "Hells Scythe",
+    "type": "BLADE",
+    "image": "/images/blade_bx_02_hells_scythe.webp",
+    "weight": 32,
+    "system": "BX",
+    "spin": "Right",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-wizard-arrow",
+    "name": "Wizard Arrow",
+    "type": "BLADE",
+    "image": "/images/blade_bx_03_wizard_arrow.webp",
+    "weight": 32,
+    "system": "BX",
+    "spin": "Right",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-knight-shield",
+    "name": "Knight Shield",
+    "type": "BLADE",
+    "image": "/images/blade_bx_04_knight_shield.webp",
+    "weight": 32,
+    "system": "BX",
+    "spin": "Right",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-knight-lance",
+    "name": "Knight Lance",
+    "type": "BLADE",
+    "image": "/images/blade_bx_13_knight_lance.webp",
+    "weight": 32,
+    "system": "BX",
+    "spin": "Right",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-shark-edge",
+    "name": "Shark Edge",
+    "type": "BLADE",
+    "image": "/images/blade_bx_14_shark_edge.webp",
+    "weight": 35,
+    "system": "BX",
+    "spin": "Right",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-leon-claw",
+    "name": "Leon Claw",
+    "type": "BLADE",
+    "image": "/images/blade_bx_15_leon_claw.webp",
+    "weight": 31,
+    "system": "BX",
+    "spin": "Right",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-viper-tail",
+    "name": "Viper Tail",
+    "type": "BLADE",
+    "image": "/images/blade_bx_16_viper_tail.webp",
+    "weight": 34,
+    "system": "BX",
+    "spin": "Right",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-rhino-horn",
+    "name": "Rhino Horn",
+    "type": "BLADE",
+    "image": "/images/blade_bx_19_rhino_horn.webp",
+    "weight": 33,
+    "system": "BX",
+    "spin": "Right",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-dran-dagger",
+    "name": "Dran Dagger",
+    "type": "BLADE",
+    "image": "/images/blade_bx_20_dran_dagger.webp",
+    "weight": 35,
+    "system": "BX",
+    "spin": "Right",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-hells-chain",
+    "name": "Hells Chain",
+    "type": "BLADE",
+    "image": "/images/blade_bx_21_hells_chain.webp",
+    "weight": 33,
+    "system": "BX",
+    "spin": "Right",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-phoenix-wing",
+    "name": "Phoenix Wing",
+    "type": "BLADE",
+    "image": "/images/blade_bx_23_phoenix_wing.webp",
+    "weight": 39,
+    "system": "BX",
+    "spin": "Right",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-wyvern-gale",
+    "name": "Wyvern Gale",
+    "type": "BLADE",
+    "image": "/images/blade_bx_24_wyvern_gale.webp",
+    "weight": 32,
+    "system": "BX",
+    "spin": "Right",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-unicorn-sting",
+    "name": "Unicorn Sting",
+    "type": "BLADE",
+    "image": "/images/blade_bx_26_unicorn_sting.webp",
+    "weight": 33,
+    "system": "BX",
+    "spin": "Right",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-sphinx-cowl",
+    "name": "Sphinx Cowl",
+    "type": "BLADE",
+    "image": "/images/blade_bx_27_sphinx_cowl.webp",
+    "weight": 33,
+    "system": "BX",
+    "spin": "Right",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-dran-buster",
+    "name": "Dran Buster",
+    "type": "BLADE",
+    "image": "/images/blade_ux_01_dran_buster.webp",
+    "weight": 37,
+    "system": "UX",
+    "spin": "Right",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-hells-hammer",
+    "name": "Hells Hammer",
+    "type": "BLADE",
+    "image": "/images/blade_ux_02_hells_hammer.webp",
+    "weight": 33,
+    "system": "UX",
+    "spin": "Right",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-wizard-rod",
+    "name": "Wizard Rod",
+    "type": "BLADE",
+    "image": "/images/blade_ux_03_wizard_rod.webp",
+    "weight": 35,
+    "system": "UX",
+    "spin": "Right",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-tyranno-beat",
+    "name": "Tyranno Beat",
+    "type": "BLADE",
+    "image": "/images/blade_bx_31_tyranno_beat.webp",
+    "weight": 37,
+    "system": "BX",
+    "spin": "Right",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-shinobi-shadow",
+    "name": "Shinobi Shadow",
+    "type": "BLADE",
+    "image": "/images/blade_ux_05_shinobi_shadow.webp",
+    "weight": 28,
+    "system": "UX",
+    "spin": "Right",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-weiss-tiger",
+    "name": "Weiss Tiger",
+    "type": "BLADE",
+    "image": "/images/blade_bx_33_weiss_tiger.webp",
+    "weight": 34,
+    "system": "BX",
+    "spin": "Right",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-cobalt-dragoon",
+    "name": "Cobalt Dragoon",
+    "type": "BLADE",
+    "image": "/images/blade_bx_34_cobalt_dragoon.webp",
+    "weight": 38,
+    "system": "BX",
+    "spin": "Left",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-black-shell",
+    "name": "Black Shell",
+    "type": "BLADE",
+    "image": "/images/blade_bx_35_black_shell.webp",
+    "weight": 33,
+    "system": "BX",
+    "spin": "Right",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-leon-crest",
+    "name": "Leon Crest",
+    "type": "BLADE",
+    "image": "/images/blade_ux_06_leon_crest.webp",
+    "weight": 35,
+    "system": "UX",
+    "spin": "Right",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-phoenix-rudder",
+    "name": "Phoenix Rudder",
+    "type": "BLADE",
+    "image": "/images/blade_ux_07_phoenix_rudder.webp",
+    "weight": 34,
+    "system": "UX",
+    "spin": "Right",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-whale-wave",
+    "name": "Whale Wave",
+    "type": "BLADE",
+    "image": "/images/blade_bx_36_whale_wave.webp",
+    "weight": 38,
+    "system": "BX",
+    "spin": "Right",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-bear-scratch",
+    "name": "Bear Scratch",
+    "type": "BLADE",
+    "image": "/images/blade_bx_37_bear_scratch.webp",
+    "weight": 29,
+    "system": "BX",
+    "spin": "Right",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-silver-wolf",
+    "name": "Silver Wolf",
+    "type": "BLADE",
+    "image": "/images/blade_ux_08_silver_wolf.webp",
+    "weight": 36,
+    "system": "UX",
+    "spin": "Right",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-samurai-saber",
+    "name": "Samurai Saber",
+    "type": "BLADE",
+    "image": "/images/blade_ux_09_samurai_saber.webp",
+    "weight": 36,
+    "system": "UX",
+    "spin": "Right",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-knight-mail",
+    "name": "Knight Mail",
+    "type": "BLADE",
+    "image": "/images/blade_ux_10_knight_mail.webp",
+    "weight": 36,
+    "system": "UX",
+    "spin": "Right",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-ptera-swing",
+    "name": "Ptera Swing",
+    "type": "BLADE",
+    "image": "/images/blade_ux_10_ptera_swing.webp",
+    "weight": 34,
+    "system": "BX",
+    "spin": "Right",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-crimson-garuda",
+    "name": "Crimson Garuda",
+    "type": "BLADE",
+    "image": "/images/blade_bx_38_crimson_garuda.webp",
+    "weight": 35,
+    "system": "BX",
+    "spin": "Right",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-impact-drake",
+    "name": "Impact Drake",
+    "type": "BLADE",
+    "image": "/images/blade_ux_11_impact_drake.webp",
+    "weight": 39,
+    "system": "UX",
+    "spin": "Right",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-ghost-circle",
+    "name": "Ghost Circle",
+    "type": "BLADE",
+    "image": "/images/blade_ux_12_ghost_circle.webp",
+    "weight": 26,
+    "system": "UX",
+    "spin": "Right",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-golem-rock",
+    "name": "Golem Rock",
+    "type": "BLADE",
+    "image": "/images/blade_ux_13_golem_rock.webp",
+    "weight": 34,
+    "system": "UX",
+    "spin": "Right",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-shelter-drake",
+    "name": "Shelter Drake",
+    "type": "BLADE",
+    "image": "/images/blade_bx_39_shelter_drake.webp",
+    "weight": 32,
+    "system": "BX",
+    "spin": "Right",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-dran-brave",
+    "name": "Dran Brave",
+    "type": "BLADE",
+    "image": "/images/blade_cx_01_dran_brave.webp",
+    "weight": 37,
+    "system": "CX",
+    "spin": "Right",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "blade-wizard-arc",
+    "name": "Wizard Arc",
+    "type": "BLADE",
+    "image": "/images/blade_cx_02_wizard_arc.webp",
+    "weight": 35,
+    "system": "CX",
+    "spin": "Right",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "blade-perseus-dark",
+    "name": "Perseus Dark",
+    "type": "BLADE",
+    "image": "/images/blade_cx_03_perseus_dark.webp",
+    "weight": 37,
+    "system": "CX",
+    "spin": "Right",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "blade-hells-reaper",
+    "name": "Hells Reaper",
+    "type": "BLADE",
+    "image": "/images/blade_cx_05_hells_reaper.webp",
+    "weight": 36,
+    "system": "CX",
+    "spin": "Right",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "blade-rhino-reaper",
+    "name": "Rhino Reaper",
+    "type": "BLADE",
+    "image": "/images/blade_cx_05_rhino_reaper.webp",
+    "weight": 35,
+    "system": "CX",
+    "spin": "Right",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "blade-scorpio-spear",
+    "name": "Scorpio Spear",
+    "type": "BLADE",
+    "image": "/images/blade_ux_14_scorpio_spear.webp",
+    "weight": 39,
+    "system": "UX",
+    "spin": "Right",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-fox-brush",
+    "name": "Fox Brush",
+    "type": "BLADE",
+    "image": "/images/blade_cx_06_fox_brush.webp",
+    "weight": 36,
+    "system": "CX",
+    "spin": "Right",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "blade-tricera-press",
+    "name": "Tricera Press",
+    "type": "BLADE",
+    "image": "/images/blade_bx_44_tricera_press.webp",
+    "weight": 36,
+    "system": "BX",
+    "spin": "Right",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-pegasus-blast",
+    "name": "Pegasus Blast",
+    "type": "BLADE",
+    "image": "/images/blade_cx_07_pegasus_blast.webp",
+    "weight": 39,
+    "system": "CX",
+    "spin": "Right",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "blade-cerberus-flame",
+    "name": "Cerberus Flame",
+    "type": "BLADE",
+    "image": "/images/blade_cx_08_cerberus_flame.webp",
+    "weight": 37,
+    "system": "CX",
+    "spin": "Right",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "blade-whale-flame",
+    "name": "Whale Flame",
+    "type": "BLADE",
+    "image": "/images/blade_cx_08_whale_flame.webp",
+    "weight": 37,
+    "system": "CX",
+    "spin": "Right",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "blade-shark-scale",
+    "name": "Shark Scale",
+    "type": "BLADE",
+    "image": "/images/blade_ux_15_shark_scale.webp",
+    "weight": 37,
+    "system": "UX",
+    "spin": "Right",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "blade-tyranno-roar",
+    "name": "Tyranno Roar",
+    "type": "BLADE",
+    "image": "/images/blade_ux_15_tyranno_roar.webp",
+    "weight": 36,
+    "system": "BX",
+    "spin": "Right",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "blade-samurai-calibur",
+    "name": "Samurai Calibur",
+    "type": "BLADE",
+    "image": "/images/blade_bx_45_samurai_calibur.webp",
+    "weight": 36,
+    "system": "BX",
+    "spin": "Right",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "blade-sol-eclipse",
+    "name": "Sol Eclipse",
+    "type": "BLADE",
+    "image": "/images/blade_cx_09_sol_eclipse.webp",
+    "weight": 39,
+    "system": "CX",
+    "spin": "Right",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "blade-goat-tackle",
+    "name": "Goat Tackle",
+    "type": "BLADE",
+    "image": "/images/blade_bx_46_goat_tackle.webp",
+    "weight": 31,
+    "system": "BX",
+    "spin": "Right",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "blade-clock-mirage",
+    "name": "Clock Mirage",
+    "type": "BLADE",
+    "image": "/images/blade_ux_16_clock_mirage.webp",
+    "weight": 37,
+    "system": "UX",
+    "spin": "Right",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "blade-wolf-hunt",
+    "name": "Wolf Hunt",
+    "type": "BLADE",
+    "image": "/images/blade_cx_10_wolf_hunt.webp",
+    "weight": 39,
+    "system": "CX",
+    "spin": "Right",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "blade-emperor-might",
+    "name": "Emperor Might",
+    "type": "BLADE",
+    "image": "/images/blade_cx_11_emperor_might.webp",
+    "weight": 45,
+    "system": "CX",
+    "spin": "Right",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "blade-shark-gill",
+    "name": "Shark Gill",
+    "type": "BLADE",
+    "image": "/images/blade_cx_11_shark_gill.webp",
+    "weight": 35,
+    "system": "BX",
+    "spin": "Right",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "blade-meteor-dragoon",
+    "name": "Meteor Dragoon",
+    "type": "BLADE",
+    "image": "/images/blade_ux_17_meteor_dragoon.webp",
+    "weight": 39,
+    "system": "UX",
+    "spin": "Left",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "blade-mummy-curse",
+    "name": "Mummy Curse",
+    "type": "BLADE",
+    "image": "/images/blade_ux_18_mummy_curse.webp",
+    "weight": 37,
+    "system": "UX",
+    "spin": "Right",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "blade-phoenix-flare",
+    "name": "Phoenix Flare",
+    "type": "BLADE",
+    "image": "/images/blade_cx_12_phoenix_flare.webp",
+    "weight": null,
+    "system": "CX",
+    "spin": "Right",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "blade-kraken-wriggle",
+    "name": "Kraken Wriggle",
+    "type": "BLADE",
+    "image": "/images/blade_cx_____kraken_wriggle.webp",
+    "weight": null,
+    "system": "CX",
+    "spin": "Right",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "blade-cobalt-drake",
+    "name": "Cobalt Drake",
+    "type": "BLADE",
+    "image": "/images/blade_bx_rare_bey_battle_cobalt_drake.webp",
+    "weight": 38,
+    "system": "BX",
+    "spin": "Right",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-phoenix-feather",
+    "name": "Phoenix Feather",
+    "type": "BLADE",
+    "image": "/images/blade_bx_corocoro_comic_phoenix_feather.webp",
+    "weight": 33,
+    "system": "BX",
+    "spin": "Right",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-aero-pegasus",
+    "name": "Aero Pegasus",
+    "type": "BLADE",
+    "image": "/images/blade_ux_rare_bey_battle_aero_pegasus.webp",
+    "weight": 38,
+    "system": "UX",
+    "spin": "Right",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-shinobi-knife-xone-",
+    "name": "Shinobi Knife (XONE)",
+    "type": "BLADE",
+    "image": "/images/blade_bx_game_package_shinobi_knife__xone_.webp",
+    "weight": 30,
+    "system": "BX",
+    "spin": "Right",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "blade-mammoth-tusk",
+    "name": "Mammoth Tusk",
+    "type": "BLADE",
+    "image": "/images/blade_bx_rare_bey_battle_mammoth_tusk.webp",
+    "weight": 30,
+    "system": "BX",
+    "spin": "Right",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-croc-crunch",
+    "name": "Croc Crunch",
+    "type": "BLADE",
+    "image": "/images/blade_bx_corocoro_comic_croc_crunch.webp",
+    "weight": 33,
+    "system": "BX",
+    "spin": "Right",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "blade-samurai-steel",
+    "name": "Samurai Steel",
+    "type": "BLADE",
+    "image": "/images/blade_bx_corocoro_comic_samurai_steel.webp",
+    "weight": 30,
+    "system": "BX",
+    "spin": "Right",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-leon-fang-red-ver-",
+    "name": "Leon Fang (Red Ver.)",
+    "type": "BLADE",
+    "image": "/images/blade_cx_game_package_leon_fang__red_ver__.webp",
+    "weight": 37,
+    "system": "CX",
+    "spin": "Right",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "blade-valkyrie-volt",
+    "name": "Valkyrie Volt",
+    "type": "BLADE",
+    "image": "/images/blade_cx_rare_bey_battle_valkyrie_volt.webp",
+    "weight": 41,
+    "system": "CX",
+    "spin": "Right",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "blade-wyvern-hover",
+    "name": "Wyvern Hover",
+    "type": "BLADE",
+    "image": "/images/blade_ux_dmm_lottery_wyvern_hover.webp",
+    "weight": 35,
+    "system": "UX",
+    "spin": "Right",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "blade-orochi-cluster",
+    "name": "Orochi Cluster",
+    "type": "BLADE",
+    "image": "/images/blade_ux_corocoro_comic_orochi_cluster.webp",
+    "weight": null,
+    "system": "UX",
+    "spin": "Right",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "ratchet-0-60",
+    "name": "0-60",
+    "type": "RATCHET",
+    "image": "/images/ratchet_cx_10_0_60.webp",
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "ratchet-0-70",
+    "name": "0-70",
+    "type": "RATCHET",
+    "image": "/images/ratchet_ux_14_0_70.webp",
+    "system": "BX",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "ratchet-0-80",
+    "name": "0-80",
+    "type": "RATCHET",
+    "image": "/images/ratchet_ux_12_0_80.webp",
+    "system": "BX",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "ratchet-1-60",
+    "name": "1-60",
+    "type": "RATCHET",
+    "image": "/images/ratchet_ux_01_1_60.webp",
+    "system": "BX",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "ratchet-1-70",
+    "name": "1-70",
+    "type": "RATCHET",
+    "image": "/images/ratchet_ux_15_1_70.webp",
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "ratchet-1-80",
+    "name": "1-80",
+    "type": "RATCHET",
+    "image": "/images/ratchet_ux_05_1_80.webp",
+    "system": "BX",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "ratchet-2-60",
+    "name": "2-60",
+    "type": "RATCHET",
+    "image": "/images/ratchet_bx_34_2_60.webp",
+    "system": "BX",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "ratchet-2-70",
+    "name": "2-70",
+    "type": "RATCHET",
+    "image": "/images/ratchet_ux_09_2_70.webp",
+    "system": "BX",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "ratchet-2-80",
+    "name": "2-80",
+    "type": "RATCHET",
+    "image": "/images/ratchet_bx_00_2_80.webp",
+    "system": "BX",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "ratchet-3-60",
+    "name": "3-60",
+    "type": "RATCHET",
+    "image": "/images/ratchet_bx_01_3_60.webp",
+    "system": "BX",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "ratchet-3-70",
+    "name": "3-70",
+    "type": "RATCHET",
+    "image": "/images/ratchet_ux_02_3_70.webp",
+    "system": "BX",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "ratchet-3-80",
+    "name": "3-80",
+    "type": "RATCHET",
+    "image": "/images/ratchet_bx_04_3_80.webp",
+    "system": "BX",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "ratchet-3-85",
+    "name": "3-85",
+    "type": "RATCHET",
+    "image": "/images/ratchet_ux_10_3_85.webp",
+    "system": "BX",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "ratchet-4-50",
+    "name": "4-50",
+    "type": "RATCHET",
+    "image": "/images/ratchet_ux_15_4_50.webp",
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "ratchet-4-55",
+    "name": "4-55",
+    "type": "RATCHET",
+    "image": "/images/ratchet_cx_02_4_55.webp",
+    "system": "BX",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "ratchet-4-60",
+    "name": "4-60",
+    "type": "RATCHET",
+    "image": "/images/ratchet_bx_02_4_60.webp",
+    "system": "BX",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "ratchet-4-70",
+    "name": "4-70",
+    "type": "RATCHET",
+    "image": "/images/ratchet_bx_31_4_70.webp",
+    "system": "BX",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "ratchet-4-80",
+    "name": "4-80",
+    "type": "RATCHET",
+    "image": "/images/ratchet_bx_03_4_80.webp",
+    "system": "BX",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "ratchet-5-60",
+    "name": "5-60",
+    "type": "RATCHET",
+    "image": "/images/ratchet_bx_15_5_60.webp",
+    "system": "BX",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "ratchet-5-70",
+    "name": "5-70",
+    "type": "RATCHET",
+    "image": "/images/ratchet_ux_03_5_70.webp",
+    "system": "BX",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "ratchet-5-80",
+    "name": "5-80",
+    "type": "RATCHET",
+    "image": "/images/ratchet_bx_16_5_80.webp",
+    "system": "BX",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "ratchet-6-60",
+    "name": "6-60",
+    "type": "RATCHET",
+    "image": "/images/ratchet_cx_01_6_60.webp",
+    "system": "BX",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "ratchet-6-70",
+    "name": "6-70",
+    "type": "RATCHET",
+    "image": "/images/ratchet_bx_45_6_70.webp",
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "ratchet-6-80",
+    "name": "6-80",
+    "type": "RATCHET",
+    "image": "/images/ratchet_cx_03_6_80.webp",
+    "system": "BX",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "ratchet-7-55",
+    "name": "7-55",
+    "type": "RATCHET",
+    "image": "/images/ratchet_ux_18_7_55.webp",
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "ratchet-7-60",
+    "name": "7-60",
+    "type": "RATCHET",
+    "image": "/images/ratchet_ux_06_7_60.webp",
+    "system": "BX",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "ratchet-7-70",
+    "name": "7-70",
+    "type": "RATCHET",
+    "image": "/images/ratchet_ux_10_7_70.webp",
+    "system": "BX",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "ratchet-7-80",
+    "name": "7-80",
+    "type": "RATCHET",
+    "image": "/images/ratchet_cx_39_7_80.webp",
+    "system": "BX",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "ratchet-9-60",
+    "name": "9-60",
+    "type": "RATCHET",
+    "image": "/images/ratchet_bx_23_9_60.webp",
+    "system": "BX",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "ratchet-9-65",
+    "name": "9-65",
+    "type": "RATCHET",
+    "image": "/images/ratchet_ux_16_9_65.webp",
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "ratchet-9-70",
+    "name": "9-70",
+    "type": "RATCHET",
+    "image": "/images/ratchet_ux_07_9_70.webp",
+    "system": "BX",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "ratchet-9-80",
+    "name": "9-80",
+    "type": "RATCHET",
+    "image": "/images/ratchet_bx_27_9_80.webp",
+    "system": "BX",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "ratchet-m-85",
+    "name": "M-85",
+    "type": "RATCHET",
+    "image": "/images/ratchet_bx_44_m_85.webp",
+    "system": "BX",
+    "sources": [
+      "bey-library",
+      "planner"
+    ]
+  },
+  {
+    "id": "ratchet-tr-turbo-",
+    "name": "Tr (Turbo)",
+    "type": "RATCHET",
+    "image": "/images/ratchet_cx_07_tr__turbo_.webp",
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "ratchet-op-operate-",
+    "name": "Op (Operate)",
+    "type": "RATCHET",
+    "image": "/images/ratchet_cx_11_op__operate_.webp",
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "bit-f-flat-",
+    "name": "F (Flat)",
+    "type": "BIT",
+    "image": "/images/bit_bx_01_f__flat_.webp",
+    "weight": 2,
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "bit-t-taper-",
+    "name": "T (Taper)",
+    "type": "BIT",
+    "image": "/images/bit_bx_02_t__taper_.webp",
+    "weight": 2,
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "bit-b-ball-",
+    "name": "B (Ball)",
+    "type": "BIT",
+    "image": "/images/bit_bx_03_b__ball_.webp",
+    "weight": 2,
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "bit-n-needle-",
+    "name": "N (Needle)",
+    "type": "BIT",
+    "image": "/images/bit_bx_04_n__needle_.webp",
+    "weight": 2,
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "bit-hn-high-needle-",
+    "name": "HN (High Needle)",
+    "type": "BIT",
+    "image": "/images/bit_bx_13_hn__high_needle_.webp",
+    "weight": 2,
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "bit-lf-low-flat-",
+    "name": "LF (Low Flat)",
+    "type": "BIT",
+    "image": "/images/bit_bx_14_lf__low_flat_.webp",
+    "weight": 2,
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "bit-p-point-",
+    "name": "P (Point)",
+    "type": "BIT",
+    "image": "/images/bit_bx_15_p__point_.webp",
+    "weight": 2,
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "bit-o-orb-",
+    "name": "O (Orb)",
+    "type": "BIT",
+    "image": "/images/bit_bx_16_o__orb_.webp",
+    "weight": 2,
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "bit-r-rush-",
+    "name": "R (Rush)",
+    "type": "BIT",
+    "image": "/images/bit_bx_20_r__rush_.webp",
+    "weight": 2,
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "bit-ht-high-taper-",
+    "name": "HT (High Taper)",
+    "type": "BIT",
+    "image": "/images/bit_bx_21_ht__high_taper_.webp",
+    "weight": 2,
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "bit-s-spike-",
+    "name": "S (Spike)",
+    "type": "BIT",
+    "image": "/images/bit_bx_19_s__spike_.webp",
+    "weight": 2,
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "bit-gf-gear-flat-",
+    "name": "GF (Gear Flat)",
+    "type": "BIT",
+    "image": "/images/bit_bx_23_gf__gear_flat_.webp",
+    "weight": 2,
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "bit-gb-gear-ball-",
+    "name": "GB (Gear Ball)",
+    "type": "BIT",
+    "image": "/images/bit_bx_24_gb__gear_ball_.webp",
+    "weight": 2,
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "bit-gp-gear-point-",
+    "name": "GP (Gear Point)",
+    "type": "BIT",
+    "image": "/images/bit_bx_26_gp__gear_point_.webp",
+    "weight": 2,
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "bit-gn-gear-needle-",
+    "name": "GN (Gear Needle)",
+    "type": "BIT",
+    "image": "/images/bit_bx_27_gn__gear_needle_.webp",
+    "weight": 2,
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "bit-a-accel-",
+    "name": "A (Accel)",
+    "type": "BIT",
+    "image": "/images/bit_ux_01_a__accel_.webp",
+    "weight": 3,
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "bit-h-hexa-",
+    "name": "H (Hexa)",
+    "type": "BIT",
+    "image": "/images/bit_ux_02_h__hexa_.webp",
+    "weight": 3,
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "bit-db-disc-ball-",
+    "name": "DB (Disc Ball)",
+    "type": "BIT",
+    "image": "/images/bit_ux_03_db__disc_ball_.webp",
+    "weight": 3,
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "bit-q-quake-",
+    "name": "Q (Quake)",
+    "type": "BIT",
+    "image": "/images/bit_bx_31_q__quake_.webp",
+    "weight": 2,
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "bit-mn-metal-needle-",
+    "name": "MN (Metal Needle)",
+    "type": "BIT",
+    "image": "/images/bit_ux_05_mn__metal_needle_.webp",
+    "weight": 3,
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "bit-u-unite-",
+    "name": "U (Unite)",
+    "type": "BIT",
+    "image": "/images/bit_bx_33_u__unite_.webp",
+    "weight": 2,
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "bit-c-cyclone-",
+    "name": "C (Cyclone)",
+    "type": "BIT",
+    "image": "/images/bit_bx_34_c__cyclone_.webp",
+    "weight": 2,
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "bit-d-dot-",
+    "name": "D (Dot)",
+    "type": "BIT",
+    "image": "/images/bit_bx_35_d__dot_.webp",
+    "weight": 2,
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "bit-g-glide-",
+    "name": "G (Glide)",
+    "type": "BIT",
+    "image": "/images/bit_ux_07_g__glide_.webp",
+    "weight": 2,
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "bit-e-elevate-",
+    "name": "E (Elevate)",
+    "type": "BIT",
+    "image": "/images/bit_bx_36_e__elevate_.webp",
+    "weight": 3,
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "bit-fb-free-ball-",
+    "name": "FB (Free Ball)",
+    "type": "BIT",
+    "image": "/images/bit_ux_08_fb__free_ball_.webp",
+    "weight": 2,
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "bit-bs-bound-spike-",
+    "name": "BS (Bound Spike)",
+    "type": "BIT",
+    "image": "/images/bit_ux_10_bs__bound_spike_.webp",
+    "weight": 2,
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "bit-ra-rubber-accel-",
+    "name": "RA (Rubber Accel)",
+    "type": "BIT",
+    "image": "/images/bit_ux_10_ra__rubber_accel_.webp",
+    "weight": 3,
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "bit-l-level-",
+    "name": "L (Level)",
+    "type": "BIT",
+    "image": "/images/bit_ux_09_l__level_.webp",
+    "weight": 2,
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "bit-tp-trans-point-",
+    "name": "TP (Trans Point)",
+    "type": "BIT",
+    "image": "/images/bit_bx_38_tp__trans_point_.webp",
+    "weight": 2,
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "bit-lr-low-rush-",
+    "name": "LR (Low Rush)",
+    "type": "BIT",
+    "image": "/images/bit_ux_11_lr__low_rush_.webp",
+    "weight": 2,
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "bit-un-under-needle-",
+    "name": "UN (Under Needle)",
+    "type": "BIT",
+    "image": "/images/bit_ux_13_un__under_needle_.webp",
+    "weight": 2,
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "bit-v-vortex-",
+    "name": "V (Vortex)",
+    "type": "BIT",
+    "image": "/images/bit_cx_01_v__vortex_.webp",
+    "weight": 2,
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "bit-lo-low-orb-",
+    "name": "LO (Low Orb)",
+    "type": "BIT",
+    "image": "/images/bit_cx_02_lo__low_orb_.webp",
+    "weight": 2,
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "bit-w-wedge-",
+    "name": "W (Wedge)",
+    "type": "BIT",
+    "image": "/images/bit_cx_03_w__wedge_.webp",
+    "weight": 2,
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "bit-k-kick-",
+    "name": "K (Kick)",
+    "type": "BIT",
+    "image": "/images/bit_cx_05_k__kick_.webp",
+    "weight": 2,
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "bit-z-zap-",
+    "name": "Z (Zap)",
+    "type": "BIT",
+    "image": "/images/bit_ux_14_z__zap_.webp",
+    "weight": 2,
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "bit-gr-gear-rush-",
+    "name": "GR (Gear Rush)",
+    "type": "BIT",
+    "image": "/images/bit_cx_06_gr__gear_rush_.webp",
+    "weight": 2,
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "bit-tr-turbo-",
+    "name": "Tr (Turbo)",
+    "type": "BIT",
+    "image": "/images/bit_cx_07_tr__turbo_.webp",
+    "weight": 12,
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "bit-wb-wall-ball-",
+    "name": "WB (Wall Ball)",
+    "type": "BIT",
+    "image": "/images/bit_cx_08_wb__wall_ball_.webp",
+    "weight": 3,
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "bit-uf-under-flat-",
+    "name": "UF (Under Flat)",
+    "type": "BIT",
+    "image": "/images/bit_ux_15_uf__under_flat_.webp",
+    "weight": 2,
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "bit-m-merge-",
+    "name": "M (Merge)",
+    "type": "BIT",
+    "image": "/images/bit_bx_45_m__merge_.webp",
+    "weight": 3,
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "bit-tk-trans-kick-",
+    "name": "TK (Trans Kick)",
+    "type": "BIT",
+    "image": "/images/bit_cx_09_tk__trans_kick_.webp",
+    "weight": 2,
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "bit-op-operate-",
+    "name": "Op (Operate)",
+    "type": "BIT",
+    "image": "/images/bit_cx_11_op__operate_.webp",
+    "weight": 14,
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "bit-j-jolt-",
+    "name": "J (Jolt)",
+    "type": "BIT",
+    "image": "/images/bit_ux_18_j__jolt_.webp",
+    "weight": 2,
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "bit-ww-wall-wedge-",
+    "name": "WW (Wall Wedge)",
+    "type": "BIT",
+    "image": "/images/bit_cx_12_ww__wall_wedge_.webp",
+    "weight": 4,
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "bit-f-t-b-n-bit-set-",
+    "name": "F/T/B/N (Bit Set)",
+    "type": "BIT",
+    "image": "/images/bit_bx_rare_bey_battle_f_t_b_n__bit_set_.webp",
+    "system": "BX",
+    "sources": [
+      "bey-library"
+    ]
+  },
+  {
+    "id": "blade-croco-crunch",
+    "name": "Croco Crunch",
+    "type": "BLADE",
+    "image": "https://beybladeplanner.com/img/blade/CrocoCrunch_p.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-draciel-shield",
+    "name": "Draciel Shield",
+    "type": "BLADE",
+    "image": "https://beybladeplanner.com/img/blade/DracielShield_p.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-dragoon-storm",
+    "name": "Dragoon Storm",
+    "type": "BLADE",
+    "image": "https://beybladeplanner.com/img/blade/DragoonStorm_p.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-dranzer-spriral",
+    "name": "Dranzer Spriral",
+    "type": "BLADE",
+    "image": "https://beybladeplanner.com/img/blade/Dranzerspiral_p.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-driger-slash",
+    "name": "Driger Slash",
+    "type": "BLADE",
+    "image": "https://beybladeplanner.com/img/blade/DrigerSlash_p.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-lightning-l-drago-ru",
+    "name": "Lightning L-Drago Ru",
+    "type": "BLADE",
+    "image": "https://beybladeplanner.com/img/blade/LDragoRapid_p.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-lightning-l-drago-up",
+    "name": "Lightning L-Drago Up",
+    "type": "BLADE",
+    "image": "https://beybladeplanner.com/img/blade/LDragoUpper_p.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-roar-tyranno",
+    "name": "Roar Tyranno",
+    "type": "BLADE",
+    "image": "https://beybladeplanner.com/img/noimage.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-shinobi-knife",
+    "name": "Shinobi Knife",
+    "type": "BLADE",
+    "image": "https://beybladeplanner.com/img/blade/ShinobiKnife_p.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-storm-pegasis",
+    "name": "Storm Pegasis",
+    "type": "BLADE",
+    "image": "https://beybladeplanner.com/img/blade/StormPegasis_p.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-victory-valkyrie",
+    "name": "Victory Valkyrie",
+    "type": "BLADE",
+    "image": "https://beybladeplanner.com/img/blade/VictoryValkyrie_p.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-xeno-xcalibur",
+    "name": "Xeno Xcalibur",
+    "type": "BLADE",
+    "image": "https://beybladeplanner.com/img/blade/XenoXcalibur_p.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "blade-yell-kong",
+    "name": "Yell Kong",
+    "type": "BLADE",
+    "image": "https://beybladeplanner.com/img/noimage.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "bit-accel",
+    "name": "Accel",
+    "type": "BIT",
+    "image": "https://beybladeplanner.com/img/bit/Accel_p.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "bit-ball",
+    "name": "Ball",
+    "type": "BIT",
+    "image": "https://beybladeplanner.com/img/bit/Ball_p.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "bit-bound-spike",
+    "name": "Bound Spike",
+    "type": "BIT",
+    "image": "https://beybladeplanner.com/img/noimage.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "bit-cyclone",
+    "name": "Cyclone",
+    "type": "BIT",
+    "image": "https://beybladeplanner.com/img/bit/Cyclone_p.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "bit-disc-ball",
+    "name": "Disc Ball",
+    "type": "BIT",
+    "image": "https://beybladeplanner.com/img/bit/DiscBall_p.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "bit-dot",
+    "name": "Dot",
+    "type": "BIT",
+    "image": "https://beybladeplanner.com/img/bit/Dot_p.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "bit-elevate",
+    "name": "Elevate",
+    "type": "BIT",
+    "image": "https://beybladeplanner.com/img/bit/Elevate_p.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "bit-flat",
+    "name": "Flat",
+    "type": "BIT",
+    "image": "https://beybladeplanner.com/img/bit/Flat_p.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "bit-free-ball",
+    "name": "Free Ball",
+    "type": "BIT",
+    "image": "https://beybladeplanner.com/img/noimage.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "bit-gear-ball",
+    "name": "Gear Ball",
+    "type": "BIT",
+    "image": "https://beybladeplanner.com/img/bit/GearBall_p.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "bit-gear-flat",
+    "name": "Gear Flat",
+    "type": "BIT",
+    "image": "https://beybladeplanner.com/img/bit/GearFlat_p.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "bit-gear-needle",
+    "name": "Gear Needle",
+    "type": "BIT",
+    "image": "https://beybladeplanner.com/img/bit/GearNeedle_p.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "bit-gear-point",
+    "name": "Gear Point",
+    "type": "BIT",
+    "image": "https://beybladeplanner.com/img/bit/GearPoint_p.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "bit-gear-rush",
+    "name": "Gear Rush",
+    "type": "BIT",
+    "image": "https://beybladeplanner.com/img/noimage.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "bit-glide",
+    "name": "Glide",
+    "type": "BIT",
+    "image": "https://beybladeplanner.com/img/bit/Glide_p.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "bit-hexa",
+    "name": "Hexa",
+    "type": "BIT",
+    "image": "https://beybladeplanner.com/img/bit/Hexa_p.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "bit-high-needle",
+    "name": "High Needle",
+    "type": "BIT",
+    "image": "https://beybladeplanner.com/img/bit/Highneedle_p.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "bit-high-taper",
+    "name": "High Taper",
+    "type": "BIT",
+    "image": "https://beybladeplanner.com/img/bit/HighTaper_p.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "bit-kick",
+    "name": "Kick",
+    "type": "BIT",
+    "image": "https://beybladeplanner.com/img/noimage.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "bit-level",
+    "name": "Level",
+    "type": "BIT",
+    "image": "https://beybladeplanner.com/img/noimage.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "bit-low-flat",
+    "name": "Low Flat",
+    "type": "BIT",
+    "image": "https://beybladeplanner.com/img/bit/LowFlat_p.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "bit-low-orb",
+    "name": "Low Orb",
+    "type": "BIT",
+    "image": "https://beybladeplanner.com/img/noimage.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "bit-low-rush",
+    "name": "Low Rush",
+    "type": "BIT",
+    "image": "https://beybladeplanner.com/img/noimage.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "bit-metal-needle",
+    "name": "Metal Needle",
+    "type": "BIT",
+    "image": "https://beybladeplanner.com/img/bit/MetalNeedle_p.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "bit-needle",
+    "name": "Needle",
+    "type": "BIT",
+    "image": "https://beybladeplanner.com/img/bit/Needle_p.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "bit-orb",
+    "name": "Orb",
+    "type": "BIT",
+    "image": "https://beybladeplanner.com/img/bit/Orb_p.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "bit-point",
+    "name": "Point",
+    "type": "BIT",
+    "image": "https://beybladeplanner.com/img/bit/Point_p.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "bit-quake",
+    "name": "Quake",
+    "type": "BIT",
+    "image": "https://beybladeplanner.com/img/bit/Quake_p.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "bit-rubber-accel",
+    "name": "Rubber Accel",
+    "type": "BIT",
+    "image": "https://beybladeplanner.com/img/noimage.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "bit-rush",
+    "name": "Rush",
+    "type": "BIT",
+    "image": "https://beybladeplanner.com/img/bit/Rush_p.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "bit-spike",
+    "name": "Spike",
+    "type": "BIT",
+    "image": "https://beybladeplanner.com/img/bit/Spike_p.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "bit-taper",
+    "name": "Taper",
+    "type": "BIT",
+    "image": "https://beybladeplanner.com/img/bit/Taper_p.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "bit-trans-point",
+    "name": "Trans Point",
+    "type": "BIT",
+    "image": "https://beybladeplanner.com/img/noimage.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "bit-under-needle",
+    "name": "Under Needle",
+    "type": "BIT",
+    "image": "https://beybladeplanner.com/img/noimage.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "bit-unite",
+    "name": "Unite",
+    "type": "BIT",
+    "image": "https://beybladeplanner.com/img/bit/Unite_p.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "bit-vortex",
+    "name": "Vortex",
+    "type": "BIT",
+    "image": "https://beybladeplanner.com/img/noimage.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "bit-wedge",
+    "name": "Wedge",
+    "type": "BIT",
+    "image": "https://beybladeplanner.com/img/noimage.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "bit-zap",
+    "name": "Zap",
+    "type": "BIT",
+    "image": "https://beybladeplanner.com/img/noimage.png",
+    "sources": [
+      "planner"
+    ]
+  },
+  {
+    "id": "lock-chip-plastic",
+    "name": "Plastic Lock Chip",
+    "type": "LOCK_CHIP",
+    "weight": 1.7,
+    "system": "CX",
+    "image": "/images/parts/lock-chip-plastic.webp",
+    "sources": ["manual"]
+  },
+  {
+    "id": "lock-chip-metal-valkyrie",
+    "name": "Metal Lock Chip - Valkyrie",
+    "type": "LOCK_CHIP",
+    "weight": 5.0,
+    "system": "CX",
+    "image": "/images/parts/lock-chip-metal-valkyrie.webp",
+    "sources": ["manual"]
+  },
+  {
+    "id": "lock-chip-metal-emperor",
+    "name": "Metal Lock Chip - Emperor",
+    "type": "LOCK_CHIP",
+    "weight": 5.0,
+    "system": "CX",
+    "image": "/images/parts/lock-chip-metal-emperor.webp",
+    "sources": ["manual"]
+  },
+  {
+    "id": "assist-blade-s-slash",
+    "name": "S (Slash)",
+    "type": "ASSIST_BLADE",
+    "weight": 4,
+    "system": "CX",
+    "spin": "Right",
+    "beyType": "ATTACK",
+    "image": "/images/parts/assist-blade_as-s-001.webp",
+    "sources": ["bey-library"]
+  },
+  {
+    "id": "assist-blade-r-round",
+    "name": "R (Round)",
+    "type": "ASSIST_BLADE",
+    "weight": 4,
+    "system": "CX",
+    "spin": "Right",
+    "beyType": "STAMINA",
+    "image": "/images/parts/assist-blade_as-r-001.webp",
+    "sources": ["bey-library"]
+  },
+  {
+    "id": "assist-blade-b-bumper",
+    "name": "B (Bumper)",
+    "type": "ASSIST_BLADE",
+    "weight": 5,
+    "system": "CX",
+    "spin": "Right",
+    "beyType": "DEFENSE",
+    "image": "/images/parts/assist-blade_as-b-001.webp",
+    "sources": ["bey-library"]
+  },
+  {
+    "id": "assist-blade-t-turn",
+    "name": "T (Turn)",
+    "type": "ASSIST_BLADE",
+    "weight": 6,
+    "system": "CX",
+    "spin": "Right",
+    "beyType": "BALANCE",
+    "image": "/images/parts/assist-blade_as-t-001.webp",
+    "sources": ["bey-library"]
+  },
+  {
+    "id": "assist-blade-c-charge",
+    "name": "C (Charge)",
+    "type": "ASSIST_BLADE",
+    "weight": 5,
+    "system": "CX",
+    "spin": "Right",
+    "beyType": "DEFENSE",
+    "image": "/images/parts/assist-blade_as-c-001.webp",
+    "sources": ["bey-library"]
+  },
+  {
+    "id": "assist-blade-j-jaggy",
+    "name": "J (Jaggy)",
+    "type": "ASSIST_BLADE",
+    "weight": 5,
+    "system": "CX",
+    "spin": "Right",
+    "beyType": "ATTACK",
+    "image": "/images/parts/assist-blade_as-j-001.webp",
+    "sources": ["bey-library"]
+  },
+  {
+    "id": "assist-blade-a-assault",
+    "name": "A (Assault)",
+    "type": "ASSIST_BLADE",
+    "weight": 5,
+    "system": "CX",
+    "spin": "Right",
+    "beyType": "ATTACK",
+    "image": "/images/parts/assist-blade_as-a-001.webp",
+    "sources": ["bey-library"]
+  },
+  {
+    "id": "assist-blade-w-wheel",
+    "name": "W (Wheel)",
+    "type": "ASSIST_BLADE",
+    "weight": 7,
+    "system": "CX",
+    "spin": "Right",
+    "beyType": "STAMINA",
+    "image": "/images/parts/assist-blade_as-w-001.webp",
+    "sources": ["bey-library"]
+  },
+  {
+    "id": "assist-blade-m-massive",
+    "name": "M (Massive)",
+    "type": "ASSIST_BLADE",
+    "weight": 6,
+    "system": "CX",
+    "spin": "Right",
+    "beyType": "BALANCE",
+    "image": "/images/parts/assist-blade_as-m-001.webp",
+    "sources": ["bey-library"]
+  },
+  {
+    "id": "assist-blade-d-dual",
+    "name": "D (Dual)",
+    "type": "ASSIST_BLADE",
+    "weight": 6,
+    "system": "CX",
+    "spin": "Right",
+    "beyType": "BALANCE",
+    "image": "/images/parts/assist-blade_as-d-001.webp",
+    "sources": ["bey-library"]
+  },
+  {
+    "id": "assist-blade-f-free",
+    "name": "F (Free)",
+    "type": "ASSIST_BLADE",
+    "weight": 5,
+    "system": "CX",
+    "spin": "Right",
+    "beyType": "STAMINA",
+    "image": "/images/parts/assist-blade_as-f-001.webp",
+    "sources": ["bey-library"]
+  },
+  {
+    "id": "assist-blade-h-heavy",
+    "name": "H (Heavy)",
+    "type": "ASSIST_BLADE",
+    "weight": 7,
+    "system": "CX",
+    "spin": "Right",
+    "beyType": "BALANCE",
+    "image": "/images/parts/assist-blade_as-h-001.webp",
+    "sources": ["bey-library"]
+  },
+  {
+    "id": "assist-blade-z-zillion",
+    "name": "Z (Zillion)",
+    "type": "ASSIST_BLADE",
+    "weight": 6,
+    "system": "CX",
+    "spin": "Right",
+    "beyType": "DEFENSE",
+    "image": "/images/parts/assist-blade_as-z-001.webp",
+    "sources": ["bey-library"]
+  },
+  {
+    "id": "assist-blade-k-knuckle",
+    "name": "K (Knuckle)",
+    "type": "ASSIST_BLADE",
+    "weight": 5,
+    "system": "CX",
+    "spin": "Right",
+    "beyType": "ATTACK",
+    "image": "/images/parts/assist-blade_as-k-001.webp",
+    "sources": ["bey-library"]
+  },
+  {
+    "id": "assist-blade-v-vertical",
+    "name": "V (Vertical)",
+    "type": "ASSIST_BLADE",
+    "weight": 5,
+    "system": "CX",
+    "spin": "Right",
+    "beyType": "DEFENSE",
+    "image": "/images/parts/assist-blade_as-v-001.webp",
+    "sources": ["bey-library"]
+  },
+  {
+    "id": "assist-blade-e-erase",
+    "name": "E (Erase)",
+    "type": "ASSIST_BLADE",
+    "weight": 5,
+    "system": "CX",
+    "spin": "Right",
+    "beyType": "STAMINA",
+    "image": "/images/parts/assist-blade_as-e-001.webp",
+    "sources": ["bey-library"]
+  }
+]

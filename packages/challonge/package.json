@@ -1,0 +1,46 @@
+{
+	"name": "@rose-griffon/challonge",
+	"version": "3.0.0",
+	"description": "Challonge client canonique (API v1 + scraper bxc curl-impersonate Chrome 131 via bun:ffi)",
+	"private": true,
+	"type": "module",
+	"main": "./src/index.ts",
+	"types": "./src/index.ts",
+	"exports": {
+		".": "./src/index.ts",
+		"./api": "./src/api.ts",
+		"./client": "./src/client.ts",
+		"./scraper": "./src/scraper.ts",
+		"./reverse": "./src/reverse.ts",
+		"./curl": "./src/transports/curl-impersonate.ts",
+		"./bxc-transport": "./src/transports/bxc.ts",
+		"./htmlrewriter": "./src/transports/htmlrewriter.ts",
+		"./bracket-svg": "./src/scrapers/bracket-svg.ts",
+		"./react-props": "./src/extractors/react-props.ts",
+		"./types": "./src/types.ts",
+		"./scores": "./src/scores.ts",
+		"./cookies": "./src/utils/cookies.ts",
+		"./retry": "./src/utils/retry.ts",
+		"./proxy": "./src/proxy.ts",
+		"./observability": "./src/observability.ts",
+		"./shadow-mode": "./src/shadow-mode.ts"
+	},
+	"scripts": {
+		"test": "bun test",
+		"typecheck": "tsc --noEmit",
+		"lint": "oxlint --config .oxlintrc.json src tests",
+		"lint:fix": "oxlint --config .oxlintrc.json --fix src tests"
+	},
+	"dependencies": {
+		"@aphrody-code/bxc": "^0.3.0",
+		"lru-cache": "^11.3.5",
+		"@rose-griffon/challonge-core": "workspace:*",
+		"i18next": "^21.6.14",
+		"i18next-browser-languagedetector": "^6.1.4",
+		"brackets-memory-db": "latest"
+	},
+	"devDependencies": {
+		"oxlint": "catalog:",
+		"typescript": "catalog:"
+	}
+}

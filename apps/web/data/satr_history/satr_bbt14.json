@@ -1,0 +1,6431 @@
+{
+  "metadata": {
+    "id": 16450851,
+    "name": "Tournoi Importé",
+    "url": "https://challonge.com/satr_bbt14",
+    "state": "complete",
+    "type": "double elimination",
+    "participantsCount": 34,
+    "startedAt": null,
+    "completedAt": null
+  },
+  "participants": [
+    {
+      "id": 266950053,
+      "name": "Neo Beyknights (Kamen Z-OursDuBeyblade-D8J6)",
+      "seed": 29,
+      "finalRank": 1
+    },
+    {
+      "id": 266950043,
+      "name": "Osaka (Odak-Mexity)",
+      "seed": 18,
+      "finalRank": 2
+    },
+    {
+      "id": 266950035,
+      "name": "Team Drillsoul (Berserk-PridefulLord-Igris)",
+      "seed": 10,
+      "finalRank": 3
+    },
+    {
+      "id": 266950028,
+      "name": "Gan Gan Galaxia (Yoorushi-zeLn-Hane Hoshi)",
+      "seed": 22,
+      "finalRank": 4
+    },
+    {
+      "id": 266950034,
+      "name": "Les Champions (Dodo 12-Aiga Akabane)",
+      "seed": 9,
+      "finalRank": 5
+    },
+    {
+      "id": 266950031,
+      "name": "Team Arc (Kreepy-RoroDela-Yuto)",
+      "seed": 6,
+      "finalRank": 5
+    },
+    {
+      "id": 266950030,
+      "name": "Kitty Girly (Leirya-Merope-Xymore)",
+      "seed": 5,
+      "finalRank": 7
+    },
+    {
+      "id": 266950039,
+      "name": "blue storm (Skyne-ceratops-Bandit)",
+      "seed": 14,
+      "finalRank": 7
+    },
+    {
+      "id": 266950042,
+      "name": "Team Dragonic (Kmn83-cerberus-Rayou_95)",
+      "seed": 17,
+      "finalRank": 9
+    },
+    {
+      "id": 266950048,
+      "name": "Les Wild Phoenix (Fulguris95-Fred-Kamen 99)",
+      "seed": 24,
+      "finalRank": 9
+    },
+    {
+      "id": 266950037,
+      "name": "Initial T (Daddy Grizzly-Loulou Sonic X-Equalizer)",
+      "seed": 12,
+      "finalRank": 9
+    },
+    {
+      "id": 266950047,
+      "name": "Black Phoenix (Rami-DarkHater)",
+      "seed": 23,
+      "finalRank": 9
+    },
+    {
+      "id": 266950056,
+      "name": "Unicorn Firefly (Mid G-Ramen S-Ender)",
+      "seed": 32,
+      "finalRank": 13
+    },
+    {
+      "id": 266950038,
+      "name": "Judgement (Azure-sewpoo_0192-Doctor)",
+      "seed": 13,
+      "finalRank": 13
+    },
+    {
+      "id": 266950026,
+      "name": "Chrono Storm (Phénixio-Croustykrs-Jacob)",
+      "seed": 2,
+      "finalRank": 13
+    },
+    {
+      "id": 266950044,
+      "name": "Black Bullet (darkhoumous-Alice-gelofy)",
+      "seed": 19,
+      "finalRank": 13
+    },
+    {
+      "id": 266950055,
+      "name": "Frenchy Peach Magic (Leni-Émilie-Pierre )",
+      "seed": 31,
+      "finalRank": 17
+    },
+    {
+      "id": 266950025,
+      "name": "Kira-Kira Team (Meiden-Shishi-Joker)",
+      "seed": 1,
+      "finalRank": 17
+    },
+    {
+      "id": 266950049,
+      "name": "Omega Deck Blade (Snake-Nassim-Alex)",
+      "seed": 25,
+      "finalRank": 17
+    },
+    {
+      "id": 266950045,
+      "name": "Titus Prime (blader M-caillou ken-kirikou prime)",
+      "seed": 20,
+      "finalRank": 17
+    },
+    {
+      "id": 266950052,
+      "name": "Star Breaker (Kamen A-Kineria-Ishan)",
+      "seed": 28,
+      "finalRank": 17
+    },
+    {
+      "id": 266950050,
+      "name": "FRA (MTS-Mewxy-Quentin )",
+      "seed": 26,
+      "finalRank": 17
+    },
+    {
+      "id": 266950027,
+      "name": "Adeptes des Vagabonds (Abdel_bma-Nono-Shinobi)",
+      "seed": 3,
+      "finalRank": 17
+    },
+    {
+      "id": 266950036,
+      "name": "Team Steve (Eiko-Spider_Agent42-Joker)",
+      "seed": 11,
+      "finalRank": 17
+    },
+    {
+      "id": 266950033,
+      "name": "Cerberus (Rock Lee-Snipblast-Shouloup)",
+      "seed": 8,
+      "finalRank": 25
+    },
+    {
+      "id": 266950029,
+      "name": "Les Swords (Yapi9575-Yonathan-Sam Valkyrie)",
+      "seed": 4,
+      "finalRank": 25
+    },
+    {
+      "id": 266950046,
+      "name": "Ahpatsum (Lunar-aichouxx-Coach 100 pitié)",
+      "seed": 21,
+      "finalRank": 25
+    },
+    {
+      "id": 266950032,
+      "name": "Blue Phoenix (Sabo-Stella-Paimy )",
+      "seed": 7,
+      "finalRank": 25
+    },
+    {
+      "id": 266950054,
+      "name": "Nebula (Astrale-Neku-ReikoTM)",
+      "seed": 30,
+      "finalRank": 25
+    },
+    {
+      "id": 266950051,
+      "name": "Réserviste (Tom-Antoine-Clément )",
+      "seed": 27,
+      "finalRank": 25
+    },
+    {
+      "id": 266950057,
+      "name": "SK HaVoK (Eden11-Taisho-Nahil)",
+      "seed": 33,
+      "finalRank": 33
+    },
+    {
+      "id": 266950118,
+      "name": "Ahmed Al-Zamel (Zeikuo-Younsi-Renji)",
+      "seed": 34,
+      "finalRank": 33
+    },
+    {
+      "id": 266950041,
+      "name": "Les débutants  (hary14-lisa94-Tongy94)",
+      "seed": 16
+    },
+    {
+      "id": 266950040,
+      "name": "Les bladeur en pyjama  (Tongy94-Kamen R-Jonas94)",
+      "seed": 15
+    }
+  ],
+  "matches": [
+    {
+      "id": 418587925,
+      "identifier": 1,
+      "round": 1,
+      "player1Id": 266950056,
+      "player2Id": 266950057,
+      "winnerId": 266950056,
+      "loserId": 266950057,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587926,
+      "identifier": 2,
+      "round": 1,
+      "player1Id": 266950055,
+      "player2Id": 266950118,
+      "winnerId": 266950055,
+      "loserId": 266950118,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587927,
+      "identifier": 17,
+      "round": 2,
+      "player1Id": 266950025,
+      "player2Id": 266950056,
+      "winnerId": 266950056,
+      "loserId": 266950025,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587928,
+      "identifier": 3,
+      "round": 2,
+      "player1Id": 266950041,
+      "player2Id": 266950042,
+      "winnerId": 266950042,
+      "loserId": 266950041,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587929,
+      "identifier": 4,
+      "round": 2,
+      "player1Id": 266950033,
+      "player2Id": 266950049,
+      "winnerId": 266950049,
+      "loserId": 266950033,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587930,
+      "identifier": 5,
+      "round": 2,
+      "player1Id": 266950034,
+      "player2Id": 266950048,
+      "winnerId": 266950034,
+      "loserId": 266950048,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587931,
+      "identifier": 6,
+      "round": 2,
+      "player1Id": 266950029,
+      "player2Id": 266950053,
+      "winnerId": 266950053,
+      "loserId": 266950029,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587932,
+      "identifier": 7,
+      "round": 2,
+      "player1Id": 266950038,
+      "player2Id": 266950045,
+      "winnerId": 266950045,
+      "loserId": 266950038,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587933,
+      "identifier": 8,
+      "round": 2,
+      "player1Id": 266950030,
+      "player2Id": 266950052,
+      "winnerId": 266950030,
+      "loserId": 266950052,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587934,
+      "identifier": 9,
+      "round": 2,
+      "player1Id": 266950037,
+      "player2Id": 266950046,
+      "winnerId": 266950037,
+      "loserId": 266950046,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587935,
+      "identifier": 18,
+      "round": 2,
+      "player1Id": 266950026,
+      "player2Id": 266950055,
+      "winnerId": 266950026,
+      "loserId": 266950055,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587936,
+      "identifier": 10,
+      "round": 2,
+      "player1Id": 266950040,
+      "player2Id": 266950043,
+      "winnerId": 266950043,
+      "loserId": 266950040,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587937,
+      "identifier": 11,
+      "round": 2,
+      "player1Id": 266950032,
+      "player2Id": 266950050,
+      "winnerId": 266950050,
+      "loserId": 266950032,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587938,
+      "identifier": 12,
+      "round": 2,
+      "player1Id": 266950035,
+      "player2Id": 266950047,
+      "winnerId": 266950035,
+      "loserId": 266950047,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587939,
+      "identifier": 13,
+      "round": 2,
+      "player1Id": 266950027,
+      "player2Id": 266950054,
+      "winnerId": 266950027,
+      "loserId": 266950054,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587940,
+      "identifier": 14,
+      "round": 2,
+      "player1Id": 266950039,
+      "player2Id": 266950044,
+      "winnerId": 266950039,
+      "loserId": 266950044,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587941,
+      "identifier": 15,
+      "round": 2,
+      "player1Id": 266950031,
+      "player2Id": 266950051,
+      "winnerId": 266950031,
+      "loserId": 266950051,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587942,
+      "identifier": 16,
+      "round": 2,
+      "player1Id": 266950036,
+      "player2Id": 266950028,
+      "winnerId": 266950028,
+      "loserId": 266950036,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587943,
+      "identifier": 35,
+      "round": 3,
+      "player1Id": 266950056,
+      "player2Id": 266950042,
+      "winnerId": 266950042,
+      "loserId": 266950056,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587944,
+      "identifier": 29,
+      "round": 3,
+      "player1Id": 266950049,
+      "player2Id": 266950034,
+      "winnerId": 266950034,
+      "loserId": 266950049,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587945,
+      "identifier": 30,
+      "round": 3,
+      "player1Id": 266950053,
+      "player2Id": 266950045,
+      "winnerId": 266950053,
+      "loserId": 266950045,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587946,
+      "identifier": 31,
+      "round": 3,
+      "player1Id": 266950030,
+      "player2Id": 266950037,
+      "winnerId": 266950030,
+      "loserId": 266950037,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587947,
+      "identifier": 36,
+      "round": 3,
+      "player1Id": 266950026,
+      "player2Id": 266950043,
+      "winnerId": 266950043,
+      "loserId": 266950026,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587948,
+      "identifier": 32,
+      "round": 3,
+      "player1Id": 266950050,
+      "player2Id": 266950035,
+      "winnerId": 266950035,
+      "loserId": 266950050,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587949,
+      "identifier": 33,
+      "round": 3,
+      "player1Id": 266950027,
+      "player2Id": 266950039,
+      "winnerId": 266950039,
+      "loserId": 266950027,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587950,
+      "identifier": 34,
+      "round": 3,
+      "player1Id": 266950031,
+      "player2Id": 266950028,
+      "winnerId": 266950031,
+      "loserId": 266950028,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587951,
+      "identifier": 51,
+      "round": 4,
+      "player1Id": 266950042,
+      "player2Id": 266950034,
+      "winnerId": 266950034,
+      "loserId": 266950042,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587952,
+      "identifier": 49,
+      "round": 4,
+      "player1Id": 266950053,
+      "player2Id": 266950030,
+      "winnerId": 266950053,
+      "loserId": 266950030,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587953,
+      "identifier": 52,
+      "round": 4,
+      "player1Id": 266950043,
+      "player2Id": 266950035,
+      "winnerId": 266950035,
+      "loserId": 266950043,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587954,
+      "identifier": 50,
+      "round": 4,
+      "player1Id": 266950039,
+      "player2Id": 266950031,
+      "winnerId": 266950031,
+      "loserId": 266950039,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587955,
+      "identifier": 59,
+      "round": 5,
+      "player1Id": 266950034,
+      "player2Id": 266950053,
+      "winnerId": 266950053,
+      "loserId": 266950034,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587956,
+      "identifier": 60,
+      "round": 5,
+      "player1Id": 266950035,
+      "player2Id": 266950031,
+      "winnerId": 266950035,
+      "loserId": 266950031,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587957,
+      "identifier": 64,
+      "round": 6,
+      "player1Id": 266950053,
+      "player2Id": 266950035,
+      "winnerId": 266950053,
+      "loserId": 266950035,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587990,
+      "identifier": 66,
+      "round": 7,
+      "player1Id": 266950053,
+      "player2Id": 266950043,
+      "winnerId": 266950053,
+      "loserId": 266950043,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587958,
+      "identifier": 20,
+      "round": -1,
+      "player1Id": 266950036,
+      "player2Id": 266950057,
+      "winnerId": 266950036,
+      "loserId": 266950057,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587959,
+      "identifier": 19,
+      "round": -1,
+      "player1Id": 266950046,
+      "player2Id": 266950118,
+      "winnerId": 266950046,
+      "loserId": 266950118,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587960,
+      "identifier": 28,
+      "round": -2,
+      "player1Id": 266950051,
+      "player2Id": 266950036,
+      "winnerId": 266950036,
+      "loserId": 266950051,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587961,
+      "identifier": 24,
+      "round": -2,
+      "player1Id": 266950044,
+      "player2Id": 266950054,
+      "winnerId": 266950044,
+      "loserId": 266950054,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587962,
+      "identifier": 23,
+      "round": -2,
+      "player1Id": 266950047,
+      "player2Id": 266950032,
+      "winnerId": 266950047,
+      "loserId": 266950032,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587963,
+      "identifier": 26,
+      "round": -2,
+      "player1Id": 266950040,
+      "player2Id": 266950055,
+      "winnerId": 266950055,
+      "loserId": 266950040,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587964,
+      "identifier": 27,
+      "round": -2,
+      "player1Id": 266950052,
+      "player2Id": 266950046,
+      "winnerId": 266950052,
+      "loserId": 266950046,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587965,
+      "identifier": 22,
+      "round": -2,
+      "player1Id": 266950038,
+      "player2Id": 266950029,
+      "winnerId": 266950038,
+      "loserId": 266950029,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587966,
+      "identifier": 21,
+      "round": -2,
+      "player1Id": 266950048,
+      "player2Id": 266950033,
+      "winnerId": 266950048,
+      "loserId": 266950033,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587967,
+      "identifier": 25,
+      "round": -2,
+      "player1Id": 266950041,
+      "player2Id": 266950025,
+      "winnerId": 266950025,
+      "loserId": 266950041,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587968,
+      "identifier": 39,
+      "round": -3,
+      "player1Id": 266950037,
+      "player2Id": 266950036,
+      "winnerId": 266950037,
+      "loserId": 266950036,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587969,
+      "identifier": 38,
+      "round": -3,
+      "player1Id": 266950045,
+      "player2Id": 266950044,
+      "winnerId": 266950044,
+      "loserId": 266950045,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587970,
+      "identifier": 37,
+      "round": -3,
+      "player1Id": 266950049,
+      "player2Id": 266950047,
+      "winnerId": 266950047,
+      "loserId": 266950049,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587971,
+      "identifier": 43,
+      "round": -3,
+      "player1Id": 266950056,
+      "player2Id": 266950055,
+      "winnerId": 266950056,
+      "loserId": 266950055,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587972,
+      "identifier": 42,
+      "round": -3,
+      "player1Id": 266950028,
+      "player2Id": 266950052,
+      "winnerId": 266950028,
+      "loserId": 266950052,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587973,
+      "identifier": 41,
+      "round": -3,
+      "player1Id": 266950027,
+      "player2Id": 266950038,
+      "winnerId": 266950038,
+      "loserId": 266950027,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587974,
+      "identifier": 40,
+      "round": -3,
+      "player1Id": 266950050,
+      "player2Id": 266950048,
+      "winnerId": 266950048,
+      "loserId": 266950050,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587975,
+      "identifier": 44,
+      "round": -3,
+      "player1Id": 266950026,
+      "player2Id": 266950025,
+      "winnerId": 266950026,
+      "loserId": 266950025,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587976,
+      "identifier": 45,
+      "round": -4,
+      "player1Id": 266950037,
+      "player2Id": 266950044,
+      "winnerId": 266950037,
+      "loserId": 266950044,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587977,
+      "identifier": 47,
+      "round": -4,
+      "player1Id": 266950047,
+      "player2Id": 266950056,
+      "winnerId": 266950047,
+      "loserId": 266950056,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587978,
+      "identifier": 46,
+      "round": -4,
+      "player1Id": 266950028,
+      "player2Id": 266950038,
+      "winnerId": 266950028,
+      "loserId": 266950038,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587979,
+      "identifier": 48,
+      "round": -4,
+      "player1Id": 266950048,
+      "player2Id": 266950026,
+      "winnerId": 266950048,
+      "loserId": 266950026,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587980,
+      "identifier": 56,
+      "round": -5,
+      "player1Id": 266950043,
+      "player2Id": 266950037,
+      "winnerId": 266950043,
+      "loserId": 266950037,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587981,
+      "identifier": 54,
+      "round": -5,
+      "player1Id": 266950039,
+      "player2Id": 266950047,
+      "winnerId": 266950039,
+      "loserId": 266950047,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587982,
+      "identifier": 55,
+      "round": -5,
+      "player1Id": 266950042,
+      "player2Id": 266950028,
+      "winnerId": 266950028,
+      "loserId": 266950042,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587983,
+      "identifier": 53,
+      "round": -5,
+      "player1Id": 266950030,
+      "player2Id": 266950048,
+      "winnerId": 266950030,
+      "loserId": 266950048,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587984,
+      "identifier": 58,
+      "round": -6,
+      "player1Id": 266950043,
+      "player2Id": 266950039,
+      "winnerId": 266950043,
+      "loserId": 266950039,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587985,
+      "identifier": 57,
+      "round": -6,
+      "player1Id": 266950028,
+      "player2Id": 266950030,
+      "winnerId": 266950028,
+      "loserId": 266950030,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587986,
+      "identifier": 61,
+      "round": -7,
+      "player1Id": 266950034,
+      "player2Id": 266950043,
+      "winnerId": 266950043,
+      "loserId": 266950034,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587987,
+      "identifier": 62,
+      "round": -7,
+      "player1Id": 266950031,
+      "player2Id": 266950028,
+      "winnerId": 266950028,
+      "loserId": 266950031,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587988,
+      "identifier": 63,
+      "round": -8,
+      "player1Id": 266950043,
+      "player2Id": 266950028,
+      "winnerId": 266950043,
+      "loserId": 266950028,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    },
+    {
+      "id": 418587989,
+      "identifier": 65,
+      "round": -9,
+      "player1Id": 266950035,
+      "player2Id": 266950043,
+      "winnerId": 266950043,
+      "loserId": 266950035,
+      "scores": "0-0",
+      "sets": [],
+      "state": "complete"
+    }
+  ],
+  "standings": [
+    {
+      "rank": 1,
+      "name": "Neo Beyknights (Kamen Z-OursDuBeyblade-D8J6)",
+      "challongeUsername": null,
+      "challongeProfileUrl": null,
+      "wins": 0,
+      "losses": 0,
+      "stats": {
+        "wins": 0,
+        "losses": 0
+      }
+    },
+    {
+      "rank": 2,
+      "name": "Osaka (Odak-Mexity)",
+      "challongeUsername": null,
+      "challongeProfileUrl": null,
+      "wins": 0,
+      "losses": 0,
+      "stats": {
+        "wins": 0,
+        "losses": 0
+      }
+    },
+    {
+      "rank": 3,
+      "name": "Team Drillsoul (Berserk-PridefulLord-Igris)",
+      "challongeUsername": null,
+      "challongeProfileUrl": null,
+      "wins": 0,
+      "losses": 0,
+      "stats": {
+        "wins": 0,
+        "losses": 0
+      }
+    },
+    {
+      "rank": 4,
+      "name": "Gan Gan Galaxia (Yoorushi-zeLn-Hane Hoshi)",
+      "challongeUsername": null,
+      "challongeProfileUrl": null,
+      "wins": 0,
+      "losses": 0,
+      "stats": {
+        "wins": 0,
+        "losses": 0
+      }
+    },
+    {
+      "rank": 5,
+      "name": "Les Champions (Dodo 12-Aiga Akabane)",
+      "challongeUsername": null,
+      "challongeProfileUrl": null,
+      "wins": 0,
+      "losses": 0,
+      "stats": {
+        "wins": 0,
+        "losses": 0
+      }
+    },
+    {
+      "rank": 5,
+      "name": "Team Arc (Kreepy-RoroDela-Yuto)",
+      "challongeUsername": null,
+      "challongeProfileUrl": null,
+      "wins": 0,
+      "losses": 0,
+      "stats": {
+        "wins": 0,
+        "losses": 0
+      }
+    },
+    {
+      "rank": 7,
+      "name": "blue storm (Skyne-ceratops-Bandit)",
+      "challongeUsername": null,
+      "challongeProfileUrl": null,
+      "wins": 0,
+      "losses": 0,
+      "stats": {
+        "wins": 0,
+        "losses": 0
+      }
+    },
+    {
+      "rank": 7,
+      "name": "Kitty Girly (Leirya-Merope-Xymore)",
+      "challongeUsername": null,
+      "challongeProfileUrl": null,
+      "wins": 0,
+      "losses": 0,
+      "stats": {
+        "wins": 0,
+        "losses": 0
+      }
+    },
+    {
+      "rank": 9,
+      "name": "Black Phoenix (Rami-DarkHater)",
+      "challongeUsername": null,
+      "challongeProfileUrl": null,
+      "wins": 0,
+      "losses": 0,
+      "stats": {
+        "wins": 0,
+        "losses": 0
+      }
+    },
+    {
+      "rank": 9,
+      "name": "Initial T (Daddy Grizzly-Loulou Sonic X-Equalizer)",
+      "challongeUsername": null,
+      "challongeProfileUrl": null,
+      "wins": 0,
+      "losses": 0,
+      "stats": {
+        "wins": 0,
+        "losses": 0
+      }
+    },
+    {
+      "rank": 9,
+      "name": "Les Wild Phoenix (Fulguris95-Fred-Kamen 99)",
+      "challongeUsername": null,
+      "challongeProfileUrl": null,
+      "wins": 0,
+      "losses": 0,
+      "stats": {
+        "wins": 0,
+        "losses": 0
+      }
+    },
+    {
+      "rank": 9,
+      "name": "Team Dragonic (Kmn83-cerberus-Rayou_95)",
+      "challongeUsername": null,
+      "challongeProfileUrl": null,
+      "wins": 0,
+      "losses": 0,
+      "stats": {
+        "wins": 0,
+        "losses": 0
+      }
+    },
+    {
+      "rank": 13,
+      "name": "Black Bullet (darkhoumous-Alice-gelofy)",
+      "challongeUsername": null,
+      "challongeProfileUrl": null,
+      "wins": 0,
+      "losses": 0,
+      "stats": {
+        "wins": 0,
+        "losses": 0
+      }
+    },
+    {
+      "rank": 13,
+      "name": "Chrono Storm (Phénixio-Croustykrs-Jacob)",
+      "challongeUsername": null,
+      "challongeProfileUrl": null,
+      "wins": 0,
+      "losses": 0,
+      "stats": {
+        "wins": 0,
+        "losses": 0
+      }
+    },
+    {
+      "rank": 13,
+      "name": "Judgement (Azure-sewpoo_0192-Doctor)",
+      "challongeUsername": null,
+      "challongeProfileUrl": null,
+      "wins": 0,
+      "losses": 0,
+      "stats": {
+        "wins": 0,
+        "losses": 0
+      }
+    },
+    {
+      "rank": 13,
+      "name": "Unicorn Firefly (Mid G-Ramen S-Ender)",
+      "challongeUsername": null,
+      "challongeProfileUrl": null,
+      "wins": 0,
+      "losses": 0,
+      "stats": {
+        "wins": 0,
+        "losses": 0
+      }
+    },
+    {
+      "rank": 17,
+      "name": "Adeptes des Vagabonds (Abdel_bma-Nono-Shinobi)",
+      "challongeUsername": null,
+      "challongeProfileUrl": null,
+      "wins": 0,
+      "losses": 0,
+      "stats": {
+        "wins": 0,
+        "losses": 0
+      }
+    },
+    {
+      "rank": 17,
+      "name": "FRA (MTS-Mewxy-Quentin )",
+      "challongeUsername": null,
+      "challongeProfileUrl": null,
+      "wins": 0,
+      "losses": 0,
+      "stats": {
+        "wins": 0,
+        "losses": 0
+      }
+    },
+    {
+      "rank": 17,
+      "name": "Frenchy Peach Magic (Leni-Émilie-Pierre )",
+      "challongeUsername": null,
+      "challongeProfileUrl": null,
+      "wins": 0,
+      "losses": 0,
+      "stats": {
+        "wins": 0,
+        "losses": 0
+      }
+    },
+    {
+      "rank": 17,
+      "name": "Kira-Kira Team (Meiden-Shishi-Joker)",
+      "challongeUsername": null,
+      "challongeProfileUrl": null,
+      "wins": 0,
+      "losses": 0,
+      "stats": {
+        "wins": 0,
+        "losses": 0
+      }
+    },
+    {
+      "rank": 17,
+      "name": "Omega Deck Blade (Snake-Nassim-Alex)",
+      "challongeUsername": null,
+      "challongeProfileUrl": null,
+      "wins": 0,
+      "losses": 0,
+      "stats": {
+        "wins": 0,
+        "losses": 0
+      }
+    },
+    {
+      "rank": 17,
+      "name": "Star Breaker (Kamen A-Kineria-Ishan)",
+      "challongeUsername": null,
+      "challongeProfileUrl": null,
+      "wins": 0,
+      "losses": 0,
+      "stats": {
+        "wins": 0,
+        "losses": 0
+      }
+    },
+    {
+      "rank": 17,
+      "name": "Team Steve (Eiko-Spider_Agent42-Joker)",
+      "challongeUsername": null,
+      "challongeProfileUrl": null,
+      "wins": 0,
+      "losses": 0,
+      "stats": {
+        "wins": 0,
+        "losses": 0
+      }
+    },
+    {
+      "rank": 17,
+      "name": "Titus Prime (blader M-caillou ken-kirikou prime)",
+      "challongeUsername": null,
+      "challongeProfileUrl": null,
+      "wins": 0,
+      "losses": 0,
+      "stats": {
+        "wins": 0,
+        "losses": 0
+      }
+    },
+    {
+      "rank": 25,
+      "name": "Ahpatsum (Lunar-aichouxx-Coach 100 pitié)",
+      "challongeUsername": null,
+      "challongeProfileUrl": null,
+      "wins": 0,
+      "losses": 0,
+      "stats": {
+        "wins": 0,
+        "losses": 0
+      }
+    },
+    {
+      "rank": 25,
+      "name": "Blue Phoenix (Sabo-Stella-Paimy )",
+      "challongeUsername": null,
+      "challongeProfileUrl": null,
+      "wins": 0,
+      "losses": 0,
+      "stats": {
+        "wins": 0,
+        "losses": 0
+      }
+    },
+    {
+      "rank": 25,
+      "name": "Cerberus (Rock Lee-Snipblast-Shouloup)",
+      "challongeUsername": null,
+      "challongeProfileUrl": null,
+      "wins": 0,
+      "losses": 0,
+      "stats": {
+        "wins": 0,
+        "losses": 0
+      }
+    },
+    {
+      "rank": 25,
+      "name": "Les bladeur en pyjama (Tongy94-Kamen R-Jonas94)",
+      "challongeUsername": null,
+      "challongeProfileUrl": null,
+      "wins": 0,
+      "losses": 0,
+      "stats": {
+        "wins": 0,
+        "losses": 0
+      }
+    },
+    {
+      "rank": 25,
+      "name": "Les débutants (hary14-lisa94-Tongy94)",
+      "challongeUsername": null,
+      "challongeProfileUrl": null,
+      "wins": 0,
+      "losses": 0,
+      "stats": {
+        "wins": 0,
+        "losses": 0
+      }
+    },
+    {
+      "rank": 25,
+      "name": "Les Swords (Yapi9575-Yonathan-Sam Valkyrie)",
+      "challongeUsername": null,
+      "challongeProfileUrl": null,
+      "wins": 0,
+      "losses": 0,
+      "stats": {
+        "wins": 0,
+        "losses": 0
+      }
+    },
+    {
+      "rank": 25,
+      "name": "Nebula (Astrale-Neku-ReikoTM)",
+      "challongeUsername": null,
+      "challongeProfileUrl": null,
+      "wins": 0,
+      "losses": 0,
+      "stats": {
+        "wins": 0,
+        "losses": 0
+      }
+    },
+    {
+      "rank": 25,
+      "name": "Réserviste (Tom-Antoine-Clément )",
+      "challongeUsername": null,
+      "challongeProfileUrl": null,
+      "wins": 0,
+      "losses": 0,
+      "stats": {
+        "wins": 0,
+        "losses": 0
+      }
+    },
+    {
+      "rank": 33,
+      "name": "Ahmed Al-Zamel (Zeikuo-Younsi-Renji)",
+      "challongeUsername": null,
+      "challongeProfileUrl": null,
+      "wins": 0,
+      "losses": 0,
+      "stats": {
+        "wins": 0,
+        "losses": 0
+      }
+    },
+    {
+      "rank": 33,
+      "name": "SK HaVoK (Eden11-Taisho-Nahil)",
+      "challongeUsername": null,
+      "challongeProfileUrl": null,
+      "wins": 0,
+      "losses": 0,
+      "stats": {
+        "wins": 0,
+        "losses": 0
+      }
+    }
+  ],
+  "stations": [
+    {
+      "stationId": 1,
+      "name": "Beyblade Battle Tournament #14 - Predictions",
+      "currentMatch": null,
+      "status": "idle"
+    },
+    {
+      "stationId": 2,
+      "name": "Stadium 1",
+      "currentMatch": null,
+      "status": "idle"
+    },
+    {
+      "stationId": 3,
+      "name": "Stadium 1",
+      "currentMatch": null,
+      "status": "idle"
+    },
+    {
+      "stationId": 4,
+      "name": "Station 4",
+      "currentMatch": null,
+      "status": "idle"
+    },
+    {
+      "stationId": 5,
+      "name": "Station 5",
+      "currentMatch": null,
+      "status": "idle"
+    }
+  ],
+  "log": [
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Bracket",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Standings",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Log (99)",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Stations",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Bracket",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Standings",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Log (99)",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Stations",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Copy Link",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Facebook",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Twitter",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Create template from this tournament",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Bracket",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Standings",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Log (99)",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Stations",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "Players",
+      "message": "Players\n34",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "Format",
+      "message": "Format\nDouble Elimination",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "Game",
+      "message": "Game\nBeyblade X",
+      "raw": null
+    },
+    {
+      "timestamp": "July  6, 2025 at  1:00 PM CEST",
+      "type": "Start Time\n\nStart",
+      "message": "Start Time\n\nStart",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "1 / 5",
+      "raw": null
+    },
+    {
+      "timestamp": "10 months ago",
+      "type": "activity",
+      "message": "Ended the tournament",
+      "raw": null
+    },
+    {
+      "timestamp": "10 months ago",
+      "type": "activity",
+      "message": "Ended the tournament",
+      "raw": null
+    },
+    {
+      "timestamp": "10 months ago",
+      "type": "activity",
+      "message": "Youns3Reported a 0-0 win for Neo Beyknights (Kamen Z-OursDuBeyblade-D8J6) over Osaka (Odak-Mexity)",
+      "raw": null
+    },
+    {
+      "timestamp": "10 months ago",
+      "type": "activity",
+      "message": "Youns3Reported a 0-0 win for Neo Beyknights (Kamen Z-OursDuBeyblade-D8J6) over Osaka (Odak-Mexity)",
+      "raw": null
+    },
+    {
+      "timestamp": "10 months ago",
+      "type": "activity",
+      "message": "Youns3Started the Neo Beyknights (Kamen Z-OursDuBeyblade-D8J6) vs. Osaka (Odak-Mexity) match",
+      "raw": null
+    },
+    {
+      "timestamp": "10 months ago",
+      "type": "activity",
+      "message": "Youns3Started the Neo Beyknights (Kamen Z-OursDuBeyblade-D8J6) vs. Osaka (Odak-Mexity) match",
+      "raw": null
+    },
+    {
+      "timestamp": "10 months ago",
+      "type": "activity",
+      "message": "Shishi4272Reported a 0-0 win for Osaka (Odak-Mexity) over Team Drillsoul (Berserk-PridefulLord-Igris)",
+      "raw": null
+    },
+    {
+      "timestamp": "10 months ago",
+      "type": "activity",
+      "message": "Shishi4272Reported a 0-0 win for Osaka (Odak-Mexity) over Team Drillsoul (Berserk-PridefulLord-Igris)",
+      "raw": null
+    },
+    {
+      "timestamp": "10 months ago",
+      "type": "activity",
+      "message": "Shishi4272Started the Team Drillsoul (Berserk-PridefulLord-Igris) vs. Osaka (Odak-Mexity) match",
+      "raw": null
+    },
+    {
+      "timestamp": "10 months ago",
+      "type": "activity",
+      "message": "Shishi4272Started the Team Drillsoul (Berserk-PridefulLord-Igris) vs. Osaka (Odak-Mexity) match",
+      "raw": null
+    },
+    {
+      "timestamp": "10 months ago",
+      "type": "activity",
+      "message": "Youns3Reported a 0-0 win for Osaka (Odak-Mexity) over Gan Gan Galaxia (Yoorushi-zeLn-Hane Hoshi)",
+      "raw": null
+    },
+    {
+      "timestamp": "10 months ago",
+      "type": "activity",
+      "message": "Youns3Reported a 0-0 win for Osaka (Odak-Mexity) over Gan Gan Galaxia (Yoorushi-zeLn-Hane Hoshi)",
+      "raw": null
+    },
+    {
+      "timestamp": "10 months ago",
+      "type": "activity",
+      "message": "Youns3Started the Osaka (Odak-Mexity) vs. Gan Gan Galaxia (Yoorushi-zeLn-Hane Hoshi) match",
+      "raw": null
+    },
+    {
+      "timestamp": "10 months ago",
+      "type": "activity",
+      "message": "Youns3Started the Osaka (Odak-Mexity) vs. Gan Gan Galaxia (Yoorushi-zeLn-Hane Hoshi) match",
+      "raw": null
+    },
+    {
+      "timestamp": "10 months ago",
+      "type": "activity",
+      "message": "Shishi4272Reported a 0-0 win for Gan Gan Galaxia (Yoorushi-zeLn-Hane Hoshi) over Team Arc (Kreepy-RoroDela-Yuto)",
+      "raw": null
+    },
+    {
+      "timestamp": "10 months ago",
+      "type": "activity",
+      "message": "Shishi4272Reported a 0-0 win for Gan Gan Galaxia (Yoorushi-zeLn-Hane Hoshi) over Team Arc (Kreepy-RoroDela-Yuto)",
+      "raw": null
+    },
+    {
+      "timestamp": "10 months ago",
+      "type": "activity",
+      "message": "Youns3Started the Team Arc (Kreepy-RoroDela-Yuto) vs. Gan Gan Galaxia (Yoorushi-zeLn-Hane Hoshi) match",
+      "raw": null
+    },
+    {
+      "timestamp": "10 months ago",
+      "type": "activity",
+      "message": "Youns3Started the Team Arc (Kreepy-RoroDela-Yuto) vs. Gan Gan Galaxia (Yoorushi-zeLn-Hane Hoshi) match",
+      "raw": null
+    },
+    {
+      "timestamp": "10 months ago",
+      "type": "activity",
+      "message": "Shishi4272Reported a 0-0 win for Neo Beyknights (Kamen Z-OursDuBeyblade-D8J6) over Team Drillsoul (Berserk-PridefulLord-Igris)",
+      "raw": null
+    },
+    {
+      "timestamp": "10 months ago",
+      "type": "activity",
+      "message": "Shishi4272Reported a 0-0 win for Neo Beyknights (Kamen Z-OursDuBeyblade-D8J6) over Team Drillsoul (Berserk-PridefulLord-Igris)",
+      "raw": null
+    },
+    {
+      "timestamp": "10 months ago",
+      "type": "activity",
+      "message": "Shishi4272Reported a 0-0 win for Osaka (Odak-Mexity) over Les Champions (Dodo 12-Aiga Akabane)",
+      "raw": null
+    },
+    {
+      "timestamp": "10 months ago",
+      "type": "activity",
+      "message": "Shishi4272Reported a 0-0 win for Osaka (Odak-Mexity) over Les Champions (Dodo 12-Aiga Akabane)",
+      "raw": null
+    },
+    {
+      "timestamp": "10 months ago",
+      "type": "activity",
+      "message": "Shishi4272Reported a 0-0 win for Gan Gan Galaxia (Yoorushi-zeLn-Hane Hoshi) over Kitty Girly (Leirya-Merope-Xymore)",
+      "raw": null
+    },
+    {
+      "timestamp": "10 months ago",
+      "type": "activity",
+      "message": "Shishi4272Reported a 0-0 win for Gan Gan Galaxia (Yoorushi-zeLn-Hane Hoshi) over Kitty Girly (Leirya-Merope-Xymore)",
+      "raw": null
+    },
+    {
+      "timestamp": "10 months ago",
+      "type": "activity",
+      "message": "Shishi4272Reported a 0-0 win for Team Drillsoul (Berserk-PridefulLord-Igris) over Team Arc (Kreepy-RoroDela-Yuto)",
+      "raw": null
+    },
+    {
+      "timestamp": "10 months ago",
+      "type": "activity",
+      "message": "Shishi4272Reported a 0-0 win for Team Drillsoul (Berserk-PridefulLord-Igris) over Team Arc (Kreepy-RoroDela-Yuto)",
+      "raw": null
+    },
+    {
+      "timestamp": "10 months ago",
+      "type": "activity",
+      "message": "Shishi4272Started the Les Champions (Dodo 12-Aiga Akabane) vs. Osaka (Odak-Mexity) match",
+      "raw": null
+    },
+    {
+      "timestamp": "10 months ago",
+      "type": "activity",
+      "message": "Shishi4272Started the Les Champions (Dodo 12-Aiga Akabane) vs. Osaka (Odak-Mexity) match",
+      "raw": null
+    },
+    {
+      "timestamp": "10 months ago",
+      "type": "activity",
+      "message": "Shishi4272Reported a 0-0 win for Osaka (Odak-Mexity) over blue storm (Skyne-ceratops-Bandit)",
+      "raw": null
+    },
+    {
+      "timestamp": "10 months ago",
+      "type": "activity",
+      "message": "Shishi4272Reported a 0-0 win for Osaka (Odak-Mexity) over blue storm (Skyne-ceratops-Bandit)",
+      "raw": null
+    },
+    {
+      "timestamp": "10 months ago",
+      "type": "activity",
+      "message": "Youns3Started the Gan Gan Galaxia (Yoorushi-zeLn-Hane Hoshi) vs. Kitty Girly (Leirya-Merope-Xymore) match",
+      "raw": null
+    },
+    {
+      "timestamp": "10 months ago",
+      "type": "activity",
+      "message": "Youns3Started the Gan Gan Galaxia (Yoorushi-zeLn-Hane Hoshi) vs. Kitty Girly (Leirya-Merope-Xymore) match",
+      "raw": null
+    },
+    {
+      "timestamp": "10 months ago",
+      "type": "activity",
+      "message": "Youns3Reported a 0-0 win for Neo Beyknights (Kamen Z-OursDuBeyblade-D8J6) over Les Champions (Dodo 12-Aiga Akabane)",
+      "raw": null
+    },
+    {
+      "timestamp": "10 months ago",
+      "type": "activity",
+      "message": "Youns3Reported a 0-0 win for Neo Beyknights (Kamen Z-OursDuBeyblade-D8J6) over Les Champions (Dodo 12-Aiga Akabane)",
+      "raw": null
+    },
+    {
+      "timestamp": "10 months ago",
+      "type": "activity",
+      "message": "SAtrEikoReported a 0-0 win for Gan Gan Galaxia (Yoorushi-zeLn-Hane Hoshi) over Team Dragonic (Kmn83-cerberus-Rayou_95)",
+      "raw": null
+    },
+    {
+      "timestamp": "10 months ago",
+      "type": "activity",
+      "message": "SAtrEikoReported a 0-0 win for Gan Gan Galaxia (Yoorushi-zeLn-Hane Hoshi) over Team Dragonic (Kmn83-cerberus-Rayou_95)",
+      "raw": null
+    },
+    {
+      "timestamp": "10 months ago",
+      "type": "activity",
+      "message": "Youns3Started the Les Champions (Dodo 12-Aiga Akabane) vs. Neo Beyknights (Kamen Z-OursDuBeyblade-D8J6) match",
+      "raw": null
+    },
+    {
+      "timestamp": "10 months ago",
+      "type": "activity",
+      "message": "Youns3Started the Les Champions (Dodo 12-Aiga Akabane) vs. Neo Beyknights (Kamen Z-OursDuBeyblade-D8J6) match",
+      "raw": null
+    },
+    {
+      "timestamp": "10 months ago",
+      "type": "activity",
+      "message": "Shishi4272Reported a 0-0 win for Osaka (Odak-Mexity) over Initial T (Daddy Grizzly-Loulou Sonic X-Equalizer)",
+      "raw": null
+    },
+    {
+      "timestamp": "10 months ago",
+      "type": "activity",
+      "message": "Shishi4272Reported a 0-0 win for Osaka (Odak-Mexity) over Initial T (Daddy Grizzly-Loulou Sonic X-Equalizer)",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "1 / 5",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "العَرَبِيَّة",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Čeština",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Dansk",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Deutsch",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Español",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Suomi",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Français",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Magyar",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Bahasa Indonesia",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Italiano",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "日本語",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "한국어",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Latviešu",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Nederlands",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "norsk",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Polski",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Português",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Português Br.",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Limba română",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Русский",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "slovenčina",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "svenska",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "ภาษาไทย",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Türkçe",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "українська",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Tiếng Việt",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "简体中文",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "繁體中文",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Help Translate",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Deutsch",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "English",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Español",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Français",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Italiano",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Nederlands",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Polski",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Português",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Limba română",
+      "raw": null
+    }
+  ],
+  "raw": {
+    "requested_plotter": "DoubleEliminationBracketPlotter",
+    "tournament": {
+      "id": 16450851,
+      "state": "complete",
+      "tournament_type": "double elimination",
+      "quick_advance": false,
+      "hide_seeds": false,
+      "hide_identifiers": false,
+      "show_station_and_time": false,
+      "animated": true,
+      "accept_attachments": false,
+      "participant_count_to_advance": 1,
+      "owner_ids": [
+        2788862,
+        2788862,
+        6793364
+      ],
+      "admin_ids": [
+        2788862,
+        7805091,
+        7043707,
+        8004080,
+        7943667,
+        7962855,
+        7804130,
+        7638544,
+        7181222,
+        6911314,
+        7708629,
+        7085495,
+        7002393,
+        2788862,
+        7067260,
+        7067274,
+        2142658,
+        5122402,
+        6793364,
+        7047730,
+        7002355,
+        7070870,
+        7512405,
+        4978902
+      ],
+      "participants_swappable": false,
+      "progress_meter": 100,
+      "group_stage_progress_meter": 0,
+      "grand_finals_modifier": null,
+      "predict_the_losers_bracket": false,
+      "voting_underway": false,
+      "is_team": false,
+      "split_participants": false,
+      "participants_per_match": 2,
+      "only_start_matches_with_stations": false
+    },
+    "rounds": [
+      {
+        "id": null,
+        "stage_type": "Tournament",
+        "stage_id": 16450851,
+        "number": 1,
+        "title": "Round 1",
+        "description": null,
+        "best_of": 1,
+        "created_at": null,
+        "updated_at": null,
+        "group_index": null,
+        "title_lines": [
+          "Round 1"
+        ],
+        "href": "/tournaments/16450851/rounds/new_or_edit?number=1&title=Round+1"
+      },
+      {
+        "id": null,
+        "stage_type": "Tournament",
+        "stage_id": 16450851,
+        "number": 2,
+        "title": "Round 2",
+        "description": null,
+        "best_of": 1,
+        "created_at": null,
+        "updated_at": null,
+        "group_index": null,
+        "title_lines": [
+          "Round 2"
+        ],
+        "href": "/tournaments/16450851/rounds/new_or_edit?number=2&title=Round+2"
+      },
+      {
+        "id": null,
+        "stage_type": "Tournament",
+        "stage_id": 16450851,
+        "number": 3,
+        "title": "Round 3",
+        "description": null,
+        "best_of": 1,
+        "created_at": null,
+        "updated_at": null,
+        "group_index": null,
+        "title_lines": [
+          "Round 3"
+        ],
+        "href": "/tournaments/16450851/rounds/new_or_edit?number=3&title=Round+3"
+      },
+      {
+        "id": null,
+        "stage_type": "Tournament",
+        "stage_id": 16450851,
+        "number": 4,
+        "title": "Round 4",
+        "description": null,
+        "best_of": 1,
+        "created_at": null,
+        "updated_at": null,
+        "group_index": null,
+        "title_lines": [
+          "Round 4"
+        ],
+        "href": "/tournaments/16450851/rounds/new_or_edit?number=4&title=Round+4"
+      },
+      {
+        "id": null,
+        "stage_type": "Tournament",
+        "stage_id": 16450851,
+        "number": 5,
+        "title": "Round 5",
+        "description": null,
+        "best_of": 1,
+        "created_at": null,
+        "updated_at": null,
+        "group_index": null,
+        "title_lines": [
+          "Round 5"
+        ],
+        "href": "/tournaments/16450851/rounds/new_or_edit?number=5&title=Round+5"
+      },
+      {
+        "id": null,
+        "stage_type": "Tournament",
+        "stage_id": 16450851,
+        "number": 6,
+        "title": "Semifinals",
+        "description": null,
+        "best_of": 1,
+        "created_at": null,
+        "updated_at": null,
+        "group_index": null,
+        "title_lines": [
+          "Semifinals"
+        ],
+        "href": "/tournaments/16450851/rounds/new_or_edit?number=6&title=Semifinals"
+      },
+      {
+        "id": null,
+        "stage_type": "Tournament",
+        "stage_id": 16450851,
+        "number": 7,
+        "title": "Finals",
+        "description": null,
+        "best_of": 1,
+        "created_at": null,
+        "updated_at": null,
+        "group_index": null,
+        "title_lines": [
+          "Finals"
+        ],
+        "href": "/tournaments/16450851/rounds/new_or_edit?number=7&title=Finals"
+      },
+      {
+        "id": null,
+        "stage_type": "Tournament",
+        "stage_id": 16450851,
+        "number": -1,
+        "title": "Losers Round 1",
+        "description": null,
+        "best_of": 1,
+        "created_at": null,
+        "updated_at": null,
+        "group_index": null,
+        "title_lines": [
+          "Losers Round 1"
+        ],
+        "href": "/tournaments/16450851/rounds/new_or_edit?number=-1&title=Losers+Round+1"
+      },
+      {
+        "id": null,
+        "stage_type": "Tournament",
+        "stage_id": 16450851,
+        "number": -2,
+        "title": "Losers Round 2",
+        "description": null,
+        "best_of": 1,
+        "created_at": null,
+        "updated_at": null,
+        "group_index": null,
+        "title_lines": [
+          "Losers Round 2"
+        ],
+        "href": "/tournaments/16450851/rounds/new_or_edit?number=-2&title=Losers+Round+2"
+      },
+      {
+        "id": null,
+        "stage_type": "Tournament",
+        "stage_id": 16450851,
+        "number": -3,
+        "title": "Losers Round 3",
+        "description": null,
+        "best_of": 1,
+        "created_at": null,
+        "updated_at": null,
+        "group_index": null,
+        "title_lines": [
+          "Losers Round 3"
+        ],
+        "href": "/tournaments/16450851/rounds/new_or_edit?number=-3&title=Losers+Round+3"
+      },
+      {
+        "id": null,
+        "stage_type": "Tournament",
+        "stage_id": 16450851,
+        "number": -4,
+        "title": "Losers Round 4",
+        "description": null,
+        "best_of": 1,
+        "created_at": null,
+        "updated_at": null,
+        "group_index": null,
+        "title_lines": [
+          "Losers Round 4"
+        ],
+        "href": "/tournaments/16450851/rounds/new_or_edit?number=-4&title=Losers+Round+4"
+      },
+      {
+        "id": null,
+        "stage_type": "Tournament",
+        "stage_id": 16450851,
+        "number": -5,
+        "title": "Losers Round 5",
+        "description": null,
+        "best_of": 1,
+        "created_at": null,
+        "updated_at": null,
+        "group_index": null,
+        "title_lines": [
+          "Losers Round 5"
+        ],
+        "href": "/tournaments/16450851/rounds/new_or_edit?number=-5&title=Losers+Round+5"
+      },
+      {
+        "id": null,
+        "stage_type": "Tournament",
+        "stage_id": 16450851,
+        "number": -6,
+        "title": "Losers Round 6",
+        "description": null,
+        "best_of": 1,
+        "created_at": null,
+        "updated_at": null,
+        "group_index": null,
+        "title_lines": [
+          "Losers Round 6"
+        ],
+        "href": "/tournaments/16450851/rounds/new_or_edit?number=-6&title=Losers+Round+6"
+      },
+      {
+        "id": null,
+        "stage_type": "Tournament",
+        "stage_id": 16450851,
+        "number": -7,
+        "title": "Losers Round 7",
+        "description": null,
+        "best_of": 1,
+        "created_at": null,
+        "updated_at": null,
+        "group_index": null,
+        "title_lines": [
+          "Losers Round 7"
+        ],
+        "href": "/tournaments/16450851/rounds/new_or_edit?number=-7&title=Losers+Round+7"
+      },
+      {
+        "id": null,
+        "stage_type": "Tournament",
+        "stage_id": 16450851,
+        "number": -8,
+        "title": "Losers Round 8",
+        "description": null,
+        "best_of": 1,
+        "created_at": null,
+        "updated_at": null,
+        "group_index": null,
+        "title_lines": [
+          "Losers Round 8"
+        ],
+        "href": "/tournaments/16450851/rounds/new_or_edit?number=-8&title=Losers+Round+8"
+      },
+      {
+        "id": null,
+        "stage_type": "Tournament",
+        "stage_id": 16450851,
+        "number": -9,
+        "title": "Losers Round 9",
+        "description": null,
+        "best_of": 1,
+        "created_at": null,
+        "updated_at": null,
+        "group_index": null,
+        "title_lines": [
+          "Losers Round 9"
+        ],
+        "href": "/tournaments/16450851/rounds/new_or_edit?number=-9&title=Losers+Round+9"
+      }
+    ],
+    "third_place_match": null,
+    "consolation_matches": [],
+    "matches_by_round": {
+      "1": [
+        {
+          "id": 418587925,
+          "tournament_id": 16450851,
+          "identifier": 1,
+          "raw_identifier": "A",
+          "round": 1,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              2,
+              1
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950056,
+            "seed": 32,
+            "display_name": "Unicorn Firefly (Mid G-Ramen S-Ender)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950057,
+            "seed": 33,
+            "display_name": "SK HaVoK (Eden11-Taisho-Nahil)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": null,
+          "player2_prereq_identifier": null,
+          "player1_is_prereq_match_loser": false,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            2,
+            1
+          ],
+          "winner_id": 266950056,
+          "loser_id": 266950057,
+          "md5": "b60034c2303a98aff539e53b0d0d26a3"
+        },
+        {
+          "id": 418587926,
+          "tournament_id": 16450851,
+          "identifier": 2,
+          "raw_identifier": "B",
+          "round": 1,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950055,
+            "seed": 31,
+            "display_name": "Frenchy Peach Magic (Leni-Émilie-Pierre )",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950118,
+            "seed": 34,
+            "display_name": "Ahmed Al-Zamel (Zeikuo-Younsi-Renji)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": null,
+          "player2_prereq_identifier": null,
+          "player1_is_prereq_match_loser": false,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950055,
+          "loser_id": 266950118,
+          "md5": "e41288d53e5c22328b645e8dc6106285"
+        }
+      ],
+      "2": [
+        {
+          "id": 418587927,
+          "tournament_id": 16450851,
+          "identifier": 17,
+          "raw_identifier": "C",
+          "round": 2,
+          "state": "complete",
+          "underway_at": "2025-07-06T10:52:05.756-04:00",
+          "games": [
+            [
+              2,
+              3
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950025,
+            "seed": 1,
+            "display_name": "Kira-Kira Team (Meiden-Shishi-Joker)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950056,
+            "seed": 32,
+            "display_name": "Unicorn Firefly (Mid G-Ramen S-Ender)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": null,
+          "player2_prereq_identifier": 1,
+          "player1_is_prereq_match_loser": false,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            2,
+            3
+          ],
+          "winner_id": 266950056,
+          "loser_id": 266950025,
+          "md5": "2ecf535f123428c865244d8d21c7331d"
+        },
+        {
+          "id": 418587928,
+          "tournament_id": 16450851,
+          "identifier": 3,
+          "raw_identifier": "D",
+          "round": 2,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              0,
+              1
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950041,
+            "seed": 16,
+            "display_name": "Les débutants  (hary14-lisa94-Tongy94)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950042,
+            "seed": 17,
+            "display_name": "Team Dragonic (Kmn83-cerberus-Rayou_95)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": null,
+          "player2_prereq_identifier": null,
+          "player1_is_prereq_match_loser": false,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            1
+          ],
+          "winner_id": 266950042,
+          "loser_id": 266950041,
+          "md5": "3222cf01800ffc3c5c4a0522bc3eb3fd"
+        },
+        {
+          "id": 418587929,
+          "tournament_id": 16450851,
+          "identifier": 4,
+          "raw_identifier": "E",
+          "round": 2,
+          "state": "complete",
+          "underway_at": "2025-07-06T10:13:32.292-04:00",
+          "games": [
+            [
+              1,
+              3
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950033,
+            "seed": 8,
+            "display_name": "Cerberus (Rock Lee-Snipblast-Shouloup)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950049,
+            "seed": 25,
+            "display_name": "Omega Deck Blade (Snake-Nassim-Alex)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": null,
+          "player2_prereq_identifier": null,
+          "player1_is_prereq_match_loser": false,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            1,
+            3
+          ],
+          "winner_id": 266950049,
+          "loser_id": 266950033,
+          "md5": "6c9a132d2bd39138bd6de3a9f9dc7e1b"
+        },
+        {
+          "id": 418587930,
+          "tournament_id": 16450851,
+          "identifier": 5,
+          "raw_identifier": "F",
+          "round": 2,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950034,
+            "seed": 9,
+            "display_name": "Les Champions (Dodo 12-Aiga Akabane)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950048,
+            "seed": 24,
+            "display_name": "Les Wild Phoenix (Fulguris95-Fred-Kamen 99)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": null,
+          "player2_prereq_identifier": null,
+          "player1_is_prereq_match_loser": false,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950034,
+          "loser_id": 266950048,
+          "md5": "0b4f39a9a09c1e6414ba65390abc59bc"
+        },
+        {
+          "id": 418587931,
+          "tournament_id": 16450851,
+          "identifier": 6,
+          "raw_identifier": "G",
+          "round": 2,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950029,
+            "seed": 4,
+            "display_name": "Les Swords (Yapi9575-Yonathan-Sam Valkyrie)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950053,
+            "seed": 29,
+            "display_name": "Neo Beyknights (Kamen Z-OursDuBeyblade-D8J6)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": null,
+          "player2_prereq_identifier": null,
+          "player1_is_prereq_match_loser": false,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950053,
+          "loser_id": 266950029,
+          "md5": "1fcc6d06e5b3b339e5d6c63448cf923d"
+        },
+        {
+          "id": 418587932,
+          "tournament_id": 16450851,
+          "identifier": 7,
+          "raw_identifier": "H",
+          "round": 2,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              0,
+              1
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950038,
+            "seed": 13,
+            "display_name": "Judgement (Azure-sewpoo_0192-Doctor)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950045,
+            "seed": 20,
+            "display_name": "Titus Prime (blader M-caillou ken-kirikou prime)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": null,
+          "player2_prereq_identifier": null,
+          "player1_is_prereq_match_loser": false,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            1
+          ],
+          "winner_id": 266950045,
+          "loser_id": 266950038,
+          "md5": "b1580e55e27480e8f51bbd7f74e762b5"
+        },
+        {
+          "id": 418587933,
+          "tournament_id": 16450851,
+          "identifier": 8,
+          "raw_identifier": "I",
+          "round": 2,
+          "state": "complete",
+          "underway_at": "2025-07-06T10:20:06.307-04:00",
+          "games": [
+            [
+              3,
+              1
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950030,
+            "seed": 5,
+            "display_name": "Kitty Girly (Leirya-Merope-Xymore)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950052,
+            "seed": 28,
+            "display_name": "Star Breaker (Kamen A-Kineria-Ishan)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": null,
+          "player2_prereq_identifier": null,
+          "player1_is_prereq_match_loser": false,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            3,
+            1
+          ],
+          "winner_id": 266950030,
+          "loser_id": 266950052,
+          "md5": "561553df68e432fbc378908ca6101212"
+        },
+        {
+          "id": 418587934,
+          "tournament_id": 16450851,
+          "identifier": 9,
+          "raw_identifier": "J",
+          "round": 2,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950037,
+            "seed": 12,
+            "display_name": "Initial T (Daddy Grizzly-Loulou Sonic X-Equalizer)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950046,
+            "seed": 21,
+            "display_name": "Ahpatsum (Lunar-aichouxx-Coach 100 pitié)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": null,
+          "player2_prereq_identifier": null,
+          "player1_is_prereq_match_loser": false,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950037,
+          "loser_id": 266950046,
+          "md5": "5392bacc2cc76441c1742bd48dafbccd"
+        },
+        {
+          "id": 418587935,
+          "tournament_id": 16450851,
+          "identifier": 18,
+          "raw_identifier": "K",
+          "round": 2,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950026,
+            "seed": 2,
+            "display_name": "Chrono Storm (Phénixio-Croustykrs-Jacob)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950055,
+            "seed": 31,
+            "display_name": "Frenchy Peach Magic (Leni-Émilie-Pierre )",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": null,
+          "player2_prereq_identifier": 2,
+          "player1_is_prereq_match_loser": false,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950026,
+          "loser_id": 266950055,
+          "md5": "b1b7ef3d58a59ac5a0fb479a8604d0e9"
+        },
+        {
+          "id": 418587936,
+          "tournament_id": 16450851,
+          "identifier": 10,
+          "raw_identifier": "L",
+          "round": 2,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950040,
+            "seed": 15,
+            "display_name": "Les bladeur en pyjama  (Tongy94-Kamen R-Jonas94)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950043,
+            "seed": 18,
+            "display_name": "Osaka (Odak-Mexity)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": null,
+          "player2_prereq_identifier": null,
+          "player1_is_prereq_match_loser": false,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950043,
+          "loser_id": 266950040,
+          "md5": "05e84ddb8e93e4a5428e8a85f61c6bca"
+        },
+        {
+          "id": 418587937,
+          "tournament_id": 16450851,
+          "identifier": 11,
+          "raw_identifier": "M",
+          "round": 2,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950032,
+            "seed": 7,
+            "display_name": "Blue Phoenix (Sabo-Stella-Paimy )",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950050,
+            "seed": 26,
+            "display_name": "FRA (MTS-Mewxy-Quentin )",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": null,
+          "player2_prereq_identifier": null,
+          "player1_is_prereq_match_loser": false,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950050,
+          "loser_id": 266950032,
+          "md5": "f6ea8c144dca06b2c81a27f8d4df4080"
+        },
+        {
+          "id": 418587938,
+          "tournament_id": 16450851,
+          "identifier": 12,
+          "raw_identifier": "N",
+          "round": 2,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              1,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950035,
+            "seed": 10,
+            "display_name": "Team Drillsoul (Berserk-PridefulLord-Igris)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950047,
+            "seed": 23,
+            "display_name": "Black Phoenix (Rami-DarkHater)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": null,
+          "player2_prereq_identifier": null,
+          "player1_is_prereq_match_loser": false,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            1,
+            0
+          ],
+          "winner_id": 266950035,
+          "loser_id": 266950047,
+          "md5": "0f2dfbcff6acd757ed3e458767ccc75e"
+        },
+        {
+          "id": 418587939,
+          "tournament_id": 16450851,
+          "identifier": 13,
+          "raw_identifier": "O",
+          "round": 2,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950027,
+            "seed": 3,
+            "display_name": "Adeptes des Vagabonds (Abdel_bma-Nono-Shinobi)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950054,
+            "seed": 30,
+            "display_name": "Nebula (Astrale-Neku-ReikoTM)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": null,
+          "player2_prereq_identifier": null,
+          "player1_is_prereq_match_loser": false,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950027,
+          "loser_id": 266950054,
+          "md5": "6708fc2404dc254892f67c7439527f9e"
+        },
+        {
+          "id": 418587940,
+          "tournament_id": 16450851,
+          "identifier": 14,
+          "raw_identifier": "P",
+          "round": 2,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950039,
+            "seed": 14,
+            "display_name": "blue storm (Skyne-ceratops-Bandit)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950044,
+            "seed": 19,
+            "display_name": "Black Bullet (darkhoumous-Alice-gelofy)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": null,
+          "player2_prereq_identifier": null,
+          "player1_is_prereq_match_loser": false,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950039,
+          "loser_id": 266950044,
+          "md5": "b22841af4ebcdede202989f25dc9c6fd"
+        },
+        {
+          "id": 418587941,
+          "tournament_id": 16450851,
+          "identifier": 15,
+          "raw_identifier": "Q",
+          "round": 2,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950031,
+            "seed": 6,
+            "display_name": "Team Arc (Kreepy-RoroDela-Yuto)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950051,
+            "seed": 27,
+            "display_name": "Réserviste (Tom-Antoine-Clément )",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": null,
+          "player2_prereq_identifier": null,
+          "player1_is_prereq_match_loser": false,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950031,
+          "loser_id": 266950051,
+          "md5": "6878984e7c5eaf147ef0f8cb7d5b5974"
+        },
+        {
+          "id": 418587942,
+          "tournament_id": 16450851,
+          "identifier": 16,
+          "raw_identifier": "R",
+          "round": 2,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950036,
+            "seed": 11,
+            "display_name": "Team Steve (Eiko-Spider_Agent42-Joker)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950028,
+            "seed": 22,
+            "display_name": "Gan Gan Galaxia (Yoorushi-zeLn-Hane Hoshi)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": null,
+          "player2_prereq_identifier": null,
+          "player1_is_prereq_match_loser": false,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950028,
+          "loser_id": 266950036,
+          "md5": "71585ff15a9f3cc21bc2482f72ae003d"
+        }
+      ],
+      "3": [
+        {
+          "id": 418587943,
+          "tournament_id": 16450851,
+          "identifier": 35,
+          "raw_identifier": "S",
+          "round": 3,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950056,
+            "seed": 32,
+            "display_name": "Unicorn Firefly (Mid G-Ramen S-Ender)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950042,
+            "seed": 17,
+            "display_name": "Team Dragonic (Kmn83-cerberus-Rayou_95)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 17,
+          "player2_prereq_identifier": 3,
+          "player1_is_prereq_match_loser": false,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950042,
+          "loser_id": 266950056,
+          "md5": "95444aeec189e34f6305261a634b593d"
+        },
+        {
+          "id": 418587944,
+          "tournament_id": 16450851,
+          "identifier": 29,
+          "raw_identifier": "T",
+          "round": 3,
+          "state": "complete",
+          "underway_at": "2025-07-06T12:02:03.911-04:00",
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950049,
+            "seed": 25,
+            "display_name": "Omega Deck Blade (Snake-Nassim-Alex)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950034,
+            "seed": 9,
+            "display_name": "Les Champions (Dodo 12-Aiga Akabane)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 4,
+          "player2_prereq_identifier": 5,
+          "player1_is_prereq_match_loser": false,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950034,
+          "loser_id": 266950049,
+          "md5": "5966ae8fb62b329c57a914a1431e3c9d"
+        },
+        {
+          "id": 418587945,
+          "tournament_id": 16450851,
+          "identifier": 30,
+          "raw_identifier": "U",
+          "round": 3,
+          "state": "complete",
+          "underway_at": "2025-07-06T12:02:05.640-04:00",
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950053,
+            "seed": 29,
+            "display_name": "Neo Beyknights (Kamen Z-OursDuBeyblade-D8J6)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950045,
+            "seed": 20,
+            "display_name": "Titus Prime (blader M-caillou ken-kirikou prime)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 6,
+          "player2_prereq_identifier": 7,
+          "player1_is_prereq_match_loser": false,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950053,
+          "loser_id": 266950045,
+          "md5": "ebdf7ea2ed2a8d86a87106f3c4b5ffb3"
+        },
+        {
+          "id": 418587946,
+          "tournament_id": 16450851,
+          "identifier": 31,
+          "raw_identifier": "V",
+          "round": 3,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950030,
+            "seed": 5,
+            "display_name": "Kitty Girly (Leirya-Merope-Xymore)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950037,
+            "seed": 12,
+            "display_name": "Initial T (Daddy Grizzly-Loulou Sonic X-Equalizer)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 8,
+          "player2_prereq_identifier": 9,
+          "player1_is_prereq_match_loser": false,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950030,
+          "loser_id": 266950037,
+          "md5": "665d87ec7b9e336f60da529e06667926"
+        },
+        {
+          "id": 418587947,
+          "tournament_id": 16450851,
+          "identifier": 36,
+          "raw_identifier": "W",
+          "round": 3,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950026,
+            "seed": 2,
+            "display_name": "Chrono Storm (Phénixio-Croustykrs-Jacob)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950043,
+            "seed": 18,
+            "display_name": "Osaka (Odak-Mexity)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 18,
+          "player2_prereq_identifier": 10,
+          "player1_is_prereq_match_loser": false,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950043,
+          "loser_id": 266950026,
+          "md5": "1fd0c82c3ab1b0f4865ef6c7b8e610b5"
+        },
+        {
+          "id": 418587948,
+          "tournament_id": 16450851,
+          "identifier": 32,
+          "raw_identifier": "X",
+          "round": 3,
+          "state": "complete",
+          "underway_at": "2025-07-06T12:02:03.946-04:00",
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950050,
+            "seed": 26,
+            "display_name": "FRA (MTS-Mewxy-Quentin )",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950035,
+            "seed": 10,
+            "display_name": "Team Drillsoul (Berserk-PridefulLord-Igris)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 11,
+          "player2_prereq_identifier": 12,
+          "player1_is_prereq_match_loser": false,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950035,
+          "loser_id": 266950050,
+          "md5": "76794b7877217bf45be1a435c1eb9e36"
+        },
+        {
+          "id": 418587949,
+          "tournament_id": 16450851,
+          "identifier": 33,
+          "raw_identifier": "Y",
+          "round": 3,
+          "state": "complete",
+          "underway_at": "2025-07-06T12:09:09.537-04:00",
+          "games": [
+            [
+              2,
+              3
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950027,
+            "seed": 3,
+            "display_name": "Adeptes des Vagabonds (Abdel_bma-Nono-Shinobi)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950039,
+            "seed": 14,
+            "display_name": "blue storm (Skyne-ceratops-Bandit)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 13,
+          "player2_prereq_identifier": 14,
+          "player1_is_prereq_match_loser": false,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            2,
+            3
+          ],
+          "winner_id": 266950039,
+          "loser_id": 266950027,
+          "md5": "89ce96bc40ae81522cf4a963d2a09988"
+        },
+        {
+          "id": 418587950,
+          "tournament_id": 16450851,
+          "identifier": 34,
+          "raw_identifier": "Z",
+          "round": 3,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950031,
+            "seed": 6,
+            "display_name": "Team Arc (Kreepy-RoroDela-Yuto)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950028,
+            "seed": 22,
+            "display_name": "Gan Gan Galaxia (Yoorushi-zeLn-Hane Hoshi)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 15,
+          "player2_prereq_identifier": 16,
+          "player1_is_prereq_match_loser": false,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950031,
+          "loser_id": 266950028,
+          "md5": "aa3bbed3a3ddb210e96721675eededac"
+        }
+      ],
+      "4": [
+        {
+          "id": 418587951,
+          "tournament_id": 16450851,
+          "identifier": 51,
+          "raw_identifier": "AA",
+          "round": 4,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950042,
+            "seed": 17,
+            "display_name": "Team Dragonic (Kmn83-cerberus-Rayou_95)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950034,
+            "seed": 9,
+            "display_name": "Les Champions (Dodo 12-Aiga Akabane)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 35,
+          "player2_prereq_identifier": 29,
+          "player1_is_prereq_match_loser": false,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950034,
+          "loser_id": 266950042,
+          "md5": "7c319b20f9e07fee9dc0e73f804c8cb5"
+        },
+        {
+          "id": 418587952,
+          "tournament_id": 16450851,
+          "identifier": 49,
+          "raw_identifier": "AB",
+          "round": 4,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950053,
+            "seed": 29,
+            "display_name": "Neo Beyknights (Kamen Z-OursDuBeyblade-D8J6)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950030,
+            "seed": 5,
+            "display_name": "Kitty Girly (Leirya-Merope-Xymore)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 30,
+          "player2_prereq_identifier": 31,
+          "player1_is_prereq_match_loser": false,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950053,
+          "loser_id": 266950030,
+          "md5": "8de1cd046ab8312d1f2e2177cc74bbd7"
+        },
+        {
+          "id": 418587953,
+          "tournament_id": 16450851,
+          "identifier": 52,
+          "raw_identifier": "AC",
+          "round": 4,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950043,
+            "seed": 18,
+            "display_name": "Osaka (Odak-Mexity)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950035,
+            "seed": 10,
+            "display_name": "Team Drillsoul (Berserk-PridefulLord-Igris)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 36,
+          "player2_prereq_identifier": 32,
+          "player1_is_prereq_match_loser": false,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950035,
+          "loser_id": 266950043,
+          "md5": "f7cf39936eaa846cd53e3258886e851a"
+        },
+        {
+          "id": 418587954,
+          "tournament_id": 16450851,
+          "identifier": 50,
+          "raw_identifier": "AD",
+          "round": 4,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950039,
+            "seed": 14,
+            "display_name": "blue storm (Skyne-ceratops-Bandit)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950031,
+            "seed": 6,
+            "display_name": "Team Arc (Kreepy-RoroDela-Yuto)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 33,
+          "player2_prereq_identifier": 34,
+          "player1_is_prereq_match_loser": false,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950031,
+          "loser_id": 266950039,
+          "md5": "134e02044ac7b08ca67bbb171df41d04"
+        }
+      ],
+      "5": [
+        {
+          "id": 418587955,
+          "tournament_id": 16450851,
+          "identifier": 59,
+          "raw_identifier": "AE",
+          "round": 5,
+          "state": "complete",
+          "underway_at": "2025-07-06T13:19:06.163-04:00",
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950034,
+            "seed": 9,
+            "display_name": "Les Champions (Dodo 12-Aiga Akabane)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950053,
+            "seed": 29,
+            "display_name": "Neo Beyknights (Kamen Z-OursDuBeyblade-D8J6)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 51,
+          "player2_prereq_identifier": 49,
+          "player1_is_prereq_match_loser": false,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950053,
+          "loser_id": 266950034,
+          "md5": "61a5ab95f6bce600f68248107fcfbdf4"
+        },
+        {
+          "id": 418587956,
+          "tournament_id": 16450851,
+          "identifier": 60,
+          "raw_identifier": "AF",
+          "round": 5,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950035,
+            "seed": 10,
+            "display_name": "Team Drillsoul (Berserk-PridefulLord-Igris)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950031,
+            "seed": 6,
+            "display_name": "Team Arc (Kreepy-RoroDela-Yuto)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 52,
+          "player2_prereq_identifier": 50,
+          "player1_is_prereq_match_loser": false,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950035,
+          "loser_id": 266950031,
+          "md5": "44598d7b2260920dd28976f57dcd0087"
+        }
+      ],
+      "6": [
+        {
+          "id": 418587957,
+          "tournament_id": 16450851,
+          "identifier": 64,
+          "raw_identifier": "AG",
+          "round": 6,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950053,
+            "seed": 29,
+            "display_name": "Neo Beyknights (Kamen Z-OursDuBeyblade-D8J6)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950035,
+            "seed": 10,
+            "display_name": "Team Drillsoul (Berserk-PridefulLord-Igris)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 59,
+          "player2_prereq_identifier": 60,
+          "player1_is_prereq_match_loser": false,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950053,
+          "loser_id": 266950035,
+          "md5": "3ea76bffd1463a059432bcb47f484c20"
+        }
+      ],
+      "7": [
+        {
+          "id": 418587990,
+          "tournament_id": 16450851,
+          "identifier": 66,
+          "raw_identifier": "AH",
+          "round": 7,
+          "state": "complete",
+          "underway_at": "2025-07-06T13:51:44.139-04:00",
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950053,
+            "seed": 29,
+            "display_name": "Neo Beyknights (Kamen Z-OursDuBeyblade-D8J6)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950043,
+            "seed": 18,
+            "display_name": "Osaka (Odak-Mexity)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 64,
+          "player2_prereq_identifier": 65,
+          "player1_is_prereq_match_loser": false,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950053,
+          "loser_id": 266950043,
+          "md5": "3f6f8208a79fe833e7b2d4f0953335a5"
+        }
+      ],
+      "-1": [
+        {
+          "id": 418587958,
+          "tournament_id": 16450851,
+          "identifier": 20,
+          "raw_identifier": "AJ",
+          "round": -1,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950036,
+            "seed": 11,
+            "display_name": "Team Steve (Eiko-Spider_Agent42-Joker)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950057,
+            "seed": 33,
+            "display_name": "SK HaVoK (Eden11-Taisho-Nahil)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 16,
+          "player2_prereq_identifier": 1,
+          "player1_is_prereq_match_loser": true,
+          "player2_is_prereq_match_loser": true,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950036,
+          "loser_id": 266950057,
+          "md5": "ac84c7e0a225fae66940b786bdbfab08"
+        },
+        {
+          "id": 418587959,
+          "tournament_id": 16450851,
+          "identifier": 19,
+          "raw_identifier": "AK",
+          "round": -1,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950046,
+            "seed": 21,
+            "display_name": "Ahpatsum (Lunar-aichouxx-Coach 100 pitié)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950118,
+            "seed": 34,
+            "display_name": "Ahmed Al-Zamel (Zeikuo-Younsi-Renji)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 9,
+          "player2_prereq_identifier": 2,
+          "player1_is_prereq_match_loser": true,
+          "player2_is_prereq_match_loser": true,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950046,
+          "loser_id": 266950118,
+          "md5": "7e4f3fbea993b2487747e81fbe91dd51"
+        }
+      ],
+      "-2": [
+        {
+          "id": 418587960,
+          "tournament_id": 16450851,
+          "identifier": 28,
+          "raw_identifier": "AL",
+          "round": -2,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950051,
+            "seed": 27,
+            "display_name": "Réserviste (Tom-Antoine-Clément )",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950036,
+            "seed": 11,
+            "display_name": "Team Steve (Eiko-Spider_Agent42-Joker)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 15,
+          "player2_prereq_identifier": 20,
+          "player1_is_prereq_match_loser": true,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950036,
+          "loser_id": 266950051,
+          "md5": "a254ef15d37907e9b6d1bdb883d7ad80"
+        },
+        {
+          "id": 418587961,
+          "tournament_id": 16450851,
+          "identifier": 24,
+          "raw_identifier": "AM",
+          "round": -2,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950044,
+            "seed": 19,
+            "display_name": "Black Bullet (darkhoumous-Alice-gelofy)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950054,
+            "seed": 30,
+            "display_name": "Nebula (Astrale-Neku-ReikoTM)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 14,
+          "player2_prereq_identifier": 13,
+          "player1_is_prereq_match_loser": true,
+          "player2_is_prereq_match_loser": true,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950044,
+          "loser_id": 266950054,
+          "md5": "445f470a7808017b8d59437dbe1feb65"
+        },
+        {
+          "id": 418587962,
+          "tournament_id": 16450851,
+          "identifier": 23,
+          "raw_identifier": "AN",
+          "round": -2,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              1,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950047,
+            "seed": 23,
+            "display_name": "Black Phoenix (Rami-DarkHater)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950032,
+            "seed": 7,
+            "display_name": "Blue Phoenix (Sabo-Stella-Paimy )",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 12,
+          "player2_prereq_identifier": 11,
+          "player1_is_prereq_match_loser": true,
+          "player2_is_prereq_match_loser": true,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            1,
+            0
+          ],
+          "winner_id": 266950047,
+          "loser_id": 266950032,
+          "md5": "4c6b0d02061797a77899b8db684a788c"
+        },
+        {
+          "id": 418587963,
+          "tournament_id": 16450851,
+          "identifier": 26,
+          "raw_identifier": "AO",
+          "round": -2,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950040,
+            "seed": 15,
+            "display_name": "Les bladeur en pyjama  (Tongy94-Kamen R-Jonas94)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950055,
+            "seed": 31,
+            "display_name": "Frenchy Peach Magic (Leni-Émilie-Pierre )",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 10,
+          "player2_prereq_identifier": 18,
+          "player1_is_prereq_match_loser": true,
+          "player2_is_prereq_match_loser": true,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950055,
+          "loser_id": 266950040,
+          "md5": "2b83512fd1f32c98672e7358a1ada6c8"
+        },
+        {
+          "id": 418587964,
+          "tournament_id": 16450851,
+          "identifier": 27,
+          "raw_identifier": "AP",
+          "round": -2,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950052,
+            "seed": 28,
+            "display_name": "Star Breaker (Kamen A-Kineria-Ishan)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950046,
+            "seed": 21,
+            "display_name": "Ahpatsum (Lunar-aichouxx-Coach 100 pitié)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 8,
+          "player2_prereq_identifier": 19,
+          "player1_is_prereq_match_loser": true,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950052,
+          "loser_id": 266950046,
+          "md5": "d971d0a252645bc759e461e9e6ba7afc"
+        },
+        {
+          "id": 418587965,
+          "tournament_id": 16450851,
+          "identifier": 22,
+          "raw_identifier": "AQ",
+          "round": -2,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950038,
+            "seed": 13,
+            "display_name": "Judgement (Azure-sewpoo_0192-Doctor)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950029,
+            "seed": 4,
+            "display_name": "Les Swords (Yapi9575-Yonathan-Sam Valkyrie)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 7,
+          "player2_prereq_identifier": 6,
+          "player1_is_prereq_match_loser": true,
+          "player2_is_prereq_match_loser": true,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950038,
+          "loser_id": 266950029,
+          "md5": "5b682328fab8db6b7dad4759ed012d84"
+        },
+        {
+          "id": 418587966,
+          "tournament_id": 16450851,
+          "identifier": 21,
+          "raw_identifier": "AR",
+          "round": -2,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              1,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950048,
+            "seed": 24,
+            "display_name": "Les Wild Phoenix (Fulguris95-Fred-Kamen 99)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950033,
+            "seed": 8,
+            "display_name": "Cerberus (Rock Lee-Snipblast-Shouloup)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 5,
+          "player2_prereq_identifier": 4,
+          "player1_is_prereq_match_loser": true,
+          "player2_is_prereq_match_loser": true,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            1,
+            0
+          ],
+          "winner_id": 266950048,
+          "loser_id": 266950033,
+          "md5": "6bfc9f693ead7cfaeff6e46c3087c56c"
+        },
+        {
+          "id": 418587967,
+          "tournament_id": 16450851,
+          "identifier": 25,
+          "raw_identifier": "AS",
+          "round": -2,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950041,
+            "seed": 16,
+            "display_name": "Les débutants  (hary14-lisa94-Tongy94)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950025,
+            "seed": 1,
+            "display_name": "Kira-Kira Team (Meiden-Shishi-Joker)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 3,
+          "player2_prereq_identifier": 17,
+          "player1_is_prereq_match_loser": true,
+          "player2_is_prereq_match_loser": true,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950025,
+          "loser_id": 266950041,
+          "md5": "241e1f1007c6909f6ff5f1193dfea116"
+        }
+      ],
+      "-3": [
+        {
+          "id": 418587968,
+          "tournament_id": 16450851,
+          "identifier": 39,
+          "raw_identifier": "AT",
+          "round": -3,
+          "state": "complete",
+          "underway_at": "2025-07-06T12:24:40.974-04:00",
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950037,
+            "seed": 12,
+            "display_name": "Initial T (Daddy Grizzly-Loulou Sonic X-Equalizer)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950036,
+            "seed": 11,
+            "display_name": "Team Steve (Eiko-Spider_Agent42-Joker)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 31,
+          "player2_prereq_identifier": 28,
+          "player1_is_prereq_match_loser": true,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950037,
+          "loser_id": 266950036,
+          "md5": "721b9ab733d8dafd2749f30ddef698c6"
+        },
+        {
+          "id": 418587969,
+          "tournament_id": 16450851,
+          "identifier": 38,
+          "raw_identifier": "AU",
+          "round": -3,
+          "state": "complete",
+          "underway_at": "2025-07-06T12:24:41.666-04:00",
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950045,
+            "seed": 20,
+            "display_name": "Titus Prime (blader M-caillou ken-kirikou prime)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950044,
+            "seed": 19,
+            "display_name": "Black Bullet (darkhoumous-Alice-gelofy)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 30,
+          "player2_prereq_identifier": 24,
+          "player1_is_prereq_match_loser": true,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950044,
+          "loser_id": 266950045,
+          "md5": "fe0d3d6f8f176a81769e45dee11385a4"
+        },
+        {
+          "id": 418587970,
+          "tournament_id": 16450851,
+          "identifier": 37,
+          "raw_identifier": "AV",
+          "round": -3,
+          "state": "complete",
+          "underway_at": "2025-07-06T12:24:42.588-04:00",
+          "games": [
+            [
+              0,
+              1
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950049,
+            "seed": 25,
+            "display_name": "Omega Deck Blade (Snake-Nassim-Alex)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950047,
+            "seed": 23,
+            "display_name": "Black Phoenix (Rami-DarkHater)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 29,
+          "player2_prereq_identifier": 23,
+          "player1_is_prereq_match_loser": true,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            1
+          ],
+          "winner_id": 266950047,
+          "loser_id": 266950049,
+          "md5": "37e0058eafe74398cfa81ead1706491a"
+        },
+        {
+          "id": 418587971,
+          "tournament_id": 16450851,
+          "identifier": 43,
+          "raw_identifier": "AW",
+          "round": -3,
+          "state": "complete",
+          "underway_at": "2025-07-06T12:36:10.330-04:00",
+          "games": [
+            [
+              1,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950056,
+            "seed": 32,
+            "display_name": "Unicorn Firefly (Mid G-Ramen S-Ender)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950055,
+            "seed": 31,
+            "display_name": "Frenchy Peach Magic (Leni-Émilie-Pierre )",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 35,
+          "player2_prereq_identifier": 26,
+          "player1_is_prereq_match_loser": true,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            1,
+            0
+          ],
+          "winner_id": 266950056,
+          "loser_id": 266950055,
+          "md5": "e957d752a63316288f71c85270cee257"
+        },
+        {
+          "id": 418587972,
+          "tournament_id": 16450851,
+          "identifier": 42,
+          "raw_identifier": "AX",
+          "round": -3,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950028,
+            "seed": 22,
+            "display_name": "Gan Gan Galaxia (Yoorushi-zeLn-Hane Hoshi)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950052,
+            "seed": 28,
+            "display_name": "Star Breaker (Kamen A-Kineria-Ishan)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 34,
+          "player2_prereq_identifier": 27,
+          "player1_is_prereq_match_loser": true,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950028,
+          "loser_id": 266950052,
+          "md5": "3a86030349a47d0c2151f21096028b80"
+        },
+        {
+          "id": 418587973,
+          "tournament_id": 16450851,
+          "identifier": 41,
+          "raw_identifier": "AY",
+          "round": -3,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950027,
+            "seed": 3,
+            "display_name": "Adeptes des Vagabonds (Abdel_bma-Nono-Shinobi)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950038,
+            "seed": 13,
+            "display_name": "Judgement (Azure-sewpoo_0192-Doctor)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 33,
+          "player2_prereq_identifier": 22,
+          "player1_is_prereq_match_loser": true,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950038,
+          "loser_id": 266950027,
+          "md5": "0cb7bb675495b29851f0046a354d17d9"
+        },
+        {
+          "id": 418587974,
+          "tournament_id": 16450851,
+          "identifier": 40,
+          "raw_identifier": "AZ",
+          "round": -3,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              0,
+              1
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950050,
+            "seed": 26,
+            "display_name": "FRA (MTS-Mewxy-Quentin )",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950048,
+            "seed": 24,
+            "display_name": "Les Wild Phoenix (Fulguris95-Fred-Kamen 99)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 32,
+          "player2_prereq_identifier": 21,
+          "player1_is_prereq_match_loser": true,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            1
+          ],
+          "winner_id": 266950048,
+          "loser_id": 266950050,
+          "md5": "321411fedb3070ad95816ff98824b958"
+        },
+        {
+          "id": 418587975,
+          "tournament_id": 16450851,
+          "identifier": 44,
+          "raw_identifier": "BA",
+          "round": -3,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950026,
+            "seed": 2,
+            "display_name": "Chrono Storm (Phénixio-Croustykrs-Jacob)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950025,
+            "seed": 1,
+            "display_name": "Kira-Kira Team (Meiden-Shishi-Joker)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 36,
+          "player2_prereq_identifier": 25,
+          "player1_is_prereq_match_loser": true,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950026,
+          "loser_id": 266950025,
+          "md5": "eae6a2386fc5e7fe79f0fedb3c4569bc"
+        }
+      ],
+      "-4": [
+        {
+          "id": 418587976,
+          "tournament_id": 16450851,
+          "identifier": 45,
+          "raw_identifier": "BB",
+          "round": -4,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950037,
+            "seed": 12,
+            "display_name": "Initial T (Daddy Grizzly-Loulou Sonic X-Equalizer)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950044,
+            "seed": 19,
+            "display_name": "Black Bullet (darkhoumous-Alice-gelofy)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 39,
+          "player2_prereq_identifier": 38,
+          "player1_is_prereq_match_loser": false,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950037,
+          "loser_id": 266950044,
+          "md5": "906c0ce4e13982479133da83cafba6c4"
+        },
+        {
+          "id": 418587977,
+          "tournament_id": 16450851,
+          "identifier": 47,
+          "raw_identifier": "BC",
+          "round": -4,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950047,
+            "seed": 23,
+            "display_name": "Black Phoenix (Rami-DarkHater)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950056,
+            "seed": 32,
+            "display_name": "Unicorn Firefly (Mid G-Ramen S-Ender)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 37,
+          "player2_prereq_identifier": 43,
+          "player1_is_prereq_match_loser": false,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950047,
+          "loser_id": 266950056,
+          "md5": "2c624c20014d2f7f63eeb9615d47bfae"
+        },
+        {
+          "id": 418587978,
+          "tournament_id": 16450851,
+          "identifier": 46,
+          "raw_identifier": "BD",
+          "round": -4,
+          "state": "complete",
+          "underway_at": "2025-07-06T13:02:01.317-04:00",
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": false,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950028,
+            "seed": 22,
+            "display_name": "Gan Gan Galaxia (Yoorushi-zeLn-Hane Hoshi)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950038,
+            "seed": 13,
+            "display_name": "Judgement (Azure-sewpoo_0192-Doctor)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 42,
+          "player2_prereq_identifier": 41,
+          "player1_is_prereq_match_loser": false,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950028,
+          "loser_id": 266950038,
+          "md5": "689d00f7347b54e9ea92b2a16667f811"
+        },
+        {
+          "id": 418587979,
+          "tournament_id": 16450851,
+          "identifier": 48,
+          "raw_identifier": "BE",
+          "round": -4,
+          "state": "complete",
+          "underway_at": "2025-07-06T12:56:59.493-04:00",
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950048,
+            "seed": 24,
+            "display_name": "Les Wild Phoenix (Fulguris95-Fred-Kamen 99)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950026,
+            "seed": 2,
+            "display_name": "Chrono Storm (Phénixio-Croustykrs-Jacob)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 40,
+          "player2_prereq_identifier": 44,
+          "player1_is_prereq_match_loser": false,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950048,
+          "loser_id": 266950026,
+          "md5": "5c9225d3074aa05dfd8f5308e9fb42e2"
+        }
+      ],
+      "-5": [
+        {
+          "id": 418587980,
+          "tournament_id": 16450851,
+          "identifier": 56,
+          "raw_identifier": "BF",
+          "round": -5,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950043,
+            "seed": 18,
+            "display_name": "Osaka (Odak-Mexity)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950037,
+            "seed": 12,
+            "display_name": "Initial T (Daddy Grizzly-Loulou Sonic X-Equalizer)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 52,
+          "player2_prereq_identifier": 45,
+          "player1_is_prereq_match_loser": true,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950043,
+          "loser_id": 266950037,
+          "md5": "48d11b8c9057399e8e9608c0887e531c"
+        },
+        {
+          "id": 418587981,
+          "tournament_id": 16450851,
+          "identifier": 54,
+          "raw_identifier": "BG",
+          "round": -5,
+          "state": "complete",
+          "underway_at": "2025-07-06T13:09:40.232-04:00",
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950039,
+            "seed": 14,
+            "display_name": "blue storm (Skyne-ceratops-Bandit)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950047,
+            "seed": 23,
+            "display_name": "Black Phoenix (Rami-DarkHater)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 50,
+          "player2_prereq_identifier": 47,
+          "player1_is_prereq_match_loser": true,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950039,
+          "loser_id": 266950047,
+          "md5": "271546501d0ff9aa9756f853bb45e537"
+        },
+        {
+          "id": 418587982,
+          "tournament_id": 16450851,
+          "identifier": 55,
+          "raw_identifier": "BH",
+          "round": -5,
+          "state": "complete",
+          "underway_at": "2025-07-06T13:11:47.676-04:00",
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": false,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950042,
+            "seed": 17,
+            "display_name": "Team Dragonic (Kmn83-cerberus-Rayou_95)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950028,
+            "seed": 22,
+            "display_name": "Gan Gan Galaxia (Yoorushi-zeLn-Hane Hoshi)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 51,
+          "player2_prereq_identifier": 46,
+          "player1_is_prereq_match_loser": true,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950028,
+          "loser_id": 266950042,
+          "md5": "97282675371d680847ccf0e4b77e682f"
+        },
+        {
+          "id": 418587983,
+          "tournament_id": 16450851,
+          "identifier": 53,
+          "raw_identifier": "BI",
+          "round": -5,
+          "state": "complete",
+          "underway_at": "2025-07-06T13:11:49.745-04:00",
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950030,
+            "seed": 5,
+            "display_name": "Kitty Girly (Leirya-Merope-Xymore)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950048,
+            "seed": 24,
+            "display_name": "Les Wild Phoenix (Fulguris95-Fred-Kamen 99)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 49,
+          "player2_prereq_identifier": 48,
+          "player1_is_prereq_match_loser": true,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950030,
+          "loser_id": 266950048,
+          "md5": "c5ff9a488ca22bd73145b5f40c79c442"
+        }
+      ],
+      "-6": [
+        {
+          "id": 418587984,
+          "tournament_id": 16450851,
+          "identifier": 58,
+          "raw_identifier": "BJ",
+          "round": -6,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950043,
+            "seed": 18,
+            "display_name": "Osaka (Odak-Mexity)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950039,
+            "seed": 14,
+            "display_name": "blue storm (Skyne-ceratops-Bandit)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 56,
+          "player2_prereq_identifier": 54,
+          "player1_is_prereq_match_loser": false,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950043,
+          "loser_id": 266950039,
+          "md5": "2b01f113fa459ffdb18ed256bb35c7ab"
+        },
+        {
+          "id": 418587985,
+          "tournament_id": 16450851,
+          "identifier": 57,
+          "raw_identifier": "BK",
+          "round": -6,
+          "state": "complete",
+          "underway_at": "2025-07-06T13:25:22.793-04:00",
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950028,
+            "seed": 22,
+            "display_name": "Gan Gan Galaxia (Yoorushi-zeLn-Hane Hoshi)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950030,
+            "seed": 5,
+            "display_name": "Kitty Girly (Leirya-Merope-Xymore)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 55,
+          "player2_prereq_identifier": 53,
+          "player1_is_prereq_match_loser": false,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950028,
+          "loser_id": 266950030,
+          "md5": "fbf69a09d3b8ab4f053ee5578b1d6327"
+        }
+      ],
+      "-7": [
+        {
+          "id": 418587986,
+          "tournament_id": 16450851,
+          "identifier": 61,
+          "raw_identifier": "BL",
+          "round": -7,
+          "state": "complete",
+          "underway_at": "2025-07-06T13:27:29.205-04:00",
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950034,
+            "seed": 9,
+            "display_name": "Les Champions (Dodo 12-Aiga Akabane)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950043,
+            "seed": 18,
+            "display_name": "Osaka (Odak-Mexity)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 59,
+          "player2_prereq_identifier": 58,
+          "player1_is_prereq_match_loser": true,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950043,
+          "loser_id": 266950034,
+          "md5": "3d73ec8224ea9b295fa50f3d61cd5f67"
+        },
+        {
+          "id": 418587987,
+          "tournament_id": 16450851,
+          "identifier": 62,
+          "raw_identifier": "BM",
+          "round": -7,
+          "state": "complete",
+          "underway_at": "2025-07-06T13:33:26.999-04:00",
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950031,
+            "seed": 6,
+            "display_name": "Team Arc (Kreepy-RoroDela-Yuto)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950028,
+            "seed": 22,
+            "display_name": "Gan Gan Galaxia (Yoorushi-zeLn-Hane Hoshi)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 60,
+          "player2_prereq_identifier": 57,
+          "player1_is_prereq_match_loser": true,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950028,
+          "loser_id": 266950031,
+          "md5": "3a3ec4f94a2bacf76d6d6f5278d7978d"
+        }
+      ],
+      "-8": [
+        {
+          "id": 418587988,
+          "tournament_id": 16450851,
+          "identifier": 63,
+          "raw_identifier": "BN",
+          "round": -8,
+          "state": "complete",
+          "underway_at": "2025-07-06T13:40:06.336-04:00",
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950043,
+            "seed": 18,
+            "display_name": "Osaka (Odak-Mexity)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950028,
+            "seed": 22,
+            "display_name": "Gan Gan Galaxia (Yoorushi-zeLn-Hane Hoshi)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 61,
+          "player2_prereq_identifier": 62,
+          "player1_is_prereq_match_loser": false,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950043,
+          "loser_id": 266950028,
+          "md5": "c0652088d87f3100c3510aedcbcb3307"
+        }
+      ],
+      "-9": [
+        {
+          "id": 418587989,
+          "tournament_id": 16450851,
+          "identifier": 65,
+          "raw_identifier": "BO",
+          "round": -9,
+          "state": "complete",
+          "underway_at": "2025-07-06T13:46:40.506-04:00",
+          "games": [
+            [
+              0,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 266950035,
+            "seed": 10,
+            "display_name": "Team Drillsoul (Berserk-PridefulLord-Igris)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 266950043,
+            "seed": 18,
+            "display_name": "Osaka (Odak-Mexity)",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 64,
+          "player2_prereq_identifier": 63,
+          "player1_is_prereq_match_loser": true,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            0
+          ],
+          "winner_id": 266950043,
+          "loser_id": 266950035,
+          "md5": "05749c1d49673a7e4350afbad0370086"
+        }
+      ]
+    },
+    "groups": []
+  }
+}

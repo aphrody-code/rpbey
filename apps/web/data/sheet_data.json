@@ -1,0 +1,2702 @@
+[
+  {
+    "#": "1",
+    "PLAYER": "Mewxy",
+    "SCORE": "53380",
+    "WIN": "1",
+    "PART.": "7",
+    "WINRATE": "67,50%",
+    "POINTS MOY.": "3,10"
+  },
+  {
+    "#": "2",
+    "PLAYER": "Xymore",
+    "SCORE": "53340",
+    "WIN": "1",
+    "PART.": "4",
+    "WINRATE": "76,00%",
+    "POINTS MOY.": "3,56"
+  },
+  {
+    "#": "3",
+    "PLAYER": "Lezko",
+    "SCORE": "52250",
+    "WIN": "0",
+    "PART.": "7",
+    "WINRATE": "66,67%",
+    "POINTS MOY.": "3,00"
+  },
+  {
+    "#": "4",
+    "PLAYER": "Zeikuo",
+    "SCORE": "51610",
+    "WIN": "0",
+    "PART.": "7",
+    "WINRATE": "65,00%",
+    "POINTS MOY.": "3,13"
+  },
+  {
+    "#": "5",
+    "PLAYER": "zeLn",
+    "SCORE": "48714",
+    "WIN": "1",
+    "PART.": "7",
+    "WINRATE": "61,76%",
+    "POINTS MOY.": "3,03"
+  },
+  {
+    "#": "6",
+    "PLAYER": "Kamen Z",
+    "SCORE": "47757",
+    "WIN": "1",
+    "PART.": "7",
+    "WINRATE": "59,38%",
+    "POINTS MOY.": "3,22"
+  },
+  {
+    "#": "7",
+    "PLAYER": "Loup",
+    "SCORE": "47252",
+    "WIN": "0",
+    "PART.": "4",
+    "WINRATE": "70,37%",
+    "POINTS MOY.": "3,15"
+  },
+  {
+    "#": "8",
+    "PLAYER": "Leirya",
+    "SCORE": "46768",
+    "WIN": "0",
+    "PART.": "7",
+    "WINRATE": "58,82%",
+    "POINTS MOY.": "3,09"
+  },
+  {
+    "#": "9",
+    "PLAYER": "Rayou_95",
+    "SCORE": "46561",
+    "WIN": "0",
+    "PART.": "7",
+    "WINRATE": "60,00%",
+    "POINTS MOY.": "2,86"
+  },
+  {
+    "#": "10",
+    "PLAYER": "Stella",
+    "SCORE": "46125",
+    "WIN": "0",
+    "PART.": "6",
+    "WINRATE": "61,29%",
+    "POINTS MOY.": "2,97"
+  },
+  {
+    "#": "11",
+    "PLAYER": "Ramen S",
+    "SCORE": "45797",
+    "WIN": "0",
+    "PART.": "4",
+    "WINRATE": "68,00%",
+    "POINTS MOY.": "3,16"
+  },
+  {
+    "#": "12",
+    "PLAYER": "Chad Light",
+    "SCORE": "45432",
+    "WIN": "0",
+    "PART.": "7",
+    "WINRATE": "57,58%",
+    "POINTS MOY.": "3,00"
+  },
+  {
+    "#": "13",
+    "PLAYER": "Younsi",
+    "SCORE": "45243",
+    "WIN": "0",
+    "PART.": "7",
+    "WINRATE": "56,25%",
+    "POINTS MOY.": "3,19"
+  },
+  {
+    "#": "14",
+    "PLAYER": "Doctor",
+    "SCORE": "45179",
+    "WIN": "0",
+    "PART.": "6",
+    "WINRATE": "58,62%",
+    "POINTS MOY.": "3,17"
+  },
+  {
+    "#": "15",
+    "PLAYER": "Blader Mystérieux",
+    "SCORE": "44885",
+    "WIN": "0",
+    "PART.": "4",
+    "WINRATE": "69,23%",
+    "POINTS MOY.": "2,88"
+  },
+  {
+    "#": "16",
+    "PLAYER": "Kamen K",
+    "SCORE": "44860",
+    "WIN": "0",
+    "PART.": "6",
+    "WINRATE": "58,62%",
+    "POINTS MOY.": "3,10"
+  },
+  {
+    "#": "17",
+    "PLAYER": "Sabo",
+    "SCORE": "43813",
+    "WIN": "0",
+    "PART.": "7",
+    "WINRATE": "57,58%",
+    "POINTS MOY.": "2,67"
+  },
+  {
+    "#": "18",
+    "PLAYER": "Vincent",
+    "SCORE": "43796",
+    "WIN": "0",
+    "PART.": "5",
+    "WINRATE": "61,54%",
+    "POINTS MOY.": "2,96"
+  },
+  {
+    "#": "19",
+    "PLAYER": "Yapi9575",
+    "SCORE": "43794",
+    "WIN": "0",
+    "PART.": "7",
+    "WINRATE": "54,84%",
+    "POINTS MOY.": "3,10"
+  },
+  {
+    "#": "20",
+    "PLAYER": "Masamune",
+    "SCORE": "43472",
+    "WIN": "0",
+    "PART.": "6",
+    "WINRATE": "57,14%",
+    "POINTS MOY.": "3,04"
+  },
+  {
+    "#": "21",
+    "PLAYER": "Fred",
+    "SCORE": "43214",
+    "WIN": "1",
+    "PART.": "5",
+    "WINRATE": "60,00%",
+    "POINTS MOY.": "3,05"
+  },
+  {
+    "#": "22",
+    "PLAYER": "Respawn",
+    "SCORE": "43163",
+    "WIN": "0",
+    "PART.": "5",
+    "WINRATE": "60,00%",
+    "POINTS MOY.": "3,04"
+  },
+  {
+    "#": "23",
+    "PLAYER": "Skarn",
+    "SCORE": "42348",
+    "WIN": "0",
+    "PART.": "4",
+    "WINRATE": "63,64%",
+    "POINTS MOY.": "3,05"
+  },
+  {
+    "#": "24",
+    "PLAYER": "Ichigydo",
+    "SCORE": "42312",
+    "WIN": "0",
+    "PART.": "5",
+    "WINRATE": "60,00%",
+    "POINTS MOY.": "2,88"
+  },
+  {
+    "#": "25",
+    "PLAYER": "Shishi",
+    "SCORE": "42250",
+    "WIN": "0",
+    "PART.": "7",
+    "WINRATE": "53,33%",
+    "POINTS MOY.": "3,00"
+  },
+  {
+    "#": "26",
+    "PLAYER": "Kreepy",
+    "SCORE": "42035",
+    "WIN": "0",
+    "PART.": "7",
+    "WINRATE": "54,84%",
+    "POINTS MOY.": "2,71"
+  },
+  {
+    "#": "27",
+    "PLAYER": "Kamen A",
+    "SCORE": "41786",
+    "WIN": "0",
+    "PART.": "5",
+    "WINRATE": "61,54%",
+    "POINTS MOY.": "2,62"
+  },
+  {
+    "#": "28",
+    "PLAYER": "Meiden",
+    "SCORE": "41364",
+    "WIN": "0",
+    "PART.": "4",
+    "WINRATE": "60,00%",
+    "POINTS MOY.": "3,30"
+  },
+  {
+    "#": "29",
+    "PLAYER": "KingJoker",
+    "SCORE": "41080",
+    "WIN": "0",
+    "PART.": "6",
+    "WINRATE": "55,56%",
+    "POINTS MOY.": "2,78"
+  },
+  {
+    "#": "30",
+    "PLAYER": "Oro",
+    "SCORE": "40992",
+    "WIN": "0",
+    "PART.": "4",
+    "WINRATE": "61,90%",
+    "POINTS MOY.": "3,00"
+  },
+  {
+    "#": "31",
+    "PLAYER": "Bandit",
+    "SCORE": "40898",
+    "WIN": "0",
+    "PART.": "7",
+    "WINRATE": "51,72%",
+    "POINTS MOY.": "2,97"
+  },
+  {
+    "#": "32",
+    "PLAYER": "Hyakutake",
+    "SCORE": "40650",
+    "WIN": "1",
+    "PART.": "2",
+    "WINRATE": "80,00%",
+    "POINTS MOY.": "3,33"
+  },
+  {
+    "#": "33",
+    "PLAYER": "Kaious",
+    "SCORE": "40299",
+    "WIN": "0",
+    "PART.": "7",
+    "WINRATE": "51,72%",
+    "POINTS MOY.": "2,83"
+  },
+  {
+    "#": "34",
+    "PLAYER": "Equalizer",
+    "SCORE": "40102",
+    "WIN": "0",
+    "PART.": "6",
+    "WINRATE": "55,56%",
+    "POINTS MOY.": "2,59"
+  },
+  {
+    "#": "35",
+    "PLAYER": "Twi",
+    "SCORE": "39873",
+    "WIN": "0",
+    "PART.": "3",
+    "WINRATE": "66,67%",
+    "POINTS MOY.": "3,11"
+  },
+  {
+    "#": "36",
+    "PLAYER": "darkhoumous",
+    "SCORE": "38839",
+    "WIN": "0",
+    "PART.": "6",
+    "WINRATE": "53,85%",
+    "POINTS MOY.": "2,58"
+  },
+  {
+    "#": "37",
+    "PLAYER": "MTS",
+    "SCORE": "38788",
+    "WIN": "0",
+    "PART.": "5",
+    "WINRATE": "54,55%",
+    "POINTS MOY.": "2,91"
+  },
+  {
+    "#": "38",
+    "PLAYER": "Inazo",
+    "SCORE": "38730",
+    "WIN": "0",
+    "PART.": "5",
+    "WINRATE": "56,52%",
+    "POINTS MOY.": "2,65"
+  },
+  {
+    "#": "39",
+    "PLAYER": "Illu",
+    "SCORE": "38480",
+    "WIN": "0",
+    "PART.": "5",
+    "WINRATE": "56,52%",
+    "POINTS MOY.": "2,61"
+  },
+  {
+    "#": "40",
+    "PLAYER": "Nahil",
+    "SCORE": "38441",
+    "WIN": "0",
+    "PART.": "3",
+    "WINRATE": "64,71%",
+    "POINTS MOY.": "3,06"
+  },
+  {
+    "#": "41",
+    "PLAYER": "PO97",
+    "SCORE": "38043",
+    "WIN": "0",
+    "PART.": "4",
+    "WINRATE": "60,00%",
+    "POINTS MOY.": "2,70"
+  },
+  {
+    "#": "42",
+    "PLAYER": "Ben",
+    "SCORE": "37818",
+    "WIN": "1",
+    "PART.": "1",
+    "WINRATE": "100,00%",
+    "POINTS MOY.": "4,00"
+  },
+  {
+    "#": "43",
+    "PLAYER": "Rock Lee",
+    "SCORE": "37211",
+    "WIN": "0",
+    "PART.": "3",
+    "WINRATE": "62,50%",
+    "POINTS MOY.": "3,06"
+  },
+  {
+    "#": "44",
+    "PLAYER": "sewpoo_0192",
+    "SCORE": "37137",
+    "WIN": "0",
+    "PART.": "7",
+    "WINRATE": "50,00%",
+    "POINTS MOY.": "2,43"
+  },
+  {
+    "#": "45",
+    "PLAYER": "Kamen 99",
+    "SCORE": "36397",
+    "WIN": "0",
+    "PART.": "4",
+    "WINRATE": "55,56%",
+    "POINTS MOY.": "2,89"
+  },
+  {
+    "#": "46",
+    "PLAYER": "Yoorushi",
+    "SCORE": "36097",
+    "WIN": "0",
+    "PART.": "5",
+    "WINRATE": "52,38%",
+    "POINTS MOY.": "2,67"
+  },
+  {
+    "#": "47",
+    "PLAYER": "PridefulLord",
+    "SCORE": "36012",
+    "WIN": "0",
+    "PART.": "6",
+    "WINRATE": "50,00%",
+    "POINTS MOY.": "2,54"
+  },
+  {
+    "#": "48",
+    "PLAYER": "Tategami",
+    "SCORE": "35841",
+    "WIN": "0",
+    "PART.": "5",
+    "WINRATE": "52,38%",
+    "POINTS MOY.": "2,62"
+  },
+  {
+    "#": "49",
+    "PLAYER": "Liquid Snake",
+    "SCORE": "35473",
+    "WIN": "0",
+    "PART.": "4",
+    "WINRATE": "55,56%",
+    "POINTS MOY.": "2,72"
+  },
+  {
+    "#": "50",
+    "PLAYER": "Berserk",
+    "SCORE": "35450",
+    "WIN": "0",
+    "PART.": "7",
+    "WINRATE": "46,15%",
+    "POINTS MOY.": "2,65"
+  },
+  {
+    "#": "51",
+    "PLAYER": "kyronnah",
+    "SCORE": "35051",
+    "WIN": "0",
+    "PART.": "3",
+    "WINRATE": "60,00%",
+    "POINTS MOY.": "2,93"
+  },
+  {
+    "#": "52",
+    "PLAYER": "Eiko",
+    "SCORE": "34789",
+    "WIN": "0",
+    "PART.": "5",
+    "WINRATE": "47,37%",
+    "POINTS MOY.": "3,11"
+  },
+  {
+    "#": "53",
+    "PLAYER": "Abi",
+    "SCORE": "34735",
+    "WIN": "0",
+    "PART.": "4",
+    "WINRATE": "52,94%",
+    "POINTS MOY.": "2,88"
+  },
+  {
+    "#": "54",
+    "PLAYER": "Paimy",
+    "SCORE": "34422",
+    "WIN": "0",
+    "PART.": "6",
+    "WINRATE": "47,83%",
+    "POINTS MOY.": "2,52"
+  },
+  {
+    "#": "55",
+    "PLAYER": "Lc_37z",
+    "SCORE": "33995",
+    "WIN": "0",
+    "PART.": "7",
+    "WINRATE": "44,00%",
+    "POINTS MOY.": "2,68"
+  },
+  {
+    "#": "56",
+    "PLAYER": "Snipblast",
+    "SCORE": "33945",
+    "WIN": "0",
+    "PART.": "6",
+    "WINRATE": "45,45%",
+    "POINTS MOY.": "2,77"
+  },
+  {
+    "#": "57",
+    "PLAYER": "gelofy",
+    "SCORE": "33843",
+    "WIN": "0",
+    "PART.": "3",
+    "WINRATE": "60,00%",
+    "POINTS MOY.": "2,73"
+  },
+  {
+    "#": "58",
+    "PLAYER": "Kipik",
+    "SCORE": "33422",
+    "WIN": "0",
+    "PART.": "3",
+    "WINRATE": "60,00%",
+    "POINTS MOY.": "2,67"
+  },
+  {
+    "#": "59",
+    "PLAYER": "Flanders",
+    "SCORE": "33422",
+    "WIN": "0",
+    "PART.": "3",
+    "WINRATE": "60,00%",
+    "POINTS MOY.": "2,67"
+  },
+  {
+    "#": "60",
+    "PLAYER": "Geats",
+    "SCORE": "33377",
+    "WIN": "0",
+    "PART.": "5",
+    "WINRATE": "50,00%",
+    "POINTS MOY.": "2,45"
+  },
+  {
+    "#": "61",
+    "PLAYER": "Andjy",
+    "SCORE": "33141",
+    "WIN": "0",
+    "PART.": "3",
+    "WINRATE": "53,85%",
+    "POINTS MOY.": "3,23"
+  },
+  {
+    "#": "62",
+    "PLAYER": "Narugo",
+    "SCORE": "32696",
+    "WIN": "0",
+    "PART.": "6",
+    "WINRATE": "45,45%",
+    "POINTS MOY.": "2,50"
+  },
+  {
+    "#": "63",
+    "PLAYER": "Aiger",
+    "SCORE": "32187",
+    "WIN": "0",
+    "PART.": "3",
+    "WINRATE": "57,14%",
+    "POINTS MOY.": "2,71"
+  },
+  {
+    "#": "64",
+    "PLAYER": "Igris",
+    "SCORE": "32104",
+    "WIN": "0",
+    "PART.": "5",
+    "WINRATE": "47,37%",
+    "POINTS MOY.": "2,53"
+  },
+  {
+    "#": "65",
+    "PLAYER": "Meilos",
+    "SCORE": "31752",
+    "WIN": "0",
+    "PART.": "3",
+    "WINRATE": "57,14%",
+    "POINTS MOY.": "2,64"
+  },
+  {
+    "#": "66",
+    "PLAYER": "RoroDela",
+    "SCORE": "31548",
+    "WIN": "0",
+    "PART.": "7",
+    "WINRATE": "41,67%",
+    "POINTS MOY.": "2,50"
+  },
+  {
+    "#": "67",
+    "PLAYER": "levroi",
+    "SCORE": "30815",
+    "WIN": "0",
+    "PART.": "6",
+    "WINRATE": "42,86%",
+    "POINTS MOY.": "2,48"
+  },
+  {
+    "#": "68",
+    "PLAYER": "Odak",
+    "SCORE": "30726",
+    "WIN": "0",
+    "PART.": "3",
+    "WINRATE": "53,85%",
+    "POINTS MOY.": "2,77"
+  },
+  {
+    "#": "69",
+    "PLAYER": "Xeno",
+    "SCORE": "29840",
+    "WIN": "0",
+    "PART.": "3",
+    "WINRATE": "53,85%",
+    "POINTS MOY.": "2,62"
+  },
+  {
+    "#": "70",
+    "PLAYER": "Ilou",
+    "SCORE": "29813",
+    "WIN": "0",
+    "PART.": "3",
+    "WINRATE": "50,00%",
+    "POINTS MOY.": "3,00"
+  },
+  {
+    "#": "71",
+    "PLAYER": "Samuy",
+    "SCORE": "29642",
+    "WIN": "0",
+    "PART.": "2",
+    "WINRATE": "63,64%",
+    "POINTS MOY.": "2,82"
+  },
+  {
+    "#": "72",
+    "PLAYER": "Guy",
+    "SCORE": "29064",
+    "WIN": "0",
+    "PART.": "2",
+    "WINRATE": "63,64%",
+    "POINTS MOY.": "2,73"
+  },
+  {
+    "#": "73",
+    "PLAYER": "Éther",
+    "SCORE": "28943",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "80,00%",
+    "POINTS MOY.": "3,70"
+  },
+  {
+    "#": "74",
+    "PLAYER": "Yorel",
+    "SCORE": "28664",
+    "WIN": "0",
+    "PART.": "5",
+    "WINRATE": "41,18%",
+    "POINTS MOY.": "2,65"
+  },
+  {
+    "#": "75",
+    "PLAYER": "Neywandow7",
+    "SCORE": "28537",
+    "WIN": "0",
+    "PART.": "3",
+    "WINRATE": "50,00%",
+    "POINTS MOY.": "2,75"
+  },
+  {
+    "#": "76",
+    "PLAYER": "Nthanb",
+    "SCORE": "28134",
+    "WIN": "0",
+    "PART.": "5",
+    "WINRATE": "41,18%",
+    "POINTS MOY.": "2,53"
+  },
+  {
+    "#": "77",
+    "PLAYER": "Niban",
+    "SCORE": "27911",
+    "WIN": "0",
+    "PART.": "2",
+    "WINRATE": "60,00%",
+    "POINTS MOY.": "2,80"
+  },
+  {
+    "#": "78",
+    "PLAYER": "Stil",
+    "SCORE": "27911",
+    "WIN": "0",
+    "PART.": "2",
+    "WINRATE": "60,00%",
+    "POINTS MOY.": "2,80"
+  },
+  {
+    "#": "79",
+    "PLAYER": "Lotteux",
+    "SCORE": "27911",
+    "WIN": "0",
+    "PART.": "2",
+    "WINRATE": "60,00%",
+    "POINTS MOY.": "2,80"
+  },
+  {
+    "#": "80",
+    "PLAYER": "Sarah",
+    "SCORE": "27823",
+    "WIN": "0",
+    "PART.": "6",
+    "WINRATE": "40,00%",
+    "POINTS MOY.": "2,25"
+  },
+  {
+    "#": "81",
+    "PLAYER": "Blaze",
+    "SCORE": "27629",
+    "WIN": "0",
+    "PART.": "3",
+    "WINRATE": "50,00%",
+    "POINTS MOY.": "2,58"
+  },
+  {
+    "#": "82",
+    "PLAYER": "L'artiste",
+    "SCORE": "27214",
+    "WIN": "0",
+    "PART.": "7",
+    "WINRATE": "36,36%",
+    "POINTS MOY.": "2,36"
+  },
+  {
+    "#": "83",
+    "PLAYER": "Mexity",
+    "SCORE": "27032",
+    "WIN": "0",
+    "PART.": "4",
+    "WINRATE": "42,86%",
+    "POINTS MOY.": "2,57"
+  },
+  {
+    "#": "84",
+    "PLAYER": "Jadoudou",
+    "SCORE": "26427",
+    "WIN": "0",
+    "PART.": "2",
+    "WINRATE": "55,56%",
+    "POINTS MOY.": "2,89"
+  },
+  {
+    "#": "85",
+    "PLAYER": "Snowpye",
+    "SCORE": "25966",
+    "WIN": "0",
+    "PART.": "3",
+    "WINRATE": "45,45%",
+    "POINTS MOY.": "2,73"
+  },
+  {
+    "#": "86",
+    "PLAYER": "Kineria",
+    "SCORE": "25949",
+    "WIN": "0",
+    "PART.": "4",
+    "WINRATE": "42,86%",
+    "POINTS MOY.": "2,36"
+  },
+  {
+    "#": "87",
+    "PLAYER": "Elliot",
+    "SCORE": "25949",
+    "WIN": "0",
+    "PART.": "4",
+    "WINRATE": "42,86%",
+    "POINTS MOY.": "2,36"
+  },
+  {
+    "#": "88",
+    "PLAYER": "OursDuBeyblade",
+    "SCORE": "24799",
+    "WIN": "0",
+    "PART.": "5",
+    "WINRATE": "37,50%",
+    "POINTS MOY.": "2,31"
+  },
+  {
+    "#": "89",
+    "PLAYER": "IceTea",
+    "SCORE": "24611",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "71,43%",
+    "POINTS MOY.": "3,43"
+  },
+  {
+    "#": "90",
+    "PLAYER": "rayxray",
+    "SCORE": "24611",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "71,43%",
+    "POINTS MOY.": "3,43"
+  },
+  {
+    "#": "91",
+    "PLAYER": "Eraidos",
+    "SCORE": "24524",
+    "WIN": "0",
+    "PART.": "2",
+    "WINRATE": "55,56%",
+    "POINTS MOY.": "2,56"
+  },
+  {
+    "#": "92",
+    "PLAYER": "Ackerman",
+    "SCORE": "24462",
+    "WIN": "0",
+    "PART.": "2",
+    "WINRATE": "50,00%",
+    "POINTS MOY.": "3,00"
+  },
+  {
+    "#": "93",
+    "PLAYER": "Berik",
+    "SCORE": "23867",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "71,43%",
+    "POINTS MOY.": "3,29"
+  },
+  {
+    "#": "94",
+    "PLAYER": "kayman",
+    "SCORE": "23867",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "71,43%",
+    "POINTS MOY.": "3,29"
+  },
+  {
+    "#": "95",
+    "PLAYER": "Tafder",
+    "SCORE": "23867",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "71,43%",
+    "POINTS MOY.": "3,29"
+  },
+  {
+    "#": "96",
+    "PLAYER": "Littlemask",
+    "SCORE": "23850",
+    "WIN": "0",
+    "PART.": "2",
+    "WINRATE": "55,56%",
+    "POINTS MOY.": "2,44"
+  },
+  {
+    "#": "97",
+    "PLAYER": "Ismael",
+    "SCORE": "23566",
+    "WIN": "0",
+    "PART.": "5",
+    "WINRATE": "37,50%",
+    "POINTS MOY.": "2,06"
+  },
+  {
+    "#": "98",
+    "PLAYER": "Nazha",
+    "SCORE": "23558",
+    "WIN": "0",
+    "PART.": "4",
+    "WINRATE": "38,46%",
+    "POINTS MOY.": "2,38"
+  },
+  {
+    "#": "99",
+    "PLAYER": "Daneb",
+    "SCORE": "23400",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "75,00%",
+    "POINTS MOY.": "3,00"
+  },
+  {
+    "#": "100",
+    "PLAYER": "LaLucieole",
+    "SCORE": "23389",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "66,67%",
+    "POINTS MOY.": "3,50"
+  },
+  {
+    "#": "101",
+    "PLAYER": "Alice",
+    "SCORE": "23345",
+    "WIN": "0",
+    "PART.": "3",
+    "WINRATE": "40,00%",
+    "POINTS MOY.": "2,80"
+  },
+  {
+    "#": "102",
+    "PLAYER": "Aleks",
+    "SCORE": "22581",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "66,67%",
+    "POINTS MOY.": "3,33"
+  },
+  {
+    "#": "103",
+    "PLAYER": "Uberoxane",
+    "SCORE": "22554",
+    "WIN": "0",
+    "PART.": "2",
+    "WINRATE": "50,00%",
+    "POINTS MOY.": "2,63"
+  },
+  {
+    "#": "104",
+    "PLAYER": "Imox",
+    "SCORE": "22554",
+    "WIN": "0",
+    "PART.": "2",
+    "WINRATE": "50,00%",
+    "POINTS MOY.": "2,63"
+  },
+  {
+    "#": "105",
+    "PLAYER": "Legoshi",
+    "SCORE": "22408",
+    "WIN": "0",
+    "PART.": "4",
+    "WINRATE": "38,46%",
+    "POINTS MOY.": "2,15"
+  },
+  {
+    "#": "106",
+    "PLAYER": "Lunar",
+    "SCORE": "22001",
+    "WIN": "0",
+    "PART.": "4",
+    "WINRATE": "38,46%",
+    "POINTS MOY.": "2,08"
+  },
+  {
+    "#": "107",
+    "PLAYER": "BRMIBR",
+    "SCORE": "21875",
+    "WIN": "0",
+    "PART.": "2",
+    "WINRATE": "50,00%",
+    "POINTS MOY.": "2,50"
+  },
+  {
+    "#": "108",
+    "PLAYER": "Yuto",
+    "SCORE": "21600",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "60,00%",
+    "POINTS MOY.": "3,60"
+  },
+  {
+    "#": "109",
+    "PLAYER": "JojoKirino",
+    "SCORE": "21579",
+    "WIN": "0",
+    "PART.": "4",
+    "WINRATE": "38,46%",
+    "POINTS MOY.": "2,00"
+  },
+  {
+    "#": "110",
+    "PLAYER": "Spider_Agent42",
+    "SCORE": "21499",
+    "WIN": "0",
+    "PART.": "3",
+    "WINRATE": "40,00%",
+    "POINTS MOY.": "2,40"
+  },
+  {
+    "#": "111",
+    "PLAYER": "Elijah",
+    "SCORE": "21499",
+    "WIN": "0",
+    "PART.": "3",
+    "WINRATE": "40,00%",
+    "POINTS MOY.": "2,40"
+  },
+  {
+    "#": "112",
+    "PLAYER": "GeoBlob",
+    "SCORE": "21499",
+    "WIN": "0",
+    "PART.": "3",
+    "WINRATE": "40,00%",
+    "POINTS MOY.": "2,40"
+  },
+  {
+    "#": "113",
+    "PLAYER": "Solid Snake",
+    "SCORE": "21499",
+    "WIN": "0",
+    "PART.": "3",
+    "WINRATE": "40,00%",
+    "POINTS MOY.": "2,40"
+  },
+  {
+    "#": "114",
+    "PLAYER": "Yaya",
+    "SCORE": "21412",
+    "WIN": "0",
+    "PART.": "4",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "2,58"
+  },
+  {
+    "#": "115",
+    "PLAYER": "Robin",
+    "SCORE": "21173",
+    "WIN": "0",
+    "PART.": "2",
+    "WINRATE": "50,00%",
+    "POINTS MOY.": "2,38"
+  },
+  {
+    "#": "116",
+    "PLAYER": "Clem",
+    "SCORE": "21173",
+    "WIN": "0",
+    "PART.": "2",
+    "WINRATE": "50,00%",
+    "POINTS MOY.": "2,38"
+  },
+  {
+    "#": "117",
+    "PLAYER": "Dee",
+    "SCORE": "21165",
+    "WIN": "0",
+    "PART.": "2",
+    "WINRATE": "42,86%",
+    "POINTS MOY.": "3,00"
+  },
+  {
+    "#": "118",
+    "PLAYER": "Azure",
+    "SCORE": "21104",
+    "WIN": "0",
+    "PART.": "5",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "2,07"
+  },
+  {
+    "#": "119",
+    "PLAYER": "DaDdyGriZzly",
+    "SCORE": "21078",
+    "WIN": "0",
+    "PART.": "4",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "2,50"
+  },
+  {
+    "#": "120",
+    "PLAYER": "Rami",
+    "SCORE": "20998",
+    "WIN": "0",
+    "PART.": "3",
+    "WINRATE": "40,00%",
+    "POINTS MOY.": "2,30"
+  },
+  {
+    "#": "121",
+    "PLAYER": "Berguiny",
+    "SCORE": "20998",
+    "WIN": "0",
+    "PART.": "3",
+    "WINRATE": "40,00%",
+    "POINTS MOY.": "2,30"
+  },
+  {
+    "#": "122",
+    "PLAYER": "Ares",
+    "SCORE": "20998",
+    "WIN": "0",
+    "PART.": "3",
+    "WINRATE": "40,00%",
+    "POINTS MOY.": "2,30"
+  },
+  {
+    "#": "123",
+    "PLAYER": "Addant",
+    "SCORE": "20900",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "66,67%",
+    "POINTS MOY.": "3,00"
+  },
+  {
+    "#": "124",
+    "PLAYER": "sword X",
+    "SCORE": "20900",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "66,67%",
+    "POINTS MOY.": "3,00"
+  },
+  {
+    "#": "125",
+    "PLAYER": "Urkel",
+    "SCORE": "20900",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "66,67%",
+    "POINTS MOY.": "3,00"
+  },
+  {
+    "#": "126",
+    "PLAYER": "Hisunu",
+    "SCORE": "20727",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "60,00%",
+    "POINTS MOY.": "3,40"
+  },
+  {
+    "#": "127",
+    "PLAYER": "Phénixio",
+    "SCORE": "20016",
+    "WIN": "0",
+    "PART.": "4",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "2,25"
+  },
+  {
+    "#": "128",
+    "PLAYER": "Hane Hoshi",
+    "SCORE": "19664",
+    "WIN": "0",
+    "PART.": "5",
+    "WINRATE": "28,57%",
+    "POINTS MOY.": "2,43"
+  },
+  {
+    "#": "129",
+    "PLAYER": "Yolkster",
+    "SCORE": "19240",
+    "WIN": "0",
+    "PART.": "2",
+    "WINRATE": "42,86%",
+    "POINTS MOY.": "2,57"
+  },
+  {
+    "#": "130",
+    "PLAYER": "Mr. Fantome",
+    "SCORE": "19200",
+    "WIN": "0",
+    "PART.": "3",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "2,67"
+  },
+  {
+    "#": "131",
+    "PLAYER": "Blyrow",
+    "SCORE": "18900",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "60,00%",
+    "POINTS MOY.": "3,00"
+  },
+  {
+    "#": "132",
+    "PLAYER": "DarkHater",
+    "SCORE": "18900",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "60,00%",
+    "POINTS MOY.": "3,00"
+  },
+  {
+    "#": "133",
+    "PLAYER": "Manon",
+    "SCORE": "18900",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "60,00%",
+    "POINTS MOY.": "3,00"
+  },
+  {
+    "#": "134",
+    "PLAYER": "Neli",
+    "SCORE": "18900",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "60,00%",
+    "POINTS MOY.": "3,00"
+  },
+  {
+    "#": "135",
+    "PLAYER": "Chidori",
+    "SCORE": "18900",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "60,00%",
+    "POINTS MOY.": "3,00"
+  },
+  {
+    "#": "136",
+    "PLAYER": "Kiiro",
+    "SCORE": "18900",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "60,00%",
+    "POINTS MOY.": "3,00"
+  },
+  {
+    "#": "137",
+    "PLAYER": "ShiroBlader",
+    "SCORE": "18900",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "60,00%",
+    "POINTS MOY.": "3,00"
+  },
+  {
+    "#": "138",
+    "PLAYER": "Flower",
+    "SCORE": "18900",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "60,00%",
+    "POINTS MOY.": "3,00"
+  },
+  {
+    "#": "139",
+    "PLAYER": "Skyne",
+    "SCORE": "17670",
+    "WIN": "0",
+    "PART.": "4",
+    "WINRATE": "27,27%",
+    "POINTS MOY.": "2,55"
+  },
+  {
+    "#": "140",
+    "PLAYER": "Lewis",
+    "SCORE": "17344",
+    "WIN": "0",
+    "PART.": "3",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "2,22"
+  },
+  {
+    "#": "141",
+    "PLAYER": "Teycoz",
+    "SCORE": "17089",
+    "WIN": "0",
+    "PART.": "2",
+    "WINRATE": "42,86%",
+    "POINTS MOY.": "2,14"
+  },
+  {
+    "#": "142",
+    "PLAYER": "Fafa11",
+    "SCORE": "16954",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "60,00%",
+    "POINTS MOY.": "2,60"
+  },
+  {
+    "#": "143",
+    "PLAYER": "Galaxy Pegasus",
+    "SCORE": "16954",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "60,00%",
+    "POINTS MOY.": "2,60"
+  },
+  {
+    "#": "144",
+    "PLAYER": "Goblade",
+    "SCORE": "16954",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "60,00%",
+    "POINTS MOY.": "2,60"
+  },
+  {
+    "#": "145",
+    "PLAYER": "Don Capri",
+    "SCORE": "16769",
+    "WIN": "0",
+    "PART.": "2",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "3,00"
+  },
+  {
+    "#": "146",
+    "PLAYER": "aichouxx",
+    "SCORE": "15900",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "50,00%",
+    "POINTS MOY.": "3,00"
+  },
+  {
+    "#": "147",
+    "PLAYER": "AMP",
+    "SCORE": "15900",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "50,00%",
+    "POINTS MOY.": "3,00"
+  },
+  {
+    "#": "148",
+    "PLAYER": "Shiroi",
+    "SCORE": "15900",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "50,00%",
+    "POINTS MOY.": "3,00"
+  },
+  {
+    "#": "149",
+    "PLAYER": "Sasan",
+    "SCORE": "15568",
+    "WIN": "0",
+    "PART.": "2",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "2,67"
+  },
+  {
+    "#": "150",
+    "PLAYER": "Fabien Le Ceratops",
+    "SCORE": "14931",
+    "WIN": "0",
+    "PART.": "2",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "2,50"
+  },
+  {
+    "#": "151",
+    "PLAYER": "Docteur",
+    "SCORE": "14878",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "50,00%",
+    "POINTS MOY.": "2,75"
+  },
+  {
+    "#": "152",
+    "PLAYER": "Suba",
+    "SCORE": "14878",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "50,00%",
+    "POINTS MOY.": "2,75"
+  },
+  {
+    "#": "153",
+    "PLAYER": "Eox",
+    "SCORE": "14878",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "50,00%",
+    "POINTS MOY.": "2,75"
+  },
+  {
+    "#": "154",
+    "PLAYER": "Sam Valkyrie",
+    "SCORE": "14878",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "50,00%",
+    "POINTS MOY.": "2,75"
+  },
+  {
+    "#": "155",
+    "PLAYER": "Sokalad1",
+    "SCORE": "14878",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "50,00%",
+    "POINTS MOY.": "2,75"
+  },
+  {
+    "#": "156",
+    "PLAYER": "BaldMan",
+    "SCORE": "14878",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "50,00%",
+    "POINTS MOY.": "2,75"
+  },
+  {
+    "#": "157",
+    "PLAYER": "IssaBlader",
+    "SCORE": "14878",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "50,00%",
+    "POINTS MOY.": "2,75"
+  },
+  {
+    "#": "158",
+    "PLAYER": "Mehdi",
+    "SCORE": "14878",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "50,00%",
+    "POINTS MOY.": "2,75"
+  },
+  {
+    "#": "159",
+    "PLAYER": "BubbleCheat",
+    "SCORE": "14878",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "50,00%",
+    "POINTS MOY.": "2,75"
+  },
+  {
+    "#": "160",
+    "PLAYER": "Fabevil",
+    "SCORE": "14878",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "50,00%",
+    "POINTS MOY.": "2,75"
+  },
+  {
+    "#": "161",
+    "PLAYER": "Birbir93",
+    "SCORE": "14267",
+    "WIN": "0",
+    "PART.": "2",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "2,33"
+  },
+  {
+    "#": "162",
+    "PLAYER": "MagnaDefender",
+    "SCORE": "14267",
+    "WIN": "0",
+    "PART.": "2",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "2,33"
+  },
+  {
+    "#": "163",
+    "PLAYER": "Mekamyu",
+    "SCORE": "13816",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "50,00%",
+    "POINTS MOY.": "2,50"
+  },
+  {
+    "#": "164",
+    "PLAYER": "Lekuervo",
+    "SCORE": "13816",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "50,00%",
+    "POINTS MOY.": "2,50"
+  },
+  {
+    "#": "165",
+    "PLAYER": "Mimi X",
+    "SCORE": "13816",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "50,00%",
+    "POINTS MOY.": "2,50"
+  },
+  {
+    "#": "166",
+    "PLAYER": "Shio",
+    "SCORE": "13816",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "50,00%",
+    "POINTS MOY.": "2,50"
+  },
+  {
+    "#": "167",
+    "PLAYER": "Vento",
+    "SCORE": "13816",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "50,00%",
+    "POINTS MOY.": "2,50"
+  },
+  {
+    "#": "168",
+    "PLAYER": "Kmn83",
+    "SCORE": "13809",
+    "WIN": "0",
+    "PART.": "3",
+    "WINRATE": "25,00%",
+    "POINTS MOY.": "2,38"
+  },
+  {
+    "#": "169",
+    "PLAYER": "D8J6",
+    "SCORE": "13574",
+    "WIN": "0",
+    "PART.": "2",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "2,17"
+  },
+  {
+    "#": "170",
+    "PLAYER": "VilaineThob",
+    "SCORE": "13574",
+    "WIN": "0",
+    "PART.": "2",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "2,17"
+  },
+  {
+    "#": "171",
+    "PLAYER": "A2NS",
+    "SCORE": "12848",
+    "WIN": "0",
+    "PART.": "2",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "2,00"
+  },
+  {
+    "#": "172",
+    "PLAYER": "Leo",
+    "SCORE": "12848",
+    "WIN": "0",
+    "PART.": "2",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "2,00"
+  },
+  {
+    "#": "173",
+    "PLAYER": "Wolfi",
+    "SCORE": "12848",
+    "WIN": "0",
+    "PART.": "2",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "2,00"
+  },
+  {
+    "#": "174",
+    "PLAYER": "Eden11",
+    "SCORE": "12709",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "50,00%",
+    "POINTS MOY.": "2,25"
+  },
+  {
+    "#": "175",
+    "PLAYER": "Tommy94",
+    "SCORE": "12709",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "50,00%",
+    "POINTS MOY.": "2,25"
+  },
+  {
+    "#": "176",
+    "PLAYER": "Baptaz",
+    "SCORE": "12089",
+    "WIN": "0",
+    "PART.": "2",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "1,83"
+  },
+  {
+    "#": "177",
+    "PLAYER": "Black Pegasus",
+    "SCORE": "11556",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "50,00%",
+    "POINTS MOY.": "2,00"
+  },
+  {
+    "#": "178",
+    "PLAYER": "Lucano",
+    "SCORE": "11556",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "50,00%",
+    "POINTS MOY.": "2,00"
+  },
+  {
+    "#": "179",
+    "PLAYER": "Charli",
+    "SCORE": "11556",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "50,00%",
+    "POINTS MOY.": "2,00"
+  },
+  {
+    "#": "180",
+    "PLAYER": "SossoStark",
+    "SCORE": "10900",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "3,00"
+  },
+  {
+    "#": "181",
+    "PLAYER": "Ishan",
+    "SCORE": "9931",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "2,67"
+  },
+  {
+    "#": "182",
+    "PLAYER": "Mr. Taisho",
+    "SCORE": "9931",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "2,67"
+  },
+  {
+    "#": "183",
+    "PLAYER": "Valentin",
+    "SCORE": "9931",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "2,67"
+  },
+  {
+    "#": "184",
+    "PLAYER": "Gareth",
+    "SCORE": "9931",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "2,67"
+  },
+  {
+    "#": "185",
+    "PLAYER": "Ghotek",
+    "SCORE": "9633",
+    "WIN": "0",
+    "PART.": "2",
+    "WINRATE": "20,00%",
+    "POINTS MOY.": "2,60"
+  },
+  {
+    "#": "186",
+    "PLAYER": "Chouloup",
+    "SCORE": "9633",
+    "WIN": "0",
+    "PART.": "2",
+    "WINRATE": "20,00%",
+    "POINTS MOY.": "2,60"
+  },
+  {
+    "#": "187",
+    "PLAYER": "56",
+    "SCORE": "8917",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "2,33"
+  },
+  {
+    "#": "188",
+    "PLAYER": "Cygale",
+    "SCORE": "8917",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "2,33"
+  },
+  {
+    "#": "189",
+    "PLAYER": "Ryuk",
+    "SCORE": "8917",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "2,33"
+  },
+  {
+    "#": "190",
+    "PLAYER": "Saja boys",
+    "SCORE": "8917",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "2,33"
+  },
+  {
+    "#": "191",
+    "PLAYER": "l'antagoniste",
+    "SCORE": "8917",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "2,33"
+  },
+  {
+    "#": "192",
+    "PLAYER": "Lucic",
+    "SCORE": "8917",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "2,33"
+  },
+  {
+    "#": "193",
+    "PLAYER": "Akira94",
+    "SCORE": "8917",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "2,33"
+  },
+  {
+    "#": "194",
+    "PLAYER": "LaserGame",
+    "SCORE": "8917",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "2,33"
+  },
+  {
+    "#": "195",
+    "PLAYER": "BladerPrime",
+    "SCORE": "8917",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "2,33"
+  },
+  {
+    "#": "196",
+    "PLAYER": "Ena",
+    "SCORE": "8917",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "2,33"
+  },
+  {
+    "#": "197",
+    "PLAYER": "LightYamani",
+    "SCORE": "8917",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "2,33"
+  },
+  {
+    "#": "198",
+    "PLAYER": "Nouhan Blader X",
+    "SCORE": "7865",
+    "WIN": "0",
+    "PART.": "3",
+    "WINRATE": "14,29%",
+    "POINTS MOY.": "2,14"
+  },
+  {
+    "#": "199",
+    "PLAYER": "Magmat Valt",
+    "SCORE": "7852",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "2,00"
+  },
+  {
+    "#": "200",
+    "PLAYER": "Mams93z",
+    "SCORE": "7852",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "2,00"
+  },
+  {
+    "#": "201",
+    "PLAYER": "Astrale",
+    "SCORE": "7852",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "2,00"
+  },
+  {
+    "#": "202",
+    "PLAYER": "Astralou",
+    "SCORE": "7852",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "2,00"
+  },
+  {
+    "#": "203",
+    "PLAYER": "NLN",
+    "SCORE": "7852",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "2,00"
+  },
+  {
+    "#": "204",
+    "PLAYER": "Tackyon",
+    "SCORE": "7852",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "2,00"
+  },
+  {
+    "#": "205",
+    "PLAYER": "LuXx598",
+    "SCORE": "7852",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "2,00"
+  },
+  {
+    "#": "206",
+    "PLAYER": "ManuMilitary",
+    "SCORE": "7404",
+    "WIN": "0",
+    "PART.": "2",
+    "WINRATE": "20,00%",
+    "POINTS MOY.": "1,80"
+  },
+  {
+    "#": "207",
+    "PLAYER": "LuluBerlu",
+    "SCORE": "6776",
+    "WIN": "0",
+    "PART.": "2",
+    "WINRATE": "20,00%",
+    "POINTS MOY.": "1,60"
+  },
+  {
+    "#": "208",
+    "PLAYER": "Octhor Corsaire",
+    "SCORE": "6776",
+    "WIN": "0",
+    "PART.": "2",
+    "WINRATE": "20,00%",
+    "POINTS MOY.": "1,60"
+  },
+  {
+    "#": "209",
+    "PLAYER": "BBK",
+    "SCORE": "6731",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "1,67"
+  },
+  {
+    "#": "210",
+    "PLAYER": "Ame",
+    "SCORE": "6731",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "1,67"
+  },
+  {
+    "#": "211",
+    "PLAYER": "BooBoo",
+    "SCORE": "6731",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "1,67"
+  },
+  {
+    "#": "212",
+    "PLAYER": "Kish",
+    "SCORE": "6731",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "1,67"
+  },
+  {
+    "#": "213",
+    "PLAYER": "Thesp",
+    "SCORE": "6731",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "1,67"
+  },
+  {
+    "#": "214",
+    "PLAYER": "Darkspirit4",
+    "SCORE": "6382",
+    "WIN": "0",
+    "PART.": "3",
+    "WINRATE": "14,29%",
+    "POINTS MOY.": "1,57"
+  },
+  {
+    "#": "215",
+    "PLAYER": "Camilkts",
+    "SCORE": "6114",
+    "WIN": "0",
+    "PART.": "2",
+    "WINRATE": "20,00%",
+    "POINTS MOY.": "1,40"
+  },
+  {
+    "#": "216",
+    "PLAYER": "SuperSigmaNoGoon",
+    "SCORE": "6114",
+    "WIN": "0",
+    "PART.": "2",
+    "WINRATE": "20,00%",
+    "POINTS MOY.": "1,40"
+  },
+  {
+    "#": "217",
+    "PLAYER": "Moon",
+    "SCORE": "5547",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "1,33"
+  },
+  {
+    "#": "218",
+    "PLAYER": "Reker",
+    "SCORE": "5547",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "1,33"
+  },
+  {
+    "#": "219",
+    "PLAYER": "Tongy94",
+    "SCORE": "5547",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "1,33"
+  },
+  {
+    "#": "220",
+    "PLAYER": "Issa",
+    "SCORE": "5547",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "1,33"
+  },
+  {
+    "#": "221",
+    "PLAYER": "Tourouk",
+    "SCORE": "5547",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "1,33"
+  },
+  {
+    "#": "222",
+    "PLAYER": "Stété",
+    "SCORE": "5547",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "1,33"
+  },
+  {
+    "#": "223",
+    "PLAYER": "Wasabi213",
+    "SCORE": "5547",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "1,33"
+  },
+  {
+    "#": "224",
+    "PLAYER": "Sufhhc",
+    "SCORE": "5547",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "33,33%",
+    "POINTS MOY.": "1,33"
+  },
+  {
+    "#": "225",
+    "PLAYER": "Kamen A Senior",
+    "SCORE": "5413",
+    "WIN": "0",
+    "PART.": "2",
+    "WINRATE": "20,00%",
+    "POINTS MOY.": "1,20"
+  },
+  {
+    "#": "226",
+    "PLAYER": "Fulguris95",
+    "SCORE": "4667",
+    "WIN": "0",
+    "PART.": "2",
+    "WINRATE": "20,00%",
+    "POINTS MOY.": "1,00"
+  },
+  {
+    "#": "227",
+    "PLAYER": "LouLouSoNicX",
+    "SCORE": "4667",
+    "WIN": "0",
+    "PART.": "2",
+    "WINRATE": "20,00%",
+    "POINTS MOY.": "1,00"
+  },
+  {
+    "#": "228",
+    "PLAYER": "Homer",
+    "SCORE": "900",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "3,00"
+  },
+  {
+    "#": "229",
+    "PLAYER": "Le Baron Kabuto",
+    "SCORE": "658",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "2,50"
+  },
+  {
+    "#": "230",
+    "PLAYER": "Perspicacegirl",
+    "SCORE": "658",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "2,50"
+  },
+  {
+    "#": "231",
+    "PLAYER": "Yoyo",
+    "SCORE": "658",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "2,50"
+  },
+  {
+    "#": "232",
+    "PLAYER": "Martin",
+    "SCORE": "658",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "2,50"
+  },
+  {
+    "#": "233",
+    "PLAYER": "SS",
+    "SCORE": "658",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "2,50"
+  },
+  {
+    "#": "234",
+    "PLAYER": "Kayman",
+    "SCORE": "450",
+    "WIN": "0",
+    "PART.": "2",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "1,50"
+  },
+  {
+    "#": "235",
+    "PLAYER": "damalcs",
+    "SCORE": "444",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "2,00"
+  },
+  {
+    "#": "236",
+    "PLAYER": "blader M",
+    "SCORE": "444",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "2,00"
+  },
+  {
+    "#": "237",
+    "PLAYER": "Léo",
+    "SCORE": "444",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "2,00"
+  },
+  {
+    "#": "238",
+    "PLAYER": "Nathaniel",
+    "SCORE": "444",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "2,00"
+  },
+  {
+    "#": "239",
+    "PLAYER": "Zoro",
+    "SCORE": "444",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "2,00"
+  },
+  {
+    "#": "240",
+    "PLAYER": "Noah",
+    "SCORE": "444",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "2,00"
+  },
+  {
+    "#": "241",
+    "PLAYER": "Marina",
+    "SCORE": "329",
+    "WIN": "0",
+    "PART.": "2",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "1,25"
+  },
+  {
+    "#": "242",
+    "PLAYER": "Dimitard",
+    "SCORE": "265",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "1,50"
+  },
+  {
+    "#": "243",
+    "PLAYER": "le_homard_au_curry_foncede",
+    "SCORE": "265",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "1,50"
+  },
+  {
+    "#": "244",
+    "PLAYER": "Kanandre",
+    "SCORE": "265",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "1,50"
+  },
+  {
+    "#": "245",
+    "PLAYER": "Sword X",
+    "SCORE": "265",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "1,50"
+  },
+  {
+    "#": "246",
+    "PLAYER": "Bladeuse L",
+    "SCORE": "265",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "1,50"
+  },
+  {
+    "#": "247",
+    "PLAYER": "Wasabi93",
+    "SCORE": "265",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "1,50"
+  },
+  {
+    "#": "248",
+    "PLAYER": "Philou",
+    "SCORE": "265",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "1,50"
+  },
+  {
+    "#": "249",
+    "PLAYER": "Lemzo",
+    "SCORE": "222",
+    "WIN": "0",
+    "PART.": "2",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "1,00"
+  },
+  {
+    "#": "250",
+    "PLAYER": "Nxzo",
+    "SCORE": "132",
+    "WIN": "0",
+    "PART.": "2",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "0,75"
+  },
+  {
+    "#": "251",
+    "PLAYER": "Akitus",
+    "SCORE": "125",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "1,00"
+  },
+  {
+    "#": "252",
+    "PLAYER": "Loriane",
+    "SCORE": "125",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "1,00"
+  },
+  {
+    "#": "253",
+    "PLAYER": "Tchoupi en heure de cole",
+    "SCORE": "125",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "1,00"
+  },
+  {
+    "#": "254",
+    "PLAYER": "Azsedxo",
+    "SCORE": "125",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "1,00"
+  },
+  {
+    "#": "255",
+    "PLAYER": "Sofy",
+    "SCORE": "125",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "1,00"
+  },
+  {
+    "#": "256",
+    "PLAYER": "Soka",
+    "SCORE": "125",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "1,00"
+  },
+  {
+    "#": "257",
+    "PLAYER": "ender",
+    "SCORE": "33",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "0,50"
+  },
+  {
+    "#": "258",
+    "PLAYER": "Chrome Ryugu",
+    "SCORE": "33",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "0,50"
+  },
+  {
+    "#": "259",
+    "PLAYER": "Lynn",
+    "SCORE": "33",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "0,50"
+  },
+  {
+    "#": "260",
+    "PLAYER": "Mini Gelofy",
+    "SCORE": "33",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "0,50"
+  },
+  {
+    "#": "261",
+    "PLAYER": "Mimi",
+    "SCORE": "33",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "0,50"
+  },
+  {
+    "#": "262",
+    "PLAYER": "Blednitsu",
+    "SCORE": "33",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "0,50"
+  },
+  {
+    "#": "263",
+    "PLAYER": "GoldenKinder",
+    "SCORE": "33",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "0,50"
+  },
+  {
+    "#": "264",
+    "PLAYER": "Armin",
+    "SCORE": "33",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "0,50"
+  },
+  {
+    "#": "265",
+    "PLAYER": "Vecta",
+    "SCORE": "33",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "0,50"
+  },
+  {
+    "#": "266",
+    "PLAYER": "WildGalaxy",
+    "SCORE": "17",
+    "WIN": "0",
+    "PART.": "2",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "0,25"
+  },
+  {
+    "#": "267",
+    "PLAYER": "Anonymous",
+    "SCORE": "0",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "0,00"
+  },
+  {
+    "#": "268",
+    "PLAYER": "Malmatv",
+    "SCORE": "0",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "0,00"
+  },
+  {
+    "#": "269",
+    "PLAYER": "Nepp",
+    "SCORE": "0",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "0,00"
+  },
+  {
+    "#": "270",
+    "PLAYER": "Astro",
+    "SCORE": "0",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "0,00"
+  },
+  {
+    "#": "271",
+    "PLAYER": "Oriana",
+    "SCORE": "0",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "0,00"
+  },
+  {
+    "#": "272",
+    "PLAYER": "19roi",
+    "SCORE": "0",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "0,00"
+  },
+  {
+    "#": "273",
+    "PLAYER": "LucasRok",
+    "SCORE": "0",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "0,00"
+  },
+  {
+    "#": "274",
+    "PLAYER": "Matthias de la Troupe X",
+    "SCORE": "0",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "0,00"
+  },
+  {
+    "#": "275",
+    "PLAYER": "Blader X",
+    "SCORE": "0",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "0,00"
+  },
+  {
+    "#": "276",
+    "PLAYER": "Koto",
+    "SCORE": "0",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "0,00"
+  },
+  {
+    "#": "277",
+    "PLAYER": "Neymar",
+    "SCORE": "0",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "0,00"
+  },
+  {
+    "#": "278",
+    "PLAYER": "Fox",
+    "SCORE": "0",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "0,00"
+  },
+  {
+    "#": "279",
+    "PLAYER": "Meo",
+    "SCORE": "0",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "0,00"
+  },
+  {
+    "#": "280",
+    "PLAYER": "John",
+    "SCORE": "0",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "0,00"
+  },
+  {
+    "#": "281",
+    "PLAYER": "Nourix",
+    "SCORE": "0",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "0,00"
+  },
+  {
+    "#": "282",
+    "PLAYER": "Nuilescent",
+    "SCORE": "0",
+    "WIN": "0",
+    "PART.": "1",
+    "WINRATE": "0,00%",
+    "POINTS MOY.": "0,00"
+  },
+  {
+    "#": "283",
+    "PLAYER": "",
+    "SCORE": "",
+    "WIN": "",
+    "PART.": "",
+    "WINRATE": "",
+    "POINTS MOY.": ""
+  },
+  {
+    "#": "284",
+    "PLAYER": "",
+    "SCORE": "",
+    "WIN": "",
+    "PART.": "",
+    "WINRATE": "",
+    "POINTS MOY.": ""
+  },
+  {
+    "#": "285",
+    "PLAYER": "",
+    "SCORE": "",
+    "WIN": "",
+    "PART.": "",
+    "WINRATE": "",
+    "POINTS MOY.": ""
+  },
+  {
+    "#": "286",
+    "PLAYER": "",
+    "SCORE": "",
+    "WIN": "",
+    "PART.": "",
+    "WINRATE": "",
+    "POINTS MOY.": ""
+  },
+  {
+    "#": "287",
+    "PLAYER": "",
+    "SCORE": "",
+    "WIN": "",
+    "PART.": "",
+    "WINRATE": "",
+    "POINTS MOY.": ""
+  },
+  {
+    "#": "288",
+    "PLAYER": "",
+    "SCORE": "",
+    "WIN": "",
+    "PART.": "",
+    "WINRATE": "",
+    "POINTS MOY.": ""
+  },
+  {
+    "#": "289",
+    "PLAYER": "",
+    "SCORE": "",
+    "WIN": "",
+    "PART.": "",
+    "WINRATE": "",
+    "POINTS MOY.": ""
+  },
+  {
+    "#": "290",
+    "PLAYER": "",
+    "SCORE": "",
+    "WIN": "",
+    "PART.": "",
+    "WINRATE": "",
+    "POINTS MOY.": ""
+  },
+  {
+    "#": "291",
+    "PLAYER": "",
+    "SCORE": "",
+    "WIN": "",
+    "PART.": "",
+    "WINRATE": "",
+    "POINTS MOY.": ""
+  },
+  {
+    "#": "292",
+    "PLAYER": "",
+    "SCORE": "",
+    "WIN": "",
+    "PART.": "",
+    "WINRATE": "",
+    "POINTS MOY.": ""
+  },
+  {
+    "#": "293",
+    "PLAYER": "",
+    "SCORE": "",
+    "WIN": "",
+    "PART.": "",
+    "WINRATE": "",
+    "POINTS MOY.": ""
+  },
+  {
+    "#": "294",
+    "PLAYER": "",
+    "SCORE": "",
+    "WIN": "",
+    "PART.": "",
+    "WINRATE": "",
+    "POINTS MOY.": ""
+  },
+  {
+    "#": "295",
+    "PLAYER": "",
+    "SCORE": "",
+    "WIN": "",
+    "PART.": "",
+    "WINRATE": "",
+    "POINTS MOY.": ""
+  },
+  {
+    "#": "296",
+    "PLAYER": "",
+    "SCORE": "",
+    "WIN": "",
+    "PART.": "",
+    "WINRATE": "",
+    "POINTS MOY.": ""
+  },
+  {
+    "#": "297",
+    "PLAYER": "",
+    "SCORE": "",
+    "WIN": "",
+    "PART.": "",
+    "WINRATE": "",
+    "POINTS MOY.": ""
+  },
+  {
+    "#": "298",
+    "PLAYER": "",
+    "SCORE": "",
+    "WIN": "",
+    "PART.": "",
+    "WINRATE": "",
+    "POINTS MOY.": ""
+  },
+  {
+    "#": "299",
+    "PLAYER": "",
+    "SCORE": "",
+    "WIN": "",
+    "PART.": "",
+    "WINRATE": "",
+    "POINTS MOY.": ""
+  },
+  {
+    "#": "300",
+    "PLAYER": "",
+    "SCORE": "",
+    "WIN": "",
+    "PART.": "",
+    "WINRATE": "",
+    "POINTS MOY.": ""
+  }
+]

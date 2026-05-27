@@ -1,0 +1,4277 @@
+[
+  {
+    "name": "Leirya",
+    "totalWins": 16,
+    "totalLosses": 14,
+    "tournamentWins": 1,
+    "tournamentsPlayed": 8,
+    "history": [
+      {
+        "tournament": "go8qg261",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "UB12",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "UB13",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille3",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille5",
+        "rank": 7,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "fbzzxt43",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille7",
+        "rank": 1,
+        "wins": 6,
+        "losses": 0
+      },
+      {
+        "tournament": "i2ltr3yr",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "BeyKnight",
+    "totalWins": 17,
+    "totalLosses": 14,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 7,
+    "history": [
+      {
+        "tournament": "go8qg261",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "UB12",
+        "rank": 17,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille3",
+        "rank": 25,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille4",
+        "rank": 13,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "fbzzxt43",
+        "rank": 3,
+        "wins": 5,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille7",
+        "rank": 13,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille8",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Hane Hoshi",
+    "totalWins": 9,
+    "totalLosses": 14,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 7,
+    "history": [
+      {
+        "tournament": "go8qg261",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "UB12",
+        "rank": 25,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "UB13",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille3",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille5",
+        "rank": 13,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille7",
+        "rank": 9,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "i2ltr3yr",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Nassim",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "go8qg261",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "King Joker",
+    "totalWins": 2,
+    "totalLosses": 6,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 3,
+    "history": [
+      {
+        "tournament": "go8qg261",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "UB12",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "UB13",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Masamune",
+    "totalWins": 9,
+    "totalLosses": 10,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 5,
+    "history": [
+      {
+        "tournament": "go8qg261",
+        "rank": 25,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille11",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "UB12",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "UB13",
+        "rank": 9,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "i2ltr3yr",
+        "rank": 13,
+        "wins": 4,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Snip",
+    "totalWins": 3,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "go8qg261",
+        "rank": 13,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Sewpoo",
+    "totalWins": 4,
+    "totalLosses": 8,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 4,
+    "history": [
+      {
+        "tournament": "go8qg261",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "go8qg261",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille11",
+        "rank": 25,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille5",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Lunar",
+    "totalWins": 9,
+    "totalLosses": 5,
+    "tournamentWins": 1,
+    "tournamentsPlayed": 3,
+    "history": [
+      {
+        "tournament": "go8qg261",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille4",
+        "rank": 1,
+        "wins": 6,
+        "losses": 1
+      },
+      {
+        "tournament": "fbzzxt43",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Spider_Agent",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "go8qg261",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Vincent",
+    "totalWins": 23,
+    "totalLosses": 10,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 5,
+    "history": [
+      {
+        "tournament": "go8qg261",
+        "rank": 5,
+        "wins": 6,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille11",
+        "rank": 13,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "UB12",
+        "rank": 2,
+        "wins": 9,
+        "losses": 2
+      },
+      {
+        "tournament": "UB13",
+        "rank": 5,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "i2ltr3yr",
+        "rank": 25,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Younsi",
+    "totalWins": 13,
+    "totalLosses": 16,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 8,
+    "history": [
+      {
+        "tournament": "go8qg261",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille11",
+        "rank": 13,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "UB12",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "UB13",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille3",
+        "rank": 13,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille5",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille7",
+        "rank": 3,
+        "wins": 5,
+        "losses": 2
+      },
+      {
+        "tournament": "i2ltr3yr",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Eiko",
+    "totalWins": 15,
+    "totalLosses": 14,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 7,
+    "history": [
+      {
+        "tournament": "go8qg261",
+        "rank": 13,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "UB12",
+        "rank": 7,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "UB13",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille3",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille5",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille7",
+        "rank": 25,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "i2ltr3yr",
+        "rank": 2,
+        "wins": 7,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Jade",
+    "totalWins": 3,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "go8qg261",
+        "rank": 9,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Mts",
+    "totalWins": 16,
+    "totalLosses": 18,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 9,
+    "history": [
+      {
+        "tournament": "go8qg261",
+        "rank": 9,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille11",
+        "rank": 5,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "UB12",
+        "rank": 13,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "UB13",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille5",
+        "rank": 9,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "fbzzxt43",
+        "rank": 13,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille7",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille8",
+        "rank": 7,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "i2ltr3yr",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Azure",
+    "totalWins": 19,
+    "totalLosses": 20,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 10,
+    "history": [
+      {
+        "tournament": "go8qg261",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille11",
+        "rank": 9,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "UB12",
+        "rank": 25,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "UB13",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille3",
+        "rank": 9,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille4",
+        "rank": 13,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "fbzzxt43",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille7",
+        "rank": 13,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille8",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "i2ltr3yr",
+        "rank": 25,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Fulguris",
+    "totalWins": 21,
+    "totalLosses": 18,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 9,
+    "history": [
+      {
+        "tournament": "go8qg261",
+        "rank": 4,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "UB12",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "UB13",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille3",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille4",
+        "rank": 9,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "fbzzxt43",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille7",
+        "rank": 9,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille8",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "i2ltr3yr",
+        "rank": 9,
+        "wins": 4,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Yorel",
+    "totalWins": 16,
+    "totalLosses": 13,
+    "tournamentWins": 1,
+    "tournamentsPlayed": 7,
+    "history": [
+      {
+        "tournament": "go8qg261",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille11",
+        "rank": 7,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille3",
+        "rank": 1,
+        "wins": 7,
+        "losses": 1
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille4",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille7",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille8",
+        "rank": 7,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "i2ltr3yr",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Abi",
+    "totalWins": 3,
+    "totalLosses": 10,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 5,
+    "history": [
+      {
+        "tournament": "go8qg261",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille11",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "UB12",
+        "rank": 65,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "UB13",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille8",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Sabo",
+    "totalWins": 28,
+    "totalLosses": 18,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 9,
+    "history": [
+      {
+        "tournament": "go8qg261",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "UB13",
+        "rank": 7,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille3",
+        "rank": 4,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille4",
+        "rank": 5,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille5",
+        "rank": 2,
+        "wins": 7,
+        "losses": 2
+      },
+      {
+        "tournament": "fbzzxt43",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille7",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille8",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "i2ltr3yr",
+        "rank": 5,
+        "wins": 5,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Kamen Z",
+    "totalWins": 23,
+    "totalLosses": 14,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 7,
+    "history": [
+      {
+        "tournament": "go8qg261",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille11",
+        "rank": 4,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille3",
+        "rank": 3,
+        "wins": 8,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille5",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "fbzzxt43",
+        "rank": 2,
+        "wins": 7,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille7",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille8",
+        "rank": 9,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Rayou",
+    "totalWins": 22,
+    "totalLosses": 16,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 8,
+    "history": [
+      {
+        "tournament": "go8qg261",
+        "rank": 5,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille11",
+        "rank": 3,
+        "wins": 6,
+        "losses": 2
+      },
+      {
+        "tournament": "UB12",
+        "rank": 49,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "UB13",
+        "rank": 9,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "fbzzxt43",
+        "rank": 9,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille7",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille8",
+        "rank": 9,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "i2ltr3yr",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Yoorushi",
+    "totalWins": 20,
+    "totalLosses": 18,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 9,
+    "history": [
+      {
+        "tournament": "go8qg261",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille11",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "UB12",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille3",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille4",
+        "rank": 7,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille5",
+        "rank": 4,
+        "wins": 6,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille7",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille8",
+        "rank": 13,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "i2ltr3yr",
+        "rank": 9,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Rock Lee",
+    "totalWins": 8,
+    "totalLosses": 16,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 8,
+    "history": [
+      {
+        "tournament": "go8qg261",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille3",
+        "rank": 13,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille4",
+        "rank": 25,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille5",
+        "rank": 13,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "fbzzxt43",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille7",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille8",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "i2ltr3yr",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "t55f",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "go8qg261",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "DarkHoumous",
+    "totalWins": 8,
+    "totalLosses": 14,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 7,
+    "history": [
+      {
+        "tournament": "go8qg261",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille11",
+        "rank": 25,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "UB12",
+        "rank": 49,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "fbzzxt43",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille7",
+        "rank": 9,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille8",
+        "rank": 9,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "i2ltr3yr",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Nouhan Blader X",
+    "totalWins": 4,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "go8qg261",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille4",
+        "rank": 7,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Zeikuo",
+    "totalWins": 24,
+    "totalLosses": 20,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 10,
+    "history": [
+      {
+        "tournament": "go8qg261",
+        "rank": 9,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille11",
+        "rank": 9,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "UB12",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "UB13",
+        "rank": 9,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille3",
+        "rank": 9,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille5",
+        "rank": 3,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "fbzzxt43",
+        "rank": 9,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille7",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille8",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "i2ltr3yr",
+        "rank": 3,
+        "wins": 4,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Kreepy",
+    "totalWins": 7,
+    "totalLosses": 8,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 4,
+    "history": [
+      {
+        "tournament": "go8qg261",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille11",
+        "rank": 7,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille7",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "i2ltr3yr",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Nounours",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "go8qg261",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "zeLn",
+    "totalWins": 22,
+    "totalLosses": 18,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 9,
+    "history": [
+      {
+        "tournament": "go8qg261",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "UB12",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "UB13",
+        "rank": 13,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille3",
+        "rank": 2,
+        "wins": 5,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille4",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille5",
+        "rank": 13,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "fbzzxt43",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille7",
+        "rank": 7,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille8",
+        "rank": 4,
+        "wins": 4,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Chouloup",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "go8qg261",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Kamen 99",
+    "totalWins": 17,
+    "totalLosses": 18,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 9,
+    "history": [
+      {
+        "tournament": "go8qg261",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille11",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "UB12",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "UB13",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille3",
+        "rank": 9,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille4",
+        "rank": 25,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille5",
+        "rank": 5,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "fbzzxt43",
+        "rank": 9,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "i2ltr3yr",
+        "rank": 13,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Ichigydo",
+    "totalWins": 4,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "go8qg261",
+        "rank": 7,
+        "wins": 4,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Gelofy",
+    "totalWins": 11,
+    "totalLosses": 10,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 5,
+    "history": [
+      {
+        "tournament": "go8qg261",
+        "rank": 9,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "UB13",
+        "rank": 25,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille7",
+        "rank": 5,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille8",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "i2ltr3yr",
+        "rank": 17,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Stella",
+    "totalWins": 14,
+    "totalLosses": 16,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 8,
+    "history": [
+      {
+        "tournament": "go8qg261",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille11",
+        "rank": 25,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "UB13",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille5",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "fbzzxt43",
+        "rank": 4,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille7",
+        "rank": 25,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille8",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "i2ltr3yr",
+        "rank": 9,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Gotek",
+    "totalWins": 5,
+    "totalLosses": 8,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 4,
+    "history": [
+      {
+        "tournament": "go8qg261",
+        "rank": 13,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille5",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "fbzzxt43",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille7",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Legoshi",
+    "totalWins": 13,
+    "totalLosses": 16,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 8,
+    "history": [
+      {
+        "tournament": "go8qg261",
+        "rank": 13,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "UB12",
+        "rank": 5,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille4",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille5",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "fbzzxt43",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille7",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille8",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "i2ltr3yr",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Ours",
+    "totalWins": 12,
+    "totalLosses": 18,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 9,
+    "history": [
+      {
+        "tournament": "go8qg261",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille11",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "UB12",
+        "rank": 49,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "UB13",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille3",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille4",
+        "rank": 25,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille5",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "fbzzxt43",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "i2ltr3yr",
+        "rank": 7,
+        "wins": 5,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Teycoz",
+    "totalWins": 15,
+    "totalLosses": 12,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 6,
+    "history": [
+      {
+        "tournament": "go8qg261",
+        "rank": 7,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille3",
+        "rank": 13,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille4",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille5",
+        "rank": 9,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "fbzzxt43",
+        "rank": 7,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille8",
+        "rank": 25,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Xymore",
+    "totalWins": 30,
+    "totalLosses": 12,
+    "tournamentWins": 2,
+    "tournamentsPlayed": 8,
+    "history": [
+      {
+        "tournament": "go8qg261",
+        "rank": 2,
+        "wins": 6,
+        "losses": 2
+      },
+      {
+        "tournament": "UB12",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille3",
+        "rank": 9,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille4",
+        "rank": 13,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille5",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille8",
+        "rank": 1,
+        "wins": 6,
+        "losses": 0
+      },
+      {
+        "tournament": "i2ltr3yr",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "i2ltr3yr",
+        "rank": 1,
+        "wins": 7,
+        "losses": 0
+      }
+    ]
+  },
+  {
+    "name": "Shishi",
+    "totalWins": 23,
+    "totalLosses": 9,
+    "tournamentWins": 1,
+    "tournamentsPlayed": 5,
+    "history": [
+      {
+        "tournament": "go8qg261",
+        "rank": 1,
+        "wins": 11,
+        "losses": 1
+      },
+      {
+        "tournament": "UB12",
+        "rank": 9,
+        "wins": 6,
+        "losses": 2
+      },
+      {
+        "tournament": "UB13",
+        "rank": 3,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille7",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "i2ltr3yr",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Alice",
+    "totalWins": 11,
+    "totalLosses": 10,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 5,
+    "history": [
+      {
+        "tournament": "go8qg261",
+        "rank": 3,
+        "wins": 5,
+        "losses": 2
+      },
+      {
+        "tournament": "UB12",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "fbzzxt43",
+        "rank": 13,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille8",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "i2ltr3yr",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Geats",
+    "totalWins": 5,
+    "totalLosses": 12,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 6,
+    "history": [
+      {
+        "tournament": "go8qg261",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "UB13",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille3",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille7",
+        "rank": 13,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille8",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "i2ltr3yr",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Kaiouss",
+    "totalWins": 7,
+    "totalLosses": 10,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 5,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille11",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "UB12",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille3",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille5",
+        "rank": 9,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille7",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Loup",
+    "totalWins": 4,
+    "totalLosses": 6,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 3,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille11",
+        "rank": 9,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "UB12",
+        "rank": 49,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "UB13",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Camilkts",
+    "totalWins": 8,
+    "totalLosses": 8,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 4,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille11",
+        "rank": 2,
+        "wins": 5,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille3",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille4",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille5",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Fred",
+    "totalWins": 20,
+    "totalLosses": 10,
+    "tournamentWins": 1,
+    "tournamentsPlayed": 6,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille11",
+        "rank": 1,
+        "wins": 6,
+        "losses": 0
+      },
+      {
+        "tournament": "UB12",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille3",
+        "rank": 7,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille4",
+        "rank": 9,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille5",
+        "rank": 7,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille7",
+        "rank": 9,
+        "wins": 4,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Sarah",
+    "totalWins": 4,
+    "totalLosses": 6,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 3,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille11",
+        "rank": 25,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille3",
+        "rank": 5,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille5",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Mewxy",
+    "totalWins": 4,
+    "totalLosses": 10,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 5,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille11",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "UB12",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille5",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille7",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "i2ltr3yr",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Wolfi",
+    "totalWins": 4,
+    "totalLosses": 12,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 6,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille11",
+        "rank": 25,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "UB12",
+        "rank": 49,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille5",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "fbzzxt43",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille7",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "i2ltr3yr",
+        "rank": 49,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Ackermann",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille11",
+        "rank": 13,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Kiiro",
+    "totalWins": 3,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille11",
+        "rank": 9,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "OrO",
+    "totalWins": 2,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille11",
+        "rank": 13,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "UB13",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Shio",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille11",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Lewis",
+    "totalWins": 12,
+    "totalLosses": 5,
+    "tournamentWins": 1,
+    "tournamentsPlayed": 3,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille11",
+        "rank": 25,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "UB12",
+        "rank": 13,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "UB13",
+        "rank": 1,
+        "wins": 8,
+        "losses": 1
+      }
+    ]
+  },
+  {
+    "name": "Narugo",
+    "totalWins": 20,
+    "totalLosses": 14,
+    "tournamentWins": 1,
+    "tournamentsPlayed": 8,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille11",
+        "rank": 25,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "UB12",
+        "rank": 49,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille4",
+        "rank": 3,
+        "wins": 5,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille5",
+        "rank": 1,
+        "wins": 6,
+        "losses": 0
+      },
+      {
+        "tournament": "fbzzxt43",
+        "rank": 9,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille7",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille8",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "i2ltr3yr",
+        "rank": 7,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Akitus",
+    "totalWins": 15,
+    "totalLosses": 8,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 4,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille11",
+        "rank": 5,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille3",
+        "rank": 13,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille7",
+        "rank": 2,
+        "wins": 7,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille8",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Manublbl",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille11",
+        "rank": 25,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Aspen",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "UB12",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "ToB||maël",
+    "totalWins": 3,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "UB12",
+        "rank": 9,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "PLUM",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "UB12",
+        "rank": 49,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Inazo",
+    "totalWins": 1,
+    "totalLosses": 6,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 3,
+    "history": [
+      {
+        "tournament": "UB12",
+        "rank": 49,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille7",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "i2ltr3yr",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Beyblade 11 Eden et Noé",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "UB12",
+        "rank": 49,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Sarah Nas",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "UB12",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Ramen S",
+    "totalWins": 1,
+    "totalLosses": 6,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 3,
+    "history": [
+      {
+        "tournament": "UB12",
+        "rank": 49,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "fbzzxt43",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "i2ltr3yr",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Illu",
+    "totalWins": 11,
+    "totalLosses": 8,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 4,
+    "history": [
+      {
+        "tournament": "UB12",
+        "rank": 13,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "UB13",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille5",
+        "rank": 9,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "i2ltr3yr",
+        "rank": 13,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Trahx Yo",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "UB12",
+        "rank": 49,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Tategami",
+    "totalWins": 9,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "UB12",
+        "rank": 3,
+        "wins": 5,
+        "losses": 2
+      },
+      {
+        "tournament": "UB13",
+        "rank": 13,
+        "wins": 4,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Nuilescent",
+    "totalWins": 7,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "UB12",
+        "rank": 7,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "UB13",
+        "rank": 13,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Loic",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "UB12",
+        "rank": 25,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Pecolino",
+    "totalWins": 4,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "UB12",
+        "rank": 5,
+        "wins": 4,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "JojoKirino",
+    "totalWins": 6,
+    "totalLosses": 14,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 7,
+    "history": [
+      {
+        "tournament": "UB12",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "UB13",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille4",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "fbzzxt43",
+        "rank": 13,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille7",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille8",
+        "rank": 25,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "i2ltr3yr",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Kineria",
+    "totalWins": 16,
+    "totalLosses": 14,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 7,
+    "history": [
+      {
+        "tournament": "UB12",
+        "rank": 13,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "UB13",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille4",
+        "rank": 13,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille5",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "fbzzxt43",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille7",
+        "rank": 7,
+        "wins": 5,
+        "losses": 2
+      },
+      {
+        "tournament": "i2ltr3yr",
+        "rank": 9,
+        "wins": 4,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Spinach",
+    "totalWins": 2,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "UB12",
+        "rank": 25,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille3",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Berserk",
+    "totalWins": 6,
+    "totalLosses": 8,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 4,
+    "history": [
+      {
+        "tournament": "UB12",
+        "rank": 49,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "UB13",
+        "rank": 9,
+        "wins": 5,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille7",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "i2ltr3yr",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Philouragan",
+    "totalWins": 7,
+    "totalLosses": 0,
+    "tournamentWins": 1,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "UB12",
+        "rank": 1,
+        "wins": 7,
+        "losses": 0
+      }
+    ]
+  },
+  {
+    "name": "Navalho",
+    "totalWins": 8,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "UB12",
+        "rank": 4,
+        "wins": 6,
+        "losses": 2
+      },
+      {
+        "tournament": "UB13",
+        "rank": 13,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Meiden",
+    "totalWins": 6,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "UB12",
+        "rank": 17,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille7",
+        "rank": 13,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "koto",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "UB12",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Dako",
+    "totalWins": 4,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "UB12",
+        "rank": 17,
+        "wins": 4,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Twi",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "UB12",
+        "rank": 25,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Ilou",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "UB12",
+        "rank": 49,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Yayaa",
+    "totalWins": 4,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "UB12",
+        "rank": 17,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "UB13",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "PridefulLord",
+    "totalWins": 1,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "UB12",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "UB13",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Light Yamani",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "UB12",
+        "rank": 49,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Nathan7",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "UB12",
+        "rank": 25,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Lezko",
+    "totalWins": 4,
+    "totalLosses": 8,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 4,
+    "history": [
+      {
+        "tournament": "UB12",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille3",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille4",
+        "rank": 9,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "fbzzxt43",
+        "rank": 25,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Sufhhc",
+    "totalWins": 4,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "UB12",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "UB13",
+        "rank": 25,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Rami",
+    "totalWins": 3,
+    "totalLosses": 6,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 3,
+    "history": [
+      {
+        "tournament": "UB12",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille4",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "fbzzxt43",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "DarkSpirit",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "UB12",
+        "rank": 25,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Soupy",
+    "totalWins": 11,
+    "totalLosses": 6,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 3,
+    "history": [
+      {
+        "tournament": "UB12",
+        "rank": 9,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "UB13",
+        "rank": 2,
+        "wins": 6,
+        "losses": 2
+      },
+      {
+        "tournament": "i2ltr3yr",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Mr.Fantome",
+    "totalWins": 7,
+    "totalLosses": 6,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 3,
+    "history": [
+      {
+        "tournament": "UB12",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille8",
+        "rank": 2,
+        "wins": 6,
+        "losses": 2
+      },
+      {
+        "tournament": "i2ltr3yr",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Yolkster",
+    "totalWins": 6,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "UB12",
+        "rank": 9,
+        "wins": 6,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Clem",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "UB12",
+        "rank": 49,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Fox",
+    "totalWins": 9,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "UB12",
+        "rank": 25,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "UB13",
+        "rank": 4,
+        "wins": 6,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Baldman",
+    "totalWins": 2,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "UB13",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "i2ltr3yr",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Nxzo",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "UB13",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "NLN",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "UB13",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Qyub",
+    "totalWins": 3,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "UB13",
+        "rank": 5,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Paimy",
+    "totalWins": 12,
+    "totalLosses": 12,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 6,
+    "history": [
+      {
+        "tournament": "UB13",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille4",
+        "rank": 25,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille5",
+        "rank": 13,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "fbzzxt43",
+        "rank": 13,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille8",
+        "rank": 13,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "i2ltr3yr",
+        "rank": 4,
+        "wins": 5,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Nthanb",
+    "totalWins": 5,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "UB13",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "i2ltr3yr",
+        "rank": 5,
+        "wins": 5,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Azoum",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "UB13",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Neymar",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "UB13",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Mehdi93",
+    "totalWins": 4,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "UB13",
+        "rank": 7,
+        "wins": 4,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Philou",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "UB13",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "El Blader Dragon",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille3",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Adan",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille3",
+        "rank": 25,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Ame",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille3",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Centalecto",
+    "totalWins": 1,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille3",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille4",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "FissionFusion",
+    "totalWins": 9,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille3",
+        "rank": 7,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille4",
+        "rank": 2,
+        "wins": 6,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Locain",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille3",
+        "rank": 25,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Pindoufdestin",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille3",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Ackerman",
+    "totalWins": 6,
+    "totalLosses": 6,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 3,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille3",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille4",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille5",
+        "rank": 5,
+        "wins": 4,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Sosso",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille3",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Ryuga",
+    "totalWins": 1,
+    "totalLosses": 6,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 3,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille3",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille4",
+        "rank": 25,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille5",
+        "rank": 25,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Merope",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille3",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Héry",
+    "totalWins": 7,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille3",
+        "rank": 5,
+        "wins": 5,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille4",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Kamen A",
+    "totalWins": 7,
+    "totalLosses": 8,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 4,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille4",
+        "rank": 4,
+        "wins": 4,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille5",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille7",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "i2ltr3yr",
+        "rank": 13,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Jason",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille4",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Skyne",
+    "totalWins": 2,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille4",
+        "rank": 9,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "i2ltr3yr",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Pax Forsythe",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille4",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Mael",
+    "totalWins": 12,
+    "totalLosses": 6,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 3,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille4",
+        "rank": 5,
+        "wins": 6,
+        "losses": 2
+      },
+      {
+        "tournament": "fbzzxt43",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille8",
+        "rank": 5,
+        "wins": 5,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Aichouxx",
+    "totalWins": 3,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille4",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "fbzzxt43",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Niban",
+    "totalWins": 1,
+    "totalLosses": 6,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 3,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille4",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille5",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille7",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Ruby_da_cherey",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille4",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Flower HH 9-70 G",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille4",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Chad Light",
+    "totalWins": 2,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille5",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille7",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Snipblast",
+    "totalWins": 5,
+    "totalLosses": 6,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 3,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille5",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      },
+      {
+        "tournament": "fbzzxt43",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille8",
+        "rank": 13,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Jadoudou",
+    "totalWins": 2,
+    "totalLosses": 6,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 3,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille5",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille8",
+        "rank": 9,
+        "wins": 2,
+        "losses": 2
+      },
+      {
+        "tournament": "i2ltr3yr",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "BeyMael253",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille5",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Ahrityr",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille5",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "NS",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille5",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Mehdi",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille5",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Darkhater",
+    "totalWins": 4,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "fbzzxt43",
+        "rank": 5,
+        "wins": 4,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Kmn83",
+    "totalWins": 4,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "fbzzxt43",
+        "rank": 7,
+        "wins": 3,
+        "losses": 2
+      },
+      {
+        "tournament": "WildBreakersUltimeBataille7",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Beyjawad",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "fbzzxt43",
+        "rank": 25,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Daneb",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "fbzzxt43",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Kipik",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "fbzzxt43",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Yuto",
+    "totalWins": 6,
+    "totalLosses": 0,
+    "tournamentWins": 1,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "fbzzxt43",
+        "rank": 1,
+        "wins": 6,
+        "losses": 0
+      }
+    ]
+  },
+  {
+    "name": "Ichi",
+    "totalWins": 3,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "fbzzxt43",
+        "rank": 5,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Mid G TP380U KS360R SE960F",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "fbzzxt43",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Ryuk",
+    "totalWins": 3,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille7",
+        "rank": 5,
+        "wins": 3,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "MekaMyu",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille7",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Abby",
+    "totalWins": 5,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille7",
+        "rank": 4,
+        "wins": 5,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "FlambinoX",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille7",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Snowpye",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille8",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Nepp-woah",
+    "totalWins": 4,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille8",
+        "rank": 5,
+        "wins": 4,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Fabien le ceratopsian",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille8",
+        "rank": 13,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Thorfin",
+    "totalWins": 4,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille8",
+        "rank": 3,
+        "wins": 4,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Littlemask",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille8",
+        "rank": 17,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Mini Gelofy",
+    "totalWins": 1,
+    "totalLosses": 4,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 2,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille8",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      },
+      {
+        "tournament": "i2ltr3yr",
+        "rank": 33,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Victor",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille8",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Dazqo",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "WildBreakersUltimeBataille8",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Hyakutake",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "i2ltr3yr",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Eraidos",
+    "totalWins": 2,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "i2ltr3yr",
+        "rank": 17,
+        "wins": 2,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "DQ",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "i2ltr3yr",
+        "rank": 33,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Hao Asakura",
+    "totalWins": 1,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "i2ltr3yr",
+        "rank": 25,
+        "wins": 1,
+        "losses": 2
+      }
+    ]
+  },
+  {
+    "name": "Igris",
+    "totalWins": 0,
+    "totalLosses": 2,
+    "tournamentWins": 0,
+    "tournamentsPlayed": 1,
+    "history": [
+      {
+        "tournament": "i2ltr3yr",
+        "rank": 49,
+        "wins": 0,
+        "losses": 2
+      }
+    ]
+  }
+]

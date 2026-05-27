@@ -1,0 +1,3299 @@
+{
+  "scrapedAt": "2026-03-30T03:48:10.455Z",
+  "threadUrl": "https://worldbeyblade.org/Thread-Winning-Combinations-at-WBO-Organized-Events-Beyblade-X-BBX",
+  "pagesScraped": 3,
+  "totalEvents": 39,
+  "events": [
+    {
+      "name": "NEBO X ... 2",
+      "date": "2026-03-29",
+      "matchType": "3on3; Single Elimination (First to 7)",
+      "playerCount": 33,
+      "ranked": true,
+      "placements": [
+        {
+          "placement": 1,
+          "player": "SAVI0R",
+          "combos": [
+            {
+              "blade": "Aero Pegasus",
+              "ratchet": "1-70",
+              "bit": "K (Kick)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "ValkyrieBlast",
+              "ratchet": "9-60",
+              "bit": "J (Jolt)",
+              "assistBlade": "Heavy",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "1-60",
+              "bit": "FB (Free Ball)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 2,
+          "player": "basilsrighttoe",
+          "combos": [
+            {
+              "blade": "Meteor Dragoon",
+              "ratchet": "7-70",
+              "bit": "L (Level)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "1-60",
+              "bit": "H (Hexa)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "1-50",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 3,
+          "player": "Valentino0317",
+          "combos": [
+            {
+              "blade": "Cobalt Dragoon",
+              "ratchet": "5-60",
+              "bit": "E (Elevate)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "EmperorBlast",
+              "ratchet": "1-60",
+              "bit": "LR (Low Rush)",
+              "assistBlade": "Heavy",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "9-60",
+              "bit": "H (Hexa)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Master ... 2",
+      "date": "2026-03-29",
+      "matchType": "3on3; Single Elimination (First to 7)",
+      "playerCount": 23,
+      "ranked": true,
+      "placements": [
+        {
+          "placement": 1,
+          "player": "0cean",
+          "combos": [
+            {
+              "blade": "EmperorBlast",
+              "ratchet": "1-50",
+              "bit": "R (Rush)",
+              "assistBlade": "Heavy",
+              "stage": "Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "7-70",
+              "bit": "LR (Low Rush)",
+              "stage": "Final Stage"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "1-60",
+              "bit": "FB (Free Ball)",
+              "stage": "Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 2,
+          "player": "Kalator",
+          "combos": [
+            {
+              "blade": "Tyranno Beat",
+              "ratchet": "7-60",
+              "bit": "R (Rush)",
+              "stage": "Final Stage"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "1-60",
+              "bit": "FB (Free Ball)",
+              "stage": "Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "9-60",
+              "bit": "LR (Low Rush)",
+              "stage": "Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 3,
+          "player": "Thedude406",
+          "combos": [
+            {
+              "blade": "Meteor Dragoon",
+              "ratchet": "7-70",
+              "bit": "L (Level)",
+              "stage": "Final Stage"
+            },
+            {
+              "blade": "Phoenix Wing",
+              "ratchet": "1-60",
+              "bit": "R (Rush)",
+              "stage": "Final Stage"
+            },
+            {
+              "blade": "Silver Wolf",
+              "ratchet": "9-60",
+              "bit": "LO (Low Orb)",
+              "stage": "Final Stage"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Boba an...pid1920978",
+      "date": "2026-03-29",
+      "matchType": "3on3; Single Elimination (First to 7)",
+      "playerCount": 39,
+      "ranked": true,
+      "placements": [
+        {
+          "placement": 1,
+          "player": "Cpt Crnch",
+          "combos": [
+            {
+              "blade": "Orochi Cluster",
+              "ratchet": "1-70",
+              "bit": "T (Taper)",
+              "stage": "First Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "7-70",
+              "bit": "FB (Free Ball)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "EmperorBlast",
+              "ratchet": "9-60",
+              "bit": "K (Kick)",
+              "assistBlade": "Heavy",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Aero Pegasus",
+              "ratchet": "1-60",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 2,
+          "player": "BUSA",
+          "combos": [
+            {
+              "blade": "Shark Scale",
+              "ratchet": "9-60",
+              "bit": "LR (Low Rush)",
+              "stage": "Final Stage"
+            },
+            {
+              "blade": "Meteor Dragoon",
+              "ratchet": "5-60",
+              "bit": "L (Level)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Mummy Curse",
+              "ratchet": "1-60",
+              "bit": "W (Wedge)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Aero Pegasus",
+              "ratchet": "1-70",
+              "bit": "R (Rush)",
+              "stage": "First Stage"
+            }
+          ]
+        },
+        {
+          "placement": 3,
+          "player": "Glitch_01",
+          "combos": [
+            {
+              "blade": "Knight Mail",
+              "ratchet": "7-60",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "1-60",
+              "bit": "H (Hexa)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wyvern Hover",
+              "ratchet": "9-60",
+              "bit": "K (Kick)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "class=\"media\">",
+      "date": "2026-03-29",
+      "playerCount": 15,
+      "ranked": true,
+      "placements": [
+        {
+          "placement": 1,
+          "player": "Place:BlaydeArmy",
+          "combos": [
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "1-50",
+              "bit": "H (Hexa)",
+              "stage": "Both Stages"
+            },
+            {
+              "blade": "Phoenix Wing",
+              "ratchet": "1-60",
+              "bit": "LR (Low Rush)",
+              "stage": "Both Stages"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "1-70",
+              "bit": "FB (Free Ball)",
+              "stage": "Both Stages"
+            }
+          ]
+        },
+        {
+          "placement": 2,
+          "player": "Place:Ringer",
+          "combos": [
+            {
+              "blade": "Meteor Dragoon",
+              "ratchet": "1-70",
+              "bit": "L (Level)",
+              "stage": "Both Stages"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "3-60",
+              "bit": "J (Jolt)",
+              "stage": "Both Stages"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "1-80",
+              "bit": "H (Hexa)",
+              "stage": "Both Stages"
+            }
+          ]
+        },
+        {
+          "placement": 3,
+          "player": "Place:ManuAura",
+          "combos": [
+            {
+              "blade": "Golem Rock",
+              "ratchet": "1-60",
+              "bit": "W (Wedge)",
+              "stage": "Both Stages"
+            },
+            {
+              "blade": "Hover Wyvern",
+              "ratchet": "3-60",
+              "bit": "LR (Low Rush)",
+              "stage": "Both Stages"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "9-60",
+              "bit": "LO (Low Orb)",
+              "stage": "Both Stages"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Beyblad...pid1919599",
+      "date": "2026-03-29",
+      "matchType": "3on3; Single Elimination (First to 7)",
+      "playerCount": 24,
+      "ranked": true,
+      "placements": [
+        {
+          "placement": 1,
+          "player": "EpicBurstYt!",
+          "combos": [
+            {
+              "blade": "Phoenix Wing",
+              "ratchet": "7-60",
+              "bit": "K (Kick)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "3-60",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Mummy Curse",
+              "ratchet": "1-60",
+              "bit": "LO (Low Orb)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 2,
+          "player": "Shawn514",
+          "combos": [
+            {
+              "blade": "Meteor Dragoon",
+              "ratchet": "7-60",
+              "bit": "L (Level)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "1-50",
+              "bit": "R (Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "1-60",
+              "bit": "H (Hexa)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 3,
+          "player": "Succulent819",
+          "combos": [
+            {
+              "blade": "Wyvern Hover",
+              "ratchet": "9-60",
+              "bit": "R (Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "1-60",
+              "bit": "H (Hexa)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "3-60",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Virgini...lo",
+      "date": "2026-03-29",
+      "matchType": "3on3; Single Elimination (Best of 3)",
+      "playerCount": 44,
+      "ranked": true,
+      "placements": [
+        {
+          "placement": 1,
+          "player": "Havoc",
+          "combos": [
+            {
+              "blade": "EmperorBlast",
+              "ratchet": "9-60",
+              "bit": "O (Orb)",
+              "assistBlade": "Heavy",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Clock Mirage",
+              "ratchet": "4-55",
+              "bit": "LO (Low Orb)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "1-60",
+              "bit": "H (Hexa)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 2,
+          "player": "Dhawk50",
+          "combos": [
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "1-50",
+              "bit": "K (Kick)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Aero Pegasus",
+              "ratchet": "1-60",
+              "bit": "R (Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "1-70",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 3,
+          "player": "TreySpinz",
+          "combos": [
+            {
+              "blade": "Aero Pegasus",
+              "ratchet": "1-60",
+              "bit": "K (Kick)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "7-60",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Cobalt Dragoon",
+              "ratchet": "9-60",
+              "bit": "E (Elevate)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Beys in...es",
+      "date": "2026-03-29",
+      "matchType": "Counter Battle; Single Elimination (First to 7)",
+      "playerCount": 21,
+      "ranked": true,
+      "placements": [
+        {
+          "placement": 1,
+          "player": "punishedslug",
+          "combos": [
+            {
+              "blade": "Knight Mail",
+              "ratchet": "1-50",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 2,
+          "player": "Kingnoodle",
+          "combos": [
+            {
+              "blade": "Phoenix Wing",
+              "ratchet": "7-60",
+              "bit": "R (Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "1-60",
+              "bit": "H (Hexa)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Golem Rock",
+              "ratchet": "9-60",
+              "bit": "W (Wedge)",
+              "stage": "Final Stage"
+            },
+            {
+              "blade": "Wyvern Hover",
+              "ratchet": "9-60",
+              "bit": "K (Kick)",
+              "stage": "First Stage"
+            }
+          ]
+        },
+        {
+          "placement": 3,
+          "player": "beyden",
+          "combos": [
+            {
+              "blade": "Shark Scale",
+              "ratchet": "3-60",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "1-60",
+              "bit": "H (Hexa)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Rip%E2%...26",
+      "date": "2026-03-28",
+      "matchType": "3on3; Double Elimination (First to 7)",
+      "playerCount": 26,
+      "ranked": false,
+      "placements": [
+        {
+          "placement": 1,
+          "player": "RoyalStriker",
+          "combos": [
+            {
+              "blade": "Shark Scale",
+              "ratchet": "7-70",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Aero Pegasus",
+              "ratchet": "1-60",
+              "bit": "K (Kick)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wyvern Hover",
+              "ratchet": "9-60",
+              "bit": "J (Jolt)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 2,
+          "player": "Nove_bbx",
+          "combos": [
+            {
+              "blade": "Wyvern Hover",
+              "ratchet": "1-60",
+              "bit": "R (Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Pegasus Blast",
+              "ratchet": "9-60",
+              "bit": "K (Kick)",
+              "assistBlade": "Heavy",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Cobalt Dragoon",
+              "ratchet": "5-60",
+              "bit": "E (Elevate)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 3,
+          "player": "BearNap",
+          "combos": [
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "7-60",
+              "bit": "B (Ball)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Aero Pegasus",
+              "ratchet": "9-60",
+              "bit": "Disk Ball",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "1-60",
+              "bit": "LO (Low Orb)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Bankai ...nt",
+      "date": "2026-03-28",
+      "matchType": "3on3; Single Elimination (First to 7)",
+      "playerCount": 28,
+      "ranked": true,
+      "placements": [
+        {
+          "placement": 1,
+          "player": "WolfBladerX",
+          "combos": [
+            {
+              "blade": "Shark Scale",
+              "ratchet": "3-60",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Aero Pegasus",
+              "ratchet": "7-60",
+              "bit": "R (Rush)",
+              "stage": "Final Stage"
+            },
+            {
+              "blade": "Mummy Curse",
+              "ratchet": "9-60",
+              "bit": "UN (Under Needle)",
+              "stage": "Final Stage"
+            },
+            {
+              "blade": "Clock Mirage",
+              "ratchet": "7-55",
+              "bit": "FB (Free Ball)",
+              "stage": "First Stage"
+            },
+            {
+              "blade": "Meteor Dragoon",
+              "ratchet": "7-70",
+              "bit": "L (Level)",
+              "stage": "First Stage"
+            }
+          ]
+        },
+        {
+          "placement": 2,
+          "player": "Tyrannobeys",
+          "combos": [
+            {
+              "blade": "Phoenix Wing",
+              "ratchet": "3-60",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Tyranno Beat",
+              "ratchet": "9-60",
+              "bit": "P (Point)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "SolBrave",
+              "ratchet": "9-70",
+              "bit": "J (Jolt)",
+              "assistBlade": "Charge",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 3,
+          "player": "phet",
+          "combos": [
+            {
+              "blade": "Cobalt Dragoon",
+              "ratchet": "5-60",
+              "bit": "E (Elevate)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Scorpio Spear",
+              "ratchet": "7-60",
+              "bit": "K (Kick)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "1-60",
+              "bit": "H (Hexa)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Nook Arena 27",
+      "date": "2026-03-28",
+      "matchType": "3on3; Single Elimination (First to 7)",
+      "playerCount": 14,
+      "ranked": true,
+      "placements": [
+        {
+          "placement": 1,
+          "player": "Ponchi",
+          "combos": [
+            {
+              "blade": "Phoenix Wing",
+              "ratchet": "3-60",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "1-60",
+              "bit": "H (Hexa)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Mummy Curse",
+              "ratchet": "1-50",
+              "bit": "K (Kick)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 2,
+          "player": "UncBey",
+          "combos": [
+            {
+              "blade": "Wyvern Hover",
+              "ratchet": "9-60",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Dran Buster",
+              "ratchet": "1-60",
+              "bit": "K (Kick)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Phoenix Wing",
+              "ratchet": "3-80",
+              "bit": "FB (Free Ball)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 3,
+          "player": "Negative Zero",
+          "combos": [
+            {
+              "blade": "Shark Scale",
+              "ratchet": "3-60",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "1-60",
+              "bit": "H (Hexa)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Golem Rock",
+              "ratchet": "9-60",
+              "bit": "B (Ball)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Master ...pid1919532",
+      "date": "2026-03-28",
+      "matchType": "3on3; Single Elimination (First to 7)",
+      "playerCount": 18,
+      "ranked": true,
+      "placements": [
+        {
+          "placement": 1,
+          "player": "BayWolf",
+          "combos": [
+            {
+              "blade": "WizardBlast",
+              "ratchet": "9-60",
+              "bit": "K (Kick)",
+              "assistBlade": "Heavy",
+              "stage": "Final Stage"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "1-60",
+              "bit": "R (Rush)",
+              "stage": "Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "1-50",
+              "bit": "LR (Low Rush)",
+              "stage": "Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 2,
+          "player": "Renzi",
+          "combos": [
+            {
+              "blade": "Cobalt Drake",
+              "ratchet": "9-60",
+              "bit": "E (Elevate)",
+              "stage": "Final Stage"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "1-60",
+              "bit": "FB (Free Ball)",
+              "stage": "Final Stage"
+            },
+            {
+              "blade": "Phoenix Wing",
+              "ratchet": "3-60",
+              "bit": "LR (Low Rush)",
+              "stage": "Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 3,
+          "player": "Spida-Mane",
+          "combos": [
+            {
+              "blade": "Clock Mirage",
+              "ratchet": "9-80",
+              "bit": "HN (High Needle)",
+              "stage": "Final Stage"
+            },
+            {
+              "blade": "Golem Rock",
+              "ratchet": "9-60",
+              "bit": "FB (Free Ball)",
+              "stage": "Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "1-60",
+              "bit": "LR (Low Rush)",
+              "stage": "Final Stage"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Master Bursters ACC 24",
+      "date": "2026-03-28",
+      "matchType": "3on3; Single Elimination (First to 7)",
+      "playerCount": 46,
+      "ranked": true,
+      "placements": [
+        {
+          "placement": 1,
+          "player": "Shaddol",
+          "combos": [
+            {
+              "blade": "Shark Scale",
+              "ratchet": "1-70",
+              "bit": "LR (Low Rush)",
+              "stage": "Final Stage"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "9-60",
+              "bit": "B (Ball)",
+              "stage": "Final Stage"
+            },
+            {
+              "blade": "EmperorBlast",
+              "ratchet": "1-50",
+              "bit": "K (Kick)",
+              "assistBlade": "Heavy",
+              "stage": "Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 2,
+          "player": "Diablotheblader",
+          "combos": [
+            {
+              "blade": "Meteor Dragoon",
+              "ratchet": "7-60",
+              "bit": "L (Level)",
+              "stage": "Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "1-60",
+              "bit": "LR (Low Rush)",
+              "stage": "Final Stage"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "1-70",
+              "bit": "H (Hexa)",
+              "stage": "Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 3,
+          "player": "Darky_777",
+          "combos": [
+            {
+              "blade": "SolBlast",
+              "ratchet": "3-60",
+              "bit": "R (Rush)",
+              "assistBlade": "Heavy",
+              "stage": "Final Stage"
+            },
+            {
+              "blade": "Aero Pegasus",
+              "ratchet": "1-60",
+              "bit": "P (Point)",
+              "stage": "Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "1-50",
+              "bit": "LR (Low Rush)",
+              "stage": "Final Stage"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Beyblad...pid1919918",
+      "date": "2026-03-28",
+      "matchType": "3on3; Single Elimination (First to 7)",
+      "playerCount": 19,
+      "ranked": true,
+      "placements": [
+        {
+          "placement": 1,
+          "player": "uppercaseccc",
+          "combos": [
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "1-60",
+              "bit": "H (Hexa)",
+              "stage": "Final Stage"
+            },
+            {
+              "blade": "Cobalt Dragoon",
+              "ratchet": "9-60",
+              "bit": "E (Elevate)",
+              "stage": "Final Stage"
+            },
+            {
+              "blade": "Golem Rock",
+              "ratchet": "9-70",
+              "bit": "W (Wedge)",
+              "stage": "Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 2,
+          "player": "Xiothik",
+          "combos": [
+            {
+              "blade": "Cobalt Dragoon",
+              "ratchet": "5-60",
+              "bit": "E (Elevate)",
+              "stage": "Final Stage"
+            },
+            {
+              "blade": "Meteor Dragoon",
+              "ratchet": "3-60",
+              "bit": "L (Level)",
+              "stage": "Final Stage"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "1-60",
+              "bit": "H (Hexa)",
+              "stage": "Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 3,
+          "player": "SushiGrade",
+          "combos": [
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "9-60",
+              "bit": "FB (Free Ball)",
+              "stage": "Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "5-60",
+              "bit": "L (Level)",
+              "stage": "Final Stage"
+            },
+            {
+              "blade": "Cobalt Dragoon",
+              "ratchet": "1-60",
+              "bit": "E (Elevate)",
+              "stage": "Final Stage"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Peak X ...ht",
+      "date": "2026-03-28",
+      "matchType": "3on3; Single Elimination (First to 7)",
+      "playerCount": 27,
+      "ranked": true,
+      "placements": [
+        {
+          "placement": 1,
+          "player": "MrMossyBanks",
+          "combos": [
+            {
+              "blade": "Phoenix Wing",
+              "ratchet": "3-60",
+              "bit": "K (Kick)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Meteor Dragoon",
+              "ratchet": "3-70",
+              "bit": "L (Level)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "1-60",
+              "bit": "H (Hexa)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 2,
+          "player": "Jc jc",
+          "combos": [
+            {
+              "blade": "Cobalt Dragoon",
+              "ratchet": "9-60",
+              "bit": "E (Elevate)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "1-60",
+              "bit": "H (Hexa)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "3-60",
+              "bit": "LO (Low Orb)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 3,
+          "player": "Mariojacob14",
+          "combos": [
+            {
+              "blade": "Mummy Curse",
+              "ratchet": "7-60",
+              "bit": "WW (Wall Wedge)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "4-50",
+              "bit": "J (Jolt)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "1-60",
+              "bit": "H (Hexa)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Red Hulk",
+              "ratchet": "5-60",
+              "bit": "P (Point)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Meteor Dragoon",
+              "ratchet": "7-70",
+              "bit": "L (Level)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "1-60",
+              "bit": "H (Hexa)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Waffles... 1",
+      "date": "2026-03-28",
+      "playerCount": 18,
+      "ranked": false,
+      "placements": [
+        {
+          "placement": 1,
+          "player": "kenjaku",
+          "combos": [
+            {
+              "blade": "Wyvern Hover",
+              "ratchet": "6-60",
+              "bit": "LR (Low Rush)",
+              "stage": "First and Final Stage"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "9-60",
+              "bit": "B (Ball)",
+              "stage": "First and Final Stage"
+            },
+            {
+              "blade": "Cobalt Dragoon",
+              "ratchet": "5-60",
+              "bit": "E (Elevate)",
+              "stage": "First and Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 2,
+          "player": "P4ND4ROCKST4R",
+          "combos": [
+            {
+              "blade": "Meteor Dragoon",
+              "ratchet": "7-60",
+              "bit": "L (Level)",
+              "stage": "First and Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "1-80",
+              "bit": "H (Hexa)",
+              "stage": "First and Final Stage"
+            },
+            {
+              "blade": "EmperorBlast H",
+              "ratchet": "6-60",
+              "bit": "K (Kick)",
+              "stage": "First and Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 3,
+          "player": "GhostFish",
+          "combos": [
+            {
+              "blade": "Phoenix Wing",
+              "ratchet": "6-60",
+              "bit": "R (Rush)",
+              "stage": "First and Final Stage"
+            },
+            {
+              "blade": "Cobalt Dragoon",
+              "ratchet": "5-60",
+              "bit": "E (Elevate)",
+              "stage": "First and Final Stage"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "1-60",
+              "bit": "FB (Free Ball)",
+              "stage": "First and Final Stage"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "SATURDA...26",
+      "date": "2026-03-28",
+      "matchType": "3on3; Single Elimination (Best of 3)",
+      "playerCount": 30,
+      "ranked": false,
+      "placements": [
+        {
+          "placement": 1,
+          "player": "Elliot9000",
+          "combos": [
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "3-60",
+              "bit": "H (Hexa)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "WolfBlast",
+              "ratchet": "1-50",
+              "bit": "LR (Low Rush)",
+              "assistBlade": "Heavy",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "1-60",
+              "bit": "R (Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "6-60",
+              "bit": "H (Hexa)",
+              "stage": "First Stage"
+            }
+          ]
+        },
+        {
+          "placement": 2,
+          "player": "sword blader",
+          "combos": [
+            {
+              "blade": "Shark Scale",
+              "ratchet": "1-60",
+              "bit": "R (Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "6-60",
+              "bit": "H (Hexa)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Pegasus Blast",
+              "ratchet": "6-70",
+              "bit": "LR (Low Rush)",
+              "assistBlade": "Wheel",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Pegasus Blast",
+              "ratchet": "9-60",
+              "bit": "LR (Low Rush)",
+              "assistBlade": "Wheel",
+              "stage": "First Stage"
+            }
+          ]
+        },
+        {
+          "placement": 3,
+          "player": "Kabl",
+          "combos": [
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "6-60",
+              "bit": "H (Hexa)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "1-60",
+              "bit": "R (Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Pegasus Blast",
+              "ratchet": "9-60",
+              "bit": "K (Kick)",
+              "assistBlade": "Heavy",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Manassa...26",
+      "date": "2026-03-28",
+      "matchType": "3on3; Single Elimination (Best of 3)",
+      "playerCount": 28,
+      "ranked": false,
+      "placements": [
+        {
+          "placement": 1,
+          "player": "Dhawk50",
+          "combos": [
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "1-50",
+              "bit": "K (Kick)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Aero Pegasus",
+              "ratchet": "1-60",
+              "bit": "R (Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "1-70",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 2,
+          "player": "Exia",
+          "combos": [
+            {
+              "blade": "Aero Pegasus",
+              "ratchet": "1-60",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "1-50",
+              "bit": "R (Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "9-60",
+              "bit": "FB (Free Ball)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 3,
+          "player": "KingKodiak96",
+          "combos": [
+            {
+              "blade": "Croc Crunch",
+              "ratchet": "2-60",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "9-60",
+              "bit": "LO (Low Orb)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Golem Rock",
+              "ratchet": "7-60",
+              "bit": "K (Kick)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "FRIDAY ...26",
+      "date": "2026-03-27",
+      "playerCount": 16,
+      "ranked": false,
+      "placements": [
+        {
+          "placement": 1,
+          "player": "CrispySynchron",
+          "combos": [
+            {
+              "blade": "EmperorFlare",
+              "ratchet": "5-60",
+              "bit": "P (Point)",
+              "assistBlade": "Heavy",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wyvern Hover",
+              "ratchet": "3-60",
+              "bit": "J (Jolt)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Golem Rock",
+              "ratchet": "9-60",
+              "bit": "LO (Low Orb)",
+              "stage": "First Stage Only"
+            },
+            {
+              "blade": "Golem Rock",
+              "ratchet": "9-60",
+              "bit": "FB (Free Ball)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 2,
+          "player": "BuddyShiba",
+          "combos": [
+            {
+              "blade": "Shark Scale",
+              "ratchet": "3-60",
+              "bit": "J (Jolt)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Aero Pegasus",
+              "ratchet": "1-60",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Silver Wolf",
+              "ratchet": "9-60",
+              "bit": "LO (Low Orb)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 3,
+          "player": "Exia",
+          "combos": [
+            {
+              "blade": "Shark Scale",
+              "ratchet": "1-50",
+              "bit": "R (Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Aero Pegasus",
+              "ratchet": "1-60",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "9-60",
+              "bit": "FB (Free Ball)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "PTL BEY... 3",
+      "date": "2026-03-27",
+      "matchType": "Counter Battle; Single Elimination (First to 7)",
+      "playerCount": 21,
+      "ranked": true,
+      "placements": [
+        {
+          "placement": 1,
+          "player": "DreadLyre",
+          "combos": [
+            {
+              "blade": "Tyranno Beat",
+              "ratchet": "3-60",
+              "bit": "P (Point)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "9-60",
+              "bit": "LO (Low Orb)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "1-60",
+              "bit": "L (Level)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 2,
+          "player": "BladerJL",
+          "combos": [
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "1-60",
+              "bit": "H (Hexa)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "1-70",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wyvern Hover",
+              "ratchet": "9-60",
+              "bit": "K (Kick)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 3,
+          "player": "Cmbaker82",
+          "combos": [
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "1-60",
+              "bit": "H (Hexa)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Phoenix Wing",
+              "ratchet": "3-60",
+              "bit": "R (Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Cobalt Dragoon",
+              "ratchet": "9-60",
+              "bit": "E (Elevate)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "MB ACC ... 6",
+      "date": "2026-03-27",
+      "matchType": "3on3; Single Elimination (First to 7)",
+      "playerCount": 100,
+      "ranked": true,
+      "placements": [
+        {
+          "placement": 1,
+          "player": "Kanztweetz",
+          "combos": [
+            {
+              "blade": "Cobalt Dragoon",
+              "ratchet": "9-60",
+              "bit": "E (Elevate)",
+              "stage": "Final Stage"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "1-60",
+              "bit": "LO (Low Orb)",
+              "stage": "Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "3-60",
+              "bit": "R (Rush)",
+              "stage": "Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 2,
+          "player": "Tempo20xxx",
+          "combos": [
+            {
+              "blade": "Cobalt Drake",
+              "ratchet": "3-60",
+              "bit": "E (Elevate)",
+              "stage": "Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "9-70",
+              "bit": "R (Rush)",
+              "stage": "Final Stage"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "9-60",
+              "bit": "B (Ball)",
+              "stage": "Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 3,
+          "player": "Chuy",
+          "combos": [
+            {
+              "blade": "Cobalt Dragoon",
+              "ratchet": "9-60",
+              "bit": "E (Elevate)",
+              "stage": "Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "1-70",
+              "bit": "LR (Low Rush)",
+              "stage": "Final Stage"
+            },
+            {
+              "blade": "Aero Pegasus",
+              "ratchet": "1-60",
+              "bit": "K (Kick)",
+              "stage": "Final Stage"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Project...ip",
+      "date": "2026-03-26",
+      "matchType": "3on3; Single Elimination (First to 7)",
+      "playerCount": 24,
+      "ranked": true,
+      "placements": [
+        {
+          "placement": 1,
+          "player": "st@n",
+          "combos": [
+            {
+              "blade": "Wyvern Hover",
+              "ratchet": "9-60",
+              "bit": "R (Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Golem Rock",
+              "ratchet": "7-60",
+              "bit": "H (Hexa)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "4-50",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 2,
+          "player": "IRNoobKake",
+          "combos": [
+            {
+              "blade": "Aero Pegasus",
+              "ratchet": "1-70",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Cobalt Dragoon",
+              "ratchet": "7-60",
+              "bit": "E (Elevate)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Silver Wolf",
+              "ratchet": "1-70",
+              "bit": "H (Hexa)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "1-70",
+              "bit": "H (Hexa)",
+              "stage": "First Stage"
+            }
+          ]
+        },
+        {
+          "placement": 3,
+          "player": "Mike18",
+          "combos": [
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "1-70",
+              "bit": "H (Hexa)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Cobalt Dragoon",
+              "ratchet": "9-60",
+              "bit": "E (Elevate)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Aero Pegasus",
+              "ratchet": "1-60",
+              "bit": "R (Rush)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Clashin... 2",
+      "date": "2026-03-26",
+      "matchType": "3on3; Single Elimination (Best of 3)",
+      "playerCount": 30,
+      "ranked": true,
+      "placements": [
+        {
+          "placement": 1,
+          "player": "Orchid",
+          "combos": [
+            {
+              "blade": "EmperorBlast",
+              "ratchet": "3-60",
+              "bit": "K (Kick)",
+              "assistBlade": "Heavy",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wyvern Hover",
+              "ratchet": "9-60",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "1-60",
+              "bit": "H (Hexa)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 2,
+          "player": "Estebomb",
+          "combos": [
+            {
+              "blade": "Orochi Cluster",
+              "ratchet": "7-60",
+              "bit": "K (Kick)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Aero Pegasus",
+              "ratchet": "9-60",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "EmperorBlast",
+              "ratchet": "1-60",
+              "bit": "R (Rush)",
+              "assistBlade": "Heavy",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 3,
+          "player": "Cinimod",
+          "combos": [
+            {
+              "blade": "Shark Scale",
+              "ratchet": "3-60",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage"
+            },
+            {
+              "blade": "Wyvern Hover",
+              "ratchet": "9-60",
+              "bit": "FB (Free Ball)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "1-60",
+              "bit": "LO (Low Orb)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "MOVED B...Conclave 6",
+      "date": "2026-03-26",
+      "matchType": "3on3; Single Elimination (First to 5, Best of 3)",
+      "playerCount": 4,
+      "ranked": false,
+      "placements": [
+        {
+          "placement": 1,
+          "player": "BigShaggy697",
+          "combos": [
+            {
+              "blade": "Shark Scale",
+              "ratchet": "1-70",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wyvern Hover",
+              "ratchet": "9-60",
+              "bit": "L (Level)",
+              "stage": "First Stage"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "1-60",
+              "bit": "H (Hexa)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wyvern Hover",
+              "ratchet": "9-60",
+              "bit": "K (Kick)",
+              "stage": "Final Stage"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Bricks ...pid1920067",
+      "date": "2026-03-26",
+      "matchType": "3on3; Single Elimination (First to 7)",
+      "playerCount": 16,
+      "ranked": true,
+      "placements": [
+        {
+          "placement": 1,
+          "player": "Slickjones",
+          "combos": [
+            {
+              "blade": "Hells Hammer",
+              "ratchet": "3-60",
+              "bit": "K (Kick)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "1-60",
+              "bit": "H (Hexa)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "1-70",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 2,
+          "player": "Rennnnnieee",
+          "combos": [
+            {
+              "blade": "Meteor Dragoon",
+              "ratchet": "5-60",
+              "bit": "L (Level)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wyvern Hover",
+              "ratchet": "1-60",
+              "bit": "K (Kick)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "4-50",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 3,
+          "player": "Spin Limited",
+          "combos": [
+            {
+              "blade": "Weiss Tiger",
+              "ratchet": "6-60",
+              "bit": "E (Elevate)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Samurai Saber",
+              "ratchet": "0-70",
+              "bit": "H (Hexa)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Silver Wolf",
+              "ratchet": "9-70",
+              "bit": "WB (Wall Ball)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Big Chi...pid1920731",
+      "date": "2026-03-26",
+      "matchType": "3on3; Single Elimination (Best of 3)",
+      "playerCount": 15,
+      "ranked": false,
+      "placements": [
+        {
+          "placement": 1,
+          "player": "asznmusic",
+          "combos": [
+            {
+              "blade": "Cobalt Dragoon",
+              "ratchet": "1-60",
+              "bit": "L (Level)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Meteor Dragoon",
+              "ratchet": "4-50",
+              "bit": "Z (Zap)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Mummy Curse",
+              "ratchet": "7-60",
+              "bit": "LO (Low Orb)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 2,
+          "player": "Rakari",
+          "combos": [
+            {
+              "blade": "Golem Rock",
+              "ratchet": "1-60",
+              "bit": "R (Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "9-60",
+              "bit": "FB (Free Ball)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "1-70",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 3,
+          "player": "Presty",
+          "combos": [
+            {
+              "blade": "Aero Pegasus",
+              "ratchet": "9-60",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Silver Wolf",
+              "ratchet": "9-70",
+              "bit": "H (Hexa)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Meteor Dragoon",
+              "ratchet": "1-60",
+              "bit": "Z (Zap)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "SATURDA...26",
+      "date": "2026-03-23",
+      "playerCount": 34,
+      "ranked": false,
+      "placements": [
+        {
+          "placement": 1,
+          "player": "Elliot9000",
+          "combos": [
+            {
+              "blade": "Wyvern Hover",
+              "ratchet": "9-60",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage Only"
+            },
+            {
+              "blade": "WolfBlast",
+              "ratchet": "9-60",
+              "bit": "K (Kick)",
+              "assistBlade": "Heavy",
+              "stage": "First Stage Only"
+            },
+            {
+              "blade": "Cobalt Dragoon",
+              "ratchet": "9-65",
+              "bit": "E (Elevate)",
+              "stage": "First Stage Only"
+            },
+            {
+              "blade": "WolfBlast",
+              "ratchet": "9-60",
+              "bit": "LR (Low Rush)",
+              "assistBlade": "Heavy",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "1-60",
+              "bit": "R (Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "6-60",
+              "bit": "H (Hexa)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 2,
+          "player": "geetster99",
+          "combos": [
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "6-60",
+              "bit": "H (Hexa)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "9-60",
+              "bit": "FB (Free Ball)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Aero Pegasus",
+              "ratchet": "3-60",
+              "bit": "R (Rush)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 3,
+          "player": "AllGlitch",
+          "combos": [
+            {
+              "blade": "DranBlast",
+              "ratchet": "1-60",
+              "bit": "LR (Low Rush)",
+              "assistBlade": "Jaggy",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wyvern Hover",
+              "ratchet": "9-60",
+              "bit": "K (Kick)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "1-70",
+              "bit": "J (Jolt)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "6-60",
+              "bit": "H (Hexa)",
+              "stage": "First Stage Only"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Blades ... 3",
+      "date": "2026-03-22",
+      "matchType": "3on3; Single Elimination (Best of 3)",
+      "playerCount": 17,
+      "ranked": true,
+      "placements": [
+        {
+          "placement": 1,
+          "player": "Modulus",
+          "combos": [
+            {
+              "blade": "Shark Scale",
+              "ratchet": "1-60",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "6-60",
+              "bit": "H (Hexa)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Aero Pegasus",
+              "ratchet": "7-60",
+              "bit": "K (Kick)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 2,
+          "player": "Cysmo",
+          "combos": [
+            {
+              "blade": "Wyvern Hover",
+              "ratchet": "9-60",
+              "bit": "K (Kick)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "1-70",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "1-60",
+              "bit": "H (Hexa)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 3,
+          "player": "Go_terr",
+          "combos": [
+            {
+              "blade": "Emperor Might",
+              "ratchet": "1-60",
+              "bit": "LF (Low Flat)",
+              "assistBlade": "Heavy",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Meteor Dragoon",
+              "ratchet": "9-60",
+              "bit": "L (Level)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Golem Rock",
+              "ratchet": "5-60",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Beyblad...ay",
+      "date": "2026-03-22",
+      "matchType": "3on3; Single Elimination (Best of 3)",
+      "playerCount": 33,
+      "ranked": true,
+      "placements": [
+        {
+          "placement": 1,
+          "player": "jubert",
+          "combos": [
+            {
+              "blade": "Shark Scale",
+              "ratchet": "1-70",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wyvern Hover",
+              "ratchet": "1-60",
+              "bit": "K (Kick)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Aero Pegasus",
+              "ratchet": "7-60",
+              "bit": "R (Rush)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 2,
+          "player": "BABELAIDMASTER",
+          "combos": [
+            {
+              "blade": "Shark Scale",
+              "ratchet": "9-60",
+              "bit": "FB (Free Ball)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Cobalt Dragoon",
+              "ratchet": "5-60",
+              "bit": "E (Elevate)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Meteor Dragoon",
+              "ratchet": "7-70",
+              "bit": "L (Level)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 3,
+          "player": "MageBlade",
+          "combos": [
+            {
+              "blade": "Shark Scale",
+              "ratchet": "1-70",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Silver Wolf",
+              "ratchet": "9-60",
+              "bit": "FB (Free Ball)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "1-60",
+              "bit": "H (Hexa)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Cobalt Dragoon",
+              "ratchet": "7-60",
+              "bit": "L (Level)",
+              "stage": "First Stage"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Spin to...ma",
+      "date": "2026-03-22",
+      "playerCount": 25,
+      "ranked": false,
+      "placements": [
+        {
+          "placement": 1,
+          "player": "Anael616",
+          "combos": [
+            {
+              "blade": "BiteCroc",
+              "ratchet": "9-60",
+              "bit": "LR (Low Rush)",
+              "stage": "Swiss"
+            },
+            {
+              "blade": "Golem Rock",
+              "ratchet": "7-60",
+              "bit": "LO (Low Orb)",
+              "stage": "Swiss"
+            },
+            {
+              "blade": "Draciel Shield",
+              "ratchet": "4-60",
+              "bit": "BS (Bound Spike)",
+              "stage": "Swiss"
+            },
+            {
+              "blade": "Weiss Tiger",
+              "ratchet": "6-60",
+              "bit": "K (Kick)",
+              "stage": "Final"
+            },
+            {
+              "blade": "Scyth Incendio",
+              "ratchet": "9-60",
+              "bit": "T (Taper)",
+              "stage": "Final"
+            },
+            {
+              "blade": "Mummy Curse",
+              "ratchet": "1-60",
+              "bit": "E (Elevate)",
+              "stage": "Final"
+            }
+          ]
+        },
+        {
+          "placement": 2,
+          "player": "Wildrose",
+          "combos": [
+            {
+              "blade": "Talon Ptera",
+              "ratchet": "5-60",
+              "bit": "K (Kick)",
+              "stage": "Swiss & Final"
+            },
+            {
+              "blade": "ReaperArc J",
+              "ratchet": "7-60",
+              "bit": "H (Hexa)",
+              "stage": "Swiss & Final"
+            },
+            {
+              "blade": "Hells Hammer",
+              "ratchet": "5-80",
+              "bit": "L (Level)",
+              "stage": "Swiss & Final"
+            }
+          ]
+        },
+        {
+          "placement": 3,
+          "player": "DiamondNights",
+          "combos": [
+            {
+              "blade": "Clock Mirage",
+              "ratchet": "7-55",
+              "bit": "UN (Under Needle)",
+              "stage": "Swiss"
+            },
+            {
+              "blade": "ValkyrieEclipse H",
+              "ratchet": "3-60",
+              "bit": "LR (Low Rush)",
+              "stage": "Swiss & Final"
+            },
+            {
+              "blade": "Weiss Tiger",
+              "ratchet": "7-60",
+              "bit": "R (Rush)",
+              "stage": "Swiss & Final"
+            },
+            {
+              "blade": "Golem Rock",
+              "ratchet": "5-60",
+              "bit": "FB (Free Ball)",
+              "stage": "Final"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Infinit...pid1920073",
+      "date": "2026-03-22",
+      "playerCount": 44,
+      "ranked": true,
+      "placements": [
+        {
+          "placement": 1,
+          "player": "KitsuneFoxx",
+          "combos": [
+            {
+              "blade": "Silver Wolf",
+              "ratchet": "3-60",
+              "bit": "H (Hexa)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "1-60",
+              "bit": "FB (Free Ball)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "9-60",
+              "bit": "J (Jolt)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 2,
+          "player": "Infiniatmos132",
+          "combos": [
+            {
+              "blade": "Samurai Saber",
+              "ratchet": "1-60",
+              "bit": "H (Hexa)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Phoenix Wing",
+              "ratchet": "7-60",
+              "bit": "K (Kick)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Pegasus Blast",
+              "ratchet": "9-60",
+              "bit": "LR (Low Rush)",
+              "assistBlade": "Heavy",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 3,
+          "player": "King-Friday",
+          "combos": [
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "3-60",
+              "bit": "B (Ball)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "1-60",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Cobalt Dragoon",
+              "ratchet": "5-60",
+              "bit": "E (Elevate)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Manassa...26",
+      "date": "2026-03-21",
+      "matchType": "3on3; Single Elimination (Best of 3)",
+      "playerCount": 32,
+      "ranked": false,
+      "placements": [
+        {
+          "placement": 1,
+          "player": "NovaTy",
+          "combos": [
+            {
+              "blade": "Shark Scale",
+              "ratchet": "4-50",
+              "bit": "J (Jolt)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wyvern Hover",
+              "ratchet": "9-60",
+              "bit": "L (Level)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Samurai Saber",
+              "ratchet": "1-60",
+              "bit": "H (Hexa)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 2,
+          "player": "Djinn Buster",
+          "combos": [
+            {
+              "blade": "Aero Pegasus",
+              "ratchet": "1-60",
+              "bit": "R (Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "7-60",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Cobalt Dragoon",
+              "ratchet": "9-60",
+              "bit": "E (Elevate)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 3,
+          "player": "Guzzy",
+          "combos": [
+            {
+              "blade": "Aero Pegasus",
+              "ratchet": "1-60",
+              "bit": "R (Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "1-70",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Cobalt Dragoon",
+              "ratchet": "9-60",
+              "bit": "E (Elevate)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Beyblad...ix",
+      "date": "2026-03-21",
+      "matchType": "3on3; Single Elimination (Best of 3)",
+      "playerCount": 26,
+      "ranked": true,
+      "placements": [
+        {
+          "placement": 1,
+          "player": "BladerJonesy",
+          "combos": [
+            {
+              "blade": "EmperorBlast",
+              "ratchet": "9-60",
+              "bit": "K (Kick)",
+              "assistBlade": "Heavy",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Aero Pegasus",
+              "ratchet": "3-60",
+              "bit": "L (Level)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "1-60",
+              "bit": "H (Hexa)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 2,
+          "player": "Thaison",
+          "combos": [
+            {
+              "blade": "Dran Buster",
+              "ratchet": "2-60",
+              "bit": "LF (Low Flat)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Fox Brush",
+              "ratchet": "1-60",
+              "bit": "K (Kick)",
+              "assistBlade": "Heavy",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Tyranno Beat",
+              "ratchet": "1-70",
+              "bit": "R (Rush)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 3,
+          "player": "WiSkyBee",
+          "combos": [
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "9-60",
+              "bit": "FB (Free Ball)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "3-60",
+              "bit": "W (Wedge)",
+              "stage": "Final Stage"
+            },
+            {
+              "blade": "Mummy Curse",
+              "ratchet": "1-60",
+              "bit": "LR (Low Rush)",
+              "stage": "Final Stage"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "TEAM AN...pid1918739",
+      "date": "2026-03-21",
+      "playerCount": 5,
+      "ranked": false,
+      "placements": [
+        {
+          "placement": 1,
+          "player": "Koii-Boy",
+          "combos": [
+            {
+              "blade": "EmperorEclipse",
+              "ratchet": "1-60",
+              "bit": "K (Kick)",
+              "assistBlade": "Heavy",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Meteor Dragoon",
+              "ratchet": "7-70",
+              "bit": "L (Level)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wyvern Hover",
+              "ratchet": "3-60",
+              "bit": "J (Jolt)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "TEAM AN...ge",
+      "date": "2026-03-21",
+      "playerCount": 9,
+      "ranked": false,
+      "placements": [
+        {
+          "placement": 1,
+          "player": "Blader_Q",
+          "combos": [
+            {
+              "blade": "Wyvern Hover",
+              "ratchet": "1-60",
+              "bit": "R (Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "9-60",
+              "bit": "FB (Free Ball)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Knight Mail",
+              "ratchet": "7-60",
+              "bit": "U (Unite)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Silver Wolf",
+              "ratchet": "6-60",
+              "bit": "O (Orb)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "HornetFlame",
+              "ratchet": "3-60",
+              "bit": "K (Kick)",
+              "assistBlade": "Wheel",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "CerberusReaper",
+              "ratchet": "5-60",
+              "bit": "H (Hexa)",
+              "assistBlade": "Bumper",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 2,
+          "player": "NeoPegasus",
+          "combos": [
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "1-60",
+              "bit": "H (Hexa)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Phoenix Wing",
+              "ratchet": "7-55",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Cobalt Dragoon",
+              "ratchet": "5-60",
+              "bit": "E (Elevate)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Golem Rock",
+              "ratchet": "7-60",
+              "bit": "WW (Wall Wedge)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Meteor Dragoon",
+              "ratchet": "9-60",
+              "bit": "R (Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wyvern Hover",
+              "ratchet": "3-60",
+              "bit": "K (Kick)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 3,
+          "player": "BbladeIntglc",
+          "combos": [
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "9-60",
+              "bit": "H (Hexa)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Cobalt Drake",
+              "ratchet": "4-55",
+              "bit": "E (Elevate)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Phoenix Wing",
+              "ratchet": "3-80",
+              "bit": "GF (Gear Flat)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "1-70",
+              "bit": "R (Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wyvern Hover",
+              "ratchet": "5-70",
+              "bit": "FB (Free Ball)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Dran Buster",
+              "ratchet": "1-60",
+              "bit": "A (Accel)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "NCBBX g...rd",
+      "date": "2026-03-19",
+      "playerCount": 32,
+      "ranked": false,
+      "placements": [
+        {
+          "placement": 1,
+          "player": "OmegaCloud24",
+          "combos": [
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "7-60",
+              "bit": "H (Hexa)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "3-60",
+              "bit": "FB (Free Ball)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Aero Pegasus",
+              "ratchet": "1-60",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 2,
+          "player": "FastTimes11",
+          "combos": [
+            {
+              "blade": "Shark Scale",
+              "ratchet": "6-60",
+              "bit": "J (Jolt)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "7-60",
+              "bit": "FB (Free Ball)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Aero Pegasus",
+              "ratchet": "1-60",
+              "bit": "K (Kick)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 3,
+          "player": "_Thatguy_",
+          "combos": [
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "7-60",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "9-60",
+              "bit": "K (Kick)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wyvern Hover",
+              "ratchet": "1-60",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Champio... 4",
+      "date": "2026-03-17",
+      "matchType": "3on3; Single Elimination (Best of 3)",
+      "playerCount": 12,
+      "ranked": true,
+      "placements": [
+        {
+          "placement": 1,
+          "player": "WonderLaunch",
+          "combos": [
+            {
+              "blade": "Meteor Dragoon",
+              "ratchet": "7-60",
+              "bit": "L (Level)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Mummy Curse",
+              "ratchet": "9-60",
+              "bit": "WW (Wall Wedge)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "3-60",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 2,
+          "player": "HunterGG",
+          "combos": [
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "1-60",
+              "bit": "J (Jolt)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Phoenix Wing",
+              "ratchet": "3-70",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "3-60",
+              "bit": "H (Hexa)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 3,
+          "player": "The_chazz",
+          "combos": [
+            {
+              "blade": "Phoenix Wing",
+              "ratchet": "3-60",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "6-60",
+              "bit": "H (Hexa)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "1-60",
+              "bit": "K (Kick)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "The Bla...pid1911511",
+      "date": "2026-03-08",
+      "playerCount": 61,
+      "ranked": false,
+      "placements": [
+        {
+          "placement": 1,
+          "player": "carlos_flo10",
+          "combos": [
+            {
+              "blade": "Wyvern Hover",
+              "ratchet": "9-60",
+              "bit": "K (Kick)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Aero Pegasus",
+              "ratchet": "1-60",
+              "bit": "R (Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "4-50",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 2,
+          "player": "mavgune",
+          "combos": [
+            {
+              "blade": "Cobalt Dragoon",
+              "ratchet": "5-60",
+              "bit": "E (Elevate)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "3-60",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Silver Wolf",
+              "ratchet": "9-60",
+              "bit": "FB (Free Ball)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 3,
+          "player": "TonOfClay",
+          "combos": [
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "1-60",
+              "bit": "H (Hexa)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Meteor Dragoon",
+              "ratchet": "7-60",
+              "bit": "L (Level)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "3-60",
+              "bit": "J (Jolt)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Cream C...re",
+      "date": "2026-03-07",
+      "matchType": "Experimental; Single Elimination (First to 7)",
+      "playerCount": 30,
+      "ranked": false,
+      "placements": [
+        {
+          "placement": 1,
+          "player": "KhromeHeartz",
+          "combos": [
+            {
+              "blade": "Shark Scale",
+              "ratchet": "1-60",
+              "bit": "K (Kick)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wyvern Hover",
+              "ratchet": "9-60",
+              "bit": "J (Jolt)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Knight Mail",
+              "ratchet": "7-60",
+              "bit": "H (Hexa)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Cobalt Dragoon",
+              "ratchet": "3-60",
+              "bit": "L (Level)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 2,
+          "player": "Mr_Something_S",
+          "combos": [
+            {
+              "blade": "Knight Mail",
+              "ratchet": "0-60",
+              "bit": "R (Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "9-60",
+              "bit": "FB (Free Ball)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "4-50",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Clock Mirage",
+              "ratchet": "4-55",
+              "bit": "UN (Under Needle)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 3,
+          "player": "Szearno",
+          "combos": [
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "1-60",
+              "bit": "H (Hexa)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "SolBlast",
+              "ratchet": "3-60",
+              "bit": "LR (Low Rush)",
+              "assistBlade": "Jaggy",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Silver Wolf",
+              "ratchet": "9-60",
+              "bit": "FB (Free Ball)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Cobalt Dragoon",
+              "ratchet": "5-60",
+              "bit": "E (Elevate)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wyvern Hover",
+              "ratchet": "1-80",
+              "bit": "LR (Low Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "7-70",
+              "bit": "J (Jolt)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Meteor Dragoon",
+              "ratchet": "5-60",
+              "bit": "L (Level)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Mummy Curse",
+              "ratchet": "1-60",
+              "bit": "W (Wedge)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Travele... 9",
+      "date": "2025-11-16",
+      "playerCount": 21,
+      "ranked": true,
+      "placements": [
+        {
+          "placement": 1,
+          "player": "Ray573",
+          "combos": [
+            {
+              "blade": "Wizard Rod",
+              "ratchet": "1-60",
+              "bit": "FB (Free Ball)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Shark Scale",
+              "ratchet": "1-70",
+              "bit": "R (Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Pegasus Blast",
+              "ratchet": "3-60",
+              "bit": "LR (Low Rush)",
+              "assistBlade": "Heavy",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 2,
+          "player": "Creeamcheesee",
+          "combos": [
+            {
+              "blade": "Phoenix Wing",
+              "ratchet": "1-60",
+              "bit": "R (Rush)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Golem Rock",
+              "ratchet": "3-60",
+              "bit": "FB (Free Ball)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Wyvern Hover",
+              "ratchet": "7-60",
+              "bit": "K (Kick)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        },
+        {
+          "placement": 3,
+          "player": "Stormfalls",
+          "combos": [
+            {
+              "blade": "Wyvern Hover",
+              "ratchet": "1-70",
+              "bit": "K (Kick)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Shark Edge",
+              "ratchet": "3-60",
+              "bit": "L (Level)",
+              "stage": "First Stage & Final Stage"
+            },
+            {
+              "blade": "Phoenix Wing",
+              "ratchet": "9-60",
+              "bit": "R (Rush)",
+              "stage": "First Stage & Final Stage"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

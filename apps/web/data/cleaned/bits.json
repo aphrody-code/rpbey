@@ -1,0 +1,652 @@
+[
+  {
+    "name": "Accel",
+    "code": "A",
+    "stats": {
+      "attack": "40",
+      "defense": "10",
+      "stamina": "10",
+      "dash": "40",
+      "burst": "80",
+      "weight": 2.6,
+      "type": "Attack"
+    }
+  },
+  {
+    "name": "Ball",
+    "code": "B",
+    "stats": {
+      "attack": "15",
+      "defense": "25",
+      "stamina": "50",
+      "dash": "10",
+      "burst": "30",
+      "weight": 2.1,
+      "type": "Stamina"
+    }
+  },
+  {
+    "name": "Bound Spike",
+    "code": "BS",
+    "stats": {
+      "attack": "5",
+      "defense": "60",
+      "stamina": "30",
+      "dash": "5",
+      "burst": "30",
+      "weight": 2,
+      "type": "Defense"
+    }
+  },
+  {
+    "name": "Cyclone",
+    "code": "C",
+    "stats": {
+      "attack": "40",
+      "defense": "5",
+      "stamina": "10",
+      "dash": "45",
+      "burst": "80",
+      "weight": 2.1,
+      "type": "Attack"
+    }
+  },
+  {
+    "name": "Cyclone",
+    "code": "C",
+    "stats": {
+      "attack": "40",
+      "defense": "5",
+      "stamina": "10",
+      "dash": "45",
+      "burst": "80",
+      "weight": 2.1,
+      "type": "Attack"
+    }
+  },
+  {
+    "name": "DiskBall",
+    "code": "DB",
+    "stats": {
+      "attack": "15",
+      "defense": "20",
+      "stamina": "55",
+      "dash": "10",
+      "burst": "30",
+      "weight": 3.2,
+      "type": "Stamina"
+    }
+  },
+  {
+    "name": "Dot",
+    "code": "D",
+    "stats": {
+      "attack": "10",
+      "defense": "55",
+      "stamina": "25",
+      "dash": "10",
+      "burst": "30",
+      "weight": 2,
+      "type": "Defense"
+    }
+  },
+  {
+    "name": "Elevate",
+    "code": "E",
+    "stats": {
+      "attack": "30",
+      "defense": "15",
+      "stamina": "20",
+      "dash": "35",
+      "burst": "30",
+      "weight": 3.2,
+      "type": "Balance"
+    }
+  },
+  {
+    "name": "Flat",
+    "code": "F",
+    "stats": {
+      "attack": "40",
+      "defense": "15",
+      "stamina": "10",
+      "dash": "35",
+      "burst": "80",
+      "weight": 2.3,
+      "type": "Attack"
+    }
+  },
+  {
+    "name": "Free Ball",
+    "code": "FB",
+    "stats": {
+      "attack": "10",
+      "defense": "25",
+      "stamina": "60",
+      "dash": "5",
+      "burst": "30",
+      "weight": 1.9,
+      "type": "Stamina"
+    }
+  },
+  {
+    "name": "GearBall",
+    "code": "GB",
+    "stats": {
+      "attack": "10",
+      "defense": "15",
+      "stamina": "45",
+      "dash": "30",
+      "burst": "30",
+      "weight": 2.1,
+      "type": "Stamina"
+    }
+  },
+  {
+    "name": "GearFlat",
+    "code": "GF",
+    "stats": {
+      "attack": "50",
+      "defense": "5",
+      "stamina": "5",
+      "dash": "40",
+      "burst": "80",
+      "weight": 2.3,
+      "type": "Attack"
+    }
+  },
+  {
+    "name": "GearNeedle",
+    "code": "GN",
+    "stats": {
+      "attack": "20",
+      "defense": "40",
+      "stamina": "10",
+      "dash": "30",
+      "burst": "30",
+      "weight": 2,
+      "type": "Defense"
+    }
+  },
+  {
+    "name": "GearPoint",
+    "code": "GP",
+    "stats": {
+      "attack": "30",
+      "defense": "25",
+      "stamina": "15",
+      "dash": "30",
+      "burst": "80",
+      "weight": 2.3,
+      "type": "Balance"
+    }
+  },
+  {
+    "name": "GearRush",
+    "code": "GR",
+    "stats": {
+      "attack": "45",
+      "defense": "10",
+      "stamina": "10",
+      "dash": "35",
+      "burst": "80",
+      "weight": 2.1,
+      "type": "Attack"
+    }
+  },
+  {
+    "name": "Glide",
+    "code": "G",
+    "stats": {
+      "attack": "20",
+      "defense": "10",
+      "stamina": "55",
+      "dash": "15",
+      "burst": "30",
+      "weight": 2.5,
+      "type": "Stamina"
+    }
+  },
+  {
+    "name": "Hexa",
+    "code": "H",
+    "stats": {
+      "attack": "30",
+      "defense": "35",
+      "stamina": "20",
+      "dash": "15",
+      "burst": "80",
+      "weight": 2.6,
+      "type": "Balance"
+    }
+  },
+  {
+    "name": "HighNeedle",
+    "code": "HN",
+    "stats": {
+      "attack": "15",
+      "defense": "55",
+      "stamina": "20",
+      "dash": "10",
+      "burst": "30",
+      "weight": 2.2,
+      "type": "Defense"
+    }
+  },
+  {
+    "name": "HighTaper",
+    "code": "HT",
+    "stats": {
+      "attack": "30",
+      "defense": "25",
+      "stamina": "20",
+      "dash": "25",
+      "burst": "80",
+      "weight": 2.2,
+      "type": "Balance"
+    }
+  },
+  {
+    "name": "Kick",
+    "code": "K",
+    "stats": {
+      "attack": "35",
+      "defense": "25",
+      "stamina": "15",
+      "dash": "25",
+      "burst": "80",
+      "weight": 2.2,
+      "type": "Balance"
+    }
+  },
+  {
+    "name": "Level",
+    "code": "L",
+    "stats": {
+      "attack": "40",
+      "defense": "5",
+      "stamina": "15",
+      "dash": "40",
+      "burst": "80",
+      "weight": 2.6,
+      "type": "Attack"
+    }
+  },
+  {
+    "name": "Low Orb",
+    "code": "LO",
+    "stats": {
+      "attack": "5",
+      "defense": "25",
+      "stamina": "55",
+      "dash": "15",
+      "burst": "30",
+      "weight": 1.9,
+      "type": "Stamina"
+    }
+  },
+  {
+    "name": "Low Rush",
+    "code": "LR",
+    "stats": {
+      "attack": "45",
+      "defense": "5",
+      "stamina": "15",
+      "dash": "35",
+      "burst": "80",
+      "weight": 1.9,
+      "type": "Attack"
+    }
+  },
+  {
+    "name": "LowFlat",
+    "code": "LF",
+    "stats": {
+      "attack": "45",
+      "defense": "5",
+      "stamina": "10",
+      "dash": "40",
+      "burst": "80",
+      "weight": 2.1,
+      "type": "Attack"
+    }
+  },
+  {
+    "name": "MetalNeedle",
+    "code": "MN",
+    "stats": {
+      "attack": "8",
+      "defense": "57",
+      "stamina": "30",
+      "dash": "5",
+      "burst": "30",
+      "weight": 2.8,
+      "type": "Defense"
+    }
+  },
+  {
+    "name": "Needle",
+    "code": "N",
+    "stats": {
+      "attack": "10",
+      "defense": "50",
+      "stamina": "30",
+      "dash": "10",
+      "burst": "30",
+      "weight": 2,
+      "type": "Defense"
+    }
+  },
+  {
+    "name": "Orb",
+    "code": "O",
+    "stats": {
+      "attack": "10",
+      "defense": "30",
+      "stamina": "50",
+      "dash": "10",
+      "burst": "30",
+      "weight": 2,
+      "type": "Stamina"
+    }
+  },
+  {
+    "name": "Point",
+    "code": "P",
+    "stats": {
+      "attack": "25",
+      "defense": "25",
+      "stamina": "25",
+      "dash": "25",
+      "burst": "80",
+      "weight": 2.2,
+      "type": "Balance"
+    }
+  },
+  {
+    "name": "Quake",
+    "code": "Q",
+    "stats": {
+      "attack": "55",
+      "defense": "15",
+      "stamina": "5",
+      "dash": "25",
+      "burst": "80",
+      "weight": 2.2,
+      "type": "Attack"
+    }
+  },
+  {
+    "name": "Rubber Accel",
+    "code": "RA",
+    "stats": {
+      "attack": "60",
+      "defense": "17",
+      "stamina": "3",
+      "dash": "20",
+      "burst": "80",
+      "weight": 3.1,
+      "type": "Attack"
+    }
+  },
+  {
+    "name": "Rush",
+    "code": "R",
+    "stats": {
+      "attack": "40",
+      "defense": "10",
+      "stamina": "20",
+      "dash": "30",
+      "burst": "80",
+      "weight": 2.1,
+      "type": "Attack"
+    }
+  },
+  {
+    "name": "Spike",
+    "code": "S",
+    "stats": {
+      "attack": "10",
+      "defense": "45",
+      "stamina": "35",
+      "dash": "10",
+      "burst": "30",
+      "weight": 2,
+      "type": "Defense"
+    }
+  },
+  {
+    "name": "Taper",
+    "code": "T",
+    "stats": {
+      "attack": "35",
+      "defense": "20",
+      "stamina": "20",
+      "dash": "25",
+      "burst": "80",
+      "weight": 2.2,
+      "type": "Balance"
+    }
+  },
+  {
+    "name": "Trans Point",
+    "code": "TP",
+    "stats": {
+      "attack": "35",
+      "defense": "25",
+      "stamina": "25",
+      "dash": "15",
+      "burst": "80",
+      "weight": null,
+      "type": "Balance"
+    }
+  },
+  {
+    "name": "Turbo (HSR)",
+    "code": "Tr",
+    "stats": {
+      "attack": "30",
+      "defense": "30",
+      "stamina": "60",
+      "dash": "10",
+      "burst": "30",
+      "weight": 12.7,
+      "type": "Attack"
+    }
+  },
+  {
+    "name": "Turbo (LSR)",
+    "code": "Tr",
+    "stats": {
+      "attack": "55",
+      "defense": "20",
+      "stamina": "10",
+      "dash": "45",
+      "burst": "30",
+      "weight": 12.7,
+      "type": "Attack"
+    }
+  },
+  {
+    "name": "Under Needle",
+    "code": "UN",
+    "stats": {
+      "attack": "10",
+      "defense": "60",
+      "stamina": "20",
+      "dash": "10",
+      "burst": "30",
+      "weight": 1.9,
+      "type": "Defense"
+    }
+  },
+  {
+    "name": "Unite",
+    "code": "U",
+    "stats": {
+      "attack": "25",
+      "defense": "25",
+      "stamina": "30",
+      "dash": "20",
+      "burst": "80",
+      "weight": 2.1,
+      "type": "Balance"
+    }
+  },
+  {
+    "name": "Vortex",
+    "code": "V",
+    "stats": {
+      "attack": "45",
+      "defense": "10",
+      "stamina": "5",
+      "dash": "40",
+      "burst": "80",
+      "weight": 2.1,
+      "type": "Attack"
+    }
+  },
+  {
+    "name": "Vortex",
+    "code": "V",
+    "stats": {
+      "attack": "45",
+      "defense": "15",
+      "stamina": "10",
+      "dash": "30",
+      "burst": "80",
+      "weight": 2.1,
+      "type": "Attack"
+    }
+  },
+  {
+    "name": "Wall Ball",
+    "code": "WB",
+    "stats": {
+      "attack": "15",
+      "defense": "30",
+      "stamina": "45",
+      "dash": "10",
+      "burst": "30",
+      "weight": null,
+      "type": "Stamina"
+    }
+  },
+  {
+    "name": "Wedge",
+    "code": "W",
+    "stats": {
+      "attack": "5",
+      "defense": "55",
+      "stamina": "30",
+      "dash": "10",
+      "burst": "30",
+      "weight": 1.9,
+      "type": "Defense"
+    }
+  },
+  {
+    "name": "Zap",
+    "code": "Z",
+    "stats": {
+      "attack": "30",
+      "defense": "20",
+      "stamina": "15",
+      "dash": "35",
+      "burst": "80",
+      "weight": 2.5,
+      "type": "Balance"
+    }
+  },
+  {
+    "name": "Merge",
+    "code": "MN",
+    "stats": {
+      "attack": "50",
+      "defense": "20",
+      "stamina": "10",
+      "dash": "20",
+      "burst": "80",
+      "weight": 3.4,
+      "type": "Balance"
+    }
+  },
+  {
+    "name": "Under Flat",
+    "code": "UF",
+    "stats": {
+      "attack": "55",
+      "defense": "5",
+      "stamina": "5",
+      "dash": "35",
+      "burst": "80",
+      "weight": 2,
+      "type": "Attack"
+    }
+  },
+  {
+    "name": "Trans Kick",
+    "code": "TK",
+    "stats": {
+      "attack": "35",
+      "defense": "30",
+      "stamina": "20",
+      "dash": "15",
+      "burst": "80",
+      "weight": 2.3,
+      "type": "Balance"
+    }
+  },
+  {
+    "name": "Operate [D]",
+    "code": "Op",
+    "stats": {
+      "attack": "20",
+      "defense": "50",
+      "stamina": "50",
+      "dash": "10",
+      "burst": "30",
+      "weight": 14.1,
+      "type": "Balance"
+    }
+  },
+  {
+    "name": "Operate [A]",
+    "code": "Op",
+    "stats": {
+      "attack": "50",
+      "defense": "35",
+      "stamina": "10",
+      "dash": "35",
+      "burst": "30",
+      "weight": 14.1,
+      "type": "Balance"
+    }
+  },
+  {
+    "name": "Jolt",
+    "code": "J",
+    "stats": {
+      "attack": "35",
+      "defense": "10",
+      "stamina": "15",
+      "dash": "40",
+      "burst": "80",
+      "weight": null,
+      "type": "Attack"
+    }
+  },
+  {
+    "name": "Wall Wedge",
+    "code": "WW",
+    "stats": {
+      "attack": "???",
+      "defense": "???",
+      "stamina": "???",
+      "dash": "???",
+      "burst": "???",
+      "weight": null,
+      "type": "Defense"
+    }
+  }
+]

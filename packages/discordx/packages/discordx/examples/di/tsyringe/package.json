@@ -1,0 +1,8 @@
+{
+  "name": "tsyringe-example",
+  "private": true,
+  "dependencies": {
+    "@rpbey/discordx": "workspace:^",
+    "tsyringe": "^4.10.0"
+  }
+}

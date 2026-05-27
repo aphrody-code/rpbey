@@ -1,0 +1,1396 @@
+{
+  "metadata": {
+    "id": 17744104,
+    "name": "UB Hors-Série Phase 2",
+    "url": "https://challonge.com/UltimeBatailleHS",
+    "state": "complete",
+    "type": "single elimination",
+    "participantsCount": 9
+  },
+  "participants": [
+    {
+      "id": 290178778,
+      "name": "Tategami",
+      "seed": 3,
+      "finalRank": 1
+    },
+    {
+      "id": 290183440,
+      "name": "King Joker",
+      "seed": 8,
+      "finalRank": 2
+    },
+    {
+      "id": 290179641,
+      "name": "Younsi",
+      "seed": 4,
+      "finalRank": 3
+    },
+    {
+      "id": 290178508,
+      "name": "zeLn",
+      "seed": 2,
+      "finalRank": 3
+    },
+    {
+      "id": 290178506,
+      "name": "Leirya",
+      "seed": 1,
+      "finalRank": 5
+    },
+    {
+      "id": 290179657,
+      "name": "MtS",
+      "seed": 5,
+      "finalRank": 5
+    },
+    {
+      "id": 290183425,
+      "name": "soupy",
+      "seed": 7,
+      "finalRank": 5
+    },
+    {
+      "id": 290179678,
+      "name": "Shishi",
+      "seed": 6,
+      "finalRank": 5
+    },
+    {
+      "id": 290183489,
+      "name": "Masamune",
+      "seed": 9,
+      "finalRank": 9
+    }
+  ],
+  "matches": [
+    {
+      "id": 451707343,
+      "identifier": 1,
+      "round": 1,
+      "player1Id": 290183440,
+      "player2Id": 290183489,
+      "winnerId": 290183440,
+      "loserId": 290183489,
+      "scores": "4-2",
+      "state": "complete"
+    },
+    {
+      "id": 451707344,
+      "identifier": 5,
+      "round": 2,
+      "player1Id": 290178506,
+      "player2Id": 290183440,
+      "winnerId": 290183440,
+      "loserId": 290178506,
+      "scores": "2-4",
+      "state": "complete"
+    },
+    {
+      "id": 451707345,
+      "identifier": 2,
+      "round": 2,
+      "player1Id": 290179641,
+      "player2Id": 290179657,
+      "winnerId": 290179641,
+      "loserId": 290179657,
+      "scores": "4-2",
+      "state": "complete"
+    },
+    {
+      "id": 451707346,
+      "identifier": 3,
+      "round": 2,
+      "player1Id": 290178508,
+      "player2Id": 290183425,
+      "winnerId": 290178508,
+      "loserId": 290183425,
+      "scores": "6-1",
+      "state": "complete"
+    },
+    {
+      "id": 451707347,
+      "identifier": 4,
+      "round": 2,
+      "player1Id": 290178778,
+      "player2Id": 290179678,
+      "winnerId": 290178778,
+      "loserId": 290179678,
+      "scores": "4-0",
+      "state": "complete"
+    },
+    {
+      "id": 451707348,
+      "identifier": 7,
+      "round": 3,
+      "player1Id": 290183440,
+      "player2Id": 290179641,
+      "winnerId": 290183440,
+      "loserId": 290179641,
+      "scores": "4-2",
+      "state": "complete"
+    },
+    {
+      "id": 451707349,
+      "identifier": 6,
+      "round": 3,
+      "player1Id": 290178508,
+      "player2Id": 290178778,
+      "winnerId": 290178778,
+      "loserId": 290178508,
+      "scores": "1-4",
+      "state": "complete"
+    },
+    {
+      "id": 451707350,
+      "identifier": 8,
+      "round": 4,
+      "player1Id": 290183440,
+      "player2Id": 290178778,
+      "winnerId": 290178778,
+      "loserId": 290183440,
+      "scores": "0-5",
+      "state": "complete"
+    }
+  ],
+  "standings": [
+    {
+      "rank": 1,
+      "name": "Tategami",
+      "challongeUsername": null,
+      "challongeProfileUrl": null,
+      "wins": 0,
+      "losses": 0,
+      "stats": {
+        "wins": 0,
+        "losses": 0
+      }
+    },
+    {
+      "rank": 2,
+      "name": "King Joker",
+      "challongeUsername": null,
+      "challongeProfileUrl": null,
+      "wins": 0,
+      "losses": 0,
+      "stats": {
+        "wins": 0,
+        "losses": 0
+      }
+    },
+    {
+      "rank": 3,
+      "name": "Younsi",
+      "challongeUsername": null,
+      "challongeProfileUrl": null,
+      "wins": 0,
+      "losses": 0,
+      "stats": {
+        "wins": 0,
+        "losses": 0
+      }
+    },
+    {
+      "rank": 3,
+      "name": "zeLn",
+      "challongeUsername": null,
+      "challongeProfileUrl": null,
+      "wins": 0,
+      "losses": 0,
+      "stats": {
+        "wins": 0,
+        "losses": 0
+      }
+    },
+    {
+      "rank": 5,
+      "name": "Leirya",
+      "challongeUsername": null,
+      "challongeProfileUrl": null,
+      "wins": 0,
+      "losses": 0,
+      "stats": {
+        "wins": 0,
+        "losses": 0
+      }
+    },
+    {
+      "rank": 5,
+      "name": "MtS",
+      "challongeUsername": null,
+      "challongeProfileUrl": null,
+      "wins": 0,
+      "losses": 0,
+      "stats": {
+        "wins": 0,
+        "losses": 0
+      }
+    },
+    {
+      "rank": 5,
+      "name": "Shishi",
+      "challongeUsername": null,
+      "challongeProfileUrl": null,
+      "wins": 0,
+      "losses": 0,
+      "stats": {
+        "wins": 0,
+        "losses": 0
+      }
+    },
+    {
+      "rank": 5,
+      "name": "soupy",
+      "challongeUsername": null,
+      "challongeProfileUrl": null,
+      "wins": 0,
+      "losses": 0,
+      "stats": {
+        "wins": 0,
+        "losses": 0
+      }
+    },
+    {
+      "rank": 9,
+      "name": "Masamune",
+      "challongeUsername": null,
+      "challongeProfileUrl": null,
+      "wins": 0,
+      "losses": 0,
+      "stats": {
+        "wins": 0,
+        "losses": 0
+      }
+    }
+  ],
+  "stations": [
+    {
+      "stationId": 1,
+      "name": "Ultime Bataille Hors-Série / Phase 2 - Predictions",
+      "currentMatch": null,
+      "status": "idle"
+    }
+  ],
+  "log": [
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Dashboard",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Public Profile",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Paramètres",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Messages (0)",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "News (4)",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "",
+      "message": "Upgrade to Premier",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Déconnexion",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Arbre",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Classement",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Annonces (0)",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Historique (11)",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Arbre",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Classement",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Annonces (0)",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Historique (11)",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Copy Link",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Facebook",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Twitter",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Create template from this tournament",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Arbre",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Classement",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Annonces (0)",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Historique (11)",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "Joueurs",
+      "message": "Joueurs\n9",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "Format",
+      "message": "Format\nSingle Elimination",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "Jeu",
+      "message": "Jeu\nBeyblade X",
+      "raw": null
+    },
+    {
+      "timestamp": "3 April 2026 à 22:00 CEST",
+      "type": "Date de départ\n\nDebut",
+      "message": "Date de départ\n\nDebut",
+      "raw": null
+    },
+    {
+      "timestamp": "il y a environ 14 heures",
+      "type": "activity",
+      "message": "Terminer ce tournoi",
+      "raw": null
+    },
+    {
+      "timestamp": "il y a environ 14 heures",
+      "type": "activity",
+      "message": "Terminer ce tournoi",
+      "raw": null
+    },
+    {
+      "timestamp": "il y a environ 14 heures",
+      "type": "activity",
+      "message": "Wild_BreakersA rapporté une victoire de 0-5 pour Tategami contre King Joker",
+      "raw": null
+    },
+    {
+      "timestamp": "il y a environ 14 heures",
+      "type": "activity",
+      "message": "Wild_BreakersA rapporté une victoire de 0-5 pour Tategami contre King Joker",
+      "raw": null
+    },
+    {
+      "timestamp": "il y a environ 14 heures",
+      "type": "activity",
+      "message": "Wild_BreakersA rapporté une victoire de 4-2 pour King Joker contre Younsi",
+      "raw": null
+    },
+    {
+      "timestamp": "il y a environ 14 heures",
+      "type": "activity",
+      "message": "Wild_BreakersA rapporté une victoire de 4-2 pour King Joker contre Younsi",
+      "raw": null
+    },
+    {
+      "timestamp": "il y a environ 15 heures",
+      "type": "activity",
+      "message": "Wild_BreakersA rapporté une victoire de 1-4 pour Tategami contre zeLn",
+      "raw": null
+    },
+    {
+      "timestamp": "il y a environ 15 heures",
+      "type": "activity",
+      "message": "Wild_BreakersA rapporté une victoire de 1-4 pour Tategami contre zeLn",
+      "raw": null
+    },
+    {
+      "timestamp": "il y a environ 15 heures",
+      "type": "activity",
+      "message": "Wild_BreakersA rapporté une victoire de 2-4 pour King Joker contre Leirya",
+      "raw": null
+    },
+    {
+      "timestamp": "il y a environ 15 heures",
+      "type": "activity",
+      "message": "Wild_BreakersA rapporté une victoire de 2-4 pour King Joker contre Leirya",
+      "raw": null
+    },
+    {
+      "timestamp": "il y a environ 15 heures",
+      "type": "activity",
+      "message": "Wild_BreakersA rapporté une victoire de 4-2 pour King Joker contre Masamune",
+      "raw": null
+    },
+    {
+      "timestamp": "il y a environ 15 heures",
+      "type": "activity",
+      "message": "Wild_BreakersA rapporté une victoire de 4-2 pour King Joker contre Masamune",
+      "raw": null
+    },
+    {
+      "timestamp": "il y a environ 15 heures",
+      "type": "activity",
+      "message": "Wild_BreakersA rapporté une victoire de 4-0 pour Tategami contre Shishi",
+      "raw": null
+    },
+    {
+      "timestamp": "il y a environ 15 heures",
+      "type": "activity",
+      "message": "Wild_BreakersA rapporté une victoire de 4-0 pour Tategami contre Shishi",
+      "raw": null
+    },
+    {
+      "timestamp": "il y a environ 15 heures",
+      "type": "activity",
+      "message": "Wild_BreakersA rapporté une victoire de 6-1 pour zeLn contre soupy",
+      "raw": null
+    },
+    {
+      "timestamp": "il y a environ 15 heures",
+      "type": "activity",
+      "message": "Wild_BreakersA rapporté une victoire de 6-1 pour zeLn contre soupy",
+      "raw": null
+    },
+    {
+      "timestamp": "il y a environ 15 heures",
+      "type": "activity",
+      "message": "Wild_BreakersA rapporté une victoire de 4-2 pour Younsi contre MtS",
+      "raw": null
+    },
+    {
+      "timestamp": "il y a environ 15 heures",
+      "type": "activity",
+      "message": "Wild_BreakersA rapporté une victoire de 4-2 pour Younsi contre MtS",
+      "raw": null
+    },
+    {
+      "timestamp": "il y a environ 15 heures",
+      "type": "activity",
+      "message": "Commencer ce tournoi",
+      "raw": null
+    },
+    {
+      "timestamp": "il y a environ 15 heures",
+      "type": "activity",
+      "message": "Commencer ce tournoi",
+      "raw": null
+    },
+    {
+      "timestamp": "il y a environ 17 heures",
+      "type": "activity",
+      "message": "Tournoi créé",
+      "raw": null
+    },
+    {
+      "timestamp": "il y a environ 17 heures",
+      "type": "activity",
+      "message": "Tournoi créé",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "العَرَبِيَّة",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Čeština",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Dansk",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Deutsch",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "English",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Español",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Suomi",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Magyar",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Bahasa Indonesia",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Italiano",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "日本語",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "한국어",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Latviešu",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Nederlands",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "norsk",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Polski",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Português",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Português Br.",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Limba română",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Русский",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "slovenčina",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "svenska",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "ภาษาไทย",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Türkçe",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "українська",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Tiếng Việt",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "简体中文",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "繁體中文",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Aidez à la Traduction",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Deutsch",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "English",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Español",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Français",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Italiano",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Nederlands",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Polski",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Português",
+      "raw": null
+    },
+    {
+      "timestamp": "",
+      "type": "activity",
+      "message": "Limba română",
+      "raw": null
+    }
+  ],
+  "raw": {
+    "requested_plotter": "SingleEliminationBracketPlotter",
+    "tournament": {
+      "id": 17744104,
+      "state": "complete",
+      "tournament_type": "single elimination",
+      "quick_advance": false,
+      "hide_seeds": false,
+      "hide_identifiers": false,
+      "show_station_and_time": false,
+      "animated": true,
+      "accept_attachments": false,
+      "participant_count_to_advance": 1,
+      "owner_ids": [
+        7364300
+      ],
+      "admin_ids": [
+        7364300
+      ],
+      "participants_swappable": false,
+      "progress_meter": 100,
+      "group_stage_progress_meter": 0,
+      "grand_finals_modifier": null,
+      "predict_the_losers_bracket": false,
+      "voting_underway": false,
+      "is_team": false,
+      "split_participants": false,
+      "participants_per_match": 2,
+      "only_start_matches_with_stations": null
+    },
+    "rounds": [
+      {
+        "id": null,
+        "stage_type": "Tournament",
+        "stage_id": 17744104,
+        "number": 1,
+        "title": "Round 1",
+        "description": null,
+        "best_of": 1,
+        "created_at": null,
+        "updated_at": null,
+        "group_index": null,
+        "title_lines": [
+          "Round 1"
+        ],
+        "href": "/tournaments/17744104/rounds/new_or_edit?number=1&title=Round+1"
+      },
+      {
+        "id": null,
+        "stage_type": "Tournament",
+        "stage_id": 17744104,
+        "number": 2,
+        "title": "Round 2",
+        "description": null,
+        "best_of": 1,
+        "created_at": null,
+        "updated_at": null,
+        "group_index": null,
+        "title_lines": [
+          "Round 2"
+        ],
+        "href": "/tournaments/17744104/rounds/new_or_edit?number=2&title=Round+2"
+      },
+      {
+        "id": null,
+        "stage_type": "Tournament",
+        "stage_id": 17744104,
+        "number": 3,
+        "title": "Semifinals",
+        "description": null,
+        "best_of": 1,
+        "created_at": null,
+        "updated_at": null,
+        "group_index": null,
+        "title_lines": [
+          "Semifinals"
+        ],
+        "href": "/tournaments/17744104/rounds/new_or_edit?number=3&title=Semifinals"
+      },
+      {
+        "id": null,
+        "stage_type": "Tournament",
+        "stage_id": 17744104,
+        "number": 4,
+        "title": "Finals",
+        "description": null,
+        "best_of": 1,
+        "created_at": null,
+        "updated_at": null,
+        "group_index": null,
+        "title_lines": [
+          "Finals"
+        ],
+        "href": "/tournaments/17744104/rounds/new_or_edit?number=4&title=Finals"
+      }
+    ],
+    "third_place_match": null,
+    "consolation_matches": [],
+    "matches_by_round": {
+      "1": [
+        {
+          "id": 451707343,
+          "tournament_id": 17744104,
+          "identifier": 1,
+          "raw_identifier": "A",
+          "round": 1,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              4,
+              2
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 290183440,
+            "seed": 8,
+            "display_name": "King Joker",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 290183489,
+            "seed": 9,
+            "display_name": "Masamune",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": null,
+          "player2_prereq_identifier": null,
+          "player1_is_prereq_match_loser": false,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            4,
+            2
+          ],
+          "winner_id": 290183440,
+          "loser_id": 290183489,
+          "md5": "c4a3a6364905ea98bfb167b29674b589"
+        }
+      ],
+      "2": [
+        {
+          "id": 451707344,
+          "tournament_id": 17744104,
+          "identifier": 5,
+          "raw_identifier": "B",
+          "round": 2,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              2,
+              4
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 290178506,
+            "seed": 1,
+            "display_name": "Leirya",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 290183440,
+            "seed": 8,
+            "display_name": "King Joker",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": null,
+          "player2_prereq_identifier": 1,
+          "player1_is_prereq_match_loser": false,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            2,
+            4
+          ],
+          "winner_id": 290183440,
+          "loser_id": 290178506,
+          "md5": "d54b24f7dbea10b89b172cb811e53a40"
+        },
+        {
+          "id": 451707345,
+          "tournament_id": 17744104,
+          "identifier": 2,
+          "raw_identifier": "C",
+          "round": 2,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              4,
+              2
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 290179641,
+            "seed": 4,
+            "display_name": "Younsi",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 290179657,
+            "seed": 5,
+            "display_name": "MtS",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": null,
+          "player2_prereq_identifier": null,
+          "player1_is_prereq_match_loser": false,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            4,
+            2
+          ],
+          "winner_id": 290179641,
+          "loser_id": 290179657,
+          "md5": "dc0ea10fd35f1c11b06268b316499bbf"
+        },
+        {
+          "id": 451707346,
+          "tournament_id": 17744104,
+          "identifier": 3,
+          "raw_identifier": "D",
+          "round": 2,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              6,
+              1
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 290178508,
+            "seed": 2,
+            "display_name": "zeLn",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 290183425,
+            "seed": 7,
+            "display_name": "soupy",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": null,
+          "player2_prereq_identifier": null,
+          "player1_is_prereq_match_loser": false,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            6,
+            1
+          ],
+          "winner_id": 290178508,
+          "loser_id": 290183425,
+          "md5": "fc60007b379c1d0563a7479de12803c1"
+        },
+        {
+          "id": 451707347,
+          "tournament_id": 17744104,
+          "identifier": 4,
+          "raw_identifier": "E",
+          "round": 2,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              4,
+              0
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 290178778,
+            "seed": 3,
+            "display_name": "Tategami",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 290179678,
+            "seed": 6,
+            "display_name": "Shishi",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": null,
+          "player2_prereq_identifier": null,
+          "player1_is_prereq_match_loser": false,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            4,
+            0
+          ],
+          "winner_id": 290178778,
+          "loser_id": 290179678,
+          "md5": "3c8bf866be3ee72393548aee08905798"
+        }
+      ],
+      "3": [
+        {
+          "id": 451707348,
+          "tournament_id": 17744104,
+          "identifier": 7,
+          "raw_identifier": "F",
+          "round": 3,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              4,
+              2
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 290183440,
+            "seed": 8,
+            "display_name": "King Joker",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 290179641,
+            "seed": 4,
+            "display_name": "Younsi",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 5,
+          "player2_prereq_identifier": 2,
+          "player1_is_prereq_match_loser": false,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            4,
+            2
+          ],
+          "winner_id": 290183440,
+          "loser_id": 290179641,
+          "md5": "a611944b0cfab1db238d85fa4f4ee532"
+        },
+        {
+          "id": 451707349,
+          "tournament_id": 17744104,
+          "identifier": 6,
+          "raw_identifier": "G",
+          "round": 3,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              1,
+              4
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 290178508,
+            "seed": 2,
+            "display_name": "zeLn",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 290178778,
+            "seed": 3,
+            "display_name": "Tategami",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 3,
+          "player2_prereq_identifier": 4,
+          "player1_is_prereq_match_loser": false,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            1,
+            4
+          ],
+          "winner_id": 290178778,
+          "loser_id": 290178508,
+          "md5": "579004a1c206038237dcf27bd80ffae0"
+        }
+      ],
+      "4": [
+        {
+          "id": 451707350,
+          "tournament_id": 17744104,
+          "identifier": 8,
+          "raw_identifier": "H",
+          "round": 4,
+          "state": "complete",
+          "underway_at": null,
+          "games": [
+            [
+              0,
+              5
+            ]
+          ],
+          "editable_by_user_ids": [],
+          "has_attachment": false,
+          "is_group_match": false,
+          "forfeited": null,
+          "station": null,
+          "queued_for_station": null,
+          "scheduled_time": null,
+          "shareable": false,
+          "has_chat": false,
+          "player1": {
+            "id": 290183440,
+            "seed": 8,
+            "display_name": "King Joker",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player2": {
+            "id": 290178778,
+            "seed": 3,
+            "display_name": "Tategami",
+            "portrait_url": null,
+            "participant_id": null,
+            "quick_added": false,
+            "team_members": null,
+            "active": true,
+            "misc": null,
+            "integration_uids": null
+          },
+          "player1_prereq_identifier": 7,
+          "player2_prereq_identifier": 6,
+          "player1_is_prereq_match_loser": false,
+          "player2_is_prereq_match_loser": false,
+          "player1_placeholder_text": null,
+          "player2_placeholder_text": null,
+          "scores": [
+            0,
+            5
+          ],
+          "winner_id": 290178778,
+          "loser_id": 290183440,
+          "md5": "7fa71859f1d1caad1fee265ed8f64db8"
+        }
+      ]
+    },
+    "groups": []
+  }
+}
