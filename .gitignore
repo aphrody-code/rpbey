@@ -244,6 +244,8 @@ infra/nginx.bak-*/
 !PLAN.md
 !docs/**/*.md
 !apps/**/README.md
+!apps/**/AGENTS.md
+!AGENTS.md
 !apps/**/CLAUDE.md
 !packages/**/README.md
 !packages/**/LICENSE*
