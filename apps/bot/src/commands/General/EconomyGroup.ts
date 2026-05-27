@@ -1551,8 +1551,8 @@ export class EconomyGroup {
       });
     }
 
-    if (profile.lastGiftSent && Date.now() - profile.lastGiftSent.getTime() < GIFT_COOLDOWN_MS) {
-      const nextGift = Math.floor((profile.lastGiftSent.getTime() + GIFT_COOLDOWN_MS) / 1000);
+    if (profile.lastGiftSent && Date.now() - new Date(profile.lastGiftSent).getTime() < GIFT_COOLDOWN_MS) {
+      const nextGift = Math.floor((new Date(profile.lastGiftSent).getTime() + GIFT_COOLDOWN_MS) / 1000);
       return interaction.editReply({
         embeds: [warningEmbed('Cooldown', `Tu pourras donner à nouveau <t:${nextGift}:R>`)],
       });

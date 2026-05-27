@@ -106,7 +106,7 @@ export default async function AdminDashboardPage() {
 	const tournamentTotalCount = tournamentTotalRows[0]?.value ?? 0;
 
 	// Helper to group by month
-	const groupByMonth = (dates: { createdAt: string }[]) => {
+	const groupByMonth = (dates: { createdAt: Date | string }[]) => {
 		const counts: Record<string, number> = {};
 		for (let i = 0; i < 6; i++) {
 			const d = new Date();

@@ -33,9 +33,7 @@ export async function GET(request: Request) {
 			tokenData.access_token,
 		);
 
-		const expiresAtIso = new Date(
-			Date.now() + tokenData.expires_in * 1000,
-		).toISOString();
+		const expiresAtDate = new Date(Date.now() + tokenData.expires_in * 1000);
 
 		// Store in Account table for API access
 		await db
@@ -47,14 +45,14 @@ export async function GET(request: Request) {
 				accountId: challongeUser.id,
 				accessToken: tokenData.access_token,
 				refreshToken: tokenData.refresh_token,
-				accessTokenExpiresAt: expiresAtIso,
+				accessTokenExpiresAt: expiresAtDate,
 			})
 			.onConflictDoUpdate({
 				target: [schema.accounts.providerId, schema.accounts.accountId],
 				set: {
 					accessToken: tokenData.access_token,
 					refreshToken: tokenData.refresh_token,
-					accessTokenExpiresAt: expiresAtIso,
+					accessTokenExpiresAt: expiresAtDate,
 				},
 			});
 

@@ -83,7 +83,7 @@ export async function POST(request: Request) {
 		id: sessionId,
 		token,
 		userId: user.id,
-		expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
+		expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
 		ipAddress: request.headers.get("x-forwarded-for") || "0.0.0.0",
 		userAgent: request.headers.get("user-agent") || "Admin Quick Login",
 	});

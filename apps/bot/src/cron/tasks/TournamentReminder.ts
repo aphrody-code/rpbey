@@ -75,15 +75,16 @@ export async function tournamentReminderTask() {
 		}
 
 		for (const tournament of upcomingTournaments) {
+			const tournamentDate = new Date(tournament.date);
 			const hoursUntil = Math.round(
-				(tournament.date.getTime() - Date.now()) / (1000 * 60 * 60),
+				(tournamentDate.getTime() - Date.now()) / (1000 * 60 * 60),
 			);
 
 			if (hoursUntil === 24 || hoursUntil === 6 || hoursUntil === 1) {
 				const description = template
 					.replace("{hours}", String(hoursUntil))
 					.replace("{name}", tournament.name)
-					.replace("{date}", tournament.date.toLocaleString("fr-FR"))
+					.replace("{date}", tournamentDate.toLocaleString("fr-FR"))
 					.replace("{location}", tournament.location ?? "En ligne")
 					.replace("{participants}", String(tournament.participants.length));
 

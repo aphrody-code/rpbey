@@ -980,7 +980,7 @@ export class DuelCommand {
       const won = m.winnerId === target.id;
       const opponent =
         m.challengerId === target.id ? m.opponentId : m.challengerId;
-      const date = `<t:${Math.floor(m.createdAt.getTime() / 1000)}:R>`;
+      const date = `<t:${Math.floor(new Date(m.createdAt).getTime() / 1000)}:R>`;
       return `${won ? '🟢' : '🔴'} **${m.score}** vs <@${opponent}> · ${m.finishType} ${date}`;
     });
 
@@ -1115,7 +1115,7 @@ export class DuelCommand {
     }
 
     const lines = matches.map((m: any) => {
-      const date = `<t:${Math.floor(m.createdAt.getTime() / 1000)}:R>`;
+      const date = `<t:${Math.floor(new Date(m.createdAt).getTime() / 1000)}:R>`;
       const winner =
         m.winnerId === m.challengerId ? m.challengerId : m.opponentId;
       const loser =

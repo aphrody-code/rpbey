@@ -129,7 +129,7 @@ export async function POST(request: NextRequest) {
 			id: crypto.randomUUID(),
 			token: sessionToken,
 			userId: user.id,
-			expiresAt: expiresAt.toISOString(),
+			expiresAt: expiresAt,
 			ipAddress: request.headers.get("x-forwarded-for") ?? "mobile",
 			userAgent: request.headers.get("user-agent") ?? "RPB TCG Mobile",
 		});

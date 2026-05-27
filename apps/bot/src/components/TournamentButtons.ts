@@ -194,7 +194,7 @@ export class TournamentButtonHandler {
         .addFields(
           {
             name: '📅 Date',
-            value: tournament.date.toLocaleDateString('fr-FR'),
+            value: new Date(tournament.date).toLocaleDateString('fr-FR'),
             inline: true,
           },
           {

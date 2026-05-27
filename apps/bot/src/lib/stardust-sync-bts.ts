@@ -175,7 +175,7 @@ export function buildStardustRankings(
 	for (const t of tournaments) {
 		const slug = t.id;
 		const label = t.name;
-		const dateIso = t.date.toISOString();
+		const dateIso = new Date(t.date).toISOString();
 		const trustPlacements = isTrustworthyForPlacements(t);
 		const perTM = new Map<string, { w: number; l: number }>();
 

@@ -90,7 +90,7 @@ export class ProductCommand {
           PRODUCT_TYPE_LABELS[product.productType] ?? product.productType;
         const price = product.price ? `${product.price}¥` : 'N/A';
         const date = product.releaseDate
-          ? `<t:${Math.floor(product.releaseDate.getTime() / 1000)}:D>`
+          ? `<t:${Math.floor(new Date(product.releaseDate).getTime() / 1000)}:D>`
           : 'N/A';
 
         embed.addFields({
@@ -186,7 +186,7 @@ export class ProductCommand {
     if (product.releaseDate) {
       embed.addFields({
         name: '📅 Date de sortie',
-        value: `<t:${Math.floor(product.releaseDate.getTime() / 1000)}:D>`,
+        value: `<t:${Math.floor(new Date(product.releaseDate).getTime() / 1000)}:D>`,
         inline: true,
       });
     }
@@ -275,7 +275,7 @@ export class ProductCommand {
     const lines = products.map((p: any) => {
       const emoji = LINE_EMOJIS[p.productLine] ?? '⚪';
       const date = p.releaseDate
-        ? `<t:${Math.floor(p.releaseDate.getTime() / 1000)}:d>`
+        ? `<t:${Math.floor(new Date(p.releaseDate).getTime() / 1000)}:d>`
         : '?';
       const typeLabel = PRODUCT_TYPE_LABELS[p.productType] ?? p.productType;
       return `${emoji} **${p.code}** — ${p.nameFr || p.name}\n${typeLabel} | ${date}${p.isLimited ? ' | ⚡ Limité' : ''}`;

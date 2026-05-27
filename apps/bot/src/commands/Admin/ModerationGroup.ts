@@ -376,7 +376,7 @@ export class ModerationCommands {
       });
 
     const lines = warns.map((w: any, i: number) => {
-      const date = `<t:${Math.floor(w.createdAt.getTime() / 1000)}:d>`;
+      const date = `<t:${Math.floor(new Date(w.createdAt).getTime() / 1000)}:d>`;
       return `**${i + 1}.** ${w.reason} — par <@${w.moderator}> ${date} \`${w.id}\``;
     });
 
