@@ -1,23 +1,23 @@
-'use client';
+"use client";
 
-import Avatar from '@mui/material/Avatar';
-import AvatarGroup from '@mui/material/AvatarGroup';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import Chip from '@mui/material/Chip';
-import Skeleton from '@mui/material/Skeleton';
-import Stack from '@mui/material/Stack';
-import { alpha, useTheme } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
-import { AnimatePresence, motion } from 'framer-motion';
-import useSWR from 'swr';
-import { type DiscordStats, type TeamGroup } from '@/lib/discord-types';
-import { RoleColors, type RoleType } from '@/lib/role-colors';
-import { api } from '@/lib/standard-api';
-import { DiscordRoleBadge } from './DiscordRoleBadge';
+import Avatar from "@mui/material/Avatar";
+import AvatarGroup from "@mui/material/AvatarGroup";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
+import Chip from "@mui/material/Chip";
+import Skeleton from "@mui/material/Skeleton";
+import Stack from "@mui/material/Stack";
+import { alpha, useTheme } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
+import { AnimatePresence, motion } from "framer-motion";
+import useSWR from "swr";
+import { type DiscordStats, type TeamGroup } from "@/lib/discord-types";
+import { RoleColors, type RoleType } from "@/lib/role-colors";
+import { api } from "@/lib/standard-api";
+import { DiscordRoleBadge } from "./DiscordRoleBadge";
 
-const DISCORD_BLUE = '#5865F2';
+const DISCORD_BLUE = "#5865F2";
 
 interface DiscordStatusCardProps {
   initialStats?: DiscordStats | null;
@@ -29,17 +29,14 @@ const fetcher = (url: string) => api.get(url).then((res) => res as any);
 
 const roleColor = (role: RoleType) => {
   const c = RoleColors[role];
-  return 'hex' in c ? c.hex : c.primary;
+  return "hex" in c ? c.hex : c.primary;
 };
 
-export function DiscordStatusCard({
-  initialStats,
-  initialTeam,
-}: DiscordStatusCardProps) {
+export function DiscordStatusCard({ initialStats, initialTeam }: DiscordStatusCardProps) {
   const theme = useTheme();
 
   const { data: stats, isLoading: statsLoading } = useSWR<DiscordStats>(
-    '/api/discord/stats',
+    "/api/discord/stats",
     fetcher,
     {
       fallbackData: initialStats || undefined,
@@ -50,7 +47,7 @@ export function DiscordStatusCard({
 
   const { data: teamData, isLoading: teamLoading } = useSWR<{
     team: TeamGroup[];
-  }>('/api/discord/team', fetcher, {
+  }>("/api/discord/team", fetcher, {
     fallbackData: initialTeam ? { team: initialTeam } : undefined,
     refreshInterval: 60000,
     revalidateOnFocus: false,
@@ -60,14 +57,7 @@ export function DiscordStatusCard({
   const loading = (statsLoading && !stats) || (teamLoading && !teamData);
 
   if (loading) {
-    return (
-      <Skeleton
-        variant="rounded"
-        width="100%"
-        height={400}
-        sx={{ borderRadius: 4 }}
-      />
-    );
+    return <Skeleton variant="rounded" width="100%" height={400} sx={{ borderRadius: 4 }} />;
   }
 
   const onlineCount = stats?.onlineCount || 0;
@@ -79,30 +69,30 @@ export function DiscordStatusCard({
       variant="outlined"
       sx={{
         p: 0,
-        display: 'flex',
-        flexDirection: 'column',
-        width: '100%',
-        height: '100%',
-        bgcolor: 'surface.high',
+        display: "flex",
+        flexDirection: "column",
+        width: "100%",
+        height: "100%",
+        bgcolor: "surface.high",
         borderRadius: 0,
-        border: '1px solid',
-        borderColor: 'divider',
-        overflow: 'hidden',
+        border: "1px solid",
+        borderColor: "divider",
+        overflow: "hidden",
       }}
     >
       {/* Banner */}
       <Box
         sx={{
-          position: 'relative',
+          position: "relative",
           height: 80,
           background: `linear-gradient(135deg, ${DISCORD_BLUE} 0%, ${alpha(DISCORD_BLUE, 0.6)} 50%, ${alpha(theme.palette.primary.main, 0.4)} 100%)`,
-          overflow: 'hidden',
-          '&::after': {
+          overflow: "hidden",
+          "&::after": {
             content: '""',
-            position: 'absolute',
+            position: "absolute",
             inset: 0,
             background:
-              'repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255,255,255,0.03) 40px, rgba(255,255,255,0.03) 41px)',
+              "repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255,255,255,0.03) 40px, rgba(255,255,255,0.03) 41px)",
           },
         }}
       >
@@ -111,25 +101,25 @@ export function DiscordStatusCard({
           size="small"
           label={`${onlineCount} en ligne`}
           sx={{
-            position: 'absolute',
+            position: "absolute",
             top: 10,
             right: 10,
-            bgcolor: alpha('#22c55e', 0.2),
-            color: '#22c55e',
+            bgcolor: alpha("#22c55e", 0.2),
+            color: "#22c55e",
             fontWeight: 700,
-            fontSize: '0.7rem',
+            fontSize: "0.7rem",
             height: 24,
-            border: `1px solid ${alpha('#22c55e', 0.3)}`,
-            '& .MuiChip-label': { px: 1 },
-            '&::before': {
+            border: `1px solid ${alpha("#22c55e", 0.3)}`,
+            "& .MuiChip-label": { px: 1 },
+            "&::before": {
               content: '""',
               width: 6,
               height: 6,
-              borderRadius: '50%',
-              bgcolor: '#22c55e',
-              boxShadow: '0 0 8px #22c55e',
+              borderRadius: "50%",
+              bgcolor: "#22c55e",
+              boxShadow: "0 0 8px #22c55e",
               ml: 1,
-              animation: 'pulse 2s infinite',
+              animation: "pulse 2s infinite",
             },
           }}
         />
@@ -140,7 +130,7 @@ export function DiscordStatusCard({
           direction="row"
           spacing={2}
           sx={{
-            alignItems: 'flex-end',
+            alignItems: "flex-end",
           }}
         >
           <Avatar
@@ -148,9 +138,9 @@ export function DiscordStatusCard({
             sx={{
               width: 56,
               height: 56,
-              border: '4px solid',
-              borderColor: 'surface.high',
-              bgcolor: 'background.default',
+              border: "4px solid",
+              borderColor: "surface.high",
+              bgcolor: "background.default",
             }}
           />
           <Box sx={{ pb: 0.5 }}>
@@ -166,11 +156,11 @@ export function DiscordStatusCard({
             <Typography
               variant="caption"
               sx={{
-                color: 'text.secondary',
+                color: "text.secondary",
                 fontWeight: 600,
               }}
             >
-              {totalCount.toLocaleString()} membres
+              {totalCount.toLocaleString("fr-FR")} membres
             </Typography>
           </Box>
         </Stack>
@@ -182,10 +172,10 @@ export function DiscordStatusCard({
           px: 2,
           pt: 2,
           pb: 1,
-          overflowY: 'auto',
-          '&::-webkit-scrollbar': { width: 4 },
-          '&::-webkit-scrollbar-thumb': {
-            bgcolor: 'divider',
+          overflowY: "auto",
+          "&::-webkit-scrollbar": { width: 4 },
+          "&::-webkit-scrollbar-thumb": {
+            bgcolor: "divider",
             borderRadius: 2,
           },
         }}
@@ -197,7 +187,7 @@ export function DiscordStatusCard({
                 direction="row"
                 spacing={1}
                 sx={{
-                  alignItems: 'center',
+                  alignItems: "center",
                   mb: 1,
                 }}
               >
@@ -210,7 +200,7 @@ export function DiscordStatusCard({
                 <Typography
                   variant="caption"
                   sx={{
-                    color: 'text.disabled',
+                    color: "text.disabled",
                     fontWeight: 600,
                   }}
                 >
@@ -228,38 +218,38 @@ export function DiscordStatusCard({
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: idx * 0.03 }}
                       sx={{
-                        display: 'flex',
-                        alignItems: 'center',
+                        display: "flex",
+                        alignItems: "center",
                         gap: 1.5,
                         py: 0.6,
                         px: 1,
                         borderRadius: 1.5,
-                        '&:hover': {
+                        "&:hover": {
                           bgcolor: (t) => alpha(t.palette.action.hover, 0.06),
                         },
                       }}
                     >
-                      <Box sx={{ position: 'relative' }}>
+                      <Box sx={{ position: "relative" }}>
                         <Avatar
                           src={member.avatar || undefined}
                           sx={{
                             width: 30,
                             height: 30,
-                            border: '2px solid',
+                            border: "2px solid",
                             borderColor: alpha(roleColor(group.roleType), 0.3),
                           }}
                         />
                         <Box
                           sx={{
-                            position: 'absolute',
+                            position: "absolute",
                             bottom: -1,
                             right: -1,
                             width: 10,
                             height: 10,
-                            borderRadius: '50%',
-                            bgcolor: '#22c55e',
-                            border: '2px solid',
-                            borderColor: 'surface.high',
+                            borderRadius: "50%",
+                            bgcolor: "#22c55e",
+                            border: "2px solid",
+                            borderColor: "surface.high",
                           }}
                         />
                       </Box>
@@ -278,8 +268,8 @@ export function DiscordStatusCard({
                           variant="caption"
                           noWrap
                           sx={{
-                            color: 'text.disabled',
-                            fontSize: '0.65rem',
+                            color: "text.disabled",
+                            fontSize: "0.65rem",
                           }}
                         >
                           {member.username}
@@ -300,13 +290,13 @@ export function DiscordStatusCard({
             max={8}
             sx={{
               mb: 1.5,
-              justifyContent: 'center',
-              '& .MuiAvatar-root': {
+              justifyContent: "center",
+              "& .MuiAvatar-root": {
                 width: 24,
                 height: 24,
-                fontSize: '0.65rem',
-                border: '2px solid',
-                borderColor: 'surface.high',
+                fontSize: "0.65rem",
+                border: "2px solid",
+                borderColor: "surface.high",
               },
             }}
           >
@@ -324,15 +314,15 @@ export function DiscordStatusCard({
           fullWidth
           sx={{
             bgcolor: DISCORD_BLUE,
-            color: 'white',
-            '&:hover': {
+            color: "white",
+            "&:hover": {
               bgcolor: alpha(DISCORD_BLUE, 0.85),
               boxShadow: `0 6px 20px ${alpha(DISCORD_BLUE, 0.4)}`,
             },
             py: 1.2,
-            fontSize: '0.85rem',
+            fontSize: "0.85rem",
             borderRadius: 2,
-            textTransform: 'none',
+            textTransform: "none",
             fontWeight: 800,
           }}
         >

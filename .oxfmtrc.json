@@ -1,0 +1,14 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "ignorePatterns": [
+    "**/packages/discordx/**",
+    "**/*.generated.ts",
+    "**/dist/**",
+    "**/.next/**",
+    "**/.turbo/**",
+    "**/node_modules/**",
+    "**/.shots/**",
+    "**/data/**",
+    "**/*.min.js"
+  ]
+}

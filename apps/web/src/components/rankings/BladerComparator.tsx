@@ -1,10 +1,11 @@
-'use client';
+"use client";
 
-import CloseIcon from '@mui/icons-material/Close';
-import CompareArrowsIcon from '@mui/icons-material/CompareArrows';
-import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
-import PersonIcon from '@mui/icons-material/Person';
-import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutlined';
+import { avatarSrc } from "@/lib/utils";
+import CloseIcon from "@mui/icons-material/Close";
+import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
+import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
+import PersonIcon from "@mui/icons-material/Person";
+import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutlined";
 import {
   Avatar,
   alpha,
@@ -21,11 +22,11 @@ import {
   Typography,
   useMediaQuery,
   useTheme,
-} from '@mui/material';
-import { type TransitionProps } from '@mui/material/transitions';
-import { AnimatePresence, motion } from 'framer-motion';
-import Link from 'next/link';
-import React, { forwardRef } from 'react';
+} from "@mui/material";
+import { type TransitionProps } from "@mui/material/transitions";
+import { AnimatePresence, motion } from "framer-motion";
+import Link from "next/link";
+import React, { forwardRef } from "react";
 import {
   Legend,
   PolarAngleAxis,
@@ -33,8 +34,8 @@ import {
   Radar,
   RadarChart,
   ResponsiveContainer,
-} from 'recharts';
-import { type ProfileWithUser } from './RankingsTable';
+} from "recharts";
+import { type ProfileWithUser } from "./RankingsTable";
 
 const Transition = forwardRef(function Transition(
   props: TransitionProps & { children: React.ReactElement },
@@ -51,7 +52,7 @@ interface BladerComparatorProps {
   allProfiles: ProfileWithUser[];
 }
 
-const COLOR_B = '#3b82f6';
+const COLOR_B = "#3b82f6";
 
 function CompareRadar({
   bladerA,
@@ -75,31 +76,31 @@ function CompareRadar({
 
   const data = [
     {
-      stat: 'Points',
+      stat: "Points",
       A: (bladerA.rankingPoints / maxPoints) * 100,
       B: (bladerB.rankingPoints / maxPoints) * 100,
       fullMark: 100,
     },
     {
-      stat: 'Victoires',
+      stat: "Victoires",
       A: (bladerA.wins / maxWins) * 100,
       B: (bladerB.wins / maxWins) * 100,
       fullMark: 100,
     },
     {
-      stat: 'Matchs',
+      stat: "Matchs",
       A: (totalA / maxMatches) * 100,
       B: (totalB / maxMatches) * 100,
       fullMark: 100,
     },
     {
-      stat: 'Win Rate',
+      stat: "Win Rate",
       A: wrA,
       B: wrB,
       fullMark: 100,
     },
     {
-      stat: 'Tournois',
+      stat: "Tournois",
       A: maxTW > 0 ? (bladerA.tournamentWins / maxTW) * 100 : 0,
       B: maxTW > 0 ? (bladerB.tournamentWins / maxTW) * 100 : 0,
       fullMark: 100,
@@ -107,14 +108,14 @@ function CompareRadar({
   ];
 
   return (
-    <Box sx={{ width: '100%', height: { xs: 240, sm: 300 }, mx: 'auto' }}>
+    <Box sx={{ width: "100%", height: { xs: 240, sm: 300 }, mx: "auto" }}>
       <ResponsiveContainer width="100%" height="100%">
         <RadarChart cx="50%" cy="50%" outerRadius="75%" data={data}>
           <PolarGrid stroke="rgba(255,255,255,0.08)" />
           <PolarAngleAxis
             dataKey="stat"
             tick={{
-              fill: 'rgba(255,255,255,0.6)',
+              fill: "rgba(255,255,255,0.6)",
               fontSize: 11,
               fontWeight: 600,
             }}
@@ -135,11 +136,7 @@ function CompareRadar({
             fillOpacity={0.25}
             strokeWidth={2}
           />
-          <Legend
-            wrapperStyle={{ fontSize: 12, fontWeight: 700 }}
-            iconType="circle"
-            iconSize={8}
-          />
+          <Legend wrapperStyle={{ fontSize: 12, fontWeight: 700 }} iconType="circle" iconSize={8} />
         </RadarChart>
       </ResponsiveContainer>
     </Box>
@@ -147,18 +144,18 @@ function CompareRadar({
 }
 
 const EXP_LABELS: Record<string, string> = {
-  BEGINNER: 'Débutant',
-  INTERMEDIATE: 'Intermédiaire',
-  ADVANCED: 'Avancé',
-  EXPERT: 'Expert',
-  VETERAN: 'Vétéran',
+  BEGINNER: "Débutant",
+  INTERMEDIATE: "Intermédiaire",
+  ADVANCED: "Avancé",
+  EXPERT: "Expert",
+  VETERAN: "Vétéran",
 };
 
 const TYPE_LABELS: Record<string, string> = {
-  ATTACK: 'Attaque',
-  DEFENSE: 'Défense',
-  STAMINA: 'Endurance',
-  BALANCE: 'Équilibre',
+  ATTACK: "Attaque",
+  DEFENSE: "Défense",
+  STAMINA: "Endurance",
+  BALANCE: "Équilibre",
 };
 
 function BladerDetailCard({
@@ -171,36 +168,32 @@ function BladerDetailCard({
   rank: string | number;
 }) {
   const total = blader.wins + blader.losses;
-  const wr = total > 0 ? ((blader.wins / total) * 100).toFixed(1) : '0.0';
+  const wr = total > 0 ? ((blader.wins / total) * 100).toFixed(1) : "0.0";
 
   const allDetails: {
     label: string;
     value: string | number | null | undefined;
   }[] = [
-    { label: 'Rang', value: `#${rank}` },
-    { label: 'Points', value: blader.rankingPoints || null },
-    { label: 'Victoires', value: blader.wins || null },
-    { label: 'Défaites', value: blader.losses || null },
-    { label: 'Matchs', value: total || null },
-    { label: 'Win Rate', value: total > 0 ? `${wr}%` : null },
-    { label: 'Tournois gagnés', value: blader.tournamentWins || null },
+    { label: "Rang", value: `#${rank}` },
+    { label: "Points", value: blader.rankingPoints || null },
+    { label: "Victoires", value: blader.wins || null },
+    { label: "Défaites", value: blader.losses || null },
+    { label: "Matchs", value: total || null },
+    { label: "Win Rate", value: total > 0 ? `${wr}%` : null },
+    { label: "Tournois gagnés", value: blader.tournamentWins || null },
     {
-      label: 'Tournois joués',
+      label: "Tournois joués",
       value: blader.user?._count?.tournaments || null,
     },
     {
-      label: 'Type favori',
-      value: blader.favoriteType
-        ? TYPE_LABELS[blader.favoriteType] || blader.favoriteType
-        : null,
+      label: "Type favori",
+      value: blader.favoriteType ? TYPE_LABELS[blader.favoriteType] || blader.favoriteType : null,
     },
     {
-      label: 'Niveau',
-      value: blader.experience
-        ? EXP_LABELS[blader.experience] || blader.experience
-        : null,
+      label: "Niveau",
+      value: blader.experience ? EXP_LABELS[blader.experience] || blader.experience : null,
     },
-    { label: 'Challonge', value: blader.challongeUsername || null },
+    { label: "Challonge", value: blader.challongeUsername || null },
   ];
 
   const details = allDetails.filter((d) => d.value != null);
@@ -211,7 +204,7 @@ function BladerDetailCard({
         p: { xs: 1.5, sm: 2 },
         borderRadius: 2,
         bgcolor: alpha(color, 0.04),
-        border: '1px solid',
+        border: "1px solid",
         borderColor: alpha(color, 0.15),
       }}
     >
@@ -219,21 +212,21 @@ function BladerDetailCard({
         <Box
           key={d.label}
           sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
             py: 0.4,
-            '&:not(:last-child)': {
-              borderBottom: '1px solid',
-              borderColor: 'rgba(255,255,255,0.04)',
+            "&:not(:last-child)": {
+              borderBottom: "1px solid",
+              borderColor: "rgba(255,255,255,0.04)",
             },
           }}
         >
           <Typography
             variant="caption"
             sx={{
-              color: 'text.secondary',
-              fontSize: { xs: '0.7rem', sm: '0.75rem' },
+              color: "text.secondary",
+              fontSize: { xs: "0.7rem", sm: "0.75rem" },
               fontWeight: 600,
             }}
           >
@@ -243,9 +236,9 @@ function BladerDetailCard({
             variant="caption"
             sx={{
               fontWeight: 800,
-              fontSize: { xs: '0.75rem', sm: '0.8rem' },
-              color: 'text.primary',
-              fontVariantNumeric: 'tabular-nums',
+              fontSize: { xs: "0.75rem", sm: "0.8rem" },
+              color: "text.primary",
+              fontVariantNumeric: "tabular-nums",
             }}
           >
             {d.value}
@@ -270,16 +263,16 @@ function CompareTable({
 
   const rows = [
     {
-      label: 'Points',
+      label: "Points",
       valA: bladerA.rankingPoints,
       valB: bladerB.rankingPoints,
     },
-    { label: 'Victoires', valA: bladerA.wins, valB: bladerB.wins },
-    { label: 'Défaites', valA: bladerA.losses, valB: bladerB.losses },
-    { label: 'Matchs', valA: totalA, valB: totalB },
-    { label: 'Win Rate', valA: wrA, valB: wrB, suffix: '%', decimals: 1 },
+    { label: "Victoires", valA: bladerA.wins, valB: bladerB.wins },
+    { label: "Défaites", valA: bladerA.losses, valB: bladerB.losses },
+    { label: "Matchs", valA: totalA, valB: totalB },
+    { label: "Win Rate", valA: wrA, valB: wrB, suffix: "%", decimals: 1 },
     {
-      label: 'Tournois gagnés',
+      label: "Tournois gagnés",
       valA: bladerA.tournamentWins,
       valB: bladerB.tournamentWins,
     },
@@ -292,36 +285,36 @@ function CompareTable({
         const bWins = row.valB > row.valA;
         const fmt = (v: number) =>
           row.decimals
-            ? `${v.toFixed(row.decimals)}${row.suffix || ''}`
-            : `${v}${row.suffix || ''}`;
+            ? `${v.toFixed(row.decimals)}${row.suffix || ""}`
+            : `${v}${row.suffix || ""}`;
         const diff = row.valA - row.valB;
         const diffStr =
           diff === 0
-            ? '='
-            : `${diff > 0 ? '+' : ''}${row.decimals ? diff.toFixed(row.decimals) : diff}${row.suffix || ''}`;
+            ? "="
+            : `${diff > 0 ? "+" : ""}${row.decimals ? diff.toFixed(row.decimals) : diff}${row.suffix || ""}`;
 
         return (
           <Box
             key={row.label}
             sx={{
-              display: 'flex',
-              alignItems: 'center',
+              display: "flex",
+              alignItems: "center",
               py: { xs: 0.6, sm: 0.8 },
               px: { xs: 1, sm: 1.5 },
               borderRadius: 1.5,
-              '&:nth-of-type(odd)': {
-                bgcolor: 'rgba(255,255,255,0.02)',
+              "&:nth-of-type(odd)": {
+                bgcolor: "rgba(255,255,255,0.02)",
               },
             }}
           >
             <Typography
               sx={{
                 flex: 1,
-                textAlign: 'right',
+                textAlign: "right",
                 fontWeight: aWins ? 800 : 500,
-                color: aWins ? 'primary.main' : 'text.secondary',
-                fontSize: { xs: '0.8rem', sm: '0.9rem' },
-                fontVariantNumeric: 'tabular-nums',
+                color: aWins ? "primary.main" : "text.secondary",
+                fontSize: { xs: "0.8rem", sm: "0.9rem" },
+                fontVariantNumeric: "tabular-nums",
               }}
             >
               {fmt(row.valA)}
@@ -329,7 +322,7 @@ function CompareTable({
             <Box
               sx={{
                 width: { xs: 90, sm: 120 },
-                textAlign: 'center',
+                textAlign: "center",
                 flexShrink: 0,
                 px: 1,
               }}
@@ -338,9 +331,9 @@ function CompareTable({
                 variant="caption"
                 sx={{
                   fontWeight: 700,
-                  color: 'text.secondary',
-                  fontSize: { xs: '0.65rem', sm: '0.75rem' },
-                  textTransform: 'uppercase',
+                  color: "text.secondary",
+                  fontSize: { xs: "0.65rem", sm: "0.75rem" },
+                  textTransform: "uppercase",
                   letterSpacing: 0.5,
                 }}
               >
@@ -348,7 +341,7 @@ function CompareTable({
               </Typography>
               <Typography
                 sx={{
-                  fontSize: { xs: '0.6rem', sm: '0.65rem' },
+                  fontSize: { xs: "0.6rem", sm: "0.65rem" },
                   fontWeight: 600,
                   color: (t) =>
                     diff === 0
@@ -356,7 +349,7 @@ function CompareTable({
                       : diff > 0
                         ? alpha(t.palette.primary.main, 0.7)
                         : alpha(COLOR_B, 0.7),
-                  fontVariantNumeric: 'tabular-nums',
+                  fontVariantNumeric: "tabular-nums",
                 }}
               >
                 {diffStr}
@@ -365,11 +358,11 @@ function CompareTable({
             <Typography
               sx={{
                 flex: 1,
-                textAlign: 'left',
+                textAlign: "left",
                 fontWeight: bWins ? 800 : 500,
-                color: bWins ? COLOR_B : 'text.secondary',
-                fontSize: { xs: '0.8rem', sm: '0.9rem' },
-                fontVariantNumeric: 'tabular-nums',
+                color: bWins ? COLOR_B : "text.secondary",
+                fontSize: { xs: "0.8rem", sm: "0.9rem" },
+                fontVariantNumeric: "tabular-nums",
               }}
             >
               {fmt(row.valB)}
@@ -389,14 +382,14 @@ export default function BladerComparator({
   allProfiles,
 }: BladerComparatorProps) {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const [dialogOpen, setDialogOpen] = React.useState(false);
 
   const canCompare = selectedBladers.length === 2;
 
   const getRank = (profile: ProfileWithUser) => {
     const index = allProfiles.findIndex((p) => p.id === profile.id);
-    return index >= 0 ? (currentPage - 1) * 100 + index + 1 : '?';
+    return index >= 0 ? (currentPage - 1) * 100 + index + 1 : "?";
   };
 
   if (selectedBladers.length === 0) return null;
@@ -409,70 +402,59 @@ export default function BladerComparator({
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 100, opacity: 0 }}
-          transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+          transition={{ type: "spring", stiffness: 300, damping: 30 }}
           style={{
-            position: 'fixed',
+            position: "fixed",
             bottom: isMobile ? 90 : 24,
-            left: '50%',
-            transform: 'translateX(-50%)',
+            left: "50%",
+            transform: "translateX(-50%)",
             zIndex: 1300,
-            width: isMobile ? 'calc(100% - 24px)' : 'auto',
+            width: isMobile ? "calc(100% - 24px)" : "auto",
             maxWidth: 560,
           }}
         >
           <Box
             sx={{
               bgcolor: alpha(theme.palette.background.paper, 0.95),
-              backdropFilter: 'blur(20px)',
-              border: '1px solid',
+              backdropFilter: "blur(20px)",
+              border: "1px solid",
               borderColor: alpha(theme.palette.primary.main, 0.3),
               borderRadius: { xs: 2.5, sm: 3 },
               px: { xs: 1.5, sm: 2 },
               py: { xs: 1, sm: 1.5 },
-              boxShadow: `0 8px 32px ${alpha('#000', 0.5)}`,
-              display: 'flex',
-              alignItems: 'center',
+              boxShadow: `0 8px 32px ${alpha("#000", 0.5)}`,
+              display: "flex",
+              alignItems: "center",
               gap: { xs: 1, sm: 1.5 },
             }}
           >
             <CompareArrowsIcon
               sx={{
-                color: 'primary.main',
-                fontSize: { xs: '1.1rem', sm: '1.3rem' },
+                color: "primary.main",
+                fontSize: { xs: "1.1rem", sm: "1.3rem" },
                 flexShrink: 0,
               }}
             />
 
-            <Stack
-              direction="row"
-              spacing={0.5}
-              sx={{ flex: 1, overflow: 'hidden', minWidth: 0 }}
-            >
+            <Stack direction="row" spacing={0.5} sx={{ flex: 1, overflow: "hidden", minWidth: 0 }}>
               {selectedBladers.map((blader) => (
                 <Chip
                   key={blader.id}
-                  label={blader.bladerName || blader.user?.name || 'Blader'}
+                  label={blader.bladerName || blader.user?.name || "Blader"}
                   avatar={
-                    <Avatar
-                      src={blader.user?.image || undefined}
-                      sx={{ width: 20, height: 20 }}
-                    />
+                    <Avatar src={avatarSrc(blader.user?.image)} sx={{ width: 20, height: 20 }} />
                   }
                   onDelete={() => onRemove(blader.id)}
-                  deleteIcon={
-                    <RemoveCircleOutlineIcon
-                      sx={{ fontSize: '0.9rem !important' }}
-                    />
-                  }
+                  deleteIcon={<RemoveCircleOutlineIcon sx={{ fontSize: "0.9rem !important" }} />}
                   size="small"
                   sx={{
                     bgcolor: alpha(theme.palette.primary.main, 0.1),
-                    border: '1px solid',
+                    border: "1px solid",
                     borderColor: alpha(theme.palette.primary.main, 0.2),
                     maxWidth: { xs: 120, sm: 160 },
                     height: { xs: 28, sm: 32 },
-                    '& .MuiChip-label': {
-                      fontSize: { xs: '0.7rem', sm: '0.8rem' },
+                    "& .MuiChip-label": {
+                      fontSize: { xs: "0.7rem", sm: "0.8rem" },
                       px: { xs: 0.5, sm: 1 },
                     },
                   }}
@@ -486,10 +468,10 @@ export default function BladerComparator({
                   variant="outlined"
                   sx={{
                     opacity: 0.5,
-                    borderStyle: 'dashed',
+                    borderStyle: "dashed",
                     height: { xs: 28, sm: 32 },
-                    '& .MuiChip-label': {
-                      fontSize: { xs: '0.7rem', sm: '0.8rem' },
+                    "& .MuiChip-label": {
+                      fontSize: { xs: "0.7rem", sm: "0.8rem" },
                     },
                   }}
                 />
@@ -504,24 +486,20 @@ export default function BladerComparator({
               startIcon={!isMobile ? <CompareArrowsIcon /> : undefined}
               sx={{
                 borderRadius: 2,
-                textTransform: 'none',
+                textTransform: "none",
                 fontWeight: 700,
-                whiteSpace: 'nowrap',
+                whiteSpace: "nowrap",
                 px: { xs: 1.5, sm: 2 },
                 py: { xs: 0.5, sm: 0.75 },
-                minWidth: { xs: 'auto', sm: 120 },
-                fontSize: { xs: '0.75rem', sm: '0.8rem' },
+                minWidth: { xs: "auto", sm: 120 },
+                fontSize: { xs: "0.75rem", sm: "0.8rem" },
               }}
             >
-              {isMobile ? 'VS' : 'Comparer'}
+              {isMobile ? "VS" : "Comparer"}
             </Button>
 
-            <IconButton
-              size="small"
-              onClick={onClear}
-              sx={{ opacity: 0.5, p: { xs: 0.5, sm: 1 } }}
-            >
-              <CloseIcon sx={{ fontSize: { xs: '1rem', sm: '1.25rem' } }} />
+            <IconButton size="small" onClick={onClear} sx={{ opacity: 0.5, p: { xs: 0.5, sm: 1 } }}>
+              <CloseIcon sx={{ fontSize: { xs: "1rem", sm: "1.25rem" } }} />
             </IconButton>
           </Box>
         </motion.div>
@@ -539,20 +517,20 @@ export default function BladerComparator({
         slotProps={{
           paper: {
             sx: {
-              bgcolor: 'background.default',
-              backgroundImage: 'none',
+              bgcolor: "background.default",
+              backgroundImage: "none",
               borderRadius: isMobile ? 0 : 3,
-              overflow: 'hidden',
-              '&::before': {
+              overflow: "hidden",
+              "&::before": {
                 content: '""',
-                position: 'absolute',
+                position: "absolute",
                 top: 0,
                 left: 0,
                 right: 0,
-                height: '30%',
+                height: "30%",
                 background: (t) =>
                   `radial-gradient(ellipse at 50% -20%, ${alpha(t.palette.primary.main, 0.08)} 0%, transparent 70%)`,
-                pointerEvents: 'none',
+                pointerEvents: "none",
               },
             },
           },
@@ -560,23 +538,20 @@ export default function BladerComparator({
       >
         <DialogTitle
           sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
             pb: 1,
             px: { xs: 2, sm: 3 },
           }}
         >
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-            <CompareArrowsIcon
-              color="primary"
-              sx={{ fontSize: { xs: '1.2rem', sm: '1.5rem' } }}
-            />
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+            <CompareArrowsIcon color="primary" sx={{ fontSize: { xs: "1.2rem", sm: "1.5rem" } }} />
             <Typography
               variant="h6"
               sx={{
                 fontWeight: 900,
-                fontSize: { xs: '1rem', sm: '1.25rem' },
+                fontSize: { xs: "1rem", sm: "1.25rem" },
               }}
             >
               Comparaison
@@ -593,34 +568,31 @@ export default function BladerComparator({
               {/* Header with both bladers */}
               <Box
                 sx={{
-                  display: 'flex',
-                  alignItems: 'stretch',
-                  justifyContent: 'space-around',
+                  display: "flex",
+                  alignItems: "stretch",
+                  justifyContent: "space-around",
                   mb: { xs: 2, sm: 3 },
                   gap: { xs: 1, sm: 2 },
                 }}
               >
                 {selectedBladers.map((blader, idx) => {
-                  const bladerColor =
-                    idx === 0 ? theme.palette.primary.main : COLOR_B;
+                  const bladerColor = idx === 0 ? theme.palette.primary.main : COLOR_B;
                   const rank = getRank(blader);
                   return (
                     <Box key={blader.id} sx={{ flex: 1, minWidth: 0 }}>
-                      <Box sx={{ textAlign: 'center', mb: 1.5 }}>
+                      <Box sx={{ textAlign: "center", mb: 1.5 }}>
                         <Link
-                          href={
-                            blader.userId ? `/profile/${blader.userId}` : '#'
-                          }
-                          style={{ textDecoration: 'none', color: 'inherit' }}
+                          href={blader.userId ? `/profile/${blader.userId}` : "#"}
+                          style={{ textDecoration: "none", color: "inherit" }}
                         >
                           <Avatar
-                            src={blader.user?.image || undefined}
+                            src={avatarSrc(blader.user?.image)}
                             sx={{
                               width: { xs: 48, sm: 68 },
                               height: { xs: 48, sm: 68 },
-                              mx: 'auto',
+                              mx: "auto",
                               mb: 0.5,
-                              border: '2px solid',
+                              border: "2px solid",
                               borderColor: bladerColor,
                               boxShadow: `0 0 16px ${alpha(bladerColor, 0.25)}`,
                             }}
@@ -630,18 +602,14 @@ export default function BladerComparator({
                             noWrap
                             sx={{
                               fontWeight: 900,
-                              fontSize: { xs: '0.8rem', sm: '0.95rem' },
+                              fontSize: { xs: "0.8rem", sm: "0.95rem" },
                             }}
                           >
-                            {blader.bladerName || blader.user?.name || 'Blader'}
+                            {blader.bladerName || blader.user?.name || "Blader"}
                           </Typography>
                         </Link>
                         <Chip
-                          icon={
-                            <EmojiEventsIcon
-                              sx={{ fontSize: '0.75rem !important' }}
-                            />
-                          }
+                          icon={<EmojiEventsIcon sx={{ fontSize: "0.75rem !important" }} />}
                           label={`#${rank}`}
                           size="small"
                           sx={{
@@ -650,16 +618,12 @@ export default function BladerComparator({
                             bgcolor: alpha(bladerColor, 0.1),
                             color: bladerColor,
                             fontWeight: 700,
-                            fontSize: '0.7rem',
-                            '& .MuiChip-label': { px: 0.5 },
+                            fontSize: "0.7rem",
+                            "& .MuiChip-label": { px: 0.5 },
                           }}
                         />
                       </Box>
-                      <BladerDetailCard
-                        blader={blader}
-                        color={bladerColor}
-                        rank={rank}
-                      />
+                      <BladerDetailCard blader={blader} color={bladerColor} rank={rank} />
                     </Box>
                   );
                 })}
@@ -672,22 +636,15 @@ export default function BladerComparator({
                 bladerA={selectedBladers[0]!}
                 bladerB={selectedBladers[1]!}
                 nameA={
-                  selectedBladers[0]?.bladerName ||
-                  selectedBladers[0]?.user?.name ||
-                  'Blader A'
+                  selectedBladers[0]?.bladerName || selectedBladers[0]?.user?.name || "Blader A"
                 }
                 nameB={
-                  selectedBladers[1]?.bladerName ||
-                  selectedBladers[1]?.user?.name ||
-                  'Blader B'
+                  selectedBladers[1]?.bladerName || selectedBladers[1]?.user?.name || "Blader B"
                 }
               />
 
               {/* Detailed stats table */}
-              <CompareTable
-                bladerA={selectedBladers[0]!}
-                bladerB={selectedBladers[1]!}
-              />
+              <CompareTable bladerA={selectedBladers[0]!} bladerB={selectedBladers[1]!} />
 
               {/* Summary */}
               <Box
@@ -696,9 +653,9 @@ export default function BladerComparator({
                   p: { xs: 1.5, sm: 2 },
                   borderRadius: 2,
                   bgcolor: alpha(theme.palette.primary.main, 0.05),
-                  border: '1px solid',
+                  border: "1px solid",
                   borderColor: alpha(theme.palette.primary.main, 0.1),
-                  textAlign: 'center',
+                  textAlign: "center",
                 }}
               >
                 {(() => {
@@ -721,8 +678,8 @@ export default function BladerComparator({
                   if (a.tournamentWins > b.tournamentWins) scoreA++;
                   else if (b.tournamentWins > a.tournamentWins) scoreB++;
 
-                  const nameA = a.bladerName || a.user?.name || 'Blader A';
-                  const nameB = b.bladerName || b.user?.name || 'Blader B';
+                  const nameA = a.bladerName || a.user?.name || "Blader A";
+                  const nameB = b.bladerName || b.user?.name || "Blader B";
                   const total = 5;
 
                   if (scoreA > scoreB) {
@@ -731,14 +688,12 @@ export default function BladerComparator({
                         variant="body2"
                         sx={{
                           fontWeight: 700,
-                          fontSize: { xs: '0.8rem', sm: '0.875rem' },
+                          fontSize: { xs: "0.8rem", sm: "0.875rem" },
                         }}
                       >
-                        <span style={{ color: 'var(--rpb-primary)' }}>
-                          {nameA}
-                        </span>{' '}
-                        domine dans {scoreA}catégorie
-                        {scoreA > 1 ? 's' : ''}sur {total}
+                        <span style={{ color: "var(--rpb-primary)" }}>{nameA}</span> domine dans{" "}
+                        {scoreA}catégorie
+                        {scoreA > 1 ? "s" : ""}sur {total}
                       </Typography>
                     );
                   }
@@ -748,12 +703,11 @@ export default function BladerComparator({
                         variant="body2"
                         sx={{
                           fontWeight: 700,
-                          fontSize: { xs: '0.8rem', sm: '0.875rem' },
+                          fontSize: { xs: "0.8rem", sm: "0.875rem" },
                         }}
                       >
-                        <span style={{ color: COLOR_B }}>{nameB}</span>domine
-                        dans {scoreB}catégorie
-                        {scoreB > 1 ? 's' : ''}sur {total}
+                        <span style={{ color: COLOR_B }}>{nameB}</span>domine dans {scoreB}catégorie
+                        {scoreB > 1 ? "s" : ""}sur {total}
                       </Typography>
                     );
                   }
@@ -762,7 +716,7 @@ export default function BladerComparator({
                       variant="body2"
                       sx={{
                         fontWeight: 700,
-                        fontSize: { xs: '0.8rem', sm: '0.875rem' },
+                        fontSize: { xs: "0.8rem", sm: "0.875rem" },
                       }}
                     >
                       Égalité parfaite !

@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import CloseIcon from '@mui/icons-material/Close';
-import CompareArrowsIcon from '@mui/icons-material/CompareArrows';
-import PersonIcon from '@mui/icons-material/Person';
-import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutlined';
+import CloseIcon from "@mui/icons-material/Close";
+import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
+import PersonIcon from "@mui/icons-material/Person";
+import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutlined";
 import {
   alpha,
   Box,
@@ -19,10 +19,10 @@ import {
   Typography,
   useMediaQuery,
   useTheme,
-} from '@mui/material';
-import { type TransitionProps } from '@mui/material/transitions';
-import { AnimatePresence, motion } from 'framer-motion';
-import React, { forwardRef } from 'react';
+} from "@mui/material";
+import { type TransitionProps } from "@mui/material/transitions";
+import { AnimatePresence, motion } from "framer-motion";
+import React, { forwardRef } from "react";
 import {
   Legend,
   PolarAngleAxis,
@@ -30,8 +30,8 @@ import {
   Radar,
   RadarChart,
   ResponsiveContainer,
-} from 'recharts';
-import { type SatrRanking } from '@/lib/types';
+} from "recharts";
+import { type SatrRanking } from "@/lib/types";
 
 const Transition = forwardRef(function Transition(
   props: TransitionProps & { children: React.ReactElement },
@@ -46,11 +46,11 @@ interface SatrComparatorProps {
   onClear: () => void;
 }
 
-const COLOR_A = '#fbbf24';
-const COLOR_B = '#3b82f6';
+const COLOR_A = "#fbbf24";
+const COLOR_B = "#3b82f6";
 
 function parseNum(val: string) {
-  return parseFloat(val.replace(',', '.').replace('%', '')) || 0;
+  return parseFloat(val.replace(",", ".").replace("%", "")) || 0;
 }
 
 function CompareRadar({ a, b }: { a: SatrRanking; b: SatrRanking }) {
@@ -65,37 +65,37 @@ function CompareRadar({ a, b }: { a: SatrRanking; b: SatrRanking }) {
 
   const data = [
     {
-      stat: 'Score',
+      stat: "Score",
       A: (a.score / maxScore) * 100,
       B: (b.score / maxScore) * 100,
     },
     {
-      stat: 'Victoires',
+      stat: "Victoires",
       A: (a.wins / maxWins) * 100,
       B: (b.wins / maxWins) * 100,
     },
-    { stat: 'Winrate', A: wrA, B: wrB },
+    { stat: "Winrate", A: wrA, B: wrB },
     {
-      stat: 'Tournois',
+      stat: "Tournois",
       A: (a.participation / maxPart) * 100,
       B: (b.participation / maxPart) * 100,
     },
     {
-      stat: 'Moyenne',
+      stat: "Moyenne",
       A: (avgA / maxAvg) * 100,
       B: (avgB / maxAvg) * 100,
     },
   ];
 
   return (
-    <Box sx={{ width: '100%', height: { xs: 240, sm: 300 }, mx: 'auto' }}>
+    <Box sx={{ width: "100%", height: { xs: 240, sm: 300 }, mx: "auto" }}>
       <ResponsiveContainer width="100%" height="100%">
         <RadarChart cx="50%" cy="50%" outerRadius="75%" data={data}>
           <PolarGrid stroke="rgba(255,255,255,0.08)" />
           <PolarAngleAxis
             dataKey="stat"
             tick={{
-              fill: 'rgba(255,255,255,0.6)',
+              fill: "rgba(255,255,255,0.6)",
               fontSize: 11,
               fontWeight: 600,
             }}
@@ -116,11 +116,7 @@ function CompareRadar({ a, b }: { a: SatrRanking; b: SatrRanking }) {
             fillOpacity={0.2}
             strokeWidth={2}
           />
-          <Legend
-            wrapperStyle={{ fontSize: 12, fontWeight: 700 }}
-            iconType="circle"
-            iconSize={8}
-          />
+          <Legend wrapperStyle={{ fontSize: 12, fontWeight: 700 }} iconType="circle" iconSize={8} />
         </RadarChart>
       </ResponsiveContainer>
     </Box>
@@ -134,13 +130,13 @@ function CompareTable({ a, b }: { a: SatrRanking; b: SatrRanking }) {
   const avgB = parseNum(b.pointsAverage);
 
   const rows = [
-    { label: 'Rang', valA: a.rank, valB: b.rank, lower: true },
-    { label: 'Score', valA: a.score, valB: b.score },
-    { label: 'Victoires', valA: a.wins, valB: b.wins },
-    { label: 'Défaites', valA: a.losses, valB: b.losses, lower: true },
-    { label: 'Winrate', valA: wrA, valB: wrB, suffix: '%', decimals: 1 },
-    { label: 'Tournois', valA: a.participation, valB: b.participation },
-    { label: 'Moyenne', valA: avgA, valB: avgB, decimals: 2 },
+    { label: "Rang", valA: a.rank, valB: b.rank, lower: true },
+    { label: "Score", valA: a.score, valB: b.score },
+    { label: "Victoires", valA: a.wins, valB: b.wins },
+    { label: "Défaites", valA: a.losses, valB: b.losses, lower: true },
+    { label: "Winrate", valA: wrA, valB: wrB, suffix: "%", decimals: 1 },
+    { label: "Tournois", valA: a.participation, valB: b.participation },
+    { label: "Moyenne", valA: avgA, valB: avgB, decimals: 2 },
   ];
 
   return (
@@ -151,34 +147,34 @@ function CompareTable({ a, b }: { a: SatrRanking; b: SatrRanking }) {
         const bWins = row.lower ? row.valB < row.valA : row.valB > row.valA;
         const fmt = (v: number) =>
           row.decimals
-            ? `${v.toFixed(row.decimals)}${row.suffix || ''}`
-            : `${v.toLocaleString()}${row.suffix || ''}`;
+            ? `${v.toFixed(row.decimals)}${row.suffix || ""}`
+            : `${v.toLocaleString("fr-FR")}${row.suffix || ""}`;
         const diff = row.valA - row.valB;
         const diffStr =
           diff === 0
-            ? '='
-            : `${diff > 0 ? '+' : ''}${row.decimals ? diff.toFixed(row.decimals) : diff}${row.suffix || ''}`;
+            ? "="
+            : `${diff > 0 ? "+" : ""}${row.decimals ? diff.toFixed(row.decimals) : diff}${row.suffix || ""}`;
 
         return (
           <Box
             key={row.label}
             sx={{
-              display: 'flex',
-              alignItems: 'center',
+              display: "flex",
+              alignItems: "center",
               py: { xs: 0.6, sm: 0.8 },
               px: { xs: 1, sm: 1.5 },
               borderRadius: 1.5,
-              '&:nth-of-type(odd)': { bgcolor: 'rgba(255,255,255,0.02)' },
+              "&:nth-of-type(odd)": { bgcolor: "rgba(255,255,255,0.02)" },
             }}
           >
             <Typography
               sx={{
                 flex: 1,
-                textAlign: 'right',
+                textAlign: "right",
                 fontWeight: aWins ? 800 : 500,
-                color: aWins ? COLOR_A : 'text.secondary',
-                fontSize: { xs: '0.8rem', sm: '0.9rem' },
-                fontVariantNumeric: 'tabular-nums',
+                color: aWins ? COLOR_A : "text.secondary",
+                fontSize: { xs: "0.8rem", sm: "0.9rem" },
+                fontVariantNumeric: "tabular-nums",
               }}
             >
               {fmt(row.valA)}
@@ -186,7 +182,7 @@ function CompareTable({ a, b }: { a: SatrRanking; b: SatrRanking }) {
             <Box
               sx={{
                 width: { xs: 90, sm: 120 },
-                textAlign: 'center',
+                textAlign: "center",
                 flexShrink: 0,
                 px: 1,
               }}
@@ -195,9 +191,9 @@ function CompareTable({ a, b }: { a: SatrRanking; b: SatrRanking }) {
                 variant="caption"
                 sx={{
                   fontWeight: 700,
-                  color: 'text.secondary',
-                  fontSize: { xs: '0.65rem', sm: '0.75rem' },
-                  textTransform: 'uppercase',
+                  color: "text.secondary",
+                  fontSize: { xs: "0.65rem", sm: "0.75rem" },
+                  textTransform: "uppercase",
                   letterSpacing: 0.5,
                 }}
               >
@@ -205,15 +201,15 @@ function CompareTable({ a, b }: { a: SatrRanking; b: SatrRanking }) {
               </Typography>
               <Typography
                 sx={{
-                  fontSize: { xs: '0.6rem', sm: '0.65rem' },
+                  fontSize: { xs: "0.6rem", sm: "0.65rem" },
                   fontWeight: 600,
                   color:
                     diff === 0
-                      ? 'text.disabled'
+                      ? "text.disabled"
                       : aWins
                         ? alpha(COLOR_A, 0.7)
                         : alpha(COLOR_B, 0.7),
-                  fontVariantNumeric: 'tabular-nums',
+                  fontVariantNumeric: "tabular-nums",
                 }}
               >
                 {diffStr}
@@ -222,11 +218,11 @@ function CompareTable({ a, b }: { a: SatrRanking; b: SatrRanking }) {
             <Typography
               sx={{
                 flex: 1,
-                textAlign: 'left',
+                textAlign: "left",
                 fontWeight: bWins ? 800 : 500,
-                color: bWins ? COLOR_B : 'text.secondary',
-                fontSize: { xs: '0.8rem', sm: '0.9rem' },
-                fontVariantNumeric: 'tabular-nums',
+                color: bWins ? COLOR_B : "text.secondary",
+                fontSize: { xs: "0.8rem", sm: "0.9rem" },
+                fontVariantNumeric: "tabular-nums",
               }}
             >
               {fmt(row.valB)}
@@ -238,13 +234,9 @@ function CompareTable({ a, b }: { a: SatrRanking; b: SatrRanking }) {
   );
 }
 
-export function SatrComparator({
-  selected,
-  onRemove,
-  onClear,
-}: SatrComparatorProps) {
+export function SatrComparator({ selected, onRemove, onClear }: SatrComparatorProps) {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const [dialogOpen, setDialogOpen] = React.useState(false);
 
   const canCompare = selected.length === 2;
@@ -259,66 +251,58 @@ export function SatrComparator({
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 100, opacity: 0 }}
-          transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+          transition={{ type: "spring", stiffness: 300, damping: 30 }}
           style={{
-            position: 'fixed',
+            position: "fixed",
             bottom: isMobile ? 90 : 24,
-            left: '50%',
-            transform: 'translateX(-50%)',
+            left: "50%",
+            transform: "translateX(-50%)",
             zIndex: 1300,
-            width: isMobile ? 'calc(100% - 24px)' : 'auto',
+            width: isMobile ? "calc(100% - 24px)" : "auto",
             maxWidth: 520,
           }}
         >
           <Box
             sx={{
               bgcolor: alpha(theme.palette.background.paper, 0.95),
-              backdropFilter: 'blur(20px)',
-              border: '1px solid',
+              backdropFilter: "blur(20px)",
+              border: "1px solid",
               borderColor: alpha(COLOR_A, 0.3),
               borderRadius: { xs: 2.5, sm: 3 },
               px: { xs: 1.5, sm: 2 },
               py: { xs: 1, sm: 1.5 },
-              boxShadow: `0 8px 32px ${alpha('#000', 0.5)}`,
-              display: 'flex',
-              alignItems: 'center',
+              boxShadow: `0 8px 32px ${alpha("#000", 0.5)}`,
+              display: "flex",
+              alignItems: "center",
               gap: { xs: 1, sm: 1.5 },
             }}
           >
             <CompareArrowsIcon
               sx={{
                 color: COLOR_A,
-                fontSize: { xs: '1.1rem', sm: '1.3rem' },
+                fontSize: { xs: "1.1rem", sm: "1.3rem" },
                 flexShrink: 0,
               }}
             />
 
-            <Stack
-              direction="row"
-              spacing={0.5}
-              sx={{ flex: 1, overflow: 'hidden', minWidth: 0 }}
-            >
+            <Stack direction="row" spacing={0.5} sx={{ flex: 1, overflow: "hidden", minWidth: 0 }}>
               {selected.map((r, idx) => (
                 <Chip
                   key={r.id}
                   label={r.playerName}
                   onDelete={() => onRemove(r.id)}
-                  deleteIcon={
-                    <RemoveCircleOutlineIcon
-                      sx={{ fontSize: '0.9rem !important' }}
-                    />
-                  }
+                  deleteIcon={<RemoveCircleOutlineIcon sx={{ fontSize: "0.9rem !important" }} />}
                   size="small"
                   sx={{
                     bgcolor: alpha(idx === 0 ? COLOR_A : COLOR_B, 0.12),
-                    border: '1px solid',
+                    border: "1px solid",
                     borderColor: alpha(idx === 0 ? COLOR_A : COLOR_B, 0.25),
                     color: idx === 0 ? COLOR_A : COLOR_B,
                     maxWidth: { xs: 130, sm: 170 },
                     height: { xs: 28, sm: 32 },
                     fontWeight: 800,
-                    '& .MuiChip-label': {
-                      fontSize: { xs: '0.7rem', sm: '0.8rem' },
+                    "& .MuiChip-label": {
+                      fontSize: { xs: "0.7rem", sm: "0.8rem" },
                       px: { xs: 0.5, sm: 1 },
                     },
                   }}
@@ -332,9 +316,9 @@ export function SatrComparator({
                   variant="outlined"
                   sx={{
                     opacity: 0.4,
-                    borderStyle: 'dashed',
+                    borderStyle: "dashed",
                     height: 32,
-                    '& .MuiChip-label': { fontSize: '0.8rem' },
+                    "& .MuiChip-label": { fontSize: "0.8rem" },
                   }}
                 />
               )}
@@ -348,31 +332,27 @@ export function SatrComparator({
               startIcon={!isMobile ? <CompareArrowsIcon /> : undefined}
               sx={{
                 borderRadius: 2,
-                textTransform: 'none',
+                textTransform: "none",
                 fontWeight: 700,
-                whiteSpace: 'nowrap',
+                whiteSpace: "nowrap",
                 px: { xs: 1.5, sm: 2 },
                 py: { xs: 0.5, sm: 0.75 },
-                minWidth: { xs: 'auto', sm: 120 },
-                fontSize: { xs: '0.75rem', sm: '0.8rem' },
+                minWidth: { xs: "auto", sm: 120 },
+                fontSize: { xs: "0.75rem", sm: "0.8rem" },
                 bgcolor: COLOR_A,
-                color: '#000',
-                '&:hover': { bgcolor: alpha(COLOR_A, 0.85) },
-                '&.Mui-disabled': {
+                color: "#000",
+                "&:hover": { bgcolor: alpha(COLOR_A, 0.85) },
+                "&.Mui-disabled": {
                   bgcolor: alpha(COLOR_A, 0.2),
-                  color: alpha('#fff', 0.3),
+                  color: alpha("#fff", 0.3),
                 },
               }}
             >
-              {isMobile ? 'VS' : 'Comparer'}
+              {isMobile ? "VS" : "Comparer"}
             </Button>
 
-            <IconButton
-              size="small"
-              onClick={onClear}
-              sx={{ opacity: 0.5, p: { xs: 0.5, sm: 1 } }}
-            >
-              <CloseIcon sx={{ fontSize: { xs: '1rem', sm: '1.25rem' } }} />
+            <IconButton size="small" onClick={onClear} sx={{ opacity: 0.5, p: { xs: 0.5, sm: 1 } }}>
+              <CloseIcon sx={{ fontSize: { xs: "1rem", sm: "1.25rem" } }} />
             </IconButton>
           </Box>
         </motion.div>
@@ -390,30 +370,30 @@ export function SatrComparator({
         slotProps={{
           paper: {
             sx: {
-              bgcolor: 'background.default',
-              backgroundImage: 'none',
+              bgcolor: "background.default",
+              backgroundImage: "none",
               borderRadius: isMobile ? 0 : 3,
-              overflow: 'hidden',
+              overflow: "hidden",
             },
           },
         }}
       >
         <DialogTitle
           sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
             pb: 1,
             px: { xs: 2, sm: 3 },
           }}
         >
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-            <CompareArrowsIcon sx={{ color: COLOR_A, fontSize: '1.3rem' }} />
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+            <CompareArrowsIcon sx={{ color: COLOR_A, fontSize: "1.3rem" }} />
             <Typography
               variant="h6"
               sx={{
                 fontWeight: 900,
-                fontSize: { xs: '1rem', sm: '1.25rem' },
+                fontSize: { xs: "1rem", sm: "1.25rem" },
               }}
             >
               Comparaison
@@ -430,21 +410,21 @@ export function SatrComparator({
               {/* Names header */}
               <Box
                 sx={{
-                  display: 'flex',
-                  justifyContent: 'space-around',
+                  display: "flex",
+                  justifyContent: "space-around",
                   mb: 2,
                 }}
               >
                 {selected.map((r, idx) => {
                   const c = idx === 0 ? COLOR_A : COLOR_B;
                   return (
-                    <Box key={r.id} sx={{ textAlign: 'center' }}>
+                    <Box key={r.id} sx={{ textAlign: "center" }}>
                       <Typography
                         variant="h6"
                         sx={{
                           fontWeight: 900,
                           color: c,
-                          fontSize: { xs: '1rem', sm: '1.2rem' },
+                          fontSize: { xs: "1rem", sm: "1.2rem" },
                         }}
                       >
                         {r.playerName}
@@ -452,12 +432,12 @@ export function SatrComparator({
                       <Typography
                         variant="caption"
                         sx={{
-                          color: 'text.secondary',
+                          color: "text.secondary",
                           fontWeight: 700,
-                          fontSize: '0.7rem',
+                          fontSize: "0.7rem",
                         }}
                       >
-                        #{r.rank} · {r.score.toLocaleString()} pts
+                        #{r.rank} · {r.score.toLocaleString("fr-FR")} pts
                       </Typography>
                     </Box>
                   );
@@ -477,7 +457,7 @@ export function SatrComparator({
                   borderRadius: 2,
                   bgcolor: alpha(COLOR_A, 0.05),
                   border: `1px solid ${alpha(COLOR_A, 0.1)}`,
-                  textAlign: 'center',
+                  textAlign: "center",
                 }}
               >
                 {(() => {
@@ -521,11 +501,11 @@ export function SatrComparator({
                       variant="body2"
                       sx={{
                         fontWeight: 700,
-                        fontSize: { xs: '0.8rem', sm: '0.875rem' },
+                        fontSize: { xs: "0.8rem", sm: "0.875rem" },
                       }}
                     >
-                      <span style={{ color }}>{winner.playerName}</span>domine
-                      dans {winCount}catégorie{winCount > 1 ? 's' : ''}sur 5
+                      <span style={{ color }}>{winner.playerName}</span>domine dans {winCount}
+                      catégorie{winCount > 1 ? "s" : ""}sur 5
                     </Typography>
                   );
                 })()}

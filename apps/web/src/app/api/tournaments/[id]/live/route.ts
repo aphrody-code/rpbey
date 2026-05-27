@@ -11,200 +11,183 @@
  */
 
 import { type NextRequest, NextResponse } from "next/server";
-import { ChallongeApi, ChallongeReverse } from "@/lib/challonge-vendor";
+import { ChallongeApi } from "@/lib/challonge-vendor/api";
+import { ChallongeReverse } from "@/lib/challonge-vendor/reverse";
 import { requireStaff } from "@/lib/auth-utils";
 import { db, schema, eq } from "@/lib/db";
 
 interface RouteParams {
-	params: Promise<{ id: string }>;
+  params: Promise<{ id: string }>;
 }
 
 // Slug helper — accepts `B_TS4`, `fr/B_TS4`, full URL.
 function extractSlug(input: string): string {
-	let s = input
-		.replace(/^https?:\/\/[^/]+\//, "")
-		.replace(/^\//, "")
-		.replace(/\/+$/, "");
-	// Strip language prefix (`fr/`, `en/`, `ja/`, …)
-	s = s.replace(/^(fr|en|es|de|ja|pt)\//, "");
-	return s;
+  let s = input
+    .replace(/^https?:\/\/[^/]+\//, "")
+    .replace(/^\//, "")
+    .replace(/\/+$/, "");
+  // Strip language prefix (`fr/`, `en/`, `ja/`, …)
+  s = s.replace(/^(fr|en|es|de|ja|pt)\//, "");
+  return s;
 }
 
 function summary(data: {
-	matches: Array<{ state?: string }>;
-	standings: unknown[];
-	stations: unknown[];
+  matches: Array<{ state?: string }>;
+  standings: unknown[];
+  stations: unknown[];
 }) {
-	const completed = data.matches.filter((m) => m.state === "complete").length;
-	const open = data.matches.filter((m) => m.state === "open").length;
-	const pending = data.matches.filter((m) => m.state === "pending").length;
-	return {
-		matchesCount: data.matches.length,
-		matchesComplete: completed,
-		matchesOpen: open,
-		matchesPending: pending,
-		standingsCount: data.standings.length,
-		stationsCount: data.stations.length,
-	};
+  const completed = data.matches.filter((m) => m.state === "complete").length;
+  const open = data.matches.filter((m) => m.state === "open").length;
+  const pending = data.matches.filter((m) => m.state === "pending").length;
+  return {
+    matchesCount: data.matches.length,
+    matchesComplete: completed,
+    matchesOpen: open,
+    matchesPending: pending,
+    standingsCount: data.standings.length,
+    stationsCount: data.stations.length,
+  };
 }
 
 // ─── GET ────────────────────────────────────────────────────────────────
 export async function GET(_request: NextRequest, { params }: RouteParams) {
-	try {
-		const { id } = await params;
+  try {
+    const { id } = await params;
 
-		if (id === "bts2" || id === "bts3") {
-			const fileName = id === "bts2" ? "B_TS2.json" : "B_TS3.json";
-			const { readFileSync, existsSync } = await import("node:fs");
-			const { join } = await import("node:path");
-			const filePath = join(process.cwd(), "data/exports", fileName);
-			if (existsSync(filePath)) {
-				const data = JSON.parse(readFileSync(filePath, "utf-8"));
-				return NextResponse.json({
-					data: {
-						standings: (
-							data.participants as Array<{ rank: number; name: string }>
-						)
-							.filter((p) => p.rank > 0)
-							.sort((a, b) => a.rank - b.rank),
-						stations: [],
-						activityLog: [],
-						lastUpdated: data.scrapedAt,
-					},
-				});
-			}
-		}
+    if (id === "bts2" || id === "bts3") {
+      const fileName = id === "bts2" ? "B_TS2.json" : "B_TS3.json";
+      const { readFileSync, existsSync } = await import("node:fs");
+      const { join } = await import("node:path");
+      const filePath = join(process.cwd(), "data/exports", fileName);
+      if (existsSync(filePath)) {
+        const data = JSON.parse(readFileSync(filePath, "utf-8"));
+        return NextResponse.json({
+          data: {
+            standings: (data.participants as Array<{ rank: number; name: string }>)
+              .filter((p) => p.rank > 0)
+              .sort((a, b) => a.rank - b.rank),
+            stations: [],
+            activityLog: [],
+            lastUpdated: data.scrapedAt,
+          },
+        });
+      }
+    }
 
-		const tournament = await db.query.tournaments.findFirst({
-			where: eq(schema.tournaments.id, id),
-			columns: {
-				id: true,
-				status: true,
-				standings: true,
-				stations: true,
-				activityLog: true,
-				updatedAt: true,
-			},
-		});
+    const tournament = await db.query.tournaments.findFirst({
+      where: eq(schema.tournaments.id, id),
+      columns: {
+        id: true,
+        status: true,
+        standings: true,
+        stations: true,
+        activityLog: true,
+        updatedAt: true,
+      },
+    });
 
-		if (!tournament) {
-			return NextResponse.json(
-				{ error: "Tournament not found" },
-				{ status: 404 },
-			);
-		}
+    if (!tournament) {
+      return NextResponse.json({ error: "Tournament not found" }, { status: 404 });
+    }
 
-		return NextResponse.json({
-			data: {
-				standings: tournament.standings ?? [],
-				stations: tournament.stations ?? [],
-				activityLog: tournament.activityLog ?? [],
-				lastUpdated: tournament.updatedAt,
-			},
-		});
-	} catch (error) {
-		console.error("Error fetching live data:", error);
-		return NextResponse.json(
-			{ error: "Failed to fetch live data" },
-			{ status: 500 },
-		);
-	}
+    return NextResponse.json({
+      data: {
+        standings: tournament.standings ?? [],
+        stations: tournament.stations ?? [],
+        activityLog: tournament.activityLog ?? [],
+        lastUpdated: tournament.updatedAt,
+      },
+    });
+  } catch (error) {
+    console.error("Error fetching live data:", error);
+    return NextResponse.json({ error: "Failed to fetch live data" }, { status: 500 });
+  }
 }
 
 // ─── POST ───────────────────────────────────────────────────────────────
 export async function POST(_request: NextRequest, { params }: RouteParams) {
-	try {
-		if (!(await requireStaff())) {
-			return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-		}
+  try {
+    if (!(await requireStaff())) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
 
-		const { id } = await params;
+    const { id } = await params;
 
-		const tournament = await db.query.tournaments.findFirst({
-			where: eq(schema.tournaments.id, id),
-			columns: { id: true, challongeId: true, challongeUrl: true },
-		});
+    const tournament = await db.query.tournaments.findFirst({
+      where: eq(schema.tournaments.id, id),
+      columns: { id: true, challongeId: true, challongeUrl: true },
+    });
 
-		if (!tournament) {
-			return NextResponse.json(
-				{ error: "Tournament not found" },
-				{ status: 404 },
-			);
-		}
+    if (!tournament) {
+      return NextResponse.json({ error: "Tournament not found" }, { status: 404 });
+    }
 
-		const challongeRef =
-			tournament.challongeId ??
-			(tournament.challongeUrl ? extractSlug(tournament.challongeUrl) : null);
+    const challongeRef =
+      tournament.challongeId ??
+      (tournament.challongeUrl ? extractSlug(tournament.challongeUrl) : null);
 
-		if (!challongeRef) {
-			return NextResponse.json(
-				{ error: "Tournament not linked to Challonge" },
-				{ status: 400 },
-			);
-		}
+    if (!challongeRef) {
+      return NextResponse.json({ error: "Tournament not linked to Challonge" }, { status: 400 });
+    }
 
-		const apiKey = process.env.CHALLONGE_API_KEY;
-		if (!apiKey) {
-			return NextResponse.json(
-				{ error: "CHALLONGE_API_KEY not configured" },
-				{ status: 500 },
-			);
-		}
+    const apiKey = process.env.CHALLONGE_API_KEY;
+    if (!apiKey) {
+      return NextResponse.json({ error: "CHALLONGE_API_KEY not configured" }, { status: 500 });
+    }
 
-		// 1. API v1 — typed source of truth
-		const api = new ChallongeApi({ apiKey });
-		const apiTournament = await api.get(challongeRef, {
-			includeParticipants: true,
-			includeMatches: true,
-		});
-		const canonical = api.toCanonical(apiTournament, { synthesizeLog: true });
-		const participants = canonical.participants;
-		const matches = canonical.matches;
-		const activityLog = canonical.log;
+    // 1. API v1 — typed source of truth
+    const api = new ChallongeApi({ apiKey });
+    const apiTournament = await api.get(challongeRef, {
+      includeParticipants: true,
+      includeMatches: true,
+    });
+    const canonical = api.toCanonical(apiTournament, { synthesizeLog: true });
+    const participants = canonical.participants;
+    const matches = canonical.matches;
+    const activityLog = canonical.log;
 
-		// 2. Reverse — best effort enrichment for live standings/store
-		const reverseSlug = tournament.challongeUrl
-			? extractSlug(tournament.challongeUrl)
-			: String(apiTournament.id);
-		const reverse = new ChallongeReverse();
-		const [standingsResult, storeResult] = await Promise.allSettled([
-			reverse.getStandings(reverseSlug),
-			reverse.getStore(reverseSlug),
-		]);
-		const liveStandings =
-			standingsResult.status === "fulfilled" ? standingsResult.value : [];
-		const store = storeResult.status === "fulfilled" ? storeResult.value : null;
+    // 2. Reverse — best effort enrichment for live standings/store
+    const reverseSlug = tournament.challongeUrl
+      ? extractSlug(tournament.challongeUrl)
+      : String(apiTournament.id);
+    const reverse = new ChallongeReverse();
+    const [standingsResult, storeResult] = await Promise.allSettled([
+      reverse.getStandings(reverseSlug),
+      reverse.getStore(reverseSlug),
+    ]);
+    const liveStandings = standingsResult.status === "fulfilled" ? standingsResult.value : [];
+    const store = storeResult.status === "fulfilled" ? storeResult.value : null;
 
-		// 3. Persist
-		await db
-			.update(schema.tournaments)
-			.set({
-				challongeId: tournament.challongeId ?? String(apiTournament.id),
-				challongeState: apiTournament.state ?? null,
-				standings: liveStandings as never,
-				stations: (store ?? []) as never,
-				activityLog: activityLog as never,
-			})
-			.where(eq(schema.tournaments.id, id));
+    // 3. Persist
+    await db
+      .update(schema.tournaments)
+      .set({
+        challongeId: tournament.challongeId ?? String(apiTournament.id),
+        challongeState: apiTournament.state ?? null,
+        standings: liveStandings as never,
+        stations: (store ?? []) as never,
+        activityLog: activityLog as never,
+      })
+      .where(eq(schema.tournaments.id, id));
 
-		return NextResponse.json({
-			success: true,
-			data: {
-				standings: liveStandings,
-				stations: store ?? [],
-				activityLog,
-				participantsCount: participants.length,
-				...summary({ matches, standings: liveStandings, stations: [] }),
-			},
-		});
-	} catch (error) {
-		console.error("Error scraping live data:", error);
-		return NextResponse.json(
-			{
-				error: "Failed to scrape live data",
-				message: (error as Error).message,
-			},
-			{ status: 500 },
-		);
-	}
+    return NextResponse.json({
+      success: true,
+      data: {
+        standings: liveStandings,
+        stations: store ?? [],
+        activityLog,
+        participantsCount: participants.length,
+        ...summary({ matches, standings: liveStandings, stations: [] }),
+      },
+    });
+  } catch (error) {
+    console.error("Error scraping live data:", error);
+    return NextResponse.json(
+      {
+        error: "Failed to scrape live data",
+        message: (error as Error).message,
+      },
+      { status: 500 },
+    );
+  }
 }

@@ -1,9 +1,6 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
   "plugins": ["typescript", "import", "oxc"],
-  "jsPlugins": [
-    { "name": "rpb", "specifier": "/home/ubuntu/tools/oxlint-plugin-rpb/src/index.js" }
-  ],
   "categories": {
     "correctness": "error",
     "suspicious": "warn",
@@ -33,9 +30,7 @@
     "import/no-cycle": "off",
     "import/default": "off",
     "import/no-unassigned-import": "off",
-    "import/no-named-as-default": "off",
-    "rpb/no-direct-console": "warn",
-    "rpb/no-sync-fs-in-handler": "error"
+    "import/no-named-as-default": "off"
   },
   "overrides": [
     {

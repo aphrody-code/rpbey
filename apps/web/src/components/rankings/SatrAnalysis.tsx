@@ -1,32 +1,24 @@
-'use client';
+"use client";
 
-import {
-  alpha,
-  Box,
-  Chip,
-  Grid,
-  Paper,
-  Stack,
-  Typography,
-} from '@mui/material';
-import { motion } from 'framer-motion';
+import { alpha, Box, Chip, Grid, Paper, Stack, Typography } from "@mui/material";
+import { motion } from "framer-motion";
 import {
   DynamicBarChart as BarChart,
   DynamicScatterChart as ScatterChart,
-} from '@/components/ui/DynamicCharts';
-import { type SatrRanking } from '@/lib/types';
+} from "@/components/ui/DynamicCharts";
+import { type SatrRanking } from "@/lib/types";
 
 function parseNum(val: string) {
-  return parseFloat(val.replace(',', '.').replace('%', '')) || 0;
+  return parseFloat(val.replace(",", ".").replace("%", "")) || 0;
 }
 
 // Tier thresholds based on score
 const TIERS = [
-  { label: 'S', min: 44000, color: '#fbbf24' },
-  { label: 'A', min: 38000, color: '#4ade80' },
-  { label: 'B', min: 30000, color: '#60a5fa' },
-  { label: 'C', min: 20000, color: '#a78bfa' },
-  { label: 'D', min: 0, color: '#6b7280' },
+  { label: "S", min: 44000, color: "#fbbf24" },
+  { label: "A", min: 38000, color: "#4ade80" },
+  { label: "B", min: 30000, color: "#60a5fa" },
+  { label: "C", min: 20000, color: "#a78bfa" },
+  { label: "D", min: 0, color: "#6b7280" },
 ] as const;
 
 function getTier(score: number) {
@@ -61,9 +53,7 @@ export function SatrAnalysis({ rankings }: SatrAnalysisProps) {
     .slice(0, 10);
 
   // Most experienced (by participation)
-  const mostActive = [...rankings]
-    .sort((a, b) => b.participation - a.participation)
-    .slice(0, 7);
+  const mostActive = [...rankings].sort((a, b) => b.participation - a.participation).slice(0, 7);
 
   return (
     <Box
@@ -78,8 +68,8 @@ export function SatrAnalysis({ rankings }: SatrAnalysisProps) {
           <Paper
             sx={{
               p: { xs: 2, md: 3 },
-              background: 'rgba(255,255,255,0.02)',
-              border: '1px solid rgba(255,255,255,0.05)',
+              background: "rgba(255,255,255,0.02)",
+              border: "1px solid rgba(255,255,255,0.05)",
               borderRadius: { xs: 3, md: 4 },
             }}
           >
@@ -88,10 +78,10 @@ export function SatrAnalysis({ rankings }: SatrAnalysisProps) {
               sx={{
                 fontWeight: 900,
                 mb: 2.5,
-                textTransform: 'uppercase',
+                textTransform: "uppercase",
                 letterSpacing: 1,
-                color: 'rgba(255,255,255,0.7)',
-                fontSize: { xs: '0.7rem', md: '0.75rem' },
+                color: "rgba(255,255,255,0.7)",
+                fontSize: { xs: "0.7rem", md: "0.75rem" },
               }}
             >
               Tiers de performance
@@ -99,16 +89,14 @@ export function SatrAnalysis({ rankings }: SatrAnalysisProps) {
             <Stack spacing={1.5}>
               {tierCounts.map((tier) => {
                 const pct =
-                  rankings.length > 0
-                    ? ((tier.count / rankings.length) * 100).toFixed(0)
-                    : '0';
+                  rankings.length > 0 ? ((tier.count / rankings.length) * 100).toFixed(0) : "0";
                 return (
                   <Box key={tier.label}>
                     <Stack
                       direction="row"
                       sx={{
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
+                        alignItems: "center",
+                        justifyContent: "space-between",
                         mb: 0.5,
                       }}
                     >
@@ -116,7 +104,7 @@ export function SatrAnalysis({ rankings }: SatrAnalysisProps) {
                         direction="row"
                         spacing={1}
                         sx={{
-                          alignItems: 'center',
+                          alignItems: "center",
                         }}
                       >
                         <Chip
@@ -124,7 +112,7 @@ export function SatrAnalysis({ rankings }: SatrAnalysisProps) {
                           size="small"
                           sx={{
                             fontWeight: 900,
-                            fontSize: '0.7rem',
+                            fontSize: "0.7rem",
                             height: 24,
                             minWidth: 32,
                             bgcolor: alpha(tier.color, 0.15),
@@ -135,13 +123,13 @@ export function SatrAnalysis({ rankings }: SatrAnalysisProps) {
                         <Typography
                           variant="caption"
                           sx={{
-                            color: 'rgba(255,255,255,0.4)',
-                            fontSize: '0.65rem',
+                            color: "rgba(255,255,255,0.4)",
+                            fontSize: "0.65rem",
                           }}
                         >
                           {tier.min > 0
-                            ? `${tier.min.toLocaleString()}+`
-                            : `< ${TIERS[TIERS.length - 2]?.min.toLocaleString()}`}
+                            ? `${tier.min.toLocaleString("fr-FR")}+`
+                            : `< ${TIERS[TIERS.length - 2]?.min.toLocaleString("fr-FR")}`}
                         </Typography>
                       </Stack>
                       <Typography
@@ -149,14 +137,14 @@ export function SatrAnalysis({ rankings }: SatrAnalysisProps) {
                         sx={{
                           fontWeight: 800,
                           color: tier.color,
-                          fontSize: '0.75rem',
+                          fontSize: "0.75rem",
                         }}
                       >
-                        {tier.count}{' '}
+                        {tier.count}{" "}
                         <Box
                           component="span"
                           sx={{
-                            color: 'rgba(255,255,255,0.3)',
+                            color: "rgba(255,255,255,0.3)",
                             fontWeight: 600,
                           }}
                         >
@@ -168,17 +156,17 @@ export function SatrAnalysis({ rankings }: SatrAnalysisProps) {
                       sx={{
                         height: 6,
                         borderRadius: 3,
-                        bgcolor: 'rgba(255,255,255,0.04)',
-                        overflow: 'hidden',
+                        bgcolor: "rgba(255,255,255,0.04)",
+                        overflow: "hidden",
                       }}
                     >
                       <Box
                         sx={{
-                          height: '100%',
+                          height: "100%",
                           width: `${rankings.length > 0 ? (tier.count / rankings.length) * 100 : 0}%`,
                           bgcolor: tier.color,
                           borderRadius: 3,
-                          transition: 'width 0.6s ease',
+                          transition: "width 0.6s ease",
                         }}
                       />
                     </Box>
@@ -195,10 +183,10 @@ export function SatrAnalysis({ rankings }: SatrAnalysisProps) {
             sx={{
               p: { xs: 2, md: 3 },
               height: { xs: 320, md: 370 },
-              background: 'rgba(255,255,255,0.02)',
-              border: '1px solid rgba(255,255,255,0.05)',
+              background: "rgba(255,255,255,0.02)",
+              border: "1px solid rgba(255,255,255,0.05)",
               borderRadius: { xs: 3, md: 4 },
-              overflow: 'hidden',
+              overflow: "hidden",
             }}
           >
             <Typography
@@ -206,47 +194,44 @@ export function SatrAnalysis({ rankings }: SatrAnalysisProps) {
               sx={{
                 fontWeight: 900,
                 mb: 1,
-                textTransform: 'uppercase',
+                textTransform: "uppercase",
                 letterSpacing: 1,
-                color: 'rgba(255,255,255,0.7)',
-                fontSize: { xs: '0.7rem', md: '0.75rem' },
+                color: "rgba(255,255,255,0.7)",
+                fontSize: { xs: "0.7rem", md: "0.75rem" },
               }}
             >
-              Winrate vs Score{' '}
-              <Box
-                component="span"
-                sx={{ color: 'rgba(255,255,255,0.3)', fontWeight: 600 }}
-              >
+              Winrate vs Score{" "}
+              <Box component="span" sx={{ color: "rgba(255,255,255,0.3)", fontWeight: 600 }}>
                 (Top 50)
               </Box>
             </Typography>
-            <Box sx={{ width: '100%', height: { xs: 260, md: 300 } }}>
+            <Box sx={{ width: "100%", height: { xs: 260, md: 300 } }}>
               <ScatterChart
                 series={[
                   {
                     data: scatterData,
-                    color: '#fbbf24',
+                    color: "#fbbf24",
                     markerSize: 5,
                   } as never,
                 ]}
                 xAxis={[
                   {
-                    label: 'Winrate (%)',
+                    label: "Winrate (%)",
                     min: 30,
                     max: 100,
                   },
                 ]}
-                yAxis={[{ label: 'Score' }]}
+                yAxis={[{ label: "Score" }]}
                 sx={{
-                  '& .MuiChartsAxis-tickLabel': {
-                    fill: 'rgba(255,255,255,0.5)',
+                  "& .MuiChartsAxis-tickLabel": {
+                    fill: "rgba(255,255,255,0.5)",
                     fontSize: 10,
                   },
-                  '& .MuiChartsAxisHighlight-root': {
-                    stroke: 'rgba(255,255,255,0.1)',
+                  "& .MuiChartsAxisHighlight-root": {
+                    stroke: "rgba(255,255,255,0.1)",
                   },
-                  '& .MuiChartsAxis-label': {
-                    fill: 'rgba(255,255,255,0.35)',
+                  "& .MuiChartsAxis-label": {
+                    fill: "rgba(255,255,255,0.35)",
                     fontSize: 11,
                   },
                 }}
@@ -262,10 +247,10 @@ export function SatrAnalysis({ rankings }: SatrAnalysisProps) {
             sx={{
               p: { xs: 2, md: 3 },
               height: { xs: 340, md: 370 },
-              background: 'rgba(255,255,255,0.02)',
-              border: '1px solid rgba(255,255,255,0.05)',
+              background: "rgba(255,255,255,0.02)",
+              border: "1px solid rgba(255,255,255,0.05)",
               borderRadius: { xs: 3, md: 4 },
-              overflow: 'hidden',
+              overflow: "hidden",
             }}
           >
             <Typography
@@ -273,44 +258,41 @@ export function SatrAnalysis({ rankings }: SatrAnalysisProps) {
               sx={{
                 fontWeight: 900,
                 mb: 1,
-                textTransform: 'uppercase',
+                textTransform: "uppercase",
                 letterSpacing: 1,
-                color: '#4ade80',
-                fontSize: { xs: '0.7rem', md: '0.75rem' },
+                color: "#4ade80",
+                fontSize: { xs: "0.7rem", md: "0.75rem" },
               }}
             >
-              Meilleure moyenne{' '}
-              <Box
-                component="span"
-                sx={{ color: 'rgba(255,255,255,0.3)', fontWeight: 600 }}
-              >
+              Meilleure moyenne{" "}
+              <Box component="span" sx={{ color: "rgba(255,255,255,0.3)", fontWeight: 600 }}>
                 (3+ tournois)
               </Box>
             </Typography>
-            <Box sx={{ width: '100%', height: { xs: 280, md: 310 } }}>
+            <Box sx={{ width: "100%", height: { xs: 280, md: 310 } }}>
               <BarChart
                 dataset={topAvg.map((r) => ({
                   name: r.playerName,
                   avg: parseNum(r.pointsAverage),
                 }))}
-                xAxis={[{ scaleType: 'band', dataKey: 'name' }]}
+                xAxis={[{ scaleType: "band", dataKey: "name" }]}
                 series={[
                   {
-                    dataKey: 'avg',
-                    color: '#4ade80',
-                    label: 'Moyenne',
+                    dataKey: "avg",
+                    color: "#4ade80",
+                    label: "Moyenne",
                   },
                 ]}
                 yAxis={[{ min: 2 }]}
                 slotProps={{ legend: { hidden: true } } as never}
                 sx={{
-                  '& .MuiChartsAxis-bottom .MuiChartsAxis-tickLabel': {
-                    fill: 'rgba(255,255,255,0.5)',
+                  "& .MuiChartsAxis-bottom .MuiChartsAxis-tickLabel": {
+                    fill: "rgba(255,255,255,0.5)",
                     fontWeight: 700,
                     fontSize: 9,
                   },
-                  '& .MuiChartsAxis-left .MuiChartsAxis-tickLabel': {
-                    fill: 'rgba(255,255,255,0.5)',
+                  "& .MuiChartsAxis-left .MuiChartsAxis-tickLabel": {
+                    fill: "rgba(255,255,255,0.5)",
                   },
                 }}
               />
@@ -323,8 +305,8 @@ export function SatrAnalysis({ rankings }: SatrAnalysisProps) {
           <Paper
             sx={{
               p: { xs: 2, md: 3 },
-              background: 'rgba(255,255,255,0.02)',
-              border: '1px solid rgba(255,255,255,0.05)',
+              background: "rgba(255,255,255,0.02)",
+              border: "1px solid rgba(255,255,255,0.05)",
               borderRadius: { xs: 3, md: 4 },
             }}
           >
@@ -333,10 +315,10 @@ export function SatrAnalysis({ rankings }: SatrAnalysisProps) {
               sx={{
                 fontWeight: 900,
                 mb: 2,
-                textTransform: 'uppercase',
+                textTransform: "uppercase",
                 letterSpacing: 1,
-                color: '#60a5fa',
-                fontSize: { xs: '0.7rem', md: '0.75rem' },
+                color: "#60a5fa",
+                fontSize: { xs: "0.7rem", md: "0.75rem" },
               }}
             >
               Les plus assidus
@@ -350,22 +332,21 @@ export function SatrAnalysis({ rankings }: SatrAnalysisProps) {
                     direction="row"
                     spacing={1.5}
                     sx={{
-                      alignItems: 'center',
+                      alignItems: "center",
                       px: 1.5,
                       py: 1,
                       borderRadius: 2,
 
-                      bgcolor:
-                        i % 2 === 0 ? 'rgba(255,255,255,0.02)' : 'transparent',
+                      bgcolor: i % 2 === 0 ? "rgba(255,255,255,0.02)" : "transparent",
                     }}
                   >
                     <Typography
                       sx={{
                         fontWeight: 900,
-                        fontSize: '0.75rem',
-                        color: 'rgba(255,255,255,0.3)',
+                        fontSize: "0.75rem",
+                        color: "rgba(255,255,255,0.3)",
                         width: 20,
-                        textAlign: 'center',
+                        textAlign: "center",
                       }}
                     >
                       {i + 1}
@@ -375,7 +356,7 @@ export function SatrAnalysis({ rankings }: SatrAnalysisProps) {
                         noWrap
                         sx={{
                           fontWeight: 800,
-                          fontSize: { xs: '0.8rem', md: '0.85rem' },
+                          fontSize: { xs: "0.8rem", md: "0.85rem" },
                         }}
                       >
                         {r.playerName}
@@ -388,7 +369,7 @@ export function SatrAnalysis({ rankings }: SatrAnalysisProps) {
                         height: 20,
                         minWidth: 28,
                         fontWeight: 900,
-                        fontSize: '0.6rem',
+                        fontSize: "0.6rem",
                         bgcolor: alpha(tier.color, 0.12),
                         color: tier.color,
                       }}
@@ -396,9 +377,9 @@ export function SatrAnalysis({ rankings }: SatrAnalysisProps) {
                     <Typography
                       sx={{
                         fontWeight: 800,
-                        color: '#60a5fa',
-                        fontSize: '0.8rem',
-                        fontVariantNumeric: 'tabular-nums',
+                        color: "#60a5fa",
+                        fontSize: "0.8rem",
+                        fontVariantNumeric: "tabular-nums",
                       }}
                     >
                       {r.participation}
@@ -406,8 +387,8 @@ export function SatrAnalysis({ rankings }: SatrAnalysisProps) {
                     <Typography
                       sx={{
                         fontWeight: 600,
-                        color: 'rgba(255,255,255,0.35)',
-                        fontSize: '0.7rem',
+                        color: "rgba(255,255,255,0.35)",
+                        fontSize: "0.7rem",
                       }}
                     >
                       {r.winRate}

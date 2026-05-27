@@ -1,0 +1,4 @@
+# Config Bun de l'app web. `bun test` lancé depuis apps/web utilise ce fichier.
+[test]
+# happy-dom enregistré avant chaque test → document/window dispo (tests DOM/composants).
+preload = ["./happydom.ts"]

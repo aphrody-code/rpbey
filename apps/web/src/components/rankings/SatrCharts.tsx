@@ -1,22 +1,14 @@
-'use client';
+"use client";
 
-import {
-  alpha,
-  Box,
-  Chip,
-  Grid,
-  Paper,
-  Stack,
-  Typography,
-} from '@mui/material';
-import { motion } from 'framer-motion';
+import { alpha, Box, Chip, Grid, Paper, Stack, Typography } from "@mui/material";
+import { motion } from "framer-motion";
 import {
   DynamicBarChart as BarChart,
   DynamicLineChart as LineChart,
   DynamicPieChart as PieChart,
   DynamicScatterChart as ScatterChart,
-} from '@/components/ui/DynamicCharts';
-import { type SatrBlader, type SatrRanking } from '@/lib/types';
+} from "@/components/ui/DynamicCharts";
+import { type SatrBlader, type SatrRanking } from "@/lib/types";
 
 interface TournamentMeta {
   slug: string;
@@ -33,17 +25,17 @@ interface SatrChartsProps {
 }
 
 function parseNum(val: string) {
-  return parseFloat(val.replace(',', '.').replace('%', '')) || 0;
+  return parseFloat(val.replace(",", ".").replace("%", "")) || 0;
 }
 
 // ── Tier system ──
 
 const TIERS = [
-  { label: 'S', min: 44000, color: '#fbbf24' },
-  { label: 'A', min: 38000, color: '#4ade80' },
-  { label: 'B', min: 30000, color: '#60a5fa' },
-  { label: 'C', min: 20000, color: '#a78bfa' },
-  { label: 'D', min: 0, color: '#6b7280' },
+  { label: "S", min: 44000, color: "#fbbf24" },
+  { label: "A", min: 38000, color: "#4ade80" },
+  { label: "B", min: 30000, color: "#60a5fa" },
+  { label: "C", min: 20000, color: "#a78bfa" },
+  { label: "D", min: 0, color: "#6b7280" },
 ] as const;
 
 function getTier(score: number) {
@@ -54,31 +46,31 @@ function getTier(score: number) {
 
 const cardSx = {
   p: { xs: 2, md: 2.5 },
-  background: 'rgba(255,255,255,0.02)',
-  border: '1px solid rgba(255,255,255,0.06)',
+  background: "rgba(255,255,255,0.02)",
+  border: "1px solid rgba(255,255,255,0.06)",
   borderRadius: { xs: 3, md: 3.5 },
-  overflow: 'hidden',
+  overflow: "hidden",
 };
 
 const chartAxisSx = {
-  '& .MuiChartsAxis-bottom .MuiChartsAxis-tickLabel': {
-    fill: 'rgba(255,255,255,0.5)',
+  "& .MuiChartsAxis-bottom .MuiChartsAxis-tickLabel": {
+    fill: "rgba(255,255,255,0.5)",
     fontWeight: 700,
     fontSize: 10,
   },
-  '& .MuiChartsAxis-left .MuiChartsAxis-tickLabel': {
-    fill: 'rgba(255,255,255,0.4)',
+  "& .MuiChartsAxis-left .MuiChartsAxis-tickLabel": {
+    fill: "rgba(255,255,255,0.4)",
     fontSize: 10,
   },
-  '& .MuiChartsAxis-label': {
-    fill: 'rgba(255,255,255,0.3)',
+  "& .MuiChartsAxis-label": {
+    fill: "rgba(255,255,255,0.3)",
     fontSize: 11,
   },
 };
 
 function ChartTitle({
   children,
-  color = 'rgba(255,255,255,0.7)',
+  color = "rgba(255,255,255,0.7)",
 }: {
   children: React.ReactNode;
   color?: string;
@@ -90,9 +82,9 @@ function ChartTitle({
         fontWeight: 900,
         mb: 1.5,
         color,
-        textTransform: 'uppercase',
+        textTransform: "uppercase",
         letterSpacing: 1,
-        fontSize: { xs: '0.65rem', md: '0.7rem' },
+        fontSize: { xs: "0.65rem", md: "0.7rem" },
       }}
     >
       {children}
@@ -100,11 +92,7 @@ function ChartTitle({
   );
 }
 
-export function SatrCharts({
-  bladers,
-  allTournamentMetas = [],
-  rankings = [],
-}: SatrChartsProps) {
+export function SatrCharts({ bladers, allTournamentMetas = [], rankings = [] }: SatrChartsProps) {
   // ── Data: Top 10 wins ──
   const topWins = [...bladers]
     .sort((a, b) => b.totalWins - a.totalWins)
@@ -113,11 +101,11 @@ export function SatrCharts({
 
   // ── Data: Winrate distribution (5 tiers) ──
   const wrBuckets = [
-    { label: '80%+', min: 80, color: '#fbbf24' },
-    { label: '60–80%', min: 60, color: '#4ade80' },
-    { label: '40–60%', min: 40, color: '#60a5fa' },
-    { label: '20–40%', min: 20, color: '#f97316' },
-    { label: '<20%', min: 0, color: '#ef4444' },
+    { label: "80%+", min: 80, color: "#fbbf24" },
+    { label: "60–80%", min: 60, color: "#4ade80" },
+    { label: "40–60%", min: 40, color: "#60a5fa" },
+    { label: "20–40%", min: 20, color: "#f97316" },
+    { label: "<20%", min: 0, color: "#ef4444" },
   ];
 
   const wrDistribution = wrBuckets.map((bucket, idx) => {
@@ -162,9 +150,7 @@ export function SatrCharts({
     .slice(0, 10);
 
   // ── Data: Most active ──
-  const mostActive = [...rankings]
-    .sort((a, b) => b.participation - a.participation)
-    .slice(0, 7);
+  const mostActive = [...rankings].sort((a, b) => b.participation - a.participation).slice(0, 7);
 
   return (
     <Box
@@ -179,29 +165,29 @@ export function SatrCharts({
         <Grid size={{ xs: 12, md: 7 }}>
           <Paper sx={{ ...cardSx, height: { xs: 300, md: 340 } }}>
             <ChartTitle color="#fbbf24">Top 10 — Victoires</ChartTitle>
-            <Box sx={{ width: '100%', height: { xs: 240, md: 280 } }}>
+            <Box sx={{ width: "100%", height: { xs: 240, md: 280 } }}>
               <BarChart
                 dataset={topWins}
-                xAxis={[{ scaleType: 'band', dataKey: 'name' }]}
+                xAxis={[{ scaleType: "band", dataKey: "name" }]}
                 series={[
                   {
-                    dataKey: 'wins',
-                    color: '#4ade80',
-                    label: 'W',
-                    stack: 'wl',
+                    dataKey: "wins",
+                    color: "#4ade80",
+                    label: "W",
+                    stack: "wl",
                   },
                   {
-                    dataKey: 'losses',
-                    color: '#ef4444',
-                    label: 'L',
-                    stack: 'wl',
+                    dataKey: "losses",
+                    color: "#ef4444",
+                    label: "L",
+                    stack: "wl",
                   },
                 ]}
                 slotProps={
                   {
                     legend: {
                       labelStyle: {
-                        fill: 'rgba(255,255,255,0.6)',
+                        fill: "rgba(255,255,255,0.6)",
                         fontWeight: 700,
                         fontSize: 11,
                       },
@@ -222,10 +208,10 @@ export function SatrCharts({
             <ChartTitle>Distribution Winrate</ChartTitle>
             <Box
               sx={{
-                width: '100%',
+                width: "100%",
                 height: { xs: 240, md: 280 },
-                display: 'flex',
-                justifyContent: 'center',
+                display: "flex",
+                justifyContent: "center",
               }}
             >
               <PieChart
@@ -236,15 +222,15 @@ export function SatrCharts({
                     outerRadius: 95,
                     paddingAngle: 3,
                     cornerRadius: 4,
-                    highlightScope: { faded: 'global', highlighted: 'item' },
-                    faded: { additionalRadius: -8, color: 'gray' },
+                    highlightScope: { faded: "global", highlighted: "item" },
+                    faded: { additionalRadius: -8, color: "gray" },
                   } as never,
                 ]}
                 slotProps={
                   {
                     legend: {
                       labelStyle: {
-                        fill: 'rgba(255,255,255,0.6)',
+                        fill: "rgba(255,255,255,0.6)",
                         fontWeight: 700,
                         fontSize: 11,
                       },
@@ -263,28 +249,28 @@ export function SatrCharts({
           <Grid size={{ xs: 12 }}>
             <Paper sx={{ ...cardSx, height: { xs: 280, md: 320 } }}>
               <ChartTitle color="#60a5fa">Évolution par BBT</ChartTitle>
-              <Box sx={{ width: '100%', height: { xs: 220, md: 260 } }}>
+              <Box sx={{ width: "100%", height: { xs: 220, md: 260 } }}>
                 <LineChart
                   dataset={evolution}
-                  xAxis={[{ scaleType: 'band', dataKey: 'bbt' }]}
+                  xAxis={[{ scaleType: "band", dataKey: "bbt" }]}
                   series={[
                     {
-                      dataKey: 'participants',
-                      color: '#60a5fa',
-                      label: 'Participants',
+                      dataKey: "participants",
+                      color: "#60a5fa",
+                      label: "Participants",
                       area: true,
                     },
                     {
-                      dataKey: 'matchs',
-                      color: '#a78bfa',
-                      label: 'Matchs',
+                      dataKey: "matchs",
+                      color: "#a78bfa",
+                      label: "Matchs",
                     },
                   ]}
                   slotProps={
                     {
                       legend: {
                         labelStyle: {
-                          fill: 'rgba(255,255,255,0.6)',
+                          fill: "rgba(255,255,255,0.6)",
                           fontWeight: 700,
                           fontSize: 11,
                         },
@@ -295,7 +281,7 @@ export function SatrCharts({
                   }
                   sx={{
                     ...chartAxisSx,
-                    '& .MuiAreaElement-root': { fillOpacity: 0.1 },
+                    "& .MuiAreaElement-root": { fillOpacity: 0.1 },
                   }}
                 />
               </Box>
@@ -308,25 +294,22 @@ export function SatrCharts({
           <Grid size={{ xs: 12, md: 7 }}>
             <Paper sx={{ ...cardSx, height: { xs: 300, md: 340 } }}>
               <ChartTitle>
-                Winrate vs Score{' '}
-                <Box
-                  component="span"
-                  sx={{ color: 'rgba(255,255,255,0.3)', fontWeight: 600 }}
-                >
+                Winrate vs Score{" "}
+                <Box component="span" sx={{ color: "rgba(255,255,255,0.3)", fontWeight: 600 }}>
                   (Top 60)
                 </Box>
               </ChartTitle>
-              <Box sx={{ width: '100%', height: { xs: 240, md: 280 } }}>
+              <Box sx={{ width: "100%", height: { xs: 240, md: 280 } }}>
                 <ScatterChart
                   series={[
                     {
                       data: scatterData,
-                      color: '#fbbf24',
+                      color: "#fbbf24",
                       markerSize: 4,
                     } as never,
                   ]}
-                  xAxis={[{ label: 'Winrate (%)', min: 30, max: 100 }]}
-                  yAxis={[{ label: 'Score' }]}
+                  xAxis={[{ label: "Winrate (%)", min: 30, max: 100 }]}
+                  yAxis={[{ label: "Score" }]}
                   slotProps={{ legend: { hidden: true } } as never}
                   sx={chartAxisSx}
                 />
@@ -343,16 +326,14 @@ export function SatrCharts({
               <Stack spacing={1.5}>
                 {tierCounts.map((tier) => {
                   const pct =
-                    rankings.length > 0
-                      ? ((tier.count / rankings.length) * 100).toFixed(0)
-                      : '0';
+                    rankings.length > 0 ? ((tier.count / rankings.length) * 100).toFixed(0) : "0";
                   return (
                     <Box key={tier.label}>
                       <Stack
                         direction="row"
                         sx={{
-                          alignItems: 'center',
-                          justifyContent: 'space-between',
+                          alignItems: "center",
+                          justifyContent: "space-between",
                           mb: 0.5,
                         }}
                       >
@@ -360,7 +341,7 @@ export function SatrCharts({
                           direction="row"
                           spacing={1}
                           sx={{
-                            alignItems: 'center',
+                            alignItems: "center",
                           }}
                         >
                           <Chip
@@ -368,7 +349,7 @@ export function SatrCharts({
                             size="small"
                             sx={{
                               fontWeight: 900,
-                              fontSize: '0.65rem',
+                              fontSize: "0.65rem",
                               height: 22,
                               minWidth: 30,
                               bgcolor: alpha(tier.color, 0.15),
@@ -379,13 +360,13 @@ export function SatrCharts({
                           <Typography
                             variant="caption"
                             sx={{
-                              color: 'rgba(255,255,255,0.35)',
-                              fontSize: '0.6rem',
+                              color: "rgba(255,255,255,0.35)",
+                              fontSize: "0.6rem",
                             }}
                           >
                             {tier.min > 0
-                              ? `${tier.min.toLocaleString()}+`
-                              : `< ${TIERS[TIERS.length - 2]?.min.toLocaleString()}`}
+                              ? `${tier.min.toLocaleString("fr-FR")}+`
+                              : `< ${TIERS[TIERS.length - 2]?.min.toLocaleString("fr-FR")}`}
                           </Typography>
                         </Stack>
                         <Typography
@@ -393,14 +374,14 @@ export function SatrCharts({
                           sx={{
                             fontWeight: 800,
                             color: tier.color,
-                            fontSize: '0.7rem',
+                            fontSize: "0.7rem",
                           }}
                         >
-                          {tier.count}{' '}
+                          {tier.count}{" "}
                           <Box
                             component="span"
                             sx={{
-                              color: 'rgba(255,255,255,0.25)',
+                              color: "rgba(255,255,255,0.25)",
                               fontWeight: 600,
                             }}
                           >
@@ -412,17 +393,17 @@ export function SatrCharts({
                         sx={{
                           height: 5,
                           borderRadius: 3,
-                          bgcolor: 'rgba(255,255,255,0.04)',
-                          overflow: 'hidden',
+                          bgcolor: "rgba(255,255,255,0.04)",
+                          overflow: "hidden",
                         }}
                       >
                         <Box
                           sx={{
-                            height: '100%',
+                            height: "100%",
                             width: `${rankings.length > 0 ? (tier.count / rankings.length) * 100 : 0}%`,
                             bgcolor: tier.color,
                             borderRadius: 3,
-                            transition: 'width 0.6s ease',
+                            transition: "width 0.6s ease",
                           }}
                         />
                       </Box>
@@ -439,24 +420,19 @@ export function SatrCharts({
           <Grid size={{ xs: 12, md: 6 }}>
             <Paper sx={{ ...cardSx, height: { xs: 300, md: 340 } }}>
               <ChartTitle color="#4ade80">
-                Meilleure moyenne{' '}
-                <Box
-                  component="span"
-                  sx={{ color: 'rgba(255,255,255,0.3)', fontWeight: 600 }}
-                >
+                Meilleure moyenne{" "}
+                <Box component="span" sx={{ color: "rgba(255,255,255,0.3)", fontWeight: 600 }}>
                   (3+ tournois)
                 </Box>
               </ChartTitle>
-              <Box sx={{ width: '100%', height: { xs: 240, md: 280 } }}>
+              <Box sx={{ width: "100%", height: { xs: 240, md: 280 } }}>
                 <BarChart
                   dataset={topAvg.map((r) => ({
                     name: r.playerName,
                     avg: parseNum(r.pointsAverage),
                   }))}
-                  xAxis={[{ scaleType: 'band', dataKey: 'name' }]}
-                  series={[
-                    { dataKey: 'avg', color: '#4ade80', label: 'Moyenne' },
-                  ]}
+                  xAxis={[{ scaleType: "band", dataKey: "name" }]}
+                  series={[{ dataKey: "avg", color: "#4ade80", label: "Moyenne" }]}
                   yAxis={[{ min: 2 }]}
                   slotProps={{ legend: { hidden: true } } as never}
                   sx={chartAxisSx}
@@ -480,24 +456,21 @@ export function SatrCharts({
                       direction="row"
                       spacing={1.5}
                       sx={{
-                        alignItems: 'center',
+                        alignItems: "center",
                         px: 1.5,
                         py: 0.75,
                         borderRadius: 2,
 
-                        bgcolor:
-                          i % 2 === 0
-                            ? 'rgba(255,255,255,0.02)'
-                            : 'transparent',
+                        bgcolor: i % 2 === 0 ? "rgba(255,255,255,0.02)" : "transparent",
                       }}
                     >
                       <Typography
                         sx={{
                           fontWeight: 900,
-                          fontSize: '0.7rem',
-                          color: 'rgba(255,255,255,0.25)',
+                          fontSize: "0.7rem",
+                          color: "rgba(255,255,255,0.25)",
                           width: 18,
-                          textAlign: 'center',
+                          textAlign: "center",
                         }}
                       >
                         {i + 1}
@@ -507,7 +480,7 @@ export function SatrCharts({
                         sx={{
                           fontWeight: 800,
                           flex: 1,
-                          fontSize: { xs: '0.78rem', md: '0.82rem' },
+                          fontSize: { xs: "0.78rem", md: "0.82rem" },
                         }}
                       >
                         {r.playerName}
@@ -519,7 +492,7 @@ export function SatrCharts({
                           height: 18,
                           minWidth: 26,
                           fontWeight: 900,
-                          fontSize: '0.55rem',
+                          fontSize: "0.55rem",
                           bgcolor: alpha(tier.color, 0.12),
                           color: tier.color,
                         }}
@@ -527,11 +500,11 @@ export function SatrCharts({
                       <Typography
                         sx={{
                           fontWeight: 800,
-                          color: '#60a5fa',
-                          fontSize: '0.78rem',
-                          fontVariantNumeric: 'tabular-nums',
+                          color: "#60a5fa",
+                          fontSize: "0.78rem",
+                          fontVariantNumeric: "tabular-nums",
                           minWidth: 16,
-                          textAlign: 'right',
+                          textAlign: "right",
                         }}
                       >
                         {r.participation}
@@ -539,10 +512,10 @@ export function SatrCharts({
                       <Typography
                         sx={{
                           fontWeight: 600,
-                          color: 'rgba(255,255,255,0.3)',
-                          fontSize: '0.68rem',
+                          color: "rgba(255,255,255,0.3)",
+                          fontSize: "0.68rem",
                           minWidth: 40,
-                          textAlign: 'right',
+                          textAlign: "right",
                         }}
                       >
                         {r.winRate}

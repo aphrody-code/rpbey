@@ -1,23 +1,20 @@
-'use client';
+"use client";
 
-import {
-  EmojiEvents as TrophyIcon,
-  CheckCircle as VerifiedIcon,
-} from '@mui/icons-material';
-import Avatar from '@mui/material/Avatar';
-import Box from '@mui/material/Box';
-import { alpha, useTheme } from '@mui/material/styles';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Tooltip from '@mui/material/Tooltip';
-import Typography from '@mui/material/Typography';
-import { motion } from 'framer-motion';
-import Link from 'next/link';
-import { getInitials } from '@/lib/utils';
+import { EmojiEvents as TrophyIcon, CheckCircle as VerifiedIcon } from "@mui/icons-material";
+import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
+import { alpha, useTheme } from "@mui/material/styles";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Tooltip from "@mui/material/Tooltip";
+import Typography from "@mui/material/Typography";
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { avatarSrc, getInitials } from "@/lib/utils";
 
 interface RankingPreviewProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -25,9 +22,9 @@ interface RankingPreviewProps {
 }
 
 const RANK_COLORS: Record<number, string> = {
-  1: '#FFD700',
-  2: '#C0C0C0',
-  3: '#CD7F32',
+  1: "#FFD700",
+  2: "#C0C0C0",
+  3: "#CD7F32",
 };
 
 function RankBadge({ rank }: { rank: number }) {
@@ -39,15 +36,15 @@ function RankBadge({ rank }: { rank: number }) {
         sx={{
           width: 28,
           height: 28,
-          borderRadius: '50%',
+          borderRadius: "50%",
           bgcolor: color,
-          color: 'rgba(0, 0, 0, 0.87)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
+          color: "rgba(0, 0, 0, 0.87)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
           fontWeight: 900,
-          fontSize: '0.75rem',
-          mx: 'auto',
+          fontSize: "0.75rem",
+          mx: "auto",
           boxShadow: `0 2px 8px ${alpha(color, 0.35)}`,
         }}
       >
@@ -59,10 +56,10 @@ function RankBadge({ rank }: { rank: number }) {
   return (
     <Typography
       sx={{
-        fontWeight: 'bold',
-        color: 'text.secondary',
-        fontSize: '0.75rem',
-        textAlign: 'center',
+        fontWeight: "bold",
+        color: "text.secondary",
+        fontSize: "0.75rem",
+        textAlign: "center",
       }}
     >
       #{rank}
@@ -78,9 +75,9 @@ export function RankingPreview({ rankings }: RankingPreviewProps) {
       <Typography
         variant="body2"
         sx={{
-          color: 'text.secondary',
+          color: "text.secondary",
           py: 4,
-          textAlign: 'center',
+          textAlign: "center",
         }}
       >
         Aucun blader classé
@@ -93,10 +90,10 @@ export function RankingPreview({ rankings }: RankingPreviewProps) {
       sx={{
         borderRadius: 2,
         bgcolor: alpha(theme.palette.background.paper, 0.6),
-        backdropFilter: 'blur(8px)',
-        border: '1px solid',
-        borderColor: 'divider',
-        overflow: 'hidden',
+        backdropFilter: "blur(8px)",
+        border: "1px solid",
+        borderColor: "divider",
+        overflow: "hidden",
       }}
     >
       <Table size="small" aria-label="Top 5 bladers">
@@ -110,8 +107,8 @@ export function RankingPreview({ rankings }: RankingPreviewProps) {
                 py: 1,
                 bgcolor: alpha(theme.palette.background.paper, 0.8),
                 fontWeight: 900,
-                fontSize: '0.65rem',
-                textTransform: 'uppercase',
+                fontSize: "0.65rem",
+                textTransform: "uppercase",
                 letterSpacing: 0.5,
               }}
             >
@@ -123,8 +120,8 @@ export function RankingPreview({ rankings }: RankingPreviewProps) {
                 py: 1,
                 bgcolor: alpha(theme.palette.background.paper, 0.8),
                 fontWeight: 900,
-                fontSize: '0.65rem',
-                textTransform: 'uppercase',
+                fontSize: "0.65rem",
+                textTransform: "uppercase",
                 letterSpacing: 0.5,
               }}
             >
@@ -137,8 +134,8 @@ export function RankingPreview({ rankings }: RankingPreviewProps) {
                 py: 1,
                 bgcolor: alpha(theme.palette.background.paper, 0.8),
                 fontWeight: 900,
-                fontSize: '0.65rem',
-                textTransform: 'uppercase',
+                fontSize: "0.65rem",
+                textTransform: "uppercase",
                 letterSpacing: 0.5,
               }}
             >
@@ -151,8 +148,8 @@ export function RankingPreview({ rankings }: RankingPreviewProps) {
                 py: 1,
                 bgcolor: alpha(theme.palette.background.paper, 0.8),
                 fontWeight: 900,
-                fontSize: '0.65rem',
-                textTransform: 'uppercase',
+                fontSize: "0.65rem",
+                textTransform: "uppercase",
                 letterSpacing: 0.5,
               }}
             >
@@ -166,16 +163,11 @@ export function RankingPreview({ rankings }: RankingPreviewProps) {
             const rankColor = RANK_COLORS[rank];
             const totalMatches = (profile.wins ?? 0) + (profile.losses ?? 0);
             const winRate =
-              totalMatches > 0
-                ? ((profile.wins / totalMatches) * 100).toFixed(0)
-                : '0';
-            const playerName =
-              profile.playerName || profile.user?.name || 'Anonyme';
-            const avatarUrl =
-              profile.avatarUrl || profile.user?.image || undefined;
+              totalMatches > 0 ? ((profile.wins / totalMatches) * 100).toFixed(0) : "0";
+            const playerName = profile.playerName || profile.user?.name || "Anonyme";
+            const avatarUrl = avatarSrc(profile.avatarUrl) ?? avatarSrc(profile.user?.image);
             const challongeUsername =
-              profile.challongeUsername ||
-              profile.user?.profile?.challongeUsername;
+              profile.challongeUsername || profile.user?.profile?.challongeUsername;
 
             return (
               <TableRow
@@ -186,16 +178,13 @@ export function RankingPreview({ rankings }: RankingPreviewProps) {
                 transition={{ delay: index * 0.06 }}
                 hover
                 sx={{
-                  '&:last-child td, &:last-child th': { border: 0 },
-                  bgcolor:
-                    index % 2 === 0
-                      ? 'transparent'
-                      : 'rgba(255, 255, 255, 0.015)',
+                  "&:last-child td, &:last-child th": { border: 0 },
+                  bgcolor: index % 2 === 0 ? "transparent" : "rgba(255, 255, 255, 0.015)",
                   borderLeft: rankColor
                     ? `3px solid ${alpha(rankColor, 0.5)}`
-                    : '3px solid transparent',
-                  transition: 'background-color 0.2s',
-                  '&:hover': {
+                    : "3px solid transparent",
+                  transition: "background-color 0.2s",
+                  "&:hover": {
                     bgcolor: alpha(theme.palette.action.hover, 0.08),
                   },
                 }}
@@ -207,18 +196,16 @@ export function RankingPreview({ rankings }: RankingPreviewProps) {
                 {/* Blader info */}
                 <TableCell sx={{ px: 1, py: 0.75 }}>
                   <Box
-                    component={profile.userId ? Link : 'div'}
-                    href={
-                      profile.userId ? `/profile/${profile.userId}` : undefined
-                    }
+                    component={profile.userId ? Link : "div"}
+                    href={profile.userId ? `/profile/${profile.userId}` : undefined}
                     sx={{
-                      display: 'flex',
-                      alignItems: 'center',
+                      display: "flex",
+                      alignItems: "center",
                       gap: 1,
-                      textDecoration: 'none',
-                      color: 'inherit',
-                      '&:hover .blader-name': profile.userId
-                        ? { color: 'primary.main' }
+                      textDecoration: "none",
+                      color: "inherit",
+                      "&:hover .blader-name": profile.userId
+                        ? { color: "primary.main" }
                         : undefined,
                     }}
                   >
@@ -230,7 +217,7 @@ export function RankingPreview({ rankings }: RankingPreviewProps) {
                         height: 30,
                         border: `1.5px solid ${rankColor ? alpha(rankColor, 0.6) : theme.palette.divider}`,
                         flexShrink: 0,
-                        fontSize: '0.7rem',
+                        fontSize: "0.7rem",
                       }}
                     >
                       {getInitials(playerName)}
@@ -238,8 +225,8 @@ export function RankingPreview({ rankings }: RankingPreviewProps) {
                     <Box sx={{ minWidth: 0, flex: 1 }}>
                       <Box
                         sx={{
-                          display: 'flex',
-                          alignItems: 'center',
+                          display: "flex",
+                          alignItems: "center",
                           gap: 0.5,
                         }}
                       >
@@ -248,11 +235,11 @@ export function RankingPreview({ rankings }: RankingPreviewProps) {
                           noWrap
                           sx={{
                             fontWeight: 800,
-                            fontSize: '0.78rem',
-                            transition: 'color 0.2s',
-                            overflow: 'hidden',
-                            textOverflow: 'ellipsis',
-                            whiteSpace: 'nowrap',
+                            fontSize: "0.78rem",
+                            transition: "color 0.2s",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            whiteSpace: "nowrap",
                           }}
                         >
                           {playerName}
@@ -261,8 +248,8 @@ export function RankingPreview({ rankings }: RankingPreviewProps) {
                           <Tooltip title={`Challonge : ${challongeUsername}`}>
                             <VerifiedIcon
                               sx={{
-                                fontSize: '0.65rem',
-                                color: 'info.main',
+                                fontSize: "0.65rem",
+                                color: "info.main",
                                 opacity: 0.8,
                                 flexShrink: 0,
                               }}
@@ -270,15 +257,12 @@ export function RankingPreview({ rankings }: RankingPreviewProps) {
                           </Tooltip>
                         )}
                         {profile.tournamentWins > 0 && (
-                          <Tooltip
-                            title={`${profile.tournamentWins} tournoi(s) remport\u00e9(s)`}
-                          >
+                          <Tooltip title={`${profile.tournamentWins} tournoi(s) remport\u00e9(s)`}>
                             <TrophyIcon
                               sx={{
-                                fontSize: '0.7rem',
-                                color: '#FFD700',
-                                filter:
-                                  'drop-shadow(0 0 2px rgba(255, 215, 0, 0.4))',
+                                fontSize: "0.7rem",
+                                color: "#FFD700",
+                                filter: "drop-shadow(0 0 2px rgba(255, 215, 0, 0.4))",
                                 flexShrink: 0,
                               }}
                             />
@@ -293,8 +277,8 @@ export function RankingPreview({ rankings }: RankingPreviewProps) {
                   <Typography
                     sx={{
                       fontWeight: 900,
-                      color: 'primary.main',
-                      fontSize: '0.8rem',
+                      color: "primary.main",
+                      fontSize: "0.8rem",
                     }}
                   >
                     {profile.points}
@@ -304,36 +288,29 @@ export function RankingPreview({ rankings }: RankingPreviewProps) {
                 <TableCell align="center" sx={{ px: 0.5, py: 0.75 }}>
                   <Typography
                     sx={{
-                      fontSize: '0.7rem',
-                      whiteSpace: 'nowrap',
+                      fontSize: "0.7rem",
+                      whiteSpace: "nowrap",
                     }}
                   >
-                    <Box
-                      component="span"
-                      sx={{ color: 'success.main', fontWeight: 700 }}
-                    >
+                    <Box component="span" sx={{ color: "success.main", fontWeight: 700 }}>
                       {profile.wins ?? 0}
                     </Box>
-                    <Box component="span" sx={{ opacity: 0.4, mx: '1px' }}>
+                    <Box component="span" sx={{ opacity: 0.4, mx: "1px" }}>
                       /
                     </Box>
-                    <Box component="span" sx={{ color: 'error.main' }}>
+                    <Box component="span" sx={{ color: "error.main" }}>
                       {profile.losses ?? 0}
                     </Box>
                   </Typography>
                   <Typography
                     variant="caption"
                     sx={{
-                      fontSize: '0.55rem',
+                      fontSize: "0.55rem",
                       opacity: 0.6,
-                      display: 'block',
+                      display: "block",
                       lineHeight: 1,
                     }}
-                    color={
-                      Number.parseFloat(winRate) >= 50
-                        ? 'success.main'
-                        : 'text.secondary'
-                    }
+                    color={Number.parseFloat(winRate) >= 50 ? "success.main" : "text.secondary"}
                   >
                     {winRate}%
                   </Typography>

@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { Box, Stack, Tab, Tabs, Typography } from '@mui/material';
-import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
+import { Box, Stack, Tab, Tabs, Typography } from "@mui/material";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 interface SatrTabsProps {
-  mode: 'ranking' | 'career';
+  mode: "ranking" | "career";
   totalBladers: number;
   totalMatches: number;
   tournamentCount: number;
@@ -23,23 +23,23 @@ export function SatrTabs({
 
   const getHref = (view: string) => {
     const params = new URLSearchParams(searchParams.toString());
-    params.set('view', view);
-    params.delete('page');
+    params.set("view", view);
+    params.delete("page");
     return `/tournaments/satr?${params.toString()}`;
   };
 
   const stats = [
-    { label: 'BLADERS', value: totalBladers, color: 'var(--rpb-secondary)' },
+    { label: "BLADERS", value: totalBladers, color: "var(--rpb-secondary)" },
     {
-      label: 'MATCHS',
-      value: totalMatches.toLocaleString(),
-      color: '#fff',
+      label: "MATCHS",
+      value: totalMatches.toLocaleString("fr-FR"),
+      color: "#fff",
     },
-    { label: 'TOURNOIS', value: tournamentCount, color: '#60a5fa' },
+    { label: "TOURNOIS", value: tournamentCount, color: "#60a5fa" },
     {
-      label: 'PARTICIPANTS',
+      label: "PARTICIPANTS",
       value: uniqueParticipants,
-      color: '#a78bfa',
+      color: "#a78bfa",
     },
   ];
 
@@ -47,26 +47,26 @@ export function SatrTabs({
     <Box
       sx={{
         mb: 4,
-        display: 'flex',
-        flexDirection: { xs: 'column', md: 'row' },
-        justifyContent: 'space-between',
-        alignItems: { xs: 'flex-start', md: 'center' },
+        display: "flex",
+        flexDirection: { xs: "column", md: "row" },
+        justifyContent: "space-between",
+        alignItems: { xs: "flex-start", md: "center" },
         gap: 2,
         p: 1,
         borderRadius: 4,
-        bgcolor: 'rgba(255,255,255,0.03)',
-        border: '1px solid rgba(255,255,255,0.05)',
+        bgcolor: "rgba(255,255,255,0.03)",
+        border: "1px solid rgba(255,255,255,0.05)",
       }}
     >
       <Tabs
         value={mode}
         sx={{
           minHeight: 48,
-          '& .MuiTabs-indicator': {
+          "& .MuiTabs-indicator": {
             height: 3,
             borderRadius: 0,
-            bgcolor: 'secondary.main',
-            boxShadow: '0 0 12px rgba(var(--rpb-secondary-rgb), 0.5)',
+            bgcolor: "secondary.main",
+            boxShadow: "0 0 12px rgba(var(--rpb-secondary-rgb), 0.5)",
           },
         }}
       >
@@ -74,40 +74,40 @@ export function SatrTabs({
           label="BBT Saison 2"
           value="ranking"
           component={Link}
-          href={getHref('ranking')}
+          href={getHref("ranking")}
           sx={{
             fontWeight: 900,
-            textTransform: 'none',
-            fontSize: '1rem',
-            color: 'rgba(255,255,255,0.5)',
-            '&.Mui-selected': { color: '#fff' },
+            textTransform: "none",
+            fontSize: "1rem",
+            color: "rgba(255,255,255,0.5)",
+            "&.Mui-selected": { color: "#fff" },
           }}
         />
         <Tab
           label="Historique des BBT"
           value="career"
           component={Link}
-          href={getHref('career')}
+          href={getHref("career")}
           sx={{
             fontWeight: 900,
-            textTransform: 'none',
-            fontSize: '1rem',
-            color: 'rgba(255,255,255,0.5)',
-            '&.Mui-selected': { color: '#fff' },
+            textTransform: "none",
+            fontSize: "1rem",
+            color: "rgba(255,255,255,0.5)",
+            "&.Mui-selected": { color: "#fff" },
           }}
         />
       </Tabs>
       <Stack direction="row" spacing={{ xs: 2, md: 4 }} sx={{ px: 2 }}>
         {stats.map((s) => (
-          <Box key={s.label} sx={{ textAlign: 'center' }}>
+          <Box key={s.label} sx={{ textAlign: "center" }}>
             <Typography
               variant="caption"
               sx={{
-                color: 'text.secondary',
-                display: 'block',
+                color: "text.secondary",
+                display: "block",
                 fontWeight: 800,
                 letterSpacing: 1,
-                fontSize: { xs: '0.55rem', md: '0.65rem' },
+                fontSize: { xs: "0.55rem", md: "0.65rem" },
               }}
             >
               {s.label}
@@ -115,7 +115,7 @@ export function SatrTabs({
             <Typography
               variant="h6"
               sx={{
-                fontWeight: '900',
+                fontWeight: "900",
                 color: s.color,
                 lineHeight: 1.2,
               }}
