@@ -26,7 +26,8 @@ echo "[deploy] data/exports : COPIE des B_TS*.json (PAS un symlink → /var/www 
 echo "         Turbopack rejette un symlink hors racine projet au build)"
 mkdir -p "$DATA_SRC/exports"
 cp -f "$EXPORTS_CDN"/*.json "$DATA_SRC/exports/"
-echo "[deploy] data/* repo → standalone"
+echo "[deploy] data/* repo → standalone (rm d'abord : sinon ln crée un nested symlink dans le dir réel généré par le build)"
+rm -rf "$SA/data"
 ln -sfn "$DATA_SRC" "$SA/data"
 
 echo "[deploy] OK — restart : sudo systemctl restart rpbey-web.service"

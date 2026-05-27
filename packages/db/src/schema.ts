@@ -374,14 +374,14 @@ export const accounts = pgTable(
 		accessToken: text(),
 		refreshToken: text(),
 		idToken: text(),
-		accessTokenExpiresAt: timestamp({ precision: 3, mode: "string" }),
-		refreshTokenExpiresAt: timestamp({ precision: 3, mode: "string" }),
+		accessTokenExpiresAt: timestamp({ precision: 3, mode: "date" }),
+		refreshTokenExpiresAt: timestamp({ precision: 3, mode: "date" }),
 		scope: text(),
 		password: text(),
-		createdAt: timestamp({ precision: 3, mode: "string" })
+		createdAt: timestamp({ precision: 3, mode: "date" })
 			.default(sql`CURRENT_TIMESTAMP`)
 			.notNull(),
-		updatedAt: timestamp({ precision: 3, mode: "string" }).notNull().$onUpdate(() => new Date().toISOString()),
+		updatedAt: timestamp({ precision: 3, mode: "date" }).notNull().$onUpdate(() => new Date()),
 	},
 	(table) => [
 		uniqueIndex("accounts_providerId_accountId_key").using(
@@ -1007,12 +1007,12 @@ export const sessions = pgTable(
 	"sessions",
 	{
 		id: text().primaryKey().notNull(),
-		expiresAt: timestamp({ precision: 3, mode: "string" }).notNull(),
+		expiresAt: timestamp({ precision: 3, mode: "date" }).notNull(),
 		token: text().notNull(),
-		createdAt: timestamp({ precision: 3, mode: "string" })
+		createdAt: timestamp({ precision: 3, mode: "date" })
 			.default(sql`CURRENT_TIMESTAMP`)
 			.notNull(),
-		updatedAt: timestamp({ precision: 3, mode: "string" }).notNull().$onUpdate(() => new Date().toISOString()),
+		updatedAt: timestamp({ precision: 3, mode: "date" }).notNull().$onUpdate(() => new Date()),
 		ipAddress: text(),
 		userAgent: text(),
 		userId: text().notNull(),
@@ -1415,11 +1415,11 @@ export const verifications = pgTable(
 		id: text().primaryKey().notNull(),
 		identifier: text().notNull(),
 		value: text().notNull(),
-		expiresAt: timestamp({ precision: 3, mode: "string" }).notNull(),
-		createdAt: timestamp({ precision: 3, mode: "string" })
+		expiresAt: timestamp({ precision: 3, mode: "date" }).notNull(),
+		createdAt: timestamp({ precision: 3, mode: "date" })
 			.default(sql`CURRENT_TIMESTAMP`)
 			.notNull(),
-		updatedAt: timestamp({ precision: 3, mode: "string" }).notNull().$onUpdate(() => new Date().toISOString()),
+		updatedAt: timestamp({ precision: 3, mode: "date" }).notNull().$onUpdate(() => new Date()),
 	},
 	(table) => [
 		index("verifications_identifier_idx").using(
@@ -1546,16 +1546,16 @@ export const users = pgTable(
 		email: text().notNull(),
 		emailVerified: boolean().default(false).notNull(),
 		image: text(),
-		createdAt: timestamp({ precision: 3, mode: "string" })
+		createdAt: timestamp({ precision: 3, mode: "date" })
 			.default(sql`CURRENT_TIMESTAMP`)
 			.notNull(),
-		updatedAt: timestamp({ precision: 3, mode: "string" }).notNull().$onUpdate(() => new Date().toISOString()),
+		updatedAt: timestamp({ precision: 3, mode: "date" }).notNull().$onUpdate(() => new Date()),
 		discordId: text(),
 		discordTag: text(),
 		role: text().default("user"),
 		banned: boolean().default(false),
 		banReason: text(),
-		banExpires: timestamp({ precision: 3, mode: "string" }),
+		banExpires: timestamp({ precision: 3, mode: "date" }),
 		username: text(),
 		displayUsername: text(),
 		twoFactorEnabled: boolean().default(false).notNull(),
