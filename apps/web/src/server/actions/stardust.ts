@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { normalizeSets } from "@/lib/challonge-vendor";
+import { normalizeSets } from "@/lib/challonge-vendor/scores";
 import {
 	db,
 	schema,

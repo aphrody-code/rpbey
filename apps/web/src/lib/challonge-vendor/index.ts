@@ -4,11 +4,12 @@ export * from "./types";
 export { bracketSideFromRound, gravatarUrl } from "./types";
 export type { BracketSide } from "./types";
 export * from "./scores";
-export {
-	ChallongeScraper,
-	type ChallongeScraperOptions,
-	type ScrapeOptions,
-} from "./scraper";
+// `ChallongeScraper` (puppeteer-extra) N'EST PLUS ré-exporté par le barrel :
+// l'importer directement via "@/lib/challonge-vendor/scraper". Sinon tout import
+// du barrel (même pour un helper pur comme normalizeSets/ChallongeApi) évalue
+// puppeteer-extra → `TypeError: utils.isObject is not a function` sous le
+// bundling Turbopack → 500 sur les pages (ex. /tournaments/stardust).
+// `ScrapeOptions` non plus — l'importer via "@/lib/challonge-vendor/scraper".
 
 // New surface (v2): use these for any new code.
 export {

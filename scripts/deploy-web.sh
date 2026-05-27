@@ -22,8 +22,11 @@ echo "[deploy] public → assets cdn/rpb-dashboard"
 ln -sfn "$ASSETS" public
 ln -sfn "$ASSETS" "$SA/public"
 
-echo "[deploy] data/exports → store CDN (B_TS*.json) ; data/* repo → standalone"
-ln -sfn "$EXPORTS_CDN" "$DATA_SRC/exports"
+echo "[deploy] data/exports : COPIE des B_TS*.json (PAS un symlink → /var/www :"
+echo "         Turbopack rejette un symlink hors racine projet au build)"
+mkdir -p "$DATA_SRC/exports"
+cp -f "$EXPORTS_CDN"/*.json "$DATA_SRC/exports/"
+echo "[deploy] data/* repo → standalone"
 ln -sfn "$DATA_SRC" "$SA/data"
 
 echo "[deploy] OK — restart : sudo systemctl restart rpbey-web.service"
