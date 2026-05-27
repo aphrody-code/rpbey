@@ -49,6 +49,16 @@ export const auth = betterAuth({
 		},
 	},
 
+	// Account linking — un user existant (par email) qui se connecte via Discord
+	// lie son compte au lieu d'échouer (les 63 users migrés ont un discordId mais
+	// pas d'account discord → sinon erreur/boucle OAuth au 1er login Discord).
+	account: {
+		accountLinking: {
+			enabled: true,
+			trustedProviders: ["discord", "google"],
+		},
+	},
+
 	// Social providers (Discord OAuth)
 	socialProviders: {
 		discord: {
@@ -66,10 +76,6 @@ export const auth = betterAuth({
 					globalName: profile.global_name,
 				};
 			},
-		},
-		twitch: {
-			clientId: process.env.TWITCH_CLIENT_ID || "",
-			clientSecret: process.env.TWITCH_CLIENT_SECRET || "",
 		},
 		google: {
 			clientId: process.env.GOOGLE_CLIENT_ID || "",

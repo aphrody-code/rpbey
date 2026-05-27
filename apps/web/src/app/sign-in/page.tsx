@@ -17,7 +17,6 @@ import {
 } from '@mui/material';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Suspense, useState } from 'react';
-import { TwitchButton } from '@/components/auth';
 import { useThemeMode } from '@/components/theme/ThemeRegistry';
 import { DiscordIcon } from '@/components/ui/Icons';
 import { signIn, signUp } from '@/lib/auth-client';
@@ -205,7 +204,6 @@ function SignInContent() {
                 {isLoading ? 'Chargement...' : 'Continuer avec Discord'}
               </Button>
 
-              <TwitchButton callbackURL={callbackURL} />
             </Stack>
 
             <Divider sx={{ my: 3 }}>
