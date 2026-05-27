@@ -21,7 +21,7 @@ export class ReminderScheduler {
   private async checkReminders(client: Client) {
     try {
       const due = await this.prisma.reminder.findMany({
-        where: { fired: false, expiresAt: { lte: new Date() } },
+        where: { fired: false, expiresAt: { lte: new Date().toISOString() } },
         take: 10,
       });
 

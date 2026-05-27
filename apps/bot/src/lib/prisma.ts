@@ -222,6 +222,16 @@ function queryFor(model: string, executor: DB | Tx) {
 }
 
 // ─── where translation ───────────────────────────────────────────────────────
+// Colonnes timestamp en mode "string" (PgTimestampString) : better-auth & app
+// écrivent/comparent parfois des objets Date → postgres-js rejette. On coerce
+// Date → ISO string pour ces colonnes ; les colonnes date-mode (PgTimestamp,
+// tables auth) gardent l'objet Date.
+function tsCoerce(col: Any, v: Any): Any {
+	return v instanceof Date && (col as Any)?.columnType === "PgTimestampString"
+		? v.toISOString()
+		: v;
+}
+
 function buildCondition(table: Any, where: Row | undefined): Any {
 	if (!where) return undefined;
 	const conds: Any[] = [];
@@ -291,17 +301,17 @@ function buildCondition(table: Any, where: Row | undefined): Any {
 		} else if (typeof raw === "object" && !(raw instanceof Date)) {
 			const op = raw as Row;
 			const insensitive = op.mode === "insensitive";
-			if ("equals" in op) conds.push(eq(col, op.equals));
+			if ("equals" in op) conds.push(eq(col, tsCoerce(col, op.equals)));
 			if ("not" in op) {
 				conds.push(
-					op.not === null ? (sql`${col} IS NOT NULL` as Any) : ne(col, op.not),
+					op.not === null ? (sql`${col} IS NOT NULL` as Any) : ne(col, tsCoerce(col, op.not)),
 				);
 			}
-			if ("in" in op) conds.push(inArray(col, op.in as Any[]));
-			if ("lt" in op) conds.push(lt(col, op.lt));
-			if ("lte" in op) conds.push(lte(col, op.lte));
-			if ("gt" in op) conds.push(gt(col, op.gt));
-			if ("gte" in op) conds.push(gte(col, op.gte));
+			if ("in" in op) conds.push(inArray(col, (op.in as Any[]).map((x) => tsCoerce(col, x))));
+			if ("lt" in op) conds.push(lt(col, tsCoerce(col, op.lt)));
+			if ("lte" in op) conds.push(lte(col, tsCoerce(col, op.lte)));
+			if ("gt" in op) conds.push(gt(col, tsCoerce(col, op.gt)));
+			if ("gte" in op) conds.push(gte(col, tsCoerce(col, op.gte)));
 			if ("contains" in op)
 				conds.push((insensitive ? ilike : like)(col, `%${op.contains}%`));
 			if ("startsWith" in op)
@@ -309,7 +319,7 @@ function buildCondition(table: Any, where: Row | undefined): Any {
 			if ("endsWith" in op)
 				conds.push((insensitive ? ilike : like)(col, `%${op.endsWith}`));
 		} else {
-			conds.push(eq(col, raw));
+			conds.push(eq(col, tsCoerce(col, raw)));
 		}
 	}
 	if (conds.length === 0) return undefined;
@@ -367,10 +377,10 @@ function buildValues(
 				continue;
 			}
 			// plain object that is a column value (jsonb) — pass through
-			values[field] = raw;
+			values[field] = tsCoerce(table[field], raw);
 			continue;
 		}
-		values[field] = raw;
+		values[field] = tsCoerce(table[field], raw);
 	}
 	return { values, nested };
 }
