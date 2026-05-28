@@ -10,6 +10,7 @@ import {
   useReducer,
   useRef,
 } from 'react';
+import { getPartsByExternalIds } from '@/server/actions/parts';
 import { type Part } from '@/lib/types';
 
 // --- Types ---
@@ -526,6 +527,30 @@ function encodeState(state: BuilderState): string {
   }
 }
 
+interface SharedSlot {
+  b?: string;
+  o?: string;
+  r?: string;
+  t?: string;
+  l?: string;
+  a?: string;
+}
+
+interface SharedDeck {
+  n?: string;
+  b?: SharedSlot[];
+}
+
+function decodeShare(code: string): SharedDeck | null {
+  try {
+    const data = JSON.parse(atob(code)) as SharedDeck;
+    if (!data || !Array.isArray(data.b)) return null;
+    return data;
+  } catch {
+    return null;
+  }
+}
+
 // --- Context ---
 
 interface BuilderContextValue {
@@ -543,10 +568,50 @@ const BuilderContext = createContext<BuilderContextValue | null>(null);
 export function BuilderProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(builderReducer, initialState);
   const hasRestoredDraft = useRef(false);
-  // Restore draft from localStorage on client mount (avoids SSR mismatch)
+  // Restore from a ?share= link (priority) or the localStorage draft on mount.
   useEffect(() => {
     if (hasRestoredDraft.current) return;
     hasRestoredDraft.current = true;
+
+    const shareCode = new URLSearchParams(window.location.search).get('share');
+    if (shareCode) {
+      const shared = decodeShare(shareCode);
+      if (shared) {
+        const ids = (shared.b ?? []).flatMap((s) =>
+          [s.b, s.o, s.r, s.t, s.l, s.a].filter(
+            (x): x is string => typeof x === 'string' && x.length > 0,
+          ),
+        );
+        getPartsByExternalIds(ids)
+          .then((parts) => {
+            const byExt = new Map(parts.map((p) => [p.externalId, p as Part]));
+            const beys = (shared.b ?? []).slice(0, 3).map((s) => ({
+              blade: s.b ? (byExt.get(s.b) ?? null) : null,
+              overBlade: s.o ? (byExt.get(s.o) ?? null) : null,
+              ratchet: s.r ? (byExt.get(s.r) ?? null) : null,
+              bit: s.t ? (byExt.get(s.t) ?? null) : null,
+              lockChip: s.l ? (byExt.get(s.l) ?? null) : null,
+              assistBlade: s.a ? (byExt.get(s.a) ?? null) : null,
+              nickname: '',
+            }));
+            // id '' (falsy) → treated as a new, unsaved deck (POST on save).
+            dispatch({
+              type: 'LOAD_DECK',
+              deck: {
+                id: '',
+                name: shared.n ?? '',
+                isActive: false,
+                beys,
+              },
+            });
+          })
+          .catch(() => {
+            /* fall back to empty builder */
+          });
+        return;
+      }
+    }
+
     const draft = loadDraft();
     if (draft) {
       dispatch({ type: 'RESTORE_DRAFT', draft });

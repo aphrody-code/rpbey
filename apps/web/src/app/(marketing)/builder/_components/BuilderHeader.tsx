@@ -78,14 +78,18 @@ export function BuilderHeader() {
             beys: (data.items || []).map(
               (item: {
                 blade: unknown;
+                overBlade?: unknown;
                 ratchet: unknown;
                 bit: unknown;
+                lockChip?: unknown;
                 assistBlade?: unknown;
                 nickname?: string;
               }) => ({
                 blade: item.blade,
+                overBlade: item.overBlade ?? null,
                 ratchet: item.ratchet,
                 bit: item.bit,
+                lockChip: item.lockChip ?? null,
                 assistBlade: item.assistBlade ?? null,
                 nickname: item.nickname || '',
               }),

@@ -85,6 +85,7 @@ export function PartCatalog() {
   const [total, setTotal] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [page, setPage] = useState(1);
+  const [searchInput, setSearchInput] = useState('');
   const [search, setSearch] = useState('');
   const [systems, setSystems] = useState<string[]>([]);
   const [beyTypes, setBeyTypes] = useState<string[]>([]);
@@ -122,6 +123,12 @@ export function PartCatalog() {
     [state.activeStep, search, systems, beyTypes, spin],
   );
 
+  // Debounce the search input so we don't fire a server roundtrip per keystroke
+  useEffect(() => {
+    const id = setTimeout(() => setSearch(searchInput), 300);
+    return () => clearTimeout(id);
+  }, [searchInput]);
+
   // Reset to page 1 and fetch when filters change
   useEffect(() => {
     setPage(1);
@@ -158,8 +165,8 @@ export function PartCatalog() {
         <TextField
           placeholder="Rechercher une pièce par nom..."
           size="medium"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          value={searchInput}
+          onChange={(e) => setSearchInput(e.target.value)}
           slotProps={{
             input: {
               startAdornment: (
