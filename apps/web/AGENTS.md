@@ -91,6 +91,7 @@ Discord OAuth + email/password (Twitch retiré). `BETTER_AUTH_URL=https://rpbey.
 `useSecureCookies`, `cookiePrefix "rpb-auth"`. **`account.accountLinking.trustedProviders: ["discord","google"]`**
 (les users migrés ont `discordId` sans account discord → linking par email au 1er login).
 `callback` → `/api/auth/callback/discord` (redirect_uri whitelisté côté app Discord).
+- **Derrière nginx** : `advanced.ipAddress.ipAddressHeaders: ["x-real-ip","x-forwarded-for"]` OBLIGATOIRE — sinon better-auth voit `127.0.0.1` pour tous → bucket rate-limit partagé → 429 globaux. `rateLimit` 60s/200 par IP, `customRules: { "/get-session": false }` (pollé par `useSession`, read-only via cookieCache).
 
 ## 6. Validation & QA
 
@@ -107,3 +108,10 @@ Vérifier le serveur : `journalctl -u rpbey-web.service | grep -iE "⨯|digest|t
 
 Vercel (`rpb-dashboard`) + Neon sont **gardés intacts** : re-pointer le DNS apex
 `rpbey.fr` → `76.76.21.21` restaure l'ancienne prod en cas de besoin.
+
+## 8. Sécurité — server actions
+
+Toute `"use server"` de **mutation** (create/update/delete/sync/merge/import) DOIT débuter par
+`if (!(await requireAdmin())) throw new Error("Forbidden");` (`requireAdmin` de `@/lib/auth-utils`,
+retourne `null` si non-admin). Sans ça l'action est invocable par n'importe quel client connecté
+(privesc). Exceptions explicites : `claimProfile` (auth-gated différemment) et les getters read-only.
