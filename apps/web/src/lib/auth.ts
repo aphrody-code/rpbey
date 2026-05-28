@@ -88,6 +88,23 @@ export const auth = betterAuth({
 	advanced: {
 		useSecureCookies: true, // Force secure cookies for production behind proxy
 		cookiePrefix: "rpb-auth",
+		// Derrière nginx, le socket source est 127.0.0.1 → sans ça better-auth
+		// rate-limite TOUS les users dans un même bucket (429 globaux). On lit
+		// l'IP réelle depuis les headers proxy (nginx pose X-Real-IP + X-Forwarded-For).
+		ipAddress: {
+			ipAddressHeaders: ["x-real-ip", "x-forwarded-for"],
+		},
+	},
+
+	// Rate limit (actif en prod par défaut). get-session est pollé par useSession
+	// (read-only, servi par le cookieCache) → on le sort du rate limit pour éviter
+	// les 429 sous polling ; le reste garde une fenêtre 60s/200 req par IP réelle.
+	rateLimit: {
+		window: 60,
+		max: 200,
+		customRules: {
+			"/get-session": false,
+		},
 	},
 
 	// NOTE: `callbacks.session` (pattern next-auth) supprimé — Better Auth l'ignore silencieusement.
