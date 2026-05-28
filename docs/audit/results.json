@@ -1,0 +1,1512 @@
+[
+  {
+    "name": "home",
+    "path": "/",
+    "status": 200,
+    "finalUrl": "https://rpbey.fr/",
+    "consoleErrors": [],
+    "pageErrors": [
+      "NAV_ERROR: TimeoutError: Navigation timeout of 45000 ms exceeded"
+    ],
+    "failedRequests": [
+      {
+        "url": "https://rpbey.fr/tournaments/satr?_rsc=5CB68i4pnAekjehf",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/anime?_rsc=5CB68i4pnAekjehf",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/rankings?_rsc=5CB68i4pnAekjehf",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/comparateur?_rsc=tXyZJ52UQVBCVsD3",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/anime?_rsc=cL9NyNmWzv8Rhmmc",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/meta?_rsc=tXyZJ52UQVBCVsD3",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/?_rsc=tXyZJ52UQVBCVsD3",
+        "status": "failed:net::ERR_ABORTED"
+      }
+    ],
+    "brokenImages": [],
+    "redirected": false
+  },
+  {
+    "name": "rankings",
+    "path": "/rankings",
+    "status": 200,
+    "finalUrl": "https://rpbey.fr/rankings",
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 404 ()",
+      "Failed to load resource: the server responded with a status of 404 ()",
+      "Failed to load resource: the server responded with a status of 404 ()",
+      "Failed to load resource: the server responded with a status of 404 ()",
+      "Failed to load resource: the server responded with a status of 404 ()",
+      "Failed to load resource: the server responded with a status of 404 ()",
+      "Failed to load resource: the server responded with a status of 404 ()",
+      "Failed to load resource: the server responded with a status of 404 ()",
+      "Failed to load resource: the server responded with a status of 404 ()",
+      "Failed to load resource: the server responded with a status of 404 ()"
+    ],
+    "pageErrors": [],
+    "failedRequests": [
+      {
+        "url": "https://cdn.discordapp.com/guilds/1319715782032228463/users/1244715598102138970/avatars/972fbee12d423227459efea1fddc2d6c.png?size=256",
+        "status": 404
+      },
+      {
+        "url": "https://cdn.discordapp.com/guilds/1319715782032228463/users/381213310881628160/avatars/a_4ccefdcec70b8bd7b6f7af17c059abdb.gif?size=256",
+        "status": 404
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/332134331474509824/7fc2bc2a44c2511017ac23477f96bb24.png?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/113366762375901184/6e6c35d610bd6dda1e38a7bd9c5518b9.png?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://user-assets.challonge.com/users/images/007/614/578/large/G7lEcswXcAAM5v2.png",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://user-assets.challonge.com/users/images/008/140/075/xlarge/IMG_1891.png",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://user-assets.challonge.com/users/images/007/935/845/large/1000004778.png",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/1259581582763884616/86c98e5f96b6fe71b439158958537203.png?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://user-assets.challonge.com/users/images/008/160/548/xlarge/HE-WM7pWoAAq2DR.png",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://user-assets.challonge.com/users/images/007/712/767/xlarge/1000125056.png",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://user-assets.challonge.com/users/images/007/070/529/xlarge/Eren.png",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://rpbey.fr/tournaments/wb?_rsc=8uisVwxVtwU7bmA7",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://cdn.discordapp.com/guilds/1319715782032228463/users/381213310881628160/avatars/a_4ccefdcec70b8bd7b6f7af17c059abdb.gif?size=256",
+        "status": 404
+      },
+      {
+        "url": "https://cdn.discordapp.com/guilds/1319715782032228463/users/1244715598102138970/avatars/972fbee12d423227459efea1fddc2d6c.png?size=256",
+        "status": 404
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/113366762375901184/6e6c35d610bd6dda1e38a7bd9c5518b9.png?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://user-assets.challonge.com/users/images/007/614/578/large/G7lEcswXcAAM5v2.png",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://user-assets.challonge.com/users/images/008/160/548/xlarge/HE-WM7pWoAAq2DR.png",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://user-assets.challonge.com/users/images/008/140/075/xlarge/IMG_1891.png",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://user-assets.challonge.com/users/images/007/712/767/xlarge/1000125056.png",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://user-assets.challonge.com/users/images/007/070/529/xlarge/Eren.png",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://user-assets.challonge.com/users/images/007/935/845/large/1000004778.png",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/332134331474509824/7fc2bc2a44c2511017ac23477f96bb24.png?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/1259581582763884616/86c98e5f96b6fe71b439158958537203.png?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/guilds/1319715782032228463/users/381213310881628160/avatars/a_4ccefdcec70b8bd7b6f7af17c059abdb.gif?size=256",
+        "status": 404
+      },
+      {
+        "url": "https://cdn.discordapp.com/guilds/1319715782032228463/users/1244715598102138970/avatars/972fbee12d423227459efea1fddc2d6c.png?size=256",
+        "status": 404
+      },
+      {
+        "url": "https://user-assets.challonge.com/users/images/007/614/578/large/G7lEcswXcAAM5v2.png",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/332134331474509824/7fc2bc2a44c2511017ac23477f96bb24.png?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://user-assets.challonge.com/users/images/007/712/767/xlarge/1000125056.png",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://user-assets.challonge.com/users/images/008/160/548/xlarge/HE-WM7pWoAAq2DR.png",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://user-assets.challonge.com/users/images/007/935/845/large/1000004778.png",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://user-assets.challonge.com/users/images/008/140/075/xlarge/IMG_1891.png",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://user-assets.challonge.com/users/images/007/070/529/xlarge/Eren.png",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/1259581582763884616/86c98e5f96b6fe71b439158958537203.png?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/113366762375901184/6e6c35d610bd6dda1e38a7bd9c5518b9.png?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/guilds/1319715782032228463/users/381213310881628160/avatars/a_4ccefdcec70b8bd7b6f7af17c059abdb.gif?size=256",
+        "status": 404
+      },
+      {
+        "url": "https://cdn.discordapp.com/guilds/1319715782032228463/users/1244715598102138970/avatars/972fbee12d423227459efea1fddc2d6c.png?size=256",
+        "status": 404
+      },
+      {
+        "url": "https://user-assets.challonge.com/users/images/007/935/845/large/1000004778.png",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://user-assets.challonge.com/users/images/007/614/578/large/G7lEcswXcAAM5v2.png",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/332134331474509824/7fc2bc2a44c2511017ac23477f96bb24.png?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/113366762375901184/6e6c35d610bd6dda1e38a7bd9c5518b9.png?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://user-assets.challonge.com/users/images/008/160/548/xlarge/HE-WM7pWoAAq2DR.png",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://user-assets.challonge.com/users/images/007/070/529/xlarge/Eren.png",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://user-assets.challonge.com/users/images/007/712/767/xlarge/1000125056.png",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://user-assets.challonge.com/users/images/008/140/075/xlarge/IMG_1891.png",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/1259581582763884616/86c98e5f96b6fe71b439158958537203.png?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/guilds/1319715782032228463/users/381213310881628160/avatars/a_4ccefdcec70b8bd7b6f7af17c059abdb.gif?size=256",
+        "status": 404
+      },
+      {
+        "url": "https://cdn.discordapp.com/guilds/1319715782032228463/users/1244715598102138970/avatars/972fbee12d423227459efea1fddc2d6c.png?size=256",
+        "status": 404
+      },
+      {
+        "url": "https://user-assets.challonge.com/users/images/007/614/578/large/G7lEcswXcAAM5v2.png",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://user-assets.challonge.com/users/images/007/935/845/large/1000004778.png",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://user-assets.challonge.com/users/images/008/160/548/xlarge/HE-WM7pWoAAq2DR.png",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://user-assets.challonge.com/users/images/008/140/075/xlarge/IMG_1891.png",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://user-assets.challonge.com/users/images/007/070/529/xlarge/Eren.png",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://user-assets.challonge.com/users/images/007/712/767/xlarge/1000125056.png",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/332134331474509824/7fc2bc2a44c2511017ac23477f96bb24.png?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/1259581582763884616/86c98e5f96b6fe71b439158958537203.png?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/113366762375901184/6e6c35d610bd6dda1e38a7bd9c5518b9.png?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      }
+    ],
+    "brokenImages": [],
+    "redirected": false
+  },
+  {
+    "name": "tournaments",
+    "path": "/tournaments",
+    "status": 200,
+    "finalUrl": "https://rpbey.fr/tournaments",
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+    ],
+    "pageErrors": [
+      "NAV_ERROR: TimeoutError: Navigation timeout of 45000 ms exceeded"
+    ],
+    "failedRequests": [
+      {
+        "url": "https://rpbey.fr/anime?_rsc=Vn7EtWQqjDbeC1xx",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/tv?_rsc=T2ACjSbmTrUNUkm4",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/tournaments?_rsc=B1FRaN3h7Q_SUwDM",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/api/auth/get-session",
+        "status": 429
+      },
+      {
+        "url": "https://rpbey.fr/tournaments/bts3?_rsc=B1FRaN3h7Q_SUwDM",
+        "status": "failed:net::ERR_ABORTED"
+      }
+    ],
+    "brokenImages": [],
+    "redirected": false
+  },
+  {
+    "name": "meta",
+    "path": "/meta",
+    "status": 200,
+    "finalUrl": "https://rpbey.fr/meta",
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+      "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+    ],
+    "pageErrors": [],
+    "failedRequests": [
+      {
+        "url": "https://rpbey.fr/anime?_rsc=nPp2sU5P7MGL8K_6",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/tv?_rsc=nPp2sU5P7MGL8K_6",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/api/auth/get-session",
+        "status": 429
+      },
+      {
+        "url": "https://rpbey.fr/api/auth/get-session",
+        "status": 429
+      }
+    ],
+    "brokenImages": [],
+    "redirected": false
+  },
+  {
+    "name": "tv",
+    "path": "/tv",
+    "status": 200,
+    "finalUrl": "https://rpbey.fr/tv",
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+    ],
+    "pageErrors": [],
+    "failedRequests": [
+      {
+        "url": "https://rpbey.fr/api/auth/get-session",
+        "status": 429
+      },
+      {
+        "url": "https://rpbey.fr/meta?_rsc=fVLmyrGAmESE6yhl",
+        "status": "failed:net::ERR_ABORTED"
+      }
+    ],
+    "brokenImages": [],
+    "redirected": false
+  },
+  {
+    "name": "anime",
+    "path": "/anime",
+    "status": 200,
+    "finalUrl": "https://rpbey.fr/anime",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [
+      {
+        "url": "https://rpbey.fr/tv?_rsc=HR-JYGHL_FHmd9kT",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/meta?_rsc=HR-JYGHL_FHmd9kT",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/tournaments?_rsc=HR-JYGHL_FHmd9kT",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/anime/beyblade-g-revolution?_rsc=DJEGmdNtFW0vdhsV",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/anime/beyblade-v-force?_rsc=lU1xgb-uQzfe71i_",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/anime/bakuten-shoot-beyblade?_rsc=l8pkTDdXypyC6COB",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/meta?_rsc=pvwyTGzqnojqfEiI",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/tournaments?_rsc=pvwyTGzqnojqfEiI",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/anime/bakuten-shoot-beyblade/1?_rsc=DtfddzvZ3tcnk0q4",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/anime/bakuten-shoot-beyblade?_rsc=l8pkTDdXypyC6COB",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/anime/beyblade-g-revolution?_rsc=DJEGmdNtFW0vdhsV",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/anime/beyblade-v-force?_rsc=lU1xgb-uQzfe71i_",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/anime/bakuten-shoot-beyblade/1?_rsc=pvwyTGzqnojqfEiI",
+        "status": "failed:net::ERR_ABORTED"
+      }
+    ],
+    "brokenImages": [],
+    "redirected": false
+  },
+  {
+    "name": "builder",
+    "path": "/builder",
+    "status": 200,
+    "finalUrl": "https://rpbey.fr/builder",
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+      "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+    ],
+    "pageErrors": [
+      "NAV_ERROR: TimeoutError: Navigation timeout of 45000 ms exceeded"
+    ],
+    "failedRequests": [
+      {
+        "url": "https://rpbey.fr/comparateur?_rsc=SdL8Orbik9mgM4eB",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/anime?_rsc=SdL8Orbik9mgM4eB",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/tv?_rsc=SdL8Orbik9mgM4eB",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/meta?_rsc=SdL8Orbik9mgM4eB",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/tournaments?_rsc=WU2hNZrorPiOyjGE",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/api/auth/get-session",
+        "status": 429
+      },
+      {
+        "url": "https://rpbey.fr/api/auth/get-session",
+        "status": 429
+      }
+    ],
+    "brokenImages": [],
+    "redirected": false
+  },
+  {
+    "name": "comparateur",
+    "path": "/comparateur",
+    "status": 200,
+    "finalUrl": "https://rpbey.fr/comparateur",
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+    ],
+    "pageErrors": [],
+    "failedRequests": [
+      {
+        "url": "https://rpbey.fr/comparateur/rock-golem-1-60un?_rsc=GoKVXr0zgIbf6pZu",
+        "status": 500
+      },
+      {
+        "url": "https://rpbey.fr/comparateur/scorpio-spear-0-70z?_rsc=GoKVXr0zgIbf6pZu",
+        "status": 500
+      },
+      {
+        "url": "https://rpbey.fr/comparateur/dagger-dran-4-70q?_rsc=GoKVXr0zgIbf6pZu",
+        "status": 500
+      },
+      {
+        "url": "https://rpbey.fr/comparateur/scarlet-garuda-4-70tp?_rsc=GoKVXr0zgIbf6pZu",
+        "status": 500
+      },
+      {
+        "url": "https://rpbey.fr/comparateur/hells-hammer-3-70h?_rsc=GoKVXr0zgIbf6pZu",
+        "status": 500
+      },
+      {
+        "url": "https://rpbey.fr/comparateur/weiss-tiger-3-60u?_rsc=GoKVXr0zgIbf6pZu",
+        "status": 500
+      },
+      {
+        "url": "https://rpbey.fr/comparateur/driger-slash-4-80p?_rsc=GoKVXr0zgIbf6pZu",
+        "status": 500
+      },
+      {
+        "url": "https://rpbey.fr/comparateur/samurai-calibur-6-70m?_rsc=GoKVXr0zgIbf6pZu",
+        "status": 500
+      },
+      {
+        "url": "https://rpbey.fr/comparateur/talon-ptera-3-80b?_rsc=GoKVXr0zgIbf6pZu",
+        "status": 500
+      },
+      {
+        "url": "https://rpbey.fr/comparateur/wizard-rod-5-70db?_rsc=GoKVXr0zgIbf6pZu",
+        "status": 500
+      },
+      {
+        "url": "https://rpbey.fr/comparateur/impact-drake-9-60lr?_rsc=GoKVXr0zgIbf6pZu",
+        "status": 500
+      },
+      {
+        "url": "https://rpbey.fr/comparateur/helm-knight-3-80n?_rsc=GoKVXr0zgIbf6pZu",
+        "status": 500
+      },
+      {
+        "url": "https://rpbey.fr/comparateur/buster-dran-1-60a?_rsc=GoKVXr0zgIbf6pZu",
+        "status": 500
+      },
+      {
+        "url": "https://rpbey.fr/comparateur/scythe-incendio-4-60t?_rsc=GoKVXr0zgIbf6pZu",
+        "status": 500
+      },
+      {
+        "url": "https://rpbey.fr/comparateur/soar-phoenix-9-60gf?_rsc=GoKVXr0zgIbf6pZu",
+        "status": 500
+      },
+      {
+        "url": "https://rpbey.fr/comparateur/sting-unicorn-5-60gp?_rsc=GoKVXr0zgIbf6pZu",
+        "status": 500
+      },
+      {
+        "url": "https://rpbey.fr/comparateur/cobalt-dragoon-2-60c?_rsc=GoKVXr0zgIbf6pZu",
+        "status": 500
+      },
+      {
+        "url": "https://rpbey.fr/comparateur/bx-00-dranzer-spiral-3-80t?_rsc=GoKVXr0zgIbf6pZu",
+        "status": 500
+      },
+      {
+        "url": "https://rpbey.fr/comparateur/claw-leon-5-60p?_rsc=GoKVXr0zgIbf6pZu",
+        "status": 500
+      },
+      {
+        "url": "https://rpbey.fr/comparateur/lance-knight-4-80hn?_rsc=GoKVXr0zgIbf6pZu",
+        "status": 500
+      },
+      {
+        "url": "https://rpbey.fr/comparateur/horn-rhino-3-80s?_rsc=GoKVXr0zgIbf6pZu",
+        "status": 500
+      },
+      {
+        "url": "https://rpbey.fr/comparateur/sword-dran-3-60f?_rsc=GoKVXr0zgIbf6pZu",
+        "status": 500
+      },
+      {
+        "url": "https://rpbey.fr/comparateur/arrow-wizard-4-80b?_rsc=GoKVXr0zgIbf6pZu",
+        "status": 500
+      },
+      {
+        "url": "https://rpbey.fr/anime?_rsc=K-iJ5j88RPapUKVk",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/comparateur/driger-slash-4-80p?_rsc=GoKVXr0zgIbf6pZu",
+        "status": 500
+      },
+      {
+        "url": "https://rpbey.fr/comparateur/talon-ptera-3-80b?_rsc=GoKVXr0zgIbf6pZu",
+        "status": 500
+      },
+      {
+        "url": "https://rpbey.fr/comparateur/wizard-rod-5-70db?_rsc=GoKVXr0zgIbf6pZu",
+        "status": 500
+      },
+      {
+        "url": "https://rpbey.fr/comparateur/samurai-calibur-6-70m?_rsc=GoKVXr0zgIbf6pZu",
+        "status": 500
+      },
+      {
+        "url": "https://rpbey.fr/comparateur/impact-drake-9-60lr?_rsc=GoKVXr0zgIbf6pZu",
+        "status": 500
+      },
+      {
+        "url": "https://rpbey.fr/comparateur/helm-knight-3-80n?_rsc=GoKVXr0zgIbf6pZu",
+        "status": 500
+      },
+      {
+        "url": "https://rpbey.fr/comparateur/buster-dran-1-60a?_rsc=GoKVXr0zgIbf6pZu",
+        "status": 500
+      },
+      {
+        "url": "https://rpbey.fr/comparateur/scythe-incendio-4-60t?_rsc=GoKVXr0zgIbf6pZu",
+        "status": 500
+      },
+      {
+        "url": "https://rpbey.fr/comparateur/soar-phoenix-9-60gf?_rsc=GoKVXr0zgIbf6pZu",
+        "status": 500
+      },
+      {
+        "url": "https://rpbey.fr/comparateur/sting-unicorn-5-60gp?_rsc=GoKVXr0zgIbf6pZu",
+        "status": 500
+      },
+      {
+        "url": "https://rpbey.fr/comparateur/cobalt-dragoon-2-60c?_rsc=GoKVXr0zgIbf6pZu",
+        "status": 500
+      },
+      {
+        "url": "https://rpbey.fr/comparateur/bx-00-dranzer-spiral-3-80t?_rsc=GoKVXr0zgIbf6pZu",
+        "status": 500
+      },
+      {
+        "url": "https://rpbey.fr/comparateur/claw-leon-5-60p?_rsc=GoKVXr0zgIbf6pZu",
+        "status": 500
+      },
+      {
+        "url": "https://rpbey.fr/comparateur/lance-knight-4-80hn?_rsc=GoKVXr0zgIbf6pZu",
+        "status": 500
+      },
+      {
+        "url": "https://rpbey.fr/comparateur/horn-rhino-3-80s?_rsc=GoKVXr0zgIbf6pZu",
+        "status": 500
+      },
+      {
+        "url": "https://rpbey.fr/comparateur/sword-dran-3-60f?_rsc=GoKVXr0zgIbf6pZu",
+        "status": 500
+      },
+      {
+        "url": "https://rpbey.fr/comparateur/arrow-wizard-4-80b?_rsc=GoKVXr0zgIbf6pZu",
+        "status": 500
+      }
+    ],
+    "brokenImages": [],
+    "redirected": false
+  },
+  {
+    "name": "notre-equipe",
+    "path": "/notre-equipe",
+    "status": 200,
+    "finalUrl": "https://rpbey.fr/notre-equipe",
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+    ],
+    "pageErrors": [
+      "NAV_ERROR: TimeoutError: Navigation timeout of 45000 ms exceeded"
+    ],
+    "failedRequests": [
+      {
+        "url": "https://cdn.discordapp.com/avatars/1244715598102138970/a_5f901b1231342658b636ae67cae4d62e.gif?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/332134331474509824/5b65b2a1f75ddb46c6a31f66d1eebfe5.png?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/386221884355641345/a_0b1a1f99203ac0b6073911ef30e120b4.gif?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/195567739488698369/7ff87bdc608d36e254cfcf84ed88de30.png?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/263962185342910464/3c68fc29ec3c66290c124ee4ae3f78ad.png?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/515928091382775820/ee12df8560b93a8f11efc4373d81ada6.png?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/281114294152724491/8c8b54750b29df8a6e139ca30ec92ea2.png?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/127784740903190528/1e8f44b7c482d230f8a5ab0eda7ab75f.png?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/508591502449180692/a_5c7283e7f0d4ec05fcf66322bc5014f8.gif?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/302044199245578242/d09c114b443290300fafd0eb662a1fd4.png?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/672002003567640586/a_600cdd8f8da8c6be9cd330f097dd9e2f.gif?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/1244715598102138970/a_5f901b1231342658b636ae67cae4d62e.gif?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/281114294152724491/8c8b54750b29df8a6e139ca30ec92ea2.png?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/332134331474509824/5b65b2a1f75ddb46c6a31f66d1eebfe5.png?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/508591502449180692/a_5c7283e7f0d4ec05fcf66322bc5014f8.gif?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/195567739488698369/7ff87bdc608d36e254cfcf84ed88de30.png?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/127784740903190528/1e8f44b7c482d230f8a5ab0eda7ab75f.png?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/515928091382775820/ee12df8560b93a8f11efc4373d81ada6.png?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/302044199245578242/d09c114b443290300fafd0eb662a1fd4.png?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/386221884355641345/a_0b1a1f99203ac0b6073911ef30e120b4.gif?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/263962185342910464/3c68fc29ec3c66290c124ee4ae3f78ad.png?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://rpbey.fr/rankings?_rsc=maPKjCthRluGK3rr",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/comparateur?_rsc=p6kR67qz8VZrJY0X",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/672002003567640586/a_600cdd8f8da8c6be9cd330f097dd9e2f.gif?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://rpbey.fr/tv?_rsc=cDZeP7hog94CLhI3",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/meta?_rsc=p6kR67qz8VZrJY0X",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/rankings?_rsc=p6kR67qz8VZrJY0X",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/tournaments?_rsc=p6kR67qz8VZrJY0X",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/1244715598102138970/a_5f901b1231342658b636ae67cae4d62e.gif?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/281114294152724491/8c8b54750b29df8a6e139ca30ec92ea2.png?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/127784740903190528/1e8f44b7c482d230f8a5ab0eda7ab75f.png?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/195567739488698369/7ff87bdc608d36e254cfcf84ed88de30.png?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/332134331474509824/5b65b2a1f75ddb46c6a31f66d1eebfe5.png?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/386221884355641345/a_0b1a1f99203ac0b6073911ef30e120b4.gif?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/515928091382775820/ee12df8560b93a8f11efc4373d81ada6.png?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/263962185342910464/3c68fc29ec3c66290c124ee4ae3f78ad.png?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/302044199245578242/d09c114b443290300fafd0eb662a1fd4.png?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/508591502449180692/a_5c7283e7f0d4ec05fcf66322bc5014f8.gif?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/672002003567640586/a_600cdd8f8da8c6be9cd330f097dd9e2f.gif?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/281114294152724491/8c8b54750b29df8a6e139ca30ec92ea2.png?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/1244715598102138970/a_5f901b1231342658b636ae67cae4d62e.gif?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/127784740903190528/1e8f44b7c482d230f8a5ab0eda7ab75f.png?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/508591502449180692/a_5c7283e7f0d4ec05fcf66322bc5014f8.gif?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/386221884355641345/a_0b1a1f99203ac0b6073911ef30e120b4.gif?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/302044199245578242/d09c114b443290300fafd0eb662a1fd4.png?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/332134331474509824/5b65b2a1f75ddb46c6a31f66d1eebfe5.png?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/515928091382775820/ee12df8560b93a8f11efc4373d81ada6.png?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/263962185342910464/3c68fc29ec3c66290c124ee4ae3f78ad.png?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/195567739488698369/7ff87bdc608d36e254cfcf84ed88de30.png?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://rpbey.fr/api/auth/get-session",
+        "status": 429
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/281114294152724491/8c8b54750b29df8a6e139ca30ec92ea2.png?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/508591502449180692/a_5c7283e7f0d4ec05fcf66322bc5014f8.gif?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/127784740903190528/1e8f44b7c482d230f8a5ab0eda7ab75f.png?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/332134331474509824/5b65b2a1f75ddb46c6a31f66d1eebfe5.png?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/386221884355641345/a_0b1a1f99203ac0b6073911ef30e120b4.gif?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/263962185342910464/3c68fc29ec3c66290c124ee4ae3f78ad.png?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/302044199245578242/d09c114b443290300fafd0eb662a1fd4.png?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/1244715598102138970/a_5f901b1231342658b636ae67cae4d62e.gif?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/515928091382775820/ee12df8560b93a8f11efc4373d81ada6.png?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/195567739488698369/7ff87bdc608d36e254cfcf84ed88de30.png?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      },
+      {
+        "url": "https://cdn.discordapp.com/avatars/672002003567640586/a_600cdd8f8da8c6be9cd330f097dd9e2f.gif?size=256",
+        "status": "failed:net::ERR_BLOCKED_BY_ORB"
+      }
+    ],
+    "brokenImages": [],
+    "redirected": false
+  },
+  {
+    "name": "reglement",
+    "path": "/reglement",
+    "status": 200,
+    "finalUrl": "https://rpbey.fr/reglement",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [
+      {
+        "url": "https://rpbey.fr/anime?_rsc=vJNxbaeerSYwqnl3",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/tv?_rsc=vJNxbaeerSYwqnl3",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/tournaments?_rsc=vJNxbaeerSYwqnl3",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/anime?_rsc=XU4sV4NhNe5J5ebf",
+        "status": "failed:net::ERR_ABORTED"
+      }
+    ],
+    "brokenImages": [],
+    "redirected": false
+  },
+  {
+    "name": "privacy",
+    "path": "/privacy",
+    "status": 200,
+    "finalUrl": "https://rpbey.fr/privacy",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [
+      {
+        "url": "https://rpbey.fr/meta?_rsc=WzUDN3am5ctH078F",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/comparateur?_rsc=UnGutxUMZihRxjHi",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/anime?_rsc=GmIYrpyLgbxMAZLU",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/tv?_rsc=-cmzMifqyqucnrW8",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/tournaments?_rsc=UnGutxUMZihRxjHi",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/rankings?_rsc=UnGutxUMZihRxjHi",
+        "status": "failed:net::ERR_ABORTED"
+      }
+    ],
+    "brokenImages": [],
+    "redirected": false
+  },
+  {
+    "name": "parts",
+    "path": "/parts",
+    "status": 200,
+    "finalUrl": "https://rpbey.fr/parts",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "brokenImages": [],
+    "redirected": false
+  },
+  {
+    "name": "sign-in",
+    "path": "/sign-in",
+    "status": 200,
+    "finalUrl": "https://rpbey.fr/sign-in",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "brokenImages": [],
+    "redirected": false
+  },
+  {
+    "name": "sign-up",
+    "path": "/sign-up",
+    "status": 304,
+    "finalUrl": "https://rpbey.fr/sign-in",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "brokenImages": [],
+    "redirected": true
+  },
+  {
+    "name": "tournaments-satr",
+    "path": "/tournaments/satr",
+    "status": 200,
+    "finalUrl": "https://rpbey.fr/tournaments/satr",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [
+      {
+        "url": "https://rpbey.fr/tournaments/satr?view=career&_rsc=4KBT1UvdRQVePMQZ",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/comparateur?_rsc=4KBT1UvdRQVePMQZ",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/anime?_rsc=j_UNNsErSOApU1Bs",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/tournaments/stardust?_rsc=BCyXMPfdNMErlt2n",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/tournaments/satr?season=2&_rsc=4KBT1UvdRQVePMQZ",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/tournaments/stardust?_rsc=4KBT1UvdRQVePMQZ",
+        "status": "failed:net::ERR_ABORTED"
+      }
+    ],
+    "brokenImages": [],
+    "redirected": false
+  },
+  {
+    "name": "tournaments-wb",
+    "path": "/tournaments/wb",
+    "status": 200,
+    "finalUrl": "https://rpbey.fr/tournaments/wb",
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+    ],
+    "pageErrors": [],
+    "failedRequests": [
+      {
+        "url": "https://rpbey.fr/tournaments/satr?_rsc=VLzT3jJAqtdEuovS",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/rankings?_rsc=Y3MiA_ROB2NP76w5",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/api/auth/get-session",
+        "status": 429
+      },
+      {
+        "url": "https://rpbey.fr/tournaments/wb?season=1&_rsc=Y3MiA_ROB2NP76w5",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/tournaments/stardust?_rsc=Y3MiA_ROB2NP76w5",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/tournaments/satr?_rsc=Y3MiA_ROB2NP76w5",
+        "status": "failed:net::ERR_ABORTED"
+      }
+    ],
+    "brokenImages": [],
+    "redirected": false
+  },
+  {
+    "name": "tournaments-stardust",
+    "path": "/tournaments/stardust",
+    "status": 200,
+    "finalUrl": "https://rpbey.fr/tournaments/stardust",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [
+      {
+        "url": "https://rpbey.fr/tournaments/stardust?view=ranking&_rsc=n2omp_m-B9vkuIMW",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/meta?_rsc=n2omp_m-B9vkuIMW",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/tournaments/wb?_rsc=s_Vw-SRVrR8Tek3e",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/rankings?_rsc=s_Vw-SRVrR8Tek3e",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/tournaments/satr?_rsc=s_Vw-SRVrR8Tek3e",
+        "status": "failed:net::ERR_ABORTED"
+      }
+    ],
+    "brokenImages": [],
+    "redirected": false
+  },
+  {
+    "name": "profile-index",
+    "path": "/profile",
+    "status": 304,
+    "finalUrl": "https://rpbey.fr/sign-in",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "brokenImages": [],
+    "redirected": true
+  },
+  {
+    "name": "tournament-cmnukkwyt0000z4ro9fvkcko6",
+    "path": "/tournaments/cmnukkwyt0000z4ro9fvkcko6",
+    "status": 200,
+    "finalUrl": "https://rpbey.fr/tournaments/bts4",
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+    ],
+    "pageErrors": [],
+    "failedRequests": [
+      {
+        "url": "https://rpbey.fr/rankings?_rsc=odAnaptist6_cP1f",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/?_rsc=odAnaptist6_cP1f",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/anime?_rsc=ce4F0ZrjLyMbHiU3",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/tv?_rsc=Bo60fYFWehU8ZVzQ",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/meta?_rsc=knpt51eX2G1gtAJ4",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/api/auth/get-session",
+        "status": 429
+      }
+    ],
+    "brokenImages": [],
+    "redirected": true
+  },
+  {
+    "name": "tournament-cmobvakra0001s7rog85nt10h",
+    "path": "/tournaments/cmobvakra0001s7rog85nt10h",
+    "status": 200,
+    "finalUrl": "https://rpbey.fr/tournaments/cmobvakra0001s7rog85nt10h",
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+    ],
+    "pageErrors": [],
+    "failedRequests": [
+      {
+        "url": "https://rpbey.fr/api/auth/get-session",
+        "status": 429
+      },
+      {
+        "url": "https://rpbey.fr/?_rsc=jZQE6UHlM5ako8vu",
+        "status": "failed:net::ERR_ABORTED"
+      }
+    ],
+    "brokenImages": [],
+    "redirected": false
+  },
+  {
+    "name": "comparateur-arrow-wizard-4-80b",
+    "path": "/comparateur/arrow-wizard-4-80b",
+    "status": 500,
+    "finalUrl": "https://rpbey.fr/comparateur/arrow-wizard-4-80b",
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "Failed to load resource: the server responded with a status of 404 (Not Found)",
+      "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+    ],
+    "pageErrors": [],
+    "failedRequests": [
+      {
+        "url": "https://rpbey.fr/comparateur/arrow-wizard-4-80b",
+        "status": 500
+      },
+      {
+        "url": "https://rpbey.fr/favicon.ico",
+        "status": 404
+      },
+      {
+        "url": "https://rpbey.fr/comparateur/arrow-wizard-4-80b",
+        "status": 500
+      },
+      {
+        "url": "https://rpbey.fr/comparateur/arrow-wizard-4-80b",
+        "status": 500
+      }
+    ],
+    "brokenImages": [],
+    "redirected": false
+  },
+  {
+    "name": "comparateur-sword-dran-3-60f",
+    "path": "/comparateur/sword-dran-3-60f",
+    "status": 500,
+    "finalUrl": "https://rpbey.fr/comparateur/sword-dran-3-60f",
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+      "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+    ],
+    "pageErrors": [],
+    "failedRequests": [
+      {
+        "url": "https://rpbey.fr/comparateur/sword-dran-3-60f",
+        "status": 500
+      },
+      {
+        "url": "https://rpbey.fr/comparateur/sword-dran-3-60f",
+        "status": 500
+      },
+      {
+        "url": "https://rpbey.fr/comparateur/sword-dran-3-60f",
+        "status": 500
+      }
+    ],
+    "brokenImages": [],
+    "redirected": false
+  },
+  {
+    "name": "anime-metal-fight-beyblade",
+    "path": "/anime/metal-fight-beyblade",
+    "status": 200,
+    "finalUrl": "https://rpbey.fr/anime/metal-fight-beyblade",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [
+      {
+        "url": "https://rpbey.fr/anime/metal-fight-beyblade/1?_rsc=u8yi8UJ1nJZSXEIC",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/anime/metal-fight-beyblade/6?_rsc=rjPsl3xlmk3vbry-",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/anime/metal-fight-beyblade/8?_rsc=c4oo7Xrm9z-E_wcR",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/anime/metal-fight-beyblade/5?_rsc=gm-XAQbjwTztpXNl",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/anime/metal-fight-beyblade/7?_rsc=pgvsTmkY04s3s7da",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/anime/metal-fight-beyblade/3?_rsc=EcmiKzzfgJCCBkA1",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/anime/metal-fight-beyblade/4?_rsc=JwXw-JDXx-vQzJD3",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/anime/metal-fight-beyblade/1?_rsc=VyFEJiRA_0g2RQnO",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/anime/metal-fight-beyblade/2?_rsc=YZb3gwEsUvdTjQqC",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/anime?_rsc=Swua2e-989gS1Tvm",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/tv?_rsc=tul5Xuvlx36B8_Zy",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/rankings?_rsc=Swua2e-989gS1Tvm",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/anime/metal-fight-beyblade/1?_rsc=VyFEJiRA_0g2RQnO",
+        "status": "failed:net::ERR_ABORTED"
+      }
+    ],
+    "brokenImages": [],
+    "redirected": false
+  },
+  {
+    "name": "anime-metal-fight-beyblade-ep1",
+    "path": "/anime/metal-fight-beyblade/1",
+    "status": 200,
+    "finalUrl": "https://rpbey.fr/anime/metal-fight-beyblade/1",
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+      "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+    ],
+    "pageErrors": [],
+    "failedRequests": [
+      {
+        "url": "https://rpbey.fr/anime/metal-fight-beyblade/3?_rsc=3mS75qLkKDnWEj8w",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/anime/metal-fight-beyblade/2?_rsc=3mS75qLkKDnWEj8w",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/anime?_rsc=3mS75qLkKDnWEj8w",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/anime/metal-fight-beyblade/7?_rsc=hl4VzypeEsx_0IdK",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/anime/metal-fight-beyblade/6?_rsc=XBw2PpRGtx9wB5n8",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/anime/metal-fight-beyblade/5?_rsc=lgJGT0cGV4gfrQJJ",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/anime/metal-fight-beyblade/4?_rsc=9kYFNE7hCUDL8XcK",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/anime/metal-fight-beyblade?_rsc=UeKaDzWS1STk6hdd",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/anime/metal-fight-beyblade/2?_rsc=XE29zKjV495PMdhr",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/anime/metal-fight-beyblade/3?_rsc=Q6ZnhXCc2X-VLQsE",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/anime/metal-fight-beyblade/1?_rsc=UeKaDzWS1STk6hdd",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/tv?_rsc=ksZrmo6oE5wqM_9r",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/api/auth/get-session",
+        "status": 429
+      },
+      {
+        "url": "https://rpbey.fr/api/auth/get-session",
+        "status": 429
+      },
+      {
+        "url": "https://rpbey.fr/?_rsc=UeKaDzWS1STk6hdd",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/anime/metal-fight-beyblade?_rsc=UeKaDzWS1STk6hdd",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/anime/metal-fight-beyblade/3?_rsc=Q6ZnhXCc2X-VLQsE",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/anime/metal-fight-beyblade/1?_rsc=UeKaDzWS1STk6hdd",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/anime/metal-fight-beyblade/2?_rsc=XE29zKjV495PMdhr",
+        "status": "failed:net::ERR_ABORTED"
+      }
+    ],
+    "brokenImages": [],
+    "redirected": false
+  },
+  {
+    "name": "profile-cmn2jxtyv003w7ma3jp31xplh",
+    "path": "/profile/cmn2jxtyv003w7ma3jp31xplh",
+    "status": 200,
+    "finalUrl": "https://rpbey.fr/profile/cmn2jxtyv003w7ma3jp31xplh",
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+    ],
+    "pageErrors": [],
+    "failedRequests": [
+      {
+        "url": "https://rpbey.fr/api/auth/get-session",
+        "status": 429
+      },
+      {
+        "url": "https://rpbey.fr/comparateur?_rsc=XH2n3-jvwSB7GVtv",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/meta?_rsc=XH2n3-jvwSB7GVtv",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/rankings?_rsc=XH2n3-jvwSB7GVtv",
+        "status": "failed:net::ERR_ABORTED"
+      },
+      {
+        "url": "https://rpbey.fr/?_rsc=sp1kJtU2Z4GSEhAs",
+        "status": "failed:net::ERR_ABORTED"
+      }
+    ],
+    "brokenImages": [],
+    "redirected": false
+  },
+  {
+    "name": "dashboard",
+    "path": "/dashboard",
+    "status": 304,
+    "finalUrl": "https://rpbey.fr/sign-in",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "brokenImages": [],
+    "redirected": true
+  },
+  {
+    "name": "admin",
+    "path": "/admin",
+    "status": 304,
+    "finalUrl": "https://rpbey.fr/sign-in",
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "brokenImages": [],
+    "redirected": true
+  }
+]
