@@ -67,6 +67,14 @@ const nextConfig: NextConfig = {
   // are auto-externalized and don't need to be repeated here.
   serverExternalPackages: [
     "postgres",
+    // Libs server-only lourdes : externalize = pas de bundling/analyse webpack
+    // → compile build nettement plus rapide (googleapis surtout est énorme).
+    "puppeteer",
+    "googleapis",
+    "google-auth-library",
+    "xlsx",
+    "cheerio",
+    "sharp",
     "puppeteer-extra",
     "puppeteer-extra-plugin",
     "puppeteer-extra-plugin-stealth",
@@ -90,9 +98,9 @@ const nextConfig: NextConfig = {
   // Experimental features
   experimental: {
     // Cache Turbopack persistant entre builds (gain 2-5x sur incremental).
-    // Désactivé : provoque un panic de parse JSX dans les chunks générés
-    // (`<SlotClone>` radix) sur build clean Next 16.2.6 — réactiver si patché upstream.
-    turbopackFileSystemCacheForBuild: false,
+    // Réactivé sur Next 16.3 canary (le panic JSX radix <SlotClone> de 16.2.6
+    // est corrigé upstream). Combiné à `next build --turbopack`.
+    turbopackFileSystemCacheForBuild: true,
     // Minification CSS via Lightning CSS (Rust).
     optimizeCss: true,
     optimizePackageImports: [
@@ -258,6 +266,23 @@ const nextConfig: NextConfig = {
           {
             key: "X-Accel-Buffering",
             value: "no",
+          },
+          // Indexation maximale (Google + LLM crawlers : aperçus/snippets illimités)
+          {
+            key: "X-Robots-Tag",
+            value:
+              "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+          },
+          // Cross-origin ouvert (lecture) — permet aux LLM / outils de fetch le
+          // contenu public. Sans Allow-Credentials → aucun cookie cross-origin
+          // n'est exposé (les routes authentifiées restent protégées).
+          {
+            key: "Access-Control-Allow-Origin",
+            value: "*",
+          },
+          {
+            key: "Access-Control-Allow-Methods",
+            value: "GET, HEAD, OPTIONS",
           },
         ],
       },

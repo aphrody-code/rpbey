@@ -28,6 +28,7 @@ export function createPageMetadata(opts: {
   return {
     title,
     description,
+    alternates: { canonical: path || '/' },
     openGraph: {
       type,
       locale: 'fr_FR',

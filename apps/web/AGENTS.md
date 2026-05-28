@@ -48,15 +48,30 @@ Le script (idempotent) :
 4. `rm -rf $SA/data && ln -s apps/web/data` (sinon nested symlink dans le dir réel du build) ;
 5. copie le helper `@tobyg74/tiktok-api-dl/helper` dans le standalone (non tracé, lu via `__dirname`).
 
+**Déploiement en UNE commande** (recommandé) :
 ```bash
-cd ~/rpbey/apps/web
-PGHOST=/var/run/postgresql PGDATABASE=rpb_neon PGUSER=ubuntu NODE_ENV=production \
-  ~/rpbey/node_modules/.bin/next build       # 'next' est hoisté à la racine
+bash ~/rpbey/scripts/ship-web.sh   # build turbopack → deploy-web.sh → restart → healthcheck
+```
+Ou les étapes manuelles :
+```bash
+cd ~/rpbey/apps/web && bun run build          # = next build --turbopack (cf. §3bis)
 bash ~/rpbey/scripts/deploy-web.sh            # ← ne JAMAIS oublier
 sudo systemctl restart rpbey-web.service
 ```
 Le serveur standalone fait `chdir` vers `.next/standalone/apps/web` → tout `readFile("data/…")`
 résout là (couvert par le symlink `data`).
+
+## 3bis. Build Turbopack + Next canary (perf)
+
+- **Next est pinné en canary** (`16.3.0-canary.32` dans le catalog racine) — politique « canary/nightly partout ». Le canary corrige le panic JSX radix `<SlotClone>` qui bloquait le FS cache Turbopack en 16.2.6.
+- **Build = `next build --turbopack`** (script `build`) + `experimental.turbopackFileSystemCacheForBuild: true`. Mesuré : compile **cold ~25 s, warm ~1.1 s** (vs ~41 s webpack). Ne pas revenir à webpack sans raison.
+- Libs server-only lourdes dans `serverExternalPackages` (googleapis, puppeteer, xlsx, cheerio, sharp…) → pas bundlées = compile plus rapide.
+
+## 3ter. Standalone sur VPS — nginx & systemd
+
+- **`/_next/static/` servi DIRECTEMENT par nginx** (location `alias` vers `.next/standalone/apps/web/.next/static/`, `Cache-Control: public, max-age=31536000, immutable`, `try_files … @bunproxy`) → offload Bun, cache 1 an. `/home/ubuntu` est en 755 donc le worker nginx (`nobody`) peut lire. Conf : `/etc/nginx/conf.d/rpbey.fr.conf` (backups `.bak-*`). Toujours `sudo nginx -t` avant `reload`.
+- Le reste (`location /`) proxie vers `127.0.0.1:3002` avec `proxy_buffering off` (requis pour les SSE `/api/bot/events`, `/api/admin/analytics/stream`).
+- systemd `rpbey-web.service` : `Restart=always`, `User=ubuntu`. **Ne pas** mettre `NoNewPrivileges` (casse le `sudo systemctl` du route handler admin `/api/admin/bot/restart`).
 
 ## 4. Pièges build (cf. `~/rpbey/docs/nextjs/README.md`)
 

@@ -239,6 +239,12 @@ infra/nginx.bak-*/
 *.txt
 !README.md
 !CLAUDE.md
+# Routes App Router servant du texte (ex /llms.txt) — du code, à versionner
+!apps/web/src/app/**/*.txt/
+!apps/web/src/app/**/*.txt/**
+# docs/ versionnés (audit, bxc…)
+!docs/**/*.md
+!docs/**/*.txt
 !SECURITY.md
 !state.md
 !LICENSE.md
