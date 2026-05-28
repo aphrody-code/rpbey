@@ -6,8 +6,6 @@ export const RankingService = {
 	 * basé sur l'historique complet des tournois.
 	 */
 	async recalculateAll() {
-		// console.log('🔄 Recalcul global du classement...');
-
 		// 1. Récupérer les règles
 		const rules = await db.query.rankingSystem.findFirst();
 		if (!rules) throw new Error("Système de classement non configuré.");
@@ -20,8 +18,6 @@ export const RankingService = {
 				tournamentMatches: true, // Pour compter les victoires
 			},
 		});
-
-		// console.log(`📊 Analyse de ${tournaments.length} tournois terminés.`);
 
 		// 3. Map pour stocker les points temporaires : UserId -> Points
 		const userPoints = new Map<

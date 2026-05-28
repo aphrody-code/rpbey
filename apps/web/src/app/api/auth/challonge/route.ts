@@ -44,7 +44,6 @@ export async function GET(request: Request) {
     );
 
     const authUrl = challonge.getAuthorizationUrl(state);
-    console.log(`🚀 Initiating Challonge OAuth for user ${session.user.id}`);
 
     return NextResponse.redirect(authUrl);
   } catch (error) {

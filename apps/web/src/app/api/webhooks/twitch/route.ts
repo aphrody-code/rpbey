@@ -64,8 +64,6 @@ export async function POST(req: Request) {
 
     if (subscription.type === 'stream.online') {
       console.log(`Stream online event for ${event.broadcaster_user_name}`);
-
-      console.log('Twitch stream online event received:', event);
     }
 
     return new NextResponse('OK', { status: 200 });

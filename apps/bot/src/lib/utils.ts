@@ -75,15 +75,6 @@ export function formatDuration(ms: number): string {
 }
 
 /**
- * Parse a duration string to milliseconds
- * NOT IMPLEMENTED in migration
- */
-export function parseDuration(_input: string): number | null {
-  // Simple implementation if needed
-  return null;
-}
-
-/**
  * Truncate a string to a maximum length
  */
 export function truncate(
