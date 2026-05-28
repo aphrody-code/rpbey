@@ -26,7 +26,8 @@ import {
   FeedMyPartnership,
   type MetaPartPreview,
   MetaPreview,
-  RankingPreview,
+  type RankingBoard,
+  RankingsCarousel,
 } from '@/components/marketing';
 import {
   TournamentShowcase,
@@ -112,8 +113,7 @@ interface HomeClientProps {
     activityLog: any;
   } | null;
   heroContent?: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  topRankings?: any[];
+  rankingBoards?: RankingBoard[];
   metaParts?: MetaPartPreview[];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   recentVideos?: any[];
@@ -123,7 +123,7 @@ interface HomeClientProps {
 export default function HomeClient({
   activeTournament,
   heroContent,
-  topRankings = [],
+  rankingBoards = [],
   metaParts = [],
   recentVideos = [],
   tournaments = [],
@@ -442,7 +442,7 @@ export default function HomeClient({
                             letterSpacing: '-0.02em',
                           }}
                         >
-                          Classement Live
+                          Classements Live
                         </Typography>
                         <Typography
                           variant="caption"
@@ -451,7 +451,7 @@ export default function HomeClient({
                             fontWeight: 600,
                           }}
                         >
-                          TOP 20 BLADERS - RPB
+                          BTS · WILD BREAKERS · SATR · STARDUST
                         </Typography>
                       </Box>
                       <Box
@@ -466,19 +466,7 @@ export default function HomeClient({
                       />
                     </Stack>
 
-                    <RankingPreview rankings={topRankings} />
-
-                    <Box sx={{ mt: 3, display: 'flex', gap: 2 }}>
-                      <Button
-                        variant="outlined"
-                        fullWidth
-                        sx={{ borderRadius: 3 }}
-                        component={Link}
-                        href="/rankings"
-                      >
-                        Voir tout
-                      </Button>
-                    </Box>
+                    <RankingsCarousel boards={rankingBoards} />
                   </CardContent>
                 </Card>
               </Grid>

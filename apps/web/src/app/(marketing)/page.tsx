@@ -1,4 +1,7 @@
-import { type MetaPartPreview } from "@/components/marketing";
+import {
+	type MetaPartPreview,
+	type RankingBoard,
+} from "@/components/marketing";
 import { type TournamentShowcaseItem } from "@/components/marketing/TournamentShowcase";
 import { loadJsonSafe } from "@/lib/data-cache";
 import {
@@ -115,6 +118,104 @@ async function getTopMetaParts(): Promise<MetaPartPreview[]> {
 	}
 }
 
+const RANKING_TOP = 12;
+
+// Tous les classements RPB pour le carrousel de la homepage. Mêmes sources que
+// les pages dédiées : BTS (getBtsRanking), WB/SATR/Stardust (tables synchronisées).
+async function getRankingBoards(): Promise<RankingBoard[]> {
+	const normalizeDbRow = (r: {
+		id: string;
+		playerName: string;
+		score: number;
+		wins: number;
+		losses: number;
+	}) => ({
+		id: r.id,
+		userId: null,
+		playerName: r.playerName,
+		points: r.score,
+		wins: r.wins,
+		losses: r.losses,
+		tournamentWins: 0,
+		avatarUrl: null,
+	});
+
+	const [bts, wb, satr, stardust] = await Promise.all([
+		getBtsRanking(2, { pageSize: RANKING_TOP })
+			.then((res) =>
+				res.entries.slice(0, RANKING_TOP).map((e) => ({
+					id: `bts-${e.rank}-${e.playerName}`,
+					userId: null,
+					playerName: e.playerName,
+					points: e.points,
+					wins: e.wins,
+					losses: e.losses,
+					tournamentWins: e.tournamentWins,
+					avatarUrl: e.avatarUrl,
+				})),
+			)
+			.catch(() => []),
+		db.query.wbRankings
+			.findMany({
+				where: eq(schema.wbRankings.season, 2),
+				orderBy: asc(schema.wbRankings.rank),
+				limit: RANKING_TOP,
+			})
+			.then((rows) => rows.map(normalizeDbRow))
+			.catch(() => []),
+		db.query.satrRankings
+			.findMany({
+				where: eq(schema.satrRankings.season, 2),
+				orderBy: asc(schema.satrRankings.rank),
+				limit: RANKING_TOP,
+			})
+			.then((rows) => rows.map(normalizeDbRow))
+			.catch(() => []),
+		db.query.stardustRankings
+			.findMany({
+				orderBy: asc(schema.stardustRankings.rank),
+				limit: RANKING_TOP,
+			})
+			.then((rows) => rows.map(normalizeDbRow))
+			.catch(() => []),
+	]);
+
+	return [
+		{
+			key: "global",
+			label: "Global",
+			sublabel: "Classement officiel BTS · Saison 2",
+			color: "var(--rpb-primary)",
+			href: "/rankings",
+			entries: bts,
+		},
+		{
+			key: "wb",
+			label: "Wild Breakers",
+			sublabel: "Circuit Wild Breakers · Saison 2",
+			color: "#a78bfa",
+			href: "/tournaments/wb",
+			entries: wb,
+		},
+		{
+			key: "satr",
+			label: "SATR",
+			sublabel: "Circuit SATR · Saison 2",
+			color: "var(--rpb-secondary)",
+			href: "/tournaments/satr",
+			entries: satr,
+		},
+		{
+			key: "stardust",
+			label: "Stardust",
+			sublabel: "Circuit Stardust",
+			color: "#60A5FA",
+			href: "/tournaments/stardust",
+			entries: stardust,
+		},
+	];
+}
+
 const BTS_EDITIONS = [
 	{
 		id: "bts3",
@@ -191,7 +292,7 @@ export default async function HomePage() {
 	const [
 		activeTournament,
 		heroContent,
-		rankings,
+		rankingBoards,
 		metaParts,
 		recentVideos,
 		btsTournaments,
@@ -218,23 +319,8 @@ export default async function HomePage() {
 			},
 		}),
 		getContent("home-hero-text"),
-		// Même source que la page /rankings (classement BTS officiel, saison 2
-		// par défaut) — la table globalRankings est un vestige périmé.
-		getBtsRanking(2, { pageSize: 20 })
-			.then((r) =>
-				r.entries.slice(0, 20).map((e) => ({
-					id: `bts-${e.rank}-${e.playerName}`,
-					userId: null,
-					playerName: e.playerName,
-					points: e.points,
-					wins: e.wins,
-					losses: e.losses,
-					tournamentWins: e.tournamentWins,
-					avatarUrl: e.avatarUrl,
-					user: null,
-				})),
-			)
-			.catch(() => []),
+		// Tous les classements RPB (BTS + WB + SATR + Stardust) pour le carrousel.
+		getRankingBoards(),
 		getTopMetaParts(),
 		db.query.youtubeVideos
 			.findMany({
@@ -332,8 +418,7 @@ export default async function HomePage() {
 		<HomeClient
 			activeTournament={activeTournament}
 			heroContent={heroContent?.content}
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			topRankings={rankings as any}
+			rankingBoards={rankingBoards}
 			metaParts={metaParts}
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			recentVideos={recentVideos as any}

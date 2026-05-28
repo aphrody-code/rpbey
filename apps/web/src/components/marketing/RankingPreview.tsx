@@ -19,6 +19,8 @@ import { avatarSrc, getInitials } from "@/lib/utils";
 interface RankingPreviewProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   rankings: any[];
+  /** Couleur d'accent (points + liseré du leader). Défaut: primary.main. */
+  accent?: string;
 }
 
 const RANK_COLORS: Record<number, string> = {
@@ -67,8 +69,9 @@ function RankBadge({ rank }: { rank: number }) {
   );
 }
 
-export function RankingPreview({ rankings }: RankingPreviewProps) {
+export function RankingPreview({ rankings, accent }: RankingPreviewProps) {
   const theme = useTheme();
+  const pointsColor = accent ?? theme.palette.primary.main;
 
   if (!rankings || rankings.length === 0) {
     return (
@@ -277,7 +280,7 @@ export function RankingPreview({ rankings }: RankingPreviewProps) {
                   <Typography
                     sx={{
                       fontWeight: 900,
-                      color: "primary.main",
+                      color: pointsColor,
                       fontSize: "0.8rem",
                     }}
                   >
