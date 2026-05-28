@@ -6,15 +6,13 @@ import {
 	schema,
 	and,
 	asc,
-	count,
 	desc,
 	eq,
-	gt,
 	ilike,
 	inArray,
 	isNotNull,
-	notInArray,
 } from "@/lib/db";
+import { getBtsRanking } from "@/server/actions/bts";
 import { getContent } from "@/server/actions/cms";
 import HomeClient from "./HomeClient";
 
@@ -220,50 +218,23 @@ export default async function HomePage() {
 			},
 		}),
 		getContent("home-hero-text"),
-		(async () => {
-			const rows = await db.query.globalRankings.findMany({
-				where: and(
-					gt(schema.globalRankings.points, 0),
-					notInArray(schema.globalRankings.playerName, [
-						"Yoyo",
-						"Loteux",
-						"𝓡𝓟𝓑 | LOTTEUX!",
-					]),
-				),
-				limit: 20,
-				orderBy: [
-					desc(schema.globalRankings.points),
-					desc(schema.globalRankings.tournamentWins),
-					desc(schema.globalRankings.wins),
-					asc(schema.globalRankings.playerName),
-				],
-				with: { user: true },
-			});
-			const userIds = rows
-				.map((r) => r.userId)
-				.filter((id): id is string => Boolean(id));
-			const countByUser = new Map<string, number>();
-			if (userIds.length) {
-				const cnt = await db
-					.select({
-						userId: schema.tournamentParticipants.userId,
-						value: count(),
-					})
-					.from(schema.tournamentParticipants)
-					.where(inArray(schema.tournamentParticipants.userId, userIds))
-					.groupBy(schema.tournamentParticipants.userId);
-				for (const c of cnt) if (c.userId) countByUser.set(c.userId, c.value);
-			}
-			return rows.map((r) => ({
-				...r,
-				user: r.user
-					? {
-							...r.user,
-							_count: { tournaments: countByUser.get(r.userId ?? "") ?? 0 },
-						}
-					: null,
-			}));
-		})(),
+		// Même source que la page /rankings (classement BTS officiel, saison 2
+		// par défaut) — la table globalRankings est un vestige périmé.
+		getBtsRanking(2, { pageSize: 20 })
+			.then((r) =>
+				r.entries.slice(0, 20).map((e) => ({
+					id: `bts-${e.rank}-${e.playerName}`,
+					userId: null,
+					playerName: e.playerName,
+					points: e.points,
+					wins: e.wins,
+					losses: e.losses,
+					tournamentWins: e.tournamentWins,
+					avatarUrl: e.avatarUrl,
+					user: null,
+				})),
+			)
+			.catch(() => []),
 		getTopMetaParts(),
 		db.query.youtubeVideos
 			.findMany({
