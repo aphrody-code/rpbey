@@ -42,6 +42,11 @@ const STATIC_ROUTES: Record<
 		priority: 0.7,
 		freq: "weekly",
 	},
+	"/comparateur": {
+		file: "src/app/(marketing)/comparateur/page.tsx",
+		priority: 0.8,
+		freq: "daily",
+	},
 	"/notre-equipe": {
 		file: "src/app/(marketing)/notre-equipe/page.tsx",
 		priority: 0.5,
@@ -156,5 +161,31 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 		console.warn("Failed to fetch anime for sitemap:", error);
 	}
 
-	return [...routes, ...tournamentRoutes, ...profileRoutes, ...animeRoutes];
+	// Dynamic — pages produits du comparateur Beyblade X (SEO long-tail)
+	let comparatorRoutes: MetadataRoute.Sitemap = [];
+	try {
+		const { loadCatalog, computeGroups, groupSlug } = await import(
+			"@/lib/bx-catalog"
+		);
+		const catalog = await loadCatalog();
+		if (catalog) {
+			const lastModified = catalog.generatedAt ? new Date(catalog.generatedAt) : new Date();
+			comparatorRoutes = computeGroups(catalog).map((g) => ({
+				url: `${baseUrl}/comparateur/${groupSlug(g)}`,
+				lastModified,
+				changeFrequency: "daily" as const,
+				priority: 0.6,
+			}));
+		}
+	} catch (error) {
+		console.warn("Failed to build comparator sitemap:", error);
+	}
+
+	return [
+		...routes,
+		...tournamentRoutes,
+		...profileRoutes,
+		...animeRoutes,
+		...comparatorRoutes,
+	];
 }

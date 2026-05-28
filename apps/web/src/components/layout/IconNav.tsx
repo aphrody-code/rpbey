@@ -28,6 +28,7 @@ import {
   Crown,
   House,
   type LucideIcon,
+  ShoppingCart,
   Swords,
   Trophy,
   Tv,
@@ -49,6 +50,7 @@ const navItems: { icon: LucideIcon; label: string; href: string }[] = [
   { icon: Tv, label: 'TV', href: '/tv' },
   { icon: Clapperboard, label: 'Anime', href: '/anime' },
   { icon: Wrench, label: 'Builder', href: '/builder' },
+  { icon: ShoppingCart, label: 'Comparateur', href: '/comparateur' },
 ];
 
 export function IconNav() {

@@ -6,7 +6,7 @@
 	"scripts": {
 		"dev": "bun --bun next dev",
 		"dev:all": "bun run bot:dev & bun --bun next dev",
-		"build": "bun --env-file=../../.env next build",
+		"build": "bun --env-file=../../.env next build --turbopack",
 		"start": "bun --bun next start",
 		"lint": "oxlint . && eslint .",
 		"lint:fix": "oxlint --fix . && eslint . --fix",
@@ -38,6 +38,7 @@
 		"@mui/x-data-grid": "^9.0.2",
 		"@mui/x-date-pickers": "^9.0.2",
 		"@next/third-parties": "^16.1.5",
+		"@rose-griffon/challonge-core": "workspace:*",
 		"@rpbey/db": "workspace:*",
 		"@rpbey/types": "workspace:*",
 		"@tiptap/core": "3.22.4",
@@ -59,9 +60,9 @@
 		"date-fns": "^4.1.0",
 		"dayjs": "^1.11.19",
 		"drizzle-orm": "^0.45.2",
-		"postgres": "^3.4.9",
 		"express": "^5.2.1",
 		"framer-motion": "^12.29.0",
+		"fuse.js": "^7.3.0",
 		"googleapis": "^171.4.0",
 		"graphql": "^16.13.2",
 		"graphql-yoga": "^5.18.1",
@@ -78,6 +79,7 @@
 		"mui-tiptap": "^1.29.0",
 		"next": "catalog:",
 		"nuqs": "^2.8.9",
+		"postgres": "^3.4.9",
 		"puppeteer": "^24.36.0",
 		"puppeteer-extra": "^3.3.6",
 		"qrcode": "^1.5.4",
@@ -101,8 +103,7 @@
 		"xlsx": "^0.18.5",
 		"xml2js": "^0.6.2",
 		"yt-search": "^2.13.1",
-		"zod": "catalog:",
-		"@rose-griffon/challonge-core": "workspace:*"
+		"zod": "catalog:"
 	},
 	"devDependencies": {
 		"@eslint/eslintrc": "^3.3.3",
