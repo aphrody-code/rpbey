@@ -13,7 +13,7 @@
  *                           (default: auto-discovered by curl-impersonate transport)
  */
 
-import { type startChallongeProxy } from "./proxy";
+import { startChallongeProxy } from "./proxy";
 
 const port = Number(process.env.PORT ?? "7878");
 const token = process.env.CHALLONGE_PROXY_TOKEN || undefined;
