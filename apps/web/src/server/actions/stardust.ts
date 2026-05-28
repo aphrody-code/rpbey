@@ -2,7 +2,6 @@
 
 import { revalidatePath } from "next/cache";
 import { requireAdmin } from "@/lib/auth-utils";
-import { normalizeSets } from "@/lib/challonge-vendor/scores";
 import {
 	db,
 	schema,
@@ -28,28 +27,6 @@ export interface StardustTournamentMeta {
 	format: string;
 }
 
-interface PlayerStats {
-	displayName: string;
-	wins: number;
-	losses: number;
-	setWins: number;
-	setLosses: number;
-	points: number;
-	tournaments: Set<string>;
-	tournamentWins: number;
-	top3: number;
-	top5: number;
-}
-
-interface BladerHistoryEntry {
-	tournamentSlug: string;
-	tournamentLabel: string;
-	finalRank: number | null;
-	wins: number;
-	losses: number;
-	date: string;
-}
-
 function normalizeName(raw: string): string {
 	const [before] = raw.split("/");
 	return (before ?? raw).trim();
@@ -57,18 +34,6 @@ function normalizeName(raw: string): string {
 
 function keyOf(raw: string): string {
 	return normalizeName(raw).toLowerCase();
-}
-
-function parseScoreToSets(
-	score: string | null | undefined,
-): Array<[number, number]> {
-	if (!score || score === "0-0") return [];
-	const segments = score.includes(",") ? score.split(",") : [score];
-	const raw = segments.map((seg) => {
-		const parts = seg.split("-").map((n) => Number(n.trim()));
-		return parts.length === 2 ? (parts as [number, number]) : null;
-	});
-	return normalizeSets(raw.filter((s): s is [number, number] => s !== null));
 }
 
 type LoadedStardustTournament = {
@@ -109,176 +74,6 @@ async function loadStardustTournaments(): Promise<LoadedStardustTournament[]> {
 		participants: t.tournamentParticipants,
 		matches: t.tournamentMatches,
 	}));
-}
-
-function buildRankings(tournaments: LoadedStardustTournament[]) {
-	const playerStats = new Map<string, PlayerStats>();
-	const canonicalNames = new Map<string, string>();
-	const bladerHistory = new Map<string, BladerHistoryEntry[]>();
-	const nbTournois = tournaments.length;
-
-	const init = (name: string): PlayerStats => ({
-		displayName: name,
-		wins: 0,
-		losses: 0,
-		setWins: 0,
-		setLosses: 0,
-		points: 0,
-		tournaments: new Set(),
-		tournamentWins: 0,
-		top3: 0,
-		top5: 0,
-	});
-
-	const register = (raw: string): string => {
-		const display = normalizeName(raw);
-		const key = display.toLowerCase();
-		if (!canonicalNames.has(key)) canonicalNames.set(key, display);
-		if (!playerStats.has(key))
-			playerStats.set(key, init(canonicalNames.get(key)!));
-		return key;
-	};
-
-	for (let tIdx = 0; tIdx < tournaments.length; tIdx++) {
-		const t = tournaments[tIdx]!;
-		const recency = nbTournois > 1 ? 0.6 + (0.4 * tIdx) / (nbTournois - 1) : 1;
-		const slug = t.id;
-		const label = t.name;
-		const dateIso = t.date.toISOString();
-
-		const perTournamentMatches = new Map<string, { w: number; l: number }>();
-
-		for (const m of t.matches) {
-			if (m.state !== "complete" || !m.winnerName) continue;
-			const loserName =
-				m.player1Name && m.player1Name !== m.winnerName
-					? m.player1Name
-					: m.player2Name && m.player2Name !== m.winnerName
-						? m.player2Name
-						: null;
-			if (!loserName) continue;
-
-			const wKey = register(m.winnerName);
-			const lKey = register(loserName);
-			const w = playerStats.get(wKey)!;
-			const l = playerStats.get(lKey)!;
-
-			const sets = parseScoreToSets(m.score);
-			if (sets.length > 0) {
-				let wSets = 0;
-				let lSets = 0;
-				for (const [a, b] of sets) {
-					if (a > b) wSets++;
-					else if (b > a) lSets++;
-				}
-				w.setWins += wSets;
-				w.setLosses += lSets;
-				l.setWins += lSets;
-				l.setLosses += wSets;
-				w.points += Math.round(wSets * recency * 100) / 100;
-				l.points += Math.round(lSets * recency * 100) / 100;
-			} else {
-				w.points += Math.round(4 * recency * 100) / 100;
-			}
-			w.wins++;
-			l.losses++;
-
-			for (const [key, isWinner] of [
-				[wKey, true],
-				[lKey, false],
-			] as const) {
-				const acc = perTournamentMatches.get(key) ?? { w: 0, l: 0 };
-				if (isWinner) acc.w++;
-				else acc.l++;
-				perTournamentMatches.set(key, acc);
-			}
-		}
-
-		for (const p of t.participants) {
-			if (!p.playerName) continue;
-			const key = register(p.playerName);
-			const stats = playerStats.get(key)!;
-			stats.tournaments.add(slug);
-			if (p.finalPlacement === 1) {
-				stats.tournamentWins++;
-				stats.top3++;
-				stats.top5++;
-			} else if (p.finalPlacement && p.finalPlacement <= 3) {
-				stats.top3++;
-				stats.top5++;
-			} else if (p.finalPlacement && p.finalPlacement <= 5) {
-				stats.top5++;
-			}
-
-			const hist = bladerHistory.get(key) ?? [];
-			const tm = perTournamentMatches.get(key) ?? { w: 0, l: 0 };
-			hist.push({
-				tournamentSlug: slug,
-				tournamentLabel: label,
-				finalRank: p.finalPlacement ?? null,
-				wins: tm.w,
-				losses: tm.l,
-				date: dateIso,
-			});
-			bladerHistory.set(key, hist);
-		}
-	}
-
-	type RankingOut = {
-		rank: number;
-		playerName: string;
-		score: number;
-		wins: number;
-		losses: number;
-		participation: number;
-		winRate: string;
-		pointsAverage: string;
-	};
-
-	const ranked: Array<RankingOut & { _tw: number; _t3: number; _t5: number }> =
-		[];
-	for (const stats of playerStats.values()) {
-		const total = stats.wins + stats.losses;
-		if (total === 0) continue;
-		const winRate = stats.wins / total;
-		const pointsAvg = stats.points / total;
-		const winscore = winRate + pointsAvg / 100;
-		const participationRate =
-			nbTournois > 0 ? stats.tournaments.size / nbTournois : 1;
-		const punish = participationRate ** 0.6;
-		const placementBonus =
-			1 +
-			stats.tournamentWins * 0.15 +
-			(stats.top3 - stats.tournamentWins) * 0.05 +
-			(stats.top5 - stats.top3) * 0.02;
-		const score = Math.round(punish * winscore * placementBonus * 100000);
-
-		ranked.push({
-			rank: 0,
-			playerName: stats.displayName,
-			score,
-			wins: stats.wins,
-			losses: stats.losses,
-			participation: stats.tournaments.size,
-			winRate: `${(winRate * 100).toFixed(1)}%`,
-			pointsAverage: pointsAvg.toFixed(2),
-			_tw: stats.tournamentWins,
-			_t3: stats.top3,
-			_t5: stats.top5,
-		});
-	}
-
-	ranked.sort(
-		(a, b) =>
-			b.score - a.score ||
-			parseFloat(b.pointsAverage) - parseFloat(a.pointsAverage) ||
-			b.participation - a.participation,
-	);
-	ranked.forEach((r, i) => {
-		r.rank = i + 1;
-	});
-
-	return { ranked, playerStats, bladerHistory };
 }
 
 export async function syncStardustRanking() {
