@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { requireAdmin } from "@/lib/auth-utils";
 import { db, schema, eq } from "@/lib/db";
 
 export async function getContent(slug: string) {
@@ -15,6 +16,7 @@ export async function upsertContent(
 	content: string,
 	title?: string,
 ) {
+	if (!(await requireAdmin())) throw new Error("Forbidden");
 	await db
 		.insert(schema.contentBlocks)
 		.values({ slug, content, title, type: "markdown" })

@@ -3,6 +3,7 @@
 import { readdir, readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { revalidatePath } from "next/cache";
+import { requireAdmin } from "@/lib/auth-utils";
 import { db, schema, eq, ilike } from "@/lib/db";
 
 // Season config: which UB numbers and HS keys belong to each season
@@ -363,6 +364,7 @@ function computeRanking(tournaments: TournamentData[]) {
  * Sync WB ranking by computing it from local tournament JSON data.
  */
 export async function syncWbRanking(season: number = CURRENT_SEASON) {
+	if (!(await requireAdmin())) throw new Error("Forbidden");
 	try {
 		const { tournaments } = await loadTournamentData(season);
 		if (tournaments.length === 0) {
@@ -477,6 +479,7 @@ export async function getWbPlayerTournamentMatches(
 }
 
 export async function linkWbBladers() {
+	if (!(await requireAdmin())) throw new Error("Forbidden");
 	try {
 		const bladers = await db.query.wbBladers.findMany();
 		const users = await db.query.users.findMany({

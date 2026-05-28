@@ -3,6 +3,7 @@
 import { readdir, readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { revalidatePath } from "next/cache";
+import { requireAdmin } from "@/lib/auth-utils";
 import { db, schema, eq, ilike } from "@/lib/db";
 
 // Season config: which BBT numbers belong to each season
@@ -343,6 +344,7 @@ async function fetchSatrRankingFromSheet(season: number): Promise<Array<{
  * N'écrase jamais les autres saisons (filtre WHERE season).
  */
 export async function syncSatrRanking(season = 2) {
+	if (!(await requireAdmin())) throw new Error("Forbidden");
 	try {
 		let rankings = await fetchSatrRankingFromSheet(season);
 		let source = "sheet";
@@ -460,6 +462,7 @@ export async function getPlayerTournamentMatches(
 }
 
 export async function linkSatrBladers() {
+	if (!(await requireAdmin())) throw new Error("Forbidden");
 	try {
 		const bladers = await db.query.satrBladers.findMany();
 		const users = await db.query.users.findMany({

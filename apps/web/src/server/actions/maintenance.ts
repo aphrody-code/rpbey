@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { requireAdmin } from "@/lib/auth-utils";
 import { autoSyncRankingForTournament } from "@/lib/auto-sync-ranking";
 import { db, schema, and, eq, inArray } from "@/lib/db";
 import { ChallongeScraper } from "@/lib/scrapers/challonge-scraper";
@@ -17,6 +18,7 @@ function normalizeName(s: string | null | undefined): string {
 
 // 1. Recalculate Rankings
 export async function actionRecalculateRankings() {
+	if (!(await requireAdmin())) throw new Error("Forbidden");
 	try {
 		const result = await recalculateRankings();
 		return { success: true, message: result.message };
@@ -30,6 +32,7 @@ export async function actionRecalculateRankings() {
 
 // 2. Clean Duplicate Users (Stub merging)
 export async function actionMergeDuplicates() {
+	if (!(await requireAdmin())) throw new Error("Forbidden");
 	try {
 		const allUsersRows = await db.query.users.findMany({
 			with: {
@@ -102,6 +105,7 @@ export async function actionMergeDuplicates() {
 
 // 3. Import Challonge Tournament
 export async function actionImportTournament(slug: string) {
+	if (!(await requireAdmin())) throw new Error("Forbidden");
 	if (!slug) return { success: false, error: "Slug manquant" };
 
 	const scraper = new ChallongeScraper();
@@ -291,6 +295,7 @@ export async function actionImportTournament(slug: string) {
 
 // 4. Sync Bey-Library
 export async function actionTriggerSyncParts() {
+	if (!(await requireAdmin())) throw new Error("Forbidden");
 	const fs = await import("node:fs/promises");
 	const path = await import("node:path");
 
@@ -350,6 +355,7 @@ export async function actionTriggerSyncParts() {
 
 // 5. Clear Cache
 export async function actionClearTournamentCache() {
+	if (!(await requireAdmin())) throw new Error("Forbidden");
 	try {
 		const tournaments = await db.query.tournaments.findMany({
 			where: inArray(schema.tournaments.status, ["COMPLETE", "ARCHIVED"]),
@@ -380,6 +386,7 @@ export async function getRankingConfig() {
 export async function actionUpdateRankingConfig(
 	data: Record<string, string | number | Date> | null,
 ) {
+	if (!(await requireAdmin())) throw new Error("Forbidden");
 	if (!data) return { success: false, error: "Données manquantes" };
 	const config = await db.query.rankingSystem.findFirst();
 	if (!config) return { success: false, error: "Config non trouvée" };

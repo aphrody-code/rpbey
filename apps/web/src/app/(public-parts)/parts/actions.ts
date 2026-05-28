@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { requireAdmin } from "@/lib/auth-utils";
 import { type Part, type PartType } from "@/lib/types";
 import {
 	db,
@@ -125,6 +126,7 @@ export async function getParts(
 }
 
 export async function upsertPart(data: Partial<Part>) {
+	if (!(await requireAdmin())) throw new Error("Forbidden");
 	if (!data.name || !data.type) throw new Error("Name and Type are required");
 
 	const generatedId = `${data.type}-${data.name}`
@@ -175,6 +177,7 @@ export async function upsertPart(data: Partial<Part>) {
 }
 
 export async function deletePart(id: string) {
+	if (!(await requireAdmin())) throw new Error("Forbidden");
 	await db.delete(schema.parts).where(eq(schema.parts.id, id));
 	revalidatePath("/parts");
 }
@@ -182,6 +185,7 @@ export async function deletePart(id: string) {
 export async function bulkImportParts(
 	partsData: Partial<Part>[],
 ): Promise<{ created: number; updated: number; errors: string[] }> {
+	if (!(await requireAdmin())) throw new Error("Forbidden");
 	let created = 0;
 	let updated = 0;
 	const errors: string[] = [];
@@ -243,6 +247,7 @@ export async function bulkImportParts(
 }
 
 export async function duplicatePart(id: string) {
+	if (!(await requireAdmin())) throw new Error("Forbidden");
 	const original = await db.query.parts.findFirst({
 		where: eq(schema.parts.id, id),
 	});
@@ -320,6 +325,7 @@ export async function upsertBeyblade(data: {
 	beyType?: string;
 	imageUrl?: string;
 }) {
+	if (!(await requireAdmin())) throw new Error("Forbidden");
 	// Calculate aggregated stats
 	const [blade, ratchet, bit] = await Promise.all([
 		db.query.parts.findFirst({ where: eq(schema.parts.id, data.bladeId) }),
@@ -368,6 +374,7 @@ export async function upsertBeyblade(data: {
 }
 
 export async function deleteBeyblade(id: string) {
+	if (!(await requireAdmin())) throw new Error("Forbidden");
 	await db.delete(schema.beyblades).where(eq(schema.beyblades.id, id));
 	revalidatePath("/parts");
 }

@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
 import { z } from "zod";
 import { auth } from "@/lib/auth";
+import { requireAdmin } from "@/lib/auth-utils";
 import { loadJsonSafe } from "@/lib/data-cache";
 import {
 	db,
@@ -77,6 +78,7 @@ export async function updateRankingConfig(data: {
 	matchWinWinner: number;
 	matchWinLoser: number;
 }) {
+	if (!(await requireAdmin())) throw new Error("Forbidden");
 	const result = RankingConfigSchema.safeParse(data);
 	if (!result.success) {
 		throw new Error(`Invalid config: ${result.error.message}`);
@@ -93,6 +95,7 @@ export async function updateRankingConfig(data: {
 }
 
 export async function recalculateRankings() {
+	if (!(await requireAdmin())) throw new Error("Forbidden");
 	const config = await getRankingConfig();
 
 	const currentSeason = await db.query.rankingSeasons.findFirst({
@@ -360,6 +363,7 @@ export async function createTournamentCategory(data: {
 	multiplier: number;
 	color?: string;
 }) {
+	if (!(await requireAdmin())) throw new Error("Forbidden");
 	const result = CategorySchema.safeParse(data);
 	if (!result.success) throw new Error("Invalid category data");
 
@@ -377,6 +381,7 @@ export async function updateTournamentCategory(
 	id: string,
 	data: { name?: string; multiplier?: number; color?: string },
 ) {
+	if (!(await requireAdmin())) throw new Error("Forbidden");
 	// Partial validation
 	const [category] = await db
 		.update(schema.tournamentCategories)
@@ -389,6 +394,7 @@ export async function updateTournamentCategory(
 }
 
 export async function deleteTournamentCategory(id: string) {
+	if (!(await requireAdmin())) throw new Error("Forbidden");
 	const [countRow] = await db
 		.select({ value: count() })
 		.from(schema.tournaments)
@@ -436,6 +442,7 @@ export async function addPointAdjustment(
 	points: number,
 	reason: string,
 ) {
+	if (!(await requireAdmin())) throw new Error("Forbidden");
 	const session = await auth.api.getSession({
 		headers: await headers(),
 	});
@@ -464,6 +471,7 @@ export async function addPointAdjustment(
 }
 
 export async function deletePointAdjustment(id: string) {
+	if (!(await requireAdmin())) throw new Error("Forbidden");
 	const adjustment = await db.query.pointAdjustments.findFirst({
 		where: eq(schema.pointAdjustments.id, id),
 	});

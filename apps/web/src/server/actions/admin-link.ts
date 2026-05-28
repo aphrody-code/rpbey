@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { requireAdmin } from "@/lib/auth-utils";
 import { db, schema, or, like, isNotNull, asc, desc, eq } from "@/lib/db";
 
 export async function getUnlinkedParticipants() {
@@ -64,6 +65,7 @@ export async function mergeUserAccounts(
 	placeholderUserId: string,
 	realUserId: string,
 ) {
+	if (!(await requireAdmin())) throw new Error("Forbidden");
 	if (placeholderUserId === realUserId) throw new Error("Même utilisateur");
 
 	try {

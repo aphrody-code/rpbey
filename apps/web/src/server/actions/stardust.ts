@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { requireAdmin } from "@/lib/auth-utils";
 import { normalizeSets } from "@/lib/challonge-vendor/scores";
 import {
 	db,
@@ -281,6 +282,7 @@ function buildRankings(tournaments: LoadedStardustTournament[]) {
 }
 
 export async function syncStardustRanking() {
+	if (!(await requireAdmin())) throw new Error("Forbidden");
 	// Formule BTS canonique (participation + finalRank bucket + matchWin) —
 	// logique unique factorisée dans `@/lib/stardust-sync-bts`.
 	const result = await syncStardustRankingsToDb(db);
@@ -398,6 +400,7 @@ export async function getStardustTournamentTop10(idOrSlug: string): Promise<{
 }
 
 export async function linkStardustBladers() {
+	if (!(await requireAdmin())) throw new Error("Forbidden");
 	try {
 		const bladers = await db.query.stardustBladers.findMany();
 		const users = await db.query.users.findMany({

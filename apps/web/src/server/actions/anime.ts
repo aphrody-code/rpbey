@@ -1,5 +1,6 @@
 "use server";
 
+import { requireAdmin } from "@/lib/auth-utils";
 import {
 	db,
 	schema,
@@ -240,6 +241,7 @@ export async function upsertAnimeSeries(data: {
 	sortOrder: number;
 	isPublished: boolean;
 }) {
+	if (!(await requireAdmin())) throw new Error("Forbidden");
 	const { id, ...rest } = data;
 	if (id) {
 		const [row] = await db
@@ -254,6 +256,7 @@ export async function upsertAnimeSeries(data: {
 }
 
 export async function deleteAnimeSeries(id: string) {
+	if (!(await requireAdmin())) throw new Error("Forbidden");
 	const [row] = await db
 		.delete(schema.animeSeries)
 		.where(eq(schema.animeSeries.id, id))
@@ -273,6 +276,7 @@ export async function upsertAnimeEpisode(data: {
 	duration: number;
 	isPublished: boolean;
 }) {
+	if (!(await requireAdmin())) throw new Error("Forbidden");
 	const { id, ...rest } = data;
 	if (id) {
 		const [row] = await db
@@ -287,6 +291,7 @@ export async function upsertAnimeEpisode(data: {
 }
 
 export async function deleteAnimeEpisode(id: string) {
+	if (!(await requireAdmin())) throw new Error("Forbidden");
 	const [row] = await db
 		.delete(schema.animeEpisodes)
 		.where(eq(schema.animeEpisodes.id, id))
@@ -304,6 +309,7 @@ export async function upsertAnimeSource(data: {
 	priority: number;
 	isActive: boolean;
 }) {
+	if (!(await requireAdmin())) throw new Error("Forbidden");
 	const { id, ...rest } = data;
 	if (id) {
 		const [row] = await db
@@ -321,6 +327,7 @@ export async function upsertAnimeSource(data: {
 }
 
 export async function deleteAnimeSource(id: string) {
+	if (!(await requireAdmin())) throw new Error("Forbidden");
 	const [row] = await db
 		.delete(schema.animeEpisodeSources)
 		.where(eq(schema.animeEpisodeSources.id, id))
@@ -337,6 +344,7 @@ export async function bulkImportEpisodes(
 		duration?: number;
 	}>,
 ) {
+	if (!(await requireAdmin())) throw new Error("Forbidden");
 	const results = [];
 	for (const ep of episodes) {
 		const [result] = await db

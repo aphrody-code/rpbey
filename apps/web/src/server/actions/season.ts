@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
+import { requireAdmin } from "@/lib/auth-utils";
 import {
 	db,
 	schema,
@@ -98,6 +99,7 @@ export async function getSeasonStandings(slug: string) {
 
 // Mutations
 export async function createSeason(name: string, slug: string) {
+	if (!(await requireAdmin())) throw new Error("Forbidden");
 	// Validate input
 	const result = CreateSeasonSchema.safeParse({ name, slug });
 	if (!result.success) {
@@ -129,6 +131,7 @@ export async function archiveCurrentSeason(
 	nextSeasonName: string,
 	nextSeasonSlug: string,
 ) {
+	if (!(await requireAdmin())) throw new Error("Forbidden");
 	// Validate input
 	const result = ArchiveSeasonSchema.safeParse({
 		nextSeasonName,
