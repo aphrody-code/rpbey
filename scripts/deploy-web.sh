@@ -19,6 +19,12 @@ echo "[deploy] static → standalone (chunks JS/fonts, hash-matched au server.js
 rm -rf "$SA/.next/static"
 cp -r .next/static "$SA/.next/static"
 
+# Cache ISR : standalone n'embarque PAS .next/cache. Sans ce dir, le runtime
+# tente un mkdir bloqué par systemd (ProtectSystem=strict, ReadWritePaths=.next)
+# → EROFS en boucle + InvariantError "client reference manifest" en cascade.
+# Le pré-créer (sous ReadWritePaths donc inscriptible) suffit.
+mkdir -p "$SA/.next/cache"
+
 echo "[deploy] public → assets cdn/rpb-dashboard"
 ln -sfn "$ASSETS" public
 ln -sfn "$ASSETS" "$SA/public"

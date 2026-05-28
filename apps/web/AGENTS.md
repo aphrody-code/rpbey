@@ -42,7 +42,7 @@ migré, manipule des **strings ISO**.
 `data/*` exclus du tracing (`outputFileTracingExcludes`, anti-250 MB Vercel). Sans
 `deploy-web.sh` → **JS chunks 404 (site mort), images 404, rankings/tournois vides**.
 Le script (idempotent) :
-1. copie `.next/static` → standalone (chunks hash-matchés au `server.js` du build) ;
+1. copie `.next/static` → standalone (chunks hash-matchés au `server.js` du build) + pré-crée `.next/cache` (sinon le runtime ISR `mkdir` est bloqué par systemd `ProtectSystem=strict` → `EROFS` en boucle + `InvariantError` manifest en cascade) ;
 2. symlink `public/` → `apps/cdn/assets/rpb-dashboard` (logos, parts, partners) ;
 3. copie `data/exports/B_TS*.json` (depuis le CDN — **pas** un symlink hors-racine, Turbopack le rejette au build) + `data/bey-library/` ;
 4. `rm -rf $SA/data && ln -s apps/web/data` (sinon nested symlink dans le dir réel du build) ;
