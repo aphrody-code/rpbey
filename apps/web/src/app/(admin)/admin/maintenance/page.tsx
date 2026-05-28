@@ -7,7 +7,6 @@ import {
   Handyman,
   History,
   Refresh,
-  Storage,
   Update,
 } from '@mui/icons-material';
 import {
@@ -17,19 +16,16 @@ import {
   Card,
   CardContent,
   CardHeader,
-  Chip,
   CircularProgress,
   Divider,
   Grid,
-  List,
-  ListItem,
-  ListItemText,
   Stack,
   TextField,
   Typography,
 } from '@mui/material';
 import { useState } from 'react';
 import { useToast } from '@/components/ui';
+import SystemStatusCard from './_components/SystemStatusCard';
 import {
   actionClearTournamentCache,
   actionImportTournament,
@@ -311,33 +307,7 @@ export default function MaintenancePage() {
 
         <Grid size={{ xs: 12, md: 4 }}>
           <Stack spacing={3}>
-            <Card variant="outlined">
-              <CardHeader title="💡 État du Système" avatar={<Storage />} />
-              <CardContent>
-                <List dense>
-                  <ListItem>
-                    <ListItemText
-                      primary="Database"
-                      secondary="PostgreSQL 17 (Connecté)"
-                    />
-                    <Chip size="small" label="OK" color="success" />
-                  </ListItem>
-                  <ListItem>
-                    <ListItemText
-                      primary="Storage"
-                      secondary="S3 Compatible (Connecté)"
-                    />
-                    <Chip size="small" label="OK" color="success" />
-                  </ListItem>
-                  <ListItem>
-                    <ListItemText
-                      primary="Dernier Recalcul"
-                      secondary="Aujourd'hui, 14:30"
-                    />
-                  </ListItem>
-                </List>
-              </CardContent>
-            </Card>
+            <SystemStatusCard />
 
             <Alert severity="info" icon={<Handyman />}>
               Ces actions sont destructives ou modifient massivement la base de

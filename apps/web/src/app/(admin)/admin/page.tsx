@@ -1,5 +1,6 @@
 import { BarChart as BarChartIcon, Dns, History, People, Visibility } from "@mui/icons-material";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
@@ -9,10 +10,12 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
+import Link from "next/link";
 import { QuickActions } from "@/components/admin/QuickActions";
 import { StatsCharts } from "@/components/admin/StatsCharts";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { TrophyIcon } from "@/components/ui/Icons";
+import { getBotStatus } from "@/lib/bot";
 import { getDiscordStats } from "@/lib/discord-data";
 import { db, schema, count, desc, gte, inArray, lte } from "@/lib/db";
 import { formatDateTime } from "@/lib/utils";
@@ -46,6 +49,7 @@ export default async function AdminDashboardPage() {
     chartTournaments,
     chartMatches,
     tournamentTotalRows,
+    botStatus,
   ] = await Promise.all([
     db.select({ value: count() }).from(schema.users),
     db
@@ -84,7 +88,10 @@ export default async function AdminDashboardPage() {
       columns: { state: true },
     }),
     db.select({ value: count() }).from(schema.tournaments),
+    getBotStatus(),
   ]);
+
+  const botOnline = botStatus?.status === "running";
 
   const userCount = userCountRows[0]?.value ?? 0;
   const activeTournamentCount = activeTournamentRows[0]?.value ?? 0;
@@ -330,17 +337,35 @@ export default async function AdminDashboardPage() {
                 </Typography>
                 <Stack spacing={1}>
                   <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                    <Typography variant="caption">Database</Typography>
-                    <Typography
-                      variant="caption"
-                      sx={{
-                        color: "success.main",
-                      }}
-                    >
+                    <Typography variant="caption">Base de données</Typography>
+                    <Typography variant="caption" sx={{ color: "success.main" }}>
                       Connecté
                     </Typography>
                   </Box>
+                  <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                    <Typography variant="caption">Bot Discord</Typography>
+                    <Typography
+                      variant="caption"
+                      sx={{ color: botOnline ? "success.main" : "error.main" }}
+                    >
+                      {botStatus
+                        ? botOnline
+                          ? `En ligne · ${botStatus.uptimeFormatted}`
+                          : "Hors ligne"
+                        : "Injoignable"}
+                    </Typography>
+                  </Box>
                 </Stack>
+                <Button
+                  component={Link}
+                  href="/admin/logs"
+                  size="small"
+                  variant="outlined"
+                  fullWidth
+                  sx={{ mt: 2 }}
+                >
+                  Console & logs
+                </Button>
               </CardContent>
             </Card>
           </Stack>

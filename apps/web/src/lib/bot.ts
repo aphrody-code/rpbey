@@ -11,13 +11,19 @@ export interface BotStatus {
   onlineCount: number;
   ping: number;
   memoryUsage: string;
-  nodeVersion: string;
+  runtime: string;
 }
 
 export interface LogEntry {
   timestamp: string;
   level: string;
   message: string;
+}
+
+export interface BotCommand {
+  name: string;
+  description: string;
+  category: string;
 }
 
 // Singleton bot API client
@@ -45,6 +51,18 @@ export async function getBotLogs(
       revalidate: 0,
     });
     return data.logs;
+  } catch {
+    return [];
+  }
+}
+
+export async function getBotCommands(): Promise<BotCommand[]> {
+  try {
+    const data = await botClient.get<{ commands: BotCommand[] }>(
+      '/api/commands',
+      { revalidate: 60 },
+    );
+    return data.commands;
   } catch {
     return [];
   }

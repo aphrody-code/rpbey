@@ -172,6 +172,9 @@ pgdata/
 # --- Logs ---
 *.log
 logs/
+# … sauf les routes App Router nommées "logs" (ex: /admin/logs)
+!apps/web/src/app/**/logs/
+!apps/web/src/app/**/logs/**
 journalctl-*.txt
 
 # --- Backups / archives ---
