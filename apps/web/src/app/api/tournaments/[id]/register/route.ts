@@ -2,6 +2,7 @@ import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { db, schema, and, eq } from "@/lib/db";
+import { anonSessionId, clientIpFromHeaders, recordEvent } from "@/lib/analytics";
 
 interface RouteParams {
 	params: Promise<{ id: string }>;
@@ -12,8 +13,9 @@ export async function POST(_request: Request, { params }: RouteParams) {
 		const { id } = await params;
 
 		// Get current user
+		const h = await headers();
 		const session = await auth.api.getSession({
-			headers: await headers(),
+			headers: h,
 		});
 
 		if (!session) {
@@ -95,6 +97,15 @@ export async function POST(_request: Request, { params }: RouteParams) {
 						: null,
 				}
 			: created;
+
+		void recordEvent({
+			type: "tournament_register",
+			path: `/tournaments/${id}`,
+			referrer: h.get("referer"),
+			sessionId: anonSessionId(clientIpFromHeaders(h), h.get("user-agent")),
+			userId: session.user.id,
+			meta: { tournamentId: id, tournamentName: tournament.name },
+		});
 
 		return NextResponse.json(participant, { status: 201 });
 	} catch (error) {

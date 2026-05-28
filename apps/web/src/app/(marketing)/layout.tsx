@@ -7,6 +7,7 @@ import {
   MobileNav,
 } from '@/components/layout';
 import { ICON_NAV_WIDTH } from '@/components/layout/constants';
+import { AnalyticsTracker } from '@/components/system/AnalyticsTracker';
 import { DiscordFloatingCTA } from '@/components/ui/DiscordFloatingCTA';
 import { SmoothScroll } from '@/components/ui/SmoothScroll';
 
@@ -26,6 +27,7 @@ export default function MarketingLayout({
 }) {
   return (
     <Box sx={{ display: 'flex', minHeight: '100vh' }}>
+      <AnalyticsTracker />
       <SmoothScroll />
       {/* Desktop: Left icon navigation */}
       <IconNav />

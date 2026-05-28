@@ -15,12 +15,20 @@ import {
 	inArray,
 	isNotNull,
 } from "@/lib/db";
+import { createPageMetadata } from "@/lib/seo-utils";
 import { getBtsRanking } from "@/server/actions/bts";
 import { getContent } from "@/server/actions/cms";
 import HomeClient from "./HomeClient";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 60;
+
+export const metadata = createPageMetadata({
+	title: "RPB - République Populaire du Beyblade",
+	description:
+		"La 1ère communauté Beyblade X en France : tournois officiels, classements nationaux, builder de combos, gacha TCG et événements en direct.",
+	path: "/",
+});
 
 const CATEGORY_ORDER = ["Blade", "Ratchet", "Bit"];
 const TOP_PER_CATEGORY = 3;

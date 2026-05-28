@@ -112,6 +112,40 @@ export const prismaMigrations = pgTable("_prisma_migrations", {
 	appliedStepsCount: integer("applied_steps_count").default(0).notNull(),
 });
 
+export const analyticsEvents = pgTable(
+	"analytics_events",
+	{
+		id: text().primaryKey().notNull().$defaultFn(() => createId()),
+		type: text().notNull(),
+		path: text(),
+		referrer: text(),
+		sessionId: text(),
+		userId: text(),
+		meta: jsonb().$type<Record<string, unknown> | null>(),
+		createdAt: timestamp({ precision: 3, mode: "string" })
+			.default(sql`CURRENT_TIMESTAMP`)
+			.notNull(),
+	},
+	(table) => [
+		index("analytics_events_createdAt_idx").using(
+			"btree",
+			table.createdAt.asc().nullsLast().op("timestamp_ops"),
+		),
+		index("analytics_events_type_idx").using(
+			"btree",
+			table.type.asc().nullsLast().op("text_ops"),
+		),
+		index("analytics_events_path_idx").using(
+			"btree",
+			table.path.asc().nullsLast().op("text_ops"),
+		),
+		index("analytics_events_sessionId_idx").using(
+			"btree",
+			table.sessionId.asc().nullsLast().op("text_ops"),
+		),
+	],
+);
+
 export const beyblades = pgTable(
 	"beyblades",
 	{

@@ -4,6 +4,7 @@ import { headers } from "next/headers";
 import { type Part, type PartType } from "@/lib/types";
 import { auth } from "@/lib/auth";
 import { db, schema, and, desc, eq, inArray, sql } from "@/lib/db";
+import { trackEvent } from "@/server/actions/analytics";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -395,7 +396,13 @@ export async function pullBooster(line: ProductLine): Promise<PullResult> {
 	}
 
 	try {
-		return await executePull(user.id, line, 1, SINGLE_PULL_COST, false);
+		const result = await executePull(user.id, line, 1, SINGLE_PULL_COST, false);
+		void trackEvent({
+			type: "gacha_pull",
+			path: "/builder",
+			meta: { line, count: 1, userId: user.id },
+		});
+		return result;
 	} catch (error) {
 		if (error instanceof Error) {
 			if (error.message === "NO_PROFILE") {
@@ -426,13 +433,19 @@ export async function pullMulti(line: ProductLine): Promise<PullResult> {
 	}
 
 	try {
-		return await executePull(
+		const result = await executePull(
 			user.id,
 			line,
 			MULTI_PULL_COUNT,
 			MULTI_PULL_COST,
 			true,
 		);
+		void trackEvent({
+			type: "gacha_pull",
+			path: "/builder",
+			meta: { line, count: MULTI_PULL_COUNT, userId: user.id },
+		});
+		return result;
 	} catch (error) {
 		if (error instanceof Error) {
 			if (error.message === "NO_PROFILE") {

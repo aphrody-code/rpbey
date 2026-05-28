@@ -4,6 +4,7 @@ import {
   Article,
   Dashboard,
   Hub,
+  Insights,
   Launch,
   Leaderboard,
   Link as LinkIcon,
@@ -45,6 +46,7 @@ const RAIL_WIDTH = 280;
 
 const ADMIN_NAV_ITEMS = [
   { label: "Vue d'ensemble", path: '/admin', icon: Dashboard },
+  { label: 'Analytics', path: '/admin/analytics', icon: Insights },
   { label: 'Console & Logs', path: '/admin/logs', icon: Terminal },
   { label: 'Maintenance', path: '/admin/maintenance', icon: Hub },
   { label: 'Liaison Comptes', path: '/admin/link', icon: LinkIcon },

@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
 import { auth } from "@/lib/auth";
 import { db, schema, eq } from "@/lib/db";
+import { trackEvent } from "@/server/actions/analytics";
 
 export async function claimProfile(stubUserId: string) {
 	const session = await auth.api.getSession({
@@ -64,6 +65,11 @@ export async function claimProfile(stubUserId: string) {
 		});
 
 		revalidatePath("/rankings");
+		void trackEvent({
+			type: "profile_claim",
+			path: "/rankings",
+			meta: { stubUserId, userId: realUser.id },
+		});
 		return {
 			success: true,
 			message:
