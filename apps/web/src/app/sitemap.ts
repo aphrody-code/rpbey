@@ -42,11 +42,6 @@ const STATIC_ROUTES: Record<
 		priority: 0.7,
 		freq: "weekly",
 	},
-	"/app": {
-		file: "src/app/(marketing)/app/page.tsx",
-		priority: 0.6,
-		freq: "monthly",
-	},
 	"/notre-equipe": {
 		file: "src/app/(marketing)/notre-equipe/page.tsx",
 		priority: 0.5,

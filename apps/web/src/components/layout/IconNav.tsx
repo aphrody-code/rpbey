@@ -26,7 +26,6 @@ import { motion } from 'framer-motion';
 import {
   Clapperboard,
   Crown,
-  Gamepad2,
   House,
   type LucideIcon,
   Swords,
@@ -50,7 +49,6 @@ const navItems: { icon: LucideIcon; label: string; href: string }[] = [
   { icon: Tv, label: 'TV', href: '/tv' },
   { icon: Clapperboard, label: 'Anime', href: '/anime' },
   { icon: Wrench, label: 'Builder', href: '/builder' },
-  { icon: Gamepad2, label: 'App', href: '/app' },
 ];
 
 export function IconNav() {
