@@ -14,14 +14,17 @@
  *   - Configurable profile, timeout, extra headers
  */
 
-import { LRUCache } from "lru-cache";
 import {
-  ImpersonatedClient,
   type isLibAvailable,
   type ImpersonateProfile,
-  type ImpersonatedResponse,
 } from "@aphrody-code/bxc/ffi/curl-impersonate";
 import { loadCookieJar, resolveDefaultCookiePath } from "../utils/cookies";
+import { LruCache } from "../core/cache";
+import {
+  ImpersonatedClientEngine,
+  type FetchEngine,
+  type RawHttpResponse,
+} from "../core/fetch-engine";
 import type { Transport } from "./transport";
 import {
   type CurlImpersonateProfile,
@@ -81,6 +84,13 @@ export interface BxcTransportOptions {
    * default — injection is opt-in and never assumed.
    */
   onEvent?: (e: TransportEvent) => void;
+  /**
+   * Low-level fetch engine. Default = `new ImpersonatedClientEngine(...)`
+   * (FFI curl-impersonate, profil `chrome131`) — comportement runtime
+   * historique. Surchargeable pour les tests (`NativeFetchEngine`) ou le
+   * secours Cloudflare (`CdpEngine`). Injection optionnelle, jamais assumée.
+   */
+  engine?: FetchEngine;
 }
 
 /**
@@ -198,7 +208,7 @@ function toFfiProfile(p: CurlImpersonateProfile): ImpersonateProfile {
 export class BxcTransport implements Transport {
   readonly #defaultProfile: ImpersonateProfile;
   readonly #cacheEnabled: boolean;
-  readonly #cache: LRUCache<string, CacheEntry>;
+  readonly #cache: LruCache<CacheEntry>;
   readonly #timeoutMs: number;
   readonly #followRedirects: boolean;
   readonly #maxRedirects: number;
@@ -207,7 +217,7 @@ export class BxcTransport implements Transport {
   readonly #cookiePath: string | null;
   readonly #log: (msg: string) => void;
   readonly #onEvent: ((e: TransportEvent) => void) | undefined;
-  readonly #client: ImpersonatedClient;
+  readonly #engine: FetchEngine;
 
   #cacheHits = 0;
   #cacheMisses = 0;
@@ -227,18 +237,21 @@ export class BxcTransport implements Transport {
     const explicitPath = opts.cookiePath ?? null;
     this.#cookiePath = explicitPath ?? resolveDefaultCookiePath();
 
-    this.#cache = new LRUCache<string, CacheEntry>({
-      maxSize: opts.cacheBytes ?? CACHE_MAX_BYTES,
-      ttl: opts.cacheTtlMs ?? CACHE_TTL_MS,
-      sizeCalculation: (e) => Math.max(1, e.bytes),
+    this.#cache = new LruCache<CacheEntry>({
+      maxBytes: opts.cacheBytes ?? CACHE_MAX_BYTES,
+      ttlMs: opts.cacheTtlMs ?? CACHE_TTL_MS,
     });
 
-    this.#client = new ImpersonatedClient({
-      profile: this.#defaultProfile,
-      timeoutMs: this.#timeoutMs,
-      followRedirects: false, // we handle redirects ourselves when safeRedirects is on
-      maxRedirects: this.#maxRedirects,
-    });
+    // Low-level engine: injected override, else the historical FFI default
+    // (curl-impersonate, profil chrome131, followRedirects géré ici).
+    this.#engine =
+      opts.engine ??
+      new ImpersonatedClientEngine({
+        profile: this.#defaultProfile,
+        timeoutMs: this.#timeoutMs,
+        followRedirects: false, // we handle redirects ourselves when safeRedirects is on
+        maxRedirects: this.#maxRedirects,
+      });
   }
 
   // ---------------------------------------------------------------------------
@@ -330,9 +343,9 @@ export class BxcTransport implements Transport {
     while (true) {
       log(`${profile} GET ${currentUrl}${hops > 0 ? ` (hop ${hops})` : ""}`);
 
-      let impRes: ImpersonatedResponse;
+      let raw: RawHttpResponse;
       try {
-        impRes = await this.#client.fetch(currentUrl, {
+        raw = await this.#engine.request(currentUrl, {
           profile,
           cookies: cookieHeader || undefined,
           headers: reqHeaders,
@@ -354,16 +367,16 @@ export class BxcTransport implements Transport {
       // Manual same-origin redirect handling
       if (
         safeRedirects &&
-        [301, 302, 303, 307, 308].includes(impRes.status) &&
-        impRes.headers.get("location")
+        [301, 302, 303, 307, 308].includes(raw.status) &&
+        raw.headers["location"]
       ) {
-        const location = impRes.headers.get("location") ?? "";
+        const location = raw.headers["location"] ?? "";
         const next = new URL(location, currentUrl).toString();
         if (!isPermittedRedirect(currentUrl, next)) {
           this.#onEvent?.({
             kind: "transport.redirect",
             url: currentUrl,
-            status: impRes.status,
+            status: raw.status,
             ms: timeSec * 1000,
             redirectUrl: next,
             blocked: true,
@@ -372,7 +385,7 @@ export class BxcTransport implements Transport {
             type: "redirect",
             originalUrl: currentUrl,
             redirectUrl: next,
-            statusCode: impRes.status,
+            statusCode: raw.status,
           };
         }
         hops++;
@@ -385,15 +398,10 @@ export class BxcTransport implements Transport {
         continue;
       }
 
-      // Convert ImpersonatedResponse (Web Response) to CurlImpersonateResponse
-      const body = await impRes.text();
-      const finalUrl = impRes.effectiveUrl || currentUrl;
-
-      // Flatten Headers to Record<string, string>
-      const headers: Record<string, string> = {};
-      impRes.headers.forEach((v, k) => {
-        headers[k] = v;
-      });
+      // The engine already read the body + flattened headers + resolved finalUrl.
+      const body = raw.body;
+      const finalUrl = raw.finalUrl || currentUrl;
+      const headers = raw.headers;
 
       // Enforce content length cap
       const bodyBytes = new TextEncoder().encode(body).byteLength;
@@ -406,27 +414,31 @@ export class BxcTransport implements Transport {
       }
 
       // Store in cache
-      if (cacheEnabled && impRes.status >= 200 && impRes.status < 400) {
-        this.#cache.set(cacheKey, {
-          status: impRes.status,
-          finalUrl,
-          headers,
-          body,
-          timeSec,
-          bytes: bodyBytes,
-        });
+      if (cacheEnabled && raw.status >= 200 && raw.status < 400) {
+        this.#cache.set(
+          cacheKey,
+          {
+            status: raw.status,
+            finalUrl,
+            headers,
+            body,
+            timeSec,
+            bytes: bodyBytes,
+          },
+          { bytes: bodyBytes },
+        );
       }
 
       this.#onEvent?.({
         kind: "transport.fetch",
         url: finalUrl,
-        status: impRes.status,
+        status: raw.status,
         ms: timeSec * 1000,
         fromCache: false,
       });
 
       return {
-        status: impRes.status,
+        status: raw.status,
         finalUrl,
         headers,
         body,
@@ -458,9 +470,9 @@ export class BxcTransport implements Transport {
     };
   }
 
-  /** Release the underlying CURL handle. */
+  /** Release the underlying engine resources (e.g. the CURL handle). */
   close(): void {
-    this.#client.close();
+    this.#engine.close();
   }
 
   [Symbol.dispose](): void {

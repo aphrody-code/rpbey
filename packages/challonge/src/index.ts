@@ -130,3 +130,45 @@ export { storeToStandings } from "./extractors/stores/standings";
 export { parseUserProfile } from "./extractors/stores/user-profile";
 export { parseOrgLanding } from "./extractors/stores/org-landing";
 export { parseGamesCatalog, findGameByName } from "./extractors/stores/games-catalog";
+
+// Pluggable HTTP fetch engine (P4 M5) — FFI / native fetch / CDP backends.
+export {
+  ImpersonatedClientEngine,
+  NativeFetchEngine,
+  CdpEngine,
+  type FetchEngine,
+  type RawHttpResponse,
+  type FetchEngineRequest,
+  type ImpersonatedClientEngineOptions,
+  type NativeFetchEngineOptions,
+  type CdpEngineOptions,
+} from "./core/fetch-engine";
+
+// Pluggable cache (P4) — LRU with byte + TTL eviction.
+export {
+  LruCache,
+  DEFAULT_CACHE_TTL_MS,
+  DEFAULT_CACHE_MAX_BYTES,
+  type Cache,
+  type CacheSetOptions,
+  type LruCacheOptions,
+} from "./core/cache";
+
+// High-level clients (P4) — multi-page crawler + tournament search.
+export {
+  crawlTournament,
+  crawlOrg,
+  type CrawlSection,
+  type CrawlEvent,
+  type CrawlOptions,
+  type CrawlOrgOptions,
+} from "./clients/crawler";
+export {
+  searchTournaments,
+  listGames,
+  findGame,
+  type SearchResult,
+  type SearchTournamentsParams,
+  type SearchTournamentsResult,
+  type ListGamesOptions,
+} from "./clients/search";

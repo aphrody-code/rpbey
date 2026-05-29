@@ -1,0 +1,105 @@
+{
+	"capturedAt": null,
+	"source": "seed",
+	"notes": "Carte des endpoints Challonge confirmés (plan challonge-crawler-complete §0 + docs/challonge/api-routes.md & search-engine.md). 'seed' = écrit à la main depuis la cartographie vérifiée (code file:line + live bxc curl-impersonate chrome131). Régénéré/enrichi par scripts/har-capture.ts (capturedAt devient une date ISO + source 'har'). urlPattern utilise {placeholders} : {lang}=fr|en|..., {slug}=tournoi (accepte subdomain-slug), {username}=challonge user. kind ∈ {ssr-html, json-xhr, json-api, rest-v1, rest-v2.1, oauth, asset-catalog, absent}.",
+	"endpoints": [
+		{
+			"method": "GET",
+			"urlPattern": "https://challonge.com/{lang}/{slug}/module",
+			"kind": "ssr-html",
+			"status": 200,
+			"notes": "Chemin canonique du scraper — 200 fiable. Porte TournamentStore + CurrentUserStore + BracketSettingsStore + ThemeStore via window._initialStoreState. Préféré à /{slug}.json (CF flaky)."
+		},
+		{
+			"method": "GET",
+			"urlPattern": "https://challonge.com/{lang}/{slug}.json",
+			"kind": "json-xhr",
+			"status": 403,
+			"notes": "JSON = TournamentStore (tournament, rounds[], matches_by_round{}, third_place_match, consolation_matches[], groups[], requested_plotter). 200 à froid puis 403 CF (instable). getStore() ciblait cette route — remplacé par /module."
+		},
+		{
+			"method": "GET",
+			"urlPattern": "https://challonge.com/{lang}/{slug}/standings",
+			"kind": "ssr-html",
+			"status": 200,
+			"notes": "Pas de store JS → table HTML SSR. 200 ou 403 CF stochastique."
+		},
+		{
+			"method": "GET",
+			"urlPattern": "https://challonge.com/{lang}/{slug}/log?page={page}",
+			"kind": "ssr-html",
+			"status": 200,
+			"notes": "LogEntryListStore (array) + ActivityFeedSettingsStore (.logEntries{currentPage,totalPages,totalCount}). Paginé (≤12 pages en // dans le scraper). 200 flaky ou 403 CF."
+		},
+		{
+			"method": "GET",
+			"urlPattern": "https://challonge.com/{lang}/{slug}/participants",
+			"kind": "ssr-html",
+			"status": 200,
+			"notes": "#participant-management[data-tournament][data-rankings] (coquille SSR, lignes React). 200, ou login-wall (302 /user_session/new), ou 403 CF."
+		},
+		{
+			"method": "GET",
+			"urlPattern": "https://challonge.com/users/{username}",
+			"kind": "ssr-html",
+			"status": 200,
+			"notes": "Profil utilisateur SSR (medals/history). Aussi /{lang}/users/{username}. Extracteur user-profile."
+		},
+		{
+			"method": "GET",
+			"urlPattern": "https://challonge.com/games.json",
+			"kind": "asset-catalog",
+			"status": 200,
+			"notes": "Catalogue jeux ~114 KB. Source autocomplete game_id (mapping game_id ↔ nom ↔ permalink). Beyblade X = game_id 337197. Caché localement (data/challonge-games.json)."
+		},
+		{
+			"method": "GET",
+			"urlPattern": "https://challonge.com/tournaments?game_id={game_id}&state={state}&tournament_type={tournament_type}&page={page}",
+			"kind": "ssr-html",
+			"status": 200,
+			"notes": "Page de recherche HTML SSR (~53 KB, React-hydraté, PAS du JSON). 403 CF sans cookie en navigate. state ∈ {in_progress,ended,pending} ; tournament_type ∈ {single_elimination,double_elimination,round_robin,swiss}. Filtre game_id à fixer (game_id n'a pas restreint en test)."
+		},
+		{
+			"method": "GET",
+			"urlPattern": "https://challonge.com/tournaments.json?q={q}&page={page}&state={state}&game_id={game_id}",
+			"kind": "json-xhr",
+			"status": 200,
+			"notes": "API XHR derrière /tournaments. Exige X-Requested-With: XMLHttpRequest + Accept: application/json. Shape {next_page, collection[{name,link,owner,filter{id,name},banner,details,...}]}. 10 résultats/page."
+		},
+		{
+			"method": "GET",
+			"urlPattern": "https://api.challonge.com/v1/tournaments/{idOrSlug}.json?include_participants={0|1}&include_matches={0|1}",
+			"kind": "rest-v1",
+			"status": 200,
+			"notes": "REST v1 read-only. Auth HTTP Basic api:<API_KEY>. 401 sans auth. idOrSlug = id|slug|subdomain-slug. v1 n'expose pas /log /predictions /announcements."
+		},
+		{
+			"method": "GET",
+			"urlPattern": "https://api.challonge.com/v1/tournaments.json?state={state}&type={type}&subdomain={subdomain}",
+			"kind": "rest-v1",
+			"status": 200,
+			"notes": "Listing v1. state ∈ {all,pending,in_progress,ended}. Pas de recherche cross-tournoi par game_id/q (voir /tournaments.json XHR)."
+		},
+		{
+			"method": "POST",
+			"urlPattern": "https://api.challonge.com/oauth/token",
+			"kind": "oauth",
+			"status": 200,
+			"notes": "OAuth2 client_credentials (write). Content-Type x-www-form-urlencoded ; body grant_type=client_credentials&client_id&client_secret&scope. Réponse {access_token,token_type,expires_in,created_at}."
+		},
+		{
+			"method": "POST",
+			"urlPattern": "https://api.challonge.com/v2.1/tournaments",
+			"kind": "rest-v2.1",
+			"status": 201,
+			"notes": "REST v2.1 read+write (JSON:API). Content-Type application/vnd.api+json + Accept application/json + Authorization-Type v1|v2 + Authorization (brut v1 / Bearer v2). Famille write : /tournaments(.../change_state, .../participants(.../bulk_add,.../randomize), .../matches(.../change_state)). Non testable sans CHALLONGE_CLIENT_ID/SECRET."
+		},
+		{
+			"method": "POST",
+			"urlPattern": "https://api.challonge.com/graphql",
+			"kind": "absent",
+			"status": 404,
+			"notes": "GraphQL strictement interne (auth session admin). 404 anonyme (jamais CF-bloqué, route absente). Aucune référence 'graphql' dans le HTML SSR des fixtures."
+		}
+	]
+}
