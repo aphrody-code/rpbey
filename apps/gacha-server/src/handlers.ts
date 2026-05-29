@@ -131,6 +131,40 @@ async function ensureProfile(userId: string): Promise<ProfileRow> {
   return again[0];
 }
 
+/**
+ * Verrouille la ligne profil dans une transaction (`SELECT … FOR UPDATE`) et
+ * renvoie son état **autoritaire**. Sérialise les écritures concurrentes du
+ * même utilisateur : indispensable pour les opérations lecture→écriture sur la
+ * monnaie / la pity / les cooldowns (sinon 2 requêtes parallèles lisent le même
+ * solde, passent toutes deux le contrôle et débitent → solde négatif / pity
+ * sautée / double claim). Appeler `ensureProfile(userId)` d'abord (existence).
+ */
+async function lockProfileTx(tx: Tx, userId: string): Promise<ProfileRow> {
+  const rows = await tx
+    .select(PROFILE_COLS)
+    .from(profiles)
+    .where(eq(profiles.userId, userId))
+    .for("update")
+    .limit(1);
+  if (!rows[0]) throw new ApiError("NO_PROFILE", "Profil introuvable", 500);
+  return rows[0];
+}
+
+/**
+ * Verrouille une ligne d'inventaire (`SELECT … FOR UPDATE`) et renvoie son
+ * `count` autoritaire (ou `null` si absente). Sérialise vente / don / fusion
+ * concurrents d'une même carte → pas de survente / sur-don / sur-fusion.
+ */
+async function lockInventoryTx(tx: Tx, userId: string, cardId: string): Promise<number | null> {
+  const rows = await tx
+    .select({ count: cardInventory.count })
+    .from(cardInventory)
+    .where(and(eq(cardInventory.userId, userId), eq(cardInventory.cardId, cardId)))
+    .for("update")
+    .limit(1);
+  return rows[0]?.count ?? null;
+}
+
 /** Carte active aléatoire de la rareté demandée, fallback raretés inférieures puis n'importe laquelle. */
 async function pickCard(rarity: Rarity): Promise<CardRow | null> {
   const idx = RARITY_ORDER.indexOf(rarity);
@@ -180,22 +214,22 @@ async function moveCurrency(tx: Tx, userId: string, delta: number, type: string,
     .values({ userId, amount: delta, type: type as never, note });
 }
 
-/** Ajoute une carte à l'inventaire (count+1), renvoie true si c'était un doublon. */
+/**
+ * Ajoute une carte à l'inventaire (count+1), renvoie true si c'était un doublon.
+ * Upsert ATOMIQUE (`ON CONFLICT … DO UPDATE`) sur l'index unique
+ * `(userId, cardId)` — pas de race select-puis-insert (cas du don au
+ * destinataire, hors verrou profil de l'appelant). `count` retourné > 1 ⇒ doublon.
+ */
 async function addCard(tx: Tx, userId: string, cardId: string): Promise<boolean> {
-  const existing = await tx
-    .select({ count: cardInventory.count })
-    .from(cardInventory)
-    .where(and(eq(cardInventory.userId, userId), eq(cardInventory.cardId, cardId)))
-    .limit(1);
-  if (existing[0]) {
-    await tx
-      .update(cardInventory)
-      .set({ count: sql`${cardInventory.count} + 1` })
-      .where(and(eq(cardInventory.userId, userId), eq(cardInventory.cardId, cardId)));
-    return true;
-  }
-  await tx.insert(cardInventory).values({ userId, cardId, count: 1, obtainedAt: now() });
-  return false;
+  const res = await tx
+    .insert(cardInventory)
+    .values({ userId, cardId, count: 1, obtainedAt: now() })
+    .onConflictDoUpdate({
+      target: [cardInventory.userId, cardInventory.cardId],
+      set: { count: sql`${cardInventory.count} + 1` },
+    })
+    .returning({ count: cardInventory.count });
+  return (res[0]?.count ?? 1) > 1;
 }
 
 /** Résout un tirage (rareté + carte) en respectant la pity. Renvoie aussi la pity mise à jour. */
@@ -220,14 +254,18 @@ async function resolvePull(
 // ─── Handlers ──────────────────────────────────────────────────────────────
 
 export async function pull(user: AuthUser): Promise<Ok<"result", PullResult>> {
-  const prof = await ensureProfile(user.id);
-  if (prof.currency < PULL_COST)
-    throw new ApiError("INSUFFICIENT_FUNDS", `Solde insuffisant (${PULL_COST} 🪙 requis)`, 400);
+  await ensureProfile(user.id);
 
-  const { rarity, card, pityAfter } = await resolvePull(prof.pityCount);
-  const wished = card ? await wishlistedCardIds(prof.id) : new Set<string>();
+  // Tout l'invariant financier (contrôle solde + débit + pity) est sérialisé
+  // par le verrou FOR UPDATE sur le profil → pas d'overspend / pity sautée.
+  const out = await db.transaction(async (tx) => {
+    const prof = await lockProfileTx(tx, user.id);
+    if (prof.currency < PULL_COST)
+      throw new ApiError("INSUFFICIENT_FUNDS", `Solde insuffisant (${PULL_COST} 🪙 requis)`, 400);
 
-  const result = await db.transaction(async (tx) => {
+    const { rarity, card, pityAfter } = await resolvePull(prof.pityCount);
+    const wished = card ? await wishlistedCardIds(prof.id) : new Set<string>();
+
     await moveCurrency(tx, user.id, -PULL_COST, "GACHA_PULL", `Tirage simple`);
     await tx.update(profiles).set({ pityCount: pityAfter }).where(eq(profiles.userId, user.id));
     let isDuplicate = false;
@@ -237,7 +275,14 @@ export async function pull(user: AuthUser): Promise<Ok<"result", PullResult>> {
       .from(profiles)
       .where(eq(profiles.userId, user.id))
       .limit(1);
-    return { newBalance: bal[0]?.c ?? 0, isDuplicate };
+    return {
+      rarity,
+      card,
+      pityAfter,
+      isDuplicate,
+      isWished: card ? wished.has(card.id) : false,
+      newBalance: bal[0]?.c ?? 0,
+    };
   });
 
   const unique = await uniqueCardCount(user.id);
@@ -246,27 +291,22 @@ export async function pull(user: AuthUser): Promise<Ok<"result", PullResult>> {
   return {
     ok: true,
     result: {
-      rarity,
-      card: card ? cardDto(card) : null,
-      isDuplicate: result.isDuplicate,
-      isWished: card ? wished.has(card.id) : false,
-      newBalance: result.newBalance,
-      pityCount: pityAfter,
+      rarity: out.rarity,
+      card: out.card ? cardDto(out.card) : null,
+      isDuplicate: out.isDuplicate,
+      isWished: out.isWished,
+      newBalance: out.newBalance,
+      pityCount: out.pityAfter,
       badgeUnlocked: badge ? { name: badge.name, emoji: badge.emoji, reward: badge.reward } : null,
     },
   };
 }
 
 export async function pullMulti(user: AuthUser): Promise<Ok<"result", MultiPullResult>> {
-  const prof = await ensureProfile(user.id);
-  if (prof.currency < MULTI_PULL_COST)
-    throw new ApiError(
-      "INSUFFICIENT_FUNDS",
-      `Solde insuffisant (${MULTI_PULL_COST} 🪙 requis)`,
-      400,
-    );
+  await ensureProfile(user.id);
 
   // Tire 10 fois ; garantit au moins 1 SR+ (force le dernier si besoin).
+  // Aléatoire pur (indépendant du solde) → préparé hors transaction.
   const draws: { rarity: Rarity | null; card: CardRow | null }[] = [];
   for (let i = 0; i < MULTI_PULL_COUNT; i++) {
     const r = await resolvePull(0); // pity neutralisée pendant le multi (reset après)
@@ -280,8 +320,15 @@ export async function pullMulti(user: AuthUser): Promise<Ok<"result", MultiPullR
     };
   }
 
-  const wished = await wishlistedCardIds(prof.id);
   const results = await db.transaction(async (tx) => {
+    const prof = await lockProfileTx(tx, user.id);
+    if (prof.currency < MULTI_PULL_COST)
+      throw new ApiError(
+        "INSUFFICIENT_FUNDS",
+        `Solde insuffisant (${MULTI_PULL_COST} 🪙 requis)`,
+        400,
+      );
+    const wished = await wishlistedCardIds(prof.id);
     await moveCurrency(
       tx,
       user.id,
@@ -325,23 +372,27 @@ export async function pullMulti(user: AuthUser): Promise<Ok<"result", MultiPullR
 }
 
 export async function daily(user: AuthUser): Promise<Ok<"result", DailyResult>> {
-  const prof = await ensureProfile(user.id);
-  const nowMs = Date.now();
-  const lastMs = prof.lastDaily ? new Date(prof.lastDaily).getTime() : null;
-  if (lastMs && nowMs - lastMs < DAILY_COOLDOWN_H * H) {
-    const retryInMs = DAILY_COOLDOWN_H * H - (nowMs - lastMs);
-    throw new ApiError("ALREADY_CLAIMED", "Récompense quotidienne déjà réclamée", 429, retryInMs);
-  }
-  const hoursSince = lastMs ? (nowMs - lastMs) / H : Infinity;
-  const streakBroken = lastMs !== null && hoursSince > STREAK_RESET_H;
-  const streakAfter = lastMs && !streakBroken ? prof.dailyStreak + 1 : 1;
-  const milestone = STREAK_MILESTONES.find((m) => m.days === streakAfter);
-  const streakBonus = milestone?.bonus ?? 0;
-  const tier = STREAK_MILESTONES.filter((m) => m.days <= streakAfter).length;
-  const interestPaid = prof.currency < 0 ? Math.round(Math.abs(prof.currency) * DEBT_INTEREST) : 0;
-  const gain = DAILY_BASE + streakBonus;
+  await ensureProfile(user.id);
 
-  const newBalance = await db.transaction(async (tx) => {
+  // Cooldown + streak + crédit, tout sérialisé sous verrou → pas de double claim.
+  const out = await db.transaction(async (tx) => {
+    const prof = await lockProfileTx(tx, user.id);
+    const nowMs = Date.now();
+    const lastMs = prof.lastDaily ? new Date(prof.lastDaily).getTime() : null;
+    if (lastMs && nowMs - lastMs < DAILY_COOLDOWN_H * H) {
+      const retryInMs = DAILY_COOLDOWN_H * H - (nowMs - lastMs);
+      throw new ApiError("ALREADY_CLAIMED", "Récompense quotidienne déjà réclamée", 429, retryInMs);
+    }
+    const hoursSince = lastMs ? (nowMs - lastMs) / H : Infinity;
+    const streakBroken = lastMs !== null && hoursSince > STREAK_RESET_H;
+    const streakAfter = lastMs && !streakBroken ? prof.dailyStreak + 1 : 1;
+    const milestone = STREAK_MILESTONES.find((m) => m.days === streakAfter);
+    const streakBonus = milestone?.bonus ?? 0;
+    const tier = STREAK_MILESTONES.filter((m) => m.days <= streakAfter).length;
+    const interestPaid =
+      prof.currency < 0 ? Math.round(Math.abs(prof.currency) * DEBT_INTEREST) : 0;
+    const gain = DAILY_BASE + streakBonus;
+
     await moveCurrency(tx, user.id, gain, "DAILY_CLAIM", `Daily j${streakAfter}`);
     if (interestPaid > 0)
       await moveCurrency(tx, user.id, -interestPaid, "ADMIN_TAKE", "Intérêts dette");
@@ -354,22 +405,33 @@ export async function daily(user: AuthUser): Promise<Ok<"result", DailyResult>> 
       .from(profiles)
       .where(eq(profiles.userId, user.id))
       .limit(1);
-    return bal[0]?.c ?? 0;
+    return {
+      newBalance: bal[0]?.c ?? 0,
+      streakBonus,
+      gain,
+      interestPaid,
+      tier,
+      streakAfter,
+      streakBroken,
+      streakBonusLabel: milestone?.label,
+    };
   });
 
   return {
     ok: true,
     result: {
       amount: DAILY_BASE,
-      streakBonus,
-      totalGain: gain - interestPaid,
-      tier,
-      streakAfter,
-      newBalance,
-      message: streakBroken ? "Série réinitialisée — nouveau départ !" : `Jour ${streakAfter} 🔥`,
-      streakBonusLabel: milestone?.label,
-      interestPaid: interestPaid || undefined,
-      streakBroken: streakBroken || undefined,
+      streakBonus: out.streakBonus,
+      totalGain: out.gain - out.interestPaid,
+      tier: out.tier,
+      streakAfter: out.streakAfter,
+      newBalance: out.newBalance,
+      message: out.streakBroken
+        ? "Série réinitialisée — nouveau départ !"
+        : `Jour ${out.streakAfter} 🔥`,
+      streakBonusLabel: out.streakBonusLabel,
+      interestPaid: out.interestPaid || undefined,
+      streakBroken: out.streakBroken || undefined,
     },
   };
 }
@@ -437,27 +499,27 @@ export async function sell(
 ): Promise<Ok<"result", SellResult>> {
   const cardId = String(body.cardId ?? "");
   if (!cardId) throw new ApiError("BAD_REQUEST", "cardId requis", 400);
-  const rows = await db
-    .select({
-      count: cardInventory.count,
-      rarity: gachaCards.rarity,
-      name: gachaCards.name,
-    })
-    .from(cardInventory)
-    .innerJoin(gachaCards, eq(cardInventory.cardId, gachaCards.id))
-    .where(and(eq(cardInventory.userId, user.id), eq(cardInventory.cardId, cardId)))
+  // Métadonnées carte (statiques) hors tx.
+  const meta = await db
+    .select({ rarity: gachaCards.rarity, name: gachaCards.name })
+    .from(gachaCards)
+    .where(eq(gachaCards.id, cardId))
     .limit(1);
-  const row = rows[0];
-  if (!row || row.count < 2)
-    throw new ApiError("NO_DUPLICATE", "Aucun doublon à vendre pour cette carte", 400);
-  const price = SELL_PRICE[(isRarity(row.rarity) ? row.rarity : "COMMON") as Rarity];
+  if (!meta[0]) throw new ApiError("NO_CARD", "Carte introuvable", 404);
+  const price = SELL_PRICE[(isRarity(meta[0].rarity) ? meta[0].rarity : "COMMON") as Rarity];
 
   const newBalance = await db.transaction(async (tx) => {
+    // Ordre de verrouillage constant (profil puis inventaire) → pas de deadlock.
+    await lockProfileTx(tx, user.id);
+    // Verrou : re-lecture autoritaire du count sous FOR UPDATE → pas de survente.
+    const count = await lockInventoryTx(tx, user.id, cardId);
+    if (count === null || count < 2)
+      throw new ApiError("NO_DUPLICATE", "Aucun doublon à vendre pour cette carte", 400);
     await tx
       .update(cardInventory)
       .set({ count: sql`${cardInventory.count} - 1` })
       .where(and(eq(cardInventory.userId, user.id), eq(cardInventory.cardId, cardId)));
-    await moveCurrency(tx, user.id, price, "SELL_CARD", `Vente ${row.name}`);
+    await moveCurrency(tx, user.id, price, "SELL_CARD", `Vente ${meta[0].name}`);
     const bal = await tx
       .select({ c: profiles.currency })
       .from(profiles)
@@ -471,34 +533,39 @@ export async function sell(
     result: {
       pricePaid: price,
       newBalance,
-      cardName: row.name,
-      rarity: row.rarity,
+      cardName: meta[0].name,
+      rarity: meta[0].rarity,
     },
   };
 }
 
 export async function sellAll(user: AuthUser): Promise<Ok<"result", SellAllResult>> {
-  const rows = await db
-    .select({
-      cardId: cardInventory.cardId,
-      count: cardInventory.count,
-      rarity: gachaCards.rarity,
-      name: gachaCards.name,
-    })
-    .from(cardInventory)
-    .innerJoin(gachaCards, eq(cardInventory.cardId, gachaCards.id))
-    .where(and(eq(cardInventory.userId, user.id)));
-  const dupes = rows.filter((r) => r.count >= 2);
-  if (dupes.length === 0) throw new ApiError("NO_DUPLICATE", "Aucun doublon à vendre", 400);
+  await ensureProfile(user.id);
 
-  const sold: {
-    name: string;
-    rarity: string;
-    count: number;
-    earned: number;
-  }[] = [];
-  let totalEarned = 0;
-  const newBalance = await db.transaction(async (tx) => {
+  const out = await db.transaction(async (tx) => {
+    // Verrou profil = mutex économie du user → la lecture des doublons et le
+    // crédit sont cohérents (pas de double crédit avec un sell/sellAll concurrent).
+    await lockProfileTx(tx, user.id);
+    const rows = await tx
+      .select({
+        cardId: cardInventory.cardId,
+        count: cardInventory.count,
+        rarity: gachaCards.rarity,
+        name: gachaCards.name,
+      })
+      .from(cardInventory)
+      .innerJoin(gachaCards, eq(cardInventory.cardId, gachaCards.id))
+      .where(eq(cardInventory.userId, user.id));
+    const dupes = rows.filter((r) => r.count >= 2);
+    if (dupes.length === 0) throw new ApiError("NO_DUPLICATE", "Aucun doublon à vendre", 400);
+
+    const sold: {
+      name: string;
+      rarity: string;
+      count: number;
+      earned: number;
+    }[] = [];
+    let totalEarned = 0;
     for (const r of dupes) {
       const extra = r.count - 1;
       const unit = SELL_PRICE[(isRarity(r.rarity) ? r.rarity : "COMMON") as Rarity];
@@ -516,16 +583,16 @@ export async function sellAll(user: AuthUser): Promise<Ok<"result", SellAllResul
       .from(profiles)
       .where(eq(profiles.userId, user.id))
       .limit(1);
-    return bal[0]?.c ?? 0;
+    return { newBalance: bal[0]?.c ?? 0, sold, totalEarned };
   });
 
   return {
     ok: true,
     result: {
-      soldCount: sold.reduce((a, s) => a + s.count, 0),
-      totalEarned,
-      newBalance,
-      sold,
+      soldCount: out.sold.reduce((a, s) => a + s.count, 0),
+      totalEarned: out.totalEarned,
+      newBalance: out.newBalance,
+      sold: out.sold,
     },
   };
 }
@@ -541,24 +608,7 @@ export async function gift(
   if (recipientId === user.id)
     throw new ApiError("BAD_REQUEST", "Tu ne peux pas te donner une carte", 400);
 
-  const prof = await ensureProfile(user.id);
-  if (prof.lastGiftSent) {
-    const since = Date.now() - new Date(prof.lastGiftSent).getTime();
-    if (since < GIFT_COOLDOWN_H * H)
-      throw new ApiError(
-        "COOLDOWN",
-        "Don déjà effectué récemment",
-        429,
-        GIFT_COOLDOWN_H * H - since,
-      );
-  }
-  const owned = await db
-    .select({ count: cardInventory.count })
-    .from(cardInventory)
-    .where(and(eq(cardInventory.userId, user.id), eq(cardInventory.cardId, cardId)))
-    .limit(1);
-  if (!owned[0] || owned[0].count < 2)
-    throw new ApiError("NO_DUPLICATE", "Il te faut un doublon pour offrir cette carte", 400);
+  await ensureProfile(user.id);
 
   const rcp = await db
     .select({ name: users.name })
@@ -567,19 +617,36 @@ export async function gift(
     .limit(1);
   if (!rcp[0]) throw new ApiError("NO_RECIPIENT", "Destinataire introuvable", 404);
 
-  await db.transaction(async (tx) => {
+  const newBalance = await db.transaction(async (tx) => {
+    // Verrous (profil puis inventaire) → cooldown + doublon re-vérifiés de
+    // façon atomique : pas de double don ni de don sans doublon réel.
+    const prof = await lockProfileTx(tx, user.id);
+    if (prof.lastGiftSent) {
+      const since = Date.now() - new Date(prof.lastGiftSent).getTime();
+      if (since < GIFT_COOLDOWN_H * H)
+        throw new ApiError(
+          "COOLDOWN",
+          "Don déjà effectué récemment",
+          429,
+          GIFT_COOLDOWN_H * H - since,
+        );
+    }
+    const count = await lockInventoryTx(tx, user.id, cardId);
+    if (count === null || count < 2)
+      throw new ApiError("NO_DUPLICATE", "Il te faut un doublon pour offrir cette carte", 400);
     await tx
       .update(cardInventory)
       .set({ count: sql`${cardInventory.count} - 1` })
       .where(and(eq(cardInventory.userId, user.id), eq(cardInventory.cardId, cardId)));
     await addCard(tx, recipientId, cardId);
     await tx.update(profiles).set({ lastGiftSent: now() }).where(eq(profiles.userId, user.id));
+    return prof.currency;
   });
 
   return {
     ok: true,
     result: {
-      newBalance: prof.currency,
+      newBalance,
       recipientName: rcp[0].name ?? undefined,
     },
   };
@@ -763,25 +830,47 @@ export async function badges(user: AuthUser): Promise<Ok<"progress", BadgeProgre
 }
 
 export async function claimBadge(user: AuthUser): Promise<Ok<"result", ClaimBadgeResult>> {
+  await ensureProfile(user.id);
   const unique = await uniqueCardCount(user.id);
-  const claimed = await claimedBadgeCounts(user.id);
-  const eligible = BADGES.filter((b) => unique >= b.count && !claimed.has(b.count));
-  if (eligible.length === 0) throw new ApiError("NO_BADGE", "Aucun badge à réclamer", 400);
-  const badge = eligible[eligible.length - 1]!;
-  const newBalance = await db.transaction(async (tx) => {
+
+  const out = await db.transaction(async (tx) => {
+    // Verrou profil = mutex : le set "déjà réclamé" est relu dans la section
+    // sérialisée → un second claim concurrent voit la 1ʳᵉ récompense et est rejeté.
+    await lockProfileTx(tx, user.id);
+    const claimedRows = await tx
+      .select({ note: currencyTransactions.note })
+      .from(currencyTransactions)
+      .where(
+        and(
+          eq(currencyTransactions.userId, user.id),
+          eq(currencyTransactions.type, "BADGE_REWARD" as never),
+        ),
+      );
+    const claimed = new Set<number>();
+    for (const r of claimedRows) {
+      const m = r.note?.match(/badge:(\d+)/);
+      if (m) claimed.add(Number(m[1]));
+    }
+    const eligible = BADGES.filter((b) => unique >= b.count && !claimed.has(b.count));
+    if (eligible.length === 0) throw new ApiError("NO_BADGE", "Aucun badge à réclamer", 400);
+    const badge = eligible[eligible.length - 1]!;
     await moveCurrency(tx, user.id, badge.reward, "BADGE_REWARD", `badge:${badge.count}`);
     const bal = await tx
       .select({ c: profiles.currency })
       .from(profiles)
       .where(eq(profiles.userId, user.id))
       .limit(1);
-    return bal[0]?.c ?? 0;
+    return { badge, newBalance: bal[0]?.c ?? 0 };
   });
   return {
     ok: true,
     result: {
-      badge: { name: badge.name, emoji: badge.emoji, reward: badge.reward },
-      newBalance,
+      badge: {
+        name: out.badge.name,
+        emoji: out.badge.emoji,
+        reward: out.badge.reward,
+      },
+      newBalance: out.newBalance,
     },
   };
 }
@@ -830,16 +919,14 @@ export async function fuse(
 ): Promise<Ok<"result", FusionResult>> {
   const cardId = String(body.cardId ?? "");
   if (!cardId) throw new ApiError("BAD_REQUEST", "cardId requis", 400);
-  const rows = await db
-    .select({ count: cardInventory.count, rarity: gachaCards.rarity })
-    .from(cardInventory)
-    .innerJoin(gachaCards, eq(cardInventory.cardId, gachaCards.id))
-    .where(and(eq(cardInventory.userId, user.id), eq(cardInventory.cardId, cardId)))
+  // Rareté de la carte (statique) hors tx.
+  const meta = await db
+    .select({ rarity: gachaCards.rarity })
+    .from(gachaCards)
+    .where(eq(gachaCards.id, cardId))
     .limit(1);
-  const row = rows[0];
-  if (!row || row.count < FUSION_DUPES_REQUIRED)
-    throw new ApiError("NOT_ENOUGH", `Il faut ${FUSION_DUPES_REQUIRED} exemplaires`, 400);
-  const rarity = (isRarity(row.rarity) ? row.rarity : "COMMON") as Rarity;
+  if (!meta[0]) throw new ApiError("NO_CARD", "Carte introuvable", 404);
+  const rarity = (isRarity(meta[0].rarity) ? meta[0].rarity : "COMMON") as Rarity;
   if (rarity === "SECRET") throw new ApiError("MAX_RARITY", "Déjà à la rareté maximale", 400);
   const targetRarity =
     RARITY_ORDER[Math.min(RARITY_ORDER.indexOf(rarity) + 1, RARITY_ORDER.length - 1)]!;
@@ -847,6 +934,12 @@ export async function fuse(
   if (!reward) throw new ApiError("NO_CARDS", "Aucune carte cible disponible", 404);
 
   const newBalance = await db.transaction(async (tx) => {
+    // Verrous (profil puis inventaire) → le nombre d'exemplaires à brûler est
+    // re-vérifié atomiquement : pas de sur-fusion concurrente.
+    await lockProfileTx(tx, user.id);
+    const count = await lockInventoryTx(tx, user.id, cardId);
+    if (count === null || count < FUSION_DUPES_REQUIRED)
+      throw new ApiError("NOT_ENOUGH", `Il faut ${FUSION_DUPES_REQUIRED} exemplaires`, 400);
     await tx
       .update(cardInventory)
       .set({ count: sql`${cardInventory.count} - ${FUSION_DUPES_REQUIRED}` })
@@ -923,18 +1016,19 @@ export async function adminGrant(
   const note = typeof body.note === "string" ? body.note : "admin grant";
   if (!targetUserId || !Number.isFinite(amount) || amount === 0)
     throw new ApiError("BAD_REQUEST", "targetUserId et amount (≠0) requis", 400);
-  const prof = await ensureProfile(targetUserId);
-  const prevBalance = prof.currency;
-  const newBalance = await db.transaction(async (tx) => {
+  await ensureProfile(targetUserId);
+  const out = await db.transaction(async (tx) => {
+    // Verrou → prevBalance/newBalance cohérents même sous octrois concurrents.
+    const prof = await lockProfileTx(tx, targetUserId);
     await moveCurrency(tx, targetUserId, amount, amount > 0 ? "ADMIN_GIVE" : "ADMIN_TAKE", note);
     const bal = await tx
       .select({ c: profiles.currency })
       .from(profiles)
       .where(eq(profiles.userId, targetUserId))
       .limit(1);
-    return bal[0]?.c ?? 0;
+    return { prevBalance: prof.currency, newBalance: bal[0]?.c ?? 0 };
   });
-  return { ok: true, newBalance, prevBalance };
+  return { ok: true, newBalance: out.newBalance, prevBalance: out.prevBalance };
 }
 
 /** Duel/Trade temps-réel async : non réimplémentés côté REST (cf. docs/gacha/bot.md). */

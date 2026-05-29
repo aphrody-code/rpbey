@@ -537,10 +537,19 @@ export async function executeCardPullTx(opts: {
 }): Promise<{ cards: GachaCardRow[]; newBalance: number; pityCount: number }> {
   const { userId, rarities, cost, type, newPityCount, pickFn, noteFor } = opts;
   return db.transaction(async (tx) => {
-    const profile = await tx.query.profiles.findFirst({
-      where: eq(schema.profiles.userId, userId),
-      columns: { id: true, currency: true, pityCount: true },
-    });
+    // Verrou ligne profil (`SELECT … FOR UPDATE`) : sérialise les tirages
+    // concurrents du même user → le contrôle de solde et le débit sont atomiques
+    // (sinon 2 tirages parallèles lisent le même solde et débitent → solde négatif).
+    const [profile] = await tx
+      .select({
+        id: schema.profiles.id,
+        currency: schema.profiles.currency,
+        pityCount: schema.profiles.pityCount,
+      })
+      .from(schema.profiles)
+      .where(eq(schema.profiles.userId, userId))
+      .for("update")
+      .limit(1);
     if (!profile) throw new Error("NO_PROFILE");
     if (profile.currency < cost) throw new Error("INSUFFICIENT_FUNDS");
 
