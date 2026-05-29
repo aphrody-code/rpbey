@@ -20,28 +20,35 @@ const DB_IMPORT = /from\s+["'](@rpbey\/db|@\/lib\/db)["']/;
 
 const DAL_PREFIX = "server/dal/";
 // Zones dont la frontière est STRICTEMENT appliquée (toute migration y ajoute son préfixe).
-const ENFORCED = ["server/services/", "app/api/v1/"];
+const ENFORCED = [
+	"server/services/",
+	"app/api/v1/",
+	"app/api/parts/",
+	"server/actions/parts.ts",
+];
 
 const glob = new Glob("**/*.{ts,tsx}");
 const offenders: string[] = [];
 
 for await (const rel of glob.scan({ cwd: SRC })) {
-  if (rel.startsWith(DAL_PREFIX)) continue;
-  const content = await Bun.file(`${SRC}/${rel}`).text();
-  if (DB_IMPORT.test(content)) offenders.push(rel);
+	if (rel.startsWith(DAL_PREFIX)) continue;
+	const content = await Bun.file(`${SRC}/${rel}`).text();
+	if (DB_IMPORT.test(content)) offenders.push(rel);
 }
 
 offenders.sort();
-const enforcedViolations = offenders.filter((f) => ENFORCED.some((p) => f.startsWith(p)));
+const enforcedViolations = offenders.filter((f) =>
+	ENFORCED.some((p) => f.startsWith(p)),
+);
 
 console.log(
-  `[dal-boundary] dette de couplage legacy : ${offenders.length} fichier(s) hors DAL importent la DB.`,
+	`[dal-boundary] dette de couplage legacy : ${offenders.length} fichier(s) hors DAL importent la DB.`,
 );
 if (enforcedViolations.length > 0) {
-  console.error(
-    `\n[dal-boundary] ÉCHEC — ${enforcedViolations.length} violation(s) dans une zone migrée (doit passer par src/server/dal/) :`,
-  );
-  for (const f of enforcedViolations) console.error(`  - src/${f}`);
-  process.exit(1);
+	console.error(
+		`\n[dal-boundary] ÉCHEC — ${enforcedViolations.length} violation(s) dans une zone migrée (doit passer par src/server/dal/) :`,
+	);
+	for (const f of enforcedViolations) console.error(`  - src/${f}`);
+	process.exit(1);
 }
 console.log("[dal-boundary] OK — aucune régression dans les zones migrées.");

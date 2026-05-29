@@ -1,5 +1,7 @@
 import { z } from "zod";
 import { RecommendQuerySchema, RecommendResponseSchema, SearchResponseSchema } from "./comparateur";
+import { MetaResponseSchema } from "./meta";
+import { PartsQuerySchema, PartsListResponseSchema } from "./parts";
 import { ErrorEnvelopeSchema, okEnvelope } from "./envelope";
 
 /**
@@ -64,6 +66,24 @@ const ROUTES: RouteDef[] = [
     summary: "Index de recherche globale (produits, pièces, tournois, bladers, lexique).",
     tags: ["comparateur"],
     response: SearchResponseSchema,
+  },
+  {
+    method: "get",
+    path: "/meta",
+    operationId: "getMeta",
+    summary:
+      "Méta-analyse hebdomadaire des pièces Beyblade X (tournois WBO), enrichie stats/images.",
+    tags: ["meta"],
+    response: MetaResponseSchema,
+  },
+  {
+    method: "get",
+    path: "/parts",
+    operationId: "listParts",
+    summary: "Catalogue public des pièces Beyblade X (filtres + pagination).",
+    tags: ["parts"],
+    query: PartsQuerySchema,
+    response: PartsListResponseSchema,
   },
 ];
 

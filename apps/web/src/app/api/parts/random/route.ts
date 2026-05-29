@@ -1,29 +1,15 @@
 import { connection, NextResponse } from "next/server";
-import { db, schema, count, eq } from "@/lib/db";
+import { getRandomPartByType } from "@/server/dal/parts";
 
-type PartType = (typeof schema.partType.enumValues)[number];
-
-async function getRandomPart(type: PartType) {
-  const [countRow] = await db
-    .select({ value: count() })
-    .from(schema.parts)
-    .where(eq(schema.parts.type, type));
-  const total = countRow?.value ?? 0;
-  if (total === 0) return null;
-  const skip = Math.floor(Math.random() * total);
-  return await db.query.parts.findFirst({
-    where: eq(schema.parts.type, type),
-    offset: skip,
-  });
-}
+export const dynamic = "force-dynamic";
 
 export async function GET() {
   await connection();
   try {
     const [randomBlade, randomRatchet, randomBit] = await Promise.all([
-      getRandomPart("BLADE"),
-      getRandomPart("RATCHET"),
-      getRandomPart("BIT"),
+      getRandomPartByType("BLADE"),
+      getRandomPartByType("RATCHET"),
+      getRandomPartByType("BIT"),
     ]);
 
     if (!randomBlade || !randomRatchet || !randomBit) {
