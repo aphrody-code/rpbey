@@ -1,18 +1,15 @@
-import { Box, Typography } from '@mui/material';
-import SeasonManager from '@/components/admin/rankings/SeasonManager';
-import {
-  getRankingConfig,
-  getTournamentCategories,
-} from '@/server/actions/ranking';
-import { getSeasons } from '@/server/actions/season';
-import PointAdjustmentList from './PointAdjustmentList';
-import RankingSettingsForm from './RankingSettingsForm';
+import { Box, Typography } from "@mui/material";
+import SeasonManager from "@/components/admin/rankings/SeasonManager";
+import { getRankingConfig, getTournamentCategories } from "@/server/actions/ranking";
+import { getSeasons } from "@/server/actions/season";
+import PointAdjustmentList from "./PointAdjustmentList";
+import RankingSettingsForm from "./RankingSettingsForm";
 
 export const metadata = {
-  title: 'Admin - Classements',
+  title: "Admin - Classements",
 };
 
-import { connection } from 'next/server';
+import { connection } from "next/server";
 
 export default async function RankingAdminPage() {
   await connection();
@@ -27,25 +24,22 @@ export default async function RankingAdminPage() {
           variant="h4"
           gutterBottom
           sx={{
-            fontWeight: 'bold',
+            fontWeight: "bold",
           }}
         >
           Gestion des Classements
         </Typography>
         <Typography
           sx={{
-            color: 'text.secondary',
+            color: "text.secondary",
           }}
         >
-          Configurez le barème des points, les catégories de tournois et gérez
-          les ajustements manuels.
+          Configurez le barème des points, les catégories de tournois et gérez les ajustements
+          manuels.
         </Typography>
       </Box>
       <SeasonManager seasons={seasons} />
-      <RankingSettingsForm
-        initialConfig={config}
-        initialCategories={categories}
-      />
+      <RankingSettingsForm initialConfig={config} initialCategories={categories} />
       <PointAdjustmentList />
     </Box>
   );

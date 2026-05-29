@@ -3,22 +3,22 @@
  * Displays registered participants for a tournament
  */
 
-'use client';
+"use client";
 
-import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
-import Avatar from '@mui/material/Avatar';
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Chip from '@mui/material/Chip';
-import IconButton from '@mui/material/IconButton';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import ListItemText from '@mui/material/ListItemText';
-import Tooltip from '@mui/material/Tooltip';
-import Typography from '@mui/material/Typography';
-import Link from 'next/link';
+import PersonRemoveIcon from "@mui/icons-material/PersonRemove";
+import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Chip from "@mui/material/Chip";
+import IconButton from "@mui/material/IconButton";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import ListItemText from "@mui/material/ListItemText";
+import Tooltip from "@mui/material/Tooltip";
+import Typography from "@mui/material/Typography";
+import Link from "next/link";
 
 interface Participant {
   id: string;
@@ -62,18 +62,18 @@ export function ParticipantList({
   return (
     <Card>
       <CardContent>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
+        <Box sx={{ display: "flex", justifyContent: "space-between", mb: 2 }}>
           <Typography
             variant="h6"
             sx={{
-              fontWeight: 'bold',
+              fontWeight: "bold",
             }}
           >
             Participants
           </Typography>
           <Chip
             label={`${participants.length} / ${maxPlayers}`}
-            color={participants.length >= maxPlayers ? 'error' : 'default'}
+            color={participants.length >= maxPlayers ? "error" : "default"}
             size="small"
           />
         </Box>
@@ -81,8 +81,8 @@ export function ParticipantList({
         {participants.length === 0 ? (
           <Typography
             sx={{
-              color: 'text.secondary',
-              textAlign: 'center',
+              color: "text.secondary",
+              textAlign: "center",
               py: 4,
             }}
           >
@@ -91,11 +91,8 @@ export function ParticipantList({
         ) : (
           <List disablePadding>
             {sortedParticipants.map((participant, index) => {
-              const name =
-                participant.user.profile?.bladerName ?? participant.user.name;
-              const hasActiveDeck = participant.user.decks?.some(
-                (d) => d.isActive,
-              );
+              const name = participant.user.profile?.bladerName ?? participant.user.name;
+              const hasActiveDeck = participant.user.decks?.some((d) => d.isActive);
 
               return (
                 <ListItem
@@ -103,7 +100,7 @@ export function ParticipantList({
                   sx={{
                     borderRadius: 1,
                     mb: 0.5,
-                    bgcolor: 'action.hover',
+                    bgcolor: "action.hover",
                   }}
                   secondaryAction={
                     canManage && onRemove ? (
@@ -129,9 +126,9 @@ export function ParticipantList({
                         border: 2,
                         borderColor: participant.seed
                           ? participant.seed <= 3
-                            ? 'warning.main'
-                            : 'primary.main'
-                          : 'transparent',
+                            ? "warning.main"
+                            : "primary.main"
+                          : "transparent",
                       }}
                     >
                       {name[0]}
@@ -141,15 +138,13 @@ export function ParticipantList({
                     primary={
                       <Link
                         href={`/dashboard/profile/${participant.userId}`}
-                        style={{ textDecoration: 'none', color: 'inherit' }}
+                        style={{ textDecoration: "none", color: "inherit" }}
                       >
-                        <Box
-                          sx={{ display: 'flex', alignItems: 'center', gap: 1 }}
-                        >
+                        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
                           <Typography
                             variant="body2"
                             sx={{
-                              fontWeight: 'medium',
+                              fontWeight: "medium",
                             }}
                           >
                             {index + 1}. {name}
@@ -159,7 +154,7 @@ export function ParticipantList({
                               label={`Seed ${participant.seed}`}
                               size="small"
                               color="warning"
-                              sx={{ height: 18, fontSize: '0.7rem' }}
+                              sx={{ height: 18, fontSize: "0.7rem" }}
                             />
                           )}
                         </Box>
@@ -172,7 +167,7 @@ export function ParticipantList({
                           size="small"
                           color="success"
                           variant="outlined"
-                          sx={{ height: 18, fontSize: '0.65rem', mt: 0.5 }}
+                          sx={{ height: 18, fontSize: "0.65rem", mt: 0.5 }}
                         />
                       ) : (
                         <Chip
@@ -180,7 +175,7 @@ export function ParticipantList({
                           size="small"
                           color="error"
                           variant="outlined"
-                          sx={{ height: 18, fontSize: '0.65rem', mt: 0.5 }}
+                          sx={{ height: 18, fontSize: "0.65rem", mt: 0.5 }}
                         />
                       )
                     }

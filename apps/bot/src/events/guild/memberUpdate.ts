@@ -1,24 +1,21 @@
-import { type ArgsOf, Discord, On } from '@rpbey/discordx';
+import { type ArgsOf, Discord, On } from "@rpbey/discordx";
 
-import { logger } from '../../lib/logger.js';
-import prisma from '../../lib/prisma.js';
+import { logger } from "../../lib/logger.js";
+import prisma from "../../lib/prisma.js";
 
 @Discord()
 export class MemberUpdateListener {
-  @On({ event: 'guildMemberUpdate' })
-  async onMemberUpdate([oldMember, newMember]: ArgsOf<'guildMemberUpdate'>) {
+  @On({ event: "guildMemberUpdate" })
+  async onMemberUpdate([oldMember, newMember]: ArgsOf<"guildMemberUpdate">) {
     const oldRoles = oldMember.roles.cache;
     const newRoles = newMember.roles.cache;
 
-    if (
-      oldRoles.size === newRoles.size &&
-      oldRoles.every((role) => newRoles.has(role.id))
-    ) {
+    if (oldRoles.size === newRoles.size && oldRoles.every((role) => newRoles.has(role.id))) {
       return;
     }
 
-    const isAdmin = newMember.permissions.has('Administrator');
-    const role = isAdmin ? 'admin' : 'user';
+    const isAdmin = newMember.permissions.has("Administrator");
+    const role = isAdmin ? "admin" : "user";
 
     try {
       await prisma.user.update({

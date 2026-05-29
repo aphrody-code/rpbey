@@ -1,18 +1,18 @@
-'use client';
+"use client";
 
-import { Box, Chip } from '@mui/material';
-import { alpha } from '@mui/material/styles';
+import { Box, Chip } from "@mui/material";
+import { alpha } from "@mui/material/styles";
 
-const SYSTEMS = ['BX', 'UX', 'CX'];
+const SYSTEMS = ["BX", "UX", "CX"];
 const BEY_TYPES = [
-  { value: 'ATTACK', label: 'ATK', color: '#ef4444' },
-  { value: 'DEFENSE', label: 'DEF', color: '#3b82f6' },
-  { value: 'STAMINA', label: 'END', color: '#22c55e' },
-  { value: 'BALANCE', label: 'BAL', color: '#a855f7' },
+  { value: "ATTACK", label: "ATK", color: "#ef4444" },
+  { value: "DEFENSE", label: "DEF", color: "#3b82f6" },
+  { value: "STAMINA", label: "END", color: "#22c55e" },
+  { value: "BALANCE", label: "BAL", color: "#a855f7" },
 ];
 const SPINS = [
-  { value: 'Right', label: 'Droite' },
-  { value: 'Left', label: 'Gauche' },
+  { value: "Right", label: "Droite" },
+  { value: "Left", label: "Gauche" },
 ];
 
 interface CatalogFiltersProps {
@@ -37,20 +37,20 @@ export function CatalogFilters({
   onSpinChange,
 }: CatalogFiltersProps) {
   return (
-    <Box sx={{ display: 'flex', gap: 0.5, flexWrap: 'wrap' }}>
+    <Box sx={{ display: "flex", gap: 0.5, flexWrap: "wrap" }}>
       {SYSTEMS.map((s) => (
         <Chip
           key={s}
           label={s}
           size="small"
-          variant={systems.includes(s) ? 'filled' : 'outlined'}
+          variant={systems.includes(s) ? "filled" : "outlined"}
           onClick={() => onSystemsChange(toggleItem(systems, s))}
           sx={{
-            fontWeight: 'bold',
-            fontSize: '0.7rem',
+            fontWeight: "bold",
+            fontSize: "0.7rem",
             height: 28,
             borderRadius: 1.5,
-            ...(systems.includes(s) && { bgcolor: '#333', color: '#fff' }),
+            ...(systems.includes(s) && { bgcolor: "#333", color: "#fff" }),
           }}
         />
       ))}
@@ -59,8 +59,8 @@ export function CatalogFilters({
         sx={{
           width: 1,
           height: 28,
-          borderRight: '1px solid',
-          borderColor: 'divider',
+          borderRight: "1px solid",
+          borderColor: "divider",
           mx: 0.25,
         }}
       />
@@ -70,22 +70,22 @@ export function CatalogFilters({
           key={bt.value}
           label={bt.label}
           size="small"
-          variant={beyTypes.includes(bt.value) ? 'filled' : 'outlined'}
+          variant={beyTypes.includes(bt.value) ? "filled" : "outlined"}
           onClick={() => onBeyTypesChange(toggleItem(beyTypes, bt.value))}
           sx={{
-            fontWeight: 'bold',
-            fontSize: '0.7rem',
+            fontWeight: "bold",
+            fontSize: "0.7rem",
             height: 28,
             borderRadius: 1.5,
             ...(beyTypes.includes(bt.value) && {
               bgcolor: bt.color,
-              color: '#fff',
+              color: "#fff",
               borderColor: bt.color,
             }),
             ...(!beyTypes.includes(bt.value) && {
               borderColor: alpha(bt.color, 0.3),
               color: bt.color,
-              '&:hover': { bgcolor: alpha(bt.color, 0.08) },
+              "&:hover": { bgcolor: alpha(bt.color, 0.08) },
             }),
           }}
         />
@@ -95,8 +95,8 @@ export function CatalogFilters({
         sx={{
           width: 1,
           height: 28,
-          borderRight: '1px solid',
-          borderColor: 'divider',
+          borderRight: "1px solid",
+          borderColor: "divider",
           mx: 0.25,
         }}
       />
@@ -106,14 +106,14 @@ export function CatalogFilters({
           key={sp.value}
           label={sp.label}
           size="small"
-          variant={spin === sp.value ? 'filled' : 'outlined'}
-          onClick={() => onSpinChange(spin === sp.value ? 'ALL' : sp.value)}
+          variant={spin === sp.value ? "filled" : "outlined"}
+          onClick={() => onSpinChange(spin === sp.value ? "ALL" : sp.value)}
           sx={{
-            fontWeight: 'bold',
-            fontSize: '0.7rem',
+            fontWeight: "bold",
+            fontSize: "0.7rem",
             height: 28,
             borderRadius: 1.5,
-            ...(spin === sp.value && { bgcolor: '#555', color: '#fff' }),
+            ...(spin === sp.value && { bgcolor: "#555", color: "#fff" }),
           }}
         />
       ))}

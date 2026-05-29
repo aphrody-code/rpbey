@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { PlayerSkeleton } from '../../_components/AnimeSkeletons';
+import { PlayerSkeleton } from "../../_components/AnimeSkeletons";
 
 export default function EpisodeLoading() {
   return <PlayerSkeleton />;

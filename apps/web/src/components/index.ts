@@ -1,18 +1,18 @@
 // UI Components
 
 // Auth Components
-export * from './auth';
+export * from "./auth";
 // Card Components
-export * from './cards';
+export * from "./cards";
 // Deck Components
-export * from './deck';
+export * from "./deck";
 // Layout Components
-export * from './layout';
+export * from "./layout";
 // Marketing Components
-export * from './marketing';
+export * from "./marketing";
 // Profile Components
-export * from './profile';
+export * from "./profile";
 
 // Tournament Components
-export * from './tournaments';
-export * from './ui';
+export * from "./tournaments";
+export * from "./ui";

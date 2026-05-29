@@ -1,4 +1,4 @@
-import prisma from './prisma.js';
+import prisma from "./prisma.js";
 
 /**
  * Get a text template from the database
@@ -6,10 +6,7 @@ import prisma from './prisma.js';
  * @param fallback Default text if block not found
  * @returns The template string
  */
-export async function getTemplate(
-  slug: string,
-  fallback: string,
-): Promise<string> {
+export async function getTemplate(slug: string, fallback: string): Promise<string> {
   try {
     const block = await prisma.contentBlock.findUnique({
       where: { slug },

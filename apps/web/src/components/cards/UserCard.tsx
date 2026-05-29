@@ -1,57 +1,56 @@
-'use client';
+"use client";
 
-import { Message } from '@mui/icons-material';
-import Avatar from '@mui/material/Avatar';
-import Badge from '@mui/material/Badge';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardActionArea from '@mui/material/CardActionArea';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Chip from '@mui/material/Chip';
-import Grid from '@mui/material/Grid';
-import { styled } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
-import { TrophyIcon } from '@/components/ui/Icons';
-import { getInitials } from '@/lib/utils';
+import { Message } from "@mui/icons-material";
+import Avatar from "@mui/material/Avatar";
+import Badge from "@mui/material/Badge";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
+import CardActionArea from "@mui/material/CardActionArea";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import Chip from "@mui/material/Chip";
+import Grid from "@mui/material/Grid";
+import { styled } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
+import { TrophyIcon } from "@/components/ui/Icons";
+import { getInitials } from "@/lib/utils";
 
 // Styled badge for online status
 const StyledBadge = styled(Badge)<{
-  status?: 'online' | 'offline' | 'idle' | 'dnd';
-}>(({ theme, status = 'offline' }) => {
+  status?: "online" | "offline" | "idle" | "dnd";
+}>(({ theme, status = "offline" }) => {
   const colors = {
-    online: '#44b700',
+    online: "#44b700",
     offline: theme.palette.grey[500],
-    idle: '#faa61a',
-    dnd: '#ed4245',
+    idle: "#faa61a",
+    dnd: "#ed4245",
   };
 
   return {
-    '& .MuiBadge-badge': {
+    "& .MuiBadge-badge": {
       backgroundColor: colors[status],
       color: colors[status],
       boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
-      '&::after': {
-        position: 'absolute',
+      "&::after": {
+        position: "absolute",
         top: 0,
         left: 0,
-        width: '100%',
-        height: '100%',
-        borderRadius: '50%',
-        animation:
-          status === 'online' ? 'ripple 1.2s infinite ease-in-out' : 'none',
-        border: '1px solid currentColor',
+        width: "100%",
+        height: "100%",
+        borderRadius: "50%",
+        animation: status === "online" ? "ripple 1.2s infinite ease-in-out" : "none",
+        border: "1px solid currentColor",
         content: '""',
       },
     },
-    '@keyframes ripple': {
-      '0%': {
-        transform: 'scale(.8)',
+    "@keyframes ripple": {
+      "0%": {
+        transform: "scale(.8)",
         opacity: 1,
       },
-      '100%': {
-        transform: 'scale(2.4)',
+      "100%": {
+        transform: "scale(2.4)",
         opacity: 0,
       },
     },
@@ -63,7 +62,7 @@ interface UserCardProps {
   name: string | null;
   image?: string | null;
   discordId?: string | null;
-  status?: 'online' | 'offline' | 'idle' | 'dnd';
+  status?: "online" | "offline" | "idle" | "dnd";
   role?: string;
   tournamentsWon?: number;
   onClick?: () => void;
@@ -76,7 +75,7 @@ export function UserCard({
   name,
   image,
   discordId,
-  status = 'offline',
+  status = "offline",
   role,
   tournamentsWon = 0,
   onClick,
@@ -84,12 +83,12 @@ export function UserCard({
   showActions = true,
   compact = false,
 }: UserCardProps) {
-  const displayName = name ?? 'Utilisateur inconnu';
+  const displayName = name ?? "Utilisateur inconnu";
 
   const avatarContent = (
     <StyledBadge
       overlap="circular"
-      anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+      anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
       variant="dot"
       status={status}
     >
@@ -99,8 +98,8 @@ export function UserCard({
         sx={{
           width: compact ? 48 : 80,
           height: compact ? 48 : 80,
-          bgcolor: 'primary.main',
-          fontSize: compact ? '1rem' : '1.5rem',
+          bgcolor: "primary.main",
+          fontSize: compact ? "1rem" : "1.5rem",
         }}
       >
         {getInitials(displayName)}
@@ -112,10 +111,10 @@ export function UserCard({
     return (
       <Card
         sx={{
-          display: 'flex',
-          alignItems: 'center',
+          display: "flex",
+          alignItems: "center",
           p: 2,
-          cursor: onClick ? 'pointer' : 'default',
+          cursor: onClick ? "pointer" : "default",
         }}
         onClick={onClick}
       >
@@ -124,14 +123,7 @@ export function UserCard({
           <Typography variant="subtitle1" noWrap>
             {displayName}
           </Typography>
-          {role && (
-            <Chip
-              label={role}
-              size="small"
-              color="primary"
-              variant="outlined"
-            />
-          )}
+          {role && <Chip label={role} size="small" color="primary" variant="outlined" />}
         </Box>
         {tournamentsWon > 0 && (
           <Chip
@@ -146,48 +138,33 @@ export function UserCard({
   }
 
   const cardContent = (
-    <CardContent sx={{ textAlign: 'center', pb: showActions ? 1 : 2 }}>
-      <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
-        {avatarContent}
-      </Box>
+    <CardContent sx={{ textAlign: "center", pb: showActions ? 1 : 2 }}>
+      <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>{avatarContent}</Box>
 
       <Typography variant="h6" component="h3" gutterBottom noWrap>
         {displayName}
       </Typography>
 
-      {role && (
-        <Chip
-          label={role}
-          size="small"
-          color="primary"
-          variant="outlined"
-          sx={{ mb: 1 }}
-        />
-      )}
+      {role && <Chip label={role} size="small" color="primary" variant="outlined" sx={{ mb: 1 }} />}
 
-      <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1, mt: 2 }}>
+      <Box sx={{ display: "flex", justifyContent: "center", gap: 1, mt: 2 }}>
         {tournamentsWon > 0 && (
           <Chip
             icon={<TrophyIcon size={16} />}
-            label={`${tournamentsWon} victoire${tournamentsWon > 1 ? 's' : ''}`}
+            label={`${tournamentsWon} victoire${tournamentsWon > 1 ? "s" : ""}`}
             size="small"
             color="warning"
           />
         )}
         {discordId && (
-          <Chip
-            label="Discord lié"
-            size="small"
-            color="secondary"
-            variant="outlined"
-          />
+          <Chip label="Discord lié" size="small" color="secondary" variant="outlined" />
         )}
       </Box>
     </CardContent>
   );
 
   const actions = showActions && (
-    <CardActions sx={{ justifyContent: 'center', pb: 2 }}>
+    <CardActions sx={{ justifyContent: "center", pb: 2 }}>
       <Button size="small" onClick={onClick}>
         Voir profil
       </Button>
@@ -209,8 +186,8 @@ export function UserCard({
 
   if (onClick && !showActions) {
     return (
-      <Card sx={{ height: '100%' }}>
-        <CardActionArea onClick={onClick} sx={{ height: '100%' }}>
+      <Card sx={{ height: "100%" }}>
+        <CardActionArea onClick={onClick} sx={{ height: "100%" }}>
           {cardContent}
         </CardActionArea>
       </Card>
@@ -218,7 +195,7 @@ export function UserCard({
   }
 
   return (
-    <Card sx={{ height: '100%' }}>
+    <Card sx={{ height: "100%" }}>
       {cardContent}
       {actions}
     </Card>

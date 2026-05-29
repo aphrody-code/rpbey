@@ -1,39 +1,25 @@
-'use client';
+"use client";
 
-import {
-  CalendarMonth,
-  PlayArrow,
-  Replay,
-  Search,
-  Theaters,
-  Translate,
-} from '@mui/icons-material';
-import {
-  Box,
-  Button,
-  Chip,
-  InputAdornment,
-  TextField,
-  Typography,
-} from '@mui/material';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useEffect, useMemo, useState } from 'react';
-import { getSeriesProgress } from '@/server/actions/anime-progress';
-import { EpisodeGrid } from './EpisodeGrid';
+import { CalendarMonth, PlayArrow, Replay, Search, Theaters, Translate } from "@mui/icons-material";
+import { Box, Button, Chip, InputAdornment, TextField, Typography } from "@mui/material";
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useMemo, useState } from "react";
+import { getSeriesProgress } from "@/server/actions/anime-progress";
+import { EpisodeGrid } from "./EpisodeGrid";
 
 const GENERATION_COLORS: Record<string, string> = {
-  ORIGINAL: '#1565C0',
-  METAL: '#E65100',
-  BURST: '#C62828',
-  X: '#7B1FA2',
+  ORIGINAL: "#1565C0",
+  METAL: "#E65100",
+  BURST: "#C62828",
+  X: "#7B1FA2",
 };
 
 const GENERATION_NAMES: Record<string, string> = {
-  ORIGINAL: 'Série Originale',
-  METAL: 'Metal Saga',
-  BURST: 'Burst',
-  X: 'Beyblade X',
+  ORIGINAL: "Série Originale",
+  METAL: "Metal Saga",
+  BURST: "Burst",
+  X: "Beyblade X",
 };
 
 interface Episode {
@@ -65,14 +51,12 @@ export function SeriesDetail({ series }: { series: SeriesData }) {
   const [progressMap, setProgressMap] = useState<
     Record<string, { progressTime: number; status: string }>
   >({});
-  const [search, setSearch] = useState('');
-  const accentColor = GENERATION_COLORS[series.generation] || '#7B1FA2';
+  const [search, setSearch] = useState("");
+  const accentColor = GENERATION_COLORS[series.generation] || "#7B1FA2";
 
   useEffect(() => {
     getSeriesProgress(series.id).then((data) => {
-      setProgressMap(
-        data as Record<string, { progressTime: number; status: string }>,
-      );
+      setProgressMap(data as Record<string, { progressTime: number; status: string }>);
     });
   }, [series.id]);
 
@@ -81,7 +65,7 @@ export function SeriesDetail({ series }: { series: SeriesData }) {
     let latest: { number: number; progressTime: number } | null = null;
     for (const ep of series.episodes) {
       const prog = progressMap[ep.id];
-      if (prog && prog.status === 'IN_PROGRESS') {
+      if (prog && prog.status === "IN_PROGRESS") {
         if (!latest || ep.number > latest.number) {
           latest = { number: ep.number, progressTime: prog.progressTime };
         }
@@ -106,7 +90,7 @@ export function SeriesDetail({ series }: { series: SeriesData }) {
     let count = 0;
     for (const ep of series.episodes) {
       const prog = progressMap[ep.id];
-      if (prog && prog.status === 'COMPLETED') count++;
+      if (prog && prog.status === "COMPLETED") count++;
     }
     return count;
   }, [progressMap, series.episodes]);
@@ -125,32 +109,32 @@ export function SeriesDetail({ series }: { series: SeriesData }) {
   }, [search, series.episodes]);
 
   return (
-    <Box sx={{ minHeight: '100vh', bgcolor: '#0a0a0a', pb: { xs: 4, md: 8 } }}>
+    <Box sx={{ minHeight: "100vh", bgcolor: "#0a0a0a", pb: { xs: 4, md: 8 } }}>
       {/* Hero banner */}
       <Box
         sx={{
-          position: 'relative',
-          width: '100%',
-          height: { xs: '55svh', sm: 350, md: 450 },
+          position: "relative",
+          width: "100%",
+          height: { xs: "55svh", sm: 350, md: 450 },
           minHeight: { xs: 320, md: 450 },
           maxHeight: { xs: 500, md: 450 },
-          overflow: 'hidden',
+          overflow: "hidden",
         }}
       >
         {series.bannerUrl || series.posterUrl ? (
           <Image
-            src={series.bannerUrl || series.posterUrl || ''}
+            src={series.bannerUrl || series.posterUrl || ""}
             alt={series.titleFr || series.title}
             fill
             priority
             sizes="100vw"
-            style={{ objectFit: 'cover', objectPosition: 'center 20%' }}
+            style={{ objectFit: "cover", objectPosition: "center 20%" }}
           />
         ) : (
           <Box
             sx={{
-              width: '100%',
-              height: '100%',
+              width: "100%",
+              height: "100%",
               background: `linear-gradient(135deg, ${accentColor}40, #0a0a0a)`,
             }}
           />
@@ -158,22 +142,22 @@ export function SeriesDetail({ series }: { series: SeriesData }) {
         {/* Gradient bottom — stronger for mobile */}
         <Box
           sx={{
-            position: 'absolute',
+            position: "absolute",
             inset: 0,
             background: {
-              xs: 'linear-gradient(to top, #0a0a0a 0%, rgba(10,10,10,0.85) 30%, rgba(10,10,10,0.3) 60%, transparent 80%)',
-              md: 'linear-gradient(to top, #0a0a0a 0%, rgba(10,10,10,0.6) 40%, transparent 70%)',
+              xs: "linear-gradient(to top, #0a0a0a 0%, rgba(10,10,10,0.85) 30%, rgba(10,10,10,0.3) 60%, transparent 80%)",
+              md: "linear-gradient(to top, #0a0a0a 0%, rgba(10,10,10,0.6) 40%, transparent 70%)",
             },
           }}
         />
         {/* Gradient left */}
         <Box
           sx={{
-            position: 'absolute',
+            position: "absolute",
             inset: 0,
             background: {
-              xs: 'none',
-              md: 'linear-gradient(to right, rgba(10,10,10,0.8) 0%, transparent 50%)',
+              xs: "none",
+              md: "linear-gradient(to right, rgba(10,10,10,0.8) 0%, transparent 50%)",
             },
           }}
         />
@@ -182,20 +166,20 @@ export function SeriesDetail({ series }: { series: SeriesData }) {
       <Box
         sx={{
           maxWidth: 1400,
-          mx: 'auto',
+          mx: "auto",
           px: { xs: 2, md: 4 },
           mt: { xs: -16, md: -16 },
-          position: 'relative',
+          position: "relative",
           zIndex: 1,
         }}
       >
         {/* Mobile layout: centered poster + info */}
         <Box
           sx={{
-            display: { xs: 'flex', md: 'none' },
-            flexDirection: 'column',
-            alignItems: 'center',
-            textAlign: 'center',
+            display: { xs: "flex", md: "none" },
+            flexDirection: "column",
+            alignItems: "center",
+            textAlign: "center",
             mb: 3,
           }}
         >
@@ -210,10 +194,10 @@ export function SeriesDetail({ series }: { series: SeriesData }) {
             >
               <Box
                 sx={{
-                  position: 'relative',
-                  aspectRatio: '2/3',
+                  position: "relative",
+                  aspectRatio: "2/3",
                   borderRadius: 2.5,
-                  overflow: 'hidden',
+                  overflow: "hidden",
                   boxShadow: `0 12px 40px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.1)`,
                 }}
               >
@@ -222,7 +206,7 @@ export function SeriesDetail({ series }: { series: SeriesData }) {
                   alt={series.titleFr || series.title}
                   fill
                   sizes="140px"
-                  style={{ objectFit: 'cover' }}
+                  style={{ objectFit: "cover" }}
                 />
               </Box>
             </Box>
@@ -234,9 +218,9 @@ export function SeriesDetail({ series }: { series: SeriesData }) {
             size="small"
             sx={{
               bgcolor: accentColor,
-              color: 'white',
+              color: "white",
               fontWeight: 700,
-              fontSize: '0.7rem',
+              fontSize: "0.7rem",
               height: 24,
               mb: 1,
             }}
@@ -247,11 +231,11 @@ export function SeriesDetail({ series }: { series: SeriesData }) {
             component="h1"
             sx={{
               fontWeight: 900,
-              color: 'white',
+              color: "white",
               mb: 0.5,
-              fontSize: '1.5rem',
+              fontSize: "1.5rem",
               lineHeight: 1.1,
-              letterSpacing: '-0.02em',
+              letterSpacing: "-0.02em",
             }}
           >
             {series.titleFr || series.title}
@@ -261,9 +245,9 @@ export function SeriesDetail({ series }: { series: SeriesData }) {
             <Typography
               variant="body2"
               sx={{
-                color: 'rgba(255,255,255,0.4)',
+                color: "rgba(255,255,255,0.4)",
                 mb: 1,
-                fontSize: '0.8rem',
+                fontSize: "0.8rem",
               }}
             >
               {series.titleJp}
@@ -273,21 +257,21 @@ export function SeriesDetail({ series }: { series: SeriesData }) {
           {/* Meta chips — horizontal row */}
           <Box
             sx={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
               gap: 1.5,
               mb: 2,
-              flexWrap: 'wrap',
+              flexWrap: "wrap",
             }}
           >
             <Box
               sx={{
-                display: 'flex',
-                alignItems: 'center',
+                display: "flex",
+                alignItems: "center",
                 gap: 0.5,
-                color: 'rgba(255,255,255,0.5)',
-                fontSize: '0.75rem',
+                color: "rgba(255,255,255,0.5)",
+                fontSize: "0.75rem",
               }}
             >
               <CalendarMonth sx={{ fontSize: 14 }} />
@@ -295,11 +279,11 @@ export function SeriesDetail({ series }: { series: SeriesData }) {
             </Box>
             <Box
               sx={{
-                display: 'flex',
-                alignItems: 'center',
+                display: "flex",
+                alignItems: "center",
                 gap: 0.5,
-                color: 'rgba(255,255,255,0.5)',
-                fontSize: '0.75rem',
+                color: "rgba(255,255,255,0.5)",
+                fontSize: "0.75rem",
               }}
             >
               <Theaters sx={{ fontSize: 14 }} />
@@ -308,14 +292,12 @@ export function SeriesDetail({ series }: { series: SeriesData }) {
             {languages.length > 0 && (
               <Box
                 sx={{
-                  display: 'flex',
-                  alignItems: 'center',
+                  display: "flex",
+                  alignItems: "center",
                   gap: 0.5,
                 }}
               >
-                <Translate
-                  sx={{ fontSize: 14, color: 'rgba(255,255,255,0.5)' }}
-                />
+                <Translate sx={{ fontSize: 14, color: "rgba(255,255,255,0.5)" }} />
                 {languages.map((lang) => (
                   <Chip
                     key={lang}
@@ -323,16 +305,16 @@ export function SeriesDetail({ series }: { series: SeriesData }) {
                     size="small"
                     sx={{
                       height: 20,
-                      fontSize: '0.6rem',
+                      fontSize: "0.6rem",
                       fontWeight: 700,
                       bgcolor:
-                        lang === 'VF'
-                          ? 'rgba(59,130,246,0.25)'
-                          : lang === 'VOSTFR'
-                            ? 'rgba(var(--rpb-primary-rgb),0.25)'
-                            : 'rgba(255,255,255,0.08)',
-                      color: 'rgba(255,255,255,0.8)',
-                      border: '1px solid rgba(255,255,255,0.08)',
+                        lang === "VF"
+                          ? "rgba(59,130,246,0.25)"
+                          : lang === "VOSTFR"
+                            ? "rgba(var(--rpb-primary-rgb),0.25)"
+                            : "rgba(255,255,255,0.08)",
+                      color: "rgba(255,255,255,0.8)",
+                      border: "1px solid rgba(255,255,255,0.08)",
                     }}
                   />
                 ))}
@@ -344,11 +326,11 @@ export function SeriesDetail({ series }: { series: SeriesData }) {
                 size="small"
                 sx={{
                   height: 22,
-                  fontSize: '0.65rem',
+                  fontSize: "0.65rem",
                   fontWeight: 700,
-                  bgcolor: 'rgba(34,197,94,0.15)',
-                  color: '#22c55e',
-                  border: '1px solid rgba(34,197,94,0.2)',
+                  bgcolor: "rgba(34,197,94,0.15)",
+                  color: "#22c55e",
+                  border: "1px solid rgba(34,197,94,0.2)",
                 }}
               />
             )}
@@ -358,14 +340,14 @@ export function SeriesDetail({ series }: { series: SeriesData }) {
             <Typography
               variant="body2"
               sx={{
-                color: 'rgba(255,255,255,0.6)',
+                color: "rgba(255,255,255,0.6)",
                 mb: 2.5,
                 lineHeight: 1.6,
-                fontSize: '0.82rem',
-                display: '-webkit-box',
+                fontSize: "0.82rem",
+                display: "-webkit-box",
                 WebkitLineClamp: 3,
-                WebkitBoxOrient: 'vertical',
-                overflow: 'hidden',
+                WebkitBoxOrient: "vertical",
+                overflow: "hidden",
               }}
             >
               {series.synopsis}
@@ -373,7 +355,7 @@ export function SeriesDetail({ series }: { series: SeriesData }) {
           )}
 
           {/* Mobile action buttons — full width Netflix style */}
-          <Box sx={{ display: 'flex', gap: 1, width: '100%' }}>
+          <Box sx={{ display: "flex", gap: 1, width: "100%" }}>
             {resumeEpisode ? (
               <>
                 <Button
@@ -383,15 +365,15 @@ export function SeriesDetail({ series }: { series: SeriesData }) {
                   fullWidth
                   startIcon={<Replay />}
                   sx={{
-                    bgcolor: 'white',
-                    color: '#0a0a0a',
+                    bgcolor: "white",
+                    color: "#0a0a0a",
                     fontWeight: 800,
                     borderRadius: 1.5,
                     py: 1.4,
-                    textTransform: 'none',
-                    fontSize: '0.9rem',
+                    textTransform: "none",
+                    fontSize: "0.9rem",
                     minHeight: 48,
-                    '&:hover': { bgcolor: 'rgba(255,255,255,0.9)' },
+                    "&:hover": { bgcolor: "rgba(255,255,255,0.9)" },
                   }}
                 >
                   Reprendre EP {resumeEpisode.number}
@@ -402,19 +384,19 @@ export function SeriesDetail({ series }: { series: SeriesData }) {
                   variant="outlined"
                   startIcon={<PlayArrow />}
                   sx={{
-                    borderColor: 'rgba(255,255,255,0.3)',
-                    color: 'white',
+                    borderColor: "rgba(255,255,255,0.3)",
+                    color: "white",
                     fontWeight: 600,
                     borderRadius: 1.5,
                     py: 1.4,
                     px: 2,
-                    textTransform: 'none',
-                    fontSize: '0.8rem',
+                    textTransform: "none",
+                    fontSize: "0.8rem",
                     minHeight: 48,
                     flexShrink: 0,
-                    '&:hover': {
-                      borderColor: 'rgba(255,255,255,0.5)',
-                      bgcolor: 'rgba(255,255,255,0.05)',
+                    "&:hover": {
+                      borderColor: "rgba(255,255,255,0.5)",
+                      bgcolor: "rgba(255,255,255,0.05)",
                     },
                   }}
                 >
@@ -430,15 +412,15 @@ export function SeriesDetail({ series }: { series: SeriesData }) {
                   fullWidth
                   startIcon={<PlayArrow />}
                   sx={{
-                    bgcolor: 'white',
-                    color: '#0a0a0a',
+                    bgcolor: "white",
+                    color: "#0a0a0a",
                     fontWeight: 800,
                     borderRadius: 1.5,
                     py: 1.4,
-                    textTransform: 'none',
-                    fontSize: '0.9rem',
+                    textTransform: "none",
+                    fontSize: "0.9rem",
                     minHeight: 48,
-                    '&:hover': { bgcolor: 'rgba(255,255,255,0.9)' },
+                    "&:hover": { bgcolor: "rgba(255,255,255,0.9)" },
                   }}
                 >
                   Regarder l&apos;épisode 1
@@ -449,7 +431,7 @@ export function SeriesDetail({ series }: { series: SeriesData }) {
         </Box>
 
         {/* Desktop layout: poster + info side by side */}
-        <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 4, mb: 4 }}>
+        <Box sx={{ display: { xs: "none", md: "flex" }, gap: 4, mb: 4 }}>
           {/* Poster */}
           {series.posterUrl && (
             <Box
@@ -460,10 +442,10 @@ export function SeriesDetail({ series }: { series: SeriesData }) {
             >
               <Box
                 sx={{
-                  position: 'relative',
-                  aspectRatio: '2/3',
+                  position: "relative",
+                  aspectRatio: "2/3",
                   borderRadius: 3,
-                  overflow: 'hidden',
+                  overflow: "hidden",
                   boxShadow: `0 8px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.08)`,
                 }}
               >
@@ -472,7 +454,7 @@ export function SeriesDetail({ series }: { series: SeriesData }) {
                   alt={series.titleFr || series.title}
                   fill
                   sizes="200px"
-                  style={{ objectFit: 'cover' }}
+                  style={{ objectFit: "cover" }}
                 />
               </Box>
             </Box>
@@ -485,9 +467,9 @@ export function SeriesDetail({ series }: { series: SeriesData }) {
               size="small"
               sx={{
                 bgcolor: accentColor,
-                color: 'white',
+                color: "white",
                 fontWeight: 700,
-                fontSize: '0.7rem',
+                fontSize: "0.7rem",
                 height: 24,
                 mb: 1.5,
               }}
@@ -498,11 +480,11 @@ export function SeriesDetail({ series }: { series: SeriesData }) {
               component="h1"
               sx={{
                 fontWeight: 900,
-                color: 'white',
+                color: "white",
                 mb: 0.5,
-                fontSize: '2.5rem',
+                fontSize: "2.5rem",
                 lineHeight: 1.1,
-                letterSpacing: '-0.02em',
+                letterSpacing: "-0.02em",
               }}
             >
               {series.titleFr || series.title}
@@ -512,9 +494,9 @@ export function SeriesDetail({ series }: { series: SeriesData }) {
               <Typography
                 variant="body2"
                 sx={{
-                  color: 'rgba(255,255,255,0.4)',
+                  color: "rgba(255,255,255,0.4)",
                   mb: 1.5,
-                  fontSize: '0.85rem',
+                  fontSize: "0.85rem",
                 }}
               >
                 {series.titleJp}
@@ -524,20 +506,20 @@ export function SeriesDetail({ series }: { series: SeriesData }) {
             {/* Meta info chips */}
             <Box
               sx={{
-                display: 'flex',
-                alignItems: 'center',
+                display: "flex",
+                alignItems: "center",
                 gap: 1.5,
                 mb: 2.5,
-                flexWrap: 'wrap',
+                flexWrap: "wrap",
               }}
             >
               <Box
                 sx={{
-                  display: 'flex',
-                  alignItems: 'center',
+                  display: "flex",
+                  alignItems: "center",
                   gap: 0.5,
-                  color: 'rgba(255,255,255,0.5)',
-                  fontSize: '0.8rem',
+                  color: "rgba(255,255,255,0.5)",
+                  fontSize: "0.8rem",
                 }}
               >
                 <CalendarMonth sx={{ fontSize: 16 }} />
@@ -545,11 +527,11 @@ export function SeriesDetail({ series }: { series: SeriesData }) {
               </Box>
               <Box
                 sx={{
-                  display: 'flex',
-                  alignItems: 'center',
+                  display: "flex",
+                  alignItems: "center",
                   gap: 0.5,
-                  color: 'rgba(255,255,255,0.5)',
-                  fontSize: '0.8rem',
+                  color: "rgba(255,255,255,0.5)",
+                  fontSize: "0.8rem",
                 }}
               >
                 <Theaters sx={{ fontSize: 16 }} />
@@ -558,14 +540,12 @@ export function SeriesDetail({ series }: { series: SeriesData }) {
               {languages.length > 0 && (
                 <Box
                   sx={{
-                    display: 'flex',
-                    alignItems: 'center',
+                    display: "flex",
+                    alignItems: "center",
                     gap: 0.5,
                   }}
                 >
-                  <Translate
-                    sx={{ fontSize: 16, color: 'rgba(255,255,255,0.5)' }}
-                  />
+                  <Translate sx={{ fontSize: 16, color: "rgba(255,255,255,0.5)" }} />
                   {languages.map((lang) => (
                     <Chip
                       key={lang}
@@ -573,16 +553,16 @@ export function SeriesDetail({ series }: { series: SeriesData }) {
                       size="small"
                       sx={{
                         height: 20,
-                        fontSize: '0.6rem',
+                        fontSize: "0.6rem",
                         fontWeight: 700,
                         bgcolor:
-                          lang === 'VF'
-                            ? 'rgba(59,130,246,0.25)'
-                            : lang === 'VOSTFR'
-                              ? 'rgba(var(--rpb-primary-rgb),0.25)'
-                              : 'rgba(255,255,255,0.08)',
-                        color: 'rgba(255,255,255,0.8)',
-                        border: '1px solid rgba(255,255,255,0.08)',
+                          lang === "VF"
+                            ? "rgba(59,130,246,0.25)"
+                            : lang === "VOSTFR"
+                              ? "rgba(var(--rpb-primary-rgb),0.25)"
+                              : "rgba(255,255,255,0.08)",
+                        color: "rgba(255,255,255,0.8)",
+                        border: "1px solid rgba(255,255,255,0.08)",
                       }}
                     />
                   ))}
@@ -594,11 +574,11 @@ export function SeriesDetail({ series }: { series: SeriesData }) {
                   size="small"
                   sx={{
                     height: 22,
-                    fontSize: '0.65rem',
+                    fontSize: "0.65rem",
                     fontWeight: 700,
-                    bgcolor: 'rgba(34,197,94,0.15)',
-                    color: '#22c55e',
-                    border: '1px solid rgba(34,197,94,0.2)',
+                    bgcolor: "rgba(34,197,94,0.15)",
+                    color: "#22c55e",
+                    border: "1px solid rgba(34,197,94,0.2)",
                   }}
                 />
               )}
@@ -608,11 +588,11 @@ export function SeriesDetail({ series }: { series: SeriesData }) {
               <Typography
                 variant="body1"
                 sx={{
-                  color: 'rgba(255,255,255,0.7)',
+                  color: "rgba(255,255,255,0.7)",
                   maxWidth: 650,
                   mb: 3,
                   lineHeight: 1.7,
-                  fontSize: '0.9rem',
+                  fontSize: "0.9rem",
                 }}
               >
                 {series.synopsis}
@@ -620,7 +600,7 @@ export function SeriesDetail({ series }: { series: SeriesData }) {
             )}
 
             {/* Action buttons */}
-            <Box sx={{ display: 'flex', gap: 1.5, flexWrap: 'wrap' }}>
+            <Box sx={{ display: "flex", gap: 1.5, flexWrap: "wrap" }}>
               {resumeEpisode ? (
                 <Button
                   component={Link}
@@ -630,14 +610,14 @@ export function SeriesDetail({ series }: { series: SeriesData }) {
                   startIcon={<Replay />}
                   sx={{
                     bgcolor: accentColor,
-                    color: 'white',
+                    color: "white",
                     fontWeight: 700,
                     borderRadius: 2,
                     px: 3.5,
                     py: 1.2,
-                    textTransform: 'none',
-                    fontSize: '0.9rem',
-                    '&:hover': { bgcolor: `${accentColor}DD` },
+                    textTransform: "none",
+                    fontSize: "0.9rem",
+                    "&:hover": { bgcolor: `${accentColor}DD` },
                   }}
                 >
                   Reprendre EP {resumeEpisode.number}
@@ -651,15 +631,15 @@ export function SeriesDetail({ series }: { series: SeriesData }) {
                     size="large"
                     startIcon={<PlayArrow />}
                     sx={{
-                      bgcolor: 'white',
-                      color: '#0a0a0a',
+                      bgcolor: "white",
+                      color: "#0a0a0a",
                       fontWeight: 800,
                       borderRadius: 2,
                       px: 3.5,
                       py: 1.2,
-                      textTransform: 'none',
-                      fontSize: '0.9rem',
-                      '&:hover': { bgcolor: 'rgba(255,255,255,0.85)' },
+                      textTransform: "none",
+                      fontSize: "0.9rem",
+                      "&:hover": { bgcolor: "rgba(255,255,255,0.85)" },
                     }}
                   >
                     Regarder l&apos;épisode 1
@@ -674,17 +654,17 @@ export function SeriesDetail({ series }: { series: SeriesData }) {
                   size="large"
                   startIcon={<PlayArrow />}
                   sx={{
-                    borderColor: 'rgba(255,255,255,0.2)',
-                    color: 'rgba(255,255,255,0.7)',
+                    borderColor: "rgba(255,255,255,0.2)",
+                    color: "rgba(255,255,255,0.7)",
                     fontWeight: 600,
                     borderRadius: 2,
                     px: 3,
                     py: 1.2,
-                    textTransform: 'none',
-                    fontSize: '0.85rem',
-                    '&:hover': {
-                      borderColor: 'rgba(255,255,255,0.4)',
-                      bgcolor: 'rgba(255,255,255,0.05)',
+                    textTransform: "none",
+                    fontSize: "0.85rem",
+                    "&:hover": {
+                      borderColor: "rgba(255,255,255,0.4)",
+                      bgcolor: "rgba(255,255,255,0.05)",
                     },
                   }}
                 >
@@ -698,28 +678,25 @@ export function SeriesDetail({ series }: { series: SeriesData }) {
         {/* Episode list header */}
         <Box
           sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
             gap: 2,
             mb: { xs: 2, md: 3 },
             mt: { xs: 1, md: 0 },
-            flexWrap: 'wrap',
+            flexWrap: "wrap",
           }}
         >
           <Typography
             variant="h5"
             sx={{
               fontWeight: 800,
-              color: 'text.primary',
-              fontSize: { xs: '1rem', md: '1.3rem' },
+              color: "text.primary",
+              fontSize: { xs: "1rem", md: "1.3rem" },
             }}
           >
             Épisodes
-            <Box
-              component="span"
-              sx={{ color: 'rgba(255,255,255,0.3)', fontWeight: 500, ml: 1 }}
-            >
+            <Box component="span" sx={{ color: "rgba(255,255,255,0.3)", fontWeight: 500, ml: 1 }}>
               {filteredEpisodes.length !== series.episodes.length
                 ? `${filteredEpisodes.length} / ${series.episodes.length}`
                 : series.episodes.length}
@@ -737,34 +714,32 @@ export function SeriesDetail({ series }: { series: SeriesData }) {
                 input: {
                   startAdornment: (
                     <InputAdornment position="start">
-                      <Search
-                        sx={{ color: 'rgba(255,255,255,0.3)', fontSize: 18 }}
-                      />
+                      <Search sx={{ color: "rgba(255,255,255,0.3)", fontSize: 18 }} />
                     </InputAdornment>
                   ),
                 },
               }}
               sx={{
-                width: { xs: '100%', sm: 260 },
-                '& .MuiOutlinedInput-root': {
+                width: { xs: "100%", sm: 260 },
+                "& .MuiOutlinedInput-root": {
                   borderRadius: 2,
-                  bgcolor: 'rgba(255,255,255,0.04)',
-                  fontSize: '0.8rem',
-                  '& fieldset': {
-                    borderColor: 'rgba(255,255,255,0.08)',
+                  bgcolor: "rgba(255,255,255,0.04)",
+                  fontSize: "0.8rem",
+                  "& fieldset": {
+                    borderColor: "rgba(255,255,255,0.08)",
                   },
-                  '&:hover fieldset': {
-                    borderColor: 'rgba(255,255,255,0.15)',
+                  "&:hover fieldset": {
+                    borderColor: "rgba(255,255,255,0.15)",
                   },
-                  '&.Mui-focused fieldset': {
+                  "&.Mui-focused fieldset": {
                     borderColor: accentColor,
                     borderWidth: 1,
                   },
                 },
-                '& .MuiInputBase-input': {
-                  color: 'white',
-                  '&::placeholder': {
-                    color: 'rgba(255,255,255,0.3)',
+                "& .MuiInputBase-input": {
+                  color: "white",
+                  "&::placeholder": {
+                    color: "rgba(255,255,255,0.3)",
                     opacity: 1,
                   },
                 },
@@ -783,14 +758,12 @@ export function SeriesDetail({ series }: { series: SeriesData }) {
         {search && filteredEpisodes.length === 0 && (
           <Box
             sx={{
-              textAlign: 'center',
+              textAlign: "center",
               py: 8,
-              color: 'rgba(255,255,255,0.3)',
+              color: "rgba(255,255,255,0.3)",
             }}
           >
-            <Typography variant="body1">
-              Aucun épisode trouvé pour &quot;{search}&quot;
-            </Typography>
+            <Typography variant="body1">Aucun épisode trouvé pour &quot;{search}&quot;</Typography>
           </Box>
         )}
       </Box>

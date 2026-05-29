@@ -1,4 +1,4 @@
-import { type Thing, type WithContext } from 'schema-dts';
+import { type Thing, type WithContext } from "schema-dts";
 
 type JsonLdProps<T extends Thing> = {
   data: WithContext<T>;

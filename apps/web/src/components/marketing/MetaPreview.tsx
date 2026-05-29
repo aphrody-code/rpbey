@@ -1,27 +1,20 @@
-'use client';
+"use client";
 
-import {
-  Avatar,
-  Box,
-  Button,
-  LinearProgress,
-  Stack,
-  Typography,
-} from '@mui/material';
-import { alpha, useTheme } from '@mui/material/styles';
-import Link from 'next/link';
+import { Avatar, Box, Button, LinearProgress, Stack, Typography } from "@mui/material";
+import { alpha, useTheme } from "@mui/material/styles";
+import Link from "next/link";
 
 const CATEGORY_COLORS: Record<string, string> = {
-  Blade: '#dc2626',
-  Ratchet: '#fbbf24',
-  Bit: '#22c55e',
-  'Lock Chip': '#60a5fa',
-  'Assist Blade': '#a855f7',
+  Blade: "#dc2626",
+  Ratchet: "#fbbf24",
+  Bit: "#22c55e",
+  "Lock Chip": "#60a5fa",
+  "Assist Blade": "#a855f7",
 };
 
 const CATEGORY_PALETTE_KEY: Record<string, string | undefined> = {
-  Blade: 'primary',
-  Ratchet: 'secondary',
+  Blade: "primary",
+  Ratchet: "secondary",
 };
 
 export interface MetaPartPreview {
@@ -29,23 +22,23 @@ export interface MetaPartPreview {
   score: number;
   category: string;
   imageUrl?: string | null;
-  position_change: number | 'NEW';
+  position_change: number | "NEW";
 }
 
 interface MetaPreviewProps {
   parts: MetaPartPreview[];
 }
 
-function PositionBadge({ change }: { change: number | 'NEW' }) {
-  if (change === 'NEW') {
+function PositionBadge({ change }: { change: number | "NEW" }) {
+  if (change === "NEW") {
     return (
       <Typography
         component="span"
         sx={{
-          fontSize: '0.55rem',
+          fontSize: "0.55rem",
           fontWeight: 900,
-          color: '#22c55e',
-          bgcolor: 'rgba(34,197,94,0.12)',
+          color: "#22c55e",
+          bgcolor: "rgba(34,197,94,0.12)",
           px: 0.5,
           py: 0.15,
           borderRadius: 0.5,
@@ -59,10 +52,7 @@ function PositionBadge({ change }: { change: number | 'NEW' }) {
 
   if (change > 0) {
     return (
-      <Typography
-        component="span"
-        sx={{ fontSize: '0.6rem', fontWeight: 700, color: '#22c55e' }}
-      >
+      <Typography component="span" sx={{ fontSize: "0.6rem", fontWeight: 700, color: "#22c55e" }}>
         +{change}
       </Typography>
     );
@@ -70,10 +60,7 @@ function PositionBadge({ change }: { change: number | 'NEW' }) {
 
   if (change < 0) {
     return (
-      <Typography
-        component="span"
-        sx={{ fontSize: '0.6rem', fontWeight: 700, color: '#ef4444' }}
-      >
+      <Typography component="span" sx={{ fontSize: "0.6rem", fontWeight: 700, color: "#ef4444" }}>
         {change}
       </Typography>
     );
@@ -94,17 +81,15 @@ export function MetaPreview({ parts }: MetaPreviewProps) {
   }
 
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box sx={{ width: "100%" }}>
       <Stack spacing={2.5}>
         {Array.from(grouped.entries()).map(([category, categoryParts]) => {
           const paletteKey = CATEGORY_PALETTE_KEY[category];
           const color = paletteKey
-            ? ((theme.palette as unknown as Record<string, { main: string }>)[
-                paletteKey
-              ]?.main ??
+            ? ((theme.palette as unknown as Record<string, { main: string }>)[paletteKey]?.main ??
               CATEGORY_COLORS[category] ??
-              '#6b7280')
-            : CATEGORY_COLORS[category] || '#6b7280';
+              "#6b7280")
+            : CATEGORY_COLORS[category] || "#6b7280";
           const maxScore = Math.max(...categoryParts.map((p) => p.score), 1);
 
           return (
@@ -112,8 +97,8 @@ export function MetaPreview({ parts }: MetaPreviewProps) {
               {/* Category Header */}
               <Box
                 sx={{
-                  display: 'flex',
-                  alignItems: 'center',
+                  display: "flex",
+                  alignItems: "center",
                   gap: 1,
                   mb: 1,
                 }}
@@ -129,9 +114,9 @@ export function MetaPreview({ parts }: MetaPreviewProps) {
                 <Typography
                   sx={{
                     fontWeight: 900,
-                    fontSize: '0.75rem',
-                    letterSpacing: '-0.01em',
-                    textTransform: 'uppercase',
+                    fontSize: "0.75rem",
+                    letterSpacing: "-0.01em",
+                    textTransform: "uppercase",
                   }}
                 >
                   {category}
@@ -146,22 +131,22 @@ export function MetaPreview({ parts }: MetaPreviewProps) {
                     component={Link}
                     href="/meta"
                     sx={{
-                      display: 'flex',
-                      alignItems: 'center',
+                      display: "flex",
+                      alignItems: "center",
                       gap: 1.25,
                       px: 1.5,
                       py: 0.75,
                       borderRadius: 2,
-                      border: '1px solid',
+                      border: "1px solid",
                       borderColor: alpha(color, 0.08),
                       bgcolor: alpha(color, 0.03),
-                      textDecoration: 'none',
-                      color: 'inherit',
-                      transition: 'all 0.2s ease-out',
-                      '&:hover': {
+                      textDecoration: "none",
+                      color: "inherit",
+                      transition: "all 0.2s ease-out",
+                      "&:hover": {
                         bgcolor: alpha(color, 0.08),
                         borderColor: alpha(color, 0.2),
-                        transform: 'translateX(2px)',
+                        transform: "translateX(2px)",
                       },
                     }}
                   >
@@ -169,13 +154,10 @@ export function MetaPreview({ parts }: MetaPreviewProps) {
                     <Typography
                       sx={{
                         fontWeight: 900,
-                        fontSize: '0.75rem',
-                        color:
-                          i === 0
-                            ? color
-                            : alpha(theme.palette.text.primary, 0.3),
+                        fontSize: "0.75rem",
+                        color: i === 0 ? color : alpha(theme.palette.text.primary, 0.3),
                         width: 16,
-                        textAlign: 'center',
+                        textAlign: "center",
                         flexShrink: 0,
                       }}
                     >
@@ -190,9 +172,9 @@ export function MetaPreview({ parts }: MetaPreviewProps) {
                         sx={{
                           width: 32,
                           height: 32,
-                          bgcolor: 'transparent',
+                          bgcolor: "transparent",
                           flexShrink: 0,
-                          '& img': { objectFit: 'contain' },
+                          "& img": { objectFit: "contain" },
                         }}
                       >
                         {part.name.charAt(0)}
@@ -205,14 +187,14 @@ export function MetaPreview({ parts }: MetaPreviewProps) {
                           borderRadius: 1.5,
                           bgcolor: alpha(color, 0.1),
                           flexShrink: 0,
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
                         }}
                       >
                         <Typography
                           sx={{
-                            fontSize: '0.6rem',
+                            fontSize: "0.6rem",
                             fontWeight: 900,
                             color: alpha(color, 0.6),
                           }}
@@ -227,11 +209,11 @@ export function MetaPreview({ parts }: MetaPreviewProps) {
                       <Typography
                         sx={{
                           fontWeight: 700,
-                          fontSize: '0.78rem',
+                          fontSize: "0.78rem",
                           lineHeight: 1.2,
-                          overflow: 'hidden',
-                          textOverflow: 'ellipsis',
-                          whiteSpace: 'nowrap',
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                          whiteSpace: "nowrap",
                         }}
                       >
                         {part.name}
@@ -243,8 +225,8 @@ export function MetaPreview({ parts }: MetaPreviewProps) {
                           mt: 0.5,
                           height: 3,
                           borderRadius: 3,
-                          bgcolor: 'rgba(255,255,255,0.04)',
-                          '& .MuiLinearProgress-bar': {
+                          bgcolor: "rgba(255,255,255,0.04)",
+                          "& .MuiLinearProgress-bar": {
                             bgcolor: color,
                             borderRadius: 3,
                           },
@@ -255,18 +237,18 @@ export function MetaPreview({ parts }: MetaPreviewProps) {
                     {/* Score + Position Change */}
                     <Box
                       sx={{
-                        textAlign: 'right',
+                        textAlign: "right",
                         flexShrink: 0,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'flex-end',
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "flex-end",
                         gap: 0.25,
                       }}
                     >
                       <Typography
                         sx={{
                           fontWeight: 900,
-                          fontSize: '0.8rem',
+                          fontSize: "0.8rem",
                           color,
                         }}
                       >
@@ -282,14 +264,8 @@ export function MetaPreview({ parts }: MetaPreviewProps) {
         })}
       </Stack>
 
-      <Box sx={{ mt: 2.5, display: 'flex', gap: 2 }}>
-        <Button
-          variant="outlined"
-          fullWidth
-          sx={{ borderRadius: 2 }}
-          component={Link}
-          href="/meta"
-        >
+      <Box sx={{ mt: 2.5, display: "flex", gap: 2 }}>
+        <Button variant="outlined" fullWidth sx={{ borderRadius: 2 }} component={Link} href="/meta">
           Voir le Meta complet
         </Button>
       </Box>

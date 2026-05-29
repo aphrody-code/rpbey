@@ -1,5 +1,10 @@
-import { MessageFlags, PermissionFlagsBits, type CommandInteraction, type GuildMember } from "discord.js";
-import { type GuardFunction } from '@rpbey/discordx';
+import {
+  MessageFlags,
+  PermissionFlagsBits,
+  type CommandInteraction,
+  type GuildMember,
+} from "discord.js";
+import { type GuardFunction } from "@rpbey/discordx";
 
 export const ModeratorOnly: GuardFunction<CommandInteraction> = async (
   interaction,
@@ -11,7 +16,7 @@ export const ModeratorOnly: GuardFunction<CommandInteraction> = async (
   if (!member) {
     if (interaction.isRepliable()) {
       await interaction.reply({
-        content: 'Cette commande ne peut être utilisée que sur un serveur.',
+        content: "Cette commande ne peut être utilisée que sur un serveur.",
         flags: MessageFlags.Ephemeral,
       });
     }
@@ -29,7 +34,7 @@ export const ModeratorOnly: GuardFunction<CommandInteraction> = async (
   } else {
     if (interaction.isRepliable()) {
       await interaction.reply({
-        content: 'Seuls les modérateurs peuvent utiliser cette commande.',
+        content: "Seuls les modérateurs peuvent utiliser cette commande.",
         flags: MessageFlags.Ephemeral,
       });
     }

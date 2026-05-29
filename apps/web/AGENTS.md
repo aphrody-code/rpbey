@@ -16,16 +16,17 @@ runtime (`bun .next/standalone/apps/web/server.js`) · **Drizzle** (`@rpbey/db`)
 
 La migration a laissé un **split de mode assumé** entre les colonnes timestamp :
 
-| Tables | Mode Drizzle | `columnType` | Type JS attendu/retourné |
-|---|---|---|---|
-| **auth** : `users`, `accounts`, `sessions`, `verifications`, `twoFactors` | `mode:"date"` | `PgTimestamp` | **objet `Date`** |
-| **toutes les autres** (tournaments, profiles, decks, rankings, gacha, anime…) | `mode:"string"` | `PgTimestampString` | **string ISO** |
+| Tables                                                                        | Mode Drizzle    | `columnType`        | Type JS attendu/retourné |
+| ----------------------------------------------------------------------------- | --------------- | ------------------- | ------------------------ |
+| **auth** : `users`, `accounts`, `sessions`, `verifications`, `twoFactors`     | `mode:"date"`   | `PgTimestamp`       | **objet `Date`**         |
+| **toutes les autres** (tournaments, profiles, decks, rankings, gacha, anime…) | `mode:"string"` | `PgTimestampString` | **string ISO**           |
 
 Pourquoi : **better-auth écrit des `Date`** (→ ses tables doivent être date-mode,
 sinon `insert` 500 « Received an instance of Date »). Le reste du code applicatif,
 migré, manipule des **strings ISO**.
 
 **Conséquences pratiques :**
+
 - **Query / write une colonne auth** (`users.createdAt`, `sessions.expiresAt`, …) :
   passe un **`Date`**. Passer une string ISO → `TypeError: x.toISOString is not a function`
   (Drizzle date-mode appelle `.toISOString()` sur ta valeur).
@@ -42,6 +43,7 @@ migré, manipule des **strings ISO**.
 `data/*` exclus du tracing (`outputFileTracingExcludes`, anti-250 MB Vercel). Sans
 `deploy-web.sh` → **JS chunks 404 (site mort), images 404, rankings/tournois vides**.
 Le script (idempotent) :
+
 1. copie `.next/static` → standalone (chunks hash-matchés au `server.js` du build) + pré-crée `.next/cache` (sinon le runtime ISR `mkdir` est bloqué par systemd `ProtectSystem=strict` → `EROFS` en boucle + `InvariantError` manifest en cascade) ;
 2. symlink `public/` → `apps/cdn/assets/rpb-dashboard` (logos, parts, partners) ;
 3. copie `data/exports/B_TS*.json` (depuis le CDN — **pas** un symlink hors-racine, Turbopack le rejette au build) + `data/bey-library/` ;
@@ -49,15 +51,19 @@ Le script (idempotent) :
 5. copie le helper `@tobyg74/tiktok-api-dl/helper` dans le standalone (non tracé, lu via `__dirname`).
 
 **Déploiement en UNE commande** (recommandé) :
+
 ```bash
 bash ~/rpbey/scripts/ship-web.sh   # build turbopack → deploy-web.sh → restart → healthcheck
 ```
+
 Ou les étapes manuelles :
+
 ```bash
 cd ~/rpbey/apps/web && bun run build          # = next build --turbopack (cf. §3bis)
 bash ~/rpbey/scripts/deploy-web.sh            # ← ne JAMAIS oublier
 sudo systemctl restart rpbey-web.service
 ```
+
 Le serveur standalone fait `chdir` vers `.next/standalone/apps/web` → tout `readFile("data/…")`
 résout là (couvert par le symlink `data`).
 
@@ -75,7 +81,7 @@ résout là (couvert par le symlink `data`).
 
 ## 4. Pièges build (cf. `~/rpbey/docs/nextjs/README.md`)
 
-- **Fuite postgres → bundle client** : ne jamais importer en *runtime* `@rpbey/db`/`@/lib/db`
+- **Fuite postgres → bundle client** : ne jamais importer en _runtime_ `@rpbey/db`/`@/lib/db`
   depuis un module atteint par un client component. Les types se dérivent via
   `type Schema = typeof import("@rpbey/db").schema` (effacé). `lib/types.ts` = ré-export `@rpbey/types`.
 - **`@vidstack/react`** ship du JSX non-transpilé → `transpilePackages: ["@vidstack/react"]`.
@@ -91,6 +97,7 @@ Discord OAuth + email/password (Twitch retiré). `BETTER_AUTH_URL=https://rpbey.
 `useSecureCookies`, `cookiePrefix "rpb-auth"`. **`account.accountLinking.trustedProviders: ["discord","google"]`**
 (les users migrés ont `discordId` sans account discord → linking par email au 1er login).
 `callback` → `/api/auth/callback/discord` (redirect_uri whitelisté côté app Discord).
+
 - **Derrière nginx** : `advanced.ipAddress.ipAddressHeaders: ["x-real-ip","x-forwarded-for"]` OBLIGATOIRE — sinon better-auth voit `127.0.0.1` pour tous → bucket rate-limit partagé → 429 globaux. `rateLimit` 60s/200 par IP, `customRules: { "/get-session": false }` (pollé par `useSession`, read-only via cookieCache).
 
 ## 6. Validation & QA
@@ -100,6 +107,7 @@ bunx tsc --noEmit                       # 0 erreur (le build ignore les types)
 # QA visuel + erreurs console de toutes les pages :
 CHROME=/usr/local/bin/chromium bun ~/rpbey/scripts/shoot.ts   # → .shots/*.png + rapport
 ```
+
 QA : un 500 sur une page = bug ; les `failedReq` externes (avatars discord/challonge ORB,
 prefetch `_rsc`, 429 get-session sous martèlement) sont du bruit headless, pas des erreurs serveur.
 Vérifier le serveur : `journalctl -u rpbey-web.service | grep -iE "⨯|digest|toISOString|instance of Date"`.
@@ -128,4 +136,7 @@ retourne `null` si non-admin). Sans ça l'action est invocable par n'importe que
   - Les places de marché (`amazon.*`, `ebay.*`, `aliexpress.*`, etc.) sont étiquetées `link-only` et court-circuitées pour éviter des ralentissements inutiles.
   - Les plateformes WooCommerce / Shopify ne sont interrogées que pour les boutiques indépendantes (`isIndependent`), accélérant significativement le run.
   - Bypasses spécifiques (ex: queue-it sur `takaratomymall.jp`, timeouts HTTP/1.1 Akamai sur `bigw.com.au`).
-
+- **Optimisations Récentes (UI & SEO)** :
+  - **Résolution des URLs d'images pour le SEO** : Ajout du helper `getAbsoluteImageUrl` dans `seo-utils.ts` pour s'assurer que toutes les balises meta Open Graph (`og:image` / `twitter:image`) utilisent des URLs absolues complètes avec protocole et hôte.
+  - **CTA Flottant Discord** : Masquage automatique du CTA flottant sur toutes les pages `/comparateur*` (via `usePathname`) pour maximiser l'espace visuel et ne pas encombrer l'interface analytique et la comparaison des prix.
+  - **Améliorations de la Page de Comparaison** : Ajout de badges "MEILLEUR PRIX" sur l'offre la moins chère, d'une barre de spread visuelle pour situer les prix, de l'affichage des devises d'origine, et d'un style de boutons plus dynamique et épuré avec dégradés.

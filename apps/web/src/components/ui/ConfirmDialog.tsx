@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import Button from '@mui/material/Button';
-import CircularProgress from '@mui/material/CircularProgress';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import { type ReactNode, useCallback, useState } from 'react';
+import Button from "@mui/material/Button";
+import CircularProgress from "@mui/material/CircularProgress";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import { type ReactNode, useCallback, useState } from "react";
 
 interface ConfirmDialogProps {
   open: boolean;
@@ -15,7 +15,7 @@ interface ConfirmDialogProps {
   message: string | ReactNode;
   confirmText?: string;
   cancelText?: string;
-  confirmColor?: 'primary' | 'secondary' | 'error' | 'warning' | 'success';
+  confirmColor?: "primary" | "secondary" | "error" | "warning" | "success";
   loading?: boolean;
   onConfirm: () => void | Promise<void>;
   onCancel: () => void;
@@ -25,9 +25,9 @@ export function ConfirmDialog({
   open,
   title,
   message,
-  confirmText = 'Confirmer',
-  cancelText = 'Annuler',
-  confirmColor = 'primary',
+  confirmText = "Confirmer",
+  cancelText = "Annuler",
+  confirmColor = "primary",
   loading = false,
   onConfirm,
   onCancel,
@@ -56,10 +56,8 @@ export function ConfirmDialog({
     >
       <DialogTitle id="confirm-dialog-title">{title}</DialogTitle>
       <DialogContent>
-        {typeof message === 'string' ? (
-          <DialogContentText id="confirm-dialog-description">
-            {message}
-          </DialogContentText>
+        {typeof message === "string" ? (
+          <DialogContentText id="confirm-dialog-description">{message}</DialogContentText>
         ) : (
           message
         )}
@@ -74,11 +72,7 @@ export function ConfirmDialog({
           color={confirmColor}
           variant="contained"
           autoFocus
-          startIcon={
-            isLoading ? (
-              <CircularProgress size={16} color="inherit" />
-            ) : undefined
-          }
+          startIcon={isLoading ? <CircularProgress size={16} color="inherit" /> : undefined}
         >
           {confirmText}
         </Button>
@@ -93,7 +87,7 @@ interface UseConfirmDialogOptions {
   message: string | ReactNode;
   confirmText?: string;
   cancelText?: string;
-  confirmColor?: 'primary' | 'secondary' | 'error' | 'warning' | 'success';
+  confirmColor?: "primary" | "secondary" | "error" | "warning" | "success";
 }
 
 export function useConfirmDialog() {
@@ -103,18 +97,15 @@ export function useConfirmDialog() {
     resolve: ((confirmed: boolean) => void) | null;
   }>({
     open: false,
-    options: { title: '', message: '' },
+    options: { title: "", message: "" },
     resolve: null,
   });
 
-  const confirm = useCallback(
-    (options: UseConfirmDialogOptions): Promise<boolean> => {
-      return new Promise((resolve) => {
-        setDialogState({ open: true, options, resolve });
-      });
-    },
-    [],
-  );
+  const confirm = useCallback((options: UseConfirmDialogOptions): Promise<boolean> => {
+    return new Promise((resolve) => {
+      setDialogState({ open: true, options, resolve });
+    });
+  }, []);
 
   const handleConfirm = useCallback(() => {
     dialogState.resolve?.(true);

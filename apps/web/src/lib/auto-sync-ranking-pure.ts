@@ -14,14 +14,11 @@ export type SyncKind = "wb" | "satr" | "stardust" | "global" | null;
  *   - name ILIKE '%SATR%' / '%BBT%' / '%SUN AFTER%' → satr
  *   - sinon → global
  */
-export function classifyRanking(
-	categoryName: string | null | undefined,
-): SyncKind {
-	if (!categoryName) return "global";
-	const up = categoryName.toUpperCase();
-	if (up.includes("STARDUST")) return "stardust";
-	if (up.includes("WILD") || /\bWB\b/.test(up)) return "wb";
-	if (up.includes("SATR") || up.includes("SUN AFTER") || up.includes("BBT"))
-		return "satr";
-	return "global";
+export function classifyRanking(categoryName: string | null | undefined): SyncKind {
+  if (!categoryName) return "global";
+  const up = categoryName.toUpperCase();
+  if (up.includes("STARDUST")) return "stardust";
+  if (up.includes("WILD") || /\bWB\b/.test(up)) return "wb";
+  if (up.includes("SATR") || up.includes("SUN AFTER") || up.includes("BBT")) return "satr";
+  return "global";
 }

@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import Box from '@mui/material/Box';
-import { motion } from 'framer-motion';
-import Image from 'next/image';
-import type React from 'react';
-import { type RoleType } from '@/lib/role-colors';
+import Box from "@mui/material/Box";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import type React from "react";
+import { type RoleType } from "@/lib/role-colors";
 
 export interface RoleIconProps {
   /**
@@ -33,12 +33,12 @@ export interface RoleIconProps {
 }
 
 const ROLE_IMAGES: Record<RoleType, string> = {
-  ADMIN: '/logo-admin.webp',
-  MODO: '/logo-modo.webp',
-  RH: '/logo-rh.webp',
-  STAFF: '/logo-staff.webp',
-  ARBITRE: '/logo.webp',
-  DEFAULT: '/logo.webp',
+  ADMIN: "/logo-admin.webp",
+  MODO: "/logo-modo.webp",
+  RH: "/logo-rh.webp",
+  STAFF: "/logo-staff.webp",
+  ARBITRE: "/logo.webp",
+  DEFAULT: "/logo.webp",
 };
 
 export const RoleIcon: React.FC<RoleIconProps> = ({
@@ -56,10 +56,10 @@ export const RoleIcon: React.FC<RoleIconProps> = ({
       sx={{
         width: size,
         height: size,
-        display: 'inline-flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        position: 'relative',
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        position: "relative",
       }}
     >
       <motion.div
@@ -69,7 +69,7 @@ export const RoleIcon: React.FC<RoleIconProps> = ({
           duration: duration,
           ease: [0.34, 1.56, 0.64, 1], // Bouncy easeOutBack
         }}
-        style={{ width: '100%', height: '100%' }}
+        style={{ width: "100%", height: "100%" }}
       >
         <Image
           src={src}
@@ -77,11 +77,11 @@ export const RoleIcon: React.FC<RoleIconProps> = ({
           width={size}
           height={size}
           style={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'contain',
+            width: "100%",
+            height: "100%",
+            objectFit: "contain",
           }}
-          priority={role === 'ADMIN' || role === 'DEFAULT'}
+          priority={role === "ADMIN" || role === "DEFAULT"}
         />
       </motion.div>
     </Box>

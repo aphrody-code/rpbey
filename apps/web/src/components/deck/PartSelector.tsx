@@ -1,22 +1,18 @@
-'use client';
+"use client";
 
 /**
  * PartSelector - Autocomplete component for selecting Beyblade parts
  */
 
-import Autocomplete from '@mui/material/Autocomplete';
-import Avatar from '@mui/material/Avatar';
-import Box from '@mui/material/Box';
-import Chip from '@mui/material/Chip';
-import CircularProgress from '@mui/material/CircularProgress';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
-import { useCallback, useEffect, useState } from 'react';
-import {
-  type BeyType,
-  type Part,
-  type PartType,
-} from '@/lib/types';
+import Autocomplete from "@mui/material/Autocomplete";
+import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
+import Chip from "@mui/material/Chip";
+import CircularProgress from "@mui/material/CircularProgress";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import { useCallback, useEffect, useState } from "react";
+import { type BeyType, type Part, type PartType } from "@/lib/types";
 
 interface PartSelectorProps {
   type: PartType;
@@ -32,33 +28,33 @@ interface PartSelectorProps {
 
 function getBeyTypeColor(beyType: BeyType | null): string {
   switch (beyType) {
-    case 'ATTACK':
-      return '#ef4444'; // red
-    case 'DEFENSE':
-      return '#3b82f6'; // blue
-    case 'STAMINA':
-      return '#22c55e'; // green
-    case 'BALANCE':
-      return '#a855f7'; // purple
+    case "ATTACK":
+      return "#ef4444"; // red
+    case "DEFENSE":
+      return "#3b82f6"; // blue
+    case "STAMINA":
+      return "#22c55e"; // green
+    case "BALANCE":
+      return "#a855f7"; // purple
     default:
-      return '#6b7280'; // gray
+      return "#6b7280"; // gray
   }
 }
 
 function getPartTypeLabel(type: PartType): string {
   switch (type) {
-    case 'BLADE':
-      return 'Blade';
-    case 'RATCHET':
-      return 'Ratchet';
-    case 'BIT':
-      return 'Bit';
-    case 'LOCK_CHIP':
-      return 'Lock Chip';
-    case 'ASSIST_BLADE':
-      return 'Assist Blade';
+    case "BLADE":
+      return "Blade";
+    case "RATCHET":
+      return "Ratchet";
+    case "BIT":
+      return "Bit";
+    case "LOCK_CHIP":
+      return "Lock Chip";
+    case "ASSIST_BLADE":
+      return "Assist Blade";
     default:
-      return 'Part';
+      return "Part";
   }
 }
 
@@ -75,7 +71,7 @@ export function PartSelector({
 }: PartSelectorProps) {
   const [options, setOptions] = useState<Part[]>([]);
   const [loading, setLoading] = useState(false);
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState("");
 
   // Fetch parts on mount and when search changes
   const fetchParts = useCallback(
@@ -83,7 +79,7 @@ export function PartSelector({
       setLoading(true);
       try {
         const params = new URLSearchParams({ type });
-        if (search) params.set('search', search);
+        if (search) params.set("search", search);
 
         const response = await fetch(`/api/parts?${params}`);
         const result = await response.json();
@@ -93,7 +89,7 @@ export function PartSelector({
           setOptions(result.data);
         }
       } catch (err) {
-        console.error('Failed to fetch parts:', err);
+        console.error("Failed to fetch parts:", err);
       } finally {
         setLoading(false);
       }
@@ -134,22 +130,22 @@ export function PartSelector({
           label={label ?? getPartTypeLabel(type)}
           error={error}
           helperText={helperText}
-          variant={dark ? 'filled' : 'outlined'}
+          variant={dark ? "filled" : "outlined"}
           sx={
             dark
               ? {
-                  bgcolor: '#333',
+                  bgcolor: "#333",
                   borderRadius: 1,
-                  '& .MuiInputBase-root': {
-                    color: 'white',
-                    bgcolor: '#333',
+                  "& .MuiInputBase-root": {
+                    color: "white",
+                    bgcolor: "#333",
                   },
-                  '& .MuiInputLabel-root': { color: '#aaa' },
-                  '& .MuiInputLabel-root.Mui-focused': { color: '#fff' },
-                  '& .MuiFilledInput-root': {
-                    bgcolor: '#333',
-                    '&:hover': { bgcolor: '#444' },
-                    '&.Mui-focused': { bgcolor: '#444' },
+                  "& .MuiInputLabel-root": { color: "#aaa" },
+                  "& .MuiInputLabel-root.Mui-focused": { color: "#fff" },
+                  "& .MuiFilledInput-root": {
+                    bgcolor: "#333",
+                    "&:hover": { bgcolor: "#444" },
+                    "&.Mui-focused": { bgcolor: "#444" },
                   },
                 }
               : {}
@@ -161,9 +157,7 @@ export function PartSelector({
               ...params.slotProps.input,
               endAdornment: (
                 <>
-                  {loading ? (
-                    <CircularProgress color="inherit" size={20} />
-                  ) : null}
+                  {loading ? <CircularProgress color="inherit" size={20} /> : null}
                   {params.slotProps.input.endAdornment}
                 </>
               ),
@@ -178,7 +172,7 @@ export function PartSelector({
             component="li"
             key={key}
             {...rest}
-            sx={{ display: 'flex', alignItems: 'center', gap: 2, py: 1 }}
+            sx={{ display: "flex", alignItems: "center", gap: 2, py: 1 }}
           >
             <Avatar
               src={option.imageUrl || undefined}
@@ -186,18 +180,18 @@ export function PartSelector({
               sx={{
                 width: 48,
                 height: 48,
-                bgcolor: 'transparent',
-                border: '1px solid #333',
+                bgcolor: "transparent",
+                border: "1px solid #333",
               }}
             >
               {option.name.charAt(0)}
             </Avatar>
             <Box sx={{ flexGrow: 1 }}>
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+              <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
                 <Typography
                   variant="body2"
                   sx={{
-                    fontWeight: 'bold',
+                    fontWeight: "bold",
                   }}
                 >
                   {option.name}
@@ -208,9 +202,9 @@ export function PartSelector({
                     size="small"
                     sx={{
                       height: 16,
-                      fontSize: '0.6rem',
-                      bgcolor: '#444',
-                      color: '#fff',
+                      fontSize: "0.6rem",
+                      bgcolor: "#444",
+                      color: "#fff",
                     }}
                   />
                 )}
@@ -219,8 +213,8 @@ export function PartSelector({
               <Typography
                 variant="caption"
                 sx={{
-                  color: 'text.secondary',
-                  display: 'flex',
+                  color: "text.secondary",
+                  display: "flex",
                   gap: 1,
                   mt: 0.5,
                 }}
@@ -229,7 +223,7 @@ export function PartSelector({
                   <span
                     style={{
                       color: getBeyTypeColor(option.beyType),
-                      fontWeight: 'bold',
+                      fontWeight: "bold",
                     }}
                   >
                     {option.beyType}

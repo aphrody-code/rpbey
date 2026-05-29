@@ -12,22 +12,22 @@ import { Browser } from "@aphrody-code/bxc";
 const page = await Browser.newPage({ profile: "static" });
 await page.goto("https://example.com");
 console.log(await page.title());
-console.log(await page.markdown());   // HTML → GFM Markdown
+console.log(await page.markdown()); // HTML → GFM Markdown
 await page.close();
 ```
 
 ### `PageOptions`
 
-| Champ | Type | Détail |
-|---|---|---|
-| `profile` | `"static" \| "http" \| "fast" \| "stealth" \| "max"` | prioritaire sur `mode`. Décide du transport. |
-| `mode` | `"static" \| "full"` | `full` ⇒ `fast`. |
-| `headless` | `boolean` | défaut Linux `true`, Windows `false`. |
-| `viewport` | `{width,height}` | transmis en mode full. |
-| `userAgent` | `string` | header en `static`/`http`, CDP en full. |
-| `httpOpts` | `{ profile: "chrome131", timeoutMs }` | options curl-impersonate (profil `http`). |
-| `insecure` | `boolean` | bypass TLS. |
-| `cookies` | `string \| Cookie[]` | **clé pour bypass** : chemin de jar (Playwright/CDP/Netscape) ou tableau. Injecté avant toute navigation. |
+| Champ       | Type                                                 | Détail                                                                                                    |
+| ----------- | ---------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `profile`   | `"static" \| "http" \| "fast" \| "stealth" \| "max"` | prioritaire sur `mode`. Décide du transport.                                                              |
+| `mode`      | `"static" \| "full"`                                 | `full` ⇒ `fast`.                                                                                          |
+| `headless`  | `boolean`                                            | défaut Linux `true`, Windows `false`.                                                                     |
+| `viewport`  | `{width,height}`                                     | transmis en mode full.                                                                                    |
+| `userAgent` | `string`                                             | header en `static`/`http`, CDP en full.                                                                   |
+| `httpOpts`  | `{ profile: "chrome131", timeoutMs }`                | options curl-impersonate (profil `http`).                                                                 |
+| `insecure`  | `boolean`                                            | bypass TLS.                                                                                               |
+| `cookies`   | `string \| Cookie[]`                                 | **clé pour bypass** : chemin de jar (Playwright/CDP/Netscape) ou tableau. Injecté avant toute navigation. |
 
 ### Type de retour selon le profil
 
@@ -50,7 +50,7 @@ await page.close();
 ```ts
 const page = await Browser.newPage({
   profile: "http",
-  cookies: "./cookies/private/challonge.json",   // jar exporté d'un vrai navigateur
+  cookies: "./cookies/private/challonge.json", // jar exporté d'un vrai navigateur
   httpOpts: { profile: "chrome131" },
 });
 await page.goto("https://challonge.com/fr/B_TS5");

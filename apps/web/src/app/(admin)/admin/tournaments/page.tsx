@@ -1,12 +1,6 @@
-'use client';
+"use client";
 
-import {
-  CloudDownload,
-  Delete,
-  Edit,
-  Link as LinkIcon,
-  Search,
-} from '@mui/icons-material';
+import { CloudDownload, Delete, Edit, Link as LinkIcon, Search } from "@mui/icons-material";
 import {
   Box,
   Button, // Add Button here
@@ -26,29 +20,29 @@ import {
   TextField,
   Tooltip,
   Typography,
-} from '@mui/material';
-import TablePagination from '@mui/material/TablePagination';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { useCallback, useEffect, useState } from 'react';
+} from "@mui/material";
+import TablePagination from "@mui/material/TablePagination";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useCallback, useEffect, useState } from "react";
 import {
   PageHeader,
   useConfirmDialog,
   useToast,
   // Remove Button from here
-} from '@/components/ui';
-import { type Tournament } from '@/lib/types';
-import { useDebounce } from '@/hooks/use-debounce';
-import { formatDateShort } from '@/lib/utils';
-import { getTournamentCategories } from '@/server/actions/ranking';
+} from "@/components/ui";
+import { type Tournament } from "@/lib/types";
+import { useDebounce } from "@/hooks/use-debounce";
+import { formatDateShort } from "@/lib/utils";
+import { getTournamentCategories } from "@/server/actions/ranking";
 import {
   createTournament,
   deleteTournament,
   getTournaments,
   type TournamentInput,
   updateTournament,
-} from './actions';
-import { CommunitySyncDialog } from './CommunitySyncDialog';
-import { TournamentDialog } from './TournamentDialog';
+} from "./actions";
+import { CommunitySyncDialog } from "./CommunitySyncDialog";
+import { TournamentDialog } from "./TournamentDialog";
 
 export default function AdminTournamentsPage() {
   const searchParams = useSearchParams();
@@ -56,16 +50,13 @@ export default function AdminTournamentsPage() {
   const [tournaments, setTournaments] = useState<
     (Tournament & { _count: { participants: number } })[]
   >([]);
-  const [categories, setCategories] = useState<{ id: string; name: string }[]>(
-    [],
-  );
+  const [categories, setCategories] = useState<{ id: string; name: string }[]>([]);
   const [loading, setLoading] = useState(true);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [syncDialogOpen, setSyncDialogOpen] = useState(false);
-  const [selectedTournament, setSelectedTournament] =
-    useState<Tournament | null>(null);
+  const [selectedTournament, setSelectedTournament] = useState<Tournament | null>(null);
   const [submitting, setSubmitting] = useState(false);
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [total, setTotal] = useState(0);
@@ -76,10 +67,10 @@ export default function AdminTournamentsPage() {
   });
 
   useEffect(() => {
-    if (searchParams.get('action') === 'new') {
+    if (searchParams.get("action") === "new") {
       setDialogOpen(true);
       // Clean up URL
-      router.replace('/admin/tournaments');
+      router.replace("/admin/tournaments");
     }
   }, [searchParams, router]);
 
@@ -91,11 +82,10 @@ export default function AdminTournamentsPage() {
   const fetchTournaments = useCallback(async () => {
     setLoading(true);
     try {
-      const [{ tournaments: data, total: totalCount, summary: stats }, cats] =
-        await Promise.all([
-          getTournaments(page + 1, rowsPerPage, debouncedSearch),
-          getTournamentCategories(),
-        ]);
+      const [{ tournaments: data, total: totalCount, summary: stats }, cats] = await Promise.all([
+        getTournaments(page + 1, rowsPerPage, debouncedSearch),
+        getTournamentCategories(),
+      ]);
 
       setTournaments(
         data as unknown as (Tournament & {
@@ -106,7 +96,7 @@ export default function AdminTournamentsPage() {
       setSummary(stats);
       setCategories(cats);
     } catch {
-      showToast('Erreur lors de la récupération des tournois', 'error');
+      showToast("Erreur lors de la récupération des tournois", "error");
     } finally {
       setLoading(false);
     }
@@ -120,9 +110,7 @@ export default function AdminTournamentsPage() {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) => {
+  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
@@ -143,19 +131,19 @@ export default function AdminTournamentsPage() {
 
   const handleDelete = async (tournament: Tournament) => {
     const confirmed = await confirm({
-      title: 'Supprimer le tournoi',
+      title: "Supprimer le tournoi",
       message: `Êtes-vous sûr de vouloir supprimer "${tournament.name}" ? Tous les participants seront également retirés.`,
-      confirmText: 'Supprimer',
-      confirmColor: 'error',
+      confirmText: "Supprimer",
+      confirmColor: "error",
     });
 
     if (confirmed) {
       try {
         await deleteTournament(tournament.id);
-        showToast('Tournoi supprimé avec succès', 'success');
+        showToast("Tournoi supprimé avec succès", "success");
         fetchTournaments();
       } catch {
-        showToast('Erreur lors de la suppression', 'error');
+        showToast("Erreur lors de la suppression", "error");
       }
     }
   };
@@ -165,50 +153,47 @@ export default function AdminTournamentsPage() {
     try {
       if (selectedTournament) {
         await updateTournament(selectedTournament.id, data);
-        showToast('Tournoi mis à jour', 'success');
+        showToast("Tournoi mis à jour", "success");
       } else {
         await createTournament(data);
-        showToast('Tournoi créé', 'success');
+        showToast("Tournoi créé", "success");
       }
       setDialogOpen(false);
       fetchTournaments();
     } catch {
-      showToast("Erreur lors de l'enregistrement", 'error');
+      showToast("Erreur lors de l'enregistrement", "error");
     } finally {
       setSubmitting(false);
     }
   };
 
-  const statusColors: Record<
-    string,
-    'success' | 'warning' | 'default' | 'info' | 'error'
-  > = {
-    REGISTRATION_OPEN: 'success',
-    REGISTRATION_CLOSED: 'warning',
-    UPCOMING: 'info',
-    COMPLETE: 'default',
-    UNDERWAY: 'success',
-    CHECKIN: 'info',
-    CANCELLED: 'error',
+  const statusColors: Record<string, "success" | "warning" | "default" | "info" | "error"> = {
+    REGISTRATION_OPEN: "success",
+    REGISTRATION_CLOSED: "warning",
+    UPCOMING: "info",
+    COMPLETE: "default",
+    UNDERWAY: "success",
+    CHECKIN: "info",
+    CANCELLED: "error",
   };
 
   const statusLabels: Record<string, string> = {
-    REGISTRATION_OPEN: 'Inscriptions ouvertes',
-    REGISTRATION_CLOSED: 'Inscriptions closes',
-    UPCOMING: 'À venir',
-    COMPLETE: 'Terminé',
-    UNDERWAY: 'En cours',
-    CHECKIN: 'Check-in',
-    CANCELLED: 'Annulé',
+    REGISTRATION_OPEN: "Inscriptions ouvertes",
+    REGISTRATION_CLOSED: "Inscriptions closes",
+    UPCOMING: "À venir",
+    COMPLETE: "Terminé",
+    UNDERWAY: "En cours",
+    CHECKIN: "Check-in",
+    CANCELLED: "Annulé",
   };
 
   return (
     <Box>
       <Box
         sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
           mb: 3,
         }}
       >
@@ -217,12 +202,8 @@ export default function AdminTournamentsPage() {
           description="Gérez les tournois Beyblade et les participants"
           actionLabel=""
         />
-        <Box sx={{ display: 'flex', gap: 2 }}>
-          <Button
-            variant="outlined"
-            startIcon={<CloudDownload />}
-            onClick={handleSyncCommunity}
-          >
+        <Box sx={{ display: "flex", gap: 2 }}>
+          <Button variant="outlined" startIcon={<CloudDownload />} onClick={handleSyncCommunity}>
             Sync Challonge
           </Button>
           <Button variant="contained" onClick={handleAdd}>
@@ -233,25 +214,25 @@ export default function AdminTournamentsPage() {
       {/* Stats */}
       <Grid container spacing={3} sx={{ mb: 4 }}>
         {[
-          { label: 'Total tournois', value: summary.totalTournaments },
-          { label: 'En cours / Ouverts', value: summary.activeTournaments },
-          { label: 'Participants totaux', value: summary.totalParticipants },
+          { label: "Total tournois", value: summary.totalTournaments },
+          { label: "En cours / Ouverts", value: summary.activeTournaments },
+          { label: "Participants totaux", value: summary.totalParticipants },
         ].map((stat) => (
           <Grid key={stat.label} size={{ xs: 12, sm: 4 }}>
             <Card
               elevation={0}
               sx={{
                 borderRadius: 3,
-                border: '1px solid',
-                borderColor: 'divider',
+                border: "1px solid",
+                borderColor: "divider",
               }}
             >
-              <CardContent sx={{ textAlign: 'center' }}>
+              <CardContent sx={{ textAlign: "center" }}>
                 <Typography
                   variant="h3"
                   color="primary"
                   sx={{
-                    fontWeight: 'bold',
+                    fontWeight: "bold",
                   }}
                 >
                   {stat.value}
@@ -259,7 +240,7 @@ export default function AdminTournamentsPage() {
                 <Typography
                   variant="body2"
                   sx={{
-                    color: 'text.secondary',
+                    color: "text.secondary",
                   }}
                 >
                   {stat.label}
@@ -286,15 +267,15 @@ export default function AdminTournamentsPage() {
             },
           }}
           sx={{
-            '& .MuiOutlinedInput-root': {
+            "& .MuiOutlinedInput-root": {
               borderRadius: 3,
-              bgcolor: 'background.paper',
+              bgcolor: "background.paper",
             },
           }}
         />
       </Box>
       {loading && tournaments.length === 0 ? (
-        <Box sx={{ display: 'flex', justifyContent: 'center', py: 8 }}>
+        <Box sx={{ display: "flex", justifyContent: "center", py: 8 }}>
           <CircularProgress />
         </Box>
       ) : (
@@ -302,23 +283,23 @@ export default function AdminTournamentsPage() {
           elevation={0}
           sx={{
             borderRadius: 3,
-            border: '1px solid',
-            borderColor: 'divider',
-            position: 'relative',
+            border: "1px solid",
+            borderColor: "divider",
+            position: "relative",
           }}
         >
           {loading && (
             <Box
               sx={{
-                position: 'absolute',
+                position: "absolute",
                 top: 0,
                 left: 0,
                 right: 0,
                 bottom: 0,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                bgcolor: 'rgba(255, 255, 255, 0.7)',
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                bgcolor: "rgba(255, 255, 255, 0.7)",
                 zIndex: 1,
                 borderRadius: 3,
               }}
@@ -343,7 +324,7 @@ export default function AdminTournamentsPage() {
                     <TableCell>
                       <Typography
                         sx={{
-                          fontWeight: 'bold',
+                          fontWeight: "bold",
                         }}
                       >
                         {tournament.name}
@@ -351,20 +332,18 @@ export default function AdminTournamentsPage() {
                       {tournament.challongeUrl && (
                         <Box
                           sx={{
-                            display: 'flex',
-                            alignItems: 'center',
+                            display: "flex",
+                            alignItems: "center",
                             gap: 0.5,
                             mt: 0.5,
                           }}
                         >
-                          <LinkIcon
-                            sx={{ fontSize: 12, color: 'text.secondary' }}
-                          />
+                          <LinkIcon sx={{ fontSize: 12, color: "text.secondary" }} />
                           <Typography
                             variant="caption"
                             noWrap
                             sx={{
-                              color: 'text.secondary',
+                              color: "text.secondary",
                               maxWidth: 200,
                             }}
                           >
@@ -379,20 +358,15 @@ export default function AdminTournamentsPage() {
                     </TableCell>
                     <TableCell>
                       <Chip
-                        label={
-                          statusLabels[tournament.status] || tournament.status
-                        }
-                        color={statusColors[tournament.status] || 'default'}
+                        label={statusLabels[tournament.status] || tournament.status}
+                        color={statusColors[tournament.status] || "default"}
                         size="small"
                       />
                     </TableCell>
                     <TableCell align="right">
-                      <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+                      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                         <Tooltip title="Modifier">
-                          <IconButton
-                            onClick={() => handleEdit(tournament)}
-                            size="small"
-                          >
+                          <IconButton onClick={() => handleEdit(tournament)} size="small">
                             <Edit fontSize="small" />
                           </IconButton>
                         </Tooltip>
@@ -414,7 +388,7 @@ export default function AdminTournamentsPage() {
                     <TableCell colSpan={5} align="center" sx={{ py: 4 }}>
                       <Typography
                         sx={{
-                          color: 'text.secondary',
+                          color: "text.secondary",
                         }}
                       >
                         Aucun tournoi trouvé

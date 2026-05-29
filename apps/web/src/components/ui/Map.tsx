@@ -1,15 +1,14 @@
-'use client';
+"use client";
 
-import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
-import L from 'leaflet';
+import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import L from "leaflet";
 
 // Fix for default marker icons in Next.js
 const customIcon = L.icon({
-  iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
-  iconRetinaUrl:
-    'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
-  shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+  iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
+  iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
+  shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
   iconSize: [25, 41],
   iconAnchor: [12, 41],
   popupAnchor: [1, -34],
@@ -22,16 +21,12 @@ interface MapProps {
   height?: number | string;
 }
 
-export default function LeafletMap({
-  position,
-  popupText,
-  height = '100%',
-}: MapProps) {
+export default function LeafletMap({ position, popupText, height = "100%" }: MapProps) {
   return (
     <MapContainer
       center={position}
       zoom={15}
-      style={{ height, width: '100%', borderRadius: 'inherit', zIndex: 0 }}
+      style={{ height, width: "100%", borderRadius: "inherit", zIndex: 0 }}
       scrollWheelZoom={false}
     >
       <TileLayer

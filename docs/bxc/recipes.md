@@ -39,11 +39,16 @@ JA3/JA4 spoofé) passe sans navigateur :
 bxc challonge "https://challonge.com/fr/B_TS5" --pretty
 # ou en lib :
 ```
+
 ```ts
-const page = await Browser.newPage({ profile: "http", cookies: "./cookies/private/challonge.json" });
+const page = await Browser.newPage({
+  profile: "http",
+  cookies: "./cookies/private/challonge.json",
+});
 await page.goto("https://challonge.com/fr/B_TS5");
 const html = await page.content();
 ```
+
 C'est ce que fait `packages/challonge` en prod.
 
 ## Checkpoint Vercel (bbxweekly) {#checkpoint-vercel-bbxweekly}
@@ -54,8 +59,9 @@ renvoient la page « Vercel Security Checkpoint » ; `fast` l'atteint mais ne
 résout pas le challenge en one-shot.
 
 **Solution de prod** (`apps/web/scripts/scrape-bbx-weekly.ts`) — chromium système
-+ stealth + **SwiftShader (WebGL logiciel)** + attente de la résolution, sous
-`xvfb`, exécuté par **bun** :
+
+- stealth + **SwiftShader (WebGL logiciel)** + attente de la résolution, sous
+  `xvfb`, exécuté par **bun** :
 
 ```bash
 cd apps/web
@@ -67,13 +73,17 @@ Ingrédients qui font passer le challenge (sinon boucle infinie « verifying »)
 
 ```js
 puppeteer.launch({
-  headless: false,                       // headful sous xvfb
+  headless: false, // headful sous xvfb
   executablePath: "/usr/local/bin/chromium",
   userDataDir: "/tmp/bbx-chrome-profile2", // persiste le cookie de clearance
   args: [
-    "--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-swiftshader",
-    "--enable-webgl", "--ignore-gpu-blocklist",
-    "--disable-blink-features=AutomationControlled", "--no-sandbox",
+    "--use-gl=angle",
+    "--use-angle=swiftshader",
+    "--enable-unsafe-swiftshader",
+    "--enable-webgl",
+    "--ignore-gpu-blocklist",
+    "--disable-blink-features=AutomationControlled",
+    "--no-sandbox",
   ],
 });
 // + puppeteer-extra-plugin-stealth (spoof navigator.webdriver / WebGL vendor)

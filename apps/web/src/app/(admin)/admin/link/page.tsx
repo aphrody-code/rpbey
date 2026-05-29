@@ -1,11 +1,6 @@
-'use client';
+"use client";
 
-import {
-  CheckCircle,
-  Link as LinkIcon,
-  Search,
-  SwapHoriz,
-} from '@mui/icons-material';
+import { CheckCircle, Link as LinkIcon, Search, SwapHoriz } from "@mui/icons-material";
 import {
   Alert,
   Autocomplete,
@@ -19,14 +14,14 @@ import {
   Stack,
   TextField,
   Typography,
-} from '@mui/material';
-import { useCallback, useEffect, useState, useTransition } from 'react';
-import { toast } from 'sonner';
+} from "@mui/material";
+import { useCallback, useEffect, useState, useTransition } from "react";
+import { toast } from "sonner";
 import {
   getAllRealUsers,
   getUnlinkedParticipants,
   mergeUserAccounts,
-} from '@/server/actions/admin-link';
+} from "@/server/actions/admin-link";
 
 interface UserOption {
   id: string;
@@ -43,24 +38,19 @@ export default function AdminLinkPage() {
   const [allUsers, setAllUsers] = useState<UserOption[]>([]);
   const [loading, setLoading] = useState(true);
   const [, startTransition] = useTransition();
-  const [selectedTournamentId, setSelectedTournamentId] = useState<
-    string | null
-  >(null);
+  const [selectedTournamentId, setSelectedTournamentId] = useState<string | null>(null);
 
   const loadData = useCallback(async () => {
     setLoading(true);
     try {
-      const [tData, uData] = await Promise.all([
-        getUnlinkedParticipants(),
-        getAllRealUsers(),
-      ]);
+      const [tData, uData] = await Promise.all([getUnlinkedParticipants(), getAllRealUsers()]);
       setTournaments(tData);
       setAllUsers(uData as UserOption[]);
       if (tData.length > 0 && !selectedTournamentId) {
         setSelectedTournamentId(tData[0]?.id || null);
       }
     } catch {
-      toast.error('Erreur de chargement');
+      toast.error("Erreur de chargement");
     } finally {
       setLoading(false);
     }
@@ -71,17 +61,12 @@ export default function AdminLinkPage() {
   }, [loadData]);
 
   const handleMerge = async (placeholderId: string, realUserId: string) => {
-    if (
-      !confirm(
-        "Fusionner ces deux comptes ? L'utilisateur temporaire sera supprimé.",
-      )
-    )
-      return;
+    if (!confirm("Fusionner ces deux comptes ? L'utilisateur temporaire sera supprimé.")) return;
 
     startTransition(async () => {
       try {
         await mergeUserAccounts(placeholderId, realUserId);
-        toast.success('Comptes fusionnés avec succès');
+        toast.success("Comptes fusionnés avec succès");
         loadData(); // Reload
       } catch (err: unknown) {
         toast.error(err instanceof Error ? err.message : String(err));
@@ -91,25 +76,23 @@ export default function AdminLinkPage() {
 
   if (loading) {
     return (
-      <Box sx={{ display: 'flex', justifyContent: 'center', py: 10 }}>
+      <Box sx={{ display: "flex", justifyContent: "center", py: 10 }}>
         <CircularProgress color="error" />
       </Box>
     );
   }
 
-  const activeTournament = tournaments.find(
-    (t) => t.id === selectedTournamentId,
-  );
+  const activeTournament = tournaments.find((t) => t.id === selectedTournamentId);
 
   return (
     <Box>
-      <Box sx={{ mb: 4, display: 'flex', alignItems: 'center', gap: 2 }}>
-        <LinkIcon sx={{ fontSize: 40, color: 'error.main' }} />
+      <Box sx={{ mb: 4, display: "flex", alignItems: "center", gap: 2 }}>
+        <LinkIcon sx={{ fontSize: 40, color: "error.main" }} />
         <Box>
           <Typography
             variant="h4"
             sx={{
-              fontWeight: '900',
+              fontWeight: "900",
             }}
           >
             LIAISON DE COMPTES
@@ -117,28 +100,23 @@ export default function AdminLinkPage() {
           <Typography
             variant="body2"
             sx={{
-              color: 'text.secondary',
+              color: "text.secondary",
             }}
           >
-            Associez les pseudos Challonge des tournois aux vrais comptes
-            Discord des joueurs.
+            Associez les pseudos Challonge des tournois aux vrais comptes Discord des joueurs.
           </Typography>
         </Box>
       </Box>
       {/* Selector */}
-      <Stack
-        direction="row"
-        spacing={1}
-        sx={{ mb: 4, overflowX: 'auto', pb: 1 }}
-      >
+      <Stack direction="row" spacing={1} sx={{ mb: 4, overflowX: "auto", pb: 1 }}>
         {tournaments.map((t) => (
           <Chip
             key={t.id}
             label={t.name}
             onClick={() => setSelectedTournamentId(t.id)}
-            color={selectedTournamentId === t.id ? 'error' : 'default'}
-            variant={selectedTournamentId === t.id ? 'filled' : 'outlined'}
-            sx={{ fontWeight: 'bold' }}
+            color={selectedTournamentId === t.id ? "error" : "default"}
+            variant={selectedTournamentId === t.id ? "filled" : "outlined"}
+            sx={{ fontWeight: "bold" }}
           />
         ))}
       </Stack>
@@ -150,8 +128,7 @@ export default function AdminLinkPage() {
             .filter((p) => p.user)
             .map((p) => {
               const isPlaceholder =
-                p.user?.email.includes('placeholder.rpb') ||
-                p.user?.email.includes('discord.rpb');
+                p.user?.email.includes("placeholder.rpb") || p.user?.email.includes("discord.rpb");
               const hasDiscordId = !!p.user?.discordId;
 
               return (
@@ -159,8 +136,8 @@ export default function AdminLinkPage() {
                   <Card
                     sx={{
                       borderRadius: 3,
-                      border: '1px solid',
-                      borderColor: isPlaceholder ? 'warning.main' : 'divider',
+                      border: "1px solid",
+                      borderColor: isPlaceholder ? "warning.main" : "divider",
                     }}
                   >
                     <CardContent sx={{ p: 2 }}>
@@ -168,7 +145,7 @@ export default function AdminLinkPage() {
                         container
                         spacing={2}
                         sx={{
-                          alignItems: 'center',
+                          alignItems: "center",
                         }}
                       >
                         {/* Left: Challonge Info */}
@@ -177,13 +154,10 @@ export default function AdminLinkPage() {
                             direction="row"
                             spacing={2}
                             sx={{
-                              alignItems: 'center',
+                              alignItems: "center",
                             }}
                           >
-                            <Avatar
-                              src={p.user?.image || undefined}
-                              sx={{ bgcolor: 'error.main' }}
-                            >
+                            <Avatar src={p.user?.image || undefined} sx={{ bgcolor: "error.main" }}>
                               {p.user?.name?.[0]}
                             </Avatar>
                             <Box sx={{ minWidth: 0 }}>
@@ -191,7 +165,7 @@ export default function AdminLinkPage() {
                                 variant="subtitle1"
                                 noWrap
                                 sx={{
-                                  fontWeight: '900',
+                                  fontWeight: "900",
                                 }}
                               >
                                 {p.user?.name}
@@ -199,8 +173,8 @@ export default function AdminLinkPage() {
                               <Typography
                                 variant="caption"
                                 sx={{
-                                  color: 'text.secondary',
-                                  display: 'block',
+                                  color: "text.secondary",
+                                  display: "block",
                                 }}
                               >
                                 ID Challonge: {p.challongeParticipantId}
@@ -212,7 +186,7 @@ export default function AdminLinkPage() {
                                   color="warning"
                                   sx={{
                                     height: 16,
-                                    fontSize: '0.6rem',
+                                    fontSize: "0.6rem",
                                     fontWeight: 900,
                                     mt: 0.5,
                                   }}
@@ -222,14 +196,10 @@ export default function AdminLinkPage() {
                                   label="LIÉ"
                                   size="small"
                                   color="success"
-                                  icon={
-                                    <CheckCircle
-                                      sx={{ fontSize: '10px !important' }}
-                                    />
-                                  }
+                                  icon={<CheckCircle sx={{ fontSize: "10px !important" }} />}
                                   sx={{
                                     height: 16,
-                                    fontSize: '0.6rem',
+                                    fontSize: "0.6rem",
                                     fontWeight: 900,
                                     mt: 0.5,
                                   }}
@@ -242,9 +212,9 @@ export default function AdminLinkPage() {
                         {/* Middle: Action */}
                         <Grid
                           size={{ xs: 12, md: 1 }}
-                          sx={{ display: 'flex', justifyContent: 'center' }}
+                          sx={{ display: "flex", justifyContent: "center" }}
                         >
-                          <SwapHoriz sx={{ color: 'text.disabled' }} />
+                          <SwapHoriz sx={{ color: "text.disabled" }} />
                         </Grid>
 
                         {/* Right: Discord Matcher */}
@@ -253,16 +223,14 @@ export default function AdminLinkPage() {
                             direction="row"
                             spacing={2}
                             sx={{
-                              alignItems: 'center',
+                              alignItems: "center",
                             }}
                           >
                             <Autocomplete
                               fullWidth
                               size="small"
                               options={allUsers}
-                              getOptionLabel={(option) =>
-                                `${option.name} (@${option.discordTag})`
-                              }
+                              getOptionLabel={(option) => `${option.name} (@${option.discordTag})`}
                               renderOption={(props, option) => (
                                 <Box component="li" {...props} sx={{ gap: 2 }}>
                                   <Avatar
@@ -273,7 +241,7 @@ export default function AdminLinkPage() {
                                     <Typography
                                       variant="body2"
                                       sx={{
-                                        fontWeight: 'bold',
+                                        fontWeight: "bold",
                                       }}
                                     >
                                       {option.name}
@@ -281,7 +249,7 @@ export default function AdminLinkPage() {
                                     <Typography
                                       variant="caption"
                                       sx={{
-                                        color: 'text.secondary',
+                                        color: "text.secondary",
                                       }}
                                     >
                                       @{option.discordTag}
@@ -290,9 +258,7 @@ export default function AdminLinkPage() {
                                 </Box>
                               )}
                               onChange={(_, newValue) => {
-                                if (newValue)
-                                  if (p.user?.id)
-                                    handleMerge(p.user.id, newValue.id);
+                                if (newValue) if (p.user?.id) handleMerge(p.user.id, newValue.id);
                               }}
                               renderInput={(params) => (
                                 <TextField
@@ -310,13 +276,10 @@ export default function AdminLinkPage() {
                                             fontSize="small"
                                             sx={{
                                               mr: 1,
-                                              color: 'text.disabled',
+                                              color: "text.disabled",
                                             }}
                                           />
-                                          {
-                                            params.slotProps.input
-                                              .startAdornment
-                                          }
+                                          {params.slotProps.input.startAdornment}
                                         </>
                                       ),
                                     },

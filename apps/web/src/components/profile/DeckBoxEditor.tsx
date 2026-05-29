@@ -1,20 +1,20 @@
-'use client';
+"use client";
 
-import CloseIcon from '@mui/icons-material/Close';
-import SaveIcon from '@mui/icons-material/Save';
-import ZoomInIcon from '@mui/icons-material/ZoomIn';
-import ZoomOutIcon from '@mui/icons-material/ZoomOut';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
-import IconButton from '@mui/material/IconButton';
-import Slider from '@mui/material/Slider';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
-import { useEffect, useRef, useState } from 'react';
+import CloseIcon from "@mui/icons-material/Close";
+import SaveIcon from "@mui/icons-material/Save";
+import ZoomInIcon from "@mui/icons-material/ZoomIn";
+import ZoomOutIcon from "@mui/icons-material/ZoomOut";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+import IconButton from "@mui/material/IconButton";
+import Slider from "@mui/material/Slider";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
+import { useEffect, useRef, useState } from "react";
 
 interface DeckBoxEditorProps {
   open: boolean;
@@ -33,33 +33,24 @@ interface Sticker {
 
 // Brand colors reference CSS variables so they adapt to the active theme
 const COLORS = [
-  { name: 'Primaire', cssVar: '--rpb-primary' },
-  { name: 'Secondaire', cssVar: '--rpb-secondary' },
-  { name: 'Blanc', cssVar: null, hex: '#ffffff' },
-  { name: 'Noir', cssVar: null, hex: '#000000' },
-  { name: 'Bleu', cssVar: null, hex: '#3b82f6' },
+  { name: "Primaire", cssVar: "--rpb-primary" },
+  { name: "Secondaire", cssVar: "--rpb-secondary" },
+  { name: "Blanc", cssVar: null, hex: "#ffffff" },
+  { name: "Noir", cssVar: null, hex: "#000000" },
+  { name: "Bleu", cssVar: null, hex: "#3b82f6" },
 ];
 
 function resolveColor(c: (typeof COLORS)[number]): string {
   if (c.cssVar) {
-    return getComputedStyle(document.documentElement)
-      .getPropertyValue(c.cssVar)
-      .trim();
+    return getComputedStyle(document.documentElement).getPropertyValue(c.cssVar).trim();
   }
   return c.hex!;
 }
 
-export function DeckBoxEditor({
-  open,
-  imageUrl,
-  onClose,
-  onSave,
-}: DeckBoxEditorProps) {
+export function DeckBoxEditor({ open, imageUrl, onClose, onSave }: DeckBoxEditorProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [stickers, setStickers] = useState<Sticker[]>([]);
-  const [selectedStickerId, setSelectedStickerId] = useState<string | null>(
-    null,
-  );
+  const [selectedStickerId, setSelectedStickerId] = useState<string | null>(null);
   const [bgImage, setBgImage] = useState<HTMLImageElement | null>(null);
   const [logoImage, setLogoImage] = useState<HTMLImageElement | null>(null);
 
@@ -67,12 +58,12 @@ export function DeckBoxEditor({
   useEffect(() => {
     const bg = new Image();
     bg.src = imageUrl;
-    bg.crossOrigin = 'anonymous';
+    bg.crossOrigin = "anonymous";
     bg.onload = () => setBgImage(bg);
 
     const logo = new Image();
-    logo.src = '/logo.webp';
-    logo.crossOrigin = 'anonymous';
+    logo.src = "/logo.webp";
+    logo.crossOrigin = "anonymous";
     logo.onload = () => setLogoImage(logo);
   }, [imageUrl]);
 
@@ -81,7 +72,7 @@ export function DeckBoxEditor({
     const canvas = canvasRef.current;
     if (!canvas || !bgImage || !logoImage) return;
 
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
     // Reset canvas to image size
@@ -100,13 +91,13 @@ export function DeckBoxEditor({
 
       // Draw tinted logo
       // 1. Draw logo to an offscreen canvas
-      const tempCanvas = document.createElement('canvas');
+      const tempCanvas = document.createElement("canvas");
       tempCanvas.width = logoImage.width;
       tempCanvas.height = logoImage.height;
-      const tCtx = tempCanvas.getContext('2d');
+      const tCtx = tempCanvas.getContext("2d");
       if (tCtx) {
         tCtx.drawImage(logoImage, 0, 0);
-        tCtx.globalCompositeOperation = 'source-in';
+        tCtx.globalCompositeOperation = "source-in";
         tCtx.fillStyle = sticker.color;
         tCtx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
       }
@@ -116,7 +107,7 @@ export function DeckBoxEditor({
 
       // Selection indicator
       if (sticker.id === selectedStickerId) {
-        ctx.strokeStyle = '#00ff00';
+        ctx.strokeStyle = "#00ff00";
         ctx.lineWidth = 5 / sticker.scale;
         ctx.strokeRect(
           -logoImage.width / 2,
@@ -138,14 +129,8 @@ export function DeckBoxEditor({
     const canvas = canvasRef.current;
     if (!canvas) return { x: 0, y: 0 };
     const rect = canvas.getBoundingClientRect();
-    const clientX =
-      'touches' in e
-        ? e.touches[0]?.clientX || 0
-        : (e as React.MouseEvent).clientX;
-    const clientY =
-      'touches' in e
-        ? e.touches[0]?.clientY || 0
-        : (e as React.MouseEvent).clientY;
+    const clientX = "touches" in e ? e.touches[0]?.clientX || 0 : (e as React.MouseEvent).clientX;
+    const clientY = "touches" in e ? e.touches[0]?.clientY || 0 : (e as React.MouseEvent).clientY;
 
     // Map screen coords to canvas internal coords
     const scaleX = canvas.width / rect.width;
@@ -168,10 +153,7 @@ export function DeckBoxEditor({
       const w = (logoImage?.width || 200) * s.scale;
       const h = (logoImage?.height || 200) * s.scale;
       return (
-        pos.x >= s.x - w / 2 &&
-        pos.x <= s.x + w / 2 &&
-        pos.y >= s.y - h / 2 &&
-        pos.y <= s.y + h / 2
+        pos.x >= s.x - w / 2 && pos.x <= s.x + w / 2 && pos.y >= s.y - h / 2 && pos.y <= s.y + h / 2
       );
     });
 
@@ -187,7 +169,7 @@ export function DeckBoxEditor({
   const handleMove = (e: React.MouseEvent | React.TouchEvent) => {
     if (!isDragging.current || !selectedStickerId) return;
     // Prevent scrolling on touch
-    if ('touches' in e) {
+    if ("touches" in e) {
       // e.preventDefault(); // Can't prevent default in passive listener? React handles this mostly.
     }
 
@@ -196,9 +178,7 @@ export function DeckBoxEditor({
     const dy = pos.y - lastPos.current.y;
 
     setStickers((prev) =>
-      prev.map((s) =>
-        s.id === selectedStickerId ? { ...s, x: s.x + dx, y: s.y + dy } : s,
-      ),
+      prev.map((s) => (s.id === selectedStickerId ? { ...s, x: s.x + dx, y: s.y + dy } : s)),
     );
 
     lastPos.current = pos;
@@ -225,9 +205,7 @@ export function DeckBoxEditor({
   const updateSelectedScale = (newScale: number) => {
     if (!selectedStickerId) return;
     setStickers((prev) =>
-      prev.map((s) =>
-        s.id === selectedStickerId ? { ...s, scale: newScale } : s,
-      ),
+      prev.map((s) => (s.id === selectedStickerId ? { ...s, scale: newScale } : s)),
     );
   };
 
@@ -257,7 +235,7 @@ export function DeckBoxEditor({
         (blob) => {
           if (blob) onSave(blob);
         },
-        'image/jpeg',
+        "image/jpeg",
         0.9,
       );
     }, 50);
@@ -270,23 +248,23 @@ export function DeckBoxEditor({
         <Stack
           spacing={2}
           sx={{
-            alignItems: 'center',
+            alignItems: "center",
           }}
         >
           <Box
             sx={{
-              width: '100%',
-              display: 'flex',
-              justifyContent: 'center',
-              bgcolor: '#111',
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+              bgcolor: "#111",
               borderRadius: 2,
-              overflow: 'hidden',
-              touchAction: 'none', // Prevent scrolling while dragging
+              overflow: "hidden",
+              touchAction: "none", // Prevent scrolling while dragging
             }}
           >
             <canvas
               ref={canvasRef}
-              style={{ maxWidth: '100%', height: 'auto' }}
+              style={{ maxWidth: "100%", height: "auto" }}
               onMouseDown={handleStart}
               onMouseMove={handleMove}
               onMouseUp={handleEnd}
@@ -298,7 +276,7 @@ export function DeckBoxEditor({
           </Box>
 
           {/* Controls */}
-          <Box sx={{ width: '100%' }}>
+          <Box sx={{ width: "100%" }}>
             <Typography variant="subtitle2" gutterBottom>
               Ajouter un Logo RPB
             </Typography>
@@ -310,12 +288,12 @@ export function DeckBoxEditor({
                   sx={{
                     width: 32,
                     height: 32,
-                    borderRadius: '50%',
+                    borderRadius: "50%",
                     bgcolor: c.cssVar ? `var(${c.cssVar})` : c.hex,
-                    border: '2px solid white',
-                    boxShadow: '0 2px 4px rgba(0,0,0,0.3)',
-                    cursor: 'pointer',
-                    '&:hover': { transform: 'scale(1.1)' },
+                    border: "2px solid white",
+                    boxShadow: "0 2px 4px rgba(0,0,0,0.3)",
+                    cursor: "pointer",
+                    "&:hover": { transform: "scale(1.1)" },
                   }}
                   title={c.name}
                 />
@@ -326,17 +304,17 @@ export function DeckBoxEditor({
               <Box
                 sx={{
                   p: 2,
-                  bgcolor: 'background.paper',
+                  bgcolor: "background.paper",
                   borderRadius: 2,
-                  border: '1px solid',
-                  borderColor: 'divider',
+                  border: "1px solid",
+                  borderColor: "divider",
                 }}
               >
                 <Stack
                   direction="row"
                   spacing={2}
                   sx={{
-                    alignItems: 'center',
+                    alignItems: "center",
                   }}
                 >
                   <ZoomOutIcon color="action" />
@@ -345,10 +323,7 @@ export function DeckBoxEditor({
                     min={0.05}
                     max={1.0}
                     step={0.01}
-                    value={
-                      stickers.find((s) => s.id === selectedStickerId)?.scale ||
-                      0.2
-                    }
+                    value={stickers.find((s) => s.id === selectedStickerId)?.scale || 0.2}
                     onChange={(_, v) => updateSelectedScale(v as number)}
                     sx={{ flexGrow: 1 }}
                   />
@@ -364,11 +339,7 @@ export function DeckBoxEditor({
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose}>Annuler</Button>
-        <Button
-          onClick={handleSave}
-          variant="contained"
-          startIcon={<SaveIcon />}
-        >
+        <Button onClick={handleSave} variant="contained" startIcon={<SaveIcon />}>
           Appliquer
         </Button>
       </DialogActions>

@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import CloseIcon from '@mui/icons-material/Close';
-import Button from '@mui/material/Button';
-import CircularProgress from '@mui/material/CircularProgress';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
-import IconButton from '@mui/material/IconButton';
-import { type FormEvent, type ReactNode, useCallback, useState } from 'react';
+import CloseIcon from "@mui/icons-material/Close";
+import Button from "@mui/material/Button";
+import CircularProgress from "@mui/material/CircularProgress";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+import IconButton from "@mui/material/IconButton";
+import { type FormEvent, type ReactNode, useCallback, useState } from "react";
 
 interface FormDialogProps {
   open: boolean;
@@ -18,7 +18,7 @@ interface FormDialogProps {
   cancelText?: string;
   loading?: boolean;
   disabled?: boolean;
-  maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+  maxWidth?: "xs" | "sm" | "md" | "lg" | "xl";
   onSubmit: () => void | Promise<void>;
   onClose: () => void;
 }
@@ -27,11 +27,11 @@ export function FormDialog({
   open,
   title,
   children,
-  submitText = 'Enregistrer',
-  cancelText = 'Annuler',
+  submitText = "Enregistrer",
+  cancelText = "Annuler",
   loading = false,
   disabled = false,
-  maxWidth = 'sm',
+  maxWidth = "sm",
   onSubmit,
   onClose,
 }: FormDialogProps) {
@@ -61,7 +61,7 @@ export function FormDialog({
       fullWidth
       slotProps={{
         paper: {
-          component: 'form',
+          component: "form",
           onSubmit: handleSubmit,
         },
       }}
@@ -73,7 +73,7 @@ export function FormDialog({
           onClick={onClose}
           disabled={isLoading}
           sx={{
-            position: 'absolute',
+            position: "absolute",
             right: 8,
             top: 8,
             color: (theme) => theme.palette.grey[500],
@@ -91,11 +91,7 @@ export function FormDialog({
           type="submit"
           disabled={isDisabled}
           variant="contained"
-          startIcon={
-            isLoading ? (
-              <CircularProgress size={16} color="inherit" />
-            ) : undefined
-          }
+          startIcon={isLoading ? <CircularProgress size={16} color="inherit" /> : undefined}
         >
           {submitText}
         </Button>

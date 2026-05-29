@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   alpha,
@@ -10,8 +10,8 @@ import {
   Typography,
   useMediaQuery,
   useTheme,
-} from '@mui/material';
-import useSWR from 'swr';
+} from "@mui/material";
+import useSWR from "swr";
 
 interface DiscordStats {
   online: number;
@@ -25,10 +25,10 @@ const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export default function DiscordStatusCard() {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   // Use SWR for real-time updates every 30s
-  const { data, error } = useSWR<DiscordStats>('/api/discord/stats', fetcher, {
+  const { data, error } = useSWR<DiscordStats>("/api/discord/stats", fetcher, {
     refreshInterval: 30000,
   });
 
@@ -38,33 +38,33 @@ export default function DiscordStatusCard() {
     <Card
       elevation={0}
       sx={{
-        background: `linear-gradient(135deg, ${alpha('#5865F2', 0.9)} 0%, ${alpha('#404EED', 0.95)} 100%)`,
+        background: `linear-gradient(135deg, ${alpha("#5865F2", 0.9)} 0%, ${alpha("#404EED", 0.95)} 100%)`,
         // MD3 Expressive shape - responsive
         borderRadius: { xs: 3, md: 4 },
-        position: 'relative',
-        overflow: 'hidden',
-        border: '1px solid',
-        borderColor: alpha('#fff', 0.1),
+        position: "relative",
+        overflow: "hidden",
+        border: "1px solid",
+        borderColor: alpha("#fff", 0.1),
         // Responsive shadow
         boxShadow: {
-          xs: '0 4px 20px rgba(88, 101, 242, 0.2)',
-          md: '0 8px 32px rgba(88, 101, 242, 0.25)',
+          xs: "0 4px 20px rgba(88, 101, 242, 0.2)",
+          md: "0 8px 32px rgba(88, 101, 242, 0.25)",
         },
       }}
     >
       {/* Discord Logo Watermark */}
       <Box
         sx={{
-          position: 'absolute',
+          position: "absolute",
           top: { xs: -15, md: -20 },
           right: { xs: -15, md: -20 },
           opacity: 0.1,
-          transform: 'rotate(-15deg)',
+          transform: "rotate(-15deg)",
         }}
       >
         <svg
-          width={isMobile ? '100' : '150'}
-          height={isMobile ? '100' : '150'}
+          width={isMobile ? "100" : "150"}
+          height={isMobile ? "100" : "150"}
           viewBox="0 0 127.14 96.36"
           fill="white"
         >
@@ -74,9 +74,9 @@ export default function DiscordStatusCard() {
       <CardContent sx={{ p: { xs: 2.5, md: 3 } }}>
         <Box
           sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'flex-start',
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "flex-start",
             mb: { xs: 1.5, md: 2 },
           }}
         >
@@ -86,10 +86,10 @@ export default function DiscordStatusCard() {
               color="white"
               gutterBottom
               sx={{
-                fontWeight: 'bold',
+                fontWeight: "bold",
 
                 // Fluid typography
-                fontSize: { xs: '1rem', sm: '1.1rem', md: '1.25rem' },
+                fontSize: { xs: "1rem", sm: "1.1rem", md: "1.25rem" },
               }}
             >
               Rejoins la communauté
@@ -97,45 +97,44 @@ export default function DiscordStatusCard() {
             <Typography
               variant="body2"
               sx={{
-                color: 'rgba(255,255,255,0.8)',
-                fontSize: { xs: '0.8rem', md: '0.875rem' },
+                color: "rgba(255,255,255,0.8)",
+                fontSize: { xs: "0.8rem", md: "0.875rem" },
                 lineHeight: 1.5,
               }}
             >
-              Discute, échange et participe aux tournois sur le serveur Discord
-              officiel.
+              Discute, échange et participe aux tournois sur le serveur Discord officiel.
             </Typography>
           </Box>
         </Box>
 
         <Box
           sx={{
-            display: 'flex',
+            display: "flex",
             gap: { xs: 0.75, md: 1 },
-            flexWrap: 'wrap',
+            flexWrap: "wrap",
             mb: { xs: 2, md: 3 },
           }}
         >
           <Chip
-            label={isLoading ? '...' : `${data?.online || 0} En ligne`}
+            label={isLoading ? "..." : `${data?.online || 0} En ligne`}
             sx={{
-              bgcolor: 'rgba(74, 222, 128, 0.2)',
-              color: '#4ade80',
-              fontWeight: 'bold',
-              border: '1px solid rgba(74, 222, 128, 0.3)',
-              fontSize: { xs: '0.7rem', md: '0.75rem' },
+              bgcolor: "rgba(74, 222, 128, 0.2)",
+              color: "#4ade80",
+              fontWeight: "bold",
+              border: "1px solid rgba(74, 222, 128, 0.3)",
+              fontSize: { xs: "0.7rem", md: "0.75rem" },
               height: { xs: 26, md: 28 },
             }}
             size="small"
           />
           <Chip
-            label={isLoading ? '...' : `${data?.inVoice || 0} En vocal`}
+            label={isLoading ? "..." : `${data?.inVoice || 0} En vocal`}
             sx={{
-              bgcolor: 'rgba(255, 255, 255, 0.1)',
-              color: 'white',
-              fontWeight: 'bold',
-              border: '1px solid rgba(255,255,255,0.2)',
-              fontSize: { xs: '0.7rem', md: '0.75rem' },
+              bgcolor: "rgba(255, 255, 255, 0.1)",
+              color: "white",
+              fontWeight: "bold",
+              border: "1px solid rgba(255,255,255,0.2)",
+              fontSize: { xs: "0.7rem", md: "0.75rem" },
               height: { xs: 26, md: 28 },
             }}
             size="small"
@@ -145,26 +144,26 @@ export default function DiscordStatusCard() {
         <Button
           variant="contained"
           fullWidth
-          href={data?.instantInvite || 'https://discord.gg/rpb'}
+          href={data?.instantInvite || "https://discord.gg/rpb"}
           target="_blank"
           rel="noopener noreferrer"
           sx={{
-            bgcolor: 'white',
-            color: '#5865F2',
+            bgcolor: "white",
+            color: "#5865F2",
             fontWeight: 800,
-            textTransform: 'none',
+            textTransform: "none",
             // Fluid typography + MD3 touch target
-            fontSize: { xs: '0.9rem', md: '1rem' },
+            fontSize: { xs: "0.9rem", md: "1rem" },
             py: { xs: 1.25, md: 1.5 },
             minHeight: { xs: 44, md: 48 },
             borderRadius: { xs: 2, md: 2 },
-            transition: 'all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)',
-            '&:hover': {
-              bgcolor: '#f0f0f0',
-              transform: 'scale(1.02)',
+            transition: "all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)",
+            "&:hover": {
+              bgcolor: "#f0f0f0",
+              transform: "scale(1.02)",
             },
-            '&:active': {
-              transform: 'scale(0.98)',
+            "&:active": {
+              transform: "scale(0.98)",
             },
           }}
         >

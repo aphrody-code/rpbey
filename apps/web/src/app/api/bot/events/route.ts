@@ -1,8 +1,8 @@
-import { type NextRequest } from 'next/server';
-import { BOT_API_KEY, getBotApiUrl } from '@/lib/bot-config';
+import { type NextRequest } from "next/server";
+import { BOT_API_KEY, getBotApiUrl } from "@/lib/bot-config";
 
-export const runtime = 'nodejs';
-export const dynamic = 'force-dynamic';
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 /**
  * Server-Sent Events bridge to the bot's WebSocket.
@@ -13,20 +13,16 @@ export const dynamic = 'force-dynamic';
  */
 export async function GET(req: NextRequest) {
   if (!BOT_API_KEY) {
-    return new Response('BOT_API_KEY not configured', { status: 500 });
+    return new Response("BOT_API_KEY not configured", { status: 500 });
   }
 
-  const topics = (
-    req.nextUrl.searchParams.get('topics') ?? 'logs,bot-events,discord-events'
-  )
-    .split(',')
+  const topics = (req.nextUrl.searchParams.get("topics") ?? "logs,bot-events,discord-events")
+    .split(",")
     .map((t) => t.trim())
     .filter(Boolean);
 
   const wsUrl =
-    getBotApiUrl().replace(/^http/, 'ws') +
-    '/ws?key=' +
-    encodeURIComponent(BOT_API_KEY);
+    getBotApiUrl().replace(/^http/, "ws") + "/ws?key=" + encodeURIComponent(BOT_API_KEY);
 
   const encoder = new TextEncoder();
   const stream = new ReadableStream<Uint8Array>({
@@ -44,17 +40,17 @@ export async function GET(req: NextRequest) {
 
       ws.onopen = () => {
         for (const topic of topics) {
-          ws.send(JSON.stringify({ action: 'subscribe', topic }));
+          ws.send(JSON.stringify({ action: "subscribe", topic }));
         }
-        sseWrite(JSON.stringify({ topic: 'sse-ready', topics }));
+        sseWrite(JSON.stringify({ topic: "sse-ready", topics }));
       };
 
       ws.onmessage = (e) => {
-        sseWrite(typeof e.data === 'string' ? e.data : e.data.toString());
+        sseWrite(typeof e.data === "string" ? e.data : e.data.toString());
       };
 
       ws.onerror = () => {
-        sseWrite(JSON.stringify({ topic: 'sse-error' }));
+        sseWrite(JSON.stringify({ topic: "sse-error" }));
       };
 
       ws.onclose = () => {
@@ -69,32 +65,36 @@ export async function GET(req: NextRequest) {
       // Keep-alive every 25s (some proxies drop idle connections at 30s).
       const ka = setInterval(() => {
         try {
-          controller.enqueue(encoder.encode(': keepalive\n\n'));
+          controller.enqueue(encoder.encode(": keepalive\n\n"));
         } catch {
           clearInterval(ka);
         }
       }, 25_000);
 
       // Close WS when the client disconnects.
-      req.signal.addEventListener('abort', () => {
+      req.signal.addEventListener("abort", () => {
         clearInterval(ka);
         closed = true;
         try {
           ws.close();
-        } catch { /* ignore */ }
+        } catch {
+          /* ignore */
+        }
         try {
           controller.close();
-        } catch { /* ignore */ }
+        } catch {
+          /* ignore */
+        }
       });
     },
   });
 
   return new Response(stream, {
     headers: {
-      'Content-Type': 'text/event-stream',
-      'Cache-Control': 'no-cache, no-transform',
-      Connection: 'keep-alive',
-      'X-Accel-Buffering': 'no',
+      "Content-Type": "text/event-stream",
+      "Cache-Control": "no-cache, no-transform",
+      Connection: "keep-alive",
+      "X-Accel-Buffering": "no",
     },
   });
 }

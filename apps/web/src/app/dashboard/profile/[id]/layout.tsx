@@ -1,15 +1,11 @@
-import { Box, CircularProgress } from '@mui/material';
-import { Suspense } from 'react';
+import { Box, CircularProgress } from "@mui/material";
+import { Suspense } from "react";
 
-export default function ProfileLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function ProfileLayout({ children }: { children: React.ReactNode }) {
   return (
     <Suspense
       fallback={
-        <Box sx={{ display: 'flex', justifyContent: 'center', py: 8 }}>
+        <Box sx={{ display: "flex", justifyContent: "center", py: 8 }}>
           <CircularProgress />
         </Box>
       }

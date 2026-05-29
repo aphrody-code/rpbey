@@ -1,23 +1,21 @@
-import { beforeEach, describe, expect, it, mock, jest } from 'bun:test';
+import { beforeEach, describe, expect, it, mock, jest } from "bun:test";
 
 const vi = {
   fn: mock,
   mock: mock.module,
   clearAllMocks: () => jest.clearAllMocks(),
 };
-import { RankingGroup } from '../commands/Beyblade/RankingGroup.js';
-import { createMockInteraction, mockPrisma } from './mocks.js';
+import { RankingGroup } from "../commands/Beyblade/RankingGroup.js";
+import { createMockInteraction, mockPrisma } from "./mocks.js";
 
 // Mock canvas utils
-vi.mock('../../lib/canvas-utils.js', () => ({
-  generateProfileCard: vi.fn().mockResolvedValue(Buffer.from('mock-image')),
-  generateLeaderboardCard: vi
-    .fn()
-    .mockResolvedValue(Buffer.from('mock-leaderboard')),
+vi.mock("../../lib/canvas-utils.js", () => ({
+  generateProfileCard: vi.fn().mockResolvedValue(Buffer.from("mock-image")),
+  generateLeaderboardCard: vi.fn().mockResolvedValue(Buffer.from("mock-leaderboard")),
 }));
 
 // Mock logger
-vi.mock('../../lib/logger.js', () => ({
+vi.mock("../../lib/logger.js", () => ({
   logger: {
     info: vi.fn(),
     error: vi.fn(),
@@ -25,7 +23,7 @@ vi.mock('../../lib/logger.js', () => ({
   },
 }));
 
-describe('RankingGroup', () => {
+describe("RankingGroup", () => {
   let rankingGroup: RankingGroup;
 
   beforeEach(() => {
@@ -33,25 +31,25 @@ describe('RankingGroup', () => {
     rankingGroup = new RankingGroup(mockPrisma);
   });
 
-  describe('profile', () => {
-    it('should show a profile when the user exists', async () => {
+  describe("profile", () => {
+    it("should show a profile when the user exists", async () => {
       const interaction = createMockInteraction({
-        commandName: 'profil',
-        user: { id: 'user123', displayName: 'BladerOne' },
+        commandName: "profil",
+        user: { id: "user123", displayName: "BladerOne" },
       });
 
       mockPrisma.user.findFirst.mockResolvedValue({
-        id: 'db-user-123',
-        discordId: 'user123',
+        id: "db-user-123",
+        discordId: "user123",
         createdAt: new Date(),
         _count: { tournaments: 5 },
         profile: {
-          bladerName: 'BladerOne',
+          bladerName: "BladerOne",
           rankingPoints: 1200,
           wins: 10,
           losses: 5,
           tournamentWins: 1,
-          bio: 'Test Bio',
+          bio: "Test Bio",
         },
       });
 
@@ -59,7 +57,7 @@ describe('RankingGroup', () => {
       mockPrisma.globalRanking.count.mockResolvedValue(10); // Rank #11
       mockPrisma.deck.findFirst.mockResolvedValue(null);
 
-      await rankingGroup.profile(undefined, 'rpb', interaction);
+      await rankingGroup.profile(undefined, "rpb", interaction);
 
       expect(interaction.deferReply).toHaveBeenCalled();
       expect(interaction.editReply).toHaveBeenCalledWith(
@@ -70,37 +68,35 @@ describe('RankingGroup', () => {
       );
     });
 
-    it('should show an error message if the user has no profile', async () => {
+    it("should show an error message if the user has no profile", async () => {
       const interaction = createMockInteraction({
-        commandName: 'profil',
-        user: { id: 'user-no-profile' },
+        commandName: "profil",
+        user: { id: "user-no-profile" },
       });
 
       mockPrisma.user.findFirst.mockResolvedValue(null);
 
-      await rankingGroup.profile(undefined, 'rpb', interaction);
+      await rankingGroup.profile(undefined, "rpb", interaction);
 
       expect(interaction.editReply).toHaveBeenCalledWith(
         expect.objectContaining({
-          content: expect.stringContaining(
-            "Tu n'as pas encore de profil Beyblade",
-          ),
+          content: expect.stringContaining("Tu n'as pas encore de profil Beyblade"),
         }),
       );
     });
   });
 
-  describe('leaderboard', () => {
-    it('should generate a leaderboard image', async () => {
+  describe("leaderboard", () => {
+    it("should generate a leaderboard image", async () => {
       const interaction = createMockInteraction({
-        commandName: 'top',
-        user: { id: 'admin' },
-        options: { format: 'image' },
+        commandName: "top",
+        user: { id: "admin" },
+        options: { format: "image" },
       });
 
       mockPrisma.globalRanking.findMany.mockResolvedValue([
         {
-          playerName: 'Top1',
+          playerName: "Top1",
           points: 5000,
           wins: 20,
           losses: 2,
@@ -108,7 +104,7 @@ describe('RankingGroup', () => {
         },
       ]);
 
-      await rankingGroup.leaderboard('image', interaction);
+      await rankingGroup.leaderboard("image", interaction);
 
       expect(interaction.editReply).toHaveBeenCalledWith(
         expect.objectContaining({

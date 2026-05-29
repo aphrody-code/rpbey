@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import CloseIcon from '@mui/icons-material/Close';
-import ExpandLessIcon from '@mui/icons-material/ExpandLess';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import CloseIcon from "@mui/icons-material/Close";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import {
   Box,
   Button,
@@ -21,15 +21,15 @@ import {
   ListItemText,
   Stack,
   Typography,
-} from '@mui/material';
-import Link from 'next/link';
-import { useState } from 'react';
-import { type WbBlader } from '@/lib/types';
+} from "@mui/material";
+import Link from "next/link";
+import { useState } from "react";
+import { type WbBlader } from "@/lib/types";
 import {
   getWbPlayerTournamentMatches,
   getWbTournamentMeta,
   getWbTournamentTop10,
-} from '@/server/actions/wb';
+} from "@/server/actions/wb";
 
 interface MatchDetail {
   opponent: string;
@@ -52,12 +52,8 @@ interface WbBladerDialogProps {
 }
 
 export function WbBladerDialog({ blader, open, onClose }: WbBladerDialogProps) {
-  const [expandedTournament, setExpandedTournament] = useState<string | null>(
-    null,
-  );
-  const [expandData, setExpandData] = useState<TournamentExpandData | null>(
-    null,
-  );
+  const [expandedTournament, setExpandedTournament] = useState<string | null>(null);
+  const [expandData, setExpandData] = useState<TournamentExpandData | null>(null);
   const [loading, setLoading] = useState(false);
 
   if (!blader) return null;
@@ -69,21 +65,18 @@ export function WbBladerDialog({ blader, open, onClose }: WbBladerDialogProps) {
     rank?: number;
   }>;
   const totalMatches = blader.totalWins + blader.totalLosses;
-  const winrate =
-    totalMatches > 0
-      ? ((blader.totalWins / totalMatches) * 100).toFixed(1)
-      : '0';
+  const winrate = totalMatches > 0 ? ((blader.totalWins / totalMatches) * 100).toFixed(1) : "0";
 
   const HS_DISPLAY_NAMES: Record<string, string> = {
-    wb_hs_patoo: 'HS: Défi Patoo',
-    wb_hs_phase2: 'HS: Phase 2',
+    wb_hs_patoo: "HS: Défi Patoo",
+    wb_hs_phase2: "HS: Phase 2",
   };
 
   const formatTournamentLabel = (slug: string) => {
     if (HS_DISPLAY_NAMES[slug]) return HS_DISPLAY_NAMES[slug];
     const ubMatch = slug.match(/wb_ub(\d+)/);
     if (ubMatch?.[1]) return `UB ${ubMatch[1]}`;
-    return slug.toUpperCase().replace('_', ' ');
+    return slug.toUpperCase().replace("_", " ");
   };
 
   const getChallongeUrl = (tournamentSlug: string) => {
@@ -110,10 +103,8 @@ export function WbBladerDialog({ blader, open, onClose }: WbBladerDialogProps) {
     setExpandData({
       top10: top10Res.success && top10Res.data ? top10Res.data : [],
       matches: matchesRes.success && matchesRes.data ? matchesRes.data : [],
-      participantsCount: metaRes.success
-        ? (metaRes.data?.participantsCount ?? 0)
-        : 0,
-      format: metaRes.success ? (metaRes.data?.format ?? '') : '',
+      participantsCount: metaRes.success ? (metaRes.data?.participantsCount ?? 0) : 0,
+      format: metaRes.success ? (metaRes.data?.format ?? "") : "",
     });
     setLoading(false);
   };
@@ -132,15 +123,15 @@ export function WbBladerDialog({ blader, open, onClose }: WbBladerDialogProps) {
         sx={{
           m: 0,
           p: 2,
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
         }}
       >
         <Typography
           variant="h6"
           sx={{
-            fontWeight: 'bold',
+            fontWeight: "bold",
           }}
         >
           Parcours : {blader.name}
@@ -156,7 +147,7 @@ export function WbBladerDialog({ blader, open, onClose }: WbBladerDialogProps) {
               <Typography
                 variant="caption"
                 sx={{
-                  color: 'text.secondary',
+                  color: "text.secondary",
                 }}
               >
                 Winrate
@@ -164,7 +155,7 @@ export function WbBladerDialog({ blader, open, onClose }: WbBladerDialogProps) {
               <Typography
                 variant="body1"
                 sx={{
-                  fontWeight: 'bold',
+                  fontWeight: "bold",
                 }}
               >
                 {winrate}%
@@ -174,7 +165,7 @@ export function WbBladerDialog({ blader, open, onClose }: WbBladerDialogProps) {
               <Typography
                 variant="caption"
                 sx={{
-                  color: 'text.secondary',
+                  color: "text.secondary",
                 }}
               >
                 Matchs
@@ -182,7 +173,7 @@ export function WbBladerDialog({ blader, open, onClose }: WbBladerDialogProps) {
               <Typography
                 variant="body1"
                 sx={{
-                  fontWeight: 'bold',
+                  fontWeight: "bold",
                 }}
               >
                 {totalMatches}
@@ -192,7 +183,7 @@ export function WbBladerDialog({ blader, open, onClose }: WbBladerDialogProps) {
               <Typography
                 variant="caption"
                 sx={{
-                  color: 'text.secondary',
+                  color: "text.secondary",
                 }}
               >
                 Tournois
@@ -200,7 +191,7 @@ export function WbBladerDialog({ blader, open, onClose }: WbBladerDialogProps) {
               <Typography
                 variant="body1"
                 sx={{
-                  fontWeight: 'bold',
+                  fontWeight: "bold",
                 }}
               >
                 {blader.tournamentsCount}
@@ -215,7 +206,7 @@ export function WbBladerDialog({ blader, open, onClose }: WbBladerDialogProps) {
               component={Link}
               href={`/profile/${blader.linkedUserId}`}
               fullWidth
-              sx={{ mb: 2, borderRadius: 2, textTransform: 'none' }}
+              sx={{ mb: 2, borderRadius: 2, textTransform: "none" }}
             >
               Voir le Profil RPB
             </Button>
@@ -223,24 +214,22 @@ export function WbBladerDialog({ blader, open, onClose }: WbBladerDialogProps) {
 
           <Divider />
         </Box>
-        <List sx={{ pt: 0, maxHeight: 500, overflow: 'auto' }}>
+        <List sx={{ pt: 0, maxHeight: 500, overflow: "auto" }}>
           {history
             .slice()
             .reverse()
             .map((h, index) => (
               <Box key={index}>
                 <ListItem
-                  divider={
-                    !expandedTournament || expandedTournament !== h.tournament
-                  }
-                  sx={{ cursor: 'pointer' }}
+                  divider={!expandedTournament || expandedTournament !== h.tournament}
+                  sx={{ cursor: "pointer" }}
                   onClick={() => handleToggleExpand(h.tournament)}
                   secondaryAction={
                     <Stack
                       direction="row"
                       spacing={1}
                       sx={{
-                        alignItems: 'center',
+                        alignItems: "center",
                       }}
                     >
                       <IconButton
@@ -266,52 +255,48 @@ export function WbBladerDialog({ blader, open, onClose }: WbBladerDialogProps) {
                     slotProps={{
                       primary: {
                         sx: {
-                          fontWeight: 'bold',
-                          fontSize: '0.9rem',
+                          fontWeight: "bold",
+                          fontSize: "0.9rem",
                         },
                       },
                     }}
                   />
                   <Chip
-                    label={`#${h.rank || '?'}`}
+                    label={`#${h.rank || "?"}`}
                     size="small"
-                    color={h.rank && h.rank <= 3 ? 'warning' : 'default'}
+                    color={h.rank && h.rank <= 3 ? "warning" : "default"}
                     sx={{
-                      fontWeight: 'bold',
+                      fontWeight: "bold",
                       mr: 2,
                       minWidth: 45,
                       bgcolor:
                         h.rank === 1
-                          ? '#FFD700'
+                          ? "#FFD700"
                           : h.rank === 2
-                            ? '#C0C0C0'
+                            ? "#C0C0C0"
                             : h.rank === 3
-                              ? '#CD7F32'
+                              ? "#CD7F32"
                               : undefined,
-                      color: h.rank && h.rank <= 3 ? 'black' : 'inherit',
+                      color: h.rank && h.rank <= 3 ? "black" : "inherit",
                     }}
                   />
                 </ListItem>
 
-                <Collapse
-                  in={expandedTournament === h.tournament}
-                  timeout="auto"
-                  unmountOnExit
-                >
+                <Collapse in={expandedTournament === h.tournament} timeout="auto" unmountOnExit>
                   <Box
                     sx={{
-                      bgcolor: 'action.hover',
+                      bgcolor: "action.hover",
                       px: 2,
                       py: 1.5,
-                      borderBottom: '1px solid',
-                      borderColor: 'divider',
+                      borderBottom: "1px solid",
+                      borderColor: "divider",
                     }}
                   >
                     {loading ? (
                       <Box
                         sx={{
-                          display: 'flex',
-                          justifyContent: 'center',
+                          display: "flex",
+                          justifyContent: "center",
                           py: 2,
                         }}
                       >
@@ -323,14 +308,14 @@ export function WbBladerDialog({ blader, open, onClose }: WbBladerDialogProps) {
                           <Typography
                             variant="caption"
                             sx={{
-                              display: 'block',
-                              color: 'text.secondary',
+                              display: "block",
+                              color: "text.secondary",
                               mb: 1,
                               fontWeight: 600,
                             }}
                           >
                             {expandData.participantsCount} participants
-                            {expandData.format ? ` • ${expandData.format}` : ''}
+                            {expandData.format ? ` • ${expandData.format}` : ""}
                           </Typography>
                         )}
 
@@ -340,9 +325,9 @@ export function WbBladerDialog({ blader, open, onClose }: WbBladerDialogProps) {
                               variant="overline"
                               sx={{
                                 fontWeight: 900,
-                                color: 'primary.main',
+                                color: "primary.main",
                                 mb: 0.5,
-                                display: 'block',
+                                display: "block",
                               }}
                             >
                               Matchs
@@ -352,23 +337,21 @@ export function WbBladerDialog({ blader, open, onClose }: WbBladerDialogProps) {
                                 <Box
                                   key={i}
                                   sx={{
-                                    display: 'flex',
-                                    justifyContent: 'space-between',
-                                    alignItems: 'center',
+                                    display: "flex",
+                                    justifyContent: "space-between",
+                                    alignItems: "center",
                                     py: 0.25,
                                   }}
                                 >
                                   <Typography
                                     variant="body2"
                                     sx={{
-                                      fontSize: '0.8rem',
-                                      color: m.won
-                                        ? 'success.main'
-                                        : 'error.main',
+                                      fontSize: "0.8rem",
+                                      color: m.won ? "success.main" : "error.main",
                                       fontWeight: 600,
                                     }}
                                   >
-                                    {m.won ? 'W' : 'L'} vs {m.opponent}
+                                    {m.won ? "W" : "L"} vs {m.opponent}
                                   </Typography>
                                   <Chip
                                     label={m.scores}
@@ -376,14 +359,10 @@ export function WbBladerDialog({ blader, open, onClose }: WbBladerDialogProps) {
                                     variant="outlined"
                                     sx={{
                                       fontWeight: 700,
-                                      fontSize: '0.7rem',
+                                      fontSize: "0.7rem",
                                       height: 20,
-                                      borderColor: m.won
-                                        ? 'success.main'
-                                        : 'error.main',
-                                      color: m.won
-                                        ? 'success.main'
-                                        : 'error.main',
+                                      borderColor: m.won ? "success.main" : "error.main",
+                                      color: m.won ? "success.main" : "error.main",
                                     }}
                                   />
                                 </Box>
@@ -396,9 +375,9 @@ export function WbBladerDialog({ blader, open, onClose }: WbBladerDialogProps) {
                           variant="overline"
                           sx={{
                             fontWeight: 900,
-                            color: 'primary.main',
+                            color: "primary.main",
                             mb: 0.5,
-                            display: 'block',
+                            display: "block",
                           }}
                         >
                           Top 10 du tournoi
@@ -408,28 +387,22 @@ export function WbBladerDialog({ blader, open, onClose }: WbBladerDialogProps) {
                             <Box
                               key={i}
                               sx={{
-                                display: 'flex',
-                                justifyContent: 'space-between',
-                                alignItems: 'center',
+                                display: "flex",
+                                justifyContent: "space-between",
+                                alignItems: "center",
                               }}
                             >
                               <Typography
                                 variant="body2"
                                 sx={{
-                                  fontWeight:
-                                    top.name === blader.name ? 900 : 500,
-                                  color:
-                                    top.name === blader.name
-                                      ? 'primary.main'
-                                      : 'inherit',
+                                  fontWeight: top.name === blader.name ? 900 : 500,
+                                  color: top.name === blader.name ? "primary.main" : "inherit",
                                 }}
                               >
                                 {top.rank}. {top.name}
                               </Typography>
                               {top.rank === 1 && (
-                                <Typography sx={{ fontSize: '0.8rem' }}>
-                                  🏆
-                                </Typography>
+                                <Typography sx={{ fontSize: "0.8rem" }}>🏆</Typography>
                               )}
                             </Box>
                           ))}

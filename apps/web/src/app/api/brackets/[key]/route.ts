@@ -6,32 +6,28 @@ export const dynamic = "force-static";
 export const revalidate = false;
 
 const KNOWN_KEYS: ReadonlySet<MockKey> = new Set([
-	"roundRobin",
-	"singleElimination",
-	"doubleElimination",
+  "roundRobin",
+  "singleElimination",
+  "doubleElimination",
 ]);
 
 interface RouteParams {
-	params: Promise<{ key: string }>;
+  params: Promise<{ key: string }>;
 }
 
-export async function GET(
-	_req: Request,
-	{ params }: RouteParams,
-): Promise<Response> {
-	const { key } = await params;
+export async function GET(_req: Request, { params }: RouteParams): Promise<Response> {
+  const { key } = await params;
 
-	if (!KNOWN_KEYS.has(key as MockKey)) {
-		return NextResponse.json(
-			{ error: `unknown brackets key '${key}'`, known: [...KNOWN_KEYS] },
-			{ status: 404 },
-		);
-	}
+  if (!KNOWN_KEYS.has(key as MockKey)) {
+    return NextResponse.json(
+      { error: `unknown brackets key '${key}'`, known: [...KNOWN_KEYS] },
+      { status: 404 },
+    );
+  }
 
-	return NextResponse.json(mock[key as MockKey], {
-		headers: {
-			"cache-control":
-				"public, max-age=0, s-maxage=300, stale-while-revalidate=86400",
-		},
-	});
+  return NextResponse.json(mock[key as MockKey], {
+    headers: {
+      "cache-control": "public, max-age=0, s-maxage=300, stale-while-revalidate=86400",
+    },
+  });
 }

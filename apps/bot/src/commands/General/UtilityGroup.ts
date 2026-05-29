@@ -1,22 +1,27 @@
-import { ActionRowBuilder, ApplicationCommandOptionType, ButtonBuilder, ButtonStyle, EmbedBuilder, MessageFlags, type ButtonInteraction, type CommandInteraction, type TextChannel, type User } from "discord.js";
 import {
-  ButtonComponent,
-  Discord,
-  Slash,
-  SlashGroup,
-  SlashOption,
-} from '@rpbey/discordx';
-import { inject, injectable } from 'tsyringe';
+  ActionRowBuilder,
+  ApplicationCommandOptionType,
+  ButtonBuilder,
+  ButtonStyle,
+  EmbedBuilder,
+  MessageFlags,
+  type ButtonInteraction,
+  type CommandInteraction,
+  type TextChannel,
+  type User,
+} from "discord.js";
+import { ButtonComponent, Discord, Slash, SlashGroup, SlashOption } from "@rpbey/discordx";
+import { inject, injectable } from "tsyringe";
 
-import { Colors, RPB } from '../../lib/constants.js';
-import { PrismaService } from '../../lib/prisma.js';
+import { Colors, RPB } from "../../lib/constants.js";
+import { PrismaService } from "../../lib/prisma.js";
 
 @Discord()
 @SlashGroup({
-  name: 'utilitaire',
-  description: 'Commandes utilitaires pour la communauté',
+  name: "utilitaire",
+  description: "Commandes utilitaires pour la communauté",
 })
-@SlashGroup('utilitaire')
+@SlashGroup("utilitaire")
 @injectable()
 export class UtilityGroup {
   constructor(@inject(PrismaService) private prisma: PrismaService) {}
@@ -24,14 +29,14 @@ export class UtilityGroup {
   // ──────────────── Membre ────────────────
 
   @Slash({
-    name: 'membre',
+    name: "membre",
     description: "Afficher les informations d'un membre",
   })
-  @SlashGroup('utilitaire')
+  @SlashGroup("utilitaire")
   async member(
     @SlashOption({
-      name: 'utilisateur',
-      description: 'Le membre à inspecter',
+      name: "utilisateur",
+      description: "Le membre à inspecter",
       required: false,
       type: ApplicationCommandOptionType.User,
     })
@@ -41,12 +46,10 @@ export class UtilityGroup {
     await interaction.deferReply();
     const target = targetUser ?? interaction.user;
     const guild = interaction.guild;
-    if (!guild)
-      return interaction.editReply('❌ Uniquement disponible sur un serveur.');
+    if (!guild) return interaction.editReply("❌ Uniquement disponible sur un serveur.");
 
     const member = await guild.members.fetch(target.id).catch(() => null);
-    if (!member)
-      return interaction.editReply('❌ Membre introuvable sur ce serveur.');
+    if (!member) return interaction.editReply("❌ Membre introuvable sur ce serveur.");
 
     const dbUser = await this.prisma.user.findFirst({
       where: { discordId: target.id },
@@ -54,9 +57,7 @@ export class UtilityGroup {
     });
 
     const createdAt = Math.floor(target.createdTimestamp / 1000);
-    const joinedAt = member.joinedTimestamp
-      ? Math.floor(member.joinedTimestamp / 1000)
-      : null;
+    const joinedAt = member.joinedTimestamp ? Math.floor(member.joinedTimestamp / 1000) : null;
 
     const roles = member.roles.cache
       .filter((r) => r.id !== guild.id)
@@ -70,13 +71,13 @@ export class UtilityGroup {
       .setColor(member.displayColor || Colors.Info)
       .addFields(
         {
-          name: '🏷️ Tag Discord',
+          name: "🏷️ Tag Discord",
           value: target.tag || target.username,
           inline: true,
         },
-        { name: '🆔 ID', value: target.id, inline: true },
+        { name: "🆔 ID", value: target.id, inline: true },
         {
-          name: '📅 Compte créé',
+          name: "📅 Compte créé",
           value: `<t:${createdAt}:D> (<t:${createdAt}:R>)`,
           inline: false,
         },
@@ -84,7 +85,7 @@ export class UtilityGroup {
 
     if (joinedAt) {
       embed.addFields({
-        name: '📥 A rejoint le serveur',
+        name: "📥 A rejoint le serveur",
         value: `<t:${joinedAt}:D> (<t:${joinedAt}:R>)`,
         inline: false,
       });
@@ -93,7 +94,7 @@ export class UtilityGroup {
     if (member.premiumSince) {
       const boostTs = Math.floor(member.premiumSinceTimestamp! / 1000);
       embed.addFields({
-        name: '🚀 Boost depuis',
+        name: "🚀 Boost depuis",
         value: `<t:${boostTs}:D>`,
         inline: true,
       });
@@ -102,7 +103,7 @@ export class UtilityGroup {
     if (roles.length > 0) {
       embed.addFields({
         name: `🎭 Rôles (${member.roles.cache.size - 1})`,
-        value: roles.join(', ') + (roles.length === 15 ? '...' : ''),
+        value: roles.join(", ") + (roles.length === 15 ? "..." : ""),
         inline: false,
       });
     }
@@ -115,8 +116,8 @@ export class UtilityGroup {
       if (p.rankingPoints) stats.push(`**Points :** ${p.rankingPoints}`);
       if (stats.length > 0) {
         embed.addFields({
-          name: '🌀 Profil Beyblade',
-          value: stats.join('\n'),
+          name: "🌀 Profil Beyblade",
+          value: stats.join("\n"),
           inline: false,
         });
       }
@@ -127,21 +128,16 @@ export class UtilityGroup {
         this.prisma.gachaCard.count({ where: { isActive: true } }),
       ]);
       const gachaLines = [];
-      gachaLines.push(`**🪙 Pièces :** ${p.currency.toLocaleString('fr-FR')}`);
+      gachaLines.push(`**🪙 Pièces :** ${p.currency.toLocaleString("fr-FR")}`);
       if (p.dailyStreak > 0)
-        gachaLines.push(
-          `**🔥 Streak :** ${p.dailyStreak} jour${p.dailyStreak > 1 ? 's' : ''}`,
-        );
+        gachaLines.push(`**🔥 Streak :** ${p.dailyStreak} jour${p.dailyStreak > 1 ? "s" : ""}`);
       if (cardCount > 0) {
-        const pct =
-          totalCards > 0 ? Math.round((cardCount / totalCards) * 100) : 0;
-        gachaLines.push(
-          `**🃏 Collection :** ${cardCount}/${totalCards} (${pct}%)`,
-        );
+        const pct = totalCards > 0 ? Math.round((cardCount / totalCards) * 100) : 0;
+        gachaLines.push(`**🃏 Collection :** ${cardCount}/${totalCards} (${pct}%)`);
       }
       embed.addFields({
-        name: '🎰 Gacha',
-        value: gachaLines.join('\n'),
+        name: "🎰 Gacha",
+        value: gachaLines.join("\n"),
         inline: false,
       });
     }
@@ -154,13 +150,13 @@ export class UtilityGroup {
   // ──────────────── Avatar ────────────────
 
   @Slash({
-    name: 'avatar',
+    name: "avatar",
     description: "Afficher l'avatar d'un membre en grand",
   })
-  @SlashGroup('utilitaire')
+  @SlashGroup("utilitaire")
   async avatar(
     @SlashOption({
-      name: 'utilisateur',
+      name: "utilisateur",
       description: "L'utilisateur dont voir l'avatar",
       required: false,
       type: ApplicationCommandOptionType.User,
@@ -187,9 +183,7 @@ export class UtilityGroup {
       .setColor(Colors.Info);
 
     if (serverAvatar && serverAvatar !== globalAvatar) {
-      embed.setDescription(
-        `[Avatar global](${globalAvatar}) | [Avatar serveur](${serverAvatar})`,
-      );
+      embed.setDescription(`[Avatar global](${globalAvatar}) | [Avatar serveur](${serverAvatar})`);
     } else {
       embed.setDescription(`[Ouvrir en pleine taille](${globalAvatar})`);
     }
@@ -200,13 +194,13 @@ export class UtilityGroup {
   // ──────────────── Bannière ────────────────
 
   @Slash({
-    name: 'banniere',
+    name: "banniere",
     description: "Afficher la bannière d'un membre",
   })
-  @SlashGroup('utilitaire')
+  @SlashGroup("utilitaire")
   async banner(
     @SlashOption({
-      name: 'utilisateur',
+      name: "utilisateur",
       description: "L'utilisateur dont voir la bannière",
       required: false,
       type: ApplicationCommandOptionType.User,
@@ -237,63 +231,59 @@ export class UtilityGroup {
   // ──────────────── Sondage ────────────────
 
   @Slash({
-    name: 'sondage',
-    description: 'Créer un sondage pour la communauté',
+    name: "sondage",
+    description: "Créer un sondage pour la communauté",
   })
-  @SlashGroup('utilitaire')
+  @SlashGroup("utilitaire")
   async poll(
     @SlashOption({
-      name: 'question',
-      description: 'La question du sondage',
+      name: "question",
+      description: "La question du sondage",
       required: true,
       type: ApplicationCommandOptionType.String,
     })
     question: string,
     @SlashOption({
-      name: 'option1',
-      description: 'Première option',
+      name: "option1",
+      description: "Première option",
       required: true,
       type: ApplicationCommandOptionType.String,
     })
     option1: string,
     @SlashOption({
-      name: 'option2',
-      description: 'Deuxième option',
+      name: "option2",
+      description: "Deuxième option",
       required: true,
       type: ApplicationCommandOptionType.String,
     })
     option2: string,
     @SlashOption({
-      name: 'option3',
-      description: 'Troisième option (optionnel)',
+      name: "option3",
+      description: "Troisième option (optionnel)",
       required: false,
       type: ApplicationCommandOptionType.String,
     })
     option3: string | undefined,
     @SlashOption({
-      name: 'option4',
-      description: 'Quatrième option (optionnel)',
+      name: "option4",
+      description: "Quatrième option (optionnel)",
       required: false,
       type: ApplicationCommandOptionType.String,
     })
     option4: string | undefined,
     @SlashOption({
-      name: 'option5',
-      description: 'Cinquième option (optionnel)',
+      name: "option5",
+      description: "Cinquième option (optionnel)",
       required: false,
       type: ApplicationCommandOptionType.String,
     })
     option5: string | undefined,
     interaction: CommandInteraction,
   ) {
-    const options = [option1, option2, option3, option4, option5].filter(
-      Boolean,
-    ) as string[];
-    const emojis = ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣'];
+    const options = [option1, option2, option3, option4, option5].filter(Boolean) as string[];
+    const emojis = ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣"];
 
-    const description = options
-      .map((opt, i) => `${emojis[i]} ${opt}`)
-      .join('\n\n');
+    const description = options.map((opt, i) => `${emojis[i]} ${opt}`).join("\n\n");
 
     const embed = new EmbedBuilder()
       .setTitle(`📊 ${question}`)
@@ -304,7 +294,7 @@ export class UtilityGroup {
       })
       .setTimestamp();
 
-    await interaction.reply({ content: '✅ Sondage créé !', flags: MessageFlags.Ephemeral });
+    await interaction.reply({ content: "✅ Sondage créé !", flags: MessageFlags.Ephemeral });
     const message = await (interaction.channel as TextChannel).send({
       embeds: [embed],
     });
@@ -317,14 +307,14 @@ export class UtilityGroup {
   // ──────────────── Suggestion ────────────────
 
   @Slash({
-    name: 'suggestion',
-    description: 'Soumettre une suggestion pour la communauté',
+    name: "suggestion",
+    description: "Soumettre une suggestion pour la communauté",
   })
-  @SlashGroup('utilitaire')
+  @SlashGroup("utilitaire")
   async suggestion(
     @SlashOption({
-      name: 'contenu',
-      description: 'Votre suggestion',
+      name: "contenu",
+      description: "Votre suggestion",
       required: true,
       type: ApplicationCommandOptionType.String,
     })
@@ -334,23 +324,23 @@ export class UtilityGroup {
     const guild = interaction.guild;
     if (!guild)
       return interaction.reply({
-        content: '❌ Uniquement disponible sur un serveur.',
+        content: "❌ Uniquement disponible sur un serveur.",
         flags: MessageFlags.Ephemeral,
       });
 
-    const suggestionsChannel = guild.channels.cache.get(
-      RPB.Channels.Suggestions,
-    ) as TextChannel | undefined;
+    const suggestionsChannel = guild.channels.cache.get(RPB.Channels.Suggestions) as
+      | TextChannel
+      | undefined;
 
     if (!suggestionsChannel) {
       return interaction.reply({
-        content: '❌ Le salon de suggestions est introuvable.',
+        content: "❌ Le salon de suggestions est introuvable.",
         flags: MessageFlags.Ephemeral,
       });
     }
 
     const embed = new EmbedBuilder()
-      .setTitle('💡 Nouvelle suggestion')
+      .setTitle("💡 Nouvelle suggestion")
       .setDescription(content)
       .setColor(Colors.Secondary)
       .setAuthor({
@@ -362,13 +352,13 @@ export class UtilityGroup {
     const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
       new ButtonBuilder()
         .setCustomId(`suggestion-up-${interaction.user.id}`)
-        .setLabel('0')
-        .setEmoji('👍')
+        .setLabel("0")
+        .setEmoji("👍")
         .setStyle(ButtonStyle.Success),
       new ButtonBuilder()
         .setCustomId(`suggestion-down-${interaction.user.id}`)
-        .setLabel('0')
-        .setEmoji('👎')
+        .setLabel("0")
+        .setEmoji("👎")
         .setStyle(ButtonStyle.Danger),
     );
 
@@ -388,52 +378,34 @@ export class UtilityGroup {
 
   @ButtonComponent({ id: /^suggestion-(up|down)-/ })
   async handleSuggestionVote(interaction: ButtonInteraction) {
-    const [, direction] = interaction.customId.split('-') as [
-      string,
-      'up' | 'down',
-    ];
+    const [, direction] = interaction.customId.split("-") as [string, "up" | "down"];
     const message = interaction.message;
 
     const actionRow = message.components[0];
-    if (
-      !actionRow ||
-      !('components' in actionRow) ||
-      actionRow.components.length < 2
-    )
-      return;
+    if (!actionRow || !("components" in actionRow) || actionRow.components.length < 2) return;
 
     const upButton = actionRow.components[0]!;
     const downButton = actionRow.components[1]!;
 
-    let upCount = Number.parseInt(
-      'label' in upButton ? (upButton.label ?? '0') : '0',
-      10,
-    );
-    let downCount = Number.parseInt(
-      'label' in downButton ? (downButton.label ?? '0') : '0',
-      10,
-    );
+    let upCount = Number.parseInt("label" in upButton ? (upButton.label ?? "0") : "0", 10);
+    let downCount = Number.parseInt("label" in downButton ? (downButton.label ?? "0") : "0", 10);
 
-    if (direction === 'up') upCount++;
+    if (direction === "up") upCount++;
     else downCount++;
 
-    const upCustomId =
-      'customId' in upButton ? upButton.customId : 'suggestion-up-unknown';
-    const downCustomId =
-      'customId' in downButton
-        ? downButton.customId
-        : 'suggestion-down-unknown';
+    const upCustomId = "customId" in upButton ? upButton.customId : "suggestion-up-unknown";
+    const downCustomId = "customId" in downButton ? downButton.customId : "suggestion-down-unknown";
 
     const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
       new ButtonBuilder()
-        .setCustomId(upCustomId ?? 'suggestion-up')
+        .setCustomId(upCustomId ?? "suggestion-up")
         .setLabel(String(upCount))
-        .setEmoji('👍')
+        .setEmoji("👍")
         .setStyle(ButtonStyle.Success),
       new ButtonBuilder()
-        .setCustomId(downCustomId ?? 'suggestion-down')
+        .setCustomId(downCustomId ?? "suggestion-down")
         .setLabel(String(downCount))
-        .setEmoji('👎')
+        .setEmoji("👎")
         .setStyle(ButtonStyle.Danger),
     );
 
@@ -443,28 +415,28 @@ export class UtilityGroup {
   // ──────────────── Rappel ────────────────
 
   @Slash({
-    name: 'rappel',
-    description: 'Programmer un rappel personnel',
+    name: "rappel",
+    description: "Programmer un rappel personnel",
   })
-  @SlashGroup('utilitaire')
+  @SlashGroup("utilitaire")
   async reminder(
     @SlashOption({
-      name: 'message',
-      description: 'Le contenu du rappel',
+      name: "message",
+      description: "Le contenu du rappel",
       required: true,
       type: ApplicationCommandOptionType.String,
     })
     message: string,
     @SlashOption({
-      name: 'minutes',
-      description: 'Dans combien de minutes (défaut: 0)',
+      name: "minutes",
+      description: "Dans combien de minutes (défaut: 0)",
       required: false,
       type: ApplicationCommandOptionType.Integer,
       minValue: 0,
     })
     minutes: number = 0,
     @SlashOption({
-      name: 'heures',
+      name: "heures",
       description: "Dans combien d'heures (défaut: 0)",
       required: false,
       type: ApplicationCommandOptionType.Integer,
@@ -472,8 +444,8 @@ export class UtilityGroup {
     })
     hours: number = 0,
     @SlashOption({
-      name: 'jours',
-      description: 'Dans combien de jours (défaut: 0)',
+      name: "jours",
+      description: "Dans combien de jours (défaut: 0)",
       required: false,
       type: ApplicationCommandOptionType.Integer,
       minValue: 0,
@@ -486,13 +458,13 @@ export class UtilityGroup {
 
     if (totalMs === 0)
       return interaction.reply({
-        content: '❌ Spécifie au moins une durée (minutes, heures ou jours).',
+        content: "❌ Spécifie au moins une durée (minutes, heures ou jours).",
         flags: MessageFlags.Ephemeral,
       });
 
     if (totalMs > 30 * 24 * 3600 * 1000)
       return interaction.reply({
-        content: '❌ Maximum 30 jours.',
+        content: "❌ Maximum 30 jours.",
         flags: MessageFlags.Ephemeral,
       });
 
@@ -517,62 +489,60 @@ export class UtilityGroup {
   // ──────────────── Embed ────────────────
 
   @Slash({
-    name: 'embed',
-    description: 'Créer un embed personnalisé',
+    name: "embed",
+    description: "Créer un embed personnalisé",
   })
-  @SlashGroup('utilitaire')
+  @SlashGroup("utilitaire")
   async embed(
     @SlashOption({
-      name: 'titre',
+      name: "titre",
       description: "Titre de l'embed",
       required: true,
       type: ApplicationCommandOptionType.String,
     })
     title: string,
     @SlashOption({
-      name: 'description',
+      name: "description",
       description: "Description de l'embed",
       required: true,
       type: ApplicationCommandOptionType.String,
     })
     description: string,
     @SlashOption({
-      name: 'couleur',
-      description: 'Couleur hex (ex: #FF0000) — défaut: rouge RPB',
+      name: "couleur",
+      description: "Couleur hex (ex: #FF0000) — défaut: rouge RPB",
       required: false,
       type: ApplicationCommandOptionType.String,
     })
     color: string | undefined,
     @SlashOption({
-      name: 'image',
+      name: "image",
       description: "URL d'une image",
       required: false,
       type: ApplicationCommandOptionType.String,
     })
     image: string | undefined,
     @SlashOption({
-      name: 'miniature',
+      name: "miniature",
       description: "URL d'une miniature",
       required: false,
       type: ApplicationCommandOptionType.String,
     })
     thumbnail: string | undefined,
     @SlashOption({
-      name: 'pied',
-      description: 'Texte en pied de page',
+      name: "pied",
+      description: "Texte en pied de page",
       required: false,
       type: ApplicationCommandOptionType.String,
     })
     footer: string | undefined,
     interaction: CommandInteraction,
   ) {
-    const colorInt = color
-      ? Number.parseInt(color.replace('#', ''), 16)
-      : Colors.Primary;
+    const colorInt = color ? Number.parseInt(color.replace("#", ""), 16) : Colors.Primary;
 
     if (color && Number.isNaN(colorInt))
       return interaction.reply({
-        content: '❌ Couleur invalide. Utilise le format hex (ex: #FF0000).',
+        content: "❌ Couleur invalide. Utilise le format hex (ex: #FF0000).",
         flags: MessageFlags.Ephemeral,
       });
 
@@ -593,7 +563,7 @@ export class UtilityGroup {
 
     await (interaction.channel as TextChannel).send({ embeds: [embed] });
     return interaction.reply({
-      content: '✅ Embed envoyé !',
+      content: "✅ Embed envoyé !",
       flags: MessageFlags.Ephemeral,
     });
   }

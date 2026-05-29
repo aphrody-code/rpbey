@@ -1,15 +1,12 @@
-'use client';
+"use client";
 
-import { Box } from '@mui/material';
-import { MediaPlayer, MediaProvider } from '@vidstack/react';
-import {
-  DefaultVideoLayout,
-  defaultLayoutIcons,
-} from '@vidstack/react/player/layouts/default';
-import '@vidstack/react/player/styles/default/theme.css';
-import '@vidstack/react/player/styles/default/layouts/video.css';
-import { useCallback, useEffect, useRef } from 'react';
-import { YouTubePlayer } from './YouTubePlayer';
+import { Box } from "@mui/material";
+import { MediaPlayer, MediaProvider } from "@vidstack/react";
+import { DefaultVideoLayout, defaultLayoutIcons } from "@vidstack/react/player/layouts/default";
+import "@vidstack/react/player/styles/default/theme.css";
+import "@vidstack/react/player/styles/default/layouts/video.css";
+import { useCallback, useEffect, useRef } from "react";
+import { YouTubePlayer } from "./YouTubePlayer";
 
 interface EpisodePlayerProps {
   title: string;
@@ -24,51 +21,45 @@ interface EpisodePlayerProps {
 
 /** Sources that must be rendered as an iframe (not via Vidstack) */
 const IFRAME_HOSTS = [
-  'sibnet.ru',
-  'vidmoly.net',
-  'vk.com',
-  'dailymotion.com',
-  'ok.ru',
-  'mail.ru',
-  'myvi.ru',
-  'sendvid.com',
+  "sibnet.ru",
+  "vidmoly.net",
+  "vk.com",
+  "dailymotion.com",
+  "ok.ru",
+  "mail.ru",
+  "myvi.ru",
+  "sendvid.com",
 ];
 
 function isIframeSource(src: string, sourceType: string): boolean {
-  if (sourceType === 'IFRAME' || sourceType === 'DAILYMOTION') return true;
+  if (sourceType === "IFRAME" || sourceType === "DAILYMOTION") return true;
   return IFRAME_HOSTS.some((host) => src.includes(host));
 }
 
 function isYouTubeSource(src: string, sourceType: string): boolean {
-  if (sourceType === 'YOUTUBE') return true;
-  return (
-    src.includes('youtube.com') ||
-    src.includes('youtu.be') ||
-    src.startsWith('youtube/')
-  );
+  if (sourceType === "YOUTUBE") return true;
+  return src.includes("youtube.com") || src.includes("youtu.be") || src.startsWith("youtube/");
 }
 
 /** Extract YouTube video ID from any src format */
 /** Extract YouTube video ID from any src format */
 function extractYouTubeId(src: string): string {
-  if (src.startsWith('youtube/')) {
-    return src.replace('youtube/', '');
+  if (src.startsWith("youtube/")) {
+    return src.replace("youtube/", "");
   }
-  const match = src.match(
-    /(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]+)/,
-  );
+  const match = src.match(/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]+)/);
   return match?.[1] ?? src;
 }
 
 /** Append start time to iframe URL based on host */
 function applyStartTime(src: string, startTime: number): string {
   if (startTime <= 0) return src;
-  const sep = src.includes('?') ? '&' : '?';
-  if (src.includes('sibnet.ru')) return `${src}${sep}t=${startTime}`;
-  if (src.includes('vk.com')) return `${src}${sep}t=${startTime}s`;
-  if (src.includes('dailymotion.com')) return `${src}${sep}start=${startTime}`;
-  if (src.includes('vidmoly.net')) return `${src}${sep}start=${startTime}`;
-  if (src.includes('ok.ru')) return `${src}${sep}fromTime=${startTime}`;
+  const sep = src.includes("?") ? "&" : "?";
+  if (src.includes("sibnet.ru")) return `${src}${sep}t=${startTime}`;
+  if (src.includes("vk.com")) return `${src}${sep}t=${startTime}s`;
+  if (src.includes("dailymotion.com")) return `${src}${sep}start=${startTime}`;
+  if (src.includes("vidmoly.net")) return `${src}${sep}start=${startTime}`;
+  if (src.includes("ok.ru")) return `${src}${sep}fromTime=${startTime}`;
   return src;
 }
 
@@ -91,9 +82,9 @@ export function EpisodePlayer({
 
   const reportProgress = useCallback(async (time: number, dur: number) => {
     try {
-      await fetch('/api/anime/progress', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      await fetch("/api/anime/progress", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           episodeId: episodeIdRef.current,
           progressTime: Math.floor(time),
@@ -110,10 +101,7 @@ export function EpisodePlayer({
       const now = Date.now();
       if (now - lastReportRef.current < 30000) return;
       lastReportRef.current = now;
-      reportProgress(
-        detail.currentTime,
-        detail.duration || episodeDuration || 0,
-      );
+      reportProgress(detail.currentTime, detail.duration || episodeDuration || 0);
     },
     [reportProgress, episodeDuration],
   );
@@ -128,17 +116,17 @@ export function EpisodePlayer({
     return (
       <Box
         sx={{
-          width: '100%',
+          width: "100%",
           borderRadius: 3,
-          overflow: 'hidden',
-          bgcolor: '#000',
+          overflow: "hidden",
+          bgcolor: "#000",
         }}
       >
         <Box
           sx={{
-            position: 'relative',
-            width: '100%',
-            paddingTop: '56.25%', // 16:9
+            position: "relative",
+            width: "100%",
+            paddingTop: "56.25%", // 16:9
           }}
         >
           <Box
@@ -150,12 +138,12 @@ export function EpisodePlayer({
             referrerPolicy="no-referrer"
             sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
             sx={{
-              position: 'absolute',
+              position: "absolute",
               top: 0,
               left: 0,
-              width: '100%',
-              height: '100%',
-              border: 'none',
+              width: "100%",
+              height: "100%",
+              border: "none",
             }}
           />
         </Box>
@@ -172,13 +160,13 @@ export function EpisodePlayer({
   return (
     <Box
       sx={{
-        width: '100%',
+        width: "100%",
         borderRadius: 3,
-        overflow: 'hidden',
-        bgcolor: '#000',
-        '& media-player': {
-          '--media-brand': 'var(--rpb-primary)',
-          '--media-focus-ring-color': 'var(--rpb-primary)',
+        overflow: "hidden",
+        bgcolor: "#000",
+        "& media-player": {
+          "--media-brand": "var(--rpb-primary)",
+          "--media-focus-ring-color": "var(--rpb-primary)",
         },
       }}
     >
@@ -190,15 +178,13 @@ export function EpisodePlayer({
         crossOrigin
         currentTime={Math.max(savedProgress, startTime)}
         onTimeUpdate={(detail) =>
-          handleTimeUpdate(
-            detail as unknown as { currentTime: number; duration: number },
-          )
+          handleTimeUpdate(detail as unknown as { currentTime: number; duration: number })
         }
         onEnded={handleEnded}
         style={{
-          '--video-brand': 'var(--rpb-primary)',
-          '--video-focus-ring-color': 'var(--rpb-primary)',
-          '--video-border-radius': '12px',
+          "--video-brand": "var(--rpb-primary)",
+          "--video-focus-ring-color": "var(--rpb-primary)",
+          "--video-border-radius": "12px",
         }}
       >
         <MediaProvider />

@@ -7,20 +7,20 @@ import {
   type CommandInteraction,
   ComponentType,
   EmbedBuilder,
-} from 'discord.js';
-import { Discord, Slash, SlashGroup, SlashOption } from '@rpbey/discordx';
+} from "discord.js";
+import { Discord, Slash, SlashGroup, SlashOption } from "@rpbey/discordx";
 
-import { getChallongeClient } from '../../lib/challonge.js';
-import { Colors, RPB } from '../../lib/constants.js';
-import { logger } from '../../lib/logger.js';
-import prisma from '../../lib/prisma.js';
+import { getChallongeClient } from "../../lib/challonge.js";
+import { Colors, RPB } from "../../lib/constants.js";
+import { logger } from "../../lib/logger.js";
+import prisma from "../../lib/prisma.js";
 
 @Discord()
 @SlashGroup({
-  name: 'inscription',
-  description: 'Gestion des inscriptions aux tournois',
+  name: "inscription",
+  description: "Gestion des inscriptions aux tournois",
 })
-@SlashGroup('inscription')
+@SlashGroup("inscription")
 export class RegisterCommand {
   static async autocomplete(interaction: AutocompleteInteraction) {
     const focusedOption = interaction.options.getFocused(true);
@@ -29,34 +29,34 @@ export class RegisterCommand {
     // Suggérer les tournois à venir ou en cours
     const tournaments = await prisma.tournament.findMany({
       where: {
-        status: { in: ['UPCOMING', 'UNDERWAY'] },
-        name: { contains: query, mode: 'insensitive' },
+        status: { in: ["UPCOMING", "UNDERWAY"] },
+        name: { contains: query, mode: "insensitive" },
       },
       take: 25,
-      orderBy: { date: 'asc' },
+      orderBy: { date: "asc" },
     });
 
     return interaction.respond(
       tournaments.map((t: any) => ({
         name: t.name,
-        value: t.challongeId || t.challongeUrl?.split('/').pop() || t.id,
+        value: t.challongeId || t.challongeUrl?.split("/").pop() || t.id,
       })),
     );
   }
 
-  @Slash({ name: 'rejoindre', description: "S'inscrire à un tournoi" })
+  @Slash({ name: "rejoindre", description: "S'inscrire à un tournoi" })
   async join(
     @SlashOption({
-      name: 'tournoi',
-      description: 'ID ou Nom du tournoi (ex: B_TS1)',
+      name: "tournoi",
+      description: "ID ou Nom du tournoi (ex: B_TS1)",
       required: true,
       type: ApplicationCommandOptionType.String,
       autocomplete: RegisterCommand.autocomplete,
     })
     tournamentId: string,
     @SlashOption({
-      name: 'pseudo',
-      description: 'Ton pseudo de joueur (si différent de Discord)',
+      name: "pseudo",
+      description: "Ton pseudo de joueur (si différent de Discord)",
       required: false,
       type: ApplicationCommandOptionType.String,
     })
@@ -71,16 +71,14 @@ export class RegisterCommand {
       const challonge = getChallongeClient();
 
       // Ensure we have a valid slug or ID
-      const targetId = tournamentId.includes('/')
-        ? tournamentId.split('/').pop()!
-        : tournamentId;
+      const targetId = tournamentId.includes("/") ? tournamentId.split("/").pop()! : tournamentId;
       const tournamentRes = await challonge.getTournament(targetId);
       const tournament = tournamentRes.data;
 
-      if (tournament.attributes.state !== 'pending') {
+      if (tournament.attributes.state !== "pending") {
         return interaction.editReply({
           content:
-            '❌ Les inscriptions sont fermées pour ce tournoi (il est déjà commencé ou terminé).',
+            "❌ Les inscriptions sont fermées pour ce tournoi (il est déjà commencé ou terminé).",
         });
       }
 
@@ -120,7 +118,7 @@ export class RegisterCommand {
           create: {
             userId: user.id,
             bladerName: playerName,
-            experience: 'BEGINNER',
+            experience: "BEGINNER",
           },
         });
 
@@ -133,17 +131,16 @@ export class RegisterCommand {
             date: tournament.attributes.startAt
               ? new Date(tournament.attributes.startAt)
               : new Date(),
-            status: 'UPCOMING',
+            status: "UPCOMING",
           },
         });
 
-        const existingParticipantDb =
-          await prisma.tournamentParticipant.findFirst({
-            where: {
-              tournamentId: dbTournament.id,
-              userId: user.id,
-            },
-          });
+        const existingParticipantDb = await prisma.tournamentParticipant.findFirst({
+          where: {
+            tournamentId: dbTournament.id,
+            userId: user.id,
+          },
+        });
         if (!existingParticipantDb) {
           await prisma.tournamentParticipant.create({
             data: {
@@ -154,11 +151,11 @@ export class RegisterCommand {
           });
         }
       } catch (dbError) {
-        logger.warn('DB sync failed:', dbError);
+        logger.warn("DB sync failed:", dbError);
       }
 
       const embed = new EmbedBuilder()
-        .setTitle('✅ Inscription confirmée !')
+        .setTitle("✅ Inscription confirmée !")
         .setDescription(
           `Tu es maintenant inscrit(e) à **${tournament.attributes.name}** !\n\n` +
             `**Pseudo:** ${playerName}\n` +
@@ -167,14 +164,14 @@ export class RegisterCommand {
         .setColor(Colors.Success)
         .addFields(
           {
-            name: '📅 Date',
+            name: "📅 Date",
             value: tournament.attributes.startAt
               ? `<t:${Math.floor(new Date(tournament.attributes.startAt).getTime() / 1000)}:F>`
-              : 'À définir',
+              : "À définir",
             inline: true,
           },
           {
-            name: '👥 Inscrits',
+            name: "👥 Inscrits",
             value: `${(participantsRes.data?.length ?? 0) + 1} joueur(s)`,
             inline: true,
           },
@@ -184,26 +181,26 @@ export class RegisterCommand {
 
       const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
         new ButtonBuilder()
-          .setLabel('Voir le bracket')
+          .setLabel("Voir le bracket")
           .setStyle(ButtonStyle.Link)
           .setURL(`https://challonge.com/${tournament.attributes.url}`)
-          .setEmoji('🔗'),
+          .setEmoji("🔗"),
       );
 
       return interaction.editReply({ embeds: [embed], components: [row] });
     } catch (error) {
-      logger.error('Join tournament error:', error);
+      logger.error("Join tournament error:", error);
       return interaction.editReply(
         "❌ Erreur lors de l'inscription. Le tournoi existe-t-il sur Challonge ?",
       );
     }
   }
 
-  @Slash({ name: 'quitter', description: "Se désinscrire d'un tournoi" })
+  @Slash({ name: "quitter", description: "Se désinscrire d'un tournoi" })
   async leave(
     @SlashOption({
-      name: 'tournoi',
-      description: 'ID ou Nom du tournoi',
+      name: "tournoi",
+      description: "ID ou Nom du tournoi",
       required: true,
       type: ApplicationCommandOptionType.String,
       autocomplete: RegisterCommand.autocomplete,
@@ -215,17 +212,14 @@ export class RegisterCommand {
 
     try {
       const challonge = getChallongeClient();
-      const targetId = tournamentId.includes('/')
-        ? tournamentId.split('/').pop()!
-        : tournamentId;
+      const targetId = tournamentId.includes("/") ? tournamentId.split("/").pop()! : tournamentId;
 
       const tournamentRes = await challonge.getTournament(targetId);
       const tournament = tournamentRes.data;
 
-      if (tournament.attributes.state !== 'pending') {
+      if (tournament.attributes.state !== "pending") {
         return interaction.editReply({
-          content:
-            '❌ Le tournoi a déjà commencé, tu ne peux plus te désinscrire.',
+          content: "❌ Le tournoi a déjà commencé, tu ne peux plus te désinscrire.",
         });
       }
 
@@ -241,7 +235,7 @@ export class RegisterCommand {
       }
 
       const confirmEmbed = new EmbedBuilder()
-        .setTitle('⚠️ Confirmation')
+        .setTitle("⚠️ Confirmation")
         .setDescription(
           `Es-tu sûr(e) de vouloir te désinscrire de **${tournament.attributes.name}** ?\n\n` +
             `Pseudo: **${participant.attributes.name}**`,
@@ -250,15 +244,15 @@ export class RegisterCommand {
 
       const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
         new ButtonBuilder()
-          .setCustomId('confirm-leave')
-          .setLabel('Confirmer')
+          .setCustomId("confirm-leave")
+          .setLabel("Confirmer")
           .setStyle(ButtonStyle.Danger)
-          .setEmoji('✅'),
+          .setEmoji("✅"),
         new ButtonBuilder()
-          .setCustomId('cancel-leave')
-          .setLabel('Annuler')
+          .setCustomId("cancel-leave")
+          .setLabel("Annuler")
           .setStyle(ButtonStyle.Secondary)
-          .setEmoji('❌'),
+          .setEmoji("❌"),
       );
 
       const response = await interaction.editReply({
@@ -273,44 +267,42 @@ export class RegisterCommand {
           filter: (i) => i.user.id === interaction.user.id,
         });
 
-        if (confirmation.customId === 'confirm-leave') {
+        if (confirmation.customId === "confirm-leave") {
           await challonge.deleteParticipant(targetId, participant.id);
 
           const successEmbed = new EmbedBuilder()
-            .setTitle('✅ Désinscription confirmée')
-            .setDescription(
-              `Tu as été retiré(e) de **${tournament.attributes.name}**.`,
-            )
+            .setTitle("✅ Désinscription confirmée")
+            .setDescription(`Tu as été retiré(e) de **${tournament.attributes.name}**.`)
             .setColor(Colors.Success)
             .setTimestamp();
 
           await confirmation.update({ embeds: [successEmbed], components: [] });
         } else {
           const cancelEmbed = new EmbedBuilder()
-            .setTitle('❌ Annulé')
-            .setDescription('Tu restes inscrit(e) au tournoi.')
+            .setTitle("❌ Annulé")
+            .setDescription("Tu restes inscrit(e) au tournoi.")
             .setColor(Colors.Error);
 
           await confirmation.update({ embeds: [cancelEmbed], components: [] });
         }
       } catch {
         await interaction.editReply({
-          content: '⏰ Temps écoulé. Désinscription annulée.',
+          content: "⏰ Temps écoulé. Désinscription annulée.",
           embeds: [],
           components: [],
         });
       }
     } catch (error) {
-      logger.error('Leave tournament error:', error);
-      return interaction.editReply('❌ Erreur lors de la désinscription.');
+      logger.error("Leave tournament error:", error);
+      return interaction.editReply("❌ Erreur lors de la désinscription.");
     }
   }
 
-  @Slash({ name: 'statut', description: "Vérifie ton statut d'inscription" })
+  @Slash({ name: "statut", description: "Vérifie ton statut d'inscription" })
   async status(
     @SlashOption({
-      name: 'tournoi',
-      description: 'ID ou Nom du tournoi',
+      name: "tournoi",
+      description: "ID ou Nom du tournoi",
       required: true,
       type: ApplicationCommandOptionType.String,
       autocomplete: RegisterCommand.autocomplete,
@@ -322,9 +314,7 @@ export class RegisterCommand {
 
     try {
       const challonge = getChallongeClient();
-      const targetId = tournamentId.includes('/')
-        ? tournamentId.split('/').pop()!
-        : tournamentId;
+      const targetId = tournamentId.includes("/") ? tournamentId.split("/").pop()! : tournamentId;
 
       const [tournamentRes, participantsRes] = await Promise.all([
         challonge.getTournament(targetId),
@@ -339,9 +329,7 @@ export class RegisterCommand {
       if (!participant) {
         const embed = new EmbedBuilder()
           .setTitle("📋 Statut d'inscription")
-          .setDescription(
-            `Tu n'es **pas inscrit(e)** à **${tournament.attributes.name}**.`,
-          )
+          .setDescription(`Tu n'es **pas inscrit(e)** à **${tournament.attributes.name}**.`)
           .setColor(Colors.Warning)
           .setTimestamp();
 
@@ -350,33 +338,31 @@ export class RegisterCommand {
             .setLabel("S'inscrire")
             .setStyle(ButtonStyle.Link)
             .setURL(`https://challonge.com/${tournament.attributes.url}`)
-            .setEmoji('📝'),
+            .setEmoji("📝"),
         );
 
         return interaction.editReply({ embeds: [embed], components: [row] });
       }
 
-      const stateEmoji = participant.attributes.checkedIn ? '✅' : '⏳';
+      const stateEmoji = participant.attributes.checkedIn ? "✅" : "⏳";
       const embed = new EmbedBuilder()
         .setTitle("📋 Statut d'inscription")
-        .setDescription(
-          `Tu es **inscrit(e)** à **${tournament.attributes.name}** !`,
-        )
+        .setDescription(`Tu es **inscrit(e)** à **${tournament.attributes.name}** !`)
         .setColor(Colors.Success)
         .addFields(
           {
-            name: '🏷️ Pseudo',
+            name: "🏷️ Pseudo",
             value: participant.attributes.name,
             inline: true,
           },
           {
-            name: '🌱 Seed',
-            value: `#${participant.attributes.seed || '?'}`,
+            name: "🌱 Seed",
+            value: `#${participant.attributes.seed || "?"}`,
             inline: true,
           },
           {
             name: `${stateEmoji} Check-in`,
-            value: participant.attributes.checkedIn ? 'Fait' : 'En attente',
+            value: participant.attributes.checkedIn ? "Fait" : "En attente",
             inline: true,
           },
         )
@@ -385,10 +371,8 @@ export class RegisterCommand {
 
       return interaction.editReply({ embeds: [embed] });
     } catch (error) {
-      logger.error('Check status error:', error);
-      return interaction.editReply(
-        '❌ Erreur lors de la vérification du statut.',
-      );
+      logger.error("Check status error:", error);
+      return interaction.editReply("❌ Erreur lors de la vérification du statut.");
     }
   }
 }

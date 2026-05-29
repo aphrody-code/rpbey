@@ -7,29 +7,33 @@
  *
  * Run via `prebuild` hook. Output is gitignored.
  */
-import { Glob } from 'bun';
-import { resolve, relative } from 'node:path';
+import { Glob } from "bun";
+import { resolve, relative } from "node:path";
 
-const ROOT = resolve(import.meta.dirname, '..');
-const SRC = resolve(ROOT, 'src');
-const OUT = resolve(SRC, '_entry-imports.generated.ts');
+const ROOT = resolve(import.meta.dirname, "..");
+const SRC = resolve(ROOT, "src");
+const OUT = resolve(SRC, "_entry-imports.generated.ts");
 
-const DIRS = ['events', 'commands', 'components'];
-const EXT = new Set(['.ts', '.tsx']);
+const DIRS = ["events", "commands", "components"];
+const EXT = new Set([".ts", ".tsx"]);
 
 const imports: string[] = [];
 
 for (const dir of DIRS) {
   const base = resolve(SRC, dir);
-  const glob = new Glob('**/*.{ts,tsx}');
+  const glob = new Glob("**/*.{ts,tsx}");
   for await (const rel of glob.scan({ cwd: base })) {
     // Skip declaration files, tests, and the generated file itself.
-    if (rel.endsWith('.d.ts')) continue;
-    if (rel.endsWith('.test.ts') || rel.endsWith('.spec.ts')) continue;
+    if (rel.endsWith(".d.ts")) continue;
+    if (rel.endsWith(".test.ts") || rel.endsWith(".spec.ts")) continue;
     const abs = resolve(base, rel);
     // Import path relative to the generated file in src/.
-    const importPath = './' + relative(SRC, abs).replace(/\\/g, '/').replace(/\.tsx?$/, '.js');
-    if (!EXT.has('.' + rel.split('.').pop())) continue;
+    const importPath =
+      "./" +
+      relative(SRC, abs)
+        .replace(/\\/g, "/")
+        .replace(/\.tsx?$/, ".js");
+    if (!EXT.has("." + rel.split(".").pop())) continue;
     imports.push(importPath);
   }
 }
@@ -41,7 +45,7 @@ const body = `/* eslint-disable */
 // Ensures the bundler sees every @Discord/@Slash decorated module as a static
 // dep so \`bun build --compile\` pulls them into the standalone binary.
 
-${imports.map((p) => `import '${p}';`).join('\n')}
+${imports.map((p) => `import '${p}';`).join("\n")}
 `;
 
 await Bun.write(OUT, body);

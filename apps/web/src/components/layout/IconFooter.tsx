@@ -1,30 +1,30 @@
-'use client';
+"use client";
 
-import { GitHub, X as XIcon } from '@mui/icons-material';
-import { alpha, Box, IconButton, Tooltip, Typography } from '@mui/material';
-import { DiscordIcon, TikTokIcon, TwitchIcon } from '@/components/ui/Icons';
+import { GitHub, X as XIcon } from "@mui/icons-material";
+import { alpha, Box, IconButton, Tooltip, Typography } from "@mui/material";
+import { DiscordIcon, TikTokIcon, TwitchIcon } from "@/components/ui/Icons";
 
 export function IconFooter() {
   return (
     <Box
       component="footer"
       sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
         gap: 2,
         py: 3,
         px: 2,
-        borderTop: 'none',
-        bgcolor: 'background.default',
-        position: 'relative',
-        '&::before': {
+        borderTop: "none",
+        bgcolor: "background.default",
+        position: "relative",
+        "&::before": {
           content: '""',
-          position: 'absolute',
+          position: "absolute",
           top: 0,
-          left: '10%',
-          right: '10%',
-          height: '1px',
+          left: "10%",
+          right: "10%",
+          height: "1px",
           background: (theme) =>
             `linear-gradient(90deg, transparent, ${alpha(theme.palette.primary.main, 0.3)} 30%, ${alpha(theme.palette.primary.main, 0.5)} 50%, ${alpha(theme.palette.primary.main, 0.3)} 70%, transparent)`,
         },
@@ -39,9 +39,9 @@ export function IconFooter() {
           rel="noopener noreferrer"
           size="small"
           sx={{
-            color: 'text.secondary',
-            '&:hover': {
-              color: '#5865F2',
+            color: "text.secondary",
+            "&:hover": {
+              color: "#5865F2",
             },
           }}
         >
@@ -56,9 +56,9 @@ export function IconFooter() {
           rel="noopener noreferrer"
           size="small"
           sx={{
-            color: 'text.secondary',
-            '&:hover': {
-              color: 'text.primary',
+            color: "text.secondary",
+            "&:hover": {
+              color: "text.primary",
             },
           }}
         >
@@ -73,9 +73,9 @@ export function IconFooter() {
           rel="noopener noreferrer"
           size="small"
           sx={{
-            color: 'text.secondary',
-            '&:hover': {
-              color: '#9146FF',
+            color: "text.secondary",
+            "&:hover": {
+              color: "#9146FF",
             },
           }}
         >
@@ -90,9 +90,9 @@ export function IconFooter() {
           rel="noopener noreferrer"
           size="small"
           sx={{
-            color: 'text.secondary',
-            '&:hover': {
-              color: 'text.primary',
+            color: "text.secondary",
+            "&:hover": {
+              color: "text.primary",
             },
           }}
         >
@@ -107,9 +107,9 @@ export function IconFooter() {
           rel="noopener noreferrer"
           size="small"
           sx={{
-            color: 'text.secondary',
-            '&:hover': {
-              color: 'text.primary',
+            color: "text.secondary",
+            "&:hover": {
+              color: "text.primary",
             },
           }}
         >
@@ -117,39 +117,39 @@ export function IconFooter() {
         </IconButton>
       </Tooltip>
       {/* Divider */}
-      <Box sx={{ width: '1px', height: 16, bgcolor: 'divider', mx: 1 }} />
+      <Box sx={{ width: "1px", height: 16, bgcolor: "divider", mx: 1 }} />
       {/* Links */}
       <Typography
         component="a"
         href="/reglement"
         variant="caption"
         sx={{
-          color: 'text.secondary',
-          textDecoration: 'none',
-          '&:hover': { textDecoration: 'underline' },
+          color: "text.secondary",
+          textDecoration: "none",
+          "&:hover": { textDecoration: "underline" },
         }}
       >
         Règlement
       </Typography>
-      <Box sx={{ width: '1px', height: 16, bgcolor: 'divider', mx: 1 }} />
+      <Box sx={{ width: "1px", height: 16, bgcolor: "divider", mx: 1 }} />
       <Typography
         component="a"
         href="/privacy"
         variant="caption"
         sx={{
-          color: 'text.secondary',
-          textDecoration: 'none',
-          '&:hover': { textDecoration: 'underline' },
+          color: "text.secondary",
+          textDecoration: "none",
+          "&:hover": { textDecoration: "underline" },
         }}
       >
         Confidentialité
       </Typography>
-      <Box sx={{ width: '1px', height: 16, bgcolor: 'divider', mx: 1 }} />
+      <Box sx={{ width: "1px", height: 16, bgcolor: "divider", mx: 1 }} />
       {/* Copyright */}
       <Typography
         variant="caption"
         sx={{
-          color: 'text.secondary',
+          color: "text.secondary",
         }}
       >
         © {new Date().getFullYear()} RPB

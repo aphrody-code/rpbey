@@ -1,26 +1,22 @@
-import {
-  ApplicationCommandOptionType,
-  type CommandInteraction,
-  EmbedBuilder,
-} from 'discord.js';
-import { Discord, Slash, SlashGroup, SlashOption } from '@rpbey/discordx';
+import { ApplicationCommandOptionType, type CommandInteraction, EmbedBuilder } from "discord.js";
+import { Discord, Slash, SlashGroup, SlashOption } from "@rpbey/discordx";
 
-import { Colors, RPB } from '../../lib/constants.js';
-import { logger } from '../../lib/logger.js';
-import prisma from '../../lib/prisma.js';
+import { Colors, RPB } from "../../lib/constants.js";
+import { logger } from "../../lib/logger.js";
+import prisma from "../../lib/prisma.js";
 
 @Discord()
-@SlashGroup({ name: 'challonge', description: 'Gérer ton compte Challonge' })
-@SlashGroup('challonge')
+@SlashGroup({ name: "challonge", description: "Gérer ton compte Challonge" })
+@SlashGroup("challonge")
 export class ChallongeCommand {
   @Slash({
-    name: 'lier',
-    description: 'Lier ton pseudo Challonge à ton compte Discord',
+    name: "lier",
+    description: "Lier ton pseudo Challonge à ton compte Discord",
   })
   async link(
     @SlashOption({
-      name: 'pseudo',
-      description: 'Ton pseudo exact sur Challonge',
+      name: "pseudo",
+      description: "Ton pseudo exact sur Challonge",
       required: true,
       type: ApplicationCommandOptionType.String,
     })
@@ -62,7 +58,7 @@ export class ChallongeCommand {
       });
 
       const embed = new EmbedBuilder()
-        .setTitle('✅ Compte Challonge lié !')
+        .setTitle("✅ Compte Challonge lié !")
         .setDescription(
           `Ton compte Discord est maintenant lié au pseudo Challonge : **${challongeUsername}**.\n\n` +
             `Cela permettra de suivre automatiquement tes résultats de tournoi.`,
@@ -73,16 +69,16 @@ export class ChallongeCommand {
 
       return interaction.editReply({ embeds: [embed] });
     } catch (error) {
-      logger.error('Challonge link error:', error);
+      logger.error("Challonge link error:", error);
       return interaction.editReply({
-        content: '❌ Une erreur est survenue lors de la liaison du compte.',
+        content: "❌ Une erreur est survenue lors de la liaison du compte.",
       });
     }
   }
 
   @Slash({
-    name: 'info',
-    description: 'Voir les informations de ton compte lié',
+    name: "info",
+    description: "Voir les informations de ton compte lié",
   })
   async info(interaction: CommandInteraction) {
     await interaction.deferReply();
@@ -101,10 +97,10 @@ export class ChallongeCommand {
       }
 
       const embed = new EmbedBuilder()
-        .setTitle('👤 Informations Challonge')
+        .setTitle("👤 Informations Challonge")
         .setColor(Colors.Primary)
         .addFields({
-          name: 'Pseudo Lié',
+          name: "Pseudo Lié",
           value: user.profile.challongeUsername,
           inline: true,
         })
@@ -116,10 +112,8 @@ export class ChallongeCommand {
 
       return interaction.editReply({ embeds: [embed] });
     } catch (error) {
-      logger.error('Challonge info error:', error);
-      return interaction.editReply(
-        '❌ Erreur lors de la récupération des infos.',
-      );
+      logger.error("Challonge info error:", error);
+      return interaction.editReply("❌ Erreur lors de la récupération des infos.");
     }
   }
 }

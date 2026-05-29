@@ -1,21 +1,21 @@
-'use client';
+"use client";
 
-import Checkbox from '@mui/material/Checkbox';
-import Paper from '@mui/material/Paper';
-import { alpha } from '@mui/material/styles';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
-import TableSortLabel from '@mui/material/TableSortLabel';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import { type ReactNode, useCallback, useMemo, useState } from 'react';
+import Checkbox from "@mui/material/Checkbox";
+import Paper from "@mui/material/Paper";
+import { alpha } from "@mui/material/styles";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TablePagination from "@mui/material/TablePagination";
+import TableRow from "@mui/material/TableRow";
+import TableSortLabel from "@mui/material/TableSortLabel";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import { type ReactNode, useCallback, useMemo, useState } from "react";
 
-type Order = 'asc' | 'desc';
+type Order = "asc" | "desc";
 
 export interface Column<T> {
   id: keyof T | string;
@@ -46,11 +46,7 @@ interface DataTableProps<T extends { id: string | number }> {
   emptyMessage?: string;
 }
 
-function descendingComparator<T>(
-  a: T,
-  b: T,
-  orderBy: keyof T | string,
-): number {
+function descendingComparator<T>(a: T, b: T, orderBy: keyof T | string): number {
   const aValue = (a as Record<string, unknown>)[orderBy as string];
   const bValue = (b as Record<string, unknown>)[orderBy as string];
 
@@ -58,11 +54,11 @@ function descendingComparator<T>(
   if (aValue == null && bValue != null) return 1;
   if (aValue == null && bValue == null) return 0;
 
-  if (typeof aValue === 'string' && typeof bValue === 'string') {
+  if (typeof aValue === "string" && typeof bValue === "string") {
     return bValue.localeCompare(aValue);
   }
 
-  if (typeof aValue === 'number' && typeof bValue === 'number') {
+  if (typeof aValue === "number" && typeof bValue === "number") {
     return bValue - aValue;
   }
 
@@ -73,7 +69,7 @@ function descendingComparator<T>(
 }
 
 function getComparator<T>(order: Order, orderBy: keyof T | string) {
-  return order === 'desc'
+  return order === "desc"
     ? (a: T, b: T) => descendingComparator(a, b, orderBy)
     : (a: T, b: T) => -descendingComparator(a, b, orderBy);
 }
@@ -86,7 +82,7 @@ export function DataTable<T extends { id: string | number }>({
   selected = [],
   onSelectionChange,
   defaultOrderBy,
-  defaultOrder = 'asc',
+  defaultOrder = "asc",
   rowsPerPageOptions = [5, 10, 25],
   dense = false,
   stickyHeader = false,
@@ -94,19 +90,17 @@ export function DataTable<T extends { id: string | number }>({
   actions,
   selectedActions,
   onRowClick,
-  emptyMessage = 'Aucune donnée',
+  emptyMessage = "Aucune donnée",
 }: DataTableProps<T>) {
   const [order, setOrder] = useState<Order>(defaultOrder);
-  const [orderBy, setOrderBy] = useState<keyof T | string>(
-    defaultOrderBy ?? columns[0]?.id ?? '',
-  );
+  const [orderBy, setOrderBy] = useState<keyof T | string>(defaultOrderBy ?? columns[0]?.id ?? "");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(rowsPerPageOptions[0] ?? 10);
 
   const handleRequestSort = useCallback(
     (property: keyof T | string) => {
-      const isAsc = orderBy === property && order === 'asc';
-      setOrder(isAsc ? 'desc' : 'asc');
+      const isAsc = orderBy === property && order === "asc";
+      setOrder(isAsc ? "desc" : "asc");
       setOrderBy(property);
     },
     [order, orderBy],
@@ -143,30 +137,24 @@ export function DataTable<T extends { id: string | number }>({
     setPage(newPage);
   }, []);
 
-  const handleChangeRowsPerPage = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      setRowsPerPage(parseInt(event.target.value, 10));
-      setPage(0);
-    },
-    [],
-  );
+  const handleChangeRowsPerPage = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  }, []);
 
   const sortedRows = useMemo(() => {
     return [...rows].sort(getComparator(order, orderBy));
   }, [rows, order, orderBy]);
 
   const paginatedRows = useMemo(() => {
-    return sortedRows.slice(
-      page * rowsPerPage,
-      page * rowsPerPage + rowsPerPage,
-    );
+    return sortedRows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
   }, [sortedRows, page, rowsPerPage]);
 
   const numSelected = selected.length;
   const rowCount = rows.length;
 
   return (
-    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+    <Paper sx={{ width: "100%", overflow: "hidden" }}>
       {(title || actions || (numSelected > 0 && selectedActions)) && (
         <Toolbar
           sx={{
@@ -174,10 +162,7 @@ export function DataTable<T extends { id: string | number }>({
             pr: { xs: 1, sm: 1 },
             ...(numSelected > 0 && {
               bgcolor: (theme) =>
-                alpha(
-                  theme.palette.primary.main,
-                  theme.palette.action.activatedOpacity,
-                ),
+                alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity),
             }),
           }}
         >
@@ -186,14 +171,14 @@ export function DataTable<T extends { id: string | number }>({
               variant="subtitle1"
               component="div"
               sx={{
-                color: 'inherit',
-                flex: '1 1 100%',
+                color: "inherit",
+                flex: "1 1 100%",
               }}
             >
-              {numSelected} sélectionné{numSelected > 1 ? 's' : ''}
+              {numSelected} sélectionné{numSelected > 1 ? "s" : ""}
             </Typography>
           ) : (
-            <Typography sx={{ flex: '1 1 100%' }} variant="h6" component="div">
+            <Typography sx={{ flex: "1 1 100%" }} variant="h6" component="div">
               {title}
             </Typography>
           )}
@@ -203,8 +188,8 @@ export function DataTable<T extends { id: string | number }>({
       <TableContainer sx={{ maxHeight }}>
         <Table
           stickyHeader={stickyHeader}
-          size={dense ? 'small' : 'medium'}
-          aria-label={title ?? 'data table'}
+          size={dense ? "small" : "medium"}
+          aria-label={title ?? "data table"}
         >
           <TableHead>
             <TableRow>
@@ -216,7 +201,7 @@ export function DataTable<T extends { id: string | number }>({
                     checked={rowCount > 0 && numSelected === rowCount}
                     onChange={handleSelectAllClick}
                     slotProps={{
-                      input: { 'aria-label': 'sélectionner tout' },
+                      input: { "aria-label": "sélectionner tout" },
                     }}
                   />
                 </TableCell>
@@ -224,15 +209,15 @@ export function DataTable<T extends { id: string | number }>({
               {columns.map((column) => (
                 <TableCell
                   key={String(column.id)}
-                  align={column.numeric ? 'right' : 'left'}
-                  padding={column.disablePadding ? 'none' : 'normal'}
+                  align={column.numeric ? "right" : "left"}
+                  padding={column.disablePadding ? "none" : "normal"}
                   sortDirection={orderBy === column.id ? order : false}
                   sx={{ width: column.width }}
                 >
                   {column.sortable !== false ? (
                     <TableSortLabel
                       active={orderBy === column.id}
-                      direction={orderBy === column.id ? order : 'asc'}
+                      direction={orderBy === column.id ? order : "asc"}
                       onClick={() => handleRequestSort(column.id)}
                     >
                       {column.label}
@@ -247,13 +232,10 @@ export function DataTable<T extends { id: string | number }>({
           <TableBody>
             {paginatedRows.length === 0 ? (
               <TableRow>
-                <TableCell
-                  colSpan={columns.length + (selectable ? 1 : 0)}
-                  align="center"
-                >
+                <TableCell colSpan={columns.length + (selectable ? 1 : 0)} align="center">
                   <Typography
                     sx={{
-                      color: 'text.secondary',
+                      color: "text.secondary",
                       py: 4,
                     }}
                   >
@@ -268,15 +250,13 @@ export function DataTable<T extends { id: string | number }>({
                   <TableRow
                     key={row.id}
                     hover
-                    onClick={() =>
-                      selectable ? handleClick(row.id) : onRowClick?.(row)
-                    }
-                    role={selectable ? 'checkbox' : undefined}
+                    onClick={() => (selectable ? handleClick(row.id) : onRowClick?.(row))}
+                    role={selectable ? "checkbox" : undefined}
                     aria-checked={selectable ? isSelected : undefined}
                     tabIndex={-1}
                     selected={isSelected}
                     sx={{
-                      cursor: selectable || onRowClick ? 'pointer' : 'default',
+                      cursor: selectable || onRowClick ? "pointer" : "default",
                     }}
                   >
                     {selectable && (
@@ -286,7 +266,7 @@ export function DataTable<T extends { id: string | number }>({
                           checked={isSelected}
                           slotProps={{
                             input: {
-                              'aria-labelledby': `table-row-${row.id}`,
+                              "aria-labelledby": `table-row-${row.id}`,
                             },
                           }}
                         />
@@ -295,16 +275,12 @@ export function DataTable<T extends { id: string | number }>({
                     {columns.map((column) => (
                       <TableCell
                         key={String(column.id)}
-                        align={column.numeric ? 'right' : 'left'}
-                        padding={column.disablePadding ? 'none' : 'normal'}
+                        align={column.numeric ? "right" : "left"}
+                        padding={column.disablePadding ? "none" : "normal"}
                       >
                         {column.render
                           ? column.render(row)
-                          : String(
-                              (row as Record<string, unknown>)[
-                                column.id as string
-                              ] ?? '',
-                            )}
+                          : String((row as Record<string, unknown>)[column.id as string] ?? "")}
                       </TableCell>
                     ))}
                   </TableRow>

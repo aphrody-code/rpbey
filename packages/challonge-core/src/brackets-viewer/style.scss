@@ -76,14 +76,10 @@
   --match-border-radius: var(--md-sys-shape-corner-medium);
 
   // ---- Elevation (M3 surface tint + shadow)
-  --md-sys-elevation-1: 0 1px 2px 0 rgba(0, 0, 0, 0.30),
-                       0 1px 3px 1px rgba(0, 0, 0, 0.15);
-  --md-sys-elevation-2: 0 1px 2px 0 rgba(0, 0, 0, 0.30),
-                       0 2px 6px 2px rgba(0, 0, 0, 0.15);
-  --md-sys-elevation-3: 0 4px 8px 3px rgba(0, 0, 0, 0.15),
-                       0 1px 3px 0 rgba(0, 0, 0, 0.30);
-  --md-sys-elevation-4: 0 6px 10px 4px rgba(0, 0, 0, 0.15),
-                       0 2px 3px 0 rgba(0, 0, 0, 0.30);
+  --md-sys-elevation-1: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.15);
+  --md-sys-elevation-2: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 2px 6px 2px rgba(0, 0, 0, 0.15);
+  --md-sys-elevation-3: 0 4px 8px 3px rgba(0, 0, 0, 0.15), 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+  --md-sys-elevation-4: 0 6px 10px 4px rgba(0, 0, 0, 0.15), 0 2px 3px 0 rgba(0, 0, 0, 0.3);
 
   // ---- Motion
   --md-sys-motion-easing-standard: cubic-bezier(0.2, 0, 0, 1);
@@ -160,14 +156,14 @@
   --md-sys-color-outline-variant: #43474e;
   --md-sys-color-scrim: rgba(0, 0, 0, 0.6);
 
-  --md-sys-elevation-1: 0 1px 2px 0 rgba(0, 0, 0, 0.45),
-                       0 1px 3px 1px rgba(0, 0, 0, 0.30);
-  --md-sys-elevation-2: 0 1px 2px 0 rgba(0, 0, 0, 0.45),
-                       0 2px 6px 2px rgba(0, 0, 0, 0.30);
+  --md-sys-elevation-1: 0 1px 2px 0 rgba(0, 0, 0, 0.45), 0 1px 3px 1px rgba(0, 0, 0, 0.3);
+  --md-sys-elevation-2: 0 1px 2px 0 rgba(0, 0, 0, 0.45), 0 2px 6px 2px rgba(0, 0, 0, 0.3);
 }
 
 @media (prefers-color-scheme: dark) {
-  .brackets-viewer:not([data-theme="light"]) { @include md3-dark-scheme; }
+  .brackets-viewer:not([data-theme="light"]) {
+    @include md3-dark-scheme;
+  }
 }
 
 .brackets-viewer.dark,
@@ -184,10 +180,22 @@
   $connector-border: var(--connector-border-width) solid var(--connector-color);
   $match-border: var(--match-border-width) solid var(--border-color);
 
-  font-family: "Roboto", "Roboto Flex", -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  font-feature-settings: "liga" 1, "kern" 1;
+  font-family:
+    "Roboto",
+    "Roboto Flex",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Helvetica,
+    Arial,
+    sans-serif,
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol",
+    "Noto Color Emoji";
+  font-feature-settings:
+    "liga" 1,
+    "kern" 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
@@ -204,9 +212,15 @@
   padding: 16px 32px 32px;
   border-radius: var(--md-sys-shape-corner-large);
 
-  &:empty { display: none; }
+  &:empty {
+    display: none;
+  }
 
-  *, ::after, ::before { box-sizing: border-box; }
+  *,
+  ::after,
+  ::before {
+    box-sizing: border-box;
+  }
 
   // ---- Typography scale
   h1 {
@@ -255,8 +269,12 @@
     justify-content: flex-start;
     gap: 24px;
 
-    h1 { flex-basis: 100%; }
-    h2 { text-align: center; }
+    h1 {
+      flex-basis: 100%;
+    }
+    h2 {
+      text-align: center;
+    }
 
     .group {
       background: var(--md-sys-color-surface-container-low);
@@ -264,9 +282,13 @@
       padding: 16px 20px 20px;
       box-shadow: var(--md-sys-elevation-1);
 
-      &:not(:last-of-type) { margin-right: 0; }
+      &:not(:last-of-type) {
+        margin-right: 0;
+      }
 
-      h2 { margin: 0 0 16px; }
+      h2 {
+        margin: 0 0 16px;
+      }
 
       table {
         font: var(--md-sys-typescale-body-medium);
@@ -292,10 +314,14 @@
         background: color-mix(in srgb, var(--md-sys-color-on-surface) 8%, transparent);
       }
 
-      th, td { padding: 10px 12px; }
+      th,
+      td {
+        padding: 10px 12px;
+      }
 
       td {
-        border-bottom: 1px solid color-mix(in srgb, var(--md-sys-color-outline-variant) 50%, transparent);
+        border-bottom: 1px solid
+          color-mix(in srgb, var(--md-sys-color-outline-variant) 50%, transparent);
 
         &:nth-of-type(2),
         &:last-of-type {
@@ -304,10 +330,15 @@
         }
       }
 
-      tr:last-child td { border-bottom: none; }
+      tr:last-child td {
+        border-bottom: none;
+      }
     }
 
-    .round { width: fit-content; margin: 0 auto; }
+    .round {
+      width: fit-content;
+      margin: 0 auto;
+    }
   }
 
   // -------------------------------------------------------------------------
@@ -324,13 +355,17 @@
     .rounds {
       display: flex;
 
-      &:not(:last-of-type) { margin-bottom: 16px; }
+      &:not(:last-of-type) {
+        margin-bottom: 16px;
+      }
 
       .round {
         display: flex;
         flex-direction: column;
 
-        &:not(:last-of-type) { margin-right: var(--round-margin); }
+        &:not(:last-of-type) {
+          margin-right: var(--round-margin);
+        }
       }
     }
   }
@@ -358,7 +393,8 @@
         width: $connector-width;
         height: 50%;
         border-right: $connector-border;
-        transition: border-color var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);
+        transition: border-color var(--md-sys-motion-duration-short)
+          var(--md-sys-motion-easing-standard);
       }
 
       &:nth-of-type(odd)::after {
@@ -415,18 +451,24 @@
     &:hover {
       box-shadow: var(--md-sys-elevation-2);
       border-color: var(--md-sys-color-outline);
-      &::before { opacity: 0.08; }
+      &::before {
+        opacity: 0.08;
+      }
     }
 
     &:focus-visible {
       outline: 2px solid var(--md-sys-color-primary);
       outline-offset: 2px;
-      &::before { opacity: 0.10; }
+      &::before {
+        opacity: 0.1;
+      }
     }
 
     &:active {
       transform: scale(0.98);
-      &::before { opacity: 0.12; }
+      &::before {
+        opacity: 0.12;
+      }
     }
 
     &.popover-selected {
@@ -448,8 +490,12 @@
       box-shadow: var(--md-sys-elevation-1);
     }
 
-    & > span:nth-of-type(1) { left: 8px; }
-    & > span:nth-of-type(2) { right: 8px; }
+    & > span:nth-of-type(1) {
+      left: 8px;
+    }
+    & > span:nth-of-type(2) {
+      right: 8px;
+    }
 
     &.connect-previous {
       &::after {
@@ -469,10 +515,18 @@
         width: var(--round-margin);
       }
 
-      .bracket:nth-of-type(1) &.straight::before { content: unset; }
-      .bracket:nth-of-type(1) &.straight::after { @extend %straight; }
-      .bracket:nth-of-type(2) &.straight::before { @extend %straight; }
-      .bracket:nth-of-type(2) &.straight::after { content: unset; }
+      .bracket:nth-of-type(1) &.straight::before {
+        content: unset;
+      }
+      .bracket:nth-of-type(1) &.straight::after {
+        @extend %straight;
+      }
+      .bracket:nth-of-type(2) &.straight::before {
+        @extend %straight;
+      }
+      .bracket:nth-of-type(2) &.straight::after {
+        content: unset;
+      }
     }
   }
 
@@ -488,7 +542,8 @@
     position: relative;
     z-index: 1;
     min-height: 32px;
-    transition: background-color var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);
+    transition: background-color var(--md-sys-motion-duration-short)
+      var(--md-sys-motion-easing-standard);
 
     &.hover {
       background: color-mix(in srgb, var(--md-sys-color-primary) 12%, transparent) !important;
@@ -509,7 +564,10 @@
       align-items: center;
       gap: 8px;
 
-      &.hint { color: var(--md-sys-color-outline); font-style: italic; }
+      &.hint {
+        color: var(--md-sys-color-outline);
+        font-style: italic;
+      }
 
       & > img {
         width: var(--participant-image-size);
@@ -589,14 +647,18 @@
       color: var(--md-sys-color-on-surface);
     }
 
-    .match:not(:last-of-type) { margin-bottom: 16px; }
+    .match:not(:last-of-type) {
+      margin-bottom: 16px;
+    }
   }
 
   // -------------------------------------------------------------------------
   // Reduced motion
   // -------------------------------------------------------------------------
   @media (prefers-reduced-motion: reduce) {
-    *, ::before, ::after {
+    *,
+    ::before,
+    ::after {
       transition-duration: 0.01ms !important;
       animation-duration: 0.01ms !important;
     }

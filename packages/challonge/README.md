@@ -1,15 +1,14 @@
-
 > ⚠️ **INFRASTRUCTURE GÉRÉE PAR ANTIGRAVITY (GOD MODE)**
 > Ce projet opère sous la **Directive Omega**. L'architecture, les dépendances, et le code sont gérés et refactorisés de manière 100% autonome. Aucune sécurité conservative n'est appliquée. La performance brute est l'unique métrique.
-\n# @rose-griffon/challonge
+> \n# @rose-griffon/challonge
 
 Client Challonge canonique du monorepo RPB. Trois transports complémentaires :
 
-| Transport | Quand l'utiliser | Latence | CF-bypass |
-|---|---|---|---|
-| **`ChallongeApi`** (v1 REST + clé) | Tournoi visible par la clé. Source de vérité typée. | ~150 ms | n/a (API non gardée) |
-| **`ChallongeReverse`** (curl-impersonate + HTMLRewriter) | Pages publiques (`/log`, `/standings`, `<slug>.json`) hors API | ~50 ms | chrome131 fingerprint |
-| **`ChallongeScraper`** (Puppeteer + stealth) | **Fallback uniquement** — laissé pour scripts legacy | ~3 s | rebrowser-patches |
+| Transport                                                | Quand l'utiliser                                               | Latence | CF-bypass             |
+| -------------------------------------------------------- | -------------------------------------------------------------- | ------- | --------------------- |
+| **`ChallongeApi`** (v1 REST + clé)                       | Tournoi visible par la clé. Source de vérité typée.            | ~150 ms | n/a (API non gardée)  |
+| **`ChallongeReverse`** (curl-impersonate + HTMLRewriter) | Pages publiques (`/log`, `/standings`, `<slug>.json`) hors API | ~50 ms  | chrome131 fingerprint |
+| **`ChallongeScraper`** (Puppeteer + stealth)             | **Fallback uniquement** — laissé pour scripts legacy           | ~3 s    | rebrowser-patches     |
 
 Renommé `@rpb/challonge` → `@rose-griffon/challonge` le 2026-04-26 lors de l'optimisation pré-BTS4.
 
@@ -18,11 +17,11 @@ Renommé `@rpb/challonge` → `@rose-griffon/challonge` le 2026-04-26 lors de l'
 ### API v1 — typé, idiomatique
 
 ```ts
-import { ChallongeApi } from '@rose-griffon/challonge';
+import { ChallongeApi } from "@rose-griffon/challonge";
 
 const api = new ChallongeApi({ apiKey: process.env.CHALLONGE_API_KEY! });
 
-const t = await api.get('B_TS4', {
+const t = await api.get("B_TS4", {
   includeParticipants: true,
   includeMatches: true,
 });
@@ -35,26 +34,26 @@ console.log(canonical.participants.length, canonical.matches.length, canonical.l
 ### Reverse — pages publiques sans clé
 
 ```ts
-import { ChallongeReverse } from '@rose-griffon/challonge';
+import { ChallongeReverse } from "@rose-griffon/challonge";
 
 const reverse = new ChallongeReverse();
 
 // Store complet : tournament, matches_by_round, rounds, third_place_match…
-const store = await reverse.getStore('B_TS4');
+const store = await reverse.getStore("B_TS4");
 
 // Activity log structuré (le seul transport à exposer /log)
-const entries = await reverse.getLog('B_TS4');
+const entries = await reverse.getLog("B_TS4");
 
 // Standings live
-const standings = await reverse.getStandings('B_TS4');
+const standings = await reverse.getStandings("B_TS4");
 ```
 
 ### Proxy local Bun.serve
 
 ```ts
-import { startChallongeProxy } from '@rose-griffon/challonge/proxy';
+import { startChallongeProxy } from "@rose-griffon/challonge/proxy";
 
-await startChallongeProxy({ port: 4500, bearerToken: 'xxx' });
+await startChallongeProxy({ port: 4500, bearerToken: "xxx" });
 // GET /B_TS4/store, /B_TS4/log, /B_TS4/standings, /B_TS4/participants
 // LRU cache partagé, cold ~550ms, hit ~3ms
 ```
@@ -62,11 +61,11 @@ await startChallongeProxy({ port: 4500, bearerToken: 'xxx' });
 ### Scraper legacy (Puppeteer)
 
 ```ts
-import { ChallongeScraper, sumSetWinsForPlayer, normalizeSets } from '@rose-griffon/challonge';
+import { ChallongeScraper, sumSetWinsForPlayer, normalizeSets } from "@rose-griffon/challonge";
 
 const scraper = new ChallongeScraper();
 try {
-  const result = await scraper.scrape('fr/B_TS2');
+  const result = await scraper.scrape("fr/B_TS2");
   // …
 } finally {
   await scraper.close();
@@ -97,16 +96,16 @@ interface ScrapedMatch {
   id: number;
   identifier: string;
   round: number;
-  bracketSide: 'WB' | 'LB' | 'GF' | null;  // déduit du signe du round
+  bracketSide: "WB" | "LB" | "GF" | null; // déduit du signe du round
   player1Id: number | null;
   player2Id: number | null;
   winnerId: number | null;
   loserId: number | null;
-  scores: string;                            // legacy "3-1,2-3,3-0"
-  sets: Array<[number, number]>;             // canonique
+  scores: string; // legacy "3-1,2-3,3-0"
+  sets: Array<[number, number]>; // canonique
   state: string;
   forfeited: boolean | null;
-  startedAt: string | null;                  // ISO 8601
+  startedAt: string | null; // ISO 8601
   completedAt: string | null;
   // …
 }
@@ -155,12 +154,12 @@ Helper `bracketSideFromRound(round, type)` : `null` si type elimination simple, 
 
 ## Performance
 
-| Op | Cold | Cache hit |
-|---|---|---|
-| `api.get(slug, {includeParticipants:true, includeMatches:true})` | ~150 ms | n/a |
-| `reverse.getStore(slug)` | ~550 ms | ~3 ms (LRU 15 min / 50 MB) |
-| `reverse.getStandings(slug)` | ~600 ms | ~3 ms |
-| `extractReactRoots(html)` (HTMLRewriter natif) | 8–20× plus rapide que `node-html-parser` |
+| Op                                                               | Cold                                     | Cache hit                  |
+| ---------------------------------------------------------------- | ---------------------------------------- | -------------------------- |
+| `api.get(slug, {includeParticipants:true, includeMatches:true})` | ~150 ms                                  | n/a                        |
+| `reverse.getStore(slug)`                                         | ~550 ms                                  | ~3 ms (LRU 15 min / 50 MB) |
+| `reverse.getStandings(slug)`                                     | ~600 ms                                  | ~3 ms                      |
+| `extractReactRoots(html)` (HTMLRewriter natif)                   | 8–20× plus rapide que `node-html-parser` |
 
 ## Tests
 
@@ -174,12 +173,12 @@ Fixtures BTS4 réelles dans `tests/fixtures/` (HTML + JSON capturés le 2026-04-
 
 ## Consommateurs
 
-| Fichier | Transport utilisé |
-|---|---|
-| `apps/rpbey/src/app/api/tournaments/[id]/live/route.ts` | API v1 + Reverse |
-| `apps/rpbey/src/server/actions/maintenance.ts` | API v1 |
-| `apps/rpb-bot/src/lib/challonge-sync.ts` | API v1 |
-| `scripts/rpb/live-tournament-sync.ts` | API v1 + Reverse (BTS4 live) |
-| `scripts/rpb/scrape-bts4.ts` | `ChallongeClient` (API + scraper conditionnel) |
-| `scripts/rpb/sync-participants-only.ts` | Scraper legacy (à migrer) |
-| `scripts/rpb/import-bts3.ts`, `rescrape-bts2.ts`, etc. | Scraper legacy (à migrer) |
+| Fichier                                                 | Transport utilisé                              |
+| ------------------------------------------------------- | ---------------------------------------------- |
+| `apps/rpbey/src/app/api/tournaments/[id]/live/route.ts` | API v1 + Reverse                               |
+| `apps/rpbey/src/server/actions/maintenance.ts`          | API v1                                         |
+| `apps/rpb-bot/src/lib/challonge-sync.ts`                | API v1                                         |
+| `scripts/rpb/live-tournament-sync.ts`                   | API v1 + Reverse (BTS4 live)                   |
+| `scripts/rpb/scrape-bts4.ts`                            | `ChallongeClient` (API + scraper conditionnel) |
+| `scripts/rpb/sync-participants-only.ts`                 | Scraper legacy (à migrer)                      |
+| `scripts/rpb/import-bts3.ts`, `rescrape-bts2.ts`, etc.  | Scraper legacy (à migrer)                      |

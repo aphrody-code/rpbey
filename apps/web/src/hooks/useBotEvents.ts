@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 
-export type BotTopic = 'logs' | 'bot-events' | 'discord-events';
+export type BotTopic = "logs" | "bot-events" | "discord-events";
 
 export interface BotEvent {
   topic: string;
@@ -27,7 +27,7 @@ interface Options {
  * ```
  */
 export function useBotEvents(options: Options = {}) {
-  const topics = options.topics ?? ['logs', 'bot-events', 'discord-events'];
+  const topics = options.topics ?? ["logs", "bot-events", "discord-events"];
   const bufferSize = options.bufferSize ?? 200;
   const onEventRef = useRef(options.onEvent);
   useEffect(() => {
@@ -38,7 +38,7 @@ export function useBotEvents(options: Options = {}) {
   const [connected, setConnected] = useState(false);
 
   useEffect(() => {
-    const url = `/api/bot/events?topics=${topics.join(',')}`;
+    const url = `/api/bot/events?topics=${topics.join(",")}`;
     const es = new EventSource(url);
 
     es.onopen = () => setConnected(true);
@@ -65,7 +65,6 @@ export function useBotEvents(options: Options = {}) {
       es.close();
       setConnected(false);
     };
-     
   }, [bufferSize, topics.join]);
 
   return { events, connected };

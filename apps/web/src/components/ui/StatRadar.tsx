@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { alpha, Box, useTheme } from '@mui/material';
+import { alpha, Box, useTheme } from "@mui/material";
 
 interface StatRadarProps {
   stats: {
@@ -15,11 +15,7 @@ interface StatRadarProps {
   color?: string;
 }
 
-export function StatRadar({
-  stats,
-  size = 200,
-  color: colorProp,
-}: StatRadarProps) {
+export function StatRadar({ stats, size = 200, color: colorProp }: StatRadarProps) {
   const theme = useTheme();
   const color = colorProp ?? theme.palette.primary.main;
 
@@ -30,16 +26,15 @@ export function StatRadar({
    * Weight: UX/CX beys range from 30g to 50g+. We'll set 60g as the 100% mark.
    */
   const normalizeStat = (val: number) => Math.min(Math.max(val, 0), 100);
-  const normalizeWeight = (w: number) =>
-    Math.min(Math.max((w / 60) * 100, 0), 100);
+  const normalizeWeight = (w: number) => Math.min(Math.max((w / 60) * 100, 0), 100);
 
   const data = [
-    { label: 'ATK', value: normalizeStat(stats.attack) },
-    { label: 'DEF', value: normalizeStat(stats.defense) },
-    { label: 'STA', value: normalizeStat(stats.stamina) },
-    { label: 'DSH', value: normalizeStat(stats.dash) },
-    { label: 'BST', value: normalizeStat(stats.burst) },
-    { label: 'WGT', value: normalizeWeight(stats.weight) },
+    { label: "ATK", value: normalizeStat(stats.attack) },
+    { label: "DEF", value: normalizeStat(stats.defense) },
+    { label: "STA", value: normalizeStat(stats.stamina) },
+    { label: "DSH", value: normalizeStat(stats.dash) },
+    { label: "BST", value: normalizeStat(stats.burst) },
+    { label: "WGT", value: normalizeWeight(stats.weight) },
   ];
 
   const numStats = data.length;
@@ -57,7 +52,7 @@ export function StatRadar({
       const y = center + radius * level * Math.sin(i * angleStep - Math.PI / 2);
       return `${x},${y}`;
     });
-    return points.join(' ');
+    return points.join(" ");
   });
 
   // Generate the data polygon path
@@ -68,34 +63,22 @@ export function StatRadar({
       const y = center + r * Math.sin(i * angleStep - Math.PI / 2);
       return `${x},${y}`;
     })
-    .join(' ');
+    .join(" ");
 
   return (
     <Box
       sx={{
-        width: '100%',
+        width: "100%",
         maxWidth: size,
-        aspectRatio: '1/1',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
+        aspectRatio: "1/1",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
-      <svg
-        width="100%"
-        height="100%"
-        viewBox="0 0 200 200"
-        style={{ overflow: 'visible' }}
-      >
+      <svg width="100%" height="100%" viewBox="0 0 200 200" style={{ overflow: "visible" }}>
         <defs>
-          <radialGradient
-            id="statGradient"
-            cx="50%"
-            cy="50%"
-            r="50%"
-            fx="50%"
-            fy="50%"
-          >
+          <radialGradient id="statGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
             <stop offset="0%" stopColor={color} stopOpacity="0.1" />
             <stop offset="100%" stopColor={color} stopOpacity="0.4" />
           </radialGradient>
@@ -159,7 +142,7 @@ export function StatRadar({
           stroke={color}
           strokeWidth="2"
           strokeLinejoin="round"
-          style={{ transition: 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)' }}
+          style={{ transition: "all 0.6s cubic-bezier(0.4, 0, 0.2, 1)" }}
         />
 
         {/* Outer Circle Rim for polish */}

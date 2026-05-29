@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import { useThemeMode } from '@/components/theme/ThemeRegistry';
+import Image from "next/image";
+import { useThemeMode } from "@/components/theme/ThemeRegistry";
 
 interface RpbLogoProps {
   size?: number;
@@ -9,14 +9,10 @@ interface RpbLogoProps {
   animated?: boolean;
 }
 
-export function RpbLogo({
-  size = 40,
-  className,
-  animated = false,
-}: RpbLogoProps) {
+export function RpbLogo({ size = 40, className, animated = false }: RpbLogoProps) {
   const { mode } = useThemeMode();
-  const isBlue = mode === 'blue';
-  const staticSrc = isBlue ? '/stardust-logo.webp' : '/logo.webp';
+  const isBlue = mode === "blue";
+  const staticSrc = isBlue ? "/stardust-logo.webp" : "/logo.webp";
 
   if (animated && !isBlue) {
     return (

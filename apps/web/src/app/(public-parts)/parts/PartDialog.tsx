@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   Avatar,
@@ -17,13 +17,9 @@ import {
   Typography,
   useMediaQuery,
   useTheme,
-} from '@mui/material';
-import { useEffect, useState } from 'react';
-import {
-  type BeyType,
-  type Part,
-  type PartType,
-} from '@/lib/types';
+} from "@mui/material";
+import { useEffect, useState } from "react";
+import { type BeyType, type Part, type PartType } from "@/lib/types";
 
 interface PartDialogProps {
   open: boolean;
@@ -32,32 +28,27 @@ interface PartDialogProps {
   initialData?: Part | null;
 }
 
-const STAT_FIELDS = ['attack', 'defense', 'stamina', 'dash', 'burst'] as const;
+const STAT_FIELDS = ["attack", "defense", "stamina", "dash", "burst"] as const;
 
 const STAT_COLORS: Record<string, string> = {
-  attack: 'var(--rpb-primary)',
-  defense: '#3b82f6',
-  stamina: '#22c55e',
-  dash: '#f59e0b',
-  burst: '#a855f7',
+  attack: "var(--rpb-primary)",
+  defense: "#3b82f6",
+  stamina: "#22c55e",
+  dash: "#f59e0b",
+  burst: "#a855f7",
 };
 
-export function PartDialog({
-  open,
-  onClose,
-  onSubmit,
-  initialData,
-}: PartDialogProps) {
+export function PartDialog({ open, onClose, onSubmit, initialData }: PartDialogProps) {
   const [form, setForm] = useState<Partial<Part>>({});
   const [loading, setLoading] = useState(false);
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   useEffect(() => {
     if (initialData) {
       setForm(initialData);
     } else {
-      setForm({ type: 'BLADE', system: 'BX' });
+      setForm({ type: "BLADE", system: "BX" });
     }
   }, [initialData]);
 
@@ -72,19 +63,13 @@ export function PartDialog({
     setForm((prev) => ({ ...prev, [field]: value }));
 
   return (
-    <Dialog
-      open={open}
-      onClose={onClose}
-      maxWidth="md"
-      fullWidth
-      fullScreen={isMobile}
-    >
+    <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth fullScreen={isMobile}>
       <DialogTitle sx={{ pb: 1 }}>
         <Stack
           direction="row"
           spacing={2}
           sx={{
-            alignItems: 'center',
+            alignItems: "center",
           }}
         >
           {/* Preview */}
@@ -94,27 +79,27 @@ export function PartDialog({
             sx={{
               width: 56,
               height: 56,
-              bgcolor: '#1a1a2e',
-              border: '2px solid',
-              borderColor: 'divider',
+              bgcolor: "#1a1a2e",
+              border: "2px solid",
+              borderColor: "divider",
             }}
           >
-            {form.name?.charAt(0) || '?'}
+            {form.name?.charAt(0) || "?"}
           </Avatar>
           <Box>
             <Typography
               variant="h6"
               sx={{
-                fontWeight: 'bold',
+                fontWeight: "bold",
               }}
             >
-              {initialData ? 'Modifier la pièce' : 'Nouvelle pièce'}
+              {initialData ? "Modifier la pièce" : "Nouvelle pièce"}
             </Typography>
             {form.name && (
               <Typography
                 variant="caption"
                 sx={{
-                  color: 'text.secondary',
+                  color: "text.secondary",
                 }}
               >
                 {form.name}
@@ -122,7 +107,7 @@ export function PartDialog({
                   <Chip
                     label={form.system}
                     size="small"
-                    sx={{ ml: 1, height: 18, fontSize: '0.65rem' }}
+                    sx={{ ml: 1, height: 18, fontSize: "0.65rem" }}
                   />
                 )}
               </Typography>
@@ -137,8 +122,8 @@ export function PartDialog({
             <Typography
               variant="overline"
               sx={{
-                color: 'text.secondary',
-                fontWeight: 'bold',
+                color: "text.secondary",
+                fontWeight: "bold",
               }}
             >
               Identité
@@ -149,8 +134,8 @@ export function PartDialog({
                   label="Nom *"
                   fullWidth
                   size="small"
-                  value={form.name || ''}
-                  onChange={(e) => update('name', e.target.value)}
+                  value={form.name || ""}
+                  onChange={(e) => update("name", e.target.value)}
                 />
               </MuiGrid>
               <MuiGrid size={{ xs: 12, sm: 4 }}>
@@ -158,8 +143,8 @@ export function PartDialog({
                   label="Nom Japonais"
                   fullWidth
                   size="small"
-                  value={form.nameJp || ''}
-                  onChange={(e) => update('nameJp', e.target.value)}
+                  value={form.nameJp || ""}
+                  onChange={(e) => update("nameJp", e.target.value)}
                 />
               </MuiGrid>
               <MuiGrid size={{ xs: 6, sm: 4 }}>
@@ -168,8 +153,8 @@ export function PartDialog({
                   label="Type *"
                   fullWidth
                   size="small"
-                  value={form.type || 'BLADE'}
-                  onChange={(e) => update('type', e.target.value as PartType)}
+                  value={form.type || "BLADE"}
+                  onChange={(e) => update("type", e.target.value as PartType)}
                 >
                   <MenuItem value="BLADE">Blade</MenuItem>
                   <MenuItem value="OVER_BLADE">Over Blade</MenuItem>
@@ -185,8 +170,8 @@ export function PartDialog({
                   label="Système"
                   fullWidth
                   size="small"
-                  value={form.system || 'BX'}
-                  onChange={(e) => update('system', e.target.value)}
+                  value={form.system || "BX"}
+                  onChange={(e) => update("system", e.target.value)}
                 >
                   <MenuItem value="BX">BX</MenuItem>
                   <MenuItem value="UX">UX</MenuItem>
@@ -198,8 +183,8 @@ export function PartDialog({
                   label="ID Externe"
                   fullWidth
                   size="small"
-                  value={form.externalId || ''}
-                  onChange={(e) => update('externalId', e.target.value)}
+                  value={form.externalId || ""}
+                  onChange={(e) => update("externalId", e.target.value)}
                   placeholder="Auto-généré si vide"
                 />
               </MuiGrid>
@@ -213,8 +198,8 @@ export function PartDialog({
             <Typography
               variant="overline"
               sx={{
-                color: 'text.secondary',
-                fontWeight: 'bold',
+                color: "text.secondary",
+                fontWeight: "bold",
               }}
             >
               Classification
@@ -226,8 +211,8 @@ export function PartDialog({
                   label="Type Bey"
                   fullWidth
                   size="small"
-                  value={form.beyType || ''}
-                  onChange={(e) => update('beyType', e.target.value as BeyType)}
+                  value={form.beyType || ""}
+                  onChange={(e) => update("beyType", e.target.value as BeyType)}
                 >
                   <MenuItem value="">—</MenuItem>
                   <MenuItem value="ATTACK">Attack</MenuItem>
@@ -242,8 +227,8 @@ export function PartDialog({
                   label="Rotation"
                   fullWidth
                   size="small"
-                  value={form.spinDirection || ''}
-                  onChange={(e) => update('spinDirection', e.target.value)}
+                  value={form.spinDirection || ""}
+                  onChange={(e) => update("spinDirection", e.target.value)}
                 >
                   <MenuItem value="">—</MenuItem>
                   <MenuItem value="Right">Right</MenuItem>
@@ -256,8 +241,8 @@ export function PartDialog({
                   label="Rareté"
                   fullWidth
                   size="small"
-                  value={form.rarity || ''}
-                  onChange={(e) => update('rarity', e.target.value)}
+                  value={form.rarity || ""}
+                  onChange={(e) => update("rarity", e.target.value)}
                   placeholder="Common, Rare..."
                 />
               </MuiGrid>
@@ -268,15 +253,10 @@ export function PartDialog({
                   fullWidth
                   size="small"
                   value={
-                    form.releaseDate
-                      ? new Date(form.releaseDate).toISOString().split('T')[0]
-                      : ''
+                    form.releaseDate ? new Date(form.releaseDate).toISOString().split("T")[0] : ""
                   }
                   onChange={(e) =>
-                    update(
-                      'releaseDate',
-                      e.target.value ? new Date(e.target.value) : null,
-                    )
+                    update("releaseDate", e.target.value ? new Date(e.target.value) : null)
                   }
                   slotProps={{ inputLabel: { shrink: true } }}
                 />
@@ -291,8 +271,8 @@ export function PartDialog({
             <Typography
               variant="overline"
               sx={{
-                color: 'text.secondary',
-                fontWeight: 'bold',
+                color: "text.secondary",
+                fontWeight: "bold",
               }}
             >
               Spécifications physiques
@@ -304,12 +284,9 @@ export function PartDialog({
                   type="number"
                   fullWidth
                   size="small"
-                  value={form.weight ?? ''}
+                  value={form.weight ?? ""}
                   onChange={(e) =>
-                    update(
-                      'weight',
-                      e.target.value ? parseFloat(e.target.value) : null,
-                    )
+                    update("weight", e.target.value ? parseFloat(e.target.value) : null)
                   }
                 />
               </MuiGrid>
@@ -319,12 +296,9 @@ export function PartDialog({
                   type="number"
                   fullWidth
                   size="small"
-                  value={form.height ?? ''}
+                  value={form.height ?? ""}
                   onChange={(e) =>
-                    update(
-                      'height',
-                      e.target.value ? parseInt(e.target.value, 10) : null,
-                    )
+                    update("height", e.target.value ? parseInt(e.target.value, 10) : null)
                   }
                 />
               </MuiGrid>
@@ -334,12 +308,9 @@ export function PartDialog({
                   type="number"
                   fullWidth
                   size="small"
-                  value={form.protrusions ?? ''}
+                  value={form.protrusions ?? ""}
                   onChange={(e) =>
-                    update(
-                      'protrusions',
-                      e.target.value ? parseInt(e.target.value, 10) : null,
-                    )
+                    update("protrusions", e.target.value ? parseInt(e.target.value, 10) : null)
                   }
                 />
               </MuiGrid>
@@ -348,8 +319,8 @@ export function PartDialog({
                   label="Gear Ratio"
                   fullWidth
                   size="small"
-                  value={form.gearRatio || ''}
-                  onChange={(e) => update('gearRatio', e.target.value)}
+                  value={form.gearRatio || ""}
+                  onChange={(e) => update("gearRatio", e.target.value)}
                 />
               </MuiGrid>
               <MuiGrid size={{ xs: 6, sm: 4 }}>
@@ -357,8 +328,8 @@ export function PartDialog({
                   label="Shaft Width"
                   fullWidth
                   size="small"
-                  value={form.shaftWidth || ''}
-                  onChange={(e) => update('shaftWidth', e.target.value)}
+                  value={form.shaftWidth || ""}
+                  onChange={(e) => update("shaftWidth", e.target.value)}
                 />
               </MuiGrid>
               <MuiGrid size={{ xs: 6, sm: 4 }}>
@@ -366,8 +337,8 @@ export function PartDialog({
                   label="Tip Type"
                   fullWidth
                   size="small"
-                  value={form.tipType || ''}
-                  onChange={(e) => update('tipType', e.target.value)}
+                  value={form.tipType || ""}
+                  onChange={(e) => update("tipType", e.target.value)}
                 />
               </MuiGrid>
             </MuiGrid>
@@ -380,8 +351,8 @@ export function PartDialog({
             <Typography
               variant="overline"
               sx={{
-                color: 'text.secondary',
-                fontWeight: 'bold',
+                color: "text.secondary",
+                fontWeight: "bold",
               }}
             >
               Stats
@@ -394,13 +365,13 @@ export function PartDialog({
                     fullWidth
                     size="small"
                     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                    value={(form as any)[stat] || ''}
+                    value={(form as any)[stat] || ""}
                     onChange={(e) => update(stat, e.target.value)}
                     sx={{
-                      '& .MuiOutlinedInput-root': {
+                      "& .MuiOutlinedInput-root": {
                         borderColor: STAT_COLORS[stat],
                       },
-                      '& label': { color: STAT_COLORS[stat] },
+                      "& label": { color: STAT_COLORS[stat] },
                     }}
                   />
                 </MuiGrid>
@@ -410,35 +381,35 @@ export function PartDialog({
             <Stack direction="row" spacing={0.5} sx={{ mt: 1.5 }}>
               {STAT_FIELDS.map((stat) => {
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                const val = parseInt((form as any)[stat] || '0', 10);
+                const val = parseInt((form as any)[stat] || "0", 10);
                 return (
-                  <Box key={stat} sx={{ flex: 1, textAlign: 'center' }}>
+                  <Box key={stat} sx={{ flex: 1, textAlign: "center" }}>
                     <Box
                       sx={{
                         height: 6,
                         borderRadius: 3,
-                        bgcolor: '#222',
-                        overflow: 'hidden',
+                        bgcolor: "#222",
+                        overflow: "hidden",
                       }}
                     >
                       <Box
                         sx={{
-                          height: '100%',
+                          height: "100%",
                           width: `${Math.min(val * 10, 100)}%`,
                           bgcolor: STAT_COLORS[stat],
                           borderRadius: 3,
-                          transition: 'width 0.3s',
+                          transition: "width 0.3s",
                         }}
                       />
                     </Box>
                     <Typography
                       variant="caption"
                       sx={{
-                        color: 'text.secondary',
-                        fontSize: '0.65rem',
+                        color: "text.secondary",
+                        fontSize: "0.65rem",
                       }}
                     >
-                      {stat.slice(0, 3).toUpperCase()} {val || '—'}
+                      {stat.slice(0, 3).toUpperCase()} {val || "—"}
                     </Typography>
                   </Box>
                 );
@@ -453,8 +424,8 @@ export function PartDialog({
             <Typography
               variant="overline"
               sx={{
-                color: 'text.secondary',
-                fontWeight: 'bold',
+                color: "text.secondary",
+                fontWeight: "bold",
               }}
             >
               Médias
@@ -465,8 +436,8 @@ export function PartDialog({
                   label="URL Image"
                   fullWidth
                   size="small"
-                  value={form.imageUrl || ''}
-                  onChange={(e) => update('imageUrl', e.target.value)}
+                  value={form.imageUrl || ""}
+                  onChange={(e) => update("imageUrl", e.target.value)}
                 />
               </MuiGrid>
               {form.imageUrl && (
@@ -474,9 +445,9 @@ export function PartDialog({
                   <Box
                     sx={{
                       p: 2,
-                      bgcolor: '#0d1117',
+                      bgcolor: "#0d1117",
                       borderRadius: 2,
-                      textAlign: 'center',
+                      textAlign: "center",
                     }}
                   >
                     <Box
@@ -485,11 +456,11 @@ export function PartDialog({
                       alt="Preview"
                       sx={{
                         maxHeight: 120,
-                        maxWidth: '100%',
-                        objectFit: 'contain',
+                        maxWidth: "100%",
+                        objectFit: "contain",
                       }}
                       onError={(e) => {
-                        (e.target as HTMLImageElement).style.display = 'none';
+                        (e.target as HTMLImageElement).style.display = "none";
                       }}
                     />
                   </Box>
@@ -500,8 +471,8 @@ export function PartDialog({
                   label="URL Modèle 3D (OBJ)"
                   fullWidth
                   size="small"
-                  value={form.modelUrl || ''}
-                  onChange={(e) => update('modelUrl', e.target.value)}
+                  value={form.modelUrl || ""}
+                  onChange={(e) => update("modelUrl", e.target.value)}
                 />
               </MuiGrid>
               <MuiGrid size={{ xs: 6 }}>
@@ -509,8 +480,8 @@ export function PartDialog({
                   label="URL Texture"
                   fullWidth
                   size="small"
-                  value={form.textureUrl || ''}
-                  onChange={(e) => update('textureUrl', e.target.value)}
+                  value={form.textureUrl || ""}
+                  onChange={(e) => update("textureUrl", e.target.value)}
                 />
               </MuiGrid>
             </MuiGrid>
@@ -524,7 +495,7 @@ export function PartDialog({
           variant="contained"
           disabled={loading || !form.name || !form.type}
         >
-          {loading ? 'Sauvegarde...' : 'Sauvegarder'}
+          {loading ? "Sauvegarde..." : "Sauvegarder"}
         </Button>
       </DialogActions>
     </Dialog>

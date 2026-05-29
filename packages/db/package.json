@@ -1,25 +1,25 @@
 {
-	"name": "@rpbey/db",
-	"version": "0.0.0",
-	"type": "module",
-	"exports": {
-		".": "./src/index.ts",
-		"./schema": "./src/schema.ts",
-		"./relations": "./src/relations.ts",
-		"./client": "./src/client.ts"
-	},
-	"scripts": {
-		"pull": "drizzle-kit pull",
-		"parity": "bun run bench/parity.ts",
-		"typecheck": "tsc --noEmit"
-	},
-	"dependencies": {
-		"@paralleldrive/cuid2": "^3.3.0",
-		"drizzle-orm": "^0.45.2",
-		"postgres": "^3.4.9"
-	},
-	"devDependencies": {
-		"drizzle-kit": "^0.31.10",
-		"typescript": "^6.0.3"
-	}
+  "name": "@rpbey/db",
+  "version": "0.0.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./schema": "./src/schema.ts",
+    "./relations": "./src/relations.ts",
+    "./client": "./src/client.ts"
+  },
+  "scripts": {
+    "pull": "drizzle-kit pull",
+    "parity": "bun run bench/parity.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@paralleldrive/cuid2": "^3.3.0",
+    "drizzle-orm": "^0.45.2",
+    "postgres": "^3.4.9"
+  },
+  "devDependencies": {
+    "drizzle-kit": "^0.31.10",
+    "typescript": "^6.0.3"
+  }
 }

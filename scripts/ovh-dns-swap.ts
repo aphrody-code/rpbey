@@ -68,9 +68,7 @@ async function ovh(method: string, path: string, body?: unknown): Promise<any> {
   const ts = String(Math.floor(Date.now() / 1000) + timeDelta);
   const sig =
     "$1$" +
-    createHash("sha1")
-      .update([appSecret, ck, method, url, payload, ts].join("+"))
-      .digest("hex");
+    createHash("sha1").update([appSecret, ck, method, url, payload, ts].join("+")).digest("hex");
   const r = await fetch(url, {
     method,
     headers: {
@@ -99,12 +97,17 @@ async function main() {
   console.log(`Zone ${ZONE} — cible VPS ${VPS_IP} — mode: ${APPLY ? "APPLY" : "DRY-RUN"}\n`);
 
   // Inventaire apex + www
-  for (const [label, sub] of [["apex (@)", ""], ["www", "www"]] as const) {
+  for (const [label, sub] of [
+    ["apex (@)", ""],
+    ["www", "www"],
+  ] as const) {
     for (const ft of ["A", "AAAA", "CNAME"]) {
       const ids = await recordsFor(ft, sub);
       for (const id of ids) {
         const rec = await ovh("GET", `/domain/zone/${ZONE}/record/${id}`);
-        console.log(`  [${label}] #${id} ${rec.fieldType} "${rec.subDomain}" → ${rec.target} (ttl ${rec.ttl})`);
+        console.log(
+          `  [${label}] #${id} ${rec.fieldType} "${rec.subDomain}" → ${rec.target} (ttl ${rec.ttl})`,
+        );
       }
     }
   }

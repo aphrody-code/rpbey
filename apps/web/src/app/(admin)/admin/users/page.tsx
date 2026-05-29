@@ -1,51 +1,44 @@
-'use client';
+"use client";
 
-import {
-  Block,
-  Delete,
-  Edit,
-  Search,
-  Send as SendIcon,
-  Visibility,
-} from '@mui/icons-material';
-import Alert from '@mui/material/Alert';
-import Avatar from '@mui/material/Avatar';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import Chip from '@mui/material/Chip';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
-import FormControl from '@mui/material/FormControl';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import InputAdornment from '@mui/material/InputAdornment';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
-import Switch from '@mui/material/Switch';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
+import { Block, Delete, Edit, Search, Send as SendIcon, Visibility } from "@mui/icons-material";
+import Alert from "@mui/material/Alert";
+import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
+import Chip from "@mui/material/Chip";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+import FormControl from "@mui/material/FormControl";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import InputAdornment from "@mui/material/InputAdornment";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import Switch from "@mui/material/Switch";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 import {
   DataGrid,
   GridActionsCellItem,
   type GridColDef,
   type GridPaginationModel,
-} from '@mui/x-data-grid';
-import { frFR } from '@mui/x-data-grid/locales';
-import { useRouter } from 'next/navigation';
-import { useCallback, useEffect, useState } from 'react';
-import { type User } from '@/lib/types';
-import { useDebounce } from '@/hooks/use-debounce';
-import { formatDateShort } from '@/lib/utils';
-import { deleteUser, getUsers, updateUser } from './actions';
+} from "@mui/x-data-grid";
+import { frFR } from "@mui/x-data-grid/locales";
+import { useRouter } from "next/navigation";
+import { useCallback, useEffect, useState } from "react";
+import { type User } from "@/lib/types";
+import { useDebounce } from "@/hooks/use-debounce";
+import { formatDateShort } from "@/lib/utils";
+import { deleteUser, getUsers, updateUser } from "./actions";
 
-const roleColors: Record<string, 'error' | 'warning' | 'info' | 'default'> = {
-  admin: 'error',
-  moderator: 'warning',
-  staff: 'info',
-  user: 'default',
+const roleColors: Record<string, "error" | "warning" | "info" | "default"> = {
+  admin: "error",
+  moderator: "warning",
+  staff: "info",
+  user: "default",
 };
 
 type UserRow = User & { _count: { tournaments: number } };
@@ -54,7 +47,7 @@ export default function AdminUsersPage() {
   const router = useRouter();
   const [users, setUsers] = useState<UserRow[]>([]);
   const [loading, setLoading] = useState(true);
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
   const [paginationModel, setPaginationModel] = useState<GridPaginationModel>({
     page: 0,
     pageSize: 10,
@@ -63,12 +56,12 @@ export default function AdminUsersPage() {
 
   // Edit dialog state
   const [editUser, setEditUser] = useState<UserRow | null>(null);
-  const [editName, setEditName] = useState('');
-  const [editRole, setEditRole] = useState('user');
+  const [editName, setEditName] = useState("");
+  const [editRole, setEditRole] = useState("user");
   const [editBanned, setEditBanned] = useState(false);
-  const [editBanReason, setEditBanReason] = useState('');
+  const [editBanReason, setEditBanReason] = useState("");
   const [saving, setSaving] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   // Delete confirmation
   const [deleteTarget, setDeleteTarget] = useState<UserRow | null>(null);
@@ -87,7 +80,7 @@ export default function AdminUsersPage() {
       setUsers(data);
       setTotal(totalCount);
     } catch (err) {
-      console.error('Failed to fetch users:', err);
+      console.error("Failed to fetch users:", err);
     } finally {
       setLoading(false);
     }
@@ -99,17 +92,17 @@ export default function AdminUsersPage() {
 
   const openEditDialog = (user: UserRow) => {
     setEditUser(user);
-    setEditName(user.name || '');
-    setEditRole(user.role || 'user');
+    setEditName(user.name || "");
+    setEditRole(user.role || "user");
     setEditBanned(user.banned || false);
-    setEditBanReason(user.banReason || '');
-    setError('');
+    setEditBanReason(user.banReason || "");
+    setError("");
   };
 
   const handleSave = async () => {
     if (!editUser) return;
     setSaving(true);
-    setError('');
+    setError("");
     try {
       await updateUser(editUser.id, {
         name: editName,
@@ -120,7 +113,7 @@ export default function AdminUsersPage() {
       setEditUser(null);
       fetchUsers();
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Erreur inconnue');
+      setError(err instanceof Error ? err.message : "Erreur inconnue");
     } finally {
       setSaving(false);
     }
@@ -134,8 +127,8 @@ export default function AdminUsersPage() {
       setDeleteTarget(null);
       fetchUsers();
     } catch (err) {
-      console.error('Failed to delete user:', err);
-      alert('Impossible de supprimer cet utilisateur.');
+      console.error("Failed to delete user:", err);
+      alert("Impossible de supprimer cet utilisateur.");
     } finally {
       setDeleting(false);
     }
@@ -143,15 +136,15 @@ export default function AdminUsersPage() {
 
   const columns: GridColDef[] = [
     {
-      field: 'name',
-      headerName: 'Utilisateur',
+      field: "name",
+      headerName: "Utilisateur",
       flex: 1,
       minWidth: 200,
       renderCell: (params) => (
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+        <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
           <Avatar
             src={params.row.image || undefined}
-            alt={params.row.name || ''}
+            alt={params.row.name || ""}
             sx={{ width: 32, height: 32 }}
           >
             {params.row.name?.charAt(0)}
@@ -160,53 +153,52 @@ export default function AdminUsersPage() {
             <Typography
               variant="body2"
               sx={{
-                fontWeight: 'bold',
+                fontWeight: "bold",
               }}
             >
-              {params.row.name || 'Anonyme'}
+              {params.row.name || "Anonyme"}
             </Typography>
             {params.row.banned && (
               <Chip
                 label="Banni"
                 color="error"
                 size="small"
-                sx={{ height: 18, fontSize: '0.65rem' }}
+                sx={{ height: 18, fontSize: "0.65rem" }}
               />
             )}
           </Box>
         </Box>
       ),
     },
-    { field: 'email', headerName: 'Email', flex: 1, minWidth: 200 },
+    { field: "email", headerName: "Email", flex: 1, minWidth: 200 },
     {
-      field: 'role',
-      headerName: 'Rôle',
+      field: "role",
+      headerName: "Rôle",
       width: 120,
       renderCell: (params) => (
         <Chip
-          label={params.value || 'user'}
-          color={roleColors[params.value as string] || 'default'}
+          label={params.value || "user"}
+          color={roleColors[params.value as string] || "default"}
           size="small"
         />
       ),
     },
     {
-      field: 'createdAt',
-      headerName: 'Inscrit le',
+      field: "createdAt",
+      headerName: "Inscrit le",
       width: 150,
-      valueFormatter: (params) =>
-        formatDateShort(new Date(params as unknown as string)),
+      valueFormatter: (params) => formatDateShort(new Date(params as unknown as string)),
     },
     {
-      field: 'tournaments',
-      headerName: 'Tournois',
+      field: "tournaments",
+      headerName: "Tournois",
       width: 100,
       valueGetter: (_value, row) => row._count.tournaments,
     },
     {
-      field: 'actions',
-      type: 'actions',
-      headerName: 'Actions',
+      field: "actions",
+      type: "actions",
+      headerName: "Actions",
       width: 150,
       getActions: (params) => [
         <GridActionsCellItem
@@ -238,7 +230,7 @@ export default function AdminUsersPage() {
         <GridActionsCellItem
           key="ban"
           icon={<Block />}
-          label={(params.row as UserRow).banned ? 'Débannir' : 'Bannir'}
+          label={(params.row as UserRow).banned ? "Débannir" : "Bannir"}
           showInMenu
           onClick={() => {
             const user = params.row as UserRow;
@@ -264,7 +256,7 @@ export default function AdminUsersPage() {
         variant="h4"
         gutterBottom
         sx={{
-          fontWeight: 'bold',
+          fontWeight: "bold",
         }}
       >
         Utilisateurs
@@ -272,7 +264,7 @@ export default function AdminUsersPage() {
       <Typography
         variant="body1"
         sx={{
-          color: 'text.secondary',
+          color: "text.secondary",
           mb: 4,
         }}
       >
@@ -299,10 +291,10 @@ export default function AdminUsersPage() {
         elevation={0}
         sx={{
           borderRadius: 3,
-          border: '1px solid',
-          borderColor: 'divider',
+          border: "1px solid",
+          borderColor: "divider",
           height: 600,
-          width: '100%',
+          width: "100%",
         }}
       >
         <DataGrid
@@ -318,27 +310,20 @@ export default function AdminUsersPage() {
           localeText={frFR.components.MuiDataGrid.defaultProps.localeText}
           density="comfortable"
           sx={{
-            border: 'none',
-            '& .MuiDataGrid-cell': {
-              borderColor: 'divider',
+            border: "none",
+            "& .MuiDataGrid-cell": {
+              borderColor: "divider",
             },
-            '& .MuiDataGrid-columnHeaders': {
-              bgcolor: 'action.hover',
-              fontWeight: 'bold',
+            "& .MuiDataGrid-columnHeaders": {
+              bgcolor: "action.hover",
+              fontWeight: "bold",
             },
           }}
         />
       </Card>
       {/* Edit User Dialog */}
-      <Dialog
-        open={!!editUser}
-        onClose={() => setEditUser(null)}
-        maxWidth="sm"
-        fullWidth
-      >
-        <DialogTitle sx={{ fontWeight: 'bold' }}>
-          Éditer l&apos;utilisateur
-        </DialogTitle>
+      <Dialog open={!!editUser} onClose={() => setEditUser(null)} maxWidth="sm" fullWidth>
+        <DialogTitle sx={{ fontWeight: "bold" }}>Éditer l&apos;utilisateur</DialogTitle>
         <DialogContent>
           {error && (
             <Alert severity="error" sx={{ mb: 2 }}>
@@ -346,20 +331,15 @@ export default function AdminUsersPage() {
             </Alert>
           )}
 
-          <Box
-            sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 3, mt: 1 }}
-          >
-            <Avatar
-              src={editUser?.image || undefined}
-              sx={{ width: 48, height: 48 }}
-            >
+          <Box sx={{ display: "flex", alignItems: "center", gap: 2, mb: 3, mt: 1 }}>
+            <Avatar src={editUser?.image || undefined} sx={{ width: 48, height: 48 }}>
               {editUser?.name?.charAt(0)}
             </Avatar>
             <Box>
               <Typography
                 variant="body2"
                 sx={{
-                  color: 'text.secondary',
+                  color: "text.secondary",
                 }}
               >
                 {editUser?.email}
@@ -368,7 +348,7 @@ export default function AdminUsersPage() {
                 <Typography
                   variant="caption"
                   sx={{
-                    color: 'text.disabled',
+                    color: "text.disabled",
                   }}
                 >
                   Discord : {editUser.discordTag}
@@ -387,11 +367,7 @@ export default function AdminUsersPage() {
 
           <FormControl fullWidth sx={{ mb: 2 }}>
             <InputLabel>Rôle</InputLabel>
-            <Select
-              value={editRole}
-              label="Rôle"
-              onChange={(e) => setEditRole(e.target.value)}
-            >
+            <Select value={editRole} label="Rôle" onChange={(e) => setEditRole(e.target.value)}>
               <MenuItem value="user">Utilisateur</MenuItem>
               <MenuItem value="moderator">Modérateur</MenuItem>
               <MenuItem value="staff">Staff</MenuItem>
@@ -428,39 +404,29 @@ export default function AdminUsersPage() {
             Annuler
           </Button>
           <Button variant="contained" onClick={handleSave} disabled={saving}>
-            {saving ? 'Enregistrement...' : 'Enregistrer'}
+            {saving ? "Enregistrement..." : "Enregistrer"}
           </Button>
         </DialogActions>
       </Dialog>
       {/* Delete Confirmation Dialog */}
-      <Dialog
-        open={!!deleteTarget}
-        onClose={() => setDeleteTarget(null)}
-        maxWidth="xs"
-        fullWidth
-      >
-        <DialogTitle sx={{ fontWeight: 'bold', color: 'error.main' }}>
+      <Dialog open={!!deleteTarget} onClose={() => setDeleteTarget(null)} maxWidth="xs" fullWidth>
+        <DialogTitle sx={{ fontWeight: "bold", color: "error.main" }}>
           Supprimer l&apos;utilisateur
         </DialogTitle>
         <DialogContent>
           <Typography>
-            Êtes-vous sûr de vouloir supprimer{' '}
-            <strong>{deleteTarget?.name || deleteTarget?.email}</strong> ? Cette
-            action est irréversible et supprimera toutes les données associées
-            (profil, decks, participations aux tournois).
+            Êtes-vous sûr de vouloir supprimer{" "}
+            <strong>{deleteTarget?.name || deleteTarget?.email}</strong> ? Cette action est
+            irréversible et supprimera toutes les données associées (profil, decks, participations
+            aux tournois).
           </Typography>
         </DialogContent>
         <DialogActions sx={{ px: 3, pb: 2 }}>
           <Button onClick={() => setDeleteTarget(null)} disabled={deleting}>
             Annuler
           </Button>
-          <Button
-            variant="contained"
-            color="error"
-            onClick={handleDelete}
-            disabled={deleting}
-          >
-            {deleting ? 'Suppression...' : 'Supprimer'}
+          <Button variant="contained" color="error" onClick={handleDelete} disabled={deleting}>
+            {deleting ? "Suppression..." : "Supprimer"}
           </Button>
         </DialogActions>
       </Dialog>

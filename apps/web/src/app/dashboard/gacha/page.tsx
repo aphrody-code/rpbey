@@ -8,125 +8,125 @@ import { db, schema, count, eq } from "@/lib/db";
 import { GachaProfileCard } from "@/components/GachaProfileCard";
 
 export const metadata: Metadata = {
-	title: "Profil Gacha | Dashboard",
-	description: "Vos statistiques gacha, pièces, série quotidienne et duels.",
+  title: "Profil Gacha | Dashboard",
+  description: "Vos statistiques gacha, pièces, série quotidienne et duels.",
 };
 
 async function ProfileContent({ userId }: { userId: string }) {
-	const profile = await db.query.profiles.findFirst({
-		where: eq(schema.profiles.userId, userId),
-		columns: {
-			id: true,
-			userId: true,
-			bladerName: true,
-			currency: true,
-			dailyStreak: true,
-			lastDaily: true,
-			pityCount: true,
-			wins: true,
-			losses: true,
-			tournamentWins: true,
-			duelRating: true,
-			duelWins: true,
-			duelLosses: true,
-		},
-		with: {
-			user: {
-				columns: {
-					name: true,
-					image: true,
-				},
-			},
-		},
-	});
+  const profile = await db.query.profiles.findFirst({
+    where: eq(schema.profiles.userId, userId),
+    columns: {
+      id: true,
+      userId: true,
+      bladerName: true,
+      currency: true,
+      dailyStreak: true,
+      lastDaily: true,
+      pityCount: true,
+      wins: true,
+      losses: true,
+      tournamentWins: true,
+      duelRating: true,
+      duelWins: true,
+      duelLosses: true,
+    },
+    with: {
+      user: {
+        columns: {
+          name: true,
+          image: true,
+        },
+      },
+    },
+  });
 
-	if (!profile) {
-		return (
-			<Alert severity="info" sx={{ mt: 2 }}>
-				<Typography variant="body1" sx={{ fontWeight: 600, mb: 0.5 }}>
-					Aucun profil gacha trouvé
-				</Typography>
-				<Typography variant="body2">
-					Lance ton premier pull dans Discord avec{" "}
-					<Box component="code" sx={{ fontFamily: "monospace", px: 0.5 }}>
-						/pull
-					</Box>{" "}
-					pour initialiser ton profil.
-				</Typography>
-			</Alert>
-		);
-	}
+  if (!profile) {
+    return (
+      <Alert severity="info" sx={{ mt: 2 }}>
+        <Typography variant="body1" sx={{ fontWeight: 600, mb: 0.5 }}>
+          Aucun profil gacha trouvé
+        </Typography>
+        <Typography variant="body2">
+          Lance ton premier pull dans Discord avec{" "}
+          <Box component="code" sx={{ fontFamily: "monospace", px: 0.5 }}>
+            /pull
+          </Box>{" "}
+          pour initialiser ton profil.
+        </Typography>
+      </Alert>
+    );
+  }
 
-	const [cardCountRow] = await db
-		.select({ value: count() })
-		.from(schema.cardInventory)
-		.where(eq(schema.cardInventory.userId, userId));
-	const cardCount = cardCountRow?.value ?? 0;
+  const [cardCountRow] = await db
+    .select({ value: count() })
+    .from(schema.cardInventory)
+    .where(eq(schema.cardInventory.userId, userId));
+  const cardCount = cardCountRow?.value ?? 0;
 
-	return (
-		<GachaProfileCard
-			profile={{
-				...profile,
-				cardCount,
-				user: {
-					name: profile.user.name,
-					image: profile.user.image,
-				},
-			}}
-		/>
-	);
+  return (
+    <GachaProfileCard
+      profile={{
+        ...profile,
+        cardCount,
+        user: {
+          name: profile.user.name,
+          image: profile.user.image,
+        },
+      }}
+    />
+  );
 }
 
 function ProfileSkeleton() {
-	return (
-		<Box
-			sx={{
-				border: "1px solid",
-				borderColor: "divider",
-				borderRadius: 3,
-				p: 3,
-			}}
-		>
-			<Box sx={{ display: "flex", alignItems: "center", gap: 2, mb: 3 }}>
-				<Skeleton variant="rounded" width={56} height={56} />
-				<Box sx={{ flex: 1 }}>
-					<Skeleton variant="text" width={160} height={28} />
-					<Skeleton variant="rounded" width={80} height={22} sx={{ mt: 0.5 }} />
-				</Box>
-			</Box>
-			<Skeleton variant="text" height={1} sx={{ mb: 3 }} />
-			<Box
-				sx={{
-					display: "grid",
-					gridTemplateColumns: "repeat(4, 1fr)",
-					gap: 1.5,
-				}}
-			>
-				{Array.from({ length: 8 }).map((_, i) => (
-					<Skeleton key={i} variant="rounded" height={90} />
-				))}
-			</Box>
-		</Box>
-	);
+  return (
+    <Box
+      sx={{
+        border: "1px solid",
+        borderColor: "divider",
+        borderRadius: 3,
+        p: 3,
+      }}
+    >
+      <Box sx={{ display: "flex", alignItems: "center", gap: 2, mb: 3 }}>
+        <Skeleton variant="rounded" width={56} height={56} />
+        <Box sx={{ flex: 1 }}>
+          <Skeleton variant="text" width={160} height={28} />
+          <Skeleton variant="rounded" width={80} height={22} sx={{ mt: 0.5 }} />
+        </Box>
+      </Box>
+      <Skeleton variant="text" height={1} sx={{ mb: 3 }} />
+      <Box
+        sx={{
+          display: "grid",
+          gridTemplateColumns: "repeat(4, 1fr)",
+          gap: 1.5,
+        }}
+      >
+        {Array.from({ length: 8 }).map((_, i) => (
+          <Skeleton key={i} variant="rounded" height={90} />
+        ))}
+      </Box>
+    </Box>
+  );
 }
 
 export default async function GachaProfilePage() {
-	const session = await auth.api.getSession({
-		headers: await headers(),
-	});
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
 
-	if (!session) {
-		redirect("/sign-in");
-	}
+  if (!session) {
+    redirect("/sign-in");
+  }
 
-	return (
-		<Box>
-			<Typography variant="h5" sx={{ fontWeight: 700, mb: 3 }}>
-				Mon profil Gacha
-			</Typography>
-			<Suspense fallback={<ProfileSkeleton />}>
-				<ProfileContent userId={session.user.id} />
-			</Suspense>
-		</Box>
-	);
+  return (
+    <Box>
+      <Typography variant="h5" sx={{ fontWeight: 700, mb: 3 }}>
+        Mon profil Gacha
+      </Typography>
+      <Suspense fallback={<ProfileSkeleton />}>
+        <ProfileContent userId={session.user.id} />
+      </Suspense>
+    </Box>
+  );
 }

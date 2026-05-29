@@ -1,23 +1,21 @@
-import { AttachmentBuilder, EmbedBuilder, type TextChannel } from 'discord.js';
-import { type ArgsOf, Discord, On } from '@rpbey/discordx';
+import { AttachmentBuilder, EmbedBuilder, type TextChannel } from "discord.js";
+import { type ArgsOf, Discord, On } from "@rpbey/discordx";
 
-import { generateWelcomeImage } from '../../lib/canvas-utils.js';
-import { getTemplate } from '../../lib/cms.js';
-import { Colors, RPB } from '../../lib/constants.js';
-import { logger } from '../../lib/logger.js';
+import { generateWelcomeImage } from "../../lib/canvas-utils.js";
+import { getTemplate } from "../../lib/cms.js";
+import { Colors, RPB } from "../../lib/constants.js";
+import { logger } from "../../lib/logger.js";
 
 @Discord()
 export class MemberJoinListener {
   // Dedup: prevent sending multiple welcome messages for the same member
   private static recentJoins = new Set<string>();
 
-  @On({ event: 'guildMemberAdd' })
-  async onMemberJoin([member]: ArgsOf<'guildMemberAdd'>) {
+  @On({ event: "guildMemberAdd" })
+  async onMemberJoin([member]: ArgsOf<"guildMemberAdd">) {
     // Skip if we already processed this member recently (dedup against rapid re-fires)
     if (MemberJoinListener.recentJoins.has(member.id)) {
-      logger.warn(
-        `[Welcome] Duplicate guildMemberAdd for ${member.user.tag}, skipping`,
-      );
+      logger.warn(`[Welcome] Duplicate guildMemberAdd for ${member.user.tag}, skipping`);
       return;
     }
     MemberJoinListener.recentJoins.add(member.id);
@@ -30,10 +28,7 @@ export class MemberJoinListener {
       await member.roles.add(RPB.Roles.Blader);
       logger.info(`[AutoRole] Blader role assigned to ${member.user.tag}`);
     } catch (err) {
-      logger.error(
-        `[AutoRole] Failed to assign Blader role to ${member.user.tag}:`,
-        err,
-      );
+      logger.error(`[AutoRole] Failed to assign Blader role to ${member.user.tag}:`, err);
     }
 
     let attachmentItems: AttachmentBuilder[] = [];
@@ -41,7 +36,7 @@ export class MemberJoinListener {
 
     try {
       const avatarUrl = member.displayAvatarURL({
-        extension: 'png',
+        extension: "png",
         size: 256,
         forceStatic: true,
       });
@@ -50,15 +45,10 @@ export class MemberJoinListener {
         avatarUrl,
         member.guild.memberCount,
       );
-      attachmentItems = [
-        new AttachmentBuilder(imageBuffer, { name: 'welcome.png' }),
-      ];
+      attachmentItems = [new AttachmentBuilder(imageBuffer, { name: "welcome.png" })];
       hasImage = true;
     } catch (err) {
-      logger.error(
-        'Failed to generate welcome image, falling back to text:',
-        err,
-      );
+      logger.error("Failed to generate welcome image, falling back to text:", err);
     }
 
     const findChannel = (search: string) =>
@@ -66,8 +56,8 @@ export class MemberJoinListener {
         (c) =>
           c.id === search ||
           (c.name &&
-            c.name.toLowerCase().replace(/[^a-z0-9]/g, '') ===
-              search.toLowerCase().replace(/[^a-z0-9]/g, '')),
+            c.name.toLowerCase().replace(/[^a-z0-9]/g, "") ===
+              search.toLowerCase().replace(/[^a-z0-9]/g, "")),
       ) as TextChannel | undefined;
 
     let welcomeChannel = findChannel(RPB.Channels.Welcome);
@@ -85,34 +75,32 @@ export class MemberJoinListener {
     const rolesChannel = findChannel(RPB.Channels.Roles);
     const generalChannel = findChannel(RPB.Channels.GeneralChat);
 
-    const getMention = (
-      channel: { id: string } | undefined,
-      fallback: string,
-    ) => (channel?.id ? `<#${channel.id}>` : fallback);
+    const getMention = (channel: { id: string } | undefined, fallback: string) =>
+      channel?.id ? `<#${channel.id}>` : fallback;
 
     const defaultTemplate =
       `Bienvenue {member} dans la **${RPB.FullName}** !\n\n` +
-      `📜 Lis le ${getMention(rulesChannel, '#règlement')} pour connaître les règles\n` +
-      `🎭 Récupère tes rôles dans ${getMention(rolesChannel, '#rôles')}\n` +
-      `💬 Viens discuter dans ${getMention(generalChannel, '#chat-general')}\n\n` +
+      `📜 Lis le ${getMention(rulesChannel, "#règlement")} pour connaître les règles\n` +
+      `🎭 Récupère tes rôles dans ${getMention(rolesChannel, "#rôles")}\n` +
+      `💬 Viens discuter dans ${getMention(generalChannel, "#chat-general")}\n\n` +
       `**Let it rip !** 🌀`;
 
-    const template = await getTemplate('bot-welcome-text', defaultTemplate);
+    const template = await getTemplate("bot-welcome-text", defaultTemplate);
     const description = template
-      .replace('{member}', member.toString())
-      .replace('{guild}', RPB.FullName)
-      .replace('{rules}', getMention(rulesChannel, '#règlement'))
-      .replace('{roles}', getMention(rolesChannel, '#rôles'))
-      .replace('{general}', getMention(generalChannel, '#chat-general'));
+      .replace("{member}", member.toString())
+      .replace("{guild}", RPB.FullName)
+      .replace("{rules}", getMention(rulesChannel, "#règlement"))
+      .replace("{roles}", getMention(rolesChannel, "#rôles"))
+      .replace("{general}", getMention(generalChannel, "#chat-general"));
 
     const embed = new EmbedBuilder()
-      .setTitle('🌀 Bienvenue à la RPB !')
+      .setTitle("🌀 Bienvenue à la RPB !")
       .setDescription(description)
       .setColor(Colors.Primary)
       .addFields(
-        { name: '👤 Membre', value: member.user.tag, inline: true },
+        { name: "👤 Membre", value: member.user.tag, inline: true },
         {
-          name: '🔢 Membre #',
+          name: "🔢 Membre #",
           value: `${member.guild.memberCount}`,
           inline: true,
         },
@@ -124,7 +112,7 @@ export class MemberJoinListener {
       .setTimestamp();
 
     if (hasImage) {
-      embed.setImage('attachment://welcome.png');
+      embed.setImage("attachment://welcome.png");
     }
 
     try {
@@ -133,11 +121,9 @@ export class MemberJoinListener {
         embeds: [embed],
         files: attachmentItems,
       });
-      logger.info(
-        `Welcome message sent to ${welcomeChannel.name} for ${member.user.tag}`,
-      );
+      logger.info(`Welcome message sent to ${welcomeChannel.name} for ${member.user.tag}`);
     } catch (error) {
-      logger.error('CRITICAL: Failed to send welcome message:', error);
+      logger.error("CRITICAL: Failed to send welcome message:", error);
     }
   }
 }

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   Avatar,
@@ -13,8 +13,8 @@ import {
   Stack,
   TextField,
   Typography,
-} from '@mui/material';
-import { useState } from 'react';
+} from "@mui/material";
+import { useState } from "react";
 
 interface ScoreReportDialogProps {
   open: boolean;
@@ -26,15 +26,10 @@ interface ScoreReportDialogProps {
   };
 }
 
-export function ScoreReportDialog({
-  open,
-  onClose,
-  onReport,
-  match,
-}: ScoreReportDialogProps) {
-  const [score1, setScore1] = useState('0');
-  const [score2, setScore2] = useState('0');
-  const [winnerId, setWinnerId] = useState<string>('');
+export function ScoreReportDialog({ open, onClose, onReport, match }: ScoreReportDialogProps) {
+  const [score1, setScore1] = useState("0");
+  const [score2, setScore2] = useState("0");
+  const [winnerId, setWinnerId] = useState<string>("");
 
   const handleSubmit = () => {
     if (!winnerId) return;
@@ -49,46 +44,39 @@ export function ScoreReportDialog({
       <DialogTitle>Signaler le Score</DialogTitle>
       <DialogContent>
         <Stack spacing={3} sx={{ mt: 1 }}>
-          <RadioGroup
-            value={winnerId}
-            onChange={(e) => setWinnerId(e.target.value)}
-          >
+          <RadioGroup value={winnerId} onChange={(e) => setWinnerId(e.target.value)}>
             <Stack spacing={2}>
               {/* Player 1 */}
               <Stack
                 direction="row"
                 spacing={2}
                 sx={{
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
+                  alignItems: "center",
+                  justifyContent: "space-between",
                 }}
               >
                 <Stack
                   direction="row"
                   spacing={1}
                   sx={{
-                    alignItems: 'center',
+                    alignItems: "center",
                   }}
                 >
-                  <Avatar
-                    src={match.player1?.avatarUrl}
-                    sx={{ width: 32, height: 32 }}
-                  />
+                  <Avatar src={match.player1?.avatarUrl} sx={{ width: 32, height: 32 }} />
                   <Typography
                     variant="body1"
                     sx={{
-                      fontWeight:
-                        winnerId === match.player1?.id ? 'bold' : 'normal',
+                      fontWeight: winnerId === match.player1?.id ? "bold" : "normal",
                     }}
                   >
-                    {match.player1?.name || 'Joueur 1'}
+                    {match.player1?.name || "Joueur 1"}
                   </Typography>
                 </Stack>
                 <Stack
                   direction="row"
                   spacing={1}
                   sx={{
-                    alignItems: 'center',
+                    alignItems: "center",
                   }}
                 >
                   <TextField
@@ -99,7 +87,7 @@ export function ScoreReportDialog({
                     sx={{ width: 60 }}
                   />
                   <FormControlLabel
-                    value={match.player1?.id || '1'}
+                    value={match.player1?.id || "1"}
                     control={<Radio />}
                     label="Gagnant"
                     labelPlacement="start"
@@ -112,36 +100,32 @@ export function ScoreReportDialog({
                 direction="row"
                 spacing={2}
                 sx={{
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
+                  alignItems: "center",
+                  justifyContent: "space-between",
                 }}
               >
                 <Stack
                   direction="row"
                   spacing={1}
                   sx={{
-                    alignItems: 'center',
+                    alignItems: "center",
                   }}
                 >
-                  <Avatar
-                    src={match.player2?.avatarUrl}
-                    sx={{ width: 32, height: 32 }}
-                  />
+                  <Avatar src={match.player2?.avatarUrl} sx={{ width: 32, height: 32 }} />
                   <Typography
                     variant="body1"
                     sx={{
-                      fontWeight:
-                        winnerId === match.player2?.id ? 'bold' : 'normal',
+                      fontWeight: winnerId === match.player2?.id ? "bold" : "normal",
                     }}
                   >
-                    {match.player2?.name || 'Joueur 2'}
+                    {match.player2?.name || "Joueur 2"}
                   </Typography>
                 </Stack>
                 <Stack
                   direction="row"
                   spacing={1}
                   sx={{
-                    alignItems: 'center',
+                    alignItems: "center",
                   }}
                 >
                   <TextField
@@ -152,7 +136,7 @@ export function ScoreReportDialog({
                     sx={{ width: 60 }}
                   />
                   <FormControlLabel
-                    value={match.player2?.id || '2'}
+                    value={match.player2?.id || "2"}
                     control={<Radio />}
                     label="Gagnant"
                     labelPlacement="start"

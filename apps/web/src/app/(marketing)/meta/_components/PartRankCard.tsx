@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import {
   Avatar,
   Box,
@@ -9,25 +9,25 @@ import {
   IconButton,
   LinearProgress,
   Typography,
-} from '@mui/material';
-import { alpha } from '@mui/material/styles';
-import { useState } from 'react';
+} from "@mui/material";
+import { alpha } from "@mui/material/styles";
+import { useState } from "react";
 
-import { DynamicRadarChart } from '@/components/ui/DynamicCharts';
+import { DynamicRadarChart } from "@/components/ui/DynamicCharts";
 
-import { SynergyList } from './SynergyList';
-import { type ComponentData } from './types';
+import { SynergyList } from "./SynergyList";
+import { type ComponentData } from "./types";
 
-function PositionIndicator({ change }: { change: number | 'NEW' }) {
-  if (change === 'NEW') {
+function PositionIndicator({ change }: { change: number | "NEW" }) {
+  if (change === "NEW") {
     return (
       <Typography
         component="span"
         sx={{
-          fontSize: '0.55rem',
+          fontSize: "0.55rem",
           fontWeight: 900,
-          color: '#22c55e',
-          bgcolor: 'rgba(34,197,94,0.12)',
+          color: "#22c55e",
+          bgcolor: "rgba(34,197,94,0.12)",
           px: 0.5,
           py: 0.15,
           borderRadius: 0.5,
@@ -41,10 +41,7 @@ function PositionIndicator({ change }: { change: number | 'NEW' }) {
 
   if (change > 0) {
     return (
-      <Typography
-        component="span"
-        sx={{ fontSize: '0.65rem', fontWeight: 700, color: '#22c55e' }}
-      >
+      <Typography component="span" sx={{ fontSize: "0.65rem", fontWeight: 700, color: "#22c55e" }}>
         ▲{change}
       </Typography>
     );
@@ -52,20 +49,14 @@ function PositionIndicator({ change }: { change: number | 'NEW' }) {
 
   if (change < 0) {
     return (
-      <Typography
-        component="span"
-        sx={{ fontSize: '0.65rem', fontWeight: 700, color: '#ef4444' }}
-      >
+      <Typography component="span" sx={{ fontSize: "0.65rem", fontWeight: 700, color: "#ef4444" }}>
         ▼{Math.abs(change)}
       </Typography>
     );
   }
 
   return (
-    <Typography
-      component="span"
-      sx={{ fontSize: '0.65rem', color: 'text.disabled' }}
-    >
+    <Typography component="span" sx={{ fontSize: "0.65rem", color: "text.disabled" }}>
       —
     </Typography>
   );
@@ -98,11 +89,11 @@ export function PartRankCard({
     <Card
       elevation={0}
       sx={{
-        border: '1px solid',
-        borderColor: 'divider',
+        border: "1px solid",
+        borderColor: "divider",
         borderRadius: { xs: 2, md: 2.5 },
-        transition: 'all 0.2s ease-out',
-        '&:hover': {
+        transition: "all 0.2s ease-out",
+        "&:hover": {
           borderColor: alpha(color, 0.3),
           boxShadow: `0 4px 16px -4px ${alpha(color, 0.15)}`,
         },
@@ -111,7 +102,7 @@ export function PartRankCard({
       <CardContent
         sx={{
           p: { xs: 1.5, md: 2 },
-          '&:last-child': {
+          "&:last-child": {
             pb: isExpandable ? { xs: 1, md: 1.5 } : { xs: 1.5, md: 2 },
           },
         }}
@@ -119,8 +110,8 @@ export function PartRankCard({
         {/* Header: Rank + Name + Change + Score */}
         <Box
           sx={{
-            display: 'flex',
-            alignItems: 'center',
+            display: "flex",
+            alignItems: "center",
             gap: { xs: 1, md: 1.5 },
             mb: 0.75,
           }}
@@ -129,10 +120,10 @@ export function PartRankCard({
           <Typography
             sx={{
               fontWeight: 900,
-              fontSize: { xs: '0.95rem', md: '1.1rem' },
-              color: rank <= 3 ? color : 'text.secondary',
+              fontSize: { xs: "0.95rem", md: "1.1rem" },
+              color: rank <= 3 ? color : "text.secondary",
               minWidth: { xs: 20, md: 24 },
-              textAlign: 'center',
+              textAlign: "center",
             }}
           >
             {rank}
@@ -146,9 +137,9 @@ export function PartRankCard({
               sx={{
                 width: { xs: 32, md: 40 },
                 height: { xs: 32, md: 40 },
-                bgcolor: 'transparent',
-                '& img': {
-                  objectFit: 'contain',
+                bgcolor: "transparent",
+                "& img": {
+                  objectFit: "contain",
                 },
               }}
             >
@@ -163,7 +154,7 @@ export function PartRankCard({
               fontWeight: 700,
               flex: 1,
               minWidth: 0,
-              fontSize: { xs: '0.8rem', md: '0.875rem' },
+              fontSize: { xs: "0.8rem", md: "0.875rem" },
             }}
             noWrap
           >
@@ -177,10 +168,10 @@ export function PartRankCard({
           <Typography
             sx={{
               fontWeight: 900,
-              fontSize: { xs: '0.85rem', md: '0.95rem' },
+              fontSize: { xs: "0.85rem", md: "0.95rem" },
               color,
               minWidth: { xs: 28, md: 32 },
-              textAlign: 'right',
+              textAlign: "right",
             }}
           >
             {component.score}
@@ -194,8 +185,8 @@ export function PartRankCard({
           sx={{
             height: { xs: 4, md: 5 },
             borderRadius: 3,
-            bgcolor: 'rgba(255,255,255,0.05)',
-            '& .MuiLinearProgress-bar': {
+            bgcolor: "rgba(255,255,255,0.05)",
+            "& .MuiLinearProgress-bar": {
               bgcolor: color,
               borderRadius: 3,
             },
@@ -208,20 +199,20 @@ export function PartRankCard({
             <Box
               onClick={() => setExpanded(!expanded)}
               sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
                 mt: 0.75,
-                cursor: 'pointer',
-                userSelect: 'none',
+                cursor: "pointer",
+                userSelect: "none",
                 minHeight: 28,
               }}
             >
               <Typography
                 variant="caption"
                 sx={{
-                  color: 'text.secondary',
-                  fontSize: { xs: '0.55rem', md: '0.6rem' },
+                  color: "text.secondary",
+                  fontSize: { xs: "0.55rem", md: "0.6rem" },
                   fontWeight: 700,
                   letterSpacing: 0.5,
                 }}
@@ -229,28 +220,26 @@ export function PartRankCard({
                 {hasStats && hasSynergy
                   ? `STATS · SYNERGIES (${component.synergy.length})`
                   : hasStats
-                    ? 'STATS'
+                    ? "STATS"
                     : `SYNERGIES (${component.synergy.length})`}
               </Typography>
               <IconButton
                 size="small"
                 sx={{
                   p: 0.25,
-                  transition: 'transform 0.2s',
-                  transform: expanded ? 'rotate(180deg)' : 'rotate(0deg)',
+                  transition: "transform 0.2s",
+                  transform: expanded ? "rotate(180deg)" : "rotate(0deg)",
                 }}
               >
-                <ExpandMoreIcon
-                  sx={{ fontSize: { xs: 14, md: 16 }, color: 'text.secondary' }}
-                />
+                <ExpandMoreIcon sx={{ fontSize: { xs: 14, md: 16 }, color: "text.secondary" }} />
               </IconButton>
             </Box>
 
             {expanded && hasStats && (
               <Box
                 sx={{
-                  display: 'flex',
-                  justifyContent: 'center',
+                  display: "flex",
+                  justifyContent: "center",
                   mt: 0.5,
                   mb: hasSynergy ? 0.5 : 0,
                 }}
@@ -259,7 +248,7 @@ export function PartRankCard({
                   {...({
                     series: [
                       {
-                        type: 'radar',
+                        type: "radar",
                         data: [
                           component.stats?.attack,
                           component.stats?.defense,
@@ -272,13 +261,13 @@ export function PartRankCard({
                       },
                     ],
                     radar: {
-                      metrics: ['ATK', 'DEF', 'END', 'DSH', 'BST'],
+                      metrics: ["ATK", "DEF", "END", "DSH", "BST"],
                       max: 10,
                     },
-                    shape: 'circular',
+                    shape: "circular",
                     divisions: 5,
                     stripeColor: (index: number) =>
-                      index % 2 === 0 ? alpha(color, 0.15) : 'transparent',
+                      index % 2 === 0 ? alpha(color, 0.15) : "transparent",
                     width: 200,
                     height: 170,
                     margin: { top: 10, bottom: 10, left: 10, right: 10 },
@@ -286,16 +275,16 @@ export function PartRankCard({
                       legend: { hidden: true },
                     },
                     sx: {
-                      '& .MuiChartsAxis-line': {
-                        stroke: 'rgba(255,255,255,0.1)',
+                      "& .MuiChartsAxis-line": {
+                        stroke: "rgba(255,255,255,0.1)",
                       },
-                      '& .MuiChartsAxis-tick': {
-                        stroke: 'rgba(255,255,255,0.1)',
+                      "& .MuiChartsAxis-tick": {
+                        stroke: "rgba(255,255,255,0.1)",
                       },
-                      '& .MuiChartsAxis-tickLabel': {
-                        fill: 'text.secondary',
-                        fontWeight: '900',
-                        fontSize: '0.65rem',
+                      "& .MuiChartsAxis-tickLabel": {
+                        fill: "text.secondary",
+                        fontWeight: "900",
+                        fontSize: "0.65rem",
                       },
                       width: { xs: 160, md: 200 },
                       height: { xs: 140, md: 170 },
@@ -308,11 +297,7 @@ export function PartRankCard({
 
             {hasSynergy && (
               <Box sx={{ mt: 0.25 }}>
-                <SynergyList
-                  synergies={component.synergy}
-                  color={color}
-                  expanded={expanded}
-                />
+                <SynergyList synergies={component.synergy} color={color} expanded={expanded} />
               </Box>
             )}
           </>

@@ -18,14 +18,14 @@ Disponible dans tous les projets (scope `user`). Pour le retirer :
 
 ## Outils exposés
 
-| Outil | Entrée | Sortie |
-|---|---|---|
-| `tune_memory_sqlite` | `{action:"get"\|"set", key, value?}` | mémoire persistante SQLite (`BXC_MEMORY_DB`). |
-| `bxc_scrape_markdown` | `{url, profile?: static\|fast\|http\|stealth}` | page → GFM Markdown (défaut `static`). |
-| `bxc_detect_frameworks` | `{url}` | frameworks + protections anti-bot (profil `http`). |
-| `bxc_cdp_evaluate` | `{url, script, profile?}` | exécute du JS dans la page via V8 (défaut `stealth`). |
-| `bxc_search` | `{query, num?, hl?, gl?, domain?, vertical?, rich?}` | Google Web Search → organic + (si `rich`) featured/knowledge/PAA/related. Auth auto via `~/.bxc/cookies/google.json`. |
-| `bxc_google_fetch` | `{url, profile?}` | Markdown + métadonnées structurées (JSON-LD, OpenGraph, Twitter cards, canonical, meta description) en une passe. |
+| Outil                   | Entrée                                               | Sortie                                                                                                                |
+| ----------------------- | ---------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `tune_memory_sqlite`    | `{action:"get"\|"set", key, value?}`                 | mémoire persistante SQLite (`BXC_MEMORY_DB`).                                                                         |
+| `bxc_scrape_markdown`   | `{url, profile?: static\|fast\|http\|stealth}`       | page → GFM Markdown (défaut `static`).                                                                                |
+| `bxc_detect_frameworks` | `{url}`                                              | frameworks + protections anti-bot (profil `http`).                                                                    |
+| `bxc_cdp_evaluate`      | `{url, script, profile?}`                            | exécute du JS dans la page via V8 (défaut `stealth`).                                                                 |
+| `bxc_search`            | `{query, num?, hl?, gl?, domain?, vertical?, rich?}` | Google Web Search → organic + (si `rich`) featured/knowledge/PAA/related. Auth auto via `~/.bxc/cookies/google.json`. |
+| `bxc_google_fetch`      | `{url, profile?}`                                    | Markdown + métadonnées structurées (JSON-LD, OpenGraph, Twitter cards, canonical, meta description) en une passe.     |
 
 ## Quand l'utiliser
 

@@ -1,18 +1,15 @@
-import {
-  getTournamentsNeedingSync,
-  scrapeAndSyncTournament,
-} from '../../lib/challonge-sync.js';
-import { logger } from '../../lib/logger.js';
-import prisma from '../../lib/prisma.js';
+import { getTournamentsNeedingSync, scrapeAndSyncTournament } from "../../lib/challonge-sync.js";
+import { logger } from "../../lib/logger.js";
+import prisma from "../../lib/prisma.js";
 
 export async function preTournamentSyncTask() {
-  logger.info('[Cron] Vérification des tournois à synchroniser...');
+  logger.info("[Cron] Vérification des tournois à synchroniser...");
 
   try {
     const tournamentIds = await getTournamentsNeedingSync();
 
     if (tournamentIds.length === 0) {
-      logger.info('[Cron] Aucun tournoi à synchroniser');
+      logger.info("[Cron] Aucun tournoi à synchroniser");
       return;
     }
 
@@ -41,8 +38,8 @@ export async function preTournamentSyncTask() {
       await new Promise((resolve) => setTimeout(resolve, 5000));
     }
 
-    logger.info('[Cron] Sync terminé.');
+    logger.info("[Cron] Sync terminé.");
   } catch (error) {
-    logger.error('[Cron] Erreur sync pré-tournoi:', error);
+    logger.error("[Cron] Erreur sync pré-tournoi:", error);
   }
 }

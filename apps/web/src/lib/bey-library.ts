@@ -4,16 +4,16 @@
  * with in-memory cache and search capabilities.
  */
 
-import { join } from 'node:path';
+import { join } from "node:path";
 
 export const CATEGORIES = [
-  'blade',
-  'over-blade',
-  'assist-blade',
-  'ratchet',
-  'bit',
-  'other',
-  'x-over',
+  "blade",
+  "over-blade",
+  "assist-blade",
+  "ratchet",
+  "bit",
+  "other",
+  "x-over",
 ] as const;
 
 export type BeyLibraryCategory = (typeof CATEGORIES)[number];
@@ -39,10 +39,7 @@ export interface BeyLibraryPart {
   sourceUrl: string;
 }
 
-export type BeyLibraryPartSummary = Omit<
-  BeyLibraryPart,
-  'variants' | 'features'
->;
+export type BeyLibraryPartSummary = Omit<BeyLibraryPart, "variants" | "features">;
 
 // Singleton data store
 let _data: BeyLibraryPart[] | null = null;
@@ -50,10 +47,7 @@ let _data: BeyLibraryPart[] | null = null;
 async function loadData(): Promise<BeyLibraryPart[]> {
   if (_data) return _data;
 
-  const filePath = join(
-    process.cwd(),
-    'data/bey-library/bey-library-complete.json',
-  );
+  const filePath = join(process.cwd(), "data/bey-library/bey-library-complete.json");
   const raw = await Bun.file(filePath).text();
   _data = JSON.parse(raw) as BeyLibraryPart[];
   return _data;
@@ -68,7 +62,7 @@ export async function getCategorySummary() {
     const parts = data.filter((p) => p.category === cat);
     const types: Record<string, number> = {};
     for (const p of parts) {
-      const t = p.type || 'Unknown';
+      const t = p.type || "Unknown";
       types[t] = (types[t] ?? 0) + 1;
     }
     return { category: cat, count: parts.length, types };
@@ -150,8 +144,7 @@ export async function searchParts(
 
   let results = data.filter((p) => {
     if (options?.category && p.category !== options.category) return false;
-    if (options?.type && p.type?.toLowerCase() !== options.type.toLowerCase())
-      return false;
+    if (options?.type && p.type?.toLowerCase() !== options.type.toLowerCase()) return false;
     return (
       p.name.toLowerCase().includes(q) ||
       p.code.toLowerCase().includes(q) ||
@@ -176,7 +169,7 @@ export async function getTypes(): Promise<{ type: string; count: number }[]> {
   const data = await loadData();
   const counts: Record<string, number> = {};
   for (const p of data) {
-    const t = p.type || 'Unknown';
+    const t = p.type || "Unknown";
     counts[t] = (counts[t] ?? 0) + 1;
   }
   return Object.entries(counts)
@@ -193,12 +186,9 @@ export async function getRandomPart(options?: {
 }): Promise<BeyLibraryPart | null> {
   const data = await loadData();
   let pool = data;
-  if (options?.category)
-    pool = pool.filter((p) => p.category === options.category);
+  if (options?.category) pool = pool.filter((p) => p.category === options.category);
   if (options?.type)
-    pool = pool.filter(
-      (p) => p.type?.toLowerCase() === options.type?.toLowerCase(),
-    );
+    pool = pool.filter((p) => p.type?.toLowerCase() === options.type?.toLowerCase());
   if (pool.length === 0) return null;
   const idx = Math.floor(Math.random() * pool.length);
   return pool[idx] ?? null;

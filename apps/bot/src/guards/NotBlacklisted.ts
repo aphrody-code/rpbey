@@ -1,12 +1,10 @@
 import { EmbedBuilder, MessageFlags, type CommandInteraction } from "discord.js";
-import { type GuardFunction } from '@rpbey/discordx';
+import { type GuardFunction } from "@rpbey/discordx";
 
-import { logger } from '../lib/logger.js';
-import { prisma } from '../lib/prisma.js';
+import { logger } from "../lib/logger.js";
+import { prisma } from "../lib/prisma.js";
 
-const BLACKLISTED_IDS = new Set(
-  process.env.BLACKLISTED_USERS?.split(',').filter(Boolean) ?? [],
-);
+const BLACKLISTED_IDS = new Set(process.env.BLACKLISTED_USERS?.split(",").filter(Boolean) ?? []);
 
 export const NotBlacklisted: GuardFunction<CommandInteraction> = async (
   interaction,
@@ -26,14 +24,14 @@ export const NotBlacklisted: GuardFunction<CommandInteraction> = async (
       select: { role: true },
     });
 
-    if (dbUser?.role === 'banned') {
+    if (dbUser?.role === "banned") {
       await sendError(interaction);
       return;
     }
 
     await next();
   } catch (error) {
-    logger.error('NotBlacklisted guard error:', error);
+    logger.error("NotBlacklisted guard error:", error);
     // Fail open
     await next();
   }
@@ -42,12 +40,12 @@ export const NotBlacklisted: GuardFunction<CommandInteraction> = async (
 async function sendError(interaction: CommandInteraction) {
   const embed = new EmbedBuilder()
     .setColor(0x1f2937)
-    .setTitle('⛔ Accès refusé')
+    .setTitle("⛔ Accès refusé")
     .setDescription(
-      'Tu as été banni de la communauté RPB et ne peux plus utiliser le bot.\n\n' +
+      "Tu as été banni de la communauté RPB et ne peux plus utiliser le bot.\n\n" +
         "Si tu penses que c'est une erreur, contacte un administrateur.",
     )
-    .setFooter({ text: 'République Populaire du Beyblade' });
+    .setFooter({ text: "République Populaire du Beyblade" });
 
   if (interaction.isRepliable()) {
     await interaction.reply({

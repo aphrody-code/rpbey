@@ -1,6 +1,6 @@
-import { GitHub as GitHubIcon, X as XIcon } from '@mui/icons-material';
-import { Box, Container, IconButton, Stack, Typography } from '@mui/material';
-import Link from 'next/link';
+import { GitHub as GitHubIcon, X as XIcon } from "@mui/icons-material";
+import { Box, Container, IconButton, Stack, Typography } from "@mui/material";
+import Link from "next/link";
 
 export function Footer() {
   return (
@@ -8,25 +8,25 @@ export function Footer() {
       component="footer"
       sx={{
         py: 3,
-        mt: 'auto',
+        mt: "auto",
         borderTop: 1,
-        borderColor: 'divider',
-        bgcolor: 'background.paper',
+        borderColor: "divider",
+        bgcolor: "background.paper",
       }}
     >
       <Container maxWidth="lg">
         <Stack
-          direction={{ xs: 'column', sm: 'row' }}
+          direction={{ xs: "column", sm: "row" }}
           spacing={2}
           sx={{
-            justifyContent: 'space-between',
-            alignItems: 'center',
+            justifyContent: "space-between",
+            alignItems: "center",
           }}
         >
           <Typography
             variant="body2"
             sx={{
-              color: 'text.secondary',
+              color: "text.secondary",
             }}
           >
             © {new Date().getFullYear()} République Populaire du Beyblade
@@ -36,15 +36,15 @@ export function Footer() {
             direction="row"
             spacing={3}
             sx={{
-              alignItems: 'center',
+              alignItems: "center",
             }}
           >
-            <Link href="/notre-equipe" style={{ textDecoration: 'none' }}>
+            <Link href="/notre-equipe" style={{ textDecoration: "none" }}>
               <Typography
                 variant="body2"
                 sx={{
-                  color: 'text.secondary',
-                  '&:hover': { color: 'primary.main' },
+                  color: "text.secondary",
+                  "&:hover": { color: "primary.main" },
                 }}
               >
                 Notre Équipe
@@ -89,7 +89,7 @@ export function Footer() {
               aria-label="X (Twitter)"
             >
               <XIcon fontSize="small" />
-            </IconButton>{' '}
+            </IconButton>{" "}
           </Stack>
         </Stack>
       </Container>

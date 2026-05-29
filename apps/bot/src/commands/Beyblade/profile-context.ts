@@ -6,16 +6,16 @@ import {
   EmbedBuilder,
   type User,
   type UserContextMenuCommandInteraction,
-} from 'discord.js';
-import { ContextMenu, Discord } from '@rpbey/discordx';
+} from "discord.js";
+import { ContextMenu, Discord } from "@rpbey/discordx";
 
-import { Colors, RPB } from '../../lib/constants.js';
-import { logger } from '../../lib/logger.js';
-import prisma from '../../lib/prisma.js';
+import { Colors, RPB } from "../../lib/constants.js";
+import { logger } from "../../lib/logger.js";
+import prisma from "../../lib/prisma.js";
 
 @Discord()
 export class ProfileContextMenuCommand {
-  @ContextMenu({ name: 'Profil Beyblade', type: ApplicationCommandType.User })
+  @ContextMenu({ name: "Profil Beyblade", type: ApplicationCommandType.User })
   async userHandler(interaction: UserContextMenuCommandInteraction) {
     await interaction.deferReply();
 
@@ -28,7 +28,7 @@ export class ProfileContextMenuCommand {
           profile: true,
           tournaments: {
             include: { tournament: true },
-            orderBy: { createdAt: 'desc' },
+            orderBy: { createdAt: "desc" },
             take: 5,
           },
         },
@@ -39,7 +39,7 @@ export class ProfileContextMenuCommand {
           .setTitle(`👤 ${targetUser.displayName}`)
           .setDescription(
             "Cet utilisateur n'a pas encore de profil Beyblade sur RPB.\n" +
-              'Crée ton profil sur [rpbey.fr/dashboard](https://rpbey.fr/dashboard) !',
+              "Crée ton profil sur [rpbey.fr/dashboard](https://rpbey.fr/dashboard) !",
           )
           .setColor(Colors.Warning)
           .setThumbnail(targetUser.displayAvatarURL({ size: 128 }))
@@ -62,56 +62,51 @@ export class ProfileContextMenuCommand {
 
       const rankTitle =
         rank === 1
-          ? '🥇 Champion'
+          ? "🥇 Champion"
           : rankingPoints >= 500
-            ? '💎 Expert'
+            ? "💎 Expert"
             : rankingPoints >= 200
-              ? '⭐ Vétéran'
+              ? "⭐ Vétéran"
               : rankingPoints >= 50
-                ? '⚔️ Combattant'
-                : '🌀 Blader';
+                ? "⚔️ Combattant"
+                : "🌀 Blader";
 
       const bar = (v: number, max: number) => {
-        if (max === 0) return '░░░░░░░░░░';
+        if (max === 0) return "░░░░░░░░░░";
         const filled = Math.round((v / max) * 10);
-        return (
-          '█'.repeat(Math.min(filled, 10)) +
-          '░'.repeat(10 - Math.min(filled, 10))
-        );
+        return "█".repeat(Math.min(filled, 10)) + "░".repeat(10 - Math.min(filled, 10));
       };
 
       const embed = new EmbedBuilder()
-        .setTitle(
-          `${rankTitle} · ${profile.bladerName ?? targetUser.displayName}`,
-        )
-        .setDescription(profile.bio ?? '*Pas de bio*')
+        .setTitle(`${rankTitle} · ${profile.bladerName ?? targetUser.displayName}`)
+        .setDescription(profile.bio ?? "*Pas de bio*")
         .setColor(rank === 1 ? 0xffd700 : rank <= 3 ? 0xc0c0c0 : Colors.Primary)
         .setThumbnail(targetUser.displayAvatarURL({ size: 256 }))
         .addFields(
           {
-            name: '🏅 Classement',
+            name: "🏅 Classement",
             value: `**#${rank}** · ${rankingPoints} pts`,
             inline: true,
           },
           {
-            name: '🎮 Type favori',
-            value: profile.favoriteType ?? 'Non défini',
+            name: "🎮 Type favori",
+            value: profile.favoriteType ?? "Non défini",
             inline: true,
           },
           {
-            name: '⭐ Niveau',
-            value: profile.experience ?? 'Non défini',
+            name: "⭐ Niveau",
+            value: profile.experience ?? "Non défini",
             inline: true,
           },
           {
-            name: '📊 Combat',
+            name: "📊 Combat",
             value:
               `\`${bar(profile.wins, total)}\` **${winRate}%** WR\n` +
               `✅ ${profile.wins}W · ❌ ${profile.losses}L · ${total} total`,
             inline: false,
           },
           {
-            name: '🏆 Tournois',
+            name: "🏆 Tournois",
             value: `${profile.tournamentWins} victoires · ${user.tournaments.length} participations`,
             inline: true,
           },
@@ -123,15 +118,15 @@ export class ProfileContextMenuCommand {
           .map((tp: any) => {
             const placement = tp.finalPlacement
               ? tp.finalPlacement <= 3
-                ? ['🥇', '🥈', '🥉'][tp.finalPlacement - 1]
+                ? ["🥇", "🥈", "🥉"][tp.finalPlacement - 1]
                 : `#${tp.finalPlacement}`
-              : '⏳';
+              : "⏳";
             return `${placement} ${tp.tournament.name}`;
           })
-          .join('\n');
+          .join("\n");
 
         embed.addFields({
-          name: '🎯 Récents',
+          name: "🎯 Récents",
           value: recentTournaments,
           inline: true,
         });
@@ -139,45 +134,40 @@ export class ProfileContextMenuCommand {
 
       const socials: string[] = [];
       if (profile.twitterHandle)
-        socials.push(
-          `🐦 [@${profile.twitterHandle}](https://x.com/${profile.twitterHandle})`,
-        );
+        socials.push(`🐦 [@${profile.twitterHandle}](https://x.com/${profile.twitterHandle})`);
       if (profile.tiktokHandle)
-        socials.push(
-          `🎵 [@${profile.tiktokHandle}](https://tiktok.com/@${profile.tiktokHandle})`,
-        );
+        socials.push(`🎵 [@${profile.tiktokHandle}](https://tiktok.com/@${profile.tiktokHandle})`);
       if (socials.length > 0) {
         embed.addFields({
-          name: '📱 Réseaux',
-          value: socials.join(' · '),
+          name: "📱 Réseaux",
+          value: socials.join(" · "),
           inline: false,
         });
       }
 
       embed
         .setFooter({
-          text: `${RPB.FullName} · Membre depuis ${user.createdAt.toLocaleDateString('fr-FR')}`,
+          text: `${RPB.FullName} · Membre depuis ${user.createdAt.toLocaleDateString("fr-FR")}`,
         })
         .setTimestamp();
 
       const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
         new ButtonBuilder()
           .setCustomId(`battle-challenge-${targetUser.id}`)
-          .setLabel('Défier en combat')
+          .setLabel("Défier en combat")
           .setStyle(ButtonStyle.Primary)
-          .setEmoji('⚔️'),
+          .setEmoji("⚔️"),
         new ButtonBuilder()
-          .setLabel('Voir sur le site')
+          .setLabel("Voir sur le site")
           .setURL(`https://rpbey.fr/profile/${user.id}`)
           .setStyle(ButtonStyle.Link),
       );
 
       return interaction.editReply({ embeds: [embed], components: [row] });
     } catch (error) {
-      logger.error('Profile context menu error:', error);
+      logger.error("Profile context menu error:", error);
       return interaction.editReply({
-        content:
-          '❌ Erreur lors de la récupération du profil. Réessaie dans quelques instants.',
+        content: "❌ Erreur lors de la récupération du profil. Réessaie dans quelques instants.",
       });
     }
   }

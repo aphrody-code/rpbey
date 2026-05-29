@@ -1,7 +1,7 @@
-import { NextResponse } from 'next/server';
-import { syncSatrRanking } from '@/server/actions/satr';
-import { syncStardustRanking } from '@/server/actions/stardust';
-import { syncWbRanking } from '@/server/actions/wb';
+import { NextResponse } from "next/server";
+import { syncSatrRanking } from "@/server/actions/satr";
+import { syncStardustRanking } from "@/server/actions/stardust";
+import { syncWbRanking } from "@/server/actions/wb";
 
 /**
  * Sync endpoint for the 3 tournament rankings (WB / SATR / Stardust).
@@ -18,7 +18,7 @@ import { syncWbRanking } from '@/server/actions/wb';
  */
 
 type SyncResult = {
-  name: 'wb' | 'satr' | 'stardust';
+  name: "wb" | "satr" | "stardust";
   success: boolean;
   count?: number;
   tournamentCount?: number;
@@ -26,34 +26,37 @@ type SyncResult = {
 };
 
 export async function POST(req: Request) {
-  const auth = req.headers.get('authorization') ?? '';
+  const auth = req.headers.get("authorization") ?? "";
   const token = process.env.RANKING_SYNC_TOKEN;
   if (!token) {
     return NextResponse.json(
-      { ok: false, error: 'RANKING_SYNC_TOKEN non configuré côté serveur' },
+      { ok: false, error: "RANKING_SYNC_TOKEN non configuré côté serveur" },
       { status: 503 },
     );
   }
   if (auth !== `Bearer ${token}`) {
-    return NextResponse.json({ ok: false, error: 'Unauthorized' }, { status: 401 });
+    return NextResponse.json({ ok: false, error: "Unauthorized" }, { status: 401 });
   }
 
   const url = new URL(req.url);
-  const only = url.searchParams.get('only');
-  const skip = (url.searchParams.get('skip') ?? '').split(',').filter(Boolean);
+  const only = url.searchParams.get("only");
+  const skip = (url.searchParams.get("skip") ?? "").split(",").filter(Boolean);
 
   const all: Array<{
-    name: 'wb' | 'satr' | 'stardust';
-    fn: () => Promise<{ success: boolean; error?: unknown; count?: number; tournamentCount?: number }>;
+    name: "wb" | "satr" | "stardust";
+    fn: () => Promise<{
+      success: boolean;
+      error?: unknown;
+      count?: number;
+      tournamentCount?: number;
+    }>;
   }> = [
-    { name: 'wb', fn: () => syncWbRanking() },
-    { name: 'satr', fn: () => syncSatrRanking() },
-    { name: 'stardust', fn: () => syncStardustRanking() },
+    { name: "wb", fn: () => syncWbRanking() },
+    { name: "satr", fn: () => syncSatrRanking() },
+    { name: "stardust", fn: () => syncStardustRanking() },
   ];
 
-  const targets = all.filter(
-    (t) => (!only || t.name === only) && !skip.includes(t.name),
-  );
+  const targets = all.filter((t) => (!only || t.name === only) && !skip.includes(t.name));
 
   const results: SyncResult[] = [];
   for (const t of targets) {
@@ -62,13 +65,9 @@ export async function POST(req: Request) {
       results.push({
         name: t.name,
         success: r.success,
-        count: 'count' in r ? r.count : undefined,
-        tournamentCount: 'tournamentCount' in r ? r.tournamentCount : undefined,
-        error: r.success
-          ? undefined
-          : typeof r.error === 'string'
-            ? r.error
-            : String(r.error),
+        count: "count" in r ? r.count : undefined,
+        tournamentCount: "tournamentCount" in r ? r.tournamentCount : undefined,
+        error: r.success ? undefined : typeof r.error === "string" ? r.error : String(r.error),
       });
     } catch (e) {
       results.push({ name: t.name, success: false, error: String(e) });
@@ -83,7 +82,7 @@ export async function GET() {
   return NextResponse.json(
     {
       usage:
-        'POST /api/admin/ranking/sync [?only=wb|satr|stardust] [?skip=...] with Authorization: Bearer <RANKING_SYNC_TOKEN>',
+        "POST /api/admin/ranking/sync [?only=wb|satr|stardust] [?skip=...] with Authorization: Bearer <RANKING_SYNC_TOKEN>",
     },
     { status: 200 },
   );

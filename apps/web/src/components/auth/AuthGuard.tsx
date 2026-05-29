@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import Box from '@mui/material/Box';
-import CircularProgress from '@mui/material/CircularProgress';
-import Typography from '@mui/material/Typography';
-import { useRouter } from 'next/navigation';
-import { type ReactNode, useEffect } from 'react';
-import { useSession } from '@/lib/auth-client';
-import { ROUTES } from '@/lib/constants';
+import Box from "@mui/material/Box";
+import CircularProgress from "@mui/material/CircularProgress";
+import Typography from "@mui/material/Typography";
+import { useRouter } from "next/navigation";
+import { type ReactNode, useEffect } from "react";
+import { useSession } from "@/lib/auth-client";
+import { ROUTES } from "@/lib/constants";
 
 interface AuthGuardProps {
   children: ReactNode;
@@ -36,18 +36,18 @@ export function AuthGuard({
       fallback ?? (
         <Box
           sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            minHeight: '50vh',
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            minHeight: "50vh",
             gap: 2,
           }}
         >
           <CircularProgress size={40} />
           <Typography
             sx={{
-              color: 'text.secondary',
+              color: "text.secondary",
             }}
           >
             Chargement...
@@ -63,18 +63,18 @@ export function AuthGuard({
       fallback ?? (
         <Box
           sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            minHeight: '50vh',
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            minHeight: "50vh",
             gap: 2,
           }}
         >
           <CircularProgress size={40} />
           <Typography
             sx={{
-              color: 'text.secondary',
+              color: "text.secondary",
             }}
           >
             Redirection...
@@ -94,11 +94,7 @@ interface GuestGuardProps {
   redirectTo?: string;
 }
 
-export function GuestGuard({
-  children,
-  fallback,
-  redirectTo = ROUTES.ADMIN,
-}: GuestGuardProps) {
+export function GuestGuard({ children, fallback, redirectTo = ROUTES.ADMIN }: GuestGuardProps) {
   const router = useRouter();
   const { data: session, isPending } = useSession();
 
@@ -114,18 +110,18 @@ export function GuestGuard({
       fallback ?? (
         <Box
           sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            minHeight: '50vh',
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            minHeight: "50vh",
             gap: 2,
           }}
         >
           <CircularProgress size={40} />
           <Typography
             sx={{
-              color: 'text.secondary',
+              color: "text.secondary",
             }}
           >
             Chargement...
@@ -141,18 +137,18 @@ export function GuestGuard({
       fallback ?? (
         <Box
           sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            minHeight: '50vh',
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            minHeight: "50vh",
             gap: 2,
           }}
         >
           <CircularProgress size={40} />
           <Typography
             sx={{
-              color: 'text.secondary',
+              color: "text.secondary",
             }}
           >
             Redirection...
@@ -197,18 +193,18 @@ export function RoleGuard({
       fallback ?? (
         <Box
           sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            minHeight: '50vh',
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            minHeight: "50vh",
             gap: 2,
           }}
         >
           <CircularProgress size={40} />
           <Typography
             sx={{
-              color: 'text.secondary',
+              color: "text.secondary",
             }}
           >
             Vérification des permissions...
@@ -224,11 +220,11 @@ export function RoleGuard({
       fallback ?? (
         <Box
           sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            minHeight: '50vh',
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            minHeight: "50vh",
             gap: 2,
           }}
         >
@@ -237,11 +233,10 @@ export function RoleGuard({
           </Typography>
           <Typography
             sx={{
-              color: 'text.secondary',
+              color: "text.secondary",
             }}
           >
-            Vous n&apos;avez pas les permissions nécessaires pour accéder à
-            cette page.
+            Vous n&apos;avez pas les permissions nécessaires pour accéder à cette page.
           </Typography>
         </Box>
       )

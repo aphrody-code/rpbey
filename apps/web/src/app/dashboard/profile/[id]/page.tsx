@@ -1,5 +1,5 @@
-import { connection } from 'next/server';
-import ProfileClient from './ProfileClient';
+import { connection } from "next/server";
+import ProfileClient from "./ProfileClient";
 
 interface ProfilePageProps {
   params: Promise<{ id: string }>;

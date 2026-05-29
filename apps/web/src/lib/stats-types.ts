@@ -10,7 +10,7 @@ export interface UserStats {
   tournamentsWon: number;
   currentStreak: number;
   bestStreak: number;
-  recentForm: ('W' | 'L')[];
+  recentForm: ("W" | "L")[];
   rank: number;
   elo: number;
   mostUsedBlades: { partId: string; name: string; count: number }[];

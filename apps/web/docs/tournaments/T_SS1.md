@@ -4,30 +4,30 @@
 
 ## Identité
 
-| Champ | Valeur |
-|---|---|
-| **Slug Challonge** | `T_SS1` |
-| **URL** | https://challonge.com/T_SS1 |
-| **Nom Challonge** | `Tournoi Importé` (à renommer) |
-| **Nom DB** | `The Stardust Series #1` |
-| **Catégorie DB** | `STARDUST SERIES` (id `cmobvakj50000s7ro0fwh1052`) |
-| **Tournament ID DB** | `cmobvakra0001s7rog85nt10h` |
-| **Challonge ID** | `17824455` |
-| **Status DB** | `COMPLETE` |
-| **`challongeState`** | `complete` |
+| Champ                | Valeur                                                                                                                    |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| **Slug Challonge**   | `T_SS1`                                                                                                                   |
+| **URL**              | https://challonge.com/T_SS1                                                                                               |
+| **Nom Challonge**    | `Tournoi Importé` (à renommer)                                                                                            |
+| **Nom DB**           | `The Stardust Series #1`                                                                                                  |
+| **Catégorie DB**     | `STARDUST SERIES` (id `cmobvakj50000s7ro0fwh1052`)                                                                        |
+| **Tournament ID DB** | `cmobvakra0001s7rog85nt10h`                                                                                               |
+| **Challonge ID**     | `17824455`                                                                                                                |
+| **Status DB**        | `COMPLETE`                                                                                                                |
+| **`challongeState`** | `complete`                                                                                                                |
 | **Date enregistrée** | `2026-05-03T17:24:27Z` (timestamp d'import — le scrape a renvoyé `started_at=null` et `completed_at=null` côté Challonge) |
 
 ## Format technique
 
-| Champ | Valeur |
-|---|---|
-| **`tournament_type`** | `double elimination` |
-| **`group_stages_enabled`** | `undefined` (= **pas** de group stage Challonge natif) |
-| **`group_stages_were_used`** | `undefined` |
-| **`grand_finals_modifier`** | `null` (= grande finale en 1 set — pas de bracket reset obligatoire) |
-| **`progress_meter`** | `100%` |
-| **`points_for_*`** | tous absents (pas de système round-robin Challonge) |
-| **Game** | non défini (`game_name=null`) |
+| Champ                        | Valeur                                                               |
+| ---------------------------- | -------------------------------------------------------------------- |
+| **`tournament_type`**        | `double elimination`                                                 |
+| **`group_stages_enabled`**   | `undefined` (= **pas** de group stage Challonge natif)               |
+| **`group_stages_were_used`** | `undefined`                                                          |
+| **`grand_finals_modifier`**  | `null` (= grande finale en 1 set — pas de bracket reset obligatoire) |
+| **`progress_meter`**         | `100%`                                                               |
+| **`points_for_*`**           | tous absents (pas de système round-robin Challonge)                  |
+| **Game**                     | non défini (`game_name=null`)                                        |
 
 ### Format réel (pool → bracket)
 
@@ -38,15 +38,15 @@ Le tournoi a été tenu en **deux phases**. La structure des poules n'est pas ex
 
 ### Composition des poules
 
-| Group | Effectif | Matches RR | Top 3 qualifiés (Advanced) |
-|---|---:|---:|---|
-| A | 5 | 10 | VentoNaBendo (4-0), Zeikuo (2-2), Masamune_Kadoya (2-2) |
-| B | 6 | 15 | azurekun (4-1), SkarnGameMaster (3-2), Upolemno (3-2) |
-| C | 6 | 15 | CrozyfletteCrue (4-1), LightYamani (3-2), SAtR_Younsi (3-2) |
-| D | 6 | 15 | LeKingJoker (4-1), Inhezia (3-2), sewpoo_0192 (3-2) |
-| E | 6 | 15 | Yolkster_ (4-1), Tategamii (4-1), Clemmmm (2-3) |
-| F | 6 | 15 | BenVinzen (4-1), Kaiouss (3-2), Berserk91 (3-2) |
-| **Total** | **35** | **85** | **18 qualifiés bracket** |
+| Group     | Effectif | Matches RR | Top 3 qualifiés (Advanced)                                  |
+| --------- | -------: | ---------: | ----------------------------------------------------------- |
+| A         |        5 |         10 | VentoNaBendo (4-0), Zeikuo (2-2), Masamune_Kadoya (2-2)     |
+| B         |        6 |         15 | azurekun (4-1), SkarnGameMaster (3-2), Upolemno (3-2)       |
+| C         |        6 |         15 | CrozyfletteCrue (4-1), LightYamani (3-2), SAtR_Younsi (3-2) |
+| D         |        6 |         15 | LeKingJoker (4-1), Inhezia (3-2), sewpoo_0192 (3-2)         |
+| E         |        6 |         15 | Yolkster\_ (4-1), Tategamii (4-1), Clemmmm (2-3)            |
+| F         |        6 |         15 | BenVinzen (4-1), Kaiouss (3-2), Berserk91 (3-2)             |
+| **Total** |   **35** |     **85** | **18 qualifiés bracket**                                    |
 
 > Group A a **5 participants** (un inscrit en moins, peut-être un forfait avant tournoi) → 10 matches RR (C(5,2)) au lieu de 15.
 
@@ -59,77 +59,77 @@ Le tournoi a été tenu en **deux phases**. La structure des poules n'est pas ex
 
 ### Distribution par round
 
-| Round | Phase | Matches |
-|---:|---|---:|
-| 1 | WB R1 | 2 |
-| 2 | WB R2 | 8 |
-| 3 | WB R3 | 4 |
-| 4 | WB R4 | 2 |
-| 5 | WB R5 (WB Final) | 1 |
-| 6 | **Grande finale** | 2 |
-| -1 | LB R1 | 2 |
-| -2 | LB R2 | 4 |
-| -3 | LB R3 | 4 |
-| -4 | LB R4 | 2 |
-| -5 | LB R5 | 2 |
-| -6 | LB R6 | 1 |
-| -7 | LB R7 (LB Final) | 1 |
+| Round | Phase             | Matches |
+| ----: | ----------------- | ------: |
+|     1 | WB R1             |       2 |
+|     2 | WB R2             |       8 |
+|     3 | WB R3             |       4 |
+|     4 | WB R4             |       2 |
+|     5 | WB R5 (WB Final)  |       1 |
+|     6 | **Grande finale** |       2 |
+|    -1 | LB R1             |       2 |
+|    -2 | LB R2             |       4 |
+|    -3 | LB R3             |       4 |
+|    -4 | LB R4             |       2 |
+|    -5 | LB R5             |       2 |
+|    -6 | LB R6             |       1 |
+|    -7 | LB R7 (LB Final)  |       1 |
 
-> **Note** : la grande finale apparaît dupliquée (round 6 = 2 matches) → un *bracket reset* a été créé mais le second match n'a pas été nécessaire (champion WB = champion overall).
+> **Note** : la grande finale apparaît dupliquée (round 6 = 2 matches) → un _bracket reset_ a été créé mais le second match n'a pas été nécessaire (champion WB = champion overall).
 
 ### Qualité des données
 
-| Métrique | Valeur | Commentaire |
-|---|---:|---|
-| Matches complete | **35 / 35** | aucun pending |
-| Forfait | **0** | |
-| Attachement | **0** | aucune capture/preuve attachée |
-| Score détaillé (`score ≠ "0-0"`) côté bracket | **0 / 35** | les scores set-par-set ne sont **pas** stockés dans `tournament_matches` Challonge — seul le W/L est connu |
-| Score détaillé pool stage (via log) | **82 / 82** | les rapports `/log` contiennent le score (ex. `"4-0"`, `"3-2"`) et sont stockés dans `score` |
+| Métrique                                      |      Valeur | Commentaire                                                                                                |
+| --------------------------------------------- | ----------: | ---------------------------------------------------------------------------------------------------------- |
+| Matches complete                              | **35 / 35** | aucun pending                                                                                              |
+| Forfait                                       |       **0** |                                                                                                            |
+| Attachement                                   |       **0** | aucune capture/preuve attachée                                                                             |
+| Score détaillé (`score ≠ "0-0"`) côté bracket |  **0 / 35** | les scores set-par-set ne sont **pas** stockés dans `tournament_matches` Challonge — seul le W/L est connu |
+| Score détaillé pool stage (via log)           | **82 / 82** | les rapports `/log` contiennent le score (ex. `"4-0"`, `"3-2"`) et sont stockés dans `score`               |
 
-> ⚠️ **Conséquence ranking** : avec la formule BTS, l'absence de score détaillé bracket n'a aucun impact (le calcul ignore les sets, il compte W/L). Mais pour un éventuel ranking *par sets* (ancienne formule heuristique stardust), l'information bracket est perdue. Les scores détaillés pool stage **sont** dispo (parsés depuis `/log`).
+> ⚠️ **Conséquence ranking** : avec la formule BTS, l'absence de score détaillé bracket n'a aucun impact (le calcul ignore les sets, il compte W/L). Mais pour un éventuel ranking _par sets_ (ancienne formule heuristique stardust), l'information bracket est perdue. Les scores détaillés pool stage **sont** dispo (parsés depuis `/log`).
 
 ## Participants & placements
 
 **35 inscrits** : 18 dans le bracket + 17 éliminés en poule. Distribution finale :
 
-| Phase | Effectif | finalPlacement DB |
-|---|---:|---|
-| Bracket Challonge | 18 | 1, 2, 3, 4, 5×2, 7×2, 9×4, 13×4, 17×2 |
-| Éliminés en poule | 17 | 19 (sentinel : au-delà du bucket top8 BTS → 0 bonus placement) |
+| Phase             | Effectif | finalPlacement DB                                              |
+| ----------------- | -------: | -------------------------------------------------------------- |
+| Bracket Challonge |       18 | 1, 2, 3, 4, 5×2, 7×2, 9×4, 13×4, 17×2                          |
+| Éliminés en poule |       17 | 19 (sentinel : au-delà du bucket top8 BTS → 0 bonus placement) |
 
 ### Bracket (18 finalistes)
 
-| Final | Joueur | W/L (bracket) | W/L (pool) | W/L (total) |
-|---:|---|---:|---:|---:|
-| **1** | Kaiouss | 8/1 | 3/1 | 11/2 |
-| **2** | LightYamani | 4/2 | 2/2 | 6/4 |
-| **3** | BenVinzen | 3/2 | 3/1 | 6/3 |
-| **4** | LeKingJoker | 4/2 | 4/1 | 8/3 |
-| 5 | Masamune_Kadoya | 2/2 | 2/2 | 4/4 |
-| 5 | SkarnGameMaster | 2/2 | 3/2 | 5/4 |
-| 7 | Inhezia | 2/2 | 3/2 | 5/4 |
-| 7 | Zeikuo | 2/1 | 2/2 | 4/3 |
-| 9 | Clemmmm | 2/2 | 1/4 | 3/6 |
-| 9 | CrozyfletteCrue | 1/2 | 4/1 | 5/3 |
-| 9 | SAtR_Younsi | 2/2 | 3/1 | 5/3 |
-| 9 | Tategamii | 2/2 | 4/1 | 6/3 |
-| 13 | Upolemno | 0/2 | 3/2 | 3/4 |
-| 13 | VentoNaBendo | 0/2 | 3/0 | 3/2 |
-| 13 | azurekun | 0/2 | 4/1 | 4/3 |
-| 13 | sewpoo_0192 | 1/2 | 3/2 | 4/4 |
-| 17 | Berserk91 | 0/2 | 3/2 | 3/4 |
-| 17 | Yolkster_ | 0/2 | 5/0 | 5/2 |
+| Final | Joueur          | W/L (bracket) | W/L (pool) | W/L (total) |
+| ----: | --------------- | ------------: | ---------: | ----------: |
+| **1** | Kaiouss         |           8/1 |        3/1 |        11/2 |
+| **2** | LightYamani     |           4/2 |        2/2 |         6/4 |
+| **3** | BenVinzen       |           3/2 |        3/1 |         6/3 |
+| **4** | LeKingJoker     |           4/2 |        4/1 |         8/3 |
+|     5 | Masamune_Kadoya |           2/2 |        2/2 |         4/4 |
+|     5 | SkarnGameMaster |           2/2 |        3/2 |         5/4 |
+|     7 | Inhezia         |           2/2 |        3/2 |         5/4 |
+|     7 | Zeikuo          |           2/1 |        2/2 |         4/3 |
+|     9 | Clemmmm         |           2/2 |        1/4 |         3/6 |
+|     9 | CrozyfletteCrue |           1/2 |        4/1 |         5/3 |
+|     9 | SAtR_Younsi     |           2/2 |        3/1 |         5/3 |
+|     9 | Tategamii       |           2/2 |        4/1 |         6/3 |
+|    13 | Upolemno        |           0/2 |        3/2 |         3/4 |
+|    13 | VentoNaBendo    |           0/2 |        3/0 |         3/2 |
+|    13 | azurekun        |           0/2 |        4/1 |         4/3 |
+|    13 | sewpoo_0192     |           1/2 |        3/2 |         4/4 |
+|    17 | Berserk91       |           0/2 |        3/2 |         3/4 |
+|    17 | Yolkster\_      |           0/2 |        5/0 |         5/2 |
 
 ### Éliminés en poule (17)
 
 `finalPlacement = 19` pour tous (au-delà du bucket top8 BTS).
 
-| poolRank | Joueurs | W/L (pool) |
-|---:|---|---|
-| 4 | Zeln3090, Loup_, Lady_Barbatrucc, Haellyss, Nera_, CØL_Éther | 1-3 W variable |
-| 5 | OrO, Kineria, LuXx598, Natellen, FeedMy, Vincent___ | 1-2 W |
-| 6 | KoFeJy, LOTTEUX!, CharlieFlanders, Nxzo, KamenZ | 0-1 W |
+| poolRank | Joueurs                                                      | W/L (pool)     |
+| -------: | ------------------------------------------------------------ | -------------- |
+|        4 | Zeln3090, Loup*, Lady_Barbatrucc, Haellyss, Nera*, CØL_Éther | 1-3 W variable |
+|        5 | OrO, Kineria, LuXx598, Natellen, FeedMy, Vincent\_\_\_       | 1-2 W          |
+|        6 | KoFeJy, LOTTEUX!, CharlieFlanders, Nxzo, KamenZ              | 0-1 W          |
 
 > Aucun participant Challonge n'a de `challongeUsername` rempli — tous identifiés par display name uniquement. **3 / 18** ont été matchés à un user RPB existant via leur `playerName` ; les 15 autres sont en `userId=null` (le ranking se base sur `playerName`, donc cela ne pose pas problème pour le calcul, mais limite les liens user → `stardustBlader`).
 
@@ -146,18 +146,18 @@ points = participation        (500, toujours)
 
 ### Barème complet
 
-| Phase / Position | Points | Source |
-|---|---:|---|
-| **Participation** | 500 | `ranking_system.participation` |
-| **1er** | 15 000 | `ranking_system.firstPlace` |
-| **2ème** | 7 000 | `ranking_system.secondPlace` |
-| **3ème** | 5 000 | `ranking_system.thirdPlace` |
-| Top 4-8 | 500 | `ranking_system.top8` |
-| ≥ 9ème | 0 | hors bucket |
-| **Win en Winner Bracket** (`round > 0`) | **1 000** | `POINTS_WB_WIN` |
-| **Win en Loser Bracket** (`round < 0`, `≠ -100`) | **500** | `POINTS_LB_WIN` |
-| **Win en Pool** (`round === -100`) | **250** | `POINTS_POOL_WIN` |
-| Défaite (peu importe la phase) | 0 | — |
+| Phase / Position                                 |    Points | Source                         |
+| ------------------------------------------------ | --------: | ------------------------------ |
+| **Participation**                                |       500 | `ranking_system.participation` |
+| **1er**                                          |    15 000 | `ranking_system.firstPlace`    |
+| **2ème**                                         |     7 000 | `ranking_system.secondPlace`   |
+| **3ème**                                         |     5 000 | `ranking_system.thirdPlace`    |
+| Top 4-8                                          |       500 | `ranking_system.top8`          |
+| ≥ 9ème                                           |         0 | hors bucket                    |
+| **Win en Winner Bracket** (`round > 0`)          | **1 000** | `POINTS_WB_WIN`                |
+| **Win en Loser Bracket** (`round < 0`, `≠ -100`) |   **500** | `POINTS_LB_WIN`                |
+| **Win en Pool** (`round === -100`)               |   **250** | `POINTS_POOL_WIN`              |
+| Défaite (peu importe la phase)                   |         0 | —                              |
 
 > **Justification du 250 en pool** : la phase de poule sert à qualifier — chaque match y est moins sélectif qu'un match en élimination directe. Un win en pool vaut donc la moitié d'un win en LB (lui-même la moitié d'un win en WB). Hiérarchie cohérente : `WB > LB > Pool`, ratio 4:2:1.
 >
@@ -168,6 +168,7 @@ points = participation        (500, toujours)
 ### Trustworthy gate
 
 Les bonus de placement (rank bucket + `tournamentWins`/`top3`/`top5` counters) ne sont crédités **que si** :
+
 1. `status` DB ∈ {`COMPLETE`, `ARCHIVED`} **OU** `challongeState === 'complete'`
 2. Distribution des `finalPlacement` montre **≥ 2 buckets distincts**
 
@@ -175,22 +176,22 @@ Pour T_SS1 les deux conditions sont remplies (status=COMPLETE, 9 buckets distinc
 
 ### Résultats canon — 35 joueurs (formule WB/LB/Pool)
 
-| # | Joueur | Score | W/L | Décomposition |
-|---:|---|---:|---:|---|
-| 1 | Kaiouss | **21 750** | 11/2 | 500 + 15 000 + 3 WB + 5 LB + 3 pool |
-| 2 | LightYamani | **12 000** | 6/4 | 500 + 7 000 + 4 WB + 0 LB + 2 pool |
-| 3 | BenVinzen | **9 250** | 6/3 | 500 + 5 000 + 3 WB + 1 LB + 3 pool ≈ |
-| 4 | LeKingJoker | **4 500** | 8/3 | 500 + 500 + WB/LB/pool mix |
-| 5 | SkarnGameMaster | **3 750** | 5/4 | top8 (rank 5) |
-| 6 | Masamune_Kadoya | **3 500** | 4/4 | top8 (rank 5) |
-| 7 | SAtR_Younsi | **3 250** | 5/3 | rank 9, hors bucket |
-| 8 | Inhezia | **2 750** | 5/4 | top8 (rank 7) |
-| 9 | Clemmmm | **2 750** | 3/6 | rank 9 |
-| 10 | Tategamii | **2 500** | 6/3 | rank 9, beaucoup de pool wins (pondération 250) |
-| 11-18 | _bracket finalists rank 9-17_ | 1 750–2 500 | variable | |
-| 19-35 | _pool eliminees_ | 500–1 750 | 0-3 wins pool | participation + Σ pool wins × 250 |
+|     # | Joueur                        |       Score |           W/L | Décomposition                                   |
+| ----: | ----------------------------- | ----------: | ------------: | ----------------------------------------------- |
+|     1 | Kaiouss                       |  **21 750** |          11/2 | 500 + 15 000 + 3 WB + 5 LB + 3 pool             |
+|     2 | LightYamani                   |  **12 000** |           6/4 | 500 + 7 000 + 4 WB + 0 LB + 2 pool              |
+|     3 | BenVinzen                     |   **9 250** |           6/3 | 500 + 5 000 + 3 WB + 1 LB + 3 pool ≈            |
+|     4 | LeKingJoker                   |   **4 500** |           8/3 | 500 + 500 + WB/LB/pool mix                      |
+|     5 | SkarnGameMaster               |   **3 750** |           5/4 | top8 (rank 5)                                   |
+|     6 | Masamune_Kadoya               |   **3 500** |           4/4 | top8 (rank 5)                                   |
+|     7 | SAtR_Younsi                   |   **3 250** |           5/3 | rank 9, hors bucket                             |
+|     8 | Inhezia                       |   **2 750** |           5/4 | top8 (rank 7)                                   |
+|     9 | Clemmmm                       |   **2 750** |           3/6 | rank 9                                          |
+|    10 | Tategamii                     |   **2 500** |           6/3 | rank 9, beaucoup de pool wins (pondération 250) |
+| 11-18 | _bracket finalists rank 9-17_ | 1 750–2 500 |      variable |                                                 |
+| 19-35 | _pool eliminees_              |   500–1 750 | 0-3 wins pool | participation + Σ pool wins × 250               |
 
-> **Comparaison avant/après pool weighting** : Tategamii passe de #5 (avec pool full weight) à **#10** (pool ÷4 vs WB) — ses 4 wins en poule ne pèsent plus comme 4 wins de bracket. Yolkster_ (5 pool wins, 0 bracket win) sort du top 10. Top 4 inchangés (champions du bracket).
+> **Comparaison avant/après pool weighting** : Tategamii passe de #5 (avec pool full weight) à **#10** (pool ÷4 vs WB) — ses 4 wins en poule ne pèsent plus comme 4 wins de bracket. Yolkster\_ (5 pool wins, 0 bracket win) sort du top 10. Top 4 inchangés (champions du bracket).
 
 > **Vérification d'intégrité** : 35/35 participants ont un ratio W/L parfaitement cohérent avec leurs matches en DB (audit SQL `tournament_matches` ↔ `tournament_participants`).
 
@@ -199,6 +200,7 @@ Pour T_SS1 les deux conditions sont remplies (status=COMPLETE, 9 buckets distinc
 Script CLI : [`bun scripts/finalize-tournament.ts T_SS1`](../../scripts/finalize-tournament.ts)
 
 Flags :
+
 - `--sync-only` : skip le scraping, recalcule uniquement le ranking depuis la DB.
 - `--keep-name` : ne pas écraser `Tournament.name` avec `metadata.name` Challonge.
 
@@ -219,15 +221,15 @@ Flags :
 
 ## Anomalies & dette technique
 
-| # | Sujet | Détail | Action recommandée |
-|---:|---|---|---|
-| 1 | ~~**Phases de poules**~~ | ~~Challonge n'expose aucun `groupId`.~~ | **Résolu** : `/log` Challonge contient tous les rapports pool — script `scrape-pool-matches.ts` extrait 82 matches et les insère avec `round=-100`. |
-| 2 | ~~**Doublons `standing-XXX`**~~ | ~~18 entrées créées par un précédent scrape supprimées par erreur.~~ | **Résolu** : 17 éliminés en poule restaurés via `restore-pool-eliminated.ts` avec `finalPlacement=19`. |
-| 3 | **Scores set-par-set absents** | 35 / 35 matches ont `score = "0-0"`. | Inviter l'organisateur à reporter les scores détaillés pour les prochains tournois (utile pour stats sets, head-to-head). |
-| 4 | **Nom Challonge** | "Tournoi Importé" sur Challonge. | Renommer côté Challonge en "The Stardust Series #1" pour cohérence avec la DB. |
-| 5 | **Date Challonge `null`** | `started_at` et `completed_at` retournés `null` par le scraper. | À investiguer côté Challonge ou côté scraper — fallback actuel = timestamp d'import. |
-| 6 | **Standings Challonge polluants** | La page `/standings` retourne 53 entrées (multi-rang) — ne contient pas que les 18 du tournoi. | Filtrer côté `ChallongeScraper` pour ne garder que les standings dont le `name` matche un participant du tournoi. |
-| 7 | **Mapping users RPB** | 3 / 18 (17 %) participants matchés à un user RPB. | Améliorer le matching : ajouter `discordTag`, fuzzy match sur `bladerName`, ou demander aux participants de lier leur compte Challonge → RPB via leur profil. |
+|   # | Sujet                             | Détail                                                                                         | Action recommandée                                                                                                                                            |
+| --: | --------------------------------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   1 | ~~**Phases de poules**~~          | ~~Challonge n'expose aucun `groupId`.~~                                                        | **Résolu** : `/log` Challonge contient tous les rapports pool — script `scrape-pool-matches.ts` extrait 82 matches et les insère avec `round=-100`.           |
+|   2 | ~~**Doublons `standing-XXX`**~~   | ~~18 entrées créées par un précédent scrape supprimées par erreur.~~                           | **Résolu** : 17 éliminés en poule restaurés via `restore-pool-eliminated.ts` avec `finalPlacement=19`.                                                        |
+|   3 | **Scores set-par-set absents**    | 35 / 35 matches ont `score = "0-0"`.                                                           | Inviter l'organisateur à reporter les scores détaillés pour les prochains tournois (utile pour stats sets, head-to-head).                                     |
+|   4 | **Nom Challonge**                 | "Tournoi Importé" sur Challonge.                                                               | Renommer côté Challonge en "The Stardust Series #1" pour cohérence avec la DB.                                                                                |
+|   5 | **Date Challonge `null`**         | `started_at` et `completed_at` retournés `null` par le scraper.                                | À investiguer côté Challonge ou côté scraper — fallback actuel = timestamp d'import.                                                                          |
+|   6 | **Standings Challonge polluants** | La page `/standings` retourne 53 entrées (multi-rang) — ne contient pas que les 18 du tournoi. | Filtrer côté `ChallongeScraper` pour ne garder que les standings dont le `name` matche un participant du tournoi.                                             |
+|   7 | **Mapping users RPB**             | 3 / 18 (17 %) participants matchés à un user RPB.                                              | Améliorer le matching : ajouter `discordTag`, fuzzy match sur `bladerName`, ou demander aux participants de lier leur compte Challonge → RPB via leur profil. |
 
 ## Artefacts
 

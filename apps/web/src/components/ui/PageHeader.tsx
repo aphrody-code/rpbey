@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { Add as AddIcon } from '@mui/icons-material';
-import { Box, Button, Stack, Typography } from '@mui/material';
-import type React from 'react';
+import { Add as AddIcon } from "@mui/icons-material";
+import { Box, Button, Stack, Typography } from "@mui/material";
+import type React from "react";
 
 interface PageHeaderProps {
   title: string;
@@ -24,11 +24,11 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
   return (
     <Box sx={{ mb: 4 }}>
       <Stack
-        direction={{ xs: 'column', sm: 'row' }}
+        direction={{ xs: "column", sm: "row" }}
         spacing={2}
         sx={{
-          justifyContent: 'space-between',
-          alignItems: { xs: 'flex-start', sm: 'center' },
+          justifyContent: "space-between",
+          alignItems: { xs: "flex-start", sm: "center" },
         }}
       >
         <Box>
@@ -37,7 +37,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
             component="h1"
             gutterBottom
             sx={{
-              fontWeight: 'bold',
+              fontWeight: "bold",
             }}
           >
             {title}
@@ -46,7 +46,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
             <Typography
               variant="body1"
               sx={{
-                color: 'text.secondary',
+                color: "text.secondary",
               }}
             >
               {description}
@@ -62,7 +62,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
               color="primary"
               startIcon={actionIcon}
               onClick={onAction}
-              sx={{ fontWeight: 'bold' }}
+              sx={{ fontWeight: "bold" }}
             >
               {actionLabel}
             </Button>

@@ -12,11 +12,11 @@ export class APIError extends Error {
     public url: string,
   ) {
     super(`API Error ${status} (${statusText}) at ${url}`);
-    this.name = 'APIError';
+    this.name = "APIError";
   }
 }
 
-export interface StandardAPIOptions extends Omit<RequestInit, 'body'> {
+export interface StandardAPIOptions extends Omit<RequestInit, "body"> {
   body?: unknown;
   baseUrl?: string;
   params?: Record<string, string | number | boolean | undefined | null>;
@@ -31,10 +31,7 @@ export interface StandardAPIOptions extends Omit<RequestInit, 'body'> {
 }
 
 export interface APIInterceptor {
-  onRequest?: (
-    url: string,
-    options: RequestInit,
-  ) => RequestInit | Promise<RequestInit>;
+  onRequest?: (url: string, options: RequestInit) => RequestInit | Promise<RequestInit>;
   onResponse?: (response: Response) => Response | Promise<Response>;
   onError?: (error: APIError) => void | Promise<void>;
 }
@@ -44,9 +41,9 @@ export class StandardAPI {
   private defaultHeaders: HeadersInit;
   private interceptors: APIInterceptor[] = [];
 
-  constructor(baseUrl: string = '', defaultHeaders: HeadersInit = {}) {
+  constructor(baseUrl: string = "", defaultHeaders: HeadersInit = {}) {
     // Remove trailing slash if present
-    this.baseUrl = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
+    this.baseUrl = baseUrl.endsWith("/") ? baseUrl.slice(0, -1) : baseUrl;
     this.defaultHeaders = defaultHeaders;
   }
 
@@ -61,20 +58,15 @@ export class StandardAPI {
   /**
    * Core request method
    */
-  async request<T = unknown>(
-    endpoint: string,
-    options: StandardAPIOptions = {},
-  ): Promise<T> {
-    const { baseUrl, params, validationSchema, revalidate, ...fetchOptions } =
-      options;
+  async request<T = unknown>(endpoint: string, options: StandardAPIOptions = {}): Promise<T> {
+    const { baseUrl, params, validationSchema, revalidate, ...fetchOptions } = options;
 
     // Determine final URL
     const urlBase = baseUrl ?? this.baseUrl;
-    const urlPath = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
+    const urlPath = endpoint.startsWith("/") ? endpoint : `/${endpoint}`;
 
     // Check if we have a valid base URL with protocol
-    const hasProtocol =
-      urlBase.startsWith('http://') || urlBase.startsWith('https://');
+    const hasProtocol = urlBase.startsWith("http://") || urlBase.startsWith("https://");
     const fullUrlString = `${urlBase}${urlPath}`;
 
     let url: URL;
@@ -84,7 +76,7 @@ export class StandardAPI {
     } else {
       // Handle relative URLs (e.g. for internal API calls)
       // We use a dummy base to leverage URLSearchParams, then strip it
-      url = new URL(fullUrlString, 'http://dummy-base.com');
+      url = new URL(fullUrlString, "http://dummy-base.com");
     }
 
     // Append query parameters
@@ -100,7 +92,7 @@ export class StandardAPI {
     let finalUrl = hasProtocol ? url.toString() : url.pathname + url.search;
 
     // If original base was empty but we have a relative path, ensure we don't double slash if not needed
-    if (!hasProtocol && urlBase === '') {
+    if (!hasProtocol && urlBase === "") {
       finalUrl = urlPath + url.search;
     }
 
@@ -122,13 +114,13 @@ export class StandardAPI {
     // Auto-set Content-Type for JSON bodies
     if (
       fetchOptions.body &&
-      typeof fetchOptions.body !== 'string' &&
+      typeof fetchOptions.body !== "string" &&
       !(fetchOptions.body instanceof FormData) &&
       !(fetchOptions.body instanceof Blob) &&
       !(fetchOptions.body instanceof URLSearchParams)
     ) {
-      if (!headers.has('Content-Type')) {
-        headers.set('Content-Type', 'application/json');
+      if (!headers.has("Content-Type")) {
+        headers.set("Content-Type", "application/json");
       }
       fetchOptions.body = JSON.stringify(fetchOptions.body);
     }
@@ -160,12 +152,7 @@ export class StandardAPI {
         } catch {
           errorData = await response.text();
         }
-        throw new APIError(
-          response.status,
-          response.statusText,
-          errorData,
-          finalUrl,
-        );
+        throw new APIError(response.status, response.statusText, errorData, finalUrl);
       }
 
       // Handle empty responses
@@ -178,12 +165,7 @@ export class StandardAPI {
       try {
         data = await response.json();
       } catch {
-        throw new APIError(
-          response.status,
-          'Invalid JSON Response',
-          null,
-          finalUrl,
-        );
+        throw new APIError(response.status, "Invalid JSON Response", null, finalUrl);
       }
 
       // Optional validation
@@ -192,7 +174,7 @@ export class StandardAPI {
           ? validationSchema.safeParse(data)
           : { success: true, data };
         if (!result.success) {
-          console.error('API Validation Error:', result.error);
+          console.error("API Validation Error:", result.error);
           // We still return data but log the error
         }
         return result.data as T;
@@ -212,41 +194,29 @@ export class StandardAPI {
   }
 
   get<T = unknown>(endpoint: string, options?: StandardAPIOptions) {
-    return this.request<T>(endpoint, { ...options, method: 'GET' });
+    return this.request<T>(endpoint, { ...options, method: "GET" });
   }
 
-  post<T = unknown>(
-    endpoint: string,
-    body?: unknown,
-    options?: StandardAPIOptions,
-  ) {
-    return this.request<T>(endpoint, { ...options, method: 'POST', body });
+  post<T = unknown>(endpoint: string, body?: unknown, options?: StandardAPIOptions) {
+    return this.request<T>(endpoint, { ...options, method: "POST", body });
   }
 
-  put<T = unknown>(
-    endpoint: string,
-    body?: unknown,
-    options?: StandardAPIOptions,
-  ) {
-    return this.request<T>(endpoint, { ...options, method: 'PUT', body });
+  put<T = unknown>(endpoint: string, body?: unknown, options?: StandardAPIOptions) {
+    return this.request<T>(endpoint, { ...options, method: "PUT", body });
   }
 
-  patch<T = unknown>(
-    endpoint: string,
-    body?: unknown,
-    options?: StandardAPIOptions,
-  ) {
-    return this.request<T>(endpoint, { ...options, method: 'PATCH', body });
+  patch<T = unknown>(endpoint: string, body?: unknown, options?: StandardAPIOptions) {
+    return this.request<T>(endpoint, { ...options, method: "PATCH", body });
   }
 
   delete<T = unknown>(endpoint: string, options?: StandardAPIOptions) {
-    return this.request<T>(endpoint, { ...options, method: 'DELETE' });
+    return this.request<T>(endpoint, { ...options, method: "DELETE" });
   }
 }
 
 // Singleton instance for internal API calls (relative paths)
-export const api = new StandardAPI('', {
-  'Content-Type': 'application/json',
+export const api = new StandardAPI("", {
+  "Content-Type": "application/json",
 });
 
 // Helper to create instances for external services

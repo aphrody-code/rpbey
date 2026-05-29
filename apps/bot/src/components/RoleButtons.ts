@@ -1,9 +1,9 @@
 import { EmbedBuilder, MessageFlags, type ButtonInteraction } from "discord.js";
-import { ButtonComponent, Discord } from '@rpbey/discordx';
+import { ButtonComponent, Discord } from "@rpbey/discordx";
 
-import { Colors, RPB } from '../lib/constants.js';
-import { logger } from '../lib/logger.js';
-import { ROLE_PANELS, type RoleButtonConfig } from '../lib/role-panels.js';
+import { Colors, RPB } from "../lib/constants.js";
+import { logger } from "../lib/logger.js";
+import { ROLE_PANELS, type RoleButtonConfig } from "../lib/role-panels.js";
 
 const BUTTON_MAP = new Map<string, RoleButtonConfig>();
 for (const panel of ROLE_PANELS) {
@@ -19,7 +19,7 @@ export class RoleButtonHandler {
     const config = BUTTON_MAP.get(interaction.customId);
     if (!config) {
       return interaction.reply({
-        content: '❌ Rôle inconnu.',
+        content: "❌ Rôle inconnu.",
         flags: MessageFlags.Ephemeral,
       });
     }
@@ -28,7 +28,7 @@ export class RoleButtonHandler {
 
     const roleId = RPB.Roles[config.roleKey];
 
-    if (!roleId || roleId.includes('REPLACE')) {
+    if (!roleId || roleId.includes("REPLACE")) {
       return interaction.editReply({
         content: `❌ Le rôle **${config.roleKey}** n'est pas encore configuré (ID manquant). Contactez un administrateur.`,
       });
@@ -44,7 +44,7 @@ export class RoleButtonHandler {
     const member = interaction.guild?.members.cache.get(interaction.user.id);
     if (!member) {
       return interaction.editReply({
-        content: '❌ Impossible de vous trouver sur le serveur.',
+        content: "❌ Impossible de vous trouver sur le serveur.",
       });
     }
 
@@ -57,17 +57,13 @@ export class RoleButtonHandler {
         embed
           .setColor(Colors.Error)
           .setTitle(`🗑️ Rôle retiré : ${role.name}`)
-          .setDescription(
-            'Vous ne recevrez plus de notifications pour ce rôle.',
-          );
+          .setDescription("Vous ne recevrez plus de notifications pour ce rôle.");
       } else {
         await member.roles.add(role);
         embed
           .setColor(Colors.Success)
           .setTitle(`✅ Rôle ajouté : ${role.name}`)
-          .setDescription(
-            config.description || 'Vous avez obtenu le rôle avec succès !',
-          );
+          .setDescription(config.description || "Vous avez obtenu le rôle avec succès !");
       }
 
       return interaction.editReply({ embeds: [embed] });
@@ -78,7 +74,7 @@ export class RoleButtonHandler {
       );
       return interaction.editReply({
         content:
-          '❌ Une erreur est survenue lors de la modification du rôle. Vérifiez que le bot a les permissions nécessaires (il doit être au-dessus du rôle à attribuer).',
+          "❌ Une erreur est survenue lors de la modification du rôle. Vérifiez que le bot a les permissions nécessaires (il doit être au-dessus du rôle à attribuer).",
       });
     }
   }

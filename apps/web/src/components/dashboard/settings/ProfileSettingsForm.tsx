@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import SaveIcon from '@mui/icons-material/Save';
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import SaveIcon from "@mui/icons-material/Save";
 import {
   Alert,
   Avatar,
@@ -12,31 +12,31 @@ import {
   Stack,
   TextField,
   Typography,
-} from '@mui/material';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-import { authClient, useSession } from '@/lib/auth-client';
+} from "@mui/material";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { authClient, useSession } from "@/lib/auth-client";
 
 export function ProfileSettingsForm() {
   const { data: session, isPending } = useSession();
   const [isUploading, setIsUploading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [message, setMessage] = useState<{
-    type: 'success' | 'error';
+    type: "success" | "error";
     text: string;
   } | null>(null);
   const router = useRouter();
 
   // Local state for form fields
-  const [name, setName] = useState(session?.user?.name || '');
-  const [email, setEmail] = useState(session?.user?.email || '');
-  const [imagePreview, setImagePreview] = useState(session?.user?.image || '');
+  const [name, setName] = useState(session?.user?.name || "");
+  const [email, setEmail] = useState(session?.user?.email || "");
+  const [imagePreview, setImagePreview] = useState(session?.user?.image || "");
 
   // Update local state when session loads
-  if (!isPending && session && name === '' && session.user.name) {
+  if (!isPending && session && name === "" && session.user.name) {
     setName(session.user.name);
     setEmail(session.user.email);
-    setImagePreview(session.user.image || '');
+    setImagePreview(session.user.image || "");
   }
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,25 +45,25 @@ export function ProfileSettingsForm() {
 
     setIsUploading(true);
     const formData = new FormData();
-    formData.append('file', file);
+    formData.append("file", file);
 
     try {
-      const res = await fetch('/api/upload/avatar', {
-        method: 'POST',
+      const res = await fetch("/api/upload/avatar", {
+        method: "POST",
         body: formData,
       });
 
-      if (!res.ok) throw new Error('Upload failed');
+      if (!res.ok) throw new Error("Upload failed");
 
       const data = await res.json();
       setImagePreview(data.url);
       setMessage({
-        type: 'success',
-        text: 'Image téléchargée. Cliquez sur Enregistrer pour valider.',
+        type: "success",
+        text: "Image téléchargée. Cliquez sur Enregistrer pour valider.",
       });
     } catch {
       setMessage({
-        type: 'error',
+        type: "error",
         text: "Erreur lors du téléchargement de l'image.",
       });
     } finally {
@@ -89,21 +89,21 @@ export function ProfileSettingsForm() {
           callbackURL: window.location.href, // Redirect back here
         });
         setMessage({
-          type: 'success',
-          text: 'Profil mis à jour. Un email de vérification a été envoyé pour la nouvelle adresse.',
+          type: "success",
+          text: "Profil mis à jour. Un email de vérification a été envoyé pour la nouvelle adresse.",
         });
       } else {
         setMessage({
-          type: 'success',
-          text: 'Profil mis à jour avec succès !',
+          type: "success",
+          text: "Profil mis à jour avec succès !",
         });
       }
 
       router.refresh();
     } catch (error) {
       setMessage({
-        type: 'error',
-        text: 'Erreur lors de la mise à jour du profil.',
+        type: "error",
+        text: "Erreur lors de la mise à jour du profil.",
       });
       console.error(error);
     } finally {
@@ -114,12 +114,12 @@ export function ProfileSettingsForm() {
   if (isPending) return <CircularProgress />;
 
   return (
-    <Paper sx={{ p: 4, maxWidth: 600, mx: 'auto', mt: 4 }}>
+    <Paper sx={{ p: 4, maxWidth: 600, mx: "auto", mt: 4 }}>
       <Typography
         variant="h5"
         gutterBottom
         sx={{
-          fontWeight: 'bold',
+          fontWeight: "bold",
         }}
       >
         Paramètres du Profil
@@ -132,7 +132,7 @@ export function ProfileSettingsForm() {
       <form onSubmit={handleSubmit}>
         <Stack spacing={4}>
           {/* Avatar Section */}
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 3 }}>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 3 }}>
             <Avatar
               src={imagePreview || session?.user?.image || undefined}
               sx={{ width: 100, height: 100 }}
@@ -141,28 +141,17 @@ export function ProfileSettingsForm() {
               <Button
                 component="label"
                 variant="outlined"
-                startIcon={
-                  isUploading ? (
-                    <CircularProgress size={20} />
-                  ) : (
-                    <CloudUploadIcon />
-                  )
-                }
+                startIcon={isUploading ? <CircularProgress size={20} /> : <CloudUploadIcon />}
                 disabled={isUploading}
               >
                 Changer la photo
-                <input
-                  type="file"
-                  hidden
-                  accept="image/*"
-                  onChange={handleImageUpload}
-                />
+                <input type="file" hidden accept="image/*" onChange={handleImageUpload} />
               </Button>
               <Typography
                 variant="caption"
                 sx={{
-                  display: 'block',
-                  color: 'text.secondary',
+                  display: "block",
+                  color: "text.secondary",
                   mt: 1,
                 }}
               >
@@ -194,16 +183,10 @@ export function ProfileSettingsForm() {
             type="submit"
             variant="contained"
             size="large"
-            startIcon={
-              isSaving ? (
-                <CircularProgress size={20} color="inherit" />
-              ) : (
-                <SaveIcon />
-              )
-            }
+            startIcon={isSaving ? <CircularProgress size={20} color="inherit" /> : <SaveIcon />}
             disabled={isSaving || isUploading}
           >
-            {isSaving ? 'Enregistrement...' : 'Enregistrer les modifications'}
+            {isSaving ? "Enregistrement..." : "Enregistrer les modifications"}
           </Button>
         </Stack>
       </form>

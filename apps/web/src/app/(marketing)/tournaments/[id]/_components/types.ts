@@ -23,7 +23,7 @@ export interface Station {
     scores: string;
     state: string;
   } | null;
-  status: 'idle' | 'active' | 'paused';
+  status: "idle" | "active" | "paused";
 }
 
 export interface LogEntry {

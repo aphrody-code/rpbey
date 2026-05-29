@@ -20,14 +20,14 @@ TLS-fingerprinté (curl-impersonate), et navigateur complet via CDP (Lightpanda 
 
 Le profil décide du **transport** utilisé. C'est le seul réglage qui compte.
 
-| Profil | Moteur | JS / DOM | Coût | Pour quoi |
-|---|---|---|---|---|
-| `static` *(défaut)* | `StaticDomTransport` (DOM Rust in-process) | DOM oui, **JS non** | ~85 ms / 38 MB | HTML statique, → Markdown, requêtes CSS. Le plus rapide. |
-| `http` | `curl-impersonate` (FFI, TLS JA3/JA4) | **ni JS ni DOM** | léger | Bypass des WAF qui fingerprintent le **handshake TLS** (ex : Challonge). Pur HTTP. |
-| `fast` | Lightpanda / `bxc-engine` via CDP WebSocket | **JS + DOM complets** | ~80 ms cold | SPA, screenshots, PDF, interception réseau. |
-| `stealth` | idem `fast` + patches stealth CDP | JS + DOM | + | Cibles avec détection d'automation. |
-| `max` | idem, stealth maximal | JS + DOM | ++ | Cibles les plus dures. |
-| `ghost` *(lib only)* | `launchGhostBrowser` : Lightpanda + suite de patches stealth + fingerprint cohérent (UA/locale/timezone/WebGL) | JS + DOM | ~80 ms / 40 MB | Anti-bot « Google-grade ». C'est le mode furtif phare. |
+| Profil               | Moteur                                                                                                         | JS / DOM              | Coût           | Pour quoi                                                                          |
+| -------------------- | -------------------------------------------------------------------------------------------------------------- | --------------------- | -------------- | ---------------------------------------------------------------------------------- |
+| `static` _(défaut)_  | `StaticDomTransport` (DOM Rust in-process)                                                                     | DOM oui, **JS non**   | ~85 ms / 38 MB | HTML statique, → Markdown, requêtes CSS. Le plus rapide.                           |
+| `http`               | `curl-impersonate` (FFI, TLS JA3/JA4)                                                                          | **ni JS ni DOM**      | léger          | Bypass des WAF qui fingerprintent le **handshake TLS** (ex : Challonge). Pur HTTP. |
+| `fast`               | Lightpanda / `bxc-engine` via CDP WebSocket                                                                    | **JS + DOM complets** | ~80 ms cold    | SPA, screenshots, PDF, interception réseau.                                        |
+| `stealth`            | idem `fast` + patches stealth CDP                                                                              | JS + DOM              | +              | Cibles avec détection d'automation.                                                |
+| `max`                | idem, stealth maximal                                                                                          | JS + DOM              | ++             | Cibles les plus dures.                                                             |
+| `ghost` _(lib only)_ | `launchGhostBrowser` : Lightpanda + suite de patches stealth + fingerprint cohérent (UA/locale/timezone/WebGL) | JS + DOM              | ~80 ms / 40 MB | Anti-bot « Google-grade ». C'est le mode furtif phare.                             |
 
 > **Règle** : `static` pour du HTML rendu côté serveur ; `http` quand seul le TLS
 > est filtré ; `fast`/`stealth`/`ghost` dès qu'il faut exécuter du JS (SPA,
@@ -42,21 +42,21 @@ Globales : `--json`, `--insecure`/`-k`, `--proxy <url>`, `--quiet`/`-q`,
 `65` erreur data/runtime · `70` interne · `130` interrompu. Erreurs sur `stderr`
 (`[error] …`), data sur `stdout`.
 
-| Commande | Usage | Notes |
-|---|---|---|
-| `bxc recon <url>` | recon one-shot → Markdown | `--profile static\|fast\|http` (défaut http), `--output <f>`, `--snapshot-dir <d>`, `--screenshot` (force `fast`), `--plain` |
-| `bxc detect <url>` | fingerprint techno / WAF / CMS | `--wapp-only`, `--json` |
-| `bxc scrape <url> <css>` | `textContent` des éléments | `--profile static\|fast\|http`, `--max N` |
-| `bxc scrape <url> --markdown` | page entière → GFM Markdown | idem profils |
-| `bxc search <query…>` | Google Web Search → résultats propres | `--num`, `--page`/`--start`, `--hl`, `--gl`, `--domain`, `--safe`, `--rich`, `--markdown`/`--json`, `--transport auto\|fetch\|ghost\|http`, `--cookies <f>`/`--no-auth` |
-| `bxc serve --cdp-port N` | serveur CDP in-process | `--host`, `--profile`, **`--auto-profile`** (escalade sur 403/Cloudflare), `--proxy`, `--log-level` |
-| `bxc mirror <url> <dir>` | miroir complet (HTML+CSS+JS+assets) | `--profile http\|static\|fast`, `--cookies`, `--concurrency`, `--same-origin-only`, `--max-asset-bytes`, `--user-agent` |
-| `bxc cookies load <jar.json>` | inspecte un cookie jar | formats Playwright/CDP/Netscape/EditThisCookie |
-| `bxc har record\|replay` | enregistre/inspecte un HAR | |
-| `bxc challonge <url>` | snapshot typé d'un tournoi Challonge | `--cookies`, `--summary`, `--pretty` |
-| `bxc api` | expose n'importe quel site en API JSON | `--port` (8787), `--host`, `--auth <token>` |
-| `bxc install` | télécharge Lightpanda (≈124 MB) | **ne télécharge PAS `bxc-engine`** (cf. §4) |
-| `bxc chrome fetch\|launch` | gestion Chromium natif | nécessite `bxc-engine` compilé |
+| Commande                      | Usage                                  | Notes                                                                                                                                                                   |
+| ----------------------------- | -------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `bxc recon <url>`             | recon one-shot → Markdown              | `--profile static\|fast\|http` (défaut http), `--output <f>`, `--snapshot-dir <d>`, `--screenshot` (force `fast`), `--plain`                                            |
+| `bxc detect <url>`            | fingerprint techno / WAF / CMS         | `--wapp-only`, `--json`                                                                                                                                                 |
+| `bxc scrape <url> <css>`      | `textContent` des éléments             | `--profile static\|fast\|http`, `--max N`                                                                                                                               |
+| `bxc scrape <url> --markdown` | page entière → GFM Markdown            | idem profils                                                                                                                                                            |
+| `bxc search <query…>`         | Google Web Search → résultats propres  | `--num`, `--page`/`--start`, `--hl`, `--gl`, `--domain`, `--safe`, `--rich`, `--markdown`/`--json`, `--transport auto\|fetch\|ghost\|http`, `--cookies <f>`/`--no-auth` |
+| `bxc serve --cdp-port N`      | serveur CDP in-process                 | `--host`, `--profile`, **`--auto-profile`** (escalade sur 403/Cloudflare), `--proxy`, `--log-level`                                                                     |
+| `bxc mirror <url> <dir>`      | miroir complet (HTML+CSS+JS+assets)    | `--profile http\|static\|fast`, `--cookies`, `--concurrency`, `--same-origin-only`, `--max-asset-bytes`, `--user-agent`                                                 |
+| `bxc cookies load <jar.json>` | inspecte un cookie jar                 | formats Playwright/CDP/Netscape/EditThisCookie                                                                                                                          |
+| `bxc har record\|replay`      | enregistre/inspecte un HAR             |                                                                                                                                                                         |
+| `bxc challonge <url>`         | snapshot typé d'un tournoi Challonge   | `--cookies`, `--summary`, `--pretty`                                                                                                                                    |
+| `bxc api`                     | expose n'importe quel site en API JSON | `--port` (8787), `--host`, `--auth <token>`                                                                                                                             |
+| `bxc install`                 | télécharge Lightpanda (≈124 MB)        | **ne télécharge PAS `bxc-engine`** (cf. §4)                                                                                                                             |
+| `bxc chrome fetch\|launch`    | gestion Chromium natif                 | nécessite `bxc-engine` compilé                                                                                                                                          |
 
 ### Lancer depuis la source vs binaire
 

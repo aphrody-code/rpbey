@@ -1,23 +1,33 @@
-import { ActionRowBuilder, ApplicationCommandOptionType, ButtonBuilder, ChannelType, EmbedBuilder, MessageFlags, PermissionFlagsBits, type CommandInteraction, type TextChannel } from "discord.js";
-import { Discord, Guard, Slash, SlashOption } from '@rpbey/discordx';
+import {
+  ActionRowBuilder,
+  ApplicationCommandOptionType,
+  ButtonBuilder,
+  ChannelType,
+  EmbedBuilder,
+  MessageFlags,
+  PermissionFlagsBits,
+  type CommandInteraction,
+  type TextChannel,
+} from "discord.js";
+import { Discord, Guard, Slash, SlashOption } from "@rpbey/discordx";
 
-import { OwnerOnly } from '../../guards/OwnerOnly.js';
-import { RPB } from '../../lib/constants.js';
-import { logger } from '../../lib/logger.js';
-import { ROLE_PANELS } from '../../lib/role-panels.js';
+import { OwnerOnly } from "../../guards/OwnerOnly.js";
+import { RPB } from "../../lib/constants.js";
+import { logger } from "../../lib/logger.js";
+import { ROLE_PANELS } from "../../lib/role-panels.js";
 
 @Discord()
 @Guard(OwnerOnly)
 export class RoleReactionCommand {
   @Slash({
-    name: 'config-roles',
-    description: 'Configure les messages de rôles réaction',
+    name: "config-roles",
+    description: "Configure les messages de rôles réaction",
     defaultMemberPermissions: PermissionFlagsBits.Administrator,
   })
   async configRoles(
     @SlashOption({
-      name: 'salon',
-      description: 'Le salon où envoyer les panneaux (défaut: #rôles)',
+      name: "salon",
+      description: "Le salon où envoyer les panneaux (défaut: #rôles)",
       required: false,
       type: ApplicationCommandOptionType.Channel,
       channelTypes: [ChannelType.GuildText],
@@ -69,14 +79,10 @@ export class RoleReactionCommand {
         sentCount++;
       }
 
-      return interaction.editReply(
-        `✅ ${sentCount} panneaux de rôles envoyés dans ${channel} !`,
-      );
+      return interaction.editReply(`✅ ${sentCount} panneaux de rôles envoyés dans ${channel} !`);
     } catch (error) {
-      logger.error('Setup roles error:', error);
-      return interaction.editReply(
-        "❌ Une erreur est survenue lors de l'envoi des panneaux.",
-      );
+      logger.error("Setup roles error:", error);
+      return interaction.editReply("❌ Une erreur est survenue lors de l'envoi des panneaux.");
     }
   }
 }

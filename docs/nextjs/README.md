@@ -11,12 +11,13 @@ Doc complète Next.js récupérée le **2026-05-27** depuis `nextjs.org/docs/llm
 - React stable = `19.2.6` (catalog `^19.2.5` y flotte). Runtime Bun (`bun --bun`), pas Node.
 
 ## Fichiers
+
 - `llms-full.txt` — doc complète (3,4 Mo / 88 661 lignes). **Ne pas lire en entier** : `grep -n`/`sed -n`.
 - `llms-index.txt` — index officiel (liens `nextjs.org/docs/*`).
 
 ## Pièges build rpbey (découverts au cutover, 2026-05-27)
 
-1. **Fuite server→client postgres.js** : un `import { schema } from "@/lib/db"` *runtime* dans
+1. **Fuite server→client postgres.js** : un `import { schema } from "@/lib/db"` _runtime_ dans
    `apps/web/src/lib/types.ts` tirait `postgres.js` (`fs/net/tls/perf_hooks`) dans le bundle navigateur
    dès qu'un client component importait un type. Fix : dériver les types via `type Schema = typeof import("@rpbey/db").schema` (type-only, effacé à la compilation → aucune arête runtime).
 2. **`@vidstack/react` ship du JSX non-transpilé** dans ses chunks `.js` → panic Turbopack

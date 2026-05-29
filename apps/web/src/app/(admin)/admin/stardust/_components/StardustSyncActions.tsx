@@ -1,17 +1,11 @@
-'use client';
+"use client";
 
-import CloudSyncIcon from '@mui/icons-material/CloudSync';
-import LinkIcon from '@mui/icons-material/Link';
-import {
-  Box,
-  Button,
-  CircularProgress,
-  Stack,
-  Typography,
-} from '@mui/material';
-import { useState } from 'react';
-import { toast } from 'sonner';
-import { linkStardustBladers, syncStardustRanking } from '@/server/actions/stardust';
+import CloudSyncIcon from "@mui/icons-material/CloudSync";
+import LinkIcon from "@mui/icons-material/Link";
+import { Box, Button, CircularProgress, Stack, Typography } from "@mui/material";
+import { useState } from "react";
+import { toast } from "sonner";
+import { linkStardustBladers, syncStardustRanking } from "@/server/actions/stardust";
 
 export default function StardustSyncActions() {
   const [loadingRanking, setLoadingRanking] = useState(false);
@@ -29,7 +23,7 @@ export default function StardustSyncActions() {
         toast.error(`Erreur: ${result.error}`);
       }
     } catch {
-      toast.error('Erreur réseau');
+      toast.error("Erreur réseau");
     } finally {
       setLoadingRanking(false);
     }
@@ -45,7 +39,7 @@ export default function StardustSyncActions() {
         toast.error(`Erreur: ${result.error}`);
       }
     } catch {
-      toast.error('Erreur réseau');
+      toast.error("Erreur réseau");
     } finally {
       setLoadingLinking(false);
     }
@@ -56,15 +50,15 @@ export default function StardustSyncActions() {
       <Box
         sx={{
           p: 2,
-          border: '1px solid',
-          borderColor: 'divider',
+          border: "1px solid",
+          borderColor: "divider",
           borderRadius: 2,
         }}
       >
-        <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
+        <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
           Classement Stardust
         </Typography>
-        <Typography variant="body2" sx={{ color: 'text.secondary', mb: 2 }}>
+        <Typography variant="body2" sx={{ color: "text.secondary", mb: 2 }}>
           Recalcule le classement à partir des tournois marqués catégorie
           &laquo;&nbsp;STARDUST&nbsp;&raquo; en base.
         </Typography>
@@ -72,46 +66,36 @@ export default function StardustSyncActions() {
           variant="contained"
           color="primary"
           startIcon={
-            loadingRanking ? (
-              <CircularProgress size={20} color="inherit" />
-            ) : (
-              <CloudSyncIcon />
-            )
+            loadingRanking ? <CircularProgress size={20} color="inherit" /> : <CloudSyncIcon />
           }
           onClick={handleSync}
           disabled={loadingRanking}
         >
-          {loadingRanking ? 'Synchronisation...' : 'Synchroniser maintenant'}
+          {loadingRanking ? "Synchronisation..." : "Synchroniser maintenant"}
         </Button>
       </Box>
       <Box
         sx={{
           p: 2,
-          border: '1px solid',
-          borderColor: 'divider',
+          border: "1px solid",
+          borderColor: "divider",
           borderRadius: 2,
         }}
       >
-        <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
+        <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
           Liaison des comptes
         </Typography>
-        <Typography variant="body2" sx={{ color: 'text.secondary', mb: 2 }}>
-          Lie automatiquement les bladers Stardust aux comptes utilisateurs RPB
-          via nom / tag Discord.
+        <Typography variant="body2" sx={{ color: "text.secondary", mb: 2 }}>
+          Lie automatiquement les bladers Stardust aux comptes utilisateurs RPB via nom / tag
+          Discord.
         </Typography>
         <Button
           variant="outlined"
-          startIcon={
-            loadingLinking ? (
-              <CircularProgress size={20} color="inherit" />
-            ) : (
-              <LinkIcon />
-            )
-          }
+          startIcon={loadingLinking ? <CircularProgress size={20} color="inherit" /> : <LinkIcon />}
           onClick={handleLink}
           disabled={loadingLinking}
         >
-          {loadingLinking ? 'Liaison...' : 'Lancer la liaison automatique'}
+          {loadingLinking ? "Liaison..." : "Lancer la liaison automatique"}
         </Button>
       </Box>
     </Stack>

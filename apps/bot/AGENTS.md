@@ -17,6 +17,7 @@ seuils de rôles).
 ## 2. Démarrage (`src/index.ts`)
 
 Ordre **non négociable** :
+
 1. `import "reflect-metadata"` en TOUTE PREMIÈRE ligne (sinon la DI tsyringe casse).
 2. `DIService.engine = tsyringeDependencyRegistryEngine.setInjector(container)`.
 3. `import "./_entry-imports.generated.ts"` — side-effect import de TOUS les
@@ -27,16 +28,16 @@ Ordre **non négociable** :
 
 ## 3. Carte des dossiers (`src/`)
 
-| Dossier | Rôle |
-|---|---|
-| `commands/{Admin,Beyblade,General}` | 23 commandes slash (`@Discord`/`@Slash`/`@SlashGroup`). |
-| `components/` | Handlers de boutons/selects/modals (`@ButtonComponent`, etc.). |
-| `events/`, `events/guild/` | 9 listeners (`@On`/`@Once`). |
-| `cron/tasks/` + `cron/index.ts` | 12 tâches planifiées (`Bun.cron`). |
-| `guards/` | Guards discordx (`@Guard`). |
-| `services/` | Services injectables (DI singletons). |
-| `lib/` | Cœur non-Discord : DB, cache, UI, moteurs, canvas, API, scrapers. |
-| `lib/canvas/`, `lib/scrapers/` | Primitives image / scrapers Challonge & co. |
+| Dossier                             | Rôle                                                              |
+| ----------------------------------- | ----------------------------------------------------------------- |
+| `commands/{Admin,Beyblade,General}` | 23 commandes slash (`@Discord`/`@Slash`/`@SlashGroup`).           |
+| `components/`                       | Handlers de boutons/selects/modals (`@ButtonComponent`, etc.).    |
+| `events/`, `events/guild/`          | 9 listeners (`@On`/`@Once`).                                      |
+| `cron/tasks/` + `cron/index.ts`     | 12 tâches planifiées (`Bun.cron`).                                |
+| `guards/`                           | Guards discordx (`@Guard`).                                       |
+| `services/`                         | Services injectables (DI singletons).                             |
+| `lib/`                              | Cœur non-Discord : DB, cache, UI, moteurs, canvas, API, scrapers. |
+| `lib/canvas/`, `lib/scrapers/`      | Primitives image / scrapers Challonge & co.                       |
 
 ## 4. Couche données — façade `lib/prisma.ts`
 
@@ -55,6 +56,7 @@ Ce que la façade supporte (vérifié) : `findFirst/findMany/findUnique`, `creat
 parallélise au lieu de sérialiser).
 
 **Pièges data :**
+
 - **Relations re-aliasées** : Drizzle nomme les relations différemment de Prisma.
   La façade ré-aliase (`deck.items`, `user.profile`, `part_bladeId → blade`, …).
   Reste dans le vocabulaire Prisma côté commandes.
@@ -69,14 +71,14 @@ parallélise au lieu de sérialiser).
 
 ## 5. Sous-systèmes consolidés (single source of truth)
 
-| Module | Rôle | Ne PAS recréer ailleurs |
-|---|---|---|
-| `lib/battle-engine.ts` | **3 variantes** de combat unifiées : `beyblade-x` (GameGroup), `tcg-duel` (DuelCommand, ELO K=32), `quick-battle` (battle-utils). Constantes par variante figées — **ne re-équilibre rien** sans intention explicite. | Pas de 4ᵉ moteur inline. |
-| `lib/ranking-provider.ts` | Calcul de points/agrégation partagé (BTS + Stardust). `loadPointsConfig`, `compareRankEntries`, `FINISH_BUCKET_MAP`. | Pas de `POINTS_BY_FINISH` dupliqué. |
-| `lib/role-sync.ts` | `syncRolesByThreshold()` générique : **un seul** `guild.members.fetch()`, add/remove batchés par 25. | Les crons SyncRankingRoles/SyncSatrRoles délèguent ici. |
-| `lib/ranking-panel.ts` | `renderRankingPanel()` (embed + canvas + composants) ; `listSeasons` caché (Redis 24h), `invalidateSeasonsCache()`. | — |
-| `lib/ui.ts` | Factory UI (voir §6). | Pas de `new EmbedBuilder` inline pour erreur/succès/info. |
-| `lib/cache.ts` | Cache Redis générique (voir §7). | Pas de `Map` cache mémoire pour des données chaudes. |
+| Module                    | Rôle                                                                                                                                                                                                                  | Ne PAS recréer ailleurs                                   |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
+| `lib/battle-engine.ts`    | **3 variantes** de combat unifiées : `beyblade-x` (GameGroup), `tcg-duel` (DuelCommand, ELO K=32), `quick-battle` (battle-utils). Constantes par variante figées — **ne re-équilibre rien** sans intention explicite. | Pas de 4ᵉ moteur inline.                                  |
+| `lib/ranking-provider.ts` | Calcul de points/agrégation partagé (BTS + Stardust). `loadPointsConfig`, `compareRankEntries`, `FINISH_BUCKET_MAP`.                                                                                                  | Pas de `POINTS_BY_FINISH` dupliqué.                       |
+| `lib/role-sync.ts`        | `syncRolesByThreshold()` générique : **un seul** `guild.members.fetch()`, add/remove batchés par 25.                                                                                                                  | Les crons SyncRankingRoles/SyncSatrRoles délèguent ici.   |
+| `lib/ranking-panel.ts`    | `renderRankingPanel()` (embed + canvas + composants) ; `listSeasons` caché (Redis 24h), `invalidateSeasonsCache()`.                                                                                                   | —                                                         |
+| `lib/ui.ts`               | Factory UI (voir §6).                                                                                                                                                                                                 | Pas de `new EmbedBuilder` inline pour erreur/succès/info. |
+| `lib/cache.ts`            | Cache Redis générique (voir §7).                                                                                                                                                                                      | Pas de `Map` cache mémoire pour des données chaudes.      |
 
 ## 6. UI — `lib/ui.ts`
 

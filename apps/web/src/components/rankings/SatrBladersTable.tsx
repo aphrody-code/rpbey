@@ -1,22 +1,22 @@
-'use client';
+"use client";
 
-import Box from '@mui/material/Box';
-import Pagination from '@mui/material/Pagination';
-import Paper from '@mui/material/Paper';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Tooltip from '@mui/material/Tooltip';
-import Typography from '@mui/material/Typography';
-import { motion } from 'framer-motion';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { useState } from 'react';
-import { TrophyIcon } from '@/components/ui/Icons';
-import { type SatrBlader } from '@/lib/types';
-import { SatrBladerDialog } from './SatrBladerDialog';
+import Box from "@mui/material/Box";
+import Pagination from "@mui/material/Pagination";
+import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Tooltip from "@mui/material/Tooltip";
+import Typography from "@mui/material/Typography";
+import { motion } from "framer-motion";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useState } from "react";
+import { TrophyIcon } from "@/components/ui/Icons";
+import { type SatrBlader } from "@/lib/types";
+import { SatrBladerDialog } from "./SatrBladerDialog";
 
 interface SatrBladersTableProps {
   bladers: SatrBlader[];
@@ -25,21 +25,14 @@ interface SatrBladersTableProps {
   totalCount: number;
 }
 
-export function SatrBladersTable({
-  bladers,
-  totalPages,
-  currentPage,
-}: SatrBladersTableProps) {
+export function SatrBladersTable({ bladers, totalPages, currentPage }: SatrBladersTableProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [selectedBlader, setSelectedBlader] = useState<SatrBlader | null>(null);
 
-  const handlePageChange = (
-    _event: React.ChangeEvent<unknown>,
-    value: number,
-  ) => {
+  const handlePageChange = (_event: React.ChangeEvent<unknown>, value: number) => {
     const params = new URLSearchParams(searchParams.toString());
-    params.set('page', value.toString());
+    params.set("page", value.toString());
     router.push(`/tournaments/satr?${params.toString()}`);
   };
 
@@ -49,25 +42,25 @@ export function SatrBladersTable({
         component={Paper}
         elevation={0}
         sx={{
-          background: 'rgba(255,255,255,0.02)',
-          backdropFilter: 'blur(10px)',
-          border: '1px solid rgba(255,255,255,0.05)',
+          background: "rgba(255,255,255,0.02)",
+          backdropFilter: "blur(10px)",
+          border: "1px solid rgba(255,255,255,0.05)",
           borderRadius: 4,
-          overflowX: 'auto',
+          overflowX: "auto",
           mb: 3,
         }}
       >
         <Table size="small">
           <TableHead>
-            <TableRow sx={{ bgcolor: 'rgba(255,255,255,0.03)' }}>
+            <TableRow sx={{ bgcolor: "rgba(255,255,255,0.03)" }}>
               <TableCell
                 width={60}
                 align="center"
                 sx={{
                   py: 2,
                   fontWeight: 900,
-                  textTransform: 'uppercase',
-                  fontSize: '0.7rem',
+                  textTransform: "uppercase",
+                  fontSize: "0.7rem",
                 }}
               >
                 #
@@ -76,8 +69,8 @@ export function SatrBladersTable({
                 sx={{
                   py: 2,
                   fontWeight: 900,
-                  textTransform: 'uppercase',
-                  fontSize: '0.7rem',
+                  textTransform: "uppercase",
+                  fontSize: "0.7rem",
                 }}
               >
                 Blader
@@ -87,8 +80,8 @@ export function SatrBladersTable({
                 sx={{
                   py: 2,
                   fontWeight: 900,
-                  textTransform: 'uppercase',
-                  fontSize: '0.7rem',
+                  textTransform: "uppercase",
+                  fontSize: "0.7rem",
                 }}
               >
                 Titres
@@ -98,8 +91,8 @@ export function SatrBladersTable({
                 sx={{
                   py: 2,
                   fontWeight: 900,
-                  textTransform: 'uppercase',
-                  fontSize: '0.7rem',
+                  textTransform: "uppercase",
+                  fontSize: "0.7rem",
                 }}
               >
                 Wins
@@ -109,8 +102,8 @@ export function SatrBladersTable({
                 sx={{
                   py: 2,
                   fontWeight: 900,
-                  textTransform: 'uppercase',
-                  fontSize: '0.7rem',
+                  textTransform: "uppercase",
+                  fontSize: "0.7rem",
                 }}
               >
                 Losses
@@ -120,8 +113,8 @@ export function SatrBladersTable({
                 sx={{
                   py: 2,
                   fontWeight: 900,
-                  textTransform: 'uppercase',
-                  fontSize: '0.7rem',
+                  textTransform: "uppercase",
+                  fontSize: "0.7rem",
                 }}
               >
                 Winrate
@@ -131,8 +124,8 @@ export function SatrBladersTable({
                 sx={{
                   py: 2,
                   fontWeight: 900,
-                  textTransform: 'uppercase',
-                  fontSize: '0.7rem',
+                  textTransform: "uppercase",
+                  fontSize: "0.7rem",
                 }}
               >
                 Tournois
@@ -141,10 +134,10 @@ export function SatrBladersTable({
                 align="center"
                 sx={{
                   py: 2,
-                  display: { xs: 'none', md: 'table-cell' },
+                  display: { xs: "none", md: "table-cell" },
                   fontWeight: 900,
-                  textTransform: 'uppercase',
-                  fontSize: '0.7rem',
+                  textTransform: "uppercase",
+                  fontSize: "0.7rem",
                 }}
               >
                 Forme
@@ -156,9 +149,7 @@ export function SatrBladersTable({
               bladers.map((row, index) => {
                 const totalMatches = row.totalWins + row.totalLosses;
                 const winRate =
-                  totalMatches > 0
-                    ? ((row.totalWins / totalMatches) * 100).toFixed(1)
-                    : '0';
+                  totalMatches > 0 ? ((row.totalWins / totalMatches) * 100).toFixed(1) : "0";
                 const history = row.history as Array<{
                   tournament: string;
                   wins: number;
@@ -179,33 +170,28 @@ export function SatrBladersTable({
                     hover
                     onClick={() => setSelectedBlader(row)}
                     sx={{
-                      '& td': {
+                      "& td": {
                         py: 1,
-                        borderBottom: '1px solid rgba(255,255,255,0.02)',
+                        borderBottom: "1px solid rgba(255,255,255,0.02)",
                       },
-                      cursor: 'pointer',
-                      '&:hover': {
-                        bgcolor: 'rgba(255,255,255,0.03) !important',
+                      cursor: "pointer",
+                      "&:hover": {
+                        bgcolor: "rgba(255,255,255,0.03) !important",
                       },
                     }}
                   >
                     <TableCell align="center">
-                      <Typography
-                        variant="caption"
-                        sx={{ fontWeight: 900, opacity: 0.5 }}
-                      >
+                      <Typography variant="caption" sx={{ fontWeight: 900, opacity: 0.5 }}>
                         #{absoluteIndex}
                       </Typography>
                     </TableCell>
                     <TableCell>
-                      <Box
-                        sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}
-                      >
+                      <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
                         <Typography
                           sx={{
-                            fontWeight: '800',
-                            fontSize: '0.9rem',
-                            color: '#fff',
+                            fontWeight: "800",
+                            fontSize: "0.9rem",
+                            color: "#fff",
                           }}
                         >
                           {row.name}
@@ -214,8 +200,8 @@ export function SatrBladersTable({
                           <Tooltip title="Podium SATR">
                             <Box
                               sx={{
-                                display: 'flex',
-                                color: '#C0C0C0',
+                                display: "flex",
+                                color: "#C0C0C0",
                                 opacity: 0.8,
                               }}
                             >
@@ -229,19 +215,19 @@ export function SatrBladersTable({
                       {tournamentWins > 0 && (
                         <Box
                           sx={{
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
                             gap: 0.5,
-                            color: '#FFD700',
-                            filter: 'drop-shadow(0 0 5px rgba(255,215,0,0.5))',
+                            color: "#FFD700",
+                            filter: "drop-shadow(0 0 5px rgba(255,215,0,0.5))",
                           }}
                         >
                           <TrophyIcon size={16} />
                           {tournamentWins > 1 && (
                             <Typography
                               variant="caption"
-                              sx={{ fontWeight: 900, color: '#FFD700' }}
+                              sx={{ fontWeight: 900, color: "#FFD700" }}
                             >
                               x{tournamentWins}
                             </Typography>
@@ -252,9 +238,9 @@ export function SatrBladersTable({
                     <TableCell align="center">
                       <Typography
                         sx={{
-                          color: 'success.main',
-                          fontWeight: 'bold',
-                          fontSize: '0.9rem',
+                          color: "success.main",
+                          fontWeight: "bold",
+                          fontSize: "0.9rem",
                         }}
                       >
                         {row.totalWins}
@@ -263,8 +249,8 @@ export function SatrBladersTable({
                     <TableCell align="center">
                       <Typography
                         sx={{
-                          color: 'error.main',
-                          fontSize: '0.9rem',
+                          color: "error.main",
+                          fontSize: "0.9rem",
                           opacity: 0.8,
                         }}
                       >
@@ -274,8 +260,8 @@ export function SatrBladersTable({
                     <TableCell align="center">
                       <Typography
                         sx={{
-                          fontWeight: '900',
-                          fontSize: '0.9rem',
+                          fontWeight: "900",
+                          fontSize: "0.9rem",
                         }}
                       >
                         {winRate}%
@@ -284,44 +270,41 @@ export function SatrBladersTable({
                     <TableCell align="center">
                       <Typography
                         sx={{
-                          fontWeight: '700',
-                          fontSize: '0.9rem',
+                          fontWeight: "700",
+                          fontSize: "0.9rem",
                           opacity: 0.9,
                         }}
                       >
                         {row.tournamentsCount}
                       </Typography>
                     </TableCell>
-                    <TableCell
-                      align="center"
-                      sx={{ display: { xs: 'none', md: 'table-cell' } }}
-                    >
+                    <TableCell align="center" sx={{ display: { xs: "none", md: "table-cell" } }}>
                       <Box
                         sx={{
-                          display: 'flex',
+                          display: "flex",
                           gap: 0.75,
-                          justifyContent: 'center',
+                          justifyContent: "center",
                         }}
                       >
                         {history.slice(-5).map((h, i) => (
                           <Tooltip
                             key={i}
-                            title={`${h.tournament.toUpperCase()}: Rang ${h.rank || '?'}`}
+                            title={`${h.tournament.toUpperCase()}: Rang ${h.rank || "?"}`}
                           >
                             <Box
                               sx={{
                                 width: 10,
                                 height: 10,
                                 borderRadius: 0,
-                                rotate: '45deg',
+                                rotate: "45deg",
                                 bgcolor:
                                   h.wins > h.losses
-                                    ? 'success.main'
+                                    ? "success.main"
                                     : h.wins < h.losses
-                                      ? 'error.main'
-                                      : 'warning.main',
+                                      ? "error.main"
+                                      : "warning.main",
                                 opacity: 0.7,
-                                border: '1px solid rgba(255,255,255,0.1)',
+                                border: "1px solid rgba(255,255,255,0.1)",
                               }}
                             />
                           </Tooltip>
@@ -336,7 +319,7 @@ export function SatrBladersTable({
                 <TableCell colSpan={8} align="center" sx={{ py: 10 }}>
                   <Typography
                     sx={{
-                      color: 'text.secondary',
+                      color: "text.secondary",
                     }}
                   >
                     Aucun blader trouvé
@@ -348,7 +331,7 @@ export function SatrBladersTable({
         </Table>
       </TableContainer>
       {totalPages > 1 && (
-        <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4, mb: 4 }}>
+        <Box sx={{ display: "flex", justifyContent: "center", mt: 4, mb: 4 }}>
           <Pagination
             count={totalPages}
             page={currentPage}
@@ -358,14 +341,14 @@ export function SatrBladersTable({
             showFirstButton
             showLastButton
             sx={{
-              '& .MuiPaginationItem-root': {
+              "& .MuiPaginationItem-root": {
                 fontWeight: 900,
                 borderRadius: 2,
-                border: '1px solid rgba(255,255,255,0.1)',
-                '&.Mui-selected': {
-                  bgcolor: 'secondary.main',
-                  color: '#000',
-                  '&:hover': { bgcolor: 'secondary.dark' },
+                border: "1px solid rgba(255,255,255,0.1)",
+                "&.Mui-selected": {
+                  bgcolor: "secondary.main",
+                  color: "#000",
+                  "&:hover": { bgcolor: "secondary.dark" },
                 },
               },
             }}

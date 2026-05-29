@@ -41,6 +41,7 @@ const matchRowCount = [...html.matchAll(/<tr[^>]*class="match-row/g)].length;
 ### 3. `scraped.stations` retourne `[]`
 
 Le `/stations` endpoint n'est pas encore porté. Si tu en as besoin, soit :
+
 - Continuer à appeler le legacy (rollback temporaire — pas recommandé)
 - Implémenter `getStations(slug)` au-dessus de `BxcTransport` (~100 LOC)
 - Désactiver `withStations: false` dans tes appels `scrape()` pour éviter le warn log
@@ -112,6 +113,7 @@ RPB_CHALLONGE_OBSERVE=1 bun run scripts/finalize-tournament.ts B_TS5
 ```
 
 Events à monitorer en prod :
+
 - `transport.fetch` — toute requête HTTP, contient `url`, `status`, `durationMs`, `ok`
 - `transport.cache.hit/miss` — efficacité du cache LRU
 - `cookie.expired` — alerte rotation cookie nécessaire (cf_clearance)
@@ -121,12 +123,12 @@ Compatible `vector` / `Loki` / `Datadog Agent` — un JSON par ligne sur stderr.
 
 ## Performance baseline
 
-| Metric | Puppeteer (v2) | Bxc (v3) |
-|---|---|---|
-| Cold start `scraper.scrape(B_TS5)` | ~3-5s | ~150ms |
-| RAM peak per scrape | 250-400 MB | 50-100 MB |
-| Latency `/log` page 1 | ~5-8s | ~1-2s |
-| Concurrent scrapes safe | 1-2 (Chromium hog) | 5-10 (FFI shared lib) |
+| Metric                             | Puppeteer (v2)     | Bxc (v3)              |
+| ---------------------------------- | ------------------ | --------------------- |
+| Cold start `scraper.scrape(B_TS5)` | ~3-5s              | ~150ms                |
+| RAM peak per scrape                | 250-400 MB         | 50-100 MB             |
+| Latency `/log` page 1              | ~5-8s              | ~1-2s                 |
+| Concurrent scrapes safe            | 1-2 (Chromium hog) | 5-10 (FFI shared lib) |
 
 Mesures estimatives, à confirmer avec benchmark prod réel.
 

@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardActionArea from '@mui/material/CardActionArea';
-import { alpha } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
-import Link from 'next/link';
-import { type ElementType } from 'react';
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import CardActionArea from "@mui/material/CardActionArea";
+import { alpha } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
+import Link from "next/link";
+import { type ElementType } from "react";
 
 interface FeatureCardProps {
   icon: ElementType;
@@ -32,30 +32,30 @@ export function FeatureCard({
     <Card
       elevation={0}
       sx={{
-        height: '100%',
-        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-        '&:hover': {
+        height: "100%",
+        transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+        "&:hover": {
           bgcolor: alpha(color, 0.08),
-          transform: 'scale(1.02)',
+          transform: "scale(1.02)",
           boxShadow: `0 12px 24px ${alpha(color, 0.15)}`,
           borderColor: alpha(color, 0.3),
         },
       }}
     >
       <CardActionArea
-        component={external ? 'a' : Link}
+        component={external ? "a" : Link}
         href={href}
-        target={external ? '_blank' : undefined}
-        sx={{ height: '100%', p: 3 }}
+        target={external ? "_blank" : undefined}
+        sx={{ height: "100%", p: 3 }}
       >
         <Box
           sx={{
             width: 56,
             height: 56,
             borderRadius: 3,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
             bgcolor: alpha(color, 0.1),
             color: color,
             mb: 2,
@@ -67,7 +67,7 @@ export function FeatureCard({
           variant="h6"
           gutterBottom
           sx={{
-            fontWeight: 'bold',
+            fontWeight: "bold",
           }}
         >
           {title}
@@ -75,7 +75,7 @@ export function FeatureCard({
         <Typography
           variant="body2"
           sx={{
-            color: 'text.secondary',
+            color: "text.secondary",
           }}
         >
           {description}

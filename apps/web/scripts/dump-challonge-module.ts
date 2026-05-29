@@ -11,50 +11,46 @@ import path from "node:path";
 import { ChallongeScraper } from "@rose-griffon/challonge";
 
 async function main() {
-	const slug = process.argv[2];
-	if (!slug) {
-		console.error("Usage: bun scripts/dump-challonge-module.ts <slug>");
-		process.exit(1);
-	}
+  const slug = process.argv[2];
+  if (!slug) {
+    console.error("Usage: bun scripts/dump-challonge-module.ts <slug>");
+    process.exit(1);
+  }
 
-	const scraper = new ChallongeScraper({
-		log: (m) => console.log(`   ${m}`),
-	});
-	const sc = scraper as unknown as {
-		init: () => Promise<void>;
-		openPage: (
-			url: string,
-			signal?: AbortSignal,
-		) => Promise<import("puppeteer").Page>;
-	};
-	await sc.init();
+  const scraper = new ChallongeScraper({
+    log: (m) => console.log(`   ${m}`),
+  });
+  const sc = scraper as unknown as {
+    init: () => Promise<void>;
+    openPage: (url: string, signal?: AbortSignal) => Promise<import("puppeteer").Page>;
+  };
+  await sc.init();
 
-	const url = `https://challonge.com/${slug}/module`;
-	console.log(`🔍 GET ${url}`);
-	const page = await sc.openPage(url);
+  const url = `https://challonge.com/${slug}/module`;
+  console.log(`🔍 GET ${url}`);
+  const page = await sc.openPage(url);
 
-	try {
-		// Wait for the SPA to hydrate
-		await page
-			.waitForSelector(
-				"[class*=bracket], [class*=group-stage], [class*=GroupStage], canvas, svg",
-				{ timeout: 15_000 },
-			)
-			.catch(() => console.log("   (no bracket selector resolved within 15s)"));
+  try {
+    // Wait for the SPA to hydrate
+    await page
+      .waitForSelector("[class*=bracket], [class*=group-stage], [class*=GroupStage], canvas, svg", {
+        timeout: 15_000,
+      })
+      .catch(() => console.log("   (no bracket selector resolved within 15s)"));
 
-		// Extra wait pour le rendu complet
-		await new Promise((r) => setTimeout(r, 4_000));
+    // Extra wait pour le rendu complet
+    await new Promise((r) => setTimeout(r, 4_000));
 
-		const html = await page.content();
-		const dumpDir = path.join(process.cwd(), "data/scrapes");
-		await mkdir(dumpDir, { recursive: true });
-		const stamp = new Date().toISOString().replace(/[:.]/g, "-");
-		const htmlPath = path.join(dumpDir, `${slug}_module_${stamp}.html`);
-		await writeFile(htmlPath, html, "utf-8");
-		console.log(`💾 HTML brut → ${htmlPath} (${html.length} chars)`);
+    const html = await page.content();
+    const dumpDir = path.join(process.cwd(), "data/scrapes");
+    await mkdir(dumpDir, { recursive: true });
+    const stamp = new Date().toISOString().replace(/[:.]/g, "-");
+    const htmlPath = path.join(dumpDir, `${slug}_module_${stamp}.html`);
+    await writeFile(htmlPath, html, "utf-8");
+    console.log(`💾 HTML brut → ${htmlPath} (${html.length} chars)`);
 
-		// Inventaire des classes/data-attrs intéressants
-		const inventory = (await page.evaluate(`
+    // Inventaire des classes/data-attrs intéressants
+    const inventory = (await page.evaluate(`
 			(function() {
 				const allClasses = new Set();
 				const dataAttrs = new Set();
@@ -74,26 +70,23 @@ async function main() {
 				};
 			})()
 		`)) as {
-			reactComponents: string[];
-			classGroupBracket: string[];
-			classMatch: string[];
-			dataAttrs: string[];
-		};
+      reactComponents: string[];
+      classGroupBracket: string[];
+      classMatch: string[];
+      dataAttrs: string[];
+    };
 
-		console.log(`\n🎭 React components: ${inventory.reactComponents.length}`);
-		for (const c of inventory.reactComponents) console.log(`   - ${c}`);
+    console.log(`\n🎭 React components: ${inventory.reactComponents.length}`);
+    for (const c of inventory.reactComponents) console.log(`   - ${c}`);
 
-		console.log(
-			`\n🏗  Classes group/bracket/round/match (${inventory.classGroupBracket.length}):`,
-		);
-		for (const c of inventory.classGroupBracket.slice(0, 50))
-			console.log(`   - ${c}`);
+    console.log(`\n🏗  Classes group/bracket/round/match (${inventory.classGroupBracket.length}):`);
+    for (const c of inventory.classGroupBracket.slice(0, 50)) console.log(`   - ${c}`);
 
-		console.log(`\n📎 data-attrs (${inventory.dataAttrs.length}):`);
-		for (const a of inventory.dataAttrs.slice(0, 30)) console.log(`   - ${a}`);
+    console.log(`\n📎 data-attrs (${inventory.dataAttrs.length}):`);
+    for (const a of inventory.dataAttrs.slice(0, 30)) console.log(`   - ${a}`);
 
-		// Extraire le contenu textuel des sections principales
-		const sections = (await page.evaluate(`
+    // Extraire le contenu textuel des sections principales
+    const sections = (await page.evaluate(`
 			(function() {
 				const out = {};
 				const findSection = (label, selector) => {
@@ -113,22 +106,22 @@ async function main() {
 				return out;
 			})()
 		`)) as Record<
-			string,
-			{
-				selector: string;
-				count: number;
-				firstHtml: string | null;
-				allText: string[];
-			}
-		>;
+      string,
+      {
+        selector: string;
+        count: number;
+        firstHtml: string | null;
+        allText: string[];
+      }
+    >;
 
-		console.log(`\n📦 Sections détectées :`);
-		for (const [k, v] of Object.entries(sections)) {
-			console.log(`   ${k}: ${v.count} éléments (selector: ${v.selector})`);
-		}
+    console.log(`\n📦 Sections détectées :`);
+    for (const [k, v] of Object.entries(sections)) {
+      console.log(`   ${k}: ${v.count} éléments (selector: ${v.selector})`);
+    }
 
-		// Look for embedded JSON data (window.__INITIAL_STATE__ etc.)
-		const jsonStores = (await page.evaluate(`
+    // Look for embedded JSON data (window.__INITIAL_STATE__ etc.)
+    const jsonStores = (await page.evaluate(`
 			(function() {
 				const found = {};
 				try {
@@ -154,28 +147,22 @@ async function main() {
 			})()
 		`)) as Record<string, unknown>;
 
-		console.log(
-			`\n🔬 JS stores :`,
-			JSON.stringify(jsonStores, null, 2).slice(0, 2000),
-		);
+    console.log(`\n🔬 JS stores :`, JSON.stringify(jsonStores, null, 2).slice(0, 2000));
 
-		const inventoryPath = path.join(
-			dumpDir,
-			`${slug}_module_${stamp}.inventory.json`,
-		);
-		await writeFile(
-			inventoryPath,
-			JSON.stringify({ inventory, sections, jsonStores }, null, 2),
-			"utf-8",
-		);
-		console.log(`💾 Inventory → ${inventoryPath}`);
-	} finally {
-		await page.close().catch(() => {});
-		await scraper.close().catch(() => {});
-	}
+    const inventoryPath = path.join(dumpDir, `${slug}_module_${stamp}.inventory.json`);
+    await writeFile(
+      inventoryPath,
+      JSON.stringify({ inventory, sections, jsonStores }, null, 2),
+      "utf-8",
+    );
+    console.log(`💾 Inventory → ${inventoryPath}`);
+  } finally {
+    await page.close().catch(() => {});
+    await scraper.close().catch(() => {});
+  }
 }
 
 main().catch((err) => {
-	console.error("💥", err);
-	process.exit(1);
+  console.error("💥", err);
+  process.exit(1);
 });

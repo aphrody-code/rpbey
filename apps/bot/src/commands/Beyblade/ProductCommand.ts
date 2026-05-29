@@ -1,50 +1,46 @@
-import { Pagination } from '@rpbey/pagination';
-import {
-  ApplicationCommandOptionType,
-  type CommandInteraction,
-  EmbedBuilder,
-} from 'discord.js';
-import { Discord, Slash, SlashChoice, SlashGroup, SlashOption } from '@rpbey/discordx';
-import { inject, injectable } from 'tsyringe';
+import { Pagination } from "@rpbey/pagination";
+import { ApplicationCommandOptionType, type CommandInteraction, EmbedBuilder } from "discord.js";
+import { Discord, Slash, SlashChoice, SlashGroup, SlashOption } from "@rpbey/discordx";
+import { inject, injectable } from "tsyringe";
 
-import { Colors, RPB } from '../../lib/constants.js';
-import { PrismaService } from '../../lib/prisma.js';
+import { Colors, RPB } from "../../lib/constants.js";
+import { PrismaService } from "../../lib/prisma.js";
 
 const PRODUCT_TYPE_LABELS: Record<string, string> = {
-  STARTER: '🟢 Starter',
-  BOOSTER: '🔵 Booster',
-  RANDOM_BOOSTER: '🟣 Random Booster',
-  SET: '📦 Set',
-  DOUBLE_STARTER: '🟡 Double Starter',
-  TOOL: '🔧 Tool',
-  COLOR_CHOICE: '🎨 Color Choice',
+  STARTER: "🟢 Starter",
+  BOOSTER: "🔵 Booster",
+  RANDOM_BOOSTER: "🟣 Random Booster",
+  SET: "📦 Set",
+  DOUBLE_STARTER: "🟡 Double Starter",
+  TOOL: "🔧 Tool",
+  COLOR_CHOICE: "🎨 Color Choice",
 };
 
 const LINE_EMOJIS: Record<string, string> = {
-  BX: '🔴',
-  UX: '🔵',
-  CX: '🟡',
+  BX: "🔴",
+  UX: "🔵",
+  CX: "🟡",
 };
 
 @Discord()
 @SlashGroup({
-  name: 'produit',
-  description: 'Parcourir et rechercher les produits Beyblade X',
+  name: "produit",
+  description: "Parcourir et rechercher les produits Beyblade X",
 })
-@SlashGroup('produit')
+@SlashGroup("produit")
 @injectable()
 export class ProductCommand {
   constructor(@inject(PrismaService) private prisma: PrismaService) {}
 
   @Slash({
-    name: 'rechercher',
-    description: 'Rechercher un produit par nom ou code',
+    name: "rechercher",
+    description: "Rechercher un produit par nom ou code",
   })
-  @SlashGroup('produit')
+  @SlashGroup("produit")
   async search(
     @SlashOption({
-      name: 'terme',
-      description: 'Nom ou code du produit à rechercher',
+      name: "terme",
+      description: "Nom ou code du produit à rechercher",
       required: true,
       type: ApplicationCommandOptionType.String,
     })
@@ -56,20 +52,18 @@ export class ProductCommand {
     const products = await this.prisma.product.findMany({
       where: {
         OR: [
-          { name: { contains: query, mode: 'insensitive' } },
-          { nameEn: { contains: query, mode: 'insensitive' } },
-          { nameFr: { contains: query, mode: 'insensitive' } },
-          { code: { contains: query, mode: 'insensitive' } },
+          { name: { contains: query, mode: "insensitive" } },
+          { nameEn: { contains: query, mode: "insensitive" } },
+          { nameFr: { contains: query, mode: "insensitive" } },
+          { code: { contains: query, mode: "insensitive" } },
         ],
       },
-      orderBy: { releaseDate: 'desc' },
+      orderBy: { releaseDate: "desc" },
       take: 25,
     });
 
     if (products.length === 0) {
-      return interaction.editReply(
-        `❌ Aucun produit trouvé pour « ${query} ».`,
-      );
+      return interaction.editReply(`❌ Aucun produit trouvé pour « ${query} ».`);
     }
 
     const pages = [];
@@ -81,32 +75,29 @@ export class ProductCommand {
         .setTitle(`🔎 Résultats pour « ${query} »`)
         .setColor(Colors.Beyblade)
         .setFooter({
-          text: `${products.length} résultat${products.length > 1 ? 's' : ''} | ${RPB.Name}`,
+          text: `${products.length} résultat${products.length > 1 ? "s" : ""} | ${RPB.Name}`,
         });
 
       for (const product of chunk) {
-        const lineEmoji = LINE_EMOJIS[product.productLine] ?? '⚪';
-        const typeLabel =
-          PRODUCT_TYPE_LABELS[product.productType] ?? product.productType;
-        const price = product.price ? `${product.price}¥` : 'N/A';
+        const lineEmoji = LINE_EMOJIS[product.productLine] ?? "⚪";
+        const typeLabel = PRODUCT_TYPE_LABELS[product.productType] ?? product.productType;
+        const price = product.price ? `${product.price}¥` : "N/A";
         const date = product.releaseDate
           ? `<t:${Math.floor(new Date(product.releaseDate).getTime() / 1000)}:D>`
-          : 'N/A';
+          : "N/A";
 
         embed.addFields({
           name: `${lineEmoji} ${product.code} — ${product.nameFr || product.name}`,
           value: [
             `**Type :** ${typeLabel}`,
             `**Prix :** ${price} | **Sortie :** ${date}`,
-            product.isLimited
-              ? `⚡ **Édition limitée** ${product.limitedNote ?? ''}`
-              : '',
+            product.isLimited ? `⚡ **Édition limitée** ${product.limitedNote ?? ""}` : "",
             product.includedParts.length > 0
-              ? `**Contenu :** ${product.includedParts.join(', ')}`
-              : '',
+              ? `**Contenu :** ${product.includedParts.join(", ")}`
+              : "",
           ]
             .filter(Boolean)
-            .join('\n'),
+            .join("\n"),
         });
       }
 
@@ -121,12 +112,12 @@ export class ProductCommand {
     return pagination.send();
   }
 
-  @Slash({ name: 'info', description: "Détails complets d'un produit" })
-  @SlashGroup('produit')
+  @Slash({ name: "info", description: "Détails complets d'un produit" })
+  @SlashGroup("produit")
   async info(
     @SlashOption({
-      name: 'code',
-      description: 'Code du produit (ex: BX-01)',
+      name: "code",
+      description: "Code du produit (ex: BX-01)",
       required: true,
       type: ApplicationCommandOptionType.String,
     })
@@ -138,8 +129,8 @@ export class ProductCommand {
     const product = await this.prisma.product.findFirst({
       where: {
         OR: [
-          { code: { equals: code, mode: 'insensitive' } },
-          { code: { contains: code, mode: 'insensitive' } },
+          { code: { equals: code, mode: "insensitive" } },
+          { code: { contains: code, mode: "insensitive" } },
         ],
       },
       include: {
@@ -155,14 +146,11 @@ export class ProductCommand {
       );
     }
 
-    const lineEmoji = LINE_EMOJIS[product.productLine] ?? '⚪';
-    const typeLabel =
-      PRODUCT_TYPE_LABELS[product.productType] ?? product.productType;
+    const lineEmoji = LINE_EMOJIS[product.productLine] ?? "⚪";
+    const typeLabel = PRODUCT_TYPE_LABELS[product.productType] ?? product.productType;
 
     const embed = new EmbedBuilder()
-      .setTitle(
-        `${lineEmoji} ${product.code} — ${product.nameFr || product.name}`,
-      )
+      .setTitle(`${lineEmoji} ${product.code} — ${product.nameFr || product.name}`)
       .setColor(Colors.Beyblade);
 
     if (product.nameEn && product.nameEn !== product.name) {
@@ -170,22 +158,22 @@ export class ProductCommand {
     }
 
     embed.addFields(
-      { name: '📦 Type', value: typeLabel, inline: true },
+      { name: "📦 Type", value: typeLabel, inline: true },
       {
-        name: '🏷️ Gamme',
+        name: "🏷️ Gamme",
         value: `${lineEmoji} ${product.productLine}`,
         inline: true,
       },
       {
-        name: '💴 Prix',
-        value: product.price ? `${product.price}¥` : 'N/A',
+        name: "💴 Prix",
+        value: product.price ? `${product.price}¥` : "N/A",
         inline: true,
       },
     );
 
     if (product.releaseDate) {
       embed.addFields({
-        name: '📅 Date de sortie',
+        name: "📅 Date de sortie",
         value: `<t:${Math.floor(new Date(product.releaseDate).getTime() / 1000)}:D>`,
         inline: true,
       });
@@ -193,15 +181,15 @@ export class ProductCommand {
 
     if (product.isLimited) {
       embed.addFields({
-        name: '⚡ Édition limitée',
-        value: product.limitedNote || 'Oui',
+        name: "⚡ Édition limitée",
+        value: product.limitedNote || "Oui",
         inline: true,
       });
     }
 
     if (product.description) {
       embed.addFields({
-        name: '📝 Description',
+        name: "📝 Description",
         value: product.description.slice(0, 1024),
       });
     }
@@ -212,20 +200,20 @@ export class ProductCommand {
       });
       embed.addFields({
         name: `🌀 Beyblades inclus (${product.beyblades.length})`,
-        value: beyLines.join('\n').slice(0, 1024),
+        value: beyLines.join("\n").slice(0, 1024),
       });
     }
 
     if (product.includedParts.length > 0 && product.beyblades.length === 0) {
       embed.addFields({
-        name: '🔩 Contenu',
-        value: product.includedParts.join(', '),
+        name: "🔩 Contenu",
+        value: product.includedParts.join(", "),
       });
     }
 
     if (product.imageUrl) {
       embed.setThumbnail(
-        product.imageUrl.startsWith('http')
+        product.imageUrl.startsWith("http")
           ? product.imageUrl
           : `https://rpbey.fr${product.imageUrl}`,
       );
@@ -237,17 +225,17 @@ export class ProductCommand {
   }
 
   @Slash({
-    name: 'nouveautés',
-    description: 'Voir les derniers produits sortis ou à venir',
+    name: "nouveautés",
+    description: "Voir les derniers produits sortis ou à venir",
   })
-  @SlashGroup('produit')
+  @SlashGroup("produit")
   async latest(
-    @SlashChoice({ name: 'BX', value: 'BX' })
-    @SlashChoice({ name: 'UX', value: 'UX' })
-    @SlashChoice({ name: 'CX', value: 'CX' })
+    @SlashChoice({ name: "BX", value: "BX" })
+    @SlashChoice({ name: "UX", value: "UX" })
+    @SlashChoice({ name: "CX", value: "CX" })
     @SlashOption({
-      name: 'gamme',
-      description: 'Filtrer par gamme (optionnel)',
+      name: "gamme",
+      description: "Filtrer par gamme (optionnel)",
       required: false,
       type: ApplicationCommandOptionType.String,
     })
@@ -256,35 +244,32 @@ export class ProductCommand {
   ) {
     await interaction.deferReply();
 
-    const where = line ? { productLine: line as 'BX' | 'UX' | 'CX' } : {};
+    const where = line ? { productLine: line as "BX" | "UX" | "CX" } : {};
 
     const products = await this.prisma.product.findMany({
       where,
-      orderBy: { releaseDate: 'desc' },
+      orderBy: { releaseDate: "desc" },
       take: 10,
     });
 
     if (products.length === 0) {
-      return interaction.editReply('❌ Aucun produit trouvé.');
+      return interaction.editReply("❌ Aucun produit trouvé.");
     }
 
     const embed = new EmbedBuilder()
-      .setTitle(`🆕 Derniers produits${line ? ` (${line})` : ''}`)
+      .setTitle(`🆕 Derniers produits${line ? ` (${line})` : ""}`)
       .setColor(Colors.Beyblade);
 
     const lines = products.map((p: any) => {
-      const emoji = LINE_EMOJIS[p.productLine] ?? '⚪';
+      const emoji = LINE_EMOJIS[p.productLine] ?? "⚪";
       const date = p.releaseDate
         ? `<t:${Math.floor(new Date(p.releaseDate).getTime() / 1000)}:d>`
-        : '?';
+        : "?";
       const typeLabel = PRODUCT_TYPE_LABELS[p.productType] ?? p.productType;
-      return `${emoji} **${p.code}** — ${p.nameFr || p.name}\n${typeLabel} | ${date}${p.isLimited ? ' | ⚡ Limité' : ''}`;
+      return `${emoji} **${p.code}** — ${p.nameFr || p.name}\n${typeLabel} | ${date}${p.isLimited ? " | ⚡ Limité" : ""}`;
     });
 
-    embed
-      .setDescription(lines.join('\n\n'))
-      .setFooter({ text: RPB.Name })
-      .setTimestamp();
+    embed.setDescription(lines.join("\n\n")).setFooter({ text: RPB.Name }).setTimestamp();
 
     return interaction.editReply({ embeds: [embed] });
   }

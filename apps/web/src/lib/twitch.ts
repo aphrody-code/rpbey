@@ -1,10 +1,10 @@
-import { ApiClient } from '@twurple/api';
-import { AppTokenAuthProvider } from '@twurple/auth';
-import { unstable_cache } from 'next/cache';
+import { ApiClient } from "@twurple/api";
+import { AppTokenAuthProvider } from "@twurple/auth";
+import { unstable_cache } from "next/cache";
 
-const clientId = process.env.TWITCH_CLIENT_ID || '';
-const clientSecret = process.env.TWITCH_CLIENT_SECRET || '';
-const channelName = process.env.NEXT_PUBLIC_TWITCH_CHANNEL || 'tv_rpb';
+const clientId = process.env.TWITCH_CLIENT_ID || "";
+const clientSecret = process.env.TWITCH_CLIENT_SECRET || "";
+const channelName = process.env.NEXT_PUBLIC_TWITCH_CHANNEL || "tv_rpb";
 
 // Initialize the Auth Provider
 // Note: This uses App Access Token (Server-to-Server), which is read-only for most user data.
@@ -27,7 +27,7 @@ export interface StreamInfo {
 
 export async function getRPBStreamInfo(): Promise<StreamInfo | null> {
   if (!clientId || !clientSecret) {
-    console.warn('Twitch credentials not set.');
+    console.warn("Twitch credentials not set.");
     return null;
   }
 
@@ -46,14 +46,12 @@ export async function getRPBStreamInfo(): Promise<StreamInfo | null> {
       gameName: stream?.gameName,
       viewerCount: stream?.viewers,
       startedAt: stream?.startDate,
-      thumbnailUrl: stream?.thumbnailUrl
-        ?.replace('{width}', '1280')
-        .replace('{height}', '720'),
+      thumbnailUrl: stream?.thumbnailUrl?.replace("{width}", "1280").replace("{height}", "720"),
       userName: user.displayName,
       avatarUrl: user.profilePictureUrl,
     };
   } catch (error) {
-    console.error('Error fetching Twitch data:', error);
+    console.error("Error fetching Twitch data:", error);
     return null;
   }
 }
@@ -85,7 +83,7 @@ export async function getLatestRPBVideo(): Promise<VideoInfo | null> {
 
     const videos = await twitchClient.videos.getVideosByUser(user.id, {
       limit: 1,
-      type: 'archive', // Only past broadcasts
+      type: "archive", // Only past broadcasts
     });
 
     if (videos.data.length === 0) {
@@ -102,16 +100,14 @@ export async function getLatestRPBVideo(): Promise<VideoInfo | null> {
       id: video.id,
       title: video.title,
       url: video.url,
-      thumbnailUrl: video.thumbnailUrl
-        .replace('%{width}', '640')
-        .replace('%{height}', '360'),
+      thumbnailUrl: video.thumbnailUrl.replace("%{width}", "640").replace("%{height}", "360"),
       duration: video.duration,
       publishedAt: video.publishDate,
       viewCount: video.views,
       channelLogo: user.profilePictureUrl,
     };
   } catch (error) {
-    console.error('Error fetching Twitch video:', error);
+    console.error("Error fetching Twitch video:", error);
     return null;
   }
 }
@@ -133,21 +129,19 @@ export async function getRPBClips(limit = 6): Promise<VideoInfo[]> {
           id: clip.id,
           title: clip.title,
           url: clip.url,
-          thumbnailUrl: clip.thumbnailUrl
-            .replace('{width}', '640')
-            .replace('{height}', '360'),
+          thumbnailUrl: clip.thumbnailUrl.replace("{width}", "640").replace("{height}", "360"),
           duration: `${Math.round(clip.duration).toString()}s`,
           publishedAt: clip.creationDate,
           viewCount: clip.views,
           channelLogo: user.profilePictureUrl,
         }));
       } catch (error) {
-        console.error('Error fetching Twitch clips:', error);
+        console.error("Error fetching Twitch clips:", error);
         return [];
       }
     },
     [`twitch-clips-${limit}`],
-    { revalidate: 3600, tags: ['twitch'] },
+    { revalidate: 3600, tags: ["twitch"] },
   )();
 }
 
@@ -162,26 +156,24 @@ export async function getRPBVideos(limit = 6): Promise<VideoInfo[]> {
 
         const videos = await twitchClient.videos.getVideosByUser(user.id, {
           limit,
-          type: 'archive',
+          type: "archive",
         });
 
         return videos.data.map((video) => ({
           id: video.id,
           title: video.title,
           url: video.url,
-          thumbnailUrl: video.thumbnailUrl
-            .replace('%{width}', '640')
-            .replace('%{height}', '360'),
+          thumbnailUrl: video.thumbnailUrl.replace("%{width}", "640").replace("%{height}", "360"),
           duration: video.duration,
           publishedAt: video.publishDate,
           viewCount: video.views,
         }));
       } catch (error) {
-        console.error('Error fetching Twitch videos:', error);
+        console.error("Error fetching Twitch videos:", error);
         return [];
       }
     },
     [`twitch-videos-${limit}`],
-    { revalidate: 3600, tags: ['twitch'] },
+    { revalidate: 3600, tags: ["twitch"] },
   )();
 }

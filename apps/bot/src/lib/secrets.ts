@@ -11,7 +11,7 @@
  *
  * Then `readSecret('DISCORD_TOKEN')` returns it without a `.env` file.
  */
-const SERVICE = 'rpb-bot';
+const SERVICE = "rpb-bot";
 
 export async function readSecret(name: string): Promise<string> {
   const fromEnv = process.env[name];

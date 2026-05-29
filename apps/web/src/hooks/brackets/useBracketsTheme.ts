@@ -7,10 +7,10 @@ import type { BracketsTheme } from "@/lib/brackets/types";
 const STORAGE_KEY = "rpbey:brackets:theme";
 
 function read(): BracketsTheme {
-	if (typeof window === "undefined") return "auto";
-	const v = window.localStorage.getItem(STORAGE_KEY);
-	if (v === "light" || v === "dark" || v === "auto") return v;
-	return "auto";
+  if (typeof window === "undefined") return "auto";
+  const v = window.localStorage.getItem(STORAGE_KEY);
+  if (v === "light" || v === "dark" || v === "auto") return v;
+  return "auto";
 }
 
 /**
@@ -23,21 +23,21 @@ function read(): BracketsTheme {
  *   <BracketsThemeSwitch value={theme} onChange={setTheme} />
  */
 export function useBracketsTheme(initial: BracketsTheme = "auto"): {
-	theme: BracketsTheme;
-	setTheme: (next: BracketsTheme) => void;
+  theme: BracketsTheme;
+  setTheme: (next: BracketsTheme) => void;
 } {
-	const [theme, setThemeState] = useState<BracketsTheme>(initial);
+  const [theme, setThemeState] = useState<BracketsTheme>(initial);
 
-	useEffect(() => {
-		setThemeState(read());
-	}, []);
+  useEffect(() => {
+    setThemeState(read());
+  }, []);
 
-	const setTheme = useCallback((next: BracketsTheme) => {
-		setThemeState(next);
-		if (typeof window !== "undefined") {
-			window.localStorage.setItem(STORAGE_KEY, next);
-		}
-	}, []);
+  const setTheme = useCallback((next: BracketsTheme) => {
+    setThemeState(next);
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem(STORAGE_KEY, next);
+    }
+  }, []);
 
-	return { theme, setTheme };
+  return { theme, setTheme };
 }

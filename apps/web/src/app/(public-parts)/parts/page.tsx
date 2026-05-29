@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   Add,
@@ -11,7 +11,7 @@ import {
   HideImage,
   Inventory2,
   Search,
-} from '@mui/icons-material';
+} from "@mui/icons-material";
 import {
   Alert,
   Avatar,
@@ -30,17 +30,12 @@ import {
   Tabs,
   TextField,
   Typography,
-} from '@mui/material';
-import Grid from '@mui/material/Grid';
-import { DataGrid, type GridColDef, type GridRowModel } from '@mui/x-data-grid';
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import { PageHeader, useToast } from '@/components/ui';
-import {
-  type Beyblade,
-  type Part,
-  type PartType,
-  type Product,
-} from '@/lib/types';
+} from "@mui/material";
+import Grid from "@mui/material/Grid";
+import { DataGrid, type GridColDef, type GridRowModel } from "@mui/x-data-grid";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { PageHeader, useToast } from "@/components/ui";
+import { type Beyblade, type Part, type PartType, type Product } from "@/lib/types";
 import {
   bulkImportParts,
   deletePart,
@@ -49,8 +44,8 @@ import {
   getParts,
   getPartsStats,
   upsertPart,
-} from './actions';
-import { PartDialog } from './PartDialog';
+} from "./actions";
+import { PartDialog } from "./PartDialog";
 
 // ──── Types ────
 
@@ -73,42 +68,38 @@ type BeybladeWithParts = Beyblade & {
 // ──── Constants ────
 
 const TYPE_LABELS: Record<string, string> = {
-  BLADE: 'Blades',
-  RATCHET: 'Ratchets',
-  BIT: 'Bits',
-  OVER_BLADE: 'Over Blades',
-  LOCK_CHIP: 'Lock Chips',
-  ASSIST_BLADE: 'Assist Blades',
+  BLADE: "Blades",
+  RATCHET: "Ratchets",
+  BIT: "Bits",
+  OVER_BLADE: "Over Blades",
+  LOCK_CHIP: "Lock Chips",
+  ASSIST_BLADE: "Assist Blades",
 };
 
 // Category colors - BLADE and ATTACK use theme primary via CSS variable
 const TYPE_COLORS: Record<string, string> = {
-  BLADE: 'var(--rpb-primary)',
-  RATCHET: '#f59e0b',
-  BIT: '#3b82f6',
-  OVER_BLADE: '#8b5cf6',
-  LOCK_CHIP: '#ec4899',
-  ASSIST_BLADE: '#06b6d4',
+  BLADE: "var(--rpb-primary)",
+  RATCHET: "#f59e0b",
+  BIT: "#3b82f6",
+  OVER_BLADE: "#8b5cf6",
+  LOCK_CHIP: "#ec4899",
+  ASSIST_BLADE: "#06b6d4",
 };
 
 // Helper to get alpha-safe background color for category colors
 // CSS variables can't use hex-alpha concatenation, so we use rgba() with --rgb variant
 const getTypeBg = (type: string) =>
-  type === 'BLADE'
-    ? 'rgba(var(--rpb-primary-rgb), 0.13)'
-    : `${TYPE_COLORS[type] || '#666'}22`;
+  type === "BLADE" ? "rgba(var(--rpb-primary-rgb), 0.13)" : `${TYPE_COLORS[type] || "#666"}22`;
 
 const BEYTYPE_COLORS: Record<string, string> = {
-  ATTACK: 'var(--rpb-primary)',
-  DEFENSE: '#3b82f6',
-  STAMINA: '#22c55e',
-  BALANCE: '#a855f7',
+  ATTACK: "var(--rpb-primary)",
+  DEFENSE: "#3b82f6",
+  STAMINA: "#22c55e",
+  BALANCE: "#a855f7",
 };
 
 const getBeyTypeBg = (type: string) =>
-  type === 'ATTACK'
-    ? 'rgba(var(--rpb-primary-rgb), 0.13)'
-    : `${BEYTYPE_COLORS[type] || '#666'}22`;
+  type === "ATTACK" ? "rgba(var(--rpb-primary-rgb), 0.13)" : `${BEYTYPE_COLORS[type] || "#666"}22`;
 
 // ──── Main Page ────
 
@@ -133,11 +124,11 @@ export default function AdminPartsPage() {
         <Grid container spacing={2} sx={{ mb: 3 }}>
           <Grid size={{ xs: 6, md: 2 }}>
             <Card variant="outlined">
-              <CardContent sx={{ py: 1.5, '&:last-child': { pb: 1.5 } }}>
+              <CardContent sx={{ py: 1.5, "&:last-child": { pb: 1.5 } }}>
                 <Typography
                   variant="caption"
                   sx={{
-                    color: 'text.secondary',
+                    color: "text.secondary",
                   }}
                 >
                   Total Pièces
@@ -145,7 +136,7 @@ export default function AdminPartsPage() {
                 <Typography
                   variant="h5"
                   sx={{
-                    fontWeight: 'bold',
+                    fontWeight: "bold",
                   }}
                 >
                   {stats.total}
@@ -158,14 +149,14 @@ export default function AdminPartsPage() {
               <Card
                 variant="outlined"
                 sx={{
-                  borderLeft: `3px solid ${TYPE_COLORS[t.type] || '#666'}`,
+                  borderLeft: `3px solid ${TYPE_COLORS[t.type] || "#666"}`,
                 }}
               >
-                <CardContent sx={{ py: 1.5, '&:last-child': { pb: 1.5 } }}>
+                <CardContent sx={{ py: 1.5, "&:last-child": { pb: 1.5 } }}>
                   <Typography
                     variant="caption"
                     sx={{
-                      color: 'text.secondary',
+                      color: "text.secondary",
                     }}
                   >
                     {TYPE_LABELS[t.type] || t.type}
@@ -173,7 +164,7 @@ export default function AdminPartsPage() {
                   <Typography
                     variant="h5"
                     sx={{
-                      fontWeight: 'bold',
+                      fontWeight: "bold",
                     }}
                   >
                     {t.count}
@@ -184,12 +175,12 @@ export default function AdminPartsPage() {
           ))}
           {stats.missingImage > 0 && (
             <Grid size={{ xs: 6, md: 2 }}>
-              <Card variant="outlined" sx={{ borderLeft: '3px solid #f59e0b' }}>
-                <CardContent sx={{ py: 1.5, '&:last-child': { pb: 1.5 } }}>
+              <Card variant="outlined" sx={{ borderLeft: "3px solid #f59e0b" }}>
+                <CardContent sx={{ py: 1.5, "&:last-child": { pb: 1.5 } }}>
                   <Typography
                     variant="caption"
                     sx={{
-                      color: 'warning.main',
+                      color: "warning.main",
                     }}
                   >
                     Sans image
@@ -197,8 +188,8 @@ export default function AdminPartsPage() {
                   <Typography
                     variant="h5"
                     sx={{
-                      fontWeight: 'bold',
-                      color: 'warning.main',
+                      fontWeight: "bold",
+                      color: "warning.main",
                     }}
                   >
                     {stats.missingImage}
@@ -215,19 +206,15 @@ export default function AdminPartsPage() {
         onChange={(_, v) => setActiveTab(v)}
         variant="scrollable"
         scrollButtons="auto"
-        sx={{ mb: 3, borderBottom: 1, borderColor: 'divider' }}
+        sx={{ mb: 3, borderBottom: 1, borderColor: "divider" }}
       >
         <Tab icon={<Inventory2 />} label="Pièces" iconPosition="start" />
         <Tab icon={<Extension />} label="Beyblades" iconPosition="start" />
         <Tab icon={<FileUpload />} label="Import" iconPosition="start" />
       </Tabs>
-      {activeTab === 0 && (
-        <PartsTab onStatsChange={() => getPartsStats().then(setStats)} />
-      )}
+      {activeTab === 0 && <PartsTab onStatsChange={() => getPartsStats().then(setStats)} />}
       {activeTab === 1 && <BeybladesTab />}
-      {activeTab === 2 && (
-        <ImportTab onStatsChange={() => getPartsStats().then(setStats)} />
-      )}
+      {activeTab === 2 && <ImportTab onStatsChange={() => getPartsStats().then(setStats)} />}
     </Box>
   );
 }
@@ -237,10 +224,10 @@ export default function AdminPartsPage() {
 function PartsTab({ onStatsChange }: { onStatsChange: () => void }) {
   const [rows, setRows] = useState<Part[]>([]);
   const [loading, setLoading] = useState(true);
-  const [search, setSearch] = useState('');
-  const [filterType, setFilterType] = useState<string>('');
-  const [filterSystem, setFilterSystem] = useState<string>('');
-  const [filterBeyType, setFilterBeyType] = useState<string>('');
+  const [search, setSearch] = useState("");
+  const [filterType, setFilterType] = useState<string>("");
+  const [filterSystem, setFilterSystem] = useState<string>("");
+  const [filterBeyType, setFilterBeyType] = useState<string>("");
   const [filterMissingImage, setFilterMissingImage] = useState(false);
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
@@ -259,14 +246,7 @@ function PartsTab({ onStatsChange }: { onStatsChange: () => void }) {
     setRows(parts);
     setTotal(t);
     setLoading(false);
-  }, [
-    search,
-    page,
-    filterType,
-    filterSystem,
-    filterBeyType,
-    filterMissingImage,
-  ]);
+  }, [search, page, filterType, filterSystem, filterBeyType, filterMissingImage]);
 
   useEffect(() => {
     const timer = setTimeout(loadData, 400);
@@ -276,30 +256,26 @@ function PartsTab({ onStatsChange }: { onStatsChange: () => void }) {
   const handleSubmit = async (data: Partial<Part>) => {
     try {
       await upsertPart(data);
-      showToast('Pièce sauvegardée', 'success');
+      showToast("Pièce sauvegardée", "success");
       loadData();
       onStatsChange();
     } catch (err) {
-      const msg =
-        err instanceof Error ? err.message : 'Erreur lors de la sauvegarde';
-      showToast(msg, 'error');
+      const msg = err instanceof Error ? err.message : "Erreur lors de la sauvegarde";
+      showToast(msg, "error");
     }
   };
 
   const handleDelete = useCallback(
     async (id: string) => {
-      if (confirm('Supprimer cette pièce ?')) {
+      if (confirm("Supprimer cette pièce ?")) {
         try {
           await deletePart(id);
-          showToast('Pièce supprimée', 'success');
+          showToast("Pièce supprimée", "success");
           loadData();
           onStatsChange();
         } catch (err) {
-          const msg =
-            err instanceof Error
-              ? err.message
-              : 'Erreur lors de la suppression';
-          showToast(msg, 'error');
+          const msg = err instanceof Error ? err.message : "Erreur lors de la suppression";
+          showToast(msg, "error");
         }
       }
     },
@@ -310,13 +286,12 @@ function PartsTab({ onStatsChange }: { onStatsChange: () => void }) {
     async (id: string) => {
       try {
         await duplicatePart(id);
-        showToast('Pièce dupliquée', 'success');
+        showToast("Pièce dupliquée", "success");
         loadData();
         onStatsChange();
       } catch (err) {
-        const msg =
-          err instanceof Error ? err.message : 'Erreur lors de la duplication';
-        showToast(msg, 'error');
+        const msg = err instanceof Error ? err.message : "Erreur lors de la duplication";
+        showToast(msg, "error");
       }
     },
     [loadData, onStatsChange, showToast],
@@ -326,25 +301,24 @@ function PartsTab({ onStatsChange }: { onStatsChange: () => void }) {
     const updatedPart = newRow as Part;
     try {
       await upsertPart(updatedPart);
-      showToast('Modification enregistrée', 'success');
+      showToast("Modification enregistrée", "success");
       onStatsChange();
       return updatedPart;
     } catch (err) {
-      const msg =
-        err instanceof Error ? err.message : 'Erreur lors de la sauvegarde';
-      showToast(msg, 'error');
+      const msg = err instanceof Error ? err.message : "Erreur lors de la sauvegarde";
+      showToast(msg, "error");
       throw err;
     }
   };
 
   const handleExportJSON = () => {
     const blob = new Blob([JSON.stringify(rows, null, 2)], {
-      type: 'application/json',
+      type: "application/json",
     });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
+    const a = document.createElement("a");
     a.href = url;
-    a.download = `parts-export-${new Date().toISOString().split('T')[0]}.json`;
+    a.download = `parts-export-${new Date().toISOString().split("T")[0]}.json`;
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -352,8 +326,8 @@ function PartsTab({ onStatsChange }: { onStatsChange: () => void }) {
   const columns: GridColDef[] = useMemo(
     () => [
       {
-        field: 'imageUrl',
-        headerName: '',
+        field: "imageUrl",
+        headerName: "",
         width: 56,
         renderCell: (params) => (
           <Avatar
@@ -362,30 +336,28 @@ function PartsTab({ onStatsChange }: { onStatsChange: () => void }) {
             sx={{
               width: 36,
               height: 36,
-              bgcolor: 'transparent',
-              border: '1px solid',
-              borderColor: 'divider',
+              bgcolor: "transparent",
+              border: "1px solid",
+              borderColor: "divider",
               fontSize: 14,
             }}
           >
-            {params.value ? undefined : (
-              <HideImage sx={{ fontSize: 16, opacity: 0.3 }} />
-            )}
+            {params.value ? undefined : <HideImage sx={{ fontSize: 16, opacity: 0.3 }} />}
           </Avatar>
         ),
       },
       {
-        field: 'name',
-        headerName: 'Nom',
+        field: "name",
+        headerName: "Nom",
         flex: 1,
         minWidth: 140,
         editable: true,
       },
       {
-        field: 'type',
-        headerName: 'Type',
+        field: "type",
+        headerName: "Type",
         width: 130,
-        type: 'singleSelect',
+        type: "singleSelect",
         valueOptions: Object.keys(TYPE_LABELS),
         editable: true,
         renderCell: (params) => (
@@ -394,20 +366,20 @@ function PartsTab({ onStatsChange }: { onStatsChange: () => void }) {
             size="small"
             sx={{
               bgcolor: getTypeBg(params.value),
-              color: TYPE_COLORS[params.value] || '#666',
+              color: TYPE_COLORS[params.value] || "#666",
               fontWeight: 600,
-              fontSize: '0.7rem',
+              fontSize: "0.7rem",
             }}
           />
         ),
       },
-      { field: 'system', headerName: 'Sys.', width: 65, editable: true },
+      { field: "system", headerName: "Sys.", width: 65, editable: true },
       {
-        field: 'beyType',
-        headerName: 'Bey',
+        field: "beyType",
+        headerName: "Bey",
         width: 90,
-        type: 'singleSelect',
-        valueOptions: ['ATTACK', 'DEFENSE', 'STAMINA', 'BALANCE'],
+        type: "singleSelect",
+        valueOptions: ["ATTACK", "DEFENSE", "STAMINA", "BALANCE"],
         editable: true,
         renderCell: (params) =>
           params.value ? (
@@ -418,14 +390,14 @@ function PartsTab({ onStatsChange }: { onStatsChange: () => void }) {
                 bgcolor: getBeyTypeBg(params.value),
                 color: BEYTYPE_COLORS[params.value],
                 fontWeight: 700,
-                fontSize: '0.7rem',
+                fontSize: "0.7rem",
               }}
             />
           ) : (
             <Typography
               variant="caption"
               sx={{
-                color: 'text.disabled',
+                color: "text.disabled",
               }}
             >
               —
@@ -433,29 +405,29 @@ function PartsTab({ onStatsChange }: { onStatsChange: () => void }) {
           ),
       },
       {
-        field: 'weight',
-        headerName: 'Poids',
+        field: "weight",
+        headerName: "Poids",
         width: 70,
-        type: 'number',
+        type: "number",
         editable: true,
-        valueFormatter: (v: number | null) => (v ? `${v}g` : '—'),
+        valueFormatter: (v: number | null) => (v ? `${v}g` : "—"),
       },
-      { field: 'spinDirection', headerName: 'Rot.', width: 60, editable: true },
-      { field: 'attack', headerName: 'Atk', width: 50, editable: true },
-      { field: 'defense', headerName: 'Def', width: 50, editable: true },
-      { field: 'stamina', headerName: 'Sta', width: 50, editable: true },
-      { field: 'dash', headerName: 'Dsh', width: 50, editable: true },
-      { field: 'burst', headerName: 'Bst', width: 50, editable: true },
-      { field: 'rarity', headerName: 'Rar.', width: 70, editable: true },
+      { field: "spinDirection", headerName: "Rot.", width: 60, editable: true },
+      { field: "attack", headerName: "Atk", width: 50, editable: true },
+      { field: "defense", headerName: "Def", width: 50, editable: true },
+      { field: "stamina", headerName: "Sta", width: 50, editable: true },
+      { field: "dash", headerName: "Dsh", width: 50, editable: true },
+      { field: "burst", headerName: "Bst", width: 50, editable: true },
+      { field: "rarity", headerName: "Rar.", width: 70, editable: true },
       {
-        field: 'updatedAt',
-        headerName: 'MAJ',
+        field: "updatedAt",
+        headerName: "MAJ",
         width: 90,
-        valueFormatter: (v: string) => new Date(v).toLocaleDateString('fr-FR'),
+        valueFormatter: (v: string) => new Date(v).toLocaleDateString("fr-FR"),
       },
       {
-        field: 'actions',
-        headerName: '',
+        field: "actions",
+        headerName: "",
         width: 120,
         sortable: false,
         renderCell: (params) => (
@@ -469,17 +441,10 @@ function PartsTab({ onStatsChange }: { onStatsChange: () => void }) {
             >
               <Edit fontSize="small" />
             </IconButton>
-            <IconButton
-              size="small"
-              onClick={() => handleDuplicate(params.row.id)}
-            >
+            <IconButton size="small" onClick={() => handleDuplicate(params.row.id)}>
               <ContentCopy fontSize="small" />
             </IconButton>
-            <IconButton
-              size="small"
-              color="error"
-              onClick={() => handleDelete(params.row.id)}
-            >
+            <IconButton size="small" color="error" onClick={() => handleDelete(params.row.id)}>
               <Delete fontSize="small" />
             </IconButton>
           </Stack>
@@ -520,8 +485,8 @@ function PartsTab({ onStatsChange }: { onStatsChange: () => void }) {
           spacing={1}
           useFlexGap
           sx={{
-            flexWrap: 'wrap',
-            alignItems: 'center',
+            flexWrap: "wrap",
+            alignItems: "center",
           }}
         >
           <TextField
@@ -533,7 +498,7 @@ function PartsTab({ onStatsChange }: { onStatsChange: () => void }) {
               setFilterType(e.target.value);
               setPage(1);
             }}
-            sx={{ minWidth: { xs: 'calc(50% - 4px)', sm: 130 } }}
+            sx={{ minWidth: { xs: "calc(50% - 4px)", sm: 130 } }}
           >
             <MenuItem value="">Tous</MenuItem>
             {Object.entries(TYPE_LABELS).map(([k, v]) => (
@@ -551,7 +516,7 @@ function PartsTab({ onStatsChange }: { onStatsChange: () => void }) {
               setFilterSystem(e.target.value);
               setPage(1);
             }}
-            sx={{ minWidth: { xs: 'calc(50% - 4px)', sm: 100 } }}
+            sx={{ minWidth: { xs: "calc(50% - 4px)", sm: 100 } }}
           >
             <MenuItem value="">Tous</MenuItem>
             <MenuItem value="BX">BX</MenuItem>
@@ -567,7 +532,7 @@ function PartsTab({ onStatsChange }: { onStatsChange: () => void }) {
               setFilterBeyType(e.target.value);
               setPage(1);
             }}
-            sx={{ minWidth: { xs: 'calc(50% - 4px)', sm: 120 } }}
+            sx={{ minWidth: { xs: "calc(50% - 4px)", sm: 120 } }}
           >
             <MenuItem value="">Tous</MenuItem>
             <MenuItem value="ATTACK">Attack</MenuItem>
@@ -577,7 +542,7 @@ function PartsTab({ onStatsChange }: { onStatsChange: () => void }) {
           </TextField>
           <Button
             size="small"
-            variant={filterMissingImage ? 'contained' : 'outlined'}
+            variant={filterMissingImage ? "contained" : "outlined"}
             color="warning"
             onClick={() => {
               setFilterMissingImage(!filterMissingImage);
@@ -594,7 +559,7 @@ function PartsTab({ onStatsChange }: { onStatsChange: () => void }) {
           direction="row"
           spacing={1}
           sx={{
-            justifyContent: 'flex-end',
+            justifyContent: "flex-end",
           }}
         >
           <Button
@@ -622,16 +587,16 @@ function PartsTab({ onStatsChange }: { onStatsChange: () => void }) {
       <Typography
         variant="caption"
         sx={{
-          color: 'text.secondary',
+          color: "text.secondary",
           mb: 1,
-          display: 'block',
+          display: "block",
         }}
       >
-        {total} résultat{total !== 1 ? 's' : ''}
+        {total} résultat{total !== 1 ? "s" : ""}
         {page > 1 && ` — Page ${page}`}
       </Typography>
       {/* DataGrid */}
-      <Card sx={{ height: { xs: '60vh', md: '68vh' }, overflow: 'auto' }}>
+      <Card sx={{ height: { xs: "60vh", md: "68vh" }, overflow: "auto" }}>
         <DataGrid
           rows={rows}
           columns={columns}
@@ -647,8 +612,8 @@ function PartsTab({ onStatsChange }: { onStatsChange: () => void }) {
           density="compact"
           sx={{
             minWidth: 600,
-            '& .MuiDataGrid-cell--editable': { bgcolor: 'action.hover' },
-            '& .MuiDataGrid-row:hover': { bgcolor: 'action.selected' },
+            "& .MuiDataGrid-cell--editable": { bgcolor: "action.hover" },
+            "& .MuiDataGrid-row:hover": { bgcolor: "action.selected" },
           }}
         />
       </Card>
@@ -667,7 +632,7 @@ function PartsTab({ onStatsChange }: { onStatsChange: () => void }) {
 function BeybladesTab() {
   const [beyblades, setBeyblades] = useState<BeybladeWithParts[]>([]);
   const [loading, setLoading] = useState(true);
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
 
   const loadData = useCallback(async () => {
     setLoading(true);
@@ -684,42 +649,42 @@ function BeybladesTab() {
   const columns: GridColDef[] = useMemo(
     () => [
       {
-        field: 'imageUrl',
-        headerName: '',
+        field: "imageUrl",
+        headerName: "",
         width: 56,
         renderCell: (params) => (
           <Avatar
             src={params.value}
             variant="rounded"
-            sx={{ width: 36, height: 36, bgcolor: 'transparent' }}
+            sx={{ width: 36, height: 36, bgcolor: "transparent" }}
           >
             <Extension />
           </Avatar>
         ),
       },
-      { field: 'code', headerName: 'Code', width: 120 },
-      { field: 'name', headerName: 'Nom', flex: 1, minWidth: 160 },
+      { field: "code", headerName: "Code", width: 120 },
+      { field: "name", headerName: "Nom", flex: 1, minWidth: 160 },
       {
-        field: 'blade',
-        headerName: 'Blade',
+        field: "blade",
+        headerName: "Blade",
         width: 130,
         valueGetter: (_v: unknown, row: BeybladeWithParts) => row.blade?.name,
       },
       {
-        field: 'ratchet',
-        headerName: 'Ratchet',
+        field: "ratchet",
+        headerName: "Ratchet",
         width: 100,
         valueGetter: (_v: unknown, row: BeybladeWithParts) => row.ratchet?.name,
       },
       {
-        field: 'bit',
-        headerName: 'Bit',
+        field: "bit",
+        headerName: "Bit",
         width: 100,
         valueGetter: (_v: unknown, row: BeybladeWithParts) => row.bit?.name,
       },
       {
-        field: 'beyType',
-        headerName: 'Type',
+        field: "beyType",
+        headerName: "Type",
         width: 90,
         renderCell: (params) =>
           params.value ? (
@@ -735,26 +700,25 @@ function BeybladesTab() {
           ) : null,
       },
       {
-        field: 'totalWeight',
-        headerName: 'Poids',
+        field: "totalWeight",
+        headerName: "Poids",
         width: 70,
-        valueFormatter: (v: number | null) => (v ? `${v.toFixed(1)}g` : '—'),
+        valueFormatter: (v: number | null) => (v ? `${v.toFixed(1)}g` : "—"),
       },
       {
-        field: 'totalAttack',
-        headerName: 'Atk',
+        field: "totalAttack",
+        headerName: "Atk",
         width: 50,
       },
-      { field: 'totalDefense', headerName: 'Def', width: 50 },
-      { field: 'totalStamina', headerName: 'Sta', width: 50 },
-      { field: 'totalDash', headerName: 'Dsh', width: 50 },
-      { field: 'totalBurst', headerName: 'Bst', width: 50 },
+      { field: "totalDefense", headerName: "Def", width: 50 },
+      { field: "totalStamina", headerName: "Sta", width: 50 },
+      { field: "totalDash", headerName: "Dsh", width: 50 },
+      { field: "totalBurst", headerName: "Bst", width: 50 },
       {
-        field: 'product',
-        headerName: 'Produit',
+        field: "product",
+        headerName: "Produit",
         width: 130,
-        valueGetter: (_v: unknown, row: BeybladeWithParts) =>
-          row.product?.name ?? '—',
+        valueGetter: (_v: unknown, row: BeybladeWithParts) => row.product?.name ?? "—",
       },
     ],
     [],
@@ -763,10 +727,10 @@ function BeybladesTab() {
   return (
     <>
       <Stack
-        direction={{ xs: 'column', sm: 'row' }}
+        direction={{ xs: "column", sm: "row" }}
         spacing={1.5}
         sx={{
-          alignItems: { sm: 'center' },
+          alignItems: { sm: "center" },
           mb: 2,
         }}
       >
@@ -791,7 +755,7 @@ function BeybladesTab() {
           <Chip label="Beyblades enregistrés" />
         </Badge>
       </Stack>
-      <Card sx={{ height: { xs: '60vh', md: '68vh' }, overflow: 'auto' }}>
+      <Card sx={{ height: { xs: "60vh", md: "68vh" }, overflow: "auto" }}>
         <DataGrid
           rows={beyblades}
           columns={columns}
@@ -812,7 +776,7 @@ function BeybladesTab() {
 // ──── Import Tab ────
 
 function ImportTab({ onStatsChange }: { onStatsChange: () => void }) {
-  const [jsonInput, setJsonInput] = useState('');
+  const [jsonInput, setJsonInput] = useState("");
   const [importing, setImporting] = useState(false);
   const [result, setResult] = useState<{
     created: number;
@@ -841,11 +805,11 @@ function ImportTab({ onStatsChange }: { onStatsChange: () => void }) {
       setResult(res);
       showToast(
         `Import terminé : ${res.created} créées, ${res.updated} mises à jour`,
-        res.errors.length > 0 ? 'warning' : 'success',
+        res.errors.length > 0 ? "warning" : "success",
       );
       onStatsChange();
     } catch (err) {
-      showToast(`Erreur JSON : ${String(err)}`, 'error');
+      showToast(`Erreur JSON : ${String(err)}`, "error");
     } finally {
       setImporting(false);
     }
@@ -854,18 +818,18 @@ function ImportTab({ onStatsChange }: { onStatsChange: () => void }) {
   const exampleJson = JSON.stringify(
     [
       {
-        name: 'Dran Sword',
-        type: 'BLADE',
-        system: 'BX',
-        beyType: 'ATTACK',
+        name: "Dran Sword",
+        type: "BLADE",
+        system: "BX",
+        beyType: "ATTACK",
         weight: 28.5,
-        spinDirection: 'Right',
-        attack: '7',
-        defense: '3',
-        stamina: '1',
-        dash: '5',
-        burst: '4',
-        imageUrl: 'https://...',
+        spinDirection: "Right",
+        attack: "7",
+        defense: "3",
+        stamina: "1",
+        dash: "5",
+        burst: "4",
+        imageUrl: "https://...",
       },
     ],
     null,
@@ -881,7 +845,7 @@ function ImportTab({ onStatsChange }: { onStatsChange: () => void }) {
               variant="h6"
               gutterBottom
               sx={{
-                fontWeight: 'bold',
+                fontWeight: "bold",
               }}
             >
               Import en masse (JSON)
@@ -889,27 +853,17 @@ function ImportTab({ onStatsChange }: { onStatsChange: () => void }) {
             <Typography
               variant="body2"
               sx={{
-                color: 'text.secondary',
+                color: "text.secondary",
                 mb: 2,
               }}
             >
-              Importez un tableau JSON de pièces. Les pièces existantes (par
-              externalId) seront mises à jour, les nouvelles seront créées.
+              Importez un tableau JSON de pièces. Les pièces existantes (par externalId) seront
+              mises à jour, les nouvelles seront créées.
             </Typography>
 
-            <Button
-              component="label"
-              variant="outlined"
-              startIcon={<FileUpload />}
-              sx={{ mb: 2 }}
-            >
+            <Button component="label" variant="outlined" startIcon={<FileUpload />} sx={{ mb: 2 }}>
               Charger un fichier JSON
-              <input
-                type="file"
-                accept=".json"
-                hidden
-                onChange={handleFileUpload}
-              />
+              <input type="file" accept=".json" hidden onChange={handleFileUpload} />
             </Button>
 
             <TextField
@@ -921,7 +875,7 @@ function ImportTab({ onStatsChange }: { onStatsChange: () => void }) {
               placeholder="Collez votre JSON ici ou chargez un fichier..."
               sx={{
                 mb: 2,
-                '& textarea': { fontFamily: 'monospace', fontSize: '0.85rem' },
+                "& textarea": { fontFamily: "monospace", fontSize: "0.85rem" },
               }}
             />
 
@@ -930,29 +884,21 @@ function ImportTab({ onStatsChange }: { onStatsChange: () => void }) {
                 variant="contained"
                 onClick={handleImport}
                 disabled={importing || !jsonInput.trim()}
-                startIcon={
-                  importing ? <CircularProgress size={20} /> : <FileUpload />
-                }
+                startIcon={importing ? <CircularProgress size={20} /> : <FileUpload />}
               >
-                {importing ? 'Import en cours...' : 'Importer'}
+                {importing ? "Import en cours..." : "Importer"}
               </Button>
-              <Button
-                variant="outlined"
-                onClick={() => setJsonInput(exampleJson)}
-              >
+              <Button variant="outlined" onClick={() => setJsonInput(exampleJson)}>
                 Voir exemple
               </Button>
             </Stack>
 
             {result && (
               <Box sx={{ mt: 3 }}>
-                <Alert
-                  severity={result.errors.length > 0 ? 'warning' : 'success'}
-                >
+                <Alert severity={result.errors.length > 0 ? "warning" : "success"}>
                   <strong>
-                    {result.created} créée{result.created !== 1 ? 's' : ''},{' '}
-                    {result.updated} mise{result.updated !== 1 ? 's' : ''} à
-                    jour
+                    {result.created} créée{result.created !== 1 ? "s" : ""}, {result.updated} mise
+                    {result.updated !== 1 ? "s" : ""} à jour
                   </strong>
                   {result.errors.length > 0 && (
                     <Box sx={{ mt: 1 }}>
@@ -961,7 +907,7 @@ function ImportTab({ onStatsChange }: { onStatsChange: () => void }) {
                           key={i}
                           variant="caption"
                           sx={{
-                            display: 'block',
+                            display: "block",
                           }}
                         >
                           {e}
@@ -983,7 +929,7 @@ function ImportTab({ onStatsChange }: { onStatsChange: () => void }) {
                 variant="subtitle2"
                 gutterBottom
                 sx={{
-                  fontWeight: 'bold',
+                  fontWeight: "bold",
                 }}
               >
                 Format attendu
@@ -991,7 +937,7 @@ function ImportTab({ onStatsChange }: { onStatsChange: () => void }) {
               <Typography
                 variant="body2"
                 sx={{
-                  color: 'text.secondary',
+                  color: "text.secondary",
                 }}
               >
                 Tableau JSON avec les champs suivants :
@@ -1001,11 +947,11 @@ function ImportTab({ onStatsChange }: { onStatsChange: () => void }) {
                 sx={{
                   mt: 1,
                   p: 1.5,
-                  bgcolor: '#0d1117',
-                  color: '#c9d1d9',
+                  bgcolor: "#0d1117",
+                  color: "#c9d1d9",
                   borderRadius: 1,
-                  fontSize: '0.75rem',
-                  overflow: 'auto',
+                  fontSize: "0.75rem",
+                  overflow: "auto",
                   maxHeight: 300,
                 }}
               >
@@ -1036,10 +982,9 @@ function ImportTab({ onStatsChange }: { onStatsChange: () => void }) {
           </Card>
 
           <Alert severity="info">
-            Les champs <strong>name</strong> et <strong>type</strong> sont
-            obligatoires. Tous les autres sont optionnels. L'
-            <strong>externalId</strong> est généré automatiquement si absent
-            (format: type-nom).
+            Les champs <strong>name</strong> et <strong>type</strong> sont obligatoires. Tous les
+            autres sont optionnels. L'
+            <strong>externalId</strong> est généré automatiquement si absent (format: type-nom).
           </Alert>
         </Stack>
       </Grid>

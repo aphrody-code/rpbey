@@ -3,21 +3,21 @@
  * Displays most used Beyblade parts
  */
 
-'use client';
+"use client";
 
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Chip from '@mui/material/Chip';
-import Divider from '@mui/material/Divider';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
-import { type UserStats } from '@/lib/stats-types';
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Chip from "@mui/material/Chip";
+import Divider from "@mui/material/Divider";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
+import { type UserStats } from "@/lib/stats-types";
 
 interface FavoritePartsCardProps {
-  blades: UserStats['mostUsedBlades'];
-  ratchets: UserStats['mostUsedRatchets'];
-  bits: UserStats['mostUsedBits'];
+  blades: UserStats["mostUsedBlades"];
+  ratchets: UserStats["mostUsedRatchets"];
+  bits: UserStats["mostUsedBits"];
 }
 
 function PartSection({
@@ -26,7 +26,7 @@ function PartSection({
   parts,
 }: {
   title: string;
-  color: 'primary' | 'secondary' | 'success';
+  color: "primary" | "secondary" | "success";
   parts: { partId: string; name: string; count: number }[];
 }) {
   if (parts.length === 0) {
@@ -36,7 +36,7 @@ function PartSection({
           variant="subtitle2"
           gutterBottom
           sx={{
-            color: 'text.secondary',
+            color: "text.secondary",
           }}
         >
           {title}
@@ -44,7 +44,7 @@ function PartSection({
         <Typography
           variant="body2"
           sx={{
-            color: 'text.secondary',
+            color: "text.secondary",
           }}
         >
           Aucune donnée
@@ -59,7 +59,7 @@ function PartSection({
         variant="subtitle2"
         gutterBottom
         sx={{
-          color: 'text.secondary',
+          color: "text.secondary",
         }}
       >
         {title}
@@ -69,31 +69,31 @@ function PartSection({
         spacing={1}
         useFlexGap
         sx={{
-          flexWrap: 'wrap',
+          flexWrap: "wrap",
         }}
       >
         {parts.map((part, index) => (
           <Chip
             key={part.partId}
             label={
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+              <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
                 <span>{part.name}</span>
                 <Box
                   component="span"
                   sx={{
-                    bgcolor: 'action.hover',
+                    bgcolor: "action.hover",
                     px: 0.75,
                     py: 0.25,
                     borderRadius: 1,
-                    fontSize: '0.75rem',
+                    fontSize: "0.75rem",
                   }}
                 >
                   ×{part.count}
                 </Box>
               </Box>
             }
-            color={index === 0 ? color : 'default'}
-            variant={index === 0 ? 'filled' : 'outlined'}
+            color={index === 0 ? color : "default"}
+            variant={index === 0 ? "filled" : "outlined"}
             size="small"
           />
         ))}
@@ -102,11 +102,7 @@ function PartSection({
   );
 }
 
-export function FavoritePartsCard({
-  blades,
-  ratchets,
-  bits,
-}: FavoritePartsCardProps) {
+export function FavoritePartsCard({ blades, ratchets, bits }: FavoritePartsCardProps) {
   const hasData = blades.length > 0 || ratchets.length > 0 || bits.length > 0;
 
   return (
@@ -116,7 +112,7 @@ export function FavoritePartsCard({
           variant="h6"
           gutterBottom
           sx={{
-            fontWeight: 'bold',
+            fontWeight: "bold",
           }}
         >
           Pièces favorites
@@ -125,8 +121,8 @@ export function FavoritePartsCard({
         {!hasData ? (
           <Typography
             sx={{
-              color: 'text.secondary',
-              textAlign: 'center',
+              color: "text.secondary",
+              textAlign: "center",
               py: 4,
             }}
           >

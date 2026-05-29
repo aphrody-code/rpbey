@@ -8,22 +8,22 @@
  */
 
 import {
-	fetchAndParseAsScrapedTournament,
-	fetchAndParseModule as fetchAndParseModuleFromPackage,
-	parseModuleToScrapedTournament,
-	type FetchAndParseOptions,
-	type HtmlRewriterModuleData,
-} from '@/lib/challonge-vendor/transports/htmlrewriter';
-import type { ScrapedTournament } from '@/lib/challonge-vendor/types';
+  fetchAndParseAsScrapedTournament,
+  fetchAndParseModule as fetchAndParseModuleFromPackage,
+  parseModuleToScrapedTournament,
+  type FetchAndParseOptions,
+  type HtmlRewriterModuleData,
+} from "@/lib/challonge-vendor/transports/htmlrewriter";
+import type { ScrapedTournament } from "@/lib/challonge-vendor/types";
 
 import { challongeToViewerData } from "./challonge";
 import type { ViewerData } from "./types";
 
 export {
-	fetchAndParseAsScrapedTournament,
-	parseModuleToScrapedTournament,
-	type FetchAndParseOptions,
-	type HtmlRewriterModuleData,
+  fetchAndParseAsScrapedTournament,
+  parseModuleToScrapedTournament,
+  type FetchAndParseOptions,
+  type HtmlRewriterModuleData,
 };
 
 /**
@@ -37,12 +37,12 @@ export const fetchAndParseModule = fetchAndParseModuleFromPackage;
  * On re-derive depuis la forme canonique du package.
  */
 export interface ChallongeHtmlRewriterResult {
-	tournamentSlug: string;
-	tournamentName: string | null;
-	tournamentType: string | null;
-	groupsCount: number;
-	participantsCount: number;
-	matchesCount: number;
+  tournamentSlug: string;
+  tournamentName: string | null;
+  tournamentType: string | null;
+  groupsCount: number;
+  participantsCount: number;
+  matchesCount: number;
 }
 
 /**
@@ -50,27 +50,27 @@ export interface ChallongeHtmlRewriterResult {
  * `<BracketsViewer>`.
  */
 export async function fetchAndConvertToViewerData(
-	slug: string,
-	options: FetchAndParseOptions = {},
+  slug: string,
+  options: FetchAndParseOptions = {},
 ): Promise<{
-	data: ViewerData;
-	result: ChallongeHtmlRewriterResult;
-	raw: ScrapedTournament;
+  data: ViewerData;
+  result: ChallongeHtmlRewriterResult;
+  raw: ScrapedTournament;
 }> {
-	const raw = await fetchAndParseAsScrapedTournament(slug, options);
-	const data = challongeToViewerData(raw);
+  const raw = await fetchAndParseAsScrapedTournament(slug, options);
+  const data = challongeToViewerData(raw);
 
-	const moduleData = raw.raw as HtmlRewriterModuleData;
-	const result: ChallongeHtmlRewriterResult = {
-		tournamentSlug: slug,
-		tournamentName: raw.metadata.name,
-		tournamentType: raw.metadata.type,
-		groupsCount: moduleData?.groups?.length ?? 0,
-		participantsCount: raw.participants.length,
-		matchesCount: raw.matches.length,
-	};
+  const moduleData = raw.raw as HtmlRewriterModuleData;
+  const result: ChallongeHtmlRewriterResult = {
+    tournamentSlug: slug,
+    tournamentName: raw.metadata.name,
+    tournamentType: raw.metadata.type,
+    groupsCount: moduleData?.groups?.length ?? 0,
+    participantsCount: raw.participants.length,
+    matchesCount: raw.matches.length,
+  };
 
-	return { data, result, raw };
+  return { data, result, raw };
 }
 
 /**
@@ -78,9 +78,7 @@ export async function fetchAndConvertToViewerData(
  * `htmlRewriterResultToViewerData(result)`. Convertit la donnee module en
  * ViewerData via la projection canonique.
  */
-export function htmlRewriterResultToViewerData(
-	moduleData: HtmlRewriterModuleData,
-): ViewerData {
-	const scraped = parseModuleToScrapedTournament(moduleData);
-	return challongeToViewerData(scraped);
+export function htmlRewriterResultToViewerData(moduleData: HtmlRewriterModuleData): ViewerData {
+  const scraped = parseModuleToScrapedTournament(moduleData);
+  return challongeToViewerData(scraped);
 }

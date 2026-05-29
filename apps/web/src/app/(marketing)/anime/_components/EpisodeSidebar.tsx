@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { PlayArrow } from '@mui/icons-material';
-import { Box, Typography } from '@mui/material';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useEffect, useRef } from 'react';
+import { PlayArrow } from "@mui/icons-material";
+import { Box, Typography } from "@mui/material";
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useRef } from "react";
 
 interface SidebarEpisode {
   id: string;
@@ -26,7 +26,7 @@ interface EpisodeSidebarProps {
 function formatDuration(seconds: number): string {
   const m = Math.floor(seconds / 60);
   const s = seconds % 60;
-  return `${m}:${s.toString().padStart(2, '0')}`;
+  return `${m}:${s.toString().padStart(2, "0")}`;
 }
 
 function episodeGradient(num: number): string {
@@ -46,8 +46,8 @@ export function EpisodeSidebar({
   useEffect(() => {
     if (activeRef.current) {
       activeRef.current.scrollIntoView({
-        block: 'center',
-        behavior: 'instant',
+        block: "center",
+        behavior: "instant",
       });
     }
   }, []);
@@ -55,12 +55,12 @@ export function EpisodeSidebar({
   return (
     <Box
       sx={{
-        bgcolor: 'rgba(255,255,255,0.02)',
-        border: '1px solid rgba(255,255,255,0.06)',
+        bgcolor: "rgba(255,255,255,0.02)",
+        border: "1px solid rgba(255,255,255,0.06)",
         borderRadius: 3,
-        overflow: 'hidden',
-        display: 'flex',
-        flexDirection: 'column',
+        overflow: "hidden",
+        display: "flex",
+        flexDirection: "column",
         maxHeight: { lg: 580 },
       }}
     >
@@ -69,8 +69,8 @@ export function EpisodeSidebar({
         sx={{
           px: 2,
           py: 1.5,
-          borderBottom: '1px solid rgba(255,255,255,0.06)',
-          bgcolor: 'rgba(255,255,255,0.02)',
+          borderBottom: "1px solid rgba(255,255,255,0.06)",
+          bgcolor: "rgba(255,255,255,0.02)",
           flexShrink: 0,
         }}
       >
@@ -78,28 +78,25 @@ export function EpisodeSidebar({
           variant="body2"
           sx={{
             fontWeight: 800,
-            color: 'white',
-            fontSize: '0.85rem',
+            color: "white",
+            fontSize: "0.85rem",
           }}
         >
           {seriesTitle}
         </Typography>
-        <Typography
-          variant="caption"
-          sx={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.7rem' }}
-        >
+        <Typography variant="caption" sx={{ color: "rgba(255,255,255,0.4)", fontSize: "0.7rem" }}>
           {episodeCount} épisodes
         </Typography>
       </Box>
       {/* Episode list */}
       <Box
         sx={{
-          overflow: 'auto',
+          overflow: "auto",
           flex: 1,
-          '&::-webkit-scrollbar': { width: 4 },
-          '&::-webkit-scrollbar-track': { bgcolor: 'transparent' },
-          '&::-webkit-scrollbar-thumb': {
-            bgcolor: 'rgba(255,255,255,0.1)',
+          "&::-webkit-scrollbar": { width: 4 },
+          "&::-webkit-scrollbar-track": { bgcolor: "transparent" },
+          "&::-webkit-scrollbar-thumb": {
+            bgcolor: "rgba(255,255,255,0.1)",
             borderRadius: 2,
           },
         }}
@@ -110,40 +107,36 @@ export function EpisodeSidebar({
             <Link
               key={ep.id}
               href={`/anime/${seriesSlug}/${ep.number}`}
-              style={{ textDecoration: 'none' }}
+              style={{ textDecoration: "none" }}
             >
               <Box
                 ref={isCurrent ? activeRef : undefined}
                 sx={{
-                  display: 'flex',
+                  display: "flex",
                   gap: 1.5,
                   px: 1.5,
                   py: 1,
-                  cursor: 'pointer',
-                  bgcolor: isCurrent
-                    ? 'rgba(var(--rpb-primary-rgb), 0.12)'
-                    : 'transparent',
-                  borderLeft: isCurrent
-                    ? '3px solid var(--rpb-primary)'
-                    : '3px solid transparent',
-                  transition: 'all 0.15s ease',
-                  '&:hover': {
+                  cursor: "pointer",
+                  bgcolor: isCurrent ? "rgba(var(--rpb-primary-rgb), 0.12)" : "transparent",
+                  borderLeft: isCurrent ? "3px solid var(--rpb-primary)" : "3px solid transparent",
+                  transition: "all 0.15s ease",
+                  "&:hover": {
                     bgcolor: isCurrent
-                      ? 'rgba(var(--rpb-primary-rgb), 0.15)'
-                      : 'rgba(255,255,255,0.04)',
+                      ? "rgba(var(--rpb-primary-rgb), 0.15)"
+                      : "rgba(255,255,255,0.04)",
                   },
                 }}
               >
                 {/* Thumbnail */}
                 <Box
                   sx={{
-                    position: 'relative',
+                    position: "relative",
                     width: 110,
                     minWidth: 110,
-                    aspectRatio: '16/9',
+                    aspectRatio: "16/9",
                     borderRadius: 1.5,
-                    overflow: 'hidden',
-                    bgcolor: 'rgba(255,255,255,0.03)',
+                    overflow: "hidden",
+                    bgcolor: "rgba(255,255,255,0.03)",
                     flexShrink: 0,
                   }}
                 >
@@ -153,24 +146,24 @@ export function EpisodeSidebar({
                       alt={ep.titleFr || ep.title}
                       fill
                       sizes="110px"
-                      style={{ objectFit: 'cover' }}
+                      style={{ objectFit: "cover" }}
                     />
                   ) : (
                     <Box
                       sx={{
-                        width: '100%',
-                        height: '100%',
+                        width: "100%",
+                        height: "100%",
                         background: episodeGradient(ep.number),
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
                       }}
                     >
                       <Typography
                         sx={{
-                          fontSize: '1.2rem',
+                          fontSize: "1.2rem",
                           fontWeight: 900,
-                          color: 'rgba(255,255,255,0.08)',
+                          color: "rgba(255,255,255,0.08)",
                         }}
                       >
                         {ep.number}
@@ -180,30 +173,30 @@ export function EpisodeSidebar({
                   {isCurrent && (
                     <Box
                       sx={{
-                        position: 'absolute',
+                        position: "absolute",
                         inset: 0,
-                        bgcolor: 'rgba(0,0,0,0.5)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
+                        bgcolor: "rgba(0,0,0,0.5)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
                       }}
                     >
-                      <PlayArrow sx={{ color: 'white', fontSize: 22 }} />
+                      <PlayArrow sx={{ color: "white", fontSize: 22 }} />
                     </Box>
                   )}
                   {ep.duration > 0 && (
                     <Box
                       sx={{
-                        position: 'absolute',
+                        position: "absolute",
                         bottom: 3,
                         right: 3,
                         px: 0.5,
                         py: 0.1,
                         borderRadius: 0.5,
-                        bgcolor: 'rgba(0,0,0,0.8)',
-                        fontSize: '0.55rem',
+                        bgcolor: "rgba(0,0,0,0.8)",
+                        fontSize: "0.55rem",
                         fontWeight: 600,
-                        color: 'rgba(255,255,255,0.8)',
+                        color: "rgba(255,255,255,0.8)",
                       }}
                     >
                       {formatDuration(ep.duration)}
@@ -216,11 +209,9 @@ export function EpisodeSidebar({
                   <Typography
                     variant="caption"
                     sx={{
-                      color: isCurrent
-                        ? 'var(--rpb-primary)'
-                        : 'rgba(255,255,255,0.4)',
+                      color: isCurrent ? "var(--rpb-primary)" : "rgba(255,255,255,0.4)",
                       fontWeight: 700,
-                      fontSize: '0.65rem',
+                      fontSize: "0.65rem",
                     }}
                   >
                     Épisode {ep.number}
@@ -228,15 +219,15 @@ export function EpisodeSidebar({
                   <Typography
                     variant="body2"
                     sx={{
-                      color: isCurrent ? 'white' : 'rgba(255,255,255,0.7)',
+                      color: isCurrent ? "white" : "rgba(255,255,255,0.7)",
                       fontWeight: isCurrent ? 700 : 500,
-                      fontSize: '0.78rem',
+                      fontSize: "0.78rem",
                       lineHeight: 1.3,
-                      overflow: 'hidden',
-                      textOverflow: 'ellipsis',
-                      display: '-webkit-box',
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      display: "-webkit-box",
                       WebkitLineClamp: 2,
-                      WebkitBoxOrient: 'vertical',
+                      WebkitBoxOrient: "vertical",
                     }}
                   >
                     {ep.titleFr || ep.title}

@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import Avatar from '@mui/material/Avatar';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Image from 'next/image';
+import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Image from "next/image";
 
 interface VideoCardProps {
   title: string;
@@ -14,13 +14,13 @@ interface VideoCardProps {
   views: number | string;
   ago: string;
   url?: string;
-  platform?: 'youtube' | 'twitch';
+  platform?: "youtube" | "twitch";
   onClick?: () => void;
 }
 
 const formatViews = (views: number | string): string => {
-  if (typeof views === 'string') return views;
-  return new Intl.NumberFormat('fr-FR', { notation: 'compact' }).format(views);
+  if (typeof views === "string") return views;
+  return new Intl.NumberFormat("fr-FR", { notation: "compact" }).format(views);
 };
 
 export function VideoCard({
@@ -35,13 +35,13 @@ export function VideoCard({
   platform,
   onClick,
 }: VideoCardProps) {
-  const Wrapper = url && !onClick ? 'a' : 'div';
+  const Wrapper = url && !onClick ? "a" : "div";
   const wrapperProps =
     url && !onClick
       ? {
           href: url,
-          target: '_blank' as const,
-          rel: 'noopener noreferrer',
+          target: "_blank" as const,
+          rel: "noopener noreferrer",
         }
       : {};
 
@@ -51,12 +51,12 @@ export function VideoCard({
       {...wrapperProps}
       onClick={onClick}
       sx={{
-        display: 'block',
-        textDecoration: 'none',
-        color: 'inherit',
-        cursor: 'pointer',
-        '&:hover .vc-thumb img': {
-          filter: 'brightness(0.8)',
+        display: "block",
+        textDecoration: "none",
+        color: "inherit",
+        cursor: "pointer",
+        "&:hover .vc-thumb img": {
+          filter: "brightness(0.8)",
         },
       }}
     >
@@ -64,11 +64,11 @@ export function VideoCard({
       <Box
         className="vc-thumb"
         sx={{
-          position: 'relative',
-          aspectRatio: '16/9',
+          position: "relative",
+          aspectRatio: "16/9",
           borderRadius: { xs: 2, sm: 2.5 },
-          overflow: 'hidden',
-          bgcolor: '#0a0a0a',
+          overflow: "hidden",
+          bgcolor: "#0a0a0a",
         }}
       >
         <Image
@@ -77,24 +77,24 @@ export function VideoCard({
           fill
           sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 25vw"
           loading="lazy"
-          style={{ objectFit: 'cover', transition: 'filter 0.2s' }}
+          style={{ objectFit: "cover", transition: "filter 0.2s" }}
         />
 
         {/* Duration overlay */}
         <Box
           sx={{
-            position: 'absolute',
+            position: "absolute",
             bottom: 6,
             right: 6,
-            bgcolor: 'rgba(0,0,0,0.85)',
-            color: '#fff',
+            bgcolor: "rgba(0,0,0,0.85)",
+            color: "#fff",
             borderRadius: 0.5,
             px: 0.6,
             py: 0.15,
-            fontSize: '0.72rem',
+            fontSize: "0.72rem",
             fontWeight: 700,
             lineHeight: 1.5,
-            letterSpacing: '0.02em',
+            letterSpacing: "0.02em",
           }}
         >
           {duration}
@@ -104,35 +104,35 @@ export function VideoCard({
         {platform && (
           <Box
             sx={{
-              position: 'absolute',
+              position: "absolute",
               top: 6,
               left: 6,
-              bgcolor: platform === 'twitch' ? '#9146ff' : '#ff0000',
-              color: '#fff',
+              bgcolor: platform === "twitch" ? "#9146ff" : "#ff0000",
+              color: "#fff",
               borderRadius: 0.5,
               px: 0.5,
               py: 0.1,
-              fontSize: '0.6rem',
+              fontSize: "0.6rem",
               fontWeight: 900,
-              textTransform: 'uppercase',
+              textTransform: "uppercase",
               letterSpacing: 0.5,
             }}
           >
-            {platform === 'twitch' ? 'Twitch' : 'YT'}
+            {platform === "twitch" ? "Twitch" : "YT"}
           </Box>
         )}
       </Box>
 
       {/* Meta: avatar + title + info */}
-      <Box sx={{ display: 'flex', mt: 1.2, gap: 1.2 }}>
+      <Box sx={{ display: "flex", mt: 1.2, gap: 1.2 }}>
         <Avatar
           src={channelAvatar}
           alt={channelName}
           sx={{
             width: 36,
             height: 36,
-            bgcolor: 'grey.800',
-            fontSize: '0.85rem',
+            bgcolor: "grey.800",
+            fontSize: "0.85rem",
             fontWeight: 700,
             flexShrink: 0,
           }}
@@ -144,13 +144,13 @@ export function VideoCard({
           <Typography
             sx={{
               fontWeight: 600,
-              fontSize: { xs: '0.85rem', sm: '0.9rem' },
+              fontSize: { xs: "0.85rem", sm: "0.9rem" },
               lineHeight: 1.3,
-              display: '-webkit-box',
+              display: "-webkit-box",
               WebkitLineClamp: 2,
-              WebkitBoxOrient: 'vertical',
-              overflow: 'hidden',
-              color: 'text.primary',
+              WebkitBoxOrient: "vertical",
+              overflow: "hidden",
+              color: "text.primary",
               mb: 0.3,
             }}
           >
@@ -159,8 +159,8 @@ export function VideoCard({
 
           <Typography
             sx={{
-              fontSize: '0.78rem',
-              color: 'text.secondary',
+              fontSize: "0.78rem",
+              color: "text.secondary",
               lineHeight: 1.4,
             }}
           >
@@ -169,8 +169,8 @@ export function VideoCard({
 
           <Typography
             sx={{
-              fontSize: '0.78rem',
-              color: 'text.secondary',
+              fontSize: "0.78rem",
+              color: "text.secondary",
               lineHeight: 1.4,
             }}
           >

@@ -1,18 +1,18 @@
-'use client';
+"use client";
 
-import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
-import DownloadIcon from '@mui/icons-material/Download';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Chip from '@mui/material/Chip';
-import CircularProgress from '@mui/material/CircularProgress';
-import Stack from '@mui/material/Stack';
-import { alpha, useTheme } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
-import { useCallback, useEffect, useState } from 'react';
-import { type Part } from '@/lib/types';
+import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
+import DownloadIcon from "@mui/icons-material/Download";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Chip from "@mui/material/Chip";
+import CircularProgress from "@mui/material/CircularProgress";
+import Stack from "@mui/material/Stack";
+import { alpha, useTheme } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
+import { useCallback, useEffect, useState } from "react";
+import { type Part } from "@/lib/types";
 
 interface RandomComboData {
   blade: Part;
@@ -28,13 +28,13 @@ export function RandomCombo() {
   const generateCombo = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await fetch('/api/parts/random');
+      const res = await fetch("/api/parts/random");
       if (res.ok) {
         const data = await res.json();
         setCombo(data);
       }
     } catch (error) {
-      console.error('Failed to generate combo', error);
+      console.error("Failed to generate combo", error);
     } finally {
       // Small artificial delay for the "roulette" effect
       setTimeout(() => setLoading(false), 500);
@@ -51,32 +51,32 @@ export function RandomCombo() {
       elevation={0}
       sx={{
         maxWidth: 600,
-        mx: 'auto',
+        mx: "auto",
         borderRadius: 5,
-        border: '1px solid',
-        borderColor: 'divider',
+        border: "1px solid",
+        borderColor: "divider",
         background: `linear-gradient(180deg, ${alpha(
           theme.palette.background.paper,
           0.9,
         )} 0%, ${alpha(theme.palette.background.default, 0.5)} 100%)`,
-        backdropFilter: 'blur(20px)',
-        overflow: 'visible',
+        backdropFilter: "blur(20px)",
+        overflow: "visible",
       }}
     >
-      <CardContent sx={{ textAlign: 'center', p: { xs: 3, md: 5 } }}>
+      <CardContent sx={{ textAlign: "center", p: { xs: 3, md: 5 } }}>
         <Typography
           variant="h4"
           gutterBottom
           sx={{
-            fontWeight: '900',
-            letterSpacing: '-0.02em',
+            fontWeight: "900",
+            letterSpacing: "-0.02em",
           }}
         >
           Générateur de Combo
         </Typography>
         <Typography
           sx={{
-            color: 'text.secondary',
+            color: "text.secondary",
             mb: 5,
           }}
         >
@@ -89,34 +89,34 @@ export function RandomCombo() {
             mb: 5,
             borderRadius: 4,
             bgcolor: alpha(theme.palette.primary.main, 0.03),
-            overflow: 'hidden',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            border: '2px dashed',
-            borderColor: loading ? 'primary.main' : 'divider',
-            position: 'relative',
-            transition: 'all 0.3s ease',
+            overflow: "hidden",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            border: "2px dashed",
+            borderColor: loading ? "primary.main" : "divider",
+            position: "relative",
+            transition: "all 0.3s ease",
           }}
         >
           {loading ? (
             <Stack
               spacing={2}
               sx={{
-                alignItems: 'center',
+                alignItems: "center",
               }}
             >
               <CircularProgress size={60} thickness={5} />
               <Typography
                 variant="h6"
                 sx={{
-                  fontWeight: 'bold',
-                  animation: 'pulse 1.5s infinite',
+                  fontWeight: "bold",
+                  animation: "pulse 1.5s infinite",
 
-                  '@keyframes pulse': {
-                    '0%': { opacity: 0.5 },
-                    '50%': { opacity: 1 },
-                    '100%': { opacity: 0.5 },
+                  "@keyframes pulse": {
+                    "0%": { opacity: 0.5 },
+                    "50%": { opacity: 1 },
+                    "100%": { opacity: 0.5 },
                   },
                 }}
               >
@@ -128,9 +128,9 @@ export function RandomCombo() {
               variant="h1"
               sx={{
                 opacity: 0.05,
-                fontSize: '10rem',
+                fontSize: "10rem",
                 fontWeight: 900,
-                userSelect: 'none',
+                userSelect: "none",
               }}
             >
               RPB
@@ -146,10 +146,10 @@ export function RandomCombo() {
               sx={{
                 p: 3,
                 borderRadius: 3,
-                border: '1px solid',
-                borderColor: 'primary.light',
+                border: "1px solid",
+                borderColor: "primary.light",
                 bgcolor: alpha(theme.palette.primary.main, 0.05),
-                transform: 'scale(1.05)',
+                transform: "scale(1.05)",
                 boxShadow: `0 10px 30px ${alpha(theme.palette.primary.main, 0.1)}`,
               }}
             >
@@ -157,9 +157,9 @@ export function RandomCombo() {
                 variant="caption"
                 color="primary"
                 sx={{
-                  fontWeight: '900',
-                  letterSpacing: '0.2em',
-                  textTransform: 'uppercase',
+                  fontWeight: "900",
+                  letterSpacing: "0.2em",
+                  textTransform: "uppercase",
                 }}
               >
                 Blade
@@ -167,7 +167,7 @@ export function RandomCombo() {
               <Typography
                 variant="h5"
                 sx={{
-                  fontWeight: '800',
+                  fontWeight: "800",
                 }}
               >
                 {combo.blade.name}
@@ -180,17 +180,17 @@ export function RandomCombo() {
                   flex: 1,
                   p: 2,
                   borderRadius: 3,
-                  border: '1px solid',
-                  borderColor: 'divider',
-                  bgcolor: 'background.paper',
+                  border: "1px solid",
+                  borderColor: "divider",
+                  bgcolor: "background.paper",
                 }}
               >
                 <Typography
                   variant="caption"
                   sx={{
-                    color: 'text.secondary',
-                    fontWeight: 'bold',
-                    letterSpacing: '0.1em',
+                    color: "text.secondary",
+                    fontWeight: "bold",
+                    letterSpacing: "0.1em",
                   }}
                 >
                   RATCHET
@@ -198,7 +198,7 @@ export function RandomCombo() {
                 <Typography
                   variant="h6"
                   sx={{
-                    fontWeight: 'bold',
+                    fontWeight: "bold",
                   }}
                 >
                   {combo.ratchet.name}
@@ -209,17 +209,17 @@ export function RandomCombo() {
                   flex: 1,
                   p: 2,
                   borderRadius: 3,
-                  border: '1px solid',
-                  borderColor: 'divider',
-                  bgcolor: 'background.paper',
+                  border: "1px solid",
+                  borderColor: "divider",
+                  bgcolor: "background.paper",
                 }}
               >
                 <Typography
                   variant="caption"
                   sx={{
-                    color: 'text.secondary',
-                    fontWeight: 'bold',
-                    letterSpacing: '0.1em',
+                    color: "text.secondary",
+                    fontWeight: "bold",
+                    letterSpacing: "0.1em",
                   }}
                 >
                   BIT
@@ -227,7 +227,7 @@ export function RandomCombo() {
                 <Typography
                   variant="h6"
                   sx={{
-                    fontWeight: 'bold',
+                    fontWeight: "bold",
                   }}
                 >
                   {combo.bit.name}
@@ -235,12 +235,12 @@ export function RandomCombo() {
               </Box>
             </Stack>
 
-            <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1 }}>
+            <Box sx={{ display: "flex", justifyContent: "center", gap: 1 }}>
               {combo.blade.beyType && (
                 <Chip
                   label={combo.blade.beyType}
                   color="primary"
-                  sx={{ fontWeight: 'bold', borderRadius: 2 }}
+                  sx={{ fontWeight: "bold", borderRadius: 2 }}
                 />
               )}
             </Box>
@@ -253,10 +253,10 @@ export function RandomCombo() {
               size="small"
               startIcon={<DownloadIcon />}
               sx={{
-                alignSelf: 'center',
+                alignSelf: "center",
                 borderRadius: 3,
                 fontWeight: 700,
-                textTransform: 'none',
+                textTransform: "none",
               }}
             >
               Télécharger en image
@@ -274,18 +274,18 @@ export function RandomCombo() {
           sx={{
             borderRadius: 4,
             py: 2,
-            fontSize: '1.1rem',
-            fontWeight: '900',
+            fontSize: "1.1rem",
+            fontWeight: "900",
             background: `linear-gradient(45deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
             boxShadow: `0 8px 25px ${alpha(theme.palette.primary.main, 0.4)}`,
-            '&:hover': {
+            "&:hover": {
               background: `linear-gradient(45deg, ${theme.palette.primary.dark}, ${theme.palette.secondary.dark})`,
-              transform: 'translateY(-2px)',
+              transform: "translateY(-2px)",
             },
-            transition: 'all 0.2s ease',
+            transition: "all 0.2s ease",
           }}
         >
-          {loading ? 'Génération...' : 'Lancer le tirage'}
+          {loading ? "Génération..." : "Lancer le tirage"}
         </Button>
       </CardContent>
     </Card>

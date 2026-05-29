@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
 
 const EpisodePlayer = dynamic(
-  () => import('./EpisodePlayer').then((m) => ({ default: m.EpisodePlayer })),
+  () => import("./EpisodePlayer").then((m) => ({ default: m.EpisodePlayer })),
   {
     ssr: false,
     loading: () => (
       <div
         style={{
-          aspectRatio: '16/9',
-          background: '#111',
+          aspectRatio: "16/9",
+          background: "#111",
           borderRadius: 12,
         }}
       />

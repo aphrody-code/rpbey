@@ -1,71 +1,67 @@
 {
-	"$schema": "https://turborepo.dev/schema.json",
-	"globalDependencies": ["tsconfig.base.json", "bunfig.toml", ".oxlintrc.json"],
-	"globalEnv": ["NODE_ENV", "PGHOST", "PGDATABASE", "PGUSER"],
-	"globalPassThroughEnv": ["PATH", "HOME", "TERM", "CI", "GITHUB_TOKEN"],
-	"ui": "tui",
-	"daemon": true,
-	"cacheDir": ".turbo/cache",
-	"remoteCache": { "enabled": false },
-	"tasks": {
-		"build": {
-			"dependsOn": ["^build", "db:generate"],
-			"inputs": [
-				"$TURBO_DEFAULT$",
-				"!**/*.test.{ts,tsx,js,jsx}",
-				"!**/*.spec.{ts,tsx,js,jsx}",
-				"!**/__tests__/**",
-				"!**/*.md",
-				"!.next/cache/**",
-				"!coverage/**"
-			],
-			"outputs": [".next/**", "!.next/cache/**", "dist/**", "build/**"]
-		},
-		"db:generate": {
-			"cache": true,
-			"inputs": [
-				"**/prisma/schema.prisma",
-				"**/drizzle.config.ts",
-				"**/src/schema*.ts"
-			],
-			"outputs": ["src/generated/**", "node_modules/.prisma/**", "drizzle/**"]
-		},
-		"dev": {
-			"cache": false,
-			"persistent": true,
-			"dependsOn": ["^build"]
-		},
-		"lint": {
-			"inputs": [
-				"$TURBO_DEFAULT$",
-				".oxlintrc.json",
-				"eslint.config.*",
-				"!**/*.md",
-				"!.next/**",
-				"!dist/**",
-				"!build/**"
-			],
-			"outputLogs": "hash-only",
-			"outputs": []
-		},
-		"type-check": {
-			"dependsOn": ["^build", "db:generate"],
-			"inputs": [
-				"$TURBO_DEFAULT$",
-				"tsconfig.json",
-				"tsconfig.base.json",
-				"!**/*.md",
-				"!.next/**",
-				"!dist/**"
-			],
-			"outputLogs": "errors-only",
-			"outputs": []
-		},
-		"test": {
-			"dependsOn": ["^build"],
-			"inputs": ["$TURBO_DEFAULT$", "vitest.config.*"],
-			"outputLogs": "new-only",
-			"outputs": ["coverage/**"]
-		}
-	}
+  "$schema": "https://turborepo.dev/schema.json",
+  "globalDependencies": ["tsconfig.base.json", "bunfig.toml", ".oxlintrc.json"],
+  "globalEnv": ["NODE_ENV", "PGHOST", "PGDATABASE", "PGUSER"],
+  "globalPassThroughEnv": ["PATH", "HOME", "TERM", "CI", "GITHUB_TOKEN"],
+  "ui": "tui",
+  "daemon": true,
+  "cacheDir": ".turbo/cache",
+  "remoteCache": { "enabled": false },
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build", "db:generate"],
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        "!**/*.test.{ts,tsx,js,jsx}",
+        "!**/*.spec.{ts,tsx,js,jsx}",
+        "!**/__tests__/**",
+        "!**/*.md",
+        "!.next/cache/**",
+        "!coverage/**"
+      ],
+      "outputs": [".next/**", "!.next/cache/**", "dist/**", "build/**"]
+    },
+    "db:generate": {
+      "cache": true,
+      "inputs": ["**/prisma/schema.prisma", "**/drizzle.config.ts", "**/src/schema*.ts"],
+      "outputs": ["src/generated/**", "node_modules/.prisma/**", "drizzle/**"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true,
+      "dependsOn": ["^build"]
+    },
+    "lint": {
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        ".oxlintrc.json",
+        "eslint.config.*",
+        "!**/*.md",
+        "!.next/**",
+        "!dist/**",
+        "!build/**"
+      ],
+      "outputLogs": "hash-only",
+      "outputs": []
+    },
+    "type-check": {
+      "dependsOn": ["^build", "db:generate"],
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        "tsconfig.json",
+        "tsconfig.base.json",
+        "!**/*.md",
+        "!.next/**",
+        "!dist/**"
+      ],
+      "outputLogs": "errors-only",
+      "outputs": []
+    },
+    "test": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", "vitest.config.*"],
+      "outputLogs": "new-only",
+      "outputs": ["coverage/**"]
+    }
+  }
 }

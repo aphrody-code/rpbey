@@ -1,5 +1,5 @@
-import { type RoleType } from '@/lib/role-colors';
-import { type BotMember } from '@/types';
+import { type RoleType } from "@/lib/role-colors";
+import { type BotMember } from "@/types";
 
 export interface DiscordStats {
   onlineCount: number;

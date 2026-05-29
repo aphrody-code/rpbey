@@ -1,4 +1,4 @@
-import { type Metadata } from 'next';
+import { type Metadata } from "next";
 import {
   type BreadcrumbList,
   type Event,
@@ -7,9 +7,20 @@ import {
   type TechArticle,
   type WebSite,
   type WithContext,
-} from 'schema-dts';
+} from "schema-dts";
 
-const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://rpbey.fr';
+export const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://rpbey.fr";
+
+/**
+ * Resolve relative image path to fully-qualified absolute URL.
+ */
+export function getAbsoluteImageUrl(url?: string | null): string {
+  if (!url) return `${baseUrl}/banner.webp`;
+  if (url.startsWith("http://") || url.startsWith("https://")) {
+    return url;
+  }
+  return `${baseUrl}${url.startsWith("/") ? "" : "/"}${url}`;
+}
 
 /**
  * Generate consistent OG + Twitter metadata for a page.
@@ -19,21 +30,21 @@ export function createPageMetadata(opts: {
   description: string;
   path: string;
   image?: string;
-  type?: 'website' | 'article' | 'profile';
+  type?: "website" | "article" | "profile";
 }): Metadata {
-  const { title, description, path, type = 'website' } = opts;
-  const image = opts.image || '/banner.webp';
+  const { title, description, path, type = "website" } = opts;
+  const image = getAbsoluteImageUrl(opts.image);
   const url = `${baseUrl}${path}`;
 
   return {
     title,
     description,
-    alternates: { canonical: path || '/' },
+    alternates: { canonical: path || "/" },
     openGraph: {
       type,
-      locale: 'fr_FR',
+      locale: "fr_FR",
       url,
-      siteName: 'RPB - République Populaire du Beyblade',
+      siteName: "RPB - République Populaire du Beyblade",
       title,
       description,
       images: [
@@ -46,7 +57,7 @@ export function createPageMetadata(opts: {
       ],
     },
     twitter: {
-      card: 'summary_large_image',
+      card: "summary_large_image",
       title,
       description,
       images: [image],
@@ -63,35 +74,35 @@ export function generateTechArticleJsonLd(article: {
   url: string;
   image?: string;
   keywords?: string[];
-  proficiencyLevel?: 'Beginner' | 'Intermediate' | 'Expert';
+  proficiencyLevel?: "Beginner" | "Intermediate" | "Expert";
 }): WithContext<TechArticle> {
   return {
-    '@context': 'https://schema.org',
-    '@type': 'TechArticle',
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
     headline: article.title,
     description: article.description,
     image: article.image ? [`${baseUrl}${article.image}`] : undefined,
     datePublished: article.publishedAt,
     dateModified: article.modifiedAt,
     author: {
-      '@type': 'Person',
+      "@type": "Person",
       name: article.authorName,
       url: `${baseUrl}/notre-equipe`, // Or specific author profile
     },
     publisher: {
-      '@type': 'Organization',
-      name: 'République Populaire du Beyblade',
+      "@type": "Organization",
+      name: "République Populaire du Beyblade",
       logo: {
-        '@type': 'ImageObject',
+        "@type": "ImageObject",
         url: `${baseUrl}/logo.webp`,
       },
     },
     mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': `${baseUrl}${article.url}`,
+      "@type": "WebPage",
+      "@id": `${baseUrl}${article.url}`,
     },
-    proficiencyLevel: article.proficiencyLevel || 'Beginner',
-    keywords: article.keywords?.join(', '),
+    proficiencyLevel: article.proficiencyLevel || "Beginner",
+    keywords: article.keywords?.join(", "),
   };
 }
 
@@ -99,10 +110,10 @@ export function generateBreadcrumbJsonLd(
   items: { name: string; item: string }[],
 ): WithContext<BreadcrumbList> {
   return {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
     itemListElement: items.map((item, index) => ({
-      '@type': 'ListItem',
+      "@type": "ListItem",
       position: index + 1,
       name: item.name,
       item: `${baseUrl}${item.item}`,
@@ -117,39 +128,37 @@ export function generateEventJsonLd(event: {
   location?: string;
   url: string;
   maxAttendees?: number;
-  status?: 'upcoming' | 'active' | 'complete' | 'cancelled';
+  status?: "upcoming" | "active" | "complete" | "cancelled";
 }): WithContext<Event> {
   const eventStatus = {
-    upcoming: 'https://schema.org/EventScheduled',
-    active: 'https://schema.org/EventScheduled',
-    complete: 'https://schema.org/EventPostponed',
-    cancelled: 'https://schema.org/EventCancelled',
+    upcoming: "https://schema.org/EventScheduled",
+    active: "https://schema.org/EventScheduled",
+    complete: "https://schema.org/EventPostponed",
+    cancelled: "https://schema.org/EventCancelled",
   } as const;
 
   return {
-    '@context': 'https://schema.org',
-    '@type': 'Event',
+    "@context": "https://schema.org",
+    "@type": "Event",
     name: event.name,
     description: event.description || `Tournoi Beyblade X organisé par la RPB`,
     startDate: event.date,
-    eventStatus: event.status
-      ? eventStatus[event.status]
-      : 'https://schema.org/EventScheduled',
+    eventStatus: event.status ? eventStatus[event.status] : "https://schema.org/EventScheduled",
     eventAttendanceMode: event.location
-      ? 'https://schema.org/OfflineEventAttendanceMode'
-      : 'https://schema.org/OnlineEventAttendanceMode',
+      ? "https://schema.org/OfflineEventAttendanceMode"
+      : "https://schema.org/OnlineEventAttendanceMode",
     location: event.location
       ? {
-          '@type': 'Place',
+          "@type": "Place",
           name: event.location,
         }
       : {
-          '@type': 'VirtualLocation',
+          "@type": "VirtualLocation",
           url: `${baseUrl}${event.url}`,
         },
     organizer: {
-      '@type': 'Organization',
-      name: 'RPB - République Populaire du Beyblade',
+      "@type": "Organization",
+      name: "RPB - République Populaire du Beyblade",
       url: baseUrl,
     },
     url: `${baseUrl}${event.url}`,
@@ -160,28 +169,28 @@ export function generateEventJsonLd(event: {
 
 export function generateOrganizationJsonLd(): WithContext<SportsOrganization> {
   return {
-    '@context': 'https://schema.org',
-    '@type': 'SportsOrganization',
-    name: 'RPB - République Populaire du Beyblade',
-    alternateName: 'RPB',
+    "@context": "https://schema.org",
+    "@type": "SportsOrganization",
+    name: "RPB - République Populaire du Beyblade",
+    alternateName: "RPB",
     url: baseUrl,
     logo: `${baseUrl}/logo.webp`,
     description:
-      'La 1ère communauté Beyblade X en France. Tournois officiels, classements nationaux et événements.',
-    sport: 'Beyblade X',
+      "La 1ère communauté Beyblade X en France. Tournois officiels, classements nationaux et événements.",
+    sport: "Beyblade X",
     sameAs: [
-      'https://discord.gg/V8H2vHWeU6',
-      'https://twitter.com/RPBey_fr',
-      'https://www.instagram.com/rpb_bey',
-      'https://www.tiktok.com/@rpb_bey',
-      'https://www.twitch.tv/tv_rpb',
-      'https://www.youtube.com/@RPB-Beyblade',
+      "https://discord.gg/V8H2vHWeU6",
+      "https://twitter.com/RPBey_fr",
+      "https://www.instagram.com/rpb_bey",
+      "https://www.tiktok.com/@rpb_bey",
+      "https://www.twitch.tv/tv_rpb",
+      "https://www.youtube.com/@RPB-Beyblade",
     ],
-    foundingDate: '2024-01-01',
+    foundingDate: "2024-01-01",
     contactPoint: {
-      '@type': 'ContactPoint',
-      contactType: 'customer service',
-      url: 'https://discord.gg/V8H2vHWeU6',
+      "@type": "ContactPoint",
+      contactType: "customer service",
+      url: "https://discord.gg/V8H2vHWeU6",
     },
   };
 }
@@ -195,42 +204,42 @@ export function generateItemListJsonLd(
   }[],
 ): WithContext<ItemList> {
   return {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
+    "@context": "https://schema.org",
+    "@type": "ItemList",
     itemListElement: items.map((item) => ({
-      '@type': 'ListItem',
+      "@type": "ListItem",
       position: item.position,
       name: item.name,
       url: `${baseUrl}${item.url}`,
-      image: item.image,
+      image: getAbsoluteImageUrl(item.image),
     })),
   };
 }
 
 export function generateWebsiteJsonLd(): WithContext<WebSite> {
   return {
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    name: 'RPB - République Populaire du Beyblade',
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "RPB - République Populaire du Beyblade",
     url: baseUrl,
     author: {
-      '@type': 'Person',
-      name: 'Yoyo',
-      url: 'https://twitter.com/yoyo__goat',
+      "@type": "Person",
+      name: "Yoyo",
+      url: "https://twitter.com/yoyo__goat",
     },
     creator: {
-      '@type': 'Person',
-      name: 'Yoyo',
-      url: 'https://twitter.com/yoyo__goat',
+      "@type": "Person",
+      name: "Yoyo",
+      url: "https://twitter.com/yoyo__goat",
     },
     potentialAction: {
-      '@type': 'SearchAction',
+      "@type": "SearchAction",
       target: {
-        '@type': 'EntryPoint',
+        "@type": "EntryPoint",
         urlTemplate: `${baseUrl}/search?q={search_term_string}`,
       },
       // @ts-expect-error - query-input is required by Google but not in schema-dts
-      'query-input': 'required name=search_term_string',
+      "query-input": "required name=search_term_string",
     },
   };
 }

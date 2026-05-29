@@ -4,15 +4,15 @@
  * Based on data/beyblade_x_logic_rules.json
  */
 
-import rules from '../../data/beyblade_x_logic_rules.json';
+import rules from "../../data/beyblade_x_logic_rules.json";
 
 export type FinishType =
-  | 'xtreme_finish'
-  | 'over_finish'
-  | 'burst_finish'
-  | 'spin_finish'
-  | 'own_finish'
-  | 'penalty_point';
+  | "xtreme_finish"
+  | "over_finish"
+  | "burst_finish"
+  | "spin_finish"
+  | "own_finish"
+  | "penalty_point";
 
 export interface BattleResult {
   winnerId: string | null; // null if draw
@@ -20,11 +20,7 @@ export interface BattleResult {
   points: number;
 }
 
-export type MatchType =
-  | '4_point_match'
-  | '5_point_match'
-  | '7_point_match'
-  | 'best_of_3_4_point';
+export type MatchType = "4_point_match" | "5_point_match" | "7_point_match" | "best_of_3_4_point";
 
 export interface MatchScore {
   player1Points: number;
@@ -42,7 +38,7 @@ export function calculateMatchScore(
   player1Id: string,
   player2Id: string,
   battles: BattleResult[],
-  matchType: MatchType = '4_point_match',
+  matchType: MatchType = "4_point_match",
 ): MatchScore {
   const config = rules.match_types[matchType as keyof typeof rules.match_types];
   const score: MatchScore = {
@@ -55,7 +51,7 @@ export function calculateMatchScore(
   };
 
   // Handle standard point matches (4, 5, 7)
-  if ('points_to_win' in config) {
+  if ("points_to_win" in config) {
     const target = config.points_to_win;
     for (const battle of battles) {
       if (battle.winnerId === player1Id) {
@@ -79,7 +75,7 @@ export function calculateMatchScore(
     }
   }
   // Handle Best of 3 sets
-  else if ('points_to_win_set' in config) {
+  else if ("points_to_win_set" in config) {
     const targetPoints = config.points_to_win_set;
     const targetSets = config.sets_to_win;
 
@@ -145,9 +141,7 @@ export function validateDeck(deck: {
   const errors: string[] = [];
 
   if (deck.beys.length !== rules.deck_rules.size) {
-    errors.push(
-      `Un deck doit contenir exactement ${rules.deck_rules.size} Beys.`,
-    );
+    errors.push(`Un deck doit contenir exactement ${rules.deck_rules.size} Beys.`);
     return { isValid: false, errors };
   }
 
@@ -175,9 +169,7 @@ export function validateDeck(deck: {
     // Over Blade uniqueness
     if (bey.overBladeId) {
       if (usedParts.has(bey.overBladeId)) {
-        errors.push(
-          `L'Over Blade du Bey #${pos} est déjà utilisé dans le deck.`,
-        );
+        errors.push(`L'Over Blade du Bey #${pos} est déjà utilisé dans le deck.`);
       }
       usedParts.add(bey.overBladeId);
     }
@@ -185,16 +177,14 @@ export function validateDeck(deck: {
     // Assist Blade uniqueness
     if (bey.assistBladeId) {
       if (usedParts.has(bey.assistBladeId)) {
-        errors.push(
-          `L'Assist Blade du Bey #${pos} est déjà utilisé dans le deck.`,
-        );
+        errors.push(`L'Assist Blade du Bey #${pos} est déjà utilisé dans le deck.`);
       }
       usedParts.add(bey.assistBladeId);
     }
 
     // Lock Chip validation
     if (bey.lockChipId && bey.lockChipName) {
-      const isMetal = bey.lockChipName.toLowerCase().includes('metal');
+      const isMetal = bey.lockChipName.toLowerCase().includes("metal");
       if (isMetal) {
         metalLockChipCount++;
       }
@@ -205,9 +195,7 @@ export function validateDeck(deck: {
     // Check banned parts
     for (const banned of rules.equipment_regulations.banned_parts) {
       if (bey.bladeName?.includes(banned.part)) {
-        errors.push(
-          `Le Bey #${pos} contient une pièce bannie : ${banned.part} (${banned.reason})`,
-        );
+        errors.push(`Le Bey #${pos} contient une pièce bannie : ${banned.part} (${banned.reason})`);
       }
     }
   });

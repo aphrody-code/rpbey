@@ -1,15 +1,20 @@
-import { ActionRowBuilder, ApplicationCommandOptionType, ButtonBuilder, ButtonStyle, EmbedBuilder, MessageFlags, PermissionFlagsBits, type ButtonInteraction, type CommandInteraction, type TextChannel } from "discord.js";
 import {
-  ButtonComponent,
-  Discord,
-  Slash,
-  SlashGroup,
-  SlashOption,
-} from '@rpbey/discordx';
-import { injectable } from 'tsyringe';
+  ActionRowBuilder,
+  ApplicationCommandOptionType,
+  ButtonBuilder,
+  ButtonStyle,
+  EmbedBuilder,
+  MessageFlags,
+  PermissionFlagsBits,
+  type ButtonInteraction,
+  type CommandInteraction,
+  type TextChannel,
+} from "discord.js";
+import { ButtonComponent, Discord, Slash, SlashGroup, SlashOption } from "@rpbey/discordx";
+import { injectable } from "tsyringe";
 
-import { Colors } from '../../lib/constants.js';
-import { logger } from '../../lib/logger.js';
+import { Colors } from "../../lib/constants.js";
+import { logger } from "../../lib/logger.js";
 
 interface GiveawayData {
   messageId: string;
@@ -37,26 +42,26 @@ function pickWinners(participants: Set<string>, count: number): string[] {
 
 @Discord()
 @SlashGroup({
-  name: 'tirage',
-  description: 'Système de giveaways pour la communauté',
+  name: "tirage",
+  description: "Système de giveaways pour la communauté",
   defaultMemberPermissions: PermissionFlagsBits.ManageMessages,
 })
-@SlashGroup('tirage')
+@SlashGroup("tirage")
 @injectable()
 export class GiveawayCommand {
-  @Slash({ name: 'créer', description: 'Lancer un nouveau giveaway' })
-  @SlashGroup('tirage')
+  @Slash({ name: "créer", description: "Lancer un nouveau giveaway" })
+  @SlashGroup("tirage")
   async create(
     @SlashOption({
-      name: 'prix',
-      description: 'Le prix à gagner',
+      name: "prix",
+      description: "Le prix à gagner",
       required: true,
       type: ApplicationCommandOptionType.String,
     })
     prize: string,
     @SlashOption({
-      name: 'durée',
-      description: 'Durée en minutes (1-10080)',
+      name: "durée",
+      description: "Durée en minutes (1-10080)",
       required: true,
       type: ApplicationCommandOptionType.Integer,
       minValue: 1,
@@ -64,8 +69,8 @@ export class GiveawayCommand {
     })
     durationMinutes: number,
     @SlashOption({
-      name: 'gagnants',
-      description: 'Nombre de gagnants (défaut: 1)',
+      name: "gagnants",
+      description: "Nombre de gagnants (défaut: 1)",
       required: false,
       type: ApplicationCommandOptionType.Integer,
       minValue: 1,
@@ -77,7 +82,7 @@ export class GiveawayCommand {
     const channel = interaction.channel as TextChannel;
     if (!channel)
       return interaction.reply({
-        content: '❌ Commande uniquement dans un salon texte.',
+        content: "❌ Commande uniquement dans un salon texte.",
         flags: MessageFlags.Ephemeral,
       });
 
@@ -85,17 +90,17 @@ export class GiveawayCommand {
     const endsAtTimestamp = Math.floor(endsAt / 1000);
 
     const embed = new EmbedBuilder()
-      .setTitle('🎁 GIVEAWAY')
+      .setTitle("🎁 GIVEAWAY")
       .setDescription(
         [
           `**${prize}**`,
-          '',
-          `🏆 **${winnersCount}** gagnant${winnersCount > 1 ? 's' : ''}`,
+          "",
+          `🏆 **${winnersCount}** gagnant${winnersCount > 1 ? "s" : ""}`,
           `⏰ Fin : <t:${endsAtTimestamp}:R> (<t:${endsAtTimestamp}:F>)`,
           `🎫 Participants : **0**`,
-          '',
-          'Cliquez sur 🎉 pour participer !',
-        ].join('\n'),
+          "",
+          "Cliquez sur 🎉 pour participer !",
+        ].join("\n"),
       )
       .setColor(Colors.Secondary)
       .setFooter({
@@ -106,14 +111,14 @@ export class GiveawayCommand {
 
     const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
       new ButtonBuilder()
-        .setCustomId('giveaway-join')
-        .setLabel('Participer')
-        .setEmoji('🎉')
+        .setCustomId("giveaway-join")
+        .setLabel("Participer")
+        .setEmoji("🎉")
         .setStyle(ButtonStyle.Success),
     );
 
     await interaction.reply({
-      content: '✅ Giveaway lancé !',
+      content: "✅ Giveaway lancé !",
       flags: MessageFlags.Ephemeral,
     });
 
@@ -122,10 +127,7 @@ export class GiveawayCommand {
       components: [row],
     });
 
-    const timer = setTimeout(
-      () => this.endGiveaway(message.id),
-      durationMinutes * 60 * 1000,
-    );
+    const timer = setTimeout(() => this.endGiveaway(message.id), durationMinutes * 60 * 1000);
 
     activeGiveaways.set(message.id, {
       messageId: message.id,
@@ -140,14 +142,14 @@ export class GiveawayCommand {
   }
 
   @Slash({
-    name: 'fin',
-    description: 'Terminer un giveaway immédiatement',
+    name: "fin",
+    description: "Terminer un giveaway immédiatement",
   })
-  @SlashGroup('tirage')
+  @SlashGroup("tirage")
   async end(
     @SlashOption({
-      name: 'message_id',
-      description: 'ID du message du giveaway',
+      name: "message_id",
+      description: "ID du message du giveaway",
       required: true,
       type: ApplicationCommandOptionType.String,
     })
@@ -157,41 +159,39 @@ export class GiveawayCommand {
     const giveaway = activeGiveaways.get(messageId);
     if (!giveaway) {
       return interaction.reply({
-        content: '❌ Aucun giveaway actif trouvé avec cet ID.',
+        content: "❌ Aucun giveaway actif trouvé avec cet ID.",
         flags: MessageFlags.Ephemeral,
       });
     }
 
     await interaction.reply({
-      content: '✅ Giveaway terminé !',
+      content: "✅ Giveaway terminé !",
       flags: MessageFlags.Ephemeral,
     });
     await this.endGiveaway(messageId);
   }
 
-  @Slash({ name: 'liste', description: 'Voir les giveaways en cours' })
-  @SlashGroup('tirage')
+  @Slash({ name: "liste", description: "Voir les giveaways en cours" })
+  @SlashGroup("tirage")
   async list(interaction: CommandInteraction) {
     if (activeGiveaways.size === 0) {
       return interaction.reply({
-        content: '📭 Aucun giveaway en cours.',
+        content: "📭 Aucun giveaway en cours.",
         flags: MessageFlags.Ephemeral,
       });
     }
 
-    const embed = new EmbedBuilder()
-      .setTitle('🎁 Giveaways en cours')
-      .setColor(Colors.Secondary);
+    const embed = new EmbedBuilder().setTitle("🎁 Giveaways en cours").setColor(Colors.Secondary);
 
     for (const [id, g] of activeGiveaways) {
       const endsAt = Math.floor(g.endsAt / 1000);
       embed.addFields({
         name: g.prize,
         value: [
-          `🎫 ${g.participants.size} participant${g.participants.size > 1 ? 's' : ''}`,
+          `🎫 ${g.participants.size} participant${g.participants.size > 1 ? "s" : ""}`,
           `⏰ Fin <t:${endsAt}:R>`,
           `📋 ID: \`${id}\``,
-        ].join('\n'),
+        ].join("\n"),
         inline: true,
       });
     }
@@ -199,12 +199,12 @@ export class GiveawayCommand {
     return interaction.reply({ embeds: [embed], flags: MessageFlags.Ephemeral });
   }
 
-  @ButtonComponent({ id: 'giveaway-join' })
+  @ButtonComponent({ id: "giveaway-join" })
   async handleJoin(interaction: ButtonInteraction) {
     const giveaway = activeGiveaways.get(interaction.message.id);
     if (!giveaway) {
       return interaction.reply({
-        content: '❌ Ce giveaway est terminé.',
+        content: "❌ Ce giveaway est terminé.",
         flags: MessageFlags.Ephemeral,
       });
     }
@@ -213,7 +213,7 @@ export class GiveawayCommand {
       giveaway.participants.delete(interaction.user.id);
       await this.updateParticipantCount(interaction, giveaway);
       return interaction.reply({
-        content: '🚪 Vous avez quitté le giveaway.',
+        content: "🚪 Vous avez quitté le giveaway.",
         flags: MessageFlags.Ephemeral,
       });
     }
@@ -222,17 +222,14 @@ export class GiveawayCommand {
     await this.updateParticipantCount(interaction, giveaway);
 
     return interaction.reply({
-      content: '🎉 Vous participez au giveaway !',
+      content: "🎉 Vous participez au giveaway !",
       flags: MessageFlags.Ephemeral,
     });
   }
 
-  private async updateParticipantCount(
-    interaction: ButtonInteraction,
-    giveaway: GiveawayData,
-  ) {
+  private async updateParticipantCount(interaction: ButtonInteraction, giveaway: GiveawayData) {
     const embed = EmbedBuilder.from(interaction.message.embeds[0]!);
-    const desc = embed.data.description ?? '';
+    const desc = embed.data.description ?? "";
     const updated = desc.replace(
       /🎫 Participants : \*\*\d+\*\*/,
       `🎫 Participants : **${giveaway.participants.size}**`,
@@ -249,10 +246,8 @@ export class GiveawayCommand {
     activeGiveaways.delete(messageId);
 
     try {
-      const { bot: botClient } = await import('../../lib/bot.js');
-      const channel = (await botClient.channels.fetch(
-        giveaway.channelId,
-      )) as TextChannel;
+      const { bot: botClient } = await import("../../lib/bot.js");
+      const channel = (await botClient.channels.fetch(giveaway.channelId)) as TextChannel;
       const message = await channel.messages.fetch(giveaway.messageId);
 
       const winners = pickWinners(giveaway.participants, giveaway.winners);
@@ -262,31 +257,27 @@ export class GiveawayCommand {
 
       if (winners.length === 0) {
         embed.setDescription(
-          [
-            `**${giveaway.prize}**`,
-            '',
-            '😢 Aucun participant... pas de gagnant.',
-          ].join('\n'),
+          [`**${giveaway.prize}**`, "", "😢 Aucun participant... pas de gagnant."].join("\n"),
         );
       } else {
-        const winnerMentions = winners.map((id) => `<@${id}>`).join(', ');
+        const winnerMentions = winners.map((id) => `<@${id}>`).join(", ");
         embed.setDescription(
           [
             `**${giveaway.prize}**`,
-            '',
-            `🏆 **Gagnant${winners.length > 1 ? 's' : ''} :** ${winnerMentions}`,
-            `🎫 ${giveaway.participants.size} participant${giveaway.participants.size > 1 ? 's' : ''}`,
-          ].join('\n'),
+            "",
+            `🏆 **Gagnant${winners.length > 1 ? "s" : ""} :** ${winnerMentions}`,
+            `🎫 ${giveaway.participants.size} participant${giveaway.participants.size > 1 ? "s" : ""}`,
+          ].join("\n"),
         );
       }
 
-      embed.setTitle('🎁 GIVEAWAY TERMINÉ');
+      embed.setTitle("🎁 GIVEAWAY TERMINÉ");
 
       const disabledRow = new ActionRowBuilder<ButtonBuilder>().addComponents(
         new ButtonBuilder()
-          .setCustomId('giveaway-ended')
-          .setLabel('Terminé')
-          .setEmoji('🔒')
+          .setCustomId("giveaway-ended")
+          .setLabel("Terminé")
+          .setEmoji("🔒")
           .setStyle(ButtonStyle.Secondary)
           .setDisabled(true),
       );
@@ -294,13 +285,13 @@ export class GiveawayCommand {
       await message.edit({ embeds: [embed], components: [disabledRow] });
 
       if (winners.length > 0) {
-        const winnerMentions = winners.map((id) => `<@${id}>`).join(', ');
+        const winnerMentions = winners.map((id) => `<@${id}>`).join(", ");
         await channel.send(
           `🎉 Félicitations ${winnerMentions} ! Vous avez gagné **${giveaway.prize}** !`,
         );
       }
     } catch (e) {
-      logger.error('[Giveaway] Error ending giveaway:', e);
+      logger.error("[Giveaway] Error ending giveaway:", e);
     }
   }
 }

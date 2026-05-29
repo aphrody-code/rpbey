@@ -1,21 +1,17 @@
-'use client';
+"use client";
 
-import { useCallback, useEffect, useState } from 'react';
-import type { LiveData } from './types';
+import { useCallback, useEffect, useState } from "react";
+import type { LiveData } from "./types";
 
 const POLL_MS = 30_000;
 
-export function useLiveTournament(
-  tournamentId: string,
-  initialData: LiveData,
-  isLive: boolean,
-) {
+export function useLiveTournament(tournamentId: string, initialData: LiveData, isLive: boolean) {
   const [liveData, setLiveData] = useState<LiveData>(initialData);
 
   const fetchLive = useCallback(async () => {
     try {
       const res = await fetch(`/api/tournaments/${tournamentId}/live`, {
-        cache: 'no-store',
+        cache: "no-store",
       });
       if (res.ok) {
         const json = await res.json();

@@ -5,9 +5,7 @@
     "status": 200,
     "finalUrl": "https://rpbey.fr/",
     "consoleErrors": [],
-    "pageErrors": [
-      "NAV_ERROR: TimeoutError: Navigation timeout of 45000 ms exceeded"
-    ],
+    "pageErrors": ["NAV_ERROR: TimeoutError: Navigation timeout of 45000 ms exceeded"],
     "failedRequests": [
       {
         "url": "https://rpbey.fr/tournaments/satr?_rsc=5CB68i4pnAekjehf",
@@ -296,9 +294,7 @@
     "consoleErrors": [
       "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
     ],
-    "pageErrors": [
-      "NAV_ERROR: TimeoutError: Navigation timeout of 45000 ms exceeded"
-    ],
+    "pageErrors": ["NAV_ERROR: TimeoutError: Navigation timeout of 45000 ms exceeded"],
     "failedRequests": [
       {
         "url": "https://rpbey.fr/anime?_rsc=Vn7EtWQqjDbeC1xx",
@@ -450,9 +446,7 @@
       "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
       "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
     ],
-    "pageErrors": [
-      "NAV_ERROR: TimeoutError: Navigation timeout of 45000 ms exceeded"
-    ],
+    "pageErrors": ["NAV_ERROR: TimeoutError: Navigation timeout of 45000 ms exceeded"],
     "failedRequests": [
       {
         "url": "https://rpbey.fr/comparateur?_rsc=SdL8Orbik9mgM4eB",
@@ -711,9 +705,7 @@
     "consoleErrors": [
       "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
     ],
-    "pageErrors": [
-      "NAV_ERROR: TimeoutError: Navigation timeout of 45000 ms exceeded"
-    ],
+    "pageErrors": ["NAV_ERROR: TimeoutError: Navigation timeout of 45000 ms exceeded"],
     "failedRequests": [
       {
         "url": "https://cdn.discordapp.com/avatars/1244715598102138970/a_5f901b1231342658b636ae67cae4d62e.gif?size=256",

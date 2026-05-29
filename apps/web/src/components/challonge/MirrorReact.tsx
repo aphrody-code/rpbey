@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import React, { useEffect, useRef } from 'react';
-import parse, { domToReact, Element, attributesToProps } from 'html-react-parser';
-import type { DOMNode } from 'html-react-parser';
-import { BracketsViewer } from '@rose-griffon/challonge-core/viewer';
-import type { ViewerData } from '@rose-griffon/challonge-core/viewer';
-import { useThemeMode } from '@/components/theme/ThemeRegistry';
-import { useTheme } from '@mui/material/styles';
+import React, { useEffect, useRef } from "react";
+import parse, { domToReact, Element, attributesToProps } from "html-react-parser";
+import type { DOMNode } from "html-react-parser";
+import { BracketsViewer } from "@rose-griffon/challonge-core/viewer";
+import type { ViewerData } from "@rose-griffon/challonge-core/viewer";
+import { useThemeMode } from "@/components/theme/ThemeRegistry";
+import { useTheme } from "@mui/material/styles";
 
 interface MirrorReactProps {
   html: string;
@@ -17,13 +17,13 @@ interface MirrorReactProps {
 /**
  * Composant hybride qui affiche le HTML mirroré de Challonge
  * mais remplace dynamiquement le bracket par notre BracketsViewer unifié.
- * 
+ *
  * L'UI est synchronisée avec le thème Material Design 3 du site.
  */
-export const MirrorReact: React.FC<MirrorReactProps> = ({ 
-  html, 
+export const MirrorReact: React.FC<MirrorReactProps> = ({
+  html,
   tournamentData,
-  baseUrl = "https://challonge.com"
+  baseUrl = "https://challonge.com",
 }) => {
   const viewerRef = useRef<HTMLDivElement>(null);
   const viewerInstance = useRef<BracketsViewer | null>(null);
@@ -35,9 +35,9 @@ export const MirrorReact: React.FC<MirrorReactProps> = ({
       if (!viewerInstance.current) {
         viewerInstance.current = new BracketsViewer();
       }
-      
+
       viewerInstance.current.render(tournamentData, {
-        selector: `#${viewerRef.current.id}`
+        selector: `#${viewerRef.current.id}`,
       });
     }
   }, [tournamentData]);
@@ -45,12 +45,14 @@ export const MirrorReact: React.FC<MirrorReactProps> = ({
   const options = {
     replace: (domNode: DOMNode) => {
       if (domNode instanceof Element && domNode.attribs) {
-        
         // 1. Remplacement du bracket original par le nôtre
-        if (domNode.attribs.class?.includes('tournament-bracket') || domNode.attribs.id === 'tournament-bracket') {
+        if (
+          domNode.attribs.class?.includes("tournament-bracket") ||
+          domNode.attribs.id === "tournament-bracket"
+        ) {
           return (
-            <div 
-              id="rpb-unified-viewer" 
+            <div
+              id="rpb-unified-viewer"
               ref={viewerRef}
               className="rpb-bracket-host min-h-[600px] w-full overflow-auto rounded-2xl border border-white/5"
             />
@@ -58,18 +60,22 @@ export const MirrorReact: React.FC<MirrorReactProps> = ({
         }
 
         // 2. Nettoyage des éléments publicitaires ou trackers
-        if (domNode.name === 'script' || domNode.name === 'ins' || domNode.attribs.class?.includes('ads')) {
+        if (
+          domNode.name === "script" ||
+          domNode.name === "ins" ||
+          domNode.attribs.class?.includes("ads")
+        ) {
           return <></>;
         }
 
         // 3. Transformation des liens relatifs en absolus
-        if (domNode.name === 'a' && domNode.attribs.href?.startsWith('/')) {
+        if (domNode.name === "a" && domNode.attribs.href?.startsWith("/")) {
           const props = attributesToProps(domNode.attribs);
           return (
-            <a 
-              {...props} 
-              href={`${baseUrl}${domNode.attribs.href}`} 
-              target="_blank" 
+            <a
+              {...props}
+              href={`${baseUrl}${domNode.attribs.href}`}
+              target="_blank"
               rel="noopener noreferrer"
               className="text-primary hover:underline transition-colors"
             >
@@ -78,13 +84,13 @@ export const MirrorReact: React.FC<MirrorReactProps> = ({
           );
         }
       }
-    }
+    },
   };
 
   // On extrait les couleurs du thème MUI pour les injecter dans le viewer
   const primaryMain = muiTheme.palette.primary.main;
-  const surfaceLow = (muiTheme.palette as any).surface?.low || '#1e293b';
-  const surfaceHigh = (muiTheme.palette as any).surface?.high || '#334155';
+  const surfaceLow = (muiTheme.palette as any).surface?.low || "#1e293b";
+  const surfaceHigh = (muiTheme.palette as any).surface?.high || "#334155";
 
   return (
     <div className="challonge-mirror-wrapper prose dark:prose-invert max-w-none">
@@ -96,7 +102,7 @@ export const MirrorReact: React.FC<MirrorReactProps> = ({
           --md-sys-color-surface-container-low: ${surfaceLow};
           --md-sys-color-surface-container-high: ${surfaceHigh};
           --md-sys-color-outline-variant: rgba(255, 255, 255, 0.1);
-          
+
           /* Override pour un look plus moderne intégré */
           background-color: transparent !important;
           font-family: inherit;
@@ -111,7 +117,9 @@ export const MirrorReact: React.FC<MirrorReactProps> = ({
           background-color: color-mix(in srgb, ${surfaceLow} 80%, transparent) !important;
           backdrop-filter: blur(8px);
           border: 1px solid rgba(255, 255, 255, 0.05) !important;
-          transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.2s ease;
+          transition:
+            transform 0.2s cubic-bezier(0.2, 0, 0, 1),
+            box-shadow 0.2s ease;
         }
 
         .rpb-bracket-host .match:hover {
@@ -124,4 +132,3 @@ export const MirrorReact: React.FC<MirrorReactProps> = ({
     </div>
   );
 };
-

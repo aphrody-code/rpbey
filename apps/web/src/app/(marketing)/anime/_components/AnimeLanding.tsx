@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { Box } from '@mui/material';
-import { type ReactNode } from 'react';
-import { useSession } from '@/lib/auth-client';
-import { AnimeHero } from './AnimeHero';
-import { AnimeSearch } from './AnimeSearch';
-import { ContinueWatching } from './ContinueWatching';
+import { Box } from "@mui/material";
+import { type ReactNode } from "react";
+import { useSession } from "@/lib/auth-client";
+import { AnimeHero } from "./AnimeHero";
+import { AnimeSearch } from "./AnimeSearch";
+import { ContinueWatching } from "./ContinueWatching";
 
 interface FeaturedSeries {
   id: string;
@@ -31,10 +31,10 @@ export function AnimeLanding({ featured, children }: AnimeLandingProps) {
   return (
     <Box
       sx={{
-        minHeight: '100vh',
-        bgcolor: '#0a0a0a',
+        minHeight: "100vh",
+        bgcolor: "#0a0a0a",
         pb: { xs: 4, md: 8 },
-        overflowX: 'hidden',
+        overflowX: "hidden",
       }}
     >
       <AnimeHero featured={featured} />

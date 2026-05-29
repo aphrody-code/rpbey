@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { AcUnit, LocalFireDepartment } from '@mui/icons-material';
-import MenuIcon from '@mui/icons-material/Menu';
+import { AcUnit, LocalFireDepartment } from "@mui/icons-material";
+import MenuIcon from "@mui/icons-material/Menu";
 import {
   AppBar,
   Avatar,
@@ -13,18 +13,18 @@ import {
   MenuItem,
   Toolbar,
   Tooltip,
-} from '@mui/material';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useState } from 'react';
-import { useThemeMode } from '@/components/theme/ThemeRegistry';
-import { signOut, useSession } from '@/lib/auth-client';
-import { LOGO_VARIANTS } from '@/lib/role-colors';
+} from "@mui/material";
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
+import { useThemeMode } from "@/components/theme/ThemeRegistry";
+import { signOut, useSession } from "@/lib/auth-client";
+import { LOGO_VARIANTS } from "@/lib/role-colors";
 
 const pages = [
-  { label: 'Tableau de bord', href: '/dashboard' },
-  { label: 'Tournois', href: '/tournaments' },
-  { label: 'Classements', href: '/rankings' },
+  { label: "Tableau de bord", href: "/dashboard" },
+  { label: "Tournois", href: "/tournaments" },
+  { label: "Classements", href: "/rankings" },
 ];
 
 export function Header() {
@@ -64,8 +64,8 @@ export function Header() {
             href="/"
             sx={{
               mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              alignItems: 'center',
+              display: { xs: "none", md: "flex" },
+              alignItems: "center",
             }}
           >
             <Image
@@ -73,24 +73,20 @@ export function Header() {
               alt="RPB Logo"
               width={40}
               height={40}
-              style={{ objectFit: 'contain' }}
+              style={{ objectFit: "contain" }}
             />
           </Box>
 
           {/* Mobile menu */}
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+            <IconButton size="large" onClick={handleOpenNavMenu} color="inherit">
               <MenuIcon />
             </IconButton>
             <Menu
               anchorEl={anchorElNav}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
-              sx={{ display: { xs: 'block', md: 'none' } }}
+              sx={{ display: { xs: "block", md: "none" } }}
             >
               {pages.map((page) => (
                 <MenuItem
@@ -111,8 +107,8 @@ export function Header() {
             href="/"
             sx={{
               flexGrow: 1,
-              display: { xs: 'flex', md: 'none' },
-              alignItems: 'center',
+              display: { xs: "flex", md: "none" },
+              alignItems: "center",
             }}
           >
             <Image
@@ -120,20 +116,18 @@ export function Header() {
               alt="RPB Logo"
               width={32}
               height={32}
-              style={{ objectFit: 'contain' }}
+              style={{ objectFit: "contain" }}
             />
           </Box>
 
           {/* Desktop menu */}
-          <Box
-            sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, gap: 1 }}
-          >
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" }, gap: 1 }}>
             {pages.map((page) => (
               <Button
                 key={page.href}
                 component={Link}
                 href={page.href}
-                sx={{ color: 'text.primary' }}
+                sx={{ color: "text.primary" }}
               >
                 {page.label}
               </Button>
@@ -144,24 +138,20 @@ export function Header() {
           <Box
             sx={{
               flexGrow: 0,
-              display: 'flex',
-              alignItems: 'center',
+              display: "flex",
+              alignItems: "center",
               gap: 0.5,
             }}
           >
-            <Tooltip
-              title={
-                mode === 'red' ? 'Passer en Mode Bleu' : 'Passer en Mode Rouge'
-              }
-            >
+            <Tooltip title={mode === "red" ? "Passer en Mode Bleu" : "Passer en Mode Rouge"}>
               <IconButton
                 onClick={toggleTheme}
                 aria-label="Changer de thème"
                 sx={{
-                  color: mode === 'red' ? 'primary.main' : 'secondary.main',
+                  color: mode === "red" ? "primary.main" : "secondary.main",
                 }}
               >
-                {mode === 'red' ? (
+                {mode === "red" ? (
                   <LocalFireDepartment sx={{ fontSize: 22 }} />
                 ) : (
                   <AcUnit sx={{ fontSize: 22 }} />
@@ -172,33 +162,21 @@ export function Header() {
             {session?.user ? (
               <>
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar
-                    alt={session.user.name || 'User'}
-                    src={session.user.image || undefined}
-                  />
+                  <Avatar alt={session.user.name || "User"} src={session.user.image || undefined} />
                 </IconButton>
                 <Menu
                   anchorEl={anchorElUser}
                   open={Boolean(anchorElUser)}
                   onClose={handleCloseUserMenu}
-                  anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-                  transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+                  anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+                  transformOrigin={{ vertical: "top", horizontal: "right" }}
                 >
-                  {(session.user.role === 'admin' ||
-                    session.user.role === 'superadmin') && (
-                    <MenuItem
-                      component={Link}
-                      href="/admin"
-                      onClick={handleCloseUserMenu}
-                    >
+                  {(session.user.role === "admin" || session.user.role === "superadmin") && (
+                    <MenuItem component={Link} href="/admin" onClick={handleCloseUserMenu}>
                       Administration
                     </MenuItem>
                   )}
-                  <MenuItem
-                    component={Link}
-                    href="/profile"
-                    onClick={handleCloseUserMenu}
-                  >
+                  <MenuItem component={Link} href="/profile" onClick={handleCloseUserMenu}>
                     Profil
                   </MenuItem>
                   <MenuItem onClick={handleSignOut}>Déconnexion</MenuItem>

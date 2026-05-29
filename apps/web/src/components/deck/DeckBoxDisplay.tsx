@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { Avatar, Box, Tooltip, Typography } from '@mui/material';
-import Image from 'next/image';
-import { type Deck } from './DeckCard';
+import { Avatar, Box, Tooltip, Typography } from "@mui/material";
+import Image from "next/image";
+import { type Deck } from "./DeckCard";
 
 interface DeckBoxDisplayProps {
   deck: Deck;
@@ -10,41 +10,39 @@ interface DeckBoxDisplayProps {
 
 export function DeckBoxDisplay({ deck }: DeckBoxDisplayProps) {
   // We extract the three beys from the deck, sorted by position
-  const sortedBeys = deck?.beys
-    ? [...deck.beys].sort((a, b) => a.position - b.position)
-    : [];
+  const sortedBeys = deck?.beys ? [...deck.beys].sort((a, b) => a.position - b.position) : [];
 
   // Approximate relative coordinates for the 3 holes in the deckbox.png image
   // The image shows an open box with 3 slots aligned horizontally at the bottom half
   const positions = [
-    { left: '21%', top: '65%', width: '22%' }, // Left slot
-    { left: '50%', top: '65%', width: '22%' }, // Center slot
-    { left: '79%', top: '65%', width: '22%' }, // Right slot
+    { left: "21%", top: "65%", width: "22%" }, // Left slot
+    { left: "50%", top: "65%", width: "22%" }, // Center slot
+    { left: "79%", top: "65%", width: "22%" }, // Right slot
   ];
 
   return (
-    <Box sx={{ width: '100%', maxWidth: 700, mx: 'auto', mb: 6 }}>
+    <Box sx={{ width: "100%", maxWidth: 700, mx: "auto", mb: 6 }}>
       {/* Title with RPB Branding */}
-      <Box sx={{ textAlign: 'center', mb: 3 }}>
+      <Box sx={{ textAlign: "center", mb: 3 }}>
         <Typography
           variant="h5"
           sx={{
-            fontWeight: '900',
-            color: 'primary.main',
-            textTransform: 'uppercase',
+            fontWeight: "900",
+            color: "primary.main",
+            textTransform: "uppercase",
             letterSpacing: 1.5,
-            textShadow: '0 2px 4px rgba(0,0,0,0.3)',
-            display: 'inline-block',
-            position: 'relative',
+            textShadow: "0 2px 4px rgba(0,0,0,0.3)",
+            display: "inline-block",
+            position: "relative",
 
-            '&::after': {
+            "&::after": {
               content: '""',
-              position: 'absolute',
+              position: "absolute",
               bottom: -4,
-              left: '10%',
-              width: '80%',
+              left: "10%",
+              width: "80%",
               height: 3,
-              bgcolor: 'secondary.main',
+              bgcolor: "secondary.main",
               borderRadius: 1,
             },
           }}
@@ -54,9 +52,9 @@ export function DeckBoxDisplay({ deck }: DeckBoxDisplayProps) {
         <Typography
           variant="caption"
           sx={{
-            display: 'block',
+            display: "block",
             mt: 1.5,
-            color: 'text.secondary',
+            color: "text.secondary",
             fontWeight: 600,
           }}
         >
@@ -66,57 +64,51 @@ export function DeckBoxDisplay({ deck }: DeckBoxDisplayProps) {
       {/* Main Container */}
       <Box
         sx={{
-          position: 'relative',
-          width: '100%',
-          aspectRatio: '1.6',
+          position: "relative",
+          width: "100%",
+          aspectRatio: "1.6",
           borderRadius: 4,
-          overflow: 'visible', // Changed to visible for hover effects to pop out
-          boxShadow: '0 30px 60px rgba(0,0,0,0.6)',
-          bgcolor: '#000',
-          '&::before': {
+          overflow: "visible", // Changed to visible for hover effects to pop out
+          boxShadow: "0 30px 60px rgba(0,0,0,0.6)",
+          bgcolor: "#000",
+          "&::before": {
             // Internal shadow / glow
             content: '""',
-            position: 'absolute',
+            position: "absolute",
             inset: 0,
-            boxShadow: 'inset 0 0 100px rgba(var(--rpb-primary-rgb), 0.15)',
+            boxShadow: "inset 0 0 100px rgba(var(--rpb-primary-rgb), 0.15)",
             zIndex: 1,
-            pointerEvents: 'none',
+            pointerEvents: "none",
           },
         }}
       >
         {/* Background Deckbox Image */}
         <Box
           sx={{
-            position: 'absolute',
+            position: "absolute",
             inset: 0,
             borderRadius: 4,
-            overflow: 'hidden',
+            overflow: "hidden",
           }}
         >
-          <Image
-            src="/deckbox.webp"
-            alt="Deckbox"
-            fill
-            style={{ objectFit: 'cover' }}
-            priority
-          />
+          <Image src="/deckbox.webp" alt="Deckbox" fill style={{ objectFit: "cover" }} priority />
 
           {/* Credit Tag */}
           <Box
             sx={{
-              position: 'absolute',
+              position: "absolute",
               bottom: 8,
               right: 12,
-              display: 'flex',
-              alignItems: 'center',
+              display: "flex",
+              alignItems: "center",
               gap: 1,
-              bgcolor: 'rgba(0,0,0,0.5)',
+              bgcolor: "rgba(0,0,0,0.5)",
               px: 1,
               py: 0.5,
               borderRadius: 2,
-              backdropFilter: 'blur(4px)',
+              backdropFilter: "blur(4px)",
               zIndex: 5,
-              pointerEvents: 'none',
+              pointerEvents: "none",
             }}
           >
             <Avatar
@@ -124,17 +116,17 @@ export function DeckBoxDisplay({ deck }: DeckBoxDisplayProps) {
               sx={{
                 width: 16,
                 height: 16,
-                border: '1px solid rgba(255,255,255,0.2)',
+                border: "1px solid rgba(255,255,255,0.2)",
               }}
             />
             <Typography
               variant="caption"
               sx={{
-                color: 'rgba(255,255,255,0.8)',
-                fontSize: '0.6rem',
-                fontWeight: '900',
+                color: "rgba(255,255,255,0.8)",
+                fontSize: "0.6rem",
+                fontWeight: "900",
                 letterSpacing: 0.5,
-                textTransform: 'uppercase',
+                textTransform: "uppercase",
               }}
             >
               DECK BOX BY LOUP
@@ -149,11 +141,10 @@ export function DeckBoxDisplay({ deck }: DeckBoxDisplayProps) {
           if (!pos) return null;
 
           const imageUrl = bey.blade.imageUrl;
-          const isExternal =
-            imageUrl.startsWith('http') && !imageUrl.includes('rpbey.fr');
+          const isExternal = imageUrl.startsWith("http") && !imageUrl.includes("rpbey.fr");
 
           const fullBeyName =
-            `${bey.blade?.name} ${bey.ratchet?.name || ''} ${bey.bit?.name || ''}`.trim();
+            `${bey.blade?.name} ${bey.ratchet?.name || ""} ${bey.bit?.name || ""}`.trim();
 
           return (
             <Tooltip
@@ -163,16 +154,13 @@ export function DeckBoxDisplay({ deck }: DeckBoxDisplayProps) {
                   <Typography
                     variant="subtitle2"
                     sx={{
-                      fontWeight: 'bold',
+                      fontWeight: "bold",
                     }}
                   >
                     {fullBeyName}
                   </Typography>
-                  <Typography
-                    variant="caption"
-                    sx={{ color: 'secondary.main', display: 'block' }}
-                  >
-                    {bey.blade.beyType || 'TYPE INCONNU'}
+                  <Typography variant="caption" sx={{ color: "secondary.main", display: "block" }}>
+                    {bey.blade.beyType || "TYPE INCONNU"}
                   </Typography>
                 </Box>
               }
@@ -181,51 +169,47 @@ export function DeckBoxDisplay({ deck }: DeckBoxDisplayProps) {
             >
               <Box
                 sx={{
-                  position: 'absolute',
+                  position: "absolute",
                   left: pos.left,
                   top: pos.top,
                   width: pos.width,
-                  aspectRatio: '1',
-                  transform: 'translate(-50%, -50%)',
+                  aspectRatio: "1",
+                  transform: "translate(-50%, -50%)",
                   zIndex: 2,
-                  perspective: '1000px',
+                  perspective: "1000px",
                 }}
               >
                 {/* Shadow at bottom of slot */}
                 <Box
                   sx={{
-                    position: 'absolute',
-                    bottom: '5%',
-                    left: '10%',
-                    width: '80%',
-                    height: '20%',
-                    bgcolor: 'rgba(0,0,0,0.6)',
-                    borderRadius: '50%',
-                    filter: 'blur(8px)',
+                    position: "absolute",
+                    bottom: "5%",
+                    left: "10%",
+                    width: "80%",
+                    height: "20%",
+                    bgcolor: "rgba(0,0,0,0.6)",
+                    borderRadius: "50%",
+                    filter: "blur(8px)",
                     zIndex: 0,
                   }}
                 />
 
                 <Box
                   sx={{
-                    position: 'relative',
-                    width: '100%',
-                    height: '100%',
-                    cursor: 'pointer',
+                    position: "relative",
+                    width: "100%",
+                    height: "100%",
+                    cursor: "pointer",
                     // Initial "inside the box" state
-                    transform: 'rotateX(45deg) scaleY(0.85) scale(0.95)',
-                    filter:
-                      'drop-shadow(0 15px 12px rgba(0,0,0,0.8)) saturate(0.9)',
+                    transform: "rotateX(45deg) scaleY(0.85) scale(0.95)",
+                    filter: "drop-shadow(0 15px 12px rgba(0,0,0,0.8)) saturate(0.9)",
 
-                    '&:hover': {
-                      transform:
-                        'rotateX(0deg) scaleY(1) scale(1.25) translateY(-30px)',
-                      filter:
-                        'drop-shadow(0 30px 20px rgba(0,0,0,0.9)) saturate(1.2)',
+                    "&:hover": {
+                      transform: "rotateX(0deg) scaleY(1) scale(1.25) translateY(-30px)",
+                      filter: "drop-shadow(0 30px 20px rgba(0,0,0,0.9)) saturate(1.2)",
                       zIndex: 10,
                     },
-                    transition:
-                      'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+                    transition: "all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
                   }}
                 >
                   {isExternal ? (
@@ -233,10 +217,10 @@ export function DeckBoxDisplay({ deck }: DeckBoxDisplayProps) {
                       src={imageUrl}
                       alt={bey.blade.name}
                       style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'contain',
-                        filter: 'drop-shadow(0 4px 4px rgba(0,0,0,0.5))',
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "contain",
+                        filter: "drop-shadow(0 4px 4px rgba(0,0,0,0.5))",
                       }}
                     />
                   ) : (
@@ -245,8 +229,8 @@ export function DeckBoxDisplay({ deck }: DeckBoxDisplayProps) {
                       alt={bey.blade.name}
                       fill
                       style={{
-                        objectFit: 'contain',
-                        filter: 'drop-shadow(0 4px 4px rgba(0,0,0,0.5))',
+                        objectFit: "contain",
+                        filter: "drop-shadow(0 4px 4px rgba(0,0,0,0.5))",
                       }}
                     />
                   )}

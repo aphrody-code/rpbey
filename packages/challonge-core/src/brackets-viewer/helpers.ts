@@ -1,6 +1,11 @@
-import { type Match, type GroupType, type MatchGame, type RankingItem } from '../brackets-model/index';
-import { type RankingHeader, type Side, type MatchWithMetadata } from './types';
-import { t } from './lang';
+import {
+  type Match,
+  type GroupType,
+  type MatchGame,
+  type RankingItem,
+} from "../brackets-model/index";
+import { type RankingHeader, type Side, type MatchWithMetadata } from "./types";
+import { t } from "./lang";
 
 /**
  * Splits an array of objects based on their values at a given key.
@@ -9,22 +14,21 @@ import { t } from './lang';
  * @param key The key of T.
  */
 export function splitBy<
-    T extends Record<string, unknown>,
-    K extends keyof T,
-    U extends Record<K, string | number>
+  T extends Record<string, unknown>,
+  K extends keyof T,
+  U extends Record<K, string | number>,
 >(objects: U[], key: K): U[][] {
-    const map = {} as Record<string | number, U[]>;
+  const map = {} as Record<string | number, U[]>;
 
-    for (const obj of objects) {
-        const commonValue = obj[key];
+  for (const obj of objects) {
+    const commonValue = obj[key];
 
-        if (!map[commonValue])
-            map[commonValue] = [];
+    if (!map[commonValue]) map[commonValue] = [];
 
-        map[commonValue].push(obj);
-    }
+    map[commonValue].push(obj);
+  }
 
-    return Object.values(map);
+  return Object.values(map);
 }
 
 /**
@@ -35,28 +39,27 @@ export function splitBy<
  * @param key The key of T.
  */
 export function splitByWithLeftovers<
-    T extends Record<string, unknown>,
-    K extends keyof T,
-    U extends Record<K, string | number>
+  T extends Record<string, unknown>,
+  K extends keyof T,
+  U extends Record<K, string | number>,
 >(objects: U[], key: K): U[][] {
-    const map = {} as Record<string | number, U[]>;
+  const map = {} as Record<string | number, U[]>;
 
-    for (const obj of objects) {
-        const commonValue = obj[key] ?? '-1'; // Object keys are converted to a string.
+  for (const obj of objects) {
+    const commonValue = obj[key] ?? "-1"; // Object keys are converted to a string.
 
-        if (!map[commonValue])
-            map[commonValue] = [];
+    if (!map[commonValue]) map[commonValue] = [];
 
-        map[commonValue].push(obj);
-    }
+    map[commonValue].push(obj);
+  }
 
-    const withoutLeftovers = Object.entries(map)
-        .filter(([key]) => key !== '-1')
-        .map(([_, value]) => value);
+  const withoutLeftovers = Object.entries(map)
+    .filter(([key]) => key !== "-1")
+    .map(([_, value]) => value);
 
-    const result = [...withoutLeftovers];
-    result[-1] = map[-1] ?? [];
-    return result;
+  const result = [...withoutLeftovers];
+  result[-1] = map[-1] ?? [];
+  return result;
 }
 
 /**
@@ -66,11 +69,11 @@ export function splitByWithLeftovers<
  * @param key The key of T.
  */
 export function sortBy<
-    T extends Record<string, unknown>,
-    K extends keyof T,
-    U extends Record<K, number>
+  T extends Record<string, unknown>,
+  K extends keyof T,
+  U extends Record<K, number>,
 >(array: U[], key: K): U[] {
-    return [...array].sort((a, b) => a[key] - b[key]);
+  return [...array].sort((a, b) => a[key] - b[key]);
 }
 
 /**
@@ -79,55 +82,64 @@ export function sortBy<
  * @param selector An optional selector to select the root element.
  */
 export function findRoot(selector?: string): HTMLElement {
-    const queryResult = document.querySelectorAll(selector || '.brackets-viewer');
+  const queryResult = document.querySelectorAll(selector || ".brackets-viewer");
 
-    if (queryResult.length === 0)
-        throw Error('Root not found. You must have at least one root element.');
+  if (queryResult.length === 0)
+    throw Error("Root not found. You must have at least one root element.");
 
-    if (queryResult.length > 1)
-        throw Error('Multiple possible roots were found. Please use `config.selector` to choose a specific root.');
+  if (queryResult.length > 1)
+    throw Error(
+      "Multiple possible roots were found. Please use `config.selector` to choose a specific root.",
+    );
 
-    const root = queryResult[0] as HTMLElement;
+  const root = queryResult[0] as HTMLElement;
 
-    if (!root.classList.contains('brackets-viewer'))
-        throw Error('The selected root must have a `.brackets-viewer` class.');
+  if (!root.classList.contains("brackets-viewer"))
+    throw Error("The selected root must have a `.brackets-viewer` class.");
 
-    return root;
+  return root;
 }
 
 /**
  * Completes a list of matches with blank matches based on the next matches.
- * 
+ *
  * Toornament can generate first rounds with an odd number of matches and the seeding is partially distributed in the second round.
  * This function adds a blank match in the first round as if it was the source match of a seeded match of the second round.
- * 
+ *
  * @param bracketType Type of the bracket.
  * @param matches The list of first round matches.
  * @param nextMatches The list of second round matches.
  */
-export function completeWithBlankMatches(bracketType: GroupType, matches: MatchWithMetadata[], nextMatches?: MatchWithMetadata[]): {
-    matches: (MatchWithMetadata | null)[],
-    fromToornament: boolean,
+export function completeWithBlankMatches(
+  bracketType: GroupType,
+  matches: MatchWithMetadata[],
+  nextMatches?: MatchWithMetadata[],
+): {
+  matches: (MatchWithMetadata | null)[];
+  fromToornament: boolean;
 } {
-    if (!nextMatches)
-        return { matches, fromToornament: false };
+  if (!nextMatches) return { matches, fromToornament: false };
 
-    let sources: (number | null)[] = [];
+  let sources: (number | null)[] = [];
 
-    if (bracketType === 'single_bracket' || bracketType === 'winner_bracket')
-        sources = nextMatches.map(match => [match.opponent1?.position || null, match.opponent2?.position || null]).flat();
+  if (bracketType === "single_bracket" || bracketType === "winner_bracket")
+    sources = nextMatches
+      .map((match) => [match.opponent1?.position || null, match.opponent2?.position || null])
+      .flat();
 
-    if (bracketType === 'loser_bracket')
-        sources = nextMatches.map(match => match.opponent2?.position || null);
+  if (bracketType === "loser_bracket")
+    sources = nextMatches.map((match) => match.opponent2?.position || null);
 
-    // The manager does not set positions where the Toornament layer does.
-    if (sources.filter(source => source !== null).length === 0)
-        return { matches, fromToornament: false };
+  // The manager does not set positions where the Toornament layer does.
+  if (sources.filter((source) => source !== null).length === 0)
+    return { matches, fromToornament: false };
 
-    return {
-        matches: sources.map(source => source && matches.find(match => match.number === source) || null),
-        fromToornament: true,
-    };
+  return {
+    matches: sources.map(
+      (source) => (source && matches.find((match) => match.number === source)) || null,
+    ),
+    fromToornament: true,
+  };
 }
 
 /**
@@ -138,19 +150,27 @@ export function completeWithBlankMatches(bracketType: GroupType, matches: MatchW
  * @param roundNumber Number of the round.
  * @param side Side of the participant.
  */
-export function getOriginAbbreviation(matchLocation: GroupType, skipFirstRound: boolean, roundNumber?: number, side?: Side): string | null {
-    roundNumber = roundNumber || -1;
+export function getOriginAbbreviation(
+  matchLocation: GroupType,
+  skipFirstRound: boolean,
+  roundNumber?: number,
+  side?: Side,
+): string | null {
+  roundNumber = roundNumber || -1;
 
-    if (skipFirstRound && matchLocation === 'loser_bracket' && roundNumber === 1)
-        return t('abbreviations.seed');
+  if (skipFirstRound && matchLocation === "loser_bracket" && roundNumber === 1)
+    return t("abbreviations.seed");
 
-    if (matchLocation === 'single_bracket' || matchLocation === 'winner_bracket' && roundNumber === 1)
-        return t('abbreviations.seed');
+  if (
+    matchLocation === "single_bracket" ||
+    (matchLocation === "winner_bracket" && roundNumber === 1)
+  )
+    return t("abbreviations.seed");
 
-    if (matchLocation === 'loser_bracket' && roundNumber % 2 === 0 && side === 'opponent1')
-        return t('abbreviations.position');
+  if (matchLocation === "loser_bracket" && roundNumber % 2 === 0 && side === "opponent1")
+    return t("abbreviations.position");
 
-    return null;
+  return null;
 }
 
 /**
@@ -159,7 +179,7 @@ export function getOriginAbbreviation(matchLocation: GroupType, skipFirstRound: 
  * @param roundNumber Number of the round.
  */
 export function isMajorRound(roundNumber: number): boolean {
-    return roundNumber === 1 || roundNumber % 2 === 0;
+  return roundNumber === 1 || roundNumber % 2 === 0;
 }
 
 /**
@@ -168,24 +188,23 @@ export function isMajorRound(roundNumber: number): boolean {
  * @param itemName Name of the ranking property.
  */
 export function rankingHeader(itemName: keyof RankingItem): RankingHeader {
-    return t(`ranking.${itemName}`, { returnObjects: true }) as RankingHeader;
+  return t(`ranking.${itemName}`, { returnObjects: true }) as RankingHeader;
 }
 
 /**
  * Indicates whether the input is a match.
- * 
+ *
  * @param input A match or a match game.
  */
 export function isMatch(input: Match | MatchGame): input is Match {
-    return 'child_count' in input;
+  return "child_count" in input;
 }
-
 
 /**
  * Indicates whether the input is a match game.
- * 
+ *
  * @param input A match or a match game.
  */
 export function isMatchGame(input: Match | MatchGame): input is MatchGame {
-    return !isMatch(input);
+  return !isMatch(input);
 }

@@ -1,13 +1,21 @@
-import { ActionRowBuilder, ApplicationCommandOptionType, AttachmentBuilder, ButtonBuilder, ButtonStyle, ComponentType, EmbedBuilder, MessageFlags, StringSelectMenuBuilder, type ButtonInteraction, type CommandInteraction, type Message, type User } from "discord.js";
-import { errorEmbed, v2Container } from '../../lib/ui.js';
 import {
-  ButtonComponent,
-  Discord,
-  Slash,
-  SlashGroup,
-  SlashOption,
-} from '@rpbey/discordx';
-import { inject, injectable } from 'tsyringe';
+  ActionRowBuilder,
+  ApplicationCommandOptionType,
+  AttachmentBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+  ComponentType,
+  EmbedBuilder,
+  MessageFlags,
+  StringSelectMenuBuilder,
+  type ButtonInteraction,
+  type CommandInteraction,
+  type Message,
+  type User,
+} from "discord.js";
+import { errorEmbed, v2Container } from "../../lib/ui.js";
+import { ButtonComponent, Discord, Slash, SlashGroup, SlashOption } from "@rpbey/discordx";
+import { inject, injectable } from "tsyringe";
 
 import {
   type TcgDuelCard,
@@ -28,10 +36,10 @@ import {
   TCG_RARITY_EMOJI,
   TCG_RARITY_LABEL,
   pickRandom,
-} from '../../lib/battle-engine.js';
-import { Colors, RPB } from '../../lib/constants.js';
-import { logger } from '../../lib/logger.js';
-import { PrismaService } from '../../lib/prisma.js';
+} from "../../lib/battle-engine.js";
+import { Colors, RPB } from "../../lib/constants.js";
+import { logger } from "../../lib/logger.js";
+import { PrismaService } from "../../lib/prisma.js";
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // MIGRATION NOTE (2026-04-30) — TCG Duel
@@ -68,23 +76,18 @@ const ELEMENT_EMOJI = TCG_ELEMENT_EMOJI;
 const ELEMENT_NAME = TCG_ELEMENT_NAME;
 
 const ROUND_INTROS = [
+  ["Le sol tremble...", "Les Beyblades sont lancées !", "C'est parti !", "L'arène s'illumine !"],
   [
-    'Le sol tremble...',
-    'Les Beyblades sont lancées !',
-    "C'est parti !",
-    "L'arène s'illumine !",
+    "La tension monte...",
+    "Deuxième confrontation !",
+    "Les arènes vibrent !",
+    "Le public retient son souffle !",
   ],
   [
-    'La tension monte...',
-    'Deuxième confrontation !',
-    'Les arènes vibrent !',
-    'Le public retient son souffle !',
-  ],
-  [
-    'Round décisif !',
-    'Tout se joue maintenant !',
+    "Round décisif !",
+    "Tout se joue maintenant !",
     "C'est le moment de vérité !",
-    'La dernière chance !',
+    "La dernière chance !",
   ],
 ];
 
@@ -129,8 +132,8 @@ type CardRow = {
 // ═══════════════════════════════════════════════════════════════════════════════
 
 @Discord()
-@SlashGroup({ name: 'duel', description: 'Système de duels TCG stratégiques' })
-@SlashGroup('duel')
+@SlashGroup({ name: "duel", description: "Système de duels TCG stratégiques" })
+@SlashGroup("duel")
 @injectable()
 export class DuelCommand {
   constructor(@inject(PrismaService) private prisma: PrismaService) {}
@@ -165,21 +168,21 @@ export class DuelCommand {
   // ══════════════════════════════════════════════════════════════════════════════
 
   @Slash({
-    name: 'combat',
-    description: '⚔️ Défier un adversaire en duel de cartes (Best of 3)',
+    name: "combat",
+    description: "⚔️ Défier un adversaire en duel de cartes (Best of 3)",
   })
-  @SlashGroup('duel')
+  @SlashGroup("duel")
   async combat(
     @SlashOption({
-      name: 'adversaire',
-      description: 'Le joueur à défier',
+      name: "adversaire",
+      description: "Le joueur à défier",
       required: true,
       type: ApplicationCommandOptionType.User,
     })
     target: User,
     @SlashOption({
-      name: 'mise',
-      description: 'Mise en pièces (0 = amical)',
+      name: "mise",
+      description: "Mise en pièces (0 = amical)",
       required: false,
       type: ApplicationCommandOptionType.Integer,
       minValue: 0,
@@ -191,17 +194,17 @@ export class DuelCommand {
     // ── Validations ──
     if (target.id === interaction.user.id)
       return interaction.reply({
-        content: '❌ Tu ne peux pas te défier toi-même !',
+        content: "❌ Tu ne peux pas te défier toi-même !",
         flags: MessageFlags.Ephemeral,
       });
     if (target.bot)
       return interaction.reply({
-        content: '❌ Pas de duel contre un bot !',
+        content: "❌ Pas de duel contre un bot !",
         flags: MessageFlags.Ephemeral,
       });
     if (activePlayers.has(interaction.user.id) || activePlayers.has(target.id))
       return interaction.reply({
-        content: '❌ Un des joueurs est déjà en duel !',
+        content: "❌ Un des joueurs est déjà en duel !",
         flags: MessageFlags.Ephemeral,
       });
 
@@ -271,10 +274,10 @@ export class DuelCommand {
         invB,
       );
     } catch (err) {
-      logger.error('[Duel] Unexpected error:', err);
+      logger.error("[Duel] Unexpected error:", err);
       try {
         await interaction.editReply({
-          embeds: [errorEmbed('Erreur', 'Le duel a été interrompu.')],
+          embeds: [errorEmbed("Erreur", "Le duel a été interrompu.")],
           components: [],
         });
       } catch {
@@ -326,47 +329,41 @@ export class DuelCommand {
 
     const winRateA =
       profileA.duelWins + profileA.duelLosses > 0
-        ? Math.round(
-            (profileA.duelWins / (profileA.duelWins + profileA.duelLosses)) *
-              100,
-          )
+        ? Math.round((profileA.duelWins / (profileA.duelWins + profileA.duelLosses)) * 100)
         : 0;
     const winRateB =
       profileB.duelWins + profileB.duelLosses > 0
-        ? Math.round(
-            (profileB.duelWins / (profileB.duelWins + profileB.duelLosses)) *
-              100,
-          )
+        ? Math.round((profileB.duelWins / (profileB.duelWins + profileB.duelLosses)) * 100)
         : 0;
 
     const challengeEmbed = new EmbedBuilder()
-      .setTitle('⚔️ Défi en Duel !')
+      .setTitle("⚔️ Défi en Duel !")
       .setDescription(
         `**${interaction.user}** défie **${target}** !\n\n` +
           `📋 **Format :** Best of 3 — Choisis 3 cartes\n` +
           `🎯 **Matchup :** Rang par rang (forte vs forte)\n` +
-          `💰 **Mise :** ${bet > 0 ? `**${bet}** 🪙 chacun` : 'Aucune (amical)'}\n` +
+          `💰 **Mise :** ${bet > 0 ? `**${bet}** 🪙 chacun` : "Aucune (amical)"}\n` +
           `\n` +
           `┌─── ${tierA.emoji} **${nameA}** ───\n` +
           `│ ${tierA.name} · **${profileA.duelRating}** ELO · ${profileA.duelWins}V/${profileA.duelLosses}D (${winRateA}%)` +
-          `${profileA.duelStreak >= 3 ? ` · 🔥${profileA.duelStreak}` : ''}\n` +
+          `${profileA.duelStreak >= 3 ? ` · 🔥${profileA.duelStreak}` : ""}\n` +
           `└─── ${tierB.emoji} **${nameB}** ───\n` +
           `│ ${tierB.name} · **${profileB.duelRating}** ELO · ${profileB.duelWins}V/${profileB.duelLosses}D (${winRateB}%)` +
-          `${profileB.duelStreak >= 3 ? ` · 🔥${profileB.duelStreak}` : ''}\n\n` +
+          `${profileB.duelStreak >= 3 ? ` · 🔥${profileB.duelStreak}` : ""}\n\n` +
           `${target}, acceptes-tu ?`,
       )
       .setColor(Colors.Primary)
       .setThumbnail(interaction.user.displayAvatarURL({ size: 128 }))
-      .setFooter({ text: 'Expire dans 60 secondes' });
+      .setFooter({ text: "Expire dans 60 secondes" });
 
     const buttons = new ActionRowBuilder<ButtonBuilder>().addComponents(
       new ButtonBuilder()
         .setCustomId(`duel-accept-${duelId}`)
-        .setLabel('⚔️ Accepter')
+        .setLabel("⚔️ Accepter")
         .setStyle(ButtonStyle.Success),
       new ButtonBuilder()
         .setCustomId(`duel-decline-${duelId}`)
-        .setLabel('Refuser')
+        .setLabel("Refuser")
         .setStyle(ButtonStyle.Secondary),
     );
 
@@ -376,9 +373,7 @@ export class DuelCommand {
       fetchReply: true,
     })) as Message;
 
-    let btnResponse:
-      | Awaited<ReturnType<typeof challengeMsg.awaitMessageComponent>>
-      | undefined;
+    let btnResponse: Awaited<ReturnType<typeof challengeMsg.awaitMessageComponent>> | undefined;
     try {
       btnResponse = await challengeMsg.awaitMessageComponent({
         componentType: ComponentType.Button,
@@ -396,12 +391,10 @@ export class DuelCommand {
       });
     }
 
-    if (btnResponse.customId.includes('decline')) {
+    if (btnResponse.customId.includes("decline")) {
       return btnResponse.update({
         embeds: [
-          challengeEmbed
-            .setDescription(`${nameB} a **refusé** le duel.`)
-            .setColor(Colors.Error),
+          challengeEmbed.setDescription(`${nameB} a **refusé** le duel.`).setColor(Colors.Error),
         ],
         components: [],
       });
@@ -412,7 +405,7 @@ export class DuelCommand {
     await interaction.editReply({
       embeds: [
         new EmbedBuilder()
-          .setTitle('🎴 Sélection des cartes...')
+          .setTitle("🎴 Sélection des cartes...")
           .setDescription(
             `${nameA} et ${nameB} choisissent leurs 3 cartes.\n⏳ **90 secondes** pour décider.\n\n> 💡 **Astuce :** Choisis des cartes du même élément pour activer le **bonus Synergie** (+10%)`,
           )
@@ -428,7 +421,7 @@ export class DuelCommand {
         .map((item) => {
           const c = item.card;
           const pwr = c.att + c.def + c.end;
-          const el = ELEMENT_EMOJI[c.element] ?? '⚪';
+          const el = ELEMENT_EMOJI[c.element] ?? "⚪";
           const rar = RARITY_LABEL[c.rarity] ?? c.rarity;
           let desc = `${rar} · ${el} ${ELEMENT_NAME[c.element] ?? c.element} · PWR ${pwr}`;
           if (desc.length > 100) desc = `${desc.slice(0, 97)}...`;
@@ -439,14 +432,14 @@ export class DuelCommand {
 
     const menuA = new StringSelectMenuBuilder()
       .setCustomId(`duel-sel-a-${duelId}`)
-      .setPlaceholder('Choisis 3 cartes...')
+      .setPlaceholder("Choisis 3 cartes...")
       .setMinValues(3)
       .setMaxValues(3)
       .addOptions(buildOptions(invA));
 
     const menuB = new StringSelectMenuBuilder()
       .setCustomId(`duel-sel-b-${duelId}`)
-      .setPlaceholder('Choisis 3 cartes...')
+      .setPlaceholder("Choisis 3 cartes...")
       .setMinValues(3)
       .setMaxValues(3)
       .addOptions(buildOptions(invB));
@@ -454,18 +447,14 @@ export class DuelCommand {
     const [selMsgA, selMsgB] = await Promise.all([
       interaction.followUp({
         content:
-          '🎴 **Choisis 3 cartes** pour le duel :\n> Même élément = **+10% Synergie** · Rang par rang (forte vs forte)',
-        components: [
-          new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(menuA),
-        ],
+          "🎴 **Choisis 3 cartes** pour le duel :\n> Même élément = **+10% Synergie** · Rang par rang (forte vs forte)",
+        components: [new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(menuA)],
         flags: MessageFlags.Ephemeral,
       }),
       btnResponse.reply({
         content:
-          '🎴 **Choisis 3 cartes** pour le duel :\n> Même élément = **+10% Synergie** · Rang par rang (forte vs forte)',
-        components: [
-          new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(menuB),
-        ],
+          "🎴 **Choisis 3 cartes** pour le duel :\n> Même élément = **+10% Synergie** · Rang par rang (forte vs forte)",
+        components: [new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(menuB)],
         flags: MessageFlags.Ephemeral,
         fetchReply: true,
       }),
@@ -479,15 +468,15 @@ export class DuelCommand {
           time: SELECTION_TIMEOUT,
           max: 1,
         });
-        collector.on('collect', async (i) => {
+        collector.on("collect", async (i) => {
           await i.update({
-            content: '✅ Cartes sélectionnées ! En attente...',
+            content: "✅ Cartes sélectionnées ! En attente...",
             components: [],
           });
           resolve(i.values);
         });
-        collector.on('end', (collected) => {
-          if (collected.size === 0) reject(new Error('timeout'));
+        collector.on("end", (collected) => {
+          if (collected.size === 0) reject(new Error("timeout"));
         });
       });
 
@@ -502,7 +491,7 @@ export class DuelCommand {
       return interaction.editReply({
         embeds: [
           new EmbedBuilder()
-            .setTitle('⏰ Temps écoulé !')
+            .setTitle("⏰ Temps écoulé !")
             .setDescription("Un joueur n'a pas sélectionné à temps.")
             .setColor(Colors.Error),
         ],
@@ -517,20 +506,16 @@ export class DuelCommand {
           const item = inv.find((i) => i.card.id === id);
           if (!item) return null;
           const c = item.card;
-          return { ...c, beyblade: c.beyblade ?? '???' };
+          return { ...c, beyblade: c.beyblade ?? "???" };
         })
         .filter(Boolean) as DuelCard[];
 
-    const cardsA = toCard(invA, picksA).sort(
-      (a, b) => cardSortPower(b) - cardSortPower(a),
-    );
-    const cardsB = toCard(invB, picksB).sort(
-      (a, b) => cardSortPower(b) - cardSortPower(a),
-    );
+    const cardsA = toCard(invA, picksA).sort((a, b) => cardSortPower(b) - cardSortPower(a));
+    const cardsB = toCard(invB, picksB).sort((a, b) => cardSortPower(b) - cardSortPower(a));
 
     if (cardsA.length < 3 || cardsB.length < 3) {
       return interaction.editReply({
-        embeds: [errorEmbed('Erreur', 'Erreur lors de la résolution des cartes.')],
+        embeds: [errorEmbed("Erreur", "Erreur lors de la résolution des cartes.")],
       });
     }
 
@@ -558,21 +543,17 @@ export class DuelCommand {
 
     // Team bonus announcement
     const bonusLines: string[] = [];
-    if (synergyA)
-      bonusLines.push(`🔗 **${nameA}** active la **Synergie élémentaire** !`);
-    if (synergyB)
-      bonusLines.push(`🔗 **${nameB}** active la **Synergie élémentaire** !`);
-    if (underdogA)
-      bonusLines.push(`🔥 **${nameA}** obtient le bonus **Underdog** !`);
-    if (underdogB)
-      bonusLines.push(`🔥 **${nameB}** obtient le bonus **Underdog** !`);
+    if (synergyA) bonusLines.push(`🔗 **${nameA}** active la **Synergie élémentaire** !`);
+    if (synergyB) bonusLines.push(`🔗 **${nameB}** active la **Synergie élémentaire** !`);
+    if (underdogA) bonusLines.push(`🔥 **${nameA}** obtient le bonus **Underdog** !`);
+    if (underdogB) bonusLines.push(`🔥 **${nameB}** obtient le bonus **Underdog** !`);
 
     if (bonusLines.length > 0) {
       await interaction.editReply({
         embeds: [
           new EmbedBuilder()
-            .setTitle('✨ Bonus activés !')
-            .setDescription(bonusLines.join('\n'))
+            .setTitle("✨ Bonus activés !")
+            .setDescription(bonusLines.join("\n"))
             .setColor(Colors.Secondary),
         ],
       });
@@ -585,8 +566,8 @@ export class DuelCommand {
     let scoreB = 0;
 
     for (let i = 0; i < 3; i++) {
-      const momentumA = i > 0 && rounds[i - 1]?.winner === 'A';
-      const momentumB = i > 0 && rounds[i - 1]?.winner === 'B';
+      const momentumA = i > 0 && rounds[i - 1]?.winner === "A";
+      const momentumB = i > 0 && rounds[i - 1]?.winner === "B";
       const lastStandA = scoreA === 0 && scoreB === 1 && i === 2;
       const lastStandB = scoreB === 0 && scoreA === 1 && i === 2;
 
@@ -607,52 +588,52 @@ export class DuelCommand {
         },
       );
       rounds.push(result);
-      if (result.winner === 'A') scoreA++;
+      if (result.winner === "A") scoreA++;
       else scoreB++;
 
       const intro = randomPick(ROUND_INTROS[i]!);
-      const winName = result.winner === 'A' ? nameA : nameB;
-      const elA = ELEMENT_EMOJI[result.cardA.element] ?? '⚪';
-      const elB = ELEMENT_EMOJI[result.cardB.element] ?? '⚪';
-      const rarA = RARITY_EMOJI[result.cardA.rarity] ?? '⚪';
-      const rarB = RARITY_EMOJI[result.cardB.rarity] ?? '⚪';
+      const winName = result.winner === "A" ? nameA : nameB;
+      const elA = ELEMENT_EMOJI[result.cardA.element] ?? "⚪";
+      const elB = ELEMENT_EMOJI[result.cardB.element] ?? "⚪";
+      const rarA = RARITY_EMOJI[result.cardA.rarity] ?? "⚪";
+      const rarB = RARITY_EMOJI[result.cardB.rarity] ?? "⚪";
       const maxPwr = Math.max(result.powerA, result.powerB);
 
       const roundEmbed = new EmbedBuilder()
         .setTitle(`⚔️ Round ${i + 1} — ${intro}`)
         .addFields(
           {
-            name: `${result.winner === 'A' ? '✅' : '❌'} ${nameA}`,
+            name: `${result.winner === "A" ? "✅" : "❌"} ${nameA}`,
             value:
               `${rarA} **${result.cardA.name}**\n` +
-              `${elA} ${ELEMENT_NAME[result.cardA.element] ?? 'Neutre'}\n` +
+              `${elA} ${ELEMENT_NAME[result.cardA.element] ?? "Neutre"}\n` +
               `\`ATT ${result.cardA.att}\` · \`DEF ${result.cardA.def}\` · \`END ${result.cardA.end}\`\n` +
               `\`${powerBar(result.powerA, maxPwr)}\` **${Math.round(result.powerA)}**`,
             inline: true,
           },
-          { name: '\u200b', value: '⚔️', inline: true },
+          { name: "\u200b", value: "⚔️", inline: true },
           {
-            name: `${result.winner === 'B' ? '✅' : '❌'} ${nameB}`,
+            name: `${result.winner === "B" ? "✅" : "❌"} ${nameB}`,
             value:
               `${rarB} **${result.cardB.name}**\n` +
-              `${elB} ${ELEMENT_NAME[result.cardB.element] ?? 'Neutre'}\n` +
+              `${elB} ${ELEMENT_NAME[result.cardB.element] ?? "Neutre"}\n` +
               `\`ATT ${result.cardB.att}\` · \`DEF ${result.cardB.def}\` · \`END ${result.cardB.end}\`\n` +
               `**${Math.round(result.powerB)}** \`${powerBar(result.powerB, maxPwr)}\``,
             inline: true,
           },
         )
-        .setColor(result.winner === 'A' ? 0x22c55e : 0xef4444);
+        .setColor(result.winner === "A" ? 0x22c55e : 0xef4444);
 
       if (result.events.length > 0) {
         roundEmbed.addFields({
-          name: '💥 Événements',
-          value: result.events.join('\n'),
+          name: "💥 Événements",
+          value: result.events.join("\n"),
         });
       }
 
       roundEmbed
         .addFields({
-          name: 'Résultat',
+          name: "Résultat",
           value: `🏆 **${winName}** remporte le round !`,
         })
         .setFooter({ text: `Score : ${scoreA} — ${scoreB}` });
@@ -665,28 +646,22 @@ export class DuelCommand {
 
     // ══════════════ PHASE 4: RESULTS + ELO ══════════════
 
-    const matchWinner = scoreA > scoreB ? 'A' : 'B';
-    const winnerName = matchWinner === 'A' ? nameA : nameB;
-    const loserName = matchWinner === 'A' ? nameB : nameA;
-    const loserId = matchWinner === 'A' ? userB.id : userA.id;
-    const winnerId = matchWinner === 'A' ? userA.id : userB.id;
-    const winnerDiscordId =
-      matchWinner === 'A' ? interaction.user.id : target.id;
-    const loserDiscordId =
-      matchWinner === 'A' ? target.id : interaction.user.id;
+    const matchWinner = scoreA > scoreB ? "A" : "B";
+    const winnerName = matchWinner === "A" ? nameA : nameB;
+    const loserName = matchWinner === "A" ? nameB : nameA;
+    const loserId = matchWinner === "A" ? userB.id : userA.id;
+    const winnerId = matchWinner === "A" ? userA.id : userB.id;
+    const winnerDiscordId = matchWinner === "A" ? interaction.user.id : target.id;
+    const loserDiscordId = matchWinner === "A" ? target.id : interaction.user.id;
 
     // ELO
-    const elo = calcElo(
-      profileA.duelRating,
-      profileB.duelRating,
-      matchWinner === 'A',
-    );
-    const winnerEloD = matchWinner === 'A' ? elo.deltaA : elo.deltaB;
-    const loserEloD = matchWinner === 'A' ? elo.deltaB : elo.deltaA;
-    const winnerNewElo = matchWinner === 'A' ? elo.newA : elo.newB;
+    const elo = calcElo(profileA.duelRating, profileB.duelRating, matchWinner === "A");
+    const winnerEloD = matchWinner === "A" ? elo.deltaA : elo.deltaB;
+    const loserEloD = matchWinner === "A" ? elo.deltaB : elo.deltaA;
+    const winnerNewElo = matchWinner === "A" ? elo.newA : elo.newB;
 
     // Streaks
-    const winnerProfile = matchWinner === 'A' ? profileA : profileB;
+    const winnerProfile = matchWinner === "A" ? profileA : profileB;
     const newStreak = winnerProfile.duelStreak + 1;
     const newBestStreak = Math.max(winnerProfile.duelBestStreak, newStreak);
 
@@ -695,18 +670,18 @@ export class DuelCommand {
       rounds.reduce((sum, r) => {
         const w =
           r.winner === matchWinner
-            ? matchWinner === 'A'
+            ? matchWinner === "A"
               ? r.powerA
               : r.powerB
-            : matchWinner === 'A'
+            : matchWinner === "A"
               ? r.powerB
               : r.powerA;
         const l =
           r.winner === matchWinner
-            ? matchWinner === 'A'
+            ? matchWinner === "A"
               ? r.powerB
               : r.powerA
-            : matchWinner === 'A'
+            : matchWinner === "A"
               ? r.powerA
               : r.powerB;
         return sum + w / Math.max(l, 1);
@@ -715,16 +690,13 @@ export class DuelCommand {
 
     // MVP card (biggest power margin)
     const mvpRound = [...rounds].sort((a, b) => b.mvpDelta - a.mvpDelta)[0]!;
-    const mvpCard = mvpRound.winner === 'A' ? mvpRound.cardA : mvpRound.cardB;
-    const mvpPlayer = mvpRound.winner === 'A' ? nameA : nameB;
+    const mvpCard = mvpRound.winner === "A" ? mvpRound.cardA : mvpRound.cardB;
+    const mvpPlayer = mvpRound.winner === "A" ? nameA : nameB;
 
     // Rewards
-    const baseReward = Math.round(
-      rounds.reduce((s, r) => s + Math.max(r.powerA, r.powerB), 0) / 4,
-    );
+    const baseReward = Math.round(rounds.reduce((s, r) => s + Math.max(r.powerA, r.powerB), 0) / 4);
     const streakBonus = newStreak >= 5 ? 50 : newStreak >= 3 ? 20 : 0;
-    const totalReward =
-      bet > 0 ? bet * 2 : Math.max(15, Math.min(baseReward, 200)) + streakBonus;
+    const totalReward = bet > 0 ? bet * 2 : Math.max(15, Math.min(baseReward, 200)) + streakBonus;
     const loserReward = bet > 0 ? 0 : 5;
 
     // Update DB
@@ -744,7 +716,7 @@ export class DuelCommand {
         data: {
           userId: winnerId,
           amount: totalReward,
-          type: 'DUEL_REWARD',
+          type: "DUEL_REWARD",
           note: `Duel victoire (${scoreA}-${scoreB}) — ${finish.msg}`,
         },
       }),
@@ -754,7 +726,7 @@ export class DuelCommand {
         data: {
           duelLosses: { increment: 1 },
           duelStreak: 0,
-          duelRating: matchWinner === 'A' ? elo.newB : elo.newA,
+          duelRating: matchWinner === "A" ? elo.newB : elo.newA,
         },
       }),
       ...(loserReward > 0
@@ -767,8 +739,8 @@ export class DuelCommand {
               data: {
                 userId: loserId,
                 amount: loserReward,
-                type: 'DUEL_REWARD',
-                note: 'Duel défaite (participation)',
+                type: "DUEL_REWARD",
+                note: "Duel défaite (participation)",
               },
             }),
           ]
@@ -810,20 +782,18 @@ export class DuelCommand {
 
     // Canvas
     try {
-      const { generateDuelArenaCard } = await import(
-        '../../lib/canvas-utils.js'
-      );
+      const { generateDuelArenaCard } = await import("../../lib/canvas-utils.js");
       const buffer = await generateDuelArenaCard({
         playerA: {
           name: nameA,
           avatarUrl: interaction.user.displayAvatarURL({
-            extension: 'png',
+            extension: "png",
             size: 128,
           }),
         },
         playerB: {
           name: nameB,
-          avatarUrl: target.displayAvatarURL({ extension: 'png', size: 128 }),
+          avatarUrl: target.displayAvatarURL({ extension: "png", size: 128 }),
         },
         rounds: rounds.map((r) => ({
           cardA: {
@@ -854,42 +824,40 @@ export class DuelCommand {
       });
       await interaction.editReply({
         embeds: [],
-        files: [new AttachmentBuilder(buffer, { name: 'duel-arena.png' })],
+        files: [new AttachmentBuilder(buffer, { name: "duel-arena.png" })],
         components: [],
       });
     } catch (err) {
-      logger.error('[Duel] Canvas failed:', err);
+      logger.error("[Duel] Canvas failed:", err);
     }
 
     // Summary + Revenge button
     const summaryLines = rounds.map((r, i) => {
-      const w = r.winner === 'A' ? '🟢' : '🔴';
+      const w = r.winner === "A" ? "🟢" : "🔴";
       return `**R${i + 1}** ${w} ${r.cardA.name} (**${Math.round(r.powerA)}**) vs ${r.cardB.name} (**${Math.round(r.powerB)}**)`;
     });
 
     const winnerTier = getRankTier(winnerNewElo);
-    const eloLine = `📊 ELO : **${winnerName}** ${winnerEloD > 0 ? '+' : ''}${winnerEloD} (${winnerNewElo} ${winnerTier.emoji}) · **${loserName}** ${loserEloD > 0 ? '+' : ''}${loserEloD}`;
+    const eloLine = `📊 ELO : **${winnerName}** ${winnerEloD > 0 ? "+" : ""}${winnerEloD} (${winnerNewElo} ${winnerTier.emoji}) · **${loserName}** ${loserEloD > 0 ? "+" : ""}${loserEloD}`;
     const streakLine =
-      newStreak >= 3
-        ? `\n🔥 **${winnerName}** est en série de ${newStreak} victoires !`
-        : '';
+      newStreak >= 3 ? `\n🔥 **${winnerName}** est en série de ${newStreak} victoires !` : "";
     const mvpLine = `\n⭐ **MVP :** ${mvpCard.name} (${mvpPlayer}) — marge de +${Math.round(mvpRound.mvpDelta)} PWR`;
 
     const revengeBtn = new ButtonBuilder()
       .setCustomId(`duel-revenge-${loserDiscordId}-${winnerDiscordId}-${bet}`)
-      .setLabel('🔄 Revanche !')
+      .setLabel("🔄 Revanche !")
       .setStyle(ButtonStyle.Primary);
 
     const summaryContent =
       `## ${finish.emoji} ${finish.msg}\n` +
       `🏆 **${winnerName}** remporte le duel ! (**${scoreA}**—**${scoreB}**)\n\n` +
-      summaryLines.join('\n') +
-      '\n\n' +
+      summaryLines.join("\n") +
+      "\n\n" +
       `💰 **+${totalReward} 🪙** pour ${winnerName}` +
-      (streakBonus > 0 ? ` (dont +${streakBonus} bonus série)` : '') +
-      (loserReward > 0 ? ` · +${loserReward} 🪙 participation` : '') +
-      (bet > 0 ? `\n🎰 Mise : ${bet} 🪙 chacun` : '') +
-      '\n' +
+      (streakBonus > 0 ? ` (dont +${streakBonus} bonus série)` : "") +
+      (loserReward > 0 ? ` · +${loserReward} 🪙 participation` : "") +
+      (bet > 0 ? `\n🎰 Mise : ${bet} 🪙 chacun` : "") +
+      "\n" +
       eloLine +
       streakLine +
       mvpLine +
@@ -911,14 +879,14 @@ export class DuelCommand {
 
   @ButtonComponent({ id: /^duel-revenge-/ })
   async handleRevenge(interaction: ButtonInteraction) {
-    const parts = interaction.customId.split('-');
+    const parts = interaction.customId.split("-");
     const loserId = parts[2]!;
     const winnerId = parts[3]!;
-    const bet = Number.parseInt(parts[4] ?? '0', 10);
+    const bet = Number.parseInt(parts[4] ?? "0", 10);
 
     if (interaction.user.id !== loserId) {
       return interaction.reply({
-        content: '❌ Seul le perdant peut demander la revanche !',
+        content: "❌ Seul le perdant peut demander la revanche !",
         flags: MessageFlags.Ephemeral,
       });
     }
@@ -930,7 +898,7 @@ export class DuelCommand {
     const winner = await interaction.client.users.fetch(winnerId);
     await interaction.followUp(
       `⚔️ **${interaction.user.displayName}** demande la revanche à **${winner.displayName}** !\n` +
-        `> Utilise \`/duel combat adversaire:@${winner.displayName}${bet > 0 ? ` mise:${bet}` : ''}\` pour relancer !`,
+        `> Utilise \`/duel combat adversaire:@${winner.displayName}${bet > 0 ? ` mise:${bet}` : ""}\` pour relancer !`,
     );
   }
 
@@ -939,14 +907,14 @@ export class DuelCommand {
   // ══════════════════════════════════════════════════════════════════════════════
 
   @Slash({
-    name: 'stats',
+    name: "stats",
     description: "📊 Voir les statistiques de duel d'un joueur",
   })
-  @SlashGroup('duel')
+  @SlashGroup("duel")
   async stats(
     @SlashOption({
-      name: 'joueur',
-      description: 'Le joueur (toi par défaut)',
+      name: "joueur",
+      description: "Le joueur (toi par défaut)",
       required: false,
       type: ApplicationCommandOptionType.User,
     })
@@ -972,16 +940,15 @@ export class DuelCommand {
     // Fetch recent matches
     const recentMatches = await this.prisma.duelMatch.findMany({
       where: { OR: [{ challengerId: target.id }, { opponentId: target.id }] },
-      orderBy: { createdAt: 'desc' },
+      orderBy: { createdAt: "desc" },
       take: 5,
     });
 
     const recentLines = recentMatches.map((m: any) => {
       const won = m.winnerId === target.id;
-      const opponent =
-        m.challengerId === target.id ? m.opponentId : m.challengerId;
+      const opponent = m.challengerId === target.id ? m.opponentId : m.challengerId;
       const date = `<t:${Math.floor(new Date(m.createdAt).getTime() / 1000)}:R>`;
-      return `${won ? '🟢' : '🔴'} **${m.score}** vs <@${opponent}> · ${m.finishType} ${date}`;
+      return `${won ? "🟢" : "🔴"} **${m.score}** vs <@${opponent}> · ${m.finishType} ${date}`;
     });
 
     // Most used element in duels
@@ -997,49 +964,46 @@ export class DuelCommand {
         cardB: { element: string };
       }>;
       for (const r of roundsData) {
-        const el =
-          m.challengerId === target.id ? r.cardA?.element : r.cardB?.element;
+        const el = m.challengerId === target.id ? r.cardA?.element : r.cardB?.element;
         if (el) elementCounts[el] = (elementCounts[el] ?? 0) + 1;
       }
     }
-    const favElement = Object.entries(elementCounts).sort(
-      (a, b) => b[1] - a[1],
-    )[0];
+    const favElement = Object.entries(elementCounts).sort((a, b) => b[1] - a[1])[0];
 
     const embed = new EmbedBuilder()
       .setTitle(`${tier.emoji} Stats de Duel — ${target.displayName}`)
       .setThumbnail(target.displayAvatarURL({ size: 128 }))
-      .setColor(Number.parseInt(tier.color.replace('#', ''), 16))
+      .setColor(Number.parseInt(tier.color.replace("#", ""), 16))
       .addFields(
         {
-          name: '🏅 Rang',
+          name: "🏅 Rang",
           value: `**${tier.name}** (${p.duelRating} ELO)`,
           inline: true,
         },
         {
-          name: '📊 W/L',
+          name: "📊 W/L",
           value: `**${p.duelWins}**V / **${p.duelLosses}**D (${winRate}%)`,
           inline: true,
         },
         {
-          name: '🔥 Série',
+          name: "🔥 Série",
           value: `Actuelle : **${p.duelStreak}** · Record : **${p.duelBestStreak}**`,
           inline: true,
         },
-        { name: '🎯 Duels joués', value: `**${total}**`, inline: true },
+        { name: "🎯 Duels joués", value: `**${total}**`, inline: true },
         {
-          name: '💫 Élément favori',
+          name: "💫 Élément favori",
           value: favElement
-            ? `${ELEMENT_EMOJI[favElement[0]] ?? '⚪'} ${ELEMENT_NAME[favElement[0]] ?? favElement[0]} (${favElement[1]}×)`
-            : 'Aucun',
+            ? `${ELEMENT_EMOJI[favElement[0]] ?? "⚪"} ${ELEMENT_NAME[favElement[0]] ?? favElement[0]} (${favElement[1]}×)`
+            : "Aucun",
           inline: true,
         },
       );
 
     if (recentLines.length > 0) {
       embed.addFields({
-        name: '📜 Derniers matchs',
-        value: recentLines.join('\n'),
+        name: "📜 Derniers matchs",
+        value: recentLines.join("\n"),
       });
     }
 
@@ -1052,16 +1016,16 @@ export class DuelCommand {
   // ══════════════════════════════════════════════════════════════════════════════
 
   @Slash({
-    name: 'classement',
-    description: '🏆 Top 10 des duellistes par ELO',
+    name: "classement",
+    description: "🏆 Top 10 des duellistes par ELO",
   })
-  @SlashGroup('duel')
+  @SlashGroup("duel")
   async leaderboard(interaction: CommandInteraction) {
     await interaction.deferReply();
 
     const top = await this.prisma.profile.findMany({
       where: { duelWins: { gt: 0 } },
-      orderBy: { duelRating: 'desc' },
+      orderBy: { duelRating: "desc" },
       take: 10,
       include: { user: { select: { discordId: true, name: true } } },
     });
@@ -1071,21 +1035,18 @@ export class DuelCommand {
     }
 
     const lines = top.map((p: any, i: number) => {
-      const rank =
-        i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : `**${i + 1}.**`;
+      const rank = i === 0 ? "🥇" : i === 1 ? "🥈" : i === 2 ? "🥉" : `**${i + 1}.**`;
       const tier = getRankTier(p.duelRating);
       const total = p.duelWins + p.duelLosses;
       const wr = total > 0 ? Math.round((p.duelWins / total) * 100) : 0;
-      const name = p.user.discordId
-        ? `<@${p.user.discordId}>`
-        : (p.user.name ?? 'Inconnu');
-      const streak = p.duelStreak >= 3 ? ` 🔥${p.duelStreak}` : '';
+      const name = p.user.discordId ? `<@${p.user.discordId}>` : (p.user.name ?? "Inconnu");
+      const streak = p.duelStreak >= 3 ? ` 🔥${p.duelStreak}` : "";
       return `${rank} ${tier.emoji} ${name} — **${p.duelRating}** ELO · ${p.duelWins}V/${p.duelLosses}D (${wr}%)${streak}`;
     });
 
     const embed = new EmbedBuilder()
-      .setTitle('🏆 Classement des Duellistes')
-      .setDescription(lines.join('\n'))
+      .setTitle("🏆 Classement des Duellistes")
+      .setDescription(lines.join("\n"))
       .setColor(Colors.Secondary)
       .setFooter({ text: `${top.length} duellistes classés · ${RPB.Name}` })
       .setTimestamp();
@@ -1098,15 +1059,15 @@ export class DuelCommand {
   // ══════════════════════════════════════════════════════════════════════════════
 
   @Slash({
-    name: 'historique',
-    description: '📜 Voir les 10 derniers duels du serveur',
+    name: "historique",
+    description: "📜 Voir les 10 derniers duels du serveur",
   })
-  @SlashGroup('duel')
+  @SlashGroup("duel")
   async history(interaction: CommandInteraction) {
     await interaction.deferReply();
 
     const matches = await this.prisma.duelMatch.findMany({
-      orderBy: { createdAt: 'desc' },
+      orderBy: { createdAt: "desc" },
       take: 10,
     });
 
@@ -1116,17 +1077,15 @@ export class DuelCommand {
 
     const lines = matches.map((m: any) => {
       const date = `<t:${Math.floor(new Date(m.createdAt).getTime() / 1000)}:R>`;
-      const winner =
-        m.winnerId === m.challengerId ? m.challengerId : m.opponentId;
-      const loser =
-        m.winnerId === m.challengerId ? m.opponentId : m.challengerId;
-      const betStr = m.bet > 0 ? ` · 🎰 ${m.bet} 🪙` : '';
-      return `${m.finishType.split(' ')[0]} <@${winner}> **${m.score}** <@${loser}>${betStr} ${date}`;
+      const winner = m.winnerId === m.challengerId ? m.challengerId : m.opponentId;
+      const loser = m.winnerId === m.challengerId ? m.opponentId : m.challengerId;
+      const betStr = m.bet > 0 ? ` · 🎰 ${m.bet} 🪙` : "";
+      return `${m.finishType.split(" ")[0]} <@${winner}> **${m.score}** <@${loser}>${betStr} ${date}`;
     });
 
     const embed = new EmbedBuilder()
-      .setTitle('📜 Historique des Duels')
-      .setDescription(lines.join('\n'))
+      .setTitle("📜 Historique des Duels")
+      .setDescription(lines.join("\n"))
       .setColor(Colors.Info)
       .setFooter({ text: RPB.Name })
       .setTimestamp();

@@ -1,6 +1,6 @@
-import { TrendingDown, TrendingUp } from '@mui/icons-material';
-import { Box, Paper, Typography, useTheme } from '@mui/material';
-import type React from 'react';
+import { TrendingDown, TrendingUp } from "@mui/icons-material";
+import { Box, Paper, Typography, useTheme } from "@mui/material";
+import type React from "react";
 
 interface StatsCardProps {
   title: string;
@@ -8,7 +8,7 @@ interface StatsCardProps {
   trend?: number; // Percentage change
   trendLabel?: string;
   icon?: React.ReactNode;
-  color?: 'primary' | 'secondary' | 'error' | 'warning' | 'info' | 'success';
+  color?: "primary" | "secondary" | "error" | "warning" | "info" | "success";
 }
 
 export const StatsCard: React.FC<StatsCardProps> = ({
@@ -17,7 +17,7 @@ export const StatsCard: React.FC<StatsCardProps> = ({
   trend,
   trendLabel,
   icon,
-  color = 'primary',
+  color = "primary",
 }) => {
   const theme = useTheme();
   const isPositive = trend && trend > 0;
@@ -28,27 +28,27 @@ export const StatsCard: React.FC<StatsCardProps> = ({
       elevation={0}
       sx={{
         p: 3,
-        height: '100%',
+        height: "100%",
         border: `1px solid ${theme.palette.divider}`,
         borderRadius: 2,
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
       }}
     >
       <Box
         sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'flex-start',
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "flex-start",
           mb: 2,
         }}
       >
         <Typography
           variant="subtitle2"
           sx={{
-            color: 'text.secondary',
-            fontWeight: 'medium',
+            color: "text.secondary",
+            fontWeight: "medium",
           }}
         >
           {title}
@@ -60,9 +60,9 @@ export const StatsCard: React.FC<StatsCardProps> = ({
               borderRadius: 1,
               bgcolor: `${color}.light`,
               color: `${color}.main`,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
               opacity: 0.2,
             }}
           >
@@ -75,7 +75,7 @@ export const StatsCard: React.FC<StatsCardProps> = ({
         <Typography
           variant="h4"
           sx={{
-            fontWeight: 'bold',
+            fontWeight: "bold",
             mb: 1,
           }}
         >
@@ -83,21 +83,17 @@ export const StatsCard: React.FC<StatsCardProps> = ({
         </Typography>
 
         {trend !== undefined && (
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
             <Box
               sx={{
-                display: 'flex',
-                alignItems: 'center',
-                color: isPositive
-                  ? 'success.main'
-                  : isNegative
-                    ? 'error.main'
-                    : 'text.secondary',
+                display: "flex",
+                alignItems: "center",
+                color: isPositive ? "success.main" : isNegative ? "error.main" : "text.secondary",
                 bgcolor: isPositive
-                  ? 'success.lighter'
+                  ? "success.lighter"
                   : isNegative
-                    ? 'error.lighter'
-                    : 'action.hover',
+                    ? "error.lighter"
+                    : "action.hover",
                 px: 0.5,
                 py: 0.25,
                 borderRadius: 0.5,
@@ -108,10 +104,10 @@ export const StatsCard: React.FC<StatsCardProps> = ({
               <Typography
                 variant="caption"
                 sx={{
-                  fontWeight: 'bold',
+                  fontWeight: "bold",
                 }}
               >
-                {trend > 0 ? '+' : ''}
+                {trend > 0 ? "+" : ""}
                 {trend}%
               </Typography>
             </Box>
@@ -119,7 +115,7 @@ export const StatsCard: React.FC<StatsCardProps> = ({
               <Typography
                 variant="caption"
                 sx={{
-                  color: 'text.secondary',
+                  color: "text.secondary",
                 }}
               >
                 {trendLabel}

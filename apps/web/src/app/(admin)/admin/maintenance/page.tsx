@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   CleaningServices,
@@ -8,7 +8,7 @@ import {
   History,
   Refresh,
   Update,
-} from '@mui/icons-material';
+} from "@mui/icons-material";
 import {
   Alert,
   Box,
@@ -22,24 +22,24 @@ import {
   Stack,
   TextField,
   Typography,
-} from '@mui/material';
-import { useState } from 'react';
-import { useToast } from '@/components/ui';
-import SystemStatusCard from './_components/SystemStatusCard';
+} from "@mui/material";
+import { useState } from "react";
+import { useToast } from "@/components/ui";
+import SystemStatusCard from "./_components/SystemStatusCard";
 import {
   actionClearTournamentCache,
   actionImportTournament,
   actionMergeDuplicates,
   actionRecalculateRankings,
   actionTriggerSyncParts,
-} from '@/server/actions/maintenance';
-import { archiveCurrentSeason } from '@/server/actions/season';
-import RankingConfigForm from './_components/RankingConfigForm';
+} from "@/server/actions/maintenance";
+import { archiveCurrentSeason } from "@/server/actions/season";
+import RankingConfigForm from "./_components/RankingConfigForm";
 
 export default function MaintenancePage() {
   const [loading, setLoading] = useState<string | null>(null);
-  const [challongeSlug, setChallongeSlug] = useState('');
-  const [nextSeasonName, setNextSeasonName] = useState('');
+  const [challongeSlug, setChallongeSlug] = useState("");
+  const [nextSeasonName, setNextSeasonName] = useState("");
   const { showToast } = useToast();
 
   const handleAction = async (
@@ -54,12 +54,12 @@ export default function MaintenancePage() {
     try {
       const res = await action();
       if (res && (res.success || !res.error)) {
-        showToast(res.message || 'Action réussie', 'success');
+        showToast(res.message || "Action réussie", "success");
       } else {
-        showToast(res?.error || 'Erreur inconnue', 'error');
+        showToast(res?.error || "Erreur inconnue", "error");
       }
     } catch (err: unknown) {
-      showToast(err instanceof Error ? err.message : String(err), 'error');
+      showToast(err instanceof Error ? err.message : String(err), "error");
     } finally {
       setLoading(null);
     }
@@ -67,53 +67,53 @@ export default function MaintenancePage() {
 
   const handleImport = async () => {
     if (!challongeSlug) return;
-    handleAction('import', () => actionImportTournament(challongeSlug));
+    handleAction("import", () => actionImportTournament(challongeSlug));
   };
 
   const handleArchive = async () => {
     if (!nextSeasonName) return;
     const slug = nextSeasonName
       .toLowerCase()
-      .replace(/ /g, '-')
-      .replace(/[^a-z0-9-]/g, '');
-    handleAction('archive', () => archiveCurrentSeason(nextSeasonName, slug));
+      .replace(/ /g, "-")
+      .replace(/[^a-z0-9-]/g, "");
+    handleAction("archive", () => archiveCurrentSeason(nextSeasonName, slug));
   };
 
   const tasks = [
     {
-      id: 'recalc',
-      title: 'Recalculer les Classements',
+      id: "recalc",
+      title: "Recalculer les Classements",
       description:
-        'Réinitialise les profils et recalcule les points de tous les joueurs pour la saison active.',
+        "Réinitialise les profils et recalcule les points de tous les joueurs pour la saison active.",
       icon: <Refresh />,
-      color: 'primary',
+      color: "primary",
       action: actionRecalculateRankings,
     },
     {
-      id: 'merge',
-      title: 'Fusionner les Doublons',
+      id: "merge",
+      title: "Fusionner les Doublons",
       description:
         'Identifie les comptes "invités" (stubs) et les fusionne avec les comptes réels correspondants.',
       icon: <CleaningServices />,
-      color: 'warning',
+      color: "warning",
       action: actionMergeDuplicates,
     },
     {
-      id: 'sync-parts',
-      title: 'Sync Bey-Library',
+      id: "sync-parts",
+      title: "Sync Bey-Library",
       description:
-        'Met à jour la base de données des pièces (Blades, Ratchets, Bits) depuis la bibliothèque source local.',
+        "Met à jour la base de données des pièces (Blades, Ratchets, Bits) depuis la bibliothèque source local.",
       icon: <Update />,
-      color: 'info',
+      color: "info",
       action: actionTriggerSyncParts,
     },
     {
-      id: 'clear-cache',
-      title: 'Vider le Cache UI',
+      id: "clear-cache",
+      title: "Vider le Cache UI",
       description:
-        'Nettoie les données de classement temporaires stockées dans les objets tournois.',
+        "Nettoie les données de classement temporaires stockées dans les objets tournois.",
       icon: <DeleteSweep />,
-      color: 'error',
+      color: "error",
       action: actionClearTournamentCache,
     },
   ];
@@ -124,14 +124,14 @@ export default function MaintenancePage() {
         <Typography
           variant="h4"
           sx={{
-            fontWeight: 'bold',
+            fontWeight: "bold",
           }}
         >
           🛠️ Maintenance Système
         </Typography>
         <Typography
           sx={{
-            color: 'text.secondary',
+            color: "text.secondary",
           }}
         >
           Outils d'administration et de gestion de l'intégrité des données
@@ -147,7 +147,7 @@ export default function MaintenancePage() {
                 title={
                   <Typography
                     sx={{
-                      fontWeight: 'bold',
+                      fontWeight: "bold",
                     }}
                   >
                     Importation Challonge Express
@@ -170,7 +170,7 @@ export default function MaintenancePage() {
                     onClick={handleImport}
                     disabled={loading !== null || !challongeSlug}
                     startIcon={
-                      loading === 'import' ? (
+                      loading === "import" ? (
                         <CircularProgress size={20} color="inherit" />
                       ) : (
                         <CloudDownload />
@@ -187,9 +187,9 @@ export default function MaintenancePage() {
             <Card
               variant="outlined"
               sx={{
-                border: '1px solid',
-                borderColor: 'error.main',
-                bgcolor: 'rgba(239, 68, 68, 0.02)',
+                border: "1px solid",
+                borderColor: "error.main",
+                bgcolor: "rgba(239, 68, 68, 0.02)",
               }}
             >
               <CardHeader
@@ -198,7 +198,7 @@ export default function MaintenancePage() {
                   <Typography
                     color="error"
                     sx={{
-                      fontWeight: 'bold',
+                      fontWeight: "bold",
                     }}
                   >
                     Clore la Saison et Archiver
@@ -222,7 +222,7 @@ export default function MaintenancePage() {
                     onClick={handleArchive}
                     disabled={loading !== null || !nextSeasonName}
                     startIcon={
-                      loading === 'archive' ? (
+                      loading === "archive" ? (
                         <CircularProgress size={20} color="inherit" />
                       ) : (
                         <History />
@@ -244,9 +244,9 @@ export default function MaintenancePage() {
                   <Card
                     variant="outlined"
                     sx={{
-                      height: '100%',
-                      display: 'flex',
-                      flexDirection: 'column',
+                      height: "100%",
+                      display: "flex",
+                      flexDirection: "column",
                     }}
                   >
                     <CardHeader
@@ -254,7 +254,7 @@ export default function MaintenancePage() {
                       title={
                         <Typography
                           sx={{
-                            fontWeight: 'bold',
+                            fontWeight: "bold",
                           }}
                         >
                           {task.title}
@@ -266,25 +266,18 @@ export default function MaintenancePage() {
                         variant="body2"
                         gutterBottom
                         sx={{
-                          color: 'text.secondary',
+                          color: "text.secondary",
                         }}
                       >
                         {task.description}
                       </Typography>
                     </CardContent>
                     <Divider />
-                    <Box sx={{ p: 2, bgcolor: 'background.default' }}>
+                    <Box sx={{ p: 2, bgcolor: "background.default" }}>
                       <Button
                         fullWidth
                         variant="contained"
-                        color={
-                          task.color as
-                            | 'primary'
-                            | 'warning'
-                            | 'info'
-                            | 'error'
-                            | 'secondary'
-                        }
+                        color={task.color as "primary" | "warning" | "info" | "error" | "secondary"}
                         onClick={() => handleAction(task.id, task.action)}
                         disabled={loading !== null}
                         startIcon={
@@ -295,7 +288,7 @@ export default function MaintenancePage() {
                           )
                         }
                       >
-                        {loading === task.id ? 'Exécution...' : 'Lancer'}
+                        {loading === task.id ? "Exécution..." : "Lancer"}
                       </Button>
                     </Box>
                   </Card>
@@ -310,9 +303,8 @@ export default function MaintenancePage() {
             <SystemStatusCard />
 
             <Alert severity="info" icon={<Handyman />}>
-              Ces actions sont destructives ou modifient massivement la base de
-              données. Assurez-vous d'avoir une sauvegarde avant toute opération
-              majeure.
+              Ces actions sont destructives ou modifient massivement la base de données.
+              Assurez-vous d'avoir une sauvegarde avant toute opération majeure.
             </Alert>
           </Stack>
         </Grid>

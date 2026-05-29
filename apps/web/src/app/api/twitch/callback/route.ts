@@ -1,8 +1,8 @@
-import { NextResponse } from 'next/server';
+import { NextResponse } from "next/server";
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
-  const code = searchParams.get('code');
+  const code = searchParams.get("code");
 
   if (!code) {
     return new NextResponse("Aucun code trouvé dans l'URL.", { status: 400 });
@@ -20,7 +20,7 @@ export async function GET(req: Request) {
     </html>
   `,
     {
-      headers: { 'Content-Type': 'text/html' },
+      headers: { "Content-Type": "text/html" },
     },
   );
 }

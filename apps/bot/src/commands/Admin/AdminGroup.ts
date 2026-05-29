@@ -1,58 +1,61 @@
-import { ApplicationCommandOptionType, MessageFlags, PermissionFlagsBits, type CommandInteraction } from "discord.js";
-import { Discord, Slash, SlashChoice, SlashGroup, SlashOption } from '@rpbey/discordx';
-import { inject, injectable } from 'tsyringe';
-import { syncRankingRolesTask } from '../../cron/tasks/SyncRankingRoles.js';
-import { publishBtsRanking } from '../../lib/classement-publisher.js';
-import { logger } from '../../lib/logger.js';
-import { PrismaService } from '../../lib/prisma.js';
+import {
+  ApplicationCommandOptionType,
+  MessageFlags,
+  PermissionFlagsBits,
+  type CommandInteraction,
+} from "discord.js";
+import { Discord, Slash, SlashChoice, SlashGroup, SlashOption } from "@rpbey/discordx";
+import { inject, injectable } from "tsyringe";
+import { syncRankingRolesTask } from "../../cron/tasks/SyncRankingRoles.js";
+import { publishBtsRanking } from "../../lib/classement-publisher.js";
+import { logger } from "../../lib/logger.js";
+import { PrismaService } from "../../lib/prisma.js";
 
 @Discord()
 @SlashGroup({
-  name: 'admin',
+  name: "admin",
   description: "Commandes d'administration du bot",
   defaultMemberPermissions: PermissionFlagsBits.Administrator,
 })
-@SlashGroup('admin')
+@SlashGroup("admin")
 @injectable()
 export class AdminGroup {
   constructor(@inject(PrismaService) private prisma: PrismaService) {}
 
   @Slash({
-    name: 'synchroniser-roles',
-    description: 'Synchronise les rôles de paliers de points',
+    name: "synchroniser-roles",
+    description: "Synchronise les rôles de paliers de points",
   })
   async syncRoles(interaction: CommandInteraction) {
     await interaction.deferReply({ flags: MessageFlags.Ephemeral });
     try {
       await syncRankingRolesTask();
-      return interaction.editReply(
-        '✅ Synchronisation des rôles de points terminée.',
-      );
+      return interaction.editReply("✅ Synchronisation des rôles de points terminée.");
     } catch (error) {
       logger.error(error);
       return interaction.editReply(
-        `❌ Erreur lors de la synchronisation des rôles : \`${error instanceof Error ? error.message : 'Erreur inconnue'}\``,
+        `❌ Erreur lors de la synchronisation des rôles : \`${error instanceof Error ? error.message : "Erreur inconnue"}\``,
       );
     }
   }
 
   @Slash({
-    name: 'publier-classement',
-    description: 'Publie le canvas BTS top 10 dans #classement avec ping @Tournois',
+    name: "publier-classement",
+    description: "Publie le canvas BTS top 10 dans #classement avec ping @Tournois",
   })
   async publishClassement(
-    @SlashChoice({ name: 'Saison 2 (BTS 2 -> 5)', value: 2 })
-    @SlashChoice({ name: 'Saison 1 (BTS 1)', value: 1 })
+    @SlashChoice({ name: "Saison 2 (BTS 2 -> 5)", value: 2 })
+    @SlashChoice({ name: "Saison 1 (BTS 1)", value: 1 })
     @SlashOption({
-      name: 'saison',
-      description: 'Saison BTS a publier (default 2)',
+      name: "saison",
+      description: "Saison BTS a publier (default 2)",
       type: ApplicationCommandOptionType.Integer,
       required: false,
     })
     season: 1 | 2 | undefined,
     @SlashOption({
-      name: 'silencieux',
-      description: 'Sans ping @Tournois',
+      name: "silencieux",
+      description: "Sans ping @Tournois",
       type: ApplicationCommandOptionType.Boolean,
       required: false,
     })
@@ -67,9 +70,7 @@ export class AdminGroup {
         purgePrevious: true,
       });
       if (!r.ok) {
-        return interaction.editReply(
-          `Echec publication classement: \`${r.error ?? 'unknown'}\``,
-        );
+        return interaction.editReply(`Echec publication classement: \`${r.error ?? "unknown"}\``);
       }
       return interaction.editReply(
         `Classement BTS S${season ?? 2} publie dans <#${r.channelId}> (${r.rendered}/${r.total} bladers) — message ${r.messageId}`,
@@ -77,14 +78,14 @@ export class AdminGroup {
     } catch (error) {
       logger.error(error);
       return interaction.editReply(
-        `Erreur publication classement: \`${error instanceof Error ? error.message : 'inconnue'}\``,
+        `Erreur publication classement: \`${error instanceof Error ? error.message : "inconnue"}\``,
       );
     }
   }
 
   @Slash({
-    name: 'classement-raz',
-    description: 'RAZ complet des points de classement',
+    name: "classement-raz",
+    description: "RAZ complet des points de classement",
   })
   async resetRanking(interaction: CommandInteraction) {
     await interaction.deferReply({ flags: MessageFlags.Ephemeral });
@@ -98,7 +99,7 @@ export class AdminGroup {
     } catch (error) {
       logger.error(error);
       return interaction.editReply(
-        `❌ Erreur lors de la réinitialisation : \`${error instanceof Error ? error.message : 'Erreur inconnue'}\``,
+        `❌ Erreur lors de la réinitialisation : \`${error instanceof Error ? error.message : "Erreur inconnue"}\``,
       );
     }
   }

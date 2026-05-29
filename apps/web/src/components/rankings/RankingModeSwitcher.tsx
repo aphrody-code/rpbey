@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { Box, ToggleButton, ToggleButtonGroup } from '@mui/material';
-import Link from 'next/link';
+import { Box, ToggleButton, ToggleButtonGroup } from "@mui/material";
+import Link from "next/link";
 
 interface Mode {
   key: string;
@@ -11,22 +11,18 @@ interface Mode {
 }
 
 const MODES: Mode[] = [
-  { key: 'global', label: 'Global', href: '/rankings', color: 'var(--rpb-primary)' },
-  { key: 'wb', label: 'Wild Breakers', href: '/tournaments/wb', color: '#a78bfa' },
-  { key: 'satr', label: 'SATR', href: '/tournaments/satr', color: 'var(--rpb-secondary)' },
-  { key: 'stardust', label: 'Stardust', href: '/tournaments/stardust', color: '#60A5FA' },
+  { key: "global", label: "Global", href: "/rankings", color: "var(--rpb-primary)" },
+  { key: "wb", label: "Wild Breakers", href: "/tournaments/wb", color: "#a78bfa" },
+  { key: "satr", label: "SATR", href: "/tournaments/satr", color: "var(--rpb-secondary)" },
+  { key: "stardust", label: "Stardust", href: "/tournaments/stardust", color: "#60A5FA" },
 ];
 
-export function RankingModeSwitcher({
-  active,
-}: {
-  active: 'global' | 'wb' | 'satr' | 'stardust';
-}) {
+export function RankingModeSwitcher({ active }: { active: "global" | "wb" | "satr" | "stardust" }) {
   return (
     <Box
       sx={{
-        display: 'flex',
-        justifyContent: 'center',
+        display: "flex",
+        justifyContent: "center",
         mb: { xs: 2, md: 3 },
       }}
     >
@@ -37,19 +33,19 @@ export function RankingModeSwitcher({
         sx={{
           p: 0.5,
           borderRadius: 3,
-          bgcolor: 'rgba(255,255,255,0.03)',
-          border: '1px solid rgba(255,255,255,0.06)',
+          bgcolor: "rgba(255,255,255,0.03)",
+          border: "1px solid rgba(255,255,255,0.06)",
           gap: 0.5,
-          flexWrap: 'wrap',
-          '& .MuiToggleButton-root': {
-            border: 'none',
-            borderRadius: '12px !important',
+          flexWrap: "wrap",
+          "& .MuiToggleButton-root": {
+            border: "none",
+            borderRadius: "12px !important",
             px: { xs: 1.5, md: 2.5 },
             py: 0.75,
-            textTransform: 'none',
+            textTransform: "none",
             fontWeight: 800,
-            fontSize: { xs: '0.72rem', md: '0.85rem' },
-            color: 'rgba(255,255,255,0.55)',
+            fontSize: { xs: "0.72rem", md: "0.85rem" },
+            color: "rgba(255,255,255,0.55)",
             letterSpacing: 0.2,
           },
         }}
@@ -61,20 +57,20 @@ export function RankingModeSwitcher({
             component={Link}
             href={m.href}
             sx={{
-              '&.Mui-selected': {
-                bgcolor: 'rgba(255,255,255,0.08) !important',
+              "&.Mui-selected": {
+                bgcolor: "rgba(255,255,255,0.08) !important",
                 color: `${m.color} !important`,
                 boxShadow: `0 0 18px ${m.color}30`,
               },
-              '&:hover': { bgcolor: 'rgba(255,255,255,0.05)' },
+              "&:hover": { bgcolor: "rgba(255,255,255,0.05)" },
             }}
           >
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75 }}>
+            <Box sx={{ display: "flex", alignItems: "center", gap: 0.75 }}>
               <Box
                 sx={{
                   width: 6,
                   height: 6,
-                  borderRadius: '50%',
+                  borderRadius: "50%",
                   bgcolor: m.color,
                   boxShadow: `0 0 6px ${m.color}`,
                 }}

@@ -1,7 +1,6 @@
-
 > ⚠️ **INFRASTRUCTURE GÉRÉE PAR ANTIGRAVITY (GOD MODE)**
 > Ce projet opère sous la **Directive Omega**. L'architecture, les dépendances, et le code sont gérés et refactorisés de manière 100% autonome. Aucune sécurité conservative n'est appliquée. La performance brute est l'unique métrique.
-\n# cdn — `cdn.rosegriffon.fr`
+> \n# cdn — `cdn.rosegriffon.fr`
 
 Serveur d'images Bun minimal qui remplace l'ancien `api.alessf.fr` (down).
 Drop-in compatible : même contrat REST, mêmes headers, même format de réponse.
@@ -39,6 +38,7 @@ curl -X POST https://cdn.rosegriffon.fr/upload \
 ```
 
 Contraintes :
+
 - `Content-Type` ∈ `image/{png,jpeg,webp,gif,svg+xml}`
 - Body ≤ 25 MB (sinon 413)
 - Body non vide (sinon 400)
@@ -91,13 +91,13 @@ sudo systemctl enable --now cdn.service
 
 ## Variables d'environnement
 
-| Var | Défaut | Description |
-|---|---|---|
-| `CDN_API_KEY` | (requis) | API key pour POST /upload + DELETE — 32+ chars |
-| `CDN_PORT` | `8804` | Port d'écoute Bun |
-| `CDN_HOST` | `127.0.0.1` | Bind interface |
-| `CDN_STORAGE` | `/var/www/cdn/images` | Dir absolue de stockage |
-| `CDN_PUBLIC_BASE` | `https://cdn.rosegriffon.fr` | Base URL retournée dans la réponse upload |
+| Var               | Défaut                       | Description                                    |
+| ----------------- | ---------------------------- | ---------------------------------------------- |
+| `CDN_API_KEY`     | (requis)                     | API key pour POST /upload + DELETE — 32+ chars |
+| `CDN_PORT`        | `8804`                       | Port d'écoute Bun                              |
+| `CDN_HOST`        | `127.0.0.1`                  | Bind interface                                 |
+| `CDN_STORAGE`     | `/var/www/cdn/images`        | Dir absolue de stockage                        |
+| `CDN_PUBLIC_BASE` | `https://cdn.rosegriffon.fr` | Base URL retournée dans la réponse upload      |
 
 ## Ops
 
@@ -112,6 +112,7 @@ ls -la /var/www/cdn/images/       # liste fichiers
 ## Compatibilité
 
 Le contrat est identique à l'ancien `api.alessf.fr` :
+
 - Format de réponse upload : `{id, url}` (mêmes clés)
 - Format DELETE : `{success: bool}`
 - URL publique : pattern `<base>/<id>` (id contient déjà l'extension)

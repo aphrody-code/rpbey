@@ -1,23 +1,20 @@
-'use client';
+"use client";
 
-import { CalendarMonth, Group } from '@mui/icons-material';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardActionArea from '@mui/material/CardActionArea';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Chip from '@mui/material/Chip';
-import Grid from '@mui/material/Grid';
-import { alpha } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
-import Image from 'next/image';
-import { TrophyIcon } from '@/components/ui/Icons';
-import {
-  type TournamentStatus,
-  TournamentStatusChip,
-} from '@/components/ui/StatusChip';
-import { formatDateShort } from '@/lib/utils';
+import { CalendarMonth, Group } from "@mui/icons-material";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
+import CardActionArea from "@mui/material/CardActionArea";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import Chip from "@mui/material/Chip";
+import Grid from "@mui/material/Grid";
+import { alpha } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
+import Image from "next/image";
+import { TrophyIcon } from "@/components/ui/Icons";
+import { type TournamentStatus, TournamentStatusChip } from "@/components/ui/StatusChip";
+import { formatDateShort } from "@/lib/utils";
 
 interface TournamentCardProps {
   id: string;
@@ -53,27 +50,25 @@ export function TournamentCard({
 }: TournamentCardProps) {
   const formattedStartDate = formatDateShort(new Date(startDate));
   const formattedEndDate = endDate ? formatDateShort(new Date(endDate)) : null;
-  const isRegistrationOpen = status === 'registration_open';
-  const isFull = maxParticipants
-    ? currentParticipants >= maxParticipants
-    : false;
+  const isRegistrationOpen = status === "registration_open";
+  const isFull = maxParticipants ? currentParticipants >= maxParticipants : false;
 
   const cardContent = (
     <>
       <CardContent sx={{ pb: showActions ? 1 : 2 }}>
         <Box
           sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'flex-start',
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "flex-start",
             gap: 1,
             mb: 1,
           }}
         >
           <Box
             sx={{
-              display: 'flex',
-              alignItems: 'center',
+              display: "flex",
+              alignItems: "center",
               gap: 1.25,
               minWidth: 0,
               flex: 1,
@@ -82,34 +77,28 @@ export function TournamentCard({
             {categoryLogo && (
               <Box
                 sx={{
-                  position: 'relative',
+                  position: "relative",
                   width: 36,
                   height: 36,
                   flexShrink: 0,
-                  borderRadius: '50%',
-                  overflow: 'hidden',
+                  borderRadius: "50%",
+                  overflow: "hidden",
                   border: categoryColor
                     ? `2px solid ${alpha(categoryColor, 0.35)}`
-                    : '2px solid rgba(255,255,255,0.1)',
-                  bgcolor: categoryColor
-                    ? alpha(categoryColor, 0.08)
-                    : 'transparent',
+                    : "2px solid rgba(255,255,255,0.1)",
+                  bgcolor: categoryColor ? alpha(categoryColor, 0.08) : "transparent",
                 }}
               >
                 <Image
                   src={categoryLogo}
-                  alt={categoryName ?? 'Catégorie'}
+                  alt={categoryName ?? "Catégorie"}
                   fill
                   sizes="36px"
-                  style={{ objectFit: 'contain', padding: 2 }}
+                  style={{ objectFit: "contain", padding: 2 }}
                 />
               </Box>
             )}
-            <Typography
-              variant="h6"
-              component="h3"
-              sx={{ fontWeight: 600, minWidth: 0 }}
-            >
+            <Typography variant="h6" component="h3" sx={{ fontWeight: 600, minWidth: 0 }}>
               {name}
             </Typography>
           </Box>
@@ -120,25 +109,23 @@ export function TournamentCard({
           <Typography
             variant="body2"
             sx={{
-              color: 'text.secondary',
+              color: "text.secondary",
               mb: 2,
-              display: '-webkit-box',
+              display: "-webkit-box",
               WebkitLineClamp: 2,
-              WebkitBoxOrient: 'vertical',
-              overflow: 'hidden',
+              WebkitBoxOrient: "vertical",
+              overflow: "hidden",
             }}
           >
             {description}
           </Typography>
         )}
 
-        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+        <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
           <Chip
             icon={<CalendarMonth />}
             label={
-              formattedEndDate
-                ? `${formattedStartDate} - ${formattedEndDate}`
-                : formattedStartDate
+              formattedEndDate ? `${formattedStartDate} - ${formattedEndDate}` : formattedStartDate
             }
             size="small"
             variant="outlined"
@@ -150,7 +137,7 @@ export function TournamentCard({
               label={`${currentParticipants}/${maxParticipants}`}
               size="small"
               variant="outlined"
-              color={isFull ? 'error' : 'default'}
+              color={isFull ? "error" : "default"}
             />
           )}
         </Box>
@@ -182,15 +169,15 @@ export function TournamentCard({
 
   if (onClick && !showActions) {
     return (
-      <Card sx={{ height: '100%' }}>
-        <CardActionArea onClick={onClick} sx={{ height: '100%' }}>
+      <Card sx={{ height: "100%" }}>
+        <CardActionArea onClick={onClick} sx={{ height: "100%" }}>
           {cardContent}
         </CardActionArea>
       </Card>
     );
   }
 
-  return <Card sx={{ height: '100%' }}>{cardContent}</Card>;
+  return <Card sx={{ height: "100%" }}>{cardContent}</Card>;
 }
 
 // Grid variant for list views
@@ -200,7 +187,7 @@ interface TournamentCardGridProps {
   onRegister?: (id: string) => void;
 }
 
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 
 export function TournamentCardGrid({
   tournaments,

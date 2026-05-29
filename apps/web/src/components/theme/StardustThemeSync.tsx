@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
-import { useThemeMode } from '@/components/theme/ThemeRegistry';
+import { useEffect } from "react";
+import { useThemeMode } from "@/components/theme/ThemeRegistry";
 
 /**
  * Quand monté, passe le thème global en "blue" (logo header/sidebar bascule
@@ -13,8 +13,8 @@ export function StardustThemeSync() {
   const { mode, setTheme } = useThemeMode();
 
   useEffect(() => {
-    if (mode !== 'blue') {
-      setTheme('blue');
+    if (mode !== "blue") {
+      setTheme("blue");
     }
   }, [mode, setTheme]);
 

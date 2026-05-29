@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { RoleColors, type RoleType } from '@/lib/role-colors';
+import { RoleColors, type RoleType } from "@/lib/role-colors";
 
 interface RoleLogoProps {
   role?: RoleType;
@@ -12,19 +12,12 @@ interface RoleLogoProps {
  * RPB Logo with dynamic role-based coloring
  * Uses the SVG vector directly to allow perfect scaling and dynamic fill coloring.
  */
-export function RoleLogo({
-  role = 'DEFAULT',
-  size = 64,
-  className = '',
-}: RoleLogoProps) {
+export function RoleLogo({ role = "DEFAULT", size = 64, className = "" }: RoleLogoProps) {
   const roleColor = RoleColors[role];
-  const colorHex = 'hex' in roleColor ? roleColor.hex : roleColor.primary;
+  const colorHex = "hex" in roleColor ? roleColor.hex : roleColor.primary;
 
   return (
-    <div
-      className={`relative inline-block ${className}`}
-      style={{ width: size, height: size }}
-    >
+    <div className={`relative inline-block ${className}`} style={{ width: size, height: size }}>
       <svg
         viewBox="0 0 800 800"
         width={size}
@@ -36,7 +29,7 @@ export function RoleLogo({
         <g
           id="star"
           style={{
-            color: role === 'DEFAULT' ? 'var(--rpb-primary)' : colorHex,
+            color: role === "DEFAULT" ? "var(--rpb-primary)" : colorHex,
           }}
         >
           <path
@@ -51,7 +44,7 @@ export function RoleLogo({
         <g
           id="horse-body"
           style={{
-            color: role === 'DEFAULT' ? 'var(--rpb-secondary)' : colorHex,
+            color: role === "DEFAULT" ? "var(--rpb-secondary)" : colorHex,
           }}
         >
           <path
@@ -66,14 +59,13 @@ export function RoleLogo({
           <path d="M310,510 C340,510 370,500 400,490 C420,480 440,470 460,470 C470,490 460,520 440,540 C410,560 380,550 350,540 C320,530 290,530 270,540 C260,520 280,510 310,510 Z M440,560 C460,570 480,570 500,560 C520,540 540,540 560,550 C570,570 560,600 540,620 C510,640 480,630 450,620 C420,610 390,610 370,620 C360,600 380,590 410,590 C430,580 450,570 440,560 Z M400,570 C420,580 440,580 460,570 L490,560 L460,550 C440,550 420,560 400,570 Z M350,600 C370,610 390,610 410,600 L440,590 L410,580 C390,580 370,590 350,600 Z M310,650 C330,660 350,660 370,650 L400,640 L370,630 C350,630 330,640 310,650 Z" />
         </g>
       </svg>
-      {role !== 'DEFAULT' && (
+      {role !== "DEFAULT" && (
         <span
           className="absolute -bottom-1 -right-1 w-3 h-3 rounded-full border-2 border-white"
           style={{
-            backgroundColor:
-              'hex' in roleColor ? roleColor.hex : roleColor.primary,
+            backgroundColor: "hex" in roleColor ? roleColor.hex : roleColor.primary,
           }}
-          title={'name' in roleColor ? roleColor.name : 'RPB'}
+          title={"name" in roleColor ? roleColor.name : "RPB"}
         />
       )}
     </div>
@@ -85,7 +77,7 @@ export function RoleLogo({
  */
 export function RoleBadge({ role }: { role: RoleType }) {
   const roleColor = RoleColors[role];
-  if (role === 'DEFAULT' || !('name' in roleColor)) return null;
+  if (role === "DEFAULT" || !("name" in roleColor)) return null;
 
   return (
     <span

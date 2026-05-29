@@ -4,11 +4,7 @@
     "ignoreDeprecations": "6.0",
     // Cible moderne pour Next.js
     "target": "ES2024",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "ES2024"
-    ],
+    "lib": ["dom", "dom.iterable", "ES2024"],
     // Modules (Next.js avec bundler)
     "module": "esnext",
     "moduleResolution": "bundler",
@@ -36,18 +32,10 @@
     // Alias de chemins
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ],
-      "@components/*": [
-        "./src/components/*"
-      ],
-      "@lib/*": [
-        "./src/lib/*"
-      ],
-      "@hooks/*": [
-        "./src/hooks/*"
-      ]
+      "@/*": ["./src/*"],
+      "@components/*": ["./src/components/*"],
+      "@lib/*": ["./src/lib/*"],
+      "@hooks/*": ["./src/hooks/*"]
     }
   },
   "include": [

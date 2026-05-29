@@ -1,4 +1,12 @@
-import { type Match, type ParticipantResult, type FinalType, type GroupType, type Id, type MatchGame, type RankingItem } from '../brackets-model/index';
+import {
+  type Match,
+  type ParticipantResult,
+  type FinalType,
+  type GroupType,
+  type Id,
+  type MatchGame,
+  type RankingItem,
+} from "../brackets-model/index";
 import { type Connection, type Placement } from "./types";
 import { isMatchGame, rankingHeader } from "./helpers";
 import { t } from "./lang";
@@ -11,30 +19,27 @@ let robotoFontLoaded = false;
  * or when running outside a DOM (SSR).
  */
 function ensureRobotoFont(): void {
-	if (robotoFontLoaded || typeof document === "undefined") return;
-	robotoFontLoaded = true;
+  if (robotoFontLoaded || typeof document === "undefined") return;
+  robotoFontLoaded = true;
 
-	const existing = document.querySelector(
-		'link[href*="fonts.googleapis.com/css"][href*="Roboto"]',
-	);
-	if (existing) return;
+  const existing = document.querySelector('link[href*="fonts.googleapis.com/css"][href*="Roboto"]');
+  if (existing) return;
 
-	const preconnect1 = document.createElement("link");
-	preconnect1.rel = "preconnect";
-	preconnect1.href = "https://fonts.googleapis.com";
-	document.head.appendChild(preconnect1);
+  const preconnect1 = document.createElement("link");
+  preconnect1.rel = "preconnect";
+  preconnect1.href = "https://fonts.googleapis.com";
+  document.head.appendChild(preconnect1);
 
-	const preconnect2 = document.createElement("link");
-	preconnect2.rel = "preconnect";
-	preconnect2.href = "https://fonts.gstatic.com";
-	preconnect2.crossOrigin = "";
-	document.head.appendChild(preconnect2);
+  const preconnect2 = document.createElement("link");
+  preconnect2.rel = "preconnect";
+  preconnect2.href = "https://fonts.gstatic.com";
+  preconnect2.crossOrigin = "";
+  document.head.appendChild(preconnect2);
 
-	const link = document.createElement("link");
-	link.rel = "stylesheet";
-	link.href =
-		"https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap";
-	document.head.appendChild(link);
+  const link = document.createElement("link");
+  link.rel = "stylesheet";
+  link.href = "https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap";
+  document.head.appendChild(link);
 }
 
 /**
@@ -43,10 +48,10 @@ function ensureRobotoFont(): void {
  * @param title The title to set.
  */
 export function createTitle(title: string): HTMLElement {
-	ensureRobotoFont();
-	const h1 = document.createElement("h1");
-	h1.innerText = title;
-	return h1;
+  ensureRobotoFont();
+  const h1 = document.createElement("h1");
+  h1.innerText = title;
+  return h1;
 }
 
 /**
@@ -55,9 +60,9 @@ export function createTitle(title: string): HTMLElement {
  * @param title The title to set.
  */
 export function createPopoverTitle(title: string): HTMLElement {
-	const h4 = document.createElement("h4");
-	h4.innerText = title;
-	return h4;
+  const h4 = document.createElement("h4");
+  h4.innerText = title;
+  return h4;
 }
 
 /**
@@ -66,10 +71,10 @@ export function createPopoverTitle(title: string): HTMLElement {
  * @param stageId ID of the stage.
  */
 export function createRoundRobinContainer(stageId: Id): HTMLElement {
-	const stage = document.createElement("div");
-	stage.classList.add("round-robin");
-	stage.setAttribute("data-stage-id", stageId.toString());
-	return stage;
+  const stage = document.createElement("div");
+  stage.classList.add("round-robin");
+  stage.setAttribute("data-stage-id", stageId.toString());
+  return stage;
 }
 
 /**
@@ -78,10 +83,10 @@ export function createRoundRobinContainer(stageId: Id): HTMLElement {
  * @param stageId ID of the stage.
  */
 export function createEliminationContainer(stageId: Id): HTMLElement {
-	const stage = document.createElement("div");
-	stage.classList.add("elimination");
-	stage.setAttribute("data-stage-id", stageId.toString());
-	return stage;
+  const stage = document.createElement("div");
+  stage.classList.add("elimination");
+  stage.setAttribute("data-stage-id", stageId.toString());
+  return stage;
 }
 
 /**
@@ -90,23 +95,20 @@ export function createEliminationContainer(stageId: Id): HTMLElement {
  * @param groupId ID of the group.
  * @param title Title of the group.
  */
-export function createBracketContainer(
-	groupId?: Id,
-	title?: string,
-): HTMLElement {
-	const bracket = document.createElement("section");
-	bracket.classList.add("bracket");
+export function createBracketContainer(groupId?: Id, title?: string): HTMLElement {
+  const bracket = document.createElement("section");
+  bracket.classList.add("bracket");
 
-	// Consolation matches are not in a group.
-	if (groupId) bracket.setAttribute("data-group-id", groupId.toString());
+  // Consolation matches are not in a group.
+  if (groupId) bracket.setAttribute("data-group-id", groupId.toString());
 
-	if (title) {
-		const h2 = document.createElement("h2");
-		h2.innerText = title;
-		bracket.append(h2);
-	}
+  if (title) {
+    const h2 = document.createElement("h2");
+    h2.innerText = title;
+    bracket.append(h2);
+  }
 
-	return bracket;
+  return bracket;
 }
 
 /**
@@ -116,23 +118,23 @@ export function createBracketContainer(
  * @param title Title of the group.
  */
 export function createGroupContainer(groupId: Id, title: string): HTMLElement {
-	const h2 = document.createElement("h2");
-	h2.innerText = title;
+  const h2 = document.createElement("h2");
+  h2.innerText = title;
 
-	const group = document.createElement("section");
-	group.classList.add("group");
-	group.setAttribute("data-group-id", groupId.toString());
-	group.append(h2);
-	return group;
+  const group = document.createElement("section");
+  group.classList.add("group");
+  group.setAttribute("data-group-id", groupId.toString());
+  group.append(h2);
+  return group;
 }
 
 /**
  * Creates a container which contains a list of rounds.
  */
 export function createRoundsContainer(): HTMLElement {
-	const round = document.createElement("div");
-	round.classList.add("rounds");
-	return round;
+  const round = document.createElement("div");
+  round.classList.add("rounds");
+  return round;
 }
 
 /**
@@ -142,14 +144,14 @@ export function createRoundsContainer(): HTMLElement {
  * @param title Title of the round.
  */
 export function createRoundContainer(roundId: Id, title: string): HTMLElement {
-	const h3 = document.createElement("h3");
-	h3.innerText = title;
+  const h3 = document.createElement("h3");
+  h3.innerText = title;
 
-	const round = document.createElement("article");
-	round.classList.add("round");
-	round.setAttribute("data-round-id", roundId.toString());
-	round.append(h3);
-	return round;
+  const round = document.createElement("article");
+  round.classList.add("round");
+  round.setAttribute("data-round-id", roundId.toString());
+  round.append(h3);
+  return round;
 }
 
 /**
@@ -158,18 +160,17 @@ export function createRoundContainer(roundId: Id, title: string): HTMLElement {
  * @param match A match or a match game.
  */
 export function createMatchContainer(match?: Match | MatchGame): HTMLElement {
-	const div = document.createElement("div");
-	div.classList.add("match");
+  const div = document.createElement("div");
+  div.classList.add("match");
 
-	if (match) {
-		if (isMatchGame(match))
-			div.setAttribute("data-match-game-id", match.id.toString());
-		else div.setAttribute("data-match-id", match.id.toString());
+  if (match) {
+    if (isMatchGame(match)) div.setAttribute("data-match-game-id", match.id.toString());
+    else div.setAttribute("data-match-id", match.id.toString());
 
-		div.setAttribute("data-match-status", match.status.toString());
-	}
+    div.setAttribute("data-match-status", match.status.toString());
+  }
 
-	return div;
+  return div;
 }
 
 /**
@@ -180,15 +181,15 @@ export function createMatchContainer(match?: Match | MatchGame): HTMLElement {
  * @param onClick Called when the label is clicked.
  */
 export function createMatchLabel(
-	label: string | undefined,
-	status: string,
-	onClick?: (event: MouseEvent) => void,
+  label: string | undefined,
+  status: string,
+  onClick?: (event: MouseEvent) => void,
 ): HTMLElement {
-	const span = document.createElement("span");
-	span.innerText = label || "";
-	span.title = status;
-	onClick && span.addEventListener("click", onClick);
-	return span;
+  const span = document.createElement("span");
+  span.innerText = label || "";
+  span.title = status;
+  onClick && span.addEventListener("click", onClick);
+  return span;
 }
 
 /**
@@ -198,13 +199,13 @@ export function createMatchLabel(
  * @param onClick Called when the label is clicked.
  */
 export function createChildCountLabel(
-	label: string,
-	onClick?: (event: MouseEvent) => void,
+  label: string,
+  onClick?: (event: MouseEvent) => void,
 ): HTMLElement {
-	const span = document.createElement("span");
-	span.innerText = label;
-	onClick && span.addEventListener("click", onClick);
-	return span;
+  const span = document.createElement("span");
+  span.innerText = label;
+  onClick && span.addEventListener("click", onClick);
+  return span;
 }
 
 /**
@@ -213,22 +214,22 @@ export function createChildCountLabel(
  * @param onClick Called when the match is clicked.
  */
 export function createOpponentsContainer(onClick?: () => void): HTMLElement {
-	const opponents = document.createElement("div");
-	opponents.classList.add("opponents");
+  const opponents = document.createElement("div");
+  opponents.classList.add("opponents");
 
-	if (onClick) {
-		opponents.setAttribute("role", "button");
-		opponents.setAttribute("tabindex", "0");
-		opponents.addEventListener("click", onClick);
-		opponents.addEventListener("keydown", (event) => {
-			if (event.key === "Enter" || event.key === " ") {
-				event.preventDefault();
-				onClick();
-			}
-		});
-	}
+  if (onClick) {
+    opponents.setAttribute("role", "button");
+    opponents.setAttribute("tabindex", "0");
+    opponents.addEventListener("click", onClick);
+    opponents.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        onClick();
+      }
+    });
+  }
 
-	return opponents;
+  return opponents;
 }
 
 /**
@@ -236,48 +237,46 @@ export function createOpponentsContainer(onClick?: () => void): HTMLElement {
  *
  * @param participantId ID of the participant.
  */
-export function createParticipantContainer(
-	participantId: Id | null,
-): HTMLElement {
-	const participant = document.createElement("div");
-	participant.classList.add("participant");
+export function createParticipantContainer(participantId: Id | null): HTMLElement {
+  const participant = document.createElement("div");
+  participant.classList.add("participant");
 
-	if (participantId !== null && participantId !== undefined)
-		participant.setAttribute("data-participant-id", participantId.toString());
+  if (participantId !== null && participantId !== undefined)
+    participant.setAttribute("data-participant-id", participantId.toString());
 
-	return participant;
+  return participant;
 }
 
 /**
  * Creates a container which contains the name of a participant.
  */
 export function createNameContainer(): HTMLElement {
-	const name = document.createElement("div");
-	name.classList.add("name");
-	return name;
+  const name = document.createElement("div");
+  name.classList.add("name");
+  return name;
 }
 
 /**
  * Creates a container which contains the result of a match for a participant.
  */
 export function createResultContainer(): HTMLElement {
-	const result = document.createElement("div");
-	result.classList.add("result");
-	return result;
+  const result = document.createElement("div");
+  result.classList.add("result");
+  return result;
 }
 
 /**
  * Creates a table.
  */
 export function createTable(): HTMLElement {
-	return document.createElement("table");
+  return document.createElement("table");
 }
 
 /**
  * Creates a table row.
  */
 export function createRow(): HTMLElement {
-	return document.createElement("tr");
+  return document.createElement("tr");
 }
 
 /**
@@ -286,9 +285,9 @@ export function createRow(): HTMLElement {
  * @param data The data in the cell.
  */
 export function createCell(data: string | number): HTMLElement {
-	const td = document.createElement("td");
-	td.innerText = String(data);
-	return td;
+  const td = document.createElement("td");
+  td.innerText = String(data);
+  return td;
 }
 
 /**
@@ -297,19 +296,19 @@ export function createCell(data: string | number): HTMLElement {
  * @param ranking The object containing the ranking.
  */
 export function createRankingHeaders(ranking: RankingItem[]): HTMLElement {
-	const headers = document.createElement("tr");
-	const firstItem = ranking[0];
+  const headers = document.createElement("tr");
+  const firstItem = ranking[0];
 
-	for (const key in firstItem) {
-		const prop = key as keyof RankingItem;
-		const header = rankingHeader(prop);
-		const th = document.createElement("th");
-		th.innerText = header.text;
-		th.setAttribute("title", header.tooltip);
-		headers.append(th);
-	}
+  for (const key in firstItem) {
+    const prop = key as keyof RankingItem;
+    const header = rankingHeader(prop);
+    const th = document.createElement("th");
+    th.innerText = header.text;
+    th.setAttribute("title", header.tooltip);
+    headers.append(th);
+  }
 
-	return headers;
+  return headers;
 }
 
 /**
@@ -319,9 +318,9 @@ export function createRankingHeaders(ranking: RankingItem[]): HTMLElement {
  * @param hint The hint to set.
  */
 export function setupHint(nameContainer: HTMLElement, hint: string): void {
-	nameContainer.classList.add("hint");
-	nameContainer.innerText = hint;
-	nameContainer.title = hint;
+  nameContainer.classList.add("hint");
+  nameContainer.innerText = hint;
+  nameContainer.title = hint;
 }
 
 /**
@@ -330,8 +329,8 @@ export function setupHint(nameContainer: HTMLElement, hint: string): void {
  * @param nameContainer The name container.
  */
 export function setupBye(nameContainer: HTMLElement): void {
-	nameContainer.innerText = t("common.bye");
-	nameContainer.classList.add("bye");
+  nameContainer.innerText = t("common.bye");
+  nameContainer.classList.add("bye");
 }
 
 /**
@@ -342,16 +341,15 @@ export function setupBye(nameContainer: HTMLElement): void {
  * @param participant The participant result.
  */
 export function setupWin(
-	participantContainer: HTMLElement,
-	resultContainer: HTMLElement,
-	participant: ParticipantResult,
+  participantContainer: HTMLElement,
+  resultContainer: HTMLElement,
+  participant: ParticipantResult,
 ): void {
-	if (participant.result && participant.result === "win") {
-		participantContainer.classList.add("win");
+  if (participant.result && participant.result === "win") {
+    participantContainer.classList.add("win");
 
-		if (participant.score === undefined)
-			resultContainer.innerText = t("abbreviations.win");
-	}
+    if (participant.score === undefined) resultContainer.innerText = t("abbreviations.win");
+  }
 }
 
 /**
@@ -362,21 +360,16 @@ export function setupWin(
  * @param participant The participant result.
  */
 export function setupLoss(
-	participantContainer: HTMLElement,
-	resultContainer: HTMLElement,
-	participant: ParticipantResult,
+  participantContainer: HTMLElement,
+  resultContainer: HTMLElement,
+  participant: ParticipantResult,
 ): void {
-	if (
-		(participant.result && participant.result === "loss") ||
-		participant.forfeit
-	) {
-		participantContainer.classList.add("loss");
+  if ((participant.result && participant.result === "loss") || participant.forfeit) {
+    participantContainer.classList.add("loss");
 
-		if (participant.forfeit)
-			resultContainer.innerText = t("abbreviations.forfeit");
-		else if (participant.score === undefined)
-			resultContainer.innerText = t("abbreviations.loss");
-	}
+    if (participant.forfeit) resultContainer.innerText = t("abbreviations.forfeit");
+    else if (participant.score === undefined) resultContainer.innerText = t("abbreviations.loss");
+  }
 }
 
 /**
@@ -387,19 +380,19 @@ export function setupLoss(
  * @param placement The placement of the participant origin.
  */
 export function addParticipantOrigin(
-	nameContainer: HTMLElement,
-	text: string,
-	placement: Placement,
+  nameContainer: HTMLElement,
+  text: string,
+  placement: Placement,
 ): void {
-	const span = document.createElement("span");
+  const span = document.createElement("span");
 
-	if (placement === "before") {
-		span.innerText = `${text} `;
-		nameContainer.prepend(span);
-	} else if (placement === "after") {
-		span.innerText = ` (${text})`;
-		nameContainer.append(span);
-	}
+  if (placement === "before") {
+    span.innerText = `${text} `;
+    nameContainer.prepend(span);
+  } else if (placement === "after") {
+    span.innerText = ` (${text})`;
+    nameContainer.append(span);
+  }
 }
 
 /**
@@ -408,13 +401,10 @@ export function addParticipantOrigin(
  * @param nameContainer The name container.
  * @param src Source of the image.
  */
-export function addParticipantImage(
-	nameContainer: HTMLElement,
-	src: string,
-): void {
-	const img = document.createElement("img");
-	img.src = src;
-	nameContainer.prepend(img);
+export function addParticipantImage(nameContainer: HTMLElement, src: string): void {
+  const img = document.createElement("img");
+  img.src = src;
+  nameContainer.prepend(img);
 }
 
 /**
@@ -428,49 +418,43 @@ export function addParticipantImage(
  * @param connectFinal Whether to connect to the final.
  */
 export function getBracketConnection(
-	alwaysConnectFirstRound: boolean,
-	roundNumber: number,
-	roundCount: number,
-	match: Match,
-	matchLocation?: GroupType,
-	connectFinal?: boolean,
+  alwaysConnectFirstRound: boolean,
+  roundNumber: number,
+  roundCount: number,
+  match: Match,
+  matchLocation?: GroupType,
+  connectFinal?: boolean,
 ): Connection {
-	const connection: Connection = {
-		connectPrevious: false,
-		connectNext: false,
-	};
+  const connection: Connection = {
+    connectPrevious: false,
+    connectNext: false,
+  };
 
-	if (matchLocation === "loser_bracket") {
-		connection.connectPrevious =
-			roundNumber > 1 && (roundNumber % 2 === 1 ? "square" : "straight");
-		connection.connectNext =
-			roundNumber < roundCount &&
-			(roundNumber % 2 === 0 ? "square" : "straight");
-	} else {
-		connection.connectPrevious = roundNumber > 1 && "square";
-		connection.connectNext =
-			roundNumber < roundCount ? "square" : connectFinal ? "straight" : false;
-	}
+  if (matchLocation === "loser_bracket") {
+    connection.connectPrevious = roundNumber > 1 && (roundNumber % 2 === 1 ? "square" : "straight");
+    connection.connectNext =
+      roundNumber < roundCount && (roundNumber % 2 === 0 ? "square" : "straight");
+  } else {
+    connection.connectPrevious = roundNumber > 1 && "square";
+    connection.connectNext =
+      roundNumber < roundCount ? "square" : connectFinal ? "straight" : false;
+  }
 
-	if (alwaysConnectFirstRound || roundNumber !== 2) return connection;
+  if (alwaysConnectFirstRound || roundNumber !== 2) return connection;
 
-	const upperBracket =
-		matchLocation === "single_bracket" || matchLocation === "winner_bracket";
+  const upperBracket = matchLocation === "single_bracket" || matchLocation === "winner_bracket";
 
-	if (
-		upperBracket &&
-		match.opponent1?.position === undefined &&
-		match.opponent2?.position === undefined
-	)
-		connection.connectPrevious = false;
+  if (
+    upperBracket &&
+    match.opponent1?.position === undefined &&
+    match.opponent2?.position === undefined
+  )
+    connection.connectPrevious = false;
 
-	if (
-		matchLocation === "loser_bracket" &&
-		match.opponent2?.position === undefined
-	)
-		connection.connectPrevious = false;
+  if (matchLocation === "loser_bracket" && match.opponent2?.position === undefined)
+    connection.connectPrevious = false;
 
-	return connection;
+  return connection;
 }
 
 /**
@@ -481,15 +465,14 @@ export function getBracketConnection(
  * @param matchCount The count of matches.
  */
 export function getFinalConnection(
-	finalType: FinalType,
-	roundNumber: number,
-	matchCount: number,
+  finalType: FinalType,
+  roundNumber: number,
+  matchCount: number,
 ): Connection {
-	return {
-		connectPrevious:
-			finalType === "grand_final" && roundNumber === 1 && "straight",
-		connectNext: matchCount === 2 && roundNumber === 1 && "straight",
-	};
+  return {
+    connectPrevious: finalType === "grand_final" && roundNumber === 1 && "straight",
+    connectNext: matchCount === 2 && roundNumber === 1 && "straight",
+  };
 }
 
 /**
@@ -500,18 +483,15 @@ export function getFinalConnection(
  * @param connection The connection to set.
  */
 export function setupConnection(
-	opponentsContainer: HTMLElement,
-	matchContainer: HTMLElement,
-	connection: Connection,
+  opponentsContainer: HTMLElement,
+  matchContainer: HTMLElement,
+  connection: Connection,
 ): void {
-	if (connection.connectPrevious)
-		opponentsContainer.classList.add("connect-previous");
+  if (connection.connectPrevious) opponentsContainer.classList.add("connect-previous");
 
-	if (connection.connectNext) matchContainer.classList.add("connect-next");
+  if (connection.connectNext) matchContainer.classList.add("connect-next");
 
-	if (connection.connectPrevious === "straight")
-		opponentsContainer.classList.add("straight");
+  if (connection.connectPrevious === "straight") opponentsContainer.classList.add("straight");
 
-	if (connection.connectNext === "straight")
-		matchContainer.classList.add("straight");
+  if (connection.connectNext === "straight") matchContainer.classList.add("straight");
 }

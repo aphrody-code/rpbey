@@ -3,6 +3,7 @@
 Audit prod `https://rpbey.fr` du **2026-05-28** (Chromium réel, viewport desktop 1440x900 + mobile 390x844, ~1.5 s d'hydratation). Données brutes : `docs/audit/results.json`.
 
 > Légende des classes d'erreur réseau observées :
+>
 > - **500 Internal Server Error** — vrai crash serveur (à corriger).
 > - **404 Not Found** — ressource introuvable (asset / avatar / favicon).
 > - **`net::ERR_ABORTED` sur `?_rsc=…`** — **bénin** : annulation de prefetch RSC Next.js quand on quitte la page avant la fin du prefetch. Non bloquant, n'impacte pas l'utilisateur. Listé pour exhaustivité mais **pas un bug**.
@@ -14,6 +15,7 @@ Audit prod `https://rpbey.fr` du **2026-05-28** (Chromium réel, viewport deskto
 ## 1. 500 — Internal Server Error (CRITIQUE)
 
 ### `/comparateur/[slug]` — TOUTES les fiches produit renvoient 500
+
 - **Confirmé hors crawl** : `curl -s -o /dev/null -w "%{http_code}" https://rpbey.fr/comparateur/arrow-wizard-4-80b` → **500**.
 - La page d'erreur est une page **brute non stylée** ("Internal Server Error", fond blanc, sans nav ni branding) — voir `screenshots/comparateur-arrow-wizard-4-80b-desktop.png`.
 - Impact en cascade : sur `/comparateur` (l'index, qui répond 200), Next.js **prefetch** les ~40 fiches de la liste → 40 réponses 500 enregistrées dans la console (voir `results.json` route `comparateur`). Donc chaque visite de l'index pollue la console de 500.
@@ -24,11 +26,11 @@ Audit prod `https://rpbey.fr` du **2026-05-28** (Chromium réel, viewport deskto
 
 ## 2. 404 — Not Found
 
-| Ressource | Page source | Type |
-|---|---|---|
-| `cdn.discordapp.com/guilds/1319715782032228463/users/1244715598102138970/avatars/972fbee12d423227459efea1fddc2d6c.png` | `/rankings` | avatar Discord membre — guild avatar expiré/supprimé |
-| `cdn.discordapp.com/guilds/1319715782032228463/users/381213310881628160/avatars/a_4ccefdcec70b8bd7b6f7af17c059abdb.gif` | `/rankings` | avatar Discord membre (animé) — idem |
-| `https://rpbey.fr/favicon.ico` | `/comparateur/[slug]` (page d'erreur 500) | favicon absent **sur la page d'erreur brute** uniquement (les pages normales servent l'icône via le `<head>` Next) |
+| Ressource                                                                                                               | Page source                               | Type                                                                                                               |
+| ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `cdn.discordapp.com/guilds/1319715782032228463/users/1244715598102138970/avatars/972fbee12d423227459efea1fddc2d6c.png`  | `/rankings`                               | avatar Discord membre — guild avatar expiré/supprimé                                                               |
+| `cdn.discordapp.com/guilds/1319715782032228463/users/381213310881628160/avatars/a_4ccefdcec70b8bd7b6f7af17c059abdb.gif` | `/rankings`                               | avatar Discord membre (animé) — idem                                                                               |
+| `https://rpbey.fr/favicon.ico`                                                                                          | `/comparateur/[slug]` (page d'erreur 500) | favicon absent **sur la page d'erreur brute** uniquement (les pages normales servent l'icône via le `<head>` Next) |
 
 > Les deux avatars Discord 404 sont des URLs de guild-avatar qui n'existent plus côté Discord. Le reste des avatars membres est bloqué par ORB (cf. §3), pas 404.
 
@@ -62,12 +64,12 @@ Aucune vraie exception applicative. Les seuls `pageerror` enregistrés sont des 
 
 ## Récapitulatif chiffré
 
-| Classe | Compte | Gravité |
-|---|---|---|
-| 500 serveur (`/comparateur/[slug]`) | 1 route, ~40 hits/visite index | 🔴 haute |
-| 404 réels (avatars Discord guild) | 2 | 🟡 basse |
-| 404 favicon (sur page erreur 500 only) | 1 | 🟢 négligeable (disparaît si 500 corrigé) |
-| Images ORB cross-origin | ~21 (rankings + notre-equipe) | 🟡 basse (cosmétique) |
-| 429 get-session (crawl) | ~12 | 🟡 moyenne (config rate-limit) |
-| Images internes cassées | 0 | — |
-| Exceptions JS applicatives | 0 | — |
+| Classe                                 | Compte                         | Gravité                                   |
+| -------------------------------------- | ------------------------------ | ----------------------------------------- |
+| 500 serveur (`/comparateur/[slug]`)    | 1 route, ~40 hits/visite index | 🔴 haute                                  |
+| 404 réels (avatars Discord guild)      | 2                              | 🟡 basse                                  |
+| 404 favicon (sur page erreur 500 only) | 1                              | 🟢 négligeable (disparaît si 500 corrigé) |
+| Images ORB cross-origin                | ~21 (rankings + notre-equipe)  | 🟡 basse (cosmétique)                     |
+| 429 get-session (crawl)                | ~12                            | 🟡 moyenne (config rate-limit)            |
+| Images internes cassées                | 0                              | —                                         |
+| Exceptions JS applicatives             | 0                              | —                                         |

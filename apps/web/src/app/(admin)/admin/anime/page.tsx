@@ -1,12 +1,6 @@
-'use client';
+"use client";
 
-import {
-  Add,
-  Delete,
-  Edit,
-  Visibility,
-  VisibilityOff,
-} from '@mui/icons-material';
+import { Add, Delete, Edit, Visibility, VisibilityOff } from "@mui/icons-material";
 import {
   Box,
   Chip,
@@ -26,22 +20,18 @@ import {
   TextField,
   Tooltip,
   Typography,
-} from '@mui/material';
-import Button from '@mui/material/Button';
-import Link from 'next/link';
-import { useCallback, useEffect, useState } from 'react';
-import { PageHeader } from '@/components/ui/PageHeader';
-import {
-  deleteAnimeSeries,
-  getAllAnimeSeries,
-  upsertAnimeSeries,
-} from '@/server/actions/anime';
+} from "@mui/material";
+import Button from "@mui/material/Button";
+import Link from "next/link";
+import { useCallback, useEffect, useState } from "react";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { deleteAnimeSeries, getAllAnimeSeries, upsertAnimeSeries } from "@/server/actions/anime";
 
 const GENERATION_COLORS: Record<string, string> = {
-  ORIGINAL: '#1565C0',
-  METAL: '#E65100',
-  BURST: '#C62828',
-  X: '#7B1FA2',
+  ORIGINAL: "#1565C0",
+  METAL: "#E65100",
+  BURST: "#C62828",
+  X: "#7B1FA2",
 };
 
 interface Series {
@@ -66,7 +56,7 @@ const EMPTY_FORM: {
   title: string;
   titleJp: string;
   titleFr: string;
-  generation: 'ORIGINAL' | 'METAL' | 'BURST' | 'X';
+  generation: "ORIGINAL" | "METAL" | "BURST" | "X";
   synopsis: string;
   posterUrl: string;
   bannerUrl: string;
@@ -75,14 +65,14 @@ const EMPTY_FORM: {
   sortOrder: number;
   isPublished: boolean;
 } = {
-  slug: '',
-  title: '',
-  titleJp: '',
-  titleFr: '',
-  generation: 'X',
-  synopsis: '',
-  posterUrl: '',
-  bannerUrl: '',
+  slug: "",
+  title: "",
+  titleJp: "",
+  titleFr: "",
+  generation: "X",
+  synopsis: "",
+  posterUrl: "",
+  bannerUrl: "",
   year: 2024,
   episodeCount: 0,
   sortOrder: 0,
@@ -118,12 +108,12 @@ export default function AdminAnimePage() {
     setForm({
       slug: s.slug,
       title: s.title,
-      titleJp: s.titleJp || '',
-      titleFr: s.titleFr || '',
-      generation: s.generation as 'ORIGINAL' | 'METAL' | 'BURST' | 'X',
-      synopsis: s.synopsis || '',
-      posterUrl: s.posterUrl || '',
-      bannerUrl: s.bannerUrl || '',
+      titleJp: s.titleJp || "",
+      titleFr: s.titleFr || "",
+      generation: s.generation as "ORIGINAL" | "METAL" | "BURST" | "X",
+      synopsis: s.synopsis || "",
+      posterUrl: s.posterUrl || "",
+      bannerUrl: s.bannerUrl || "",
       year: s.year,
       episodeCount: s.episodeCount,
       sortOrder: s.sortOrder,
@@ -142,14 +132,14 @@ export default function AdminAnimePage() {
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm('Supprimer cette série et tous ses épisodes ?')) return;
+    if (!confirm("Supprimer cette série et tous ses épisodes ?")) return;
     await deleteAnimeSeries(id);
     fetchSeries();
   };
 
   if (loading) {
     return (
-      <Box sx={{ display: 'flex', justifyContent: 'center', py: 10 }}>
+      <Box sx={{ display: "flex", justifyContent: "center", py: 10 }}>
         <CircularProgress color="primary" />
       </Box>
     );
@@ -164,22 +154,22 @@ export default function AdminAnimePage() {
         onAction={handleOpenNew}
       />
       {/* Series table */}
-      <Box sx={{ overflowX: 'auto' }}>
+      <Box sx={{ overflowX: "auto" }}>
         <Box
           component="table"
           sx={{
-            width: '100%',
-            borderCollapse: 'collapse',
-            '& th, & td': {
+            width: "100%",
+            borderCollapse: "collapse",
+            "& th, & td": {
               p: 1.5,
-              textAlign: 'left',
-              borderBottom: '1px solid',
-              borderColor: 'divider',
+              textAlign: "left",
+              borderBottom: "1px solid",
+              borderColor: "divider",
             },
-            '& th': {
+            "& th": {
               fontWeight: 700,
-              color: 'text.secondary',
-              fontSize: '0.8rem',
+              color: "text.secondary",
+              fontSize: "0.8rem",
             },
           }}
         >
@@ -201,7 +191,7 @@ export default function AdminAnimePage() {
                   <Typography
                     variant="body2"
                     sx={{
-                      color: 'text.secondary',
+                      color: "text.secondary",
                     }}
                   >
                     {s.sortOrder}
@@ -219,7 +209,7 @@ export default function AdminAnimePage() {
                   <Typography
                     variant="caption"
                     sx={{
-                      color: 'text.secondary',
+                      color: "text.secondary",
                     }}
                   >
                     {s.slug}
@@ -231,9 +221,9 @@ export default function AdminAnimePage() {
                     size="small"
                     sx={{
                       bgcolor: GENERATION_COLORS[s.generation],
-                      color: 'white',
+                      color: "white",
                       fontWeight: 700,
-                      fontSize: '0.7rem',
+                      fontSize: "0.7rem",
                     }}
                   />
                 </td>
@@ -241,18 +231,16 @@ export default function AdminAnimePage() {
                 <td>
                   <Link
                     href={`/admin/anime/${s.id}`}
-                    style={{ color: 'var(--rpb-primary)', fontWeight: 600 }}
+                    style={{ color: "var(--rpb-primary)", fontWeight: 600 }}
                   >
                     {s._count.episodes} / {s.episodeCount}
                   </Link>
                 </td>
                 <td>
                   {s.isPublished ? (
-                    <Visibility sx={{ color: 'success.main', fontSize: 20 }} />
+                    <Visibility sx={{ color: "success.main", fontSize: 20 }} />
                   ) : (
-                    <VisibilityOff
-                      sx={{ color: 'text.secondary', fontSize: 20 }}
-                    />
+                    <VisibilityOff sx={{ color: "text.secondary", fontSize: 20 }} />
                   )}
                 </td>
                 <td>
@@ -263,11 +251,7 @@ export default function AdminAnimePage() {
                       </IconButton>
                     </Tooltip>
                     <Tooltip title="Gérer les épisodes">
-                      <IconButton
-                        size="small"
-                        component={Link}
-                        href={`/admin/anime/${s.id}`}
-                      >
+                      <IconButton size="small" component={Link} href={`/admin/anime/${s.id}`}>
                         <Add fontSize="small" />
                       </IconButton>
                     </Tooltip>
@@ -275,7 +259,7 @@ export default function AdminAnimePage() {
                       <IconButton
                         size="small"
                         onClick={() => handleDelete(s.id)}
-                        sx={{ color: 'error.main' }}
+                        sx={{ color: "error.main" }}
                       >
                         <Delete fontSize="small" />
                       </IconButton>
@@ -294,11 +278,11 @@ export default function AdminAnimePage() {
         maxWidth="sm"
         fullWidth
         slotProps={{
-          paper: { sx: { borderRadius: 3, bgcolor: 'background.paper' } },
+          paper: { sx: { borderRadius: 3, bgcolor: "background.paper" } },
         }}
       >
         <DialogTitle sx={{ fontWeight: 700 }}>
-          {editId ? 'Modifier la série' : 'Nouvelle série'}
+          {editId ? "Modifier la série" : "Nouvelle série"}
         </DialogTitle>
         <DialogContent>
           <Stack spacing={2} sx={{ mt: 1 }}>
@@ -338,11 +322,7 @@ export default function AdminAnimePage() {
                 onChange={(e) =>
                   setForm({
                     ...form,
-                    generation: e.target.value as
-                      | 'ORIGINAL'
-                      | 'METAL'
-                      | 'BURST'
-                      | 'X',
+                    generation: e.target.value as "ORIGINAL" | "METAL" | "BURST" | "X",
                   })
                 }
               >
@@ -366,27 +346,21 @@ export default function AdminAnimePage() {
                 label="Année"
                 type="number"
                 value={form.year}
-                onChange={(e) =>
-                  setForm({ ...form, year: Number(e.target.value) })
-                }
+                onChange={(e) => setForm({ ...form, year: Number(e.target.value) })}
                 size="small"
               />
               <TextField
                 label="Nb épisodes"
                 type="number"
                 value={form.episodeCount}
-                onChange={(e) =>
-                  setForm({ ...form, episodeCount: Number(e.target.value) })
-                }
+                onChange={(e) => setForm({ ...form, episodeCount: Number(e.target.value) })}
                 size="small"
               />
               <TextField
                 label="Ordre"
                 type="number"
                 value={form.sortOrder}
-                onChange={(e) =>
-                  setForm({ ...form, sortOrder: Number(e.target.value) })
-                }
+                onChange={(e) => setForm({ ...form, sortOrder: Number(e.target.value) })}
                 size="small"
               />
             </Stack>
@@ -408,9 +382,7 @@ export default function AdminAnimePage() {
               control={
                 <Switch
                   checked={form.isPublished}
-                  onChange={(e) =>
-                    setForm({ ...form, isPublished: e.target.checked })
-                  }
+                  onChange={(e) => setForm({ ...form, isPublished: e.target.checked })}
                 />
               }
               label="Publié"
@@ -419,12 +391,8 @@ export default function AdminAnimePage() {
         </DialogContent>
         <DialogActions sx={{ px: 3, pb: 2 }}>
           <Button onClick={() => setDialogOpen(false)}>Annuler</Button>
-          <Button
-            variant="contained"
-            onClick={handleSave}
-            sx={{ bgcolor: 'primary.main' }}
-          >
-            {editId ? 'Enregistrer' : 'Créer'}
+          <Button variant="contained" onClick={handleSave} sx={{ bgcolor: "primary.main" }}>
+            {editId ? "Enregistrer" : "Créer"}
           </Button>
         </DialogActions>
       </Dialog>

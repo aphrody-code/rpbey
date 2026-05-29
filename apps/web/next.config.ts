@@ -270,8 +270,7 @@ const nextConfig: NextConfig = {
           // Indexation maximale (Google + LLM crawlers : aperçus/snippets illimités)
           {
             key: "X-Robots-Tag",
-            value:
-              "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+            value: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
           },
           // Cross-origin ouvert (lecture) — permet aux LLM / outils de fetch le
           // contenu public. Sans Allow-Credentials → aucun cookie cross-origin

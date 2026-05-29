@@ -18,9 +18,9 @@ import { getTikTokRoutes } from "./routes/tiktok.js";
 import { getTournamentRoutes } from "./routes/tournaments.js";
 
 const CORS_HEADERS: Record<string, string> = {
-	"Access-Control-Allow-Origin": "*",
-	"Access-Control-Allow-Methods": "GET, POST, PATCH, OPTIONS",
-	"Access-Control-Allow-Headers": "Authorization, Content-Type",
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, POST, PATCH, OPTIONS",
+  "Access-Control-Allow-Headers": "Authorization, Content-Type",
 };
 
 /**
@@ -31,56 +31,55 @@ const CORS_HEADERS: Record<string, string> = {
  * lit `x-api-key`. La clé attendue est la même (`process.env.BOT_API_KEY`).
  */
 export function bearerAuthenticate(req: Request): Response | null {
-	const expectedKey = process.env.BOT_API_KEY;
-	if (!expectedKey) {
-		return Response.json(
-			{ error: "Server misconfiguration: BOT_API_KEY missing" },
-			{ status: 500, headers: CORS_HEADERS },
-		);
-	}
+  const expectedKey = process.env.BOT_API_KEY;
+  if (!expectedKey) {
+    return Response.json(
+      { error: "Server misconfiguration: BOT_API_KEY missing" },
+      { status: 500, headers: CORS_HEADERS },
+    );
+  }
 
-	const header = req.headers.get("authorization") ?? "";
-	const match = /^Bearer\s+(.+)$/i.exec(header.trim());
-	if (!match) {
-		return Response.json(
-			{ error: "Unauthorized", message: "Missing Bearer token" },
-			{ status: 401, headers: CORS_HEADERS },
-		);
-	}
+  const header = req.headers.get("authorization") ?? "";
+  const match = /^Bearer\s+(.+)$/i.exec(header.trim());
+  if (!match) {
+    return Response.json(
+      { error: "Unauthorized", message: "Missing Bearer token" },
+      { status: 401, headers: CORS_HEADERS },
+    );
+  }
 
-	const provided = match[1];
-	const a = new TextEncoder().encode(provided);
-	const b = new TextEncoder().encode(expectedKey);
-	if (a.length !== b.length || !timingSafeEqual(a, b)) {
-		return Response.json(
-			{ error: "Unauthorized", message: "Invalid Bearer token" },
-			{ status: 401, headers: CORS_HEADERS },
-		);
-	}
+  const provided = match[1];
+  const a = new TextEncoder().encode(provided);
+  const b = new TextEncoder().encode(expectedKey);
+  if (a.length !== b.length || !timingSafeEqual(a, b)) {
+    return Response.json(
+      { error: "Unauthorized", message: "Invalid Bearer token" },
+      { status: 401, headers: CORS_HEADERS },
+    );
+  }
 
-	return null;
+  return null;
 }
 
 /** Réponse stub uniforme pour les endpoints non encore implémentés. */
 function notImplemented(name: string): Response {
-	return Response.json(
-		{ error: "NOT_IMPLEMENTED", endpoint: name },
-		{ status: 501, headers: CORS_HEADERS },
-	);
+  return Response.json(
+    { error: "NOT_IMPLEMENTED", endpoint: name },
+    { status: 501, headers: CORS_HEADERS },
+  );
 }
 
 /** Wrap un handler protégé Bearer + corps JSON `{ ok, ... }` ou erreur. */
 function protectedStub(name: string) {
-	return async (req: Request) => {
-		const authError = bearerAuthenticate(req);
-		if (authError) return authError;
-		return notImplemented(name);
-	};
+  return async (req: Request) => {
+    const authError = bearerAuthenticate(req);
+    if (authError) return authError;
+    return notImplemented(name);
+  };
 }
 
 /** Réponse OPTIONS uniforme pour CORS preflight. */
-const optionsHandler = () =>
-	new Response(null, { status: 204, headers: CORS_HEADERS });
+const optionsHandler = () => new Response(null, { status: 204, headers: CORS_HEADERS });
 
 /**
  * Routes ajoutées par la refacto Vercel.
@@ -96,47 +95,47 @@ const optionsHandler = () =>
  * Les stubs restants (501) couvrent les endpoints prévus mais hors scope W2B.
  */
 export function getRefactorRoutes() {
-	return {
-		// Healthcheck public — pas d'auth, exposé publiquement (utilisé par
-		// uptime monitors externes + Vercel preview smoke tests).
-		"/api/health": {
-			GET: () =>
-				Response.json(
-					{
-						ok: true,
-						uptime: process.uptime(),
-						commit: process.env.VERCEL_GIT_COMMIT_SHA ?? "dev",
-					},
-					{ headers: CORS_HEADERS },
-				),
-			OPTIONS: optionsHandler,
-		},
+  return {
+    // Healthcheck public — pas d'auth, exposé publiquement (utilisé par
+    // uptime monitors externes + Vercel preview smoke tests).
+    "/api/health": {
+      GET: () =>
+        Response.json(
+          {
+            ok: true,
+            uptime: process.uptime(),
+            commit: process.env.VERCEL_GIT_COMMIT_SHA ?? "dev",
+          },
+          { headers: CORS_HEADERS },
+        ),
+      OPTIONS: optionsHandler,
+    },
 
-		// ─── Scrapers (W2B) ───────────────────────────────────────────────────
-		...getScrapeRoutes(),
-		// stubs scrapers tiers non implémentés
-		"/api/scrape/youtube/:channel": {
-			POST: protectedStub("scrape.youtube"),
-			OPTIONS: optionsHandler,
-		},
-		"/api/scrape/twitch/:channel": {
-			POST: protectedStub("scrape.twitch"),
-			OPTIONS: optionsHandler,
-		},
+    // ─── Scrapers (W2B) ───────────────────────────────────────────────────
+    ...getScrapeRoutes(),
+    // stubs scrapers tiers non implémentés
+    "/api/scrape/youtube/:channel": {
+      POST: protectedStub("scrape.youtube"),
+      OPTIONS: optionsHandler,
+    },
+    "/api/scrape/twitch/:channel": {
+      POST: protectedStub("scrape.twitch"),
+      OPTIONS: optionsHandler,
+    },
 
-		// ─── Tournaments (W2B) ────────────────────────────────────────────────
-		...getTournamentRoutes(),
+    // ─── Tournaments (W2B) ────────────────────────────────────────────────
+    ...getTournamentRoutes(),
 
-		// ─── TikTok (W2B) ─────────────────────────────────────────────────────
-		...getTikTokRoutes(),
+    // ─── TikTok (W2B) ─────────────────────────────────────────────────────
+    ...getTikTokRoutes(),
 
-		// ─── Maintenance + Stardust recalc (W2B) ──────────────────────────────
-		...getMaintenanceRoutes(),
+    // ─── Maintenance + Stardust recalc (W2B) ──────────────────────────────
+    ...getMaintenanceRoutes(),
 
-		// ─── Rankings (stub) ──────────────────────────────────────────────────
-		"/api/rankings/refresh": {
-			POST: protectedStub("rankings.refresh"),
-			OPTIONS: optionsHandler,
-		},
-	};
+    // ─── Rankings (stub) ──────────────────────────────────────────────────
+    "/api/rankings/refresh": {
+      POST: protectedStub("rankings.refresh"),
+      OPTIONS: optionsHandler,
+    },
+  };
 }

@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { BarChart, Hub, Shield, TrendingUp } from '@mui/icons-material';
+import { BarChart, Hub, Shield, TrendingUp } from "@mui/icons-material";
 import {
   Avatar,
   alpha,
@@ -13,12 +13,12 @@ import {
   ListItem,
   Typography,
   useTheme,
-} from '@mui/material';
-import { useEffect, useState } from 'react';
-import { getMetaStats } from '@/server/actions/admin-meta';
+} from "@mui/material";
+import { useEffect, useState } from "react";
+import { getMetaStats } from "@/server/actions/admin-meta";
 
 type MetaStats = Awaited<ReturnType<typeof getMetaStats>>;
-type MetaItem = MetaStats['blades'][number];
+type MetaItem = MetaStats["blades"][number];
 
 export default function AdminMetaPage() {
   const theme = useTheme();
@@ -34,7 +34,7 @@ export default function AdminMetaPage() {
 
   if (loading || !stats) {
     return (
-      <Box sx={{ display: 'flex', justifyContent: 'center', py: 10 }}>
+      <Box sx={{ display: "flex", justifyContent: "center", py: 10 }}>
         <CircularProgress color="primary" />
       </Box>
     );
@@ -45,9 +45,9 @@ export default function AdminMetaPage() {
       <Box
         sx={{
           mb: { xs: 3, md: 4 },
-          display: 'flex',
-          flexDirection: { xs: 'column', sm: 'row' },
-          alignItems: { xs: 'flex-start', sm: 'center' },
+          display: "flex",
+          flexDirection: { xs: "column", sm: "row" },
+          alignItems: { xs: "flex-start", sm: "center" },
           gap: { xs: 1, sm: 2 },
         }}
       >
@@ -56,16 +56,16 @@ export default function AdminMetaPage() {
             p: 1.5,
             borderRadius: 3,
             bgcolor: alpha(theme.palette.primary.main, 0.1),
-            display: 'flex',
+            display: "flex",
           }}
         >
-          <Hub sx={{ fontSize: { xs: 32, md: 40 }, color: 'primary.main' }} />
+          <Hub sx={{ fontSize: { xs: 32, md: 40 }, color: "primary.main" }} />
         </Box>
         <Box>
           <Typography
             variant="h4"
             sx={{
-              fontWeight: '900',
+              fontWeight: "900",
             }}
           >
             GESTION META
@@ -73,11 +73,10 @@ export default function AdminMetaPage() {
           <Typography
             variant="body2"
             sx={{
-              color: 'text.secondary',
+              color: "text.secondary",
             }}
           >
-            Analyse de l'utilisation des pièces basée sur les decks de la
-            communauté.
+            Analyse de l'utilisation des pièces basée sur les decks de la communauté.
           </Typography>
         </Box>
       </Box>
@@ -94,12 +93,7 @@ export default function AdminMetaPage() {
           icon={<TrendingUp />}
           color={theme.palette.secondary.main}
         />
-        <StatSection
-          title="Top Bits"
-          data={stats.bits}
-          icon={<TrendingUp />}
-          color="#3b82f6"
-        />
+        <StatSection title="Top Bits" data={stats.bits} icon={<TrendingUp />} color="#3b82f6" />
         <StatSection
           title="Top Assists (CX)"
           data={stats.assists}
@@ -129,20 +123,20 @@ function StatSection({
       <Card
         sx={{
           borderRadius: 4,
-          border: '1px solid',
-          borderColor: 'divider',
-          height: '100%',
-          bgcolor: 'background.paper',
+          border: "1px solid",
+          borderColor: "divider",
+          height: "100%",
+          bgcolor: "background.paper",
         }}
       >
         <CardContent sx={{ p: 3 }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 3 }}>
-            <Box sx={{ color: color, display: 'flex' }}>{icon}</Box>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1.5, mb: 3 }}>
+            <Box sx={{ color: color, display: "flex" }}>{icon}</Box>
             <Typography
               variant="h6"
               sx={{
-                fontWeight: '900',
-                fontSize: '1rem',
+                fontWeight: "900",
+                fontSize: "1rem",
                 letterSpacing: 0.5,
               }}
             >
@@ -154,8 +148,8 @@ function StatSection({
             <Typography
               variant="body2"
               sx={{
-                color: 'text.disabled',
-                textAlign: 'center',
+                color: "text.disabled",
+                textAlign: "center",
                 py: 4,
               }}
             >
@@ -167,12 +161,12 @@ function StatSection({
                 <ListItem
                   key={item.id}
                   disablePadding
-                  sx={{ mb: 2, flexDirection: 'column', alignItems: 'stretch' }}
+                  sx={{ mb: 2, flexDirection: "column", alignItems: "stretch" }}
                 >
                   <Box
                     sx={{
-                      display: 'flex',
-                      alignItems: 'center',
+                      display: "flex",
+                      alignItems: "center",
                       gap: 1.5,
                       mb: 0.5,
                     }}
@@ -184,7 +178,7 @@ function StatSection({
                         width: 32,
                         height: 32,
                         bgcolor: alpha(color, 0.1),
-                        border: '1px solid',
+                        border: "1px solid",
                         borderColor: alpha(color, 0.2),
                       }}
                     >
@@ -195,7 +189,7 @@ function StatSection({
                         variant="body2"
                         noWrap
                         sx={{
-                          fontWeight: 'bold',
+                          fontWeight: "bold",
                         }}
                       >
                         {item.name}
@@ -204,8 +198,8 @@ function StatSection({
                     <Typography
                       variant="caption"
                       sx={{
-                        fontWeight: '900',
-                        color: 'text.secondary',
+                        fontWeight: "900",
+                        color: "text.secondary",
                       }}
                     >
                       {item.count}
@@ -214,15 +208,15 @@ function StatSection({
                   <Box
                     sx={{
                       height: 4,
-                      width: '100%',
-                      bgcolor: 'action.hover',
+                      width: "100%",
+                      bgcolor: "action.hover",
                       borderRadius: 2,
-                      overflow: 'hidden',
+                      overflow: "hidden",
                     }}
                   >
                     <Box
                       sx={{
-                        height: '100%',
+                        height: "100%",
                         width: `${(item.count / maxUsage) * 100}%`,
                         bgcolor: color,
                         borderRadius: 2,

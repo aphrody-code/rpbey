@@ -15,15 +15,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Commandes (racine)
 
-| But | Commande |
-|---|---|
-| Dev (tout / web / bot) | `bun run dev` · `bun run dev:web` · `bun run dev:bot` |
-| Build | `bun run build` · `bun run build:web` |
-| Type-check | `bun run type-check` (turbo) — le vrai gate par appli est `bunx tsc --noEmit` |
-| Lint / fix | `bun run lint` (oxlint) · `bun run lint:fix` |
-| Format / check | `bun run format` (oxfmt) · `bun run format:check` |
-| Test | `bun run test` (turbo) |
-| E2E (chromium réel) | `bun run e2e` (== `CHROME=/usr/local/bin/chromium bun scripts/e2e.ts`) |
+| But                    | Commande                                                                      |
+| ---------------------- | ----------------------------------------------------------------------------- |
+| Dev (tout / web / bot) | `bun run dev` · `bun run dev:web` · `bun run dev:bot`                         |
+| Build                  | `bun run build` · `bun run build:web`                                         |
+| Type-check             | `bun run type-check` (turbo) — le vrai gate par appli est `bunx tsc --noEmit` |
+| Lint / fix             | `bun run lint` (oxlint) · `bun run lint:fix`                                  |
+| Format / check         | `bun run format` (oxfmt) · `bun run format:check`                             |
+| Test                   | `bun run test` (turbo)                                                        |
+| E2E (chromium réel)    | `bun run e2e` (== `CHROME=/usr/local/bin/chromium bun scripts/e2e.ts`)        |
 
 **Lint = oxlint** (`.oxlintrc.json`) **+ oxfmt** (`.oxfmtrc.json`) ; le web lance **aussi eslint** (`apps/web` : `bun run lint`). **Indentation = tabs** partout. Bun ≥ 1.3 requis (`Bun.cron`). Linker `hoisted` dans `bunfig.toml` (le défaut `isolated` casse les bundlers Next.js).
 
@@ -45,10 +45,10 @@ Les **deux** applis tapent le **même Postgres LOCAL** (socket `/var/run/postgre
 
 La migration Prisma→Drizzle a laissé un split volontaire sur les colonnes `timestamp` — **la source #1 de bugs runtime** :
 
-| Tables | Mode | Type JS attendu/retourné |
-|---|---|---|
-| **auth** : `users`, `accounts`, `sessions`, `verifications`, `twoFactors` | `mode:"date"` | objet **`Date`** |
-| **toutes les autres** (tournaments, profiles, decks, rankings, gacha, anime…) | `mode:"string"` | **string ISO** |
+| Tables                                                                        | Mode            | Type JS attendu/retourné |
+| ----------------------------------------------------------------------------- | --------------- | ------------------------ |
+| **auth** : `users`, `accounts`, `sessions`, `verifications`, `twoFactors`     | `mode:"date"`   | objet **`Date`**         |
+| **toutes les autres** (tournaments, profiles, decks, rankings, gacha, anime…) | `mode:"string"` | **string ISO**           |
 
 Raison : better-auth écrit des `Date`. Conséquences : écrire une colonne **auth** = passer un `Date` ; écrire une **non-auth** = passer `new Date().toISOString()` ; **lire pour afficher** = toujours wrapper `new Date(x)` avant `.toLocaleDateString()`/`.getTime()`. Mauvais type → `TypeError: x.toISOString is not a function` ou `Received an instance of Date`. En cas de doute : `bun -e "import{schema}from'@rpbey/db';console.log(schema.<table>.<col>.columnType)"`.
 

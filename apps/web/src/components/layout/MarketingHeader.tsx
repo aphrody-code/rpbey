@@ -1,10 +1,6 @@
-'use client';
+"use client";
 
-import {
-  AccountCircle,
-  AcUnit,
-  LocalFireDepartment,
-} from '@mui/icons-material';
+import { AccountCircle, AcUnit, LocalFireDepartment } from "@mui/icons-material";
 import {
   Avatar,
   alpha,
@@ -14,11 +10,11 @@ import {
   Stack,
   Tooltip,
   Typography,
-} from '@mui/material';
-import Link from 'next/link';
-import { useThemeMode } from '@/components/theme/ThemeRegistry';
-import { RpbLogo } from '@/components/ui/RpbLogo';
-import { useSession } from '@/lib/auth-client';
+} from "@mui/material";
+import Link from "next/link";
+import { useThemeMode } from "@/components/theme/ThemeRegistry";
+import { RpbLogo } from "@/components/ui/RpbLogo";
+import { useSession } from "@/lib/auth-client";
 
 export function MarketingHeader() {
   const { data: session } = useSession();
@@ -28,35 +24,35 @@ export function MarketingHeader() {
     <Box
       component="header"
       sx={{
-        display: { xs: 'flex', md: 'none' },
+        display: { xs: "flex", md: "none" },
         height: 64,
-        alignItems: 'center',
+        alignItems: "center",
         bgcolor: (t) => alpha(t.palette.background.default, 0.7),
-        borderBottom: '1px solid',
+        borderBottom: "1px solid",
         borderColor: (t) => alpha(t.palette.secondary.main, 0.2),
-        position: 'fixed',
-        left: { xs: 0, md: 'auto' },
+        position: "fixed",
+        left: { xs: 0, md: "auto" },
         right: 0,
         top: 0,
-        width: { xs: '100%', md: 'auto' },
+        width: { xs: "100%", md: "auto" },
         zIndex: 1100,
-        backdropFilter: 'blur(12px)',
+        backdropFilter: "blur(12px)",
       }}
     >
       <Container maxWidth="lg">
         <Stack
           direction="row"
           sx={{
-            alignItems: 'center',
-            justifyContent: 'space-between',
+            alignItems: "center",
+            justifyContent: "space-between",
           }}
         >
           <Link
             href="/"
             style={{
-              textDecoration: 'none',
-              display: 'flex',
-              alignItems: 'center',
+              textDecoration: "none",
+              display: "flex",
+              alignItems: "center",
               gap: 8,
             }}
           >
@@ -64,16 +60,16 @@ export function MarketingHeader() {
             <Typography
               variant="h6"
               sx={{
-                fontWeight: '900',
+                fontWeight: "900",
 
                 background: (t) =>
                   `linear-gradient(135deg, ${t.palette.secondary.main} 0%, ${t.palette.primary.main} 100%)`,
 
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                letterSpacing: '-0.02em',
-                textTransform: 'uppercase',
-                fontSize: '1.1rem',
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                letterSpacing: "-0.02em",
+                textTransform: "uppercase",
+                fontSize: "1.1rem",
               }}
             >
               RPB
@@ -84,26 +80,22 @@ export function MarketingHeader() {
             direction="row"
             spacing={0.5}
             sx={{
-              alignItems: 'center',
+              alignItems: "center",
             }}
           >
-            <Tooltip
-              title={
-                mode === 'red' ? 'Passer en Mode Bleu' : 'Passer en Mode Rouge'
-              }
-            >
+            <Tooltip title={mode === "red" ? "Passer en Mode Bleu" : "Passer en Mode Rouge"}>
               <IconButton
                 onClick={toggleTheme}
                 aria-label="Changer de thème"
                 sx={{
                   p: 0.5,
-                  color: 'secondary.main',
-                  '&:hover': {
+                  color: "secondary.main",
+                  "&:hover": {
                     bgcolor: (t) => alpha(t.palette.secondary.main, 0.15),
                   },
                 }}
               >
-                {mode === 'red' ? (
+                {mode === "red" ? (
                   <LocalFireDepartment sx={{ fontSize: 22 }} />
                 ) : (
                   <AcUnit sx={{ fontSize: 22 }} />
@@ -118,25 +110,25 @@ export function MarketingHeader() {
                 aria-label="Mon compte"
                 sx={{
                   p: 0.5,
-                  border: '1px solid',
+                  border: "1px solid",
                   borderColor: (t) => alpha(t.palette.secondary.main, 0.3),
-                  color: 'secondary.main',
+                  color: "secondary.main",
                   bgcolor: (t) => alpha(t.palette.secondary.main, 0.1),
-                  '&:hover': {
+                  "&:hover": {
                     bgcolor: (t) => alpha(t.palette.secondary.main, 0.2),
-                    borderColor: 'secondary.main',
+                    borderColor: "secondary.main",
                   },
                 }}
               >
                 {session.user.image ? (
                   <Avatar
                     src={session.user.image}
-                    alt={session.user.name || 'Avatar'}
+                    alt={session.user.name || "Avatar"}
                     sx={{
                       width: 28,
                       height: 28,
-                      border: '1px solid',
-                      borderColor: 'secondary.main',
+                      border: "1px solid",
+                      borderColor: "secondary.main",
                     }}
                   />
                 ) : (

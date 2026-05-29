@@ -6,7 +6,6 @@
  * Ref: https://bun.sh/docs/api/streams (Bun extension, non-standard).
  */
 
- 
 interface ReadableStream<R = unknown> {
   /** Bun extension: collect the entire stream into a Uint8Array. */
   bytes(): Promise<Uint8Array<ArrayBuffer>>;

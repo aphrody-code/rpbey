@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   Button,
@@ -12,10 +12,10 @@ import {
   Select,
   Stack,
   TextField,
-} from '@mui/material';
-import { useEffect, useState } from 'react';
-import { type ContentBlock } from '@/lib/types';
-import { type ContentBlockInput } from './actions';
+} from "@mui/material";
+import { useEffect, useState } from "react";
+import { type ContentBlock } from "@/lib/types";
+import { type ContentBlockInput } from "./actions";
 
 interface ContentDialogProps {
   open: boolean;
@@ -33,26 +33,26 @@ export function ContentDialog({
   loading,
 }: ContentDialogProps) {
   const [formData, setFormData] = useState<ContentBlockInput>({
-    slug: '',
-    title: '',
-    type: 'text',
-    content: '',
+    slug: "",
+    title: "",
+    type: "text",
+    content: "",
   });
 
   useEffect(() => {
     if (initialData) {
       setFormData({
         slug: initialData.slug,
-        title: initialData.title || '',
+        title: initialData.title || "",
         type: initialData.type,
         content: initialData.content,
       });
     } else {
       setFormData({
-        slug: '',
-        title: '',
-        type: 'text',
-        content: '',
+        slug: "",
+        title: "",
+        type: "text",
+        content: "",
       });
     }
   }, [initialData]);
@@ -65,18 +65,14 @@ export function ContentDialog({
   return (
     <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth>
       <form onSubmit={handleSubmit}>
-        <DialogTitle>
-          {initialData ? 'Modifier le contenu' : 'Ajouter du contenu'}
-        </DialogTitle>
+        <DialogTitle>{initialData ? "Modifier le contenu" : "Ajouter du contenu"}</DialogTitle>
         <DialogContent dividers>
           <Stack spacing={3} sx={{ mt: 1 }}>
-            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+            <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
               <TextField
                 label="Slug (Clé unique)"
                 value={formData.slug}
-                onChange={(e) =>
-                  setFormData({ ...formData, slug: e.target.value })
-                }
+                onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
                 fullWidth
                 required
                 disabled={!!initialData} // Prevent changing slug of existing content
@@ -85,9 +81,7 @@ export function ContentDialog({
               <TextField
                 label="Titre (Admin)"
                 value={formData.title}
-                onChange={(e) =>
-                  setFormData({ ...formData, title: e.target.value })
-                }
+                onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                 fullWidth
                 required
               />
@@ -98,9 +92,7 @@ export function ContentDialog({
               <Select
                 value={formData.type}
                 label="Type de contenu"
-                onChange={(e) =>
-                  setFormData({ ...formData, type: e.target.value })
-                }
+                onChange={(e) => setFormData({ ...formData, type: e.target.value })}
               >
                 <MenuItem value="text">Texte Simple</MenuItem>
                 <MenuItem value="markdown">Markdown</MenuItem>
@@ -112,22 +104,20 @@ export function ContentDialog({
             <TextField
               label="Contenu"
               value={formData.content}
-              onChange={(e) =>
-                setFormData({ ...formData, content: e.target.value })
-              }
+              onChange={(e) => setFormData({ ...formData, content: e.target.value })}
               fullWidth
               required
               multiline
               minRows={10}
               maxRows={25}
-              sx={{ fontFamily: 'monospace' }}
+              sx={{ fontFamily: "monospace" }}
             />
           </Stack>
         </DialogContent>
         <DialogActions>
           <Button onClick={onClose}>Annuler</Button>
           <Button type="submit" variant="contained" disabled={loading}>
-            {loading ? 'Enregistrement...' : 'Enregistrer'}
+            {loading ? "Enregistrement..." : "Enregistrer"}
           </Button>
         </DialogActions>
       </form>

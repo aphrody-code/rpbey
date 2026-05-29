@@ -7,11 +7,11 @@ import { BracketsLoader } from "./BracketsLoader";
 import type { BracketsViewerClientProps } from "./BracketsViewerClient";
 
 const BracketsViewerClient = dynamic(
-	() => import("./BracketsViewerClient").then((m) => m.BracketsViewerClient),
-	{
-		ssr: false,
-		loading: () => <BracketsLoader />,
-	},
+  () => import("./BracketsViewerClient").then((m) => m.BracketsViewerClient),
+  {
+    ssr: false,
+    loading: () => <BracketsLoader />,
+  },
 );
 
 /**
@@ -21,10 +21,8 @@ const BracketsViewerClient = dynamic(
  * - Rendu strictement client (`ssr: false`) — la lib appelle `document.createElement`.
  * - Fallback `BracketsLoader` (Skeleton MUI) pendant le download du bundle.
  */
-export function BracketsViewer(
-	props: BracketsViewerClientProps,
-): React.ReactElement {
-	return <BracketsViewerClient {...props} />;
+export function BracketsViewer(props: BracketsViewerClientProps): React.ReactElement {
+  return <BracketsViewerClient {...props} />;
 }
 
 export default BracketsViewer;

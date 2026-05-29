@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { Box } from '@mui/material';
-import { type SxProps, type Theme } from '@mui/material/styles';
+import { Box } from "@mui/material";
+import { type SxProps, type Theme } from "@mui/material/styles";
 
 interface BbxIconProps {
   src: string;
@@ -10,7 +10,7 @@ interface BbxIconProps {
   sx?: SxProps<Theme>;
 }
 
-export function BbxIcon({ src, alt = '', size = 24, sx }: BbxIconProps) {
+export function BbxIcon({ src, alt = "", size = 24, sx }: BbxIconProps) {
   return (
     <Box
       component="img"
@@ -19,8 +19,8 @@ export function BbxIcon({ src, alt = '', size = 24, sx }: BbxIconProps) {
       sx={{
         width: size,
         height: size,
-        objectFit: 'contain',
-        display: 'block',
+        objectFit: "contain",
+        display: "block",
         ...sx,
       }}
     />
@@ -45,10 +45,10 @@ export function BbxNavIcon({
       sx={{
         width: size,
         height: size,
-        objectFit: 'contain',
-        display: 'block',
-        filter: active ? 'none' : 'grayscale(0.6) opacity(0.7)',
-        transition: 'filter 0.2s ease',
+        objectFit: "contain",
+        display: "block",
+        filter: active ? "none" : "grayscale(0.6) opacity(0.7)",
+        transition: "filter 0.2s ease",
       }}
     />
   );

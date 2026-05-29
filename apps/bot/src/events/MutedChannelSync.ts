@@ -1,15 +1,15 @@
-import { ChannelType } from 'discord.js';
-import { type ArgsOf, Discord, On } from '@rpbey/discordx';
+import { ChannelType } from "discord.js";
+import { type ArgsOf, Discord, On } from "@rpbey/discordx";
 
-import { logger } from '../lib/logger.js';
+import { logger } from "../lib/logger.js";
 
-const MUTED_CHANNEL_ID = process.env.MUTED_CHANNEL_ID ?? '1456761597245784260';
-const MUTED_ROLE_NAME = 'Muted';
+const MUTED_CHANNEL_ID = process.env.MUTED_CHANNEL_ID ?? "1456761597245784260";
+const MUTED_ROLE_NAME = "Muted";
 
 @Discord()
 export class MutedChannelSyncListener {
-  @On({ event: 'channelCreate' })
-  async onChannelCreate([channel]: ArgsOf<'channelCreate'>) {
+  @On({ event: "channelCreate" })
+  async onChannelCreate([channel]: ArgsOf<"channelCreate">) {
     if (channel.partial) {
       try {
         await channel.fetch();
@@ -18,7 +18,7 @@ export class MutedChannelSyncListener {
       }
     }
 
-    if (!('guild' in channel) || !channel.guild) return;
+    if (!("guild" in channel) || !channel.guild) return;
 
     if (
       channel.type !== ChannelType.GuildText &&
@@ -29,9 +29,7 @@ export class MutedChannelSyncListener {
       return;
     }
 
-    const mutedRole = channel.guild.roles.cache.find(
-      (r) => r.name === MUTED_ROLE_NAME,
-    );
+    const mutedRole = channel.guild.roles.cache.find((r) => r.name === MUTED_ROLE_NAME);
 
     if (!mutedRole) return;
 
@@ -51,14 +49,9 @@ export class MutedChannelSyncListener {
         });
       }
 
-      logger.debug(
-        `Permissions Muted configurées pour le nouveau salon: ${channel.name}`,
-      );
+      logger.debug(`Permissions Muted configurées pour le nouveau salon: ${channel.name}`);
     } catch (error) {
-      logger.warn(
-        `Impossible de configurer les permissions Muted pour ${channel.name}:`,
-        error,
-      );
+      logger.warn(`Impossible de configurer les permissions Muted pour ${channel.name}:`, error);
     }
   }
 }

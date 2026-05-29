@@ -1,9 +1,5 @@
-import {
-  type CommandInteraction,
-  type Guild,
-  type TextChannel,
-} from 'discord.js';
-import { mock } from 'bun:test';
+import { type CommandInteraction, type Guild, type TextChannel } from "discord.js";
+import { mock } from "bun:test";
 
 const vi = {
   fn: mock,
@@ -19,20 +15,18 @@ export function createMockInteraction(options: {
   const interaction = {
     commandName: options.commandName,
     user: {
-      id: '123456789',
-      username: 'testuser',
-      displayName: 'Test User',
-      displayAvatarURL: vi
-        .fn()
-        .mockReturnValue('https://example.com/avatar.png'),
+      id: "123456789",
+      username: "testuser",
+      displayName: "Test User",
+      displayAvatarURL: vi.fn().mockReturnValue("https://example.com/avatar.png"),
       ...options.user,
     },
     guild: (options.guild || {
-      id: 'guild123',
-      name: 'Test Guild',
+      id: "guild123",
+      name: "Test Guild",
     }) as Guild,
     channel: {
-      id: 'channel123',
+      id: "channel123",
       send: vi.fn().mockResolvedValue({}),
     } as unknown as TextChannel,
     options: {

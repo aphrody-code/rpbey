@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { Avatar, Box, LinearProgress, Typography } from '@mui/material';
+import { Avatar, Box, LinearProgress, Typography } from "@mui/material";
 
-import { type SynergyItem } from './types';
+import { type SynergyItem } from "./types";
 
 const DEFAULT_VISIBLE = 5;
 
@@ -21,13 +21,13 @@ export function SynergyList({
   const maxScore = Math.max(...synergies.map((s) => s.score), 1);
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.4 }}>
+    <Box sx={{ display: "flex", flexDirection: "column", gap: 0.4 }}>
       {visible.map((s) => (
         <Box
           key={s.name}
           sx={{
-            display: 'flex',
-            alignItems: 'center',
+            display: "flex",
+            alignItems: "center",
             gap: { xs: 0.75, md: 1 },
           }}
         >
@@ -38,8 +38,8 @@ export function SynergyList({
               sx={{
                 width: 16,
                 height: 16,
-                bgcolor: 'transparent',
-                '& img': { objectFit: 'contain' },
+                bgcolor: "transparent",
+                "& img": { objectFit: "contain" },
               }}
             />
           )}
@@ -48,12 +48,12 @@ export function SynergyList({
             sx={{
               width: { xs: 70, md: 100 },
               minWidth: { xs: 70, md: 100 },
-              fontSize: { xs: '0.6rem', md: '0.65rem' },
-              color: 'text.secondary',
-              textAlign: s.imageUrl ? 'left' : 'right',
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              whiteSpace: 'nowrap',
+              fontSize: { xs: "0.6rem", md: "0.65rem" },
+              color: "text.secondary",
+              textAlign: s.imageUrl ? "left" : "right",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap",
             }}
           >
             {s.name}
@@ -65,8 +65,8 @@ export function SynergyList({
               flex: 1,
               height: { xs: 3, md: 4 },
               borderRadius: 2,
-              bgcolor: 'rgba(255,255,255,0.05)',
-              '& .MuiLinearProgress-bar': {
+              bgcolor: "rgba(255,255,255,0.05)",
+              "& .MuiLinearProgress-bar": {
                 bgcolor: color,
                 borderRadius: 2,
                 opacity: 0.7,
@@ -78,9 +78,9 @@ export function SynergyList({
             sx={{
               width: { xs: 24, md: 28 },
               minWidth: { xs: 24, md: 28 },
-              fontSize: { xs: '0.55rem', md: '0.6rem' },
+              fontSize: { xs: "0.55rem", md: "0.6rem" },
               fontWeight: 700,
-              color: 'text.secondary',
+              color: "text.secondary",
             }}
           >
             {s.score}

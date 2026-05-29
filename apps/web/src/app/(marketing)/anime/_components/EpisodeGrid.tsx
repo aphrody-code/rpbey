@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { Box } from '@mui/material';
-import { EpisodeCard } from './EpisodeCard';
+import { Box } from "@mui/material";
+import { EpisodeCard } from "./EpisodeCard";
 
 interface Episode {
   id: string;
@@ -18,27 +18,21 @@ interface EpisodeGridProps {
   progressMap?: Record<string, { progressTime: number; status: string }>;
 }
 
-export function EpisodeGrid({
-  seriesSlug,
-  episodes,
-  progressMap = {},
-}: EpisodeGridProps) {
+export function EpisodeGrid({ seriesSlug, episodes, progressMap = {} }: EpisodeGridProps) {
   return (
     <>
       {/* Mobile: Netflix-style vertical list */}
       <Box
         sx={{
-          display: { xs: 'flex', sm: 'none' },
-          flexDirection: 'column',
+          display: { xs: "flex", sm: "none" },
+          flexDirection: "column",
           gap: 1.5,
         }}
       >
         {episodes.map((ep) => {
           const prog = progressMap[ep.id];
           const progressFraction =
-            prog && ep.duration > 0
-              ? prog.progressTime / ep.duration
-              : undefined;
+            prog && ep.duration > 0 ? prog.progressTime / ep.duration : undefined;
 
           return (
             <EpisodeCard
@@ -59,11 +53,11 @@ export function EpisodeGrid({
       {/* Tablet+: Grid layout */}
       <Box
         sx={{
-          display: { xs: 'none', sm: 'grid' },
+          display: { xs: "none", sm: "grid" },
           gridTemplateColumns: {
-            sm: 'repeat(2, 1fr)',
-            md: 'repeat(3, 1fr)',
-            lg: 'repeat(4, 1fr)',
+            sm: "repeat(2, 1fr)",
+            md: "repeat(3, 1fr)",
+            lg: "repeat(4, 1fr)",
           },
           gap: 2.5,
         }}
@@ -71,9 +65,7 @@ export function EpisodeGrid({
         {episodes.map((ep) => {
           const prog = progressMap[ep.id];
           const progressFraction =
-            prog && ep.duration > 0
-              ? prog.progressTime / ep.duration
-              : undefined;
+            prog && ep.duration > 0 ? prog.progressTime / ep.duration : undefined;
 
           return (
             <EpisodeCard

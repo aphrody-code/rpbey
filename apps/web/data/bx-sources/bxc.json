@@ -40,6 +40,7 @@
     {"name": "King Jouet BE", "domain": "king-jouet.be", "url": "https://www.king-jouet.be/jeux-jouets/beyblade/page1.htm", "region": "BE", "type": "retailer"},
     {"name": "King Jouet CH", "domain": "king-jouet.ch", "url": "https://www.king-jouet.ch/jeux-jouets/toupies-arenes-beyblade-x/beyblade/page1.htm", "region": "CH", "type": "retailer"},
     {"name": "Smyths Toys", "domain": "smythstoys.com", "url": "https://www.smythstoys.com/uk/en-gb/toys/action-figures-and-playsets/beyblade/c/SM06010117", "region": "UK", "type": "retailer"},
-    {"name": "Argos", "domain": "argos.co.uk", "url": "https://www.argos.co.uk/sd/beyblade-x/", "region": "UK", "type": "retailer"}
+    {"name": "Argos", "domain": "argos.co.uk", "url": "https://www.argos.co.uk/sd/beyblade-x/", "region": "UK", "type": "retailer"},
+    {"name": "FeedMy", "domain": "feedmy.fr", "url": "https://feedmy.fr/collections/beyblade-x", "region": "FR", "type": "specialist"}
   ]
 }

@@ -1,14 +1,19 @@
-import { ChannelType, MessageFlags, PermissionFlagsBits, type CommandInteraction } from "discord.js";
-import { Discord, Slash } from '@rpbey/discordx';
+import {
+  ChannelType,
+  MessageFlags,
+  PermissionFlagsBits,
+  type CommandInteraction,
+} from "discord.js";
+import { Discord, Slash } from "@rpbey/discordx";
 
-import { logger } from '../../lib/logger.js';
-import prisma from '../../lib/prisma.js';
+import { logger } from "../../lib/logger.js";
+import prisma from "../../lib/prisma.js";
 
 @Discord()
 export class SyncCommand {
   @Slash({
-    name: 'synchroniser',
-    description: 'Synchronise rôles, salons et membres avec la base de données',
+    name: "synchroniser",
+    description: "Synchronise rôles, salons et membres avec la base de données",
     defaultMemberPermissions: PermissionFlagsBits.Administrator,
   })
   async sync(interaction: CommandInteraction) {
@@ -16,19 +21,19 @@ export class SyncCommand {
 
     if (!guild) {
       return interaction.reply({
-        content: '❌ Cette commande ne peut être utilisée que sur un serveur.',
+        content: "❌ Cette commande ne peut être utilisée que sur un serveur.",
         flags: MessageFlags.Ephemeral,
       });
     }
 
     await interaction.reply({
-      content: '🔄 Démarrage de la synchronisation globale...',
+      content: "🔄 Démarrage de la synchronisation globale...",
       flags: MessageFlags.Ephemeral,
     });
 
     try {
       // --- 1. Sync Roles ---
-      await interaction.editReply('🔄 Synchronisation des Rôles...');
+      await interaction.editReply("🔄 Synchronisation des Rôles...");
       const roles = await guild.roles.fetch();
       let rolesSynced = 0;
 
@@ -73,13 +78,13 @@ export class SyncCommand {
           create: {
             id: channel.id,
             name: channel.name,
-            type: ChannelType[channel.type] || 'UNKNOWN',
+            type: ChannelType[channel.type] || "UNKNOWN",
             parentId: channel.parentId,
             position: channel.position,
           },
           update: {
             name: channel.name,
-            type: ChannelType[channel.type] || 'UNKNOWN',
+            type: ChannelType[channel.type] || "UNKNOWN",
             parentId: channel.parentId,
             position: channel.position,
           },
@@ -122,24 +127,22 @@ export class SyncCommand {
                       color: r.hexColor,
                       id: r.id,
                     })),
-                    status: member.presence?.status || 'offline',
-                    activities: (member.presence?.activities || []).map(
-                      (a) => ({
-                        name: a.name,
-                        type: a.type,
-                        state: a.state,
-                        details: a.details,
-                        url: a.url,
-                      }),
-                    ),
+                    status: member.presence?.status || "offline",
+                    activities: (member.presence?.activities || []).map((a) => ({
+                      name: a.name,
+                      type: a.type,
+                      state: a.state,
+                      details: a.details,
+                      url: a.url,
+                    })),
                     serverAvatar: member.avatarURL({
-                      extension: 'png',
+                      extension: "png",
                       size: 256,
                     }),
                     globalName: member.user.globalName,
                     discordTag: member.user.tag,
                     image: member.user.displayAvatarURL({
-                      extension: 'png',
+                      extension: "png",
                       size: 256,
                     }),
                   },
@@ -147,10 +150,7 @@ export class SyncCommand {
                 membersUpdated++;
               }
             } catch (e) {
-              logger.error(
-                `[Sync] Error syncing member ${member.user.tag}:`,
-                e,
-              );
+              logger.error(`[Sync] Error syncing member ${member.user.tag}:`, e);
               errors++;
             }
           }),
@@ -173,7 +173,7 @@ export class SyncCommand {
           `*Les données sont maintenant à jour dans la base de données.*`,
       });
     } catch (error) {
-      logger.error('[Sync] Command error:', error);
+      logger.error("[Sync] Command error:", error);
       return interaction.editReply({
         content: `❌ Une erreur majeure est survenue : ${error}`,
       });

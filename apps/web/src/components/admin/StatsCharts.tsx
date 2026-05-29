@@ -1,18 +1,11 @@
-'use client';
+"use client";
 
-import {
-  Box,
-  Card,
-  CardContent,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from '@mui/material';
-import Grid from '@mui/material/Grid';
+import { Box, Card, CardContent, Typography, useMediaQuery, useTheme } from "@mui/material";
+import Grid from "@mui/material/Grid";
 import {
   DynamicBarChart as BarChart,
   DynamicPieChart as PieChart,
-} from '@/components/ui/DynamicCharts';
+} from "@/components/ui/DynamicCharts";
 
 interface StatsChartsProps {
   registrations: { month: string; count: number }[];
@@ -20,13 +13,9 @@ interface StatsChartsProps {
   matchesStatus: { status: string; count: number }[];
 }
 
-export function StatsCharts({
-  registrations,
-  tournaments,
-  matchesStatus,
-}: StatsChartsProps) {
+export function StatsCharts({ registrations, tournaments, matchesStatus }: StatsChartsProps) {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
     <Grid container spacing={3} sx={{ mt: 3 }}>
@@ -35,13 +24,13 @@ export function StatsCharts({
         <Card
           elevation={0}
           sx={{
-            border: '1px solid',
-            borderColor: 'divider',
+            border: "1px solid",
+            borderColor: "divider",
             borderRadius: 4,
-            height: '100%',
-            transition: 'box-shadow 0.2s',
-            '&:hover': {
-              boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
+            height: "100%",
+            transition: "box-shadow 0.2s",
+            "&:hover": {
+              boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
             },
           }}
         >
@@ -50,29 +39,29 @@ export function StatsCharts({
               variant="h6"
               gutterBottom
               sx={{
-                fontWeight: 'bold',
+                fontWeight: "bold",
               }}
             >
               Croissance Utilisateurs & Tournois
             </Typography>
-            <Box sx={{ height: 350, width: '100%' }}>
+            <Box sx={{ height: 350, width: "100%" }}>
               {registrations.length > 0 ? (
                 <BarChart
                   xAxis={[
                     {
-                      scaleType: 'band',
+                      scaleType: "band",
                       data: registrations.map((d) => d.month),
                     },
                   ]}
                   series={[
                     {
                       data: registrations.map((d) => d.count),
-                      label: 'Nouveaux Inscrits',
-                      color: '#3b82f6',
+                      label: "Nouveaux Inscrits",
+                      color: "#3b82f6",
                     },
                     {
                       data: tournaments.map((d) => d.count),
-                      label: 'Tournois Créés',
+                      label: "Tournois Créés",
                       color: theme.palette.secondary.main,
                     },
                   ]}
@@ -81,15 +70,15 @@ export function StatsCharts({
               ) : (
                 <Box
                   sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    height: '100%',
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    height: "100%",
                   }}
                 >
                   <Typography
                     sx={{
-                      color: 'text.secondary',
+                      color: "text.secondary",
                     }}
                   >
                     Aucune donnée disponible
@@ -105,13 +94,13 @@ export function StatsCharts({
         <Card
           elevation={0}
           sx={{
-            border: '1px solid',
-            borderColor: 'divider',
+            border: "1px solid",
+            borderColor: "divider",
             borderRadius: 4,
-            height: '100%',
-            transition: 'box-shadow 0.2s',
-            '&:hover': {
-              boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
+            height: "100%",
+            transition: "box-shadow 0.2s",
+            "&:hover": {
+              boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
             },
           }}
         >
@@ -120,7 +109,7 @@ export function StatsCharts({
               variant="h6"
               gutterBottom
               sx={{
-                fontWeight: 'bold',
+                fontWeight: "bold",
               }}
             >
               État des Matchs
@@ -128,9 +117,9 @@ export function StatsCharts({
             <Box
               sx={{
                 height: 350,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
               }}
             >
               {matchesStatus.length > 0 ? (
@@ -142,21 +131,21 @@ export function StatsCharts({
                         value: s.count,
                         label: s.status,
                         color:
-                          s.status === 'Terminé'
-                            ? '#22c55e'
-                            : s.status === 'En cours'
-                              ? '#3b82f6'
-                              : '#94a3b8',
+                          s.status === "Terminé"
+                            ? "#22c55e"
+                            : s.status === "En cours"
+                              ? "#3b82f6"
+                              : "#94a3b8",
                       })),
                       innerRadius: 40,
                       outerRadius: 100,
                       paddingAngle: 4,
                       cornerRadius: 6,
-                      highlightScope: { fade: 'global', highlight: 'item' },
+                      highlightScope: { fade: "global", highlight: "item" },
                       faded: {
                         innerRadius: 30,
                         additionalRadius: -30,
-                        color: 'gray',
+                        color: "gray",
                       },
                     },
                   ]}
@@ -171,7 +160,7 @@ export function StatsCharts({
               ) : (
                 <Typography
                   sx={{
-                    color: 'text.secondary',
+                    color: "text.secondary",
                   }}
                 >
                   Aucun match enregistré

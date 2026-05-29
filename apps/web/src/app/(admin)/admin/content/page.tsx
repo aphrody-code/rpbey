@@ -1,25 +1,20 @@
-'use client';
+"use client";
 
-import { Delete as DeleteIcon, Edit as EditIcon } from '@mui/icons-material';
-import { Box, Chip, IconButton, Tooltip, Typography } from '@mui/material';
-import CircularProgress from '@mui/material/CircularProgress';
-import { useCallback, useEffect, useState } from 'react';
-import {
-  DataTable,
-  PageHeader,
-  useConfirmDialog,
-  useToast,
-} from '@/components/ui';
-import { type Column } from '@/components/ui/DataTable';
-import { type ContentBlock } from '@/lib/types';
+import { Delete as DeleteIcon, Edit as EditIcon } from "@mui/icons-material";
+import { Box, Chip, IconButton, Tooltip, Typography } from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
+import { useCallback, useEffect, useState } from "react";
+import { DataTable, PageHeader, useConfirmDialog, useToast } from "@/components/ui";
+import { type Column } from "@/components/ui/DataTable";
+import { type ContentBlock } from "@/lib/types";
 import {
   type ContentBlockInput,
   createContentBlock,
   deleteContentBlock,
   getContentBlocks,
   updateContentBlock,
-} from './actions';
-import { ContentDialog } from './ContentDialog';
+} from "./actions";
+import { ContentDialog } from "./ContentDialog";
 
 export default function AdminContentPage() {
   const [blocks, setBlocks] = useState<ContentBlock[]>([]);
@@ -37,7 +32,7 @@ export default function AdminContentPage() {
       const data = await getContentBlocks();
       setBlocks(data);
     } catch {
-      showToast('Erreur lors de la récupération du contenu', 'error');
+      showToast("Erreur lors de la récupération du contenu", "error");
     } finally {
       setLoading(false);
     }
@@ -59,19 +54,19 @@ export default function AdminContentPage() {
 
   const handleDelete = async (block: ContentBlock) => {
     const confirmed = await confirm({
-      title: 'Supprimer le contenu',
+      title: "Supprimer le contenu",
       message: `Êtes-vous sûr de vouloir supprimer "${block.title}" (${block.slug}) ?`,
-      confirmText: 'Supprimer',
-      confirmColor: 'error',
+      confirmText: "Supprimer",
+      confirmColor: "error",
     });
 
     if (confirmed) {
       try {
         await deleteContentBlock(block.id);
-        showToast('Contenu supprimé avec succès', 'success');
+        showToast("Contenu supprimé avec succès", "success");
         fetchBlocks();
       } catch {
-        showToast('Erreur lors de la suppression', 'error');
+        showToast("Erreur lors de la suppression", "error");
       }
     }
   };
@@ -79,11 +74,11 @@ export default function AdminContentPage() {
   const handleSubmit = async (data: ContentBlockInput) => {
     setSubmitting(true);
     try {
-      if (data.type === 'json') {
+      if (data.type === "json") {
         try {
           JSON.parse(data.content);
         } catch {
-          showToast('JSON invalide', 'error');
+          showToast("JSON invalide", "error");
           setSubmitting(false);
           return;
         }
@@ -91,15 +86,15 @@ export default function AdminContentPage() {
 
       if (selectedBlock) {
         await updateContentBlock(selectedBlock.id, data);
-        showToast('Contenu mis à jour', 'success');
+        showToast("Contenu mis à jour", "success");
       } else {
         await createContentBlock(data);
-        showToast('Contenu créé', 'success');
+        showToast("Contenu créé", "success");
       }
       setDialogOpen(false);
       fetchBlocks();
     } catch {
-      showToast("Erreur lors de l'enregistrement", 'error');
+      showToast("Erreur lors de l'enregistrement", "error");
     } finally {
       setSubmitting(false);
     }
@@ -107,14 +102,14 @@ export default function AdminContentPage() {
 
   const columns: Column<ContentBlock>[] = [
     {
-      id: 'title',
-      label: 'Titre / Slug',
+      id: "title",
+      label: "Titre / Slug",
       render: (row) => (
         <Box>
           <Typography
             variant="subtitle2"
             sx={{
-              fontWeight: 'bold',
+              fontWeight: "bold",
             }}
           >
             {row.title}
@@ -122,8 +117,8 @@ export default function AdminContentPage() {
           <Typography
             variant="caption"
             sx={{
-              color: 'text.secondary',
-              fontFamily: 'monospace',
+              color: "text.secondary",
+              fontFamily: "monospace",
             }}
           >
             {row.slug}
@@ -132,40 +127,34 @@ export default function AdminContentPage() {
       ),
     },
     {
-      id: 'type',
-      label: 'Type',
+      id: "type",
+      label: "Type",
       render: (row) => {
         const typeLabels: Record<string, string> = {
-          text: 'Texte',
-          markdown: 'Markdown',
-          json: 'JSON',
-          html: 'HTML',
+          text: "Texte",
+          markdown: "Markdown",
+          json: "JSON",
+          html: "HTML",
         };
         return (
           <Chip
             label={typeLabels[row.type] || row.type}
             size="small"
-            color={
-              row.type === 'json'
-                ? 'warning'
-                : row.type === 'markdown'
-                  ? 'info'
-                  : 'default'
-            }
+            color={row.type === "json" ? "warning" : row.type === "markdown" ? "info" : "default"}
             variant="outlined"
           />
         );
       },
     },
     {
-      id: 'content',
-      label: 'Aperçu',
+      id: "content",
+      label: "Aperçu",
       render: (row) => (
         <Typography
           variant="body2"
           noWrap
           sx={{
-            color: 'text.secondary',
+            color: "text.secondary",
             maxWidth: 300,
           }}
         >
@@ -174,15 +163,15 @@ export default function AdminContentPage() {
       ),
     },
     {
-      id: 'updatedAt',
-      label: 'Modifié le',
-      render: (row) => new Date(row.updatedAt).toLocaleDateString('fr-FR'),
+      id: "updatedAt",
+      label: "Modifié le",
+      render: (row) => new Date(row.updatedAt).toLocaleDateString("fr-FR"),
     },
     {
-      id: 'actions',
-      label: 'Actions',
+      id: "actions",
+      label: "Actions",
       render: (row) => (
-        <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
           <Tooltip title="Modifier">
             <IconButton
               onClick={(e) => {
@@ -221,15 +210,11 @@ export default function AdminContentPage() {
       />
 
       {loading ? (
-        <Box sx={{ display: 'flex', justifyContent: 'center', py: 8 }}>
+        <Box sx={{ display: "flex", justifyContent: "center", py: 8 }}>
           <CircularProgress />
         </Box>
       ) : (
-        <DataTable
-          columns={columns}
-          rows={blocks}
-          emptyMessage="Aucun contenu trouvé."
-        />
+        <DataTable columns={columns} rows={blocks} emptyMessage="Aucun contenu trouvé." />
       )}
 
       <ContentDialog

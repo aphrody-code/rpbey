@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import Box from '@mui/material/Box';
-import Image from 'next/image';
-import { useState } from 'react';
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import Box from "@mui/material/Box";
+import Image from "next/image";
+import { useState } from "react";
 
 interface FeaturedVideoProps {
   videoId: string;
@@ -16,12 +16,12 @@ export function FeaturedVideo({ videoId }: FeaturedVideoProps) {
     return (
       <Box
         sx={{
-          position: 'relative',
-          aspectRatio: '16/9',
+          position: "relative",
+          aspectRatio: "16/9",
           borderRadius: { xs: 2.5, md: 3 },
-          overflow: 'hidden',
+          overflow: "hidden",
           mb: { xs: 2, md: 3 },
-          bgcolor: '#000',
+          bgcolor: "#000",
         }}
       >
         <iframe
@@ -30,11 +30,11 @@ export function FeaturedVideo({ videoId }: FeaturedVideoProps) {
           allow="autoplay; encrypted-media; picture-in-picture"
           allowFullScreen
           style={{
-            position: 'absolute',
+            position: "absolute",
             inset: 0,
-            width: '100%',
-            height: '100%',
-            border: 'none',
+            width: "100%",
+            height: "100%",
+            border: "none",
           }}
         />
       </Box>
@@ -45,17 +45,17 @@ export function FeaturedVideo({ videoId }: FeaturedVideoProps) {
     <Box
       onClick={() => setPlaying(true)}
       sx={{
-        position: 'relative',
-        aspectRatio: '16/9',
+        position: "relative",
+        aspectRatio: "16/9",
         borderRadius: { xs: 2.5, md: 3 },
-        overflow: 'hidden',
+        overflow: "hidden",
         mb: { xs: 2, md: 3 },
-        cursor: 'pointer',
-        '&:hover .play-btn': {
-          transform: 'scale(1.1)',
-          bgcolor: 'var(--rpb-primary)',
+        cursor: "pointer",
+        "&:hover .play-btn": {
+          transform: "scale(1.1)",
+          bgcolor: "var(--rpb-primary)",
         },
-        '&:hover img': { filter: 'brightness(0.7)' },
+        "&:hover img": { filter: "brightness(0.7)" },
       }}
     >
       <Image
@@ -63,34 +63,34 @@ export function FeaturedVideo({ videoId }: FeaturedVideoProps) {
         alt="Video a la une"
         fill
         priority
-        style={{ objectFit: 'cover', transition: 'filter 0.25s' }}
+        style={{ objectFit: "cover", transition: "filter 0.25s" }}
       />
       <Box
         sx={{
-          position: 'absolute',
+          position: "absolute",
           inset: 0,
-          background: 'linear-gradient(transparent 50%, rgba(0,0,0,0.7))',
+          background: "linear-gradient(transparent 50%, rgba(0,0,0,0.7))",
         }}
       />
       <Box
         className="play-btn"
         sx={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
           width: { xs: 56, md: 72 },
           height: { xs: 56, md: 72 },
-          borderRadius: '50%',
-          bgcolor: 'rgba(0,0,0,0.7)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          transition: 'all 0.25s ease',
-          backdropFilter: 'blur(4px)',
+          borderRadius: "50%",
+          bgcolor: "rgba(0,0,0,0.7)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          transition: "all 0.25s ease",
+          backdropFilter: "blur(4px)",
         }}
       >
-        <PlayArrowIcon sx={{ color: '#fff', fontSize: { xs: 32, md: 40 } }} />
+        <PlayArrowIcon sx={{ color: "#fff", fontSize: { xs: 32, md: 40 } }} />
       </Box>
     </Box>
   );

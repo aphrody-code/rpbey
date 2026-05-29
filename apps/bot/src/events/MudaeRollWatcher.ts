@@ -1,9 +1,9 @@
-import { type ArgsOf, Discord, On } from '@rpbey/discordx';
+import { type ArgsOf, Discord, On } from "@rpbey/discordx";
 
-import { RPB } from '../lib/constants.js';
-import { logger } from '../lib/logger.js';
+import { RPB } from "../lib/constants.js";
+import { logger } from "../lib/logger.js";
 
-const MUDAE_BOT_ID = '432610292342587392';
+const MUDAE_BOT_ID = "432610292342587392";
 
 /** Mudae prefix-command patterns (e.g. $wa, $wg, $hg, $mg, $ma, $ha) */
 const MUDAE_CMD_REGEX = /^\$(?:wa|wg|ha|hg|ma|mg|w|m|h)\b/i;
@@ -12,7 +12,7 @@ const MUDAE_CMD_REGEX = /^\$(?:wa|wg|ha|hg|ma|mg|w|m|h)\b/i;
 const rollCooldowns = new Map<string, number>();
 const COOLDOWN_MS = 5 * 60 * 1000; // 5 minutes
 
-function isMudaeRoll(embeds: ArgsOf<'messageCreate'>[0]['embeds']): boolean {
+function isMudaeRoll(embeds: ArgsOf<"messageCreate">[0]["embeds"]): boolean {
   if (!embeds.length) return false;
   const embed = embeds[0];
   // Mudae roll embeds: author (character name), description (series name), image
@@ -21,8 +21,8 @@ function isMudaeRoll(embeds: ArgsOf<'messageCreate'>[0]['embeds']): boolean {
 
 @Discord()
 export class MudaeRollWatcher {
-  @On({ event: 'messageCreate' })
-  async onMessage([message]: ArgsOf<'messageCreate'>) {
+  @On({ event: "messageCreate" })
+  async onMessage([message]: ArgsOf<"messageCreate">) {
     // Only watch Mudae bot messages
     if (message.author.id !== MUDAE_BOT_ID) return;
     if (!isMudaeRoll(message.embeds)) return;
@@ -35,9 +35,7 @@ export class MudaeRollWatcher {
     if (!triggeredBy && message.reference?.messageId) {
       // Mudae sometimes replies to the user's $ command
       try {
-        const refMsg = await message.channel.messages.fetch(
-          message.reference.messageId,
-        );
+        const refMsg = await message.channel.messages.fetch(message.reference.messageId);
         if (MUDAE_CMD_REGEX.test(refMsg.content)) {
           triggeredBy = refMsg.author;
         }
@@ -91,7 +89,7 @@ export class MudaeRollWatcher {
         `[Mudae] Roll detected from ${triggeredBy.tag ?? triggeredBy.id}, pinged Mudae role`,
       );
     } catch (error) {
-      logger.error('[Mudae] Failed to send roll notification:', error);
+      logger.error("[Mudae] Failed to send roll notification:", error);
     }
   }
 }

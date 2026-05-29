@@ -5,8 +5,8 @@ import {
   type ContextMenuCommandInteraction,
   type ModalSubmitInteraction,
   type SelectMenuInteraction,
-} from 'discord.js';
-import { type GuardFunction } from '@rpbey/discordx';
+} from "discord.js";
+import { type GuardFunction } from "@rpbey/discordx";
 
 export const NotBot: GuardFunction<
   | CommandInteraction

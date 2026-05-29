@@ -228,12 +228,8 @@
           "tableFrom": "beyblades",
           "tableTo": "parts",
           "schemaTo": "public",
-          "columnsFrom": [
-            "bitId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["bitId"],
+          "columnsTo": ["id"],
           "onDelete": "restrict",
           "onUpdate": "cascade"
         },
@@ -242,12 +238,8 @@
           "tableFrom": "beyblades",
           "tableTo": "parts",
           "schemaTo": "public",
-          "columnsFrom": [
-            "bladeId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["bladeId"],
+          "columnsTo": ["id"],
           "onDelete": "restrict",
           "onUpdate": "cascade"
         },
@@ -256,12 +248,8 @@
           "tableFrom": "beyblades",
           "tableTo": "products",
           "schemaTo": "public",
-          "columnsFrom": [
-            "productId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["productId"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "cascade"
         },
@@ -270,12 +258,8 @@
           "tableFrom": "beyblades",
           "tableTo": "parts",
           "schemaTo": "public",
-          "columnsFrom": [
-            "ratchetId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["ratchetId"],
+          "columnsTo": ["id"],
           "onDelete": "restrict",
           "onUpdate": "cascade"
         }
@@ -370,12 +354,8 @@
           "tableFrom": "card_inventory",
           "tableTo": "gacha_cards",
           "schemaTo": "public",
-          "columnsFrom": [
-            "cardId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["cardId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         },
@@ -384,12 +364,8 @@
           "tableFrom": "card_inventory",
           "tableTo": "users",
           "schemaTo": "public",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         }
@@ -612,12 +588,8 @@
           "tableFrom": "card_wishlists",
           "tableTo": "gacha_cards",
           "schemaTo": "public",
-          "columnsFrom": [
-            "cardId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["cardId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         },
@@ -626,12 +598,8 @@
           "tableFrom": "card_wishlists",
           "tableTo": "profiles",
           "schemaTo": "public",
-          "columnsFrom": [
-            "profileId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["profileId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         }
@@ -837,12 +805,8 @@
           "tableFrom": "currency_transactions",
           "tableTo": "users",
           "schemaTo": "public",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         }
@@ -1064,12 +1028,8 @@
           "tableFrom": "accounts",
           "tableTo": "users",
           "schemaTo": "public",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         }
@@ -1436,12 +1396,8 @@
           "tableFrom": "deck_items",
           "tableTo": "parts",
           "schemaTo": "public",
-          "columnsFrom": [
-            "assistBladeId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["assistBladeId"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "cascade"
         },
@@ -1450,12 +1406,8 @@
           "tableFrom": "deck_items",
           "tableTo": "beyblades",
           "schemaTo": "public",
-          "columnsFrom": [
-            "beyId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["beyId"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "cascade"
         },
@@ -1464,12 +1416,8 @@
           "tableFrom": "deck_items",
           "tableTo": "parts",
           "schemaTo": "public",
-          "columnsFrom": [
-            "bitId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["bitId"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "cascade"
         },
@@ -1478,12 +1426,8 @@
           "tableFrom": "deck_items",
           "tableTo": "parts",
           "schemaTo": "public",
-          "columnsFrom": [
-            "bladeId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["bladeId"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "cascade"
         },
@@ -1492,12 +1436,8 @@
           "tableFrom": "deck_items",
           "tableTo": "decks",
           "schemaTo": "public",
-          "columnsFrom": [
-            "deckId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["deckId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         },
@@ -1506,12 +1446,8 @@
           "tableFrom": "deck_items",
           "tableTo": "parts",
           "schemaTo": "public",
-          "columnsFrom": [
-            "lockChipId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["lockChipId"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "cascade"
         },
@@ -1520,12 +1456,8 @@
           "tableFrom": "deck_items",
           "tableTo": "parts",
           "schemaTo": "public",
-          "columnsFrom": [
-            "overBladeId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["overBladeId"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "cascade"
         },
@@ -1534,12 +1466,8 @@
           "tableFrom": "deck_items",
           "tableTo": "parts",
           "schemaTo": "public",
-          "columnsFrom": [
-            "ratchetId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["ratchetId"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "cascade"
         }
@@ -1617,12 +1545,8 @@
           "tableFrom": "decks",
           "tableTo": "users",
           "schemaTo": "public",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         }
@@ -1854,12 +1778,8 @@
           "tableFrom": "gacha_cards",
           "tableTo": "gacha_drops",
           "schemaTo": "public",
-          "columnsFrom": [
-            "dropId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["dropId"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "cascade"
         }
@@ -1954,12 +1874,8 @@
           "tableFrom": "part_inventory",
           "tableTo": "parts",
           "schemaTo": "public",
-          "columnsFrom": [
-            "partId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["partId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         },
@@ -1968,12 +1884,8 @@
           "tableFrom": "part_inventory",
           "tableTo": "users",
           "schemaTo": "public",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         }
@@ -2112,12 +2024,8 @@
           "tableFrom": "point_adjustments",
           "tableTo": "users",
           "schemaTo": "public",
-          "columnsFrom": [
-            "adminId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["adminId"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "cascade"
         },
@@ -2126,12 +2034,8 @@
           "tableFrom": "point_adjustments",
           "tableTo": "users",
           "schemaTo": "public",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         }
@@ -2629,12 +2533,8 @@
           "tableFrom": "profiles",
           "tableTo": "users",
           "schemaTo": "public",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         }
@@ -3114,12 +3014,8 @@
           "tableFrom": "gacha_friendships",
           "tableTo": "users",
           "schemaTo": "public",
-          "columnsFrom": [
-            "friendId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["friendId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -3128,12 +3024,8 @@
           "tableFrom": "gacha_friendships",
           "tableTo": "users",
           "schemaTo": "public",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -3471,12 +3363,8 @@
           "tableFrom": "sessions",
           "tableTo": "users",
           "schemaTo": "public",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         }
@@ -3560,12 +3448,8 @@
           "tableFrom": "tickets",
           "tableTo": "users",
           "schemaTo": "public",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         }
@@ -4152,12 +4036,8 @@
           "tableFrom": "tournament_matches",
           "tableTo": "users",
           "schemaTo": "public",
-          "columnsFrom": [
-            "player1Id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["player1Id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "cascade"
         },
@@ -4166,12 +4046,8 @@
           "tableFrom": "tournament_matches",
           "tableTo": "users",
           "schemaTo": "public",
-          "columnsFrom": [
-            "player2Id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["player2Id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "cascade"
         },
@@ -4180,12 +4056,8 @@
           "tableFrom": "tournament_matches",
           "tableTo": "tournaments",
           "schemaTo": "public",
-          "columnsFrom": [
-            "tournamentId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["tournamentId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         },
@@ -4194,12 +4066,8 @@
           "tableFrom": "tournament_matches",
           "tableTo": "users",
           "schemaTo": "public",
-          "columnsFrom": [
-            "winnerId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["winnerId"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "cascade"
         }
@@ -4395,12 +4263,8 @@
           "tableFrom": "tournaments",
           "tableTo": "tournament_categories",
           "schemaTo": "public",
-          "columnsFrom": [
-            "categoryId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["categoryId"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "cascade"
         }
@@ -4615,12 +4479,8 @@
           "tableFrom": "tournament_participants",
           "tableTo": "decks",
           "schemaTo": "public",
-          "columnsFrom": [
-            "deckId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["deckId"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "cascade"
         },
@@ -4629,12 +4489,8 @@
           "tableFrom": "tournament_participants",
           "tableTo": "tournaments",
           "schemaTo": "public",
-          "columnsFrom": [
-            "tournamentId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["tournamentId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         },
@@ -4643,12 +4499,8 @@
           "tableFrom": "tournament_participants",
           "tableTo": "users",
           "schemaTo": "public",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         }
@@ -4774,12 +4626,8 @@
           "tableFrom": "season_entries",
           "tableTo": "ranking_seasons",
           "schemaTo": "public",
-          "columnsFrom": [
-            "seasonId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["seasonId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         },
@@ -4788,12 +4636,8 @@
           "tableFrom": "season_entries",
           "tableTo": "users",
           "schemaTo": "public",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         }
@@ -4857,12 +4701,8 @@
           "tableFrom": "two_factors",
           "tableTo": "users",
           "schemaTo": "public",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         }
@@ -5749,12 +5589,8 @@
           "tableFrom": "global_rankings",
           "tableTo": "users",
           "schemaTo": "public",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         }
@@ -5860,12 +5696,8 @@
           "tableFrom": "anime_episode_sources",
           "tableTo": "anime_episodes",
           "schemaTo": "public",
-          "columnsFrom": [
-            "episodeId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["episodeId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         }
@@ -6114,12 +5946,8 @@
           "tableFrom": "anime_episodes",
           "tableTo": "anime_series",
           "schemaTo": "public",
-          "columnsFrom": [
-            "seriesId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["seriesId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         }
@@ -6407,12 +6235,8 @@
           "tableFrom": "anime_watch_progress",
           "tableTo": "anime_episodes",
           "schemaTo": "public",
-          "columnsFrom": [
-            "episodeId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["episodeId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         },
@@ -6421,12 +6245,8 @@
           "tableFrom": "anime_watch_progress",
           "tableTo": "users",
           "schemaTo": "public",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         }
@@ -6441,84 +6261,42 @@
   "enums": {
     "public.AnimeGeneration": {
       "name": "AnimeGeneration",
-      "values": [
-        "ORIGINAL",
-        "METAL",
-        "BURST",
-        "X"
-      ],
+      "values": ["ORIGINAL", "METAL", "BURST", "X"],
       "schema": "public"
     },
     "public.BeyType": {
       "name": "BeyType",
-      "values": [
-        "ATTACK",
-        "DEFENSE",
-        "STAMINA",
-        "BALANCE"
-      ],
+      "values": ["ATTACK", "DEFENSE", "STAMINA", "BALANCE"],
       "schema": "public"
     },
     "public.CardRarity": {
       "name": "CardRarity",
-      "values": [
-        "COMMON",
-        "RARE",
-        "SUPER_RARE",
-        "LEGENDARY",
-        "SECRET"
-      ],
+      "values": ["COMMON", "RARE", "SUPER_RARE", "LEGENDARY", "SECRET"],
       "schema": "public"
     },
     "public.CardType": {
       "name": "CardType",
-      "values": [
-        "PNG",
-        "ARTIST"
-      ],
+      "values": ["PNG", "ARTIST"],
       "schema": "public"
     },
     "public.EpisodeSourceType": {
       "name": "EpisodeSourceType",
-      "values": [
-        "YOUTUBE",
-        "DAILYMOTION",
-        "MP4",
-        "HLS",
-        "IFRAME"
-      ],
+      "values": ["YOUTUBE", "DAILYMOTION", "MP4", "HLS", "IFRAME"],
       "schema": "public"
     },
     "public.ExperienceLevel": {
       "name": "ExperienceLevel",
-      "values": [
-        "BEGINNER",
-        "INTERMEDIATE",
-        "ADVANCED",
-        "EXPERT",
-        "LEGEND"
-      ],
+      "values": ["BEGINNER", "INTERMEDIATE", "ADVANCED", "EXPERT", "LEGEND"],
       "schema": "public"
     },
     "public.PartType": {
       "name": "PartType",
-      "values": [
-        "BLADE",
-        "RATCHET",
-        "BIT",
-        "LOCK_CHIP",
-        "ASSIST_BLADE",
-        "OVER_BLADE"
-      ],
+      "values": ["BLADE", "RATCHET", "BIT", "LOCK_CHIP", "ASSIST_BLADE", "OVER_BLADE"],
       "schema": "public"
     },
     "public.ProductLine": {
       "name": "ProductLine",
-      "values": [
-        "BX",
-        "UX",
-        "CX"
-      ],
+      "values": ["BX", "UX", "CX"],
       "schema": "public"
     },
     "public.ProductType": {
@@ -6566,11 +6344,7 @@
     },
     "public.WatchStatus": {
       "name": "WatchStatus",
-      "values": [
-        "NOT_STARTED",
-        "IN_PROGRESS",
-        "COMPLETED"
-      ],
+      "values": ["NOT_STARTED", "IN_PROGRESS", "COMPLETED"],
       "schema": "public"
     }
   },

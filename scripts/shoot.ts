@@ -8,12 +8,26 @@ const OUT = "/home/ubuntu/rpbey/.shots";
 mkdirSync(OUT, { recursive: true });
 
 const ROUTES = [
-  "/", "/notre-equipe", "/profile", "/anime", "/tournaments", "/rankings",
-  "/meta", "/tv", "/app", "/builder", "/privacy", "/reglement",
-  "/tournaments/wb", "/tournaments/satr", "/sign-in", "/dashboard",
+  "/",
+  "/notre-equipe",
+  "/profile",
+  "/anime",
+  "/tournaments",
+  "/rankings",
+  "/meta",
+  "/tv",
+  "/app",
+  "/builder",
+  "/privacy",
+  "/reglement",
+  "/tournaments/wb",
+  "/tournaments/satr",
+  "/sign-in",
+  "/dashboard",
 ];
 
-const exec = process.env.CHROME ??
+const exec =
+  process.env.CHROME ??
   "/home/ubuntu/.cache/puppeteer/chrome/linux-148.0.7778.97/chrome-linux64/chrome";
 
 const browser = await puppeteer.launch({
@@ -29,10 +43,17 @@ for (const route of ROUTES) {
   await page.setViewport({ width: 1440, height: 900, deviceScaleFactor: 1 });
   const consoleErrors: string[] = [];
   const failed: string[] = [];
-  page.on("console", (m) => { if (m.type() === "error") consoleErrors.push(m.text().slice(0, 200)); });
+  page.on("console", (m) => {
+    if (m.type() === "error") consoleErrors.push(m.text().slice(0, 200));
+  });
   page.on("pageerror", (e) => consoleErrors.push("PAGEERROR: " + String(e.message).slice(0, 200)));
-  page.on("requestfailed", (r) => failed.push(`${r.failure()?.errorText} ${r.url().slice(0, 120)}`));
-  page.on("response", (r) => { if (r.status() >= 400 && r.url().startsWith(BASE)) failed.push(`${r.status()} ${r.url().slice(BASE.length, BASE.length + 120)}`); });
+  page.on("requestfailed", (r) =>
+    failed.push(`${r.failure()?.errorText} ${r.url().slice(0, 120)}`),
+  );
+  page.on("response", (r) => {
+    if (r.status() >= 400 && r.url().startsWith(BASE))
+      failed.push(`${r.status()} ${r.url().slice(BASE.length, BASE.length + 120)}`);
+  });
 
   let status = 0;
   try {
@@ -44,9 +65,15 @@ for (const route of ROUTES) {
   }
   const name = route === "/" ? "home" : route.replace(/\//g, "_").replace(/^_/, "");
   await page.screenshot({ path: `${OUT}/${name}.png`, fullPage: true }).catch(() => {});
-  report[route] = { status, consoleErrors: [...new Set(consoleErrors)], failed: [...new Set(failed)] };
+  report[route] = {
+    status,
+    consoleErrors: [...new Set(consoleErrors)],
+    failed: [...new Set(failed)],
+  };
   await page.close();
-  console.log(`${status} ${route}  err:${report[route].consoleErrors.length} failedReq:${report[route].failed.length}`);
+  console.log(
+    `${status} ${route}  err:${report[route].consoleErrors.length} failedReq:${report[route].failed.length}`,
+  );
 }
 await browser.close();
 

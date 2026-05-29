@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { Box, Typography, useTheme } from '@mui/material';
-import type React from 'react';
-import { DynamicBarChart as MuiBarChart } from '@/components/ui/DynamicCharts';
+import { Box, Typography, useTheme } from "@mui/material";
+import type React from "react";
+import { DynamicBarChart as MuiBarChart } from "@/components/ui/DynamicCharts";
 
 interface ChartProps {
   title?: string;
@@ -30,16 +30,16 @@ export const BarChart: React.FC<ChartProps> = ({
       <Box
         sx={{
           height,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          bgcolor: 'action.hover',
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          bgcolor: "action.hover",
           borderRadius: 1,
         }}
       >
         <Typography
           sx={{
-            color: 'text.secondary',
+            color: "text.secondary",
           }}
         >
           Chargement...
@@ -49,7 +49,7 @@ export const BarChart: React.FC<ChartProps> = ({
   }
 
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box sx={{ width: "100%" }}>
       {title && (
         <Typography variant="h6" gutterBottom>
           {title}
@@ -61,11 +61,11 @@ export const BarChart: React.FC<ChartProps> = ({
           ...s,
           color: s.color || theme.palette.primary.main,
         }))}
-        xAxis={[{ scaleType: 'band', data: xAxisLabels }]}
+        xAxis={[{ scaleType: "band", data: xAxisLabels }]}
         slotProps={{
           legend: {
-            direction: 'horizontal',
-            position: { vertical: 'top', horizontal: 'center' },
+            direction: "horizontal",
+            position: { vertical: "top", horizontal: "center" },
           },
         }}
       />

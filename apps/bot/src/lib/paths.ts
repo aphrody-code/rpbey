@@ -1,4 +1,4 @@
-import path from 'node:path';
+import path from "node:path";
 
 /**
  * Resolve a path relative to the project root.
@@ -8,13 +8,10 @@ import path from 'node:path';
  */
 export function resolveRootPath(...segments: string[]): string {
   const cwd = process.cwd();
-  const root =
-    cwd.endsWith('/bot') || cwd.endsWith('\\bot')
-      ? path.resolve(cwd, '..')
-      : cwd;
+  const root = cwd.endsWith("/bot") || cwd.endsWith("\\bot") ? path.resolve(cwd, "..") : cwd;
   return path.resolve(root, ...segments);
 }
 
 export function resolveDataPath(...segments: string[]): string {
-  return resolveRootPath('data', ...segments);
+  return resolveRootPath("data", ...segments);
 }

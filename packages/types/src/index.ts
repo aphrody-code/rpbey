@@ -16,12 +16,8 @@ export type Beyblade = InferSelectModel<Schema["beyblades"]>;
 export type Deck = InferSelectModel<Schema["decks"]>;
 export type DeckItem = InferSelectModel<Schema["deckItems"]>;
 export type Tournament = InferSelectModel<Schema["tournaments"]>;
-export type TournamentCategory = InferSelectModel<
-	Schema["tournamentCategories"]
->;
-export type TournamentParticipant = InferSelectModel<
-	Schema["tournamentParticipants"]
->;
+export type TournamentCategory = InferSelectModel<Schema["tournamentCategories"]>;
+export type TournamentParticipant = InferSelectModel<Schema["tournamentParticipants"]>;
 export type TournamentMatch = InferSelectModel<Schema["tournamentMatches"]>;
 export type StaffMember = InferSelectModel<Schema["staffMembers"]>;
 export type ContentBlock = InferSelectModel<Schema["contentBlocks"]>;
@@ -42,21 +38,15 @@ export type GachaCard = InferSelectModel<Schema["gachaCards"]>;
 export type CardInventory = InferSelectModel<Schema["cardInventory"]>;
 export type CardWishlist = InferSelectModel<Schema["cardWishlists"]>;
 export type PartInventory = InferSelectModel<Schema["partInventory"]>;
-export type CurrencyTransaction = InferSelectModel<
-	Schema["currencyTransactions"]
->;
+export type CurrencyTransaction = InferSelectModel<Schema["currencyTransactions"]>;
 export type AnimeSeries = InferSelectModel<Schema["animeSeries"]>;
 export type AnimeEpisode = InferSelectModel<Schema["animeEpisodes"]>;
-export type AnimeEpisodeSource = InferSelectModel<
-	Schema["animeEpisodeSources"]
->;
+export type AnimeEpisodeSource = InferSelectModel<Schema["animeEpisodeSources"]>;
 export type AnimeWatchProgress = InferSelectModel<Schema["animeWatchProgress"]>;
 export type Warning = InferSelectModel<Schema["warnings"]>;
 export type Reminder = InferSelectModel<Schema["reminders"]>;
 export type BeyLibraryPart = InferSelectModel<Schema["beyLibraryParts"]>;
-export type LegacyTournamentArchive = InferSelectModel<
-	Schema["legacyTournamentArchives"]
->;
+export type LegacyTournamentArchive = InferSelectModel<Schema["legacyTournamentArchives"]>;
 export type StreamState = InferSelectModel<Schema["streamStates"]>;
 export type PointAdjustment = InferSelectModel<Schema["pointAdjustments"]>;
 export type RankingSeason = InferSelectModel<Schema["rankingSeasons"]>;
@@ -75,57 +65,56 @@ export type ProductType = Schema["productType"]["enumValues"][number];
 export type ProductLine = Schema["productLine"]["enumValues"][number];
 export type ExperienceLevel = Schema["experienceLevel"]["enumValues"][number];
 export type AnimeGeneration = Schema["animeGeneration"]["enumValues"][number];
-export type EpisodeSourceType =
-	Schema["episodeSourceType"]["enumValues"][number];
+export type EpisodeSourceType = Schema["episodeSourceType"]["enumValues"][number];
 export type WatchStatus = Schema["watchStatus"]["enumValues"][number];
 
 // === Extended Types (relations resolved to Prisma-style field names) ===
 
 // User with Profile
 export type UserWithProfile = User & {
-	profile: Profile | null;
+  profile: Profile | null;
 };
 
 // Full Beyblade with Parts
 export type BeybladeWithParts = Beyblade & {
-	blade: Part | null;
-	ratchet: Part | null;
-	bit: Part | null;
+  blade: Part | null;
+  ratchet: Part | null;
+  bit: Part | null;
 };
 
 // DeckItem with Parts
 export type DeckItemWithParts = DeckItem & {
-	bey: Beyblade | null;
-	blade: Part | null;
-	overBlade: Part | null;
-	ratchet: Part | null;
-	bit: Part | null;
-	lockChip: Part | null;
-	assistBlade: Part | null;
+  bey: Beyblade | null;
+  blade: Part | null;
+  overBlade: Part | null;
+  ratchet: Part | null;
+  bit: Part | null;
+  lockChip: Part | null;
+  assistBlade: Part | null;
 };
 
 // Deck with Items and their Parts
 export type DeckWithItems = Deck & {
-	items: DeckItemWithParts[];
+  items: DeckItemWithParts[];
 };
 
 // Match with Players
 export type MatchWithPlayers = TournamentMatch & {
-	player1: UserWithProfile | null;
-	player2: UserWithProfile | null;
-	winner: UserWithProfile | null;
-	tournament: Tournament;
+  player1: UserWithProfile | null;
+  player2: UserWithProfile | null;
+  winner: UserWithProfile | null;
+  tournament: Tournament;
 };
 
 // Tournament with Participants and Matches
 export type TournamentFull = Tournament & {
-	participants: (TournamentParticipant & {
-		user: UserWithProfile | null;
-		deck: DeckWithItems | null;
-	})[];
-	matches: (TournamentMatch & {
-		player1: UserWithProfile | null;
-		player2: UserWithProfile | null;
-		winner: UserWithProfile | null;
-	})[];
+  participants: (TournamentParticipant & {
+    user: UserWithProfile | null;
+    deck: DeckWithItems | null;
+  })[];
+  matches: (TournamentMatch & {
+    player1: UserWithProfile | null;
+    player2: UserWithProfile | null;
+    winner: UserWithProfile | null;
+  })[];
 };

@@ -28,138 +28,130 @@ import path from "node:path";
 import { db, schema, eq, or } from "@/lib/db";
 
 interface RouteParams {
-	params: Promise<{ id: string }>;
+  params: Promise<{ id: string }>;
 }
 
 interface PoolMatch {
-	matchId: string;
-	groupName: string;
-	state: string;
-	winner: string;
-	loser: string;
+  matchId: string;
+  groupName: string;
+  state: string;
+  winner: string;
+  loser: string;
 }
 
 interface PoolParticipant {
-	rank: number;
-	displayName: string;
-	challongeUsername?: string;
-	portraitUrl?: string;
-	advanced: boolean;
-	wins: number;
-	losses: number;
-	ties: number;
-	tb: number;
-	setWins: number;
-	setTies: number;
-	pts: number;
-	matchHistory: Array<{
-		matchId: string;
-		matchState: string;
-		result: string;
-	}>;
+  rank: number;
+  displayName: string;
+  challongeUsername?: string;
+  portraitUrl?: string;
+  advanced: boolean;
+  wins: number;
+  losses: number;
+  ties: number;
+  tb: number;
+  setWins: number;
+  setTies: number;
+  pts: number;
+  matchHistory: Array<{
+    matchId: string;
+    matchState: string;
+    result: string;
+  }>;
 }
 
 interface PoolGroup {
-	name: string;
-	participants: PoolParticipant[];
+  name: string;
+  participants: PoolParticipant[];
 }
 
 interface PoolStructure {
-	slug: string;
-	groupsCount: number;
-	groups: PoolGroup[];
-	matches: PoolMatch[];
-	matchesCount: number;
-	participantsCount: number;
+  slug: string;
+  groupsCount: number;
+  groups: PoolGroup[];
+  matches: PoolMatch[];
+  matchesCount: number;
+  participantsCount: number;
 }
 
 export const dynamic = "force-dynamic";
 
-export async function GET(
-	_req: Request,
-	{ params }: RouteParams,
-): Promise<Response> {
-	const { id: idOrChallongeId } = await params;
+export async function GET(_req: Request, { params }: RouteParams): Promise<Response> {
+  const { id: idOrChallongeId } = await params;
 
-	if (!idOrChallongeId) {
-		return NextResponse.json({ error: "id requis" }, { status: 400 });
-	}
+  if (!idOrChallongeId) {
+    return NextResponse.json({ error: "id requis" }, { status: 400 });
+  }
 
-	const tournament = await db.query.tournaments.findFirst({
-		where: or(
-			eq(schema.tournaments.id, idOrChallongeId),
-			eq(schema.tournaments.challongeId, idOrChallongeId),
-		),
-		columns: {
-			id: true,
-			name: true,
-			challongeId: true,
-		},
-		with: {
-			tournamentMatches: {
-				where: eq(schema.tournamentMatches.round, -100),
-				columns: {
-					challongeMatchId: true,
-					score: true,
-					state: true,
-					winnerName: true,
-				},
-			},
-		},
-	});
+  const tournament = await db.query.tournaments.findFirst({
+    where: or(
+      eq(schema.tournaments.id, idOrChallongeId),
+      eq(schema.tournaments.challongeId, idOrChallongeId),
+    ),
+    columns: {
+      id: true,
+      name: true,
+      challongeId: true,
+    },
+    with: {
+      tournamentMatches: {
+        where: eq(schema.tournamentMatches.round, -100),
+        columns: {
+          challongeMatchId: true,
+          score: true,
+          state: true,
+          winnerName: true,
+        },
+      },
+    },
+  });
 
-	if (!tournament) {
-		return NextResponse.json(
-			{ error: `tournament '${idOrChallongeId}' introuvable` },
-			{ status: 404 },
-		);
-	}
+  if (!tournament) {
+    return NextResponse.json(
+      { error: `tournament '${idOrChallongeId}' introuvable` },
+      { status: 404 },
+    );
+  }
 
-	const challongeKey = tournament.challongeId ?? tournament.id;
-	const file = Bun.file(
-		path.join(process.cwd(), "data", "pools", `${challongeKey}.json`),
-	);
+  const challongeKey = tournament.challongeId ?? tournament.id;
+  const file = Bun.file(path.join(process.cwd(), "data", "pools", `${challongeKey}.json`));
 
-	if (!(await file.exists())) {
-		return NextResponse.json(
-			{ error: "no pool stage for this tournament" },
-			{ status: 404 },
-		);
-	}
+  if (!(await file.exists())) {
+    return NextResponse.json({ error: "no pool stage for this tournament" }, { status: 404 });
+  }
 
-	const structure = (await file.json()) as PoolStructure;
+  const structure = (await file.json()) as PoolStructure;
 
-	// Enrichir les matches avec les scores DB (winnerName + score live).
-	const dbByMatchId = new Map(
-		tournament.tournamentMatches
-			.filter((m) => m.challongeMatchId)
-			.map((m) => [m.challongeMatchId!, m]),
-	);
+  // Enrichir les matches avec les scores DB (winnerName + score live).
+  const dbByMatchId = new Map(
+    tournament.tournamentMatches
+      .filter((m) => m.challongeMatchId)
+      .map((m) => [m.challongeMatchId!, m]),
+  );
 
-	const enrichedMatches = structure.matches.map((m) => {
-		const dbMatch = dbByMatchId.get(m.matchId);
-		return {
-			...m,
-			score: dbMatch?.score ?? null,
-			dbState: dbMatch?.state ?? null,
-		};
-	});
+  const enrichedMatches = structure.matches.map((m) => {
+    const dbMatch = dbByMatchId.get(m.matchId);
+    return {
+      ...m,
+      score: dbMatch?.score ?? null,
+      dbState: dbMatch?.state ?? null,
+    };
+  });
 
-	return NextResponse.json(
-		{
-			groups: structure.groups,
-			groupsCount: structure.groupsCount,
-			matches: enrichedMatches,
-			matchesCount: structure.matchesCount,
-			participantsCount: structure.participantsCount,
-			tournamentId: tournament.id,
-			tournamentName: tournament.name,
-		},
-		{
-			headers: {
-				"x-pool-source": "module-html",
-				"cache-control": "public, s-maxage=300, stale-while-revalidate=600",
-			},
-		},
-	);
+  return NextResponse.json(
+    {
+      groups: structure.groups,
+      groupsCount: structure.groupsCount,
+      matches: enrichedMatches,
+      matchesCount: structure.matchesCount,
+      participantsCount: structure.participantsCount,
+      tournamentId: tournament.id,
+      tournamentName: tournament.name,
+    },
+    {
+      headers: {
+        "x-pool-source": "module-html",
+        "cache-control": "public, s-maxage=300, stale-while-revalidate=600",
+      },
+    },
+  );
 }

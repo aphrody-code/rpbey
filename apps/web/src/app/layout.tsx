@@ -1,87 +1,81 @@
-import InitColorSchemeScript from '@mui/material/InitColorSchemeScript';
-import { type Metadata, type Viewport } from 'next';
-import Script from 'next/script';
-import { NuqsAdapter } from 'nuqs/adapters/next/app';
-import { JsonLd } from '@/components/seo/JsonLd';
-import ThemeRegistry from '@/components/theme/ThemeRegistry';
-import { Toaster } from '@/components/ui/Toaster';
-import { googleSansFlex } from '@/lib/fonts';
-import {
-  generateOrganizationJsonLd,
-  generateWebsiteJsonLd,
-} from '@/lib/seo-utils';
-import './globals.css';
+import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
+import { type Metadata, type Viewport } from "next";
+import Script from "next/script";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
+import { JsonLd } from "@/components/seo/JsonLd";
+import ThemeRegistry from "@/components/theme/ThemeRegistry";
+import { Toaster } from "@/components/ui/Toaster";
+import { googleSansFlex } from "@/lib/fonts";
+import { generateOrganizationJsonLd, generateWebsiteJsonLd } from "@/lib/seo-utils";
+import "./globals.css";
 
 export const viewport: Viewport = {
-  themeColor: '#dc2626',
-  width: 'device-width',
+  themeColor: "#dc2626",
+  width: "device-width",
   initialScale: 1,
-  viewportFit: 'cover',
+  viewportFit: "cover",
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://rpbey.fr'),
+  metadataBase: new URL("https://rpbey.fr"),
   title: {
-    default: 'RPB - République Populaire du Beyblade',
-    template: '%s | RPB',
+    default: "RPB - République Populaire du Beyblade",
+    template: "%s | RPB",
   },
   description:
-    'Rejoignez la RPB, la 1ère communauté Beyblade X en France. Participez aux tournois officiels, consultez le classement national, optimisez vos decks et discutez meta sur notre Discord.',
+    "Rejoignez la RPB, la 1ère communauté Beyblade X en France. Participez aux tournois officiels, consultez le classement national, optimisez vos decks et discutez meta sur notre Discord.",
   keywords: [
-    'Beyblade',
-    'Beyblade X',
-    'Beyblade X France',
-    'RPB',
-    'République Populaire du Beyblade',
-    'Tournoi Beyblade',
-    'Classement Beyblade',
-    'Communauté Beyblade',
-    'Discord Beyblade',
-    'WBO France',
-    'Takara Tomy',
-    'Hasbro',
-    'Dran Sword',
-    'Hells Scythe',
-    'Wizard Arrow',
-    'Toupies de combat',
-    'Meta Beyblade X',
-    'Deck Building',
-    'Compétition',
-    'RPBey',
+    "Beyblade",
+    "Beyblade X",
+    "Beyblade X France",
+    "RPB",
+    "République Populaire du Beyblade",
+    "Tournoi Beyblade",
+    "Classement Beyblade",
+    "Communauté Beyblade",
+    "Discord Beyblade",
+    "WBO France",
+    "Takara Tomy",
+    "Hasbro",
+    "Dran Sword",
+    "Hells Scythe",
+    "Wizard Arrow",
+    "Toupies de combat",
+    "Meta Beyblade X",
+    "Deck Building",
+    "Compétition",
+    "RPBey",
   ],
-  authors: [
-    { name: 'RPB' },
-    { name: 'Yoyo', url: 'https://twitter.com/yoyo__goat' },
-  ],
-  creator: 'Yoyo',
+  authors: [{ name: "RPB" }, { name: "Yoyo", url: "https://twitter.com/yoyo__goat" }],
+  creator: "Yoyo",
   icons: {
-    icon: '/logo.webp',
-    apple: '/logo.webp',
+    icon: "/logo.webp",
+    apple: "/logo.webp",
   },
-  manifest: '/manifest.json',
+  manifest: "/manifest.json",
   openGraph: {
-    type: 'website',
-    locale: 'fr_FR',
-    url: 'https://rpbey.fr',
-    siteName: 'RPB - République Populaire du Beyblade',
-    title: 'RPB - République Populaire du Beyblade',
+    type: "website",
+    locale: "fr_FR",
+    url: "https://rpbey.fr",
+    siteName: "RPB - République Populaire du Beyblade",
+    title: "RPB - République Populaire du Beyblade",
     description:
-      'Rejoignez la RPB, la 1ère communauté Beyblade X en France. Tournois, classements, meta et passion.',
+      "Rejoignez la RPB, la 1ère communauté Beyblade X en France. Tournois, classements, meta et passion.",
     images: [
       {
-        url: '/banner.webp',
+        url: "/banner.webp",
         width: 1200,
         height: 630,
-        alt: 'RPB Banner',
+        alt: "RPB Banner",
       },
     ],
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'RPB - République Populaire du Beyblade',
+    card: "summary_large_image",
+    title: "RPB - République Populaire du Beyblade",
     description:
-      'Rejoignez la RPB, la 1ère communauté Beyblade X en France. Tournois, classements, meta et passion.',
-    images: ['/banner.webp'],
+      "Rejoignez la RPB, la 1ère communauté Beyblade X en France. Tournois, classements, meta et passion.",
+    images: ["/banner.webp"],
   },
   robots: {
     index: true,
@@ -107,7 +101,7 @@ export default function RootLayout({
             src="https://www.googletagmanager.com/ns.html?id=GTM-WQTHQZM9"
             height="0"
             width="0"
-            style={{ display: 'none', visibility: 'hidden' }}
+            style={{ display: "none", visibility: "hidden" }}
             title="gtm"
           />
         </noscript>

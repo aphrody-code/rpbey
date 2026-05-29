@@ -1,48 +1,48 @@
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, MessageFlags, type ButtonInteraction } from "discord.js";
-import { ButtonComponent, Discord } from '@rpbey/discordx';
-
 import {
-  getDeckStats,
-  getRandomStats,
-  runBattleSimulation,
-} from '../lib/battle-utils.js';
-import { Colors, RPB } from '../lib/constants.js';
-import { logger } from '../lib/logger.js';
-import prisma from '../lib/prisma.js';
-import { pendingBattles } from '../lib/state.js';
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+  EmbedBuilder,
+  MessageFlags,
+  type ButtonInteraction,
+} from "discord.js";
+import { ButtonComponent, Discord } from "@rpbey/discordx";
+
+import { getDeckStats, getRandomStats, runBattleSimulation } from "../lib/battle-utils.js";
+import { Colors, RPB } from "../lib/constants.js";
+import { logger } from "../lib/logger.js";
+import prisma from "../lib/prisma.js";
+import { pendingBattles } from "../lib/state.js";
 
 @Discord()
 export class BattleButtonHandler {
   @ButtonComponent({ id: /^battle-/ })
   async handleBattleButton(interaction: ButtonInteraction) {
-    const [, action, param] = interaction.customId.split('-');
+    const [, action, param] = interaction.customId.split("-");
 
     // Dispatch based on action
     switch (action) {
-      case 'accept':
+      case "accept":
         return this.handleAccept(interaction, param);
-      case 'decline':
+      case "decline":
         return this.handleDecline(interaction, param);
-      case 'rematch':
+      case "rematch":
         return this.handleRematch(interaction, param);
-      case 'challenge':
+      case "challenge":
         return this.handleChallenge(interaction, param);
-      case 'stats':
+      case "stats":
         return this.handleStats(interaction);
-      case 'random':
+      case "random":
         return this.handleRandom(interaction, param);
       default:
         return interaction.reply({
-          content: '❌ Action inconnue.',
+          content: "❌ Action inconnue.",
           flags: MessageFlags.Ephemeral,
         });
     }
   }
 
-  private async handleAccept(
-    interaction: ButtonInteraction,
-    challengerId: string,
-  ) {
+  private async handleAccept(interaction: ButtonInteraction, challengerId: string) {
     const battle = pendingBattles.get(challengerId);
 
     if (!battle) {
@@ -61,9 +61,7 @@ export class BattleButtonHandler {
 
     pendingBattles.delete(challengerId);
 
-    const challenger = await interaction.client.users
-      .fetch(challengerId)
-      .catch(() => null);
+    const challenger = await interaction.client.users.fetch(challengerId).catch(() => null);
 
     if (!challenger) {
       return interaction.reply({
@@ -79,7 +77,7 @@ export class BattleButtonHandler {
 
     if (!statsA || !statsB) {
       const embed = new EmbedBuilder()
-        .setTitle('⚠️ Decks manquants')
+        .setTitle("⚠️ Decks manquants")
         .setDescription(
           `L'un des joueurs (ou les deux) n'a pas de deck actif.\nVoulez-vous lancer un **Combat Aléatoire** ?`,
         )
@@ -88,7 +86,7 @@ export class BattleButtonHandler {
       const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
         new ButtonBuilder()
           .setCustomId(`battle-random-${challenger.id}`)
-          .setLabel('🎲 Combat Aléatoire')
+          .setLabel("🎲 Combat Aléatoire")
           .setStyle(ButtonStyle.Primary),
       );
 
@@ -99,10 +97,10 @@ export class BattleButtonHandler {
       content: null,
       embeds: [
         new EmbedBuilder()
-          .setTitle('⚔️ Combat Beyblade !')
+          .setTitle("⚔️ Combat Beyblade !")
           .setDescription(
             `**${challenger.displayName}** VS **${interaction.user.displayName}**\n\n` +
-              '🌀 3... 2... 1... **LET IT RIP !**',
+              "🌀 3... 2... 1... **LET IT RIP !**",
           )
           .setColor(Colors.Secondary)
           .setFooter({ text: RPB.FullName }),
@@ -112,22 +110,14 @@ export class BattleButtonHandler {
 
     await this.sleep(2500);
 
-    return runBattleSimulation(
-      interaction,
-      challenger,
-      interaction.user,
-      statsA,
-      statsB,
-    );
+    return runBattleSimulation(interaction, challenger, interaction.user, statsA, statsB);
   }
 
   private async handleRandom(interaction: ButtonInteraction, targetId: string) {
-    const target = await interaction.client.users
-      .fetch(targetId)
-      .catch(() => null);
+    const target = await interaction.client.users.fetch(targetId).catch(() => null);
     if (!target)
       return interaction.reply({
-        content: '❌ Erreur joueur introuvable.',
+        content: "❌ Erreur joueur introuvable.",
         flags: MessageFlags.Ephemeral,
       });
 
@@ -138,11 +128,11 @@ export class BattleButtonHandler {
       content: null,
       embeds: [
         new EmbedBuilder()
-          .setTitle('🎲 Combat Aléatoire !')
+          .setTitle("🎲 Combat Aléatoire !")
           .setDescription(
             `**${interaction.user.displayName}** VS **${target.displayName}**\n\n` +
-              'Génération de combos aléatoires...\n' +
-              '🌀 3... 2... 1... **LET IT RIP !**',
+              "Génération de combos aléatoires...\n" +
+              "🌀 3... 2... 1... **LET IT RIP !**",
           )
           .setColor(Colors.Secondary),
       ],
@@ -150,19 +140,10 @@ export class BattleButtonHandler {
     });
 
     await this.sleep(2000);
-    return runBattleSimulation(
-      interaction,
-      interaction.user,
-      target,
-      statsA,
-      statsB,
-    );
+    return runBattleSimulation(interaction, interaction.user, target, statsA, statsB);
   }
 
-  private async handleDecline(
-    interaction: ButtonInteraction,
-    challengerId: string,
-  ) {
+  private async handleDecline(interaction: ButtonInteraction, challengerId: string) {
     const battle = pendingBattles.get(challengerId);
 
     if (!battle) {
@@ -182,7 +163,7 @@ export class BattleButtonHandler {
     pendingBattles.delete(challengerId);
 
     const embed = new EmbedBuilder()
-      .setTitle('😔 Défi refusé')
+      .setTitle("😔 Défi refusé")
       .setDescription(`**${interaction.user.displayName}** a refusé le combat.`)
       .setColor(Colors.Error)
       .setTimestamp();
@@ -190,13 +171,8 @@ export class BattleButtonHandler {
     return interaction.update({ embeds: [embed], components: [] });
   }
 
-  private async handleRematch(
-    interaction: ButtonInteraction,
-    challengerId: string,
-  ) {
-    const opponent = await interaction.client.users
-      .fetch(challengerId)
-      .catch(() => null);
+  private async handleRematch(interaction: ButtonInteraction, challengerId: string) {
+    const opponent = await interaction.client.users.fetch(challengerId).catch(() => null);
 
     if (!opponent) {
       return interaction.reply({
@@ -207,7 +183,7 @@ export class BattleButtonHandler {
 
     if (opponent.id === interaction.user.id) {
       return interaction.reply({
-        content: '❌ Tu ne peux pas te défier toi-même !',
+        content: "❌ Tu ne peux pas te défier toi-même !",
         flags: MessageFlags.Ephemeral,
       });
     }
@@ -226,56 +202,51 @@ export class BattleButtonHandler {
     );
 
     const embed = new EmbedBuilder()
-      .setTitle('🔄 Demande de revanche !')
+      .setTitle("🔄 Demande de revanche !")
       .setDescription(
         `**${interaction.user.displayName}** veut une revanche contre **${opponent.displayName}** !\n\n` +
           `${opponent}, acceptes-tu le défi ?`,
       )
       .setColor(Colors.Secondary)
-      .setFooter({ text: 'Le défi expire dans 5 minutes' })
+      .setFooter({ text: "Le défi expire dans 5 minutes" })
       .setTimestamp();
 
     const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
       new ButtonBuilder()
         .setCustomId(`battle-accept-${interaction.user.id}`)
-        .setLabel('Accepter')
+        .setLabel("Accepter")
         .setStyle(ButtonStyle.Success)
-        .setEmoji('⚔️'),
+        .setEmoji("⚔️"),
       new ButtonBuilder()
         .setCustomId(`battle-decline-${interaction.user.id}`)
-        .setLabel('Refuser')
+        .setLabel("Refuser")
         .setStyle(ButtonStyle.Danger)
-        .setEmoji('❌'),
+        .setEmoji("❌"),
     );
 
     return interaction.reply({ embeds: [embed], components: [row] });
   }
 
-  private async handleChallenge(
-    interaction: ButtonInteraction,
-    opponentId: string,
-  ) {
-    const opponent = await interaction.client.users
-      .fetch(opponentId)
-      .catch(() => null);
+  private async handleChallenge(interaction: ButtonInteraction, opponentId: string) {
+    const opponent = await interaction.client.users.fetch(opponentId).catch(() => null);
 
     if (!opponent) {
       return interaction.reply({
-        content: '❌ Impossible de trouver cet adversaire.',
+        content: "❌ Impossible de trouver cet adversaire.",
         flags: MessageFlags.Ephemeral,
       });
     }
 
     if (opponent.id === interaction.user.id) {
       return interaction.reply({
-        content: '❌ Tu ne peux pas te battre contre toi-même !',
+        content: "❌ Tu ne peux pas te battre contre toi-même !",
         flags: MessageFlags.Ephemeral,
       });
     }
 
     if (opponent.bot) {
       return interaction.reply({
-        content: '❌ Tu ne peux pas défier un bot !',
+        content: "❌ Tu ne peux pas défier un bot !",
         flags: MessageFlags.Ephemeral,
       });
     }
@@ -294,7 +265,7 @@ export class BattleButtonHandler {
     );
 
     const embed = new EmbedBuilder()
-      .setTitle('⚔️ Défi Beyblade !')
+      .setTitle("⚔️ Défi Beyblade !")
       .setDescription(
         `**${interaction.user.displayName}** défie **${opponent.displayName}** en combat !\n\n` +
           `${opponent}, acceptes-tu le défi ?`,
@@ -302,8 +273,8 @@ export class BattleButtonHandler {
       .setColor(Colors.Secondary)
       .setThumbnail(interaction.user.displayAvatarURL({ size: 128 }))
       .addFields(
-        { name: '🎯 Challenger', value: interaction.user.tag, inline: true },
-        { name: '🎮 Adversaire', value: opponent.tag, inline: true },
+        { name: "🎯 Challenger", value: interaction.user.tag, inline: true },
+        { name: "🎮 Adversaire", value: opponent.tag, inline: true },
       )
       .setFooter({ text: `${RPB.FullName} | Le défi expire dans 5 minutes` })
       .setTimestamp();
@@ -311,21 +282,21 @@ export class BattleButtonHandler {
     const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
       new ButtonBuilder()
         .setCustomId(`battle-accept-${interaction.user.id}`)
-        .setLabel('Accepter le défi')
+        .setLabel("Accepter le défi")
         .setStyle(ButtonStyle.Success)
-        .setEmoji('⚔️'),
+        .setEmoji("⚔️"),
       new ButtonBuilder()
         .setCustomId(`battle-decline-${interaction.user.id}`)
-        .setLabel('Refuser')
+        .setLabel("Refuser")
         .setStyle(ButtonStyle.Danger)
-        .setEmoji('❌'),
+        .setEmoji("❌"),
     );
 
     return interaction.reply({ embeds: [embed], components: [row] });
   }
 
   private async handleStats(interaction: ButtonInteraction) {
-    const targetId = interaction.customId.split('-')[2] || interaction.user.id;
+    const targetId = interaction.customId.split("-")[2] || interaction.user.id;
 
     try {
       const profile = await prisma.profile.findFirst({
@@ -342,28 +313,23 @@ export class BattleButtonHandler {
       }
 
       const totalBattles = profile.wins + profile.losses;
-      const winRate =
-        totalBattles > 0
-          ? ((profile.wins / totalBattles) * 100).toFixed(1)
-          : '0';
+      const winRate = totalBattles > 0 ? ((profile.wins / totalBattles) * 100).toFixed(1) : "0";
 
       const embed = new EmbedBuilder()
-        .setTitle(
-          `📊 Stats de Blader : ${profile.bladerName || profile.user.name}`,
-        )
+        .setTitle(`📊 Stats de Blader : ${profile.bladerName || profile.user.name}`)
         .setColor(Colors.Primary)
         .setThumbnail(interaction.user.displayAvatarURL())
         .addFields(
-          { name: '🏆 Victoires', value: `${profile.wins}`, inline: true },
-          { name: '💔 Défaites', value: `${profile.losses}`, inline: true },
-          { name: '📈 Winrate', value: `${winRate}%`, inline: true },
+          { name: "🏆 Victoires", value: `${profile.wins}`, inline: true },
+          { name: "💔 Défaites", value: `${profile.losses}`, inline: true },
+          { name: "📈 Winrate", value: `${winRate}%`, inline: true },
           {
-            name: '🎖️ Tournois gagnés',
+            name: "🎖️ Tournois gagnés",
             value: `${profile.tournamentWins}`,
             inline: true,
           },
           {
-            name: '✨ Expérience',
+            name: "✨ Expérience",
             value: profile.experience,
             inline: true,
           },
@@ -373,9 +339,9 @@ export class BattleButtonHandler {
 
       return interaction.reply({ embeds: [embed], flags: MessageFlags.Ephemeral });
     } catch (error) {
-      logger.error('Failed to fetch blader stats:', error);
+      logger.error("Failed to fetch blader stats:", error);
       return interaction.reply({
-        content: '❌ Erreur lors de la récupération des statistiques.',
+        content: "❌ Erreur lors de la récupération des statistiques.",
         flags: MessageFlags.Ephemeral,
       });
     }

@@ -24,68 +24,66 @@ const cookiePath = resolveDefaultCookiePath();
 const haveCookies = !!cookiePath && existsSync(cookiePath);
 
 if (!haveCookies) {
-	console.log(
-		`[proxy-smoke] skipping network tests — no cookie jar at ${cookiePath ?? "<unset>"}`,
-	);
+  console.log(`[proxy-smoke] skipping network tests — no cookie jar at ${cookiePath ?? "<unset>"}`);
 }
 
 let server: ReturnType<typeof startChallongeProxy>;
 let baseUrl = "";
 
 beforeAll(() => {
-	// Bun.serve `port: 0` binds to a random ephemeral port — works with any caller.
-	server = startChallongeProxy({ port: 0, development: false });
-	baseUrl = server.url.href.replace(/\/+$/, "");
+  // Bun.serve `port: 0` binds to a random ephemeral port — works with any caller.
+  server = startChallongeProxy({ port: 0, development: false });
+  baseUrl = server.url.href.replace(/\/+$/, "");
 });
 
 afterAll(() => {
-	server?.stop(true);
+  server?.stop(true);
 });
 
 describe("Challonge proxy — always-on routes", () => {
-	test("GET / returns JSON route listing", async () => {
-		const res = await fetch(`${baseUrl}/`, {
-			signal: AbortSignal.timeout(5_000),
-		});
-		expect(res.status).toBe(200);
-		expect(res.headers.get("content-type")).toContain("application/json");
+  test("GET / returns JSON route listing", async () => {
+    const res = await fetch(`${baseUrl}/`, {
+      signal: AbortSignal.timeout(5_000),
+    });
+    expect(res.status).toBe(200);
+    expect(res.headers.get("content-type")).toContain("application/json");
 
-		const body = (await res.json()) as {
-			name: string;
-			version: string;
-			routes: string[];
-		};
-		expect(body.name).toBe("challonge-proxy");
-		expect(Array.isArray(body.routes)).toBe(true);
-		// The 5 structured routes plus /
-		expect(body.routes.length).toBeGreaterThanOrEqual(6);
-		expect(body.routes).toContain("GET /:slug/store");
-		expect(body.routes).toContain("GET /:slug/log");
-		expect(body.routes).toContain("GET /:slug/standings");
-		expect(body.routes).toContain("GET /:slug/participants");
-	});
+    const body = (await res.json()) as {
+      name: string;
+      version: string;
+      routes: string[];
+    };
+    expect(body.name).toBe("challonge-proxy");
+    expect(Array.isArray(body.routes)).toBe(true);
+    // The 5 structured routes plus /
+    expect(body.routes.length).toBeGreaterThanOrEqual(6);
+    expect(body.routes).toContain("GET /:slug/store");
+    expect(body.routes).toContain("GET /:slug/log");
+    expect(body.routes).toContain("GET /:slug/standings");
+    expect(body.routes).toContain("GET /:slug/participants");
+  });
 
-	test("Unknown route returns JSON 404", async () => {
-		const res = await fetch(`${baseUrl}/__nope__`, {
-			signal: AbortSignal.timeout(5_000),
-		});
-		expect(res.status).toBe(404);
-		expect(res.headers.get("content-type")).toContain("application/json");
-		const body = (await res.json()) as { error: string; status: number };
-		expect(body.status).toBe(404);
-	});
+  test("Unknown route returns JSON 404", async () => {
+    const res = await fetch(`${baseUrl}/__nope__`, {
+      signal: AbortSignal.timeout(5_000),
+    });
+    expect(res.status).toBe(404);
+    expect(res.headers.get("content-type")).toContain("application/json");
+    const body = (await res.json()) as { error: string; status: number };
+    expect(body.status).toBe(404);
+  });
 });
 
 describe.skipIf(!haveCookies)("Challonge proxy — network-gated routes", () => {
-	test("GET /:slug/store returns JSON TournamentStore", async () => {
-		const res = await fetch(`${baseUrl}/${SLUG}/store`, {
-			signal: AbortSignal.timeout(60_000),
-		});
-		expect(res.status).toBe(200);
-		expect(res.headers.get("content-type")).toContain("application/json");
+  test("GET /:slug/store returns JSON TournamentStore", async () => {
+    const res = await fetch(`${baseUrl}/${SLUG}/store`, {
+      signal: AbortSignal.timeout(60_000),
+    });
+    expect(res.status).toBe(200);
+    expect(res.headers.get("content-type")).toContain("application/json");
 
-		const data = (await res.json()) as Record<string, unknown>;
-		expect(typeof data.tournament).toBe("object");
-		expect(typeof data.matches_by_round).toBe("object");
-	}, 70_000);
+    const data = (await res.json()) as Record<string, unknown>;
+    expect(typeof data.tournament).toBe("object");
+    expect(typeof data.matches_by_round).toBe("object");
+  }, 70_000);
 });

@@ -1,22 +1,9 @@
-'use client';
+"use client";
 
-import {
-  FiberManualRecord,
-  History,
-  Sensors,
-  EmojiEvents as Trophy,
-} from '@mui/icons-material';
-import {
-  alpha,
-  Box,
-  Card,
-  Chip,
-  Stack,
-  Typography,
-  useTheme,
-} from '@mui/material';
-import { AnimatePresence, motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { FiberManualRecord, History, Sensors, EmojiEvents as Trophy } from "@mui/icons-material";
+import { alpha, Box, Card, Chip, Stack, Typography, useTheme } from "@mui/material";
+import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 interface TournamentLiveCarouselProps {
   tournament: {
@@ -45,9 +32,7 @@ const VARIANTS = {
   }),
 };
 
-export function TournamentLiveCarousel({
-  tournament,
-}: TournamentLiveCarouselProps) {
+export function TournamentLiveCarousel({ tournament }: TournamentLiveCarouselProps) {
   const theme = useTheme();
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(0);
@@ -79,10 +64,10 @@ export function TournamentLiveCarousel({
   }>;
 
   // Determine available slides
-  const slides: Array<'stadiums' | 'standings' | 'logs'> = [];
-  if (stations.length > 0) slides.push('stadiums');
-  if (standings.length > 0) slides.push('standings');
-  if (logs.length > 0) slides.push('logs');
+  const slides: Array<"stadiums" | "standings" | "logs"> = [];
+  if (stations.length > 0) slides.push("stadiums");
+  if (standings.length > 0) slides.push("standings");
+  if (logs.length > 0) slides.push("logs");
   const slideCount = slides.length;
 
   // Auto-rotate
@@ -102,8 +87,8 @@ export function TournamentLiveCarousel({
   return (
     <Box
       sx={{
-        position: 'relative',
-        width: '100%',
+        position: "relative",
+        width: "100%",
         height: 400, // Fixed height for carousel
         perspective: 1000,
       }}
@@ -117,13 +102,13 @@ export function TournamentLiveCarousel({
           animate="center"
           exit="exit"
           transition={{
-            x: { type: 'spring', stiffness: 300, damping: 30 },
+            x: { type: "spring", stiffness: 300, damping: 30 },
             opacity: { duration: 0.2 },
           }}
           style={{
-            width: '100%',
-            height: '100%',
-            position: 'absolute',
+            width: "100%",
+            height: "100%",
+            position: "absolute",
             top: 0,
             left: 0,
           }}
@@ -131,27 +116,27 @@ export function TournamentLiveCarousel({
           <Card
             variant="outlined"
             sx={{
-              height: '100%',
+              height: "100%",
               borderRadius: 0,
               bgcolor: alpha(theme.palette.background.paper, 0.6),
-              backdropFilter: 'blur(20px)',
-              border: '1px solid',
+              backdropFilter: "blur(20px)",
+              border: "1px solid",
               borderColor: alpha(theme.palette.divider, 0.2),
-              boxShadow: '0 20px 40px -10px rgba(0,0,0,0.2)',
-              overflow: 'hidden',
-              display: 'flex',
-              flexDirection: 'column',
+              boxShadow: "0 20px 40px -10px rgba(0,0,0,0.2)",
+              overflow: "hidden",
+              display: "flex",
+              flexDirection: "column",
             }}
           >
             {/* Header */}
             <Box
               sx={{
                 p: 2.5,
-                borderBottom: '1px solid',
-                borderColor: 'divider',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
+                borderBottom: "1px solid",
+                borderColor: "divider",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
                 bgcolor: alpha(theme.palette.primary.main, 0.05),
               }}
             >
@@ -159,21 +144,21 @@ export function TournamentLiveCarousel({
                 direction="row"
                 spacing={1.5}
                 sx={{
-                  alignItems: 'center',
+                  alignItems: "center",
                 }}
               >
                 <Box
                   sx={{
                     p: 0.8,
-                    borderRadius: '50%',
-                    bgcolor: 'background.paper',
-                    color: 'primary.main',
+                    borderRadius: "50%",
+                    bgcolor: "background.paper",
+                    color: "primary.main",
                     boxShadow: 1,
                   }}
                 >
-                  {activeSlide === 'stadiums' && <Sensors fontSize="small" />}
-                  {activeSlide === 'standings' && <Trophy fontSize="small" />}
-                  {activeSlide === 'logs' && <History fontSize="small" />}
+                  {activeSlide === "stadiums" && <Sensors fontSize="small" />}
+                  {activeSlide === "standings" && <Trophy fontSize="small" />}
+                  {activeSlide === "logs" && <History fontSize="small" />}
                 </Box>
                 <Typography
                   variant="subtitle1"
@@ -181,9 +166,9 @@ export function TournamentLiveCarousel({
                     fontWeight: 800,
                   }}
                 >
-                  {activeSlide === 'stadiums' && 'En Direct : Stadiums'}
-                  {activeSlide === 'standings' && 'Top Classement'}
-                  {activeSlide === 'logs' && 'Dernières Activités'}
+                  {activeSlide === "stadiums" && "En Direct : Stadiums"}
+                  {activeSlide === "standings" && "Top Classement"}
+                  {activeSlide === "logs" && "Dernières Activités"}
                 </Typography>
               </Stack>
 
@@ -194,17 +179,15 @@ export function TournamentLiveCarousel({
                 color="error"
                 sx={{
                   fontWeight: 900,
-                  animation: 'pulse 2s infinite',
+                  animation: "pulse 2s infinite",
                   height: 24,
                 }}
               />
             </Box>
 
             {/* Content */}
-            <Box
-              sx={{ p: 3, flex: 1, overflow: 'hidden', position: 'relative' }}
-            >
-              {activeSlide === 'stadiums' && (
+            <Box sx={{ p: 3, flex: 1, overflow: "hidden", position: "relative" }}>
+              {activeSlide === "stadiums" && (
                 <Stack spacing={2}>
                   {stations.slice(0, 3).map((s) => (
                     <Box
@@ -212,18 +195,17 @@ export function TournamentLiveCarousel({
                       sx={{
                         p: 2,
                         borderRadius: 3,
-                        bgcolor: 'background.paper',
-                        boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
-                        border: '1px solid',
-                        borderColor:
-                          s.status === 'active' ? 'success.light' : 'divider',
+                        bgcolor: "background.paper",
+                        boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
+                        border: "1px solid",
+                        borderColor: s.status === "active" ? "success.light" : "divider",
                       }}
                     >
                       <Stack
                         direction="row"
                         sx={{
-                          justifyContent: 'space-between',
-                          alignItems: 'center',
+                          justifyContent: "space-between",
+                          alignItems: "center",
                           mb: 1,
                         }}
                       >
@@ -231,7 +213,7 @@ export function TournamentLiveCarousel({
                           variant="caption"
                           sx={{
                             fontWeight: 700,
-                            color: 'text.secondary',
+                            color: "text.secondary",
                           }}
                         >
                           {s.name}
@@ -242,7 +224,7 @@ export function TournamentLiveCarousel({
                             size="small"
                             sx={{
                               height: 20,
-                              fontSize: '0.65rem',
+                              fontSize: "0.65rem",
                               fontWeight: 700,
                             }}
                           />
@@ -252,8 +234,8 @@ export function TournamentLiveCarousel({
                         <Stack
                           direction="row"
                           sx={{
-                            justifyContent: 'space-between',
-                            alignItems: 'center',
+                            justifyContent: "space-between",
+                            alignItems: "center",
                           }}
                         >
                           <Typography
@@ -261,7 +243,7 @@ export function TournamentLiveCarousel({
                             noWrap
                             sx={{
                               fontWeight: 800,
-                              maxWidth: '40%',
+                              maxWidth: "40%",
                             }}
                           >
                             {s.currentMatch.player1}
@@ -277,8 +259,8 @@ export function TournamentLiveCarousel({
                             noWrap
                             sx={{
                               fontWeight: 800,
-                              textAlign: 'right',
-                              maxWidth: '40%',
+                              textAlign: "right",
+                              maxWidth: "40%",
                             }}
                           >
                             {s.currentMatch.player2}
@@ -288,8 +270,8 @@ export function TournamentLiveCarousel({
                         <Typography
                           variant="body2"
                           sx={{
-                            color: 'text.secondary',
-                            textAlign: 'center',
+                            color: "text.secondary",
+                            textAlign: "center",
                           }}
                         >
                           En attente de match...
@@ -300,7 +282,7 @@ export function TournamentLiveCarousel({
                 </Stack>
               )}
 
-              {activeSlide === 'standings' && (
+              {activeSlide === "standings" && (
                 <Stack spacing={1}>
                   {standings.slice(0, 5).map((s, i) => (
                     <Stack
@@ -308,28 +290,25 @@ export function TournamentLiveCarousel({
                       direction="row"
                       spacing={2}
                       sx={{
-                        alignItems: 'center',
+                        alignItems: "center",
                         p: 1.5,
                         borderRadius: 2,
 
-                        bgcolor:
-                          i === 0
-                            ? alpha(theme.palette.primary.main, 0.08)
-                            : 'transparent',
+                        bgcolor: i === 0 ? alpha(theme.palette.primary.main, 0.08) : "transparent",
                       }}
                     >
                       <Box
                         sx={{
                           width: 28,
                           height: 28,
-                          borderRadius: '50%',
-                          bgcolor: i === 0 ? 'primary.main' : 'action.selected',
-                          color: i === 0 ? 'white' : 'text.primary',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
+                          borderRadius: "50%",
+                          bgcolor: i === 0 ? "primary.main" : "action.selected",
+                          color: i === 0 ? "white" : "text.primary",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
                           fontWeight: 900,
-                          fontSize: '0.8rem',
+                          fontSize: "0.8rem",
                         }}
                       >
                         {s.rank}
@@ -347,7 +326,7 @@ export function TournamentLiveCarousel({
                         variant="caption"
                         sx={{
                           fontWeight: 700,
-                          color: 'text.secondary',
+                          color: "text.secondary",
                         }}
                       >
                         {s.wins}W - {s.losses}L
@@ -357,35 +336,35 @@ export function TournamentLiveCarousel({
                 </Stack>
               )}
 
-              {activeSlide === 'logs' && (
-                <Stack spacing={0} sx={{ height: '100%', overflow: 'hidden' }}>
+              {activeSlide === "logs" && (
+                <Stack spacing={0} sx={{ height: "100%", overflow: "hidden" }}>
                   {logs.slice(0, 6).map((log, i) => (
                     <Box
                       key={i}
                       sx={{
                         py: 1.5,
-                        borderBottom: i < 5 ? '1px dashed' : 'none',
-                        borderColor: 'divider',
+                        borderBottom: i < 5 ? "1px dashed" : "none",
+                        borderColor: "divider",
                       }}
                     >
                       <Stack
                         direction="row"
                         spacing={1.5}
                         sx={{
-                          alignItems: 'flex-start',
+                          alignItems: "flex-start",
                         }}
                       >
                         <Typography
                           variant="caption"
                           sx={{
-                            color: 'text.secondary',
+                            color: "text.secondary",
                             minWidth: 50,
                             pt: 0.3,
                           }}
                         >
-                          {new Date(log.timestamp).toLocaleTimeString('fr-FR', {
-                            hour: '2-digit',
-                            minute: '2-digit',
+                          {new Date(log.timestamp).toLocaleTimeString("fr-FR", {
+                            hour: "2-digit",
+                            minute: "2-digit",
                           })}
                         </Typography>
                         <Typography variant="body2" sx={{ lineHeight: 1.3 }}>
@@ -399,9 +378,7 @@ export function TournamentLiveCarousel({
             </Box>
 
             {/* Pagination Dots */}
-            <Box
-              sx={{ p: 2, display: 'flex', justifyContent: 'center', gap: 1 }}
-            >
+            <Box sx={{ p: 2, display: "flex", justifyContent: "center", gap: 1 }}>
               {slides.map((_, i) => (
                 <Box
                   key={i}
@@ -410,14 +387,12 @@ export function TournamentLiveCarousel({
                   animate={{
                     width: i === index ? 24 : 8,
                     backgroundColor:
-                      i === index
-                        ? theme.palette.primary.main
-                        : theme.palette.action.disabled,
+                      i === index ? theme.palette.primary.main : theme.palette.action.disabled,
                   }}
                   sx={{
                     height: 8,
                     borderRadius: 4,
-                    cursor: 'pointer',
+                    cursor: "pointer",
                   }}
                 />
               ))}

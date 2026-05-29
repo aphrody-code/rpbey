@@ -13,49 +13,49 @@ import { Suspense, useEffect, useRef } from "react";
  * anonymous, daily-rotating session id.
  */
 function Tracker() {
-	const pathname = usePathname();
-	const searchParams = useSearchParams();
-	const lastSent = useRef<string | null>(null);
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const lastSent = useRef<string | null>(null);
 
-	useEffect(() => {
-		if (!pathname) return;
-		const qs = searchParams?.toString();
-		const full = qs ? `${pathname}?${qs}` : pathname;
-		// Dedupe identical consecutive sends (e.g. effect re-fires).
-		if (lastSent.current === full) return;
-		lastSent.current = full;
+  useEffect(() => {
+    if (!pathname) return;
+    const qs = searchParams?.toString();
+    const full = qs ? `${pathname}?${qs}` : pathname;
+    // Dedupe identical consecutive sends (e.g. effect re-fires).
+    if (lastSent.current === full) return;
+    lastSent.current = full;
 
-		const payload = JSON.stringify({
-			type: "pageview",
-			path: full,
-			referrer: document.referrer || null,
-		});
+    const payload = JSON.stringify({
+      type: "pageview",
+      path: full,
+      referrer: document.referrer || null,
+    });
 
-		try {
-			if (typeof navigator !== "undefined" && navigator.sendBeacon) {
-				const blob = new Blob([payload], { type: "application/json" });
-				navigator.sendBeacon("/api/analytics", blob);
-			} else {
-				void fetch("/api/analytics", {
-					method: "POST",
-					headers: { "Content-Type": "application/json" },
-					body: payload,
-					keepalive: true,
-				}).catch(() => {});
-			}
-		} catch {
-			/* tracking must never break the app */
-		}
-	}, [pathname, searchParams]);
+    try {
+      if (typeof navigator !== "undefined" && navigator.sendBeacon) {
+        const blob = new Blob([payload], { type: "application/json" });
+        navigator.sendBeacon("/api/analytics", blob);
+      } else {
+        void fetch("/api/analytics", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: payload,
+          keepalive: true,
+        }).catch(() => {});
+      }
+    } catch {
+      /* tracking must never break the app */
+    }
+  }, [pathname, searchParams]);
 
-	return null;
+  return null;
 }
 
 export function AnalyticsTracker() {
-	// useSearchParams requires a Suspense boundary in the App Router.
-	return (
-		<Suspense fallback={null}>
-			<Tracker />
-		</Suspense>
-	);
+  // useSearchParams requires a Suspense boundary in the App Router.
+  return (
+    <Suspense fallback={null}>
+      <Tracker />
+    </Suspense>
+  );
 }

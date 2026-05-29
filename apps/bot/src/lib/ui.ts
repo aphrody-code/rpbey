@@ -11,27 +11,22 @@
  */
 
 import {
-	ActionRowBuilder,
-	ButtonBuilder,
-	ButtonStyle,
-	ContainerBuilder,
-	EmbedBuilder,
-	MediaGalleryBuilder,
-	MediaGalleryItemBuilder,
-	MessageFlags,
-	SectionBuilder,
-	SeparatorBuilder,
-	TextDisplayBuilder,
-	type AttachmentBuilder,
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+  ContainerBuilder,
+  EmbedBuilder,
+  MediaGalleryBuilder,
+  MediaGalleryItemBuilder,
+  MessageFlags,
+  SectionBuilder,
+  SeparatorBuilder,
+  TextDisplayBuilder,
+  type AttachmentBuilder,
 } from "discord.js";
 
 import { Colors, RPB } from "./constants.js";
-import {
-	createEmbed,
-	errorEmbed,
-	successEmbed,
-	warningEmbed,
-} from "./utils.js";
+import { createEmbed, errorEmbed, successEmbed, warningEmbed } from "./utils.js";
 
 // ─── Re-exports from utils.ts ────────────────────────────────────────────────
 
@@ -43,11 +38,11 @@ export { createEmbed, errorEmbed, successEmbed, warningEmbed };
  * Create an info-styled embed (blue).
  */
 export function infoEmbed(title: string, description?: string): EmbedBuilder {
-	return createEmbed({
-		title: `ℹ️ ${title}`,
-		description,
-		color: Colors.Info,
-	});
+  return createEmbed({
+    title: `ℹ️ ${title}`,
+    description,
+    color: Colors.Info,
+  });
 }
 
 // ─── Button factories ─────────────────────────────────────────────────────────
@@ -59,20 +54,14 @@ export function infoEmbed(title: string, description?: string): EmbedBuilder {
  * @param labels override default labels (first = confirm, second = cancel)
  */
 export function confirmRow(
-	idYes: string,
-	idNo: string,
-	labels: [string, string] = ["✅ Confirmer", "❌ Annuler"],
+  idYes: string,
+  idNo: string,
+  labels: [string, string] = ["✅ Confirmer", "❌ Annuler"],
 ): ActionRowBuilder<ButtonBuilder> {
-	return new ActionRowBuilder<ButtonBuilder>().addComponents(
-		new ButtonBuilder()
-			.setCustomId(idYes)
-			.setLabel(labels[0])
-			.setStyle(ButtonStyle.Success),
-		new ButtonBuilder()
-			.setCustomId(idNo)
-			.setLabel(labels[1])
-			.setStyle(ButtonStyle.Secondary),
-	);
+  return new ActionRowBuilder<ButtonBuilder>().addComponents(
+    new ButtonBuilder().setCustomId(idYes).setLabel(labels[0]).setStyle(ButtonStyle.Success),
+    new ButtonBuilder().setCustomId(idNo).setLabel(labels[1]).setStyle(ButtonStyle.Secondary),
+  );
 }
 
 /**
@@ -83,66 +72,55 @@ export function confirmRow(
  * @param totalPages total number of pages
  */
 export function paginationRow(
-	prefix: string,
-	page: number,
-	totalPages: number,
+  prefix: string,
+  page: number,
+  totalPages: number,
 ): ActionRowBuilder<ButtonBuilder> {
-	return new ActionRowBuilder<ButtonBuilder>().addComponents(
-		new ButtonBuilder()
-			.setCustomId(`${prefix}-prev-${page}`)
-			.setLabel("◀")
-			.setStyle(ButtonStyle.Secondary)
-			.setDisabled(page <= 0),
-		new ButtonBuilder()
-			.setCustomId(`${prefix}-page-${page}`)
-			.setLabel(`${page + 1} / ${totalPages}`)
-			.setStyle(ButtonStyle.Secondary)
-			.setDisabled(true),
-		new ButtonBuilder()
-			.setCustomId(`${prefix}-next-${page}`)
-			.setLabel("▶")
-			.setStyle(ButtonStyle.Secondary)
-			.setDisabled(page >= totalPages - 1),
-	);
+  return new ActionRowBuilder<ButtonBuilder>().addComponents(
+    new ButtonBuilder()
+      .setCustomId(`${prefix}-prev-${page}`)
+      .setLabel("◀")
+      .setStyle(ButtonStyle.Secondary)
+      .setDisabled(page <= 0),
+    new ButtonBuilder()
+      .setCustomId(`${prefix}-page-${page}`)
+      .setLabel(`${page + 1} / ${totalPages}`)
+      .setStyle(ButtonStyle.Secondary)
+      .setDisabled(true),
+    new ButtonBuilder()
+      .setCustomId(`${prefix}-next-${page}`)
+      .setLabel("▶")
+      .setStyle(ButtonStyle.Secondary)
+      .setDisabled(page >= totalPages - 1),
+  );
 }
 
 /**
  * Build a link button (URL).
  */
 export function linkButton(label: string, url: string): ButtonBuilder {
-	return new ButtonBuilder()
-		.setLabel(label)
-		.setURL(url)
-		.setStyle(ButtonStyle.Link);
+  return new ButtonBuilder().setLabel(label).setURL(url).setStyle(ButtonStyle.Link);
 }
 
 /**
  * Build an action row with a single link button.
  */
-export function linkButtonRow(
-	label: string,
-	url: string,
-): ActionRowBuilder<ButtonBuilder> {
-	return new ActionRowBuilder<ButtonBuilder>().addComponents(
-		linkButton(label, url),
-	);
+export function linkButtonRow(label: string, url: string): ActionRowBuilder<ButtonBuilder> {
+  return new ActionRowBuilder<ButtonBuilder>().addComponents(linkButton(label, url));
 }
 
 /**
  * Build an action button (with optional emoji).
  */
 export function actionButton(
-	id: string,
-	label: string,
-	style: ButtonStyle = ButtonStyle.Primary,
-	emoji?: string,
+  id: string,
+  label: string,
+  style: ButtonStyle = ButtonStyle.Primary,
+  emoji?: string,
 ): ButtonBuilder {
-	const btn = new ButtonBuilder()
-		.setCustomId(id)
-		.setLabel(label)
-		.setStyle(style);
-	if (emoji) btn.setEmoji(emoji);
-	return btn;
+  const btn = new ButtonBuilder().setCustomId(id).setLabel(label).setStyle(style);
+  if (emoji) btn.setEmoji(emoji);
+  return btn;
 }
 
 // ─── Components V2 ───────────────────────────────────────────────────────────
@@ -151,23 +129,23 @@ export function actionButton(
  * Options for v2Container helper.
  */
 export interface V2ContainerOptions {
-	/** Accent color as 0xRRGGBB integer */
-	accentColor?: number;
-	/** Text sections to render inside the container */
-	sections: Array<{
-		/** Markdown content rendered as TextDisplay */
-		content: string;
-		/** Optional single action button to attach to this section */
-		button?: ButtonBuilder;
-	}>;
-	/**
-	 * Optional image attachment filename (e.g. 'profile.png').
-	 * The file must be supplied in the `files` array of the reply.
-	 * Renders as a MediaGallery at the bottom of the container.
-	 */
-	imageFilename?: string;
-	/** Insert a separator before the image gallery */
-	imageSeparator?: boolean;
+  /** Accent color as 0xRRGGBB integer */
+  accentColor?: number;
+  /** Text sections to render inside the container */
+  sections: Array<{
+    /** Markdown content rendered as TextDisplay */
+    content: string;
+    /** Optional single action button to attach to this section */
+    button?: ButtonBuilder;
+  }>;
+  /**
+   * Optional image attachment filename (e.g. 'profile.png').
+   * The file must be supplied in the `files` array of the reply.
+   * Renders as a MediaGallery at the bottom of the container.
+   */
+  imageFilename?: string;
+  /** Insert a separator before the image gallery */
+  imageSeparator?: boolean;
 }
 
 /**
@@ -182,46 +160,40 @@ export interface V2ContainerOptions {
  * IMPORTANT: Do not add `embeds` or `content` to a V2 message — Discord ignores/errors them.
  */
 export function v2Container(options: V2ContainerOptions): {
-	components: ContainerBuilder[];
-	flags: number;
+  components: ContainerBuilder[];
+  flags: number;
 } {
-	const container = new ContainerBuilder();
+  const container = new ContainerBuilder();
 
-	if (options.accentColor !== undefined) {
-		container.setAccentColor(options.accentColor);
-	}
+  if (options.accentColor !== undefined) {
+    container.setAccentColor(options.accentColor);
+  }
 
-	for (const section of options.sections) {
-		if (section.button) {
-			const sec = new SectionBuilder()
-				.addTextDisplayComponents(
-					new TextDisplayBuilder().setContent(section.content),
-				)
-				.setButtonAccessory(section.button);
-			container.addSectionComponents(sec);
-		} else {
-			container.addTextDisplayComponents(
-				new TextDisplayBuilder().setContent(section.content),
-			);
-		}
-	}
+  for (const section of options.sections) {
+    if (section.button) {
+      const sec = new SectionBuilder()
+        .addTextDisplayComponents(new TextDisplayBuilder().setContent(section.content))
+        .setButtonAccessory(section.button);
+      container.addSectionComponents(sec);
+    } else {
+      container.addTextDisplayComponents(new TextDisplayBuilder().setContent(section.content));
+    }
+  }
 
-	if (options.imageFilename) {
-		if (options.imageSeparator !== false) {
-			container.addSeparatorComponents(new SeparatorBuilder());
-		}
-		const gallery = new MediaGalleryBuilder().addItems(
-			new MediaGalleryItemBuilder().setURL(
-				`attachment://${options.imageFilename}`,
-			),
-		);
-		container.addMediaGalleryComponents(gallery);
-	}
+  if (options.imageFilename) {
+    if (options.imageSeparator !== false) {
+      container.addSeparatorComponents(new SeparatorBuilder());
+    }
+    const gallery = new MediaGalleryBuilder().addItems(
+      new MediaGalleryItemBuilder().setURL(`attachment://${options.imageFilename}`),
+    );
+    container.addMediaGalleryComponents(gallery);
+  }
 
-	return {
-		components: [container],
-		flags: MessageFlags.IsComponentsV2,
-	};
+  return {
+    components: [container],
+    flags: MessageFlags.IsComponentsV2,
+  };
 }
 
 /**
@@ -229,13 +201,13 @@ export function v2Container(options: V2ContainerOptions): {
  * Convenience wrapper over v2Container for single-text panels.
  */
 export function v2Text(
-	content: string,
-	accentColor?: number,
+  content: string,
+  accentColor?: number,
 ): {
-	components: ContainerBuilder[];
-	flags: number;
+  components: ContainerBuilder[];
+  flags: number;
 } {
-	return v2Container({ accentColor, sections: [{ content }] });
+  return v2Container({ accentColor, sections: [{ content }] });
 }
 
 /**
@@ -247,19 +219,19 @@ export function v2Text(
  * @param accentColor optional hex color for the container accent
  */
 export function v2ImageCard(
-	header: string,
-	filename: string,
-	accentColor?: number,
+  header: string,
+  filename: string,
+  accentColor?: number,
 ): {
-	components: ContainerBuilder[];
-	flags: number;
+  components: ContainerBuilder[];
+  flags: number;
 } {
-	return v2Container({
-		accentColor,
-		sections: [{ content: header }],
-		imageFilename: filename,
-		imageSeparator: false,
-	});
+  return v2Container({
+    accentColor,
+    sections: [{ content: header }],
+    imageFilename: filename,
+    imageSeparator: false,
+  });
 }
 
 /**
@@ -267,25 +239,25 @@ export function v2ImageCard(
  * Displays a header text block + canvas battle card image.
  */
 export function v2BattlePanel(
-	headerLines: string[],
-	imageFilename: string,
-	accentColor: number = Colors.Primary,
-	revengeButton?: ButtonBuilder,
+  headerLines: string[],
+  imageFilename: string,
+  accentColor: number = Colors.Primary,
+  revengeButton?: ButtonBuilder,
 ): {
-	components: ContainerBuilder[];
-	flags: number;
+  components: ContainerBuilder[];
+  flags: number;
 } {
-	const content = headerLines.join("\n");
-	const sections: V2ContainerOptions["sections"] = revengeButton
-		? [{ content, button: revengeButton }]
-		: [{ content }];
+  const content = headerLines.join("\n");
+  const sections: V2ContainerOptions["sections"] = revengeButton
+    ? [{ content, button: revengeButton }]
+    : [{ content }];
 
-	return v2Container({
-		accentColor,
-		sections,
-		imageFilename,
-		imageSeparator: false,
-	});
+  return v2Container({
+    accentColor,
+    sections,
+    imageFilename,
+    imageSeparator: false,
+  });
 }
 
 // ─── Helpers for common error/success V2 responses ───────────────────────────
@@ -294,30 +266,30 @@ export function v2BattlePanel(
  * A Components V2 error panel (red accent, ❌ prefix).
  */
 export function v2Error(message: string): {
-	components: ContainerBuilder[];
-	flags: number;
+  components: ContainerBuilder[];
+  flags: number;
 } {
-	return v2Text(`❌ **Erreur**\n${message}`, Colors.Error);
+  return v2Text(`❌ **Erreur**\n${message}`, Colors.Error);
 }
 
 /**
  * A Components V2 success panel (green accent, ✅ prefix).
  */
 export function v2Success(message: string): {
-	components: ContainerBuilder[];
-	flags: number;
+  components: ContainerBuilder[];
+  flags: number;
 } {
-	return v2Text(`✅ ${message}`, Colors.Success);
+  return v2Text(`✅ ${message}`, Colors.Success);
 }
 
 /**
  * A Components V2 warning panel (orange accent, ⚠️ prefix).
  */
 export function v2Warning(message: string): {
-	components: ContainerBuilder[];
-	flags: number;
+  components: ContainerBuilder[];
+  flags: number;
 } {
-	return v2Text(`⚠️ ${message}`, Colors.Warning);
+  return v2Text(`⚠️ ${message}`, Colors.Warning);
 }
 
 // ─── Profile V2 panel ────────────────────────────────────────────────────────
@@ -334,38 +306,38 @@ export function v2Warning(message: string): {
  * @param imageFilename attachment filename (e.g. 'profile.png')
  */
 export function v2ProfilePanel(
-	displayName: string,
-	rankTitle: string,
-	rank: number,
-	points: number,
-	wins: number,
-	losses: number,
-	winRate: string,
-	imageFilename: string,
+  displayName: string,
+  rankTitle: string,
+  rank: number,
+  points: number,
+  wins: number,
+  losses: number,
+  winRate: string,
+  imageFilename: string,
 ): {
-	components: ContainerBuilder[];
-	flags: number;
+  components: ContainerBuilder[];
+  flags: number;
 } {
-	const header =
-		`## 👤 ${displayName}\n` +
-		`**${rankTitle}** · Rang #${rank} · ${points} pts\n` +
-		`⚔️ ${wins}V / ${losses}D · ${winRate}\n` +
-		`\n*${RPB.FullName}*`;
+  const header =
+    `## 👤 ${displayName}\n` +
+    `**${rankTitle}** · Rang #${rank} · ${points} pts\n` +
+    `⚔️ ${wins}V / ${losses}D · ${winRate}\n` +
+    `\n*${RPB.FullName}*`;
 
-	return v2Container({
-		accentColor: Colors.Primary,
-		sections: [
-			{
-				content: header,
-				button: new ButtonBuilder()
-					.setLabel("Voir en ligne")
-					.setURL("https://rpbey.fr/dashboard")
-					.setStyle(ButtonStyle.Link),
-			},
-		],
-		imageFilename,
-		imageSeparator: false,
-	});
+  return v2Container({
+    accentColor: Colors.Primary,
+    sections: [
+      {
+        content: header,
+        button: new ButtonBuilder()
+          .setLabel("Voir en ligne")
+          .setURL("https://rpbey.fr/dashboard")
+          .setStyle(ButtonStyle.Link),
+      },
+    ],
+    imageFilename,
+    imageSeparator: false,
+  });
 }
 
 /**
@@ -376,78 +348,78 @@ export function v2ProfilePanel(
  * @param accentColor  rarity color
  */
 export function v2GachaPullPanel(
-	title: string,
-	description: string,
-	imageFilename: string | undefined,
-	accentColor: number,
-	attachments?: AttachmentBuilder[],
+  title: string,
+  description: string,
+  imageFilename: string | undefined,
+  accentColor: number,
+  attachments?: AttachmentBuilder[],
 ): {
-	components: ContainerBuilder[];
-	flags: number;
+  components: ContainerBuilder[];
+  flags: number;
 } | null {
-	// Only produce V2 panel when we have a canvas image
-	if (!imageFilename) return null;
-	const content = `## ${title}\n${description}`;
-	return v2Container({
-		accentColor,
-		sections: [{ content }],
-		imageFilename,
-		imageSeparator: false,
-	});
+  // Only produce V2 panel when we have a canvas image
+  if (!imageFilename) return null;
+  const content = `## ${title}\n${description}`;
+  return v2Container({
+    accentColor,
+    sections: [{ content }],
+    imageFilename,
+    imageSeparator: false,
+  });
 }
 
 /**
  * Build a V2 duel result panel.
  */
 export function v2DuelResultPanel(
-	winnerName: string,
-	loserName: string,
-	score: string,
-	finishMsg: string,
-	eloLine: string,
-	summaryLines: string[],
-	imageFilename: string,
-	accentColor: number,
-	revengeButton?: ButtonBuilder,
+  winnerName: string,
+  loserName: string,
+  score: string,
+  finishMsg: string,
+  eloLine: string,
+  summaryLines: string[],
+  imageFilename: string,
+  accentColor: number,
+  revengeButton?: ButtonBuilder,
 ): {
-	components: ContainerBuilder[];
-	flags: number;
+  components: ContainerBuilder[];
+  flags: number;
 } {
-	const content =
-		`## ${finishMsg}\n` +
-		`🏆 **${winnerName}** bat **${loserName}** (**${score}**)\n\n` +
-		summaryLines.join("\n") +
-		`\n\n${eloLine}`;
+  const content =
+    `## ${finishMsg}\n` +
+    `🏆 **${winnerName}** bat **${loserName}** (**${score}**)\n\n` +
+    summaryLines.join("\n") +
+    `\n\n${eloLine}`;
 
-	const sections: V2ContainerOptions["sections"] = revengeButton
-		? [{ content, button: revengeButton }]
-		: [{ content }];
+  const sections: V2ContainerOptions["sections"] = revengeButton
+    ? [{ content, button: revengeButton }]
+    : [{ content }];
 
-	return v2Container({
-		accentColor,
-		sections,
-		imageFilename,
-		imageSeparator: false,
-	});
+  return v2Container({
+    accentColor,
+    sections,
+    imageFilename,
+    imageSeparator: false,
+  });
 }
 
 /**
  * Build a V2 deck panel with canvas card image.
  */
 export function v2DeckPanel(
-	deckName: string,
-	isActive: boolean,
-	imageFilename: string,
+  deckName: string,
+  isActive: boolean,
+  imageFilename: string,
 ): {
-	components: ContainerBuilder[];
-	flags: number;
+  components: ContainerBuilder[];
+  flags: number;
 } {
-	const activeLabel = isActive ? "⭐ Deck actif" : "Deck";
-	const content = `## ${activeLabel}: ${deckName}`;
-	return v2Container({
-		accentColor: isActive ? Colors.Primary : Colors.Secondary,
-		sections: [{ content }],
-		imageFilename,
-		imageSeparator: false,
-	});
+  const activeLabel = isActive ? "⭐ Deck actif" : "Deck";
+  const content = `## ${activeLabel}: ${deckName}`;
+  return v2Container({
+    accentColor: isActive ? Colors.Primary : Colors.Secondary,
+    sections: [{ content }],
+    imageFilename,
+    imageSeparator: false,
+  });
 }

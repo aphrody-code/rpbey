@@ -1,16 +1,12 @@
-import { Search as SearchIcon } from '@mui/icons-material';
-import { InputAdornment, TextField, type TextFieldProps } from '@mui/material';
-import type React from 'react';
+import { Search as SearchIcon } from "@mui/icons-material";
+import { InputAdornment, TextField, type TextFieldProps } from "@mui/material";
+import type React from "react";
 
 type SearchInputProps = TextFieldProps & {
   onSearch?: (value: string) => void;
 };
 
-export const SearchInput: React.FC<SearchInputProps> = ({
-  onSearch,
-  onChange,
-  ...props
-}) => {
+export const SearchInput: React.FC<SearchInputProps> = ({ onSearch, onChange, ...props }) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (onChange) {
       onChange(event);
@@ -36,8 +32,8 @@ export const SearchInput: React.FC<SearchInputProps> = ({
         },
       }}
       sx={{
-        '& .MuiOutlinedInput-root': {
-          bgcolor: 'background.paper',
+        "& .MuiOutlinedInput-root": {
+          bgcolor: "background.paper",
         },
         minWidth: 250,
       }}

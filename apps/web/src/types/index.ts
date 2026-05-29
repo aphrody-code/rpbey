@@ -33,13 +33,13 @@ export interface Tournament {
 
 // Matches Prisma enum TournamentStatus
 export type TournamentStatus =
-  | 'UPCOMING'
-  | 'REGISTRATION_OPEN'
-  | 'REGISTRATION_CLOSED'
-  | 'CHECKIN'
-  | 'UNDERWAY'
-  | 'COMPLETE'
-  | 'CANCELLED';
+  | "UPCOMING"
+  | "REGISTRATION_OPEN"
+  | "REGISTRATION_CLOSED"
+  | "CHECKIN"
+  | "UNDERWAY"
+  | "COMPLETE"
+  | "CANCELLED";
 
 // Participant types
 export interface Participant {
@@ -51,11 +51,7 @@ export interface Participant {
   createdAt: Date;
 }
 
-export type ParticipantStatus =
-  | 'REGISTERED'
-  | 'CHECKED_IN'
-  | 'ELIMINATED'
-  | 'WINNER';
+export type ParticipantStatus = "REGISTERED" | "CHECKED_IN" | "ELIMINATED" | "WINNER";
 
 // Match types
 export interface Match {
@@ -73,7 +69,7 @@ export interface Match {
 }
 
 // Matches the 'state' field in TournamentMatch model
-export type MatchState = 'pending' | 'open' | 'complete';
+export type MatchState = "pending" | "open" | "complete";
 
 // API Response types
 export interface ApiResponse<T> {

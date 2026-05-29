@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { AnimatePresence, motion } from 'framer-motion';
-import { usePathname } from 'next/navigation';
+import { AnimatePresence, motion } from "framer-motion";
+import { usePathname } from "next/navigation";
 
 export function PageTransition({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -13,8 +13,8 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -10 }}
-        transition={{ duration: 0.2, ease: 'easeInOut' }}
-        style={{ width: '100%', height: '100%' }}
+        transition={{ duration: 0.2, ease: "easeInOut" }}
+        style={{ width: "100%", height: "100%" }}
       >
         {children}
       </motion.div>

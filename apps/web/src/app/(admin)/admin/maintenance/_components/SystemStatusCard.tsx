@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { OpenInNew, Storage } from '@mui/icons-material';
+import { OpenInNew, Storage } from "@mui/icons-material";
 import {
   Button,
   Card,
@@ -11,10 +11,10 @@ import {
   List,
   ListItem,
   ListItemText,
-} from '@mui/material';
-import Link from 'next/link';
-import { useEffect, useState } from 'react';
-import type { BotStatus } from '@/lib/bot';
+} from "@mui/material";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import type { BotStatus } from "@/lib/bot";
 
 /**
  * Carte d'état système live — interroge l'API réelle du bot via le bridge
@@ -23,19 +23,19 @@ import type { BotStatus } from '@/lib/bot';
  */
 export default function SystemStatusCard() {
   const [status, setStatus] = useState<BotStatus | null>(null);
-  const [state, setState] = useState<'loading' | 'ok' | 'offline'>('loading');
+  const [state, setState] = useState<"loading" | "ok" | "offline">("loading");
 
   useEffect(() => {
     let cancelled = false;
-    fetch('/api/bot/status')
+    fetch("/api/bot/status")
       .then((r) => (r.ok ? r.json() : Promise.reject()))
       .then((data: BotStatus) => {
         if (cancelled) return;
         setStatus(data);
-        setState(data.status === 'running' ? 'ok' : 'offline');
+        setState(data.status === "running" ? "ok" : "offline");
       })
       .catch(() => {
-        if (!cancelled) setState('offline');
+        if (!cancelled) setState("offline");
       });
     return () => {
       cancelled = true;
@@ -55,20 +55,20 @@ export default function SystemStatusCard() {
             <ListItemText
               primary="Bot Discord"
               secondary={
-                state === 'loading'
-                  ? 'Vérification…'
-                  : state === 'ok'
-                    ? `En ligne · ${status?.uptimeFormatted ?? ''}`
-                    : 'Injoignable'
+                state === "loading"
+                  ? "Vérification…"
+                  : state === "ok"
+                    ? `En ligne · ${status?.uptimeFormatted ?? ""}`
+                    : "Injoignable"
               }
             />
-            {state === 'loading' ? (
+            {state === "loading" ? (
               <CircularProgress size={16} />
             ) : (
               <Chip
                 size="small"
-                label={state === 'ok' ? 'OK' : 'KO'}
-                color={state === 'ok' ? 'success' : 'error'}
+                label={state === "ok" ? "OK" : "KO"}
+                color={state === "ok" ? "success" : "error"}
               />
             )}
           </ListItem>
@@ -76,7 +76,7 @@ export default function SystemStatusCard() {
             <ListItem>
               <ListItemText
                 primary="Ping Discord"
-                secondary={`${status.ping} ms · ${status.memberCount.toLocaleString('fr-FR')} membres`}
+                secondary={`${status.ping} ms · ${status.memberCount.toLocaleString("fr-FR")} membres`}
               />
             </ListItem>
           )}

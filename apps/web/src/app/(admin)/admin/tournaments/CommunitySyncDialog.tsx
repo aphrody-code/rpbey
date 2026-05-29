@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { CloudDownload } from '@mui/icons-material';
+import { CloudDownload } from "@mui/icons-material";
 import {
   Alert,
   Box,
@@ -15,14 +15,11 @@ import {
   ListItemSecondaryAction,
   ListItemText,
   Typography,
-} from '@mui/material';
-import { useState } from 'react';
-import { useToast } from '@/components/ui';
-import { type ChallongeTournament } from '@/lib/challonge';
-import {
-  importTournamentFromChallonge,
-  syncCommunityTournaments,
-} from './actions';
+} from "@mui/material";
+import { useState } from "react";
+import { useToast } from "@/components/ui";
+import { type ChallongeTournament } from "@/lib/challonge";
+import { importTournamentFromChallonge, syncCommunityTournaments } from "./actions";
 
 interface CommunitySyncDialogProps {
   open: boolean;
@@ -30,11 +27,7 @@ interface CommunitySyncDialogProps {
   onSuccess: () => void;
 }
 
-export function CommunitySyncDialog({
-  open,
-  onClose,
-  onSuccess,
-}: CommunitySyncDialogProps) {
+export function CommunitySyncDialog({ open, onClose, onSuccess }: CommunitySyncDialogProps) {
   const [loading, setLoading] = useState(false);
   const [tournaments, setTournaments] = useState<ChallongeTournament[]>([]);
   const [fetched, setFetched] = useState(false);
@@ -48,10 +41,7 @@ export function CommunitySyncDialog({
       setTournaments(data);
       setFetched(true);
     } catch {
-      showToast(
-        'Erreur lors de la synchronisation avec la communauté',
-        'error',
-      );
+      showToast("Erreur lors de la synchronisation avec la communauté", "error");
     } finally {
       setLoading(false);
     }
@@ -61,14 +51,11 @@ export function CommunitySyncDialog({
     setImporting(tournament.id);
     try {
       await importTournamentFromChallonge(tournament.id);
-      showToast(
-        `Tournoi "${tournament.attributes.name}" importé avec succès`,
-        'success',
-      );
+      showToast(`Tournoi "${tournament.attributes.name}" importé avec succès`, "success");
       setTournaments((prev) => prev.filter((t) => t.id !== tournament.id));
       onSuccess();
     } catch {
-      showToast("Erreur lors de l'import du tournoi", 'error');
+      showToast("Erreur lors de l'import du tournoi", "error");
     } finally {
       setImporting(null);
     }
@@ -82,33 +69,30 @@ export function CommunitySyncDialog({
 
   return (
     <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
-      <DialogTitle sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+      <DialogTitle sx={{ display: "flex", alignItems: "center", gap: 1 }}>
         <CloudDownload /> Synchronisation Communauté
       </DialogTitle>
       <DialogContent dividers>
         {!fetched ? (
           <Box
             sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
               py: 4,
               gap: 2,
             }}
           >
             <Typography>
-              Rechercher les nouveaux tournois de la communauté Challonge
-              configurée.
+              Rechercher les nouveaux tournois de la communauté Challonge configurée.
             </Typography>
             <Button
               variant="contained"
               onClick={handleSync}
               disabled={loading}
-              startIcon={
-                loading ? <CircularProgress size={20} /> : <CloudDownload />
-              }
+              startIcon={loading ? <CircularProgress size={20} /> : <CloudDownload />}
             >
-              {loading ? 'Recherche en cours...' : 'Rechercher les tournois'}
+              {loading ? "Recherche en cours..." : "Rechercher les tournois"}
             </Button>
           </Box>
         ) : tournaments.length === 0 ? (
@@ -121,11 +105,8 @@ export function CommunitySyncDialog({
                   primary={tournament.attributes.name}
                   secondary={
                     <>
-                      {new Date(
-                        tournament.attributes.startAt || '',
-                      ).toLocaleDateString()}{' '}
-                      •{tournament.attributes.tournamentType} •
-                      {tournament.attributes.state}
+                      {new Date(tournament.attributes.startAt || "").toLocaleDateString()} •
+                      {tournament.attributes.tournamentType} •{tournament.attributes.state}
                     </>
                   }
                 />
@@ -136,11 +117,7 @@ export function CommunitySyncDialog({
                     onClick={() => handleImport(tournament)}
                     disabled={!!importing}
                   >
-                    {importing === tournament.id ? (
-                      <CircularProgress size={20} />
-                    ) : (
-                      'Importer'
-                    )}
+                    {importing === tournament.id ? <CircularProgress size={20} /> : "Importer"}
                   </Button>
                 </ListItemSecondaryAction>
               </ListItem>

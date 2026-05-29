@@ -1,20 +1,17 @@
-import { type Metadata } from 'next';
-import { createPageMetadata } from '@/lib/seo-utils';
-import {
-  getAnimeSeriesByGeneration,
-  getFeaturedAnimeSeries,
-} from '@/server/actions/anime';
-import { AnimeCarousel } from './_components/AnimeCarousel';
-import { AnimeLanding } from './_components/AnimeLanding';
+import { type Metadata } from "next";
+import { createPageMetadata } from "@/lib/seo-utils";
+import { getAnimeSeriesByGeneration, getFeaturedAnimeSeries } from "@/server/actions/anime";
+import { AnimeCarousel } from "./_components/AnimeCarousel";
+import { AnimeLanding } from "./_components/AnimeLanding";
 
 export const metadata: Metadata = createPageMetadata({
-  title: 'Anime Beyblade | RPB',
+  title: "Anime Beyblade | RPB",
   description:
     "Regardez toutes les séries anime Beyblade : de l'Original à Beyblade X, en streaming gratuit sur la RPB.",
-  path: '/anime',
+  path: "/anime",
 });
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 export default async function AnimePage() {
   const [featured, seriesByGeneration] = await Promise.all([
@@ -22,7 +19,7 @@ export default async function AnimePage() {
     getAnimeSeriesByGeneration(),
   ]);
 
-  const generationOrder = ['ORIGINAL', 'METAL', 'BURST', 'X'];
+  const generationOrder = ["ORIGINAL", "METAL", "BURST", "X"];
 
   return (
     <AnimeLanding featured={featured}>

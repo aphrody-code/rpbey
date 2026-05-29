@@ -1,12 +1,12 @@
-import { EmbedBuilder, type TextChannel } from 'discord.js';
+import { EmbedBuilder, type TextChannel } from "discord.js";
 
-import { bot } from '../../lib/bot.js';
-import { Colors, RPB } from '../../lib/constants.js';
-import { logger } from '../../lib/logger.js';
-import prisma from '../../lib/prisma.js';
+import { bot } from "../../lib/bot.js";
+import { Colors, RPB } from "../../lib/constants.js";
+import { logger } from "../../lib/logger.js";
+import prisma from "../../lib/prisma.js";
 
 export async function dailyStatsTask() {
-  logger.info('[Cron] Running daily stats report...');
+  logger.info("[Cron] Running daily stats report...");
 
   try {
     const now = new Date();
@@ -28,12 +28,12 @@ export async function dailyStatsTask() {
       prisma.user.count(),
       prisma.tournament.count({
         where: {
-          status: { in: ['REGISTRATION_OPEN', 'UNDERWAY', 'CHECKIN'] },
+          status: { in: ["REGISTRATION_OPEN", "UNDERWAY", "CHECKIN"] },
         },
       }),
       prisma.tournament.count({
         where: {
-          status: 'COMPLETE',
+          status: "COMPLETE",
           updatedAt: { gte: yesterday },
         },
       }),
@@ -41,32 +41,32 @@ export async function dailyStatsTask() {
     ]);
 
     const embed = new EmbedBuilder()
-      .setTitle('📊 Rapport Quotidien RPB')
-      .setDescription(`Statistiques du ${now.toLocaleDateString('fr-FR')}`)
+      .setTitle("📊 Rapport Quotidien RPB")
+      .setDescription(`Statistiques du ${now.toLocaleDateString("fr-FR")}`)
       .setColor(Colors.Info)
       .addFields(
         {
-          name: '👥 Nouveaux utilisateurs (24h)',
+          name: "👥 Nouveaux utilisateurs (24h)",
           value: `+${newUsers}`,
           inline: true,
         },
         {
-          name: '📈 Total utilisateurs',
+          name: "📈 Total utilisateurs",
           value: totalUsers.toString(),
           inline: true,
         },
         {
-          name: '🏆 Tournois actifs',
+          name: "🏆 Tournois actifs",
           value: activeTournaments.toString(),
           inline: true,
         },
         {
-          name: '✅ Tournois terminés (24h)',
+          name: "✅ Tournois terminés (24h)",
           value: completedTournamentsToday.toString(),
           inline: true,
         },
         {
-          name: '🎮 Participations totales',
+          name: "🎮 Participations totales",
           value: totalParticipations.toString(),
           inline: true,
         },
@@ -82,8 +82,8 @@ export async function dailyStatsTask() {
       }
     }
 
-    logger.info('[Cron] Daily stats report sent');
+    logger.info("[Cron] Daily stats report sent");
   } catch (error) {
-    logger.error('[Cron] Daily stats error:', error);
+    logger.error("[Cron] Daily stats error:", error);
   }
 }

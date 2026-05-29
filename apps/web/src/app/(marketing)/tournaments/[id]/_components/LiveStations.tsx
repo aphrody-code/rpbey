@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { alpha, Grid, Paper, Stack, Typography, useTheme } from '@mui/material';
-import type { Station } from './types';
+import { alpha, Grid, Paper, Stack, Typography, useTheme } from "@mui/material";
+import type { Station } from "./types";
 
 export function LiveStations({ stations }: { stations: Station[] }) {
   const theme = useTheme();
-  const active = stations.filter((s) => s.status === 'active');
+  const active = stations.filter((s) => s.status === "active");
   if (active.length === 0) return null;
 
   return (
@@ -15,16 +15,13 @@ export function LiveStations({ stations }: { stations: Station[] }) {
         p: 4,
         mb: 4,
         borderRadius: 6,
-        border: '1px solid',
-        borderColor: 'divider',
+        border: "1px solid",
+        borderColor: "divider",
         bgcolor: alpha(theme.palette.background.paper, 0.6),
-        backdropFilter: 'blur(10px)',
+        backdropFilter: "blur(10px)",
       }}
     >
-      <Typography
-        variant="h5"
-        sx={{ fontWeight: '900', mb: 4, letterSpacing: 1 }}
-      >
+      <Typography variant="h5" sx={{ fontWeight: "900", mb: 4, letterSpacing: 1 }}>
         STADIUMS EN DIRECT
       </Typography>
       <Grid container spacing={3}>
@@ -35,19 +32,19 @@ export function LiveStations({ stations }: { stations: Station[] }) {
               sx={{
                 p: 3,
                 borderRadius: 4,
-                border: '1px solid',
-                borderColor: 'divider',
-                bgcolor: 'background.paper',
+                border: "1px solid",
+                borderColor: "divider",
+                bgcolor: "background.paper",
               }}
             >
               <Typography
                 variant="caption"
                 color="primary"
                 sx={{
-                  fontWeight: '900',
-                  display: 'block',
+                  fontWeight: "900",
+                  display: "block",
                   mb: 2,
-                  textTransform: 'uppercase',
+                  textTransform: "uppercase",
                 }}
               >
                 {station.name}
@@ -56,44 +53,40 @@ export function LiveStations({ stations }: { stations: Station[] }) {
                 <Stack
                   direction="row"
                   sx={{
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
+                    justifyContent: "space-between",
+                    alignItems: "center",
                   }}
                 >
-                  <Typography
-                    variant="body2"
-                    noWrap
-                    sx={{ fontWeight: '900', maxWidth: '40%' }}
-                  >
+                  <Typography variant="body2" noWrap sx={{ fontWeight: "900", maxWidth: "40%" }}>
                     {station.currentMatch.player1}
                   </Typography>
                   <Typography
                     variant="caption"
                     sx={{
-                      fontWeight: '900',
+                      fontWeight: "900",
                       px: 1.5,
                       py: 0.5,
-                      bgcolor: 'error.main',
-                      color: 'white',
+                      bgcolor: "error.main",
+                      color: "white",
                       borderRadius: 1,
                     }}
                   >
-                    {station.currentMatch.scores || 'VS'}
+                    {station.currentMatch.scores || "VS"}
                   </Typography>
                   <Typography
                     variant="body2"
                     noWrap
                     sx={{
-                      fontWeight: '900',
-                      textAlign: 'right',
-                      maxWidth: '40%',
+                      fontWeight: "900",
+                      textAlign: "right",
+                      maxWidth: "40%",
                     }}
                   >
                     {station.currentMatch.player2}
                   </Typography>
                 </Stack>
               ) : (
-                <Typography variant="body2" sx={{ color: 'text.disabled' }}>
+                <Typography variant="body2" sx={{ color: "text.disabled" }}>
                   Disponible pour combat
                 </Typography>
               )}

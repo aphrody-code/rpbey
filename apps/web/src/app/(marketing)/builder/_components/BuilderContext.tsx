@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   createContext,
@@ -9,9 +9,9 @@ import {
   useMemo,
   useReducer,
   useRef,
-} from 'react';
-import { getPartsByExternalIds } from '@/server/actions/parts';
-import { type Part } from '@/lib/types';
+} from "react";
+import { getPartsByExternalIds } from "@/server/actions/parts";
+import { type Part } from "@/lib/types";
 
 // --- Types ---
 
@@ -25,13 +25,7 @@ export interface BeySlot {
   nickname: string;
 }
 
-export type BuilderStep =
-  | 'BLADE'
-  | 'OVER_BLADE'
-  | 'RATCHET'
-  | 'BIT'
-  | 'LOCK_CHIP'
-  | 'ASSIST_BLADE';
+export type BuilderStep = "BLADE" | "OVER_BLADE" | "RATCHET" | "BIT" | "LOCK_CHIP" | "ASSIST_BLADE";
 
 export interface DeckSummary {
   id: string;
@@ -49,36 +43,30 @@ export interface BuilderState {
   activeStep: BuilderStep;
   savedDecks: DeckSummary[];
   loadingDecks: boolean;
-  mobileTab: 'catalog' | 'deck';
-  history: Omit<
-    BuilderState,
-    'history' | 'future' | 'savedDecks' | 'loadingDecks'
-  >[];
-  future: Omit<
-    BuilderState,
-    'history' | 'future' | 'savedDecks' | 'loadingDecks'
-  >[];
+  mobileTab: "catalog" | "deck";
+  history: Omit<BuilderState, "history" | "future" | "savedDecks" | "loadingDecks">[];
+  future: Omit<BuilderState, "history" | "future" | "savedDecks" | "loadingDecks">[];
 }
 
 // --- Actions ---
 
 export type BuilderAction =
-  | { type: 'SET_PART'; part: Part }
-  | { type: 'REMOVE_PART'; slotIndex: number; partType: BuilderStep }
-  | { type: 'SET_ACTIVE_SLOT'; slotIndex: number }
-  | { type: 'SET_ACTIVE_STEP'; step: BuilderStep }
-  | { type: 'SET_DECK_NAME'; name: string }
-  | { type: 'SET_IS_ACTIVE'; isActive: boolean }
-  | { type: 'SET_NICKNAME'; slotIndex: number; nickname: string }
-  | { type: 'LOAD_DECK'; deck: LoadDeckPayload }
-  | { type: 'NEW_DECK' }
-  | { type: 'SET_SAVED_DECKS'; decks: DeckSummary[] }
-  | { type: 'SET_LOADING_DECKS'; loading: boolean }
-  | { type: 'DELETE_DECK'; deckId: string }
-  | { type: 'SET_MOBILE_TAB'; tab: 'catalog' | 'deck' }
-  | { type: 'RESTORE_DRAFT'; draft: Partial<BuilderState> }
-  | { type: 'UNDO' }
-  | { type: 'REDO' };
+  | { type: "SET_PART"; part: Part }
+  | { type: "REMOVE_PART"; slotIndex: number; partType: BuilderStep }
+  | { type: "SET_ACTIVE_SLOT"; slotIndex: number }
+  | { type: "SET_ACTIVE_STEP"; step: BuilderStep }
+  | { type: "SET_DECK_NAME"; name: string }
+  | { type: "SET_IS_ACTIVE"; isActive: boolean }
+  | { type: "SET_NICKNAME"; slotIndex: number; nickname: string }
+  | { type: "LOAD_DECK"; deck: LoadDeckPayload }
+  | { type: "NEW_DECK" }
+  | { type: "SET_SAVED_DECKS"; decks: DeckSummary[] }
+  | { type: "SET_LOADING_DECKS"; loading: boolean }
+  | { type: "DELETE_DECK"; deckId: string }
+  | { type: "SET_MOBILE_TAB"; tab: "catalog" | "deck" }
+  | { type: "RESTORE_DRAFT"; draft: Partial<BuilderState> }
+  | { type: "UNDO" }
+  | { type: "REDO" };
 
 export interface LoadDeckPayload {
   id: string;
@@ -104,7 +92,7 @@ const emptySlot: BeySlot = {
   bit: null,
   lockChip: null,
   assistBlade: null,
-  nickname: '',
+  nickname: "",
 };
 
 function createEmptyBeys(): [BeySlot, BeySlot, BeySlot] {
@@ -113,18 +101,18 @@ function createEmptyBeys(): [BeySlot, BeySlot, BeySlot] {
 
 /** Check if the blade in this slot is a CX blade */
 export function isCXBlade(slot: BeySlot): boolean {
-  return slot.blade?.system === 'CX';
+  return slot.blade?.system === "CX";
 }
 
 function getNextStep(slot: BeySlot): BuilderStep {
-  if (!slot.blade) return 'BLADE';
+  if (!slot.blade) return "BLADE";
   if (isCXBlade(slot)) {
-    if (!slot.lockChip) return 'LOCK_CHIP';
-    if (!slot.assistBlade) return 'ASSIST_BLADE';
+    if (!slot.lockChip) return "LOCK_CHIP";
+    if (!slot.assistBlade) return "ASSIST_BLADE";
   }
-  if (!slot.ratchet) return 'RATCHET';
-  if (!slot.bit) return 'BIT';
-  return 'BLADE';
+  if (!slot.ratchet) return "RATCHET";
+  if (!slot.bit) return "BIT";
+  return "BLADE";
 }
 
 function isSlotComplete(slot: BeySlot): boolean {
@@ -138,18 +126,18 @@ function isSlotComplete(slot: BeySlot): boolean {
 
 function stepKey(step: BuilderStep): keyof BeySlot {
   switch (step) {
-    case 'BLADE':
-      return 'blade';
-    case 'OVER_BLADE':
-      return 'overBlade';
-    case 'RATCHET':
-      return 'ratchet';
-    case 'BIT':
-      return 'bit';
-    case 'LOCK_CHIP':
-      return 'lockChip';
-    case 'ASSIST_BLADE':
-      return 'assistBlade';
+    case "BLADE":
+      return "blade";
+    case "OVER_BLADE":
+      return "overBlade";
+    case "RATCHET":
+      return "ratchet";
+    case "BIT":
+      return "bit";
+    case "LOCK_CHIP":
+      return "lockChip";
+    case "ASSIST_BLADE":
+      return "assistBlade";
   }
 }
 
@@ -158,20 +146,13 @@ function stepToPartType(step: BuilderStep): string {
 }
 
 // --- History Helper ---
-const HISTORY_EXCLUDE_KEYS = [
-  'history',
-  'future',
-  'savedDecks',
-  'loadingDecks',
-] as const;
+const HISTORY_EXCLUDE_KEYS = ["history", "future", "savedDecks", "loadingDecks"] as const;
 
 function omitHistoryKeys(
   state: BuilderState,
 ): Omit<BuilderState, (typeof HISTORY_EXCLUDE_KEYS)[number]> {
   return Object.fromEntries(
-    Object.entries(state).filter(
-      ([k]) => !(HISTORY_EXCLUDE_KEYS as readonly string[]).includes(k),
-    ),
+    Object.entries(state).filter(([k]) => !(HISTORY_EXCLUDE_KEYS as readonly string[]).includes(k)),
   ) as Omit<BuilderState, (typeof HISTORY_EXCLUDE_KEYS)[number]>;
 }
 
@@ -188,26 +169,23 @@ function pushHistory(state: BuilderState): BuilderState {
 
 export const initialState: BuilderState = {
   deckId: null,
-  deckName: '',
+  deckName: "",
   isActive: false,
   beys: createEmptyBeys(),
   activeSlotIndex: 0,
-  activeStep: 'BLADE',
+  activeStep: "BLADE",
   savedDecks: [],
   loadingDecks: false,
-  mobileTab: 'catalog',
+  mobileTab: "catalog",
   history: [],
   future: [],
 };
 
 // --- Reducer ---
 
-export function builderReducer(
-  state: BuilderState,
-  action: BuilderAction,
-): BuilderState {
+export function builderReducer(state: BuilderState, action: BuilderAction): BuilderState {
   switch (action.type) {
-    case 'UNDO': {
+    case "UNDO": {
       if (state.history.length === 0) return state;
       const [previous, ...remainingHistory] = state.history;
       const current = omitHistoryKeys(state);
@@ -219,7 +197,7 @@ export function builderReducer(
       };
     }
 
-    case 'REDO': {
+    case "REDO": {
       if (state.future.length === 0) return state;
       const [next, ...remainingFuture] = state.future;
       const current = omitHistoryKeys(state);
@@ -231,7 +209,7 @@ export function builderReducer(
       };
     }
 
-    case 'SET_PART': {
+    case "SET_PART": {
       const nextState = pushHistory(state);
       const newBeys: [BeySlot, BeySlot, BeySlot] = [
         { ...state.beys[0] },
@@ -250,7 +228,7 @@ export function builderReducer(
       };
 
       // If switching away from a CX blade, clear CX-specific parts
-      if (state.activeStep === 'BLADE' && !isCXBlade(newBeys[idx])) {
+      if (state.activeStep === "BLADE" && !isCXBlade(newBeys[idx])) {
         newBeys[idx] = {
           ...newBeys[idx],
           overBlade: null,
@@ -266,25 +244,23 @@ export function builderReducer(
 
       if (isSlotComplete(updatedSlot)) {
         // Find next incomplete slot
-        const nextIncomplete = newBeys.findIndex(
-          (s, i) => i > idx && !isSlotComplete(s),
-        ) as 0 | 1 | 2 | -1;
+        const nextIncomplete = newBeys.findIndex((s, i) => i > idx && !isSlotComplete(s)) as
+          | 0
+          | 1
+          | 2
+          | -1;
         if (nextIncomplete !== -1) {
           nextSlotIndex = nextIncomplete;
           nextStep = getNextStep(newBeys[nextIncomplete]);
         } else {
           // Check earlier slots
-          const earlier = newBeys.findIndex((s) => !isSlotComplete(s)) as
-            | 0
-            | 1
-            | 2
-            | -1;
+          const earlier = newBeys.findIndex((s) => !isSlotComplete(s)) as 0 | 1 | 2 | -1;
           if (earlier !== -1) {
             nextSlotIndex = earlier;
             nextStep = getNextStep(newBeys[earlier]);
           } else {
             // All complete, stay
-            nextStep = 'BLADE';
+            nextStep = "BLADE";
           }
         }
       } else {
@@ -299,7 +275,7 @@ export function builderReducer(
       };
     }
 
-    case 'REMOVE_PART': {
+    case "REMOVE_PART": {
       const nextState = pushHistory(state);
       const newBeys: [BeySlot, BeySlot, BeySlot] = [
         { ...state.beys[0] },
@@ -313,7 +289,7 @@ export function builderReducer(
         [rmKey]: null,
       };
       // If removing the blade, also clear CX parts
-      if (action.partType === 'BLADE') {
+      if (action.partType === "BLADE") {
         newBeys[rmIdx] = {
           ...newBeys[rmIdx],
           overBlade: null,
@@ -329,7 +305,7 @@ export function builderReducer(
       };
     }
 
-    case 'SET_ACTIVE_SLOT': {
+    case "SET_ACTIVE_SLOT": {
       const saIdx = action.slotIndex as 0 | 1 | 2;
       const slot = state.beys[saIdx];
       return {
@@ -339,16 +315,16 @@ export function builderReducer(
       };
     }
 
-    case 'SET_ACTIVE_STEP':
+    case "SET_ACTIVE_STEP":
       return { ...state, activeStep: action.step };
 
-    case 'SET_DECK_NAME':
+    case "SET_DECK_NAME":
       return { ...state, deckName: action.name };
 
-    case 'SET_IS_ACTIVE':
+    case "SET_IS_ACTIVE":
       return { ...state, isActive: action.isActive };
 
-    case 'SET_NICKNAME': {
+    case "SET_NICKNAME": {
       const nextState = pushHistory(state);
       const newBeys: [BeySlot, BeySlot, BeySlot] = [
         { ...state.beys[0] },
@@ -363,7 +339,7 @@ export function builderReducer(
       return { ...nextState, beys: newBeys };
     }
 
-    case 'LOAD_DECK': {
+    case "LOAD_DECK": {
       const nextState = pushHistory(state);
       const newBeys = createEmptyBeys();
       action.deck.beys.forEach((bey, i) => {
@@ -375,15 +351,11 @@ export function builderReducer(
             bit: bey.bit ?? null,
             lockChip: bey.lockChip ?? null,
             assistBlade: bey.assistBlade ?? null,
-            nickname: bey.nickname || '',
+            nickname: bey.nickname || "",
           };
         }
       });
-      const firstIncomplete = newBeys.findIndex((s) => !isSlotComplete(s)) as
-        | 0
-        | 1
-        | 2
-        | -1;
+      const firstIncomplete = newBeys.findIndex((s) => !isSlotComplete(s)) as 0 | 1 | 2 | -1;
       const ldIdx = (firstIncomplete !== -1 ? firstIncomplete : 0) as 0 | 1 | 2;
       return {
         ...nextState,
@@ -396,43 +368,43 @@ export function builderReducer(
       };
     }
 
-    case 'NEW_DECK':
+    case "NEW_DECK":
       return {
         ...pushHistory(state),
         deckId: null,
-        deckName: '',
+        deckName: "",
         isActive: false,
         beys: createEmptyBeys(),
         activeSlotIndex: 0,
-        activeStep: 'BLADE',
+        activeStep: "BLADE",
       };
 
-    case 'SET_SAVED_DECKS':
+    case "SET_SAVED_DECKS":
       return { ...state, savedDecks: action.decks };
 
-    case 'SET_LOADING_DECKS':
+    case "SET_LOADING_DECKS":
       return { ...state, loadingDecks: action.loading };
 
-    case 'DELETE_DECK':
+    case "DELETE_DECK":
       return {
         ...state,
         savedDecks: state.savedDecks.filter((d) => d.id !== action.deckId),
         ...(state.deckId === action.deckId
           ? {
               deckId: null,
-              deckName: '',
+              deckName: "",
               isActive: false,
               beys: createEmptyBeys(),
               activeSlotIndex: 0,
-              activeStep: 'BLADE' as BuilderStep,
+              activeStep: "BLADE" as BuilderStep,
             }
           : {}),
       };
 
-    case 'SET_MOBILE_TAB':
+    case "SET_MOBILE_TAB":
       return { ...state, mobileTab: action.tab };
 
-    case 'RESTORE_DRAFT':
+    case "RESTORE_DRAFT":
       return { ...state, ...action.draft };
 
     default:
@@ -442,7 +414,7 @@ export function builderReducer(
 
 // --- localStorage persistence ---
 
-const LS_KEY = 'rpb-builder-draft';
+const LS_KEY = "rpb-builder-draft";
 
 interface LocalDraft {
   deckId: string | null;
@@ -478,9 +450,9 @@ function loadDraft(): Partial<BuilderState> | null {
     if (!hasParts && !draft.deckName) return null;
     // Ensure CX fields exist (migration from old drafts)
     for (const bey of draft.beys) {
-      if (!('overBlade' in bey)) (bey as BeySlot).overBlade = null;
-      if (!('lockChip' in bey)) (bey as BeySlot).lockChip = null;
-      if (!('assistBlade' in bey)) (bey as BeySlot).assistBlade = null;
+      if (!("overBlade" in bey)) (bey as BeySlot).overBlade = null;
+      if (!("lockChip" in bey)) (bey as BeySlot).lockChip = null;
+      if (!("assistBlade" in bey)) (bey as BeySlot).assistBlade = null;
     }
     // Find first incomplete slot
     const firstIncomplete = draft.beys.findIndex((s) => !isSlotComplete(s));
@@ -523,7 +495,7 @@ function encodeState(state: BuilderState): string {
   try {
     return btoa(JSON.stringify(data));
   } catch {
-    return '';
+    return "";
   }
 }
 
@@ -573,13 +545,13 @@ export function BuilderProvider({ children }: { children: ReactNode }) {
     if (hasRestoredDraft.current) return;
     hasRestoredDraft.current = true;
 
-    const shareCode = new URLSearchParams(window.location.search).get('share');
+    const shareCode = new URLSearchParams(window.location.search).get("share");
     if (shareCode) {
       const shared = decodeShare(shareCode);
       if (shared) {
         const ids = (shared.b ?? []).flatMap((s) =>
           [s.b, s.o, s.r, s.t, s.l, s.a].filter(
-            (x): x is string => typeof x === 'string' && x.length > 0,
+            (x): x is string => typeof x === "string" && x.length > 0,
           ),
         );
         getPartsByExternalIds(ids)
@@ -592,14 +564,14 @@ export function BuilderProvider({ children }: { children: ReactNode }) {
               bit: s.t ? (byExt.get(s.t) ?? null) : null,
               lockChip: s.l ? (byExt.get(s.l) ?? null) : null,
               assistBlade: s.a ? (byExt.get(s.a) ?? null) : null,
-              nickname: '',
+              nickname: "",
             }));
             // id '' (falsy) → treated as a new, unsaved deck (POST on save).
             dispatch({
-              type: 'LOAD_DECK',
+              type: "LOAD_DECK",
               deck: {
-                id: '',
-                name: shared.n ?? '',
+                id: "",
+                name: shared.n ?? "",
                 isActive: false,
                 beys,
               },
@@ -614,46 +586,42 @@ export function BuilderProvider({ children }: { children: ReactNode }) {
 
     const draft = loadDraft();
     if (draft) {
-      dispatch({ type: 'RESTORE_DRAFT', draft });
+      dispatch({ type: "RESTORE_DRAFT", draft });
     }
   }, []);
 
   // Keyboard Shortcuts
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (
-        e.target instanceof HTMLInputElement ||
-        e.target instanceof HTMLTextAreaElement
-      )
-        return;
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
 
       const key = e.key.toLowerCase();
 
       if (e.ctrlKey || e.metaKey) {
-        if (key === 'z') {
-          if (e.shiftKey) dispatch({ type: 'REDO' });
-          else dispatch({ type: 'UNDO' });
+        if (key === "z") {
+          if (e.shiftKey) dispatch({ type: "REDO" });
+          else dispatch({ type: "UNDO" });
           e.preventDefault();
-        } else if (key === 'y') {
-          dispatch({ type: 'REDO' });
+        } else if (key === "y") {
+          dispatch({ type: "REDO" });
           e.preventDefault();
         }
       }
 
-      if (['1', '2', '3'].includes(e.key)) {
+      if (["1", "2", "3"].includes(e.key)) {
         dispatch({
-          type: 'SET_ACTIVE_SLOT',
+          type: "SET_ACTIVE_SLOT",
           slotIndex: parseInt(e.key, 10) - 1,
         });
       }
 
-      if (key === 'b') dispatch({ type: 'SET_ACTIVE_STEP', step: 'BLADE' });
-      if (key === 'r') dispatch({ type: 'SET_ACTIVE_STEP', step: 'RATCHET' });
-      if (key === 't') dispatch({ type: 'SET_ACTIVE_STEP', step: 'BIT' });
+      if (key === "b") dispatch({ type: "SET_ACTIVE_STEP", step: "BLADE" });
+      if (key === "r") dispatch({ type: "SET_ACTIVE_STEP", step: "RATCHET" });
+      if (key === "t") dispatch({ type: "SET_ACTIVE_STEP", step: "BIT" });
     };
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
   // Persist to localStorage on every relevant change (skip first render)
@@ -673,8 +641,7 @@ export function BuilderProvider({ children }: { children: ReactNode }) {
       if (bey.overBlade) ids.add(bey.overBlade.id);
       if (bey.ratchet) ids.add(bey.ratchet.id);
       if (bey.bit) ids.add(bey.bit.id);
-      if (bey.lockChip?.name.toLowerCase().includes('metal'))
-        ids.add(bey.lockChip.id);
+      if (bey.lockChip?.name.toLowerCase().includes("metal")) ids.add(bey.lockChip.id);
       if (bey.assistBlade) ids.add(bey.assistBlade.id);
     }
     return ids;
@@ -688,15 +655,14 @@ export function BuilderProvider({ children }: { children: ReactNode }) {
       if (bey.overBlade) names.add(bey.overBlade.name);
       if (bey.ratchet) names.add(bey.ratchet.name);
       if (bey.bit) names.add(bey.bit.name);
-      if (bey.lockChip?.name.toLowerCase().includes('metal'))
-        names.add(bey.lockChip.name);
+      if (bey.lockChip?.name.toLowerCase().includes("metal")) names.add(bey.lockChip.name);
       if (bey.assistBlade) names.add(bey.assistBlade.name);
     }
     return names;
   }, [state.beys]);
 
   const shareUrl = useMemo(() => {
-    if (typeof window === 'undefined') return '';
+    if (typeof window === "undefined") return "";
     const baseUrl = window.location.origin + window.location.pathname;
     const code = encodeState(state);
     return code ? `${baseUrl}?share=${code}` : baseUrl;
@@ -715,13 +681,11 @@ export function BuilderProvider({ children }: { children: ReactNode }) {
     [state, usedPartIds, usedPartNames, shareUrl],
   );
 
-  return (
-    <BuilderContext.Provider value={value}>{children}</BuilderContext.Provider>
-  );
+  return <BuilderContext.Provider value={value}>{children}</BuilderContext.Provider>;
 }
 
 export function useBuilder() {
   const ctx = useContext(BuilderContext);
-  if (!ctx) throw new Error('useBuilder must be used within BuilderProvider');
+  if (!ctx) throw new Error("useBuilder must be used within BuilderProvider");
   return ctx;
 }

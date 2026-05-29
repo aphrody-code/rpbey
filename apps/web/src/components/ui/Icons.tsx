@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import { type SVGProps } from 'react';
+import Image from "next/image";
+import { type SVGProps } from "react";
 
 interface IconProps extends SVGProps<SVGSVGElement> {
   size?: number;
@@ -118,11 +118,7 @@ export function XIcon({ size = 24, ...props }: IconProps) {
  * Official Beyblade X Logo
  * Source: https://beyblade.com
  */
-export function BeybladeXLogo({
-  size = 100,
-  className,
-  alt = 'Beyblade X',
-}: ImageIconProps) {
+export function BeybladeXLogo({ size = 100, className, alt = "Beyblade X" }: ImageIconProps) {
   return (
     <Image
       src="/beyblade-x-logo.webp"
@@ -130,7 +126,7 @@ export function BeybladeXLogo({
       width={size}
       height={size}
       className={className}
-      style={{ objectFit: 'contain' }}
+      style={{ objectFit: "contain" }}
     />
   );
 }
@@ -152,14 +148,7 @@ export function BeybladeXIcon({ size = 24, ...props }: IconProps) {
       {/* Stylized X shape inspired by Beyblade X */}
       <path d="M20 20L45 50L20 80L35 80L50 60L65 80L80 80L55 50L80 20L65 20L50 40L35 20Z" />
       {/* Outer ring */}
-      <circle
-        cx="50"
-        cy="50"
-        r="45"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="4"
-      />
+      <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" strokeWidth="4" />
     </svg>
   );
 }
@@ -175,7 +164,7 @@ export function RPBLogoIcon({ size = 24, className }: ImageIconProps) {
       width={size}
       height={size}
       className={className}
-      style={{ objectFit: 'contain' }}
+      style={{ objectFit: "contain" }}
     />
   );
 }
@@ -197,14 +186,7 @@ export function RPBIcon({ size = 24, ...props }: IconProps) {
       {/* Background circle */}
       <circle cx="50" cy="50" r="48" fill="var(--rpb-primary)" />
       {/* Inner ring */}
-      <circle
-        cx="50"
-        cy="50"
-        r="40"
-        fill="none"
-        stroke="var(--rpb-secondary)"
-        strokeWidth="3"
-      />
+      <circle cx="50" cy="50" r="40" fill="none" stroke="var(--rpb-secondary)" strokeWidth="3" />
       {/* RPB Text */}
       <text
         x="50"
@@ -273,21 +255,9 @@ export function BeybladeIcon({ size = 24, ...props }: IconProps) {
       aria-hidden="true"
       {...props}
     >
-      <circle
-        cx="12"
-        cy="10"
-        r="8"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-      />
+      <circle cx="12" cy="10" r="8" fill="none" stroke="currentColor" strokeWidth="2" />
       <circle cx="12" cy="10" r="4" />
-      <path
-        d="M12 18v4"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
+      <path d="M12 18v4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
       <circle cx="12" cy="22" r="1" />
     </svg>
   );

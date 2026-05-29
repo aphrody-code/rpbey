@@ -1,8 +1,8 @@
-import { parseStringPromise } from 'xml2js';
-import { type VideoInfo } from './twitch';
+import { parseStringPromise } from "xml2js";
+import { type VideoInfo } from "./twitch";
 
-const YOUTUBE_RSS_URL = 'https://www.youtube.com/feeds/videos.xml?channel_id=';
-const DEFAULT_CHANNEL_ID = 'UCaGPpRP8MJzc5s8WGOD4jLw';
+const YOUTUBE_RSS_URL = "https://www.youtube.com/feeds/videos.xml?channel_id=";
+const DEFAULT_CHANNEL_ID = "UCaGPpRP8MJzc5s8WGOD4jLw";
 
 export async function getRecentYouTubeVideos(
   channelId: string = DEFAULT_CHANNEL_ID,
@@ -26,18 +26,15 @@ export async function getRecentYouTubeVideos(
     // Process only the first 'limit' entries
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return entries.slice(0, limit).map((entry: any) => {
-      const videoId = entry['yt:videoId']?.[0];
+      const videoId = entry["yt:videoId"]?.[0];
       const title = entry.title?.[0];
       const published = new Date(entry.published?.[0]);
 
       const stats =
-        entry['media:group']?.[0]?.['media:community']?.[0]?.[
-          'media:statistics'
-        ]?.[0]?.$;
+        entry["media:group"]?.[0]?.["media:community"]?.[0]?.["media:statistics"]?.[0]?.$;
       const views = stats ? parseInt(stats.views, 10) : 0;
 
-      const thumbnail =
-        entry['media:group']?.[0]?.['media:thumbnail']?.[0]?.$.url;
+      const thumbnail = entry["media:group"]?.[0]?.["media:thumbnail"]?.[0]?.$.url;
       const url = entry.link?.[0]?.$.href;
 
       return {
@@ -45,13 +42,13 @@ export async function getRecentYouTubeVideos(
         title,
         url,
         thumbnailUrl: thumbnail,
-        duration: 'YouTube', // RSS doesn't give duration easily, using placeholder
+        duration: "YouTube", // RSS doesn't give duration easily, using placeholder
         publishedAt: published,
         viewCount: views,
       };
     });
   } catch (error) {
-    console.error('Error fetching YouTube videos:', error);
+    console.error("Error fetching YouTube videos:", error);
     return [];
   }
 }

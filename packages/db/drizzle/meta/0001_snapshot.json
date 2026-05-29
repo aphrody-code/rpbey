@@ -134,12 +134,8 @@
           "name": "accounts_userId_fkey",
           "tableFrom": "accounts",
           "tableTo": "users",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         }
@@ -371,12 +367,8 @@
           "name": "anime_episode_sources_episodeId_fkey",
           "tableFrom": "anime_episode_sources",
           "tableTo": "anime_episodes",
-          "columnsFrom": [
-            "episodeId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["episodeId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         }
@@ -513,12 +505,8 @@
           "name": "anime_episodes_seriesId_fkey",
           "tableFrom": "anime_episodes",
           "tableTo": "anime_series",
-          "columnsFrom": [
-            "seriesId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["seriesId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         }
@@ -805,12 +793,8 @@
           "name": "anime_watch_progress_episodeId_fkey",
           "tableFrom": "anime_watch_progress",
           "tableTo": "anime_episodes",
-          "columnsFrom": [
-            "episodeId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["episodeId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         },
@@ -818,12 +802,8 @@
           "name": "anime_watch_progress_userId_fkey",
           "tableFrom": "anime_watch_progress",
           "tableTo": "users",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         }
@@ -1129,12 +1109,8 @@
           "name": "beyblades_bitId_fkey",
           "tableFrom": "beyblades",
           "tableTo": "parts",
-          "columnsFrom": [
-            "bitId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["bitId"],
+          "columnsTo": ["id"],
           "onDelete": "restrict",
           "onUpdate": "cascade"
         },
@@ -1142,12 +1118,8 @@
           "name": "beyblades_bladeId_fkey",
           "tableFrom": "beyblades",
           "tableTo": "parts",
-          "columnsFrom": [
-            "bladeId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["bladeId"],
+          "columnsTo": ["id"],
           "onDelete": "restrict",
           "onUpdate": "cascade"
         },
@@ -1155,12 +1127,8 @@
           "name": "beyblades_productId_fkey",
           "tableFrom": "beyblades",
           "tableTo": "products",
-          "columnsFrom": [
-            "productId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["productId"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "cascade"
         },
@@ -1168,12 +1136,8 @@
           "name": "beyblades_ratchetId_fkey",
           "tableFrom": "beyblades",
           "tableTo": "parts",
-          "columnsFrom": [
-            "ratchetId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["ratchetId"],
+          "columnsTo": ["id"],
           "onDelete": "restrict",
           "onUpdate": "cascade"
         }
@@ -1362,12 +1326,8 @@
           "name": "card_inventory_cardId_fkey",
           "tableFrom": "card_inventory",
           "tableTo": "gacha_cards",
-          "columnsFrom": [
-            "cardId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["cardId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         },
@@ -1375,12 +1335,8 @@
           "name": "card_inventory_userId_fkey",
           "tableFrom": "card_inventory",
           "tableTo": "users",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         }
@@ -1467,12 +1423,8 @@
           "name": "card_wishlists_cardId_fkey",
           "tableFrom": "card_wishlists",
           "tableTo": "gacha_cards",
-          "columnsFrom": [
-            "cardId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["cardId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         },
@@ -1480,12 +1432,8 @@
           "name": "card_wishlists_profileId_fkey",
           "tableFrom": "card_wishlists",
           "tableTo": "profiles",
-          "columnsFrom": [
-            "profileId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["profileId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         }
@@ -1675,12 +1623,8 @@
           "name": "currency_transactions_userId_fkey",
           "tableFrom": "currency_transactions",
           "tableTo": "users",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         }
@@ -1802,12 +1746,8 @@
           "name": "deck_items_assistBladeId_fkey",
           "tableFrom": "deck_items",
           "tableTo": "parts",
-          "columnsFrom": [
-            "assistBladeId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["assistBladeId"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "cascade"
         },
@@ -1815,12 +1755,8 @@
           "name": "deck_items_beyId_fkey",
           "tableFrom": "deck_items",
           "tableTo": "beyblades",
-          "columnsFrom": [
-            "beyId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["beyId"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "cascade"
         },
@@ -1828,12 +1764,8 @@
           "name": "deck_items_bitId_fkey",
           "tableFrom": "deck_items",
           "tableTo": "parts",
-          "columnsFrom": [
-            "bitId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["bitId"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "cascade"
         },
@@ -1841,12 +1773,8 @@
           "name": "deck_items_bladeId_fkey",
           "tableFrom": "deck_items",
           "tableTo": "parts",
-          "columnsFrom": [
-            "bladeId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["bladeId"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "cascade"
         },
@@ -1854,12 +1782,8 @@
           "name": "deck_items_deckId_fkey",
           "tableFrom": "deck_items",
           "tableTo": "decks",
-          "columnsFrom": [
-            "deckId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["deckId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         },
@@ -1867,12 +1791,8 @@
           "name": "deck_items_lockChipId_fkey",
           "tableFrom": "deck_items",
           "tableTo": "parts",
-          "columnsFrom": [
-            "lockChipId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["lockChipId"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "cascade"
         },
@@ -1880,12 +1800,8 @@
           "name": "deck_items_overBladeId_fkey",
           "tableFrom": "deck_items",
           "tableTo": "parts",
-          "columnsFrom": [
-            "overBladeId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["overBladeId"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "cascade"
         },
@@ -1893,12 +1809,8 @@
           "name": "deck_items_ratchetId_fkey",
           "tableFrom": "deck_items",
           "tableTo": "parts",
-          "columnsFrom": [
-            "ratchetId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["ratchetId"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "cascade"
         }
@@ -1975,12 +1887,8 @@
           "name": "decks_userId_fkey",
           "tableFrom": "decks",
           "tableTo": "users",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         }
@@ -2560,12 +2468,8 @@
           "name": "gacha_cards_dropId_fkey",
           "tableFrom": "gacha_cards",
           "tableTo": "gacha_drops",
-          "columnsFrom": [
-            "dropId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["dropId"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "cascade"
         }
@@ -2742,12 +2646,8 @@
           "name": "gacha_friendships_friendId_users_id_fk",
           "tableFrom": "gacha_friendships",
           "tableTo": "users",
-          "columnsFrom": [
-            "friendId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["friendId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -2755,12 +2655,8 @@
           "name": "gacha_friendships_userId_users_id_fk",
           "tableFrom": "gacha_friendships",
           "tableTo": "users",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -2768,10 +2664,7 @@
       "compositePrimaryKeys": {
         "gacha_friendships_pkey": {
           "name": "gacha_friendships_pkey",
-          "columns": [
-            "userId",
-            "friendId"
-          ]
+          "columns": ["userId", "friendId"]
         }
       },
       "uniqueConstraints": {},
@@ -2904,12 +2797,8 @@
           "name": "global_rankings_userId_fkey",
           "tableFrom": "global_rankings",
           "tableTo": "users",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         }
@@ -3065,12 +2954,8 @@
           "name": "part_inventory_partId_fkey",
           "tableFrom": "part_inventory",
           "tableTo": "parts",
-          "columnsFrom": [
-            "partId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["partId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         },
@@ -3078,12 +2963,8 @@
           "name": "part_inventory_userId_fkey",
           "tableFrom": "part_inventory",
           "tableTo": "users",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         }
@@ -3380,12 +3261,8 @@
           "name": "point_adjustments_adminId_fkey",
           "tableFrom": "point_adjustments",
           "tableTo": "users",
-          "columnsFrom": [
-            "adminId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["adminId"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "cascade"
         },
@@ -3393,12 +3270,8 @@
           "name": "point_adjustments_userId_fkey",
           "tableFrom": "point_adjustments",
           "tableTo": "users",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         }
@@ -3890,12 +3763,8 @@
           "name": "profiles_userId_fkey",
           "tableFrom": "profiles",
           "tableTo": "users",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         }
@@ -4507,12 +4376,8 @@
           "name": "season_entries_seasonId_fkey",
           "tableFrom": "season_entries",
           "tableTo": "ranking_seasons",
-          "columnsFrom": [
-            "seasonId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["seasonId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         },
@@ -4520,12 +4385,8 @@
           "name": "season_entries_userId_fkey",
           "tableFrom": "season_entries",
           "tableTo": "users",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         }
@@ -4635,12 +4496,8 @@
           "name": "sessions_userId_fkey",
           "tableFrom": "sessions",
           "tableTo": "users",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         }
@@ -5112,12 +4969,8 @@
           "name": "tickets_userId_fkey",
           "tableFrom": "tickets",
           "tableTo": "users",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         }
@@ -5326,12 +5179,8 @@
           "name": "tournament_matches_player1Id_fkey",
           "tableFrom": "tournament_matches",
           "tableTo": "users",
-          "columnsFrom": [
-            "player1Id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["player1Id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "cascade"
         },
@@ -5339,12 +5188,8 @@
           "name": "tournament_matches_player2Id_fkey",
           "tableFrom": "tournament_matches",
           "tableTo": "users",
-          "columnsFrom": [
-            "player2Id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["player2Id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "cascade"
         },
@@ -5352,12 +5197,8 @@
           "name": "tournament_matches_tournamentId_fkey",
           "tableFrom": "tournament_matches",
           "tableTo": "tournaments",
-          "columnsFrom": [
-            "tournamentId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["tournamentId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         },
@@ -5365,12 +5206,8 @@
           "name": "tournament_matches_winnerId_fkey",
           "tableFrom": "tournament_matches",
           "tableTo": "users",
-          "columnsFrom": [
-            "winnerId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["winnerId"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "cascade"
         }
@@ -5523,12 +5360,8 @@
           "name": "tournament_participants_deckId_fkey",
           "tableFrom": "tournament_participants",
           "tableTo": "decks",
-          "columnsFrom": [
-            "deckId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["deckId"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "cascade"
         },
@@ -5536,12 +5369,8 @@
           "name": "tournament_participants_tournamentId_fkey",
           "tableFrom": "tournament_participants",
           "tableTo": "tournaments",
-          "columnsFrom": [
-            "tournamentId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["tournamentId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         },
@@ -5549,12 +5378,8 @@
           "name": "tournament_participants_userId_fkey",
           "tableFrom": "tournament_participants",
           "tableTo": "users",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         }
@@ -5749,12 +5574,8 @@
           "name": "tournaments_categoryId_fkey",
           "tableFrom": "tournaments",
           "tableTo": "tournament_categories",
-          "columnsFrom": [
-            "categoryId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["categoryId"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "cascade"
         }
@@ -5817,12 +5638,8 @@
           "name": "two_factors_userId_fkey",
           "tableFrom": "two_factors",
           "tableTo": "users",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         }
@@ -6532,84 +6349,42 @@
     "public.AnimeGeneration": {
       "name": "AnimeGeneration",
       "schema": "public",
-      "values": [
-        "ORIGINAL",
-        "METAL",
-        "BURST",
-        "X"
-      ]
+      "values": ["ORIGINAL", "METAL", "BURST", "X"]
     },
     "public.BeyType": {
       "name": "BeyType",
       "schema": "public",
-      "values": [
-        "ATTACK",
-        "DEFENSE",
-        "STAMINA",
-        "BALANCE"
-      ]
+      "values": ["ATTACK", "DEFENSE", "STAMINA", "BALANCE"]
     },
     "public.CardRarity": {
       "name": "CardRarity",
       "schema": "public",
-      "values": [
-        "COMMON",
-        "RARE",
-        "SUPER_RARE",
-        "LEGENDARY",
-        "SECRET"
-      ]
+      "values": ["COMMON", "RARE", "SUPER_RARE", "LEGENDARY", "SECRET"]
     },
     "public.CardType": {
       "name": "CardType",
       "schema": "public",
-      "values": [
-        "PNG",
-        "ARTIST"
-      ]
+      "values": ["PNG", "ARTIST"]
     },
     "public.EpisodeSourceType": {
       "name": "EpisodeSourceType",
       "schema": "public",
-      "values": [
-        "YOUTUBE",
-        "DAILYMOTION",
-        "MP4",
-        "HLS",
-        "IFRAME"
-      ]
+      "values": ["YOUTUBE", "DAILYMOTION", "MP4", "HLS", "IFRAME"]
     },
     "public.ExperienceLevel": {
       "name": "ExperienceLevel",
       "schema": "public",
-      "values": [
-        "BEGINNER",
-        "INTERMEDIATE",
-        "ADVANCED",
-        "EXPERT",
-        "LEGEND"
-      ]
+      "values": ["BEGINNER", "INTERMEDIATE", "ADVANCED", "EXPERT", "LEGEND"]
     },
     "public.PartType": {
       "name": "PartType",
       "schema": "public",
-      "values": [
-        "BLADE",
-        "RATCHET",
-        "BIT",
-        "LOCK_CHIP",
-        "ASSIST_BLADE",
-        "OVER_BLADE"
-      ]
+      "values": ["BLADE", "RATCHET", "BIT", "LOCK_CHIP", "ASSIST_BLADE", "OVER_BLADE"]
     },
     "public.ProductLine": {
       "name": "ProductLine",
       "schema": "public",
-      "values": [
-        "BX",
-        "UX",
-        "CX"
-      ]
+      "values": ["BX", "UX", "CX"]
     },
     "public.ProductType": {
       "name": "ProductType",
@@ -6657,11 +6432,7 @@
     "public.WatchStatus": {
       "name": "WatchStatus",
       "schema": "public",
-      "values": [
-        "NOT_STARTED",
-        "IN_PROGRESS",
-        "COMPLETED"
-      ]
+      "values": ["NOT_STARTED", "IN_PROGRESS", "COMPLETED"]
     }
   },
   "schemas": {},

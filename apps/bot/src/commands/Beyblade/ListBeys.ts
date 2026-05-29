@@ -1,30 +1,21 @@
-import { Pagination } from '@rpbey/pagination';
-import {
-  ApplicationCommandOptionType,
-  type CommandInteraction,
-  EmbedBuilder,
-} from 'discord.js';
-import { Discord, Slash, SlashChoice, SlashOption } from '@rpbey/discordx';
-import { inject, injectable } from 'tsyringe';
+import { Pagination } from "@rpbey/pagination";
+import { ApplicationCommandOptionType, type CommandInteraction, EmbedBuilder } from "discord.js";
+import { Discord, Slash, SlashChoice, SlashOption } from "@rpbey/discordx";
+import { inject, injectable } from "tsyringe";
 
-import { Colors } from '../../lib/constants.js';
-import { PrismaService } from '../../lib/prisma.js';
+import { Colors } from "../../lib/constants.js";
+import { PrismaService } from "../../lib/prisma.js";
 
-const TYPE_META: Record<
-  string,
-  { color: number; emoji: string; label: string }
-> = {
-  ATTACK: { color: 0xef4444, emoji: '⚔️', label: 'Attaque' },
-  DEFENSE: { color: 0x3b82f6, emoji: '🛡️', label: 'Défense' },
-  STAMINA: { color: 0x22c55e, emoji: '🌀', label: 'Endurance' },
-  BALANCE: { color: 0xa855f7, emoji: '⚖️', label: 'Équilibre' },
+const TYPE_META: Record<string, { color: number; emoji: string; label: string }> = {
+  ATTACK: { color: 0xef4444, emoji: "⚔️", label: "Attaque" },
+  DEFENSE: { color: 0x3b82f6, emoji: "🛡️", label: "Défense" },
+  STAMINA: { color: 0x22c55e, emoji: "🌀", label: "Endurance" },
+  BALANCE: { color: 0xa855f7, emoji: "⚖️", label: "Équilibre" },
 };
 
 function statBar(value: number, max = 100): string {
   const filled = Math.round((value / max) * 10);
-  return (
-    '█'.repeat(Math.min(filled, 10)) + '░'.repeat(10 - Math.min(filled, 10))
-  );
+  return "█".repeat(Math.min(filled, 10)) + "░".repeat(10 - Math.min(filled, 10));
 }
 
 @Discord()
@@ -33,24 +24,24 @@ export class ListBeysCommand {
   constructor(@inject(PrismaService) private prisma: PrismaService) {}
 
   @Slash({
-    name: 'beys',
-    description: 'Parcourir la bibliothèque Beyblade X',
+    name: "beys",
+    description: "Parcourir la bibliothèque Beyblade X",
   })
   async list(
-    @SlashChoice({ name: '⚔️ Attaque', value: 'ATTACK' })
-    @SlashChoice({ name: '🛡️ Défense', value: 'DEFENSE' })
-    @SlashChoice({ name: '🌀 Endurance', value: 'STAMINA' })
-    @SlashChoice({ name: '⚖️ Équilibre', value: 'BALANCE' })
+    @SlashChoice({ name: "⚔️ Attaque", value: "ATTACK" })
+    @SlashChoice({ name: "🛡️ Défense", value: "DEFENSE" })
+    @SlashChoice({ name: "🌀 Endurance", value: "STAMINA" })
+    @SlashChoice({ name: "⚖️ Équilibre", value: "BALANCE" })
     @SlashOption({
-      name: 'type',
-      description: 'Filtrer par type',
+      name: "type",
+      description: "Filtrer par type",
       required: false,
       type: ApplicationCommandOptionType.String,
     })
     beyType: string | undefined,
     @SlashOption({
-      name: 'recherche',
-      description: 'Rechercher par nom',
+      name: "recherche",
+      description: "Rechercher par nom",
       required: false,
       type: ApplicationCommandOptionType.String,
     })
@@ -61,19 +52,17 @@ export class ListBeysCommand {
 
     const where: Record<string, unknown> = {};
     if (beyType) where.beyType = beyType;
-    if (search) where.name = { contains: search, mode: 'insensitive' };
+    if (search) where.name = { contains: search, mode: "insensitive" };
 
     const blades = await this.prisma.beyblade.findMany({
       where,
-      orderBy: { name: 'asc' },
+      orderBy: { name: "asc" },
       include: { blade: true, ratchet: true, bit: true },
     });
 
     if (blades.length === 0) {
       return interaction.editReply(
-        search
-          ? `❌ Aucun résultat pour "${search}".`
-          : '❌ Aucune toupie trouvée.',
+        search ? `❌ Aucun résultat pour "${search}".` : "❌ Aucune toupie trouvée.",
       );
     }
 
@@ -90,7 +79,7 @@ export class ListBeysCommand {
         .setTitle(
           typeMeta
             ? `${typeMeta.emoji} Beyblade X — ${typeMeta.label}`
-            : '🌀 Beyblade X — Bibliothèque',
+            : "🌀 Beyblade X — Bibliothèque",
         )
         .setColor(typeMeta?.color ?? Colors.Beyblade)
         .setFooter({
@@ -104,16 +93,16 @@ export class ListBeysCommand {
       }
 
       for (const bey of current) {
-        const tm = TYPE_META[bey.beyType || ''];
-        const emoji = tm?.emoji || '🌀';
+        const tm = TYPE_META[bey.beyType || ""];
+        const emoji = tm?.emoji || "🌀";
         const atk = bey.totalAttack ?? 0;
         const def = bey.totalDefense ?? 0;
         const sta = bey.totalStamina ?? 0;
-        const weight = bey.totalWeight ? `${bey.totalWeight}g` : '?g';
+        const weight = bey.totalWeight ? `${bey.totalWeight}g` : "?g";
 
         const parts = [bey.blade?.name, bey.ratchet?.name, bey.bit?.name]
           .filter(Boolean)
-          .join(' · ');
+          .join(" · ");
 
         embed.addFields({
           name: `${emoji} ${bey.name}`,

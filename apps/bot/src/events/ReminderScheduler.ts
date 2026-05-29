@@ -1,9 +1,9 @@
-import { type Client, type TextChannel } from 'discord.js';
-import { type ArgsOf, Discord, On } from '@rpbey/discordx';
-import { inject, injectable } from 'tsyringe';
+import { type Client, type TextChannel } from "discord.js";
+import { type ArgsOf, Discord, On } from "@rpbey/discordx";
+import { inject, injectable } from "tsyringe";
 
-import { logger } from '../lib/logger.js';
-import { PrismaService } from '../lib/prisma.js';
+import { logger } from "../lib/logger.js";
+import { PrismaService } from "../lib/prisma.js";
 
 const CHECK_INTERVAL = 30_000; // 30 seconds
 
@@ -12,9 +12,9 @@ const CHECK_INTERVAL = 30_000; // 30 seconds
 export class ReminderScheduler {
   constructor(@inject(PrismaService) private prisma: PrismaService) {}
 
-  @On({ event: 'clientReady' })
-  async onReady([client]: ArgsOf<'clientReady'>) {
-    logger.info('[Reminders] Scheduler started');
+  @On({ event: "clientReady" })
+  async onReady([client]: ArgsOf<"clientReady">) {
+    logger.info("[Reminders] Scheduler started");
     setInterval(() => this.checkReminders(client), CHECK_INTERVAL);
   }
 
@@ -32,9 +32,7 @@ export class ReminderScheduler {
             .catch(() => null)) as TextChannel | null;
 
           if (channel) {
-            await channel.send(
-              `⏰ <@${reminder.discordId}> — Rappel :\n> ${reminder.message}`,
-            );
+            await channel.send(`⏰ <@${reminder.discordId}> — Rappel :\n> ${reminder.message}`);
           }
 
           await this.prisma.reminder.update({
@@ -42,14 +40,11 @@ export class ReminderScheduler {
             data: { fired: true },
           });
         } catch (err) {
-          logger.error(
-            `[Reminders] Failed to fire reminder ${reminder.id}:`,
-            err,
-          );
+          logger.error(`[Reminders] Failed to fire reminder ${reminder.id}:`, err);
         }
       }
     } catch (err) {
-      logger.error('[Reminders] Check failed:', err);
+      logger.error("[Reminders] Check failed:", err);
     }
   }
 }

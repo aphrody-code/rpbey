@@ -1,26 +1,20 @@
-'use client';
+"use client";
 
-import {
-  FormControlLabel,
-  Grid,
-  MenuItem,
-  Switch,
-  TextField,
-} from '@mui/material';
-import { useEffect, useState } from 'react';
-import { FormDialog } from '@/components/ui';
-import { type StaffMember } from '@/lib/types';
-import { type StaffMemberInput } from './actions';
+import { FormControlLabel, Grid, MenuItem, Switch, TextField } from "@mui/material";
+import { useEffect, useState } from "react";
+import { FormDialog } from "@/components/ui";
+import { type StaffMember } from "@/lib/types";
+import { type StaffMemberInput } from "./actions";
 
 const TEAMS = [
-  { value: 'admin', label: 'Administration' },
-  { value: 'rh', label: 'Ressources Humaines' },
-  { value: 'modo', label: 'Modération' },
-  { value: 'arbitre', label: 'Arbitrage' },
-  { value: 'staff', label: 'Staff' },
-  { value: 'dev', label: 'Développement' },
-  { value: 'event', label: 'Événementiel' },
-  { value: 'media', label: 'Média / Design' },
+  { value: "admin", label: "Administration" },
+  { value: "rh", label: "Ressources Humaines" },
+  { value: "modo", label: "Modération" },
+  { value: "arbitre", label: "Arbitrage" },
+  { value: "staff", label: "Staff" },
+  { value: "dev", label: "Développement" },
+  { value: "event", label: "Événementiel" },
+  { value: "media", label: "Média / Design" },
 ];
 
 interface StaffDialogProps {
@@ -31,19 +25,13 @@ interface StaffDialogProps {
   loading?: boolean;
 }
 
-export function StaffDialog({
-  open,
-  onClose,
-  onSubmit,
-  initialData,
-  loading,
-}: StaffDialogProps) {
+export function StaffDialog({ open, onClose, onSubmit, initialData, loading }: StaffDialogProps) {
   const [formData, setFormData] = useState<StaffMemberInput>({
-    name: '',
-    role: '',
-    teamId: 'modo',
-    imageUrl: '',
-    discordId: '',
+    name: "",
+    role: "",
+    teamId: "modo",
+    imageUrl: "",
+    discordId: "",
     displayIndex: 0,
     isActive: true,
   });
@@ -51,21 +39,21 @@ export function StaffDialog({
   useEffect(() => {
     if (initialData) {
       setFormData({
-        name: initialData.name || '',
-        role: initialData.role || '',
-        teamId: initialData.teamId || 'modo',
-        imageUrl: initialData.imageUrl || '',
-        discordId: initialData.discordId || '',
+        name: initialData.name || "",
+        role: initialData.role || "",
+        teamId: initialData.teamId || "modo",
+        imageUrl: initialData.imageUrl || "",
+        discordId: initialData.discordId || "",
         displayIndex: initialData.displayIndex || 0,
         isActive: initialData.isActive ?? true,
       });
     } else {
       setFormData({
-        name: '',
-        role: '',
-        teamId: 'modo',
-        imageUrl: '',
-        discordId: '',
+        name: "",
+        role: "",
+        teamId: "modo",
+        imageUrl: "",
+        discordId: "",
         displayIndex: 0,
         isActive: true,
       });
@@ -80,7 +68,7 @@ export function StaffDialog({
     <FormDialog
       open={open}
       onClose={onClose}
-      title={initialData ? 'Modifier le membre' : 'Ajouter un membre'}
+      title={initialData ? "Modifier le membre" : "Ajouter un membre"}
       onSubmit={handleSubmit}
       loading={loading}
       maxWidth="md"
@@ -111,9 +99,7 @@ export function StaffDialog({
             select
             label="Équipe"
             value={formData.teamId}
-            onChange={(e) =>
-              setFormData({ ...formData, teamId: e.target.value })
-            }
+            onChange={(e) => setFormData({ ...formData, teamId: e.target.value })}
             required
           >
             {TEAMS.map((option) => (
@@ -142,9 +128,7 @@ export function StaffDialog({
             fullWidth
             label="URL de l'image"
             value={formData.imageUrl}
-            onChange={(e) =>
-              setFormData({ ...formData, imageUrl: e.target.value })
-            }
+            onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
             placeholder="https://..."
             helperText="L'avatar Discord sera utilisé si synchronisé"
           />
@@ -154,9 +138,7 @@ export function StaffDialog({
             fullWidth
             label="ID Discord"
             value={formData.discordId}
-            onChange={(e) =>
-              setFormData({ ...formData, discordId: e.target.value })
-            }
+            onChange={(e) => setFormData({ ...formData, discordId: e.target.value })}
           />
         </Grid>
         <Grid size={{ xs: 12 }}>
@@ -164,9 +146,7 @@ export function StaffDialog({
             control={
               <Switch
                 checked={formData.isActive}
-                onChange={(e) =>
-                  setFormData({ ...formData, isActive: e.target.checked })
-                }
+                onChange={(e) => setFormData({ ...formData, isActive: e.target.checked })}
               />
             }
             label="Actif (Affiché sur le site)"

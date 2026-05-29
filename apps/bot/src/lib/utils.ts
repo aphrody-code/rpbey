@@ -1,6 +1,6 @@
-import { EmbedBuilder } from 'discord.js';
+import { EmbedBuilder } from "discord.js";
 
-import { Colors, RPB } from './constants.js';
+import { Colors, RPB } from "./constants.js";
 
 /**
  * Create a standardized embed for the bot
@@ -23,10 +23,7 @@ export function createEmbed(options: {
 /**
  * Create a success embed
  */
-export function successEmbed(
-  title: string,
-  description?: string,
-): EmbedBuilder {
+export function successEmbed(title: string, description?: string): EmbedBuilder {
   return createEmbed({
     title: `✅ ${title}`,
     description,
@@ -48,10 +45,7 @@ export function errorEmbed(title: string, description?: string): EmbedBuilder {
 /**
  * Create a warning embed
  */
-export function warningEmbed(
-  title: string,
-  description?: string,
-): EmbedBuilder {
+export function warningEmbed(title: string, description?: string): EmbedBuilder {
   return createEmbed({
     title: `⚠️ ${title}`,
     description,
@@ -77,11 +71,7 @@ export function formatDuration(ms: number): string {
 /**
  * Truncate a string to a maximum length
  */
-export function truncate(
-  str: string,
-  maxLength: number,
-  suffix = '...',
-): string {
+export function truncate(str: string, maxLength: number, suffix = "..."): string {
   if (str.length <= maxLength) return str;
   return str.slice(0, maxLength - suffix.length) + suffix;
 }
@@ -99,7 +89,7 @@ export function formatNumber(num: number): string {
 export function pickRandom<T>(array: readonly T[]): T {
   const element = array[Math.floor(Math.random() * array.length)];
   if (element === undefined) {
-    if (array.length === 0) throw new Error('Cannot pick from empty array');
+    if (array.length === 0) throw new Error("Cannot pick from empty array");
     return array[0];
   }
   return element;
@@ -109,7 +99,7 @@ export function pickRandom<T>(array: readonly T[]): T {
  * Escape markdown in a string
  */
 export function escapeMarkdown(text: string): string {
-  return text.replace(/[*_`~|\\]/g, '\\$&');
+  return text.replace(/[*_`~|\\]/g, "\\$&");
 }
 
 /**

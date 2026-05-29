@@ -1,17 +1,11 @@
-'use client';
+"use client";
 
-import CloudSyncIcon from '@mui/icons-material/CloudSync';
-import LinkIcon from '@mui/icons-material/Link';
-import {
-  Box,
-  Button,
-  CircularProgress,
-  Stack,
-  Typography,
-} from '@mui/material';
-import { useState } from 'react';
-import { toast } from 'sonner';
-import { linkWbBladers, syncWbRanking } from '@/server/actions/wb';
+import CloudSyncIcon from "@mui/icons-material/CloudSync";
+import LinkIcon from "@mui/icons-material/Link";
+import { Box, Button, CircularProgress, Stack, Typography } from "@mui/material";
+import { useState } from "react";
+import { toast } from "sonner";
+import { linkWbBladers, syncWbRanking } from "@/server/actions/wb";
 
 export default function WbSyncActions() {
   const [loadingRanking, setLoadingRanking] = useState(false);
@@ -27,7 +21,7 @@ export default function WbSyncActions() {
         toast.error(`Erreur: ${result.error}`);
       }
     } catch {
-      toast.error('Erreur réseau');
+      toast.error("Erreur réseau");
     } finally {
       setLoadingRanking(false);
     }
@@ -43,7 +37,7 @@ export default function WbSyncActions() {
         toast.error(`Erreur: ${result.error}`);
       }
     } catch {
-      toast.error('Erreur réseau');
+      toast.error("Erreur réseau");
     } finally {
       setLoadingLinking(false);
     }
@@ -54,15 +48,15 @@ export default function WbSyncActions() {
       <Box
         sx={{
           p: 2,
-          border: '1px solid',
-          borderColor: 'divider',
+          border: "1px solid",
+          borderColor: "divider",
           borderRadius: 2,
         }}
       >
         <Typography
           variant="subtitle1"
           sx={{
-            fontWeight: 'bold',
+            fontWeight: "bold",
           }}
         >
           Classement Ultim Bataille
@@ -70,41 +64,36 @@ export default function WbSyncActions() {
         <Typography
           variant="body2"
           sx={{
-            color: 'text.secondary',
+            color: "text.secondary",
             mb: 2,
           }}
         >
-          Recalcule le classement à partir des fichiers JSON de tournois
-          (data/wb_history/).
+          Recalcule le classement à partir des fichiers JSON de tournois (data/wb_history/).
         </Typography>
         <Button
           variant="contained"
           color="error"
           startIcon={
-            loadingRanking ? (
-              <CircularProgress size={20} color="inherit" />
-            ) : (
-              <CloudSyncIcon />
-            )
+            loadingRanking ? <CircularProgress size={20} color="inherit" /> : <CloudSyncIcon />
           }
           onClick={handleSyncRanking}
           disabled={loadingRanking}
         >
-          {loadingRanking ? 'Synchronisation...' : 'Synchroniser maintenant'}
+          {loadingRanking ? "Synchronisation..." : "Synchroniser maintenant"}
         </Button>
       </Box>
       <Box
         sx={{
           p: 2,
-          border: '1px solid',
-          borderColor: 'divider',
+          border: "1px solid",
+          borderColor: "divider",
           borderRadius: 2,
         }}
       >
         <Typography
           variant="subtitle1"
           sx={{
-            fontWeight: 'bold',
+            fontWeight: "bold",
           }}
         >
           Liaison des Comptes
@@ -112,28 +101,20 @@ export default function WbSyncActions() {
         <Typography
           variant="body2"
           sx={{
-            color: 'text.secondary',
+            color: "text.secondary",
             mb: 2,
           }}
         >
-          Analyse les noms des bladers WB et tente de les lier aux comptes
-          utilisateurs RPB existants.
+          Analyse les noms des bladers WB et tente de les lier aux comptes utilisateurs RPB
+          existants.
         </Typography>
         <Button
           variant="outlined"
-          startIcon={
-            loadingLinking ? (
-              <CircularProgress size={20} color="inherit" />
-            ) : (
-              <LinkIcon />
-            )
-          }
+          startIcon={loadingLinking ? <CircularProgress size={20} color="inherit" /> : <LinkIcon />}
           onClick={handleLinkBladers}
           disabled={loadingLinking}
         >
-          {loadingLinking
-            ? 'Liaison en cours...'
-            : 'Lancer la liaison automatique'}
+          {loadingLinking ? "Liaison en cours..." : "Lancer la liaison automatique"}
         </Button>
       </Box>
     </Stack>

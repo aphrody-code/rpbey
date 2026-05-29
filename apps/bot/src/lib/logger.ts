@@ -9,16 +9,16 @@ export const logger = {
     console.error(...args);
   },
   debug(...args: unknown[]) {
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === "development") {
       console.debug(...args);
     }
   },
   trace(...args: unknown[]) {
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === "development") {
       console.trace(...args);
     }
   },
   fatal(...args: unknown[]) {
-    console.error('[FATAL]', ...args);
+    console.error("[FATAL]", ...args);
   },
 };

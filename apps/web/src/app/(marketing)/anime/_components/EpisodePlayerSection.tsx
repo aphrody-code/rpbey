@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { Box } from '@mui/material';
-import { useState } from 'react';
-import { EpisodeViewer } from './EpisodeViewer';
-import { NextEpisodeOverlay } from './NextEpisodeOverlay';
+import { Box } from "@mui/material";
+import { useState } from "react";
+import { EpisodeViewer } from "./EpisodeViewer";
+import { NextEpisodeOverlay } from "./NextEpisodeOverlay";
 
 interface Source {
   id: string;

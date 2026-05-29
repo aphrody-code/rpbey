@@ -1,13 +1,9 @@
-import { type Metadata } from 'next';
+import { type Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Modifier mon Profil',
+  title: "Modifier mon Profil",
 };
 
-export default function EditProfileLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function EditProfileLayout({ children }: { children: React.ReactNode }) {
   return children;
 }

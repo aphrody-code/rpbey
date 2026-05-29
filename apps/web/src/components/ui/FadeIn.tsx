@@ -1,26 +1,20 @@
-'use client';
+"use client";
 
-import {
-  domAnimation,
-  LazyMotion,
-  m,
-  useReducedMotion,
-  type Variants,
-} from 'framer-motion';
-import { type ReactNode } from 'react';
+import { domAnimation, LazyMotion, m, useReducedMotion, type Variants } from "framer-motion";
+import { type ReactNode } from "react";
 
 export function FadeIn({
   children,
   delay = 0,
   duration = 0.5,
-  direction = 'up',
+  direction = "up",
   fullWidth = false,
   className,
 }: {
   children: ReactNode;
   delay?: number;
   duration?: number;
-  direction?: 'up' | 'down' | 'left' | 'right' | 'none';
+  direction?: "up" | "down" | "left" | "right" | "none";
   fullWidth?: boolean;
   className?: string;
 }) {
@@ -29,8 +23,8 @@ export function FadeIn({
   const variants: Variants = {
     hidden: {
       opacity: 0,
-      y: direction === 'up' ? 20 : direction === 'down' ? -20 : 0,
-      x: direction === 'left' ? 20 : direction === 'right' ? -20 : 0,
+      y: direction === "up" ? 20 : direction === "down" ? -20 : 0,
+      x: direction === "left" ? 20 : direction === "right" ? -20 : 0,
     },
     visible: {
       opacity: 1,
@@ -51,7 +45,7 @@ export function FadeIn({
         animate="visible"
         variants={variants}
         className={className}
-        style={{ width: fullWidth ? '100%' : 'auto' }}
+        style={{ width: fullWidth ? "100%" : "auto" }}
       >
         {children}
       </m.div>
@@ -102,9 +96,9 @@ export function ScaleOnHover({
       <m.div
         whileHover={{ scale }}
         whileTap={{ scale: 0.98 }}
-        transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+        transition={{ type: "spring", stiffness: 400, damping: 17 }}
         className={className}
-        style={{ height: '100%' }}
+        style={{ height: "100%" }}
       >
         {children}
       </m.div>

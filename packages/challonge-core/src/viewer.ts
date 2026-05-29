@@ -1,1 +1,1 @@
-export * from './brackets-viewer/index';
+export * from "./brackets-viewer/index";

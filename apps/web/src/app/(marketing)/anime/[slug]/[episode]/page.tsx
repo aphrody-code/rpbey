@@ -1,18 +1,13 @@
-import {
-  ArrowBack,
-  ArrowForward,
-  ChevronRight,
-  Home,
-} from '@mui/icons-material';
-import { Box, Button, Chip, Typography } from '@mui/material';
-import { type Metadata } from 'next';
-import Image from 'next/image';
-import Link from 'next/link';
-import { notFound } from 'next/navigation';
-import { getAnimeEpisode } from '@/server/actions/anime';
-import { getEpisodeProgress } from '@/server/actions/anime-progress';
-import { EpisodePlayerSection } from '../../_components/EpisodePlayerSection';
-import { EpisodeSidebar } from '../../_components/EpisodeSidebar';
+import { ArrowBack, ArrowForward, ChevronRight, Home } from "@mui/icons-material";
+import { Box, Button, Chip, Typography } from "@mui/material";
+import { type Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { getAnimeEpisode } from "@/server/actions/anime";
+import { getEpisodeProgress } from "@/server/actions/anime-progress";
+import { EpisodePlayerSection } from "../../_components/EpisodePlayerSection";
+import { EpisodeSidebar } from "../../_components/EpisodeSidebar";
 
 interface Props {
   params: Promise<{ slug: string; episode: string }>;
@@ -21,31 +16,29 @@ interface Props {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug, episode } = await params;
   const num = Number.parseInt(episode, 10);
-  if (Number.isNaN(num)) return { title: 'Épisode introuvable | RPB' };
+  if (Number.isNaN(num)) return { title: "Épisode introuvable | RPB" };
 
   const data = await getAnimeEpisode(slug, num);
-  if (!data) return { title: 'Épisode introuvable | RPB' };
+  if (!data) return { title: "Épisode introuvable | RPB" };
 
   const title = `${data.series.titleFr || data.series.title} EP ${num} | RPB`;
   const description =
-    data.episode.synopsis ||
-    `Épisode ${num} de ${data.series.titleFr || data.series.title}`;
-  const image =
-    data.episode.thumbnailUrl || data.series.posterUrl || '/banner.webp';
+    data.episode.synopsis || `Épisode ${num} de ${data.series.titleFr || data.series.title}`;
+  const image = data.episode.thumbnailUrl || data.series.posterUrl || "/banner.webp";
 
   return {
     title,
     description,
     openGraph: {
-      type: 'article',
-      locale: 'fr_FR',
-      siteName: 'RPB - République Populaire du Beyblade',
+      type: "article",
+      locale: "fr_FR",
+      siteName: "RPB - République Populaire du Beyblade",
       title,
       description,
       images: [{ url: image, alt: title }],
     },
     twitter: {
-      card: 'summary_large_image',
+      card: "summary_large_image",
       title,
       description,
       images: [image],
@@ -56,7 +49,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 function formatDuration(seconds: number): string {
   const m = Math.floor(seconds / 60);
   const s = seconds % 60;
-  return `${m}:${s.toString().padStart(2, '0')}`;
+  return `${m}:${s.toString().padStart(2, "0")}`;
 }
 
 function episodeGradient(num: number): string {
@@ -75,59 +68,58 @@ export default async function EpisodePage({ params }: Props) {
   const { episode: ep, series, prev, next, allEpisodes } = data;
 
   const progress = await getEpisodeProgress(ep.id);
-  const savedTime =
-    progress && progress.status !== 'COMPLETED' ? progress.progressTime : 0;
+  const savedTime = progress && progress.status !== "COMPLETED" ? progress.progressTime : 0;
 
   const seriesTitle = series.titleFr || series.title;
 
   return (
-    <Box sx={{ minHeight: '100vh', bgcolor: '#0a0a0a', pb: { xs: 4, md: 8 } }}>
+    <Box sx={{ minHeight: "100vh", bgcolor: "#0a0a0a", pb: { xs: 4, md: 8 } }}>
       {/* Breadcrumb — hidden on mobile for cleaner look */}
       <Box
         sx={{
           maxWidth: 1400,
-          mx: 'auto',
+          mx: "auto",
           px: { xs: 2, md: 3 },
           pt: { xs: 0.5, md: 1.5 },
           pb: { xs: 0.5, md: 1 },
-          display: { xs: 'none', sm: 'flex' },
-          alignItems: 'center',
+          display: { xs: "none", sm: "flex" },
+          alignItems: "center",
           gap: 0.5,
-          flexWrap: 'wrap',
+          flexWrap: "wrap",
         }}
       >
         <Link
           href="/anime"
           style={{
-            color: 'rgba(255,255,255,0.4)',
-            textDecoration: 'none',
-            display: 'flex',
-            alignItems: 'center',
+            color: "rgba(255,255,255,0.4)",
+            textDecoration: "none",
+            display: "flex",
+            alignItems: "center",
           }}
         >
           <Home sx={{ fontSize: 16, mr: 0.5 }} />
-          <Typography variant="caption" sx={{ fontSize: '0.75rem' }}>
+          <Typography variant="caption" sx={{ fontSize: "0.75rem" }}>
             Anime
           </Typography>
         </Link>
-        <ChevronRight sx={{ fontSize: 14, color: 'rgba(255,255,255,0.2)' }} />
+        <ChevronRight sx={{ fontSize: 14, color: "rgba(255,255,255,0.2)" }} />
         <Link
           href={`/anime/${slug}`}
           style={{
-            color: 'rgba(255,255,255,0.4)',
-            textDecoration: 'none',
+            color: "rgba(255,255,255,0.4)",
+            textDecoration: "none",
           }}
         >
-          <Typography variant="caption" sx={{ fontSize: '0.75rem' }}>
+          <Typography variant="caption" sx={{ fontSize: "0.75rem" }}>
             {seriesTitle}
           </Typography>
         </Link>
-        <ChevronRight sx={{ fontSize: 14, color: 'rgba(255,255,255,0.2)' }} />
+        <ChevronRight sx={{ fontSize: 14, color: "rgba(255,255,255,0.2)" }} />
         <Typography
           variant="caption"
           sx={{
-            color: 'rgba(255,255,255,0.7)',
-            fontSize: '0.75rem',
+            color: "rgba(255,255,255,0.7)",
+            fontSize: "0.75rem",
             fontWeight: 600,
           }}
         >
@@ -138,11 +130,11 @@ export default async function EpisodePage({ params }: Props) {
       <Box
         sx={{
           maxWidth: 1400,
-          mx: 'auto',
+          mx: "auto",
           px: { xs: 0, md: 3 },
-          display: 'flex',
+          display: "flex",
           gap: 2,
-          alignItems: 'flex-start',
+          alignItems: "flex-start",
         }}
       >
         {/* Player column */}
@@ -162,8 +154,8 @@ export default async function EpisodePage({ params }: Props) {
             {/* Mobile: series link */}
             <Box
               sx={{
-                display: { xs: 'flex', sm: 'none' },
-                alignItems: 'center',
+                display: { xs: "flex", sm: "none" },
+                alignItems: "center",
                 gap: 0.5,
                 mb: 1.5,
               }}
@@ -171,11 +163,11 @@ export default async function EpisodePage({ params }: Props) {
               <Link
                 href={`/anime/${slug}`}
                 style={{
-                  color: 'rgba(255,255,255,0.5)',
-                  textDecoration: 'none',
-                  fontSize: '0.75rem',
-                  display: 'flex',
-                  alignItems: 'center',
+                  color: "rgba(255,255,255,0.5)",
+                  textDecoration: "none",
+                  fontSize: "0.75rem",
+                  display: "flex",
+                  alignItems: "center",
                   gap: 4,
                 }}
               >
@@ -187,18 +179,18 @@ export default async function EpisodePage({ params }: Props) {
             {/* Title row */}
             <Box
               sx={{
-                display: 'flex',
-                alignItems: 'flex-start',
-                justifyContent: 'space-between',
+                display: "flex",
+                alignItems: "flex-start",
+                justifyContent: "space-between",
                 gap: 2,
-                flexWrap: 'wrap',
+                flexWrap: "wrap",
               }}
             >
               <Box sx={{ flex: 1, minWidth: 0 }}>
                 <Box
                   sx={{
-                    display: 'flex',
-                    alignItems: 'center',
+                    display: "flex",
+                    alignItems: "center",
                     gap: 1,
                     mb: 0.5,
                   }}
@@ -208,18 +200,18 @@ export default async function EpisodePage({ params }: Props) {
                     size="small"
                     sx={{
                       fontWeight: 800,
-                      fontSize: '0.65rem',
-                      bgcolor: 'var(--rpb-primary)',
-                      color: 'white',
+                      fontSize: "0.65rem",
+                      bgcolor: "var(--rpb-primary)",
+                      color: "white",
                       height: 22,
                     }}
                   />
                   <Typography
                     variant="caption"
                     sx={{
-                      color: 'rgba(255,255,255,0.4)',
-                      fontSize: '0.75rem',
-                      display: { xs: 'none', sm: 'block' },
+                      color: "rgba(255,255,255,0.4)",
+                      fontSize: "0.75rem",
+                      display: { xs: "none", sm: "block" },
                     }}
                   >
                     {seriesTitle}
@@ -229,9 +221,9 @@ export default async function EpisodePage({ params }: Props) {
                   variant="h6"
                   sx={{
                     fontWeight: 800,
-                    color: 'text.primary',
+                    color: "text.primary",
                     lineHeight: 1.3,
-                    fontSize: { xs: '1rem', md: '1.25rem' },
+                    fontSize: { xs: "1rem", md: "1.25rem" },
                   }}
                 >
                   {ep.titleFr || ep.title}
@@ -241,62 +233,52 @@ export default async function EpisodePage({ params }: Props) {
               {/* Prev/Next buttons */}
               <Box
                 sx={{
-                  display: 'flex',
+                  display: "flex",
                   gap: 1,
                   flexShrink: 0,
-                  alignSelf: { xs: 'stretch', md: 'center' },
+                  alignSelf: { xs: "stretch", md: "center" },
                 }}
               >
                 {prev && (
-                  <Link
-                    href={`/anime/${slug}/${prev.number}`}
-                    style={{ textDecoration: 'none' }}
-                  >
+                  <Link href={`/anime/${slug}/${prev.number}`} style={{ textDecoration: "none" }}>
                     <Button
                       startIcon={<ArrowBack />}
                       size="small"
                       sx={{
                         borderRadius: 2,
                         px: { xs: 1.5, md: 2 },
-                        color: 'text.secondary',
-                        border: '1px solid rgba(255,255,255,0.1)',
-                        textTransform: 'none',
+                        color: "text.secondary",
+                        border: "1px solid rgba(255,255,255,0.1)",
+                        textTransform: "none",
                         minHeight: 40,
-                        '&:hover': {
-                          bgcolor: 'rgba(255,255,255,0.05)',
-                          borderColor: 'rgba(255,255,255,0.2)',
+                        "&:hover": {
+                          bgcolor: "rgba(255,255,255,0.05)",
+                          borderColor: "rgba(255,255,255,0.2)",
                         },
                       }}
                     >
-                      <Box sx={{ display: { xs: 'none', sm: 'inline' } }}>
-                        EP {prev.number}
-                      </Box>
+                      <Box sx={{ display: { xs: "none", sm: "inline" } }}>EP {prev.number}</Box>
                     </Button>
                   </Link>
                 )}
                 {next && (
-                  <Link
-                    href={`/anime/${slug}/${next.number}`}
-                    style={{ textDecoration: 'none' }}
-                  >
+                  <Link href={`/anime/${slug}/${next.number}`} style={{ textDecoration: "none" }}>
                     <Button
                       endIcon={<ArrowForward />}
                       variant="contained"
                       size="small"
                       sx={{
-                        bgcolor: 'var(--rpb-primary)',
-                        color: 'white',
+                        bgcolor: "var(--rpb-primary)",
+                        color: "white",
                         borderRadius: 2,
                         px: { xs: 1.5, md: 2 },
-                        textTransform: 'none',
+                        textTransform: "none",
                         fontWeight: 700,
                         minHeight: 40,
-                        '&:hover': { bgcolor: 'var(--rpb-primary)' },
+                        "&:hover": { bgcolor: "var(--rpb-primary)" },
                       }}
                     >
-                      <Box sx={{ display: { xs: 'none', sm: 'inline' } }}>
-                        Épisode suivant
-                      </Box>
+                      <Box sx={{ display: { xs: "none", sm: "inline" } }}>Épisode suivant</Box>
                     </Button>
                   </Link>
                 )}
@@ -309,10 +291,10 @@ export default async function EpisodePage({ params }: Props) {
                 variant="body2"
                 sx={{
                   mt: 1.5,
-                  color: 'rgba(255,255,255,0.55)',
+                  color: "rgba(255,255,255,0.55)",
                   lineHeight: 1.7,
                   maxWidth: 700,
-                  fontSize: '0.85rem',
+                  fontSize: "0.85rem",
                 }}
               >
                 {ep.synopsis}
@@ -323,19 +305,19 @@ export default async function EpisodePage({ params }: Props) {
           {/* Mobile episode strip — Netflix horizontal scroll with thumbnails */}
           <Box
             sx={{
-              display: { xs: 'block', lg: 'none' },
+              display: { xs: "block", lg: "none" },
               mt: 3,
               pt: 2,
-              borderTop: '1px solid rgba(255,255,255,0.06)',
+              borderTop: "1px solid rgba(255,255,255,0.06)",
             }}
           >
             <Typography
               variant="body2"
               sx={{
                 fontWeight: 700,
-                color: 'text.secondary',
+                color: "text.secondary",
                 mb: 1.5,
-                fontSize: '0.8rem',
+                fontSize: "0.8rem",
                 px: 2,
               }}
             >
@@ -343,14 +325,14 @@ export default async function EpisodePage({ params }: Props) {
             </Typography>
             <Box
               sx={{
-                display: 'flex',
+                display: "flex",
                 gap: 1,
                 px: 2,
-                overflowX: 'auto',
-                scrollSnapType: 'x mandatory',
-                scrollbarWidth: 'none',
-                '&::-webkit-scrollbar': { display: 'none' },
-                WebkitOverflowScrolling: 'touch',
+                overflowX: "auto",
+                scrollSnapType: "x mandatory",
+                scrollbarWidth: "none",
+                "&::-webkit-scrollbar": { display: "none" },
+                WebkitOverflowScrolling: "touch",
                 pb: 1,
               }}
             >
@@ -360,29 +342,29 @@ export default async function EpisodePage({ params }: Props) {
                   <Link
                     key={epItem.id}
                     href={`/anime/${slug}/${epItem.number}`}
-                    style={{ textDecoration: 'none' }}
+                    style={{ textDecoration: "none" }}
                   >
                     <Box
                       sx={{
                         flexShrink: 0,
-                        scrollSnapAlign: 'start',
+                        scrollSnapAlign: "start",
                         width: 150,
                         opacity: isCurrent ? 1 : 0.7,
-                        transition: 'opacity 0.2s',
-                        '&:active': { opacity: 1 },
+                        transition: "opacity 0.2s",
+                        "&:active": { opacity: 1 },
                       }}
                     >
                       {/* Thumbnail */}
                       <Box
                         sx={{
-                          position: 'relative',
-                          aspectRatio: '16/9',
+                          position: "relative",
+                          aspectRatio: "16/9",
                           borderRadius: 1.5,
-                          overflow: 'hidden',
-                          bgcolor: 'rgba(255,255,255,0.03)',
+                          overflow: "hidden",
+                          bgcolor: "rgba(255,255,255,0.03)",
                           border: isCurrent
-                            ? '2px solid var(--rpb-primary)'
-                            : '1px solid rgba(255,255,255,0.06)',
+                            ? "2px solid var(--rpb-primary)"
+                            : "1px solid rgba(255,255,255,0.06)",
                         }}
                       >
                         {epItem.thumbnailUrl ? (
@@ -391,24 +373,24 @@ export default async function EpisodePage({ params }: Props) {
                             alt={epItem.titleFr || epItem.title}
                             fill
                             sizes="150px"
-                            style={{ objectFit: 'cover' }}
+                            style={{ objectFit: "cover" }}
                           />
                         ) : (
                           <Box
                             sx={{
-                              width: '100%',
-                              height: '100%',
+                              width: "100%",
+                              height: "100%",
                               background: episodeGradient(epItem.number),
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'center',
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
                             }}
                           >
                             <Typography
                               sx={{
-                                fontSize: '1.1rem',
+                                fontSize: "1.1rem",
                                 fontWeight: 900,
-                                color: 'rgba(255,255,255,0.08)',
+                                color: "rgba(255,255,255,0.08)",
                               }}
                             >
                               {epItem.number}
@@ -418,18 +400,16 @@ export default async function EpisodePage({ params }: Props) {
                         {/* Episode number overlay */}
                         <Box
                           sx={{
-                            position: 'absolute',
+                            position: "absolute",
                             top: 4,
                             left: 4,
                             px: 0.5,
                             py: 0.1,
                             borderRadius: 0.5,
-                            bgcolor: isCurrent
-                              ? 'var(--rpb-primary)'
-                              : 'rgba(0,0,0,0.75)',
-                            fontSize: '0.55rem',
+                            bgcolor: isCurrent ? "var(--rpb-primary)" : "rgba(0,0,0,0.75)",
+                            fontSize: "0.55rem",
                             fontWeight: 700,
-                            color: 'white',
+                            color: "white",
                           }}
                         >
                           EP {epItem.number}
@@ -437,16 +417,16 @@ export default async function EpisodePage({ params }: Props) {
                         {epItem.duration > 0 && (
                           <Box
                             sx={{
-                              position: 'absolute',
+                              position: "absolute",
                               bottom: 3,
                               right: 3,
                               px: 0.4,
                               py: 0.1,
                               borderRadius: 0.5,
-                              bgcolor: 'rgba(0,0,0,0.8)',
-                              fontSize: '0.5rem',
+                              bgcolor: "rgba(0,0,0,0.8)",
+                              fontSize: "0.5rem",
                               fontWeight: 600,
-                              color: 'rgba(255,255,255,0.8)',
+                              color: "rgba(255,255,255,0.8)",
                             }}
                           >
                             {formatDuration(epItem.duration)}
@@ -457,15 +437,15 @@ export default async function EpisodePage({ params }: Props) {
                       <Typography
                         variant="caption"
                         sx={{
-                          display: 'block',
+                          display: "block",
                           mt: 0.5,
-                          color: isCurrent ? 'white' : 'rgba(255,255,255,0.5)',
+                          color: isCurrent ? "white" : "rgba(255,255,255,0.5)",
                           fontWeight: isCurrent ? 700 : 500,
-                          fontSize: '0.65rem',
+                          fontSize: "0.65rem",
                           lineHeight: 1.3,
-                          overflow: 'hidden',
-                          textOverflow: 'ellipsis',
-                          whiteSpace: 'nowrap',
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                          whiteSpace: "nowrap",
                         }}
                       >
                         {epItem.titleFr || epItem.title}
@@ -481,7 +461,7 @@ export default async function EpisodePage({ params }: Props) {
         {/* Sidebar (desktop only) */}
         <Box
           sx={{
-            display: { xs: 'none', lg: 'block' },
+            display: { xs: "none", lg: "block" },
             width: 360,
             flexShrink: 0,
           }}

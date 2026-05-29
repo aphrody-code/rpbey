@@ -3,14 +3,14 @@
  * Full blader profile with stats, matches, and rivalries
  */
 
-'use client';
+"use client";
 
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import Skeleton from '@mui/material/Skeleton';
-import Typography from '@mui/material/Typography';
-import { use } from 'react';
-import useSWR from 'swr';
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import Skeleton from "@mui/material/Skeleton";
+import Typography from "@mui/material/Typography";
+import { use } from "react";
+import useSWR from "swr";
 import {
   BladerProfileHeader,
   FavoritePartsCard,
@@ -18,9 +18,9 @@ import {
   ProfileDecksSection,
   RivalriesCard,
   UserProfileStatsCard,
-} from '@/components/profile';
-import { useAuth } from '@/hooks';
-import { type UserStats } from '@/lib/stats-types';
+} from "@/components/profile";
+import { useAuth } from "@/hooks";
+import { type UserStats } from "@/lib/stats-types";
 
 interface ProfilePageProps {
   params: Promise<{ id: string }>;
@@ -33,7 +33,7 @@ export default function ProfilePage({ params }: ProfilePageProps) {
   const { user: currentUser } = useAuth();
 
   // If no ID, show current user's profile
-  const userId = id === 'me' ? currentUser?.id : id;
+  const userId = id === "me" ? currentUser?.id : id;
 
   const { data: statsData, isLoading: statsLoading } = useSWR<{
     data: UserStats;
@@ -53,9 +53,9 @@ export default function ProfilePage({ params }: ProfilePageProps) {
     if (response.ok) {
       const blob = await response.blob();
       const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
+      const a = document.createElement("a");
       a.href = url;
-      a.download = `${stats?.bladerName ?? 'profile'}-card.png`;
+      a.download = `${stats?.bladerName ?? "profile"}-card.png`;
       a.click();
       URL.revokeObjectURL(url);
     }
@@ -64,25 +64,13 @@ export default function ProfilePage({ params }: ProfilePageProps) {
   if (statsLoading || userLoading) {
     return (
       <Box>
-        <Skeleton
-          variant="rectangular"
-          height={200}
-          sx={{ borderRadius: 2, mb: 3 }}
-        />
+        <Skeleton variant="rectangular" height={200} sx={{ borderRadius: 2, mb: 3 }} />
         <Grid container spacing={3}>
           <Grid size={{ xs: 12, md: 8 }}>
-            <Skeleton
-              variant="rectangular"
-              height={300}
-              sx={{ borderRadius: 2 }}
-            />
+            <Skeleton variant="rectangular" height={300} sx={{ borderRadius: 2 }} />
           </Grid>
           <Grid size={{ xs: 12, md: 4 }}>
-            <Skeleton
-              variant="rectangular"
-              height={300}
-              sx={{ borderRadius: 2 }}
-            />
+            <Skeleton variant="rectangular" height={300} sx={{ borderRadius: 2 }} />
           </Grid>
         </Grid>
       </Box>
@@ -93,14 +81,14 @@ export default function ProfilePage({ params }: ProfilePageProps) {
     return (
       <Box
         sx={{
-          textAlign: 'center',
+          textAlign: "center",
           py: 8,
         }}
       >
         <Typography
           variant="h5"
           sx={{
-            color: 'text.secondary',
+            color: "text.secondary",
           }}
         >
           Profil introuvable
@@ -114,9 +102,7 @@ export default function ProfilePage({ params }: ProfilePageProps) {
       <Box sx={{ mb: 4 }}>
         <BladerProfileHeader
           stats={stats}
-          avatarUrl={
-            user?.serverAvatar ?? user?.profile?.avatarUrl ?? user?.image
-          }
+          avatarUrl={user?.serverAvatar ?? user?.profile?.avatarUrl ?? user?.image}
           joinDate={user?.createdAt}
           bio={user?.profile?.bio}
           challongeUsername={stats.challongeUsername}
@@ -134,13 +120,10 @@ export default function ProfilePage({ params }: ProfilePageProps) {
       <Grid container spacing={3}>
         {/* Main content */}
         <Grid size={{ xs: 12, md: 8 }}>
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
             <UserProfileStatsCard stats={stats} />
             {userId && (
-              <ProfileDecksSection
-                userId={userId}
-                isOwnProfile={currentUser?.id === userId}
-              />
+              <ProfileDecksSection userId={userId} isOwnProfile={currentUser?.id === userId} />
             )}
             <MatchHistory userId={stats.userId} />
           </Box>
@@ -150,10 +133,10 @@ export default function ProfilePage({ params }: ProfilePageProps) {
         <Grid size={{ xs: 12, md: 4 }}>
           <Box
             sx={{
-              display: 'flex',
-              flexDirection: 'column',
+              display: "flex",
+              flexDirection: "column",
               gap: 3,
-              position: { md: 'sticky' },
+              position: { md: "sticky" },
               top: { md: 24 },
             }}
           >

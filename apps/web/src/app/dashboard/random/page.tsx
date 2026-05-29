@@ -1,10 +1,10 @@
-import Container from '@mui/material/Container';
-import { RandomCombo } from '@/components/deck/RandomCombo';
-import { PageHeader } from '@/components/ui';
+import Container from "@mui/material/Container";
+import { RandomCombo } from "@/components/deck/RandomCombo";
+import { PageHeader } from "@/components/ui";
 
 export const metadata = {
-  title: 'Hasard | Dashboard RPB',
-  description: 'Laisse le hasard décider de ton prochain combo Beyblade X !',
+  title: "Hasard | Dashboard RPB",
+  description: "Laisse le hasard décider de ton prochain combo Beyblade X !",
 };
 
 export default function RandomPage() {

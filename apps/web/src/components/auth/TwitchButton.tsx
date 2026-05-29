@@ -1,23 +1,23 @@
-'use client';
+"use client";
 
-import Button, { type ButtonProps } from '@mui/material/Button';
-import CircularProgress from '@mui/material/CircularProgress';
-import { useCallback, useState } from 'react';
-import { TwitchIcon } from '@/components/ui/Icons';
-import { signIn } from '@/lib/auth-client';
+import Button, { type ButtonProps } from "@mui/material/Button";
+import CircularProgress from "@mui/material/CircularProgress";
+import { useCallback, useState } from "react";
+import { TwitchIcon } from "@/components/ui/Icons";
+import { signIn } from "@/lib/auth-client";
 
-interface TwitchButtonProps extends Omit<ButtonProps, 'onClick' | 'children'> {
+interface TwitchButtonProps extends Omit<ButtonProps, "onClick" | "children"> {
   callbackURL?: string;
   text?: string;
   loadingText?: string;
 }
 
 export function TwitchButton({
-  callbackURL = '/dashboard',
-  text = 'Se connecter avec Twitch',
-  loadingText = 'Connexion...',
-  variant = 'contained',
-  size = 'large',
+  callbackURL = "/dashboard",
+  text = "Se connecter avec Twitch",
+  loadingText = "Connexion...",
+  variant = "contained",
+  size = "large",
   fullWidth = true,
   ...props
 }: TwitchButtonProps) {
@@ -27,11 +27,11 @@ export function TwitchButton({
     setLoading(true);
     try {
       await signIn.social({
-        provider: 'twitch',
+        provider: "twitch",
         callbackURL,
       });
     } catch (error) {
-      console.error('Twitch sign in error:', error);
+      console.error("Twitch sign in error:", error);
       setLoading(false);
     }
   }, [callbackURL]);
@@ -44,23 +44,19 @@ export function TwitchButton({
       onClick={handleClick}
       disabled={loading}
       startIcon={
-        loading ? (
-          <CircularProgress size={20} color="inherit" />
-        ) : (
-          <TwitchIcon size={20} />
-        )
+        loading ? <CircularProgress size={20} color="inherit" /> : <TwitchIcon size={20} />
       }
       sx={{
-        backgroundColor: '#9146FF',
-        color: '#ffffff',
-        '&:hover': {
-          backgroundColor: '#772CE8',
+        backgroundColor: "#9146FF",
+        color: "#ffffff",
+        "&:hover": {
+          backgroundColor: "#772CE8",
         },
-        '&:disabled': {
-          backgroundColor: '#9146FF',
+        "&:disabled": {
+          backgroundColor: "#9146FF",
           opacity: 0.7,
         },
-        textTransform: 'none',
+        textTransform: "none",
         fontWeight: 600,
         py: 1.5,
         ...props.sx,

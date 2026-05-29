@@ -1,13 +1,9 @@
-'use client';
+"use client";
 
-import { NavigateNext } from '@mui/icons-material';
-import {
-  Breadcrumbs as MuiBreadcrumbs,
-  Link as MuiLink,
-  Typography,
-} from '@mui/material';
-import Link from 'next/link';
-import type React from 'react';
+import { NavigateNext } from "@mui/icons-material";
+import { Breadcrumbs as MuiBreadcrumbs, Link as MuiLink, Typography } from "@mui/material";
+import Link from "next/link";
+import type React from "react";
 
 export interface BreadcrumbItem {
   label: string;
@@ -33,8 +29,8 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items }) => {
             <Typography
               key={item.label}
               sx={{
-                color: 'text.primary',
-                fontWeight: isLast ? 'medium' : 'regular',
+                color: "text.primary",
+                fontWeight: isLast ? "medium" : "regular",
               }}
             >
               {item.label}

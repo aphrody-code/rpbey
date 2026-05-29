@@ -8,20 +8,19 @@ import { AnalyticsDashboard } from "@/components/admin/AnalyticsDashboard";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-	title: "Analytics temps réel",
-	description:
-		"Trafic en direct, pages vues, top pages, referrers et événements métier de la RPB.",
+  title: "Analytics temps réel",
+  description: "Trafic en direct, pages vues, top pages, referrers et événements métier de la RPB.",
 };
 
 export default async function AdminAnalyticsPage() {
-	await connection();
+  await connection();
 
-	const session = await requireAdmin();
-	if (!session) {
-		redirect("/sign-in?callbackUrl=/admin/analytics");
-	}
+  const session = await requireAdmin();
+  if (!session) {
+    redirect("/sign-in?callbackUrl=/admin/analytics");
+  }
 
-	const initial = await getAnalyticsSummary();
+  const initial = await getAnalyticsSummary();
 
-	return <AnalyticsDashboard initial={initial} />;
+  return <AnalyticsDashboard initial={initial} />;
 }

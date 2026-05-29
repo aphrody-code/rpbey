@@ -1,55 +1,55 @@
-import { RankCardBuilder } from 'canvacord';
+import { RankCardBuilder } from "canvacord";
 import {
   ApplicationCommandOptionType,
   AttachmentBuilder,
   type CommandInteraction,
   EmbedBuilder,
   type User,
-} from 'discord.js';
-import { v2ProfilePanel } from '../../lib/ui.js';
-import { Discord, Slash, SlashChoice, SlashGroup, SlashOption } from '@rpbey/discordx';
-import { inject, injectable } from 'tsyringe';
+} from "discord.js";
+import { v2ProfilePanel } from "../../lib/ui.js";
+import { Discord, Slash, SlashChoice, SlashGroup, SlashOption } from "@rpbey/discordx";
+import { inject, injectable } from "tsyringe";
 
-import { cached, cachedBuffer, TTL } from '../../lib/cache.js';
-import { generateProfileCard } from '../../lib/canvas-utils.js';
-import { Colors } from '../../lib/constants.js';
-import { logger } from '../../lib/logger.js';
-import { PrismaService } from '../../lib/prisma.js';
+import { cached, cachedBuffer, TTL } from "../../lib/cache.js";
+import { generateProfileCard } from "../../lib/canvas-utils.js";
+import { Colors } from "../../lib/constants.js";
+import { logger } from "../../lib/logger.js";
+import { PrismaService } from "../../lib/prisma.js";
 import {
   defaultSeasonKey,
   renderRankingPanel,
   type RankingVariant,
-} from '../../lib/ranking-panel.js';
+} from "../../lib/ranking-panel.js";
 
 @Discord()
 @SlashGroup({
-  description: 'Commandes de classement et profils',
-  name: 'classement',
+  description: "Commandes de classement et profils",
+  name: "classement",
 })
-@SlashGroup('classement')
+@SlashGroup("classement")
 @injectable()
 export class RankingGroup {
   constructor(@inject(PrismaService) private prisma: PrismaService) {}
 
-  @Slash({ description: "Voir le profil d'un blader", name: 'profil' })
-  @SlashGroup('classement')
+  @Slash({ description: "Voir le profil d'un blader", name: "profil" })
+  @SlashGroup("classement")
   async profile(
     @SlashOption({
-      name: 'joueur',
+      name: "joueur",
       required: false,
       type: ApplicationCommandOptionType.User,
-      description: 'Le joueur à voir',
+      description: "Le joueur à voir",
     })
     targetUser: User | undefined,
-    @SlashChoice({ name: 'Style RPB', value: 'rpb' })
-    @SlashChoice({ name: 'Style Classique', value: 'classic' })
+    @SlashChoice({ name: "Style RPB", value: "rpb" })
+    @SlashChoice({ name: "Style Classique", value: "classic" })
     @SlashOption({
-      name: 'style',
+      name: "style",
       required: false,
       type: ApplicationCommandOptionType.String,
-      description: 'Style de carte',
+      description: "Style de carte",
     })
-    style: 'rpb' | 'classic' = 'rpb',
+    style: "rpb" | "classic" = "rpb",
     interaction: CommandInteraction,
   ) {
     const target = targetUser ?? interaction.user;
@@ -64,7 +64,7 @@ export class RankingGroup {
             take: 1,
             include: {
               items: {
-                orderBy: { position: 'asc' },
+                orderBy: { position: "asc" },
                 include: { blade: true },
               },
             },
@@ -74,26 +74,22 @@ export class RankingGroup {
       });
       if (!user?.profile)
         return interaction.editReply({
-          content:
-            '❌ Profil introuvable. Crée ton compte sur https://rpbey.fr/dashboard',
+          content: "❌ Profil introuvable. Crée ton compte sur https://rpbey.fr/dashboard",
         });
 
       const rankingPoints = user.profile.rankingPoints;
       // Cache the rank count query (full-scan expensive)
       const rank =
-        (await cached(
-          `rank:global:${rankingPoints}`,
-          TTL.RANKING,
-          () =>
-            this.prisma.globalRanking.count({
-              where: { points: { gt: rankingPoints } },
-            }),
+        (await cached(`rank:global:${rankingPoints}`, TTL.RANKING, () =>
+          this.prisma.globalRanking.count({
+            where: { points: { gt: rankingPoints } },
+          }),
         )) + 1;
 
-      if (style === 'classic') {
+      if (style === "classic") {
         const level = Math.floor(Math.sqrt(rankingPoints / 10));
         const card = new RankCardBuilder()
-          .setAvatar(target.displayAvatarURL({ extension: 'png' }))
+          .setAvatar(target.displayAvatarURL({ extension: "png" }))
           .setDisplayName(target.displayName)
           .setLevel(level)
           .setRank(rank)
@@ -101,23 +97,21 @@ export class RankingGroup {
           .setRequiredXP(100)
           .setUsername(target.username);
         return interaction.editReply({
-          files: [
-            new AttachmentBuilder(await card.build(), { name: 'rank.png' }),
-          ],
+          files: [new AttachmentBuilder(await card.build(), { name: "rank.png" })],
         });
       }
 
       // Compute rank title based on points
       const rankTitle =
         rank === 1
-          ? 'Champion'
+          ? "Champion"
           : rankingPoints >= 500
-            ? 'Expert'
+            ? "Expert"
             : rankingPoints >= 200
-              ? 'Vétéran'
+              ? "Vétéran"
               : rankingPoints >= 50
-                ? 'Combattant'
-                : 'Blader';
+                ? "Combattant"
+                : "Blader";
 
       // Get active deck if available
       const activeDeck = user.decks[0];
@@ -125,10 +119,8 @@ export class RankingGroup {
         ? {
             name: activeDeck.name,
             blades: activeDeck.items.map((i: any) => ({
-              name: i.blade?.name || '?',
-              imageUrl: i.blade?.imageUrl
-                ? `https://rpbey.fr${i.blade.imageUrl}`
-                : '',
+              name: i.blade?.name || "?",
+              imageUrl: i.blade?.imageUrl ? `https://rpbey.fr${i.blade.imageUrl}` : "",
             })),
           }
         : null;
@@ -140,11 +132,11 @@ export class RankingGroup {
         () =>
           generateProfileCard({
             activeDeck: deckData,
-            avatarUrl: target.displayAvatarURL({ extension: 'png', size: 512 }),
+            avatarUrl: target.displayAvatarURL({ extension: "png", size: 512 }),
             bestStreak: 0,
             bladerName: user.profile.bladerName || target.displayName,
             currentStreak: 0,
-            joinedAt: user.createdAt.toLocaleDateString('fr-FR'),
+            joinedAt: user.createdAt.toLocaleDateString("fr-FR"),
             losses: user.profile.losses,
             rank,
             rankingPoints,
@@ -164,45 +156,40 @@ export class RankingGroup {
         user.profile.wins,
         user.profile.losses,
         winRateStr,
-        'profile.png',
+        "profile.png",
       );
       return interaction.editReply({
         ...v2,
-        files: [new AttachmentBuilder(cardBuffer, { name: 'profile.png' })],
+        files: [new AttachmentBuilder(cardBuffer, { name: "profile.png" })],
       });
     } catch (error) {
-      logger.error('[Ranking] Profile error:', error);
+      logger.error("[Ranking] Profile error:", error);
       return interaction.editReply(
-        '❌ Erreur lors du chargement du profil. Vérifie que ton compte existe sur rpbey.fr/dashboard.',
+        "❌ Erreur lors du chargement du profil. Vérifie que ton compte existe sur rpbey.fr/dashboard.",
       );
     }
   }
 
-  @Slash({ description: 'Afficher le top des bladers', name: 'top' })
-  @SlashGroup('classement')
+  @Slash({ description: "Afficher le top des bladers", name: "top" })
+  @SlashGroup("classement")
   async leaderboard(
-    @SlashChoice({ name: 'RPB', value: 'rpb' })
-    @SlashChoice({ name: 'BBT', value: 'satr' })
-    @SlashChoice({ name: 'UB', value: 'wb' })
-    @SlashChoice({ name: 'Stardust', value: 'stardust' })
+    @SlashChoice({ name: "RPB", value: "rpb" })
+    @SlashChoice({ name: "BBT", value: "satr" })
+    @SlashChoice({ name: "UB", value: "wb" })
+    @SlashChoice({ name: "Stardust", value: "stardust" })
     @SlashOption({
-      name: 'type',
+      name: "type",
       required: false,
       type: ApplicationCommandOptionType.String,
-      description: 'Type de classement',
+      description: "Type de classement",
     })
-    type: string = 'rpb',
+    type: string = "rpb",
     interaction: CommandInteraction,
   ) {
     await interaction.deferReply();
     try {
       const variant = (
-        type === 'satr' ||
-        type === 'wb' ||
-        type === 'rpb' ||
-        type === 'stardust'
-          ? type
-          : 'rpb'
+        type === "satr" || type === "wb" || type === "rpb" || type === "stardust" ? type : "rpb"
       ) as RankingVariant;
       const season = await defaultSeasonKey(variant);
       const { embed, file, components } = await renderRankingPanel({
@@ -216,16 +203,14 @@ export class RankingGroup {
         components,
       });
     } catch (error) {
-      logger.error('[Ranking] Leaderboard error:', error);
-      return interaction.editReply(
-        '❌ Erreur lors du chargement du classement.',
-      );
+      logger.error("[Ranking] Leaderboard error:", error);
+      return interaction.editReply("❌ Erreur lors du chargement du classement.");
     }
   }
 
   private computeWinRate(wins: number, losses: number): string {
     const total = wins + losses;
-    if (total === 0) return '0%';
+    if (total === 0) return "0%";
     return `${Math.round((wins / total) * 100)}%`;
   }
 }
