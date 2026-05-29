@@ -10,7 +10,23 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
+import { styled } from "@mui/material/styles";
 import { useState } from "react";
+
+/**
+ * Bouton flottant translucide (glassmorphism) réutilisé dans la lightbox.
+ * `styled()` car le même override apparaît sur 2 boutons (fermer / ouvrir) ;
+ * seule la position `right` reste un one-off via `sx`. En styled() : pas de
+ * shorthand `bgcolor` ni de string palette `common.white` (non résolus hors sx).
+ */
+const GlassIconButton = styled(IconButton)({
+  position: "fixed",
+  top: 16,
+  color: "#fff",
+  backgroundColor: "color-mix(in srgb, #000 60%, transparent)",
+  backdropFilter: "blur(8px)",
+  "&:hover": { backgroundColor: "color-mix(in srgb, #000 82%, transparent)" },
+});
 
 export interface FrameItem {
   id: string;
@@ -249,39 +265,25 @@ export function GalerieClient({ frames }: GalerieClientProps) {
               )}
 
               {/* Bouton fermer */}
-              <IconButton
+              <GlassIconButton
                 onClick={() => setLightbox(null)}
-                sx={{
-                  position: "fixed",
-                  top: 16,
-                  right: 16,
-                  bgcolor: "color-mix(in srgb, #000 60%, transparent)",
-                  color: "common.white",
-                  backdropFilter: "blur(8px)",
-                  "&:hover": { bgcolor: "color-mix(in srgb, #000 82%, transparent)" },
-                }}
                 size="small"
+                aria-label="Fermer"
+                sx={{ right: 16 }}
               >
                 <Close />
-              </IconButton>
+              </GlassIconButton>
 
               {/* Ouvrir en plein format — lien natif, pas de nativeButton needed */}
               <Tooltip title="Ouvrir en plein format">
-                <IconButton
+                <GlassIconButton
                   onClick={() => window.open(lightbox.imageUrl, "_blank", "noreferrer")}
-                  sx={{
-                    position: "fixed",
-                    top: 16,
-                    right: 56,
-                    bgcolor: "color-mix(in srgb, #000 60%, transparent)",
-                    color: "common.white",
-                    backdropFilter: "blur(8px)",
-                    "&:hover": { bgcolor: "color-mix(in srgb, #000 82%, transparent)" },
-                  }}
                   size="small"
+                  aria-label="Ouvrir en plein format"
+                  sx={{ right: 56 }}
                 >
                   <OpenInNew fontSize="small" />
-                </IconButton>
+                </GlassIconButton>
               </Tooltip>
             </>
           )}
