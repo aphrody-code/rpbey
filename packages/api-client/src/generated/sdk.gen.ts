@@ -4,8 +4,8 @@ import * as z from 'zod';
 
 import type { Client, Options as Options2, TDataShape } from './client';
 import { client } from './client.gen';
-import type { GetMetaData, GetMetaErrors, GetMetaResponses, GetPublicUserData, GetPublicUserErrors, GetPublicUserResponses, GetRankingsData, GetRankingsErrors, GetRankingsResponses, GetRecommendationsData, GetRecommendationsErrors, GetRecommendationsResponses, GetUserMatchesData, GetUserMatchesErrors, GetUserMatchesResponses, GlobalSearchData, GlobalSearchErrors, GlobalSearchResponses, ListPartsData, ListPartsErrors, ListPartsResponses } from './types.gen';
-import { zGetMetaResponse, zGetPublicUserPath, zGetPublicUserResponse, zGetRankingsQuery, zGetRankingsResponse, zGetRecommendationsQuery, zGetRecommendationsResponse, zGetUserMatchesPath, zGetUserMatchesQuery, zGetUserMatchesResponse, zGlobalSearchQuery, zGlobalSearchResponse, zListPartsQuery, zListPartsResponse } from './zod.gen';
+import type { GetMetaData, GetMetaErrors, GetMetaResponses, GetPublicUserData, GetPublicUserErrors, GetPublicUserResponses, GetRankingsData, GetRankingsErrors, GetRankingsResponses, GetRecommendationsData, GetRecommendationsErrors, GetRecommendationsResponses, GetTournamentData, GetTournamentErrors, GetTournamentResponses, GetUserMatchesData, GetUserMatchesErrors, GetUserMatchesResponses, GlobalSearchData, GlobalSearchErrors, GlobalSearchResponses, ListPartsData, ListPartsErrors, ListPartsResponses, ListStreamVideosData, ListStreamVideosErrors, ListStreamVideosResponses, ListTournamentsData, ListTournamentsErrors, ListTournamentsResponses } from './types.gen';
+import { zGetMetaResponse, zGetPublicUserPath, zGetPublicUserResponse, zGetRankingsQuery, zGetRankingsResponse, zGetRecommendationsQuery, zGetRecommendationsResponse, zGetTournamentPath, zGetTournamentResponse, zGetUserMatchesPath, zGetUserMatchesQuery, zGetUserMatchesResponse, zGlobalSearchQuery, zGlobalSearchResponse, zListPartsQuery, zListPartsResponse, zListStreamVideosQuery, zListStreamVideosResponse, zListTournamentsQuery, zListTournamentsResponse } from './zod.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean, TResponse = unknown> = Options2<TData, ThrowOnError, TResponse> & {
     /**
@@ -116,5 +116,47 @@ export const getUserMatches = <ThrowOnError extends boolean = false>(options: Op
     }).parseAsync(data),
     responseValidator: async (data) => await zGetUserMatchesResponse.parseAsync(data),
     url: '/api/v1/users/{id}/matches',
+    ...options
+});
+
+/**
+ * Liste publique des tournois RPB (cartes avec catégorie + compteurs), filtrable par statut et paginable.
+ */
+export const listTournaments = <ThrowOnError extends boolean = false>(options?: Options<ListTournamentsData, ThrowOnError>) => (options?.client ?? client).get<ListTournamentsResponses, ListTournamentsErrors, ThrowOnError>({
+    requestValidator: async (data) => await z.object({
+        body: z.never().optional(),
+        path: z.never().optional(),
+        query: zListTournamentsQuery.optional()
+    }).parseAsync(data),
+    responseValidator: async (data) => await zListTournamentsResponse.parseAsync(data),
+    url: '/api/v1/tournaments',
+    ...options
+});
+
+/**
+ * Détail d'un tournoi (ligne + participants + matches) par id, challongeId ou slug.
+ */
+export const getTournament = <ThrowOnError extends boolean = false>(options: Options<GetTournamentData, ThrowOnError>) => (options.client ?? client).get<GetTournamentResponses, GetTournamentErrors, ThrowOnError>({
+    requestValidator: async (data) => await z.object({
+        body: z.never().optional(),
+        path: zGetTournamentPath,
+        query: z.never().optional()
+    }).parseAsync(data),
+    responseValidator: async (data) => await zGetTournamentResponse.parseAsync(data),
+    url: '/api/v1/tournaments/{id}',
+    ...options
+});
+
+/**
+ * Feed BeyTube de la communauté (vidéos mises en avant, triées par date).
+ */
+export const listStreamVideos = <ThrowOnError extends boolean = false>(options?: Options<ListStreamVideosData, ThrowOnError>) => (options?.client ?? client).get<ListStreamVideosResponses, ListStreamVideosErrors, ThrowOnError>({
+    requestValidator: async (data) => await z.object({
+        body: z.never().optional(),
+        path: z.never().optional(),
+        query: zListStreamVideosQuery.optional()
+    }).parseAsync(data),
+    responseValidator: async (data) => await zListStreamVideosResponse.parseAsync(data),
+    url: '/api/v1/stream',
     ...options
 });

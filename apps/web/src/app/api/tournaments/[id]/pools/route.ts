@@ -25,7 +25,7 @@
 import { NextResponse } from "next/server";
 import path from "node:path";
 
-import { db, schema, eq, or } from "@/lib/db";
+import { getTournamentPoolMatches } from "@/server/dal/tournaments";
 
 interface RouteParams {
   params: Promise<{ id: string }>;
@@ -82,28 +82,7 @@ export async function GET(_req: Request, { params }: RouteParams): Promise<Respo
     return NextResponse.json({ error: "id requis" }, { status: 400 });
   }
 
-  const tournament = await db.query.tournaments.findFirst({
-    where: or(
-      eq(schema.tournaments.id, idOrChallongeId),
-      eq(schema.tournaments.challongeId, idOrChallongeId),
-    ),
-    columns: {
-      id: true,
-      name: true,
-      challongeId: true,
-    },
-    with: {
-      tournamentMatches: {
-        where: eq(schema.tournamentMatches.round, -100),
-        columns: {
-          challongeMatchId: true,
-          score: true,
-          state: true,
-          winnerName: true,
-        },
-      },
-    },
-  });
+  const tournament = await getTournamentPoolMatches(idOrChallongeId);
 
   if (!tournament) {
     return NextResponse.json(

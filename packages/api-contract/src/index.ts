@@ -4,5 +4,7 @@ export * from "./meta";
 export * from "./parts";
 export * from "./rankings";
 export * from "./users";
+export * from "./tournaments";
+export * from "./stream";
 export * from "./scrapers";
 export * from "./openapi";

@@ -6,63 +6,45 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { requireAdmin, requireStaff } from "@/lib/auth-utils";
 import { getChallongeService } from "@/lib/challonge";
-import { db, schema, count, desc, eq, isNull } from "@/lib/db";
+import {
+  createTournamentRow,
+  deleteTournamentsBulk,
+  listTournamentCards,
+} from "@/server/dal/tournaments";
+
+const VALID_STATUSES = [
+  "UPCOMING",
+  "REGISTRATION_OPEN",
+  "REGISTRATION_CLOSED",
+  "CHECKIN",
+  "UNDERWAY",
+  "COMPLETE",
+  "CANCELLED",
+  "ARCHIVED",
+] as const;
+type StatusVal = (typeof VALID_STATUSES)[number];
 
 // GET - List tournaments
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    const status = searchParams.get("status");
+    const statusParam = searchParams.get("status");
     const limit = Math.min(Math.max(parseInt(searchParams.get("limit") ?? "50", 10) || 50, 1), 200);
     const offset = Math.max(parseInt(searchParams.get("offset") ?? "0", 10) || 0, 0);
 
-    const validStatuses = ["PENDING", "ACTIVE", "COMPLETE", "ARCHIVED"];
-    const where =
-      status && validStatuses.includes(status)
-        ? eq(
-            schema.tournaments.status,
-            status as (typeof schema.tournamentStatus.enumValues)[number],
-          )
+    const status =
+      statusParam && (VALID_STATUSES as readonly string[]).includes(statusParam)
+        ? (statusParam as StatusVal)
         : undefined;
 
-    const [tournamentRows, totalRows] = await Promise.all([
-      db.query.tournaments.findMany({
-        where,
-        with: {
-          tournamentParticipants: {
-            with: {
-              user: {
-                with: {
-                  profiles: true,
-                },
-              },
-            },
-          },
-          tournamentMatches: { columns: { id: true } },
-        },
-        orderBy: desc(schema.tournaments.date),
-        limit,
-        offset,
-      }),
-      db.select({ value: count() }).from(schema.tournaments).where(where),
-    ]);
-
-    const tournaments = tournamentRows.map((t) => ({
-      ...t,
-      _count: {
-        participants: t.tournamentParticipants.length,
-        matches: t.tournamentMatches.length,
-      },
-      participants: t.tournamentParticipants.map((p) => ({
-        ...p,
-        user: p.user ? { ...p.user, profile: p.user.profiles[0] ?? null } : null,
-      })),
-    }));
-
-    const total = totalRows[0]?.value ?? 0;
+    const { items, total } = await listTournamentCards({
+      status,
+      limit,
+      offset,
+    });
 
     return NextResponse.json({
-      data: tournaments,
+      data: items,
       meta: { total, limit, offset },
     });
   } catch (error) {
@@ -117,20 +99,17 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    const [tournament] = await db
-      .insert(schema.tournaments)
-      .values({
-        name,
-        description,
-        date: new Date(date).toISOString(),
-        location,
-        format: format ?? "3on3 Double Elimination",
-        maxPlayers: maxPlayers ?? 64,
-        challongeId,
-        challongeUrl,
-        status: "UPCOMING",
-      })
-      .returning();
+    const tournament = await createTournamentRow({
+      name,
+      description,
+      date: new Date(date).toISOString(),
+      location,
+      format: format ?? "3on3 Double Elimination",
+      maxPlayers: maxPlayers ?? 64,
+      challongeId,
+      challongeUrl,
+      status: "UPCOMING",
+    });
 
     return NextResponse.json({ data: tournament }, { status: 201 });
   } catch (error) {
@@ -149,23 +128,11 @@ export async function DELETE(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const deleteAll = searchParams.get("all") === "true";
 
-    if (deleteAll) {
-      const deleted = await db.delete(schema.tournaments).returning({ id: schema.tournaments.id });
-      return NextResponse.json({
-        deleted: deleted.length,
-        message: "All tournaments deleted",
-      });
-    }
-
-    // Delete only fake tournaments (no challongeId)
-    const deleted = await db
-      .delete(schema.tournaments)
-      .where(isNull(schema.tournaments.challongeId))
-      .returning({ id: schema.tournaments.id });
+    const deleted = await deleteTournamentsBulk({ all: deleteAll });
 
     return NextResponse.json({
-      deleted: deleted.length,
-      message: "Fake tournaments deleted",
+      deleted,
+      message: deleteAll ? "All tournaments deleted" : "Fake tournaments deleted",
     });
   } catch (error) {
     console.error("Error deleting tournaments:", error);

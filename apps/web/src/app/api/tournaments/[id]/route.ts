@@ -7,39 +7,18 @@ import { type NextRequest, NextResponse } from "next/server";
 import { type TournamentStatus } from "@/lib/types";
 import { requireAdmin, requireStaff } from "@/lib/auth-utils";
 import { getChallongeService } from "@/lib/challonge";
-import { db, schema, asc, eq, ilike, or } from "@/lib/db";
+import {
+  deleteTournamentCascade,
+  getTournamentById,
+  getTournamentFull,
+  setParticipantChallongeId,
+  setTournamentStatus,
+  updateTournamentRow,
+  upsertMatchFromChallonge,
+} from "@/server/dal/tournaments";
 
 interface RouteParams {
   params: Promise<{ id: string }>;
-}
-
-function remapTournamentFull(
-  t:
-    | ({
-        tournamentParticipants: Array<Record<string, unknown>>;
-        tournamentMatches: Array<Record<string, unknown>>;
-      } & Record<string, unknown>)
-    | null
-    | undefined,
-) {
-  if (!t) return t;
-  const { tournamentParticipants, tournamentMatches, ...rest } = t;
-  return {
-    ...rest,
-    participants: tournamentParticipants.map((p) => {
-      const user = p.user as { profiles?: unknown[] } | null;
-      return {
-        ...p,
-        user: user ? { ...user, profile: user.profiles?.[0] ?? null } : null,
-      };
-    }),
-    matches: tournamentMatches.map((m) => ({
-      ...m,
-      player1: m.user_player1Id ?? null,
-      player2: m.user_player2Id ?? null,
-      winner: m.user_winnerId ?? null,
-    })),
-  };
 }
 
 function isOffline(tournament: { challongeId: string | null; challongeUrl: string | null }) {
@@ -50,54 +29,13 @@ function isOffline(tournament: { challongeId: string | null; challongeUrl: strin
 export async function GET(_request: NextRequest, { params }: RouteParams) {
   try {
     const { id } = await params;
+    const tournament = await getTournamentFull(id);
 
-    let tournamentRow = await db.query.tournaments.findFirst({
-      where: eq(schema.tournaments.id, id),
-      with: {
-        tournamentParticipants: {
-          with: { user: { with: { profiles: true } } },
-          orderBy: asc(schema.tournamentParticipants.seed),
-        },
-        tournamentMatches: {
-          with: {
-            user_player1Id: { with: { profiles: true } },
-            user_player2Id: { with: { profiles: true } },
-            user_winnerId: { with: { profiles: true } },
-          },
-          orderBy: [asc(schema.tournamentMatches.round), asc(schema.tournamentMatches.createdAt)],
-        },
-      },
-    });
-
-    // Fallback: Try searching by challongeId or challongeUrl slug
-    if (!tournamentRow) {
-      tournamentRow = await db.query.tournaments.findFirst({
-        where: or(
-          eq(schema.tournaments.challongeId, id),
-          ilike(schema.tournaments.challongeUrl, `%${id}%`),
-        ),
-        with: {
-          tournamentParticipants: {
-            with: { user: { with: { profiles: true } } },
-            orderBy: asc(schema.tournamentParticipants.seed),
-          },
-          tournamentMatches: {
-            with: {
-              user_player1Id: { with: { profiles: true } },
-              user_player2Id: { with: { profiles: true } },
-              user_winnerId: { with: { profiles: true } },
-            },
-            orderBy: [asc(schema.tournamentMatches.round), asc(schema.tournamentMatches.createdAt)],
-          },
-        },
-      });
-    }
-
-    if (!tournamentRow) {
+    if (!tournament) {
       return NextResponse.json({ error: "Tournament not found" }, { status: 404 });
     }
 
-    return NextResponse.json({ data: remapTournamentFull(tournamentRow) });
+    return NextResponse.json({ data: tournament });
   } catch (error) {
     console.error("Error fetching tournament:", error);
     return NextResponse.json({ error: "Failed to fetch tournament" }, { status: 500 });
@@ -123,9 +61,7 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
       status?: string;
     };
 
-    const existing = await db.query.tournaments.findFirst({
-      where: eq(schema.tournaments.id, id),
-    });
+    const existing = await getTournamentById(id);
     if (!existing) {
       return NextResponse.json({ error: "Tournament not found" }, { status: 404 });
     }
@@ -144,19 +80,15 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
       }
     }
 
-    const [tournament] = await db
-      .update(schema.tournaments)
-      .set({
-        ...(name && { name }),
-        ...(description !== undefined && { description }),
-        ...(date && { date: new Date(date).toISOString() }),
-        ...(location !== undefined && { location }),
-        ...(format && { format }),
-        ...(maxPlayers && { maxPlayers }),
-        ...(status && { status: status as TournamentStatus }),
-      })
-      .where(eq(schema.tournaments.id, id))
-      .returning();
+    const tournament = await updateTournamentRow(id, {
+      ...(name && { name }),
+      ...(description !== undefined && { description }),
+      ...(date && { date: new Date(date).toISOString() }),
+      ...(location !== undefined && { location }),
+      ...(format && { format }),
+      ...(maxPlayers && { maxPlayers }),
+      ...(status && { status: status as TournamentStatus }),
+    });
 
     return NextResponse.json({ data: tournament });
   } catch (error) {
@@ -174,9 +106,7 @@ export async function DELETE(_request: NextRequest, { params }: RouteParams) {
 
     const { id } = await params;
 
-    const tournament = await db.query.tournaments.findFirst({
-      where: eq(schema.tournaments.id, id),
-    });
+    const tournament = await getTournamentById(id);
     if (!tournament) {
       return NextResponse.json({ error: "Tournament not found" }, { status: 404 });
     }
@@ -192,15 +122,7 @@ export async function DELETE(_request: NextRequest, { params }: RouteParams) {
     }
 
     // Delete related data atomically
-    await db.transaction(async (tx) => {
-      await tx
-        .delete(schema.tournamentMatches)
-        .where(eq(schema.tournamentMatches.tournamentId, id));
-      await tx
-        .delete(schema.tournamentParticipants)
-        .where(eq(schema.tournamentParticipants.tournamentId, id));
-      await tx.delete(schema.tournaments).where(eq(schema.tournaments.id, id));
-    });
+    await deleteTournamentCascade(id);
 
     return NextResponse.json({ success: true });
   } catch (error) {
@@ -222,23 +144,13 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
       action: "start" | "finalize" | "sync" | "sync_participants";
     };
 
-    const tournamentRow = await db.query.tournaments.findFirst({
-      where: eq(schema.tournaments.id, id),
-      with: {
-        tournamentParticipants: { with: { user: true } },
-        tournamentMatches: true,
-      },
-    });
+    const tournamentRow = await getTournamentFull(id);
 
     if (!tournamentRow) {
       return NextResponse.json({ error: "Tournament not found" }, { status: 404 });
     }
 
-    const tournament = {
-      ...tournamentRow,
-      participants: tournamentRow.tournamentParticipants,
-      matches: tournamentRow.tournamentMatches,
-    };
+    const tournament = tournamentRow;
 
     if (!tournament.challongeId) {
       return NextResponse.json({ error: "Tournament not linked to Challonge" }, { status: 400 });
@@ -277,12 +189,7 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
           );
 
           if (existingInChallonge) {
-            await db
-              .update(schema.tournamentParticipants)
-              .set({
-                challongeParticipantId: String(existingInChallonge.id),
-              })
-              .where(eq(schema.tournamentParticipants.id, localParticipant.id));
+            await setParticipantChallongeId(localParticipant.id, String(existingInChallonge.id));
           } else {
             participantsToCreate.push({
               name:
@@ -308,10 +215,7 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
               (p) => p.userId === created.attributes.misc,
             );
             if (localParticipant) {
-              await db
-                .update(schema.tournamentParticipants)
-                .set({ challongeParticipantId: String(created.id) })
-                .where(eq(schema.tournamentParticipants.id, localParticipant.id));
+              await setParticipantChallongeId(localParticipant.id, String(created.id));
             }
           }
         }
@@ -320,19 +224,13 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
 
       case "start": {
         await challonge.startTournament(tournament.challongeId);
-        await db
-          .update(schema.tournaments)
-          .set({ status: "UNDERWAY" })
-          .where(eq(schema.tournaments.id, id));
+        await setTournamentStatus(id, "UNDERWAY");
         break;
       }
 
       case "finalize": {
         await challonge.finalizeTournament(tournament.challongeId);
-        await db
-          .update(schema.tournaments)
-          .set({ status: "COMPLETE" })
-          .where(eq(schema.tournaments.id, id));
+        await setTournamentStatus(id, "COMPLETE");
         break;
       }
 
@@ -354,33 +252,19 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
             (p) => p.challongeParticipantId === String(attrs.winnerId),
           );
 
-          // Challonge v2.1 uses scores as an array or CSV depending on request. Attributes usually have scores as string.
+          // Challonge v2.1 uses scores as an array or CSV depending on request.
           const scoreStr = attrs.scores || null;
 
-          await db
-            .insert(schema.tournamentMatches)
-            .values({
-              tournamentId: id,
-              challongeMatchId: String(match.id),
-              round: attrs.round,
-              state: attrs.state,
-              player1Id: player1?.userId ?? null,
-              player2Id: player2?.userId ?? null,
-              winnerId: winner?.userId ?? null,
-              score: scoreStr,
-            })
-            .onConflictDoUpdate({
-              target: [
-                schema.tournamentMatches.tournamentId,
-                schema.tournamentMatches.challongeMatchId,
-              ],
-              set: {
-                round: attrs.round,
-                state: attrs.state,
-                score: scoreStr,
-                winnerId: winner?.userId ?? null,
-              },
-            });
+          await upsertMatchFromChallonge({
+            tournamentId: id,
+            challongeMatchId: String(match.id),
+            round: attrs.round,
+            state: attrs.state,
+            player1Id: player1?.userId ?? null,
+            player2Id: player2?.userId ?? null,
+            winnerId: winner?.userId ?? null,
+            score: scoreStr,
+          });
         }
         break;
       }

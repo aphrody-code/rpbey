@@ -407,3 +407,175 @@ export const zGetUserMatchesResponse = z.object({
         offset: z.int().gte(0).lte(9007199254740991)
     })
 });
+
+export const zListTournamentsQuery = z.object({
+    status: z.enum([
+        'UPCOMING',
+        'REGISTRATION_OPEN',
+        'REGISTRATION_CLOSED',
+        'CHECKIN',
+        'UNDERWAY',
+        'COMPLETE',
+        'CANCELLED',
+        'ARCHIVED'
+    ]).optional(),
+    limit: z.int().gte(1).lte(200).optional(),
+    offset: z.int().gte(0).lte(9007199254740991).optional()
+});
+
+/**
+ * OK
+ */
+export const zListTournamentsResponse = z.object({
+    ok: z.literal(true),
+    data: z.object({
+        items: z.array(z.object({
+            id: z.string(),
+            name: z.string(),
+            description: z.string().nullish(),
+            date: z.string(),
+            location: z.string().nullish(),
+            format: z.string(),
+            maxPlayers: z.number(),
+            status: z.enum([
+                'UPCOMING',
+                'REGISTRATION_OPEN',
+                'REGISTRATION_CLOSED',
+                'CHECKIN',
+                'UNDERWAY',
+                'COMPLETE',
+                'CANCELLED',
+                'ARCHIVED'
+            ]),
+            challongeId: z.string().nullish(),
+            challongeUrl: z.string().nullish(),
+            challongeState: z.string().nullish(),
+            posterUrl: z.string().nullish(),
+            categoryId: z.string().nullish(),
+            weight: z.number().nullish(),
+            createdAt: z.string().nullish(),
+            updatedAt: z.string().nullish(),
+            category: z.object({
+                id: z.string(),
+                name: z.string(),
+                color: z.string().nullish(),
+                logoUrl: z.string().nullish()
+            }).nullable(),
+            participantsCount: z.number(),
+            matchesCount: z.number()
+        })),
+        total: z.number(),
+        limit: z.number(),
+        offset: z.number()
+    })
+});
+
+export const zGetTournamentPath = z.object({
+    id: z.string()
+});
+
+/**
+ * OK
+ */
+export const zGetTournamentResponse = z.object({
+    ok: z.literal(true),
+    data: z.object({
+        tournament: z.object({
+            id: z.string(),
+            name: z.string(),
+            description: z.string().nullish(),
+            date: z.string(),
+            location: z.string().nullish(),
+            format: z.string(),
+            maxPlayers: z.number(),
+            status: z.enum([
+                'UPCOMING',
+                'REGISTRATION_OPEN',
+                'REGISTRATION_CLOSED',
+                'CHECKIN',
+                'UNDERWAY',
+                'COMPLETE',
+                'CANCELLED',
+                'ARCHIVED'
+            ]),
+            challongeId: z.string().nullish(),
+            challongeUrl: z.string().nullish(),
+            challongeState: z.string().nullish(),
+            posterUrl: z.string().nullish(),
+            categoryId: z.string().nullish(),
+            weight: z.number().nullish(),
+            createdAt: z.string().nullish(),
+            updatedAt: z.string().nullish()
+        }).nullable(),
+        participants: z.array(z.object({
+            id: z.string(),
+            tournamentId: z.string(),
+            userId: z.string().nullish(),
+            playerName: z.string().nullish(),
+            seed: z.number().nullish(),
+            finalPlacement: z.number().nullish(),
+            challongeParticipantId: z.string().nullish(),
+            player: z.object({
+                id: z.string(),
+                name: z.string().nullish(),
+                bladerName: z.string().nullish(),
+                imageUrl: z.string().nullish()
+            }).nullable()
+        })),
+        matches: z.array(z.object({
+            id: z.string(),
+            tournamentId: z.string(),
+            challongeMatchId: z.string().nullish(),
+            round: z.number(),
+            state: z.string().nullish(),
+            score: z.string().nullish(),
+            player1Id: z.string().nullish(),
+            player2Id: z.string().nullish(),
+            winnerId: z.string().nullish(),
+            player1: z.object({
+                id: z.string(),
+                name: z.string().nullish(),
+                bladerName: z.string().nullish(),
+                imageUrl: z.string().nullish()
+            }).nullable(),
+            player2: z.object({
+                id: z.string(),
+                name: z.string().nullish(),
+                bladerName: z.string().nullish(),
+                imageUrl: z.string().nullish()
+            }).nullable(),
+            winner: z.object({
+                id: z.string(),
+                name: z.string().nullish(),
+                bladerName: z.string().nullish(),
+                imageUrl: z.string().nullish()
+            }).nullable()
+        }))
+    })
+});
+
+export const zListStreamVideosQuery = z.object({
+    channelId: z.string().optional(),
+    featured: z.enum(['true', 'false']).optional(),
+    limit: z.int().gte(1).lte(100).optional()
+});
+
+/**
+ * OK
+ */
+export const zListStreamVideosResponse = z.object({
+    ok: z.literal(true),
+    data: z.object({
+        videos: z.array(z.object({
+            id: z.string(),
+            title: z.string(),
+            channelName: z.string(),
+            channelAvatar: z.string().nullish(),
+            views: z.int().gte(-9007199254740991).lte(9007199254740991),
+            thumbnail: z.string(),
+            url: z.string(),
+            duration: z.string().nullish(),
+            ago: z.string().nullish()
+        }))
+    })
+});

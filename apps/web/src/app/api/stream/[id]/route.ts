@@ -14,7 +14,8 @@
  */
 
 import { type NextRequest, NextResponse } from "next/server";
-import { db, schema, asc, eq, ilike, or } from "@/lib/db";
+import { loadJsonSafe } from "@/lib/data-cache";
+import { getTournamentForStream } from "@/server/dal/stream";
 
 interface RouteParams {
   params: Promise<{ id: string }>;
@@ -224,20 +225,24 @@ function buildProgramState(
 
 // ─── Scraped tournament handler (BTS2, BTS3, WB UB*) ─────────────────────────
 
-async function handleScrapedTournament(id: string) {
-  const { existsSync, readFileSync } = await import("node:fs");
-  const { join } = await import("node:path");
+type ScrapedStateInput = Parameters<typeof buildScrapedState>[0];
 
-  // Check BTS exports
+interface WbHistoryExport {
+  metadata?: { url?: string };
+  participants?: Array<{ name: string; finalRank: number; seed: number }>;
+  matches?: ScrapedStateInput["matches"];
+}
+
+async function handleScrapedTournament(id: string) {
+  // Check BTS exports (FS/CDN via loadJsonSafe — plus de process.cwd()).
   const btsMap: Record<string, string> = {
     bts2: "B_TS2.json",
     bts3: "B_TS3.json",
   };
   const btsFile = btsMap[id];
   if (btsFile) {
-    const filePath = join(process.cwd(), "data/exports", btsFile);
-    if (!existsSync(filePath)) return null;
-    const data = JSON.parse(readFileSync(filePath, "utf-8"));
+    const data = await loadJsonSafe<ScrapedStateInput>(`data/exports/${btsFile}`);
+    if (!data) return null;
     return buildScrapedState(data, "bts", id.toUpperCase());
   }
 
@@ -245,19 +250,16 @@ async function handleScrapedTournament(id: string) {
   const wbMatch = id.match(/^wb_?(ub\d+)$/i);
   if (wbMatch?.[1]) {
     const slug = `wb_${wbMatch[1].toLowerCase()}`;
-    const filePath = join(process.cwd(), "data/wb_history", `${slug}.json`);
-    if (!existsSync(filePath)) return null;
-    const data = JSON.parse(readFileSync(filePath, "utf-8"));
+    const data = await loadJsonSafe<WbHistoryExport>(`data/wb_history/${slug}.json`);
+    if (!data) return null;
     return buildScrapedState(
       {
         url: data.metadata?.url,
-        participants: (data.participants ?? []).map(
-          (p: { name: string; finalRank: number; seed: number }) => ({
-            name: p.name,
-            rank: p.finalRank,
-            seed: p.seed,
-          }),
-        ),
+        participants: (data.participants ?? []).map((p) => ({
+          name: p.name,
+          rank: p.finalRank,
+          seed: p.seed,
+        })),
         matches: data.matches ?? [],
       },
       "wb",
@@ -325,30 +327,7 @@ function buildScrapedState(
 // ─── DB tournament handler ───────────────────────────────────────────────────
 
 async function handleDBTournament(id: string, matchRound?: number | null) {
-  const tournamentRaw = await db.query.tournaments.findFirst({
-    where: or(
-      eq(schema.tournaments.id, id),
-      eq(schema.tournaments.challongeId, id),
-      ilike(schema.tournaments.challongeUrl, `%${id}%`),
-    ),
-    with: {
-      tournamentParticipants: {
-        with: { user: { with: { profiles: true } } },
-        orderBy: [
-          asc(schema.tournamentParticipants.finalPlacement),
-          asc(schema.tournamentParticipants.seed),
-        ],
-      },
-      tournamentMatches: {
-        with: {
-          user_player1Id: { with: { profiles: true } },
-          user_player2Id: { with: { profiles: true } },
-          user_winnerId: { with: { profiles: true } },
-        },
-        orderBy: [asc(schema.tournamentMatches.round), asc(schema.tournamentMatches.createdAt)],
-      },
-    },
-  });
+  const tournamentRaw = await getTournamentForStream(id);
 
   if (!tournamentRaw) return null;
 

@@ -2,12 +2,13 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import { connection } from "next/server";
-import { getBeyTubeFeatured } from "@/lib/beytube";
-import { db, schema, desc, eq } from "@/lib/db";
 import { createPageMetadata } from "@/lib/seo-utils";
 import { getTikTokVideos } from "@/lib/tiktok";
 import { getRPBClips, getRPBStreamInfo } from "@/lib/twitch";
+import { getBeyTubeFeatured, getRpbYoutubeVideos } from "@/server/dal/stream";
 import { TvFeed } from "./_components/TvFeed";
+
+const RPB_YT_CHANNEL_ID = "UCHiDwWI-2uQrsUiJhXt6rng";
 
 export const metadata = createPageMetadata({
   title: "RPB TV | Clips & Rediffusions",
@@ -33,22 +34,18 @@ export default async function TVPage() {
   // Clips
   const clipsPromise = safeFetch(getRPBClips(20), []);
 
-  // Rediffusions — vidéos YouTube RPB depuis la DB (avec vrais logos)
-  const rpbVideosPromise = db.query.youtubeVideos
-    .findMany({
-      where: eq(schema.youtubeVideos.channelId, "UCHiDwWI-2uQrsUiJhXt6rng"),
-      orderBy: desc(schema.youtubeVideos.publishedAt),
-      limit: 20,
-    })
+  // Rediffusions — vidéos YouTube RPB via la DAL (avec vrais logos)
+  const rpbVideosPromise = getRpbYoutubeVideos(RPB_YT_CHANNEL_ID, 20)
     .then((vids) =>
       vids.map((v) => ({
         id: v.id,
         title: v.title,
         url: v.url,
-        thumbnailUrl: v.thumbnail,
+        thumbnailUrl: v.thumbnailUrl,
         duration: v.duration,
+        // publishedAt arrive en string ISO (mode:"string") — wrap en Date pour le client.
         publishedAt: new Date(v.publishedAt),
-        viewCount: v.views,
+        viewCount: v.viewCount,
         channelName: v.channelName,
         channelAvatar: v.channelAvatar,
       })),

@@ -4,7 +4,12 @@ import { google } from "googleapis";
 import { headers } from "next/headers";
 import { auth } from "@/lib/auth";
 import { getChallongeService } from "@/lib/challonge";
-import { db, schema, and, asc, eq } from "@/lib/db";
+import {
+  getProviderAccount,
+  getTournamentForSheets,
+  getTournamentWithParticipants,
+  reportMatchByChallongeId,
+} from "@/server/dal/tournaments";
 
 export async function reportChallongeMatch(
   tournamentId: string,
@@ -20,10 +25,7 @@ export async function reportChallongeMatch(
       return { error: "Unauthorized" };
     }
 
-    const tournament = await db.query.tournaments.findFirst({
-      where: eq(schema.tournaments.id, tournamentId),
-      with: { tournamentParticipants: true },
-    });
+    const tournament = await getTournamentWithParticipants(tournamentId);
 
     if (!tournament?.challongeId) return { error: "Tournament not linked" };
 
@@ -32,12 +34,7 @@ export async function reportChallongeMatch(
     if (!participant?.challongeParticipantId) return { error: "Winner not synced with Challonge" };
 
     // Try to get Admin's Challonge Token
-    const account = await db.query.accounts.findFirst({
-      where: and(
-        eq(schema.accounts.userId, session.user.id),
-        eq(schema.accounts.providerId, "challonge"),
-      ),
-    });
+    const account = await getProviderAccount(session.user.id, "challonge");
 
     const challonge = getChallongeService();
     await challonge.reportMatchScore(tournament.challongeId, matchId, {
@@ -47,19 +44,11 @@ export async function reportChallongeMatch(
     });
 
     // Also update local DB for immediate feedback
-    await db
-      .update(schema.tournamentMatches)
-      .set({
-        winnerId: data.winnerId,
-        score: data.score,
-        state: "complete",
-      })
-      .where(
-        and(
-          eq(schema.tournamentMatches.tournamentId, tournamentId),
-          eq(schema.tournamentMatches.challongeMatchId, matchId),
-        ),
-      );
+    await reportMatchByChallongeId(tournamentId, matchId, {
+      winnerId: data.winnerId,
+      score: data.score,
+      state: "complete",
+    });
 
     return { success: true };
   } catch (error) {
@@ -79,88 +68,18 @@ export async function exportTournamentToSheets(tournamentId: string) {
     }
 
     // Get Google Account token
-    const account = await db.query.accounts.findFirst({
-      where: and(
-        eq(schema.accounts.userId, session.user.id),
-        eq(schema.accounts.providerId, "google"),
-      ),
-    });
+    const account = await getProviderAccount(session.user.id, "google");
 
     if (!account?.accessToken) {
       return { error: "NO_GOOGLE_ACCOUNT" };
     }
 
-    // Fetch Tournament Data
-    const tournamentRow = await db.query.tournaments.findFirst({
-      where: eq(schema.tournaments.id, tournamentId),
-      with: {
-        tournamentParticipants: {
-          with: {
-            user: {
-              with: {
-                profiles: true,
-                decks: {
-                  where: eq(schema.decks.isActive, true),
-                  with: {
-                    deckItems: {
-                      with: {
-                        beyblade: true,
-                        part_bladeId: true,
-                        part_ratchetId: true,
-                        part_bitId: true,
-                      },
-                    },
-                  },
-                },
-              },
-            },
-          },
-          orderBy: asc(schema.tournamentParticipants.seed),
-        },
-        tournamentMatches: {
-          with: {
-            user_player1Id: { with: { profiles: true } },
-            user_player2Id: { with: { profiles: true } },
-            user_winnerId: { with: { profiles: true } },
-          },
-          orderBy: [asc(schema.tournamentMatches.round), asc(schema.tournamentMatches.createdAt)],
-        },
-      },
-    });
+    // Fetch Tournament Data (relations remappées Prisma-style par la DAL)
+    const tournament = await getTournamentForSheets(tournamentId);
 
-    if (!tournamentRow) {
+    if (!tournament) {
       return { error: "Tournament not found" };
     }
-
-    // Remap relations to Prisma-style field names
-    const tournament = {
-      ...tournamentRow,
-      participants: tournamentRow.tournamentParticipants.map((p) => ({
-        ...p,
-        user: p.user
-          ? {
-              ...p.user,
-              profile: p.user.profiles[0] ?? null,
-              decks: p.user.decks.map((d) => ({
-                ...d,
-                items: d.deckItems.map((it) => ({
-                  ...it,
-                  bey: it.beyblade,
-                  blade: it.part_bladeId,
-                  ratchet: it.part_ratchetId,
-                  bit: it.part_bitId,
-                })),
-              })),
-            }
-          : null,
-      })),
-      matches: tournamentRow.tournamentMatches.map((m) => ({
-        ...m,
-        player1: m.user_player1Id ?? null,
-        player2: m.user_player2Id ?? null,
-        winner: m.user_winnerId ?? null,
-      })),
-    };
 
     // Initialize Google Sheets API
     const authClient = new google.auth.OAuth2(

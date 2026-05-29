@@ -604,3 +604,256 @@ export type GetUserMatchesResponses = {
 };
 
 export type GetUserMatchesResponse = GetUserMatchesResponses[keyof GetUserMatchesResponses];
+
+export type ListTournamentsData = {
+    body?: never;
+    path?: never;
+    query?: {
+        status?: 'UPCOMING' | 'REGISTRATION_OPEN' | 'REGISTRATION_CLOSED' | 'CHECKIN' | 'UNDERWAY' | 'COMPLETE' | 'CANCELLED' | 'ARCHIVED';
+        limit?: number;
+        offset?: number;
+    };
+    url: '/api/v1/tournaments';
+};
+
+export type ListTournamentsErrors = {
+    /**
+     * Erreur de requête ou de validation
+     */
+    '4XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+    /**
+     * Erreur serveur
+     */
+    '5XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+};
+
+export type ListTournamentsError = ListTournamentsErrors[keyof ListTournamentsErrors];
+
+export type ListTournamentsResponses = {
+    /**
+     * OK
+     */
+    200: {
+        ok: true;
+        data: {
+            items: Array<{
+                id: string;
+                name: string;
+                description?: string | null;
+                /**
+                 * ISO 8601 date-time string
+                 */
+                date: string;
+                location?: string | null;
+                format: string;
+                maxPlayers: number;
+                status: 'UPCOMING' | 'REGISTRATION_OPEN' | 'REGISTRATION_CLOSED' | 'CHECKIN' | 'UNDERWAY' | 'COMPLETE' | 'CANCELLED' | 'ARCHIVED';
+                challongeId?: string | null;
+                challongeUrl?: string | null;
+                challongeState?: string | null;
+                posterUrl?: string | null;
+                categoryId?: string | null;
+                weight?: number | null;
+                createdAt?: string | null;
+                updatedAt?: string | null;
+                category: {
+                    id: string;
+                    name: string;
+                    color?: string | null;
+                    logoUrl?: string | null;
+                } | null;
+                participantsCount: number;
+                matchesCount: number;
+            }>;
+            total: number;
+            limit: number;
+            offset: number;
+        };
+    };
+};
+
+export type ListTournamentsResponse = ListTournamentsResponses[keyof ListTournamentsResponses];
+
+export type GetTournamentData = {
+    body?: never;
+    path: {
+        id: string;
+    };
+    query?: never;
+    url: '/api/v1/tournaments/{id}';
+};
+
+export type GetTournamentErrors = {
+    /**
+     * Erreur de requête ou de validation
+     */
+    '4XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+    /**
+     * Erreur serveur
+     */
+    '5XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+};
+
+export type GetTournamentError = GetTournamentErrors[keyof GetTournamentErrors];
+
+export type GetTournamentResponses = {
+    /**
+     * OK
+     */
+    200: {
+        ok: true;
+        data: {
+            tournament: {
+                id: string;
+                name: string;
+                description?: string | null;
+                /**
+                 * ISO 8601 date-time string
+                 */
+                date: string;
+                location?: string | null;
+                format: string;
+                maxPlayers: number;
+                status: 'UPCOMING' | 'REGISTRATION_OPEN' | 'REGISTRATION_CLOSED' | 'CHECKIN' | 'UNDERWAY' | 'COMPLETE' | 'CANCELLED' | 'ARCHIVED';
+                challongeId?: string | null;
+                challongeUrl?: string | null;
+                challongeState?: string | null;
+                posterUrl?: string | null;
+                categoryId?: string | null;
+                weight?: number | null;
+                createdAt?: string | null;
+                updatedAt?: string | null;
+            } | null;
+            participants: Array<{
+                id: string;
+                tournamentId: string;
+                userId?: string | null;
+                playerName?: string | null;
+                seed?: number | null;
+                finalPlacement?: number | null;
+                challongeParticipantId?: string | null;
+                player: {
+                    id: string;
+                    name?: string | null;
+                    bladerName?: string | null;
+                    imageUrl?: string | null;
+                } | null;
+            }>;
+            matches: Array<{
+                id: string;
+                tournamentId: string;
+                challongeMatchId?: string | null;
+                round: number;
+                state?: string | null;
+                score?: string | null;
+                player1Id?: string | null;
+                player2Id?: string | null;
+                winnerId?: string | null;
+                player1: {
+                    id: string;
+                    name?: string | null;
+                    bladerName?: string | null;
+                    imageUrl?: string | null;
+                } | null;
+                player2: {
+                    id: string;
+                    name?: string | null;
+                    bladerName?: string | null;
+                    imageUrl?: string | null;
+                } | null;
+                winner: {
+                    id: string;
+                    name?: string | null;
+                    bladerName?: string | null;
+                    imageUrl?: string | null;
+                } | null;
+            }>;
+        };
+    };
+};
+
+export type GetTournamentResponse = GetTournamentResponses[keyof GetTournamentResponses];
+
+export type ListStreamVideosData = {
+    body?: never;
+    path?: never;
+    query?: {
+        channelId?: string;
+        featured?: 'true' | 'false';
+        limit?: number;
+    };
+    url: '/api/v1/stream';
+};
+
+export type ListStreamVideosErrors = {
+    /**
+     * Erreur de requête ou de validation
+     */
+    '4XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+    /**
+     * Erreur serveur
+     */
+    '5XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+};
+
+export type ListStreamVideosError = ListStreamVideosErrors[keyof ListStreamVideosErrors];
+
+export type ListStreamVideosResponses = {
+    /**
+     * OK
+     */
+    200: {
+        ok: true;
+        data: {
+            videos: Array<{
+                id: string;
+                title: string;
+                channelName: string;
+                channelAvatar?: string | null;
+                views: number;
+                thumbnail: string;
+                url: string;
+                duration?: string | null;
+                ago?: string | null;
+            }>;
+        };
+    };
+};
+
+export type ListStreamVideosResponse = ListStreamVideosResponses[keyof ListStreamVideosResponses];

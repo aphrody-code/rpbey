@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { requireAdmin } from "@/lib/auth-utils";
 import { generateTournamentExport } from "@/lib/csv-export";
-import { db, schema, asc, eq } from "@/lib/db";
+import { getTournamentForExport } from "@/server/dal/tournaments";
 
 export async function GET(_request: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
@@ -11,29 +11,11 @@ export async function GET(_request: Request, { params }: { params: Promise<{ id:
 
     const { id } = await params;
 
-    const tournamentRow = await db.query.tournaments.findFirst({
-      where: eq(schema.tournaments.id, id),
-      with: {
-        tournamentParticipants: {
-          with: {
-            user: { with: { profiles: true } },
-          },
-          orderBy: asc(schema.tournamentParticipants.finalPlacement),
-        },
-      },
-    });
+    const tournament = await getTournamentForExport(id);
 
-    if (!tournamentRow) {
+    if (!tournament) {
       return NextResponse.json({ error: "Not found" }, { status: 404 });
     }
-
-    const tournament = {
-      ...tournamentRow,
-      participants: tournamentRow.tournamentParticipants.map((p) => ({
-        ...p,
-        user: p.user ? { ...p.user, profile: p.user.profiles[0] ?? null } : null,
-      })),
-    };
 
     const csv = generateTournamentExport(tournament);
 

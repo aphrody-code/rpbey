@@ -19,7 +19,7 @@ import { NextResponse } from "next/server";
 import { challongeToViewerData } from "@/lib/brackets/challonge";
 import { bracketDbToViewerData } from "@/lib/brackets/db";
 import { loadJsonSafe } from "@/lib/data-cache";
-import { db, schema, eq, or } from "@/lib/db";
+import { getTournamentForBracket } from "@/server/dal/tournaments";
 import type { ScrapedTournament } from "@/lib/brackets/challonge";
 
 interface RouteParams {
@@ -65,16 +65,7 @@ export async function GET(_req: Request, { params }: RouteParams): Promise<Respo
   }
 
   // 2. Fallback DB (Matches sync via scraper ou bot-api)
-  const tournament = await db.query.tournaments.findFirst({
-    where: or(
-      eq(schema.tournaments.id, idOrChallongeId),
-      eq(schema.tournaments.challongeId, idOrChallongeId),
-    ),
-    with: {
-      tournamentParticipants: true,
-      tournamentMatches: true,
-    },
-  });
+  const tournament = await getTournamentForBracket(idOrChallongeId);
 
   if (!tournament) {
     return NextResponse.json(

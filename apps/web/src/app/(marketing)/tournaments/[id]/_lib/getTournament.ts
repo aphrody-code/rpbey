@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import { loadJsonSafe } from "@/lib/data-cache";
-import { db, schema, eq, ilike, or } from "@/lib/db";
+import { getMarketingTournament } from "@/server/dal/tournaments";
 
 /** Minimal shape shared between "max" (ScrapedTournament) and legacy BTS JSON exports. */
 interface BtsExportParticipant {
@@ -26,45 +26,6 @@ interface BtsExportData {
   participants?: BtsExportParticipant[];
   scrapedAt?: string;
   url?: string;
-}
-
-const tournamentColumns = {
-  id: true,
-  name: true,
-  status: true,
-  description: true,
-  date: true,
-  location: true,
-  format: true,
-  maxPlayers: true,
-  challongeId: true,
-  challongeUrl: true,
-  posterUrl: true,
-  standings: true,
-  stations: true,
-  activityLog: true,
-  updatedAt: true,
-} as const;
-
-const tournamentWith = {
-  tournamentCategory: {
-    columns: { id: true, name: true, color: true, logoUrl: true },
-  },
-} as const;
-
-function remapTournament<
-  T extends {
-    tournamentCategory: {
-      id: string;
-      name: string;
-      color: string | null;
-      logoUrl: string | null;
-    } | null;
-  },
->(t: T | null | undefined) {
-  if (!t) return null;
-  const { tournamentCategory, ...rest } = t;
-  return { ...rest, category: tournamentCategory ?? null };
 }
 
 const BTS_META: Record<string, { file: string; name: string; desc: string; date: string }> = {
@@ -147,24 +108,7 @@ export async function getTournamentById(id: string) {
     }
   }
 
-  const dbTournament =
-    remapTournament(
-      await db.query.tournaments.findFirst({
-        where: eq(schema.tournaments.id, id),
-        columns: tournamentColumns,
-        with: tournamentWith,
-      }),
-    ) ??
-    remapTournament(
-      await db.query.tournaments.findFirst({
-        where: or(
-          eq(schema.tournaments.challongeId, id),
-          ilike(schema.tournaments.challongeUrl, `%${id}%`),
-        ),
-        columns: tournamentColumns,
-        with: tournamentWith,
-      }),
-    );
+  const dbTournament = await getMarketingTournament(id);
 
   // Si le record DB est un BTS dont on a déjà l'export JSON (slug bts<N>),
   // rediriger vers le slug canonique (évite doublon CUID + bracket vide).

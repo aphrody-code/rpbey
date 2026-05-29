@@ -6,38 +6,20 @@
  */
 
 import { type NextRequest, NextResponse } from "next/server";
-import { db, schema, and, desc, eq, gte, or } from "@/lib/db";
+import { loadJsonSafe } from "@/lib/data-cache";
+import { listStreamableTournaments } from "@/server/dal/stream";
+
+interface ScrapedExport {
+  url?: string;
+  participantsCount?: number;
+  matchesCount?: number;
+  scrapedAt?: string;
+}
 
 export async function GET(_request: NextRequest) {
   try {
-    // Return tournaments that are UNDERWAY or recently COMPLETE (last 24h)
-    const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
-
-    const tournamentRows = await db.query.tournaments.findMany({
-      where: or(
-        eq(schema.tournaments.status, "UNDERWAY"),
-        eq(schema.tournaments.status, "CHECKIN"),
-        and(
-          eq(schema.tournaments.status, "COMPLETE"),
-          gte(schema.tournaments.updatedAt, oneDayAgo),
-        ),
-      ),
-      columns: {
-        id: true,
-        name: true,
-        status: true,
-        format: true,
-        date: true,
-        location: true,
-        challongeUrl: true,
-        updatedAt: true,
-      },
-      with: {
-        tournamentParticipants: { columns: { id: true } },
-        tournamentMatches: { columns: { id: true } },
-      },
-      orderBy: desc(schema.tournaments.updatedAt),
-    });
+    // Tournaments that are UNDERWAY / CHECKIN, or recently COMPLETE (last 24h).
+    const tournamentRows = await listStreamableTournaments();
 
     const tournaments = tournamentRows.map((t) => ({
       ...t,
@@ -47,15 +29,11 @@ export async function GET(_request: NextRequest) {
       },
     }));
 
-    // Also include scraped BTS tournaments
+    // Also include scraped BTS tournaments (FS/CDN via loadJsonSafe — pas de process.cwd()).
     const scrapedTournaments = [];
-    const { existsSync, readFileSync } = await import("node:fs");
-    const { join } = await import("node:path");
-
     for (const slug of ["B_TS2", "B_TS3"]) {
-      const filePath = join(process.cwd(), "data/exports", `${slug}.json`);
-      if (existsSync(filePath)) {
-        const data = JSON.parse(readFileSync(filePath, "utf-8"));
+      const data = await loadJsonSafe<ScrapedExport>(`data/exports/${slug}.json`);
+      if (data) {
         scrapedTournaments.push({
           id: slug.toLowerCase(),
           name: `Bey-Tamashii Séries - ${slug}`,

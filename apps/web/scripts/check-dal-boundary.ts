@@ -51,6 +51,21 @@ const ENFORCED = [
   "app/(marketing)/profile/",
   // wave-1 : infra
   "server/dal/infra.ts",
+  // wave-2 : tournaments — surface migrée propre (DAL = seul puits DB).
+  // NB: les routes legacy/admin/marketing (`app/api/tournaments/`, `(admin)/admin/tournaments/`,
+  // `(marketing)/tournaments/`, export admin) restent NON enforced : elles n'importent plus
+  // la DB en direct, mais sont transitivement couplées via des seams owned par d'autres lanes
+  // (`@/lib/auth`/`@/lib/auth-utils` = adapter Drizzle better-auth, `@/lib/analytics`,
+  // composants UI). Même précédent que wave-1 (`app/api/profile/`). Leur dette directe a été
+  // résorbée ; l'enforcement strict suivra la migration de ces seams.
+  "app/api/v1/tournaments/",
+  "server/dal/tournaments.ts",
+  "server/services/tournaments.ts",
+  "app/api/brackets/db/",
+  "lib/discord-data.ts",
+  // wave-2 : stream
+  "app/api/v1/stream/",
+  "server/dal/stream.ts",
 ];
 
 const glob = new Glob("**/*.{ts,tsx}");

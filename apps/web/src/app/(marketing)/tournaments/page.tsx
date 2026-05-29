@@ -17,7 +17,7 @@ import Link from "next/link";
 import { TournamentCardGrid } from "@/components/cards/TournamentCard";
 import { type TournamentStatus } from "@/components/ui/StatusChip";
 import { loadJsonSafe } from "@/lib/data-cache";
-import { db, schema, desc } from "@/lib/db";
+import { listAllTournamentsForMarketing } from "@/server/dal/tournaments";
 import { createPageMetadata } from "@/lib/seo-utils";
 
 export const dynamic = "force-dynamic";
@@ -127,16 +127,8 @@ export default async function TournamentsPage() {
     matchesCount?: number;
   };
 
-  const [dbTournamentsRaw, btsExports] = await Promise.all([
-    db.query.tournaments.findMany({
-      orderBy: desc(schema.tournaments.date),
-      with: {
-        tournamentParticipants: { columns: { id: true } },
-        tournamentCategory: {
-          columns: { id: true, name: true, color: true, logoUrl: true },
-        },
-      },
-    }),
+  const [dbTournaments, btsExports] = await Promise.all([
+    listAllTournamentsForMarketing(),
     Promise.all(
       BTS_EDITIONS.map(async (edition) => ({
         edition,
@@ -144,12 +136,6 @@ export default async function TournamentsPage() {
       })),
     ),
   ]);
-
-  const dbTournaments = dbTournamentsRaw.map((t) => ({
-    ...t,
-    category: t.tournamentCategory,
-    _count: { participants: t.tournamentParticipants.length },
-  }));
 
   const btsCards: BtsCard[] = [];
   for (const { edition, data } of btsExports) {

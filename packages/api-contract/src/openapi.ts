@@ -13,6 +13,12 @@ import {
   UserMatchesQuerySchema,
   UserMatchesResponseSchema,
 } from "./users";
+import {
+  TournamentDetailResponseSchema,
+  TournamentsListResponseSchema,
+  TournamentsQuerySchema,
+} from "./tournaments";
+import { StreamListResponseSchema, StreamQuerySchema } from "./stream";
 import { ErrorEnvelopeSchema, okEnvelope } from "./envelope";
 
 /**
@@ -128,6 +134,34 @@ const ROUTES: RouteDef[] = [
     pathParams: ["id"],
     query: UserMatchesQuerySchema,
     response: UserMatchesResponseSchema,
+  },
+  {
+    method: "get",
+    path: "/tournaments",
+    operationId: "listTournaments",
+    summary:
+      "Liste publique des tournois RPB (cartes avec catégorie + compteurs), filtrable par statut et paginable.",
+    tags: ["tournaments"],
+    query: TournamentsQuerySchema,
+    response: TournamentsListResponseSchema,
+  },
+  {
+    method: "get",
+    path: "/tournaments/{id}",
+    operationId: "getTournament",
+    summary: "Détail d'un tournoi (ligne + participants + matches) par id, challongeId ou slug.",
+    tags: ["tournaments"],
+    pathParams: ["id"],
+    response: TournamentDetailResponseSchema,
+  },
+  {
+    method: "get",
+    path: "/stream",
+    operationId: "listStreamVideos",
+    summary: "Feed BeyTube de la communauté (vidéos mises en avant, triées par date).",
+    tags: ["stream"],
+    query: StreamQuerySchema,
+    response: StreamListResponseSchema,
   },
 ];
 

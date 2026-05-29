@@ -14,7 +14,11 @@ import { type NextRequest, NextResponse } from "next/server";
 import { ChallongeApi } from "@/lib/challonge-vendor/api";
 import { ChallongeReverse } from "@/lib/challonge-vendor/reverse";
 import { requireStaff } from "@/lib/auth-utils";
-import { db, schema, eq } from "@/lib/db";
+import {
+  getTournamentChallongeRef,
+  getTournamentForLive,
+  persistLiveSnapshot,
+} from "@/server/dal/tournaments";
 
 interface RouteParams {
   params: Promise<{ id: string }>;
@@ -74,17 +78,7 @@ export async function GET(_request: NextRequest, { params }: RouteParams) {
       }
     }
 
-    const tournament = await db.query.tournaments.findFirst({
-      where: eq(schema.tournaments.id, id),
-      columns: {
-        id: true,
-        status: true,
-        standings: true,
-        stations: true,
-        activityLog: true,
-        updatedAt: true,
-      },
-    });
+    const tournament = await getTournamentForLive(id);
 
     if (!tournament) {
       return NextResponse.json({ error: "Tournament not found" }, { status: 404 });
@@ -113,10 +107,7 @@ export async function POST(_request: NextRequest, { params }: RouteParams) {
 
     const { id } = await params;
 
-    const tournament = await db.query.tournaments.findFirst({
-      where: eq(schema.tournaments.id, id),
-      columns: { id: true, challongeId: true, challongeUrl: true },
-    });
+    const tournament = await getTournamentChallongeRef(id);
 
     if (!tournament) {
       return NextResponse.json({ error: "Tournament not found" }, { status: 404 });
@@ -159,16 +150,13 @@ export async function POST(_request: NextRequest, { params }: RouteParams) {
     const store = storeResult.status === "fulfilled" ? storeResult.value : null;
 
     // 3. Persist
-    await db
-      .update(schema.tournaments)
-      .set({
-        challongeId: tournament.challongeId ?? String(apiTournament.id),
-        challongeState: apiTournament.state ?? null,
-        standings: liveStandings as never,
-        stations: (store ?? []) as never,
-        activityLog: activityLog as never,
-      })
-      .where(eq(schema.tournaments.id, id));
+    await persistLiveSnapshot(id, {
+      challongeId: tournament.challongeId ?? String(apiTournament.id),
+      challongeState: apiTournament.state ?? null,
+      standings: liveStandings,
+      stations: store ?? [],
+      activityLog,
+    });
 
     return NextResponse.json({
       success: true,

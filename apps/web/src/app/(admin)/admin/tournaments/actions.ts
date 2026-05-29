@@ -3,7 +3,13 @@
 import { revalidatePath } from "next/cache";
 import { type TournamentStatus } from "@/lib/types";
 import { getChallongeService } from "@/lib/challonge";
-import { db, schema, count, desc, eq, ilike, inArray, or } from "@/lib/db";
+import {
+  createTournamentRow,
+  deleteTournamentRow,
+  listExistingChallongeIds,
+  listTournamentsAdmin,
+  updateTournamentRow,
+} from "@/server/dal/tournaments";
 import { requireAdmin } from "@/lib/auth-utils";
 
 export type TournamentInput = {
@@ -33,15 +39,9 @@ export async function syncCommunityTournaments() {
   const challongeTournaments = await service.fetchAllCommunityTournaments(communityId);
 
   // Get existing tournaments to avoid duplicates
-  const existingTournaments = await db.query.tournaments.findMany({
-    where: inArray(
-      schema.tournaments.challongeId,
-      challongeTournaments.map((t) => t.id),
-    ),
-    columns: { challongeId: true },
-  });
-
-  const existingIds = new Set(existingTournaments.map((t) => t.challongeId));
+  const existingIds = new Set(
+    await listExistingChallongeIds(challongeTournaments.map((t) => t.id)),
+  );
 
   // Filter out existing tournaments
   const newTournaments = challongeTournaments.filter((t) => !existingIds.has(t.id));
@@ -61,7 +61,7 @@ export async function importTournamentFromChallonge(challongeId: string) {
   if (t.state === "in_progress" || t.state === "underway") status = "UNDERWAY";
   if (t.state === "complete" || t.state === "ended") status = "COMPLETE";
 
-  await db.insert(schema.tournaments).values({
+  await createTournamentRow({
     name: t.name,
     description: t.description,
     date: (t.startAt ? new Date(t.startAt) : new Date()).toISOString(),
@@ -76,64 +76,7 @@ export async function importTournamentFromChallonge(challongeId: string) {
 }
 
 export async function getTournaments(page = 1, pageSize = 10, search = "") {
-  const skip = (page - 1) * pageSize;
-
-  const where = search
-    ? or(
-        ilike(schema.tournaments.name, `%${search}%`),
-        ilike(schema.tournaments.description, `%${search}%`),
-      )
-    : undefined;
-
-  const [tournaments, totalRows, totalAll, activeRows, participantRows] = await Promise.all([
-    db.query.tournaments.findMany({
-      where,
-      offset: skip,
-      limit: pageSize,
-      orderBy: desc(schema.tournaments.date),
-    }),
-    db.select({ value: count() }).from(schema.tournaments).where(where),
-    db.select({ value: count() }).from(schema.tournaments),
-    db
-      .select({ value: count() })
-      .from(schema.tournaments)
-      .where(inArray(schema.tournaments.status, ["REGISTRATION_OPEN", "UNDERWAY", "CHECKIN"])),
-    db.select({ value: count() }).from(schema.tournamentParticipants),
-  ]);
-
-  const total = totalRows[0]?.value ?? 0;
-
-  // Participant counts per tournament (Prisma _count.participants)
-  const tournamentIds = tournaments.map((t) => t.id);
-  const countById = new Map<string, number>();
-  if (tournamentIds.length > 0) {
-    const rows = await db
-      .select({
-        tournamentId: schema.tournamentParticipants.tournamentId,
-        value: count(),
-      })
-      .from(schema.tournamentParticipants)
-      .where(inArray(schema.tournamentParticipants.tournamentId, tournamentIds))
-      .groupBy(schema.tournamentParticipants.tournamentId);
-    for (const r of rows) {
-      countById.set(r.tournamentId, r.value);
-    }
-  }
-
-  const tournamentsWithCount = tournaments.map((t) => ({
-    ...t,
-    _count: { participants: countById.get(t.id) ?? 0 },
-  }));
-
-  return {
-    tournaments: tournamentsWithCount,
-    total,
-    summary: {
-      totalTournaments: totalAll[0]?.value ?? 0,
-      activeTournaments: activeRows[0]?.value ?? 0,
-      totalParticipants: participantRows[0]?.value ?? 0,
-    },
-  };
+  return listTournamentsAdmin(page, pageSize, search);
 }
 
 export async function createTournament(data: TournamentInput) {
@@ -151,7 +94,7 @@ export async function createTournament(data: TournamentInput) {
     weight,
   } = data;
 
-  await db.insert(schema.tournaments).values({
+  await createTournamentRow({
     name,
     description,
     date: new Date(date).toISOString(),
@@ -182,21 +125,18 @@ export async function updateTournament(id: string, data: TournamentInput) {
     weight,
   } = data;
 
-  await db
-    .update(schema.tournaments)
-    .set({
-      name,
-      description,
-      date: new Date(date).toISOString(),
-      location,
-      format,
-      maxPlayers,
-      status,
-      challongeUrl,
-      categoryId,
-      weight: weight || 1.0,
-    })
-    .where(eq(schema.tournaments.id, id));
+  await updateTournamentRow(id, {
+    name,
+    description,
+    date: new Date(date).toISOString(),
+    location,
+    format,
+    maxPlayers,
+    status,
+    challongeUrl,
+    categoryId,
+    weight: weight || 1.0,
+  });
 
   revalidatePath("/admin/tournaments");
   revalidatePath("/tournaments"); // Revalidate marketing page if exists
@@ -204,7 +144,7 @@ export async function updateTournament(id: string, data: TournamentInput) {
 
 export async function deleteTournament(id: string) {
   if (!(await requireAdmin())) throw new Error("Non autorisé");
-  await db.delete(schema.tournaments).where(eq(schema.tournaments.id, id));
+  await deleteTournamentRow(id);
 
   revalidatePath("/admin/tournaments");
   revalidatePath("/tournaments");
