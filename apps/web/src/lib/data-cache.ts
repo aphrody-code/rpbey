@@ -35,7 +35,12 @@ async function loadJsonUncached<T = JsonValue>(relPath: string): Promise<T> {
   }
 
   // Dev local / VPS standalone : lecture FS directe (data/ + public/data/ supportés).
-  const candidates = [join(process.cwd(), normalized), join(process.cwd(), "public", normalized)];
+  // turbopackIgnore : empêche le NFT tracer Turbopack de tracer tout le CWD (warning
+  // « Encountered unexpected file in NFT list ») — pattern utilisé par Next lui-même.
+  const candidates = [
+    join(/* turbopackIgnore: true */ process.cwd(), normalized),
+    join(/* turbopackIgnore: true */ process.cwd(), "public", normalized),
+  ];
   let lastErr: unknown = null;
   for (const filePath of candidates) {
     try {
@@ -62,7 +67,10 @@ async function loadTextUncached(relPath: string): Promise<string> {
     return await res.text();
   }
 
-  const candidates = [join(process.cwd(), normalized), join(process.cwd(), "public", normalized)];
+  const candidates = [
+    join(/* turbopackIgnore: true */ process.cwd(), normalized),
+    join(/* turbopackIgnore: true */ process.cwd(), "public", normalized),
+  ];
   let lastErr: unknown = null;
   for (const filePath of candidates) {
     try {

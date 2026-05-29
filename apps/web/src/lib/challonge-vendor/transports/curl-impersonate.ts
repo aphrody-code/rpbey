@@ -239,7 +239,7 @@ interface ResolvedCurlOptions {
 
 function resolveOptions(opts: CurlImpersonateOptions): ResolvedCurlOptions {
   const binDir = opts.binDir ?? DEFAULT_BIN_DIR;
-  if (!existsSync(binDir)) {
+  if (!existsSync(/* turbopackIgnore: true */ binDir)) {
     throw new CurlImpersonateError(
       `curl-impersonate binary directory not found at ${binDir}. ` +
         `Install: curl -sSL https://github.com/lexiforest/curl-impersonate/releases/latest/download/curl-impersonate-v1.5.5.x86_64-linux-gnu.tar.gz | tar -xz -C ${binDir}`,
@@ -392,7 +392,7 @@ export async function curlImpersonateGet(
   }
 
   const bin = join(opts.binDir, `curl_${opts.profile}`);
-  if (!existsSync(bin)) {
+  if (!existsSync(/* turbopackIgnore: true */ bin)) {
     throw new CurlImpersonateError(
       `Profile binary not found: ${bin}. Available profiles in ${opts.binDir}.`,
     );
