@@ -1,6 +1,6 @@
 "use server";
 
-import { db, schema, and, or, ilike, sql, eq } from "@/lib/db";
+import { findBladerProfiles, findSatrBladers } from "@/server/dal/search";
 
 export async function searchBladers(query: string) {
   if (!query || query.length < 2) return [];
@@ -9,35 +9,10 @@ export async function searchBladers(query: string) {
 
   // Search in primary profiles (joined to user), only profiles whose user has
   // at least one tournament participation (real Challonge profiles).
-  const profiles = await db
-    .select({
-      bladerName: schema.profiles.bladerName,
-      challongeUsername: schema.profiles.challongeUsername,
-      userName: schema.users.name,
-      userUsername: schema.users.username,
-      userImage: schema.users.image,
-    })
-    .from(schema.profiles)
-    .innerJoin(schema.users, eq(schema.profiles.userId, schema.users.id))
-    .where(
-      and(
-        or(
-          ilike(schema.profiles.challongeUsername, pattern),
-          ilike(schema.profiles.bladerName, pattern),
-          ilike(schema.users.name, pattern),
-          ilike(schema.users.username, pattern),
-        ),
-        sql`EXISTS (SELECT 1 FROM ${schema.tournamentParticipants} WHERE ${schema.tournamentParticipants.userId} = ${schema.users.id})`,
-      ),
-    )
-    .limit(5);
+  const profiles = await findBladerProfiles(pattern);
 
   // Search in SATR profiles
-  const satrBladers = await db
-    .select({ name: schema.satrBladers.name })
-    .from(schema.satrBladers)
-    .where(ilike(schema.satrBladers.name, pattern))
-    .limit(3);
+  const satrBladers = await findSatrBladers(pattern);
 
   const results = profiles.map((p) => ({
     name: p.challongeUsername

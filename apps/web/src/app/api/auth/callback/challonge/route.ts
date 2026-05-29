@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getChallongeService } from "@/lib/challonge";
-import { db, schema } from "@/lib/db";
+import { upsertChallongeAccount, upsertChallongeProfile } from "@/server/dal/auth";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -34,37 +34,16 @@ export async function GET(request: Request) {
     const expiresAtDate = new Date(Date.now() + tokenData.expires_in * 1000);
 
     // Store in Account table for API access
-    await db
-      .insert(schema.accounts)
-      .values({
-        id: crypto.randomUUID(),
-        userId: userId,
-        providerId: "challonge",
-        accountId: challongeUser.id,
-        accessToken: tokenData.access_token,
-        refreshToken: tokenData.refresh_token,
-        accessTokenExpiresAt: expiresAtDate,
-      })
-      .onConflictDoUpdate({
-        target: [schema.accounts.providerId, schema.accounts.accountId],
-        set: {
-          accessToken: tokenData.access_token,
-          refreshToken: tokenData.refresh_token,
-          accessTokenExpiresAt: expiresAtDate,
-        },
-      });
+    await upsertChallongeAccount({
+      userId,
+      accountId: challongeUser.id,
+      accessToken: tokenData.access_token,
+      refreshToken: tokenData.refresh_token,
+      accessTokenExpiresAt: expiresAtDate,
+    });
 
     // Update or Create Profile with verified username
-    await db
-      .insert(schema.profiles)
-      .values({
-        userId,
-        challongeUsername: challongeUser.username,
-      })
-      .onConflictDoUpdate({
-        target: schema.profiles.userId,
-        set: { challongeUsername: challongeUser.username },
-      });
+    await upsertChallongeProfile(userId, challongeUser.username);
 
     // Redirect back with success
     const separator = returnTo.includes("?") ? "&" : "?";

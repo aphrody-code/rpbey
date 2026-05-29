@@ -12,8 +12,10 @@
  * - **Échoue** (exit 1) si une zone DÉJÀ MIGRÉE (allowlist `ENFORCED`) reste couplée
  *   (directement OU transitivement) → empêche la régression de la couche propre.
  *
- * Au fur et à mesure de la migration domaine par domaine, ajouter les préfixes
- * migrés à `ENFORCED`. Quand toute la dette est résorbée, passer `ENFORCED` à `["src/"]`.
+ * FLIP GLOBAL effectué (wave-6-final) : la dette transitive est résorbée à 0, donc
+ * `ENFORCED = ["src/"]` — la frontière est désormais appliquée à TOUT `src/`. Plus
+ * aucun fichier hors `{server/dal/**, lib/db.ts, lib/auth.ts}` (les puits, cf. `isSink`)
+ * ne peut atteindre la DB sans faire échouer le gate.
  *
  * Usage : bun apps/web/scripts/check-dal-boundary.ts
  */
@@ -23,91 +25,35 @@ const ROOT = new URL("../", import.meta.url).pathname; // apps/web/
 const SRC = `${ROOT}src`;
 
 const DAL_PREFIX = "server/dal/";
+// Puits PROPRES reconnus en plus de `server/dal/**` : deux seams framework
+// IRRÉDUCTIBLES qui ont légitimement le droit d'atteindre la DB.
+//   - `lib/db.ts`   : LE barrel de re-export (`export { db, schema } from "@rpbey/db"`
+//                     + `export * from "drizzle-orm"`). C'est la source DB elle-même.
+//   - `lib/auth.ts` : instance better-auth via `drizzleAdapter(db)`. L'adapter EXIGE
+//                     la db (mandaté par le framework), server-only, importé par ~50
+//                     routes pour résoudre la session. Ce couplage est inévitable.
+// Tout AUTRE fichier important `@/lib/db`/`@rpbey/db` en direct reste flaggé via
+// `DB_IMPORT` (protection anti-contournement intacte) : seuls ces 2 fichiers,
+// qui ont `directDb=true`, sont exemptés du verdict via `isSink`.
+const SINK_FILES = new Set(["lib/db.ts", "lib/auth.ts"]);
+/** Un `rel` est un puits propre s'il est dans la DAL ou l'un des 2 seams framework. */
+const isSink = (rel: string): boolean => rel.startsWith(DAL_PREFIX) || SINK_FILES.has(rel);
 // Import direct de la DB (barrel `@/lib/db` ou paquet `@rpbey/db`).
 const DB_IMPORT = /from\s+["'](@rpbey\/db|@\/lib\/db|@lib\/db)["']/;
 // Capture toutes les sources d'import/`export … from` locales pour bâtir le graphe.
 const IMPORT_FROM = /(?:import|export)\b[^;]*?\bfrom\s+["']([^"']+)["']/g;
 
-// Zones dont la frontière est STRICTEMENT appliquée (toute migration y ajoute son préfixe).
-const ENFORCED = [
-  "server/services/",
-  "server/data-source.ts",
-  "app/api/v1/",
-  "app/api/parts/",
-  "server/actions/parts.ts",
-  // wave-1 : rankings
-  "app/api/v1/rankings/",
-  "server/dal/rankings.ts",
-  // wave-1 : users
-  // NB: `app/api/profile/` et `server/actions/claim-profile.ts` NON enforced —
-  // ces routes lisent la session via `@/lib/auth` (adapter Drizzle better-auth,
-  // seam framework inévitable, owned par la lane `auth`), donc transitivement
-  // couplées à la DB sans pouvoir passer par la DAL. Leur import DIRECT @rpbey/db
-  // a bien été retiré (dette réduite) ; l'enforcement strict reste hors de portée.
-  "app/api/v1/users/",
-  "app/api/users/",
-  "server/dal/users.ts",
-  "server/dal/stats.ts",
-  "app/(marketing)/profile/",
-  // wave-1 : infra
-  "server/dal/infra.ts",
-  // wave-2 : tournaments — surface migrée propre (DAL = seul puits DB).
-  // NB: les routes legacy/admin/marketing (`app/api/tournaments/`, `(admin)/admin/tournaments/`,
-  // `(marketing)/tournaments/`, export admin) restent NON enforced : elles n'importent plus
-  // la DB en direct, mais sont transitivement couplées via des seams owned par d'autres lanes
-  // (`@/lib/auth`/`@/lib/auth-utils` = adapter Drizzle better-auth, `@/lib/analytics`,
-  // composants UI). Même précédent que wave-1 (`app/api/profile/`). Leur dette directe a été
-  // résorbée ; l'enforcement strict suivra la migration de ces seams.
-  "app/api/v1/tournaments/",
-  "server/dal/tournaments.ts",
-  "server/services/tournaments.ts",
-  "app/api/brackets/db/",
-  "lib/discord-data.ts",
-  // wave-2 : stream
-  "app/api/v1/stream/",
-  "server/dal/stream.ts",
-  // wave-3 : anime — routes publiques /api/v1/anime + DAL (seul puits DB du domaine).
-  // NB: actions/anime*, app/api/anime/progress (route authentifiée) et les pages
-  // (marketing)/anime restent NON enforced (transitivement couplées via @/lib/auth +
-  // client components appelant des server actions — seam owned par la lane auth).
-  "app/api/v1/anime/",
-  "server/dal/anime.ts",
-  // wave-3 : cms — lectures publiques /api/v1/cms + DAL + service meta (déjà db-free).
-  // NB: les mutations admin (content/staff/season/admin-link) restent en server actions
-  // DAL-backed à leur path legacy (requireAdmin couple @/lib/auth jusqu'à la migration auth).
-  "app/api/v1/cms/",
-  "server/dal/cms.ts",
-  "server/services/meta.ts",
-  // wave-3 : analytics — ingestion publique anonyme /api/v1/analytics + DAL.
-  // NB: api/analytics (beacon legacy) et actions/analytics.ts résolvent la session
-  // (@/lib/auth) → NON enforced ; leur import db direct a été retiré (passe par la DAL).
-  "app/api/v1/analytics/",
-  "server/dal/analytics.ts",
-  // wave-3 : decks — lecture publique /api/v1/decks + DAL. Les mutations (CRUD/activation)
-  // restent au path legacy /api/decks (session better-auth), DAL-backed mais NON enforced.
-  "app/api/v1/decks/",
-  "server/dal/decks.ts",
-  // wave-4 : gacha — lectures publiques /api/v1/gacha (cards/drops/leaderboard) + DAL + service.
-  // NB: les MUTATIONS authentifiées (pull/multi/duel/daily/wishlist/profile/inventory + game/inventory)
-  // restent au path legacy /api/gacha/* et /api/game/* (DAL-backed, db inline retirée) : @/lib/auth
-  // les couple transitivement à la DB jusqu'à la migration de la lane auth.
-  "app/api/v1/gacha/",
-  "server/dal/gacha.ts",
-  "server/services/gacha.ts",
-  // wave-4 : discord-bridge — BFF bot db-free (lib/bot.ts parle au bot en HTTP `:3001`, aucune table).
-  "app/api/v1/bot/",
-  "lib/bot.ts",
-  // wave-4 : moderation — lectures publiques anonymisées /api/v1/moderation (summary + warnings/count) + DAL.
-  // NB: le contenu sensible (raison, modérateur, ticket) reste hors /api/v1 (bot-only / session-gated).
-  "app/api/v1/moderation/",
-  "server/dal/moderation.ts",
-  // wave-5 : graphql — resolvers db-free (schema.ts/route.ts) ; tout l'accès DB du domaine
-  // est concentré dans `server/dal/graphql.ts` (puits canonique, déplacé depuis
-  // app/api/graphql/data.ts). Pas de contrat Zod ni de route /api/v1 (le SDL reste la
-  // source de vérité, GraphQL reste sur /api/graphql POST+GET). Enforçable de bout en bout.
-  "app/api/graphql/",
-  "server/dal/graphql.ts",
-];
+// Zones dont la frontière est STRICTEMENT appliquée.
+//
+// FLIP GLOBAL (wave-6-final, 2026-05-29) : la dette de couplage transitive a été
+// RÉSORBÉE à 0 (toutes les vagues domaine + la lane `auth` migrées vers la DAL,
+// `lib/db.ts`/`lib/auth.ts` déclarés puits framework via `isSink`). On passe donc
+// d'une allowlist incrémentale préfixe-par-préfixe à l'enforcement GLOBAL : plus
+// AUCUN fichier hors `{server/dal/**, lib/db.ts, lib/auth.ts}` n'a le droit
+// d'atteindre la DB. Toute nouvelle régression (un fichier qui réimporte
+// `@rpbey/db`/`@/lib/db` en direct ou se couple transitivement à un fichier couplé)
+// fera échouer le gate (exit 1). C'est la Phase 6 hard-fail global du plan.
+const ENFORCED = ["src/"];
 
 const glob = new Glob("**/*.{ts,tsx}");
 
@@ -167,7 +113,7 @@ function resolveImport(fromRel: string, spec: string): string | null {
 const coupled = new Set<string>();
 const memo = new Map<string, boolean>();
 function isCoupled(rel: string, stack: Set<string>): boolean {
-  if (rel.startsWith(DAL_PREFIX)) return false; // la DAL est propre
+  if (isSink(rel)) return false; // la DAL + seams framework sont propres
   const cached = memo.get(rel);
   if (cached !== undefined) return cached;
   if (stack.has(rel)) return false; // cycle : neutre sur cette arête
@@ -181,7 +127,7 @@ function isCoupled(rel: string, stack: Set<string>): boolean {
   let result = false;
   for (const spec of node.imports) {
     const target = resolveImport(rel, spec);
-    if (target && !target.startsWith(DAL_PREFIX) && isCoupled(target, stack)) {
+    if (target && !isSink(target) && isCoupled(target, stack)) {
       result = true;
       break;
     }
@@ -193,12 +139,17 @@ function isCoupled(rel: string, stack: Set<string>): boolean {
 }
 
 for (const rel of files) {
-  if (rel.startsWith(DAL_PREFIX)) continue;
+  if (isSink(rel)) continue;
   if (isCoupled(rel, new Set())) coupled.add(rel);
 }
 
 const offenders = [...coupled].sort();
-const enforcedViolations = offenders.filter((f) => ENFORCED.some((p) => f.startsWith(p)));
+// `f` est relatif à `src/` (le glob scanne avec cwd=SRC) ; on compare donc sur le
+// chemin affiché `src/<f>` pour que le préfixe global `"src/"` matche bien tout
+// offender (et que les préfixes legacy `app/...`/`server/...` matchent aussi via f).
+const enforcedViolations = offenders.filter((f) =>
+  ENFORCED.some((p) => f.startsWith(p) || `src/${f}`.startsWith(p)),
+);
 
 console.log(
   `[dal-boundary] dette de couplage (transitive) : ${offenders.length} fichier(s) hors DAL atteignent la DB.`,

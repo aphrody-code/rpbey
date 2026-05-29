@@ -4,7 +4,13 @@
  */
 
 import { type NextRequest, NextResponse } from "next/server";
-import { db, schema, eq } from "@/lib/db";
+import {
+  createDiscordUser,
+  createSession,
+  ensureProfile,
+  findUserByDiscordId,
+  updateDiscordUser,
+} from "@/server/dal/auth";
 
 export async function POST(request: NextRequest) {
   try {
@@ -55,9 +61,7 @@ export async function POST(request: NextRequest) {
     };
 
     // Find or create user
-    let user = await db.query.users.findFirst({
-      where: eq(schema.users.discordId, discordUser.id),
-    });
+    let user = await findUserByDiscordId(discordUser.id);
 
     const discordTag =
       discordUser.discriminator === "0"
@@ -69,31 +73,22 @@ export async function POST(request: NextRequest) {
       : null;
 
     if (!user) {
-      const [created] = await db
-        .insert(schema.users)
-        .values({
-          id: crypto.randomUUID(),
-          email: `${discordUser.id}@discord.rpbey.fr`,
-          name: discordUser.username,
-          discordId: discordUser.id,
-          discordTag,
-          image: avatarUrl,
-          globalName: discordUser.global_name,
-          emailVerified: true,
-        })
-        .returning();
-      user = created;
+      user = await createDiscordUser({
+        id: crypto.randomUUID(),
+        email: `${discordUser.id}@discord.rpbey.fr`,
+        name: discordUser.username,
+        discordId: discordUser.id,
+        discordTag,
+        image: avatarUrl,
+        globalName: discordUser.global_name,
+        emailVerified: true,
+      });
     } else {
-      const [updated] = await db
-        .update(schema.users)
-        .set({
-          discordTag,
-          image: avatarUrl,
-          globalName: discordUser.global_name,
-        })
-        .where(eq(schema.users.id, user.id))
-        .returning();
-      user = updated;
+      user = await updateDiscordUser(user.id, {
+        discordTag,
+        image: avatarUrl,
+        globalName: discordUser.global_name,
+      });
     }
 
     if (!user) {
@@ -101,10 +96,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Ensure profile exists
-    await db
-      .insert(schema.profiles)
-      .values({ userId: user.id, bladerName: discordUser.username })
-      .onConflictDoNothing({ target: schema.profiles.userId });
+    await ensureProfile(user.id, discordUser.username);
 
     // Create session token
     const sessionToken = Array.from(crypto.getRandomValues(new Uint8Array(32)), (b) =>
@@ -112,7 +104,7 @@ export async function POST(request: NextRequest) {
     ).join("");
     const expiresAt = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000); // 30 days
 
-    await db.insert(schema.sessions).values({
+    await createSession({
       id: crypto.randomUUID(),
       token: sessionToken,
       userId: user.id,

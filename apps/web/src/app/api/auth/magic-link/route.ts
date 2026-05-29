@@ -1,6 +1,10 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
-import { db, schema, and, eq, gt, inArray } from "@/lib/db";
+import {
+  createSession,
+  findAdminUserByDiscordId,
+  findValidSessionByToken,
+} from "@/server/dal/auth";
 
 export const dynamic = "force-dynamic";
 
@@ -38,9 +42,7 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "Token manquant" }, { status: 400 });
   }
 
-  const session = await db.query.sessions.findFirst({
-    where: and(eq(schema.sessions.token, token), gt(schema.sessions.expiresAt, new Date())),
-  });
+  const session = await findValidSessionByToken(token);
 
   if (!session) {
     return NextResponse.json({ error: "Token invalide ou expiré" }, { status: 401 });
@@ -78,12 +80,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "PIN incorrect" }, { status: 401 });
   }
 
-  const user = await db.query.users.findFirst({
-    where: and(
-      eq(schema.users.discordId, discordId),
-      inArray(schema.users.role, ["admin", "superadmin"]),
-    ),
-  });
+  const user = await findAdminUserByDiscordId(discordId);
 
   if (!user) {
     return NextResponse.json(
@@ -100,7 +97,7 @@ export async function POST(request: Request) {
     b.toString(16).padStart(2, "0"),
   ).join("");
 
-  await db.insert(schema.sessions).values({
+  await createSession({
     id: sessionId,
     token,
     userId: user.id,
