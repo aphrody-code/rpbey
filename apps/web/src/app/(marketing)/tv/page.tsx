@@ -5,7 +5,7 @@ import { connection } from "next/server";
 import { createPageMetadata } from "@/lib/seo-utils";
 import { getTikTokVideos } from "@/lib/tiktok";
 import { getRPBClips, getRPBStreamInfo } from "@/lib/twitch";
-import { getBeyTubeFeatured, getRpbYoutubeVideos } from "@/server/dal/stream";
+import { getRpbYoutube, listBeyTubeFeed } from "@/server/services/stream";
 import { TvFeed } from "./_components/TvFeed";
 
 const RPB_YT_CHANNEL_ID = "UCHiDwWI-2uQrsUiJhXt6rng";
@@ -34,8 +34,8 @@ export default async function TVPage() {
   // Clips
   const clipsPromise = safeFetch(getRPBClips(20), []);
 
-  // Rediffusions — vidéos YouTube RPB via la DAL (avec vrais logos)
-  const rpbVideosPromise = getRpbYoutubeVideos(RPB_YT_CHANNEL_ID, 20)
+  // Rediffusions — vidéos YouTube RPB via le service (avec vrais logos)
+  const rpbVideosPromise = getRpbYoutube(RPB_YT_CHANNEL_ID, 20)
     .then((vids) =>
       vids.map((v) => ({
         id: v.id,
@@ -53,7 +53,7 @@ export default async function TVPage() {
     .catch(() => []);
 
   // BeyTube community videos
-  const beyTubeVideosPromise = safeFetch(getBeyTubeFeatured(), []);
+  const beyTubeVideosPromise = safeFetch(listBeyTubeFeed(), []);
 
   // TikTok
   const tikTokVideosPromise = (async () => {

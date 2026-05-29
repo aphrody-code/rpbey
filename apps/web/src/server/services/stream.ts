@@ -10,7 +10,7 @@ import type {
   TwitchVideo,
   YoutubeVideo,
 } from "@rpbey/api-contract";
-import { getBeyTubeFeatured, getRpbYoutubeVideos } from "@/server/dal/stream";
+import { getBeyTubeFeatured, getRpbYoutubeVideos, type RpbYoutubeVideo } from "@/server/dal/stream";
 import { isRemote } from "@/server/data-source";
 import { getTikTokVideos } from "@/lib/tiktok";
 import { getLatestRPBVideo, getRPBClips, getRPBStreamInfo } from "@/lib/twitch";
@@ -45,6 +45,25 @@ export async function listBeyTubeFeed(limit = 20): Promise<BeyTubeVideo[]> {
     return env.data.videos;
   }
   return getBeyTubeFeatured(limit);
+}
+
+/**
+ * Rediffusions RPB : vidéos YouTube d'une chaîne (page `/tv`), forme `RpbYoutubeVideo`
+ * (avec `viewCount` / `publishedAt` / `thumbnailUrl` / `channelAvatar`).
+ *
+ * Co-localisé : `getRpbYoutubeVideos` (DAL, iso). Standalone : RELIQUAT — `/api/v1/stream`
+ * (`channelId`) renvoie la forme `BeyTubeVideo` (pas de `publishedAt`, champs renommés),
+ * donc ne peut PAS reconstruire `RpbYoutubeVideo` à l'identique. On throw explicitement
+ * plutôt que de fabriquer une réponse divergente.
+ */
+export async function getRpbYoutube(channelId: string, limit = 20): Promise<RpbYoutubeVideo[]> {
+  if (isRemote) {
+    throw new Error(
+      "[stream] getRpbYoutube non disponible en standalone : /api/v1/stream?channelId " +
+        "renvoie BeyTubeVideo (publishedAt/viewCount absents), forme incompatible avec RpbYoutubeVideo",
+    );
+  }
+  return getRpbYoutubeVideos(channelId, limit);
 }
 
 /** Tolère l'échec d'une source externe sans casser le feed entier. */

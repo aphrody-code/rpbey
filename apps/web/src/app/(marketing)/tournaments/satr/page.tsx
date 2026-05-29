@@ -12,13 +12,8 @@ import { RankingModeSwitcher } from "@/components/rankings/RankingModeSwitcher";
 import { SatrTabs } from "@/components/rankings/SatrTabs";
 import { SeasonTabs } from "@/components/rankings/SeasonTabs";
 import { type SatrBlader, type SatrRanking } from "@/lib/types";
-import {
-  getBladerAggregateStats,
-  getRankingLastUpdate,
-  listCareerBladers,
-  listSeasonRankings,
-  listSeasonRankingsAll,
-} from "@/server/dal/rankings";
+import { getBladerAggregateStats, listSeasonRankingsAll } from "@/server/dal/rankings";
+import { getRankings } from "@/server/services/rankings";
 import { getSatrSeasonStats } from "@/server/actions/satr";
 
 export const dynamic = "force-dynamic";
@@ -75,44 +70,36 @@ export default async function SatrPage({ searchParams }: SatrPageProps) {
   const seasonParam = Number(resolvedSearchParams.season);
   const season = seasonParam === 1 ? 1 : 2; // défaut Saison 2 (courante)
 
-  const [champions, rankingData, globalStats, lastUpdate, seasonStatsRes, allRankingsRaw] =
-    await Promise.all([
-      getChampions(season),
-      (async () => {
-        try {
-          if (mode === "ranking") {
-            return await listSeasonRankings({
-              kind: "satr",
-              season,
-              search: searchQuery || undefined,
-              limit: pageSize,
-              offset: (page - 1) * pageSize,
-            });
-          } else {
-            return await listCareerBladers({
-              kind: "satr",
-              search: searchQuery || undefined,
-              limit: pageSize,
-              offset: (page - 1) * pageSize,
-            });
-          }
-        } catch (e) {
-          console.error("Data fetch error:", e);
-          return { items: [], total: 0 };
-        }
-      })(),
-      getBladerAggregateStats("satr").catch(() => ({
-        totalBladers: 0,
-        totalMatches: 0,
-      })),
-      getRankingLastUpdate("satr").then((updatedAt) => ({ updatedAt })),
-      getSatrSeasonStats(season),
-      // All rankings for analysis charts (saison courante uniquement)
-      listSeasonRankingsAll("satr", season),
-    ]);
+  const [champions, rankingData, globalStats, seasonStatsRes, allRankingsRaw] = await Promise.all([
+    getChampions(season),
+    getRankings({
+      kind: "satr",
+      view: mode,
+      season,
+      search: searchQuery || undefined,
+      page,
+      pageSize,
+    }).catch((e) => {
+      console.error("Data fetch error:", e);
+      return {
+        items: [] as SatrRanking[],
+        total: 0,
+        totalPages: 0,
+        lastUpdate: null,
+      };
+    }),
+    getBladerAggregateStats("satr").catch(() => ({
+      totalBladers: 0,
+      totalMatches: 0,
+    })),
+    getSatrSeasonStats(season),
+    // All rankings for analysis charts (saison courante uniquement)
+    listSeasonRankingsAll("satr", season),
+  ]);
 
+  const lastUpdate = { updatedAt: rankingData.lastUpdate };
   const allRankings = allRankingsRaw as SatrRanking[];
-  const totalPages = Math.ceil(rankingData.total / pageSize);
+  const totalPages = rankingData.totalPages;
   const s2Data =
     seasonStatsRes?.success && seasonStatsRes.data
       ? seasonStatsRes.data
@@ -246,7 +233,7 @@ export default async function SatrPage({ searchParams }: SatrPageProps) {
           <Box sx={{ mt: { xs: 1, md: 2 } }}>
             {mode === "career" && (
               <SatrCharts
-                bladers={rankingData.items as SatrBlader[]}
+                bladers={rankingData.items as unknown as SatrBlader[]}
                 allTournamentMetas={allTournamentMetas}
                 rankings={allRankings}
               />
@@ -254,14 +241,14 @@ export default async function SatrPage({ searchParams }: SatrPageProps) {
 
             {mode === "ranking" ? (
               <SatrTable
-                rankings={rankingData.items as SatrRanking[]}
+                rankings={rankingData.items as unknown as SatrRanking[]}
                 totalPages={totalPages}
                 currentPage={page}
                 totalCount={rankingData.total}
               />
             ) : (
               <SatrBladersTable
-                bladers={rankingData.items as SatrBlader[]}
+                bladers={rankingData.items as unknown as SatrBlader[]}
                 totalPages={totalPages}
                 currentPage={page}
                 totalCount={rankingData.total}

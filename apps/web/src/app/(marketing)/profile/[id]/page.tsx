@@ -4,7 +4,7 @@
  */
 
 import { type Metadata } from "next";
-import { getProfileMeta } from "@/server/dal/users";
+import { getProfileMetaInfo } from "@/server/services/users";
 import PublicProfile from "./_components/PublicProfile";
 
 interface PageProps {
@@ -14,7 +14,7 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { id } = await params;
 
-  const user = await getProfileMeta(id);
+  const user = await getProfileMetaInfo(id);
 
   if (!user) {
     return {

@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import { headers } from "next/headers";
-import { listActiveStaffMembers } from "@/server/dal/cms";
+import { getStaffMembers } from "@/server/services/cms";
 import { TeamClientContent } from "./TeamClientContent";
 
 export const metadata = {
@@ -23,7 +23,7 @@ const TEAM_ORDER = ["ADMIN", "RH", "MODO", "ARBITRE", "STAFF", "DEV", "EVENT", "
 
 export default async function TeamPage() {
   await headers();
-  const members = await listActiveStaffMembers();
+  const members = await getStaffMembers();
 
   if (members.length === 0) {
     return (

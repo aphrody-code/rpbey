@@ -13,12 +13,8 @@ import { RankingModeSwitcher } from "@/components/rankings/RankingModeSwitcher";
 import { SeasonTabs } from "@/components/rankings/SeasonTabs";
 import { WbTabs } from "@/components/rankings/WbTabs";
 import { type WbBlader, type WbRanking } from "@/lib/types";
-import {
-  getBladerAggregateStats,
-  getRankingLastUpdate,
-  listCareerBladers,
-  listSeasonRankings,
-} from "@/server/dal/rankings";
+import { getBladerAggregateStats } from "@/server/dal/rankings";
+import { getRankings } from "@/server/services/rankings";
 import { getWbSeasonStats } from "@/server/actions/wb";
 
 const DiscordIcon = (props: SvgIconProps) => (
@@ -92,41 +88,34 @@ export default async function WbPage({ searchParams }: WbPageProps) {
   const seasonParam = Number(resolvedSearchParams.season);
   const season = seasonParam === 1 ? 1 : 2; // défaut Saison 2 (courante)
 
-  const [champions, rankingData, globalStats, lastUpdate, seasonStatsRes] = await Promise.all([
+  const [champions, rankingData, globalStats, seasonStatsRes] = await Promise.all([
     getChampions(season),
-    (async () => {
-      try {
-        if (mode === "ranking") {
-          return await listSeasonRankings({
-            kind: "wb",
-            season,
-            search: searchQuery || undefined,
-            limit: pageSize,
-            offset: (page - 1) * pageSize,
-          });
-        } else {
-          return await listCareerBladers({
-            kind: "wb",
-            search: searchQuery || undefined,
-            limit: pageSize,
-            offset: (page - 1) * pageSize,
-          });
-        }
-      } catch (e) {
-        console.error("Data fetch error:", e);
-        return { items: [], total: 0 };
-      }
-    })(),
+    getRankings({
+      kind: "wb",
+      view: mode,
+      season,
+      search: searchQuery || undefined,
+      page,
+      pageSize,
+    }).catch((e) => {
+      console.error("Data fetch error:", e);
+      return {
+        items: [] as WbRanking[],
+        total: 0,
+        totalPages: 0,
+        lastUpdate: null,
+      };
+    }),
     getBladerAggregateStats("wb").catch(() => ({
       totalBladers: 0,
       totalMatches: 0,
     })),
-    getRankingLastUpdate("wb").then((updatedAt) => ({ updatedAt })),
     // Stats adaptées à la saison demandée (count tournois, participants uniques…)
     getWbSeasonStats(season),
   ]);
 
-  const totalPages = Math.ceil(rankingData.total / pageSize);
+  const lastUpdate = { updatedAt: rankingData.lastUpdate };
+  const totalPages = rankingData.totalPages;
   const s1Data =
     seasonStatsRes?.success && seasonStatsRes.data
       ? seasonStatsRes.data
@@ -321,21 +310,21 @@ export default async function WbPage({ searchParams }: WbPageProps) {
           <Box sx={{ mt: { xs: 1, md: 2 } }}>
             {mode === "career" && (
               <WbCharts
-                bladers={rankingData.items as WbBlader[]}
+                bladers={rankingData.items as unknown as WbBlader[]}
                 allTournamentMetas={allTournamentMetas}
               />
             )}
 
             {mode === "ranking" ? (
               <WbTable
-                rankings={rankingData.items as WbRanking[]}
+                rankings={rankingData.items as unknown as WbRanking[]}
                 totalPages={totalPages}
                 currentPage={page}
                 totalCount={rankingData.total}
               />
             ) : (
               <WbBladersTable
-                bladers={rankingData.items as WbBlader[]}
+                bladers={rankingData.items as unknown as WbBlader[]}
                 totalPages={totalPages}
                 currentPage={page}
                 totalCount={rankingData.total}

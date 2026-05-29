@@ -32,6 +32,7 @@ import {
   Paper,
 } from "@mui/material";
 import { DataGrid, type GridColDef } from "@mui/x-data-grid";
+import { globalSearch } from "@rpbey/api-client";
 import Fuse from "fuse.js";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
@@ -137,10 +138,14 @@ export function ComparateurClient({
     if (globalItems.length > 0 || loadingGlobal) return;
     setLoadingGlobal(true);
     try {
-      const res = await fetch("/api/search/global");
-      const json = await res.json();
-      if (json.success && json.data) {
-        setGlobalItems(json.data);
+      // SDK @rpbey/api-client (GET /api/v1/search, même index global que l'ancienne route
+      // /api/search/global). Sans API_BASE le client tape la même origine. L'enveloppe
+      // { ok, data: { data: GlobalSearchItem[] } } remplace { success, data: [...] } ;
+      // les items (GlobalSearchItem) sont identiques → affichage Fuse inchangé.
+      const res = await globalSearch();
+      const items = res.data?.data?.data;
+      if (res.data?.ok && Array.isArray(items)) {
+        setGlobalItems(items as GlobalSearchItem[]);
       }
     } catch (err) {
       console.error("Failed to load global search items", err);

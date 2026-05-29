@@ -12,6 +12,7 @@ import {
   ListItem,
   ListItemText,
 } from "@mui/material";
+import { botStatus as sdkBotStatus } from "@rpbey/api-client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import type { BotStatus } from "@/lib/bot";
@@ -27,12 +28,19 @@ export default function SystemStatusCard() {
 
   useEffect(() => {
     let cancelled = false;
-    fetch("/api/bot/status")
-      .then((r) => (r.ok ? r.json() : Promise.reject()))
-      .then((data: BotStatus) => {
+    // SDK @rpbey/api-client (GET /api/v1/bot/status → enveloppe { ok, data: { status } }).
+    // Sans API_BASE le client tape la même origine. Le BotStatus brut de l'ancienne
+    // route /api/bot/status est ici niché sous data.status (null si le bot est injoignable).
+    sdkBotStatus()
+      .then((res) => {
         if (cancelled) return;
+        if (res.error || !res.data?.ok) {
+          setState("offline");
+          return;
+        }
+        const data = res.data.data.status;
         setStatus(data);
-        setState(data.status === "running" ? "ok" : "offline");
+        setState(data?.status === "running" ? "ok" : "offline");
       })
       .catch(() => {
         if (!cancelled) setState("offline");

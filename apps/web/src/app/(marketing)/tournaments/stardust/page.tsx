@@ -11,13 +11,8 @@ import { StardustTabs } from "@/components/rankings/StardustTabs";
 import { StardustThemeSync } from "@/components/theme/StardustThemeSync";
 import { type StardustBlader, type StardustRanking } from "@/lib/types";
 import { MuiDiscordIcon as DiscordIcon } from "@/components/ui/MuiIcons";
-import {
-  getBladerAggregateStats,
-  getRankingLastUpdate,
-  listCareerBladers,
-  listSeasonRankings,
-  listStardustChampions,
-} from "@/server/dal/rankings";
+import { getBladerAggregateStats, listStardustChampions } from "@/server/dal/rankings";
+import { getRankings } from "@/server/services/rankings";
 import { createPageMetadata } from "@/lib/seo-utils";
 import { getStardustSeasonStats } from "@/server/actions/stardust";
 
@@ -43,34 +38,25 @@ export default async function StardustPage({ searchParams }: PageProps) {
   const searchQuery = typeof sp.search === "string" ? sp.search : "";
   const mode = (sp.view === "career" ? "career" : "ranking") as "ranking" | "career";
 
-  const [rankingsRes, bladersRes, bladerStats, lastUpdate, seasonStatsRes, championsRaw] =
-    await Promise.all([
-      mode === "ranking"
-        ? listSeasonRankings({
-            kind: "stardust",
-            search: searchQuery || undefined,
-            limit: pageSize,
-            offset: (page - 1) * pageSize,
-          })
-        : Promise.resolve({ items: [] as StardustRanking[], total: 0 }),
-      mode === "career"
-        ? listCareerBladers({
-            kind: "stardust",
-            search: searchQuery || undefined,
-            limit: pageSize,
-            offset: (page - 1) * pageSize,
-          })
-        : Promise.resolve({ items: [] as StardustBlader[], total: 0 }),
-      getBladerAggregateStats("stardust"),
-      getRankingLastUpdate("stardust").then((updatedAt) => ({ updatedAt })),
-      getStardustSeasonStats(),
-      listStardustChampions(),
-    ]);
+  const [rankingsData, bladerStats, seasonStatsRes, championsRaw] = await Promise.all([
+    getRankings({
+      kind: "stardust",
+      view: mode,
+      season: undefined,
+      search: searchQuery || undefined,
+      page,
+      pageSize,
+    }),
+    getBladerAggregateStats("stardust"),
+    getStardustSeasonStats(),
+    listStardustChampions(),
+  ]);
 
-  const rankings = rankingsRes.items;
-  const bladers = bladersRes.items;
-  const totalCount = mode === "ranking" ? rankingsRes.total : bladersRes.total;
-  const totalPages = Math.ceil(totalCount / pageSize);
+  const rankings = mode === "ranking" ? (rankingsData.items as unknown as StardustRanking[]) : [];
+  const bladers = mode === "career" ? (rankingsData.items as unknown as StardustBlader[]) : [];
+  const lastUpdate = { updatedAt: rankingsData.lastUpdate };
+  const totalCount = rankingsData.total;
+  const totalPages = rankingsData.totalPages;
   const totalBladers = bladerStats.totalBladers;
   const totalMatches = bladerStats.totalMatches;
   const seasonData = seasonStatsRes.success

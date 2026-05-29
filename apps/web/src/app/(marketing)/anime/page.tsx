@@ -1,6 +1,6 @@
 import { type Metadata } from "next";
 import { createPageMetadata } from "@/lib/seo-utils";
-import { listFeaturedSeries, listSeriesByGeneration } from "@/server/dal/anime";
+import { getFeaturedSeries, getSeriesByGeneration } from "@/server/services/anime";
 import { AnimeCarousel } from "./_components/AnimeCarousel";
 import { AnimeLanding } from "./_components/AnimeLanding";
 
@@ -15,8 +15,8 @@ export const dynamic = "force-dynamic";
 
 export default async function AnimePage() {
   const [featured, seriesByGeneration] = await Promise.all([
-    listFeaturedSeries(),
-    listSeriesByGeneration(),
+    getFeaturedSeries(),
+    getSeriesByGeneration(),
   ]);
 
   const generationOrder = ["ORIGINAL", "METAL", "BURST", "X"];

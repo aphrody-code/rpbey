@@ -3,6 +3,7 @@
 import { EmojiEvents } from "@mui/icons-material";
 import Button from "@mui/material/Button";
 import Skeleton from "@mui/material/Skeleton";
+import { listTournaments } from "@rpbey/api-client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -20,10 +21,13 @@ export function NextTournamentButton() {
   useEffect(() => {
     async function fetchNextTournament() {
       try {
-        const res = await fetch("/api/tournaments");
-        if (!res.ok) throw new Error("Failed to fetch");
+        // SDK @rpbey/api-client (GET /api/v1/tournaments → enveloppe { ok, data: { items } }).
+        // Sans API_BASE le client tape la même origine ; les items portent status (enum
+        // UPCOMING) + date ISO, exactement les champs lus par le bouton.
+        const res = await listTournaments();
+        if (res.error || !res.data?.ok) throw new Error("Failed to fetch");
 
-        const tournaments: Tournament[] = await res.json();
+        const tournaments: Tournament[] = res.data.data.items;
 
         // Find the next upcoming tournament (status UPCOMING and date in future)
         const now = new Date();

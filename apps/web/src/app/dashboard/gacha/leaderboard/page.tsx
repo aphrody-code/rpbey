@@ -3,7 +3,7 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { Box, Typography } from "@mui/material";
 import { auth } from "@/lib/auth";
-import { getGachaLeaderboard } from "@/server/dal/gacha";
+import { getGachaLeaderboardEntries } from "@/server/services/gacha";
 import { LeaderboardClient } from "./_components/LeaderboardClient";
 
 export const metadata: Metadata = {
@@ -22,14 +22,14 @@ export default async function GachaLeaderboardPage() {
     redirect("/sign-in");
   }
 
-  // Fetch top 100 profiles with user info + card counts (via DAL)
-  const rows = await getGachaLeaderboard(100);
+  // Fetch top 100 profiles with user info + card counts (via service, seam DAL↔SDK)
+  const { entries: rows } = await getGachaLeaderboardEntries(100);
 
   const entries = rows.map((p) => ({
     rank: 0, // computed client-side per tab
     userId: p.userId,
-    name: p.name,
-    image: p.image,
+    name: p.name ?? null,
+    image: p.image ?? null,
     currency: p.currency,
     duelWins: p.duelWins,
     duelRating: p.duelRating,

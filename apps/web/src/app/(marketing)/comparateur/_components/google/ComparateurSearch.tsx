@@ -3,6 +3,7 @@
 import * as React from "react";
 import { Box, Container } from "@mui/material";
 import { useRouter, useSearchParams } from "next/navigation";
+import { globalSearch } from "@rpbey/api-client";
 import type { GlobalSearchItem, SearchCategory } from "@rpbey/api-contract";
 import { facetCounts, normalize, rankSearch, suggest } from "@/lib/search-rank";
 import type { BxProductGroup, RecommendedProduct } from "../types";
@@ -44,13 +45,15 @@ export function ComparateurSearch({ groups, recommendations }: ComparateurSearch
     initialMode ? "ai" : "all",
   );
 
-  // Index de recherche (fetch depuis /api/v1/search)
+  // Index de recherche via le SDK @rpbey/api-client (GET /api/v1/search, query absente
+  // → index complet). Sans API_BASE le client tape la même origine ; l'enveloppe
+  // { ok, data: { data: GlobalSearchItem[] } } est identique à l'ancien fetch direct.
   const [searchIndex, setSearchIndex] = React.useState<GlobalSearchItem[]>([]);
   React.useEffect(() => {
-    fetch("/api/v1/search")
-      .then((r) => r.json())
-      .then((d) => {
-        if (d?.ok && Array.isArray(d.data?.data)) setSearchIndex(d.data.data);
+    globalSearch()
+      .then((res) => {
+        const items = res.data?.data?.data;
+        if (res.data?.ok && Array.isArray(items)) setSearchIndex(items as GlobalSearchItem[]);
       })
       .catch(() => {});
   }, []);
