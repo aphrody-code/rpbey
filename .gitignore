@@ -247,6 +247,9 @@ infra/nginx.bak-*/
 !docs/**/*.txt
 !SECURITY.md
 !state.md
+# Tableau de bord coordination multi-agents (versionné, partagé entre lanes)
+!task.md
+!.agents/*.md
 !LICENSE.md
 !LICENSE.txt
 !CHANGELOG.md
@@ -279,3 +282,6 @@ monorepo-map.json
 # QA artefacts
 .e2e*.log
 .shots/
+
+# --- coordination multi-agents : mailbox transient (agents.json/task.md tracked) ---
+.agents/mailbox/*.jsonl

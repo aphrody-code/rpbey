@@ -25,11 +25,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 | Test                   | `bun run test` (turbo)                                                        |
 | E2E (chromium réel)    | `bun run e2e` (== `CHROME=/usr/local/bin/chromium bun scripts/e2e.ts`)        |
 
-**Lint = oxlint** (`.oxlintrc.json`) **+ oxfmt** (`.oxfmtrc.json`) ; le web lance **aussi eslint** (`apps/web` : `bun run lint`). **Indentation TS/TSX = 2 espaces** (défaut oxfmt — le `.oxfmtrc` n'override pas). ⚠️ Un hook d'éditeur **re-tabule** les fichiers après chaque `Edit` (tabs **non**-canoniques, rejetés par `oxfmt --check`) : lancer `bunx oxfmt <fichiers>` puis `bunx oxfmt --check` avant tout commit (c'est le gate). Bun ≥ 1.3 requis (`Bun.cron`). Linker `hoisted` dans `bunfig.toml` (le défaut `isolated` casse les bundlers Next.js).
+**Lint = oxlint** (`.oxlintrc.json`) **+ oxfmt** (`.oxfmtrc.json`) **uniquement** (ESLint totalement retiré de web+bot le 2026-05-29 ; `apps/web` `bun run lint` = `oxlint . && bun scripts/check-dal-boundary.ts`). **Indentation TS/TSX = 2 espaces** (défaut oxfmt — le `.oxfmtrc` n'override pas). ⚠️ Un hook d'éditeur **re-tabule** les fichiers après chaque `Edit` (tabs **non**-canoniques, rejetés par `oxfmt --check`) : lancer `bunx oxfmt <fichiers>` puis `bunx oxfmt --check` avant tout commit (c'est le gate). Bun ≥ 1.3 requis (`Bun.cron`). Linker `hoisted` dans `bunfig.toml` (le défaut `isolated` casse les bundlers Next.js).
 
 ### Par appli
 
-- **web** : `bunx tsc --noEmit` (le build a `ignoreBuildErrors: true` → tsc est le seul garde-fou type). Build prod + déploiement → §Déploiement. QA visuel : `CHROME=/usr/local/bin/chromium bun scripts/shoot.ts`.
+- **web** : `bunx tsc --noEmit` (le gate type principal). Le build type-check aussi désormais (`next.config.ts` `ignoreBuildErrors: false` depuis 2026-05-29). Build prod + déploiement → §Déploiement. QA visuel : `CHROME=/usr/local/bin/chromium bun scripts/shoot.ts`.
 - **bot** : `bunx tsc --noEmit`, puis `bun run build` (**SWC**, pas `bun build`) → `dist/`. `bun run start`. Tests : `bun test`, bridge Activity `bun run test:bridge`, ciblé `bun test test/<file>.test.ts` ou `bun test -t "<pattern>"`.
 
 ## Architecture — la vue d'ensemble
@@ -75,7 +75,7 @@ Pour comprendre le fonctionnement de la session de crawling, l'indexation Redis 
 ### Web — déploiement & build (lire `apps/web/AGENTS.md`)
 
 - **`scripts/deploy-web.sh` OBLIGATOIRE après chaque `next build`** : le standalone n'inclut **pas** `public/` ni `data/*` (exclus du tracing). Sans lui → chunks JS 404 (site mort), images/rankings vides. Le script copie `.next/static`, symlinke `public/` → CDN, copie les exports `data/`.
-- Pièges build : pas d'import runtime de `@rpbey/db` depuis un client component (fuite postgres → bundle) ; `transpilePackages: ["@vidstack/react"]` ; scraper challonge importé via `@/lib/challonge-vendor/scraper` (pas le barrel) ; `ignoreBuildErrors: true` (drift MUI X).
+- Pièges build : pas d'import runtime de `@rpbey/db` depuis un client component (fuite postgres → bundle) ; `transpilePackages: ["@vidstack/react"]` ; scraper challonge importé via `@/lib/challonge-vendor/scraper` (pas le barrel) ; `ignoreBuildErrors: false` (drift MUI X v9 résorbé → build type-check strict).
 
 ## Style commits
 
