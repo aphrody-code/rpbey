@@ -45,7 +45,7 @@ import { ICON_NAV_WIDTH } from "./constants";
 
 const navItems: { icon: LucideIcon; label: string; href: string }[] = [
   { icon: House, label: "Accueil", href: "/" },
-  { icon: Search, label: "Recherche", href: "/recherche" },
+  { icon: Search, label: "Recherche", href: "/search" },
   { icon: Trophy, label: "Tournois", href: "/tournaments" },
   { icon: Crown, label: "Classements", href: "/rankings" },
   { icon: Swords, label: "Meta", href: "/meta" },

@@ -20,7 +20,7 @@ const SITE_PAGES: Array<{ title: string; url: string; desc: string }> = [
   },
   {
     title: "Recherche",
-    url: "/recherche",
+    url: "/search",
     desc: "Moteur de recherche Beyblade",
   },
   {
@@ -258,6 +258,126 @@ export async function buildGlobalSearchIndex(): Promise<GlobalSearchItem[]> {
       url: page.url,
       details: page.desc,
       badge: "Page",
+    });
+  }
+
+  // 9. Combos gagnants (WBO — agrégés par fréquence + meilleur placement).
+  const combosData = await loadJsonSafe<{
+    events?: Array<{
+      name?: string;
+      placements?: Array<{
+        placement?: number;
+        player?: string;
+        combos?: Array<{ blade?: string; ratchet?: string; bit?: string }>;
+      }>;
+    }>;
+  }>("data/wbo-combos.json");
+  const comboMap = new Map<
+    string,
+    {
+      label: string;
+      blade: string;
+      count: number;
+      best: number;
+      player: string;
+      event: string;
+    }
+  >();
+  for (const ev of combosData?.events ?? []) {
+    for (const pl of ev.placements ?? []) {
+      for (const c of pl.combos ?? []) {
+        const blade = (c.blade ?? "").trim();
+        if (!blade) continue;
+        const label = [blade, (c.ratchet ?? "").trim(), (c.bit ?? "").trim()]
+          .filter(Boolean)
+          .join(" ");
+        const key = label.toLowerCase();
+        const placement = typeof pl.placement === "number" ? pl.placement : 99;
+        const ex = comboMap.get(key);
+        if (ex) {
+          ex.count++;
+          if (placement < ex.best) {
+            ex.best = placement;
+            ex.player = pl.player ?? ex.player;
+            ex.event = ev.name ?? ex.event;
+          }
+        } else {
+          comboMap.set(key, {
+            label,
+            blade,
+            count: 1,
+            best: placement,
+            player: pl.player ?? "",
+            event: ev.name ?? "",
+          });
+        }
+      }
+    }
+  }
+  for (const [key, c] of comboMap) {
+    items.push({
+      id: `combo-${key}`,
+      title: c.label,
+      subtitle: `Combo méta · vu ${c.count}×${c.best === 1 ? " · gagnant" : ""}`,
+      category: "combo",
+      url: `/search?q=${encodeURIComponent(c.blade)}`,
+      details: c.player
+        ? `Top: ${c.player}${c.event ? ` (${c.event})` : ""}`
+        : "Combinaison vue en tournoi WBO",
+      badge: c.best === 1 ? "Combo gagnant" : "Combo",
+    });
+  }
+
+  // Titres déjà indexés (dédup des beys encyclopédiques vs catalogue/pièces).
+  const seenTitles = new Set(items.map((i) => i.title.toLowerCase().trim()));
+
+  // 10. Beys encyclopédiques — TOUTES générations (Bakuten, Metal, Burst, X).
+  const universeBeys = await loadJsonSafe<
+    Array<{
+      title?: string;
+      url?: string;
+      summary?: string;
+      metadata?: { JPName?: string };
+    }>
+  >("data/universe_beys.json");
+  for (const bey of universeBeys ?? []) {
+    const title = (bey.title ?? "").trim();
+    if (!title || seenTitles.has(title.toLowerCase())) continue;
+    seenTitles.add(title.toLowerCase());
+    const jp = bey.metadata?.JPName
+      ? ` · ${bey.metadata.JPName.replace(/\{\{[^}]*\}\}/g, "")}`
+      : "";
+    items.push({
+      id: `bey-${title}`,
+      title,
+      subtitle: `Beyblade${jp}`,
+      category: "product",
+      url: bey.url || `/search?q=${encodeURIComponent(title)}`,
+      details: bey.summary?.trim() || "Toupie Beyblade (encyclopédie, toutes générations)",
+      badge: "Bey",
+    });
+  }
+
+  // 11. Personnages d'anime/manga Beyblade (toutes séries).
+  const universeChars = await loadJsonSafe<
+    Array<{
+      title?: string;
+      url?: string;
+      summary?: string;
+      metadata?: { JPName?: string; Occupation?: string };
+    }>
+  >("data/universe_characters.json");
+  for (const ch of universeChars ?? []) {
+    const title = (ch.title ?? "").trim();
+    if (!title) continue;
+    items.push({
+      id: `char-${title}`,
+      title,
+      subtitle: `Personnage${ch.metadata?.Occupation ? ` · ${ch.metadata.Occupation}` : ""}`,
+      category: "anime",
+      url: ch.url || `/search?q=${encodeURIComponent(title)}`,
+      details: ch.summary?.trim() || "Personnage de l'univers Beyblade",
+      badge: "Personnage",
     });
   }
 

@@ -86,7 +86,7 @@ export function MarketingHeader() {
             <Tooltip title="Recherche Beyblade">
               <IconButton
                 component={Link}
-                href="/recherche"
+                href="/search"
                 aria-label="Recherche"
                 sx={{
                   p: 0.5,

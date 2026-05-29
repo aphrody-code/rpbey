@@ -4,7 +4,7 @@ import * as React from "react";
 import { Box, Container } from "@mui/material";
 import { useRouter, useSearchParams } from "next/navigation";
 import type { GlobalSearchItem, SearchCategory } from "@rpbey/api-contract";
-import { facetCounts, rankSearch, suggest } from "@/lib/search-rank";
+import { facetCounts, normalize, rankSearch, suggest } from "@/lib/search-rank";
 import type { BxProductGroup, RecommendedProduct } from "../types";
 import { AiSynthesis } from "./AiSynthesis";
 import { GoogleHome } from "./GoogleHome";
@@ -23,19 +23,10 @@ interface ComparateurSearchProps {
   recommendations: RecommendedProduct[];
 }
 
-// Recherche prefixe insensible a la casse + accents
-function normalizeQ(s: string): string {
-  return s
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
-    .trim();
-}
-
-// Correspond un groupe au query (fuzzy prefixe)
+// Correspond un groupe au query (normalisation partagee avec le ranker)
 function matchesGroup(g: BxProductGroup, q: string): boolean {
-  const nq = normalizeQ(q);
-  return normalizeQ(g.name).includes(nq) || (g.code != null && normalizeQ(g.code).includes(nq));
+  const nq = normalize(q);
+  return normalize(g.name).includes(nq) || (g.code != null && normalize(g.code).includes(nq));
 }
 
 export function ComparateurSearch({ groups, recommendations }: ComparateurSearchProps) {
@@ -110,7 +101,7 @@ export function ComparateurSearch({ groups, recommendations }: ComparateurSearch
     const params = new URLSearchParams();
     if (q) params.set("q", q);
     if (mode) params.set("mode", "ai");
-    const path = params.toString() ? `/recherche?${params}` : "/recherche";
+    const path = params.toString() ? `/search?${params}` : "/search";
     router.replace(path, { scroll: false });
   }
 

@@ -35,6 +35,7 @@ import { DataGrid, type GridColDef } from "@mui/x-data-grid";
 import Fuse from "fuse.js";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useMemo, useState, useEffect } from "react";
 import type { BxCatalog, BxProduct, BxProductGroup, BxShop, RecommendedProduct } from "./types";
 
@@ -111,6 +112,7 @@ export function ComparateurClient({
   recommendations = [],
 }: Props) {
   const [tab, setTab] = useState(0);
+  const router = useRouter();
   const [search, setSearch] = useState("");
   const [region, setRegion] = useState("all");
   const [openGroup, setOpenGroup] = useState<BxProductGroup | null>(null);
@@ -185,10 +187,11 @@ export function ComparateurClient({
 
     const matched = globalFuse.search(query).map((r) => r.item);
 
+    // Le comparateur est axé produits / beys / pièces. Les autres sujets
+    // (tournois, bladers, anime, lexique, toutes saisons) vivent sur /search.
     for (const item of matched) {
-      if (grouped[item.category as keyof typeof grouped]) {
-        grouped[item.category as keyof typeof grouped].push(item);
-      }
+      if (item.category === "product") grouped.product.push(item);
+      else if (item.category === "part") grouped.part.push(item);
     }
 
     return grouped;
@@ -203,11 +206,11 @@ export function ComparateurClient({
         setOpenGroup(matchedGroup);
         setTab(0);
       } else if (item.url) {
-        window.location.href = item.url;
+        router.push(item.url);
       }
     } else if (item.url) {
       // Le lexique n'a pas d'URL (terme purement informatif) → pas de navigation.
-      window.location.href = item.url;
+      router.push(item.url);
     }
   };
 
@@ -911,6 +914,34 @@ export function ComparateurClient({
                 </Typography>
               ) : (
                 <Stack spacing={2.5}>
+                  {/* CTA → moteur de recherche global (toutes saisons, tous sujets) */}
+                  <Box
+                    component={Link}
+                    href={`/search?q=${encodeURIComponent(search)}`}
+                    onClick={() => setShowGlobalDropdown(false)}
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      gap: 1,
+                      p: 1,
+                      borderRadius: 2,
+                      textDecoration: "none",
+                      border: "1px solid",
+                      borderColor: "rgba(138,180,248,0.3)",
+                      bgcolor: "rgba(138,180,248,0.08)",
+                      color: "#8ab4f8",
+                      fontWeight: 800,
+                      fontSize: "0.78rem",
+                      "&:hover": { bgcolor: "rgba(138,180,248,0.16)" },
+                    }}
+                  >
+                    <span>
+                      Recherche complete Beyblade (toutes saisons, tournois, anime, bladers...)
+                    </span>
+                    <OpenInNew sx={{ fontSize: 14 }} />
+                  </Box>
+
                   {/* Category: Products */}
                   {globalResults.product.length > 0 && (
                     <Box>

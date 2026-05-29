@@ -1,32 +1,17 @@
-import { type Metadata } from "next";
-import { Suspense } from "react";
-import { computeGroups, groupSlug, loadCatalog } from "@/lib/bx-catalog";
-import { getRecommendations } from "@/lib/recommendation-engine";
-import { createPageMetadata } from "@/lib/seo-utils";
-import { ComparateurSearch } from "../comparateur/_components/google/ComparateurSearch";
+import { redirect } from "next/navigation";
 
 export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = createPageMetadata({
-  title: "Recherche Beyblade X — le moteur de recherche RPB",
-  description:
-    "Le moteur de recherche Beyblade : toupies, pieces, combos, tournois, bladers, anime, lexique et boutiques. Prix en temps reel sur 100+ boutiques.",
-  path: "/recherche",
-});
-
-export default async function RecherchePage() {
-  const catalog = await loadCatalog();
-  const groups = catalog ? computeGroups(catalog) : [];
-  for (const g of groups) {
-    g.slug = groupSlug(g);
-  }
-
-  const recommendations = await getRecommendations();
-
-  return (
-    // Suspense requis par useSearchParams() dans ComparateurSearch (Next 16 App Router)
-    <Suspense fallback={null}>
-      <ComparateurSearch groups={groups} recommendations={recommendations} />
-    </Suspense>
-  );
+/** Alias FR → route canonique `/search` (préserve `?q=`, `?mode=ai`). */
+export default async function RechercheAlias({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const sp = await searchParams;
+  const params = new URLSearchParams();
+  if (typeof sp.q === "string" && sp.q) params.set("q", sp.q);
+  if (typeof sp.mode === "string" && sp.mode) params.set("mode", sp.mode);
+  const qs = params.toString();
+  redirect(qs ? `/search?${qs}` : "/search");
 }

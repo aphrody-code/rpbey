@@ -1,32 +1,22 @@
-import { type Metadata } from "next";
-import { Suspense } from "react";
-import { computeGroups, groupSlug, loadCatalog } from "@/lib/bx-catalog";
-import { getRecommendations } from "@/lib/recommendation-engine";
-import { createPageMetadata } from "@/lib/seo-utils";
-import { ComparateurSearch } from "../_components/google/ComparateurSearch";
+import { redirect } from "next/navigation";
 
 export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = createPageMetadata({
-  title: "Recherche Beyblade X — comparateur RPB",
-  description:
-    "Recherchez une toupie, une piece, un blader ou un tournoi Beyblade X. Comparateur de prix en temps reel sur 100+ boutiques.",
-  path: "/comparateur/recherche",
-});
-
-export default async function RecherchePage() {
-  const catalog = await loadCatalog();
-  const groups = catalog ? computeGroups(catalog) : [];
-  for (const g of groups) {
-    g.slug = groupSlug(g);
-  }
-
-  const recommendations = await getRecommendations();
-
-  return (
-    // Suspense requis par useSearchParams() dans ComparateurSearch (Next 16 App Router)
-    <Suspense fallback={null}>
-      <ComparateurSearch groups={groups} recommendations={recommendations} />
-    </Suspense>
-  );
+/**
+ * Ancienne URL de la recherche. Le moteur canonique est `/search` (entrée de
+ * navigation, SEO). On redirige en préservant la requête (`?q=`, `?mode=ai`).
+ */
+export default async function ComparateurRechercheRedirect({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const sp = await searchParams;
+  const params = new URLSearchParams();
+  const q = sp.q;
+  const mode = sp.mode;
+  if (typeof q === "string" && q) params.set("q", q);
+  if (typeof mode === "string" && mode) params.set("mode", mode);
+  const qs = params.toString();
+  redirect(qs ? `/search?${qs}` : "/search");
 }

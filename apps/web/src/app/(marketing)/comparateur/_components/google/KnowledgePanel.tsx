@@ -244,7 +244,7 @@ export function KnowledgePanel({ group, reco, related }: KnowledgePanelProps) {
               <MuiLink
                 key={r.key}
                 component={NextLink}
-                href={`/comparateur/recherche?q=${encodeURIComponent(r.name)}`}
+                href={`/search?q=${encodeURIComponent(r.name)}`}
                 sx={{
                   fontSize: "0.82rem",
                   color: LINK_BLUE,
