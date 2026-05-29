@@ -25,6 +25,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 | Format / check         | `bun run format` (oxfmt) · `bun run format:check`                             |
 | Test                   | `bun run test` (turbo)                                                        |
 | E2E (chromium réel)    | `bun run e2e` (== `CHROME=/usr/local/bin/chromium bun scripts/e2e.ts`)        |
+| Docs (sync/format)     | `bun run docs:check` · `docs:fmt` · `docs:index` (outil Bun-natif `scripts/docs.ts`) |
 
 **Lint = oxlint** (`.oxlintrc.json`) **+ oxfmt** (`.oxfmtrc.json`) **uniquement** (ESLint totalement retiré de web+bot le 2026-05-29 ; `apps/web` `bun run lint` = `oxlint . && bun scripts/check-dal-boundary.ts`). **Indentation TS/TSX = 2 espaces** (défaut oxfmt — le `.oxfmtrc` n'override pas). ⚠️ Un hook d'éditeur **re-tabule** les fichiers après chaque `Edit` (tabs **non**-canoniques, rejetés par `oxfmt --check`) : lancer `bunx oxfmt <fichiers>` puis `bunx oxfmt --check` avant tout commit (c'est le gate). Bun ≥ 1.3 requis (`Bun.cron`). Linker `hoisted` dans `bunfig.toml` (le défaut `isolated` casse les bundlers Next.js).
 
@@ -57,7 +58,7 @@ Raison : better-auth écrit des `Date`. Conséquences : écrire une colonne **au
 
 - `@rpbey/db` (Drizzle, ci-dessus) · `@rpbey/types` (types-only dérivés du schéma).
 - `packages/discordx/` — **fork discordx** vendu : fournit `@rpbey/discordx`, `@rpbey/di` (tsyringe registry), `@rpbey/pagination`. Ignoré par oxlint/oxfmt.
-- `@rose-griffon/challonge` (v3) — client Challonge canonique : API v1 + **scraper via `@aphrody-code/bxc`** (curl-impersonate Chrome, transports dans `src/transports/`). `@rose-griffon/challonge-core` — logique de brackets pure (modèle/manager/viewer).
+- `@rose-griffon/challonge` (v4) — client canonique : API v1 + **write v2.1 OAuth** + crawler/transports/engine/cache **pluggables** + schémas Zod (33 subpath exports), tout via `@aphrody-code/bxc` (curl-impersonate, zéro Puppeteer). Consommé **uniquement par apps/bot** (apps/web a une copie vendorée `challonge-vendor/` + `@rose-griffon/challonge-core` brackets purs) → bxc-FFI n'affecte pas le build web. tsconfig durci (`lib ESNext+DOM`, `types bun`) → `tsc --noEmit` = 0.
 
 ### Crawling & RAG X.com (Twitter)
 
@@ -77,7 +78,7 @@ Pour comprendre le fonctionnement de la session de crawling, l'indexation Redis 
 
 - **`scripts/deploy-web.sh` OBLIGATOIRE après chaque `next build`** : le standalone n'inclut **pas** `public/` ni `data/*` (exclus du tracing). Sans lui → chunks JS 404 (site mort), images/rankings vides. Le script copie `.next/static`, symlinke `public/` → CDN, copie les exports `data/`.
 - Pièges build : pas d'import runtime de `@rpbey/db` depuis un client component (fuite postgres → bundle) ; `transpilePackages: ["@vidstack/react"]` ; scraper challonge importé via `@/lib/challonge-vendor/scraper` (pas le barrel) ; `ignoreBuildErrors: false` (drift MUI X v9 résorbé → build type-check strict).
-- **Migration API-first** (plan `tingly-wondering-river`) : complète et déployée **en co-localisé** (dette `@rpbey/db` hors DAL = 0, gate transitif global). Mais l'objectif « déployable seul Vercel » **reste non atteint** : la plupart des RSC/client lisent encore la DAL ou un `fetch` relatif (seam SDK dormant tant que `API_BASE` n'est pas set, jamais smoke-testé en standalone).
+- **Migration API-first** (plan `tingly-wondering-river`) : complète et déployée **en co-localisé** (dette `@rpbey/db` hors DAL = 0, gate transitif global). L'objectif « déployable seul Vercel » est **ABANDONNÉ — on reste sur le VPS** (décision 2026-05-29). NE PAS rechasser RSC→SDK / client→SDK / smoke standalone : c'est du travail mort sur VPS-only (le seam `isRemote`/SDK reste dormant et inerte, inoffensif).
 - **⚠️ Le gate de vérif DOIT inclure `next build`, pas seulement `tsc`** : un client component qui importe une façade `lib/*` ré-exportant un module server-only casse le bundle browser **sans que `tsc` le voie** (`tsc` valide les types, pas la frontière server/client du bundler). Cas réel : `TvFeed` → `lib/beytube` → `server/dal/stream`.
 
 ## Style commits
