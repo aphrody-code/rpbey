@@ -9,7 +9,7 @@ import Typography from "@mui/material/Typography";
 import { formatDistanceToNow } from "date-fns";
 import { fr } from "date-fns/locale";
 import { Suspense, use, useState } from "react";
-import { type BeyTubeVideo } from "@/lib/beytube";
+import { type BeyTubeVideo } from "@rpbey/api-contract";
 import { type TikTokVideo } from "@/lib/tiktok-types";
 import { type StreamInfo, type VideoInfo } from "@/lib/twitch";
 import { LiveBanner } from "./LiveBanner";
@@ -197,7 +197,7 @@ function BeyTubeGrid({ promise }: { promise: Promise<BeyTubeVideo[]> }) {
               thumbnail={video.thumbnail}
               duration={video.duration || "0:00"}
               channelName={video.channelName}
-              channelAvatar={video.channelAvatar}
+              channelAvatar={video.channelAvatar ?? undefined}
               views={video.views}
               ago={video.ago || "Recemment"}
               url={video.url}
