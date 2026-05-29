@@ -1983,17 +1983,21 @@ export class EconomyGroup {
       // Get banner promo image
       const bannerAttachment = await fetchInventoryMosaicPng(activeBanner.id).catch(() => null);
 
-      const endTimestamp = Math.floor(new Date(activeBanner.endDate).getTime() / 1000);
+      const endTimestamp = activeBanner.endDate
+        ? Math.floor(new Date(activeBanner.endDate).getTime() / 1000)
+        : null;
 
       const embed = new EmbedBuilder()
         .setColor(RPB.GoldColor)
         .setTitle(`📦 Drop ${activeBanner.season} — ${activeBanner.name}`)
         .setDescription(
           [
-            `*${activeBanner.theme}*`,
+            activeBanner.theme ? `*${activeBanner.theme}*` : null,
             "",
-            `**Fin :** <t:${endTimestamp}:R> (<t:${endTimestamp}:D>)`,
-          ].join("\n"),
+            endTimestamp ? `**Fin :** <t:${endTimestamp}:R> (<t:${endTimestamp}:D>)` : null,
+          ]
+            .filter((l): l is string => l !== null)
+            .join("\n"),
         )
         .setFooter({ text: "Les cartes de ce drop apparaissent en priorité dans les tirages !" });
 

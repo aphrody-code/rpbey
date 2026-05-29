@@ -22,6 +22,7 @@
         "@aphrody-code/canvas": "0.1.99-fork.4",
         "@paralleldrive/cuid2": "^3.3.0",
         "@rose-griffon/challonge": "workspace:*",
+        "@rpbey/api-contract": "workspace:*",
         "@rpbey/db": "workspace:*",
         "@rpbey/di": "workspace:*",
         "@rpbey/discordx": "workspace:*",
@@ -64,6 +65,7 @@
         "@colyseus/playground": "^0.17.12",
         "@colyseus/schema": "^4.0.25",
         "@colyseus/tools": "^0.17.19",
+        "@rpbey/api-contract": "workspace:*",
         "@rpbey/db": "workspace:*",
         "colyseus": "^0.17.10",
         "drizzle-orm": "^0.45.2",
@@ -209,10 +211,6 @@
       "version": "3.0.0",
       "dependencies": {
         "@aphrody-code/bxc": "^0.5.2",
-        "@rose-griffon/challonge-core": "workspace:*",
-        "brackets-memory-db": "latest",
-        "i18next": "^21.6.14",
-        "i18next-browser-languagedetector": "^6.1.4",
         "lru-cache": "^11.3.5",
       },
       "devDependencies": {

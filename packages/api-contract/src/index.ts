@@ -12,6 +12,7 @@ export * from "./cms";
 export * from "./analytics";
 export * from "./decks";
 export * from "./gacha";
+export * from "./gacha-game";
 export * from "./bot";
 export * from "./moderation";
 export * from "./openapi";

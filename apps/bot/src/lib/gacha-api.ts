@@ -24,6 +24,27 @@
 
 import crypto from "node:crypto";
 
+import type {
+  BadgeProgress as ContractBadgeProgress,
+  DailyResult as ContractDailyResult,
+  FusionPreview as ContractFusionPreview,
+  FusionResult as ContractFusionResult,
+  GachaBalance,
+  GachaBanner,
+  GachaGameCard,
+  GachaRatesResponse,
+  GameLeaderboardEntry,
+  GiftResult as ContractGiftResult,
+  HistoryItem as ContractHistoryItem,
+  HistoryPage as ContractHistoryPage,
+  InventoryItem as ContractInventoryItem,
+  InventoryPage as ContractInventoryPage,
+  MultiPullResult as ContractMultiPullResult,
+  PullResult as ContractPullResult,
+  SellAllResult as ContractSellAllResult,
+  SellResult as ContractSellResult,
+  WishlistItem as ContractWishlistItem,
+} from "@rpbey/api-contract";
 import pg from "pg";
 
 // ─── Config ──────────────────────────────────────────────────────────────────
@@ -222,163 +243,32 @@ export function __resetGachaApiCachesForTests(): void {
   inflightMints.clear();
 }
 
-// ─── Types (minimal subset of gacha service return shapes) ──────────────────
+// ─── Types — alias du contrat partagé `@rpbey/api-contract` ──────────────────
+// Le serveur de jeu (`apps/gacha-server`) renvoie EXACTEMENT ces formes (source
+// de vérité unique). On conserve les noms historiques du client pour ne pas
+// toucher les appelants (EconomyGroup, DuelCommand, discord-activity).
 
-export interface GachaCard {
-  id: string;
-  name: string;
-  nameJp: string | null;
-  series: string;
-  description: string | null;
-  rarity: string;
-  element: string;
-  att: number;
-  def: number;
-  end: number;
-  equilibre: number;
-  beyblade: string | null;
-  imageUrl: string | null;
-  specialMove: string | null;
-  isActive: boolean;
-  dropId: string | null;
-}
+export type GachaCard = GachaGameCard;
+export type PullResult = ContractPullResult;
+export type MultiPullResult = ContractMultiPullResult;
+export type DailyResult = ContractDailyResult;
+export type Balance = GachaBalance;
+export type InventoryItem = ContractInventoryItem;
+export type InventoryPage = ContractInventoryPage;
+export type SellResult = ContractSellResult;
+export type SellAllResult = ContractSellAllResult;
+export type WishlistItem = ContractWishlistItem;
+export type HistoryItem = ContractHistoryItem;
+export type HistoryPage = ContractHistoryPage;
+export type DropRates = GachaRatesResponse;
+export type Banner = GachaBanner;
+export type BadgeProgress = ContractBadgeProgress;
+export type FusionPreview = ContractFusionPreview;
+export type FusionResult = ContractFusionResult;
+export type LeaderboardEntry = GameLeaderboardEntry;
+export type GiftResult = ContractGiftResult;
 
-export interface PullResult {
-  rarity: string | null;
-  card: GachaCard | null;
-  isDuplicate: boolean;
-  isWished: boolean;
-  newBalance: number;
-  pityCount: number;
-  badgeUnlocked?: { name: string; emoji: string; reward: number } | null;
-}
-
-export interface MultiPullResult {
-  results: PullResult[];
-  newBalance: number;
-  hitsCount: number;
-  missCount: number;
-}
-
-export interface DailyResult {
-  amount: number;
-  streakBonus: number;
-  totalGain: number;
-  tier: number;
-  streakAfter: number;
-  newBalance: number;
-  message: string;
-  streakBonusLabel?: string;
-  interestPaid?: number;
-  streakBroken?: boolean;
-}
-
-export interface Balance {
-  currency: number;
-  dailyStreak: number;
-  lastDaily: string | null;
-  pityCount: number;
-}
-
-export interface InventoryItem {
-  cardId: string;
-  count: number;
-  card: GachaCard;
-}
-
-export interface InventoryPage {
-  items: InventoryItem[];
-  nextCursor: string | null;
-  total: number;
-}
-
-export interface SellResult {
-  pricePaid: number;
-  newBalance: number;
-  cardName: string;
-  rarity: string;
-}
-
-export interface SellAllResult {
-  soldCount: number;
-  totalEarned: number;
-  newBalance: number;
-  sold: Array<{ name: string; rarity: string; count: number; earned: number }>;
-}
-
-export interface WishlistItem {
-  cardId: string;
-  card: GachaCard;
-  owned: boolean;
-}
-
-export interface HistoryItem {
-  id: string;
-  amount: number;
-  type: string;
-  note: string | null;
-  createdAt: string;
-}
-
-export interface HistoryPage {
-  items: HistoryItem[];
-  nextCursor: string | null;
-}
-
-export interface DropRates {
-  MISS: number;
-  COMMON: number;
-  RARE: number;
-  SUPER_RARE: number;
-  LEGENDARY: number;
-  pityThreshold: number;
-}
-
-export interface Banner {
-  id: string;
-  slug: string;
-  name: string;
-  theme: string;
-  season: number;
-  startDate: string;
-  endDate: string;
-  imageUrl: string | null;
-  isActive: boolean;
-}
-
-export interface BadgeProgress {
-  badges: Array<{
-    count: number;
-    name: string;
-    emoji: string;
-    reward: number;
-    earned: boolean;
-    claimed: boolean;
-  }>;
-  uniqueCards: number;
-  nextBadge: {
-    count: number;
-    name: string;
-    emoji: string;
-    reward: number;
-  } | null;
-}
-
-export interface FusionPreview {
-  eligible: boolean;
-  candidates: GachaCard[];
-  targetRarity: string | null;
-  message: string;
-}
-
-export interface FusionResult {
-  burnedCardId: string;
-  burnedRarity: string;
-  rewardCard: GachaCard;
-  rewardRarity: string;
-  newBalance: number;
-}
-
+// ─── Duel / Trade async — propres au client (pas dans le contrat REST partagé) ─
 export interface DuelProposal {
   id: string;
   challengerId: string;
@@ -411,18 +301,6 @@ export interface TradeProposal {
   requestedCardId: string;
   status: string;
   createdAt: string;
-}
-
-export interface LeaderboardEntry {
-  userId: string;
-  name: string | null;
-  image: string | null;
-  value: number;
-}
-
-export interface GiftResult {
-  newBalance: number;
-  recipientName?: string;
 }
 
 // ─── Error type ───────────────────────────────────────────────────────────────

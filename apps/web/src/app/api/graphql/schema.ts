@@ -6,6 +6,10 @@ import {
   getProfileByUserId,
   getSeasonBySlug,
   getTournamentById,
+  gqlGachaCards,
+  gqlGachaDrops,
+  gqlGachaLeaderboard,
+  gqlGachaProfile,
   listBeyblades,
   listGlobalRankings,
   listParts,
@@ -184,6 +188,77 @@ export const schema = createSchema({
       episodeCount: Int!
     }
 
+    # ── Gacha ────────────────────────────────────────
+
+    enum GachaRarity {
+      COMMON
+      RARE
+      SUPER_RARE
+      LEGENDARY
+      SECRET
+    }
+
+    type GachaCard {
+      id: ID!
+      slug: String!
+      name: String!
+      nameJp: String
+      series: String!
+      rarity: String!
+      element: String
+      imageUrl: String
+      beyblade: String
+      description: String
+      att: Int!
+      def: Int!
+      end: Int!
+      equilibre: Int!
+      specialMove: String
+      artistName: String
+      isActive: Boolean!
+      dropId: String
+    }
+
+    type GachaDrop {
+      id: ID!
+      slug: String!
+      name: String!
+      theme: String
+      season: Int!
+      maxCards: Int
+      startDate: String
+      endDate: String
+      isActive: Boolean!
+      imageUrl: String
+      cardCount: Int!
+    }
+
+    type GachaLeaderboardEntry {
+      rank: Int!
+      userId: ID!
+      name: String
+      image: String
+      currency: Int!
+      duelWins: Int!
+      duelRating: Int!
+      cardCount: Int!
+    }
+
+    type GachaProfile {
+      id: ID!
+      userId: ID!
+      bladerName: String
+      currency: Int!
+      dailyStreak: Int!
+      lastDaily: String
+      pityCount: Int!
+      wins: Int!
+      losses: Int!
+      tournamentWins: Int!
+      cardCount: Int!
+      totalCards: Int!
+    }
+
     # ── Root Query ───────────────────────────────────
 
     type Query {
@@ -251,6 +326,32 @@ export const schema = createSchema({
       All published anime series
       """
       animeSeries: [AnimeSeries!]!
+
+      """
+      Public gacha card catalogue (active cards), filterable by rarity / drop / series / search
+      """
+      gachaCards(
+        rarity: GachaRarity
+        dropId: String
+        series: String
+        search: String
+        limit: Int = 200
+      ): [GachaCard!]!
+
+      """
+      Seasonal gacha collections (drops) with card counts
+      """
+      gachaDrops: [GachaDrop!]!
+
+      """
+      Gacha leaderboard (BeyCoins / collection / duels)
+      """
+      gachaLeaderboard(limit: Int = 100): [GachaLeaderboardEntry!]!
+
+      """
+      A player's gacha profile (currency, streak, duels, card count) by user ID
+      """
+      gachaProfile(userId: ID!): GachaProfile
     }
   `,
   resolvers: {
@@ -296,6 +397,23 @@ export const schema = createSchema({
       profile: (_: unknown, { userId }: { userId: string }) => getProfileByUserId(userId),
 
       animeSeries: () => listPublishedAnimeSeries(),
+
+      gachaCards: (
+        _: unknown,
+        args: {
+          rarity?: string;
+          dropId?: string;
+          series?: string;
+          search?: string;
+          limit: number;
+        },
+      ) => gqlGachaCards(args),
+
+      gachaDrops: () => gqlGachaDrops(),
+
+      gachaLeaderboard: (_: unknown, { limit }: { limit: number }) => gqlGachaLeaderboard(limit),
+
+      gachaProfile: (_: unknown, { userId }: { userId: string }) => gqlGachaProfile(userId),
     },
 
     Season: {

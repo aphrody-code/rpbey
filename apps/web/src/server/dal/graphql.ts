@@ -1,5 +1,12 @@
 import "server-only";
 import { and, asc, db, desc, eq, gt, ilike, schema as t } from "@/lib/db";
+import {
+  getGachaLeaderboard,
+  getGachaProfile,
+  listGachaCards,
+  listGachaDrops,
+} from "@/server/dal/gacha";
+import type { CardRarity } from "@/lib/types";
 
 /**
  * DAL du endpoint GraphQL (Phase 3 — API-first).
@@ -228,4 +235,46 @@ export function listPublishedAnimeSeries() {
     where: eq(t.animeSeries.isPublished, true),
     orderBy: [asc(t.animeSeries.generation), asc(t.animeSeries.sortOrder)],
   });
+}
+
+// ── Gacha (cartes / drops / leaderboard / profil) ─────────────────────────────
+// Réutilise les puits DAL gacha (server/dal/gacha) — pas de requête DB dupliquée.
+// Ces wrappers existent pour que les resolvers GraphQL n'importent QUE ce module.
+
+const MAX_GACHA_CARDS = 200;
+
+/** Cartes gacha actives, filtrables (rareté/drop/série/recherche). */
+export async function gqlGachaCards(args: {
+  rarity?: string;
+  dropId?: string;
+  series?: string;
+  search?: string;
+  limit: number;
+}) {
+  const { cards } = await listGachaCards({
+    // `rarity` provient de l'enum SDL `GachaRarity` (validé par GraphQL) →
+    // toujours une `CardRarity` valide à l'exécution.
+    rarity: args.rarity as CardRarity | undefined,
+    dropId: args.dropId,
+    series: args.series,
+    search: args.search,
+    activeOnly: true,
+    limit: Math.min(args.limit, MAX_GACHA_CARDS),
+  });
+  return cards;
+}
+
+/** Collections (drops) gacha + compteur de cartes. */
+export function gqlGachaDrops() {
+  return listGachaDrops();
+}
+
+/** Classement gacha (BeyCoins / collection / duels). */
+export function gqlGachaLeaderboard(limit: number) {
+  return getGachaLeaderboard(Math.min(limit, 100));
+}
+
+/** Profil gacha public d'un joueur (currency, streak, duels, nb de cartes). */
+export function gqlGachaProfile(userId: string) {
+  return getGachaProfile(userId);
 }

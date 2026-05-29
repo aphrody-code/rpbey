@@ -3,6 +3,27 @@
  * le body/query, renvoie l'objet JSON exact attendu par le client
  * (apps/bot/src/lib/gacha-api.ts), ou lève une ApiError.
  */
+import type {
+  AdminGrantResult,
+  BadgeProgress,
+  ClaimBadgeResult,
+  DailyResult,
+  FusionPreview,
+  FusionResult,
+  GachaBalance,
+  GachaBanner,
+  GachaRatesResponse,
+  GameLeaderboardEntry,
+  GiftResult,
+  HistoryPage,
+  InventoryPage,
+  MultiPullResult,
+  PullResult,
+  SellAllResult,
+  SellResult,
+  WishlistItem,
+  WishlistToggleResult,
+} from "@rpbey/api-contract";
 import { db, schema } from "@rpbey/db";
 import { and, asc, desc, eq, ilike, lt, sql } from "drizzle-orm";
 import type { AuthUser } from "./auth";
@@ -25,8 +46,11 @@ import {
   STREAK_RESET_H,
   type Rarity,
 } from "./config";
-import { cardDto, rollRarity, type CardRow } from "./game";
+import { cardDto, type CardDto, rollRarity, type CardRow } from "./game";
 import { ApiError } from "./http";
+
+/** Enveloppe de succès `{ ok: true, <key>: payload }`. */
+type Ok<K extends string, T> = { ok: true } & { [P in K]: T };
 
 const {
   gachaCards,
@@ -195,7 +219,7 @@ async function resolvePull(
 
 // ─── Handlers ──────────────────────────────────────────────────────────────
 
-export async function pull(user: AuthUser) {
+export async function pull(user: AuthUser): Promise<Ok<"result", PullResult>> {
   const prof = await ensureProfile(user.id);
   if (prof.currency < PULL_COST)
     throw new ApiError("INSUFFICIENT_FUNDS", `Solde insuffisant (${PULL_COST} 🪙 requis)`, 400);
@@ -233,7 +257,7 @@ export async function pull(user: AuthUser) {
   };
 }
 
-export async function pullMulti(user: AuthUser) {
+export async function pullMulti(user: AuthUser): Promise<Ok<"result", MultiPullResult>> {
   const prof = await ensureProfile(user.id);
   if (prof.currency < MULTI_PULL_COST)
     throw new ApiError(
@@ -300,7 +324,7 @@ export async function pullMulti(user: AuthUser) {
   };
 }
 
-export async function daily(user: AuthUser) {
+export async function daily(user: AuthUser): Promise<Ok<"result", DailyResult>> {
   const prof = await ensureProfile(user.id);
   const nowMs = Date.now();
   const lastMs = prof.lastDaily ? new Date(prof.lastDaily).getTime() : null;
@@ -350,7 +374,7 @@ export async function daily(user: AuthUser) {
   };
 }
 
-export async function balance(user: AuthUser) {
+export async function balance(user: AuthUser): Promise<GachaBalance> {
   const p = await ensureProfile(user.id);
   return {
     currency: p.currency,
@@ -361,7 +385,10 @@ export async function balance(user: AuthUser) {
   };
 }
 
-export async function inventoryPage(user: AuthUser, q: URLSearchParams) {
+export async function inventoryPage(
+  user: AuthUser,
+  q: URLSearchParams,
+): Promise<Ok<"page", InventoryPage>> {
   const rarity = q.get("rarity") ?? undefined;
   const cursor = q.get("cursor") ?? undefined;
   const limit = Math.min(50, Math.max(1, Number(q.get("limit") ?? "20") || 20));
@@ -404,7 +431,10 @@ export async function inventoryPage(user: AuthUser, q: URLSearchParams) {
   };
 }
 
-export async function sell(user: AuthUser, body: Record<string, unknown>) {
+export async function sell(
+  user: AuthUser,
+  body: Record<string, unknown>,
+): Promise<Ok<"result", SellResult>> {
   const cardId = String(body.cardId ?? "");
   if (!cardId) throw new ApiError("BAD_REQUEST", "cardId requis", 400);
   const rows = await db
@@ -447,7 +477,7 @@ export async function sell(user: AuthUser, body: Record<string, unknown>) {
   };
 }
 
-export async function sellAll(user: AuthUser) {
+export async function sellAll(user: AuthUser): Promise<Ok<"result", SellAllResult>> {
   const rows = await db
     .select({
       cardId: cardInventory.cardId,
@@ -500,7 +530,10 @@ export async function sellAll(user: AuthUser) {
   };
 }
 
-export async function gift(user: AuthUser, body: Record<string, unknown>) {
+export async function gift(
+  user: AuthUser,
+  body: Record<string, unknown>,
+): Promise<Ok<"result", GiftResult>> {
   const recipientId = String(body.recipientId ?? "");
   const cardId = String(body.cardId ?? "");
   if (!recipientId || !cardId)
@@ -552,7 +585,10 @@ export async function gift(user: AuthUser, body: Record<string, unknown>) {
   };
 }
 
-export async function wishlistToggle(user: AuthUser, body: Record<string, unknown>) {
+export async function wishlistToggle(
+  user: AuthUser,
+  body: Record<string, unknown>,
+): Promise<{ ok: true } & WishlistToggleResult> {
   const cardId = String(body.cardId ?? "");
   if (!cardId) throw new ApiError("BAD_REQUEST", "cardId requis", 400);
   const prof = await ensureProfile(user.id);
@@ -581,7 +617,7 @@ export async function wishlistToggle(user: AuthUser, body: Record<string, unknow
   return { ok: true, added, cardName: card[0].name };
 }
 
-export async function wishlist(user: AuthUser) {
+export async function wishlist(user: AuthUser): Promise<Ok<"items", WishlistItem[]>> {
   const prof = await ensureProfile(user.id);
   const rows = await db
     .select({ card: CARD_COLS })
@@ -604,7 +640,10 @@ export async function wishlist(user: AuthUser) {
   };
 }
 
-export async function history(user: AuthUser, q: URLSearchParams) {
+export async function history(
+  user: AuthUser,
+  q: URLSearchParams,
+): Promise<Ok<"page", HistoryPage>> {
   const limit = Math.min(100, Math.max(1, Number(q.get("limit") ?? "20") || 20));
   const cursor = q.get("cursor") ?? undefined;
   const type = q.get("type") ?? undefined;
@@ -634,17 +673,17 @@ export async function history(user: AuthUser, q: URLSearchParams) {
   };
 }
 
-export function rates() {
+export function rates(): { ok: true } & GachaRatesResponse {
   return { ok: true, ...RATES, pityThreshold: PITY_THRESHOLD };
 }
 
-export async function cardById(id: string) {
+export async function cardById(id: string): Promise<Ok<"card", CardDto>> {
   const rows = await db.select(CARD_COLS).from(gachaCards).where(eq(gachaCards.id, id)).limit(1);
   if (!rows[0]) throw new ApiError("NO_CARD", "Carte introuvable", 404);
   return { ok: true, card: cardDto(rows[0]) };
 }
 
-export async function searchCards(q: URLSearchParams) {
+export async function searchCards(q: URLSearchParams): Promise<Ok<"items", CardDto[]>> {
   const term = (q.get("q") ?? "").trim();
   const limit = Math.min(50, Math.max(1, Number(q.get("limit") ?? "10") || 10));
   const conds = term ? [ilike(gachaCards.name, `%${term}%`)] : [];
@@ -657,7 +696,7 @@ export async function searchCards(q: URLSearchParams) {
   return { ok: true, items: rows.map(cardDto) };
 }
 
-export async function banners() {
+export async function banners(): Promise<{ banners: GachaBanner[] }> {
   const rows = await db
     .select({
       id: gachaDrops.id,
@@ -693,7 +732,7 @@ async function claimedBadgeCounts(userId: string): Promise<Set<number>> {
   return set;
 }
 
-export async function badges(user: AuthUser) {
+export async function badges(user: AuthUser): Promise<Ok<"progress", BadgeProgress>> {
   await ensureProfile(user.id);
   const unique = await uniqueCardCount(user.id);
   const claimed = await claimedBadgeCounts(user.id);
@@ -723,7 +762,7 @@ export async function badges(user: AuthUser) {
   };
 }
 
-export async function claimBadge(user: AuthUser) {
+export async function claimBadge(user: AuthUser): Promise<Ok<"result", ClaimBadgeResult>> {
   const unique = await uniqueCardCount(user.id);
   const claimed = await claimedBadgeCounts(user.id);
   const eligible = BADGES.filter((b) => unique >= b.count && !claimed.has(b.count));
@@ -762,7 +801,7 @@ async function fusionCandidates(userId: string) {
   return eligible;
 }
 
-export async function fusionPreview(user: AuthUser) {
+export async function fusionPreview(user: AuthUser): Promise<Ok<"preview", FusionPreview>> {
   const eligible = await fusionCandidates(user.id);
   if (eligible.length === 0)
     return {
@@ -785,7 +824,10 @@ export async function fusionPreview(user: AuthUser) {
   };
 }
 
-export async function fuse(user: AuthUser, body: Record<string, unknown>) {
+export async function fuse(
+  user: AuthUser,
+  body: Record<string, unknown>,
+): Promise<Ok<"result", FusionResult>> {
   const cardId = String(body.cardId ?? "");
   if (!cardId) throw new ApiError("BAD_REQUEST", "cardId requis", 400);
   const rows = await db
@@ -831,7 +873,10 @@ export async function fuse(user: AuthUser, body: Record<string, unknown>) {
   };
 }
 
-export async function leaderboard(category: string, q: URLSearchParams) {
+export async function leaderboard(
+  category: string,
+  q: URLSearchParams,
+): Promise<Ok<"entries", GameLeaderboardEntry[]>> {
   const limit = Math.min(100, Math.max(1, Number(q.get("limit") ?? "10") || 10));
   if (category === "collection") {
     const rows = await db
@@ -868,7 +913,10 @@ export async function leaderboard(category: string, q: URLSearchParams) {
   return { ok: true, entries: rows };
 }
 
-export async function adminGrant(user: AuthUser, body: Record<string, unknown>) {
+export async function adminGrant(
+  user: AuthUser,
+  body: Record<string, unknown>,
+): Promise<{ ok: true } & AdminGrantResult> {
   if (!user.isAdmin) throw new ApiError("FORBIDDEN", "Réservé aux admins", 403);
   const targetUserId = String(body.targetUserId ?? "");
   const amount = Math.trunc(Number(body.amount ?? 0));

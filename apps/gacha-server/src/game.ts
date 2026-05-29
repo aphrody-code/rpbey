@@ -1,6 +1,8 @@
 /** Logique de jeu pure (sans DB). */
+import type { GachaGameCard } from "@rpbey/api-contract";
 import { RATES, type Rarity } from "./config";
 
+/** Ligne carte lue en DB (colonnes `CARD_COLS`). Superset structurel de la DTO. */
 export interface CardRow {
   id: string;
   name: string;
@@ -20,7 +22,8 @@ export interface CardRow {
   dropId: string | null;
 }
 
-export interface CardDto extends CardRow {}
+/** DTO carte exposée par l'API — type partagé du contrat (`@rpbey/api-contract`). */
+export type CardDto = GachaGameCard;
 
 export function cardDto(c: CardRow): CardDto {
   return {
