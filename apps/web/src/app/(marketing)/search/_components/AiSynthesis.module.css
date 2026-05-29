@@ -23,7 +23,7 @@
   display: inline-flex;
   align-items: center;
   padding: 8px 16px;
-  border-radius: 18px;
+  border-radius: 16px;
   background: var(--rpb-surface-high, #3c4043);
   border: 1px solid var(--rpb-border, #3c4043);
   color: var(--rpb-text, #e8eaed);
@@ -87,8 +87,8 @@
 .citation {
   display: inline-flex;
   align-items: center;
-  gap: 3px;
-  padding: 1px 6px;
+  gap: 4px;
+  padding: 2px 8px;
   margin-left: 4px;
   border-radius: 12px;
   background: color-mix(in srgb, var(--rpb-primary) 12%, var(--rpb-surface-main, #303134));
@@ -140,7 +140,7 @@
   color: var(--rpb-text-secondary, #bdc1c6);
   background: color-mix(in srgb, var(--rpb-text, #e8eaed) 5%, transparent);
   border: 1px solid var(--rpb-border, #3c4043);
-  border-radius: 10px;
+  border-radius: 12px;
 }
 
 .relanceLabel {

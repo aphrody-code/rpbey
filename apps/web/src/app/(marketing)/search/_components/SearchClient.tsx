@@ -3,7 +3,7 @@
 import * as React from "react";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, MotionConfig, motion, useReducedMotion } from "framer-motion";
 import { globalSearch } from "@rpbey/api-client";
 import type { GlobalSearchItem, SearchCategory } from "@rpbey/api-contract";
 import { facetCounts, normalize, rankSearch, suggest } from "@/lib/search-rank";
@@ -209,48 +209,54 @@ export function SearchClient({ groups, recommendations }: SearchClientProps) {
   // ─────────────────────────────────────────────────────────────────────────────
   if (view === "home") {
     return (
-      <div className={styles.root}>
-        <motion.div className={styles.homeWrap} key="home" {...fadeThrough}>
-          {/* Zone centrale */}
-          <div className={styles.homeCenter}>
-            <Image
-              src={LOGO_GIF}
-              alt="RPB — Recherche Beyblade"
-              width={188}
-              height={188}
-              className={styles.homeLogo}
-              priority
-              unoptimized
-            />
+      <MotionConfig reducedMotion="user">
+        <div className={styles.root}>
+          <motion.div className={styles.homeWrap} key="home" {...fadeThrough}>
+            {/* Zone centrale */}
+            <div className={styles.homeCenter}>
+              <Image
+                src={LOGO_GIF}
+                alt="RPB — Recherche Beyblade"
+                width={188}
+                height={188}
+                className={styles.homeLogo}
+                priority
+                unoptimized
+              />
 
-            {/* Barre de recherche home */}
-            <SearchField
-              value={query}
-              suggestions={suggestions}
-              aiMode={aiMode}
-              onChange={handleChange}
-              onSubmit={handleSubmit}
-              onToggleAi={handleToggleAi}
-            />
+              {/* Barre de recherche home */}
+              <SearchField
+                value={query}
+                suggestions={suggestions}
+                aiMode={aiMode}
+                onChange={handleChange}
+                onSubmit={handleSubmit}
+                onToggleAi={handleToggleAi}
+              />
 
-            {/* Boutons home */}
-            <div className={styles.homeActions}>
-              <button type="button" className={styles.homeBtn} onClick={() => handleSubmit(query)}>
-                Rechercher
-              </button>
-              <button
-                type="button"
-                className={styles.homeBtn}
-                onClick={handleLucky}
-                disabled={!topReco}
-                title={topReco ? `Meilleure reco : ${topReco.name}` : "Calcul en cours…"}
-              >
-                J&apos;ai de la chance
-              </button>
+              {/* Boutons home */}
+              <div className={styles.homeActions}>
+                <button
+                  type="button"
+                  className={styles.homeBtn}
+                  onClick={() => handleSubmit(query)}
+                >
+                  Rechercher
+                </button>
+                <button
+                  type="button"
+                  className={styles.homeBtn}
+                  onClick={handleLucky}
+                  disabled={!topReco}
+                  title={topReco ? `Meilleure reco : ${topReco.name}` : "Calcul en cours…"}
+                >
+                  J&apos;ai de la chance
+                </button>
+              </div>
             </div>
-          </div>
-        </motion.div>
-      </div>
+          </motion.div>
+        </div>
+      </MotionConfig>
     );
   }
 
@@ -258,95 +264,102 @@ export function SearchClient({ groups, recommendations }: SearchClientProps) {
   // VUE SERP / SYNTHESIS
   // ─────────────────────────────────────────────────────────────────────────────
   return (
-    <div className={styles.root}>
-      {/* Header SERP sticky */}
-      <div className={styles.serpHeader}>
-        <div className={styles.serpHeaderInner}>
-          {/* Logo compact → retour home */}
-          <button
-            type="button"
-            className={styles.serpLogo}
-            onClick={() => {
-              setView("home");
-              setQuery("");
-              syncUrl("", aiMode);
-            }}
-            aria-label="Retour à l'accueil de la recherche"
-          >
-            <Image
-              src={LOGO_GIF}
-              alt="RPB"
-              width={36}
-              height={36}
-              className={styles.serpLogoImg}
-              unoptimized
-            />
-          </button>
+    <MotionConfig reducedMotion="user">
+      <div className={styles.root}>
+        {/* Header SERP sticky */}
+        <div className={styles.serpHeader}>
+          <div className={styles.serpHeaderInner}>
+            {/* Logo compact → retour home */}
+            <button
+              type="button"
+              className={styles.serpLogo}
+              onClick={() => {
+                setView("home");
+                setQuery("");
+                syncUrl("", aiMode);
+              }}
+              aria-label="Retour à l'accueil de la recherche"
+            >
+              <Image
+                src={LOGO_GIF}
+                alt="RPB"
+                width={36}
+                height={36}
+                className={styles.serpLogoImg}
+                unoptimized
+              />
+            </button>
 
-          {/* Champ inline */}
-          <div className={styles.serpFieldWrap}>
-            <SearchField
-              value={query}
-              suggestions={suggestions}
-              aiMode={aiMode}
-              maxWidth="100%"
-              onChange={handleChange}
-              onSubmit={handleSubmit}
-              onToggleAi={handleToggleAi}
-            />
-          </div>
-        </div>
-
-        {/* Onglets facettes */}
-        <SerpTabs active={category} onChange={handleTabChange} facets={liveFacets} />
-      </div>
-
-      {/* Corps */}
-      <div className={styles.serpBody}>
-        <div className={`${styles.serpGrid} ${matchedGroup ? styles.hasPanel : ""}`}>
-          {/* Colonne résultats / synthèse */}
-          <div>
-            <AnimatePresence mode="wait">
-              {view === "synthesis" ? (
-                <motion.div key="synthesis" {...fadeThrough}>
-                  <AiSynthesis
-                    query={query}
-                    group={matchedGroup}
-                    reco={matchedReco}
-                    suggestions={suggestions}
-                    onNewSearch={handleSubmit}
-                  />
-                </motion.div>
-              ) : (
-                <motion.div key="serp" {...fadeThrough}>
-                  {showShimmer ? <SearchShimmer /> : <SerpResults items={results} query={query} />}
-                </motion.div>
-              )}
-            </AnimatePresence>
+            {/* Champ inline */}
+            <div className={styles.serpFieldWrap}>
+              <SearchField
+                value={query}
+                suggestions={suggestions}
+                aiMode={aiMode}
+                maxWidth="100%"
+                onChange={handleChange}
+                onSubmit={handleSubmit}
+                onToggleAi={handleToggleAi}
+              />
+            </div>
           </div>
 
-          {/* Knowledge Panel (colonne droite) */}
-          {matchedGroup && view !== "synthesis" && (
-            <AnimatePresence>
-              <motion.div
-                key="panel"
-                initial={{ opacity: 0, x: 16 }}
-                animate={{ opacity: 1, x: 0, transition: { duration: 0.25, ease: EASING_ENTER } }}
-                exit={{ opacity: 0, x: 16, transition: { duration: 0.15, ease: EASING_EXIT } }}
-              >
-                <KnowledgePanel group={matchedGroup} reco={matchedReco} related={relatedGroups} />
-              </motion.div>
-            </AnimatePresence>
-          )}
+          {/* Onglets facettes */}
+          <SerpTabs active={category} onChange={handleTabChange} facets={liveFacets} />
+        </div>
+
+        {/* Corps */}
+        <div className={styles.serpBody}>
+          <div className={`${styles.serpGrid} ${matchedGroup ? styles.hasPanel : ""}`}>
+            {/* Colonne résultats / synthèse */}
+            <div>
+              <AnimatePresence mode="wait">
+                {view === "synthesis" ? (
+                  <motion.div key="synthesis" {...fadeThrough}>
+                    <AiSynthesis
+                      query={query}
+                      group={matchedGroup}
+                      reco={matchedReco}
+                      suggestions={suggestions}
+                      onNewSearch={handleSubmit}
+                    />
+                  </motion.div>
+                ) : (
+                  <motion.div key="serp" {...fadeThrough}>
+                    {showShimmer ? (
+                      <SearchShimmer />
+                    ) : (
+                      <SerpResults items={results} query={query} />
+                    )}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Knowledge Panel (colonne droite) */}
+            {matchedGroup && view !== "synthesis" && (
+              <AnimatePresence>
+                <motion.div
+                  key="panel"
+                  initial={{ opacity: 0, x: 16 }}
+                  animate={{ opacity: 1, x: 0, transition: { duration: 0.25, ease: EASING_ENTER } }}
+                  exit={{ opacity: 0, x: 16, transition: { duration: 0.15, ease: EASING_EXIT } }}
+                >
+                  <KnowledgePanel group={matchedGroup} reco={matchedReco} related={relatedGroups} />
+                </motion.div>
+              </AnimatePresence>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </MotionConfig>
   );
 }
 
 // ── Shimmer de chargement (pendant le premier fetch de l'index) ───────────────
 
 function SearchShimmer() {
+  const reduce = useReducedMotion();
   return (
     <div aria-busy="true" aria-label="Chargement des résultats">
       {[1, 2, 3, 4].map((i) => (
@@ -360,16 +373,17 @@ function SearchShimmer() {
             gap: 8,
           }}
         >
-          <div style={shimmerBar(140, 12)} />
-          <div style={shimmerBar(320, 18)} />
-          <div style={shimmerBar(480, 13)} />
+          <div style={shimmerBar(140, 12, reduce)} />
+          <div style={shimmerBar(320, 18, reduce)} />
+          <div style={shimmerBar(480, 13, reduce)} />
         </div>
       ))}
     </div>
   );
 }
 
-function shimmerBar(width: number, height: number): React.CSSProperties {
+// reduce === true → pas d'animation (respecte prefers-reduced-motion).
+function shimmerBar(width: number, height: number, reduce: boolean | null): React.CSSProperties {
   return {
     width,
     height,
@@ -377,6 +391,6 @@ function shimmerBar(width: number, height: number): React.CSSProperties {
     background:
       "linear-gradient(90deg, var(--rpb-surface-main,#303134) 25%, var(--rpb-surface-high,#3c4043) 50%, var(--rpb-surface-main,#303134) 75%)",
     backgroundSize: "200% 100%",
-    animation: "shimmer 1.4s infinite linear",
+    animation: reduce ? undefined : "shimmer 1.4s infinite linear",
   };
 }

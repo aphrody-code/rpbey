@@ -126,7 +126,7 @@
   display: inline-flex;
   align-items: center;
   padding: 2px 8px;
-  border-radius: 10px;
+  border-radius: 12px;
   font-size: 0.72rem;
   font-weight: 800;
   border: 1px solid transparent;
@@ -163,7 +163,7 @@
   color: var(--rpb-text-secondary, #bdc1c6);
   background: color-mix(in srgb, var(--rpb-text, #e8eaed) 5%, transparent);
   border: 1px solid var(--rpb-border, #3c4043);
-  border-radius: 10px;
+  border-radius: 12px;
 }
 
 /* CTA */
@@ -222,7 +222,7 @@
   font-size: 0.82rem;
   color: var(--rpb-link, #8ab4f8);
   text-decoration: none;
-  min-height: 32px;
+  min-height: 40px;
 }
 
 .relatedLink:hover {
