@@ -32,7 +32,7 @@
     "lint:fix": "oxlint --config .oxlintrc.json --fix src tests"
   },
   "dependencies": {
-    "@aphrody-code/bxc": "^0.3.0",
+    "@aphrody-code/bxc": "^0.5.2",
     "@rose-griffon/challonge-core": "workspace:*",
     "brackets-memory-db": "latest",
     "i18next": "^21.6.14",

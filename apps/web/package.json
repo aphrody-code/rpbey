@@ -28,7 +28,7 @@
 		"clean": "rm -rf .next dist node_modules/.cache .turbo tsconfig.tsbuildinfo"
 	},
 	"dependencies": {
-		"@aphrody-code/bxc": "^0.3.0",
+		"@aphrody-code/bxc": "^0.5.2",
 		"@better-fetch/fetch": "^1.1.21",
 		"@discord/embedded-app-sdk": "^2.4.0",
 		"@emotion/cache": "^11.14.0",
