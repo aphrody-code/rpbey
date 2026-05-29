@@ -109,3 +109,24 @@ export {
   type SnapshotStanding,
 } from "./mappers/snapshot";
 export { parseStandingsTable } from "./extractors/stores/standings";
+
+// Extractor registry + store/route extractors (P3 — pure, bundlable).
+export {
+  STORE_EXTRACTORS,
+  getStoreExtractor,
+  ROUTE_EXTRACTORS,
+  registerRouteExtractor,
+  getRouteExtractor,
+  type StoreExtractor,
+  type RouteExtractor,
+} from "./extractors/registry";
+export { storeToLogEntries, type LogEntryRaw } from "./extractors/stores/log";
+export {
+  storeToParticipants,
+  normalizeParticipantRaw,
+  type NormalizedParticipant,
+} from "./extractors/stores/participants";
+export { storeToStandings } from "./extractors/stores/standings";
+export { parseUserProfile } from "./extractors/stores/user-profile";
+export { parseOrgLanding } from "./extractors/stores/org-landing";
+export { parseGamesCatalog, findGameByName } from "./extractors/stores/games-catalog";

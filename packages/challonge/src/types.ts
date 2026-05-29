@@ -163,3 +163,85 @@ export function gravatarUrl(emailHash: string | null | undefined, size = 200): s
   if (!emailHash) return null;
   return `https://gravatar.com/avatar/${emailHash}?s=${size}&d=mp`;
 }
+
+// ─── P3: user profile / org landing / games catalogue ────────────────────────
+
+/**
+ * A user's public profile page (`/users/{username}`, SSR HTML).
+ *
+ * Challonge renders medal counts and a tournament-participation history on the
+ * public profile. Everything beyond identity is best-effort: fields a guest
+ * cannot see (private profiles, hidden history) come back `null`/absent.
+ */
+export interface ScrapedUserProfile {
+  /** URL slug / login handle (the `{username}` segment). */
+  username: string;
+  /** Rendered display name, when distinct from the handle. */
+  displayName: string | null;
+  /** Avatar image URL (Challonge CDN or Gravatar fallback). */
+  avatarUrl: string | null;
+  /** Free-text location, when the user filled it in. */
+  location?: string | null;
+  /** Profile bio / "about" blurb. */
+  bio?: string | null;
+  /** Membership-start label (raw text or ISO date, as rendered). */
+  memberSince?: string | null;
+  /** Medal tally shown on the profile header. */
+  medals?: { gold: number; silver: number; bronze: number };
+  /** Past tournaments the user took part in (most-recent first, as rendered). */
+  tournamentHistory?: Array<{
+    name: string;
+    slug: string | null;
+    placement: number | null;
+    date: string | null;
+    gameName: string | null;
+  }>;
+  /** Canonical profile URL. */
+  profileUrl: string;
+}
+
+/**
+ * An organisation landing page (`<subdomain>.challonge.com`).
+ *
+ * The landing lists the org's public tournaments. Header metadata
+ * (description/logo) is optional — many orgs leave it blank.
+ */
+export interface ScrapedOrg {
+  /** Organisation subdomain (the `<subdomain>` part of the host). */
+  subdomain: string;
+  /** Organisation display name. */
+  name: string | null;
+  /** Organisation description / tagline. */
+  description?: string | null;
+  /** Organisation logo image URL. */
+  logoUrl?: string | null;
+  /** Canonical landing URL. */
+  url: string;
+  /** Public tournaments hosted by the org, as listed on the landing. */
+  tournaments: Array<{
+    name: string;
+    slug: string;
+    url: string;
+    state?: string | null;
+    gameName?: string | null;
+    participantsCount?: number | null;
+    startAt?: string | null;
+  }>;
+}
+
+/**
+ * A single entry from the games catalogue (`/games.json`).
+ *
+ * Shape: `[{ id, value, tokens[], permalink }]`. Used to pin a stable
+ * `game_id` (e.g. Beyblade X = 337197) across tournaments.
+ */
+export interface ChallongeGame {
+  /** Stable numeric game id. */
+  id: number;
+  /** Canonical game name. */
+  value: string;
+  /** Search tokens / aliases for the game. */
+  tokens?: string[];
+  /** URL-safe permalink slug, when present. */
+  permalink?: string | null;
+}

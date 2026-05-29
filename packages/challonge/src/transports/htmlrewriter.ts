@@ -425,6 +425,11 @@ function legacyToScrapedTournament(data: HtmlRewriterModuleData): ScrapedTournam
         hasAttachment: null,
         suggestedPlayOrder: null,
         groupId: null,
+        // SVG layout coords flow straight from the bracket node we're reading.
+        // Only set on SVG-bearing legacy pages; the /module path never enters
+        // this branch (bracketEnabled === false), so its output stays identical.
+        x: bm.x,
+        y: bm.y,
       });
     }
   }

@@ -26,7 +26,15 @@ import {
 import { resolveDefaultCookiePath } from "./utils/cookies";
 import { parseInitialStoreState } from "./extractors/store-state";
 import { type ChallongeSnapshotLike, snapshotToScrapedTournament } from "./mappers/snapshot";
-import { parseStandingsTable as parseStandingsTableShared } from "./extractors/stores/standings";
+import {
+  parseStandingsTable as parseStandingsTableShared,
+  storeToStandings as storeToStandingsShared,
+} from "./extractors/stores/standings";
+import { storeToLogEntries as storeToLogEntriesShared } from "./extractors/stores/log";
+import {
+  type NormalizedParticipant,
+  storeToParticipants as storeToParticipantsShared,
+} from "./extractors/stores/participants";
 import type { Transport } from "./transports/transport";
 import {
   type ScrapedLogEntry,
@@ -142,61 +150,16 @@ interface ActivityFeedSettings {
   totalCount: number;
 }
 
-interface LogEntryRaw {
-  created_at?: string;
-  timestamp?: string;
-  date?: string;
-  type?: string;
-  action?: string;
-  event_type?: string;
-  message?: string;
-  description?: string;
-  text?: string;
-  [key: string]: unknown;
-}
-
+/**
+ * Façade over the relocated {@link storeToLogEntriesShared} extractor.
+ *
+ * Kept as a local name so the `fetchLog` call-sites below stay untouched. The
+ * implementation (and the `LogEntryRaw` shape) now lives in
+ * `extractors/stores/log.ts` (pure, bundlable, single source of truth); output
+ * is identical.
+ */
 function storeToLogEntries(store: Record<string, unknown>): ScrapedLogEntry[] {
-  // Current Challonge layout (2026): _initialStoreState['LogEntryListStore'] = [...] directly
-  const directArray = store["LogEntryListStore"];
-  if (Array.isArray(directArray)) {
-    const entries = directArray as LogEntryRaw[];
-    return entries.map((entry) => ({
-      timestamp: entry.created_at ?? entry.timestamp ?? entry.date ?? "",
-      type:
-        entry.type ??
-        entry.action ??
-        entry.event_type ??
-        (entry as Record<string, unknown>)["key"]?.toString() ??
-        "activity",
-      message: entry.description ?? entry.message ?? entry.text ?? "",
-      raw: entry,
-    }));
-  }
-
-  // Legacy layout: wrapped in { entries: [...] } or { log: [...] }
-  const ls =
-    (store["LogEntryListStore"] as Record<string, unknown> | null) ??
-    (store["LogStore"] as Record<string, unknown> | null) ??
-    (store["ActivityStore"] as Record<string, unknown> | null);
-
-  const rawEntries =
-    (ls?.["entries"] as LogEntryRaw[] | null) ??
-    (ls?.["log"] as LogEntryRaw[] | null) ??
-    ((store["TournamentStore"] as Record<string, unknown> | null)?.["log"] as
-      | LogEntryRaw[]
-      | null) ??
-    ((store["TournamentStore"] as Record<string, unknown> | null)?.["activity_log"] as
-      | LogEntryRaw[]
-      | null);
-
-  if (!Array.isArray(rawEntries) || rawEntries.length === 0) return [];
-
-  return rawEntries.map((entry) => ({
-    timestamp: entry.created_at ?? entry.timestamp ?? entry.date ?? "",
-    type: entry.type ?? entry.action ?? entry.event_type ?? "unknown",
-    message: entry.message ?? entry.description ?? entry.text ?? JSON.stringify(entry),
-    raw: entry,
-  }));
+  return storeToLogEntriesShared(store);
 }
 
 function activityFeedSettings(store: Record<string, unknown>): ActivityFeedSettings | null {
@@ -252,58 +215,16 @@ function mapSnapshotToScrapedTournament(
 // Participant normalization (shared by openPage shim + scrape)
 // ---------------------------------------------------------------------------
 
-interface NormalizedParticipant {
-  id: number;
-  display_name: string;
-  seed: number;
-  username: string | null;
-  challongeUsername: string | null;
-  challongeProfileUrl: string | null;
-  final_rank: number | null;
-  checked_in: boolean;
-  portrait_url: string | null;
-}
-
-function normalizeParticipantRaw(p: Record<string, unknown>): NormalizedParticipant {
-  const data = (p["participant"] as Record<string, unknown>) ?? p;
-  const username =
-    (data["username"] as string | null) ?? (data["challonge_username"] as string | null) ?? null;
-  return {
-    id: (data["id"] as number) ?? 0,
-    display_name:
-      (data["display_name"] as string) ??
-      (data["name"] as string) ??
-      (data["username"] as string) ??
-      "",
-    seed: (data["seed"] as number) ?? 0,
-    username,
-    challongeUsername: username,
-    challongeProfileUrl: username ? `https://challonge.com/users/${username}` : null,
-    final_rank: (data["final_rank"] as number | null) ?? null,
-    checked_in: Boolean(data["checked_in"]),
-    portrait_url:
-      (data["portrait_url"] as string | null) ??
-      (data["attached_participatable_portrait_url"] as string | null) ??
-      (data["attached_participant_portrait_url"] as string | null) ??
-      null,
-  };
-}
-
-/** Extract participants from a /participants page store. */
+/**
+ * Façade over the relocated {@link storeToParticipantsShared} extractor.
+ *
+ * Kept as a local name so the `fetchParticipants` call-site below stays
+ * untouched. The implementation (plus `NormalizedParticipant` and
+ * `normalizeParticipantRaw`) now lives in `extractors/stores/participants.ts`
+ * (pure, bundlable, single source of truth); output is identical.
+ */
 function storeToParticipants(store: Record<string, unknown>): NormalizedParticipant[] {
-  const ts = store["TournamentStore"] as Record<string, unknown> | null;
-  const ps = store["ParticipantsStore"] as Record<string, unknown> | null;
-
-  const candidates: unknown[] =
-    (ts?.["participants"] as unknown[] | null) ??
-    ((ts?.["tournament"] as Record<string, unknown> | null)?.["participants"] as
-      | unknown[]
-      | null) ??
-    (ps?.["participants"] as unknown[] | null) ??
-    (Array.isArray(ps) ? ps : null) ??
-    [];
-
-  return (candidates as Record<string, unknown>[]).map(normalizeParticipantRaw);
+  return storeToParticipantsShared(store);
 }
 
 /**
@@ -317,26 +238,16 @@ function parseStandingsTable(html: string): ScrapedStanding[] {
   return parseStandingsTableShared(html);
 }
 
-/** Extract standings from a /standings page store. */
+/**
+ * Façade over the relocated {@link storeToStandingsShared} extractor.
+ *
+ * Kept as a local name so the `fetchStandings` call-site below stays untouched.
+ * The store-based implementation now lives alongside `parseStandingsTable` in
+ * `extractors/stores/standings.ts` (pure, bundlable, single source of truth);
+ * output is identical.
+ */
 function storeToStandings(store: Record<string, unknown>): ScrapedStanding[] {
-  const ss = store["StandingsStore"] as Record<string, unknown> | null;
-  const ts = store["TournamentStore"] as Record<string, unknown> | null;
-
-  const raw: unknown[] =
-    (ss?.["standings"] as unknown[] | null) ?? (ts?.["standings"] as unknown[] | null) ?? [];
-
-  return (raw as Record<string, unknown>[]).map((s, i) => ({
-    rank: (s["rank"] as number) ?? (s["final_rank"] as number) ?? i + 1,
-    name: ((s["display_name"] as string) ?? (s["name"] as string) ?? "").trim().replace("✅", ""),
-    challongeUsername:
-      (s["username"] as string | null) ?? (s["challonge_username"] as string | null) ?? null,
-    challongeProfileUrl: (s["username"] as string | null)
-      ? `https://challonge.com/users/${s["username"] as string}`
-      : null,
-    wins: (s["wins"] as number) ?? (s["match_wins"] as number) ?? 0,
-    losses: (s["losses"] as number) ?? (s["match_losses"] as number) ?? 0,
-    stats: s,
-  }));
+  return storeToStandingsShared(store);
 }
 
 // ---------------------------------------------------------------------------

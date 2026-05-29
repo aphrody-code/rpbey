@@ -75,3 +75,36 @@ export function parseStandingsTable(html: string): ScrapedStanding[] {
   }
   return out;
 }
+
+/**
+ * Extract standings from a parsed `_initialStoreState` map (store-based, distinct
+ * from the HTML-table {@link parseStandingsTable} fallback above).
+ *
+ * Reads `StandingsStore.standings` (or `TournamentStore.standings`). Moved
+ * verbatim out of `scraper.ts` (P3 registry split); byte-for-byte identical,
+ * only relocated so the extractor stays free of any bxc / transport / FFI
+ * import and can be reused from the route registry.
+ *
+ * @param store  Parsed `_initialStoreState` map.
+ * @returns Parsed standings (empty array when none found).
+ */
+export function storeToStandings(store: Record<string, unknown>): ScrapedStanding[] {
+  const ss = store["StandingsStore"] as Record<string, unknown> | null;
+  const ts = store["TournamentStore"] as Record<string, unknown> | null;
+
+  const raw: unknown[] =
+    (ss?.["standings"] as unknown[] | null) ?? (ts?.["standings"] as unknown[] | null) ?? [];
+
+  return (raw as Record<string, unknown>[]).map((s, i) => ({
+    rank: (s["rank"] as number) ?? (s["final_rank"] as number) ?? i + 1,
+    name: ((s["display_name"] as string) ?? (s["name"] as string) ?? "").trim().replace("✅", ""),
+    challongeUsername:
+      (s["username"] as string | null) ?? (s["challonge_username"] as string | null) ?? null,
+    challongeProfileUrl: (s["username"] as string | null)
+      ? `https://challonge.com/users/${s["username"] as string}`
+      : null,
+    wins: (s["wins"] as number) ?? (s["match_wins"] as number) ?? 0,
+    losses: (s["losses"] as number) ?? (s["match_losses"] as number) ?? 0,
+    stats: s,
+  }));
+}
