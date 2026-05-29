@@ -16,10 +16,8 @@ const nextConfig: NextConfig = {
         outputFileTracingRoot: path.resolve(__dirname, "../../"),
       }),
 
-  // Temporarily bypass type errors (MUI X DataGrid v9 + React 19 types drift).
-  // TODO: fix root cause and flip back to false.
   typescript: {
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: false,
   },
   // Trace dynamic requires that static analysis misses (tiktok-api-dl loads signature.js/webmssdk.js at runtime)
   // Bun's isolated install stores packages under node_modules/.bun/<pkg>@<ver>+<hash>/ — both layouts included.
