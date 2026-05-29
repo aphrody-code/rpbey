@@ -10,5 +10,8 @@ const yoga = createYoga({
 
 const handler = yoga as unknown as (request: Request) => Promise<Response>;
 
+export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
+
 export const GET = handler;
 export const POST = handler;

@@ -101,6 +101,12 @@ const ENFORCED = [
   // NB: le contenu sensible (raison, modérateur, ticket) reste hors /api/v1 (bot-only / session-gated).
   "app/api/v1/moderation/",
   "server/dal/moderation.ts",
+  // wave-5 : graphql — resolvers db-free (schema.ts/route.ts) ; tout l'accès DB du domaine
+  // est concentré dans `server/dal/graphql.ts` (puits canonique, déplacé depuis
+  // app/api/graphql/data.ts). Pas de contrat Zod ni de route /api/v1 (le SDL reste la
+  // source de vérité, GraphQL reste sur /api/graphql POST+GET). Enforçable de bout en bout.
+  "app/api/graphql/",
+  "server/dal/graphql.ts",
 ];
 
 const glob = new Glob("**/*.{ts,tsx}");

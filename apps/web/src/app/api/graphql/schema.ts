@@ -1,5 +1,30 @@
 import { createSchema } from "graphql-yoga";
-import { db, schema as t, and, asc, desc, eq, gt, ilike } from "@/lib/db";
+import {
+  getBeybladeByCode,
+  getGlobalRankingByName,
+  getPartByExternalId,
+  getProfileByUserId,
+  getSeasonBySlug,
+  getTournamentById,
+  listBeyblades,
+  listGlobalRankings,
+  listParts,
+  listPublishedAnimeSeries,
+  listSeasonEntries,
+  listSeasons,
+  listTournaments,
+  searchGlobalRankings,
+} from "@/server/dal/graphql";
+
+/** % de winrate arrondi à 2 décimales (W/(W+L)), 0 si aucun match. */
+function winRate(wins: number, losses: number): number {
+  return wins + losses > 0 ? Math.round((wins / (wins + losses)) * 10000) / 100 : 0;
+}
+
+type RankingRow = { wins: number; losses: number };
+function withWinRate<T extends RankingRow>(r: T): T & { winRate: number } {
+  return { ...r, winRate: winRate(r.wins, r.losses) };
+}
 
 export const schema = createSchema({
   typeDefs: /* GraphQL */ `
@@ -231,184 +256,55 @@ export const schema = createSchema({
   resolvers: {
     Query: {
       rankings: async (_: unknown, { limit, offset }: { limit: number; offset: number }) => {
-        const rows = await db.query.globalRankings.findMany({
-          where: gt(t.globalRankings.points, 0),
-          orderBy: [desc(t.globalRankings.points), desc(t.globalRankings.wins)],
-          limit: Math.min(limit, 100),
-          offset,
-        });
-        return rows.map((r) => ({
-          ...r,
-          winRate:
-            r.wins + r.losses > 0 ? Math.round((r.wins / (r.wins + r.losses)) * 10000) / 100 : 0,
-        }));
+        const rows = await listGlobalRankings(limit, offset);
+        return rows.map(withWinRate);
       },
 
       blader: async (_: unknown, { name }: { name: string }) => {
-        const r = await db.query.globalRankings.findFirst({
-          where: eq(t.globalRankings.playerName, name),
-        });
-        if (!r) return null;
-        return {
-          ...r,
-          winRate:
-            r.wins + r.losses > 0 ? Math.round((r.wins / (r.wins + r.losses)) * 10000) / 100 : 0,
-        };
+        const r = await getGlobalRankingByName(name);
+        return r ? withWinRate(r) : null;
       },
 
       searchBladers: async (_: unknown, { query, limit }: { query: string; limit: number }) => {
-        const rows = await db.query.globalRankings.findMany({
-          where: and(
-            ilike(t.globalRankings.playerName, `%${query}%`),
-            gt(t.globalRankings.points, 0),
-          ),
-          orderBy: desc(t.globalRankings.points),
-          limit: Math.min(limit, 25),
-        });
-        return rows.map((r) => ({
-          ...r,
-          winRate:
-            r.wins + r.losses > 0 ? Math.round((r.wins / (r.wins + r.losses)) * 10000) / 100 : 0,
-        }));
+        const rows = await searchGlobalRankings(query, limit);
+        return rows.map(withWinRate);
       },
 
-      seasons: () =>
-        db.query.rankingSeasons.findMany({
-          orderBy: desc(t.rankingSeasons.startDate),
-        }),
+      seasons: () => listSeasons(),
 
-      season: (_: unknown, { slug }: { slug: string }) =>
-        db.query.rankingSeasons.findFirst({
-          where: eq(t.rankingSeasons.slug, slug),
-        }),
+      season: (_: unknown, { slug }: { slug: string }) => getSeasonBySlug(slug),
 
       parts: (
         _: unknown,
         { type, limit, offset }: { type?: string; limit: number; offset: number },
-      ) =>
-        db.query.parts.findMany({
-          where: type ? eq(t.parts.type, type as never) : undefined,
-          orderBy: asc(t.parts.name),
-          limit: Math.min(limit, 200),
-          offset,
-        }),
+      ) => listParts(type, limit, offset),
 
-      part: (_: unknown, { externalId }: { externalId: string }) =>
-        db.query.parts.findFirst({
-          where: eq(t.parts.externalId, externalId),
-        }),
+      part: (_: unknown, { externalId }: { externalId: string }) => getPartByExternalId(externalId),
 
-      beyblades: async (_: unknown, { limit, offset }: { limit: number; offset: number }) => {
-        const rows = await db.query.beyblades.findMany({
-          with: {
-            part_bladeId: true,
-            part_ratchetId: true,
-            part_bitId: true,
-          },
-          orderBy: asc(t.beyblades.name),
-          limit: Math.min(limit, 200),
-          offset,
-        });
-        return rows.map((b) => ({
-          ...b,
-          blade: b.part_bladeId,
-          ratchet: b.part_ratchetId,
-          bit: b.part_bitId,
-        }));
-      },
+      beyblades: (_: unknown, { limit, offset }: { limit: number; offset: number }) =>
+        listBeyblades(limit, offset),
 
-      beyblade: async (_: unknown, { code }: { code: string }) => {
-        const b = await db.query.beyblades.findFirst({
-          where: eq(t.beyblades.code, code),
-          with: {
-            part_bladeId: true,
-            part_ratchetId: true,
-            part_bitId: true,
-          },
-        });
-        if (!b) return null;
-        return {
-          ...b,
-          blade: b.part_bladeId,
-          ratchet: b.part_ratchetId,
-          bit: b.part_bitId,
-        };
-      },
+      beyblade: (_: unknown, { code }: { code: string }) => getBeybladeByCode(code),
 
-      tournaments: async (
+      tournaments: (
         _: unknown,
         { status, limit, offset }: { status?: string; limit: number; offset: number },
-      ) => {
-        const rows = await db.query.tournaments.findMany({
-          where: status ? eq(t.tournaments.status, status as never) : undefined,
-          with: {
-            tournamentCategory: true,
-            tournamentParticipants: { columns: { id: true } },
-          },
-          orderBy: desc(t.tournaments.date),
-          limit: Math.min(limit, 50),
-          offset,
-        });
-        return rows.map((tr) => ({
-          ...tr,
-          category: tr.tournamentCategory,
-          _count: { participants: tr.tournamentParticipants.length },
-        }));
-      },
+      ) => listTournaments(status, limit, offset),
 
-      tournament: async (_: unknown, { id }: { id: string }) => {
-        const tr = await db.query.tournaments.findFirst({
-          where: eq(t.tournaments.id, id),
-          with: {
-            tournamentCategory: true,
-            tournamentParticipants: { columns: { id: true } },
-          },
-        });
-        if (!tr) return null;
-        return {
-          ...tr,
-          category: tr.tournamentCategory,
-          _count: { participants: tr.tournamentParticipants.length },
-        };
-      },
+      tournament: (_: unknown, { id }: { id: string }) => getTournamentById(id),
 
-      profile: async (_: unknown, { userId }: { userId: string }) => {
-        const p = await db.query.profiles.findFirst({
-          where: eq(t.profiles.userId, userId),
-          with: {
-            user: {
-              columns: {
-                id: true,
-                name: true,
-                image: true,
-                discordTag: true,
-              },
-            },
-          },
-        });
-        return p;
-      },
+      profile: (_: unknown, { userId }: { userId: string }) => getProfileByUserId(userId),
 
-      animeSeries: () =>
-        db.query.animeSeries.findMany({
-          where: eq(t.animeSeries.isPublished, true),
-          orderBy: [asc(t.animeSeries.generation), asc(t.animeSeries.sortOrder)],
-        }),
+      animeSeries: () => listPublishedAnimeSeries(),
     },
 
     Season: {
       entries: (parent: { id: string }, { limit, offset }: { limit: number; offset: number }) =>
-        db.query.seasonEntries.findMany({
-          where: eq(t.seasonEntries.seasonId, parent.id),
-          orderBy: desc(t.seasonEntries.points),
-          limit: Math.min(limit, 100),
-          offset,
-        }),
+        listSeasonEntries(parent.id, limit, offset),
     },
 
     Tournament: {
-      participantCount: (parent: { _count?: { participants: number } }) =>
-        parent._count?.participants ?? 0,
+      participantCount: (parent: { participantCount?: number }) => parent.participantCount ?? 0,
     },
   },
 });
