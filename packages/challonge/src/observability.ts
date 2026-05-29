@@ -56,10 +56,10 @@ export function recordEvent(event: ObservabilityEvent, fields: Record<string, un
   };
   try {
     const line = JSON.stringify(payload);
-    Bun.stderr.write(line + "\n");
+    process.stderr.write(line + "\n");
   } catch {
     // Cyclic structure or BigInt — fall back to a safe message.
-    Bun.stderr.write(
+    process.stderr.write(
       `{"ts":"${new Date().toISOString()}","event":"${event}","error":"non-serialisable fields"}\n`,
     );
   }

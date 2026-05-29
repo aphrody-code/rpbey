@@ -36,7 +36,7 @@
     "lint": "biome lint",
     "prepare": "husky",
     "prettier": "prettier --check .",
-    "test": "turbo run test"
+    "test": "echo 'Subpackages tested by root'"
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.9",

@@ -166,7 +166,7 @@ export async function fetchAndParseModule(
   const playerSeedBuf: string[] = [];
 
   const parseTransform = (val: string | null): { x: number; y: number } => {
-    const m = val?.match(/translate\(([\-\d.]+)\s+([\-\d.]+)\)/);
+    const m = val?.match(/translate\(([-\d.]+)\s+([-\d.]+)\)/);
     return {
       x: m ? parseFloat(m[1]!) : 0,
       y: m ? parseFloat(m[2]!) : 0,

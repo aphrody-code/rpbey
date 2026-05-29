@@ -10,9 +10,9 @@ import {
   type RankingFormula,
 } from "../brackets-model/index";
 import { type CallbackFunction, type FormConfiguration } from "./form";
-import { InMemoryDatabase } from "brackets-memory-db";
-import { BracketsViewer } from "./main";
-import { BracketsManager } from "../brackets-manager/index";
+import type { InMemoryDatabase } from "brackets-memory-db";
+import type { BracketsViewer } from "./main";
+import type { BracketsManager } from "../brackets-manager/index";
 import { type ToI18nKey, type TFunction } from "./lang";
 
 export type { ToI18nKey, TFunction };

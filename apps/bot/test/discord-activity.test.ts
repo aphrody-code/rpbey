@@ -86,11 +86,19 @@ function makeTx() {
 }
 
 // Mock prisma BEFORE importing the SUT.
+const realPrismaModule = await import("../src/lib/prisma.js");
 mock.module("../src/lib/prisma.js", () => ({
-  prisma: {
-    $transaction: async (cb: (tx: ReturnType<typeof makeTx>) => unknown) => cb(makeTx()),
-  },
-  default: {},
+  ...realPrismaModule,
+  prisma: new Proxy(realPrismaModule.prisma, {
+    get: (target, prop: string) => {
+      if ((globalThis as any).__mockPrisma) {
+        if (prop === "$transaction") {
+          return async (cb: (tx: ReturnType<typeof makeTx>) => unknown) => cb(makeTx());
+        }
+      }
+      return (target as any)[prop];
+    },
+  }),
 }));
 
 // Mock gacha-api for exchangeDiscordCode tests.
@@ -124,6 +132,8 @@ async function signPayload(timestamp: string, body: string): Promise<string> {
 }
 
 beforeAll(async () => {
+  (globalThis as any).__mockGachaApi = true;
+  (globalThis as any).__mockPrisma = true;
   const kp = (await crypto.subtle.generateKey({ name: "Ed25519" } as never, true, [
     "sign",
     "verify",
@@ -131,6 +141,11 @@ beforeAll(async () => {
   PRIVATE_KEY = kp.privateKey;
   const raw = await crypto.subtle.exportKey("raw", kp.publicKey);
   PUBLIC_KEY_HEX = bytesToHex(new Uint8Array(raw));
+});
+
+afterAll(() => {
+  (globalThis as any).__mockGachaApi = false;
+  (globalThis as any).__mockPrisma = false;
 });
 
 // Now import the SUT (after the mocks are in place).
@@ -159,6 +174,7 @@ function jsonBody(payload: Record<string, unknown>): string {
 beforeEach(() => {
   resetDb();
   mintedSessions.length = 0;
+  process.env.DISCORD_CLIENT_ID = "app-1";
   process.env.DISCORD_PUBLIC_KEY = PUBLIC_KEY_HEX;
   process.env[`DISCORD_SKU_${SKU_KNOWN}`] = String(SKU_AMOUNT);
 });
@@ -499,7 +515,7 @@ describe("exchangeDiscordCode", () => {
     delete process.env.DISCORD_CLIENT_ID;
     let caught: unknown;
     try {
-      await exchangeDiscordCode("code");
+      await exchangeDiscordCode("code-missing-env");
     } catch (e) {
       caught = e;
     }
@@ -527,7 +543,7 @@ describe("exchangeDiscordCode", () => {
       new Response("server error", { status: 500 })) as unknown as typeof fetch;
     let caught: unknown;
     try {
-      await exchangeDiscordCode("code");
+      await exchangeDiscordCode("code-discord-500");
     } catch (e) {
       caught = e;
     }
@@ -554,7 +570,7 @@ describe("exchangeDiscordCode", () => {
     }) as typeof fetch;
     let caught: unknown;
     try {
-      await exchangeDiscordCode("code");
+      await exchangeDiscordCode("code-user-fetch-fail");
     } catch (e) {
       caught = e;
     }

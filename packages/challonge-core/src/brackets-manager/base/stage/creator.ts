@@ -20,7 +20,7 @@ import {
   type ParticipantSlot,
   type StandardBracketResults,
 } from "../../types";
-import { BracketsManager } from "../..";
+import type { BracketsManager } from "../..";
 import * as helpers from "../../helpers";
 
 /**

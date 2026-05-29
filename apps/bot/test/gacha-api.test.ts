@@ -70,7 +70,7 @@ mock.module("pg", () => ({
 // ─── Import SUT after mocks ──────────────────────────────────────────────────
 
 const { ensureGachaSession, __resetGachaApiCachesForTests } =
-  await import("../src/lib/gacha-api.js");
+  await import("../src/lib/gacha-api.ts?real");
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 

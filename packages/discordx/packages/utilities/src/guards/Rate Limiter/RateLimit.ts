@@ -4,9 +4,10 @@
  * Licensed under the Apache License. See License.txt in the project root for license information.
  * -------------------------------------------------------------------------------------------------------
  */
-import {
+import type {
   CommandInteraction,
-  MessageComponentInteraction,
+  MessageComponentInteraction} from "discord.js";
+import {
   MessageFlags,
 } from "discord.js";
 import { type GuardFunction, SimpleCommandMessage } from "@rpbey/discordx";

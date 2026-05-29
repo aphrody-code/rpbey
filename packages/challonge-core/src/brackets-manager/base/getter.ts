@@ -11,7 +11,7 @@ import {
   type Id,
 } from "../../brackets-model/index";
 import { type RoundPositionalInfo } from "../types";
-import { StageCreator } from "./stage/creator";
+import type { StageCreator } from "./stage/creator";
 import * as helpers from "../helpers";
 
 export class BaseGetter {

@@ -22,7 +22,9 @@
     "incremental": true,
     "paths": {
       "@rpb/dashboard/*": ["./apps/rpbey/src/*"],
-      "@rpb/bot/*": ["./apps/rpb-bot/src/*"]
+      "@rpb/bot/*": ["./apps/rpb-bot/src/*"],
+      "discordx": ["./packages/discordx/packages/discordx/src/index.ts"],
+      "discordx/*": ["./packages/discordx/packages/discordx/src/*"]
     }
   },
   "exclude": [

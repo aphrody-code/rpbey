@@ -95,7 +95,7 @@ export class TimedSet<T> implements ITimedSet<T> {
   }
 
   public entries(): IterableIterator<[T, T]> {
-    return new Set([...this._map.keys()]).entries();
+    return new Set(this._map.keys()).entries();
   }
 
   public forEach(

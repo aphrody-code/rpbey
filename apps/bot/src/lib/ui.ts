@@ -10,12 +10,13 @@
  * Images must use MediaGalleryItemBuilder.setURL('attachment://file.png') + files.
  */
 
+import type {
+  EmbedBuilder} from "discord.js";
 import {
   ActionRowBuilder,
   ButtonBuilder,
   ButtonStyle,
   ContainerBuilder,
-  EmbedBuilder,
   MediaGalleryBuilder,
   MediaGalleryItemBuilder,
   MessageFlags,

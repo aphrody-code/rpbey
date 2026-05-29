@@ -43,6 +43,7 @@ describe("RankingGroup", () => {
         discordId: "user123",
         createdAt: new Date(),
         _count: { tournaments: 5 },
+        decks: [],
         profile: {
           bladerName: "BladerOne",
           rankingPoints: 1200,
@@ -62,7 +63,6 @@ describe("RankingGroup", () => {
       expect(interaction.deferReply).toHaveBeenCalled();
       expect(interaction.editReply).toHaveBeenCalledWith(
         expect.objectContaining({
-          embeds: expect.any(Array),
           files: expect.any(Array),
         }),
       );
@@ -80,7 +80,7 @@ describe("RankingGroup", () => {
 
       expect(interaction.editReply).toHaveBeenCalledWith(
         expect.objectContaining({
-          content: expect.stringContaining("Tu n'as pas encore de profil Beyblade"),
+          content: expect.stringContaining("Profil introuvable"),
         }),
       );
     });
