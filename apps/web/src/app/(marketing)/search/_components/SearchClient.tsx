@@ -16,17 +16,19 @@ import { SerpTabs } from "./SerpTabs";
 import styles from "./SearchClient.module.css";
 import "./shimmer.css";
 
-// ── Easings M3 ────────────────────────────────────────────────────────────────
-const EASING_STANDARD = [0.2, 0, 0, 1] as const;
-const EASING_ENTER = [0.05, 0.7, 0.1, 1] as const;
+// ── Easings M3 (docs/01-md3-spec-foundations.md, Motion) ───────────────────────
+// Transitions spatiales : entrée = Emphasized Decelerate, sortie = Emphasized Accelerate.
+const EASING_ENTER = [0.05, 0.7, 0.1, 1] as const; // emphasized decelerate
+const EASING_EXIT = [0.3, 0, 0.8, 0.15] as const; // emphasized accelerate
 
 // ── Variantes framer-motion ───────────────────────────────────────────────────
 
-// Fade-through : sortant disparaît vite, entrant apparaît avec légère montée
+// Fade-through (+ légère montée d'échelle) : sortant accélère et disparaît (90ms),
+// entrant décélère en apparaissant (210ms) — durées canoniques du motif fade-through.
 const fadeThrough = {
   initial: { opacity: 0, scale: 0.96 },
   animate: { opacity: 1, scale: 1, transition: { duration: 0.21, ease: EASING_ENTER } },
-  exit: { opacity: 0, scale: 0.96, transition: { duration: 0.09, ease: EASING_STANDARD } },
+  exit: { opacity: 0, scale: 0.96, transition: { duration: 0.09, ease: EASING_EXIT } },
 };
 
 // Logo animé RPB — hero unique de la home + retour accueil en SERP.
@@ -330,7 +332,7 @@ export function SearchClient({ groups, recommendations }: SearchClientProps) {
                 key="panel"
                 initial={{ opacity: 0, x: 16 }}
                 animate={{ opacity: 1, x: 0, transition: { duration: 0.25, ease: EASING_ENTER } }}
-                exit={{ opacity: 0, x: 16, transition: { duration: 0.15, ease: EASING_STANDARD } }}
+                exit={{ opacity: 0, x: 16, transition: { duration: 0.15, ease: EASING_EXIT } }}
               >
                 <KnowledgePanel group={matchedGroup} reco={matchedReco} related={relatedGroups} />
               </motion.div>
