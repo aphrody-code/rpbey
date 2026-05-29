@@ -19,11 +19,6 @@
  * Tri identique BTS : score desc, tournamentWins desc, wins desc.
  */
 
-import type { db } from "@/lib/db";
-import { schema, and, asc, ilike, inArray } from "@/lib/db";
-
-type Db = typeof db;
-
 interface StardustTournament {
   id: string;
   name: string;
@@ -298,117 +293,56 @@ export function buildStardustRankings(
   return { ranked, playerStats: players, bladerHistory };
 }
 
+/** Barème par défaut si la table `ranking_system` est vide. */
+export const DEFAULT_STARDUST_CONFIG: RankingConfig = {
+  participation: 500,
+  firstPlace: 15000,
+  secondPlace: 7000,
+  thirdPlace: 5000,
+  top8: 500,
+  matchWinWinner: 1000,
+  matchWinLoser: 500,
+};
+
+export interface StardustBladerUpsert {
+  name: string;
+  totalWins: number;
+  totalLosses: number;
+  tournamentWins: number;
+  tournamentsCount: number;
+  history: object[];
+}
+
+export interface StardustSyncPlan {
+  ranked: BuildResult["ranked"];
+  bladers: StardustBladerUpsert[];
+  tournamentCount: number;
+}
+
 /**
- * Sync stardust rankings to DB. Pure: no `revalidatePath` here — caller
- * handles cache invalidation.
+ * Construit le plan de synchronisation Stardust (lignes de classement + bladers
+ * à upserter) à partir des tournois pré-chargés et du barème. PURE : aucune I/O,
+ * aucune dépendance `@rpbey/db`. La persistance est portée par la DAL (`@/server/dal/gacha`),
+ * appelée depuis l'action `actions/stardust.ts`.
  */
-export async function syncStardustRankingsToDb(
-  dbClient: Db,
-): Promise<
-  { success: true; count: number; tournamentCount: number } | { success: false; error: string }
-> {
-  try {
-    const stardustCategories = await dbClient
-      .select({ id: schema.tournamentCategories.id })
-      .from(schema.tournamentCategories)
-      .where(ilike(schema.tournamentCategories.name, "%STARDUST%"));
-    const categoryIds = stardustCategories.map((c) => c.id);
-
-    const rows = categoryIds.length
-      ? await dbClient.query.tournaments.findMany({
-          where: and(
-            inArray(schema.tournaments.categoryId, categoryIds),
-            inArray(schema.tournaments.status, ["COMPLETE", "ARCHIVED", "UNDERWAY"]),
-          ),
-          orderBy: asc(schema.tournaments.date),
-          with: {
-            tournamentParticipants: true,
-            tournamentMatches: true,
-            tournamentCategory: true,
-          },
-        })
-      : [];
-
-    const tournaments: StardustTournament[] = rows.map((t) => ({
-      id: t.id,
-      name: t.name,
-      date: new Date(t.date),
-      status: t.status,
-      challongeState: t.challongeState,
-      participants: t.tournamentParticipants.map((p) => ({
-        playerName: p.playerName,
-        finalPlacement: p.finalPlacement,
-        wins: p.wins,
-        losses: p.losses,
-      })),
-      matches: t.tournamentMatches.map((m) => ({
-        state: m.state,
-        round: m.round,
-        player1Name: m.player1Name,
-        player2Name: m.player2Name,
-        winnerName: m.winnerName,
-        score: m.score,
-      })),
-    }));
-
-    if (tournaments.length === 0) {
-      return {
-        success: false,
-        error: "Aucun tournoi Stardust trouvé en base",
-      };
-    }
-
-    const config = (await dbClient.query.rankingSystem.findFirst()) ?? {
-      participation: 500,
-      firstPlace: 15000,
-      secondPlace: 7000,
-      thirdPlace: 5000,
-      top8: 500,
-      matchWinWinner: 1000,
-      matchWinLoser: 500,
-    };
-
-    const { ranked, playerStats, bladerHistory } = buildStardustRankings(tournaments, config);
-
-    await dbClient.transaction(async (tx) => {
-      await tx.delete(schema.stardustRankings);
-      if (ranked.length > 0) {
-        await tx.insert(schema.stardustRankings).values(ranked);
-      }
+export function buildStardustSyncPlan(
+  tournaments: StardustTournament[],
+  config: RankingConfig,
+): StardustSyncPlan {
+  const { ranked, playerStats, bladerHistory } = buildStardustRankings(tournaments, config);
+  const bladers: StardustBladerUpsert[] = [];
+  for (const [k, stats] of playerStats.entries()) {
+    bladers.push({
+      name: stats.displayName,
+      totalWins: stats.wins,
+      totalLosses: stats.losses,
+      tournamentWins: stats.tournamentWins,
+      tournamentsCount: stats.tournaments.size,
+      history: (bladerHistory.get(k) ?? []) as unknown as object[],
     });
-
-    for (const [k, stats] of playerStats.entries()) {
-      const hist = (bladerHistory.get(k) ?? []) as unknown as object[];
-      await dbClient
-        .insert(schema.stardustBladers)
-        .values({
-          name: stats.displayName,
-          totalWins: stats.wins,
-          totalLosses: stats.losses,
-          tournamentWins: stats.tournamentWins,
-          tournamentsCount: stats.tournaments.size,
-          history: hist as never,
-        })
-        .onConflictDoUpdate({
-          target: schema.stardustBladers.name,
-          set: {
-            totalWins: stats.wins,
-            totalLosses: stats.losses,
-            tournamentWins: stats.tournamentWins,
-            tournamentsCount: stats.tournaments.size,
-            history: hist as never,
-          },
-        });
-    }
-
-    return {
-      success: true,
-      count: ranked.length,
-      tournamentCount: tournaments.length,
-    };
-  } catch (error) {
-    return { success: false, error: String(error) };
   }
+  return { ranked, bladers, tournamentCount: tournaments.length };
 }
 
 export { keyOf, normalizeName, isTrustworthyForPlacements };
+export type { StardustTournament, RankingConfig };

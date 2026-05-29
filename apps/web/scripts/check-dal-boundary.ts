@@ -87,6 +87,20 @@ const ENFORCED = [
   // restent au path legacy /api/decks (session better-auth), DAL-backed mais NON enforced.
   "app/api/v1/decks/",
   "server/dal/decks.ts",
+  // wave-4 : gacha — lectures publiques /api/v1/gacha (cards/drops/leaderboard) + DAL + service.
+  // NB: les MUTATIONS authentifiées (pull/multi/duel/daily/wishlist/profile/inventory + game/inventory)
+  // restent au path legacy /api/gacha/* et /api/game/* (DAL-backed, db inline retirée) : @/lib/auth
+  // les couple transitivement à la DB jusqu'à la migration de la lane auth.
+  "app/api/v1/gacha/",
+  "server/dal/gacha.ts",
+  "server/services/gacha.ts",
+  // wave-4 : discord-bridge — BFF bot db-free (lib/bot.ts parle au bot en HTTP `:3001`, aucune table).
+  "app/api/v1/bot/",
+  "lib/bot.ts",
+  // wave-4 : moderation — lectures publiques anonymisées /api/v1/moderation (summary + warnings/count) + DAL.
+  // NB: le contenu sensible (raison, modérateur, ticket) reste hors /api/v1 (bot-only / session-gated).
+  "app/api/v1/moderation/",
+  "server/dal/moderation.ts",
 ];
 
 const glob = new Glob("**/*.{ts,tsx}");

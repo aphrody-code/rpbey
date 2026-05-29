@@ -3,7 +3,7 @@
  * Get user's card collection
  */
 import { NextResponse } from "next/server";
-import { db, schema, desc, eq } from "@/lib/db";
+import { getCardInventory } from "@/server/dal/gacha";
 import { getApiUser, serverError, unauthorized } from "../helpers";
 
 export async function GET() {
@@ -11,12 +11,7 @@ export async function GET() {
     const user = await getApiUser();
     if (!user) return unauthorized();
 
-    const inventoryRows = await db.query.cardInventory.findMany({
-      where: eq(schema.cardInventory.userId, user.id),
-      with: { gachaCard: true },
-      orderBy: desc(schema.cardInventory.obtainedAt),
-    });
-    const inventory = inventoryRows.map((i) => ({ ...i, card: i.gachaCard }));
+    const inventory = await getCardInventory(user.id);
 
     return NextResponse.json({
       success: true,

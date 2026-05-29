@@ -3,7 +3,13 @@
 import { headers } from "next/headers";
 import { type Part, type PartType } from "@/lib/types";
 import { auth } from "@/lib/auth";
-import { db, schema, and, desc, eq, inArray, sql } from "@/lib/db";
+import {
+  claimDailyTx,
+  executePartPullTx,
+  getPartInventory,
+  getPartsForLine,
+  getProfileCurrency,
+} from "@/server/dal/gacha";
 import { trackEvent } from "@/server/actions/analytics";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -259,19 +265,7 @@ async function executePull(
   guaranteeEpicPlus: boolean,
 ): Promise<PullResult> {
   // Fetch all parts matching the product line system
-  const availableParts = await db.query.parts.findMany({
-    where: and(
-      eq(schema.parts.system, line),
-      inArray(schema.parts.type, [
-        "BLADE",
-        "OVER_BLADE",
-        "RATCHET",
-        "BIT",
-        "LOCK_CHIP",
-        "ASSIST_BLADE",
-      ]),
-    ),
-  });
+  const availableParts = (await getPartsForLine(line)) as Part[];
 
   if (availableParts.length === 0) {
     return {
@@ -306,53 +300,13 @@ async function executePull(
     }
   }
 
-  // Execute transaction: deduct currency + add inventory + log transaction
-  const result = await db.transaction(async (tx) => {
-    // Get current profile and check balance
-    const profile = await tx.query.profiles.findFirst({
-      where: eq(schema.profiles.userId, userId),
-      columns: { currency: true },
-    });
-
-    if (!profile) {
-      throw new Error("NO_PROFILE");
-    }
-
-    if (profile.currency < cost) {
-      throw new Error("INSUFFICIENT_FUNDS");
-    }
-
-    // Deduct currency
-    const [updatedProfile] = await tx
-      .update(schema.profiles)
-      .set({ currency: sql`${schema.profiles.currency} - ${cost}` })
-      .where(eq(schema.profiles.userId, userId))
-      .returning();
-
-    // Add parts to inventory (upsert to handle duplicates)
-    for (const { part } of selectedParts) {
-      await tx
-        .insert(schema.partInventory)
-        .values({
-          userId,
-          partId: part.id,
-          count: 1,
-        })
-        .onConflictDoUpdate({
-          target: [schema.partInventory.userId, schema.partInventory.partId],
-          set: { count: sql`${schema.partInventory.count} + 1` },
-        });
-    }
-
-    // Log the transaction
-    await tx.insert(schema.currencyTransactions).values({
-      userId,
-      amount: -cost,
-      type: count > 1 ? "MULTI_PULL" : "GACHA_PULL",
-      note: `${count > 1 ? "Multi" : "Single"} pull - Ligne ${line}`,
-    });
-
-    return updatedProfile!.currency;
+  // Execute transaction via DAL: deduct currency + add inventory + log
+  const newBalance = await executePartPullTx({
+    userId,
+    partIds: selectedParts.map(({ part }) => part.id),
+    cost,
+    type: count > 1 ? "MULTI_PULL" : "GACHA_PULL",
+    note: `${count > 1 ? "Multi" : "Single"} pull - Ligne ${line}`,
   });
 
   return {
@@ -366,7 +320,7 @@ async function executePull(
       system: part.system,
       weight: part.weight,
     })),
-    newBalance: result,
+    newBalance,
   };
 }
 
@@ -458,72 +412,12 @@ export async function claimDaily(): Promise<DailyResult> {
   }
 
   try {
-    const result = await db.transaction(async (tx) => {
-      const profile = await tx.query.profiles.findFirst({
-        where: eq(schema.profiles.userId, user.id),
-        columns: { currency: true, lastDaily: true, dailyStreak: true },
-      });
-
-      if (!profile) {
-        throw new Error("NO_PROFILE");
-      }
-
-      const now = new Date();
-      const lastDaily = profile.lastDaily;
-
-      // Check if already claimed today
-      if (lastDaily) {
-        const lastDate = new Date(lastDaily);
-        const isSameDay =
-          lastDate.getUTCFullYear() === now.getUTCFullYear() &&
-          lastDate.getUTCMonth() === now.getUTCMonth() &&
-          lastDate.getUTCDate() === now.getUTCDate();
-
-        if (isSameDay) {
-          throw new Error("ALREADY_CLAIMED");
-        }
-      }
-
-      // Calculate streak
-      let newStreak = 1;
-      if (lastDaily) {
-        const hoursSinceLastDaily =
-          (now.getTime() - new Date(lastDaily).getTime()) / (1000 * 60 * 60);
-        if (hoursSinceLastDaily < DAILY_RESET_HOURS) {
-          // Continue streak
-          newStreak = profile.dailyStreak + 1;
-        }
-        // Otherwise streak resets to 1
-      }
-
-      // Calculate reward
-      const streakBonus = Math.min((newStreak - 1) * DAILY_STREAK_BONUS, DAILY_MAX_BONUS);
-      const totalAmount = DAILY_BASE_AMOUNT + streakBonus;
-
-      // Update profile
-      const [updatedProfile] = await tx
-        .update(schema.profiles)
-        .set({
-          currency: sql`${schema.profiles.currency} + ${totalAmount}`,
-          lastDaily: now.toISOString(),
-          dailyStreak: newStreak,
-        })
-        .where(eq(schema.profiles.userId, user.id))
-        .returning();
-
-      // Log the transaction
-      await tx.insert(schema.currencyTransactions).values({
-        userId: user.id,
-        amount: totalAmount,
-        type: "DAILY_CLAIM",
-        note: `Récompense quotidienne (série: ${newStreak} jours)`,
-      });
-
-      return {
-        amount: totalAmount,
-        streak: newStreak,
-        newBalance: updatedProfile!.currency,
-      };
+    const result = await claimDailyTx({
+      userId: user.id,
+      baseAmount: DAILY_BASE_AMOUNT,
+      streakBonus: DAILY_STREAK_BONUS,
+      maxBonus: DAILY_MAX_BONUS,
+      resetHours: DAILY_RESET_HOURS,
     });
 
     return {
@@ -560,25 +454,7 @@ export async function getInventory(): Promise<InventoryItem[]> {
   const user = await getSessionUser();
   if (!user) return [];
 
-  const inventory = await db.query.partInventory.findMany({
-    where: eq(schema.partInventory.userId, user.id),
-    with: {
-      part: {
-        columns: {
-          id: true,
-          name: true,
-          type: true,
-          imageUrl: true,
-          system: true,
-          weight: true,
-          beyType: true,
-          tipType: true,
-          protrusions: true,
-        },
-      },
-    },
-    orderBy: desc(schema.partInventory.obtainedAt),
-  });
+  const inventory = await getPartInventory(user.id);
 
   return inventory.map((item) => ({
     partId: item.partId,
@@ -586,7 +462,7 @@ export async function getInventory(): Promise<InventoryItem[]> {
     part: {
       id: item.part.id,
       name: item.part.name,
-      type: item.part.type,
+      type: item.part.type as PartType,
       imageUrl: item.part.imageUrl,
       system: item.part.system,
       weight: item.part.weight,
@@ -605,10 +481,7 @@ export async function getUserCurrency(): Promise<CurrencyResult> {
     return { success: false, message: "Non connecté." };
   }
 
-  const profile = await db.query.profiles.findFirst({
-    where: eq(schema.profiles.userId, user.id),
-    columns: { currency: true },
-  });
+  const profile = await getProfileCurrency(user.id);
 
   if (!profile) {
     return {

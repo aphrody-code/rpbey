@@ -3,7 +3,7 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { Box, Typography } from "@mui/material";
 import { auth } from "@/lib/auth";
-import { db, schema, count, desc, inArray } from "@/lib/db";
+import { getGachaLeaderboard } from "@/server/dal/gacha";
 import { LeaderboardClient } from "./_components/LeaderboardClient";
 
 export const metadata: Metadata = {
@@ -22,50 +22,18 @@ export default async function GachaLeaderboardPage() {
     redirect("/sign-in");
   }
 
-  // Fetch top 100 profiles with user info + card counts
-  const profiles = await db.query.profiles.findMany({
-    orderBy: desc(schema.profiles.currency),
-    limit: 100,
-    columns: {
-      userId: true,
-      bladerName: true,
-      currency: true,
-      duelWins: true,
-      duelRating: true,
-    },
-    with: {
-      user: {
-        columns: {
-          name: true,
-          image: true,
-        },
-      },
-    },
-  });
+  // Fetch top 100 profiles with user info + card counts (via DAL)
+  const rows = await getGachaLeaderboard(100);
 
-  // Count cards per user in one query
-  const userIds = profiles.map((p) => p.userId);
-  const cardCounts = userIds.length
-    ? await db
-        .select({
-          userId: schema.cardInventory.userId,
-          value: count(),
-        })
-        .from(schema.cardInventory)
-        .where(inArray(schema.cardInventory.userId, userIds))
-        .groupBy(schema.cardInventory.userId)
-    : [];
-  const cardCountMap = new Map<string, number>(cardCounts.map((c) => [c.userId, c.value]));
-
-  const entries = profiles.map((p) => ({
+  const entries = rows.map((p) => ({
     rank: 0, // computed client-side per tab
     userId: p.userId,
-    name: p.bladerName ?? p.user.name,
-    image: p.user.image,
+    name: p.name,
+    image: p.image,
     currency: p.currency,
     duelWins: p.duelWins,
     duelRating: p.duelRating,
-    cardCount: cardCountMap.get(p.userId) ?? 0,
+    cardCount: p.cardCount,
     isCurrentUser: p.userId === session.user.id,
   }));
 

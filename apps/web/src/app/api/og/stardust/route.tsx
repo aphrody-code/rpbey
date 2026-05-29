@@ -12,7 +12,7 @@
 
 import { ImageResponse } from "next/og";
 import { loadGoogleSansFonts } from "@/lib/og/fonts";
-import { db, schema, and, asc, count, eq, ilike, inArray } from "@/lib/db";
+import { getStardustOgStats } from "@/server/dal/gacha";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -22,49 +22,6 @@ const HEIGHT = 630;
 const ACCENT = "#60A5FA";
 const BG_TOP = "#0c1730";
 const BG_BOTTOM = "#1e3a5f";
-
-interface PodiumEntry {
-  rank: number;
-  name: string;
-  score: number;
-}
-
-async function loadStats() {
-  const [tournamentCountRows, bladerCountRows, podium] = await Promise.all([
-    db
-      .select({ value: count() })
-      .from(schema.tournaments)
-      .innerJoin(
-        schema.tournamentCategories,
-        eq(schema.tournaments.categoryId, schema.tournamentCategories.id),
-      )
-      .where(
-        and(
-          ilike(schema.tournamentCategories.name, "%STARDUST%"),
-          inArray(schema.tournaments.status, ["COMPLETE", "ARCHIVED"]),
-        ),
-      ),
-    db.select({ value: count() }).from(schema.stardustBladers),
-    db.query.stardustRankings.findMany({
-      orderBy: asc(schema.stardustRankings.rank),
-      limit: 3,
-      columns: { rank: true, playerName: true, score: true },
-    }),
-  ]);
-
-  const tournamentCount = tournamentCountRows[0]?.value ?? 0;
-  const bladerCount = bladerCountRows[0]?.value ?? 0;
-
-  return {
-    tournamentCount,
-    bladerCount,
-    podium: podium.map<PodiumEntry>((p) => ({
-      rank: p.rank,
-      name: p.playerName,
-      score: p.score,
-    })),
-  };
-}
 
 function fmt(n: number): string {
   return n.toLocaleString("fr-FR");
@@ -78,7 +35,7 @@ function ellipsize(text: string, max: number): string {
 export async function GET() {
   try {
     const fonts = await loadGoogleSansFonts();
-    const stats = await loadStats();
+    const stats = await getStardustOgStats();
     const champion = stats.podium[0] ?? null;
     const others = stats.podium.slice(1);
 

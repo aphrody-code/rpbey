@@ -1033,3 +1033,206 @@ export const zTrackAnalyticsEventResponse = z.object({
         accepted: z.literal(true)
     })
 });
+
+export const zGachaCardsQuery = z.object({
+    rarity: z.enum([
+        'COMMON',
+        'RARE',
+        'SUPER_RARE',
+        'LEGENDARY',
+        'SECRET'
+    ]).optional(),
+    dropId: z.string().optional(),
+    series: z.string().optional(),
+    search: z.string().optional(),
+    activeOnly: z.boolean().optional(),
+    limit: z.int().gte(1).lte(200).optional()
+});
+
+/**
+ * OK
+ */
+export const zGachaCardsResponse = z.object({
+    ok: z.literal(true),
+    data: z.object({
+        cards: z.array(z.object({
+            id: z.string(),
+            slug: z.string(),
+            name: z.string(),
+            nameJp: z.string().nullish(),
+            series: z.string(),
+            rarity: z.string(),
+            imageUrl: z.string().nullish(),
+            beyblade: z.string().nullish(),
+            description: z.string().nullish(),
+            dropRate: z.number().nullish(),
+            isActive: z.boolean(),
+            att: z.number(),
+            def: z.number(),
+            end: z.number(),
+            equilibre: z.number(),
+            element: z.string().nullish(),
+            specialMove: z.string().nullish(),
+            artistName: z.string().nullish(),
+            cardType: z.string().nullish(),
+            dropId: z.string().nullish(),
+            createdAt: z.string().nullish(),
+            updatedAt: z.string().nullish()
+        })),
+        total: z.number()
+    })
+});
+
+/**
+ * OK
+ */
+export const zGachaDropsResponse = z.object({
+    ok: z.literal(true),
+    data: z.object({
+        drops: z.array(z.object({
+            id: z.string(),
+            slug: z.string(),
+            name: z.string(),
+            theme: z.string().nullish(),
+            season: z.number(),
+            maxCards: z.number().nullish(),
+            startDate: z.string().nullish(),
+            endDate: z.string().nullish(),
+            isActive: z.boolean(),
+            imageUrl: z.string().nullish(),
+            cardCount: z.number(),
+            createdAt: z.string().nullish(),
+            updatedAt: z.string().nullish()
+        }))
+    })
+});
+
+export const zGachaLeaderboardQuery = z.object({
+    limit: z.int().gte(1).lte(200).optional()
+});
+
+/**
+ * OK
+ */
+export const zGachaLeaderboardResponse = z.object({
+    ok: z.literal(true),
+    data: z.object({
+        entries: z.array(z.object({
+            rank: z.number(),
+            userId: z.string(),
+            name: z.string().nullish(),
+            image: z.string().nullish(),
+            currency: z.number(),
+            duelWins: z.number(),
+            duelRating: z.number(),
+            cardCount: z.number()
+        }))
+    })
+});
+
+/**
+ * OK
+ */
+export const zBotStatusResponse = z.object({
+    ok: z.literal(true),
+    data: z.object({
+        status: z.object({
+            status: z.enum([
+                'running',
+                'starting',
+                'offline'
+            ]),
+            uptime: z.number(),
+            uptimeFormatted: z.string(),
+            guilds: z.number(),
+            users: z.number(),
+            memberCount: z.number(),
+            onlineCount: z.number(),
+            ping: z.number(),
+            memoryUsage: z.string(),
+            runtime: z.string()
+        }).nullable()
+    })
+});
+
+export const zBotLogsQuery = z.object({
+    tail: z.int().gte(1).lte(2000).optional().default(200),
+    since: z.string().optional()
+});
+
+/**
+ * OK
+ */
+export const zBotLogsResponse = z.object({
+    ok: z.literal(true),
+    data: z.object({
+        logs: z.array(z.object({
+            timestamp: z.string(),
+            level: z.string(),
+            message: z.string()
+        }))
+    })
+});
+
+/**
+ * OK
+ */
+export const zBotCommandsResponse = z.object({
+    ok: z.literal(true),
+    data: z.object({
+        commands: z.array(z.object({
+            name: z.string(),
+            description: z.string(),
+            category: z.string()
+        }))
+    })
+});
+
+/**
+ * OK
+ */
+export const zModerationSummaryResponse = z.object({
+    ok: z.literal(true),
+    data: z.object({
+        warnings: z.object({
+            total: z.int().gte(0).lte(9007199254740991),
+            uniqueMembers: z.int().gte(0).lte(9007199254740991),
+            lastWarningAt: z.string().nullable()
+        }),
+        tickets: z.object({
+            total: z.int().gte(0).lte(9007199254740991),
+            open: z.int().gte(0).lte(9007199254740991),
+            closed: z.int().gte(0).lte(9007199254740991),
+            byStatus: z.array(z.object({
+                status: z.string(),
+                count: z.int().gte(0).lte(9007199254740991)
+            })),
+            byType: z.array(z.object({
+                type: z.string(),
+                count: z.int().gte(0).lte(9007199254740991)
+            })),
+            lastTicketAt: z.string().nullable()
+        }),
+        reminders: z.object({
+            total: z.int().gte(0).lte(9007199254740991),
+            pending: z.int().gte(0).lte(9007199254740991),
+            fired: z.int().gte(0).lte(9007199254740991)
+        })
+    })
+});
+
+export const zModerationWarningCountQuery = z.object({
+    discordId: z.string().min(1).max(64)
+});
+
+/**
+ * OK
+ */
+export const zModerationWarningCountResponse = z.object({
+    ok: z.literal(true),
+    data: z.object({
+        discordId: z.string(),
+        count: z.int().gte(0).lte(9007199254740991),
+        lastWarningAt: z.string().nullable()
+    })
+});

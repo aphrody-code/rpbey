@@ -11,4 +11,7 @@ export * from "./anime";
 export * from "./cms";
 export * from "./analytics";
 export * from "./decks";
+export * from "./gacha";
+export * from "./bot";
+export * from "./moderation";
 export * from "./openapi";

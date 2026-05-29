@@ -5,7 +5,7 @@
 
 import { ImageResponse } from "next/og";
 import { loadGoogleSansFonts } from "@/lib/og/fonts";
-import { db, schema, desc, eq } from "@/lib/db";
+import { getActiveSeasonTop10 } from "@/server/dal/gacha";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -24,19 +24,7 @@ function rankColor(rank: number): string {
 
 export async function GET() {
   try {
-    const seasonRow = await db.query.rankingSeasons.findFirst({
-      where: eq(schema.rankingSeasons.isActive, true),
-      with: {
-        seasonEntries: {
-          orderBy: desc(schema.seasonEntries.points),
-          limit: 10,
-          with: {
-            user: { columns: { name: true, image: true } },
-          },
-        },
-      },
-    });
-    const season = seasonRow ? { ...seasonRow, entries: seasonRow.seasonEntries } : null;
+    const season = await getActiveSeasonTop10();
 
     if (!season || season.entries.length === 0) {
       return new Response(JSON.stringify({ error: "No leaderboard data" }), {

@@ -1,7 +1,7 @@
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
-import { db, schema, desc, eq } from "@/lib/db";
+import { getPartInventory } from "@/server/dal/gacha";
 
 type Rarity = "COMMON" | "RARE" | "EPIC" | "LEGENDARY" | "SECRET";
 
@@ -65,26 +65,7 @@ export async function GET() {
       return NextResponse.json({ error: "Non connecté" }, { status: 401 });
     }
 
-    const inventory = await db.query.partInventory.findMany({
-      where: eq(schema.partInventory.userId, session.user.id),
-      with: {
-        part: {
-          columns: {
-            id: true,
-            name: true,
-            type: true,
-            imageUrl: true,
-            system: true,
-            weight: true,
-            beyType: true,
-            tipType: true,
-            protrusions: true,
-            externalId: true,
-          },
-        },
-      },
-      orderBy: desc(schema.partInventory.obtainedAt),
-    });
+    const inventory = await getPartInventory(session.user.id);
 
     const items = inventory.map((item) => ({
       partId: item.partId,

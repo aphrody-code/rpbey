@@ -30,6 +30,24 @@ import {
 import { ContentBlockListResponseSchema, ContentQuerySchema, StaffListResponseSchema } from "./cms";
 import { AnalyticsTrackInputSchema, AnalyticsTrackResponseSchema } from "./analytics";
 import { DeckQuerySchema, DeckResponseSchema } from "./decks";
+import {
+  GachaCardsQuerySchema,
+  GachaCardsResponseSchema,
+  GachaDropsResponseSchema,
+  GachaLeaderboardQuerySchema,
+  GachaLeaderboardResponseSchema,
+} from "./gacha";
+import {
+  BotCommandsResponseSchema,
+  BotLogsQuerySchema,
+  BotLogsResponseSchema,
+  BotStatusResponseSchema,
+} from "./bot";
+import {
+  ModerationSummarySchema,
+  WarningCountQuerySchema,
+  WarningCountResponseSchema,
+} from "./moderation";
 import { ErrorEnvelopeSchema, okEnvelope } from "./envelope";
 
 /**
@@ -245,6 +263,75 @@ const ROUTES: RouteDef[] = [
     tags: ["analytics"],
     body: AnalyticsTrackInputSchema,
     response: AnalyticsTrackResponseSchema,
+  },
+  {
+    method: "get",
+    path: "/gacha/cards",
+    operationId: "gachaCards",
+    summary: "Catalogue public des cartes gacha TCG (filtres rareté/série/drop + recherche).",
+    tags: ["gacha"],
+    query: GachaCardsQuerySchema,
+    response: GachaCardsResponseSchema,
+  },
+  {
+    method: "get",
+    path: "/gacha/drops",
+    operationId: "gachaDrops",
+    summary: "Collections (drops) gacha saisonnières publiques, avec compteur de cartes.",
+    tags: ["gacha"],
+    response: GachaDropsResponseSchema,
+  },
+  {
+    method: "get",
+    path: "/gacha/leaderboard",
+    operationId: "gachaLeaderboard",
+    summary: "Classement public gacha (BeyCoins / collection / duels), paginable.",
+    tags: ["gacha"],
+    query: GachaLeaderboardQuerySchema,
+    response: GachaLeaderboardResponseSchema,
+  },
+  {
+    method: "get",
+    path: "/bot/status",
+    operationId: "botStatus",
+    summary: "Statut du bot Discord (proxy server-to-server `:3001`) ; `null` si injoignable.",
+    tags: ["bot"],
+    response: BotStatusResponseSchema,
+  },
+  {
+    method: "get",
+    path: "/bot/logs",
+    operationId: "botLogs",
+    summary: "Derniers logs du bot Discord (`tail` borné 1..2000, curseur ISO `since` optionnel).",
+    tags: ["bot"],
+    query: BotLogsQuerySchema,
+    response: BotLogsResponseSchema,
+  },
+  {
+    method: "get",
+    path: "/bot/commands",
+    operationId: "botCommands",
+    summary: "Commandes applicatives enregistrées par le bot Discord.",
+    tags: ["bot"],
+    response: BotCommandsResponseSchema,
+  },
+  {
+    method: "get",
+    path: "/moderation/summary",
+    operationId: "moderationSummary",
+    summary:
+      "Cliché agrégé ANONYMISÉ de la modération (warnings/tickets/reminders, distributions).",
+    tags: ["moderation"],
+    response: ModerationSummarySchema,
+  },
+  {
+    method: "get",
+    path: "/moderation/warnings/count",
+    operationId: "moderationWarningCount",
+    summary: "Compteur de warnings d'un membre Discord (`discordId`), sans PII.",
+    tags: ["moderation"],
+    query: WarningCountQuerySchema,
+    response: WarningCountResponseSchema,
   },
 ];
 

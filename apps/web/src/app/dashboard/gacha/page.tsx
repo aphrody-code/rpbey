@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import { Suspense } from "react";
 import { Alert, Box, Skeleton, Typography } from "@mui/material";
 import { auth } from "@/lib/auth";
-import { db, schema, count, eq } from "@/lib/db";
+import { getGachaDashboardProfile } from "@/server/dal/gacha";
 import { GachaProfileCard } from "@/components/GachaProfileCard";
 
 export const metadata: Metadata = {
@@ -13,32 +13,7 @@ export const metadata: Metadata = {
 };
 
 async function ProfileContent({ userId }: { userId: string }) {
-  const profile = await db.query.profiles.findFirst({
-    where: eq(schema.profiles.userId, userId),
-    columns: {
-      id: true,
-      userId: true,
-      bladerName: true,
-      currency: true,
-      dailyStreak: true,
-      lastDaily: true,
-      pityCount: true,
-      wins: true,
-      losses: true,
-      tournamentWins: true,
-      duelRating: true,
-      duelWins: true,
-      duelLosses: true,
-    },
-    with: {
-      user: {
-        columns: {
-          name: true,
-          image: true,
-        },
-      },
-    },
-  });
+  const profile = await getGachaDashboardProfile(userId);
 
   if (!profile) {
     return (
@@ -57,17 +32,11 @@ async function ProfileContent({ userId }: { userId: string }) {
     );
   }
 
-  const [cardCountRow] = await db
-    .select({ value: count() })
-    .from(schema.cardInventory)
-    .where(eq(schema.cardInventory.userId, userId));
-  const cardCount = cardCountRow?.value ?? 0;
-
   return (
     <GachaProfileCard
       profile={{
         ...profile,
-        cardCount,
+        cardCount: profile.cardCount,
         user: {
           name: profile.user.name,
           image: profile.user.image,

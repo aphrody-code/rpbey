@@ -1602,3 +1602,476 @@ export type TrackAnalyticsEventResponses = {
 };
 
 export type TrackAnalyticsEventResponse = TrackAnalyticsEventResponses[keyof TrackAnalyticsEventResponses];
+
+export type GachaCardsData = {
+    body?: never;
+    path?: never;
+    query?: {
+        rarity?: 'COMMON' | 'RARE' | 'SUPER_RARE' | 'LEGENDARY' | 'SECRET';
+        dropId?: string;
+        series?: string;
+        search?: string;
+        activeOnly?: boolean;
+        limit?: number;
+    };
+    url: '/api/v1/gacha/cards';
+};
+
+export type GachaCardsErrors = {
+    /**
+     * Erreur de requête ou de validation
+     */
+    '4XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+    /**
+     * Erreur serveur
+     */
+    '5XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+};
+
+export type GachaCardsError = GachaCardsErrors[keyof GachaCardsErrors];
+
+export type GachaCardsResponses = {
+    /**
+     * OK
+     */
+    200: {
+        ok: true;
+        data: {
+            cards: Array<{
+                id: string;
+                slug: string;
+                name: string;
+                nameJp?: string | null;
+                series: string;
+                rarity: string;
+                imageUrl?: string | null;
+                beyblade?: string | null;
+                description?: string | null;
+                dropRate?: number | null;
+                isActive: boolean;
+                att: number;
+                def: number;
+                end: number;
+                equilibre: number;
+                element?: string | null;
+                specialMove?: string | null;
+                artistName?: string | null;
+                cardType?: string | null;
+                dropId?: string | null;
+                createdAt?: string | null;
+                updatedAt?: string | null;
+            }>;
+            total: number;
+        };
+    };
+};
+
+export type GachaCardsResponse = GachaCardsResponses[keyof GachaCardsResponses];
+
+export type GachaDropsData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/v1/gacha/drops';
+};
+
+export type GachaDropsErrors = {
+    /**
+     * Erreur de requête ou de validation
+     */
+    '4XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+    /**
+     * Erreur serveur
+     */
+    '5XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+};
+
+export type GachaDropsError = GachaDropsErrors[keyof GachaDropsErrors];
+
+export type GachaDropsResponses = {
+    /**
+     * OK
+     */
+    200: {
+        ok: true;
+        data: {
+            drops: Array<{
+                id: string;
+                slug: string;
+                name: string;
+                theme?: string | null;
+                season: number;
+                maxCards?: number | null;
+                startDate?: string | null;
+                endDate?: string | null;
+                isActive: boolean;
+                imageUrl?: string | null;
+                cardCount: number;
+                createdAt?: string | null;
+                updatedAt?: string | null;
+            }>;
+        };
+    };
+};
+
+export type GachaDropsResponse = GachaDropsResponses[keyof GachaDropsResponses];
+
+export type GachaLeaderboardData = {
+    body?: never;
+    path?: never;
+    query?: {
+        limit?: number;
+    };
+    url: '/api/v1/gacha/leaderboard';
+};
+
+export type GachaLeaderboardErrors = {
+    /**
+     * Erreur de requête ou de validation
+     */
+    '4XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+    /**
+     * Erreur serveur
+     */
+    '5XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+};
+
+export type GachaLeaderboardError = GachaLeaderboardErrors[keyof GachaLeaderboardErrors];
+
+export type GachaLeaderboardResponses = {
+    /**
+     * OK
+     */
+    200: {
+        ok: true;
+        data: {
+            entries: Array<{
+                rank: number;
+                userId: string;
+                name?: string | null;
+                image?: string | null;
+                currency: number;
+                duelWins: number;
+                duelRating: number;
+                cardCount: number;
+            }>;
+        };
+    };
+};
+
+export type GachaLeaderboardResponse = GachaLeaderboardResponses[keyof GachaLeaderboardResponses];
+
+export type BotStatusData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/v1/bot/status';
+};
+
+export type BotStatusErrors = {
+    /**
+     * Erreur de requête ou de validation
+     */
+    '4XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+    /**
+     * Erreur serveur
+     */
+    '5XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+};
+
+export type BotStatusError = BotStatusErrors[keyof BotStatusErrors];
+
+export type BotStatusResponses = {
+    /**
+     * OK
+     */
+    200: {
+        ok: true;
+        data: {
+            status: {
+                status: 'running' | 'starting' | 'offline';
+                uptime: number;
+                uptimeFormatted: string;
+                guilds: number;
+                users: number;
+                memberCount: number;
+                onlineCount: number;
+                ping: number;
+                memoryUsage: string;
+                runtime: string;
+            } | null;
+        };
+    };
+};
+
+export type BotStatusResponse = BotStatusResponses[keyof BotStatusResponses];
+
+export type BotLogsData = {
+    body?: never;
+    path?: never;
+    query?: {
+        tail?: number;
+        since?: string;
+    };
+    url: '/api/v1/bot/logs';
+};
+
+export type BotLogsErrors = {
+    /**
+     * Erreur de requête ou de validation
+     */
+    '4XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+    /**
+     * Erreur serveur
+     */
+    '5XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+};
+
+export type BotLogsError = BotLogsErrors[keyof BotLogsErrors];
+
+export type BotLogsResponses = {
+    /**
+     * OK
+     */
+    200: {
+        ok: true;
+        data: {
+            logs: Array<{
+                timestamp: string;
+                level: string;
+                message: string;
+            }>;
+        };
+    };
+};
+
+export type BotLogsResponse = BotLogsResponses[keyof BotLogsResponses];
+
+export type BotCommandsData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/v1/bot/commands';
+};
+
+export type BotCommandsErrors = {
+    /**
+     * Erreur de requête ou de validation
+     */
+    '4XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+    /**
+     * Erreur serveur
+     */
+    '5XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+};
+
+export type BotCommandsError = BotCommandsErrors[keyof BotCommandsErrors];
+
+export type BotCommandsResponses = {
+    /**
+     * OK
+     */
+    200: {
+        ok: true;
+        data: {
+            commands: Array<{
+                name: string;
+                description: string;
+                category: string;
+            }>;
+        };
+    };
+};
+
+export type BotCommandsResponse = BotCommandsResponses[keyof BotCommandsResponses];
+
+export type ModerationSummaryData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/v1/moderation/summary';
+};
+
+export type ModerationSummaryErrors = {
+    /**
+     * Erreur de requête ou de validation
+     */
+    '4XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+    /**
+     * Erreur serveur
+     */
+    '5XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+};
+
+export type ModerationSummaryError = ModerationSummaryErrors[keyof ModerationSummaryErrors];
+
+export type ModerationSummaryResponses = {
+    /**
+     * OK
+     */
+    200: {
+        ok: true;
+        data: {
+            warnings: {
+                total: number;
+                uniqueMembers: number;
+                lastWarningAt: string | null;
+            };
+            tickets: {
+                total: number;
+                open: number;
+                closed: number;
+                byStatus: Array<{
+                    status: string;
+                    count: number;
+                }>;
+                byType: Array<{
+                    type: string;
+                    count: number;
+                }>;
+                lastTicketAt: string | null;
+            };
+            reminders: {
+                total: number;
+                pending: number;
+                fired: number;
+            };
+        };
+    };
+};
+
+export type ModerationSummaryResponse = ModerationSummaryResponses[keyof ModerationSummaryResponses];
+
+export type ModerationWarningCountData = {
+    body?: never;
+    path?: never;
+    query: {
+        discordId: string;
+    };
+    url: '/api/v1/moderation/warnings/count';
+};
+
+export type ModerationWarningCountErrors = {
+    /**
+     * Erreur de requête ou de validation
+     */
+    '4XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+    /**
+     * Erreur serveur
+     */
+    '5XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+};
+
+export type ModerationWarningCountError = ModerationWarningCountErrors[keyof ModerationWarningCountErrors];
+
+export type ModerationWarningCountResponses = {
+    /**
+     * OK
+     */
+    200: {
+        ok: true;
+        data: {
+            discordId: string;
+            count: number;
+            lastWarningAt: string | null;
+        };
+    };
+};
+
+export type ModerationWarningCountResponse = ModerationWarningCountResponses[keyof ModerationWarningCountResponses];

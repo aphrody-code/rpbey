@@ -1,7 +1,7 @@
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
-import { db, schema, and, eq, gt } from "@/lib/db";
+import { findUserBySessionToken } from "@/server/dal/gacha";
 
 /**
  * Get authenticated user from session or Bearer token.
@@ -14,11 +14,8 @@ export async function getApiUser() {
   const authHeader = hdrs.get("authorization");
   if (authHeader?.startsWith("Bearer ")) {
     const token = authHeader.slice(7);
-    const session = await db.query.sessions.findFirst({
-      where: and(eq(schema.sessions.token, token), gt(schema.sessions.expiresAt, new Date())),
-      with: { user: true },
-    });
-    if (session) return session.user;
+    const user = await findUserBySessionToken(token);
+    if (user) return user;
   }
 
   // Fall back to cookie-based auth (web)

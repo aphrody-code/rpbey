@@ -11,7 +11,7 @@
 import { ImageResponse } from "next/og";
 import type { NextRequest } from "next/server";
 import { loadGoogleSansFonts } from "@/lib/og/fonts";
-import { db, schema, eq } from "@/lib/db";
+import { getGachaCard } from "@/server/dal/gacha";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -147,9 +147,7 @@ export async function GET(request: NextRequest) {
       });
     }
 
-    const card = await db.query.gachaCards.findFirst({
-      where: id ? eq(schema.gachaCards.id, id) : eq(schema.gachaCards.slug, slug!),
-    });
+    const card = await getGachaCard({ id, slug });
 
     if (!card) {
       return new Response(JSON.stringify({ error: "Card not found" }), {

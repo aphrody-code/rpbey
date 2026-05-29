@@ -3,7 +3,7 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { Box, Typography } from "@mui/material";
 import { auth } from "@/lib/auth";
-import { db, schema, and, desc, eq } from "@/lib/db";
+import { listCurrencyTransactions } from "@/server/dal/gacha";
 import type { TransactionType } from "@/lib/types";
 import { HistoryClient } from "./_components/HistoryClient";
 
@@ -46,20 +46,10 @@ export default async function GachaHistoryPage({ searchParams }: PageProps) {
     ? (rawType as TransactionType)
     : "";
 
-  const transactions = await db.query.currencyTransactions.findMany({
-    where: and(
-      eq(schema.currencyTransactions.userId, session.user.id),
-      ...(typeFilter ? [eq(schema.currencyTransactions.type, typeFilter)] : []),
-    ),
-    orderBy: desc(schema.currencyTransactions.createdAt),
+  const transactions = await listCurrencyTransactions({
+    userId: session.user.id,
+    type: typeFilter,
     limit: 100,
-    columns: {
-      id: true,
-      amount: true,
-      type: true,
-      note: true,
-      createdAt: true,
-    },
   });
 
   return (

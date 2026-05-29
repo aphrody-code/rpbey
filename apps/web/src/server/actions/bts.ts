@@ -3,7 +3,7 @@
 import { join } from "node:path";
 
 import { loadJsonSafe } from "@/lib/data-cache";
-import { db, schema, inArray, isNotNull } from "@/lib/db";
+import { listDiscordUsersForBts, listTournamentsByChallongeIds } from "@/server/dal/gacha";
 import { getRankingConfig } from "./ranking";
 
 // ─── Types ─────────────────────────────────────────────────────────
@@ -338,43 +338,9 @@ async function loadDiscordImageResolver(): Promise<
       if (n) aliasToKey.set(n, k);
     }
   }
-  type BtsUserRow = {
-    id: string;
-    discordId: string | null;
-    username: string | null;
-    displayUsername: string | null;
-    name: string | null;
-    globalName: string | null;
-    nickname: string | null;
-    discordTag: string | null;
-    image: string | null;
-    profile: {
-      challongeUsername: string | null;
-      bladerName: string | null;
-    } | null;
-  };
-  let users: BtsUserRow[] = [];
+  let users: Awaited<ReturnType<typeof listDiscordUsersForBts>> = [];
   try {
-    const userRows = await db.query.users.findMany({
-      where: isNotNull(schema.users.discordId),
-      columns: {
-        id: true,
-        discordId: true,
-        username: true,
-        displayUsername: true,
-        name: true,
-        globalName: true,
-        nickname: true,
-        discordTag: true,
-        image: true,
-      },
-      with: {
-        profiles: {
-          columns: { challongeUsername: true, bladerName: true },
-        },
-      },
-    });
-    users = userRows.map((u) => ({ ...u, profile: u.profiles[0] ?? null }));
+    users = await listDiscordUsersForBts();
   } catch {
     /* ignore */
   }
@@ -578,18 +544,7 @@ export async function getBtsSeasonTournaments(season: BtsSeason): Promise<BtsSea
     .filter((id): id is number => typeof id === "number")
     .map((id) => String(id));
 
-  const dbTournaments =
-    challongeIds.length > 0
-      ? await db.query.tournaments.findMany({
-          where: inArray(schema.tournaments.challongeId, challongeIds),
-          columns: {
-            id: true,
-            name: true,
-            challongeId: true,
-            posterUrl: true,
-          },
-        })
-      : [];
+  const dbTournaments = await listTournamentsByChallongeIds(challongeIds);
   const dbByChallongeId = new Map(dbTournaments.map((t) => [t.challongeId ?? "", t]));
 
   // Pool data: presence of `data/pools/B_TS{n}.json` indicates a pool stage.

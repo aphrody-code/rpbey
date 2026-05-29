@@ -4,8 +4,8 @@ import * as z from 'zod';
 
 import type { Client, Options as Options2, TDataShape } from './client';
 import { client } from './client.gen';
-import type { GetAnimeSeriesData, GetAnimeSeriesErrors, GetAnimeSeriesResponses, GetMetaData, GetMetaErrors, GetMetaResponses, GetPublicUserData, GetPublicUserErrors, GetPublicUserResponses, GetRankingsData, GetRankingsErrors, GetRankingsResponses, GetRecommendationsData, GetRecommendationsErrors, GetRecommendationsResponses, GetSharedDeckData, GetSharedDeckErrors, GetSharedDeckResponses, GetTournamentData, GetTournamentErrors, GetTournamentResponses, GetUserMatchesData, GetUserMatchesErrors, GetUserMatchesResponses, GlobalSearchData, GlobalSearchErrors, GlobalSearchResponses, ListAnimeSeriesByGenerationData, ListAnimeSeriesByGenerationErrors, ListAnimeSeriesByGenerationResponses, ListAnimeSeriesData, ListAnimeSeriesErrors, ListAnimeSeriesResponses, ListContentBlocksData, ListContentBlocksErrors, ListContentBlocksResponses, ListPartsData, ListPartsErrors, ListPartsResponses, ListStaffMembersData, ListStaffMembersErrors, ListStaffMembersResponses, ListStreamVideosData, ListStreamVideosErrors, ListStreamVideosResponses, ListTournamentsData, ListTournamentsErrors, ListTournamentsResponses, SearchAnimeData, SearchAnimeErrors, SearchAnimeResponses, TrackAnalyticsEventData, TrackAnalyticsEventErrors, TrackAnalyticsEventResponses } from './types.gen';
-import { zGetAnimeSeriesPath, zGetAnimeSeriesResponse, zGetMetaResponse, zGetPublicUserPath, zGetPublicUserResponse, zGetRankingsQuery, zGetRankingsResponse, zGetRecommendationsQuery, zGetRecommendationsResponse, zGetSharedDeckQuery, zGetSharedDeckResponse, zGetTournamentPath, zGetTournamentResponse, zGetUserMatchesPath, zGetUserMatchesQuery, zGetUserMatchesResponse, zGlobalSearchQuery, zGlobalSearchResponse, zListAnimeSeriesByGenerationResponse, zListAnimeSeriesQuery, zListAnimeSeriesResponse, zListContentBlocksQuery, zListContentBlocksResponse, zListPartsQuery, zListPartsResponse, zListStaffMembersResponse, zListStreamVideosQuery, zListStreamVideosResponse, zListTournamentsQuery, zListTournamentsResponse, zSearchAnimeQuery, zSearchAnimeResponse, zTrackAnalyticsEventBody, zTrackAnalyticsEventResponse } from './zod.gen';
+import type { BotCommandsData, BotCommandsErrors, BotCommandsResponses, BotLogsData, BotLogsErrors, BotLogsResponses, BotStatusData, BotStatusErrors, BotStatusResponses, GachaCardsData, GachaCardsErrors, GachaCardsResponses, GachaDropsData, GachaDropsErrors, GachaDropsResponses, GachaLeaderboardData, GachaLeaderboardErrors, GachaLeaderboardResponses, GetAnimeSeriesData, GetAnimeSeriesErrors, GetAnimeSeriesResponses, GetMetaData, GetMetaErrors, GetMetaResponses, GetPublicUserData, GetPublicUserErrors, GetPublicUserResponses, GetRankingsData, GetRankingsErrors, GetRankingsResponses, GetRecommendationsData, GetRecommendationsErrors, GetRecommendationsResponses, GetSharedDeckData, GetSharedDeckErrors, GetSharedDeckResponses, GetTournamentData, GetTournamentErrors, GetTournamentResponses, GetUserMatchesData, GetUserMatchesErrors, GetUserMatchesResponses, GlobalSearchData, GlobalSearchErrors, GlobalSearchResponses, ListAnimeSeriesByGenerationData, ListAnimeSeriesByGenerationErrors, ListAnimeSeriesByGenerationResponses, ListAnimeSeriesData, ListAnimeSeriesErrors, ListAnimeSeriesResponses, ListContentBlocksData, ListContentBlocksErrors, ListContentBlocksResponses, ListPartsData, ListPartsErrors, ListPartsResponses, ListStaffMembersData, ListStaffMembersErrors, ListStaffMembersResponses, ListStreamVideosData, ListStreamVideosErrors, ListStreamVideosResponses, ListTournamentsData, ListTournamentsErrors, ListTournamentsResponses, ModerationSummaryData, ModerationSummaryErrors, ModerationSummaryResponses, ModerationWarningCountData, ModerationWarningCountErrors, ModerationWarningCountResponses, SearchAnimeData, SearchAnimeErrors, SearchAnimeResponses, TrackAnalyticsEventData, TrackAnalyticsEventErrors, TrackAnalyticsEventResponses } from './types.gen';
+import { zBotCommandsResponse, zBotLogsQuery, zBotLogsResponse, zBotStatusResponse, zGachaCardsQuery, zGachaCardsResponse, zGachaDropsResponse, zGachaLeaderboardQuery, zGachaLeaderboardResponse, zGetAnimeSeriesPath, zGetAnimeSeriesResponse, zGetMetaResponse, zGetPublicUserPath, zGetPublicUserResponse, zGetRankingsQuery, zGetRankingsResponse, zGetRecommendationsQuery, zGetRecommendationsResponse, zGetSharedDeckQuery, zGetSharedDeckResponse, zGetTournamentPath, zGetTournamentResponse, zGetUserMatchesPath, zGetUserMatchesQuery, zGetUserMatchesResponse, zGlobalSearchQuery, zGlobalSearchResponse, zListAnimeSeriesByGenerationResponse, zListAnimeSeriesQuery, zListAnimeSeriesResponse, zListContentBlocksQuery, zListContentBlocksResponse, zListPartsQuery, zListPartsResponse, zListStaffMembersResponse, zListStreamVideosQuery, zListStreamVideosResponse, zListTournamentsQuery, zListTournamentsResponse, zModerationSummaryResponse, zModerationWarningCountQuery, zModerationWarningCountResponse, zSearchAnimeQuery, zSearchAnimeResponse, zTrackAnalyticsEventBody, zTrackAnalyticsEventResponse } from './zod.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean, TResponse = unknown> = Options2<TData, ThrowOnError, TResponse> & {
     /**
@@ -275,4 +275,116 @@ export const trackAnalyticsEvent = <ThrowOnError extends boolean = false>(option
         'Content-Type': 'application/json',
         ...options.headers
     }
+});
+
+/**
+ * Catalogue public des cartes gacha TCG (filtres rareté/série/drop + recherche).
+ */
+export const gachaCards = <ThrowOnError extends boolean = false>(options?: Options<GachaCardsData, ThrowOnError>) => (options?.client ?? client).get<GachaCardsResponses, GachaCardsErrors, ThrowOnError>({
+    requestValidator: async (data) => await z.object({
+        body: z.never().optional(),
+        path: z.never().optional(),
+        query: zGachaCardsQuery.optional()
+    }).parseAsync(data),
+    responseValidator: async (data) => await zGachaCardsResponse.parseAsync(data),
+    url: '/api/v1/gacha/cards',
+    ...options
+});
+
+/**
+ * Collections (drops) gacha saisonnières publiques, avec compteur de cartes.
+ */
+export const gachaDrops = <ThrowOnError extends boolean = false>(options?: Options<GachaDropsData, ThrowOnError>) => (options?.client ?? client).get<GachaDropsResponses, GachaDropsErrors, ThrowOnError>({
+    requestValidator: async (data) => await z.object({
+        body: z.never().optional(),
+        path: z.never().optional(),
+        query: z.never().optional()
+    }).parseAsync(data),
+    responseValidator: async (data) => await zGachaDropsResponse.parseAsync(data),
+    url: '/api/v1/gacha/drops',
+    ...options
+});
+
+/**
+ * Classement public gacha (BeyCoins / collection / duels), paginable.
+ */
+export const gachaLeaderboard = <ThrowOnError extends boolean = false>(options?: Options<GachaLeaderboardData, ThrowOnError>) => (options?.client ?? client).get<GachaLeaderboardResponses, GachaLeaderboardErrors, ThrowOnError>({
+    requestValidator: async (data) => await z.object({
+        body: z.never().optional(),
+        path: z.never().optional(),
+        query: zGachaLeaderboardQuery.optional()
+    }).parseAsync(data),
+    responseValidator: async (data) => await zGachaLeaderboardResponse.parseAsync(data),
+    url: '/api/v1/gacha/leaderboard',
+    ...options
+});
+
+/**
+ * Statut du bot Discord (proxy server-to-server `:3001`) ; `null` si injoignable.
+ */
+export const botStatus = <ThrowOnError extends boolean = false>(options?: Options<BotStatusData, ThrowOnError>) => (options?.client ?? client).get<BotStatusResponses, BotStatusErrors, ThrowOnError>({
+    requestValidator: async (data) => await z.object({
+        body: z.never().optional(),
+        path: z.never().optional(),
+        query: z.never().optional()
+    }).parseAsync(data),
+    responseValidator: async (data) => await zBotStatusResponse.parseAsync(data),
+    url: '/api/v1/bot/status',
+    ...options
+});
+
+/**
+ * Derniers logs du bot Discord (`tail` borné 1..2000, curseur ISO `since` optionnel).
+ */
+export const botLogs = <ThrowOnError extends boolean = false>(options?: Options<BotLogsData, ThrowOnError>) => (options?.client ?? client).get<BotLogsResponses, BotLogsErrors, ThrowOnError>({
+    requestValidator: async (data) => await z.object({
+        body: z.never().optional(),
+        path: z.never().optional(),
+        query: zBotLogsQuery.optional()
+    }).parseAsync(data),
+    responseValidator: async (data) => await zBotLogsResponse.parseAsync(data),
+    url: '/api/v1/bot/logs',
+    ...options
+});
+
+/**
+ * Commandes applicatives enregistrées par le bot Discord.
+ */
+export const botCommands = <ThrowOnError extends boolean = false>(options?: Options<BotCommandsData, ThrowOnError>) => (options?.client ?? client).get<BotCommandsResponses, BotCommandsErrors, ThrowOnError>({
+    requestValidator: async (data) => await z.object({
+        body: z.never().optional(),
+        path: z.never().optional(),
+        query: z.never().optional()
+    }).parseAsync(data),
+    responseValidator: async (data) => await zBotCommandsResponse.parseAsync(data),
+    url: '/api/v1/bot/commands',
+    ...options
+});
+
+/**
+ * Cliché agrégé ANONYMISÉ de la modération (warnings/tickets/reminders, distributions).
+ */
+export const moderationSummary = <ThrowOnError extends boolean = false>(options?: Options<ModerationSummaryData, ThrowOnError>) => (options?.client ?? client).get<ModerationSummaryResponses, ModerationSummaryErrors, ThrowOnError>({
+    requestValidator: async (data) => await z.object({
+        body: z.never().optional(),
+        path: z.never().optional(),
+        query: z.never().optional()
+    }).parseAsync(data),
+    responseValidator: async (data) => await zModerationSummaryResponse.parseAsync(data),
+    url: '/api/v1/moderation/summary',
+    ...options
+});
+
+/**
+ * Compteur de warnings d'un membre Discord (`discordId`), sans PII.
+ */
+export const moderationWarningCount = <ThrowOnError extends boolean = false>(options: Options<ModerationWarningCountData, ThrowOnError>) => (options.client ?? client).get<ModerationWarningCountResponses, ModerationWarningCountErrors, ThrowOnError>({
+    requestValidator: async (data) => await z.object({
+        body: z.never().optional(),
+        path: z.never().optional(),
+        query: zModerationWarningCountQuery
+    }).parseAsync(data),
+    responseValidator: async (data) => await zModerationWarningCountResponse.parseAsync(data),
+    url: '/api/v1/moderation/warnings/count',
+    ...options
 });

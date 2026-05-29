@@ -3,7 +3,7 @@
  * Duel with a random opponent card using element advantages
  */
 import { type NextRequest, NextResponse } from "next/server";
-import { db, schema, and, count, eq, sql } from "@/lib/db";
+import { awardDuelReward, getOwnedCard, getRandomActiveCard } from "@/server/dal/gacha";
 import { badRequest, getApiUser, serverError, unauthorized } from "../helpers";
 
 const ELEMENT_ADVANTAGE: Record<string, string> = {
@@ -32,25 +32,14 @@ export async function POST(request: NextRequest) {
     if (!cardId) return badRequest("cardId requis");
 
     // Verify the user owns this card
-    const owned = await db.query.cardInventory.findFirst({
-      where: and(eq(schema.cardInventory.userId, user.id), eq(schema.cardInventory.cardId, cardId)),
-      with: { gachaCard: true },
-    });
+    const owned = await getOwnedCard(user.id, cardId);
 
     if (!owned) return badRequest("Tu ne possèdes pas cette carte");
 
     const playerCard = owned.gachaCard;
 
     // Pick a random opponent card
-    const [totalCardsRow] = await db
-      .select({ value: count() })
-      .from(schema.gachaCards)
-      .where(eq(schema.gachaCards.isActive, true));
-    const totalCards = totalCardsRow?.value ?? 0;
-    const opponentCard = await db.query.gachaCards.findFirst({
-      where: eq(schema.gachaCards.isActive, true),
-      offset: Math.floor(Math.random() * totalCards),
-    });
+    const opponentCard = await getRandomActiveCard();
 
     if (!opponentCard) {
       return NextResponse.json(
@@ -83,19 +72,11 @@ export async function POST(request: NextRequest) {
 
     // Award BeyCoins if player wins
     if (winner === "player") {
-      await db
-        .update(schema.profiles)
-        .set({
-          currency: sql`${schema.profiles.currency} + ${DUEL_REWARD}`,
-        })
-        .where(eq(schema.profiles.userId, user.id));
-
-      await db.insert(schema.currencyTransactions).values({
-        userId: user.id,
-        amount: DUEL_REWARD,
-        type: "TOURNAMENT_REWARD",
-        note: `Duel gagné — ${playerCard.name} vs ${opponentCard.name}`,
-      });
+      await awardDuelReward(
+        user.id,
+        DUEL_REWARD,
+        `Duel gagné — ${playerCard.name} vs ${opponentCard.name}`,
+      );
     }
 
     return NextResponse.json({
