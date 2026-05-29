@@ -49,11 +49,11 @@ const RARITY_THEMES: Record<string, RarityTheme> = {
     label: "RARE",
     stars: 2,
   },
-  EPIC: {
+  SUPER_RARE: {
     borderColor: "#8b5cf6",
     bgGradient: ["#1e0a4a", "#2e1065", "#140530"],
     accentColor: "#a78bfa",
-    label: "ÉPIQUE",
+    label: "SUPER RARE",
     stars: 3,
   },
   LEGENDARY: {

@@ -30,9 +30,12 @@ const jwtSecret =
   "gacha-dev-secret-change-me";
 JWT.settings.secret = jwtSecret;
 if (jwtSecret === "gacha-dev-secret-change-me" && process.env.NODE_ENV === "production") {
+  // Refuse de démarrer : un secret JWT public en prod rend l'auth de Room
+  // (Discord Activity) forgeable. Pose BETTER_AUTH_SECRET dans l'environnement.
   process.stderr.write(
-    "[gacha-server] ⚠️  JWT secret = fallback dev en PRODUCTION — pose BETTER_AUTH_SECRET (JWT Colyseus forgeable sinon).\n",
+    "[gacha-server] FATAL — JWT secret = fallback dev en PRODUCTION. Pose BETTER_AUTH_SECRET.\n",
   );
+  process.exit(78); // EX_CONFIG
 }
 
 // Restreint le CORS de Colyseus (permissif par défaut : reflète toute origine).

@@ -45,7 +45,8 @@ export const ALLOWED_ORIGINS: ReadonlySet<string> = new Set(
 /** Sous-domaines acceptés dynamiquement (proxy Discord Activity + previews Vercel). */
 export const ALLOWED_ORIGIN_PATTERNS: readonly RegExp[] = [
   /^https:\/\/[a-z0-9-]+\.discordsays\.com$/i,
-  /^https:\/\/[a-z0-9-]+\.vercel\.app$/i,
+  // Previews Vercel DU PROJET uniquement (pas tout `*.vercel.app` tiers).
+  /^https:\/\/rpbey-[a-z0-9-]+\.vercel\.app$/i,
 ];
 
 /** True si l'origine HTTP est autorisée (exacte ou pattern). */

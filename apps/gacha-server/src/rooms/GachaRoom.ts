@@ -42,7 +42,13 @@ export class GachaRoom extends Room {
   override state = new GachaState();
 
   static override async onAuth(token: string): Promise<JwtPayload> {
-    return (await JWT.verify(token)) as JwtPayload;
+    const payload = (await JWT.verify(token)) as Partial<JwtPayload> | null;
+    // Valide la forme : un JWT cryptographiquement valide mais sans `userId`
+    // (p. ex. forgé par un autre service partageant le secret) ferait tourner
+    // les handlers avec userId=undefined → insert profil null / crash.
+    if (!payload || typeof payload.userId !== "string" || !payload.userId)
+      throw new Error("INVALID_TOKEN");
+    return { userId: payload.userId, name: payload.name };
   }
 
   override onCreate(): void {
@@ -76,13 +82,17 @@ export class GachaRoom extends Room {
 
     this.onMessage("balance", async (client) => {
       const user = asAuth(client.auth as JwtPayload);
-      const b = await h.balance(user);
-      const p = this.state.players.get(client.sessionId);
-      if (p) {
-        p.currency = b.currency;
-        p.pity = b.pityCount;
+      try {
+        const b = await h.balance(user);
+        const p = this.state.players.get(client.sessionId);
+        if (p) {
+          p.currency = b.currency;
+          p.pity = b.pityCount;
+        }
+        client.send("balance:result", b);
+      } catch (e) {
+        client.send("error", { message: (e as Error).message });
       }
-      client.send("balance:result", b);
     });
   }
 

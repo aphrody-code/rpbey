@@ -25,7 +25,7 @@ import type {
   WishlistToggleResult,
 } from "@rpbey/api-contract";
 import { db, schema } from "@rpbey/db";
-import { and, asc, desc, eq, ilike, lt, sql } from "drizzle-orm";
+import { and, asc, desc, eq, gt, ilike, lt, sql } from "drizzle-orm";
 import type { AuthUser } from "./auth";
 import {
   BADGES,
@@ -188,10 +188,12 @@ async function pickCard(rarity: Rarity): Promise<CardRow | null> {
 }
 
 async function uniqueCardCount(userId: string): Promise<number> {
+  // `count > 0` : une carte fusionnée/vendue jusqu'à 0 laisse une ligne fantôme
+  // `count:0` qui ne doit PAS compter comme carte unique (badges / leaderboard).
   const r = await db
     .select({ n: sql<number>`count(*)::int` })
     .from(cardInventory)
-    .where(eq(cardInventory.userId, userId));
+    .where(and(eq(cardInventory.userId, userId), gt(cardInventory.count, 0)));
   return r[0]?.n ?? 0;
 }
 
@@ -237,18 +239,19 @@ async function resolvePull(
   pityBefore: number,
 ): Promise<{ rarity: Rarity | null; card: CardRow | null; pityAfter: number }> {
   let rolled = rollRarity();
-  let pityAfter: number;
-  if (rolled !== "MISS" && SR_PLUS.includes(rolled)) {
-    pityAfter = 0;
-  } else if (pityBefore + 1 >= PITY_THRESHOLD) {
-    rolled = "SUPER_RARE"; // garantie pity
-    pityAfter = 0;
-  } else {
-    pityAfter = pityBefore + 1;
-  }
-  if (rolled === "MISS") return { rarity: null, card: null, pityAfter };
-  const card = await pickCard(rolled);
-  return { rarity: card ? (card.rarity as Rarity) : null, card, pityAfter };
+  const atPity = pityBefore + 1 >= PITY_THRESHOLD;
+  const rolledSrPlus = rolled !== "MISS" && SR_PLUS.includes(rolled);
+  // Garantie pity : au seuil, force un SUPER_RARE (sauf si le roll est déjà SR+).
+  if (atPity && !rolledSrPlus) rolled = "SUPER_RARE";
+
+  const card = rolled === "MISS" ? null : await pickCard(rolled);
+  const servedRarity = card ? (card.rarity as Rarity) : null;
+  // Pity remise à 0 UNIQUEMENT si la carte réellement servie est SR+ : si le
+  // stock SR+ est vide, `pickCard` retombe sur une rareté inférieure → on ne
+  // consomme pas la garantie (sinon le joueur paie, perd sa pity et reçoit une
+  // commune). La garantie reste due au prochain tirage.
+  const pityAfter = servedRarity && SR_PLUS.includes(servedRarity) ? 0 : pityBefore + 1;
+  return { rarity: servedRarity, card, pityAfter };
 }
 
 // ─── Handlers ──────────────────────────────────────────────────────────────
@@ -966,10 +969,18 @@ export async function fuse(
   };
 }
 
+const LEADERBOARD_CATEGORIES = ["currency", "wins", "mmr", "collection"] as const;
+
 export async function leaderboard(
   category: string,
   q: URLSearchParams,
 ): Promise<Ok<"entries", GameLeaderboardEntry[]>> {
+  if (!(LEADERBOARD_CATEGORIES as readonly string[]).includes(category))
+    throw new ApiError(
+      "BAD_REQUEST",
+      `Catégorie invalide (attendu : ${LEADERBOARD_CATEGORIES.join(", ")})`,
+      400,
+    );
   const limit = Math.min(100, Math.max(1, Number(q.get("limit") ?? "10") || 10));
   if (category === "collection") {
     const rows = await db
@@ -981,6 +992,7 @@ export async function leaderboard(
       })
       .from(cardInventory)
       .innerJoin(users, eq(cardInventory.userId, users.id))
+      .where(gt(cardInventory.count, 0))
       .groupBy(cardInventory.userId, users.name, users.image)
       .orderBy(desc(sql`count(*)`))
       .limit(limit);

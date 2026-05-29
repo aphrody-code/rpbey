@@ -244,14 +244,14 @@ export const schema = createSchema({
       cardCount: Int!
     }
 
+    # Profil gacha PUBLIC : uniquement des stats déjà visibles (collection, duels,
+    # palmarès). Le endpoint /api/graphql est public et non authentifié — on
+    # n'expose donc PAS le solde (currency), la pity, le streak ni lastDaily
+    # (timing/activité exploitables) pour un userId arbitraire.
     type GachaProfile {
       id: ID!
       userId: ID!
       bladerName: String
-      currency: Int!
-      dailyStreak: Int!
-      lastDaily: String
-      pityCount: Int!
       wins: Int!
       losses: Int!
       tournamentWins: Int!

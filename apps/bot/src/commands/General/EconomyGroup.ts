@@ -12,6 +12,7 @@ import { StaffOnly } from "../../guards/StaffOnly.js";
 import { Colors, RPB } from "../../lib/constants.js";
 import { GachaApiError, createGachaClient, type GachaApiClient } from "../../lib/gacha-api.js";
 import {
+  fetchBannerPromoPng,
   fetchCardPng,
   fetchInventoryMosaicPng,
   fetchLeaderboardPng,
@@ -407,17 +408,11 @@ export class EconomyGroup {
           emoji: RARITY_CONFIG[r]?.emoji || "⚪",
         }));
 
-      // Try to get profile card image from gacha server
-      // We need the internal userId from the session cache — get it from balance endpoint
-      const profileAttachment = await fetchProfileCardPng(
-        interaction.user.id,
-        // We pass discordId here; the gacha server uses userId internally.
-        // The profile card endpoint uses internal userId. We can get it via
-        // the session cache by calling createGachaClient again but that's
-        // wasteful — instead we map via the users table (already done by balance).
-        // For now we pass undefined and fall through to embed.
-        undefined,
-      ).catch(() => null);
+      // Image de profil : le endpoint serveur attend l'userId INTERNE (uuid),
+      // fourni par `balance()` (`bal.userId`), pas le discordId.
+      const profileAttachment = bal.userId
+        ? await fetchProfileCardPng(bal.userId).catch(() => null)
+        : null;
 
       if (profileAttachment) {
         return interaction.editReply({ files: [profileAttachment] });
@@ -1346,17 +1341,20 @@ export class EconomyGroup {
     const coinReward = winner === "A" ? Math.round(scoreA / 3) : Math.round(scoreB / 3);
     const winnerId = winner === "A" ? userA.id : userB.id;
 
-    await this.prisma.profile.update({
-      where: { userId: winnerId },
-      data: { currency: { increment: coinReward } },
-    });
-    await this.prisma.currencyTransaction.create({
-      data: {
-        userId: winnerId,
-        amount: coinReward,
-        type: "TOURNAMENT_REWARD",
-        note: `Duel gacha: ${pickA.name} vs ${pickB.name}`,
-      },
+    // Crédit + journal atomiques (cohérence solde↔ledger même en cas de crash).
+    await this.prisma.$transaction(async (tx) => {
+      await tx.profile.update({
+        where: { userId: winnerId },
+        data: { currency: { increment: coinReward } },
+      });
+      await tx.currencyTransaction.create({
+        data: {
+          userId: winnerId,
+          amount: coinReward,
+          type: "TOURNAMENT_REWARD",
+          note: `Duel gacha: ${pickA.name} vs ${pickB.name}`,
+        },
+      });
     });
 
     const winnerName = winner === "A" ? interaction.user.displayName : target.displayName;
@@ -1502,11 +1500,7 @@ export class EconomyGroup {
       });
     }
 
-    await this.prisma.profile.update({
-      where: { id: profile.id },
-      data: { currency: { decrement: mise } },
-    });
-
+    // Le tirage est pur (RNG) → calculé avant la transaction.
     const roll = Math.random();
     let multiplier: number;
     let result: string;
@@ -1538,23 +1532,44 @@ export class EconomyGroup {
     const gain = mise * multiplier;
     const net = gain - mise;
 
-    if (gain > 0) {
-      await this.prisma.profile.update({
-        where: { id: profile.id },
-        data: { currency: { increment: gain } },
+    // Débit + gain + journal ATOMIQUES. Le débit est un UPDATE conditionnel
+    // (`currency >= mise`) : deux paris concurrents ne peuvent pas tous deux
+    // passer le contrôle (anti double-spend / solde négatif).
+    const settled = await this.prisma.$transaction(async (tx) => {
+      const debit = await tx.profile.updateMany({
+        where: { userId: user.id, currency: { gte: mise } },
+        data: { currency: { decrement: mise } },
+      });
+      if (debit.count === 0) return false;
+      if (gain > 0) {
+        await tx.profile.update({
+          where: { id: profile.id },
+          data: { currency: { increment: gain } },
+        });
+      }
+      await tx.currencyTransaction.create({
+        data: {
+          userId: user.id,
+          amount: net,
+          type: "GACHA_PULL",
+          note: `Pari: mise ${mise} → x${multiplier} (${net >= 0 ? "+" : ""}${net})`,
+        },
+      });
+      return true;
+    });
+
+    if (!settled) {
+      return interaction.editReply({
+        embeds: [
+          errorEmbed(
+            "Fonds insuffisants",
+            `Solde insuffisant pour miser **${mise.toLocaleString("fr-FR")}** 🪙 (un autre pari vient peut-être de passer).`,
+          ),
+        ],
       });
     }
 
     const newBalance = profile.currency - mise + gain;
-
-    await this.prisma.currencyTransaction.create({
-      data: {
-        userId: user.id,
-        amount: net,
-        type: "GACHA_PULL",
-        note: `Pari: mise ${mise} → x${multiplier} (${net >= 0 ? "+" : ""}${net})`,
-      },
-    });
 
     const beyMessages: Record<number, string[]> = {
       0: [
@@ -1794,30 +1809,49 @@ export class EconomyGroup {
       });
     }
 
-    await this.prisma.profile.update({
-      where: { id: profile.id },
-      data: { currency: { decrement: amount }, lastGiftSent: new Date() },
+    // Transfert ATOMIQUE : débit conditionnel (`currency >= amount`, anti
+    // double-spend), crédit destinataire et double journal dans une seule
+    // transaction → impossible de détruire/créer de la monnaie si une écriture
+    // échoue, et deux dons concurrents ne peuvent pas tous deux passer le débit.
+    const settled = await this.prisma.$transaction(async (tx) => {
+      const debit = await tx.profile.updateMany({
+        where: { userId: user.id, currency: { gte: amount } },
+        data: { currency: { decrement: amount }, lastGiftSent: new Date() },
+      });
+      if (debit.count === 0) return false;
+      await tx.profile.update({
+        where: { id: targetProfile.id },
+        data: { currency: { increment: amount } },
+      });
+      await tx.currencyTransaction.createMany({
+        data: [
+          {
+            userId: user.id,
+            amount: -amount,
+            type: "ADMIN_GIVE",
+            note: `Don à ${target.displayName}`,
+          },
+          {
+            userId: targetUser.id,
+            amount,
+            type: "ADMIN_GIVE",
+            note: `Don de ${interaction.user.displayName}`,
+          },
+        ],
+      });
+      return true;
     });
-    await this.prisma.profile.update({
-      where: { id: targetProfile.id },
-      data: { currency: { increment: amount } },
-    });
-    await this.prisma.currencyTransaction.createMany({
-      data: [
-        {
-          userId: user.id,
-          amount: -amount,
-          type: "ADMIN_GIVE",
-          note: `Don à ${target.displayName}`,
-        },
-        {
-          userId: targetUser.id,
-          amount,
-          type: "ADMIN_GIVE",
-          note: `Don de ${interaction.user.displayName}`,
-        },
-      ],
-    });
+
+    if (!settled) {
+      return interaction.editReply({
+        embeds: [
+          errorEmbed(
+            "Don impossible",
+            `Solde insuffisant pour donner **${amount.toLocaleString("fr-FR")}** 🪙.`,
+          ),
+        ],
+      });
+    }
 
     return interaction.editReply({
       embeds: [
@@ -1981,7 +2015,7 @@ export class EconomyGroup {
       }
 
       // Get banner promo image
-      const bannerAttachment = await fetchInventoryMosaicPng(activeBanner.id).catch(() => null);
+      const bannerAttachment = await fetchBannerPromoPng(activeBanner.slug).catch(() => null);
 
       const endTimestamp = activeBanner.endDate
         ? Math.floor(new Date(activeBanner.endDate).getTime() / 1000)

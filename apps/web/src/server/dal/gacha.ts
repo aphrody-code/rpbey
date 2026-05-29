@@ -468,10 +468,15 @@ export async function executePartPullTx(opts: {
 }): Promise<number> {
   const { userId, partIds, cost, type, note } = opts;
   return db.transaction(async (tx) => {
-    const profile = await tx.query.profiles.findFirst({
-      where: eq(schema.profiles.userId, userId),
-      columns: { currency: true },
-    });
+    // Verrou ligne profil (`FOR UPDATE`) — sérialise les tirages de pièces
+    // concurrents → pas d'overspend (cf. executeCardPullTx). Sans verrou, 2
+    // tirages parallèles lisent le même solde et débitent tous deux.
+    const [profile] = await tx
+      .select({ currency: schema.profiles.currency })
+      .from(schema.profiles)
+      .where(eq(schema.profiles.userId, userId))
+      .for("update")
+      .limit(1);
     if (!profile) throw new Error("NO_PROFILE");
     if (profile.currency < cost) throw new Error("INSUFFICIENT_FUNDS");
 
