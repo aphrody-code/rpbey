@@ -45,14 +45,18 @@ ln -sfn "$DATA_SRC" "$SA/data"
 # sous-dossier helper/ (chargé via __dirname au runtime → ENOENT signature.js).
 # On le copie (feature TikTok du /tv, sinon unhandledRejection en boucle).
 TT_PKG_SRC=/home/ubuntu/rpbey/node_modules/@tobyg74/tiktok-api-dl
-TT_PKG_DST="$SA/node_modules/@tobyg74/tiktok-api-dl"
+TT_HELPER_SRC="$TT_PKG_SRC/helper"
 if [ -d "$TT_PKG_SRC" ]; then
-	# Next ne trace PAS @tobyg74/tiktok-api-dl dans standalone (dir parent absent) ;
-	# l'ancienne garde [ -d dirname ] sautait donc la copie → ENOENT helper/signature.js
-	# en boucle (unhandledRejection /tv). On copie le PACKAGE entier en créant le parent.
-	echo "[deploy] tiktok-api-dl (+helper) → standalone (package non tracé par Next)"
-	mkdir -p "$(dirname "$TT_PKG_DST")"
-	cp -rf "$TT_PKG_SRC" "$(dirname "$TT_PKG_DST")/"
+	# Next trace @tobyg74/tiktok-api-dl de façon INCOMPLÈTE : helper/ est chargé via
+	# __dirname au runtime, donc seul xbogus.js est tracé (signature.js absent) →
+	# ENOENT helper/signature.js en boucle (unhandledRejection /tv). Le runtime peut
+	# résoudre le package depuis l'une des copies (root standalone OU apps/web/node_modules).
+	# On garantit le package complet dans apps/web/node_modules ET on re-remplit helper/
+	# dans TOUTE copie tracée (root + apps/web + .next) pour couvrir la résolution réelle.
+	echo "[deploy] tiktok-api-dl (+helper) → toutes copies standalone"
+	mkdir -p "$SA/node_modules/@tobyg74"
+	cp -rf "$TT_PKG_SRC" "$SA/node_modules/@tobyg74/"
+	find .next/standalone -type d -path "*@tobyg74/tiktok-api-dl" -exec cp -rf "$TT_HELPER_SRC" {}/ \;
 fi
 
 echo "[deploy] OK — restart : sudo systemctl restart rpbey-web.service"
