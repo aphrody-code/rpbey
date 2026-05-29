@@ -1,0 +1,59 @@
+import { z } from "zod";
+
+/**
+ * Schémas des SORTIES de scrapeurs — le contrat que chaque scrapeur bxc doit
+ * produire pour alimenter correctement la DB / l'API. Validés par la fondation
+ * `ghost-scraper` (validateRecords) avant écriture.
+ */
+
+// ── Produit catalogue (→ data/bx-catalog.json, consommé par le comparateur). ──
+// Reflet de BxProduct (apps/web .../comparateur/_components/types.ts).
+export const CatalogProductSchema = z.object({
+  shop: z.string(),
+  domain: z.string(),
+  region: z.string(),
+  type: z.string(),
+  currency: z.string(),
+  title: z.string().min(1),
+  price: z.number().nullable(),
+  priceMax: z.number().nullable(),
+  priceEur: z.number().nullish(),
+  available: z.boolean(),
+  url: z.url(),
+  image: z.string().nullable(),
+});
+export type CatalogProduct = z.infer<typeof CatalogProductSchema>;
+
+// ── Ligne d'import pièce (→ table `parts` @rpbey/db). ──
+// Champs requis = colonnes notNull ; stats en TEXT ; timestamps gérés par la DB.
+export const PartImportSchema = z.object({
+  externalId: z.string().min(1),
+  name: z.string().min(1),
+  type: z.enum(["BLADE", "RATCHET", "BIT", "ASSIST_BLADE", "LOCK_CHIP", "OVER_BLADE"]),
+  nameJp: z.string().nullish(),
+  beyType: z.enum(["ATTACK", "DEFENSE", "STAMINA", "BALANCE"]).nullish(),
+  weight: z.number().nullish(),
+  attack: z.string().nullish(),
+  defense: z.string().nullish(),
+  stamina: z.string().nullish(),
+  burst: z.string().nullish(),
+  dash: z.string().nullish(),
+  height: z.number().int().nullish(),
+  imageUrl: z.string().nullish(),
+  rarity: z.string().nullish(),
+  spinDirection: z.string().nullish(),
+  system: z.string().nullish(),
+});
+export type PartImport = z.infer<typeof PartImportSchema>;
+
+// ── Combo méta WBO (→ data/wbo-combos.json / enrichissement reco). ──
+export const WboComboSchema = z.object({
+  combo: z.string().min(1),
+  blade: z.string().nullish(),
+  ratchet: z.string().nullish(),
+  bit: z.string().nullish(),
+  usage: z.number().int().nonnegative().nullish(),
+  topCut: z.number().int().nonnegative().nullish(),
+  tier: z.enum(["S", "A", "B", "C"]).nullish(),
+});
+export type WboCombo = z.infer<typeof WboComboSchema>;

@@ -59,6 +59,7 @@
       "name": "@rose-griffon/dashboard",
       "version": "1.0.0",
       "dependencies": {
+        "@aphrody-code/bxc": "^0.3.0",
         "@better-fetch/fetch": "^1.1.21",
         "@discord/embedded-app-sdk": "^2.4.0",
         "@emotion/cache": "^11.14.0",
