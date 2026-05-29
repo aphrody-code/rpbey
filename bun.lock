@@ -212,6 +212,7 @@
       "dependencies": {
         "@aphrody-code/bxc": "^0.5.2",
         "lru-cache": "^11.3.5",
+        "zod": "^4.4.3",
       },
       "devDependencies": {
         "oxlint": "catalog:",

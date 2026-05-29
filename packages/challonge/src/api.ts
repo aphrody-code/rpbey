@@ -106,6 +106,53 @@ export interface ChallongeApiTournament {
   matches?: Array<{ match: ChallongeApiMatch }>;
 }
 
+/**
+ * Raw v1 shape for a match attachment.
+ *
+ * Endpoint family: `/tournaments/{t}/matches/{m}/attachments`.
+ * An attachment is either a URL (link), a text note (`description`), or an
+ * uploaded asset (`asset_*` fields, present only when a file was uploaded).
+ */
+export interface ChallongeApiMatchAttachment {
+  id: number;
+  match_id?: number;
+  user_id?: number | null;
+  description?: string | null;
+  url?: string | null;
+  original_file_name?: string | null;
+  created_at?: string | null;
+  updated_at?: string | null;
+  /** Present only for uploaded-file attachments. */
+  asset_file_name?: string | null;
+  asset_content_type?: string | null;
+  asset_file_size?: number | null;
+  /** Challonge also returns a direct asset URL on uploads. */
+  asset_url?: string | null;
+}
+
+/**
+ * camelCase, normalized match attachment — the shape the client exposes,
+ * consistent with the rest of api.ts (`ScrapedParticipant`/`ScrapedMatch`).
+ *
+ * Timestamps are kept as raw ISO strings (monorepo invariant: non-auth =
+ * string ISO). Wrap in `new Date(x)` before any `.toLocaleDateString()`.
+ */
+export interface MatchAttachment {
+  id: number;
+  matchId: number | null;
+  userId: number | null;
+  description: string | null;
+  url: string | null;
+  originalFileName: string | null;
+  createdAt: string | null;
+  updatedAt: string | null;
+  /** Present only for uploaded-file attachments (else null). */
+  assetFileName: string | null;
+  assetContentType: string | null;
+  assetFileSize: number | null;
+  assetUrl: string | null;
+}
+
 // ─── Errors ──────────────────────────────────────────────────────────────────
 
 export class ChallongeApiError extends Error {
@@ -164,6 +211,12 @@ export class ChallongeApi {
     path: string,
     init: {
       query?: Record<string, string | number | undefined>;
+      /**
+       * Form-encoded request body. Keys may use Challonge's bracket syntax
+       * (`match_attachment[url]`). Sent as `application/x-www-form-urlencoded`.
+       * Undefined/null values are omitted.
+       */
+      form?: Record<string, string | number | boolean | undefined | null>;
       signal?: AbortSignal;
     } = {},
   ): Promise<T> {
@@ -172,6 +225,15 @@ export class ChallongeApi {
       for (const [k, v] of Object.entries(init.query)) {
         if (v !== undefined && v !== null) url.searchParams.set(k, String(v));
       }
+    }
+
+    let reqBody: string | undefined;
+    if (init.form) {
+      const params = new URLSearchParams();
+      for (const [k, v] of Object.entries(init.form)) {
+        if (v !== undefined && v !== null) params.set(k, String(v));
+      }
+      reqBody = params.toString();
     }
 
     return retry(
@@ -183,13 +245,18 @@ export class ChallongeApi {
         init.signal?.addEventListener("abort", externalAbort, { once: true });
 
         try {
+          const headers: Record<string, string> = {
+            Authorization: this.authHeader,
+            "User-Agent": this.userAgent,
+            Accept: "application/json",
+          };
+          if (reqBody !== undefined) {
+            headers["Content-Type"] = "application/x-www-form-urlencoded";
+          }
           const resp = await fetch(url.toString(), {
             method,
-            headers: {
-              Authorization: this.authHeader,
-              "User-Agent": this.userAgent,
-              Accept: "application/json",
-            },
+            headers,
+            body: reqBody,
             signal: ctl.signal,
           });
 
@@ -273,6 +340,106 @@ export class ChallongeApi {
       },
     );
     return arr.map((x) => x.tournament);
+  }
+
+  // ── Match attachments (v1) ────────────────────────────────────────────────
+
+  /**
+   * List every attachment on a match.
+   * GET /tournaments/{t}/matches/{m}/attachments.json
+   */
+  async listAttachments(
+    tournamentId: string | number,
+    matchId: string | number,
+    opts: { signal?: AbortSignal } = {},
+  ): Promise<MatchAttachment[]> {
+    const arr = await this.request<Array<{ match_attachment: ChallongeApiMatchAttachment }>>(
+      "GET",
+      `/tournaments/${tournamentId}/matches/${matchId}/attachments.json`,
+      { signal: opts.signal },
+    );
+    return arr.map((x) => mapAttachment(x.match_attachment));
+  }
+
+  /**
+   * Fetch a single attachment by id.
+   * GET /tournaments/{t}/matches/{m}/attachments/{id}.json
+   */
+  async getAttachment(
+    tournamentId: string | number,
+    matchId: string | number,
+    attachmentId: string | number,
+    opts: { signal?: AbortSignal } = {},
+  ): Promise<MatchAttachment> {
+    const json = await this.request<{
+      match_attachment: ChallongeApiMatchAttachment;
+    }>("GET", `/tournaments/${tournamentId}/matches/${matchId}/attachments/${attachmentId}.json`, {
+      signal: opts.signal,
+    });
+    return mapAttachment(json.match_attachment);
+  }
+
+  /**
+   * Create an attachment (a link, a text note, or an asset URL).
+   * POST /tournaments/{t}/matches/{m}/attachments.json
+   *
+   * The match must belong to a tournament where attachments are allowed
+   * (`accept_attachments=1`). At least one of `url`/`description`/`assetUrl`
+   * should be set.
+   */
+  async createAttachment(
+    tournamentId: string | number,
+    matchId: string | number,
+    data: { url?: string; description?: string; assetUrl?: string },
+    opts: { signal?: AbortSignal } = {},
+  ): Promise<MatchAttachment> {
+    const json = await this.request<{
+      match_attachment: ChallongeApiMatchAttachment;
+    }>("POST", `/tournaments/${tournamentId}/matches/${matchId}/attachments.json`, {
+      form: attachmentForm(data),
+      signal: opts.signal,
+    });
+    return mapAttachment(json.match_attachment);
+  }
+
+  /**
+   * Update an existing attachment. Only the provided fields are sent.
+   * PUT /tournaments/{t}/matches/{m}/attachments/{id}.json
+   */
+  async updateAttachment(
+    tournamentId: string | number,
+    matchId: string | number,
+    attachmentId: string | number,
+    data: { url?: string; description?: string; assetUrl?: string },
+    opts: { signal?: AbortSignal } = {},
+  ): Promise<MatchAttachment> {
+    const json = await this.request<{
+      match_attachment: ChallongeApiMatchAttachment;
+    }>("PUT", `/tournaments/${tournamentId}/matches/${matchId}/attachments/${attachmentId}.json`, {
+      form: attachmentForm(data),
+      signal: opts.signal,
+    });
+    return mapAttachment(json.match_attachment);
+  }
+
+  /**
+   * Delete an attachment. Returns the deleted attachment as echoed by the API.
+   * DELETE /tournaments/{t}/matches/{m}/attachments/{id}.json
+   */
+  async deleteAttachment(
+    tournamentId: string | number,
+    matchId: string | number,
+    attachmentId: string | number,
+    opts: { signal?: AbortSignal } = {},
+  ): Promise<MatchAttachment> {
+    const json = await this.request<{
+      match_attachment: ChallongeApiMatchAttachment;
+    }>(
+      "DELETE",
+      `/tournaments/${tournamentId}/matches/${matchId}/attachments/${attachmentId}.json`,
+      { signal: opts.signal },
+    );
+    return mapAttachment(json.match_attachment);
   }
 
   /**
@@ -376,6 +543,47 @@ export class ChallongeApi {
       raw: t,
     };
   }
+}
+
+/**
+ * Normalize a raw v1 `match_attachment` into the camelCase `MatchAttachment`
+ * shape exposed by the client. Missing optional fields collapse to `null`.
+ */
+function mapAttachment(a: ChallongeApiMatchAttachment): MatchAttachment {
+  return {
+    id: a.id,
+    matchId: a.match_id ?? null,
+    userId: a.user_id ?? null,
+    description: a.description ?? null,
+    url: a.url ?? null,
+    originalFileName: a.original_file_name ?? null,
+    createdAt: a.created_at ?? null,
+    updatedAt: a.updated_at ?? null,
+    assetFileName: a.asset_file_name ?? null,
+    assetContentType: a.asset_content_type ?? null,
+    assetFileSize: a.asset_file_size ?? null,
+    assetUrl: a.asset_url ?? null,
+  };
+}
+
+/**
+ * Build the form body for create/update. Challonge v1 nests attachment fields
+ * under `match_attachment[...]`. Only the supplied fields are sent.
+ */
+function attachmentForm(data: {
+  url?: string;
+  description?: string;
+  assetUrl?: string;
+}): Record<string, string> {
+  const form: Record<string, string> = {};
+  if (data.url !== undefined) form["match_attachment[url]"] = data.url;
+  if (data.description !== undefined) {
+    form["match_attachment[description]"] = data.description;
+  }
+  if (data.assetUrl !== undefined) {
+    form["match_attachment[asset_url]"] = data.assetUrl;
+  }
+  return form;
 }
 
 /**

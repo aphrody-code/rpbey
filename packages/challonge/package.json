@@ -30,6 +30,8 @@
     "./store-state": "./src/extractors/store-state.ts",
     "./clients/crawler": "./src/clients/crawler.ts",
     "./clients/search": "./src/clients/search.ts",
+    "./write": "./src/write.ts",
+    "./schemas": "./src/schemas.ts",
     "./core/fetch-engine": "./src/core/fetch-engine.ts",
     "./core/cache": "./src/core/cache.ts",
     "./types": "./src/types.ts",
@@ -48,7 +50,8 @@
   },
   "dependencies": {
     "@aphrody-code/bxc": "^0.5.2",
-    "lru-cache": "^11.3.5"
+    "lru-cache": "^11.3.5",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "oxlint": "catalog:",

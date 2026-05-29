@@ -22,8 +22,44 @@ export {
   type ChallongeApiTournament,
   type ChallongeApiParticipant,
   type ChallongeApiMatch,
+  type ChallongeApiMatchAttachment,
+  type MatchAttachment,
 } from "./api";
 export { ChallongeClient, type ChallongeClientOptions, type FetchOptions } from "./client";
+
+// Write surface (v2.1 JSON:API, OAuth client_credentials) — extrait apps/bot.
+// `ChallongeClient` y collisionne avec le scraper-client de ./client : on
+// réexporte la classe write sous l'alias `ChallongeWriteClient`. Les types
+// JSON:API génériques (Tournament/Participant/Match/ApiResponse/ChallongeConfig)
+// sont aliasés `ChallongeV2*` pour ne pas masquer d'autres surfaces.
+export {
+  ChallongeClient as ChallongeWriteClient,
+  getChallongeClient,
+  type ChallongeConfig as ChallongeWriteConfig,
+  type Tournament as ChallongeV2Tournament,
+  type Participant as ChallongeV2Participant,
+  type Match as ChallongeV2Match,
+  type ApiResponse as ChallongeV2ApiResponse,
+} from "./write";
+
+// Schémas Zod partagés (validateurs runtime des données scrapées) — bundlables.
+export {
+  ChallongeBracketSideSchema,
+  ChallongeParticipantSchema,
+  ChallongeMatchSchema,
+  ChallongeStandingSchema,
+  ChallongeStationSchema,
+  ChallongeLogEntrySchema,
+  ChallongeTournamentMetadataSchema,
+  ChallongeTournamentSchema,
+  type ChallongeParticipant,
+  type ChallongeMatch,
+  type ChallongeStanding,
+  type ChallongeStation,
+  type ChallongeLogEntry,
+  type ChallongeTournamentMetadata,
+  type ChallongeTournament,
+} from "./schemas";
 
 // Reverse engineering surface (browser-less Cloudflare bypass).
 export {
