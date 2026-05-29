@@ -37,10 +37,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ### DB partagée = le fait transverse #1
 
-Les **deux** applis tapent le **même Postgres LOCAL** (socket `/var/run/postgresql`, base `rpb_neon`, user `ubuntu`) via le package **`@rpbey/db`** (Drizzle ORM + postgres-js, ~53 tables, `schema.ts` + `relations.ts`). C'est la **source de vérité unique** du schéma — toute évolution DB passe par ce package, pas par une migration locale à une appli.
+Les **deux** applis tapent le **même Postgres LOCAL** (socket `/var/run/postgresql`, base `rpb_neon`, user `ubuntu`) via le package **`@rpbey/db`** (Drizzle ORM + postgres-js, ~54 tables, `schema.ts` + `relations.ts`). C'est la **source de vérité unique** du schéma — toute évolution DB passe par ce package, pas par une migration locale à une appli.
 
 - Le **web** consomme Drizzle directement (`@rpbey/db`).
-- Le **bot** passe par une **façade compatible Prisma** (`apps/bot/src/lib/prisma.ts`, ~860 lignes) qui émule l'API Prisma sur Drizzle, pour ne pas réécrire ~295 call-sites. Dans le bot : utiliser `prisma`/`this.prisma`, **jamais** Drizzle inline.
+- Le **bot** passe par une **façade compatible Prisma** (`apps/bot/src/lib/prisma.ts`, ~900 lignes) qui émule l'API Prisma sur Drizzle, pour ne pas réécrire ~295 call-sites. Dans le bot : utiliser `prisma`/`this.prisma`, **jamais** Drizzle inline.
 
 ### 🔑 Invariant timestamp (split de mode assumé)
 

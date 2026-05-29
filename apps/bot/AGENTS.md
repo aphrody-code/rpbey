@@ -33,7 +33,7 @@ Ordre **non négociable** :
 | `commands/{Admin,Beyblade,General}` | 23 commandes slash (`@Discord`/`@Slash`/`@SlashGroup`).           |
 | `components/`                       | Handlers de boutons/selects/modals (`@ButtonComponent`, etc.).    |
 | `events/`, `events/guild/`          | 9 listeners (`@On`/`@Once`).                                      |
-| `cron/tasks/` + `cron/index.ts`     | 12 tâches planifiées (`Bun.cron`).                                |
+| `cron/tasks/` + `cron/index.ts`     | 7 tâches planifiées actives (`Bun.cron`) sur 11 fichiers `tasks/` (3 désactivées). |
 | `guards/`                           | Guards discordx (`@Guard`).                                       |
 | `services/`                         | Services injectables (DI singletons).                             |
 | `lib/`                              | Cœur non-Discord : DB, cache, UI, moteurs, canvas, API, scrapers. |
@@ -42,7 +42,7 @@ Ordre **non négociable** :
 ## 4. Couche données — façade `lib/prisma.ts`
 
 La DB est **Drizzle** (`@rpbey/db` → `{ db, schema }`), mais le bot l'interroge via
-une **façade qui émule l'API Prisma** (`lib/prisma.ts`, ~860 lignes ;
+une **façade qui émule l'API Prisma** (`lib/prisma.ts`, ~900 lignes ;
 `export const prisma`, injecté/importé). On garde la façade : ~295 call-sites
 fonctionnent dessus sans réécriture. **N'appelle PAS Drizzle directement** dans
 les commandes — passe par `this.prisma` / `prisma`.
@@ -111,7 +111,7 @@ ranking → `cacheDel`/`invalidateSeasonsCache`).
 silencieusement (`Bun.cron is not a function`). Le bot **requiert Bun 1.3+**.
 Tâches : LiveTournamentSync (5min), PreTournamentSync (horaire), TournamentReminder
 (:30), SyncRankingRoles + SyncSatrRoles (30min), BBX meta (ven 18h), MentionsScan
-(6h), cleanup sessions (3h). Évite tout travail lourd bloquant ; parallélise les
+(6h), nettoyage sessions (quotidien, 01:00 UTC). Évite tout travail lourd bloquant ; parallélise les
 `await` indépendants (`Promise.all`).
 
 ## 9. API & lien avec le dashboard Next
@@ -142,7 +142,7 @@ publics ; routes scrape/tournois protégées (Bearer `BOT_API_KEY`) ; WebSocket 
 ```bash
 cd ~/rpbey/apps/bot
 bunx tsc --noEmit     # type-check → 0 erreur attendu
-bun run build         # SWC → dist/ (105 fichiers)
+bun run build         # SWC → dist/ (~106 fichiers)
 bun run start         # lance le bot (Bun 1.3+)
 ```
 
