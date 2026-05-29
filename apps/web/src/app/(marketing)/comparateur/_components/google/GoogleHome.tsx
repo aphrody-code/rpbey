@@ -4,7 +4,7 @@ import { Box, Button, Stack, Typography } from "@mui/material";
 import type { GlobalSearchItem, RecommendedProduct } from "@rpbey/api-contract";
 import { GoogleSearchField } from "./GoogleSearchField";
 import { GoogleTopBar } from "./GoogleTopBar";
-import { GRADIENT_WORDMARK, TEXT_SECONDARY, TEXT_TERTIARY } from "./tokens";
+import { GRADIENT_WORDMARK, TEXT_TERTIARY } from "./tokens";
 
 interface GoogleHomeProps {
   suggestions: GlobalSearchItem[];
@@ -57,14 +57,29 @@ export function GoogleHome({
             fontSize: { xs: "3rem", sm: "4.5rem", md: "5.5rem" },
             lineHeight: 1,
             letterSpacing: "-0.04em",
-            mb: 4,
+            mb: 1.5,
             background: GRADIENT_WORDMARK,
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             userSelect: "none",
           }}
         >
-          Comparateur
+          RPB
+        </Typography>
+
+        {/* Tagline : ce moteur couvre tout l'univers Beyblade, pas juste le comparateur */}
+        <Typography
+          sx={{
+            fontSize: { xs: "0.95rem", sm: "1.2rem" },
+            fontWeight: 600,
+            color: "text.secondary",
+            mb: 4,
+            textAlign: "center",
+            letterSpacing: "-0.01em",
+            maxWidth: 620,
+          }}
+        >
+          Le moteur de recherche Beyblade — beys, parts, combos, tournois, bladers, anime & lexique
         </Typography>
 
         {/* Greeting contextuel */}
@@ -78,7 +93,7 @@ export function GoogleHome({
               textAlign: "center",
             }}
           >
-            Salut. Quelle piece cherches-tu ?
+            Salut. Que cherches-tu dans l&apos;univers Beyblade ?
           </Typography>
         )}
 
@@ -134,19 +149,9 @@ export function GoogleHome({
           </Button>
         </Stack>
 
-        {/* Sous-texte langue (style Google) */}
+        {/* Sous-texte (style Google) */}
         <Typography sx={{ mt: 3, fontSize: "0.8rem", color: TEXT_TERTIARY }}>
-          Comparateur disponible en{" "}
-          <Box
-            component="span"
-            sx={{
-              color: TEXT_SECONDARY,
-              textDecoration: "underline",
-              cursor: "pointer",
-            }}
-          >
-            francais
-          </Box>
+          Recherche Beyblade — toutes générations (Bakuten, Metal, Burst, X) · français
         </Typography>
       </Box>
     </Box>
