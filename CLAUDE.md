@@ -76,6 +76,8 @@ Pour comprendre le fonctionnement de la session de crawling, l'indexation Redis 
 
 - **`scripts/deploy-web.sh` OBLIGATOIRE après chaque `next build`** : le standalone n'inclut **pas** `public/` ni `data/*` (exclus du tracing). Sans lui → chunks JS 404 (site mort), images/rankings vides. Le script copie `.next/static`, symlinke `public/` → CDN, copie les exports `data/`.
 - Pièges build : pas d'import runtime de `@rpbey/db` depuis un client component (fuite postgres → bundle) ; `transpilePackages: ["@vidstack/react"]` ; scraper challonge importé via `@/lib/challonge-vendor/scraper` (pas le barrel) ; `ignoreBuildErrors: false` (drift MUI X v9 résorbé → build type-check strict).
+- **Migration API-first** (plan `tingly-wondering-river`) : complète et déployée **en co-localisé** (dette `@rpbey/db` hors DAL = 0, gate transitif global). Mais l'objectif « déployable seul Vercel » **reste non atteint** : la plupart des RSC/client lisent encore la DAL ou un `fetch` relatif (seam SDK dormant tant que `API_BASE` n'est pas set, jamais smoke-testé en standalone).
+- **⚠️ Le gate de vérif DOIT inclure `next build`, pas seulement `tsc`** : un client component qui importe une façade `lib/*` ré-exportant un module server-only casse le bundle browser **sans que `tsc` le voie** (`tsc` valide les types, pas la frontière server/client du bundler). Cas réel : `TvFeed` → `lib/beytube` → `server/dal/stream`.
 
 ## Style commits
 

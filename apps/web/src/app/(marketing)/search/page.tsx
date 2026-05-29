@@ -1,7 +1,7 @@
 import { type Metadata } from "next";
 import { Suspense } from "react";
 import { computeGroups, groupSlug, loadCatalog } from "@/lib/bx-catalog";
-import { getRecommendations } from "@/lib/recommendation-engine";
+import { getRecommendations } from "@/server/services/recommend";
 import { createPageMetadata } from "@/lib/seo-utils";
 import { ComparateurSearch } from "../comparateur/_components/google/ComparateurSearch";
 

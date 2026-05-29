@@ -5,7 +5,7 @@ import { type ItemList, type WithContext } from "schema-dts";
 import { JsonLd } from "@/components/seo/JsonLd";
 import NextLink from "@/components/ui/NextLink";
 import { type BxProductGroup, computeGroups, groupSlug, loadCatalog } from "@/lib/bx-catalog";
-import { getRecommendations } from "@/lib/recommendation-engine";
+import { getRecommendations } from "@/server/services/recommend";
 import {
   createPageMetadata,
   generateBreadcrumbJsonLd,

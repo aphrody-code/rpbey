@@ -4,7 +4,7 @@
  * with in-memory cache and search capabilities.
  */
 
-import { join } from "node:path";
+import { loadJson } from "./data-cache";
 
 export const CATEGORIES = [
   "blade",
@@ -47,9 +47,9 @@ let _data: BeyLibraryPart[] | null = null;
 async function loadData(): Promise<BeyLibraryPart[]> {
   if (_data) return _data;
 
-  const filePath = join(process.cwd(), "data/bey-library/bey-library-complete.json");
-  const raw = await Bun.file(filePath).text();
-  _data = JSON.parse(raw) as BeyLibraryPart[];
+  // Route via data-cache : FS d'abord (co-localise VPS/dev, comportement inchange),
+  // fallback CDN sur Vercel/standalone. Cf. loaders freres (bx-catalog, bts, ranking).
+  _data = await loadJson<BeyLibraryPart[]>("data/bey-library/bey-library-complete.json");
   return _data;
 }
 

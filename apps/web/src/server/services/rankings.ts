@@ -1,10 +1,12 @@
 import "server-only";
+import { getRankings as sdkGetRankings } from "@rpbey/api-client";
 import type {
   RankingKind,
   RankingsListResponse,
   RankingsQuery,
   RankingStats,
 } from "@rpbey/api-contract";
+import { isRemote, unwrap } from "@/server/data-source";
 import {
   countSeasonRankings,
   getBladerAggregateStats,
@@ -20,9 +22,9 @@ import {
  * depuis la DAL (lectures DB) + métier (pagination, normalisation ISO).
  * UI-agnostic. Consommé par `/api/v1/rankings` et les RSC marketing.
  *
- * Seam : aucun appel SDK distant ici pour l'instant (les RSC tapent la DAL
- * en co-localisé). Le point de bascule `isRemote`/`unwrap` est introduit dans
- * la route `/api/v1/rankings` si/quand le front passe au SDK.
+ * Seam : `getRankings` bascule sur le SDK généré en mode standalone (`isRemote`,
+ * `API_BASE` défini) ; en co-localisé (VPS) le chemin DAL ci-dessous reste
+ * inchangé. La forme contrat `RankingsListResponse` est identique des deux côtés.
  */
 
 const SEASON_KINDS: ReadonlySet<RankingKind> = new Set(["satr", "wb", "stardust"]);
@@ -39,6 +41,23 @@ function isSeasonKind(kind: RankingKind): kind is SeasonRankingKind {
  */
 export async function getRankings(query: RankingsQuery): Promise<RankingsListResponse> {
   const { kind, view, season, search, page, pageSize } = query;
+
+  // Standalone (Vercel) : la liste est servie par l'API distante via le SDK généré.
+  if (isRemote) {
+    return unwrap(
+      await sdkGetRankings({
+        query: {
+          kind,
+          view,
+          season: season ?? undefined,
+          search,
+          page,
+          pageSize,
+        },
+      }),
+    );
+  }
+
   const offset = (page - 1) * pageSize;
 
   if (kind === "global") {
