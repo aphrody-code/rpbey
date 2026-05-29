@@ -90,6 +90,9 @@ résout là (couvert par le symlink `data`).
 - `experimental.turbopackFileSystemCacheForBuild: false`. `typescript.ignoreBuildErrors: true`
   (drift MUI X) → le vrai type-check = `bunx tsc --noEmit` (doit être 0).
 - Builtin `bun` non importable dans une route (build « collect page data ») → `globalThis.Bun` lazy.
+- **Charger un JSON de `data/`** : toujours `loadJsonSafe("data/X.json")` de `@/lib/data-cache`
+  (FS en dev/standalone, fetch CDN sur Vercel). **Jamais** `path.join(process.cwd(), "apps/web/data/X.json")`
+  — en dev `cwd=apps/web` → chemin doublé inexistant, et le `fs` direct casse sur Vercel (FS absent).
 
 ## 5. Auth (better-auth)
 
