@@ -22,3 +22,11 @@ export async function listRankings() {
   ]);
   return { satr, stardust, wb };
 }
+
+export async function listAnimeSeries() {
+  return db.select().from(schema.animeSeries);
+}
+
+export async function listContentBlocks() {
+  return db.select().from(schema.contentBlocks);
+}

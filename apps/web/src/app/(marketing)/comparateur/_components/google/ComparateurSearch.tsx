@@ -4,6 +4,7 @@ import * as React from "react";
 import { Box, Container } from "@mui/material";
 import { useRouter, useSearchParams } from "next/navigation";
 import type { GlobalSearchItem, SearchCategory } from "@rpbey/api-contract";
+import { facetCounts, rankSearch, suggest } from "@/lib/search-rank";
 import type { BxProductGroup, RecommendedProduct } from "../types";
 import { AiSynthesis } from "./AiSynthesis";
 import { GoogleHome } from "./GoogleHome";
@@ -63,22 +64,23 @@ export function ComparateurSearch({ groups, recommendations }: ComparateurSearch
       .catch(() => {});
   }, []);
 
-  // Suggestions filtrees par prefixe
-  const suggestions = React.useMemo((): GlobalSearchItem[] => {
-    if (!query.trim()) return [];
-    const nq = normalizeQ(query);
-    return searchIndex.filter((item) => normalizeQ(item.title).includes(nq)).slice(0, 8);
-  }, [query, searchIndex]);
+  // Suggestions classees par pertinence (BM25F + synonymes + fuzzy)
+  const suggestions = React.useMemo(
+    (): GlobalSearchItem[] => suggest(searchIndex, query, 8),
+    [query, searchIndex],
+  );
 
-  // Resultats filtres par categorie
+  // Resultats classes par pertinence, filtres par categorie active
   const results = React.useMemo((): GlobalSearchItem[] => {
-    if (!query.trim()) return [];
-    const nq = normalizeQ(query);
-    return searchIndex.filter((item) => {
-      if (category !== "all" && category !== "ai" && item.category !== category) return false;
-      return normalizeQ(item.title).includes(nq) || normalizeQ(item.subtitle).includes(nq);
-    });
+    const cat = category === "ai" ? "all" : category;
+    return rankSearch(searchIndex, query, { category: cat });
   }, [query, searchIndex, category]);
+
+  // Facettes (compteurs par categorie) pour les onglets
+  const facets = React.useMemo(
+    (): Record<string, number> => facetCounts(searchIndex, query),
+    [query, searchIndex],
+  );
 
   // Entite produit matchee pour le Knowledge Panel et la synthese
   const matchedGroup = React.useMemo((): BxProductGroup | null => {
@@ -108,7 +110,7 @@ export function ComparateurSearch({ groups, recommendations }: ComparateurSearch
     const params = new URLSearchParams();
     if (q) params.set("q", q);
     if (mode) params.set("mode", "ai");
-    const path = params.toString() ? `/comparateur/recherche?${params}` : "/comparateur/recherche";
+    const path = params.toString() ? `/recherche?${params}` : "/recherche";
     router.replace(path, { scroll: false });
   }
 
@@ -238,7 +240,7 @@ export function ComparateurSearch({ groups, recommendations }: ComparateurSearch
         </Box>
 
         {/* Onglets */}
-        <SerpTabs active={category} onChange={handleTabChange} />
+        <SerpTabs active={category} onChange={handleTabChange} facets={facets} />
       </Box>
 
       {/* Corps SERP : 2 colonnes */}

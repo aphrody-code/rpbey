@@ -83,7 +83,17 @@ export type RecommendResponse = z.infer<typeof RecommendResponseSchema>;
 
 // ── /v1/search (recherche globale) ───────────────────────────────
 
-export const SearchCategorySchema = z.enum(["product", "part", "tournament", "blader", "lexicon"]);
+export const SearchCategorySchema = z.enum([
+  "product",
+  "part",
+  "tournament",
+  "blader",
+  "lexicon",
+  "combo",
+  "anime",
+  "site",
+  "page",
+]);
 export type SearchCategory = z.infer<typeof SearchCategorySchema>;
 
 export const GlobalSearchItemSchema = z.object({
@@ -95,11 +105,17 @@ export const GlobalSearchItemSchema = z.object({
   details: z.string().optional(),
   badge: z.string().optional(),
   price: z.number().nullable().optional(),
+  /** Score de pertinence (présent uniquement sur une réponse triée par requête). */
+  score: z.number().optional(),
 });
 export type GlobalSearchItem = z.infer<typeof GlobalSearchItemSchema>;
 
 export const SearchResponseSchema = z.object({
   count: z.number(),
   data: z.array(GlobalSearchItemSchema),
+  /** Requête appliquée côté serveur (absent = index complet non filtré). */
+  query: z.string().optional(),
+  /** Nombre de résultats par catégorie (facettes/onglets). */
+  facets: z.record(z.string(), z.number()).optional(),
 });
 export type SearchResponse = z.infer<typeof SearchResponseSchema>;

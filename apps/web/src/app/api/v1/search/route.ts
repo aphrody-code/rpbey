@@ -1,14 +1,43 @@
-import { SearchResponseSchema } from "@rpbey/api-contract";
+import { z } from "zod";
+import { SearchCategorySchema, SearchResponseSchema } from "@rpbey/api-contract";
 import { getRoute } from "@/server/api/handler";
 import { buildGlobalSearchIndex } from "@/server/services/global-search";
+import { facetCounts, rankSearch } from "@/lib/search-rank";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 
+const SearchQuerySchema = z.object({
+  /** Requête plein-texte. Absente = index complet (compat suggestions/SSR). */
+  q: z.string().optional(),
+  /** Filtre de catégorie (les facettes restent calculées sur toutes catégories). */
+  category: SearchCategorySchema.optional(),
+  /** Plafond de résultats (défaut 50 quand q présent). */
+  limit: z.coerce.number().int().positive().max(500).optional(),
+});
+
 export const GET = getRoute({
+  query: SearchQuerySchema,
   response: SearchResponseSchema,
-  async handle() {
-    const items = await buildGlobalSearchIndex();
-    return { count: items.length, data: items };
+  async handle({ query }) {
+    const index = await buildGlobalSearchIndex();
+
+    // Sans requête : renvoie l'index complet (l'autocomplétion/SSR filtre côté client).
+    if (!query.q || !query.q.trim()) {
+      return { count: index.length, data: index };
+    }
+
+    const facets = facetCounts(index, query.q);
+    const ranked = rankSearch(index, query.q, {
+      category: query.category,
+      limit: query.limit ?? 50,
+    });
+
+    return {
+      count: ranked.length,
+      data: ranked,
+      query: query.q,
+      facets,
+    };
   },
 });

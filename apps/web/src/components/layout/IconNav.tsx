@@ -28,6 +28,7 @@ import {
   Crown,
   House,
   type LucideIcon,
+  Search,
   ShoppingCart,
   Swords,
   Trophy,
@@ -44,6 +45,7 @@ import { ICON_NAV_WIDTH } from "./constants";
 
 const navItems: { icon: LucideIcon; label: string; href: string }[] = [
   { icon: House, label: "Accueil", href: "/" },
+  { icon: Search, label: "Recherche", href: "/recherche" },
   { icon: Trophy, label: "Tournois", href: "/tournaments" },
   { icon: Crown, label: "Classements", href: "/rankings" },
   { icon: Swords, label: "Meta", href: "/meta" },

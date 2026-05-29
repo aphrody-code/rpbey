@@ -2,14 +2,65 @@ import "server-only";
 import type { GlobalSearchItem } from "@rpbey/api-contract";
 import { loadCatalog, computeGroups, groupSlug } from "@/lib/bx-catalog";
 import { loadJsonSafe } from "@/lib/data-cache";
-import { listParts, listRankings, listTournaments } from "@/server/dal/search";
+import { listAnimeSeries, listParts, listRankings, listTournaments } from "@/server/dal/search";
 
 /**
  * Service de recherche globale — assemble l'index `GlobalSearchItem[]`
- * (produits catalogue, pièces DB, tournois, bladers, lexique).
+ * (produits catalogue, pièces DB, tournois, bladers, lexique, anime, sites, pages).
  * UI-agnostic : aucune dépendance React/MUI. Consommé par `/api/search/global`
  * (legacy) et `/api/v1/search`.
  */
+
+// Pages/sections du site rpbey.fr — entrées de navigation indexées (catégorie "page").
+const SITE_PAGES: Array<{ title: string; url: string; desc: string }> = [
+  {
+    title: "Comparateur de prix Beyblade X",
+    url: "/comparateur",
+    desc: "Prix en direct, multi-boutiques",
+  },
+  {
+    title: "Recherche",
+    url: "/recherche",
+    desc: "Moteur de recherche Beyblade",
+  },
+  {
+    title: "Builder de combo",
+    url: "/builder",
+    desc: "Construis et analyse ton combo",
+  },
+  {
+    title: "Tournois",
+    url: "/tournaments",
+    desc: "Brackets, résultats, calendrier",
+  },
+  {
+    title: "Classements",
+    url: "/rankings",
+    desc: "SATR, Stardust, World Beyblade",
+  },
+  {
+    title: "Pièces Beyblade X",
+    url: "/parts",
+    desc: "Base de données des pièces et tiers",
+  },
+  {
+    title: "Anime Beyblade",
+    url: "/anime",
+    desc: "Séries et épisodes en streaming",
+  },
+  {
+    title: "Méta du moment",
+    url: "/meta",
+    desc: "Tier list et analyse compétitive",
+  },
+  { title: "Notre équipe", url: "/notre-equipe", desc: "Le staff de la RPB" },
+  { title: "RPB TV", url: "/tv", desc: "Live et streams de la communauté" },
+  {
+    title: "Règlement",
+    url: "/reglement",
+    desc: "Règles des tournois et de la communauté",
+  },
+];
 
 const BLADE_TIERS: Record<string, string> = {
   "wizard rod": "S",
@@ -154,6 +205,59 @@ export async function buildGlobalSearchIndex(): Promise<GlobalSearchItem[]> {
       url: "",
       details: term.definition,
       badge: term.popularityTier && term.popularityTier !== "Low" ? term.popularityTier : "Lexique",
+    });
+  }
+
+  // 6. Anime (séries publiées).
+  const series = await listAnimeSeries();
+  for (const s of series) {
+    if (s.isPublished === false) continue;
+    const titleFr = s.titleFr && s.titleFr !== s.title ? ` (${s.titleFr})` : "";
+    items.push({
+      id: `anime-${s.id}`,
+      title: s.title,
+      subtitle: `Anime${s.year ? ` · ${s.year}` : ""}${s.generation ? ` · ${s.generation}` : ""}${titleFr}`,
+      category: "anime",
+      url: `/anime/${s.slug}`,
+      details:
+        s.synopsis ?? `Série Beyblade${s.episodeCount ? ` · ${s.episodeCount} épisodes` : ""}`,
+      badge: "Anime",
+    });
+  }
+
+  // 7. Sites Beyblade du monde (catalogue curé, JSON).
+  const sitesData = await loadJsonSafe<{
+    sites?: Array<{
+      name: string;
+      url: string;
+      domain: string;
+      category: string;
+      region?: string;
+      lang?: string;
+    }>;
+  }>("data/beyblade-sites.json");
+  for (const site of sitesData?.sites ?? []) {
+    items.push({
+      id: `site-${site.domain}`,
+      title: site.name,
+      subtitle: `${site.category}${site.region ? ` · ${site.region}` : ""}`,
+      category: "site",
+      url: site.url,
+      details: site.domain,
+      badge: "Site",
+    });
+  }
+
+  // 8. Pages / sections du site.
+  for (const page of SITE_PAGES) {
+    items.push({
+      id: `page-${page.url}`,
+      title: page.title,
+      subtitle: "Page rpbey.fr",
+      category: "page",
+      url: page.url,
+      details: page.desc,
+      badge: "Page",
     });
   }
 

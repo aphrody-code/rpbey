@@ -1,6 +1,6 @@
 "use client";
 
-import { AccountCircle, AcUnit, LocalFireDepartment } from "@mui/icons-material";
+import { AccountCircle, AcUnit, LocalFireDepartment, Search } from "@mui/icons-material";
 import {
   Avatar,
   alpha,
@@ -83,6 +83,23 @@ export function MarketingHeader() {
               alignItems: "center",
             }}
           >
+            <Tooltip title="Recherche Beyblade">
+              <IconButton
+                component={Link}
+                href="/recherche"
+                aria-label="Recherche"
+                sx={{
+                  p: 0.5,
+                  color: "secondary.main",
+                  "&:hover": {
+                    bgcolor: (t) => alpha(t.palette.secondary.main, 0.15),
+                  },
+                }}
+              >
+                <Search sx={{ fontSize: 22 }} />
+              </IconButton>
+            </Tooltip>
+
             <Tooltip title={mode === "red" ? "Passer en Mode Bleu" : "Passer en Mode Rouge"}>
               <IconButton
                 onClick={toggleTheme}
