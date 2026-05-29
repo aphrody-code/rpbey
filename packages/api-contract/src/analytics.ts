@@ -1,5 +1,4 @@
 import { z } from "zod";
-import { IsoDateSchema } from "./envelope";
 
 /**
  * Analytics — ingestion d'événements (pageviews + événements métier) et cliché
@@ -26,24 +25,7 @@ export const AnalyticsTrackResponseSchema = z.object({
 });
 export type AnalyticsTrackResponse = z.infer<typeof AnalyticsTrackResponseSchema>;
 
-/** Une ligne d'événement récente exposée par le cliché admin. */
-export const AnalyticsRecentEventSchema = z.object({
-  id: z.string(),
-  type: z.string(),
-  path: z.string().nullable(),
-  userId: z.string().nullable(),
-  createdAt: IsoDateSchema,
-});
-export type AnalyticsRecentEvent = z.infer<typeof AnalyticsRecentEventSchema>;
-
-/** Cliché agrégé (pageviews, top pages/referrers, événements récents). */
-export const AnalyticsSummarySchema = z.object({
-  liveVisitors: z.number().int().nonnegative(),
-  pageviewsToday: z.number().int().nonnegative(),
-  pageviews7d: z.number().int().nonnegative(),
-  eventsToday: z.number().int().nonnegative(),
-  topPages: z.array(z.object({ path: z.string(), views: z.number().int().nonnegative() })),
-  topReferrers: z.array(z.object({ referrer: z.string(), count: z.number().int().nonnegative() })),
-  recentEvents: z.array(AnalyticsRecentEventSchema),
-});
-export type AnalyticsSummary = z.infer<typeof AnalyticsSummarySchema>;
+// Le cliché agrégé admin (summary + événements récents) reste servi par le path
+// legacy /api/admin/analytics (session-gated via @/lib/auth) jusqu'à la migration
+// de la lane auth — pas de schéma de contrat tant qu'aucune route /api/v1 ne le
+// consomme (éviter une surface de contrat morte).
