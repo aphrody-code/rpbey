@@ -83,3 +83,6 @@ bey-library-mirror/
 # public/vendor/brackets/*.js (tracked for Vercel build)
 # public/vendor/brackets/*.css (tracked for Vercel build)
 .vercel
+
+# Spec OpenAPI émis (dérivé du contrat Zod, régénéré par gen:api)
+openapi.json

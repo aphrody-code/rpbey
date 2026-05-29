@@ -44,3 +44,70 @@ export function getRoute<R extends z.ZodType, Q extends z.ZodType = z.ZodType>(o
     }
   };
 }
+
+/**
+ * Wrapper de Route Handler de MUTATION (POST/PUT/PATCH/DELETE) typé :
+ * - valide le corps JSON contre `body` (Zod, 422 si invalide) ;
+ * - valide la sortie contre `response` (drift = 500) ;
+ * - même enveloppe `{ ok, data } | { ok, error }`.
+ * `status` permet 201 sur création. Un corps absent/illisible → `{}` (laisse Zod trancher).
+ */
+export function mutationRoute<
+  R extends z.ZodType,
+  B extends z.ZodType = z.ZodType,
+  Q extends z.ZodType = z.ZodType,
+>(opts: {
+  body?: B;
+  query?: Q;
+  response: R;
+  status?: number;
+  handle: (ctx: { body: z.infer<B>; query: z.infer<Q>; request: Request }) => Promise<z.infer<R>>;
+}): (request: Request) => Promise<Response> {
+  return async (request: Request): Promise<Response> => {
+    let query: unknown;
+    if (opts.query) {
+      const url = new URL(request.url);
+      const parsed = opts.query.safeParse(Object.fromEntries(url.searchParams.entries()));
+      if (!parsed.success) {
+        return jsonErr({ code: "bad_request", message: z.prettifyError(parsed.error) }, 422);
+      }
+      query = parsed.data;
+    }
+
+    let body: unknown = {};
+    if (opts.body) {
+      const raw = await request.json().catch(() => ({}));
+      const parsed = opts.body.safeParse(raw);
+      if (!parsed.success) {
+        return jsonErr({ code: "bad_request", message: z.prettifyError(parsed.error) }, 422);
+      }
+      body = parsed.data;
+    }
+
+    try {
+      const data = await opts.handle({
+        body: body as z.infer<B>,
+        query: query as z.infer<Q>,
+        request,
+      });
+      const validated = opts.response.parse(data);
+      return jsonOk(validated, { status: opts.status ?? 200 });
+    } catch (e) {
+      console.error("[api/v1] mutation error:", e);
+      const message = e instanceof Error ? e.message : "internal error";
+      return jsonErr({ code: "internal", message }, 500);
+    }
+  };
+}
+
+/** Alias sémantiques de `mutationRoute` (POST=création 201 par défaut, PATCH/PUT/DELETE=200). */
+export function postRoute<
+  R extends z.ZodType,
+  B extends z.ZodType = z.ZodType,
+  Q extends z.ZodType = z.ZodType,
+>(opts: Parameters<typeof mutationRoute<R, B, Q>>[0]) {
+  return mutationRoute<R, B, Q>({ status: 201, ...opts });
+}
+export const patchRoute = mutationRoute;
+export const putRoute = mutationRoute;
+export const deleteRoute = mutationRoute;
