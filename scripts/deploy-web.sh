@@ -44,11 +44,15 @@ ln -sfn "$DATA_SRC" "$SA/data"
 # @tobyg74/tiktok-api-dl : Next trace le package dans standalone mais PAS son
 # sous-dossier helper/ (chargé via __dirname au runtime → ENOENT signature.js).
 # On le copie (feature TikTok du /tv, sinon unhandledRejection en boucle).
-TT_SRC=/home/ubuntu/rpbey/node_modules/@tobyg74/tiktok-api-dl/helper
-TT_DST="$SA/node_modules/@tobyg74/tiktok-api-dl/helper"
-if [ -d "$TT_SRC" ] && [ -d "$(dirname "$TT_DST")" ]; then
-	echo "[deploy] tiktok helper → standalone"
-	cp -rf "$TT_SRC" "$(dirname "$TT_DST")/"
+TT_PKG_SRC=/home/ubuntu/rpbey/node_modules/@tobyg74/tiktok-api-dl
+TT_PKG_DST="$SA/node_modules/@tobyg74/tiktok-api-dl"
+if [ -d "$TT_PKG_SRC" ]; then
+	# Next ne trace PAS @tobyg74/tiktok-api-dl dans standalone (dir parent absent) ;
+	# l'ancienne garde [ -d dirname ] sautait donc la copie → ENOENT helper/signature.js
+	# en boucle (unhandledRejection /tv). On copie le PACKAGE entier en créant le parent.
+	echo "[deploy] tiktok-api-dl (+helper) → standalone (package non tracé par Next)"
+	mkdir -p "$(dirname "$TT_PKG_DST")"
+	cp -rf "$TT_PKG_SRC" "$(dirname "$TT_PKG_DST")/"
 fi
 
 echo "[deploy] OK — restart : sudo systemctl restart rpbey-web.service"
