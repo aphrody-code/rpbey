@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "DECK BUILDER | RPB",
     description: "Construisez et sauvegardez vos decks Beyblade X avec le builder visuel RPB.",
-    images: ["/main-banner.webp"],
+    images: ["/banner.webp"],
   },
 };
 

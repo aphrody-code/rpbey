@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { db, schema, asc, eq } from "@/lib/db";
+import { requireAdmin } from "@/lib/auth-utils";
 
 export type ContentBlockInput = {
   slug: string;
@@ -17,6 +18,7 @@ export async function getContentBlocks() {
 }
 
 export async function updateContentBlock(id: string, data: ContentBlockInput) {
+  if (!(await requireAdmin())) throw new Error("Non autorisé");
   const { slug, title, type, content } = data;
 
   await db
@@ -34,6 +36,7 @@ export async function updateContentBlock(id: string, data: ContentBlockInput) {
 }
 
 export async function createContentBlock(data: ContentBlockInput) {
+  if (!(await requireAdmin())) throw new Error("Non autorisé");
   const { slug, title, type, content } = data;
 
   await db.insert(schema.contentBlocks).values({
@@ -47,6 +50,7 @@ export async function createContentBlock(data: ContentBlockInput) {
 }
 
 export async function deleteContentBlock(id: string) {
+  if (!(await requireAdmin())) throw new Error("Non autorisé");
   await db.delete(schema.contentBlocks).where(eq(schema.contentBlocks.id, id));
 
   revalidatePath("/admin/content");

@@ -6,11 +6,12 @@
  * Ref: https://bun.sh/docs/api/streams (Bun extension, non-standard).
  */
 
-interface ReadableStream<R = unknown> {
-  /** Bun extension: collect the entire stream into a Uint8Array. */
-  bytes(): Promise<Uint8Array<ArrayBuffer>>;
-  /** Bun extension: collect the entire stream as a UTF-8 string. */
-  text(): Promise<string>;
-  /** Bun extension: collect the entire stream, then parse as JSON. */
-  json<T = unknown>(): Promise<T>;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- défaut générique aligné sur lib.dom.d.ts (TS2428 sinon)
+interface ReadableStream<R = any> {
+	/** Bun extension: collect the entire stream into a Uint8Array. */
+	bytes(): Promise<Uint8Array<ArrayBuffer>>;
+	/** Bun extension: collect the entire stream as a UTF-8 string. */
+	text(): Promise<string>;
+	/** Bun extension: collect the entire stream, then parse as JSON. */
+	json<T = unknown>(): Promise<T>;
 }

@@ -134,6 +134,12 @@ export class StandardAPI {
       }
     }
 
+    // Timeout par défaut (8s) si aucun signal fourni : un upstream muet (bot :3001,
+    // Challonge…) ne doit pas faire hang le rendu SSR jusqu'au timeout nginx.
+    if (!finalOptions.signal) {
+      finalOptions.signal = AbortSignal.timeout(8000);
+    }
+
     try {
       let response = await fetch(finalUrl, finalOptions);
 

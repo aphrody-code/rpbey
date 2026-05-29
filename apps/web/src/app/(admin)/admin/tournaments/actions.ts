@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { type TournamentStatus } from "@/lib/types";
 import { getChallongeService } from "@/lib/challonge";
 import { db, schema, and, count, desc, eq, ilike, inArray, or } from "@/lib/db";
+import { requireAdmin } from "@/lib/auth-utils";
 
 export type TournamentInput = {
   name: string;
@@ -19,6 +20,7 @@ export type TournamentInput = {
 };
 
 export async function syncCommunityTournaments() {
+  if (!(await requireAdmin())) throw new Error("Non autorisé");
   const communityId = process.env.CHALLONGE_COMMUNITY_ID;
   if (!communityId) {
     throw new Error("CHALLONGE_COMMUNITY_ID is not configured");
@@ -48,6 +50,7 @@ export async function syncCommunityTournaments() {
 }
 
 export async function importTournamentFromChallonge(challongeId: string) {
+  if (!(await requireAdmin())) throw new Error("Non autorisé");
   const service = getChallongeService();
   const tournament = await service.getTournament(challongeId);
   const t = tournament.attributes;
@@ -134,6 +137,7 @@ export async function getTournaments(page = 1, pageSize = 10, search = "") {
 }
 
 export async function createTournament(data: TournamentInput) {
+  if (!(await requireAdmin())) throw new Error("Non autorisé");
   const {
     name,
     description,
@@ -164,6 +168,7 @@ export async function createTournament(data: TournamentInput) {
 }
 
 export async function updateTournament(id: string, data: TournamentInput) {
+  if (!(await requireAdmin())) throw new Error("Non autorisé");
   const {
     name,
     description,
@@ -198,6 +203,7 @@ export async function updateTournament(id: string, data: TournamentInput) {
 }
 
 export async function deleteTournament(id: string) {
+  if (!(await requireAdmin())) throw new Error("Non autorisé");
   await db.delete(schema.tournaments).where(eq(schema.tournaments.id, id));
 
   revalidatePath("/admin/tournaments");
