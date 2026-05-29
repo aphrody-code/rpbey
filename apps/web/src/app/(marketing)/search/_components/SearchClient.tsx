@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { globalSearch } from "@rpbey/api-client";
@@ -28,14 +29,8 @@ const fadeThrough = {
   exit: { opacity: 0, scale: 0.96, transition: { duration: 0.09, ease: EASING_STANDARD } },
 };
 
-// Navigation liens du top-bar
-const NAV_LINKS: { label: string; href: string; hideMobile?: boolean }[] = [
-  { label: "Comparateur", href: "/comparateur" },
-  { label: "Tournois", href: "/tournaments" },
-  { label: "Classement", href: "/rankings" },
-  { label: "Méta", href: "/meta", hideMobile: true },
-  { label: "Anime", href: "/anime", hideMobile: true },
-];
+// Logo animé RPB — hero unique de la home + retour accueil en SERP.
+const LOGO_GIF = "/rpb-3d.gif";
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -153,12 +148,6 @@ export function SearchClient({ groups, recommendations }: SearchClientProps) {
     return groups.filter((g) => g.key !== matchedGroup.key).slice(0, 6);
   }, [matchedGroup, groups]);
 
-  // ── Bandeau tendances home : vraies recommandations ───────────────────────
-  const trends = React.useMemo(
-    (): RecommendedProduct[] => recommendations.slice(0, 8),
-    [recommendations],
-  );
-
   // ── Sync URL ──────────────────────────────────────────────────────────────
   function syncUrl(q: string, mode: boolean) {
     const params = new URLSearchParams();
@@ -220,32 +209,17 @@ export function SearchClient({ groups, recommendations }: SearchClientProps) {
     return (
       <div className={styles.root}>
         <motion.div className={styles.homeWrap} key="home" {...fadeThrough}>
-          {/* Top-bar navigation */}
-          <header className={styles.homeTopBar}>
-            {NAV_LINKS.map((l) => (
-              <a
-                key={l.label}
-                href={l.href}
-                className={
-                  l.hideMobile
-                    ? `${styles.homeTopBarLink} ${styles.homeTopBarLinkHideMobile}`
-                    : styles.homeTopBarLink
-                }
-              >
-                {l.label}
-              </a>
-            ))}
-          </header>
-
           {/* Zone centrale */}
           <div className={styles.homeCenter}>
-            <h1 className={styles.wordmark} aria-label="RPB — Recherche Beyblade">
-              RPB
-            </h1>
-            <p className={styles.tagline}>
-              Le moteur de recherche Beyblade — beys, parts, combos, tournois, bladers, anime &amp;
-              lexique
-            </p>
+            <Image
+              src={LOGO_GIF}
+              alt="RPB — Recherche Beyblade"
+              width={188}
+              height={188}
+              className={styles.homeLogo}
+              priority
+              unoptimized
+            />
 
             {/* Barre de recherche home */}
             <SearchField
@@ -272,32 +246,6 @@ export function SearchClient({ groups, recommendations }: SearchClientProps) {
                 J&apos;ai de la chance
               </button>
             </div>
-
-            <p className={styles.homeSubtext}>
-              Recherche Beyblade — toutes générations (Bakuten, Metal, Burst, X) · français
-            </p>
-
-            {/* Bandeau tendances (vraies recommandations) */}
-            {trends.length > 0 && (
-              <div className={styles.trendsBand}>
-                <p className={styles.trendsTitle}>Top Beys du moment</p>
-                <div className={styles.trendsGrid}>
-                  {trends.map((r) => (
-                    <a
-                      key={r.key}
-                      href={`/search?q=${encodeURIComponent(r.name)}`}
-                      className={styles.trendChip}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleSubmit(r.name);
-                      }}
-                    >
-                      {r.name}
-                    </a>
-                  ))}
-                </div>
-              </div>
-            )}
           </div>
         </motion.div>
       </div>
@@ -323,7 +271,14 @@ export function SearchClient({ groups, recommendations }: SearchClientProps) {
             }}
             aria-label="Retour à l'accueil de la recherche"
           >
-            RPB
+            <Image
+              src={LOGO_GIF}
+              alt="RPB"
+              width={36}
+              height={36}
+              className={styles.serpLogoImg}
+              unoptimized
+            />
           </button>
 
           {/* Champ inline */}
@@ -338,15 +293,6 @@ export function SearchClient({ groups, recommendations }: SearchClientProps) {
               onToggleAi={handleToggleAi}
             />
           </div>
-
-          {/* Liens nav droite */}
-          <nav className={styles.serpTopLinks} aria-label="Navigation secondaire">
-            {NAV_LINKS.map((l) => (
-              <a key={l.label} href={l.href} className={styles.serpTopLink}>
-                {l.label}
-              </a>
-            ))}
-          </nav>
         </div>
 
         {/* Onglets facettes */}
