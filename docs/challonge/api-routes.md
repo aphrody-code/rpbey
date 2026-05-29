@@ -6,16 +6,16 @@ Vérifié sur code (`file:line`) + live (bxc curl-impersonate chrome131).
 
 ## (1) REST v1 — read-only — `packages/challonge/src/api.ts`
 
-- **Base** : `https://api.challonge.com/v1` (`api.ts:151`).
-- **Auth** : HTTP Basic `api:<API_KEY>` → `Authorization: Basic btoa("api:"+key)` (`api.ts:158-160`).
+- **Base** : `https://api.challonge.com/v1` (`api.ts:198`).
+- **Auth** : HTTP Basic `api:<API_KEY>` → `Authorization: Basic btoa("api:"+key)` (`api.ts:206`).
 - **Accept** : `application/json` (`api.ts:191`). XML aussi supporté côté Challonge, non utilisé ici.
 - **Rate limit** : 600 req/min/token ; respecte `Retry-After` sur 429 (`api.ts:196-201`).
 - **Format** : suffixe `.json`.
 
 | Endpoint | Méthode | Params | Source |
 | --- | --- | --- | --- |
-| `/tournaments/{idOrSlug}.json` | GET | `include_participants=0\|1`, `include_matches=0\|1` | `api.ts:235` `get()` |
-| `/tournaments.json` | GET | `state(all\|pending\|in_progress\|ended)`, `type`, `subdomain` | `api.ts:259` `list()` |
+| `/tournaments/{idOrSlug}.json` | GET | `include_participants=0\|1`, `include_matches=0\|1` | `api.ts:302` `get()` |
+| `/tournaments.json` | GET | `state(all\|pending\|in_progress\|ended)`, `type`, `subdomain` | `api.ts:326` `list()` |
 
 - `idOrSlug` accepte id numérique, slug url, ou `subdomain-slug`.
 - **Lacune documentée** (`api.ts:8`) : v1 n'expose **pas** `/log`, `/predictions`,
@@ -45,43 +45,47 @@ Vérifié sur code (`file:line`) + live (bxc curl-impersonate chrome131).
   player1_prereq_match_id, player2_prereq_match_id, player1_is_prereq_match_loser,
   player2_is_prereq_match_loser, group_id`.
 
-## (2) REST v2.1 — read+write — `apps/bot/src/lib/challonge.ts`
+## (2) REST v2.1 — read+write — `packages/challonge/src/write.ts` (module `@rose-griffon/challonge/write`)
 
-- **Base API** : `https://api.challonge.com/v2.1` (`challonge.ts:10`).
-- **Base OAuth** : `https://api.challonge.com` (`challonge.ts:11`).
-- **Headers** (`challonge.ts:131-146`) : `Content-Type: application/vnd.api+json`,
+Le client réel vit dans le package partagé (`packages/challonge/src/write.ts`, ~517
+lignes). `apps/bot/src/lib/challonge.ts` n'est plus qu'un **shim de re-export** (22
+lignes) de `@rose-griffon/challonge/write` (`getChallongeClient` + types JSON:API).
+
+- **Base API** : `https://api.challonge.com/v2.1` (`write.ts:28` `API_BASE`).
+- **Base OAuth** : `https://api.challonge.com` (`write.ts:29` `OAUTH_BASE`).
+- **Headers** (`write.ts:151-153`) : `Content-Type: application/vnd.api+json`,
   `Accept: application/json`, `Authorization-Type: v1|v2`.
   - v1 : `Authorization: <apiKey>` (brut, **pas** Basic).
   - v2 : `Authorization: Bearer <oauth_token>`.
-- **OAuth2 Client Credentials** (`challonge.ts:95-129`) : `POST /oauth/token`,
+- **OAuth2 Client Credentials** (`write.ts:123-129`) : `POST /oauth/token`,
   `Content-Type: x-www-form-urlencoded`, body
   `grant_type=client_credentials&client_id=…&client_secret=…&scope="me tournaments:read
   tournaments:write matches:read matches:write participants:read participants:write"`.
   Réponse `{access_token, token_type, expires_in, created_at}`. Cache avec marge 5 min.
-- **Singleton** `getChallongeClient()` (`challonge.ts:472`) : préfère OAuth v2 si
+- **Singleton** `getChallongeClient()` (`write.ts:490`) : préfère OAuth v2 si
   `CHALLONGE_CLIENT_ID` + `CHALLONGE_CLIENT_SECRET`, sinon fallback v1 `apiKey`.
 - Toutes les réponses sont **JSON:API** (`data: { type, attributes }`).
 
 | Endpoint | Méthode | Body / params | Source |
 | --- | --- | --- | --- |
-| `/oauth/token` | POST | `grant_type, client_id, client_secret, scope` | `challonge.ts:105` |
-| `/tournaments` | GET | `state, page, per_page` | `challonge.ts:170` `listTournaments` |
-| `/tournaments/{id}` | GET | — | `challonge.ts:187` `getTournament` |
-| `/tournaments` | POST | `data{type:"tournaments", attributes{name,url,tournament_type,description,game_name,start_at,signup_cap,open_signup}}` | `challonge.ts:194` `createTournament` |
-| `/tournaments/{id}/change_state` | PUT | `data{type:"TournamentState", attributes{state: start\|finalize\|reset}}` | `challonge.ts:224` |
-| `/tournaments/{id}` | DELETE | — | `challonge.ts:245` `deleteTournament` |
-| `/tournaments/{id}/participants` | GET | — | `challonge.ts:254` `listParticipants` |
-| `/tournaments/{id}/participants` | POST | `data{type:"participants", attributes{name,email,seed,misc}}` | `challonge.ts:264` `createParticipant` |
-| `/tournaments/{id}/participants/bulk_add` | POST | `data[]` (array de participants) | `challonge.ts:293` `bulkCreateParticipants` |
-| `/tournaments/{id}/participants/{pid}` | DELETE | — | `challonge.ts:322` `deleteParticipant` |
-| `/tournaments/{id}/participants/randomize` | POST | — | `challonge.ts:329` `randomizeParticipants` |
-| `/tournaments/{id}/participants/{pid}` | PUT | `data{type:"participants", attributes{checked_in: true\|false}}` | `challonge.ts:336/357` check-in / undo |
-| `/tournaments/{id}/open_for_check_in` | PUT | — | `challonge.ts:378` `openCheckIn` |
-| `/tournaments/{id}/close_check_in` | PUT | — | `challonge.ts:388` `closeCheckIn` |
-| `/tournaments/{id}/matches` | GET | `state(open\|pending\|complete)` | `challonge.ts:400` `listMatches` |
-| `/tournaments/{id}/matches/{mid}` | GET | — | `challonge.ts:417` `getMatch` |
-| `/tournaments/{id}/matches/{mid}` | PUT | `data{type:"matches", attributes{winner_id, scores_csv}}` | `challonge.ts:427` `updateMatch` (report) |
-| `/tournaments/{id}/matches/{mid}/change_state` | PUT | `data{type:"MatchState", attributes{state:"mark_underway"}}` | `challonge.ts:453` `markMatchUnderway` |
+| `/oauth/token` | POST | `grant_type, client_id, client_secret, scope` | `write.ts:123` |
+| `/tournaments` | GET | `state, page, per_page` | `write.ts:188` `listTournaments` |
+| `/tournaments/{id}` | GET | — | `write.ts:205` `getTournament` |
+| `/tournaments` | POST | `data{type:"tournaments", attributes{name,url,tournament_type,description,game_name,start_at,signup_cap,open_signup}}` | `write.ts:212` `createTournament` |
+| `/tournaments/{id}/change_state` | PUT | `data{type:"TournamentState", attributes{state: start\|finalize\|reset}}` | `write.ts:248` |
+| `/tournaments/{id}` | DELETE | — | `write.ts:263` `deleteTournament` |
+| `/tournaments/{id}/participants` | GET | — | `write.ts:272` `listParticipants` |
+| `/tournaments/{id}/participants` | POST | `data{type:"participants", attributes{name,email,seed,misc}}` | `write.ts:282` `createParticipant` |
+| `/tournaments/{id}/participants/bulk_add` | POST | `data[]` (array de participants) | `write.ts:322` `bulkCreateParticipants` |
+| `/tournaments/{id}/participants/{pid}` | DELETE | — | `write.ts:340` `deleteParticipant` |
+| `/tournaments/{id}/participants/randomize` | POST | — | `write.ts:347` `randomizeParticipants` |
+| `/tournaments/{id}/participants/{pid}` | PUT | `data{type:"participants", attributes{checked_in: true\|false}}` | `write.ts:282` check-in / undo |
+| `/tournaments/{id}/open_for_check_in` | PUT | — | `write.ts:399` `openCheckIn` |
+| `/tournaments/{id}/close_check_in` | PUT | — | `write.ts:409` `closeCheckIn` |
+| `/tournaments/{id}/matches` | GET | `state(open\|pending\|complete)` | `write.ts:418` `listMatches` |
+| `/tournaments/{id}/matches/{mid}` | GET | — | `write.ts:435` `getMatch` |
+| `/tournaments/{id}/matches/{mid}` | PUT | `data{type:"matches", attributes{winner_id, scores_csv}}` | `write.ts:445` `updateMatch` (report) |
+| `/tournaments/{id}/matches/{mid}/change_state` | PUT | `data{type:"MatchState", attributes{state:"mark_underway"}}` | `write.ts:471-479` `markMatchUnderway` |
 
 - **Live vérifié** : `GET /v2.1/tournaments` avec `Authorization-Type: v1` mais
   mauvais `Content-Type` → **415** `{"errors":{"detail":"Invalid header value in
@@ -93,18 +97,18 @@ Vérifié sur code (`file:line`) + live (bxc curl-impersonate chrome131).
 ## (3) Routes internes front (SSR React, Cloudflare-fronted)
 
 Base : `challonge.com/{slug}` ou `challonge.com/{lang}/{slug}` (défaut package
-`https://challonge.com/fr`, `reverse.ts:80`). Slug accepte aussi un subdomain
+`https://challonge.com/fr`, `reverse.ts:117`). Slug accepte aussi un subdomain
 (`org.challonge.com/{slug}`). Toutes consommées via `BxcTransport` (chrome131).
 
 | Route | Live (curl-impersonate, sans cookie) | Stores / source | Source code |
 | --- | --- | --- | --- |
 | `/{slug}` (root) | 200 ou **403 CF** (stochastique) | `TournamentStore`, `CurrentUserStore`, `BracketSettingsStore`, `ThemeStore` ; RC `TournamentController` ; `gon.*` | `reverse/scraper` |
-| `/{slug}/module` | **200 fiable** (chemin canonique) | mêmes stores que root, source de `TournamentStore` | `scraper.ts:680` `extractStore` |
-| `/{slug}/log[?page=N]` | 200 (flaky) ou 403 CF | `LogEntryListStore` (array), `ActivityFeedSettingsStore` (`.logEntries{currentPage,totalPages,totalCount}`), `CurrentUserStore` ; RC `LogEntriesController` | `reverse.ts:147/161` ; `scraper.ts:703` `fetchLog` (paginé ≤12 pages // ) |
-| `/{slug}/standings` | 200 ou 403 CF | **pas de store** → table HTML SSR | `reverse.ts:226` ; `scraper.ts:764` |
-| `/{slug}/participants` | login-wall (302 `/user_session/new`) ou 403 CF | `#participant-management[data-tournament][data-rankings]` (coquille SSR, lignes React) | `reverse.ts:253` ; `scraper.ts:749` |
-| `/{slug}.json` | 200 (warm) ou **403 CF** — INSTABLE | JSON = `TournamentStore` (`tournament, rounds[], matches_by_round{}, third_place_match, consolation_matches[], groups[], requested_plotter`) | `reverse.ts:277` `getStore()` |
-| `/{slug}/stations` | non porté | `ScrapeOptions.withStations` retourne `[]` + log | `scraper.ts:798,827-830` |
+| `/{slug}/module` | **200 fiable** (chemin canonique) | mêmes stores que root, source de `TournamentStore` | `scraper.ts:395` `extractStore` |
+| `/{slug}/log[?page=N]` | 200 (flaky) ou 403 CF | `LogEntryListStore` (array), `ActivityFeedSettingsStore` (`.logEntries{currentPage,totalPages,totalCount}`), `CurrentUserStore` ; RC `LogEntriesController` | `reverse.ts:205` ; `scraper.ts:422` `fetchLog` (paginé ≤12 pages // ) |
+| `/{slug}/standings` | 200 ou 403 CF | **pas de store** → table HTML SSR | `reverse.ts:270` ; `scraper.ts:483` |
+| `/{slug}/participants` | login-wall (302 `/user_session/new`) ou 403 CF | `#participant-management[data-tournament][data-rankings]` (coquille SSR, lignes React) | `reverse.ts:297` ; `scraper.ts:468` |
+| `/{slug}.json` | 200 (warm) ou **403 CF** — fallback auto vers `/module` | JSON = `TournamentStore` (`tournament, rounds[], matches_by_round{}, third_place_match, consolation_matches[], groups[], requested_plotter`) | `reverse.ts:330` `getStore()` |
+| `/{slug}/stations` | non porté | `ScrapeOptions.withStations` retourne `[]` + log | `scraper.ts:599` |
 | `/{slug}/groups` | login-wall (302) | — (dérivable de `/module` `groups[]`) | — |
 | `/{slug}/predictions`, `/announcements` | 200 coquille auth-gated | — | — |
 | `/{slug}/spectate` | **404** | — | — |
@@ -115,9 +119,11 @@ Méta extraites : `meta[property=og:title|og:url|og:image|og:description]`
 `meta[name=csrf-token]`, `meta[name=asset-host]`. Hôtes assets :
 `assets.challonge.com` (CSS/JS/manifest), `user-assets.challonge.com` (portraits/bannières).
 
-> **Bug actif** : `getStore()` (`reverse.ts:277-318`) cible `/{slug}.json` qui est
-> désormais souvent **403 CF** (vérifié sur `B_TS5.json` et `fr/B_TS5.json`).
-> Préférer `/module` + `extractChallongeTournament`. Détail dans `pages-selectors.md`.
+> **Auto-recouvrant** : `getStore()` (`reverse.ts:330`) cible `/{slug}.json` qui est
+> désormais souvent **403 CF** (vérifié sur `B_TS5.json` et `fr/B_TS5.json`), mais
+> fallback automatiquement vers `#getStoreFromModule` (`reverse.ts:379`) qui lit
+> `/module` + `parseInitialStoreState` sur tout échec (403, redirect, JSON vide). Le
+> docstring `reverse.ts:320-329` documente ce fallback. Détail dans `pages-selectors.md`.
 
 ## (4) GraphQL — interne, NON exposé publiquement
 
@@ -155,9 +161,10 @@ Le package a un retry interne (`utils/retry.ts`, sur 429/5xx/transient) ; la CLI
 ## Gaps
 
 - v1 attachments non implémenté.
-- `getStore()` (`/{slug}.json`) cassé (403 CF) — remplacer par `/module`.
 - GraphQL non introspectable sans session admin.
-- Filtre `game` sur `tournaments.json` non confirmé (`game_id=337197` Beyblade X
-  n'a pas filtré — a renvoyé "Modern Warships"). Bon nom de param à fixer.
+- Filtre `game` sur `tournaments.json` non confirmé : le `game_id` Beyblade X est
+  **figé = 337197** (fixture `games.json` + `games-catalog.ts`), mais le param
+  `game_id=337197` n'a pas restreint live (a renvoyé "Modern Warships"). Reste à
+  fixer le **nom** du param de filtre (`game_id` vs `filter[game_id]`).
 - `/stations` non porté.
 - write v2.1 non testable sans `CHALLONGE_CLIENT_ID/SECRET`.

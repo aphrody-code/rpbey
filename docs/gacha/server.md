@@ -19,6 +19,7 @@ Serveur de jeu gacha : **REST économie** (consommée par le bot) + **temps rée
 | `src/discord-token.ts` | `mountDiscordToken(app)` — `POST /discord_token` (OAuth Discord → session Bearer + JWT Colyseus) |
 | `src/rooms/GachaRoom.ts` | `GachaRoom extends Room` — état `@colyseus/schema` synchronisé, `onAuth=JWT.verify`, messages pull/daily/balance |
 | `test/smoke.ts` | Smoke auto-contenu (spawn serveur + session test + endpoints + CORS), `bun run smoke` |
+| `test/concurrency.ts` | Test de concurrence du verrou `SELECT … FOR UPDATE` (8 pulls parallèles → pas d'overspend), `bun test/concurrency.ts` |
 | `deploy/rpbey-gacha.service` | Unité systemd (loopback :5050) |
 | `deploy/nginx-gacha.location.conf` | Snippet nginx `/gacha/` (WSS) pour api.rpbey.fr |
 
@@ -31,7 +32,7 @@ Auth = **Bearer** (table `sessions` partagée, mintée par le bot). Enveloppes e
 | `POST /api/gacha/pull` | `pull` | coût **50** 🪙, pity, badge unlock |
 | `POST /api/gacha/pull10` | `pullMulti` | coût **450**, ≥1 SR+ garanti |
 | `POST /api/gacha/daily` | `daily` | streak, intérêts dette, paliers |
-| `GET /api/gacha/balance` | `balance` | `{currency, dailyStreak, pityCount, userId}` |
+| `GET /api/gacha/balance` | `balance` | `{currency, dailyStreak, lastDaily, pityCount, userId}` |
 | `GET /api/gacha/inventory/page` | `inventoryPage` | pagination curseur |
 | `POST /api/gacha/sell` · `/sell-all` | `sell` · `sellAll` | vente doublons |
 | `POST /api/gacha/gift` | `gift` | don (cooldown 12 h, doublon requis) |
@@ -58,7 +59,7 @@ Auth = **Bearer** (table `sessions` partagée, mintée par le bot). Enveloppes e
 Colyseus pose un CORS **permissif** au niveau du serveur HTTP brut (`prependListener('request')` dans `@colyseus/core`, **avant** express) : `DEFAULT_CORS_HEADERS` avec `Access-Control-Allow-Origin: *` + credentials, et `getCorsHeaders()` reflète **n'importe quelle** origine. Un middleware express est court-circuité.
 
 `src/cors.ts` `configureCors()` override `matchMaker.controller` :
-- reflet de l'origine **uniquement** si autorisée — `isAllowedOrigin` : `*.discordsays.com`, `*.vercel.app`, `rpbey.fr`/`www`/`bot`/`play`, `discord.com`, `localhost:3002`, + `GACHA_EXTRA_ORIGINS` (CSV) ;
+- reflet de l'origine **uniquement** si autorisée — `isAllowedOrigin` : `*.discordsays.com`, `rpbey-*.vercel.app` (previews du projet uniquement), `rpbey.fr`/`www`/`bot`/`play`, `discord.com`, `localhost:3002`, + `GACHA_EXTRA_ORIGINS` (CSV) ;
 - sinon → origine canonique fixe `https://rpbey.fr` (un navigateur tiers reçoit un ACAO ≠ son origine → bloqué).
 
 ## Déploiement
@@ -74,4 +75,4 @@ Colyseus pose un CORS **permissif** au niveau du serveur HTTP brut (`prependList
 
 ## Vérif
 
-`bun run smoke` (depuis `apps/gacha-server`) — spawn serveur + session test + boot/401/CORS/balance/rates/pull/badges/leaderboard. Gate : `bunx tsc --noEmit`, `bunx oxlint apps/gacha-server`, `bunx oxfmt --check`.
+`bun run smoke` (depuis `apps/gacha-server`) — spawn serveur + session test + boot/401/CORS/balance/rates/pull/badges/leaderboard. Test de concurrence du verrou : `bun test/concurrency.ts` (8 pulls parallèles → exactement 2 succès, jamais de solde négatif). Gate : `bunx tsc --noEmit`, `bunx oxlint apps/gacha-server`, `bunx oxfmt --check`.

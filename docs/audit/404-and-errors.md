@@ -12,15 +12,14 @@ Audit prod `https://rpbey.fr` du **2026-05-28** (Chromium réel, viewport deskto
 
 ---
 
-## 1. 500 — Internal Server Error (CRITIQUE)
+## 1. 500 — Internal Server Error (RÉSOLU, commit 9f4d15a)
 
-### `/comparateur/[slug]` — TOUTES les fiches produit renvoient 500
+### `/comparateur/[slug]` — les fiches produit renvoyaient 500 (corrigé)
 
-- **Confirmé hors crawl** : `curl -s -o /dev/null -w "%{http_code}" https://rpbey.fr/comparateur/arrow-wizard-4-80b` → **500**.
-- La page d'erreur est une page **brute non stylée** ("Internal Server Error", fond blanc, sans nav ni branding) — voir `screenshots/comparateur-arrow-wizard-4-80b-desktop.png`.
-- Impact en cascade : sur `/comparateur` (l'index, qui répond 200), Next.js **prefetch** les ~40 fiches de la liste → 40 réponses 500 enregistrées dans la console (voir `results.json` route `comparateur`). Donc chaque visite de l'index pollue la console de 500.
-- Slugs vérifiés en 500 (échantillon, tous identiques) : `arrow-wizard-4-80b`, `sword-dran-3-60f`, `horn-rhino-3-80s`, `lance-knight-4-80hn`, `claw-leon-5-60p`, `rock-golem-1-60un`, `scorpio-spear-0-70z`, … (toute la liste préfetchée).
-- **Note** : un fix est annoncé en cours côté agent principal. Signalé ici factuellement.
+- **Au snapshot (2026-05-28)** : `curl -s -o /dev/null -w "%{http_code}" https://rpbey.fr/comparateur/arrow-wizard-4-80b` → **500** ; page d'erreur **brute non stylée** ("Internal Server Error", fond blanc) — voir `screenshots/comparateur-arrow-wizard-4-80b-desktop.png`.
+- Impact en cascade d'alors : sur `/comparateur` (l'index, qui répond 200), Next.js **prefetchait** les ~40 fiches → 40 réponses 500 en console (voir `results.json` route `comparateur`).
+- Slugs alors vérifiés en 500 (échantillon) : `arrow-wizard-4-80b`, `sword-dran-3-60f`, `horn-rhino-3-80s`, `lance-knight-4-80hn`, `claw-leon-5-60p`, `rock-golem-1-60un`, `scorpio-spear-0-70z`, …
+- **RÉSOLU sur HEAD (commit 9f4d15a)** : la page `/comparateur/[slug]/page.tsx` est passée `force-static` + `generateStaticParams` (`dynamicParams = true`, `notFound()` sur slug inconnu). Les fiches sont pré-générées et répondent 200 ; la repro curl 500 n'est plus vraie et le prefetch de l'index ne génère plus de 500.
 
 ---
 
@@ -43,7 +42,7 @@ Aucune image **interne** cassée détectée (`naturalWidth===0` = 0 partout). Le
 - `/rankings` : ~10 avatars `cdn.discordapp.com/avatars/...` + `user-assets.challonge.com/users/images/...` (photos de profil Challonge des joueurs).
 - `/notre-equipe` : ~11 avatars `cdn.discordapp.com/avatars/...` (photos staff).
 
-**Cause probable** : `<img src>` cross-origin sans passer par un proxy/Image Optimizer interne (ou `crossorigin` manquant), donc Chromium applique l'ORB. Reco : proxifier les avatars via `/api/image` (route déjà existante) ou Next `<Image>` avec un loader, pour servir same-origin.
+**Cause probable** : `<img src>` cross-origin sans passer par un proxy/Image Optimizer interne (ou `crossorigin` manquant), donc Chromium applique l'ORB. Reco : `/api/image` **ne convient pas** — la route rejette tout `src` qui ne commence pas par `/` et lit depuis `join(process.cwd(), 'public', src)`, donc elle ne sert QUE des chemins locaux et ne peut PAS proxifier `cdn.discordapp.com` / `user-assets.challonge.com`. Pour servir same-origin : soit créer une vraie route proxy (ex. `/api/avatar?url=`), soit déclarer ces domaines dans `next.config` `images.remotePatterns` et passer par `next/Image`.
 
 ---
 
@@ -52,7 +51,7 @@ Aucune image **interne** cassée détectée (`naturalWidth===0` = 0 partout). Le
 `GET /api/auth/get-session` a renvoyé 429 sur plusieurs pages pendant le crawl rapide (`/tournaments`, `/meta`, `/tv`, `/builder`, `/notre-equipe`, `/tournaments/wb`, `/anime/.../1`, `/profile/[id]`, les fiches tournoi).
 
 - Déclenché par le **rythme du crawl** (toutes les pages d'affilée → beaucoup de hits get-session). Un utilisateur réel ne devrait pas l'atteindre en navigation normale.
-- **Mais** : le seuil semble bas et le client ne dégrade pas gracieusement (la session échoue silencieusement). Reco : augmenter le rate-limit sur `get-session` ou dédupliquer/cacher l'appel côté client (1 fetch session partagé par navigation au lieu d'1 par page).
+- **RÉSOLU** : la reco a été appliquée — `auth.ts` désactive le rate-limit sur `get-session` via `customRules: { "/get-session": false }` (endpoint pollé par `useSession`). Le 429 observé restait un artefact du crawl rapide.
 
 ---
 
@@ -64,12 +63,12 @@ Aucune vraie exception applicative. Les seuls `pageerror` enregistrés sont des 
 
 ## Récapitulatif chiffré
 
-| Classe                                 | Compte                         | Gravité                                   |
-| -------------------------------------- | ------------------------------ | ----------------------------------------- |
-| 500 serveur (`/comparateur/[slug]`)    | 1 route, ~40 hits/visite index | 🔴 haute                                  |
-| 404 réels (avatars Discord guild)      | 2                              | 🟡 basse                                  |
-| 404 favicon (sur page erreur 500 only) | 1                              | 🟢 négligeable (disparaît si 500 corrigé) |
-| Images ORB cross-origin                | ~21 (rankings + notre-equipe)  | 🟡 basse (cosmétique)                     |
-| 429 get-session (crawl)                | ~12                            | 🟡 moyenne (config rate-limit)            |
-| Images internes cassées                | 0                              | —                                         |
-| Exceptions JS applicatives             | 0                              | —                                         |
+| Classe                                 | Compte (au snapshot)           | Gravité                                              |
+| -------------------------------------- | ------------------------------ | --------------------------------------------------- |
+| 500 serveur (`/comparateur/[slug]`)    | 0 sur HEAD (RÉSOLU 9f4d15a)    | RÉSOLU (était haute ; force-static, plus de 500)    |
+| 404 réels (avatars Discord guild)      | 2                              | basse                                               |
+| 404 favicon (sur page erreur 500 only) | 0 sur HEAD                     | négligeable (a disparu avec la 500 corrigée)        |
+| Images ORB cross-origin                | ~21 (rankings + notre-equipe)  | basse (cosmétique)                                  |
+| 429 get-session (crawl)                | ~12                            | RÉSOLU (config rate-limit appliquée, cf. §4)        |
+| Images internes cassées                | 0                              | —                                                   |
+| Exceptions JS applicatives             | 0                              | —                                                   |

@@ -7,7 +7,7 @@ fixtures (primaire) + live bxc curl-impersonate Chrome 131 (2026-05-29).
 > Rappel transverse : `/module` est le **seul chemin Cloudflare-tolérant fiable**.
 > Les autres routes (root, `/standings`, `/participants`, `/log`, `/{slug}.json`)
 > sont stochastiquement 403 CF en curl-impersonate sans cookie. Le package
-> route déjà tout par `/module` (`scraper.ts:680` `extractStore`,
+> route déjà tout par `/module` (`scraper.ts:395` `extractStore`,
 > `dumpChallongeRaw(slug, "module")`). Les fetchers `/log`/`/standings`/`/participants`
 > retournent silencieusement `[]` sous CF tant qu'aucun cookie jar n'est présent.
 
@@ -57,13 +57,13 @@ g.match[data-match-id][data-identifier][transform="translate(X Y)"]   # état: c
 - `transform="translate(X Y)"` → X infère le round, Y la bracket-side en double-elim.
 - Produit `BracketMatch { matchId, identifier, state, x, y, player1, player2 }`
   (coords x/y utilisées par `htmlrewriter.ts` legacy, **pas** par le mapper
-  principal `scraper.ts:290`).
+  principal `scraper.ts:193`).
 
 ## 4. Group stages (round-robin)
 
 - Même page `/module`. Données : `TournamentStore.groups[]` +
   `matches_by_round["0"]` (round 0 = group stage).
-- Mode legacy HTMLRewriter (`htmlrewriter.ts:537` `parseLegacyHtml`) parse les
+- Mode legacy HTMLRewriter (`htmlrewriter.ts:465` `parseLegacyHtml`) parse les
   tables de poule : `li.group-name`, `div.group-standings-pane table.standings tbody tr td`
   (colonnes 0=rank, 1=name(+username)/`img.portrait`, 2=`W-L-T`, 3=tb, 4=setWins,
   5=setTies, 6=pts), `a.match-report[data-match-id][data-match-state]` +
@@ -76,7 +76,8 @@ g.match[data-match-id][data-identifier][transform="translate(X Y)"]   # état: c
 - Live : 200 ou **403 CF**. HTML ~172-215 KB. **PAS de `_initialStoreState`** (pas de `StandingsStore`).
 - `body.class` : `participants participants-standings -application-new`.
 - **Aucun mount React** → table HTML SSR pure. Parser : `parseStandingsTable`
-  (`scraper.ts:480` ≡ `reverse.ts:448`, dupliqué).
+  (unifié `extractors/stores/standings.ts:34` ; façades `scraper.ts:237` /
+  `reverse.ts:458`).
 
 Sélecteurs exacts (confirmés `bts4_standings.html`) :
 
@@ -108,7 +109,7 @@ table.striped-table.-light.-padbody.limited_width.standings > tbody > tr
   - `data-tournament` = `{id, state, maxParticipants, notifyUsersWhenMatchesOpen,
     isTeams, isGroups, isLocked, signupCap, url}` (JSON).
   - `data-rankings` = `[...]` (souvent `"[]"` dans la fixture).
-- Parser : `reverse.ts:253` `getParticipants` (`parseJsonAttr` sur `data-tournament`
+- Parser : `reverse.ts:297` `getParticipants` (`parseJsonAttr` sur `data-tournament`
   + `data-rankings`).
 - **Source autoritaire des participants** = `/module` `TournamentStore` players (sans
   login). `/participants` n'ajoute que `username`/`portrait`/`check-in`.
@@ -122,8 +123,8 @@ table.striped-table.-light.-padbody.limited_width.standings > tbody > tr
 - Stores : `window._initialStoreState['LogEntryListStore']` (**array direct**,
   opener `[`), `ActivityFeedSettingsStore` (pagination sous
   `.logEntries{currentPage,totalPages,totalCount}`), `CurrentUserStore`.
-- Parser : `scraper.ts:227` `storeToLogEntries` (gère array + legacy `{entries}`/`{log}`).
-  Pagination : `?page=N` (1-based), `activityFeedSettings` (`scraper.ts:271`).
+- Parser : `scraper.ts:161` `storeToLogEntries` (gère array + legacy `{entries}`/`{log}`).
+  Pagination : `?page=N` (1-based), `activityFeedSettings` (`scraper.ts:165`).
 - **Seule source de l'activity log** (l'API v1 ne l'expose pas).
 
 ## 8. Public JSON — `/{lang}/{slug}.json`
@@ -134,22 +135,24 @@ table.striped-table.-light.-padbody.limited_width.standings > tbody > tr
 - Quand 200 : JSON valide ~208 KB = même payload que `TournamentStore`. Top-keys :
   `requested_plotter, tournament, rounds, third_place_match, consolation_matches,
   matches_by_round, groups`.
-- Parser : `reverse.ts:277` `getStore()`. **Path le plus sûr quand accessible**
-  (JSON garanti, pas de parsing de store-state), mais 403 CF rend `getStore()`
-  non fiable en 2026 → fallback `/module`.
+- Parser : `reverse.ts:330` `getStore()`. **Path le plus sûr quand accessible**
+  (JSON garanti, pas de parsing de store-state) ; sur 403 CF il fallback
+  automatiquement sur `/module` via `#getStoreFromModule` (`reverse.ts:379`).
 
 ## 9. Org / community — `<org>.challonge.com`
 
 - Pattern : `<32hex>.challonge.com` ou nommé (`1-2smash`, `0oz`, `worldbeyblade`).
 - **Non live-testé** (403 CF attendu comme la racine). Landing = liste de tournois.
-- Aucun extracteur dans le package.
+- Extracteur : `parseOrgLanding` (`extractors/stores/org-landing.ts:253`), fixture
+  `org_landing.html`.
 
 ## 10. User profile — `/users/{username}`
 
 - URL : `https://challonge.com/users/berserk91`
 - Live : **200** (~63 KB), profil public SSR (medals/history).
 - Cible des liens `challongeProfileUrl` (standings/participants).
-- Aucun extracteur ni type dédié dans le package (gap).
+- Extracteur : `parseUserProfile` (`extractors/stores/user-profile.ts:222`), fixture
+  `user_profile.html`.
 
 ## 11. Search / discovery — `/tournaments`
 
@@ -169,7 +172,8 @@ final_rank, …}`). Le **match v1 API** (`bts4_matches.json`) utilise des `*_id`
 
 ## Gaps
 
-- Org subdomain + user profile : structures non live-capturées (403 CF attendu).
+- Org subdomain + user profile : extracteurs + fixtures présents (`parseOrgLanding`,
+  `parseUserProfile`) mais structures non re-capturées **live** (403 CF attendu).
 - Aucune capture d'un tournoi qui server-render le bracket SVG (`g.match`) — les
   sélecteurs `bracket-svg.ts` restent valides en théorie mais non confirmés sur le
   site actuel ; bracket = `matches_by_round` uniquement.

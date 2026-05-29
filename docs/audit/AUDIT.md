@@ -3,24 +3,26 @@
 **Date** : 2026-05-28 · **Cible** : `https://rpbey.fr` (prod) · **Méthode** : Chromium réel (Puppeteer), desktop 1440x900 + mobile 390x844, `fullPage`, ~1.5 s d'hydratation. Capture du status HTTP, console (`error`), `pageerror`, requêtes échouées/≥400, images cassées (`naturalWidth===0`).
 **Pages auditées** : 27 routes (14 statiques publiques + 9 dynamiques échantillonnées + 4 auth-gated + variantes). Données brutes : `results.json`. Détail erreurs : `404-and-errors.md`. Captures : `screenshots/`.
 
+> Instantané historique (2026-05-28, prod d'alors). Les bugs P1/P2/P3 (comparateur 500, error.tsx absent) ont été corrigés dans le commit 9f4d15a. Ne décrit PAS l'état courant du code (HEAD).
+
 ---
 
 ## Synthèse — Top 10 problèmes prioritaires
 
 | #   | Sévérité | Problème                                                                                                                                                                                                                                                                                     | Page(s)                           |
 | --- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- |
-| 1   | 🔴 HAUTE | **`/comparateur/[slug]` renvoie 500 sur TOUTES les fiches** (server error, reproduit hors crawl via curl). Page d'erreur **brute non stylée** ("Internal Server Error", fond blanc, sans nav).                                                                                               | `/comparateur/<slug>`             |
-| 2   | 🔴 HAUTE | **Cascade de 500 sur l'index `/comparateur`** : le prefetch RSC des ~40 fiches déclenche 40 réponses 500 → console polluée à chaque visite, et tous les liens "Voir la fiche" mènent au 500.                                                                                                 | `/comparateur`                    |
-| 3   | 🟠 MOY   | **Page d'erreur globale non brandée** : le `error.tsx`/`not-found.tsx` semble absent ou non stylé (la 500 du comparateur tombe sur le fallback Next minimal). Aucune issue utilisateur (pas de bouton retour, pas de nav).                                                                   | global                            |
-| 4   | 🟠 MOY   | **`/parts` (outil de gestion CRUD) exposé publiquement** : boutons Ajouter / Importer / Export / éditer / supprimer (icônes crayon + corbeille) visibles sans auth. Soit c'est volontaire (read-only côté serveur), soit fuite d'UI admin. À vérifier que les mutations sont gated côté API. | `/parts`                          |
-| 5   | 🟠 MOY   | **Rate-limit `/api/auth/get-session` trop agressif** : 429 dès qu'on enchaîne quelques pages. Le client ne dégrade pas (session échoue en silence). Dédupliquer/cacher l'appel session.                                                                                                      | transverse                        |
-| 6   | 🟡 BASSE | **Avatars cross-origin non affichés** (ORB) : Discord + Challonge bloqués par le navigateur sur `/rankings` et `/notre-equipe` → fallback gris. Proxifier via `/api/image`.                                                                                                                  | `/rankings`, `/notre-equipe`      |
-| 7   | 🟡 BASSE | **Colonnes de table tronquées** sur `/parts` (entêtes "S...", "P...", "R...", lettres seules "J","L","I") — illisibles sans hover/tooltip.                                                                                                                                                   | `/parts`                          |
-| 8   | 🟡 BASSE | **Table comparateur : colonne droite ("Meilleur prix chez") coupée en mobile** ; sur desktop un toast/popup flotte par-dessus le tableau (overlay mal positionné).                                                                                                                           | `/comparateur` (mobile + desktop) |
-| 9   | 🟡 BASSE | **2 avatars Discord en vrai 404** (guild-avatars expirés) sur `/rankings`.                                                                                                                                                                                                                   | `/rankings`                       |
-| 10  | 🟢 INFO  | **États vides minimalistes** sur profils sans données ("Aucun match", "Aucune pièce", "Pas encore renseigné") — corrects mais sans CTA ni illustration.                                                                                                                                      | `/profile/[id]`                   |
+| 1   | HAUTE (RÉSOLU 9f4d15a) | **`/comparateur/[slug]` renvoyait 500 sur TOUTES les fiches**. Corrigé : la page est désormais `force-static` + `generateStaticParams` (pages pré-générées, `notFound()` sur slug inconnu). Plus de chemin 500 ni de reproduction curl sur HEAD.                                              | `/comparateur/<slug>`             |
+| 2   | HAUTE (RÉSOLU 9f4d15a) | **Cascade de 500 sur l'index `/comparateur`** : conséquence directe de #1. Les fiches étant force-static, elles répondent 200 et le prefetch RSC ne génère plus de 500.                                                                                                                      | `/comparateur`                    |
+| 3   | MOY (corrigé)          | **Page d'erreur globale** : `error.tsx` et `not-found.tsx` **existent et sont brandés** (MUI, fond `background.default`, CTA reset / lien vers home). Le claim initial "absent ou non stylé" était faux sur HEAD.                                                                             | global                            |
+| 4   | MOY                    | **`/parts` (outil de gestion CRUD) exposé publiquement** : boutons Ajouter / Importer / Export / éditer / supprimer (icônes crayon + corbeille) visibles sans auth. Soit c'est volontaire (read-only côté serveur), soit fuite d'UI admin. À vérifier que les mutations sont gated côté API. | `/parts`                          |
+| 5   | MOY (RÉSOLU)           | **Rate-limit `/api/auth/get-session`** : la reco a été appliquée — `customRules: { "/get-session": false }` dans `auth.ts` désactive le rate-limit sur l'endpoint pollé par `useSession`.                                                                                                    | transverse                        |
+| 6   | BASSE                  | **Avatars cross-origin non affichés** (ORB) : Discord + Challonge bloqués par le navigateur sur `/rankings` et `/notre-equipe` → fallback gris. `/api/image` ne proxifie QUE des chemins locaux (`public/`) ; créer une vraie route proxy (ex. `/api/avatar?url=`) ou ajouter le domaine à `next.config` `images.remotePatterns` + `next/Image`. | `/rankings`, `/notre-equipe`      |
+| 7   | BASSE                  | **Colonnes de table tronquées** sur `/parts` (entêtes "S...", "P...", "R...", lettres seules "J","L","I") — illisibles sans hover/tooltip.                                                                                                                                                   | `/parts`                          |
+| 8   | BASSE                  | **Table comparateur : colonne droite ("Meilleur prix chez") coupée en mobile** ; sur desktop un toast/popup flotte par-dessus le tableau (overlay mal positionné).                                                                                                                           | `/comparateur` (mobile + desktop) |
+| 9   | BASSE                  | **2 avatars Discord en vrai 404** (guild-avatars expirés) sur `/rankings`.                                                                                                                                                                                                                   | `/rankings`                       |
+| 10  | INFO                   | **États vides minimalistes** sur profils sans données ("Aucun match", "Aucune pièce", "Pas encore renseigné") — corrects mais sans CTA ni illustration.                                                                                                                                      | `/profile/[id]`                   |
 
-**Verdict global** : le site est **majoritairement sain et soigné** (dark theme cohérent, navigation, hero, brackets, tier-list, lecteur anime, comparateur de prix tous fonctionnels et responsive). **Un seul bug bloquant** : les fiches détail du comparateur (500). Le reste = polish (avatars proxy, rate-limit, troncatures de table, page d'erreur à brander).
+**Verdict global** (au moment du snapshot) : le site est **majoritairement sain et soigné** (dark theme cohérent, navigation, hero, brackets, tier-list, lecteur anime, comparateur de prix tous fonctionnels et responsive). Le seul bug bloquant d'alors — les fiches détail du comparateur (500) — **a depuis été corrigé** (commit 9f4d15a, force-static), tout comme le rate-limit get-session (#5). Restant = polish (avatars proxy, troncatures de table).
 
 ---
 
@@ -29,18 +31,18 @@
 | Route                      | Status             | #err console\*    | #req échouées\*\* | Verdict                             |
 | -------------------------- | ------------------ | ----------------- | ----------------- | ----------------------------------- |
 | `/` (home)                 | 200                | 0                 | 0 réel            | OK                                  |
-| `/rankings`                | 200                | 10 (404 avatars)  | 2×404 + ORB       | ⚠️ avatars                          |
+| `/rankings`                | 200                | 10 (404 avatars)  | 2×404 + ORB       | attention avatars                   |
 | `/tournaments`             | 200                | 1 (429)           | 1×429             | OK                                  |
 | `/meta`                    | 200                | 2 (429)           | 2×429             | OK                                  |
 | `/tv`                      | 200                | 1 (429)           | 1×429             | OK                                  |
 | `/anime`                   | 200                | 0                 | 0 réel            | OK                                  |
 | `/builder`                 | 200                | 2 (429)           | 2×429             | OK                                  |
-| `/comparateur`             | 200                | 40 (500 prefetch) | 40×500            | 🔴 cascade 500                      |
-| `/comparateur/<slug>`      | **500**            | —                 | 500               | 🔴 crash                            |
-| `/notre-equipe`            | 200                | 1 (429)           | ORB avatars + 429 | ⚠️ avatars                          |
+| `/comparateur`             | 200                | 40 (500 prefetch) | 40×500            | RÉSOLU (était cascade 500, cf. #2)  |
+| `/comparateur/<slug>`      | **500**            | —                 | 500               | RÉSOLU (était crash 500, cf. #1 — force-static sur HEAD) |
+| `/notre-equipe`            | 200                | 1 (429)           | ORB avatars + 429 | attention avatars                   |
 | `/reglement`               | 200                | 0                 | 0 réel            | OK                                  |
 | `/privacy`                 | 200                | 0                 | 0 réel            | OK                                  |
-| `/parts`                   | 200                | 0                 | 0                 | ⚠️ CRUD public + colonnes tronquées |
+| `/parts`                   | 200                | 0                 | 0                 | attention CRUD public + colonnes tronquées |
 | `/sign-in`                 | 200                | 0                 | 0                 | OK                                  |
 | `/sign-up`                 | 200 (→ sign-in)    | 0                 | 0                 | OK (redirige vers /sign-in)         |
 | `/tournaments/satr`        | 200                | 0                 | 0 réel            | OK                                  |
@@ -75,8 +77,8 @@
 - Capture : `screenshots/rankings-desktop.png` · `rankings-mobile.png`.
 - Rendu : leaderboard (rang/joueur/stats) + bracket "Bey-Tamashii Séries #2" complet.
 - Problèmes UI : (BASSE) avatars joueurs en fallback gris — Discord/Challonge bloqués ORB ; 2 avatars en vrai 404.
-- Reco : proxifier les avatars via `/api/image` pour servir same-origin (supprime ORB + 404 gérés via fallback serveur).
-- Verdict : **⚠️ avatars** (fonctionnel sinon).
+- Reco : `/api/image` ne proxifie QUE des chemins locaux (`public/`) — elle ne peut pas servir une URL `cdn.discordapp.com` / `user-assets.challonge.com`. Créer une vraie route proxy (ex. `/api/avatar?url=`) ou déclarer ces domaines dans `next.config` `images.remotePatterns` et passer par `next/Image`.
+- Verdict : **attention avatars** (fonctionnel sinon).
 
 ### `/tournaments` — Liste tournois
 
@@ -118,24 +120,24 @@
 - Capture : `screenshots/comparateur-desktop.png` · `comparateur-mobile.png`.
 - Rendu : "Comparateur de prix Beyblade X — 2278 offres / 17 boutiques", recherche, filtres (Meilleurs prix / Tous les produits / Boutiques), grande table Produit/Code/Boutiques/Meilleur prix.
 - Problèmes :
-  - 🔴 (HAUTE) chaque ligne préfetche sa fiche `/comparateur/<slug>` → **40× 500** en console ; tous les liens fiche mènent au 500 (#1/#2).
-  - 🟡 (BASSE) desktop : un toast/popup flotte par-dessus le tableau (overlay mal placé, gêne la lecture des dernières colonnes).
-  - 🟡 (BASSE) mobile : colonne "Meilleur prix chez" coupée (table non scrollable horizontalement visible).
-- Verdict : **🔴** (l'index s'affiche mais le parcours fiche est cassé).
+  - HAUTE (RÉSOLU 9f4d15a) au snapshot, chaque ligne préfetchait sa fiche `/comparateur/<slug>` → **40× 500** en console (#1/#2). Les fiches étant désormais force-static, le prefetch répond 200.
+  - BASSE desktop : un toast/popup flotte par-dessus le tableau (overlay mal placé, gêne la lecture des dernières colonnes).
+  - BASSE mobile : colonne "Meilleur prix chez" coupée (table non scrollable horizontalement visible).
+- Verdict : **OK sur HEAD** (la cascade 500 est résolue ; restent les deux points de polish table).
 
 ### `/comparateur/[slug]` — Fiche produit
 
-- Capture : `screenshots/comparateur-arrow-wizard-4-80b-desktop.png` (= page 500 brute).
-- Problèmes : 🔴 **500 systématique** (confirmé curl). Page d'erreur non brandée.
-- Reco : corriger le crash serveur (data fetch fiche) + ajouter un `error.tsx` stylé avec nav + retour. (Fix annoncé en cours.)
-- Verdict : **🔴 crash**.
+- Capture : `screenshots/comparateur-arrow-wizard-4-80b-desktop.png` (= page 500 brute, au snapshot).
+- Problèmes (au snapshot) : **500 systématique** (confirmé curl alors). Page d'erreur non brandée.
+- RÉSOLU (commit 9f4d15a) : la page est passée `force-static` + `generateStaticParams` (`dynamicParams = true`, `notFound()` sur slug inconnu) — plus de crash serveur, fiches pré-générées qui répondent 200. Le `error.tsx` global existe par ailleurs (cf. #3). La repro curl 500 n'est plus vraie sur HEAD.
+- Verdict : **RÉSOLU**.
 
 ### `/notre-equipe` — Staff
 
 - Capture : `screenshots/notre-equipe-desktop.png`.
 - Rendu : grille de cartes staff.
-- Problèmes : 🟡 avatars Discord bloqués ORB (fallback). Proxifier (cf. `/rankings`).
-- Verdict : **⚠️ avatars**.
+- Problèmes : BASSE avatars Discord bloqués ORB (fallback). Vraie route proxy ou `images.remotePatterns` (cf. `/rankings`).
+- Verdict : **attention avatars**.
 
 ### `/reglement` & `/privacy` — Pages légales/règles
 
@@ -149,10 +151,10 @@
 - Capture : `screenshots/parts-desktop.png` · `parts-mobile.png`.
 - Rendu : stats (Total 437, Blades 221, Ratchets 40, Bits 154…), onglets Pièces/Beyblades/Import, recherche + filtres, table de 437 lignes avec actions par ligne (éditer/dupliquer/supprimer), boutons **Export** + **Ajouter**.
 - Problèmes :
-  - 🟠 (MOY) **outil CRUD exposé publiquement** (pas d'auth gate visible) — confirmer que les mutations sont refusées côté API pour un non-admin ; sinon, gater la page.
-  - 🟡 (BASSE) **entêtes de colonnes tronquées** ("S...", "P...", "R...", "J", "L", "I") — ajouter tooltips ou élargir.
-  - 🟡 (BASSE) mobile : table déborde horizontalement (scroll horizontal — acceptable mais à confirmer).
-- Verdict : **⚠️** (fonctionnel ; question de gating + lisibilité entêtes).
+  - MOY **outil CRUD exposé publiquement** (pas d'auth gate visible) — confirmer que les mutations sont refusées côté API pour un non-admin ; sinon, gater la page.
+  - BASSE **entêtes de colonnes tronquées** ("S...", "P...", "R...", "J", "L", "I") — ajouter tooltips ou élargir.
+  - BASSE mobile : table déborde horizontalement (scroll horizontal — acceptable mais à confirmer).
+- Verdict : **attention** (fonctionnel ; question de gating + lisibilité entêtes).
 
 ### `/sign-in` & `/sign-up`
 
@@ -186,7 +188,7 @@
 
 - Capture : `profile-cmn2jxtyv003w7ma3jp31xplh-*.png`.
 - Rendu : header (avatar, pseudo, "Partager", "Carte Bey..."), stats globales, sections Rivalités / Pièces favorites / Historique des matchs.
-- Problèmes : 🟢 états vides minimalistes ("Aucun match", "Aucune pièce") sans CTA — correct mais améliorable.
+- Problèmes : INFO états vides minimalistes ("Aucun match", "Aucune pièce") sans CTA — correct mais améliorable.
 - Verdict : **OK**.
 
 ### `/dashboard`, `/admin` — Auth-gated

@@ -17,8 +17,13 @@ double elimination, état `complete`) :
 | `bts4_log.html` | SSR | `LogEntriesController`, `LogEntryListStore` (array) + `ActivityFeedSettingsStore` |
 | `bts4_standings.html` | SSR | table `striped-table standings`, 116 win / 116 loss / 232 match-report |
 | `bts4_participants.html` | SSR | coquille `#participant-management` (lignes React, 0 `<tr>`) |
+| `games.json` | catalogue | array `{id, value, tokens[], permalink}` (~114 KB ; Beyblade X = 337197, Beyblade = 758) |
+| `org_landing.html` | SSR | landing org `<sub>.challonge.com` (~292 KB ; parsée par `parseOrgLanding`) |
+| `user_profile.html` | SSR | profil `/users/{name}` (~64 KB ; parsée par `parseUserProfile`) |
 
-> Les `.html` sont en **JS-literal** (clés bare) → `JSON.parse` KO → fixtures STALE
+(Plus un dossier `legacy/` pour les fixtures de l'ancien rendu HTMLRewriter.)
+
+> Les `.html` B_TS4 sont en **JS-literal** (clés bare) → `JSON.parse` KO → fixtures STALE
 > par rapport au LIVE (JSON valide). Voir [`react-stores.md`](react-stores.md).
 
 ### Champs réels (vérifiés sur les `.json`)
@@ -58,33 +63,33 @@ ScrapedTournament {
 ```
 
 Producteurs :
-- `ChallongeApi.toCanonical()` (`api.ts:287`) — depuis v1 ; peut synthétiser `log[]`
-  depuis les timestamps de matches (`synthesizeLogFromMatches`, `api.ts:389`).
-- `ChallongeScraper.scrape()` (`scraper.ts:779`) — `/module` (TournamentStore) +
+- `ChallongeApi.toCanonical()` (`api.ts:454`) — depuis v1 ; peut synthétiser `log[]`
+  depuis les timestamps de matches (`synthesizeLogFromMatches`, `api.ts:597`).
+- `ChallongeScraper.scrape()` (`scraper.ts:498`) — `/module` (TournamentStore) +
   `/standings` (table) + `/log` (paginé) + `/participants` (extra).
-- `htmlrewriter.ts` `snapshotToScrapedTournament` (`:260`) — depuis le snapshot bxc.
+- `htmlrewriter.ts` `snapshotToScrapedTournament` (`:271`) — depuis le snapshot bxc.
 - bxc `extractChallongeTournament` → `ChallongeTournamentSnapshot` (meta 40+ flags,
   rounds[], matches[] + matches_by_round{}, third_place_match, consolation_matches[],
   groups[], participants[], standings dérivées, react mount, gon).
 
 Côté SVG : `bracket-svg.ts` `parseBracketSvg` extrait `matchId, identifier, state,
 x, y, player1/2{participantId, name, seed, score, winner}` — **mais** seul
-`htmlrewriter.ts` legacy l'utilise ; le mapper principal `scraper.ts:290` n'appelle
-**pas** `parseBracketSvg` → `ScrapedMatch` n'a pas de x/y.
+`htmlrewriter.ts` legacy l'utilise ; le mapper principal `scraper.ts:193`
+(`mapSnapshotToScrapedTournament`) n'appelle **pas** `parseBracketSvg` → `ScrapedMatch` n'a pas de x/y.
 
 ## Données MANQUANTES / partielles
 
 | Donnée | État | Détail |
 | --- | --- | --- |
 | **Search index global** | manquant | aucun `searchTournaments({gameId,state,type,page})` wrappant `/tournaments?game_id=` ni le XHR `tournaments.json`. Voir `search-engine.md`. |
-| **Catalogue `games.json`** | non figé | `game_id` Beyblade X exact à cacher (404/403 transitoire). |
+| **Catalogue `games.json`** | figé | `game_id` Beyblade X = **337197** (fixture `games.json` committée + `games-catalog.ts`). Reste à confirmer le **nom** du param de filtre (`game_id` vs `filter[game_id]`). |
 | **Group stages détaillés** | partiel | `groups[]` typé `unknown[]` partout ; standings de poule round-robin non dérivées séparément (les matches existent via `group_id`). |
-| **Coords SVG dans le mapper principal** | partiel | `mapSnapshotToScrapedTournament` (`scraper.ts:290`) n'appelle pas `parseBracketSvg` → pas de x/y. Seul `htmlrewriter.ts` les expose. |
-| **Profils users** (`/users/{name}` medals/history) | manquant | aucun extracteur ni type (probe 200 mais non parsé). |
-| **Communities/orgs landing** (`<sub>.challonge.com`) | manquant | aucun extracteur de landing org. |
+| **Coords SVG dans le mapper principal** | partiel | `mapSnapshotToScrapedTournament` (`scraper.ts:193`) n'appelle pas `parseBracketSvg` → pas de x/y. Seul `htmlrewriter.ts` les expose. |
+| **Profils users** (`/users/{name}` medals/history) | extrait | `parseUserProfile` (`extractors/stores/user-profile.ts:222`) + fixture `user_profile.html`. |
+| **Communities/orgs landing** (`<sub>.challonge.com`) | extrait | `parseOrgLanding` (`extractors/stores/org-landing.ts:253`) + fixture `org_landing.html`. |
 | **Attachments de match** | partiel | `has_attachment`/`attachment_count`/`open_graph_image_*` lus, mais contenu (images) jamais téléchargé. v1 `/matches/{m}/attachments` non implémenté. |
-| **Stations** (`/stations`) | manquant | `ScrapedStation` typé mais `scraper.ts:798` retourne `[]` (withStations log+skip). Page jamais capturée. |
-| **Standings officielles** | partiel | bxc dérive du graphe (`deriveStandings`, best-effort) ; les vraies standings = table HTML (`parseStandingsTable`, dupliquée `scraper.ts:480` ≡ `reverse.ts:448`). |
+| **Stations** (`/stations`) | manquant | `ScrapedStation` typé mais `scraper.ts:599` retourne `[]` (withStations log+skip). Page jamais capturée. |
+| **Standings officielles** | partiel | bxc dérive du graphe (`deriveStandings`, best-effort) ; les vraies standings = table HTML (`parseStandingsTable`, unifiée dans `extractors/stores/standings.ts:34`, façades `scraper.ts:237` / `reverse.ts:458`). |
 | **Predictions / announcements** | manquant | login-wall, jamais capturé. |
 | **Faye live-refresh** | non implémenté | canal `/tournaments/<id>` non souscrit (piste temps-réel). |
 
@@ -95,20 +100,20 @@ x, y, player1/2{participantId, name, seed, score, winner}` — **mais** seul
 [401], `bx-catalog.json` (~1.2 MB). Utiles pour croiser usernames/joueurs Challonge
 avec la meta locale.
 
-## Doublons / dette à résoudre côté package (rappel modularité)
+## Doublons / dette résolue côté package (rappel modularité)
 
-- `parseStandingsTable` dupliqué (`scraper.ts:480` ≡ `reverse.ts:448`).
-- Parser `_initialStoreState` dupliqué (`scraper.ts:101` `parseStoreState` vs
-  `reverse.ts:354` `extractInitialStoreState`).
-- 2 mappers snapshot→ScrapedTournament divergents (`scraper.ts:290` vs
-  `htmlrewriter.ts:260`).
-- `STORE_STATE_RE` (`scraper.ts:97`) mort (`void STORE_STATE_RE`).
-- `getStore()` (`/{slug}.json`) cassé par CF (voir `api-routes.md`).
+- **Triple-dédup RÉSOLUE** : un seul `parseStandingsTable` dans
+  `extractors/stores/standings.ts:34` ; les deux call-sites sont des façades
+  (`scraper.ts:237` et `reverse.ts:458`). Un seul `parseInitialStoreState` dans
+  `extractors/store-state.ts:30` ; `parseStoreState` (`scraper.ts:108`) et
+  `extractInitialStoreState` (`reverse.ts:445`) y délèguent tous deux.
+- `STORE_STATE_RE` supprimé (0 occurrence dans `src/`).
+- Reste : 2 mappers snapshot→ScrapedTournament divergents (`scraper.ts:193`
+  `mapSnapshotToScrapedTournament` vs `htmlrewriter.ts:271`).
 
 ## Gaps (live non résolu)
 
 - Routes listing/découverte CF hard-block après rafale (pas de cookie jar).
-- `game_id` Beyblade non figé.
+- `game_id` Beyblade X figé (337197) ; reste le **nom** du param de filtre à confirmer live.
 - Bracket SVG server-rendered jamais observé sur le site actuel.
-- Profils users / orgs : pas de fixture, pas d'extracteur à inspecter.
 - HAR post-hydratation (XHR client-side) non capturé (nécessite Chrome CDP).

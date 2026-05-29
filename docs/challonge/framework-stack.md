@@ -70,7 +70,7 @@ mount par page** :
 Architecture **hybride** clé pour le scraper :
 - bracket / module / log → **parser le store-state JS** (`_initialStoreState`) ;
 - participants / standings → **parser la table HTML SSR** (`parseStandingsTable`,
-  `packages/challonge/src/scraper.ts:480` ≡ `reverse.ts:448`, dupliqué).
+  unifié `packages/challonge/src/extractors/stores/standings.ts:34`).
 
 Le `react-props.ts` du package (`extractors/react-props.ts:14-22`) liste des
 controllers supposés (`StandingsController`, `ParticipantsController`,
@@ -86,42 +86,15 @@ PAS de Redux, PAS un seul blob JSON. Initialisé :
 puis assignations incrémentales par clé. Détail complet dans
 [`react-stores.md`](react-stores.md).
 
-### Piège de sérialisation critique (vérifié sur fixtures)
+### Piège de sérialisation critique
 
-Dans les fixtures B_TS4, les valeurs sont des **objets-littéraux JS** à clés
-**bare-identifier** (NON quotées), pas du JSON :
-
-```
-window._initialStoreState["TournamentStore"] = {
-  requested_plotter: "DoubleEliminationBracketPlotter",
-  tournament: { id: 17… },
-  …
-};
-window._initialStoreState["CurrentUserStore"] = { locale: "fr", is_superadmin: false };
-window._initialStoreState["ThemeStore"] = { options: { hideSeeds: false, … } };
-window._initialStoreState["BracketSettingsStore"] = { panOnSingleClick: false, … };
-```
-
-→ `JSON.parse` **échoue** sur ces blobs au top-level → `bxc extract` et le
-brace-parser du package renvoient vide/throw **sur les fixtures**. Les **fixtures
-sont STALE**.
-
-En **LIVE**, le `/module` sérialise désormais du **JSON valide** (clés
-single-quote `'TournamentStore'`, valeurs JSON propres) → `extractChallongeTournament`
-et le brace-counter marchent. Le pipeline reste **fragile** : un retour au
-JS-literal le casserait. Le path `.json` (JSON garanti par construction) est le
-plus sûr quand il n'est pas CF-gated.
-
-Le parser du package (`scraper.ts:101-171` `parseStoreState`, `reverse.ts:354-435`
-`extractInitialStoreState`) gère :
-- clé entre `['"]` (single OU double quote) ;
-- opener `{` **et** `[` (LogEntryListStore est un array direct) via un
-  **brace-counter** robuste qui tient compte des strings/escapes ;
-- mais **pas** le JS-literal (clés bare) → échoue silencieusement par clé.
-
-Le `bxc findStore` (`~/bxc/src/scrapers/challonge.ts:272`) utilise une regex
-non-greedy `\{[\s\S]*?\}` + `JSON.parse` : fragile sur gros payload imbriqué et
-**rate** les stores ouvrant par `[`.
+Le piège JS-literal (fixtures B_TS4) vs JSON-valide (live `/module` 2026), le
+caractère STALE des fixtures, et l'inventaire des 3 parsers (`parseStoreState`
+`scraper.ts:108`, `extractInitialStoreState` `reverse.ts:445` — tous deux façades
+de l'unique `extractors/store-state.ts:30` ; `bxc findStore`) sont décrits
+canoniquement dans [`react-stores.md`](react-stores.md) §Sérialisation. Résumé : le
+`/module` live sérialise du JSON valide (pipeline fonctionnel mais fragile) ; le
+path `.json` (JSON garanti) est le plus sûr quand il n'est pas CF-gated.
 
 ## Live-refresh : Faye / Bayeux (pub-sub)
 

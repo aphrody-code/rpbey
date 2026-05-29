@@ -16,6 +16,9 @@ Mécaniques de jeu, valeurs d'équilibre, et roster de la bannière 1. Les valeu
 
 Le projet communautaire prévoit en plus une répartition cible par bannière : **Commun ×16, Rare ×10, Super Rare ×4, Légendaire ×2**.
 
+> **Attention** : le serveur `:5050` utilise une **table de tirage DISTINCTE et rééquilibrée**, avec un slot **MISS** (tirage raté, aucune carte) — ce n'est **PAS** aligné sur le 60/25/10/4/1 du web (`apps/gacha-server/src/config.ts:78-93`) :
+> **MISS 30 % · COMMON 39 % · RARE 18 % · SUPER_RARE 9 % · LEGENDARY 3 % · SECRET 1 %** (somme = 100).
+
 ### Niveaux d'effort (convention artistes)
 - **R** = dessin propre · **SR** = plus poussé · **LR/Légendaire** = boosté + légèrement animé (seules les LR sont animées ; si l'artiste ne sait pas animer, c'est pris en charge).
 

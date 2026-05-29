@@ -51,4 +51,4 @@ Le serveur de jeu gacha (`apps/gacha-server`, REST + temps réel `:5050`) et son
 ### CORS
 
 - Colyseus pose un CORS **permissif par défaut** (reflète toute origine, `ACAO: *` + credentials) via un `prependListener` HTTP de `@colyseus/core`, **avant** express → un middleware express ne suffit pas.
-- `src/cors.ts` **override `matchMaker.controller.getCorsHeaders` + `DEFAULT_CORS_HEADERS`** : reflet de l'origine **uniquement** si autorisée (`config.isAllowedOrigin` : `*.discordsays.com`, `*.vercel.app`, `rpbey.fr`/`bot.rpbey.fr`/`play.rpbey.fr`, localhost:3002, + `GACHA_EXTRA_ORIGINS`), sinon origine canonique fixe `rpbey.fr` (bloque le cross-origin tiers). Couvert par `test/smoke.ts`.
+- `src/cors.ts` **override `matchMaker.controller.getCorsHeaders` + `DEFAULT_CORS_HEADERS`** : reflet de l'origine **uniquement** si autorisée (`config.isAllowedOrigin` : `*.discordsays.com`, `rpbey-*.vercel.app` (previews du projet uniquement), `rpbey.fr`/`bot.rpbey.fr`/`play.rpbey.fr`, localhost:3002, + `GACHA_EXTRA_ORIGINS`), sinon origine canonique fixe `rpbey.fr` (bloque le cross-origin tiers). Couvert par `test/smoke.ts`.

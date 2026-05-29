@@ -14,8 +14,8 @@ window._initialStoreState["CurrentUserStore"] = { … };
 
 | Contexte | Clé du store | Valeur | `JSON.parse` ? |
 | --- | --- | --- | --- |
-| **Fixtures B_TS4** | double-quote `["TournamentStore"]` | **objet-littéral JS** (clés **bare**, ex `requested_plotter:`, `tournament:`, `locale:`) | ❌ échoue (clés non quotées) |
-| **Live `/module` 2026** | single-quote `['TournamentStore']` | **JSON valide** (clés quotées, valeurs JSON) | ✅ marche |
+| **Fixtures B_TS4** | double-quote `["TournamentStore"]` | **objet-littéral JS** (clés **bare**, ex `requested_plotter:`, `tournament:`, `locale:`) | non (échoue, clés non quotées) |
+| **Live `/module` 2026** | single-quote `['TournamentStore']` | **JSON valide** (clés quotées, valeurs JSON) | oui |
 
 Extrait réel de `bts4_module.html` (ligne ~367) :
 
@@ -42,9 +42,9 @@ Conséquences :
 
 | Parser | Gère quote `['"]` | Gère opener `[` | Gère JS-literal (clés bare) |
 | --- | --- | --- | --- |
-| `scraper.ts:101` `parseStoreState` (brace-counter) | ✅ | ✅ | ❌ |
-| `reverse.ts:354` `extractInitialStoreState` (brace-counter) | ✅ | ✅ | ❌ |
-| `~/bxc/src/scrapers/challonge.ts:272` `findStore` (regex `\{[\s\S]*?\}` + JSON.parse) | ✅ | ❌ (rate `[`) | ❌ |
+| `scraper.ts:108` `parseStoreState` (brace-counter) | oui | oui | non |
+| `reverse.ts:445` `extractInitialStoreState` (brace-counter) | oui | oui | non |
+| `~/bxc/src/scrapers/challonge.ts:272` `findStore` (regex `\{[\s\S]*?\}` + JSON.parse) | oui | non (rate `[`) | non |
 
 Les brace-counters du package sont les plus robustes (string/escape-aware) mais
 restent tributaires de `JSON.parse` par clé → ignorent silencieusement une clé
@@ -140,7 +140,7 @@ Entry shape (`extractors/react-props.ts:115` `ChallongeRawLogEntry`) :
 ```
 
 Mappé vers `ScrapedLogEntry { timestamp, type, message, who, raw }`
-(`reverse.ts:180-186`, `scraper.ts:227`).
+(`scraper.ts:161` `storeToLogEntries`).
 
 ## `ActivityFeedSettingsStore` (pagination)
 
@@ -149,9 +149,9 @@ Mappé vers `ScrapedLogEntry { timestamp, type, message, who, raw }`
 ```
 
 (Layout 2026 : pagination nichée sous `.logEntries`. Layout ancien : flat à la racine.)
-Lu par `activityFeedSettings` (`scraper.ts:271`) et `getLogPage`
-(`reverse.ts:194-212`). Le crawler log paginé suit `?page=2..totalPages` (≤ 12
-pages en parallèle, `scraper.ts:721`).
+Lu par `activityFeedSettings` (`scraper.ts:165`) et `getLogPage`
+(`reverse.ts:205`). Le crawler log paginé suit `?page=2..totalPages` (≤ 12
+pages en parallèle, `scraper.ts:440`).
 
 ## `gon` (gem Rails, hors `_initialStoreState`)
 
@@ -163,7 +163,7 @@ pages en parallèle, `scraper.ts:721`).
 ## Stores absents / supposés
 
 - `StandingsStore` : **absent** des pages `/standings` 2026 → fallback table HTML
-  obligatoire (`storeToStandings` `scraper.ts:526` renverra `[]`, puis
+  obligatoire (`storeToStandings` `scraper.ts:249` renverra `[]`, puis
   `parseStandingsTable`).
 - `ParticipantsStore` : non observé ; participants via `#participant-management`
   attrs ou `/module` players.

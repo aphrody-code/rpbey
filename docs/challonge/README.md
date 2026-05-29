@@ -34,9 +34,10 @@ Deux chemins complémentaires (`packages/challonge/src/`) :
    qui imite le fingerprint TLS+H2 d'un vrai Chrome pour passer Cloudflare. Lit
    les stores `_initialStoreState` et les tables HTML SSR.
 
-L'**écriture** (création de tournoi/participants, report de scores) vit côté bot
-dans `apps/bot/src/lib/challonge.ts` (2e client, API v2.1 OAuth). Voir
-`api-routes.md`.
+L'**écriture** (création de tournoi/participants, report de scores) vit dans le
+package partagé `packages/challonge/src/write.ts` (module `@rose-griffon/challonge/write`,
+API v2.1 OAuth), ré-exporté côté bot par le shim `apps/bot/src/lib/challonge.ts`.
+Voir `api-routes.md`.
 
 ## Les routes par fiabilité (curl-impersonate sans cookie, 2026-05-29)
 
@@ -68,7 +69,7 @@ dans `apps/bot/src/lib/challonge.ts` (2e client, API v2.1 OAuth). Voir
 
 ## Sources citées dans ces docs
 
-- **Fixtures** : `packages/challonge/tests/fixtures/{bts4_root,bts4_module,bts4_log,bts4_standings,bts4_participants}.html` + `{bts4_full,bts4_matches,bts4_participants}.json` (extraction B_TS4).
+- **Fixtures** : `packages/challonge/tests/fixtures/{bts4_root,bts4_module,bts4_log,bts4_standings,bts4_participants}.html` + `{bts4_full,bts4_matches,bts4_participants}.json` (extraction B_TS4) ; plus `games.json` (catalogue jeux, Beyblade X = 337197), `org_landing.html`, `user_profile.html`, et un dossier `legacy/`.
 - **Code package** : `packages/challonge/src/{api,reverse,scraper,types}.ts`, `src/transports/htmlrewriter.ts`, `src/extractors/react-props.ts`, `src/scrapers/bracket-svg.ts`, `src/utils/cookies.ts`.
 - **Code bot** : `apps/bot/src/lib/challonge.ts` (write v2.1 OAuth).
 - **bxc** : `~/bxc/src/scrapers/challonge.ts`, `~/bxc/src/cli/challonge.ts`, `~/bxc/src/api/browser.ts`, `~/bxc/src/ffi/curl-impersonate.ts`, `~/bxc/src/cookies/`.

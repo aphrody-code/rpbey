@@ -4,19 +4,19 @@ Le bot (`apps/bot`, discordx + tsyringe) expose les commandes joueur. Pour le ga
 
 ## Serveur gacha `:5050` — `apps/gacha-server`
 
-- Base URL : `process.env.GACHA_API_URL ?? "http://127.0.0.1:5050"` (`gacha-api.ts:31`).
+- Base URL : `process.env.GACHA_API_URL ?? "http://127.0.0.1:5050"` (`gacha-api.ts:52`).
 - Serveur de jeu **dans le monorepo** (`apps/gacha-server`, Colyseus 0.17 / Bun) : REST économie + temps réel Discord Activity. Détails serveur → [server.md](./server.md). Côté bot vivent le *client* (`gacha-api.ts`) et le pont d'images (`gacha-images.ts`).
 - Partage la **même DB** que web/bot (lit/écrit `profiles.currency`, `card_inventory`, etc., s'authentifie via la table `sessions`).
 
 ### Authentification — sessions Bearer mintées par le bot (`gacha-api.ts`)
 
 Le bot crée/réutilise une session Bearer par utilisateur Discord et la passe au serveur `:5050` :
-- `SESSION_TTL_MS = 6 h` (`:32`), réutilisée si ≥ 30 min restantes (`SESSION_REUSE_MIN_REMAINING_MS`, `:33`).
+- `SESSION_TTL_MS = 6 h` (`:53`), réutilisée si ≥ 30 min restantes (`SESSION_REUSE_MIN_REMAINING_MS`, `:54`).
 - Pool pg direct (`DATABASE_URL`, max 3 conns, `:58-71`) — pas la façade Prisma.
 - `upsertUser()` → `findReusableSession()` → sinon `mintSessionInternal()` (token `randomBytes(32).hex()`, insert `sessions`) ; `mintSession()` coalesce les mints concurrents ; `getSession()` = cache mémoire ; **`ensureGachaSession(discordId, name)`** = export public `{token, userId, expiresAt}`.
 - Pont Discord Activity (OAuth code → session) : `apps/bot/src/lib/discord-activity.ts` + endpoints bot `/api/discord/*` (voir `api-server.ts`).
 
-### Endpoints appelés (interface `GachaApiClient`, `gacha-api.ts:443-497`)
+### Endpoints appelés (interface `GachaApiClient`, `gacha-api.ts:321-375`)
 
 | Méthode client | HTTP | Coût | Note |
 | --- | --- | --- | --- |
@@ -36,7 +36,7 @@ Le bot crée/réutilise une session Bearer par utilisateur Discord et la passe a
 | `tradePropose/Accept/Decline/Pending` | `/api/trade/*` | — | ⚠️ **501** — appelé par `/gacha echange` (gap, cf. server.md) |
 | `adminGrant(userId, amount, note)` | POST `/api/admin/currency/grant` | — | admin |
 
-Robustesse : timeout 15 s → `GachaApiError("TIMEOUT")` ; 502/503/504 → `SERVICE_UNAVAILABLE` ; `tryGachaClient()` renvoie `null` si down (dégradation gracieuse, le bot affiche un embed « service indispo »). Normalisation `balanceAfter` → `newBalance` (`:568-580`).
+Robustesse : timeout 15 s → `GachaApiError("TIMEOUT")` ; 502/503/504 → `SERVICE_UNAVAILABLE` ; `tryGachaClient()` renvoie `null` si down (dégradation gracieuse, le bot affiche un embed « service indispo »). Normalisation `balanceAfter` → `newBalance` (`normalizeBalanceFields`, `:446-458`).
 
 ### Pont images Skia — `gacha-images.ts` (~179 l)
 
@@ -90,8 +90,9 @@ Invite à lancer la **Discord Activity** (deeplink si en vocal) ou fallback PWA 
 | `BADGES` | 5→200…31→3000 | EconomyGroup:43-50 |
 | `GIFT_COOLDOWN_MS` | 12 h | EconomyGroup:64 |
 | dette intérêts | 15 % | EconomyGroup:102 |
-| `SESSION_TTL_MS` | 6 h | gacha-api:32 |
-| `BASE_URL` | `:5050` (`GACHA_API_URL`) | gacha-api:31 |
+| `SESSION_TTL_MS` | 6 h | gacha-api:53 |
+| `SESSION_REUSE_MIN_REMAINING_MS` | 30 min | gacha-api:54 |
+| `BASE_URL` | `:5050` (`GACHA_API_URL`) | gacha-api:52 |
 | `FETCH_TIMEOUT_MS` (images) | 20 s | gacha-images:24 |
 | duel cooldown / sélection / round | 3 min / 90 s / 3,5 s | DuelCommand:64-67 |
 | mise duel max | 5000 | DuelCommand |

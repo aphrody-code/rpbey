@@ -49,7 +49,7 @@ Le gacha est un jeu de cartes communautaire (thème Beyblade : *Metal Fusion / B
 
 ⚠️ **`/api/gacha/pull` existe sur DEUX serveurs avec des coûts différents** :
 - web `:3002` → **100** 🪙 (`apps/web/src/app/api/gacha/helpers.ts:61`)
-- serveur `:5050` → **50** 🪙 (`apps/bot/src/commands/General/EconomyGroup.ts:33`)
+- serveur `:5050` → **50** 🪙 (`apps/gacha-server/src/config.ts:69`, `PULL_COST` — source serveur faisant autorité ; valeur miroir affichée par le bot en `EconomyGroup.ts:33`)
 
 Ce sont des chemins identiques sur des services distincts. Les deux écrivent `profiles.currency` / `currency_transactions` dans la **même DB**. C'est la principale source de confusion du système — toujours préciser **quelle surface** on touche.
 
@@ -64,7 +64,7 @@ Ce sont des chemins identiques sur des services distincts. Les deux écrivent `p
 | Web actions (parts) | `apps/web/src/server/actions/gacha.ts` |
 | Web constantes | `apps/web/src/app/api/gacha/helpers.ts` |
 | Contrat Zod | `packages/api-contract/src/gacha.ts` |
-| Serveur :5050 | `apps/gacha-server/src/{index,handlers,rest,cors,auth,config,discord-token}.ts`, `rooms/GachaRoom.ts` |
+| Serveur :5050 | `apps/gacha-server/src/{index,handlers,rest,cors,auth,config,discord-token,game,http}.ts`, `rooms/GachaRoom.ts` |
 | Serveur déploiement | `apps/gacha-server/deploy/{rpbey-gacha.service,nginx-gacha.location.conf}` |
 | Bot client :5050 | `apps/bot/src/lib/gacha-api.ts` |
 | Bot images (Skia) | `apps/bot/src/lib/gacha-images.ts` |

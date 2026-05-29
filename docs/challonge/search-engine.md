@@ -18,9 +18,9 @@ ci-dessous sont réelles mais transitoires.
 ```
 
 - Mapping `game_id ↔ nom ↔ permalink`. Pour filtrer les tournois Beyblade :
-  `games.filter(x => /beyblade/i.test(x.value))`. (Le `game_name` Beyblade X est
-  confirmé dans les fixtures ; le `game_id` exact reste à figer depuis ce JSON quand
-  l'accès est restauré — voir gaps.)
+  `games.filter(x => /beyblade/i.test(x.value))`. Le `game_id` Beyblade X est
+  **figé = 337197** (fixture `games.json` committée + `games-catalog.ts`,
+  `findGameByName`). Reste à confirmer le **nom** du param de filtre — voir gaps.
 
 ### 2. Page de recherche filtrée — `GET challonge.com/tournaments?…`
 
@@ -85,9 +85,9 @@ L'autocomplete jeu = `games.json` (liste complète, filtrage client-side via `to
 
 ## L'API (v1 / v2.1) ne fait PAS de recherche cross-tournoi
 
-- v1 `list({state, type, subdomain})` (`api.ts:259`) : scopé au token, pas de
+- v1 `list({state, type, subdomain})` (`api.ts:326`) : scopé au token, pas de
   `q`/`game_id`.
-- v2.1 `listTournaments({state, page, per_page})` (`apps/bot/src/lib/challonge.ts:170`) :
+- v2.1 `listTournaments({state, page, per_page})` (`packages/challonge/src/write.ts:188`) :
   JSON:API, scopé au token, pas de `game_id`/`q`/`type`.
 
 → **La découverte publique de tournois Beyblade passe obligatoirement par le scraper
@@ -109,9 +109,9 @@ Maintenir un cookie jar + pacer ≥ 4 s pour survivre au gating CF.
   exacte des cartes de résultat de la page HTML filtrée (store key de listing,
   classes de cartes, format pagination DOM) **non re-capturée**. À finaliser via
   tunnel SOCKS (memo `project_reddit-scraper-ip-block`) ou avec cookie jar présent.
-- `game_id` Beyblade X exact non figé (`games.json` 200 puis 403). `game_id=337197`
-  testé mais le filtre `game_id` **n'a pas restreint** (a renvoyé "Modern Warships")
-  → le bon nom de param (`game_id` vs `filter[game_id]` vs `game_name`) reste à
+- `game_id` Beyblade X figé = **337197** (fixture `games.json` committée). Mais le
+  filtre `game_id=337197` **n'a pas restreint** live (a renvoyé "Modern Warships")
+  → le bon **nom** de param (`game_id` vs `filter[game_id]` vs `game_name`) reste à
   confirmer pacé/avec cookie.
 - HAR post-hydratation des bundles JS (pour voir un éventuel XHR autocomplete
   client-side) nécessiterait Chrome CDP (bxc fast/stealth), non lancé.
