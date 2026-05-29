@@ -1,3 +1,4 @@
+import { type ArgsOf, Discord, On } from "@rpbey/discordx";
 import {
   AuditLogEvent,
   ChannelType,
@@ -5,7 +6,6 @@ import {
   type Guild,
   type GuildTextBasedChannel,
 } from "discord.js";
-import { type ArgsOf, Discord, On } from "@rpbey/discordx";
 import { injectable } from "tsyringe";
 
 import { Colors } from "../lib/constants.js";

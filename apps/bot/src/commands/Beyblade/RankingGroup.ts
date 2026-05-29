@@ -1,18 +1,15 @@
+import { Discord, Slash, SlashChoice, SlashGroup, SlashOption } from "@rpbey/discordx";
 import { RankCardBuilder } from "canvacord";
 import {
   ApplicationCommandOptionType,
   AttachmentBuilder,
   type CommandInteraction,
-  EmbedBuilder,
   type User,
 } from "discord.js";
-import { v2ProfilePanel } from "../../lib/ui.js";
-import { Discord, Slash, SlashChoice, SlashGroup, SlashOption } from "@rpbey/discordx";
 import { inject, injectable } from "tsyringe";
 
 import { cached, cachedBuffer, TTL } from "../../lib/cache.js";
 import { generateProfileCard } from "../../lib/canvas-utils.js";
-import { Colors } from "../../lib/constants.js";
 import { logger } from "../../lib/logger.js";
 import { PrismaService } from "../../lib/prisma.js";
 import {
@@ -20,6 +17,7 @@ import {
   renderRankingPanel,
   type RankingVariant,
 } from "../../lib/ranking-panel.js";
+import { v2ProfilePanel } from "../../lib/ui.js";
 
 @Discord()
 @SlashGroup({

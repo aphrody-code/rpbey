@@ -1,5 +1,5 @@
-import { EmbedBuilder, MessageFlags, type CommandInteraction } from "discord.js";
 import { Discord, Slash } from "@rpbey/discordx";
+import { EmbedBuilder, MessageFlags, type CommandInteraction } from "discord.js";
 import { injectable } from "tsyringe";
 
 import { Colors, RPB } from "../../lib/constants.js";

@@ -1,10 +1,10 @@
+import { type GuardFunction } from "@rpbey/discordx";
 import {
   MessageFlags,
   PermissionFlagsBits,
   type CommandInteraction,
   type GuildMember,
 } from "discord.js";
-import { type GuardFunction } from "@rpbey/discordx";
 
 export const ModeratorOnly: GuardFunction<CommandInteraction> = async (
   interaction,

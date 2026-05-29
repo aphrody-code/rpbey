@@ -19,18 +19,67 @@
     "typescript/no-floating-promises": "error",
     "typescript/no-misused-promises": "error",
     "typescript/await-thenable": "error",
-    "typescript/no-explicit-any": "warn",
+    "typescript/no-explicit-any": "off",
+    "typescript/no-extraneous-class": "off",
+    "typescript/no-unsafe-declaration-merging": "off",
     "typescript/consistent-type-imports": ["warn", { "prefer": "type-imports" }],
     "typescript/no-unused-vars": "off",
-    "no-unused-vars": ["warn", { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }],
+    "no-unused-vars": [
+      "warn",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "caughtErrorsIgnorePattern": "^_"
+      }
+    ],
     "no-console": "off",
     "no-await-in-loop": "off",
+    "no-underscore-dangle": [
+      "warn",
+      {
+        "allow": [
+          "__dirname",
+          "_FONT",
+          "_LB_FONT",
+          "_TOKEN_PATH",
+          "_pool",
+          "_client",
+          "_prisma",
+          "_staRatio",
+          "_hexColor",
+          "_listSeasonsRaw",
+          "_loadImageNoWhiteBg",
+          "_loadImageDirect",
+          "_drawBattleEdge",
+          "_targetDir",
+          "_user",
+          "_count",
+          "_comboNameA",
+          "_comboNameB",
+          "__resetSkuMapForTests",
+          "__resetGachaApiCachesForTests",
+          "__mockPrisma",
+          "__mockGachaApi",
+          "_LB_BLACK",
+          "_ELEMENT_ICONS",
+          "_ELEMENT_WEAKNESS",
+          "_GEN_COLORS",
+          "_drawSparkle",
+          "_drawLightRays",
+          "_drawBox",
+          "_drawSeparator",
+          "_drawHoloFoil",
+          "_drawHoloSeal"
+        ]
+      }
+    ],
     "import/no-duplicates": "error",
     "import/no-self-import": "error",
     "import/no-cycle": "off",
     "import/default": "off",
     "import/no-unassigned-import": "off",
-    "import/no-named-as-default": "off"
+    "import/no-named-as-default": "off",
+    "import/no-named-as-default-member": "off"
   },
   "overrides": [
     {

@@ -71,15 +71,10 @@ export async function GET(request: Request) {
       filters: options.filters,
       data: recommendations,
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Recommendation API Error:", error);
-    return NextResponse.json(
-      {
-        success: false,
-        error: error.message || "Failed to fetch recommendations",
-      },
-      { status: 500 },
-    );
+    const message = error instanceof Error ? error.message : "Failed to fetch recommendations";
+    return NextResponse.json({ success: false, error: message }, { status: 500 });
   }
 }
 
@@ -98,14 +93,9 @@ export async function POST(request: Request) {
       filters: body.filters,
       data: recommendations,
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Recommendation API POST Error:", error);
-    return NextResponse.json(
-      {
-        success: false,
-        error: error.message || "Failed to fetch recommendations",
-      },
-      { status: 500 },
-    );
+    const message = error instanceof Error ? error.message : "Failed to fetch recommendations";
+    return NextResponse.json({ success: false, error: message }, { status: 500 });
   }
 }

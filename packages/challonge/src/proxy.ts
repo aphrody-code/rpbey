@@ -77,8 +77,8 @@ function tokenMatches(provided: string, expected: string): boolean {
   const max = Math.max(a.length, b.length);
   let diff = a.length ^ b.length;
   for (let i = 0; i < max; i++) {
-    const av = i < a.length ? a[i]! : 0;
-    const bv = i < b.length ? b[i]! : 0;
+    const av = i < a.length ? (a[i] ?? 0) : 0;
+    const bv = i < b.length ? (b[i] ?? 0) : 0;
     diff |= av ^ bv;
   }
   return diff === 0;

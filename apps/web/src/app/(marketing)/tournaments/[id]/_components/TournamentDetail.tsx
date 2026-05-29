@@ -21,6 +21,7 @@ import type {
   TournamentData,
 } from "./types";
 import { useLiveTournament } from "./useLiveTournament";
+import type { ViewerData } from "@rose-griffon/challonge-core/viewer";
 
 export type { TournamentData } from "./types";
 
@@ -29,7 +30,7 @@ interface Props {
   formattedDate: string;
   initialLiveData: InitialLiveData;
   mirrorHtml?: string;
-  mirrorData?: any;
+  mirrorData?: ViewerData;
 }
 
 const LIVE_STATUSES = new Set(["UNDERWAY", "CHECKIN"]);

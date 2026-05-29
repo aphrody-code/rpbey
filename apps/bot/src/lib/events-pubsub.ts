@@ -11,8 +11,8 @@
  * Best-effort: never throws; logs a warning on failure so caller is unaffected.
  */
 
-import { redis } from "./redis.js";
 import { logger } from "./logger.js";
+import { redis } from "./redis.js";
 
 export type EventChannel = "tournament" | "ranking";
 

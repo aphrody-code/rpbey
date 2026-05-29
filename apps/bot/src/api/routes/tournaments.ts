@@ -22,8 +22,11 @@ import {
   fetchAndParseAsScrapedTournament,
   fetchPublicTournamentJson,
 } from "@rose-griffon/challonge";
+
+import type { publishBtsRanking as PublishBtsRankingFn } from "../../lib/classement-publisher.js";
 import { logger } from "../../lib/logger.js";
 import { prisma } from "../../lib/prisma.js";
+
 import {
   errorResponse,
   extractSlug,
@@ -525,7 +528,7 @@ const finalize = withAuth(async (req) => {
   // Publication automatique du classement BTS canvas si demandé.
   // Best-effort : un échec ne casse pas le finalize.
   let publishResult:
-    | Awaited<ReturnType<typeof import("../../lib/classement-publisher.js").publishBtsRanking>>
+    | Awaited<ReturnType<typeof PublishBtsRankingFn>>
     | { ok: false; skipped: true } = { ok: false, skipped: true };
   if (body.publishRanking) {
     try {

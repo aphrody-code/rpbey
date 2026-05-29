@@ -37,6 +37,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useMemo, useState, useEffect } from "react";
+import type { GlobalSearchItem } from "@rpbey/api-contract";
 import type { BxCatalog, BxProduct, BxProductGroup, BxShop, RecommendedProduct } from "./types";
 
 interface Props {
@@ -121,7 +122,7 @@ export function ComparateurClient({
   const [wHype, setWHype] = useState(0.2);
   const [wPrice, setWPrice] = useState(0.3);
 
-  const [globalItems, setGlobalItems] = useState<any[]>([]);
+  const [globalItems, setGlobalItems] = useState<GlobalSearchItem[]>([]);
   const [showGlobalDropdown, setShowGlobalDropdown] = useState(false);
   const [loadingGlobal, setLoadingGlobal] = useState(false);
 
@@ -176,11 +177,11 @@ export function ComparateurClient({
   const globalResults = useMemo(() => {
     const query = search.trim();
     const grouped = {
-      product: [] as any[],
-      part: [] as any[],
-      tournament: [] as any[],
-      blader: [] as any[],
-      lexicon: [] as any[],
+      product: [] as GlobalSearchItem[],
+      part: [] as GlobalSearchItem[],
+      tournament: [] as GlobalSearchItem[],
+      blader: [] as GlobalSearchItem[],
+      lexicon: [] as GlobalSearchItem[],
     };
 
     if (!query || globalItems.length === 0) return grouped;
@@ -197,7 +198,7 @@ export function ComparateurClient({
     return grouped;
   }, [search, globalItems, globalFuse]);
 
-  const handleGlobalItemClick = (item: any) => {
+  const handleGlobalItemClick = (item: GlobalSearchItem) => {
     setShowGlobalDropdown(false);
     if (item.category === "product") {
       const key = item.id.replace("group-", "");
@@ -248,8 +249,8 @@ export function ComparateurClient({
     return list.sort((a, b) => b.overallScore - a.overallScore);
   }, [recommendations, wMeta, wHype, wPrice, region, search]);
 
-  const handleRecClick = (row: any) => {
-    const rec = row as RecommendedProduct;
+  const handleRecClick = (row: RecommendedProduct) => {
+    const rec = row;
     const matchedGroup = groups.find((g) => g.key === rec.key);
     if (matchedGroup) {
       setOpenGroup(matchedGroup);
@@ -470,10 +471,10 @@ export function ComparateurClient({
         useExtendedSearch: true,
         getFn: (obj: BxProduct, path: string | string[]): string | string[] => {
           const keys = Array.isArray(path) ? path : (path as string).split(".");
-          let value: any = obj;
+          let value: unknown = obj;
           for (const key of keys) {
             if (value == null) return "";
-            value = (value as any)[key];
+            value = (value as Record<string, unknown>)[key];
           }
           if (typeof value === "string") {
             return normalizeText(value);
@@ -499,10 +500,10 @@ export function ComparateurClient({
         useExtendedSearch: true,
         getFn: (obj: BxProductGroup, path: string | string[]): string | string[] => {
           const keys = Array.isArray(path) ? path : (path as string).split(".");
-          let value: any = obj;
+          let value: unknown = obj;
           for (const key of keys) {
             if (value == null) return "";
-            value = (value as any)[key];
+            value = (value as Record<string, unknown>)[key];
           }
           if (typeof value === "string") {
             return normalizeText(value);
@@ -962,7 +963,7 @@ export function ComparateurClient({
                         🛒 Produits ({globalResults.product.length})
                       </Typography>
                       <Stack spacing={0.5}>
-                        {globalResults.product.slice(0, 4).map((item: any) => (
+                        {globalResults.product.slice(0, 4).map((item: GlobalSearchItem) => (
                           <Box
                             key={item.id}
                             onClick={() => handleGlobalItemClick(item)}
@@ -974,7 +975,9 @@ export function ComparateurClient({
                               display: "flex",
                               justifyContent: "space-between",
                               alignItems: "center",
-                              "&:hover": { bgcolor: "rgba(255,255,255,0.04)" },
+                              "&:hover": {
+                                bgcolor: "rgba(255,255,255,0.04)",
+                              },
                             }}
                           >
                             <Box>
@@ -1025,7 +1028,7 @@ export function ComparateurClient({
                         ⚙️ Pièces détachées ({globalResults.part.length})
                       </Typography>
                       <Stack spacing={0.5}>
-                        {globalResults.part.slice(0, 4).map((item: any) => (
+                        {globalResults.part.slice(0, 4).map((item: GlobalSearchItem) => (
                           <Box
                             key={item.id}
                             onClick={() => handleGlobalItemClick(item)}
@@ -1037,7 +1040,9 @@ export function ComparateurClient({
                               display: "flex",
                               justifyContent: "space-between",
                               alignItems: "center",
-                              "&:hover": { bgcolor: "rgba(255,255,255,0.04)" },
+                              "&:hover": {
+                                bgcolor: "rgba(255,255,255,0.04)",
+                              },
                             }}
                           >
                             <Box>
@@ -1094,7 +1099,7 @@ export function ComparateurClient({
                         🏆 Tournois ({globalResults.tournament.length})
                       </Typography>
                       <Stack spacing={0.5}>
-                        {globalResults.tournament.slice(0, 3).map((item: any) => (
+                        {globalResults.tournament.slice(0, 3).map((item: GlobalSearchItem) => (
                           <Box
                             key={item.id}
                             onClick={() => handleGlobalItemClick(item)}
@@ -1162,7 +1167,7 @@ export function ComparateurClient({
                         👤 Bladers & Classement ({globalResults.blader.length})
                       </Typography>
                       <Stack spacing={0.5}>
-                        {globalResults.blader.slice(0, 3).map((item: any) => (
+                        {globalResults.blader.slice(0, 3).map((item: GlobalSearchItem) => (
                           <Box
                             key={item.id}
                             onClick={() => handleGlobalItemClick(item)}
@@ -1174,7 +1179,9 @@ export function ComparateurClient({
                               display: "flex",
                               justifyContent: "space-between",
                               alignItems: "center",
-                              "&:hover": { bgcolor: "rgba(255,255,255,0.04)" },
+                              "&:hover": {
+                                bgcolor: "rgba(255,255,255,0.04)",
+                              },
                             }}
                           >
                             <Box>
@@ -1220,7 +1227,7 @@ export function ComparateurClient({
                         📖 Lexique ({globalResults.lexicon.length})
                       </Typography>
                       <Stack spacing={0.5}>
-                        {globalResults.lexicon.slice(0, 4).map((item: any) => (
+                        {globalResults.lexicon.slice(0, 4).map((item: GlobalSearchItem) => (
                           <Box key={item.id} sx={{ p: 1, borderRadius: 2 }}>
                             <Typography sx={{ fontWeight: 800, fontSize: "0.82rem" }}>
                               {item.title}{" "}

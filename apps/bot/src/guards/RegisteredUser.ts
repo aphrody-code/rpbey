@@ -1,3 +1,4 @@
+import { type GuardFunction } from "@rpbey/discordx";
 import {
   ActionRowBuilder,
   ButtonBuilder,
@@ -6,7 +7,6 @@ import {
   MessageFlags,
   type CommandInteraction,
 } from "discord.js";
-import { type GuardFunction } from "@rpbey/discordx";
 
 import { logger } from "../lib/logger.js";
 import { prisma } from "../lib/prisma.js";

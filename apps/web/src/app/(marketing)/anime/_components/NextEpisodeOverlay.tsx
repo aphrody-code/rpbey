@@ -3,6 +3,7 @@
 import { SkipNext } from "@mui/icons-material";
 import { Box, Button, LinearProgress, Typography } from "@mui/material";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 interface NextEpisodeOverlayProps {
@@ -16,11 +17,12 @@ const COUNTDOWN_SECONDS = 8;
 export function NextEpisodeOverlay({ seriesSlug, nextNumber, nextTitle }: NextEpisodeOverlayProps) {
   const [secondsLeft, setSecondsLeft] = useState(COUNTDOWN_SECONDS);
   const [dismissed, setDismissed] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     if (dismissed) return;
     if (secondsLeft <= 0) {
-      window.location.href = `/anime/${seriesSlug}/${nextNumber}`;
+      router.push(`/anime/${seriesSlug}/${nextNumber}`);
       return;
     }
     const timer = setTimeout(() => setSecondsLeft((s) => s - 1), 1000);

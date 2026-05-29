@@ -122,12 +122,23 @@ export async function recalculateRankings() {
     string,
     { primaryName: string; challongeUsername: string; aliases: string[] }
   > = {};
-  let enrichedData: any[] = [];
+  interface EnrichedRankingEntry {
+    playerKey: string;
+    playerName: string;
+    wins: number;
+    losses: number;
+    tournamentWins: number;
+    tournamentsCount: number;
+    totalPoints: number;
+    challongeUsername: string | null;
+    avatarUrl: string | null;
+  }
+  let enrichedData: EnrichedRankingEntry[] = [];
   try {
     // Sur Vercel : fetch CDN (cdn.rpbey.fr). Sur VPS : lecture FS directe.
     const [mapperData, enriched] = await Promise.all([
       loadJsonSafe<typeof mapper>("data/exports/participants_map.json"),
-      loadJsonSafe<any[]>("data/exports/recalculated_ranking_s2_enriched.json"),
+      loadJsonSafe<EnrichedRankingEntry[]>("data/exports/recalculated_ranking_s2_enriched.json"),
     ]);
     if (mapperData) mapper = mapperData;
     if (enriched) enrichedData = enriched;

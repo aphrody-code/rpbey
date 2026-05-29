@@ -9,10 +9,13 @@
  * Phase 4 : uses dumpChallongeRaw from @rose-griffon/challonge workspace dep
  * instead of the stale services/challonge local duplicate.
  */
-import path from "node:path";
 import { mkdir } from "node:fs/promises";
+import path from "node:path";
+
 import { ChallongeScraper, dumpChallongeRaw } from "@rose-griffon/challonge";
+
 import { logger } from "../../lib/logger.js";
+
 import {
   errorResponse,
   extractSlug,

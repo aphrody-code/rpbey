@@ -1,3 +1,4 @@
+import { Discord, Guard, Slash, SlashOption } from "@rpbey/discordx";
 import {
   ActionRowBuilder,
   ApplicationCommandOptionType,
@@ -9,7 +10,6 @@ import {
   type CommandInteraction,
   type TextChannel,
 } from "discord.js";
-import { Discord, Guard, Slash, SlashOption } from "@rpbey/discordx";
 
 import { OwnerOnly } from "../../guards/OwnerOnly.js";
 import { RPB } from "../../lib/constants.js";

@@ -1,3 +1,5 @@
+import { ButtonComponent, Discord, Slash, SlashChoice, SlashOption } from "@rpbey/discordx";
+import { createTranscript } from "discord-html-transcripts";
 import {
   ActionRowBuilder,
   ApplicationCommandOptionType,
@@ -12,8 +14,6 @@ import {
   type TextChannel,
   type User,
 } from "discord.js";
-import { createTranscript } from "discord-html-transcripts";
-import { ButtonComponent, Discord, Slash, SlashChoice, SlashOption } from "@rpbey/discordx";
 import { inject, injectable } from "tsyringe";
 
 import { Colors, RPB } from "../../lib/constants.js";

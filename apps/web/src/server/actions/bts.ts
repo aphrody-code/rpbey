@@ -339,7 +339,22 @@ async function loadDiscordImageResolver(): Promise<
       if (n) aliasToKey.set(n, k);
     }
   }
-  let users: any[] = [];
+  type BtsUserRow = {
+    id: string;
+    discordId: string | null;
+    username: string | null;
+    displayUsername: string | null;
+    name: string | null;
+    globalName: string | null;
+    nickname: string | null;
+    discordTag: string | null;
+    image: string | null;
+    profile: {
+      challongeUsername: string | null;
+      bladerName: string | null;
+    } | null;
+  };
+  let users: BtsUserRow[] = [];
   try {
     const userRows = await db.query.users.findMany({
       where: isNotNull(schema.users.discordId),

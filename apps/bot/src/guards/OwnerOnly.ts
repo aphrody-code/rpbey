@@ -1,5 +1,5 @@
-import { MessageFlags, type CommandInteraction } from "discord.js";
 import { type GuardFunction } from "@rpbey/discordx";
+import { MessageFlags, type CommandInteraction } from "discord.js";
 
 export const OwnerOnly: GuardFunction<CommandInteraction> = async (interaction, _client, next) => {
   const owners = process.env.OWNER_IDS?.split(",") ?? [];

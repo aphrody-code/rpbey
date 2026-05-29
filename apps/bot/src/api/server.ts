@@ -12,6 +12,7 @@
  * restent uniquement pour les endpoints non-couverts (rankings.refresh).
  */
 import { timingSafeEqual } from "node:crypto";
+
 import { getMaintenanceRoutes } from "./routes/maintenance.js";
 import { getScrapeRoutes } from "./routes/scrape.js";
 import { getTikTokRoutes } from "./routes/tiktok.js";

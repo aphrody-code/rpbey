@@ -1,3 +1,4 @@
+import { ButtonComponent, Discord, Slash, SlashGroup, SlashOption } from "@rpbey/discordx";
 import {
   ActionRowBuilder,
   ApplicationCommandOptionType,
@@ -10,7 +11,6 @@ import {
   type CommandInteraction,
   type TextChannel,
 } from "discord.js";
-import { ButtonComponent, Discord, Slash, SlashGroup, SlashOption } from "@rpbey/discordx";
 import { injectable } from "tsyringe";
 
 import { Colors } from "../../lib/constants.js";

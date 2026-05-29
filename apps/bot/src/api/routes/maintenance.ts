@@ -15,8 +15,10 @@
  * `dynamic import` avec @ts-ignore pour ne pas bloquer le typecheck dès W2B.
  */
 import { ChallongeScraper } from "@rose-griffon/challonge";
+
 import { logger } from "../../lib/logger.js";
 import { prisma } from "../../lib/prisma.js";
+
 import {
   errorResponse,
   extractSlug,

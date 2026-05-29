@@ -1,4 +1,5 @@
 import { type NextRequest } from "next/server";
+import type { RedisClient } from "bun";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -53,7 +54,7 @@ export async function GET(req: NextRequest) {
       // par le global `Bun` au moment de la requête (le serveur tourne sous Bun).
       const RedisClientCtor = (
         globalThis as unknown as {
-          Bun: { RedisClient: new (url: string) => import("bun").RedisClient };
+          Bun: { RedisClient: new (url: string) => RedisClient };
         }
       ).Bun.RedisClient;
       const subscriber = new RedisClientCtor(process.env.REDIS_URL ?? "redis://127.0.0.1:6379");

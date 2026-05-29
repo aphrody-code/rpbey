@@ -1,5 +1,5 @@
-import { EmbedBuilder, MessageFlags, type CommandInteraction } from "discord.js";
 import { type GuardFunction } from "@rpbey/discordx";
+import { EmbedBuilder, MessageFlags, type CommandInteraction } from "discord.js";
 
 import { logger } from "../lib/logger.js";
 import { prisma } from "../lib/prisma.js";

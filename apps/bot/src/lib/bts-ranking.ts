@@ -8,8 +8,8 @@
  */
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
-import { resolveRootPath } from "./paths.js";
 
+import { resolveRootPath } from "./paths.js";
 import prisma from "./prisma.js";
 import {
   FINISH_BUCKET_MAP,
@@ -170,7 +170,9 @@ async function loadDiscordResolver(): Promise<
   let map: Record<string, MapEntry> = {};
   try {
     map = JSON.parse(await readFile(PARTICIPANTS_MAP_PATH, "utf-8"));
-  } catch {}
+  } catch {
+    // file missing or malformed — start with empty map
+  }
 
   const aliasToKey = new Map<string, string>();
   for (const [k, e] of Object.entries(map)) {

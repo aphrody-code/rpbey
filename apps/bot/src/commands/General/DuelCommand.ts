@@ -1,3 +1,4 @@
+import { ButtonComponent, Discord, Slash, SlashGroup, SlashOption } from "@rpbey/discordx";
 import {
   ActionRowBuilder,
   ApplicationCommandOptionType,
@@ -13,14 +14,11 @@ import {
   type Message,
   type User,
 } from "discord.js";
-import { errorEmbed, v2Container } from "../../lib/ui.js";
-import { ButtonComponent, Discord, Slash, SlashGroup, SlashOption } from "@rpbey/discordx";
 import { inject, injectable } from "tsyringe";
 
 import {
   type TcgDuelCard,
   type TcgRoundResult,
-  tcgComputePower,
   tcgHasSynergy,
   tcgTeamPower,
   tcgResolveRound,
@@ -29,8 +27,6 @@ import {
   tcgCardSortPower,
   tcgPowerBar,
   calcElo,
-  TCG_FINISH_TYPES,
-  TCG_RANK_TIERS,
   TCG_ELEMENT_EMOJI,
   TCG_ELEMENT_NAME,
   TCG_RARITY_EMOJI,
@@ -40,6 +36,7 @@ import {
 import { Colors, RPB } from "../../lib/constants.js";
 import { logger } from "../../lib/logger.js";
 import { PrismaService } from "../../lib/prisma.js";
+import { errorEmbed, v2Container } from "../../lib/ui.js";
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // MIGRATION NOTE (2026-04-30) — TCG Duel

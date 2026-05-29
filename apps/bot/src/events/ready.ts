@@ -1,5 +1,5 @@
-import { type GuildMember } from "discord.js";
 import { type ArgsOf, type Client, Discord, On } from "@rpbey/discordx";
+import { type GuildMember } from "discord.js";
 import { inject, injectable } from "tsyringe";
 
 import { logger } from "../lib/logger.js";

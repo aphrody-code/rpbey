@@ -1,10 +1,10 @@
+import { Discord, Slash, SlashGroup, SlashOption } from "@rpbey/discordx";
 import {
   ApplicationCommandOptionType,
   AttachmentBuilder,
   type CommandInteraction,
   EmbedBuilder,
 } from "discord.js";
-import { Discord, Slash, SlashGroup, SlashOption } from "@rpbey/discordx";
 import { injectable } from "tsyringe";
 
 import { logger } from "../../lib/logger.js";

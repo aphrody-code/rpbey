@@ -11,6 +11,7 @@ export const authClient = createAuthClient({
     usernameClient(),
     twoFactorClient({
       onTwoFactorRedirect() {
+        // eslint-disable-next-line @next/next/no-location-assign-relative-destination -- callback better-auth hors composant React, useRouter non disponible ici
         window.location.href = "/two-factor";
       },
     }),

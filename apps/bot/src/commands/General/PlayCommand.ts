@@ -1,3 +1,4 @@
+import { Discord, Slash } from "@rpbey/discordx";
 import {
   ActionRowBuilder,
   ButtonBuilder,
@@ -7,7 +8,6 @@ import {
   type CommandInteraction,
   type GuildMember,
 } from "discord.js";
-import { Discord, Slash } from "@rpbey/discordx";
 import { injectable } from "tsyringe";
 
 import { Colors, RPB } from "../../lib/constants.js";

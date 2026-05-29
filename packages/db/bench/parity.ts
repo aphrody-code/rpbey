@@ -36,9 +36,9 @@ for (const [label, table] of Object.entries(tables)) {
   const exp = expected[label];
   const mark = n === exp ? "OK " : "FAIL";
   if (n !== exp) ok = false;
-  console.log(`${mark} ${label.padEnd(16)} drizzle=${n} expected=${exp}`);
+  console.info(`${mark} ${label.padEnd(16)} drizzle=${n} expected=${exp}`);
 }
 
 await client.end();
-console.log(ok ? "\nPARITY OK" : "\nPARITY MISMATCH");
+console.info(ok ? "\nPARITY OK" : "\nPARITY MISMATCH");
 process.exit(ok ? 0 : 1);

@@ -14,7 +14,7 @@
     }
   },
   "rules": {
-    "eqeqeq": "warn",
+    "eqeqeq": ["error", "always", { "null": "ignore" }],
     "no-console": ["warn", { "allow": ["warn", "error"] }],
     "no-debugger": "error",
     "no-unused-vars": "warn",
@@ -23,7 +23,8 @@
     "no-eval": "error",
 
     "typescript/no-explicit-any": "warn",
-    "typescript/no-non-null-assertion": "warn",
+    "typescript/no-non-null-assertion": "off",
+    "typescript/no-non-null-asserted-optional-chain": "error",
     "typescript/consistent-type-imports": "warn",
 
     "react/no-danger": "off",

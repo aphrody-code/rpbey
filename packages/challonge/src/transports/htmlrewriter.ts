@@ -31,7 +31,7 @@ import {
   extractChallongeTournament,
   type ChallongeTournamentSnapshot,
 } from "@aphrody-code/bxc/scrapers/challonge";
-import { parseBracketSvg } from "../scrapers/bracket-svg";
+import { parseBracketSvg, type BracketMatch } from "../scrapers/bracket-svg";
 import {
   type ScrapedMatch,
   type ScrapedParticipant,
@@ -92,7 +92,7 @@ export interface HtmlRewriterModuleData {
     loserName?: string;
   }>;
   /** Bracket match nodes from the inline SVG (X/Y coords, player slots). */
-  bracketMatches: import("../scrapers/bracket-svg").BracketMatch[];
+  bracketMatches: BracketMatch[];
   /**
    * Full tournament snapshot from `window._initialStoreState['TournamentStore']`.
    * Present when the HTML contains the TournamentStore (most Challonge pages).
@@ -260,7 +260,7 @@ export async function fetchPublicTournamentJson(
 function snapshotToScrapedTournament(
   slug: string,
   snap: ChallongeTournamentSnapshot,
-  _bracketMatches: import("../scrapers/bracket-svg").BracketMatch[],
+  _bracketMatches: BracketMatch[],
 ): ScrapedTournament {
   const t = snap.tournament;
   const tournamentType = t.tournament_type ?? "single elimination";
@@ -537,7 +537,7 @@ function legacyToScrapedTournament(data: HtmlRewriterModuleData): ScrapedTournam
 async function parseLegacyHtml(
   slug: string,
   html: string,
-  bracketMatches: import("../scrapers/bracket-svg").BracketMatch[],
+  bracketMatches: BracketMatch[],
 ): Promise<HtmlRewriterModuleData> {
   const groups: GroupData[] = [];
   let currentGroup: GroupData | null = null;
@@ -554,8 +554,8 @@ async function parseLegacyHtml(
   const parseTransformLocal = (val: string | null): { x: number; y: number } => {
     const m = val?.match(/translate\(([-\d.]+)\s+([-\d.]+)\)/);
     return {
-      x: m ? parseFloat(m[1]!) : 0,
-      y: m ? parseFloat(m[2]!) : 0,
+      x: m ? parseFloat(m[1] ?? "0") : 0,
+      y: m ? parseFloat(m[2] ?? "0") : 0,
     };
   };
   // parseTransformLocal used below to satisfy strict unused-var checker.
@@ -576,8 +576,8 @@ async function parseLegacyHtml(
           .trim();
         const m = cleaned.match(/^(.+?)\s*\(([^)]+)\)\s*$/);
         if (m) {
-          currentRow.displayName = m[1]!.trim();
-          currentRow.challongeUsername = m[2]!.trim();
+          currentRow.displayName = (m[1] ?? "").trim();
+          currentRow.challongeUsername = (m[2] ?? "").trim();
         } else {
           currentRow.displayName = cleaned;
         }
@@ -587,9 +587,9 @@ async function parseLegacyHtml(
       case 2: {
         const m = text.match(/(\d+)\s*-\s*(\d+)\s*-\s*(\d+)/);
         if (m) {
-          currentRow.wins = parseInt(m[1]!, 10);
-          currentRow.losses = parseInt(m[2]!, 10);
-          currentRow.ties = parseInt(m[3]!, 10);
+          currentRow.wins = parseInt(m[1] ?? "0", 10);
+          currentRow.losses = parseInt(m[2] ?? "0", 10);
+          currentRow.ties = parseInt(m[3] ?? "0", 10);
         }
         break;
       }

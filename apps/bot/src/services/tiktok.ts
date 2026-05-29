@@ -1,4 +1,5 @@
 import { GetUserPosts } from "@tobyg74/tiktok-api-dl";
+
 import { type TikTokVideo } from "./tiktok-types";
 
 export { type TikTokVideo };

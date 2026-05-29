@@ -1,5 +1,5 @@
-import { ChannelType } from "discord.js";
 import { type ArgsOf, Discord, On } from "@rpbey/discordx";
+import { ChannelType } from "discord.js";
 
 import { logger } from "../lib/logger.js";
 

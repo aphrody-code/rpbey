@@ -1,5 +1,5 @@
-import { EmbedBuilder, MessageFlags, type ModalSubmitInteraction } from "discord.js";
 import { Discord, ModalComponent } from "@rpbey/discordx";
+import { EmbedBuilder, MessageFlags, type ModalSubmitInteraction } from "discord.js";
 import { inject, injectable } from "tsyringe";
 
 import { Colors, RPB } from "../lib/constants.js";

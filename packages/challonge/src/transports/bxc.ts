@@ -319,7 +319,7 @@ export class BxcTransport {
         [301, 302, 303, 307, 308].includes(impRes.status) &&
         impRes.headers.get("location")
       ) {
-        const location = impRes.headers.get("location")!;
+        const location = impRes.headers.get("location") ?? "";
         const next = new URL(location, currentUrl).toString();
         if (!isPermittedRedirect(currentUrl, next)) {
           return {

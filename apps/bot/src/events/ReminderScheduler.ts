@@ -1,5 +1,5 @@
-import { type Client, type TextChannel } from "discord.js";
 import { type ArgsOf, Discord, On } from "@rpbey/discordx";
+import { type Client, type TextChannel } from "discord.js";
 import { inject, injectable } from "tsyringe";
 
 import { logger } from "../lib/logger.js";

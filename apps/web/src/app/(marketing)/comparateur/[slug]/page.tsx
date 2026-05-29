@@ -51,7 +51,10 @@ const MEDAL = ["#FFD700", "#C0C0C0", "#CD7F32"];
 const eur = (v: number | null | undefined) =>
   v == null
     ? "—"
-    : new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(v);
+    : new Intl.NumberFormat("fr-FR", {
+        style: "currency",
+        currency: "EUR",
+      }).format(v);
 const native = (v: number | null | undefined, c: string) =>
   v == null
     ? "—"
@@ -243,7 +246,6 @@ export default async function ProductComparePage({
                   p: 1.5,
                 }}
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <Box
                   component="img"
                   src={g.cheapest.image}
@@ -330,7 +332,11 @@ export default async function ProductComparePage({
                   <Box sx={{ mt: 1 }}>
                     {g.cheapest && (
                       <Typography
-                        sx={{ color: "text.secondary", fontSize: "0.92rem", fontWeight: 500 }}
+                        sx={{
+                          color: "text.secondary",
+                          fontSize: "0.92rem",
+                          fontWeight: 500,
+                        }}
                       >
                         chez{" "}
                         <strong style={{ color: "var(--mui-palette-text-primary)" }}>
@@ -401,7 +407,11 @@ export default async function ProductComparePage({
                   <Stack direction="row" sx={{ justifyContent: "space-between", mt: 1 }}>
                     <Typography
                       variant="caption"
-                      sx={{ color: "#22c55e", fontWeight: 800, fontSize: "0.75rem" }}
+                      sx={{
+                        color: "#22c55e",
+                        fontWeight: 800,
+                        fontSize: "0.75rem",
+                      }}
                     >
                       min {eur(low)}
                     </Typography>
@@ -419,7 +429,11 @@ export default async function ProductComparePage({
                     </Typography>
                     <Typography
                       variant="caption"
-                      sx={{ color: "#ef4444", fontWeight: 800, fontSize: "0.75rem" }}
+                      sx={{
+                        color: "#ef4444",
+                        fontWeight: 800,
+                        fontSize: "0.75rem",
+                      }}
                     >
                       max {eur(high)}
                     </Typography>
@@ -467,11 +481,19 @@ export default async function ProductComparePage({
                 <Box sx={{ width: 36, textAlign: "center", flexShrink: 0 }}>
                   {medal ? (
                     <EmojiEvents
-                      sx={{ color: medal, fontSize: 28, filter: `drop-shadow(0 0 5px ${medal}60)` }}
+                      sx={{
+                        color: medal,
+                        fontSize: 28,
+                        filter: `drop-shadow(0 0 5px ${medal}60)`,
+                      }}
                     />
                   ) : (
                     <Typography
-                      sx={{ fontWeight: 800, color: "text.secondary", fontSize: "0.85rem" }}
+                      sx={{
+                        fontWeight: 800,
+                        color: "text.secondary",
+                        fontSize: "0.85rem",
+                      }}
                     >
                       #{i + 1}
                     </Typography>
@@ -496,7 +518,10 @@ export default async function ProductComparePage({
                   <Stack direction="row" spacing={1} sx={{ alignItems: "center", mb: 0.25 }}>
                     <Typography
                       noWrap
-                      sx={{ fontWeight: i === 0 ? 800 : 700, fontSize: "0.95rem" }}
+                      sx={{
+                        fontWeight: i === 0 ? 800 : 700,
+                        fontSize: "0.95rem",
+                      }}
                     >
                       {o.shop}
                     </Typography>
@@ -598,7 +623,12 @@ export default async function ProductComparePage({
 
         <Typography
           variant="caption"
-          sx={{ color: "text.secondary", display: "block", mt: 3, opacity: 0.6 }}
+          sx={{
+            color: "text.secondary",
+            display: "block",
+            mt: 3,
+            opacity: 0.6,
+          }}
         >
           Prix convertis en € à titre indicatif (taux approximatifs). Vérifiez le prix final sur la
           boutique. Liens marchands.

@@ -1,4 +1,4 @@
-import { ChannelType, EmbedBuilder } from "discord.js";
+import { ChannelType, EmbedBuilder, type TextChannel } from "discord.js";
 
 import { bot } from "../../lib/bot.js";
 import { getTemplate } from "../../lib/cms.js";
@@ -53,14 +53,14 @@ export async function tournamentReminderTask() {
     const channelId = getReminderChannelId();
 
     // Resolve announce channel once — reused for all reminders this tick
-    let channel: import("discord.js").TextChannel | null = null;
+    let channel: TextChannel | null = null;
     if (guildId && channelId) {
       try {
         const guild = bot.guilds.cache.get(guildId);
         if (guild) {
           const ch = guild.channels.cache.get(channelId);
           if (ch && ch.type === ChannelType.GuildText) {
-            channel = ch as import("discord.js").TextChannel;
+            channel = ch as TextChannel;
           }
         }
       } catch (err) {

@@ -1,10 +1,10 @@
+import { Discord, Slash, SlashGroup } from "@rpbey/discordx";
 import {
   EmbedBuilder,
   MessageFlags,
   type CommandInteraction,
   version as djsVersion,
 } from "discord.js";
-import { Discord, Slash, SlashGroup } from "@rpbey/discordx";
 import { inject, injectable } from "tsyringe";
 
 import { Colors, RPB } from "../../lib/constants.js";

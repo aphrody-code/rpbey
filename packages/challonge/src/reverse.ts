@@ -29,7 +29,6 @@ import { extractReactRoots, getReactRoot, readDataAttrs } from "./extractors/rea
 import {
   type LogEntriesProps,
   type ChallongeRawLogEntry,
-  type ParticipantsProps,
   type ReactRoot,
   type StandingsProps,
 } from "./extractors/react-props";

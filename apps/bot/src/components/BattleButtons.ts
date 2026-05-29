@@ -1,3 +1,4 @@
+import { ButtonComponent, Discord } from "@rpbey/discordx";
 import {
   ActionRowBuilder,
   ButtonBuilder,
@@ -6,7 +7,6 @@ import {
   MessageFlags,
   type ButtonInteraction,
 } from "discord.js";
-import { ButtonComponent, Discord } from "@rpbey/discordx";
 
 import { getDeckStats, getRandomStats, runBattleSimulation } from "../lib/battle-utils.js";
 import { Colors, RPB } from "../lib/constants.js";

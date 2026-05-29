@@ -15,6 +15,7 @@
  */
 
 import type { Guild, GuildMember } from "discord.js";
+
 import { logger } from "./logger.js";
 
 // ─── Types ────────────────────────────────────────────────────────────────────

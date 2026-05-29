@@ -1,10 +1,10 @@
+import { Discord, Slash, SlashGroup, SlashOption } from "@rpbey/discordx";
 import {
   ApplicationCommandOptionType,
   type CommandInteraction,
   EmbedBuilder,
   PermissionFlagsBits,
 } from "discord.js";
-import { Discord, Slash, SlashGroup, SlashOption } from "@rpbey/discordx";
 
 import { scrapeAndSyncTournament } from "../../lib/challonge-sync.js";
 import { Colors } from "../../lib/constants.js";

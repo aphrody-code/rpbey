@@ -110,7 +110,7 @@ function parseStoreState(html: string): Record<string, unknown> {
   let m: RegExpExecArray | null;
 
   while ((m = keyRe.exec(html)) !== null) {
-    const key = m[1]!;
+    const key = m[1] ?? "";
     const valueStart = m.index + m[0].length;
 
     // Detect opener (object or array). Challonge serializes some stores as
@@ -128,7 +128,7 @@ function parseStoreState(html: string): Record<string, unknown> {
     let inString = false;
     let escape = false;
     for (; i < html.length; i++) {
-      const ch = html[i]!;
+      const ch = html[i] ?? "";
       if (escape) {
         escape = false;
         continue;

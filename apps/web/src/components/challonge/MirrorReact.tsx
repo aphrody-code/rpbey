@@ -5,7 +5,6 @@ import parse, { domToReact, Element, attributesToProps } from "html-react-parser
 import type { DOMNode } from "html-react-parser";
 import { BracketsViewer } from "@rose-griffon/challonge-core/viewer";
 import type { ViewerData } from "@rose-griffon/challonge-core/viewer";
-import { useThemeMode } from "@/components/theme/ThemeRegistry";
 import { useTheme } from "@mui/material/styles";
 
 interface MirrorReactProps {
@@ -27,7 +26,6 @@ export const MirrorReact: React.FC<MirrorReactProps> = ({
 }) => {
   const viewerRef = useRef<HTMLDivElement>(null);
   const viewerInstance = useRef<BracketsViewer | null>(null);
-  const { mode } = useThemeMode();
   const muiTheme = useTheme();
 
   useEffect(() => {
@@ -88,46 +86,43 @@ export const MirrorReact: React.FC<MirrorReactProps> = ({
   };
 
   // On extrait les couleurs du thème MUI pour les injecter dans le viewer
-  const primaryMain = muiTheme.palette.primary.main;
-  const surfaceLow = (muiTheme.palette as any).surface?.low || "#1e293b";
-  const surfaceHigh = (muiTheme.palette as any).surface?.high || "#334155";
+  type PaletteWithSurface = typeof muiTheme.palette & {
+    surface?: { low?: string; high?: string };
+  };
+  const palette = muiTheme.palette as PaletteWithSurface;
+  const primaryMain = palette.primary.main;
+  const surfaceLow = palette.surface?.low ?? "#1e293b";
+  const surfaceHigh = palette.surface?.high ?? "#334155";
+
+  const globalCss = `
+    .challonge-mirror-wrapper .rpb-bracket-host .brackets-viewer {
+      --md-sys-color-primary: ${primaryMain};
+      --md-sys-color-surface: transparent;
+      --md-sys-color-surface-container-low: ${surfaceLow};
+      --md-sys-color-surface-container-high: ${surfaceHigh};
+      --md-sys-color-outline-variant: rgba(255, 255, 255, 0.1);
+      background-color: transparent !important;
+      font-family: inherit;
+    }
+    .rpb-bracket-host .brackets-viewer {
+      color-scheme: dark;
+    }
+    .rpb-bracket-host .match {
+      background-color: color-mix(in srgb, ${surfaceLow} 80%, transparent) !important;
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.05) !important;
+      transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.2s ease;
+    }
+    .rpb-bracket-host .match:hover {
+      transform: translateY(-2px) scale(1.01);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      border-color: ${primaryMain}44 !important;
+    }
+  `;
 
   return (
     <div className="challonge-mirror-wrapper prose dark:prose-invert max-w-none">
-      <style jsx global>{`
-        .challonge-mirror-wrapper .rpb-bracket-host .brackets-viewer {
-          /* Injection des tokens Material Design 3 de l'application */
-          --md-sys-color-primary: ${primaryMain};
-          --md-sys-color-surface: transparent;
-          --md-sys-color-surface-container-low: ${surfaceLow};
-          --md-sys-color-surface-container-high: ${surfaceHigh};
-          --md-sys-color-outline-variant: rgba(255, 255, 255, 0.1);
-
-          /* Override pour un look plus moderne intégré */
-          background-color: transparent !important;
-          font-family: inherit;
-        }
-
-        /* Mode sombre forcé car l'app est dark-only */
-        .rpb-bracket-host .brackets-viewer {
-          color-scheme: dark;
-        }
-
-        .rpb-bracket-host .match {
-          background-color: color-mix(in srgb, ${surfaceLow} 80%, transparent) !important;
-          backdrop-filter: blur(8px);
-          border: 1px solid rgba(255, 255, 255, 0.05) !important;
-          transition:
-            transform 0.2s cubic-bezier(0.2, 0, 0, 1),
-            box-shadow 0.2s ease;
-        }
-
-        .rpb-bracket-host .match:hover {
-          transform: translateY(-2px) scale(1.01);
-          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-          border-color: ${primaryMain}44 !important;
-        }
-      `}</style>
+      <style dangerouslySetInnerHTML={{ __html: globalCss }} />
       {parse(html, options)}
     </div>
   );

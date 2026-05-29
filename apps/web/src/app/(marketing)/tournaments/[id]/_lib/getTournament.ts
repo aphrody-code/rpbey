@@ -2,6 +2,32 @@ import { redirect } from "next/navigation";
 import { loadJsonSafe } from "@/lib/data-cache";
 import { db, schema, eq, ilike, or } from "@/lib/db";
 
+/** Minimal shape shared between "max" (ScrapedTournament) and legacy BTS JSON exports. */
+interface BtsExportParticipant {
+  id: number;
+  name: string;
+  seed?: number;
+  finalRank?: number | null;
+  /** Present in legacy exports as flat `rank` field. */
+  rank?: number;
+}
+
+interface BtsExportMetadata {
+  id: number;
+  type: string;
+  participantsCount: number;
+  url: string;
+  startedAt: string | null;
+  completedAt: string | null;
+}
+
+interface BtsExportData {
+  metadata?: BtsExportMetadata;
+  participants?: BtsExportParticipant[];
+  scrapedAt?: string;
+  url?: string;
+}
+
 const tournamentColumns = {
   id: true,
   name: true,
@@ -79,21 +105,21 @@ export type ResolvedTournament = NonNullable<Awaited<ReturnType<typeof getTourna
 export async function getTournamentById(id: string) {
   const meta = BTS_META[id];
   if (meta) {
-    const data = await loadJsonSafe<any>(`data/exports/${meta.file}`);
+    const data = await loadJsonSafe<BtsExportData>(`data/exports/${meta.file}`);
     if (data) {
-      const isMaxData = !!data.metadata;
-      const participants = isMaxData ? data.participants : data.participants || [];
+      const md = data.metadata;
+      const participants: BtsExportParticipant[] = data.participants ?? [];
       const standings = participants
-        .map((p: any) => ({
-          rank: p.finalRank || p.rank || 0,
+        .map((p) => ({
+          rank: p.finalRank ?? p.rank ?? 0,
           name: p.name,
         }))
-        .filter((p: any) => p.rank > 0)
-        .sort((a: any, b: any) => a.rank - b.rank);
+        .filter((p) => p.rank > 0)
+        .sort((a, b) => a.rank - b.rank);
 
-      const updatedAt = isMaxData
-        ? data.metadata.completedAt || data.metadata.startedAt
-        : data.scrapedAt || meta.date;
+      const updatedAtStr = md
+        ? (md.completedAt ?? md.startedAt ?? meta.date)
+        : (data.scrapedAt ?? meta.date);
 
       return {
         id,
@@ -102,15 +128,15 @@ export async function getTournamentById(id: string) {
         description: meta.desc,
         date: new Date(meta.date),
         location: "Dernier Bar avant la Fin du Monde, Paris",
-        format: isMaxData ? data.metadata.type : "3on3 Double Elimination",
-        maxPlayers: isMaxData ? data.metadata.participantsCount : 128,
-        challongeId: isMaxData ? String(data.metadata.id) : id,
-        challongeUrl: (isMaxData ? data.metadata.url : data.url) ?? null,
+        format: md ? md.type : "3on3 Double Elimination",
+        maxPlayers: md ? md.participantsCount : 128,
+        challongeId: md ? String(md.id) : id,
+        challongeUrl: (md ? md.url : data.url) ?? null,
         posterUrl: null as string | null,
         standings,
         stations: [] as unknown[],
         activityLog: [] as unknown[],
-        updatedAt: new Date(updatedAt),
+        updatedAt: new Date(updatedAtStr),
         category: null as null | {
           id: string;
           name: string;

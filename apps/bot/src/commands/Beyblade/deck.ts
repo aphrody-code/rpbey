@@ -1,3 +1,4 @@
+import { Discord, Slash, SlashChoice, SlashGroup, SlashOption } from "@rpbey/discordx";
 import {
   ActionRowBuilder,
   ApplicationCommandOptionType,
@@ -7,8 +8,6 @@ import {
   type CommandInteraction,
   EmbedBuilder,
 } from "discord.js";
-import { v2DeckPanel } from "../../lib/ui.js";
-import { Discord, Slash, SlashChoice, SlashGroup, SlashOption } from "@rpbey/discordx";
 import { inject, injectable } from "tsyringe";
 
 import { cached, TTL } from "../../lib/cache.js";
@@ -16,6 +15,7 @@ import { generateDeckCard } from "../../lib/canvas-utils.js";
 import { Colors } from "../../lib/constants.js";
 import { logger } from "../../lib/logger.js";
 import { PrismaService } from "../../lib/prisma.js";
+import { v2DeckPanel } from "../../lib/ui.js";
 
 const parseStat = (val: string | number | null | undefined): number => {
   if (typeof val === "number") return val;
@@ -67,19 +67,18 @@ async function autocompleteParts(
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const acBlade = (i: any) => autocompleteParts(i, "BLADE");
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 const acRatchet = (i: any) => autocompleteParts(i, "RATCHET");
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 const acBit = (i: any) => autocompleteParts(i, "BIT");
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 const acOverBlade = (i: any) => autocompleteParts(i, "OVER_BLADE");
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 const acLockChip = (i: any) => autocompleteParts(i, "LOCK_CHIP");
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 const acAssistBlade = (i: any) => autocompleteParts(i, "ASSIST_BLADE");
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 const acDeck = async (i: any) => {
   try {
     const prisma = getPrisma();
@@ -241,7 +240,6 @@ export class DeckCommand {
       const decksSlice = user.decks.slice(0, 5);
       // Parallelize canvas renders (was sequential)
       const rendered = await Promise.all(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         decksSlice.map(async (deck: any) => {
           const hasItems = deck.items.some((i: { bladeId?: string | null }) => i.bladeId);
           if (!hasItems) return { deck, buffer: null };
@@ -420,7 +418,6 @@ export class DeckCommand {
       this.buildDeckCardData(deck.name, interaction.user.displayName, deck.isActive, deck.items),
     );
     const filename = `deck-${deck.id}.png`;
-    const cxNote = isCX ? "\n*Blade CX détecté — pièces Over/Chip/Assist enregistrées.*" : "";
 
     const v2 = v2DeckPanel(name, deck.isActive, filename);
     // V2 messages cannot have content/embeds — prepend creation notice as a section in the container

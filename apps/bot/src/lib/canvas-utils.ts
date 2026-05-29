@@ -1626,7 +1626,7 @@ const LB_VARIANT_THEMES: Record<LbVariant, LbVariantTheme> = {
 
 const MEDAL = ["#f7d301", "#C0C0C0", "#CD7F32"] as const;
 const LB_YELLOW = "#ffcf2b";
-const LB_BLACK = "#0a0a0a";
+const _LB_BLACK = "#0a0a0a";
 
 function drawLbWavyTexture(ctx: CanvasCtx, x: number, y: number, w: number, h: number) {
   ctx.save();
@@ -2315,7 +2315,7 @@ export interface GachaCardData {
   };
 }
 
-const ELEMENT_ICONS: Record<string, { symbol: string; color: string; name: string }> = {
+const _ELEMENT_ICONS: Record<string, { symbol: string; color: string; name: string }> = {
   FEU: { symbol: "🔥", color: "#ef4444", name: "Feu" },
   EAU: { symbol: "💧", color: "#3b82f6", name: "Eau" },
   TERRE: { symbol: "🌍", color: "#a16207", name: "Terre" },
@@ -2326,7 +2326,7 @@ const ELEMENT_ICONS: Record<string, { symbol: string; color: string; name: strin
 };
 
 // Element weakness cycle: Feu > Vent > Terre > Eau > Feu, Ombre <> Lumière
-const ELEMENT_WEAKNESS: Record<string, string> = {
+const _ELEMENT_WEAKNESS: Record<string, string> = {
   FEU: "EAU",
   EAU: "TERRE",
   TERRE: "VENT",
@@ -2426,7 +2426,7 @@ function drawNoise(ctx: CanvasCtx, w: number, h: number, alpha = 0.03) {
 }
 
 /** Draw a 4-point sparkle at given position */
-function drawSparkle(
+function _drawSparkle(
   ctx: CanvasCtx,
   x: number,
   y: number,
@@ -2453,7 +2453,7 @@ function drawSparkle(
 }
 
 /** Draw light rays from top for legendary/secret */
-function drawLightRays(ctx: CanvasCtx, w: number, h: number, color: string, count = 3) {
+function _drawLightRays(ctx: CanvasCtx, w: number, h: number, color: string, count = 3) {
   ctx.save();
   ctx.globalCompositeOperation = "screen";
   for (let i = 0; i < count; i++) {
@@ -2475,7 +2475,7 @@ function drawLightRays(ctx: CanvasCtx, w: number, h: number, color: string, coun
 }
 
 /** Draw a rounded rect with fill + optional stroke */
-function drawBox(
+function _drawBox(
   ctx: CanvasCtx,
   x: number,
   y: number,
@@ -2500,7 +2500,7 @@ function drawBox(
 }
 
 /** Draw a horizontal separator line with gradient fade */
-function drawSeparator(ctx: CanvasCtx, x: number, y: number, w: number, color: string) {
+function _drawSeparator(ctx: CanvasCtx, x: number, y: number, w: number, color: string) {
   const grad = ctx.createLinearGradient(x, y, x + w, y);
   grad.addColorStop(0, `${color}00`);
   grad.addColorStop(0.15, `${color}60`);
@@ -2516,7 +2516,7 @@ function drawSeparator(ctx: CanvasCtx, x: number, y: number, w: number, color: s
 }
 
 // Generation colors: Bakuten=red, Metal=gold, Burst=green, X=blue
-const GEN_COLORS: Record<string, string> = {
+const _GEN_COLORS: Record<string, string> = {
   BAKUTEN: "#ef4444",
   BAKUTEN_SHOOT: "#ef4444",
   METAL: "#f59e0b",
@@ -2531,7 +2531,7 @@ const GEN_COLORS: Record<string, string> = {
 };
 
 /** Draw holographic foil overlay — rainbow conic gradient, screen-blended */
-function drawHoloFoil(
+function _drawHoloFoil(
   ctx: CanvasCtx,
   x: number,
   y: number,
@@ -2560,7 +2560,7 @@ function drawHoloFoil(
 }
 
 /** Draw holographic seal stamp */
-function drawHoloSeal(ctx: CanvasCtx, cx: number, cy: number, radius: number, color: string) {
+function _drawHoloSeal(ctx: CanvasCtx, cx: number, cy: number, radius: number, color: string) {
   // Rainbow ring
   ctx.save();
   const sealHolo = ctx.createConicGradient(0, cx, cy);

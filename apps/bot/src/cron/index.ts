@@ -1,11 +1,9 @@
 import { logger } from "../lib/logger.js";
+
 import { bbxWeeklySyncTask } from "./tasks/BbxWeeklySync.js";
-import { dailyStatsTask } from "./tasks/DailyStats.js";
 import { liveTournamentSyncTask } from "./tasks/LiveTournamentSync.js";
 import { mentionsScanTask } from "./tasks/MentionsScan.js";
 import { preTournamentSyncTask } from "./tasks/PreTournamentSync.js";
-import { rankingPostTask } from "./tasks/RankingPost.js";
-import { rankingSyncTask } from "./tasks/RankingSync.js";
 import { sessionCleanupTask } from "./tasks/SessionCleanup.js";
 import { syncRankingRolesTask } from "./tasks/SyncRankingRoles.js";
 import { syncSatrRolesTask } from "./tasks/SyncSatrRoles.js";

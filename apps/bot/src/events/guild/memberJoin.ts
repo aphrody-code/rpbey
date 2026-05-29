@@ -1,5 +1,5 @@
-import { AttachmentBuilder, EmbedBuilder, type TextChannel } from "discord.js";
 import { type ArgsOf, Discord, On } from "@rpbey/discordx";
+import { AttachmentBuilder, EmbedBuilder, type TextChannel } from "discord.js";
 
 import { generateWelcomeImage } from "../../lib/canvas-utils.js";
 import { getTemplate } from "../../lib/cms.js";

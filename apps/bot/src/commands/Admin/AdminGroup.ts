@@ -1,11 +1,12 @@
+import { Discord, Slash, SlashChoice, SlashGroup, SlashOption } from "@rpbey/discordx";
 import {
   ApplicationCommandOptionType,
   MessageFlags,
   PermissionFlagsBits,
   type CommandInteraction,
 } from "discord.js";
-import { Discord, Slash, SlashChoice, SlashGroup, SlashOption } from "@rpbey/discordx";
 import { inject, injectable } from "tsyringe";
+
 import { syncRankingRolesTask } from "../../cron/tasks/SyncRankingRoles.js";
 import { publishBtsRanking } from "../../lib/classement-publisher.js";
 import { logger } from "../../lib/logger.js";

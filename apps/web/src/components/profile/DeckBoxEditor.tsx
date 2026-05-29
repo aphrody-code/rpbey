@@ -219,17 +219,11 @@ export function DeckBoxEditor({ open, imageUrl, onClose, onSave }: DeckBoxEditor
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    // Deselect to remove the border
+    // Désélectionne pour retirer la bordure de sélection avant la capture.
     setSelectedStickerId(null);
 
-    // Need a tick to redraw without border?
-    // We can just force a redraw in the toBlob callback or use a ref to skip drawing selection
-    // But React state update is async.
-    // Hack: we need to wait for the state update to clear selection, then capture.
-    // Or simpler: pass a flag to the draw function?
-    // Let's just redraw immediately on the canvas context manually for saving.
-
-    // Actually, just clearing the ID and waiting a minimal timeout is standard in React.
+    // La mise à jour d'état React est asynchrone : on laisse un tick au re-render
+    // pour effacer la bordure du canvas avant de capturer le blob.
     setTimeout(() => {
       canvas.toBlob(
         (blob) => {

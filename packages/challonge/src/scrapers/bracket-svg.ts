@@ -81,8 +81,8 @@ export interface BracketMatch {
 function parseTransform(val: string | null): { x: number; y: number } {
   const m = val?.match(/translate\(([-\d.]+)\s+([-\d.]+)\)/);
   return {
-    x: m ? parseFloat(m[1]!) : 0,
-    y: m ? parseFloat(m[2]!) : 0,
+    x: m ? parseFloat(m[1] ?? "0") : 0,
+    y: m ? parseFloat(m[2] ?? "0") : 0,
   };
 }
 
@@ -122,7 +122,7 @@ export async function parseBracketSvg(html: string): Promise<BracketMatch[]> {
         currentMatch = {
           matchId,
           identifier: el.getAttribute("data-identifier") ?? "",
-          state: stateMatch ? stateMatch[1]! : "pending",
+          state: stateMatch ? (stateMatch[1] ?? "pending") : "pending",
           x: transform.x,
           y: transform.y,
           player1: null,

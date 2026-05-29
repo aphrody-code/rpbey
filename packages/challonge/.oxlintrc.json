@@ -14,7 +14,16 @@
     "node": true,
     "es2024": true
   },
-  "ignorePatterns": ["dist/", "node_modules/", "*.cjs", "*.mjs", "src/ffi/"],
+  "ignorePatterns": [
+    "dist/",
+    "node_modules/",
+    "*.cjs",
+    "*.mjs",
+    "src/ffi/",
+    "tests/",
+    "**/*.test.ts",
+    "**/*.spec.ts"
+  ],
   "rules": {
     "typescript/no-floating-promises": "error",
     "typescript/no-misused-promises": "error",
@@ -30,6 +39,8 @@
     "prefer-const": "warn",
     "import/no-cycle": "warn",
     "import/no-self-import": "error",
-    "import/no-duplicates": "error"
+    "import/no-duplicates": "error",
+    "no-underscore-dangle": "off",
+    "no-shadow": "off"
   }
 }

@@ -1,6 +1,6 @@
+import { Discord, Slash, SlashChoice, SlashGroup, SlashOption } from "@rpbey/discordx";
 import { Pagination } from "@rpbey/pagination";
 import { ApplicationCommandOptionType, type CommandInteraction, EmbedBuilder } from "discord.js";
-import { Discord, Slash, SlashChoice, SlashGroup, SlashOption } from "@rpbey/discordx";
 import { inject, injectable } from "tsyringe";
 
 import { Colors, RPB } from "../../lib/constants.js";

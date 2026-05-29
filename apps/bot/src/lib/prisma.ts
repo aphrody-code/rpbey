@@ -24,7 +24,8 @@
  * Le raw SQL de `gacha-api.ts` (pool `pg` direct sur `users`/`sessions`) n'est
  * PAS concerné et reste inchangé.
  */
-import { singleton } from "tsyringe";
+import { createId } from "@paralleldrive/cuid2";
+import { db, schema } from "@rpbey/db";
 import {
   and,
   asc,
@@ -41,10 +42,8 @@ import {
   sql,
   count as drizzleCount,
 } from "drizzle-orm";
-import { db, schema } from "@rpbey/db";
-import { createId } from "@paralleldrive/cuid2";
+import { singleton } from "tsyringe";
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 type Any = any;
 type Row = Record<string, Any>;
 type DB = typeof db;

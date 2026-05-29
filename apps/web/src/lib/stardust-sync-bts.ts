@@ -19,7 +19,7 @@
  * Tri identique BTS : score desc, tournamentWins desc, wins desc.
  */
 
-import type { db} from "@/lib/db";
+import type { db } from "@/lib/db";
 import { schema, and, eq, asc, ilike, inArray } from "@/lib/db";
 
 type Db = typeof db;

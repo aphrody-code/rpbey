@@ -1,5 +1,5 @@
-import { MessageFlags, type CommandInteraction, type GuildMember } from "discord.js";
 import { type GuardFunction } from "@rpbey/discordx";
+import { MessageFlags, type CommandInteraction, type GuildMember } from "discord.js";
 
 import { RPB } from "../lib/constants.js";
 

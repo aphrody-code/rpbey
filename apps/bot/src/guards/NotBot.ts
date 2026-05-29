@@ -1,3 +1,4 @@
+import { type GuardFunction } from "@rpbey/discordx";
 import {
   type AutocompleteInteraction,
   type ButtonInteraction,
@@ -6,7 +7,6 @@ import {
   type ModalSubmitInteraction,
   type SelectMenuInteraction,
 } from "discord.js";
-import { type GuardFunction } from "@rpbey/discordx";
 
 export const NotBot: GuardFunction<
   | CommandInteraction

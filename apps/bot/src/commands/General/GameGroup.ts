@@ -1,3 +1,4 @@
+import { Discord, Slash, SlashGroup, SlashOption } from "@rpbey/discordx";
 import {
   ApplicationCommandOptionType,
   AttachmentBuilder,
@@ -6,24 +7,22 @@ import {
   type CommandInteraction,
   type User,
 } from "discord.js";
-import { Discord, Slash, SlashGroup, SlashOption } from "@rpbey/discordx";
 import { inject, injectable } from "tsyringe";
 
-import { p as parseNum } from "../../lib/battle-utils.js";
 import {
   type BbxComboStats,
-  type BbxBattleResult,
   simulateBbxBattle,
   getTypeColor,
   getTypeEmoji,
   statBar,
 } from "../../lib/battle-engine.js";
+import { p as parseNum } from "../../lib/battle-utils.js";
 import {
   type ComboCardData,
   generateBattleResultCard,
   generateComboCard,
 } from "../../lib/canvas-utils.js";
-import { Colors, RPB } from "../../lib/constants.js";
+import { RPB } from "../../lib/constants.js";
 import { logger } from "../../lib/logger.js";
 import { resolveDataPath } from "../../lib/paths.js";
 import { PrismaService } from "../../lib/prisma.js";

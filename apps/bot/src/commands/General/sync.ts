@@ -1,10 +1,10 @@
+import { Discord, Slash } from "@rpbey/discordx";
 import {
   ChannelType,
   MessageFlags,
   PermissionFlagsBits,
   type CommandInteraction,
 } from "discord.js";
-import { Discord, Slash } from "@rpbey/discordx";
 
 import { logger } from "../../lib/logger.js";
 import prisma from "../../lib/prisma.js";

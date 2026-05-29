@@ -1,7 +1,7 @@
 import { getPartUsageStats, getPartsAndProducts } from "@/server/dal/recommendations";
 import { loadCatalog, computeGroups, groupSlug } from "@/lib/bx-catalog";
 import { loadJsonSafe } from "@/lib/data-cache";
-import type { BxProductGroup } from "@/lib/bx-catalog";
+import type { BxOffer, BxProductGroup } from "@/lib/bx-catalog";
 
 // -------------------------------------------------------------
 // Type Definitions
@@ -46,7 +46,7 @@ export interface RecommendedProduct {
   cheapestEur: number | null;
   shopCount: number;
   imageUrl: string | null;
-  offers: any[];
+  offers: BxOffer[];
 
   // Calculated Scores (0.0 to 1.0)
   metaRelevanceScore: number;

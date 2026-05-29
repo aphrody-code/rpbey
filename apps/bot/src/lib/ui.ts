@@ -10,8 +10,6 @@
  * Images must use MediaGalleryItemBuilder.setURL('attachment://file.png') + files.
  */
 
-import type {
-  EmbedBuilder} from "discord.js";
 import {
   ActionRowBuilder,
   ButtonBuilder,
@@ -24,6 +22,7 @@ import {
   SeparatorBuilder,
   TextDisplayBuilder,
   type AttachmentBuilder,
+  type EmbedBuilder,
 } from "discord.js";
 
 import { Colors, RPB } from "./constants.js";
@@ -353,7 +352,7 @@ export function v2GachaPullPanel(
   description: string,
   imageFilename: string | undefined,
   accentColor: number,
-  attachments?: AttachmentBuilder[],
+  _attachments?: AttachmentBuilder[],
 ): {
   components: ContainerBuilder[];
   flags: number;

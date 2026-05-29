@@ -17,15 +17,10 @@
  */
 
 import type { BxcTransport, BxcFetchOptions } from "./bxc";
-import {
-  type CurlImpersonateOptions,
-  type CurlImpersonateResponse,
-  type RedirectInfo,
-  CurlImpersonateError,
-  validateURL,
-  upgradeToHttps,
-  isPermittedRedirect,
-  isRedirectInfo,
+import type {
+  CurlImpersonateOptions,
+  CurlImpersonateResponse,
+  RedirectInfo,
 } from "./curl-impersonate-types";
 
 // Re-export all types + pure helpers so callers keep working with the same
@@ -57,7 +52,7 @@ async function getTransport(): Promise<BxcTransport | null> {
 
   try {
     const mod = await import("./bxc");
-    const transport = new (mod as any).BxcTransport();
+    const transport = new mod.BxcTransport();
     _defaultTransport = transport;
     _ffiAvailable = true;
     return transport;

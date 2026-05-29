@@ -165,10 +165,10 @@ export async function GET(request: NextRequest) {
     const elem = card.element ? ELEMENT_ICONS[card.element] : null;
     const stars = "★".repeat(theme.stars) + "☆".repeat(5 - theme.stars);
 
-    // Note: rendu image binaire (vignette character) externe complexe (sharp
-    // unflatten + clip path) n'est pas portable en Satori 1:1. On pose juste
-    // l'imageUrl directement; Satori sait charger les http(s) en src d'<img>.
-    // TODO: rendu complet (vignette, halo, particules) a porter si besoin DA.
+    // Choix assumé : le rendu image binaire (vignette character) externe complexe
+    // (sharp unflatten + clip path) n'est pas portable en Satori 1:1. On pose
+    // l'imageUrl directement ; Satori charge les http(s) en src d'<img>. Le rendu
+    // décoratif avancé (halo, particules) reste volontairement hors de cette carte OG.
 
     return new ImageResponse(
       <div

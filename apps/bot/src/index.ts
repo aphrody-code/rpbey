@@ -1,8 +1,9 @@
 import "reflect-metadata";
 import { tsyringeDependencyRegistryEngine } from "@rpbey/di";
-import { MessageFlags, PermissionsBitField } from "discord.js";
 import { DIService } from "@rpbey/discordx";
+import { MessageFlags, PermissionsBitField } from "discord.js";
 import { container } from "tsyringe";
+
 import { startApiServer } from "./lib/api-server.js";
 import { bot } from "./lib/bot.js";
 import { setupEventBridge } from "./lib/event-bridge.js";
@@ -20,7 +21,9 @@ if (typeof fetch.preconnect === "function") {
   for (const url of ["https://discord.com", "https://api.twitch.tv", "https://api.challonge.com"]) {
     try {
       fetch.preconnect(url);
-    } catch {}
+    } catch {
+      // preconnect not supported — ignore
+    }
   }
 }
 
@@ -39,7 +42,6 @@ async function waitForSessions(token: string): Promise<void> {
   const rest = new REST().setToken(token);
   const CHECK_INTERVAL = 5 * 60_000; // Re-check every 5 minutes
 
-  // eslint-disable-next-line no-constant-condition
   while (true) {
     try {
       const gateway = (await rest.get(Routes.gatewayBot())) as {

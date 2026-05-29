@@ -35,7 +35,7 @@ interface LeaderboardClientProps {
 
 type TabKey = "currency" | "wins" | "mmr" | "collection";
 
-const TABS: { key: TabKey; label: string; icon: React.ReactNode }[] = [
+const TABS: { key: TabKey; label: string; icon: React.ReactElement }[] = [
   { key: "currency", label: "Pièces", icon: <Toll fontSize="small" /> },
   { key: "wins", label: "Victoires", icon: <EmojiEvents fontSize="small" /> },
   { key: "mmr", label: "MMR", icon: <TrendingUp fontSize="small" /> },
@@ -114,13 +114,7 @@ export function LeaderboardClient({ entries }: LeaderboardClientProps) {
           }}
         >
           {TABS.map((t) => (
-            <Tab
-              key={t.key}
-              value={t.key}
-              label={t.label}
-              icon={t.icon as any}
-              iconPosition="start"
-            />
+            <Tab key={t.key} value={t.key} label={t.label} icon={t.icon} iconPosition="start" />
           ))}
         </Tabs>
       </Box>

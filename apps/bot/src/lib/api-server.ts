@@ -1,6 +1,9 @@
 import { timingSafeEqual } from "node:crypto";
+
 import { type Server, type ServerWebSocket } from "bun";
+
 import { getRefactorRoutes } from "../api/server.js";
+
 import { bot } from "./bot.js";
 import {
   exchangeDiscordCode,
@@ -226,7 +229,10 @@ export async function servePlayBundle(pathname: string): Promise<Response> {
     decoded = decodeURIComponent(rel);
     // Double-decode défense contre %252e%252e
     const doubleDecoded = decodeURIComponent(decoded);
-    if (doubleDecoded !== decoded && /\.\.|\\|\0/.test(doubleDecoded)) {
+    if (
+      doubleDecoded !== decoded &&
+      (/\.\.|\\/.test(doubleDecoded) || doubleDecoded.includes("\u0000"))
+    ) {
       return new Response("forbidden", { status: 403 });
     }
   } catch {

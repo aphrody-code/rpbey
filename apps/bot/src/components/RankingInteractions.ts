@@ -1,5 +1,5 @@
-import { MessageFlags, type ButtonInteraction, type StringSelectMenuInteraction } from "discord.js";
 import { ButtonComponent, Discord, SelectMenuComponent } from "@rpbey/discordx";
+import { MessageFlags, type ButtonInteraction, type StringSelectMenuInteraction } from "discord.js";
 
 import { logger } from "../lib/logger.js";
 import {

@@ -26,7 +26,10 @@ export const metadata: Metadata = createPageMetadata({
 const eur = (v: number | null | undefined) =>
   v == null
     ? "—"
-    : new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(v);
+    : new Intl.NumberFormat("fr-FR", {
+        style: "currency",
+        currency: "EUR",
+      }).format(v);
 
 function savePct(g: BxProductGroup): number {
   const ps = g.offers.map((o) => o.priceEur).filter((n): n is number => n != null);
@@ -156,7 +159,10 @@ export default async function ComparateurPage() {
               sx={{ mt: 4, flexWrap: "wrap", rowGap: 1.5 }}
             >
               {[
-                { n: catalog.productCount.toLocaleString("fr-FR"), l: "offres comparées" },
+                {
+                  n: catalog.productCount.toLocaleString("fr-FR"),
+                  l: "offres comparées",
+                },
                 { n: catalog.shopCount, l: "boutiques" },
                 { n: groups.length, l: "produits" },
                 { n: countries, l: "pays" },
@@ -285,7 +291,6 @@ export default async function ComparateurPage() {
                       }}
                     >
                       {g.cheapest?.image ? (
-                        // eslint-disable-next-line @next/next/no-img-element
                         <Box
                           component="img"
                           src={g.cheapest.image}
@@ -325,13 +330,21 @@ export default async function ComparateurPage() {
                     </Box>
                     <Typography
                       noWrap
-                      sx={{ fontWeight: 800, fontSize: "0.85rem", color: "text.primary" }}
+                      sx={{
+                        fontWeight: 800,
+                        fontSize: "0.85rem",
+                        color: "text.primary",
+                      }}
                     >
                       {g.name}
                     </Typography>
                     <Stack
                       direction="row"
-                      sx={{ alignItems: "baseline", justifyContent: "space-between", mt: "auto" }}
+                      sx={{
+                        alignItems: "baseline",
+                        justifyContent: "space-between",
+                        mt: "auto",
+                      }}
                     >
                       <Typography
                         sx={{
@@ -345,7 +358,11 @@ export default async function ComparateurPage() {
                       </Typography>
                       <Typography
                         variant="caption"
-                        sx={{ color: "text.secondary", fontSize: "0.65rem", fontWeight: 500 }}
+                        sx={{
+                          color: "text.secondary",
+                          fontSize: "0.65rem",
+                          fontWeight: 500,
+                        }}
                       >
                         {g.shopCount} boutiques
                       </Typography>

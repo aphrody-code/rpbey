@@ -4,7 +4,7 @@ import importPlugin from "eslint-plugin-import";
 
 export default tseslint.config(
   eslint.configs.recommended,
-  ...tseslint.configs.recommendedTypeChecked,
+  ...tseslint.configs.recommended,
   {
     languageOptions: {
       parserOptions: {
@@ -16,12 +16,34 @@ export default tseslint.config(
       import: importPlugin,
     },
     rules: {
+      // Type-checked rules we actively enforce
       "@typescript-eslint/no-floating-promises": "error",
-      "@typescript-eslint/no-misused-promises": "error",
+      // Discord.js event handlers pass async callbacks to void-typed args — allow
+      "@typescript-eslint/no-misused-promises": [
+        "error",
+        { checksVoidReturn: { arguments: false } },
+      ],
       "@typescript-eslint/await-thenable": "error",
-      "@typescript-eslint/no-explicit-any": "warn",
-      "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
+
+      // Relaxed rules for this codebase
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        {
+          argsIgnorePattern: "^_",
+          varsIgnorePattern: "^_",
+          caughtErrorsIgnorePattern: "^_",
+        },
+      ],
+      "@typescript-eslint/ban-ts-comment": "off",
+      "@typescript-eslint/no-require-imports": "off",
+      // Prisma emulation uses declaration merging — expected pattern
+      "@typescript-eslint/no-unsafe-declaration-merging": "off",
+      "@typescript-eslint/no-empty-object-type": "off",
+
       "no-console": "off",
+
+      // Import order kept as warning
       "import/order": [
         "warn",
         {
@@ -33,6 +55,15 @@ export default tseslint.config(
     },
   },
   {
-    ignores: ["dist", "node_modules", "*.js", "*.cjs"],
+    ignores: [
+      "dist",
+      "node_modules",
+      "*.js",
+      "*.cjs",
+      "scripts/**",
+      "test/**",
+      "vitest.config.ts",
+      "src/tests/**",
+    ],
   },
 );

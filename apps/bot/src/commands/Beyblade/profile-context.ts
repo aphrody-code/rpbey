@@ -1,3 +1,4 @@
+import { ContextMenu, Discord } from "@rpbey/discordx";
 import {
   ActionRowBuilder,
   ApplicationCommandType,
@@ -7,7 +8,6 @@ import {
   type User,
   type UserContextMenuCommandInteraction,
 } from "discord.js";
-import { ContextMenu, Discord } from "@rpbey/discordx";
 
 import { Colors, RPB } from "../../lib/constants.js";
 import { logger } from "../../lib/logger.js";

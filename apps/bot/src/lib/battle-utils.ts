@@ -4,6 +4,7 @@ import {
   ButtonBuilder,
   ButtonStyle,
   EmbedBuilder,
+  type ImageURLOptions,
 } from "discord.js";
 
 import { generateBattleCard } from "./canvas-utils.js";
@@ -347,8 +348,6 @@ function buildBattleNarrative(
 }
 
 // ─── Discord Types ──────────────────────────────────────────────────────────
-
-import { type ImageURLOptions } from "discord.js";
 
 interface BattleUser {
   id: string;

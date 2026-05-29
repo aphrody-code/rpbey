@@ -1,3 +1,4 @@
+import { Discord, Guard, Slash, SlashGroup, SlashOption } from "@rpbey/discordx";
 import {
   ApplicationCommandOptionType,
   AttachmentBuilder,
@@ -5,7 +6,6 @@ import {
   MessageFlags,
   type CommandInteraction,
 } from "discord.js";
-import { Discord, Guard, Slash, SlashGroup, SlashOption } from "@rpbey/discordx";
 import { inject, injectable } from "tsyringe";
 
 import { StaffOnly } from "../../guards/StaffOnly.js";
@@ -32,19 +32,6 @@ import {
 
 const GACHA_COST = 50;
 const MULTI_PULL_COST = 450;
-
-const DAILY_TIERS = [
-  { weight: 60, min: 80, max: 120, msg: "+**{n}** pièces ajoutées à ta collection !" },
-  { weight: 25, min: 150, max: 200, msg: "Beau tirage ! +**{n}** pièces !" },
-  { weight: 10, min: 250, max: 350, msg: "Excellent ! Une vraie pépite ! +**{n}** pièces !" },
-  {
-    weight: 4,
-    min: 500,
-    max: 700,
-    msg: "🌟 Incroyable ! Un trésor ultra-rare ! +**{n}** pièces !",
-  },
-  { weight: 1, min: 1000, max: 1500, msg: "💎✨ JACKPOT LÉGENDAIRE !!! +**{n}** pièces !!!" },
-] as const;
 
 const STREAK_BONUSES = [
   { days: 3, bonus: 50, label: "3 jours" },
@@ -146,10 +133,9 @@ export class EconomyGroup {
     let totalCards = 82; // fallback count
     try {
       const api = await this.api(interaction);
-      const rates = await api.rates();
+      await api.rates();
       // rates doesn't include total cards; use search to count active cards
-      const items = await api.searchCards("", 1);
-      void items; // just checking connectivity
+      await api.searchCards("", 1);
     } catch {
       // ignore — help embed works without it
     }

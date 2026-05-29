@@ -22,8 +22,9 @@
  *   → this is the "service-token bypass" path already present in middleware.ts.
  */
 
-import pg from "pg";
 import crypto from "node:crypto";
+
+import pg from "pg";
 
 // ─── Config ──────────────────────────────────────────────────────────────────
 
@@ -132,7 +133,7 @@ async function cleanupExpiredSessions(userId: string): Promise<void> {
     );
   } catch (err) {
     // Best-effort : on ne fail pas le mint si la purge crash.
-    // eslint-disable-next-line no-console
+
     console.warn("[gacha-api] cleanupExpiredSessions failed", err);
   }
 }

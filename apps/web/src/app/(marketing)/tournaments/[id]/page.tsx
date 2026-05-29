@@ -7,6 +7,7 @@ import { getTournamentById } from "./_lib/getTournament";
 import { loadJsonSafe, loadText } from "@/lib/data-cache";
 import type { ScrapedTournament } from "@/lib/brackets/challonge";
 import { challongeToViewerData } from "@/lib/brackets/challonge";
+import type { ViewerData } from "@rose-griffon/challonge-core/viewer";
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -160,7 +161,7 @@ export default async function TournamentDetailPage({ params }: PageProps) {
 
   // --- Hybride Mirror Data ---
   let mirrorHtml: string | null = null;
-  let mirrorData: any = null;
+  let mirrorData: ViewerData | null = null;
 
   // Si c'est un BTS, on tente de charger le miroir HTML + Max Data
   const isBtsSlug = id.toLowerCase().startsWith("bts");

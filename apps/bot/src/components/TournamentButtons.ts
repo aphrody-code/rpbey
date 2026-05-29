@@ -1,3 +1,4 @@
+import { ButtonComponent, Discord } from "@rpbey/discordx";
 import {
   ActionRowBuilder,
   ButtonBuilder,
@@ -9,7 +10,6 @@ import {
   TextInputStyle,
   type ButtonInteraction,
 } from "discord.js";
-import { ButtonComponent, Discord } from "@rpbey/discordx";
 
 import { Colors, RPB } from "../lib/constants.js";
 import { logger } from "../lib/logger.js";

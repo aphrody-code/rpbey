@@ -21,7 +21,7 @@ import {
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { Controller, useForm, useWatch } from "react-hook-form";
 import useSWR, { mutate } from "swr";
 import { SecuritySettings } from "@/components/profile";
 import { AvatarUpload } from "@/components/profile/AvatarUpload"; // Import new component
@@ -85,13 +85,12 @@ export default function EditProfilePage() {
     register,
     handleSubmit,
     setValue,
-    watch,
-    control, // Destructure control
+    control,
     formState: { errors },
   } = useForm<ProfileFormData>();
 
-  const watchedDeckBoxImage = watch("deckBoxImage");
-  const watchedImage = watch("image");
+  const watchedDeckBoxImage = useWatch({ control, name: "deckBoxImage" });
+  const watchedImage = useWatch({ control, name: "image" });
 
   useEffect(() => {
     if (profileData) {

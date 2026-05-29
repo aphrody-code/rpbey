@@ -17,6 +17,7 @@ import {
 } from "@mui/material";
 import { alpha } from "@mui/material/styles";
 import { useCallback, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { DeckBoxDisplay } from "@/components/deck/DeckBoxDisplay";
 import { type Deck } from "@/components/deck/DeckCard";
@@ -28,6 +29,7 @@ import { clearDraft, isCXBlade, useBuilder } from "./BuilderContext";
 export function DeckComposition() {
   const { state, dispatch } = useBuilder();
   const { data: session } = useSession();
+  const router = useRouter();
   const [isSaving, setIsSaving] = useState(false);
   const [boxOpen, setBoxOpen] = useState(false);
 
@@ -84,7 +86,7 @@ export function DeckComposition() {
       toast.error("Connectez-vous pour sauvegarder vos decks", {
         action: {
           label: "Se connecter",
-          onClick: () => window.location.assign("/dashboard"),
+          onClick: () => router.push("/dashboard"),
         },
       });
       return;

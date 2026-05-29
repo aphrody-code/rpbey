@@ -1,3 +1,4 @@
+import { Discord, Guard, Slash, SlashChoice, SlashGroup, SlashOption } from "@rpbey/discordx";
 import {
   ApplicationCommandOptionType,
   ChannelType,
@@ -9,7 +10,6 @@ import {
   type Role,
   type TextChannel,
 } from "discord.js";
-import { Discord, Guard, Slash, SlashChoice, SlashGroup, SlashOption } from "@rpbey/discordx";
 
 import { ModeratorOnly } from "../../guards/ModeratorOnly.js";
 import { getChallongeClient } from "../../lib/challonge.js";

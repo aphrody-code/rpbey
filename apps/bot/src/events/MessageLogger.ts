@@ -1,8 +1,8 @@
 import { mkdir } from "node:fs/promises";
 import path from "node:path";
 
-import { ChannelType } from "discord.js";
 import { type ArgsOf, Discord, On } from "@rpbey/discordx";
+import { ChannelType } from "discord.js";
 
 import { logger } from "../lib/logger.js";
 import { resolveRootPath } from "../lib/paths.js";
