@@ -6,7 +6,7 @@
 import { ImageResponse } from "next/og";
 import type { NextRequest } from "next/server";
 import { loadGoogleSansFonts } from "@/lib/og/fonts";
-import { db, schema, eq } from "@/lib/db";
+import { getComboParts } from "@/server/dal/decks";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -89,11 +89,7 @@ export async function GET(request: NextRequest) {
       });
     }
 
-    const [blade, ratchet, bit] = await Promise.all([
-      db.query.parts.findFirst({ where: eq(schema.parts.id, bladeId) }),
-      db.query.parts.findFirst({ where: eq(schema.parts.id, ratchetId) }),
-      db.query.parts.findFirst({ where: eq(schema.parts.id, bitId) }),
-    ]);
+    const { blade, ratchet, bit } = await getComboParts(bladeId, ratchetId, bitId);
 
     if (!blade || !ratchet || !bit) {
       return new Response(JSON.stringify({ error: "Parts not found" }), {

@@ -1,8 +1,13 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { db, schema, asc, eq } from "@/lib/db";
 import { requireAdmin } from "@/lib/auth-utils";
+import {
+  createContentBlock as createContentBlockDal,
+  deleteContentBlock as deleteContentBlockDal,
+  listContentBlocks,
+  updateContentBlock as updateContentBlockDal,
+} from "@/server/dal/cms";
 
 export type ContentBlockInput = {
   slug: string;
@@ -12,46 +17,24 @@ export type ContentBlockInput = {
 };
 
 export async function getContentBlocks() {
-  return await db.query.contentBlocks.findMany({
-    orderBy: asc(schema.contentBlocks.slug),
-  });
+  return listContentBlocks();
 }
 
 export async function updateContentBlock(id: string, data: ContentBlockInput) {
   if (!(await requireAdmin())) throw new Error("Non autorisé");
-  const { slug, title, type, content } = data;
-
-  await db
-    .update(schema.contentBlocks)
-    .set({
-      slug,
-      title,
-      type,
-      content,
-    })
-    .where(eq(schema.contentBlocks.id, id));
-
+  await updateContentBlockDal(id, data);
   revalidatePath("/admin/content");
   revalidatePath("/"); // Revalidate potentially everything since content can be anywhere
 }
 
 export async function createContentBlock(data: ContentBlockInput) {
   if (!(await requireAdmin())) throw new Error("Non autorisé");
-  const { slug, title, type, content } = data;
-
-  await db.insert(schema.contentBlocks).values({
-    slug,
-    title,
-    type,
-    content,
-  });
-
+  await createContentBlockDal(data);
   revalidatePath("/admin/content");
 }
 
 export async function deleteContentBlock(id: string) {
   if (!(await requireAdmin())) throw new Error("Non autorisé");
-  await db.delete(schema.contentBlocks).where(eq(schema.contentBlocks.id, id));
-
+  await deleteContentBlockDal(id);
   revalidatePath("/admin/content");
 }

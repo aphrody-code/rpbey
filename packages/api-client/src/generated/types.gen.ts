@@ -857,3 +857,748 @@ export type ListStreamVideosResponses = {
 };
 
 export type ListStreamVideosResponse = ListStreamVideosResponses[keyof ListStreamVideosResponses];
+
+export type ListAnimeSeriesData = {
+    body?: never;
+    path?: never;
+    query?: {
+        generation?: 'ORIGINAL' | 'METAL' | 'BURST' | 'X';
+        featured?: boolean;
+    };
+    url: '/api/v1/anime';
+};
+
+export type ListAnimeSeriesErrors = {
+    /**
+     * Erreur de requête ou de validation
+     */
+    '4XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+    /**
+     * Erreur serveur
+     */
+    '5XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+};
+
+export type ListAnimeSeriesError = ListAnimeSeriesErrors[keyof ListAnimeSeriesErrors];
+
+export type ListAnimeSeriesResponses = {
+    /**
+     * OK
+     */
+    200: {
+        ok: true;
+        data: {
+            series: Array<{
+                id: string;
+                slug: string;
+                title: string;
+                titleJp?: string | null;
+                titleFr?: string | null;
+                generation: 'ORIGINAL' | 'METAL' | 'BURST' | 'X';
+                synopsis?: string | null;
+                posterUrl?: string | null;
+                bannerUrl?: string | null;
+                year: number;
+                episodeCount: number;
+                sortOrder: number;
+                isPublished: boolean;
+                /**
+                 * ISO 8601 date-time string
+                 */
+                createdAt: string;
+                /**
+                 * ISO 8601 date-time string
+                 */
+                updatedAt: string;
+            }>;
+        };
+    };
+};
+
+export type ListAnimeSeriesResponse = ListAnimeSeriesResponses[keyof ListAnimeSeriesResponses];
+
+export type ListAnimeSeriesByGenerationData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/v1/anime/by-generation';
+};
+
+export type ListAnimeSeriesByGenerationErrors = {
+    /**
+     * Erreur de requête ou de validation
+     */
+    '4XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+    /**
+     * Erreur serveur
+     */
+    '5XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+};
+
+export type ListAnimeSeriesByGenerationError = ListAnimeSeriesByGenerationErrors[keyof ListAnimeSeriesByGenerationErrors];
+
+export type ListAnimeSeriesByGenerationResponses = {
+    /**
+     * OK
+     */
+    200: {
+        ok: true;
+        data: {
+            byGeneration: {
+                [key: string]: Array<{
+                    id: string;
+                    slug: string;
+                    title: string;
+                    titleJp?: string | null;
+                    titleFr?: string | null;
+                    generation: 'ORIGINAL' | 'METAL' | 'BURST' | 'X';
+                    synopsis?: string | null;
+                    posterUrl?: string | null;
+                    bannerUrl?: string | null;
+                    year: number;
+                    episodeCount: number;
+                    sortOrder: number;
+                    isPublished: boolean;
+                    /**
+                     * ISO 8601 date-time string
+                     */
+                    createdAt: string;
+                    /**
+                     * ISO 8601 date-time string
+                     */
+                    updatedAt: string;
+                }>;
+            };
+        };
+    };
+};
+
+export type ListAnimeSeriesByGenerationResponse = ListAnimeSeriesByGenerationResponses[keyof ListAnimeSeriesByGenerationResponses];
+
+export type SearchAnimeData = {
+    body?: never;
+    path?: never;
+    query: {
+        q: string;
+    };
+    url: '/api/v1/anime/search';
+};
+
+export type SearchAnimeErrors = {
+    /**
+     * Erreur de requête ou de validation
+     */
+    '4XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+    /**
+     * Erreur serveur
+     */
+    '5XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+};
+
+export type SearchAnimeError = SearchAnimeErrors[keyof SearchAnimeErrors];
+
+export type SearchAnimeResponses = {
+    /**
+     * OK
+     */
+    200: {
+        ok: true;
+        data: {
+            series: Array<{
+                id: string;
+                slug: string;
+                title: string;
+                titleJp?: string | null;
+                titleFr?: string | null;
+                generation: 'ORIGINAL' | 'METAL' | 'BURST' | 'X';
+                synopsis?: string | null;
+                posterUrl?: string | null;
+                bannerUrl?: string | null;
+                year: number;
+                episodeCount: number;
+                sortOrder: number;
+                isPublished: boolean;
+                /**
+                 * ISO 8601 date-time string
+                 */
+                createdAt: string;
+                /**
+                 * ISO 8601 date-time string
+                 */
+                updatedAt: string;
+            }>;
+            episodes: Array<{
+                id: string;
+                seriesId: string;
+                number: number;
+                title: string;
+                titleFr?: string | null;
+                titleJp?: string | null;
+                synopsis?: string | null;
+                thumbnailUrl?: string | null;
+                duration: number;
+                isPublished: boolean;
+                /**
+                 * ISO 8601 date-time string
+                 */
+                createdAt: string;
+                /**
+                 * ISO 8601 date-time string
+                 */
+                updatedAt: string;
+                series: {
+                    slug: string;
+                    title: string;
+                };
+            }>;
+        };
+    };
+};
+
+export type SearchAnimeResponse = SearchAnimeResponses[keyof SearchAnimeResponses];
+
+export type GetAnimeSeriesData = {
+    body?: never;
+    path: {
+        slug: string;
+    };
+    query?: never;
+    url: '/api/v1/anime/{slug}';
+};
+
+export type GetAnimeSeriesErrors = {
+    /**
+     * Erreur de requête ou de validation
+     */
+    '4XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+    /**
+     * Erreur serveur
+     */
+    '5XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+};
+
+export type GetAnimeSeriesError = GetAnimeSeriesErrors[keyof GetAnimeSeriesErrors];
+
+export type GetAnimeSeriesResponses = {
+    /**
+     * OK
+     */
+    200: {
+        ok: true;
+        data: {
+            series: {
+                id: string;
+                slug: string;
+                title: string;
+                titleJp?: string | null;
+                titleFr?: string | null;
+                generation: 'ORIGINAL' | 'METAL' | 'BURST' | 'X';
+                synopsis?: string | null;
+                posterUrl?: string | null;
+                bannerUrl?: string | null;
+                year: number;
+                episodeCount: number;
+                sortOrder: number;
+                isPublished: boolean;
+                /**
+                 * ISO 8601 date-time string
+                 */
+                createdAt: string;
+                /**
+                 * ISO 8601 date-time string
+                 */
+                updatedAt: string;
+                episodes: Array<{
+                    id: string;
+                    seriesId: string;
+                    number: number;
+                    title: string;
+                    titleFr?: string | null;
+                    titleJp?: string | null;
+                    synopsis?: string | null;
+                    thumbnailUrl?: string | null;
+                    duration: number;
+                    isPublished: boolean;
+                    /**
+                     * ISO 8601 date-time string
+                     */
+                    createdAt: string;
+                    /**
+                     * ISO 8601 date-time string
+                     */
+                    updatedAt: string;
+                    sources: Array<{
+                        id: string;
+                        episodeId: string;
+                        type: 'YOUTUBE' | 'DAILYMOTION' | 'MP4' | 'HLS' | 'IFRAME';
+                        url: string;
+                        quality: string;
+                        language: string;
+                        priority: number;
+                        isActive: boolean;
+                        /**
+                         * ISO 8601 date-time string
+                         */
+                        createdAt: string;
+                        /**
+                         * ISO 8601 date-time string
+                         */
+                        updatedAt: string;
+                    }>;
+                }>;
+            } | null;
+        };
+    };
+};
+
+export type GetAnimeSeriesResponse = GetAnimeSeriesResponses[keyof GetAnimeSeriesResponses];
+
+export type ListContentBlocksData = {
+    body?: never;
+    path?: never;
+    query?: {
+        slug?: string;
+    };
+    url: '/api/v1/cms/content';
+};
+
+export type ListContentBlocksErrors = {
+    /**
+     * Erreur de requête ou de validation
+     */
+    '4XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+    /**
+     * Erreur serveur
+     */
+    '5XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+};
+
+export type ListContentBlocksError = ListContentBlocksErrors[keyof ListContentBlocksErrors];
+
+export type ListContentBlocksResponses = {
+    /**
+     * OK
+     */
+    200: {
+        ok: true;
+        data: {
+            blocks: Array<{
+                id: string;
+                slug: string;
+                title?: string | null;
+                type: string;
+                content: string;
+                createdAt?: string | null;
+                updatedAt?: string | null;
+            }>;
+        };
+    };
+};
+
+export type ListContentBlocksResponse = ListContentBlocksResponses[keyof ListContentBlocksResponses];
+
+export type ListStaffMembersData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/v1/cms/staff';
+};
+
+export type ListStaffMembersErrors = {
+    /**
+     * Erreur de requête ou de validation
+     */
+    '4XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+    /**
+     * Erreur serveur
+     */
+    '5XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+};
+
+export type ListStaffMembersError = ListStaffMembersErrors[keyof ListStaffMembersErrors];
+
+export type ListStaffMembersResponses = {
+    /**
+     * OK
+     */
+    200: {
+        ok: true;
+        data: {
+            members: Array<{
+                id: string;
+                name: string;
+                role: string;
+                teamId: string;
+                imageUrl?: string | null;
+                discordId?: string | null;
+                displayIndex?: number | null;
+                isActive?: boolean | null;
+                createdAt?: string | null;
+                updatedAt?: string | null;
+            }>;
+        };
+    };
+};
+
+export type ListStaffMembersResponse = ListStaffMembersResponses[keyof ListStaffMembersResponses];
+
+export type GetSharedDeckData = {
+    body?: never;
+    path?: never;
+    query: {
+        id: string;
+    };
+    url: '/api/v1/decks';
+};
+
+export type GetSharedDeckErrors = {
+    /**
+     * Erreur de requête ou de validation
+     */
+    '4XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+    /**
+     * Erreur serveur
+     */
+    '5XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+};
+
+export type GetSharedDeckError = GetSharedDeckErrors[keyof GetSharedDeckErrors];
+
+export type GetSharedDeckResponses = {
+    /**
+     * OK
+     */
+    200: {
+        ok: true;
+        data: {
+            deck: {
+                id: string;
+                name: string;
+                isActive: boolean;
+                userId: string;
+                ownerName?: string | null;
+                createdAt?: string | null;
+                updatedAt?: string | null;
+                items: Array<{
+                    id: string;
+                    deckId: string;
+                    position: number;
+                    beyId?: string | null;
+                    bladeId?: string | null;
+                    overBladeId?: string | null;
+                    ratchetId?: string | null;
+                    bitId?: string | null;
+                    lockChipId?: string | null;
+                    assistBladeId?: string | null;
+                    blade: {
+                        id: string;
+                        externalId: string;
+                        name: string;
+                        type: string;
+                        nameJp?: string | null;
+                        beyType?: string | null;
+                        weight?: number | null;
+                        attack?: string | null;
+                        defense?: string | null;
+                        stamina?: string | null;
+                        burst?: string | null;
+                        dash?: string | null;
+                        height?: number | null;
+                        protrusions?: number | null;
+                        gearRatio?: string | null;
+                        shaftWidth?: string | null;
+                        tipType?: string | null;
+                        releaseDate?: string | null;
+                        imageUrl?: string | null;
+                        rarity?: string | null;
+                        modelUrl?: string | null;
+                        textureUrl?: string | null;
+                        spinDirection?: string | null;
+                        system?: string | null;
+                        createdAt?: string | null;
+                        updatedAt?: string | null;
+                    } | null;
+                    overBlade: {
+                        id: string;
+                        externalId: string;
+                        name: string;
+                        type: string;
+                        nameJp?: string | null;
+                        beyType?: string | null;
+                        weight?: number | null;
+                        attack?: string | null;
+                        defense?: string | null;
+                        stamina?: string | null;
+                        burst?: string | null;
+                        dash?: string | null;
+                        height?: number | null;
+                        protrusions?: number | null;
+                        gearRatio?: string | null;
+                        shaftWidth?: string | null;
+                        tipType?: string | null;
+                        releaseDate?: string | null;
+                        imageUrl?: string | null;
+                        rarity?: string | null;
+                        modelUrl?: string | null;
+                        textureUrl?: string | null;
+                        spinDirection?: string | null;
+                        system?: string | null;
+                        createdAt?: string | null;
+                        updatedAt?: string | null;
+                    } | null;
+                    ratchet: {
+                        id: string;
+                        externalId: string;
+                        name: string;
+                        type: string;
+                        nameJp?: string | null;
+                        beyType?: string | null;
+                        weight?: number | null;
+                        attack?: string | null;
+                        defense?: string | null;
+                        stamina?: string | null;
+                        burst?: string | null;
+                        dash?: string | null;
+                        height?: number | null;
+                        protrusions?: number | null;
+                        gearRatio?: string | null;
+                        shaftWidth?: string | null;
+                        tipType?: string | null;
+                        releaseDate?: string | null;
+                        imageUrl?: string | null;
+                        rarity?: string | null;
+                        modelUrl?: string | null;
+                        textureUrl?: string | null;
+                        spinDirection?: string | null;
+                        system?: string | null;
+                        createdAt?: string | null;
+                        updatedAt?: string | null;
+                    } | null;
+                    bit: {
+                        id: string;
+                        externalId: string;
+                        name: string;
+                        type: string;
+                        nameJp?: string | null;
+                        beyType?: string | null;
+                        weight?: number | null;
+                        attack?: string | null;
+                        defense?: string | null;
+                        stamina?: string | null;
+                        burst?: string | null;
+                        dash?: string | null;
+                        height?: number | null;
+                        protrusions?: number | null;
+                        gearRatio?: string | null;
+                        shaftWidth?: string | null;
+                        tipType?: string | null;
+                        releaseDate?: string | null;
+                        imageUrl?: string | null;
+                        rarity?: string | null;
+                        modelUrl?: string | null;
+                        textureUrl?: string | null;
+                        spinDirection?: string | null;
+                        system?: string | null;
+                        createdAt?: string | null;
+                        updatedAt?: string | null;
+                    } | null;
+                    lockChip: {
+                        id: string;
+                        externalId: string;
+                        name: string;
+                        type: string;
+                        nameJp?: string | null;
+                        beyType?: string | null;
+                        weight?: number | null;
+                        attack?: string | null;
+                        defense?: string | null;
+                        stamina?: string | null;
+                        burst?: string | null;
+                        dash?: string | null;
+                        height?: number | null;
+                        protrusions?: number | null;
+                        gearRatio?: string | null;
+                        shaftWidth?: string | null;
+                        tipType?: string | null;
+                        releaseDate?: string | null;
+                        imageUrl?: string | null;
+                        rarity?: string | null;
+                        modelUrl?: string | null;
+                        textureUrl?: string | null;
+                        spinDirection?: string | null;
+                        system?: string | null;
+                        createdAt?: string | null;
+                        updatedAt?: string | null;
+                    } | null;
+                    assistBlade: {
+                        id: string;
+                        externalId: string;
+                        name: string;
+                        type: string;
+                        nameJp?: string | null;
+                        beyType?: string | null;
+                        weight?: number | null;
+                        attack?: string | null;
+                        defense?: string | null;
+                        stamina?: string | null;
+                        burst?: string | null;
+                        dash?: string | null;
+                        height?: number | null;
+                        protrusions?: number | null;
+                        gearRatio?: string | null;
+                        shaftWidth?: string | null;
+                        tipType?: string | null;
+                        releaseDate?: string | null;
+                        imageUrl?: string | null;
+                        rarity?: string | null;
+                        modelUrl?: string | null;
+                        textureUrl?: string | null;
+                        spinDirection?: string | null;
+                        system?: string | null;
+                        createdAt?: string | null;
+                        updatedAt?: string | null;
+                    } | null;
+                }>;
+            } | null;
+        };
+    };
+};
+
+export type GetSharedDeckResponse = GetSharedDeckResponses[keyof GetSharedDeckResponses];
+
+export type TrackAnalyticsEventData = {
+    body: {
+        type: string;
+        path?: string | null;
+        referrer?: string | null;
+        meta?: {
+            [key: string]: unknown;
+        } | null;
+    };
+    path?: never;
+    query?: never;
+    url: '/api/v1/analytics';
+};
+
+export type TrackAnalyticsEventErrors = {
+    /**
+     * Erreur de requête ou de validation
+     */
+    '4XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+    /**
+     * Erreur serveur
+     */
+    '5XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+};
+
+export type TrackAnalyticsEventError = TrackAnalyticsEventErrors[keyof TrackAnalyticsEventErrors];
+
+export type TrackAnalyticsEventResponses = {
+    /**
+     * OK
+     */
+    200: {
+        ok: true;
+        data: {
+            accepted: true;
+        };
+    };
+};
+
+export type TrackAnalyticsEventResponse = TrackAnalyticsEventResponses[keyof TrackAnalyticsEventResponses];

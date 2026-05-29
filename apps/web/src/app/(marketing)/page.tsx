@@ -1,10 +1,18 @@
 import { type MetaPartPreview, type RankingBoard } from "@/components/marketing";
 import { type TournamentShowcaseItem } from "@/components/marketing/TournamentShowcase";
 import { loadJsonSafe } from "@/lib/data-cache";
-import { db, schema, and, asc, desc, eq, ilike, inArray, isNotNull } from "@/lib/db";
 import { createPageMetadata } from "@/lib/seo-utils";
 import { getBtsRanking } from "@/server/actions/bts";
 import { getContent } from "@/server/actions/cms";
+import {
+  getActiveHomeTournament,
+  getFeaturedHomeVideos,
+  getHomeRankingBoards,
+  getNextBtsTournament,
+  getNextStardustTournament,
+  getPartImages,
+  type HomeRankingRow,
+} from "@/server/dal/cms";
 import HomeClient from "./HomeClient";
 
 export const dynamic = "force-dynamic";
@@ -77,10 +85,8 @@ async function getTopMetaParts(): Promise<MetaPartPreview[]> {
     const period = data?.periods["4weeks"];
     if (!period?.categories) return [];
 
-    // Fetch part images from DB
-    const dbParts = await db.query.parts.findMany({
-      columns: { name: true, imageUrl: true },
-    });
+    // Images des pièces (DB via DAL)
+    const dbParts = await getPartImages();
     const imageMap = new Map<string, string>();
     for (const p of dbParts) {
       if (p.imageUrl) {
@@ -118,13 +124,7 @@ const RANKING_TOP = 12;
 // Tous les classements RPB pour le carrousel de la homepage. Mêmes sources que
 // les pages dédiées : BTS (getBtsRanking), WB/SATR/Stardust (tables synchronisées).
 async function getRankingBoards(): Promise<RankingBoard[]> {
-  const normalizeDbRow = (r: {
-    id: string;
-    playerName: string;
-    score: number;
-    wins: number;
-    losses: number;
-  }) => ({
+  const normalizeDbRow = (r: HomeRankingRow) => ({
     id: r.id,
     userId: null,
     playerName: r.playerName,
@@ -135,7 +135,7 @@ async function getRankingBoards(): Promise<RankingBoard[]> {
     avatarUrl: null,
   });
 
-  const [bts, wb, satr, stardust] = await Promise.all([
+  const [bts, boards] = await Promise.all([
     getBtsRanking(2, { pageSize: RANKING_TOP })
       .then((res) =>
         res.entries.slice(0, RANKING_TOP).map((e) => ({
@@ -150,29 +150,11 @@ async function getRankingBoards(): Promise<RankingBoard[]> {
         })),
       )
       .catch(() => []),
-    db.query.wbRankings
-      .findMany({
-        where: eq(schema.wbRankings.season, 2),
-        orderBy: asc(schema.wbRankings.rank),
-        limit: RANKING_TOP,
-      })
-      .then((rows) => rows.map(normalizeDbRow))
-      .catch(() => []),
-    db.query.satrRankings
-      .findMany({
-        where: eq(schema.satrRankings.season, 2),
-        orderBy: asc(schema.satrRankings.rank),
-        limit: RANKING_TOP,
-      })
-      .then((rows) => rows.map(normalizeDbRow))
-      .catch(() => []),
-    db.query.stardustRankings
-      .findMany({
-        orderBy: asc(schema.stardustRankings.rank),
-        limit: RANKING_TOP,
-      })
-      .then((rows) => rows.map(normalizeDbRow))
-      .catch(() => []),
+    getHomeRankingBoards(2, RANKING_TOP).catch(() => ({
+      wb: [],
+      satr: [],
+      stardust: [],
+    })),
   ]);
 
   return [
@@ -190,7 +172,7 @@ async function getRankingBoards(): Promise<RankingBoard[]> {
       sublabel: "Circuit Wild Breakers · Saison 2",
       color: "#a78bfa",
       href: "/tournaments/wb",
-      entries: wb,
+      entries: boards.wb.map(normalizeDbRow),
     },
     {
       key: "satr",
@@ -198,7 +180,7 @@ async function getRankingBoards(): Promise<RankingBoard[]> {
       sublabel: "Circuit SATR · Saison 2",
       color: "var(--rpb-secondary)",
       href: "/tournaments/satr",
-      entries: satr,
+      entries: boards.satr.map(normalizeDbRow),
     },
     {
       key: "stardust",
@@ -206,7 +188,7 @@ async function getRankingBoards(): Promise<RankingBoard[]> {
       sublabel: "Circuit Stardust",
       color: "#60A5FA",
       href: "/tournaments/stardust",
-      entries: stardust,
+      entries: boards.stardust.map(normalizeDbRow),
     },
   ];
 }
@@ -294,89 +276,15 @@ export default async function HomePage() {
     nextBts,
     nextStardust,
   ] = await Promise.all([
-    db.query.tournaments.findFirst({
-      where: and(
-        inArray(schema.tournaments.status, ["UNDERWAY", "CHECKIN", "REGISTRATION_OPEN"]),
-        isNotNull(schema.tournaments.challongeUrl),
-      ),
-      orderBy: desc(schema.tournaments.date),
-      columns: {
-        id: true,
-        challongeUrl: true,
-        name: true,
-        standings: true,
-        stations: true,
-        activityLog: true,
-      },
-    }),
+    getActiveHomeTournament(),
     getContent("home-hero-text"),
     // Tous les classements RPB (BTS + WB + SATR + Stardust) pour le carrousel.
     getRankingBoards(),
     getTopMetaParts(),
-    db.query.youtubeVideos
-      .findMany({
-        where: and(
-          eq(schema.youtubeVideos.isFeatured, true),
-          eq(schema.youtubeVideos.channelId, "UCHiDwWI-2uQrsUiJhXt6rng"),
-        ),
-        orderBy: desc(schema.youtubeVideos.publishedAt),
-        limit: 12,
-        columns: {
-          id: true,
-          title: true,
-          channelName: true,
-          channelAvatar: true,
-          thumbnail: true,
-          views: true,
-          duration: true,
-          publishedAt: true,
-        },
-      })
-      .then((vids) =>
-        vids.map((v) => ({
-          ...v,
-          videoId: v.id,
-          publishedAt: new Date(v.publishedAt).toISOString(),
-        })),
-      )
-      .catch(() => []),
+    getFeaturedHomeVideos(12).catch(() => []),
     getBtsTournaments(),
-    db.query.tournaments.findFirst({
-      where: and(
-        ilike(schema.tournaments.name, "%BEY-TAMASHII%"),
-        inArray(schema.tournaments.status, [
-          "UPCOMING",
-          "REGISTRATION_OPEN",
-          "CHECKIN",
-          "UNDERWAY",
-        ]),
-      ),
-      orderBy: asc(schema.tournaments.date),
-      columns: {
-        id: true,
-        name: true,
-        date: true,
-        location: true,
-        challongeUrl: true,
-      },
-    }),
-    (async () => {
-      const rows = await db.query.tournaments.findMany({
-        where: inArray(schema.tournaments.status, [
-          "UPCOMING",
-          "REGISTRATION_OPEN",
-          "CHECKIN",
-          "UNDERWAY",
-        ]),
-        orderBy: asc(schema.tournaments.date),
-        columns: { id: true, name: true, date: true, posterUrl: true },
-        with: { tournamentCategory: { columns: { name: true } } },
-      });
-      return (
-        rows.find((t) => (t.tournamentCategory?.name ?? "").toUpperCase().includes("STARDUST")) ??
-        null
-      );
-    })(),
+    getNextBtsTournament(),
+    getNextStardustTournament(),
   ]);
 
   if (nextBts) {

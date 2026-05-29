@@ -579,3 +579,457 @@ export const zListStreamVideosResponse = z.object({
         }))
     })
 });
+
+export const zListAnimeSeriesQuery = z.object({
+    generation: z.enum([
+        'ORIGINAL',
+        'METAL',
+        'BURST',
+        'X'
+    ]).optional(),
+    featured: z.boolean().optional()
+});
+
+/**
+ * OK
+ */
+export const zListAnimeSeriesResponse = z.object({
+    ok: z.literal(true),
+    data: z.object({
+        series: z.array(z.object({
+            id: z.string(),
+            slug: z.string(),
+            title: z.string(),
+            titleJp: z.string().nullish(),
+            titleFr: z.string().nullish(),
+            generation: z.enum([
+                'ORIGINAL',
+                'METAL',
+                'BURST',
+                'X'
+            ]),
+            synopsis: z.string().nullish(),
+            posterUrl: z.string().nullish(),
+            bannerUrl: z.string().nullish(),
+            year: z.int().gte(-9007199254740991).lte(9007199254740991),
+            episodeCount: z.int().gte(-9007199254740991).lte(9007199254740991),
+            sortOrder: z.int().gte(-9007199254740991).lte(9007199254740991),
+            isPublished: z.boolean(),
+            createdAt: z.string(),
+            updatedAt: z.string()
+        }))
+    })
+});
+
+/**
+ * OK
+ */
+export const zListAnimeSeriesByGenerationResponse = z.object({
+    ok: z.literal(true),
+    data: z.object({
+        byGeneration: z.record(z.string(), z.array(z.object({
+            id: z.string(),
+            slug: z.string(),
+            title: z.string(),
+            titleJp: z.string().nullish(),
+            titleFr: z.string().nullish(),
+            generation: z.enum([
+                'ORIGINAL',
+                'METAL',
+                'BURST',
+                'X'
+            ]),
+            synopsis: z.string().nullish(),
+            posterUrl: z.string().nullish(),
+            bannerUrl: z.string().nullish(),
+            year: z.int().gte(-9007199254740991).lte(9007199254740991),
+            episodeCount: z.int().gte(-9007199254740991).lte(9007199254740991),
+            sortOrder: z.int().gte(-9007199254740991).lte(9007199254740991),
+            isPublished: z.boolean(),
+            createdAt: z.string(),
+            updatedAt: z.string()
+        })))
+    })
+});
+
+export const zSearchAnimeQuery = z.object({
+    q: z.string().min(1)
+});
+
+/**
+ * OK
+ */
+export const zSearchAnimeResponse = z.object({
+    ok: z.literal(true),
+    data: z.object({
+        series: z.array(z.object({
+            id: z.string(),
+            slug: z.string(),
+            title: z.string(),
+            titleJp: z.string().nullish(),
+            titleFr: z.string().nullish(),
+            generation: z.enum([
+                'ORIGINAL',
+                'METAL',
+                'BURST',
+                'X'
+            ]),
+            synopsis: z.string().nullish(),
+            posterUrl: z.string().nullish(),
+            bannerUrl: z.string().nullish(),
+            year: z.int().gte(-9007199254740991).lte(9007199254740991),
+            episodeCount: z.int().gte(-9007199254740991).lte(9007199254740991),
+            sortOrder: z.int().gte(-9007199254740991).lte(9007199254740991),
+            isPublished: z.boolean(),
+            createdAt: z.string(),
+            updatedAt: z.string()
+        })),
+        episodes: z.array(z.object({
+            id: z.string(),
+            seriesId: z.string(),
+            number: z.int().gte(-9007199254740991).lte(9007199254740991),
+            title: z.string(),
+            titleFr: z.string().nullish(),
+            titleJp: z.string().nullish(),
+            synopsis: z.string().nullish(),
+            thumbnailUrl: z.string().nullish(),
+            duration: z.int().gte(-9007199254740991).lte(9007199254740991),
+            isPublished: z.boolean(),
+            createdAt: z.string(),
+            updatedAt: z.string(),
+            series: z.object({
+                slug: z.string(),
+                title: z.string()
+            })
+        }))
+    })
+});
+
+export const zGetAnimeSeriesPath = z.object({
+    slug: z.string()
+});
+
+/**
+ * OK
+ */
+export const zGetAnimeSeriesResponse = z.object({
+    ok: z.literal(true),
+    data: z.object({
+        series: z.object({
+            id: z.string(),
+            slug: z.string(),
+            title: z.string(),
+            titleJp: z.string().nullish(),
+            titleFr: z.string().nullish(),
+            generation: z.enum([
+                'ORIGINAL',
+                'METAL',
+                'BURST',
+                'X'
+            ]),
+            synopsis: z.string().nullish(),
+            posterUrl: z.string().nullish(),
+            bannerUrl: z.string().nullish(),
+            year: z.int().gte(-9007199254740991).lte(9007199254740991),
+            episodeCount: z.int().gte(-9007199254740991).lte(9007199254740991),
+            sortOrder: z.int().gte(-9007199254740991).lte(9007199254740991),
+            isPublished: z.boolean(),
+            createdAt: z.string(),
+            updatedAt: z.string(),
+            episodes: z.array(z.object({
+                id: z.string(),
+                seriesId: z.string(),
+                number: z.int().gte(-9007199254740991).lte(9007199254740991),
+                title: z.string(),
+                titleFr: z.string().nullish(),
+                titleJp: z.string().nullish(),
+                synopsis: z.string().nullish(),
+                thumbnailUrl: z.string().nullish(),
+                duration: z.int().gte(-9007199254740991).lte(9007199254740991),
+                isPublished: z.boolean(),
+                createdAt: z.string(),
+                updatedAt: z.string(),
+                sources: z.array(z.object({
+                    id: z.string(),
+                    episodeId: z.string(),
+                    type: z.enum([
+                        'YOUTUBE',
+                        'DAILYMOTION',
+                        'MP4',
+                        'HLS',
+                        'IFRAME'
+                    ]),
+                    url: z.string(),
+                    quality: z.string(),
+                    language: z.string(),
+                    priority: z.int().gte(-9007199254740991).lte(9007199254740991),
+                    isActive: z.boolean(),
+                    createdAt: z.string(),
+                    updatedAt: z.string()
+                }))
+            }))
+        }).nullable()
+    })
+});
+
+export const zListContentBlocksQuery = z.object({
+    slug: z.string().optional()
+});
+
+/**
+ * OK
+ */
+export const zListContentBlocksResponse = z.object({
+    ok: z.literal(true),
+    data: z.object({
+        blocks: z.array(z.object({
+            id: z.string(),
+            slug: z.string(),
+            title: z.string().nullish(),
+            type: z.string(),
+            content: z.string(),
+            createdAt: z.string().nullish(),
+            updatedAt: z.string().nullish()
+        }))
+    })
+});
+
+/**
+ * OK
+ */
+export const zListStaffMembersResponse = z.object({
+    ok: z.literal(true),
+    data: z.object({
+        members: z.array(z.object({
+            id: z.string(),
+            name: z.string(),
+            role: z.string(),
+            teamId: z.string(),
+            imageUrl: z.string().nullish(),
+            discordId: z.string().nullish(),
+            displayIndex: z.number().nullish(),
+            isActive: z.boolean().nullish(),
+            createdAt: z.string().nullish(),
+            updatedAt: z.string().nullish()
+        }))
+    })
+});
+
+export const zGetSharedDeckQuery = z.object({
+    id: z.string().min(1)
+});
+
+/**
+ * OK
+ */
+export const zGetSharedDeckResponse = z.object({
+    ok: z.literal(true),
+    data: z.object({
+        deck: z.object({
+            id: z.string(),
+            name: z.string(),
+            isActive: z.boolean(),
+            userId: z.string(),
+            ownerName: z.string().nullish(),
+            createdAt: z.string().nullish(),
+            updatedAt: z.string().nullish(),
+            items: z.array(z.object({
+                id: z.string(),
+                deckId: z.string(),
+                position: z.int().gte(-9007199254740991).lte(9007199254740991),
+                beyId: z.string().nullish(),
+                bladeId: z.string().nullish(),
+                overBladeId: z.string().nullish(),
+                ratchetId: z.string().nullish(),
+                bitId: z.string().nullish(),
+                lockChipId: z.string().nullish(),
+                assistBladeId: z.string().nullish(),
+                blade: z.object({
+                    id: z.string(),
+                    externalId: z.string(),
+                    name: z.string(),
+                    type: z.string(),
+                    nameJp: z.string().nullish(),
+                    beyType: z.string().nullish(),
+                    weight: z.number().nullish(),
+                    attack: z.string().nullish(),
+                    defense: z.string().nullish(),
+                    stamina: z.string().nullish(),
+                    burst: z.string().nullish(),
+                    dash: z.string().nullish(),
+                    height: z.number().nullish(),
+                    protrusions: z.number().nullish(),
+                    gearRatio: z.string().nullish(),
+                    shaftWidth: z.string().nullish(),
+                    tipType: z.string().nullish(),
+                    releaseDate: z.string().nullish(),
+                    imageUrl: z.string().nullish(),
+                    rarity: z.string().nullish(),
+                    modelUrl: z.string().nullish(),
+                    textureUrl: z.string().nullish(),
+                    spinDirection: z.string().nullish(),
+                    system: z.string().nullish(),
+                    createdAt: z.string().nullish(),
+                    updatedAt: z.string().nullish()
+                }).nullable(),
+                overBlade: z.object({
+                    id: z.string(),
+                    externalId: z.string(),
+                    name: z.string(),
+                    type: z.string(),
+                    nameJp: z.string().nullish(),
+                    beyType: z.string().nullish(),
+                    weight: z.number().nullish(),
+                    attack: z.string().nullish(),
+                    defense: z.string().nullish(),
+                    stamina: z.string().nullish(),
+                    burst: z.string().nullish(),
+                    dash: z.string().nullish(),
+                    height: z.number().nullish(),
+                    protrusions: z.number().nullish(),
+                    gearRatio: z.string().nullish(),
+                    shaftWidth: z.string().nullish(),
+                    tipType: z.string().nullish(),
+                    releaseDate: z.string().nullish(),
+                    imageUrl: z.string().nullish(),
+                    rarity: z.string().nullish(),
+                    modelUrl: z.string().nullish(),
+                    textureUrl: z.string().nullish(),
+                    spinDirection: z.string().nullish(),
+                    system: z.string().nullish(),
+                    createdAt: z.string().nullish(),
+                    updatedAt: z.string().nullish()
+                }).nullable(),
+                ratchet: z.object({
+                    id: z.string(),
+                    externalId: z.string(),
+                    name: z.string(),
+                    type: z.string(),
+                    nameJp: z.string().nullish(),
+                    beyType: z.string().nullish(),
+                    weight: z.number().nullish(),
+                    attack: z.string().nullish(),
+                    defense: z.string().nullish(),
+                    stamina: z.string().nullish(),
+                    burst: z.string().nullish(),
+                    dash: z.string().nullish(),
+                    height: z.number().nullish(),
+                    protrusions: z.number().nullish(),
+                    gearRatio: z.string().nullish(),
+                    shaftWidth: z.string().nullish(),
+                    tipType: z.string().nullish(),
+                    releaseDate: z.string().nullish(),
+                    imageUrl: z.string().nullish(),
+                    rarity: z.string().nullish(),
+                    modelUrl: z.string().nullish(),
+                    textureUrl: z.string().nullish(),
+                    spinDirection: z.string().nullish(),
+                    system: z.string().nullish(),
+                    createdAt: z.string().nullish(),
+                    updatedAt: z.string().nullish()
+                }).nullable(),
+                bit: z.object({
+                    id: z.string(),
+                    externalId: z.string(),
+                    name: z.string(),
+                    type: z.string(),
+                    nameJp: z.string().nullish(),
+                    beyType: z.string().nullish(),
+                    weight: z.number().nullish(),
+                    attack: z.string().nullish(),
+                    defense: z.string().nullish(),
+                    stamina: z.string().nullish(),
+                    burst: z.string().nullish(),
+                    dash: z.string().nullish(),
+                    height: z.number().nullish(),
+                    protrusions: z.number().nullish(),
+                    gearRatio: z.string().nullish(),
+                    shaftWidth: z.string().nullish(),
+                    tipType: z.string().nullish(),
+                    releaseDate: z.string().nullish(),
+                    imageUrl: z.string().nullish(),
+                    rarity: z.string().nullish(),
+                    modelUrl: z.string().nullish(),
+                    textureUrl: z.string().nullish(),
+                    spinDirection: z.string().nullish(),
+                    system: z.string().nullish(),
+                    createdAt: z.string().nullish(),
+                    updatedAt: z.string().nullish()
+                }).nullable(),
+                lockChip: z.object({
+                    id: z.string(),
+                    externalId: z.string(),
+                    name: z.string(),
+                    type: z.string(),
+                    nameJp: z.string().nullish(),
+                    beyType: z.string().nullish(),
+                    weight: z.number().nullish(),
+                    attack: z.string().nullish(),
+                    defense: z.string().nullish(),
+                    stamina: z.string().nullish(),
+                    burst: z.string().nullish(),
+                    dash: z.string().nullish(),
+                    height: z.number().nullish(),
+                    protrusions: z.number().nullish(),
+                    gearRatio: z.string().nullish(),
+                    shaftWidth: z.string().nullish(),
+                    tipType: z.string().nullish(),
+                    releaseDate: z.string().nullish(),
+                    imageUrl: z.string().nullish(),
+                    rarity: z.string().nullish(),
+                    modelUrl: z.string().nullish(),
+                    textureUrl: z.string().nullish(),
+                    spinDirection: z.string().nullish(),
+                    system: z.string().nullish(),
+                    createdAt: z.string().nullish(),
+                    updatedAt: z.string().nullish()
+                }).nullable(),
+                assistBlade: z.object({
+                    id: z.string(),
+                    externalId: z.string(),
+                    name: z.string(),
+                    type: z.string(),
+                    nameJp: z.string().nullish(),
+                    beyType: z.string().nullish(),
+                    weight: z.number().nullish(),
+                    attack: z.string().nullish(),
+                    defense: z.string().nullish(),
+                    stamina: z.string().nullish(),
+                    burst: z.string().nullish(),
+                    dash: z.string().nullish(),
+                    height: z.number().nullish(),
+                    protrusions: z.number().nullish(),
+                    gearRatio: z.string().nullish(),
+                    shaftWidth: z.string().nullish(),
+                    tipType: z.string().nullish(),
+                    releaseDate: z.string().nullish(),
+                    imageUrl: z.string().nullish(),
+                    rarity: z.string().nullish(),
+                    modelUrl: z.string().nullish(),
+                    textureUrl: z.string().nullish(),
+                    spinDirection: z.string().nullish(),
+                    system: z.string().nullish(),
+                    createdAt: z.string().nullish(),
+                    updatedAt: z.string().nullish()
+                }).nullable()
+            }))
+        }).nullable()
+    })
+});
+
+export const zTrackAnalyticsEventBody = z.object({
+    type: z.string().min(1).max(64).default('pageview'),
+    path: z.string().max(512).nullish(),
+    referrer: z.string().max(512).nullish(),
+    meta: z.record(z.string(), z.unknown()).nullish()
+});
+
+/**
+ * OK
+ */
+export const zTrackAnalyticsEventResponse = z.object({
+    ok: z.literal(true),
+    data: z.object({
+        accepted: z.literal(true)
+    })
+});

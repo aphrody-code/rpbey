@@ -6,7 +6,7 @@
 import { ImageResponse } from "next/og";
 import type { NextRequest } from "next/server";
 import { loadGoogleSansFonts } from "@/lib/og/fonts";
-import { db, schema, asc, eq } from "@/lib/db";
+import { getDeckForCard } from "@/server/dal/decks";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -31,37 +31,14 @@ export async function GET(_request: NextRequest, { params }: RouteParams) {
   try {
     const { id: deckId } = await params;
 
-    const deckRow = await db.query.decks.findFirst({
-      where: eq(schema.decks.id, deckId),
-      with: {
-        user: { columns: { name: true } },
-        deckItems: {
-          with: {
-            part_bladeId: true,
-            part_ratchetId: true,
-            part_bitId: true,
-          },
-          orderBy: asc(schema.deckItems.position),
-        },
-      },
-    });
+    const deck = await getDeckForCard(deckId);
 
-    if (!deckRow) {
+    if (!deck) {
       return new Response(JSON.stringify({ error: "Deck not found" }), {
         status: 404,
         headers: { "Content-Type": "application/json" },
       });
     }
-
-    const deck = {
-      ...deckRow,
-      items: deckRow.deckItems.map((it) => ({
-        ...it,
-        blade: it.part_bladeId,
-        ratchet: it.part_ratchetId,
-        bit: it.part_bitId,
-      })),
-    };
 
     const fonts = await loadGoogleSansFonts();
     const width = 900;

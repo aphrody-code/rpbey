@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import { headers } from "next/headers";
-import { db, schema, asc, eq } from "@/lib/db";
+import { listActiveStaffMembers } from "@/server/dal/cms";
 import { TeamClientContent } from "./TeamClientContent";
 
 export const metadata = {
@@ -23,10 +23,7 @@ const TEAM_ORDER = ["ADMIN", "RH", "MODO", "ARBITRE", "STAFF", "DEV", "EVENT", "
 
 export default async function TeamPage() {
   await headers();
-  const members = await db.query.staffMembers.findMany({
-    where: eq(schema.staffMembers.isActive, true),
-    orderBy: [asc(schema.staffMembers.role), asc(schema.staffMembers.displayIndex)],
-  });
+  const members = await listActiveStaffMembers();
 
   if (members.length === 0) {
     return (

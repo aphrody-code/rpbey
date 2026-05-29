@@ -7,7 +7,7 @@ import {
   anonSessionId,
   clientIpFromHeaders,
   recordEvent,
-} from "@/lib/analytics";
+} from "@/server/dal/analytics";
 
 /**
  * Server action tracker for business events fired from inside other server

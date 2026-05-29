@@ -1,6 +1,6 @@
 import { type Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getAnimeSeriesBySlug } from "@/server/actions/anime";
+import { getSeriesBySlug } from "@/server/dal/anime";
 import { SeriesDetail } from "../_components/SeriesDetail";
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const series = await getAnimeSeriesBySlug(slug);
+  const series = await getSeriesBySlug(slug);
   if (!series) return { title: "Série introuvable | RPB" };
 
   return {
@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function SeriesPage({ params }: Props) {
   const { slug } = await params;
-  const series = await getAnimeSeriesBySlug(slug);
+  const series = await getSeriesBySlug(slug);
 
   if (!series) notFound();
 

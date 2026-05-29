@@ -1,7 +1,10 @@
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
-import { db, schema } from "@/lib/db";
+import { saveWatchProgress } from "@/server/dal/anime";
+
+export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
 
 export async function POST(request: Request) {
   try {
@@ -20,26 +23,12 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "episodeId et progressTime requis" }, { status: 400 });
     }
 
-    const isCompleted = duration > 0 && progressTime / duration > 0.9;
-
-    const [progress] = await db
-      .insert(schema.animeWatchProgress)
-      .values({
-        userId: session.user.id,
-        episodeId,
-        progressTime: Math.floor(progressTime),
-        status: isCompleted ? "COMPLETED" : "IN_PROGRESS",
-        completedAt: isCompleted ? new Date().toISOString() : null,
-      })
-      .onConflictDoUpdate({
-        target: [schema.animeWatchProgress.userId, schema.animeWatchProgress.episodeId],
-        set: {
-          progressTime: Math.floor(progressTime),
-          status: isCompleted ? "COMPLETED" : "IN_PROGRESS",
-          completedAt: isCompleted ? new Date().toISOString() : null,
-        },
-      })
-      .returning();
+    const progress = await saveWatchProgress(
+      session.user.id,
+      episodeId,
+      progressTime,
+      duration ?? 0,
+    );
 
     return NextResponse.json(progress);
   } catch (error) {

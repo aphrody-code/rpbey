@@ -3,7 +3,12 @@
 import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
 import { auth } from "@/lib/auth";
-import { db, schema, asc, eq } from "@/lib/db";
+import {
+  createStaffMember as createStaffMemberDal,
+  deleteStaffMember as deleteStaffMemberDal,
+  listStaffMembers,
+  updateStaffMember as updateStaffMemberDal,
+} from "@/server/dal/cms";
 
 export type StaffMemberInput = {
   name: string;
@@ -29,16 +34,12 @@ async function checkAdmin() {
 
 export async function getStaffMembers() {
   await checkAdmin();
-  return await db.query.staffMembers.findMany({
-    orderBy: [asc(schema.staffMembers.role), asc(schema.staffMembers.displayIndex)],
-  });
+  return listStaffMembers();
 }
 
 export async function createStaffMember(data: StaffMemberInput) {
   await checkAdmin();
-
-  const [member] = await db.insert(schema.staffMembers).values(data).returning();
-
+  const member = await createStaffMemberDal(data);
   revalidatePath("/admin/staff");
   revalidatePath("/notre-equipe");
   return member;
@@ -46,13 +47,7 @@ export async function createStaffMember(data: StaffMemberInput) {
 
 export async function updateStaffMember(id: string, data: Partial<StaffMemberInput>) {
   await checkAdmin();
-
-  const [member] = await db
-    .update(schema.staffMembers)
-    .set(data)
-    .where(eq(schema.staffMembers.id, id))
-    .returning();
-
+  const member = await updateStaffMemberDal(id, data);
   revalidatePath("/admin/staff");
   revalidatePath("/notre-equipe");
   return member;
@@ -60,9 +55,7 @@ export async function updateStaffMember(id: string, data: Partial<StaffMemberInp
 
 export async function deleteStaffMember(id: string) {
   await checkAdmin();
-
-  await db.delete(schema.staffMembers).where(eq(schema.staffMembers.id, id));
-
+  await deleteStaffMemberDal(id);
   revalidatePath("/admin/staff");
   revalidatePath("/notre-equipe");
   return { success: true };

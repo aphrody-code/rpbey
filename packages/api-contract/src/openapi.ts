@@ -19,6 +19,17 @@ import {
   TournamentsQuerySchema,
 } from "./tournaments";
 import { StreamListResponseSchema, StreamQuerySchema } from "./stream";
+import {
+  AnimeListQuerySchema,
+  AnimeSearchQuerySchema,
+  AnimeSearchResponseSchema,
+  AnimeSeriesByGenerationResponseSchema,
+  AnimeSeriesDetailResponseSchema,
+  AnimeSeriesListResponseSchema,
+} from "./anime";
+import { ContentBlockListResponseSchema, ContentQuerySchema, StaffListResponseSchema } from "./cms";
+import { AnalyticsTrackInputSchema, AnalyticsTrackResponseSchema } from "./analytics";
+import { DeckQuerySchema, DeckResponseSchema } from "./decks";
 import { ErrorEnvelopeSchema, okEnvelope } from "./envelope";
 
 /**
@@ -162,6 +173,78 @@ const ROUTES: RouteDef[] = [
     tags: ["stream"],
     query: StreamQuerySchema,
     response: StreamListResponseSchema,
+  },
+  {
+    method: "get",
+    path: "/anime",
+    operationId: "listAnimeSeries",
+    summary:
+      "Séries d'anime Beyblade publiées (lecture publique), filtrables par génération et `featured`.",
+    tags: ["anime"],
+    query: AnimeListQuerySchema,
+    response: AnimeSeriesListResponseSchema,
+  },
+  {
+    method: "get",
+    path: "/anime/by-generation",
+    operationId: "listAnimeSeriesByGeneration",
+    summary: "Séries d'anime regroupées par génération (ORIGINAL / METAL / BURST / X).",
+    tags: ["anime"],
+    response: AnimeSeriesByGenerationResponseSchema,
+  },
+  {
+    method: "get",
+    path: "/anime/search",
+    operationId: "searchAnime",
+    summary: "Recherche de séries et épisodes d'anime publiés par texte libre.",
+    tags: ["anime"],
+    query: AnimeSearchQuerySchema,
+    response: AnimeSearchResponseSchema,
+  },
+  {
+    method: "get",
+    path: "/anime/{slug}",
+    operationId: "getAnimeSeries",
+    summary: "Détail d'une série d'anime par slug (épisodes publiés + sources actives).",
+    tags: ["anime"],
+    pathParams: ["slug"],
+    response: AnimeSeriesDetailResponseSchema,
+  },
+  {
+    method: "get",
+    path: "/cms/content",
+    operationId: "listContentBlocks",
+    summary: "Blocs de contenu éditorial (lecture publique) ; `?slug=` filtre sur un bloc précis.",
+    tags: ["cms"],
+    query: ContentQuerySchema,
+    response: ContentBlockListResponseSchema,
+  },
+  {
+    method: "get",
+    path: "/cms/staff",
+    operationId: "listStaffMembers",
+    summary: "Membres du staff actifs (page « notre équipe »).",
+    tags: ["cms"],
+    response: StaffListResponseSchema,
+  },
+  {
+    method: "get",
+    path: "/decks",
+    operationId: "getSharedDeck",
+    summary: "Lecture publique d'un deck partageable par identifiant (`?id=`), read-only.",
+    tags: ["decks"],
+    query: DeckQuerySchema,
+    response: DeckResponseSchema,
+  },
+  {
+    method: "post",
+    path: "/analytics",
+    operationId: "trackAnalyticsEvent",
+    summary:
+      "Ingestion publique anonyme d'un événement analytics (pageview / événement métier), best-effort.",
+    tags: ["analytics"],
+    body: AnalyticsTrackInputSchema,
+    response: AnalyticsTrackResponseSchema,
   },
 ];
 

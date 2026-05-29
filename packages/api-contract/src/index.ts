@@ -7,4 +7,8 @@ export * from "./users";
 export * from "./tournaments";
 export * from "./stream";
 export * from "./scrapers";
+export * from "./anime";
+export * from "./cms";
+export * from "./analytics";
+export * from "./decks";
 export * from "./openapi";

@@ -4,8 +4,8 @@ import { type Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getAnimeEpisode } from "@/server/actions/anime";
 import { getEpisodeProgress } from "@/server/actions/anime-progress";
+import { getEpisodeByNumber } from "@/server/dal/anime";
 import { EpisodePlayerSection } from "../../_components/EpisodePlayerSection";
 import { EpisodeSidebar } from "../../_components/EpisodeSidebar";
 
@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const num = Number.parseInt(episode, 10);
   if (Number.isNaN(num)) return { title: "Épisode introuvable | RPB" };
 
-  const data = await getAnimeEpisode(slug, num);
+  const data = await getEpisodeByNumber(slug, num);
   if (!data) return { title: "Épisode introuvable | RPB" };
 
   const title = `${data.series.titleFr || data.series.title} EP ${num} | RPB`;
@@ -62,7 +62,7 @@ export default async function EpisodePage({ params }: Props) {
   const num = Number.parseInt(episode, 10);
   if (Number.isNaN(num)) notFound();
 
-  const data = await getAnimeEpisode(slug, num);
+  const data = await getEpisodeByNumber(slug, num);
   if (!data) notFound();
 
   const { episode: ep, series, prev, next, allEpisodes } = data;

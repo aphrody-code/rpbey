@@ -2,24 +2,15 @@
 
 import { revalidatePath } from "next/cache";
 import { requireAdmin } from "@/lib/auth-utils";
-import { db, schema, eq } from "@/lib/db";
+import { getContentBlock, upsertContentBlock } from "@/server/dal/cms";
 
 export async function getContent(slug: string) {
-  const block = await db.query.contentBlocks.findFirst({
-    where: eq(schema.contentBlocks.slug, slug),
-  });
-  return block ?? null;
+  return getContentBlock(slug);
 }
 
 export async function upsertContent(slug: string, content: string, title?: string) {
   if (!(await requireAdmin())) throw new Error("Forbidden");
-  await db
-    .insert(schema.contentBlocks)
-    .values({ slug, content, title, type: "markdown" })
-    .onConflictDoUpdate({
-      target: schema.contentBlocks.slug,
-      set: { content, title, type: "markdown" },
-    });
+  await upsertContentBlock(slug, content, title);
   revalidatePath("/");
   revalidatePath(`/${slug}`);
   return { success: true };

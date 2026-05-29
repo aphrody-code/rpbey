@@ -4,8 +4,8 @@ import * as z from 'zod';
 
 import type { Client, Options as Options2, TDataShape } from './client';
 import { client } from './client.gen';
-import type { GetMetaData, GetMetaErrors, GetMetaResponses, GetPublicUserData, GetPublicUserErrors, GetPublicUserResponses, GetRankingsData, GetRankingsErrors, GetRankingsResponses, GetRecommendationsData, GetRecommendationsErrors, GetRecommendationsResponses, GetTournamentData, GetTournamentErrors, GetTournamentResponses, GetUserMatchesData, GetUserMatchesErrors, GetUserMatchesResponses, GlobalSearchData, GlobalSearchErrors, GlobalSearchResponses, ListPartsData, ListPartsErrors, ListPartsResponses, ListStreamVideosData, ListStreamVideosErrors, ListStreamVideosResponses, ListTournamentsData, ListTournamentsErrors, ListTournamentsResponses } from './types.gen';
-import { zGetMetaResponse, zGetPublicUserPath, zGetPublicUserResponse, zGetRankingsQuery, zGetRankingsResponse, zGetRecommendationsQuery, zGetRecommendationsResponse, zGetTournamentPath, zGetTournamentResponse, zGetUserMatchesPath, zGetUserMatchesQuery, zGetUserMatchesResponse, zGlobalSearchQuery, zGlobalSearchResponse, zListPartsQuery, zListPartsResponse, zListStreamVideosQuery, zListStreamVideosResponse, zListTournamentsQuery, zListTournamentsResponse } from './zod.gen';
+import type { GetAnimeSeriesData, GetAnimeSeriesErrors, GetAnimeSeriesResponses, GetMetaData, GetMetaErrors, GetMetaResponses, GetPublicUserData, GetPublicUserErrors, GetPublicUserResponses, GetRankingsData, GetRankingsErrors, GetRankingsResponses, GetRecommendationsData, GetRecommendationsErrors, GetRecommendationsResponses, GetSharedDeckData, GetSharedDeckErrors, GetSharedDeckResponses, GetTournamentData, GetTournamentErrors, GetTournamentResponses, GetUserMatchesData, GetUserMatchesErrors, GetUserMatchesResponses, GlobalSearchData, GlobalSearchErrors, GlobalSearchResponses, ListAnimeSeriesByGenerationData, ListAnimeSeriesByGenerationErrors, ListAnimeSeriesByGenerationResponses, ListAnimeSeriesData, ListAnimeSeriesErrors, ListAnimeSeriesResponses, ListContentBlocksData, ListContentBlocksErrors, ListContentBlocksResponses, ListPartsData, ListPartsErrors, ListPartsResponses, ListStaffMembersData, ListStaffMembersErrors, ListStaffMembersResponses, ListStreamVideosData, ListStreamVideosErrors, ListStreamVideosResponses, ListTournamentsData, ListTournamentsErrors, ListTournamentsResponses, SearchAnimeData, SearchAnimeErrors, SearchAnimeResponses, TrackAnalyticsEventData, TrackAnalyticsEventErrors, TrackAnalyticsEventResponses } from './types.gen';
+import { zGetAnimeSeriesPath, zGetAnimeSeriesResponse, zGetMetaResponse, zGetPublicUserPath, zGetPublicUserResponse, zGetRankingsQuery, zGetRankingsResponse, zGetRecommendationsQuery, zGetRecommendationsResponse, zGetSharedDeckQuery, zGetSharedDeckResponse, zGetTournamentPath, zGetTournamentResponse, zGetUserMatchesPath, zGetUserMatchesQuery, zGetUserMatchesResponse, zGlobalSearchQuery, zGlobalSearchResponse, zListAnimeSeriesByGenerationResponse, zListAnimeSeriesQuery, zListAnimeSeriesResponse, zListContentBlocksQuery, zListContentBlocksResponse, zListPartsQuery, zListPartsResponse, zListStaffMembersResponse, zListStreamVideosQuery, zListStreamVideosResponse, zListTournamentsQuery, zListTournamentsResponse, zSearchAnimeQuery, zSearchAnimeResponse, zTrackAnalyticsEventBody, zTrackAnalyticsEventResponse } from './zod.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean, TResponse = unknown> = Options2<TData, ThrowOnError, TResponse> & {
     /**
@@ -159,4 +159,120 @@ export const listStreamVideos = <ThrowOnError extends boolean = false>(options?:
     responseValidator: async (data) => await zListStreamVideosResponse.parseAsync(data),
     url: '/api/v1/stream',
     ...options
+});
+
+/**
+ * Séries d'anime Beyblade publiées (lecture publique), filtrables par génération et `featured`.
+ */
+export const listAnimeSeries = <ThrowOnError extends boolean = false>(options?: Options<ListAnimeSeriesData, ThrowOnError>) => (options?.client ?? client).get<ListAnimeSeriesResponses, ListAnimeSeriesErrors, ThrowOnError>({
+    requestValidator: async (data) => await z.object({
+        body: z.never().optional(),
+        path: z.never().optional(),
+        query: zListAnimeSeriesQuery.optional()
+    }).parseAsync(data),
+    responseValidator: async (data) => await zListAnimeSeriesResponse.parseAsync(data),
+    url: '/api/v1/anime',
+    ...options
+});
+
+/**
+ * Séries d'anime regroupées par génération (ORIGINAL / METAL / BURST / X).
+ */
+export const listAnimeSeriesByGeneration = <ThrowOnError extends boolean = false>(options?: Options<ListAnimeSeriesByGenerationData, ThrowOnError>) => (options?.client ?? client).get<ListAnimeSeriesByGenerationResponses, ListAnimeSeriesByGenerationErrors, ThrowOnError>({
+    requestValidator: async (data) => await z.object({
+        body: z.never().optional(),
+        path: z.never().optional(),
+        query: z.never().optional()
+    }).parseAsync(data),
+    responseValidator: async (data) => await zListAnimeSeriesByGenerationResponse.parseAsync(data),
+    url: '/api/v1/anime/by-generation',
+    ...options
+});
+
+/**
+ * Recherche de séries et épisodes d'anime publiés par texte libre.
+ */
+export const searchAnime = <ThrowOnError extends boolean = false>(options: Options<SearchAnimeData, ThrowOnError>) => (options.client ?? client).get<SearchAnimeResponses, SearchAnimeErrors, ThrowOnError>({
+    requestValidator: async (data) => await z.object({
+        body: z.never().optional(),
+        path: z.never().optional(),
+        query: zSearchAnimeQuery
+    }).parseAsync(data),
+    responseValidator: async (data) => await zSearchAnimeResponse.parseAsync(data),
+    url: '/api/v1/anime/search',
+    ...options
+});
+
+/**
+ * Détail d'une série d'anime par slug (épisodes publiés + sources actives).
+ */
+export const getAnimeSeries = <ThrowOnError extends boolean = false>(options: Options<GetAnimeSeriesData, ThrowOnError>) => (options.client ?? client).get<GetAnimeSeriesResponses, GetAnimeSeriesErrors, ThrowOnError>({
+    requestValidator: async (data) => await z.object({
+        body: z.never().optional(),
+        path: zGetAnimeSeriesPath,
+        query: z.never().optional()
+    }).parseAsync(data),
+    responseValidator: async (data) => await zGetAnimeSeriesResponse.parseAsync(data),
+    url: '/api/v1/anime/{slug}',
+    ...options
+});
+
+/**
+ * Blocs de contenu éditorial (lecture publique) ; `?slug=` filtre sur un bloc précis.
+ */
+export const listContentBlocks = <ThrowOnError extends boolean = false>(options?: Options<ListContentBlocksData, ThrowOnError>) => (options?.client ?? client).get<ListContentBlocksResponses, ListContentBlocksErrors, ThrowOnError>({
+    requestValidator: async (data) => await z.object({
+        body: z.never().optional(),
+        path: z.never().optional(),
+        query: zListContentBlocksQuery.optional()
+    }).parseAsync(data),
+    responseValidator: async (data) => await zListContentBlocksResponse.parseAsync(data),
+    url: '/api/v1/cms/content',
+    ...options
+});
+
+/**
+ * Membres du staff actifs (page « notre équipe »).
+ */
+export const listStaffMembers = <ThrowOnError extends boolean = false>(options?: Options<ListStaffMembersData, ThrowOnError>) => (options?.client ?? client).get<ListStaffMembersResponses, ListStaffMembersErrors, ThrowOnError>({
+    requestValidator: async (data) => await z.object({
+        body: z.never().optional(),
+        path: z.never().optional(),
+        query: z.never().optional()
+    }).parseAsync(data),
+    responseValidator: async (data) => await zListStaffMembersResponse.parseAsync(data),
+    url: '/api/v1/cms/staff',
+    ...options
+});
+
+/**
+ * Lecture publique d'un deck partageable par identifiant (`?id=`), read-only.
+ */
+export const getSharedDeck = <ThrowOnError extends boolean = false>(options: Options<GetSharedDeckData, ThrowOnError>) => (options.client ?? client).get<GetSharedDeckResponses, GetSharedDeckErrors, ThrowOnError>({
+    requestValidator: async (data) => await z.object({
+        body: z.never().optional(),
+        path: z.never().optional(),
+        query: zGetSharedDeckQuery
+    }).parseAsync(data),
+    responseValidator: async (data) => await zGetSharedDeckResponse.parseAsync(data),
+    url: '/api/v1/decks',
+    ...options
+});
+
+/**
+ * Ingestion publique anonyme d'un événement analytics (pageview / événement métier), best-effort.
+ */
+export const trackAnalyticsEvent = <ThrowOnError extends boolean = false>(options: Options<TrackAnalyticsEventData, ThrowOnError>) => (options.client ?? client).post<TrackAnalyticsEventResponses, TrackAnalyticsEventErrors, ThrowOnError>({
+    requestValidator: async (data) => await z.object({
+        body: zTrackAnalyticsEventBody,
+        path: z.never().optional(),
+        query: z.never().optional()
+    }).parseAsync(data),
+    responseValidator: async (data) => await zTrackAnalyticsEventResponse.parseAsync(data),
+    url: '/api/v1/analytics',
+    ...options,
+    headers: {
+        'Content-Type': 'application/json',
+        ...options.headers
+    }
 });

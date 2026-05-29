@@ -66,6 +66,27 @@ const ENFORCED = [
   // wave-2 : stream
   "app/api/v1/stream/",
   "server/dal/stream.ts",
+  // wave-3 : anime — routes publiques /api/v1/anime + DAL (seul puits DB du domaine).
+  // NB: actions/anime*, app/api/anime/progress (route authentifiée) et les pages
+  // (marketing)/anime restent NON enforced (transitivement couplées via @/lib/auth +
+  // client components appelant des server actions — seam owned par la lane auth).
+  "app/api/v1/anime/",
+  "server/dal/anime.ts",
+  // wave-3 : cms — lectures publiques /api/v1/cms + DAL + service meta (déjà db-free).
+  // NB: les mutations admin (content/staff/season/admin-link) restent en server actions
+  // DAL-backed à leur path legacy (requireAdmin couple @/lib/auth jusqu'à la migration auth).
+  "app/api/v1/cms/",
+  "server/dal/cms.ts",
+  "server/services/meta.ts",
+  // wave-3 : analytics — ingestion publique anonyme /api/v1/analytics + DAL.
+  // NB: api/analytics (beacon legacy) et actions/analytics.ts résolvent la session
+  // (@/lib/auth) → NON enforced ; leur import db direct a été retiré (passe par la DAL).
+  "app/api/v1/analytics/",
+  "server/dal/analytics.ts",
+  // wave-3 : decks — lecture publique /api/v1/decks + DAL. Les mutations (CRUD/activation)
+  // restent au path legacy /api/decks (session better-auth), DAL-backed mais NON enforced.
+  "app/api/v1/decks/",
+  "server/dal/decks.ts",
 ];
 
 const glob = new Glob("**/*.{ts,tsx}");
