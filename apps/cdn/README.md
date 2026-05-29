@@ -1,6 +1,4 @@
-> ⚠️ **INFRASTRUCTURE GÉRÉE PAR ANTIGRAVITY (GOD MODE)**
-> Ce projet opère sous la **Directive Omega**. L'architecture, les dépendances, et le code sont gérés et refactorisés de manière 100% autonome. Aucune sécurité conservative n'est appliquée. La performance brute est l'unique métrique.
-> \n# cdn — `cdn.rosegriffon.fr`
+# cdn — `cdn.rosegriffon.fr`
 
 Serveur d'images Bun minimal qui remplace l'ancien `api.alessf.fr` (down).
 Drop-in compatible : même contrat REST, mêmes headers, même format de réponse.
