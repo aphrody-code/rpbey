@@ -1,23 +1,20 @@
 #!/usr/bin/env bun
 /// <reference types="bun" />
 /**
- * Construit un catalogue `gacha.json` à partir d'un dump produit par
- * `scrape-channel.ts` (messages.jsonl + images/) et optimisé par
- * `optimize-images.ts` (images-opt/). Une entrée par image :
- *   { id, character, artist, image, original, format, url, messageId,
- *     attachmentId, postedAt, sourceFilename, content, needsReview }
+ * Construit le catalogue `gacha.json` depuis un dump scrape-channel
+ * (messages.jsonl + images/) optimisé par optimize-images.ts (images-opt/).
  *
- * - artist (dessinateur)   : l'auteur du message (signal fiable dans un salon WIP).
- * - character (personnage) : extrait heuristiquement du nom de fichier
- *     (`Tsubasa_card.png` -> "Tsubasa", `kyoya_batch_1_effect.png` -> "Kyoya",
- *      `AsutoYuma_comm.jpg` -> "Asuto Yuma"). `null` si non dérivable
- *      (`image.png`, `Sans_titre_…`, `IMG_1234.jpg`) -> `needsReview: true`.
- *      AUCUN nom inventé : on n'écrit que ce que le fichier dit clairement.
+ * Classification :
+ *   - artist (dessinateur) = auteur du message.
+ *   - character/rarity/series/kind/status = fusionnés depuis `gacha-overrides.json`
+ *     (analyse visuelle + contexte d'envoi, clé = attachmentId) quand présent ;
+ *     sinon character est déduit heuristiquement du nom de fichier (sans rien
+ *     inventer ; null + needsReview si indéterminable).
  *
  * Usage :
  *   bun scripts/build-gacha-json.ts --channel=<id>
- *   bun scripts/build-gacha-json.ts --dir=data/scrape/<id> --out=gacha.json
- *   bun scripts/build-gacha-json.ts --channel=<id> --all   # toutes les images, pas que les attachments image/*
+ *   bun scripts/build-gacha-json.ts --dir=data/scrape/<id> --overrides=gacha-overrides.json
+ *   bun scripts/build-gacha-json.ts --channel=<id> --all
  */
 import { resolve, join } from "node:path";
 
@@ -56,7 +53,6 @@ if (!(await Bun.file(msgPath).exists())) {
 
 const IMAGE_EXT = /\.(png|jpe?g|gif|webp|bmp|avif|tiff?|heic|heif)$/i;
 
-// Tokens de bruit à retirer du nom de fichier avant d'isoler le personnage.
 const NOISE = new Set([
   "card",
   "carte",
@@ -145,28 +141,23 @@ function titleCase(s: string): string {
     .map((w) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
     .join(" ");
 }
-
-/** Sépare le camelCase ("AsutoYuma" -> "Asuto Yuma") puis sur _ - espaces. */
 function tokenize(base: string): string[] {
-  const spaced = base
+  return base
     .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
     .replace(/[_\-.]+/g, " ")
     .replace(/\s+/g, " ")
-    .trim();
-  return spaced.split(" ").filter(Boolean);
+    .trim()
+    .split(" ")
+    .filter(Boolean);
 }
-
-/** Un token est-il un nom plausible (pas du bruit, pas un nombre/junk) ? */
 function looksLikeName(tok: string): boolean {
   const t = tok.toLowerCase();
   if (NOISE.has(t)) return false;
-  if (/\d/.test(tok)) return false; // contient un chiffre -> id/date/junk
-  if (tok.length < 3) return false; // f, m, v, fr, en…
-  if (!/[aeiouyàâäéèêëîïôöûü]/i.test(tok)) return false; // sans voyelle -> junk
+  if (/\d/.test(tok)) return false;
+  if (tok.length < 3) return false;
+  if (!/[aeiouyàâäéèêëîïôöûü]/i.test(tok)) return false;
   return true;
 }
-
-/** Déduit le nom de personnage depuis le filename, ou null. */
 function extractCharacter(filename: string): string | null {
   const base = filename.replace(IMAGE_EXT, "").replace(/\.[a-z0-9]+$/i, "");
   const toks = tokenize(base).filter(looksLikeName);
@@ -174,7 +165,6 @@ function extractCharacter(filename: string): string | null {
   return titleCase(toks.slice(0, 2).join(" "));
 }
 
-/** Nom de fichier optimisé correspondant (cf. optimize-images.ts). */
 function optimizedFor(scrapeFile: string): {
   path: string;
   format: "png" | "webp" | "other";
@@ -208,14 +198,26 @@ interface ScrapedMsg {
     contentType: string | null;
   }[];
 }
-
+type Kind = "card" | "illustration" | "template" | "portfolio" | "meme";
+interface Override {
+  character?: string | null;
+  series?: string;
+  rarity?: string;
+  kind?: Kind;
+  status?: string;
+  note?: string;
+}
 interface GachaEntry {
   id: string;
   character: string | null;
+  series: string | null;
+  rarity: string | null;
+  kind: Kind;
+  status: string | null;
   artist: string;
   artistId: string;
-  image: string; // version optimisée (images-opt/ — png lossless ou webp)
-  original: string; // brut scrapé (images/)
+  image: string;
+  original: string;
   format: "png" | "webp" | "other";
   url: string;
   messageId: string;
@@ -223,7 +225,19 @@ interface GachaEntry {
   postedAt: string;
   sourceFilename: string;
   content: string;
+  note: string | null;
   needsReview: boolean;
+}
+
+// Overrides curés (analyse visuelle + contexte), clé = attachmentId.
+const ovPath = args.get("overrides") ?? join(baseDir, "gacha-overrides.json");
+let overrides: Record<string, Override> = {};
+if (await Bun.file(ovPath).exists()) {
+  const raw = JSON.parse(await Bun.file(ovPath).text()) as Record<string, unknown>;
+  for (const [k, v] of Object.entries(raw)) {
+    if (!k.startsWith("_")) overrides[k] = v as Override;
+  }
+  log(`[gacha] overrides chargés : ${Object.keys(overrides).length} (${ovPath})`);
 }
 
 const lines = (await Bun.file(msgPath).text())
@@ -237,12 +251,18 @@ for (const m of lines) {
   for (const a of m.attachments ?? []) {
     const isImg = (a.contentType ?? "").startsWith("image/") || IMAGE_EXT.test(a.name ?? "");
     if (!ALL && !isImg) continue;
-    const character = extractCharacter(a.name ?? "");
     const scrapeFile = `${m.id}-${a.id}-${(a.name ?? "att").replace(/[^\w.-]+/g, "_").slice(0, 120)}`;
     const opt = optimizedFor(scrapeFile);
+    const ov = overrides[a.id];
+    const character =
+      ov && "character" in ov ? (ov.character ?? null) : extractCharacter(a.name ?? "");
     entries.push({
       id: "",
       character,
+      series: ov?.series ?? null,
+      rarity: ov?.rarity ?? null,
+      kind: ov?.kind ?? "card",
+      status: ov?.status ?? null,
       artist: m.author.name,
       artistId: m.author.id,
       image: opt.path,
@@ -254,15 +274,30 @@ for (const m of lines) {
       postedAt: m.createdAt,
       sourceFilename: a.name ?? "",
       content: (m.content ?? "").replace(/\s+/g, " ").trim().slice(0, 280),
-      needsReview: character === null,
+      note: ov?.note ?? null,
+      needsReview: ov ? false : character === null,
     });
   }
 }
 
-// Tri : personnages connus d'abord (alpha), puis dessinateur, puis date.
+const KIND_RANK: Record<Kind, number> = {
+  card: 0,
+  illustration: 1,
+  portfolio: 2,
+  template: 3,
+  meme: 4,
+};
+const RARITY_RANK: Record<string, number> = { LR: 0, SR: 1, R: 2, special: 3 };
+const rarityRank = (r: string | null) => (r && r in RARITY_RANK ? RARITY_RANK[r]! : 9);
+
+// Tri : cartes d'abord (par rareté LR>SR>R), puis personnage, dessinateur, date ;
+// le hors-bannière (illustration/portfolio/template/meme) ensuite.
 entries.sort((a, b) => {
-  if (!a.character !== !b.character) return a.character ? -1 : 1;
-  const c = (a.character ?? "").localeCompare(b.character ?? "");
+  if (KIND_RANK[a.kind] !== KIND_RANK[b.kind]) return KIND_RANK[a.kind] - KIND_RANK[b.kind];
+  if (a.kind === "card" && rarityRank(a.rarity) !== rarityRank(b.rarity)) {
+    return rarityRank(a.rarity) - rarityRank(b.rarity);
+  }
+  const c = (a.character ?? "zzz").localeCompare(b.character ?? "zzz");
   if (c !== 0) return c;
   const ar = a.artist.localeCompare(b.artist);
   if (ar !== 0) return ar;
@@ -275,17 +310,19 @@ entries.forEach((e, i) => {
 const outPath = join(baseDir, OUT_NAME);
 await Bun.write(outPath, `${JSON.stringify(entries, null, 2)}\n`);
 
-// Résumé + table de contrôle.
-const byChar = entries.filter((e) => e.character).length;
+const cards = entries.filter((e) => e.kind === "card");
 const review = entries.filter((e) => e.needsReview);
 const artists = [...new Set(entries.map((e) => e.artist))];
-log(`[gacha] ${entries.length} images classées -> ${outPath}`);
-log(`[gacha] personnage identifié : ${byChar}/${entries.length} — à revoir : ${review.length}`);
+log(`[gacha] ${entries.length} images -> ${outPath}`);
+log(
+  `[gacha] cartes : ${cards.length} · hors-bannière : ${entries.length - cards.length} · à revoir : ${review.length}`,
+);
 log(`[gacha] dessinateurs (${artists.length}) : ${artists.join(", ")}`);
 log("[gacha] ─── aperçu ───");
 for (const e of entries) {
+  const tag = e.kind === "card" ? (e.rarity ?? "?") : e.kind;
   log(
-    `  ${e.id}  ${(e.character ?? "??? (review)").padEnd(18)}  par ${e.artist.padEnd(16)}  ${e.sourceFilename}`,
+    `  ${e.id}  [${tag.padEnd(11)}] ${(e.character ?? "??? (review)").padEnd(26)} ${(e.status ?? "").padEnd(7)} par ${e.artist}`,
   );
 }
 process.exit(0);
