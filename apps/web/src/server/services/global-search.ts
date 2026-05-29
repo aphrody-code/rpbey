@@ -283,8 +283,21 @@ export async function buildGlobalSearchIndex(): Promise<GlobalSearchItem[]> {
       event: string;
     }
   >();
+  // Le dump Wayback contient ~15-20 % de name/player bruités (URLs challonge,
+  // "Final Stage - Deck Format", "Tournament Page: …") issus du parse best-effort.
+  // On les écarte de l'affichage (ligne "Top: …") sans jeter le combo lui-même.
+  const cleanMeta = (s: string | undefined): string => {
+    const v = (s ?? "").trim();
+    if (!v || v.length > 80) return "";
+    if (/https?:|challonge|\bwrote:|tournament page|^final stage\b|format$|^round\b/i.test(v)) {
+      return "";
+    }
+    return v;
+  };
   for (const ev of combosData?.events ?? []) {
+    const evName = cleanMeta(ev.name);
     for (const pl of ev.placements ?? []) {
+      const player = cleanMeta(pl.player);
       for (const c of pl.combos ?? []) {
         const blade = (c.blade ?? "").trim();
         if (!blade) continue;
@@ -298,8 +311,8 @@ export async function buildGlobalSearchIndex(): Promise<GlobalSearchItem[]> {
           ex.count++;
           if (placement < ex.best) {
             ex.best = placement;
-            ex.player = pl.player ?? ex.player;
-            ex.event = ev.name ?? ex.event;
+            ex.player = player || ex.player;
+            ex.event = evName || ex.event;
           }
         } else {
           comboMap.set(key, {
@@ -307,8 +320,8 @@ export async function buildGlobalSearchIndex(): Promise<GlobalSearchItem[]> {
             blade,
             count: 1,
             best: placement,
-            player: pl.player ?? "",
-            event: ev.name ?? "",
+            player,
+            event: evName,
           });
         }
       }
