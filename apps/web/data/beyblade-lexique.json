@@ -1,0 +1,131 @@
+{
+  "generatedAt": "2026-05-29T05:09:28.636Z",
+  "totalTermsCount": 15,
+  "terms": [
+    {
+      "term": "X-Celerator Rail",
+      "definition": "The special gear-toothed rail running along the stadium wall in Beyblade X that allows Beyblades to engage in Extreme Dash maneuvers.",
+      "category": "Stadium / Equipment",
+      "mentionsCount": 0,
+      "popularityTier": "Low",
+      "examplesFromReddit": []
+    },
+    {
+      "term": "Extreme Dash",
+      "definition": "The defining movement mechanic of Beyblade X, where the gear on the Bit catches on the X-Celerator Rail to accelerate to extreme speeds.",
+      "category": "Mechanics",
+      "mentionsCount": 0,
+      "popularityTier": "Low",
+      "examplesFromReddit": []
+    },
+    {
+      "term": "Extreme Finish",
+      "definition": "A win condition worth 3 points, achieved by knocking the opponent's Beyblade out through the Extreme Zone (center exit).",
+      "category": "Match Rules",
+      "mentionsCount": 0,
+      "popularityTier": "Low",
+      "examplesFromReddit": []
+    },
+    {
+      "term": "Over Finish",
+      "definition": "A win condition worth 2 points, achieved by knocking the opponent's Beyblade into one of the side pockets (Over Zones).",
+      "category": "Match Rules",
+      "mentionsCount": 0,
+      "popularityTier": "Low",
+      "examplesFromReddit": []
+    },
+    {
+      "term": "Burst Finish",
+      "definition": "A win condition worth 2 points, achieved by causing the opponent's Beyblade to burst (separate into Blade, Ratchet, and Bit) during battle.",
+      "category": "Match Rules",
+      "mentionsCount": 0,
+      "popularityTier": "Low",
+      "examplesFromReddit": []
+    },
+    {
+      "term": "Spin Finish",
+      "definition": "A win condition worth 1 point, achieved by out-spinning the opponent's Beyblade (having the last spinning Beyblade).",
+      "category": "Match Rules",
+      "mentionsCount": 0,
+      "popularityTier": "Low",
+      "examplesFromReddit": []
+    },
+    {
+      "term": "Blade",
+      "definition": "The top metal layer of a Beyblade X, responsible for making contact and providing attack, defense, or stamina performance.",
+      "category": "Components",
+      "mentionsCount": 0,
+      "popularityTier": "Low",
+      "examplesFromReddit": []
+    },
+    {
+      "term": "Ratchet",
+      "definition": "The middle layer of a Beyblade X that determines its height (e.g. 60 or 80) and has protrusions that can cause bursts.",
+      "category": "Components",
+      "mentionsCount": 0,
+      "popularityTier": "Low",
+      "examplesFromReddit": []
+    },
+    {
+      "term": "Bit",
+      "definition": "The bottom tip component of a Beyblade X, determining movement behavior (e.g., Ball, Flat, Needle) and burst resistance.",
+      "category": "Components",
+      "mentionsCount": 0,
+      "popularityTier": "Low",
+      "examplesFromReddit": []
+    },
+    {
+      "term": "Launcher Grip",
+      "definition": "An accessory that attaches to a string or ripcord launcher, providing a more stable and powerful launching hold.",
+      "category": "Accessories",
+      "mentionsCount": 0,
+      "popularityTier": "Low",
+      "examplesFromReddit": []
+    },
+    {
+      "term": "String Launcher",
+      "definition": "A launcher built with a pull-string and recoil spring system, preferred by many players for ease of use.",
+      "category": "Accessories",
+      "mentionsCount": 0,
+      "popularityTier": "Low",
+      "examplesFromReddit": []
+    },
+    {
+      "term": "Deck",
+      "definition": "A set of three distinct Beyblades that a blader chooses for competitive tournament play under WBO deck rules.",
+      "category": "Competitive",
+      "mentionsCount": 1,
+      "popularityTier": "Low",
+      "examplesFromReddit": [
+        "How’s my first deck looking?"
+      ]
+    },
+    {
+      "term": "Gimmick",
+      "definition": "A special design feature of a Beyblade parts, like rubber blades, free-spinning rings, or unique weight distribution.",
+      "category": "General Slang",
+      "mentionsCount": 0,
+      "popularityTier": "Low",
+      "examplesFromReddit": []
+    },
+    {
+      "term": "Hasbro",
+      "definition": "The multinational company distributing and manufacturing the western releases of Beyblade X, featuring some localized naming.",
+      "category": "Brands",
+      "mentionsCount": 2,
+      "popularityTier": "Medium",
+      "examplesFromReddit": [
+        "Hasbro is cooking RAHH 🗣️🔥",
+        "New Hasbro release spotted"
+      ]
+    },
+    {
+      "term": "Takara Tomy",
+      "definition": "The original creator and Japanese manufacturer of Beyblade X, known for releasing the products first.",
+      "category": "Brands",
+      "mentionsCount": 0,
+      "popularityTier": "Low",
+      "examplesFromReddit": []
+    }
+  ]
+}

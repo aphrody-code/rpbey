@@ -271,6 +271,22 @@ export async function getRecommendations(
     }
   }
 
+  // Load Reddit Hype Data if available
+  let redditHypeScores: Record<string, number> = {};
+  try {
+    const fs = require("fs");
+    const path = require("path");
+    const hypePath = path.join(process.cwd(), "apps/web/data/reddit-hype.json");
+    if (fs.existsSync(hypePath)) {
+      const hypeReport = JSON.parse(fs.readFileSync(hypePath, "utf-8"));
+      if (hypeReport && hypeReport.hypeScores) {
+        redditHypeScores = hypeReport.hypeScores;
+      }
+    }
+  } catch (e) {
+    console.warn("Failed to load reddit-hype.json, using defaults.", e);
+  }
+
   // 4. Calculate Scores for Each Product Group
   const now = new Date("2026-05-29T00:00:00Z").getTime();
   const ONE_YEAR_MS = 365 * 24 * 60 * 60 * 1000;
@@ -407,7 +423,16 @@ export async function getRecommendations(
       if (demand > 1.0) demand = 1.0;
     }
 
-    const hypeScore = 0.4 * newness + 0.4 * popularity + 0.2 * demand;
+    // Blend Reddit Hype Score if available (weight: 25% Reddit, 30% newness, 30% popularity/shop count, 15% demand)
+    let redditScore = 0.5;
+    if (matchedDbProduct && matchedDbProduct.code) {
+      const code = matchedDbProduct.code.toUpperCase();
+      if (redditHypeScores[code] !== undefined) {
+        redditScore = redditHypeScores[code];
+      }
+    }
+
+    const hypeScore = 0.3 * newness + 0.3 * popularity + 0.15 * demand + 0.25 * redditScore;
 
     // E. Calculate Raw Price Efficiency Ratio
     const cheapestPrice = group.cheapestEur ?? 0;
