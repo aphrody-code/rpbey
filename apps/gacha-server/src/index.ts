@@ -21,9 +21,19 @@ import { mountDiscordToken } from "./discord-token";
 import { mountRest } from "./rest";
 import { GachaRoom } from "./rooms/GachaRoom";
 
-// Secret JWT pour l'auth de la Room (Discord Activity).
-JWT.settings.secret =
-  process.env.JWT_SECRET ?? process.env.AUTH_SECRET ?? "gacha-dev-secret-change-me";
+// Secret JWT pour l'auth de la Room (Discord Activity). Partage le secret de
+// l'écosystème (better-auth) : `BETTER_AUTH_SECRET` (clé canonique du bot/web).
+const jwtSecret =
+  process.env.JWT_SECRET ??
+  process.env.AUTH_SECRET ??
+  process.env.BETTER_AUTH_SECRET ??
+  "gacha-dev-secret-change-me";
+JWT.settings.secret = jwtSecret;
+if (jwtSecret === "gacha-dev-secret-change-me" && process.env.NODE_ENV === "production") {
+  process.stderr.write(
+    "[gacha-server] ⚠️  JWT secret = fallback dev en PRODUCTION — pose BETTER_AUTH_SECRET (JWT Colyseus forgeable sinon).\n",
+  );
+}
 
 // Restreint le CORS de Colyseus (permissif par défaut : reflète toute origine).
 configureCors();
