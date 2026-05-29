@@ -1,6 +1,14 @@
 "use client";
 
-import { CalendarMonth, PlayArrow, Replay, Search, Theaters, Translate } from "@mui/icons-material";
+import {
+  CalendarMonth,
+  PhotoLibrary,
+  PlayArrow,
+  Replay,
+  Search,
+  Theaters,
+  Translate,
+} from "@mui/icons-material";
 import { Box, Button, Chip, InputAdornment, TextField, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
@@ -427,6 +435,28 @@ export function SeriesDetail({ series }: { series: SeriesData }) {
                 </Button>
               )
             )}
+            <Button
+              component={Link}
+              href={`/anime/${series.slug}/galerie`}
+              variant="outlined"
+              aria-label="Galerie d'images"
+              sx={{
+                borderColor: "rgba(255,255,255,0.3)",
+                color: "white",
+                borderRadius: 1.5,
+                py: 1.4,
+                px: 2,
+                minWidth: 0,
+                minHeight: 48,
+                flexShrink: 0,
+                "&:hover": {
+                  borderColor: "rgba(255,255,255,0.5)",
+                  bgcolor: "rgba(255,255,255,0.05)",
+                },
+              }}
+            >
+              <PhotoLibrary fontSize="small" />
+            </Button>
           </Box>
         </Box>
 
@@ -671,6 +701,29 @@ export function SeriesDetail({ series }: { series: SeriesData }) {
                   Depuis le début
                 </Button>
               )}
+              <Button
+                component={Link}
+                href={`/anime/${series.slug}/galerie`}
+                variant="outlined"
+                size="large"
+                startIcon={<PhotoLibrary />}
+                sx={{
+                  borderColor: "rgba(255,255,255,0.2)",
+                  color: "rgba(255,255,255,0.7)",
+                  fontWeight: 600,
+                  borderRadius: 2,
+                  px: 3,
+                  py: 1.2,
+                  textTransform: "none",
+                  fontSize: "0.85rem",
+                  "&:hover": {
+                    borderColor: "rgba(255,255,255,0.4)",
+                    bgcolor: "rgba(255,255,255,0.05)",
+                  },
+                }}
+              >
+                Galerie
+              </Button>
             </Box>
           </Box>
         </Box>

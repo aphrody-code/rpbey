@@ -10,7 +10,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import Link from "next/link";
+import Link from "@/components/ui/NextLink";
 import { QuickActions } from "@/components/admin/QuickActions";
 import { StatsCharts } from "@/components/admin/StatsCharts";
 import { FadeIn } from "@/components/ui/FadeIn";

@@ -1,6 +1,6 @@
 import { GitHub as GitHubIcon, X as XIcon } from "@mui/icons-material";
 import { Box, Container, IconButton, Stack, Typography } from "@mui/material";
-import Link from "next/link";
+import Link from "@/components/ui/NextLink";
 
 export function Footer() {
   return (
