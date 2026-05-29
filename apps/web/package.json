@@ -76,7 +76,6 @@
 		"lucide-react": "1.8.0",
 		"match-sorter": "^8.2.0",
 		"matter-js": "^0.20.0",
-		"mui-tiptap": "^1.29.0",
 		"next": "catalog:",
 		"nuqs": "^2.8.9",
 		"postgres": "^3.4.9",
