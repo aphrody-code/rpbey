@@ -1,0 +1,3350 @@
+{
+  "generatedAt": "2026-05-29T07:28:49.431Z",
+  "count": 254,
+  "byCategory": {
+    "community": 5,
+    "database": 9,
+    "marketplace": 102,
+    "meta": 1,
+    "news": 5,
+    "official": 11,
+    "shop": 114,
+    "social": 2,
+    "tournament": 3,
+    "wiki": 2
+  },
+  "sites": [
+    {
+      "name": "Disboard (Beyblade servers)",
+      "url": "https://disboard.org/en/servers/tag/beyblade",
+      "domain": "disboard.org",
+      "category": "community",
+      "region": "INT",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Elite Fourum",
+      "url": "https://www.elitefourum.com",
+      "domain": "elitefourum.com",
+      "category": "community",
+      "region": "INT",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "r/BeybladeX (Reddit)",
+      "url": "https://www.reddit.com/r/BeybladeX/",
+      "domain": "reddit.com",
+      "category": "community",
+      "region": "INT",
+      "lang": "en",
+      "sources": [
+        "rpbey"
+      ]
+    },
+    {
+      "name": "WBO Discord",
+      "url": "https://discord.com/invite/world-beyblade-organization-620289759171969096",
+      "domain": "discord.com",
+      "category": "community",
+      "region": "INT",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "World Beyblade Organization",
+      "url": "https://worldbeyblade.org",
+      "domain": "worldbeyblade.org",
+      "category": "community",
+      "region": "INT",
+      "lang": "en",
+      "sources": [
+        "rpbey"
+      ]
+    },
+    {
+      "name": "BBX Deck Builder",
+      "url": "https://www.bbxdeckbuilder.com",
+      "domain": "bbxdeckbuilder.com",
+      "category": "database",
+      "region": "INT",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Beyblade Planner",
+      "url": "https://beybladeplanner.com",
+      "domain": "beybladeplanner.com",
+      "category": "database",
+      "region": "INT",
+      "lang": "en",
+      "sources": [
+        "rpbey"
+      ]
+    },
+    {
+      "name": "Beyblade X Database (beybxdb)",
+      "url": "https://www.beybxdb.com",
+      "domain": "beybxdb.com",
+      "category": "database",
+      "region": "INT",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Beyblade X Stats Checker",
+      "url": "https://beyblade-x-stats.vercel.app",
+      "domain": "beyblade-x-stats.vercel.app",
+      "category": "database",
+      "region": "INT",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "BeyBrew (deck builder)",
+      "url": "https://beybladebrew.com",
+      "domain": "beybladebrew.com",
+      "category": "database",
+      "region": "INT",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "BeyBuilder X",
+      "url": "https://fabelavalon.github.io/BeyBuilderX/",
+      "domain": "fabelavalon.github.io",
+      "category": "database",
+      "region": "INT",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "BeyXTool",
+      "url": "https://beyxtool.pages.dev",
+      "domain": "beyxtool.pages.dev",
+      "category": "database",
+      "region": "INT",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Midwest Beyblade (Combo Creator)",
+      "url": "https://app.midwestbeyblade.com",
+      "domain": "midwestbeyblade.com",
+      "category": "database",
+      "region": "US",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "TierMaker (Beyblade X)",
+      "url": "https://tiermaker.com/categories/random/beyblade-x-releases--16060292",
+      "domain": "tiermaker.com",
+      "category": "database",
+      "region": "INT",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "11st (11번가)",
+      "url": "https://www.11st.co.kr",
+      "domain": "11st.co.kr",
+      "category": "marketplace",
+      "region": "KR",
+      "type": "marketplace",
+      "lang": "ko",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "AEON Retail",
+      "url": "https://aeonretail.com",
+      "domain": "aeonretail.com",
+      "category": "marketplace",
+      "region": "JP",
+      "type": "retailer",
+      "lang": "ja",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "AliExpress",
+      "url": "https://www.aliexpress.com/w/wholesale-beyblade-x.html",
+      "domain": "aliexpress.com",
+      "category": "marketplace",
+      "region": "INT",
+      "type": "marketplace",
+      "platform": "link-only",
+      "currency": "USD",
+      "productCount": 0,
+      "sources": [
+        "aphrody-search",
+        "websearch"
+      ]
+    },
+    {
+      "name": "AliExpress France",
+      "url": "https://fr.aliexpress.com/w/wholesale-toupie-beyblade.html",
+      "domain": "fr.aliexpress.com",
+      "category": "marketplace",
+      "region": "INT",
+      "type": "marketplace",
+      "platform": "link-only",
+      "currency": "USD",
+      "productCount": 0,
+      "sources": [
+        "websearch"
+      ]
+    },
+    {
+      "name": "Allegro",
+      "url": "https://allegro.pl",
+      "domain": "allegro.pl",
+      "category": "marketplace",
+      "region": "PL",
+      "type": "marketplace",
+      "lang": "pl",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Amazon Australia",
+      "url": "https://www.amazon.com.au/beyblade-x/s?k=beyblade+x",
+      "domain": "amazon.com.au",
+      "category": "marketplace",
+      "region": "INT",
+      "type": "marketplace",
+      "platform": "link-only",
+      "currency": "USD",
+      "productCount": 0,
+      "sources": [
+        "aphrody-search"
+      ]
+    },
+    {
+      "name": "Amazon Belgique",
+      "url": "https://www.amazon.com.be/toupie-beyblade/s?k=toupie+beyblade",
+      "domain": "amazon.com.be",
+      "category": "marketplace",
+      "region": "BE",
+      "type": "marketplace",
+      "platform": "link-only",
+      "currency": "EUR",
+      "productCount": 0,
+      "sources": [
+        "websearch"
+      ]
+    },
+    {
+      "name": "Amazon Canada",
+      "url": "https://www.amazon.ca/beyblade-x/s?k=beyblade+x",
+      "domain": "amazon.ca",
+      "category": "marketplace",
+      "region": "INT",
+      "type": "marketplace",
+      "platform": "link-only",
+      "currency": "USD",
+      "productCount": 0,
+      "sources": [
+        "aphrody-search"
+      ]
+    },
+    {
+      "name": "Amazon Deutschland",
+      "url": "https://www.amazon.de/-/en/beyblade-x/s?k=beyblade+x",
+      "domain": "amazon.de",
+      "category": "marketplace",
+      "region": "EU",
+      "type": "marketplace",
+      "platform": "link-only",
+      "currency": "EUR",
+      "productCount": 0,
+      "sources": [
+        "aphrody-search",
+        "websearch"
+      ]
+    },
+    {
+      "name": "Amazon España",
+      "url": "https://www.amazon.es/s?k=beyblade+x",
+      "domain": "amazon.es",
+      "category": "marketplace",
+      "region": "EU",
+      "type": "marketplace",
+      "platform": "link-only",
+      "currency": "EUR",
+      "productCount": 0,
+      "sources": [
+        "aphrody-search"
+      ]
+    },
+    {
+      "name": "Amazon France",
+      "url": "https://www.amazon.fr/beyblade-x/s?k=beyblade+x",
+      "domain": "amazon.fr",
+      "category": "marketplace",
+      "region": "FR",
+      "type": "marketplace",
+      "platform": "link-only",
+      "currency": "EUR",
+      "productCount": 0,
+      "sources": [
+        "aphrody-search",
+        "bxc",
+        "websearch"
+      ]
+    },
+    {
+      "name": "Amazon Italia",
+      "url": "https://www.amazon.it/s?k=beyblade+x",
+      "domain": "amazon.it",
+      "category": "marketplace",
+      "region": "EU",
+      "type": "marketplace",
+      "platform": "link-only",
+      "currency": "EUR",
+      "productCount": 0,
+      "sources": [
+        "aphrody-search"
+      ]
+    },
+    {
+      "name": "Amazon Nederland",
+      "url": "https://www.amazon.nl/s?k=beyblade+x",
+      "domain": "amazon.nl",
+      "category": "marketplace",
+      "region": "EU",
+      "type": "marketplace",
+      "platform": "link-only",
+      "currency": "EUR",
+      "productCount": 0,
+      "sources": [
+        "aphrody-search"
+      ]
+    },
+    {
+      "name": "Amazon UK",
+      "url": "https://www.amazon.co.uk/beyblade-x/s?k=beyblade+x",
+      "domain": "amazon.co.uk",
+      "category": "marketplace",
+      "region": "UK",
+      "type": "marketplace",
+      "platform": "link-only",
+      "currency": "GBP",
+      "productCount": 0,
+      "sources": [
+        "aphrody-search",
+        "bxc",
+        "websearch"
+      ]
+    },
+    {
+      "name": "Amazon USA",
+      "url": "https://www.amazon.com/beyblade-x/s?k=beyblade+x",
+      "domain": "amazon.com",
+      "category": "marketplace",
+      "region": "US",
+      "type": "marketplace",
+      "platform": "link-only",
+      "currency": "USD",
+      "productCount": 0,
+      "sources": [
+        "aphrody-search",
+        "bxc",
+        "websearch"
+      ]
+    },
+    {
+      "name": "AmiAmi",
+      "url": "https://www.amiami.com/eng/",
+      "domain": "amiami.com",
+      "category": "marketplace",
+      "region": "JP",
+      "type": "import",
+      "platform": "link-only",
+      "currency": "JPY",
+      "productCount": 0,
+      "sources": [
+        "aphrody-search",
+        "websearch"
+      ]
+    },
+    {
+      "name": "Auction (KR)",
+      "url": "https://www.auction.co.kr",
+      "domain": "auction.co.kr",
+      "category": "marketplace",
+      "region": "KR",
+      "type": "marketplace",
+      "lang": "ko",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Beslist BE",
+      "url": "https://www.beslist.be",
+      "domain": "beslist.be",
+      "category": "marketplace",
+      "region": "BE",
+      "type": "comparator",
+      "lang": "nl",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "BEY Kingdom (PokeNinJapan)",
+      "url": "https://beyblade-kingdom.com/",
+      "domain": "beyblade-kingdom.com",
+      "category": "marketplace",
+      "region": "JP",
+      "type": "import",
+      "platform": "shopify",
+      "currency": "USD",
+      "productCount": 120,
+      "sources": [
+        "aphrody-search",
+        "bxc",
+        "websearch"
+      ]
+    },
+    {
+      "name": "Billiger.de",
+      "url": "https://www.billiger.de",
+      "domain": "billiger.de",
+      "category": "marketplace",
+      "region": "DE",
+      "type": "comparator",
+      "lang": "de",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Blackship (forwarder)",
+      "url": "https://blackship.me",
+      "domain": "blackship.me",
+      "category": "marketplace",
+      "region": "JP",
+      "type": "import",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Bol.com",
+      "url": "https://www.bol.com/be/nl/p/beyblade-x-xtreme-battle-set/9300000179134596/",
+      "domain": "bol.com",
+      "category": "marketplace",
+      "region": "EU",
+      "type": "marketplace",
+      "platform": "link-only",
+      "currency": "EUR",
+      "productCount": 0,
+      "sources": [
+        "aphrody-search"
+      ]
+    },
+    {
+      "name": "Buy&Ship (proxy)",
+      "url": "https://www.buyandship.com.sg",
+      "domain": "buyandship.com.sg",
+      "category": "marketplace",
+      "region": "SG",
+      "type": "import",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Buyee",
+      "url": "https://buyee.jp/item/search/category/2084041894?lang=en",
+      "domain": "buyee.jp",
+      "category": "marketplace",
+      "region": "JP",
+      "type": "import",
+      "platform": "link-only",
+      "currency": "JPY",
+      "productCount": 0,
+      "sources": [
+        "aphrody-search"
+      ]
+    },
+    {
+      "name": "Cdiscount",
+      "url": "https://www.cdiscount.com/juniors/r-toupie+beyblade+x.html",
+      "domain": "cdiscount.com",
+      "category": "marketplace",
+      "region": "FR",
+      "type": "marketplace",
+      "platform": "link-only",
+      "currency": "EUR",
+      "productCount": 0,
+      "sources": [
+        "aphrody-search",
+        "websearch"
+      ]
+    },
+    {
+      "name": "Ceneo",
+      "url": "https://www.ceneo.pl",
+      "domain": "ceneo.pl",
+      "category": "marketplace",
+      "region": "PL",
+      "type": "comparator",
+      "lang": "pl",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Coupang",
+      "url": "https://www.coupang.com",
+      "domain": "coupang.com",
+      "category": "marketplace",
+      "region": "KR",
+      "type": "marketplace",
+      "lang": "ko",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Detsky Mir (Детский мир)",
+      "url": "https://www.detmir.ru",
+      "domain": "detmir.ru",
+      "category": "marketplace",
+      "region": "RU",
+      "type": "retailer",
+      "lang": "ru",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Discovery Japan",
+      "url": "https://www.discovery-japan.me",
+      "domain": "discovery-japan.me",
+      "category": "marketplace",
+      "region": "JP",
+      "type": "import",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Doorzo (proxy)",
+      "url": "https://www.doorzo.com",
+      "domain": "doorzo.com",
+      "category": "marketplace",
+      "region": "JP",
+      "type": "import",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Drim",
+      "url": "https://www.drim.es",
+      "domain": "drim.es",
+      "category": "marketplace",
+      "region": "ES",
+      "type": "retailer",
+      "lang": "es",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "EB Games Canada",
+      "url": "https://www.ebgames.ca",
+      "domain": "ebgames.ca",
+      "category": "marketplace",
+      "region": "CA",
+      "type": "retailer",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "eBay",
+      "url": "https://www.ebay.com/sch/i.html?_nkw=beyblade+x",
+      "domain": "ebay.com",
+      "category": "marketplace",
+      "region": "US",
+      "type": "marketplace",
+      "platform": "link-only",
+      "currency": "USD",
+      "productCount": 0,
+      "sources": [
+        "aphrody-search",
+        "websearch"
+      ]
+    },
+    {
+      "name": "eBay Deutschland",
+      "url": "https://www.ebay.de/shop/beyblades-x?_nkw=beyblades+x",
+      "domain": "ebay.de",
+      "category": "marketplace",
+      "region": "EU",
+      "type": "marketplace",
+      "platform": "link-only",
+      "currency": "EUR",
+      "productCount": 0,
+      "sources": [
+        "websearch"
+      ]
+    },
+    {
+      "name": "eBay UK",
+      "url": "https://www.ebay.co.uk/shop/beyblade-x?_nkw=beyblade+x",
+      "domain": "ebay.co.uk",
+      "category": "marketplace",
+      "region": "UK",
+      "type": "marketplace",
+      "platform": "link-only",
+      "currency": "GBP",
+      "productCount": 0,
+      "sources": [
+        "aphrody-search",
+        "bxc",
+        "websearch"
+      ]
+    },
+    {
+      "name": "Edion",
+      "url": "https://www.edion.com",
+      "domain": "edion.com",
+      "category": "marketplace",
+      "region": "JP",
+      "type": "retailer",
+      "lang": "ja",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "eeo Store",
+      "url": "https://eeo.today",
+      "domain": "eeo.today",
+      "category": "marketplace",
+      "region": "JP",
+      "type": "retailer",
+      "lang": "ja",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Empik",
+      "url": "https://www.empik.com",
+      "domain": "empik.com",
+      "category": "marketplace",
+      "region": "PL",
+      "type": "retailer",
+      "lang": "pl",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Entertainment Earth",
+      "url": "https://www.entertainmentearth.com",
+      "domain": "entertainmentearth.com",
+      "category": "marketplace",
+      "region": "US",
+      "type": "retailer",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Etsy",
+      "url": "https://www.etsy.com/market/custom_beyblade_x_launcher",
+      "domain": "etsy.com",
+      "category": "marketplace",
+      "region": "INT",
+      "type": "marketplace",
+      "platform": "link-only",
+      "currency": "USD",
+      "productCount": 0,
+      "sources": [
+        "aphrody-search"
+      ]
+    },
+    {
+      "name": "Galaxus NL",
+      "url": "https://www.galaxus.nl",
+      "domain": "galaxus.nl",
+      "category": "marketplace",
+      "region": "NL",
+      "type": "retailer",
+      "lang": "nl",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Gmarket",
+      "url": "https://www.gmarket.co.kr",
+      "domain": "gmarket.co.kr",
+      "category": "marketplace",
+      "region": "KR",
+      "type": "marketplace",
+      "lang": "ko",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Goody-Japan",
+      "url": "https://www.goody-japan.com/en",
+      "domain": "goody-japan.com",
+      "category": "marketplace",
+      "region": "JP",
+      "type": "import",
+      "platform": "link-only",
+      "currency": "JPY",
+      "productCount": 0,
+      "sources": [
+        "aphrody-search"
+      ]
+    },
+    {
+      "name": "HEB México",
+      "url": "https://www.heb.com.mx",
+      "domain": "heb.com.mx",
+      "category": "marketplace",
+      "region": "MX",
+      "type": "retailer",
+      "lang": "es",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Hepsiburada",
+      "url": "https://www.hepsiburada.com",
+      "domain": "hepsiburada.com",
+      "category": "marketplace",
+      "region": "TR",
+      "type": "marketplace",
+      "lang": "tr",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Hobby Search",
+      "url": "https://www.1999.co.jp",
+      "domain": "1999.co.jp",
+      "category": "marketplace",
+      "region": "JP",
+      "type": "import",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "HobbyLink Japan",
+      "url": "https://www.hlj.com/",
+      "domain": "hlj.com",
+      "category": "marketplace",
+      "region": "JP",
+      "type": "import",
+      "platform": "link-only",
+      "currency": "JPY",
+      "productCount": 0,
+      "sources": [
+        "aphrody-search",
+        "websearch"
+      ]
+    },
+    {
+      "name": "Idealo",
+      "url": "https://www.idealo.de/",
+      "domain": "idealo.de",
+      "category": "marketplace",
+      "region": "EU",
+      "type": "marketplace",
+      "platform": "link-only",
+      "currency": "EUR",
+      "productCount": 0,
+      "sources": [
+        "aphrody-search"
+      ]
+    },
+    {
+      "name": "Itsuki Japan",
+      "url": "https://itsukijapan.com/collections/beyblade-x-takara-tomy",
+      "domain": "itsukijapan.com",
+      "category": "marketplace",
+      "region": "JP",
+      "type": "import",
+      "platform": "shopify",
+      "currency": "USD",
+      "productCount": 53,
+      "sources": [
+        "aphrody-search"
+      ]
+    },
+    {
+      "name": "Japan Rabbit (proxy)",
+      "url": "https://www.japanrabbit.com",
+      "domain": "japanrabbit.com",
+      "category": "marketplace",
+      "region": "JP",
+      "type": "import",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Japanzon",
+      "url": "https://www.japanzon.com/en/beyblade/",
+      "domain": "japanzon.com",
+      "category": "marketplace",
+      "region": "JP",
+      "type": "import",
+      "platform": "link-only",
+      "currency": "JPY",
+      "productCount": 0,
+      "sources": [
+        "aphrody-search"
+      ]
+    },
+    {
+      "name": "Joshin web",
+      "url": "https://joshinweb.jp",
+      "domain": "joshinweb.jp",
+      "category": "marketplace",
+      "region": "JP",
+      "type": "retailer",
+      "lang": "ja",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "JPfans (proxy)",
+      "url": "https://jpfans.com",
+      "domain": "jpfans.com",
+      "category": "marketplace",
+      "region": "JP",
+      "type": "import",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Juguetilandia",
+      "url": "https://www.juguetilandia.com",
+      "domain": "juguetilandia.com",
+      "category": "marketplace",
+      "region": "ES",
+      "type": "retailer",
+      "lang": "es",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Juguetrón",
+      "url": "https://www.juguetron.mx",
+      "domain": "juguetron.mx",
+      "category": "marketplace",
+      "region": "MX",
+      "type": "retailer",
+      "lang": "es",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Kaufland",
+      "url": "https://www.kaufland.de/t/kreisel/beyblade/~25914/",
+      "domain": "kaufland.de",
+      "category": "marketplace",
+      "region": "EU",
+      "type": "marketplace",
+      "platform": "link-only",
+      "currency": "EUR",
+      "productCount": 0,
+      "sources": [
+        "websearch"
+      ]
+    },
+    {
+      "name": "Kenbill",
+      "url": "https://kenbill.com",
+      "domain": "kenbill.com",
+      "category": "marketplace",
+      "region": "JP",
+      "type": "retailer",
+      "lang": "ja",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Liverpool MX",
+      "url": "https://www.liverpool.com.mx",
+      "domain": "liverpool.com.mx",
+      "category": "marketplace",
+      "region": "MX",
+      "type": "retailer",
+      "lang": "es",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "MercadoLibre MX",
+      "url": "https://listado.mercadolibre.com.mx",
+      "domain": "mercadolibre.com.mx",
+      "category": "marketplace",
+      "region": "MX",
+      "type": "marketplace",
+      "lang": "es",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "MercadoLivre BR",
+      "url": "https://lista.mercadolivre.com.br",
+      "domain": "mercadolivre.com.br",
+      "category": "marketplace",
+      "region": "BR",
+      "type": "marketplace",
+      "lang": "pt",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Miravia",
+      "url": "https://www.miravia.es/kw/beyblade-x.html",
+      "domain": "miravia.es",
+      "category": "marketplace",
+      "region": "EU",
+      "type": "marketplace",
+      "platform": "link-only",
+      "currency": "EUR",
+      "productCount": 0,
+      "sources": [
+        "aphrody-search"
+      ]
+    },
+    {
+      "name": "Neokyo",
+      "url": "https://neokyo.com/",
+      "domain": "neokyo.com",
+      "category": "marketplace",
+      "region": "JP",
+      "type": "import",
+      "platform": "link-only",
+      "currency": "JPY",
+      "productCount": 0,
+      "sources": [
+        "aphrody-search"
+      ]
+    },
+    {
+      "name": "Nin-Nin Game",
+      "url": "https://www.nin-nin-game.com/en/",
+      "domain": "nin-nin-game.com",
+      "category": "marketplace",
+      "region": "JP",
+      "type": "import",
+      "platform": "link-only",
+      "currency": "JPY",
+      "productCount": 0,
+      "sources": [
+        "aphrody-search",
+        "websearch"
+      ]
+    },
+    {
+      "name": "Otto.de",
+      "url": "https://www.otto.de",
+      "domain": "otto.de",
+      "category": "marketplace",
+      "region": "DE",
+      "type": "retailer",
+      "lang": "de",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "OZON",
+      "url": "https://www.ozon.ru",
+      "domain": "ozon.ru",
+      "category": "marketplace",
+      "region": "RU",
+      "type": "marketplace",
+      "lang": "ru",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Paxbeys (HK)",
+      "url": "https://paxbeys.com",
+      "domain": "paxbeys.com",
+      "category": "marketplace",
+      "region": "HK",
+      "type": "import",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "PokeNinJapan",
+      "url": "https://pokeninjapan.com",
+      "domain": "pokeninjapan.com",
+      "category": "marketplace",
+      "region": "JP",
+      "type": "import",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "PriceRunner SE",
+      "url": "https://www.pricerunner.se",
+      "domain": "pricerunner.se",
+      "category": "marketplace",
+      "region": "SE",
+      "type": "comparator",
+      "lang": "sv",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "PriceRunner UK",
+      "url": "https://www.pricerunner.com",
+      "domain": "pricerunner.com",
+      "category": "marketplace",
+      "region": "UK",
+      "type": "comparator",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Proshop NL/PL",
+      "url": "https://www.proshop.pl",
+      "domain": "proshop.pl",
+      "category": "marketplace",
+      "region": "PL",
+      "type": "retailer",
+      "lang": "pl",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Proshop SE",
+      "url": "https://www.proshop.se",
+      "domain": "proshop.se",
+      "category": "marketplace",
+      "region": "SE",
+      "type": "retailer",
+      "lang": "sv",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Rakuten (search Beyblade X)",
+      "url": "https://search.rakuten.co.jp",
+      "domain": "rakuten.co.jp",
+      "category": "marketplace",
+      "region": "JP",
+      "type": "marketplace",
+      "lang": "ja",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Rakuten France",
+      "url": "https://fr.shopping.rakuten.com/nav/Enfant_jouets_cour-recreation/f5/toupie/f8/Beyblade",
+      "domain": "fr.shopping.rakuten.com",
+      "category": "marketplace",
+      "region": "FR",
+      "type": "marketplace",
+      "platform": "link-only",
+      "currency": "EUR",
+      "productCount": 0,
+      "sources": [
+        "websearch"
+      ]
+    },
+    {
+      "name": "Ri Happy",
+      "url": "https://www.rihappy.com.br",
+      "domain": "rihappy.com.br",
+      "category": "marketplace",
+      "region": "BR",
+      "type": "retailer",
+      "lang": "pt",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Shopee BR",
+      "url": "https://shopee.com.br",
+      "domain": "shopee.com.br",
+      "category": "marketplace",
+      "region": "BR",
+      "type": "marketplace",
+      "lang": "pt",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Solaris Japan",
+      "url": "https://www.solarisjapan.com/",
+      "domain": "solarisjapan.com",
+      "category": "marketplace",
+      "region": "JP",
+      "type": "import",
+      "platform": "link-only",
+      "currency": "JPY",
+      "productCount": 0,
+      "sources": [
+        "aphrody-search",
+        "websearch"
+      ]
+    },
+    {
+      "name": "Sports Direct BE",
+      "url": "https://www.sportsdirect.be",
+      "domain": "sportsdirect.be",
+      "category": "marketplace",
+      "region": "BE",
+      "type": "retailer",
+      "lang": "nl",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "SSG / E-Mart",
+      "url": "https://emart.ssg.com",
+      "domain": "ssg.com",
+      "category": "marketplace",
+      "region": "KR",
+      "type": "retailer",
+      "lang": "ko",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Suruga-ya",
+      "url": "https://www.suruga-ya.jp",
+      "domain": "suruga-ya.jp",
+      "category": "marketplace",
+      "region": "JP",
+      "type": "import",
+      "lang": "ja",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Target",
+      "url": "https://www.target.com/s/beyblade+x",
+      "domain": "target.com",
+      "category": "marketplace",
+      "region": "US",
+      "type": "marketplace",
+      "platform": "link-only",
+      "currency": "USD",
+      "productCount": 0,
+      "sources": [
+        "aphrody-search",
+        "bxc",
+        "websearch"
+      ]
+    },
+    {
+      "name": "Tenso (forwarder)",
+      "url": "https://www.tenso.com",
+      "domain": "tenso.com",
+      "category": "marketplace",
+      "region": "JP",
+      "type": "import",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Teresa's Toy Store",
+      "url": "https://teresastoystore.com",
+      "domain": "teresastoystore.com",
+      "category": "marketplace",
+      "region": "JP",
+      "type": "import",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Tokyo Spin Vault",
+      "url": "https://tokyospinvault.com/",
+      "domain": "tokyospinvault.com",
+      "category": "marketplace",
+      "region": "JP",
+      "type": "import",
+      "platform": "bxc",
+      "currency": "JPY",
+      "productCount": 6,
+      "sources": [
+        "aphrody-search",
+        "bxc"
+      ]
+    },
+    {
+      "name": "Toy Craze (HK proxy)",
+      "url": "https://www.toy-craze.com",
+      "domain": "toy-craze.com",
+      "category": "marketplace",
+      "region": "HK",
+      "type": "import",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Toys Center IT",
+      "url": "https://www.toyscenter.it",
+      "domain": "toyscenter.it",
+      "category": "marketplace",
+      "region": "IT",
+      "type": "retailer",
+      "lang": "it",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Toys Japan",
+      "url": "https://toys-japan.com/",
+      "domain": "toys-japan.com",
+      "category": "marketplace",
+      "region": "JP",
+      "type": "import",
+      "platform": "link-only",
+      "currency": "JPY",
+      "productCount": 0,
+      "sources": [
+        "aphrody-search"
+      ]
+    },
+    {
+      "name": "Toys Store Japan",
+      "url": "https://toysstorejapan.com/en/collections/beyblade-x-1",
+      "domain": "toysstorejapan.com",
+      "category": "marketplace",
+      "region": "JP",
+      "type": "import",
+      "platform": "shopify",
+      "currency": "USD",
+      "productCount": 1,
+      "sources": [
+        "aphrody-search",
+        "bxc"
+      ]
+    },
+    {
+      "name": "Toys\"R\"Us Japan",
+      "url": "https://www.toysrus.co.jp",
+      "domain": "toysrus.co.jp",
+      "category": "marketplace",
+      "region": "JP",
+      "type": "retailer",
+      "lang": "ja",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Toys\"R\"Us Malaysia",
+      "url": "https://www.toysrus.com.my",
+      "domain": "toysrus.com.my",
+      "category": "marketplace",
+      "region": "MY",
+      "type": "retailer",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Toys\"R\"Us México",
+      "url": "https://www.toysrus.com.mx",
+      "domain": "toysrus.com.mx",
+      "category": "marketplace",
+      "region": "MX",
+      "type": "retailer",
+      "lang": "es",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "ToysOneJapan",
+      "url": "https://toysonejapan.com/collections/beyblade",
+      "domain": "toysonejapan.com",
+      "category": "marketplace",
+      "region": "JP",
+      "type": "import",
+      "platform": "shopify",
+      "currency": "USD",
+      "productCount": 82,
+      "sources": [
+        "aphrody-search",
+        "bxc",
+        "websearch"
+      ]
+    },
+    {
+      "name": "Toyzz Shop",
+      "url": "https://www.toyzzshop.com",
+      "domain": "toyzzshop.com",
+      "category": "marketplace",
+      "region": "TR",
+      "type": "retailer",
+      "lang": "tr",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Trendyol",
+      "url": "https://www.trendyol.com",
+      "domain": "trendyol.com",
+      "category": "marketplace",
+      "region": "TR",
+      "type": "marketplace",
+      "lang": "tr",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Tura Scandinavia",
+      "url": "https://www.turascandinavia.com",
+      "domain": "turascandinavia.com",
+      "category": "marketplace",
+      "region": "SE",
+      "type": "retailer",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Ubuy Turkey",
+      "url": "https://www.ubuy.com.tr",
+      "domain": "ubuy.com.tr",
+      "category": "marketplace",
+      "region": "TR",
+      "type": "import",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Walmart",
+      "url": "https://www.walmart.com/browse/toys/beyblade-x/4171_3438149_3025832_2565986",
+      "domain": "walmart.com",
+      "category": "marketplace",
+      "region": "US",
+      "type": "marketplace",
+      "platform": "link-only",
+      "currency": "USD",
+      "productCount": 0,
+      "sources": [
+        "aphrody-search",
+        "bxc",
+        "websearch"
+      ]
+    },
+    {
+      "name": "Walmart Canada",
+      "url": "https://www.walmart.ca/en/search?q=beyblade+x",
+      "domain": "walmart.ca",
+      "category": "marketplace",
+      "region": "INT",
+      "type": "marketplace",
+      "platform": "link-only",
+      "currency": "USD",
+      "productCount": 0,
+      "sources": [
+        "aphrody-search"
+      ]
+    },
+    {
+      "name": "Walmart México",
+      "url": "https://www.walmart.com.mx",
+      "domain": "walmart.com.mx",
+      "category": "marketplace",
+      "region": "MX",
+      "type": "retailer",
+      "lang": "es",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Wildberries",
+      "url": "https://www.wildberries.ru",
+      "domain": "wildberries.ru",
+      "category": "marketplace",
+      "region": "RU",
+      "type": "marketplace",
+      "lang": "ru",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Yahoo! Shopping JP",
+      "url": "https://shopping.yahoo.co.jp",
+      "domain": "shopping.yahoo.co.jp",
+      "category": "marketplace",
+      "region": "JP",
+      "type": "marketplace",
+      "lang": "ja",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Yandex Market",
+      "url": "https://market.yandex.ru",
+      "domain": "market.yandex.ru",
+      "category": "marketplace",
+      "region": "RU",
+      "type": "marketplace",
+      "lang": "ru",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "ZenMarket",
+      "url": "https://discover-en.zenmarket.jp/showcase/hobbies-and-collectibles/beyblades",
+      "domain": "zenmarket.jp",
+      "category": "marketplace",
+      "region": "JP",
+      "type": "import",
+      "platform": "bxc",
+      "currency": "JPY",
+      "productCount": 1,
+      "sources": [
+        "aphrody-search",
+        "bxc"
+      ]
+    },
+    {
+      "name": "Beyblade Weekly (méta WBO)",
+      "url": "https://bbxweekly.com/2weeks",
+      "domain": "bbxweekly.com",
+      "category": "meta",
+      "region": "INT",
+      "lang": "en",
+      "sources": [
+        "rpbey"
+      ]
+    },
+    {
+      "name": "Bey.au (guide AU)",
+      "url": "https://bey.au",
+      "domain": "bey.au",
+      "category": "news",
+      "region": "AU",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "BeyBase (reviews/news)",
+      "url": "https://beybase.com",
+      "domain": "beybase.com",
+      "category": "news",
+      "region": "INT",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Beyblade Cloudfree (guide JP)",
+      "url": "https://beyblade.cloudfree.jp",
+      "domain": "beyblade.cloudfree.jp",
+      "category": "news",
+      "region": "JP",
+      "lang": "ja",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Bleeding Cool (couverture Beyblade)",
+      "url": "https://bleedingcool.com",
+      "domain": "bleedingcool.com",
+      "category": "news",
+      "region": "INT",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Forbes (Beyblade coverage)",
+      "url": "https://www.forbes.com",
+      "domain": "forbes.com",
+      "category": "news",
+      "region": "INT",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "BEYBLADE Official Website (Hasbro)",
+      "url": "https://beyblade.com/",
+      "domain": "beyblade.com",
+      "category": "official",
+      "region": "US",
+      "type": "official",
+      "platform": "bxc",
+      "currency": "USD",
+      "productCount": 8,
+      "sources": [
+        "aphrody-search",
+        "websearch"
+      ]
+    },
+    {
+      "name": "Beyblade X App (App Store)",
+      "url": "https://apps.apple.com/us/app/beyblade-x-app/id6480068432",
+      "domain": "apps.apple.com",
+      "category": "official",
+      "region": "INT",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Beyblade X App (Google Play)",
+      "url": "https://play.google.com/store/apps/details?id=jp.co.takaratomy.beyblade",
+      "domain": "play.google.com",
+      "category": "official",
+      "region": "INT",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "BEYBLADEX Official Store",
+      "url": "https://shop.beyblade.com/",
+      "domain": "shop.beyblade.com",
+      "category": "official",
+      "region": "US",
+      "type": "official",
+      "platform": "bxc",
+      "currency": "USD",
+      "productCount": 7,
+      "sources": [
+        "aphrody-search",
+        "bxc",
+        "websearch"
+      ]
+    },
+    {
+      "name": "Crunchyroll (Beyblade)",
+      "url": "https://www.crunchyroll.com/series/GYMGP5M5Y/beyblade",
+      "domain": "crunchyroll.com",
+      "category": "official",
+      "region": "INT",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Hasbro Beyblade X App",
+      "url": "https://apps.hasbro.com/en-US/beyblade-x-app",
+      "domain": "apps.hasbro.com",
+      "category": "official",
+      "region": "US",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Hasbro Shop (official)",
+      "url": "https://shop.hasbro.com/en-us/brand/beyblade",
+      "domain": "shop.hasbro.com",
+      "category": "official",
+      "region": "US",
+      "type": "official",
+      "platform": "link-only",
+      "currency": "USD",
+      "productCount": 0,
+      "sources": [
+        "websearch"
+      ]
+    },
+    {
+      "name": "Takara Tomy (officiel)",
+      "url": "https://www.takaratomy.co.jp/english/products/brand/beyblade.html",
+      "domain": "takaratomy.co.jp",
+      "category": "official",
+      "region": "JP",
+      "type": "official",
+      "platform": "link-only",
+      "currency": "JPY",
+      "productCount": 0,
+      "sources": [
+        "bxc",
+        "websearch"
+      ]
+    },
+    {
+      "name": "Takara Tomy Beyblade X (officiel JP)",
+      "url": "https://beyblade.takaratomy.co.jp",
+      "domain": "beyblade.takaratomy.co.jp",
+      "category": "official",
+      "region": "JP",
+      "lang": "ja",
+      "sources": [
+        "rpbey"
+      ]
+    },
+    {
+      "name": "Takara Tomy Mall",
+      "url": "https://takaratomymall.jp/shop/c/cBeyX/",
+      "domain": "takaratomymall.jp",
+      "category": "official",
+      "region": "JP",
+      "type": "official",
+      "platform": "bxc",
+      "currency": "JPY",
+      "productCount": 31,
+      "sources": [
+        "aphrody-search",
+        "bxc",
+        "websearch"
+      ]
+    },
+    {
+      "name": "Viz Media (Beyblade X manga)",
+      "url": "https://www.viz.com/vizmanga/chapters/beyblade-x",
+      "domain": "viz.com",
+      "category": "official",
+      "region": "US",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "AIE Games",
+      "url": "https://www.aiegames.com.au/category/beyblade-x-633.html",
+      "domain": "aiegames.com.au",
+      "category": "shop",
+      "region": "INT",
+      "type": "specialist",
+      "platform": "link-only",
+      "currency": "USD",
+      "productCount": 0,
+      "sources": [
+        "aphrody-search"
+      ]
+    },
+    {
+      "name": "Anime Beyond",
+      "url": "https://anime-beyond.de/collections/beyblade-x",
+      "domain": "anime-beyond.de",
+      "category": "shop",
+      "region": "EU",
+      "type": "specialist",
+      "platform": "shopify",
+      "currency": "EUR",
+      "productCount": 28,
+      "sources": [
+        "aphrody-search"
+      ]
+    },
+    {
+      "name": "AnyToys UK",
+      "url": "https://anytoys.com/product-category/beyblades/beyblade-x/",
+      "domain": "anytoys.com",
+      "category": "shop",
+      "region": "UK",
+      "type": "specialist",
+      "platform": "link-only",
+      "currency": "GBP",
+      "productCount": 0,
+      "sources": [
+        "aphrody-search",
+        "bxc"
+      ]
+    },
+    {
+      "name": "Argos",
+      "url": "https://www.argos.co.uk/sd/beyblade-x/",
+      "domain": "argos.co.uk",
+      "category": "shop",
+      "region": "UK",
+      "type": "retailer",
+      "platform": "bxc",
+      "currency": "GBP",
+      "productCount": 22,
+      "sources": [
+        "aphrody-search",
+        "bxc"
+      ]
+    },
+    {
+      "name": "Armağan Oyuncak",
+      "url": "https://www.armaganoyuncak.com.tr",
+      "domain": "armaganoyuncak.com.tr",
+      "category": "shop",
+      "region": "TR",
+      "type": "retailer",
+      "lang": "tr",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Asmodee UK",
+      "url": "https://www.asmodee.co.uk/collections/beyblade-x-new-releases",
+      "domain": "asmodee.co.uk",
+      "category": "shop",
+      "region": "UK",
+      "type": "retailer",
+      "platform": "bxc",
+      "currency": "GBP",
+      "productCount": 24,
+      "sources": [
+        "aphrody-search"
+      ]
+    },
+    {
+      "name": "Athena Games",
+      "url": "https://athenagames.com",
+      "domain": "athenagames.com",
+      "category": "shop",
+      "region": "UK",
+      "type": "retailer",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Auchan",
+      "url": "https://www.auchan.fr/hasbro-beyblade-x-set-de-combat-xtreme-inclut-2-toupies/pr-C1789116",
+      "domain": "auchan.fr",
+      "category": "shop",
+      "region": "FR",
+      "type": "retailer",
+      "platform": "bxc",
+      "currency": "EUR",
+      "productCount": 5,
+      "sources": [
+        "aphrody-search",
+        "websearch"
+      ]
+    },
+    {
+      "name": "Banana Games",
+      "url": "https://bananagames.ca",
+      "domain": "bananagames.ca",
+      "category": "shop",
+      "region": "CA",
+      "type": "retailer",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "BBLS le Grushka (RU)",
+      "url": "https://www.bblslegrushka.ru",
+      "domain": "bblslegrushka.ru",
+      "category": "shop",
+      "region": "RU",
+      "type": "specialist",
+      "lang": "ru",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "BBX.co.kr",
+      "url": "https://bbx.co.kr",
+      "domain": "bbx.co.kr",
+      "category": "shop",
+      "region": "KR",
+      "type": "specialist",
+      "lang": "ko",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Beyblade Art Shop (India)",
+      "url": "https://beybladeartshop.com",
+      "domain": "beybladeartshop.com",
+      "category": "shop",
+      "region": "IN",
+      "type": "specialist",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Beyblade Dad",
+      "url": "https://beybladedad.ca",
+      "domain": "beybladedad.ca",
+      "category": "shop",
+      "region": "CA",
+      "type": "specialist",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Beyblade Legend",
+      "url": "https://beyblade-legend.fr/boutique/",
+      "domain": "beyblade-legend.fr",
+      "category": "shop",
+      "region": "FR",
+      "type": "specialist",
+      "platform": "woocommerce",
+      "currency": "EUR",
+      "productCount": 78,
+      "sources": [
+        "bxc"
+      ]
+    },
+    {
+      "name": "Beyblade Nexus",
+      "url": "https://www.beybladenexus.com/category/beybladex",
+      "domain": "beybladenexus.com",
+      "category": "shop",
+      "region": "EU",
+      "type": "specialist",
+      "platform": "link-only",
+      "currency": "EUR",
+      "productCount": 0,
+      "sources": [
+        "aphrody-search",
+        "bxc",
+        "websearch"
+      ]
+    },
+    {
+      "name": "Beyblade Shop",
+      "url": "https://beyblade-shop.com/collections/toupie-beyblade-x",
+      "domain": "beyblade-shop.com",
+      "category": "shop",
+      "region": "FR",
+      "type": "specialist",
+      "platform": "shopify",
+      "currency": "EUR",
+      "productCount": 250,
+      "sources": [
+        "aphrody-search",
+        "bxc",
+        "websearch"
+      ]
+    },
+    {
+      "name": "Beyblade Shop DE",
+      "url": "https://beyblade-shop.de/collections/beyblade-x",
+      "domain": "beyblade-shop.de",
+      "category": "shop",
+      "region": "EU",
+      "type": "specialist",
+      "platform": "shopify",
+      "currency": "EUR",
+      "productCount": 250,
+      "sources": [
+        "aphrody-search",
+        "websearch"
+      ]
+    },
+    {
+      "name": "Beyblade Store FR",
+      "url": "https://beyblade-store.fr/collections/toupie-beyblade-x/",
+      "domain": "beyblade-store.fr",
+      "category": "shop",
+      "region": "FR",
+      "type": "specialist",
+      "platform": "link-only",
+      "currency": "EUR",
+      "productCount": 0,
+      "sources": [
+        "aphrody-search",
+        "bxc",
+        "websearch"
+      ]
+    },
+    {
+      "name": "Beyblade Store México",
+      "url": "https://beybladestoremexico.mitiendanube.com",
+      "domain": "beybladestoremexico.mitiendanube.com",
+      "category": "shop",
+      "region": "MX",
+      "type": "specialist",
+      "lang": "es",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Beyblade.com.br (Beys Store)",
+      "url": "https://www.beyblade.com.br",
+      "domain": "beyblade.com.br",
+      "category": "shop",
+      "region": "BR",
+      "type": "specialist",
+      "lang": "pt",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Beyblader (BR)",
+      "url": "https://beyblader.com.br",
+      "domain": "beyblader.com.br",
+      "category": "shop",
+      "region": "BR",
+      "type": "specialist",
+      "lang": "pt",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "BeybladeShop.de",
+      "url": "https://beybladeshop.de/beyblade-x/",
+      "domain": "beybladeshop.de",
+      "category": "shop",
+      "region": "EU",
+      "type": "specialist",
+      "platform": "link-only",
+      "currency": "EUR",
+      "productCount": 0,
+      "sources": [
+        "websearch"
+      ]
+    },
+    {
+      "name": "BeyClub Shop",
+      "url": "https://beyclubshop.com/pages/beyblade-x",
+      "domain": "beyclubshop.com",
+      "category": "shop",
+      "region": "EU",
+      "type": "specialist",
+      "platform": "shopify",
+      "currency": "EUR",
+      "productCount": 96,
+      "sources": [
+        "aphrody-search",
+        "websearch"
+      ]
+    },
+    {
+      "name": "BeysAndBricks",
+      "url": "https://beysandbricks.com/beyblade-x/",
+      "domain": "beysandbricks.com",
+      "category": "shop",
+      "region": "US",
+      "type": "specialist",
+      "platform": "bxc",
+      "currency": "USD",
+      "productCount": 7,
+      "sources": [
+        "aphrody-search",
+        "bxc",
+        "websearch"
+      ]
+    },
+    {
+      "name": "BeyStation",
+      "url": "https://beystation.com/",
+      "domain": "beystation.com",
+      "category": "shop",
+      "region": "US",
+      "type": "specialist",
+      "platform": "shopify",
+      "currency": "USD",
+      "productCount": 18,
+      "sources": [
+        "aphrody-search",
+        "websearch"
+      ]
+    },
+    {
+      "name": "BeyToys",
+      "url": "https://beytoys.com",
+      "domain": "beytoys.com",
+      "category": "shop",
+      "region": "US",
+      "type": "specialist",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "BeyWarehouse",
+      "url": "https://beywarehouse.com/collections/beyblade-x-2023",
+      "domain": "beywarehouse.com",
+      "category": "shop",
+      "region": "US",
+      "type": "specialist",
+      "platform": "shopify",
+      "currency": "USD",
+      "productCount": 249,
+      "sources": [
+        "aphrody-search",
+        "bxc",
+        "websearch"
+      ]
+    },
+    {
+      "name": "BGL Hobbies",
+      "url": "https://bglhobbies.com.au/",
+      "domain": "bglhobbies.com.au",
+      "category": "shop",
+      "region": "INT",
+      "type": "specialist",
+      "platform": "shopify",
+      "currency": "USD",
+      "productCount": 45,
+      "sources": [
+        "websearch"
+      ]
+    },
+    {
+      "name": "BIG W",
+      "url": "https://www.bigw.com.au/brands/beyblade",
+      "domain": "bigw.com.au",
+      "category": "shop",
+      "region": "INT",
+      "type": "retailer",
+      "platform": "link-only",
+      "currency": "USD",
+      "productCount": 0,
+      "sources": [
+        "aphrody-search"
+      ]
+    },
+    {
+      "name": "Booghe",
+      "url": "https://www.booghe.co.uk/collections/beyblades",
+      "domain": "booghe.co.uk",
+      "category": "shop",
+      "region": "UK",
+      "type": "retailer",
+      "platform": "bxc",
+      "currency": "GBP",
+      "productCount": 22,
+      "sources": [
+        "websearch"
+      ]
+    },
+    {
+      "name": "BSA Store",
+      "url": "https://www.bsastore.it/collections/beyblade-x",
+      "domain": "bsastore.it",
+      "category": "shop",
+      "region": "EU",
+      "type": "specialist",
+      "platform": "shopify",
+      "currency": "EUR",
+      "productCount": 56,
+      "sources": [
+        "aphrody-search"
+      ]
+    },
+    {
+      "name": "Canadian Tire",
+      "url": "https://www.canadiantire.ca/en/pdp/beyblade-x-single-pack-1501283p.html",
+      "domain": "canadiantire.ca",
+      "category": "shop",
+      "region": "INT",
+      "type": "retailer",
+      "platform": "link-only",
+      "currency": "USD",
+      "productCount": 0,
+      "sources": [
+        "aphrody-search"
+      ]
+    },
+    {
+      "name": "Cardverse",
+      "url": "https://cardverse.it/collections/beyblade-x",
+      "domain": "cardverse.it",
+      "category": "shop",
+      "region": "EU",
+      "type": "specialist",
+      "platform": "shopify",
+      "currency": "EUR",
+      "productCount": 73,
+      "sources": [
+        "aphrody-search"
+      ]
+    },
+    {
+      "name": "Carrefour",
+      "url": "https://www.carrefour.fr/p/set-de-combat-xtreme-beyblade-x-hasbro-5010996309457",
+      "domain": "carrefour.fr",
+      "category": "shop",
+      "region": "FR",
+      "type": "retailer",
+      "platform": "link-only",
+      "currency": "EUR",
+      "productCount": 0,
+      "sources": [
+        "aphrody-search"
+      ]
+    },
+    {
+      "name": "Casey's Toys",
+      "url": "https://www.caseystoys.com.au",
+      "domain": "caseystoys.com.au",
+      "category": "shop",
+      "region": "AU",
+      "type": "retailer",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Chaos Cards",
+      "url": "https://www.chaoscards.co.uk/shop/merchandising/beyblade-x",
+      "domain": "chaoscards.co.uk",
+      "category": "shop",
+      "region": "UK",
+      "type": "retailer",
+      "platform": "link-only",
+      "currency": "GBP",
+      "productCount": 0,
+      "sources": [
+        "websearch"
+      ]
+    },
+    {
+      "name": "Colruyt",
+      "url": "https://www.colruyt.be/nl/producten/219337",
+      "domain": "colruyt.be",
+      "category": "shop",
+      "region": "BE",
+      "type": "retailer",
+      "platform": "link-only",
+      "currency": "EUR",
+      "productCount": 0,
+      "sources": [
+        "aphrody-search"
+      ]
+    },
+    {
+      "name": "Cultura",
+      "url": "https://www.cultura.com/c/toupies-beyblade",
+      "domain": "cultura.com",
+      "category": "shop",
+      "region": "FR",
+      "type": "retailer",
+      "platform": "link-only",
+      "currency": "EUR",
+      "productCount": 0,
+      "sources": [
+        "aphrody-search",
+        "bxc",
+        "websearch"
+      ]
+    },
+    {
+      "name": "Danireon (TCG/hobby CA)",
+      "url": "https://www.danireon.com",
+      "domain": "danireon.com",
+      "category": "shop",
+      "region": "CA",
+      "type": "retailer",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "De Poort",
+      "url": "https://depoort.com/nl/18080-beyblade-x",
+      "domain": "depoort.com",
+      "category": "shop",
+      "region": "BE",
+      "type": "retailer",
+      "platform": "link-only",
+      "currency": "EUR",
+      "productCount": 0,
+      "sources": [
+        "aphrody-search"
+      ]
+    },
+    {
+      "name": "DreamLand (BE)",
+      "url": "https://www.dreamland.be/nl/m/beyblade",
+      "domain": "dreamland.be",
+      "category": "shop",
+      "region": "BE",
+      "type": "retailer",
+      "platform": "bxc",
+      "currency": "EUR",
+      "productCount": 10,
+      "sources": [
+        "aphrody-search",
+        "websearch"
+      ]
+    },
+    {
+      "name": "Dungeon Dice",
+      "url": "https://www.dungeondice.it",
+      "domain": "dungeondice.it",
+      "category": "shop",
+      "region": "IT",
+      "type": "retailer",
+      "lang": "it",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "E.Leclerc",
+      "url": "https://www.e.leclerc/cat/toupie-beyblade",
+      "domain": "e.leclerc",
+      "category": "shop",
+      "region": "FR",
+      "type": "retailer",
+      "platform": "link-only",
+      "currency": "EUR",
+      "productCount": 0,
+      "sources": [
+        "aphrody-search",
+        "websearch"
+      ]
+    },
+    {
+      "name": "Eclipse Gaming",
+      "url": "https://eclipse-gaming.co.uk",
+      "domain": "eclipse-gaming.co.uk",
+      "category": "shop",
+      "region": "UK",
+      "type": "specialist",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Efotech",
+      "url": "https://efotech.com.tr",
+      "domain": "efotech.com.tr",
+      "category": "shop",
+      "region": "TR",
+      "type": "specialist",
+      "lang": "tr",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "ELC Toys",
+      "url": "https://elctoys.com/collections/beyblade-x",
+      "domain": "elctoys.com",
+      "category": "shop",
+      "region": "US",
+      "type": "specialist",
+      "platform": "shopify",
+      "currency": "USD",
+      "productCount": 10,
+      "sources": [
+        "bxc"
+      ]
+    },
+    {
+      "name": "Enku Shop",
+      "url": "https://enkushop.pl",
+      "domain": "enkushop.pl",
+      "category": "shop",
+      "region": "PL",
+      "type": "specialist",
+      "lang": "pl",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Eurotoys SE",
+      "url": "https://www.eurotoys.se",
+      "domain": "eurotoys.se",
+      "category": "shop",
+      "region": "SE",
+      "type": "retailer",
+      "lang": "sv",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Fantàsia Store",
+      "url": "https://fantasiastore.it",
+      "domain": "fantasiastore.it",
+      "category": "shop",
+      "region": "IT",
+      "type": "retailer",
+      "lang": "it",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "FeedMy",
+      "url": "https://feedmy.fr/collections/beyblade-x",
+      "domain": "feedmy.fr",
+      "category": "shop",
+      "region": "FR",
+      "type": "specialist",
+      "platform": "shopify",
+      "currency": "EUR",
+      "productCount": 33,
+      "sources": [
+        "bxc"
+      ]
+    },
+    {
+      "name": "Fnac",
+      "url": "https://www.fnac.com/Beyblade/m65761/w-4",
+      "domain": "fnac.com",
+      "category": "shop",
+      "region": "FR",
+      "type": "retailer",
+      "platform": "link-only",
+      "currency": "EUR",
+      "productCount": 0,
+      "sources": [
+        "aphrody-search",
+        "websearch"
+      ]
+    },
+    {
+      "name": "Fnac Belgique",
+      "url": "https://www.fr.fnac.be/se109609/Beyblade-X",
+      "domain": "fnac.be",
+      "category": "shop",
+      "region": "BE",
+      "type": "retailer",
+      "platform": "link-only",
+      "currency": "EUR",
+      "productCount": 0,
+      "sources": [
+        "aphrody-search"
+      ]
+    },
+    {
+      "name": "Fnac Belgique",
+      "url": "https://www.fr.fnac.be/Beyblade/m65761",
+      "domain": "fr.fnac.be",
+      "category": "shop",
+      "region": "BE",
+      "type": "retailer",
+      "platform": "link-only",
+      "currency": "EUR",
+      "productCount": 0,
+      "sources": [
+        "websearch"
+      ]
+    },
+    {
+      "name": "Funside",
+      "url": "https://funside.it/collections/beyblade-x",
+      "domain": "funside.it",
+      "category": "shop",
+      "region": "EU",
+      "type": "specialist",
+      "platform": "shopify",
+      "currency": "EUR",
+      "productCount": 49,
+      "sources": [
+        "aphrody-search"
+      ]
+    },
+    {
+      "name": "GAME España",
+      "url": "https://www.game.es/pack-inicial-de-peonzas-beyblade-x-merchandising-234885",
+      "domain": "game.es",
+      "category": "shop",
+      "region": "EU",
+      "type": "retailer",
+      "platform": "jsonld",
+      "currency": "EUR",
+      "productCount": 1,
+      "sources": [
+        "websearch"
+      ]
+    },
+    {
+      "name": "Game3",
+      "url": "https://game3.ca/collections/beyblade-x-all-products",
+      "domain": "game3.ca",
+      "category": "shop",
+      "region": "INT",
+      "type": "specialist",
+      "platform": "shopify",
+      "currency": "USD",
+      "productCount": 85,
+      "sources": [
+        "aphrody-search",
+        "websearch"
+      ]
+    },
+    {
+      "name": "Games and Stuff",
+      "url": "https://www.gamesandstuffonline.com",
+      "domain": "gamesandstuffonline.com",
+      "category": "shop",
+      "region": "US",
+      "type": "retailer",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "GameStop",
+      "url": "https://www.gamestop.com/toys-games/fidget-toys/products/hasbro-beyblade-x-cx-starter-pack-set/20020817.html",
+      "domain": "gamestop.com",
+      "category": "shop",
+      "region": "US",
+      "type": "retailer",
+      "platform": "link-only",
+      "currency": "USD",
+      "productCount": 0,
+      "sources": [
+        "websearch"
+      ]
+    },
+    {
+      "name": "Get Beyblade Shop",
+      "url": "https://getbeybladeshop.shop/categories/toupie-beyblade-x",
+      "domain": "getbeybladeshop.shop",
+      "category": "shop",
+      "region": "FR",
+      "type": "specialist",
+      "platform": "link-only",
+      "currency": "EUR",
+      "productCount": 0,
+      "sources": [
+        "aphrody-search",
+        "bxc"
+      ]
+    },
+    {
+      "name": "GiaxStore",
+      "url": "https://www.giaxstore.it/collections/beyblade-x",
+      "domain": "giaxstore.it",
+      "category": "shop",
+      "region": "EU",
+      "type": "specialist",
+      "platform": "shopify",
+      "currency": "EUR",
+      "productCount": 61,
+      "sources": [
+        "aphrody-search"
+      ]
+    },
+    {
+      "name": "Go-Toupie",
+      "url": "https://go-toupie.com/collections/beyblade-x",
+      "domain": "go-toupie.com",
+      "category": "shop",
+      "region": "FR",
+      "type": "specialist",
+      "platform": "shopify",
+      "currency": "EUR",
+      "productCount": 5,
+      "sources": [
+        "aphrody-search",
+        "websearch"
+      ]
+    },
+    {
+      "name": "Gold Saucer Store",
+      "url": "https://goldsaucerstore.com/20-beyblade",
+      "domain": "goldsaucerstore.com",
+      "category": "shop",
+      "region": "EU",
+      "type": "specialist",
+      "platform": "bxc",
+      "currency": "EUR",
+      "productCount": 25,
+      "sources": [
+        "aphrody-search",
+        "websearch"
+      ]
+    },
+    {
+      "name": "Hobby Brinquedos",
+      "url": "https://www.hobbybrinquedosvendas.com.br",
+      "domain": "hobbybrinquedosvendas.com.br",
+      "category": "shop",
+      "region": "BR",
+      "type": "retailer",
+      "lang": "pt",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Il Covo del Nerd",
+      "url": "https://www.ilcovodelnerd.com/categoria-prodotto/beyblade/",
+      "domain": "ilcovodelnerd.com",
+      "category": "shop",
+      "region": "EU",
+      "type": "retailer",
+      "platform": "link-only",
+      "currency": "EUR",
+      "productCount": 0,
+      "sources": [
+        "websearch"
+      ]
+    },
+    {
+      "name": "Intertoys",
+      "url": "https://www.intertoys.nl/beyblade",
+      "domain": "intertoys.nl",
+      "category": "shop",
+      "region": "EU",
+      "type": "retailer",
+      "platform": "bxc",
+      "currency": "EUR",
+      "productCount": 7,
+      "sources": [
+        "aphrody-search"
+      ]
+    },
+    {
+      "name": "Jardin d'Enfants",
+      "url": "https://jardin-denfants.fr",
+      "domain": "jardin-denfants.fr",
+      "category": "shop",
+      "region": "FR",
+      "type": "retailer",
+      "lang": "fr",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "JouéClub",
+      "url": "https://www.joueclub.fr/nos-heros/beyblade.html",
+      "domain": "joueclub.fr",
+      "category": "shop",
+      "region": "FR",
+      "type": "retailer",
+      "platform": "bxc",
+      "currency": "EUR",
+      "productCount": 19,
+      "sources": [
+        "aphrody-search",
+        "bxc",
+        "websearch"
+      ]
+    },
+    {
+      "name": "Juguetes Carrión",
+      "url": "https://www.juguetescarrion.com/juguetes/aire-libre-y-deportes/peonzas-y-trompos/beyblade-x-kit-inicial-surtido",
+      "domain": "juguetescarrion.com",
+      "category": "shop",
+      "region": "EU",
+      "type": "retailer",
+      "platform": "bxc",
+      "currency": "EUR",
+      "productCount": 4,
+      "sources": [
+        "websearch"
+      ]
+    },
+    {
+      "name": "Juguetes Don Dino",
+      "url": "https://www.juguetesdondino.com/kit-beyblade-x-2-0-c-lanzador-surt.html",
+      "domain": "juguetesdondino.com",
+      "category": "shop",
+      "region": "EU",
+      "type": "retailer",
+      "platform": "jsonld",
+      "currency": "EUR",
+      "productCount": 1,
+      "sources": [
+        "websearch"
+      ]
+    },
+    {
+      "name": "Kimland",
+      "url": "https://www.kimland.pl",
+      "domain": "kimland.pl",
+      "category": "shop",
+      "region": "PL",
+      "type": "retailer",
+      "lang": "pl",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "King Jouet",
+      "url": "https://www.king-jouet.com/jeux-jouets/toupies-arenes-beyblade-x/page1.htm",
+      "domain": "king-jouet.com",
+      "category": "shop",
+      "region": "FR",
+      "type": "retailer",
+      "platform": "link-only",
+      "currency": "EUR",
+      "productCount": 0,
+      "sources": [
+        "aphrody-search",
+        "bxc",
+        "websearch"
+      ]
+    },
+    {
+      "name": "King Jouet BE",
+      "url": "https://www.king-jouet.be/jeux-jouets/starter-toupies-beyblade-x/page1.htm",
+      "domain": "king-jouet.be",
+      "category": "shop",
+      "region": "BE",
+      "type": "retailer",
+      "platform": "link-only",
+      "currency": "EUR",
+      "productCount": 0,
+      "sources": [
+        "bxc",
+        "websearch"
+      ]
+    },
+    {
+      "name": "King Jouet Suisse",
+      "url": "https://www.king-jouet.ch/jeux-jouets/toupies-arenes-beyblade-x/beyblade/page1.htm",
+      "domain": "king-jouet.ch",
+      "category": "shop",
+      "region": "CH",
+      "type": "retailer",
+      "platform": "link-only",
+      "currency": "CHF",
+      "productCount": 0,
+      "sources": [
+        "aphrody-search",
+        "bxc",
+        "websearch"
+      ]
+    },
+    {
+      "name": "Kraina Zabawy",
+      "url": "https://krainazabawy.pl",
+      "domain": "krainazabawy.pl",
+      "category": "shop",
+      "region": "PL",
+      "type": "retailer",
+      "lang": "pl",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "La Boutique Beyblade",
+      "url": "https://www.la-boutique-beyblade.fr/",
+      "domain": "la-boutique-beyblade.fr",
+      "category": "shop",
+      "region": "FR",
+      "type": "specialist",
+      "platform": "bxc",
+      "currency": "EUR",
+      "productCount": 4,
+      "sources": [
+        "aphrody-search",
+        "bxc"
+      ]
+    },
+    {
+      "name": "La Grande Récré",
+      "url": "https://www.lagranderecre.fr/",
+      "domain": "lagranderecre.fr",
+      "category": "shop",
+      "region": "FR",
+      "type": "retailer",
+      "platform": "link-only",
+      "currency": "EUR",
+      "productCount": 0,
+      "sources": [
+        "aphrody-search"
+      ]
+    },
+    {
+      "name": "Lama's Store",
+      "url": "https://lamas-store.com/collections/beyblade-x",
+      "domain": "lamas-store.com",
+      "category": "shop",
+      "region": "EU",
+      "type": "specialist",
+      "platform": "shopify",
+      "currency": "EUR",
+      "productCount": 41,
+      "sources": [
+        "aphrody-search"
+      ]
+    },
+    {
+      "name": "Lennies Toys",
+      "url": "https://lennies.com/collections/beyblade",
+      "domain": "lennies.com",
+      "category": "shop",
+      "region": "UK",
+      "type": "specialist",
+      "platform": "shopify",
+      "currency": "GBP",
+      "productCount": 19,
+      "sources": [
+        "aphrody-search",
+        "bxc"
+      ]
+    },
+    {
+      "name": "Mall of Beys (Zankye)",
+      "url": "https://mallofbeys.com/collections/beyblade-x",
+      "domain": "mallofbeys.com",
+      "category": "shop",
+      "region": "US",
+      "type": "specialist",
+      "platform": "shopify",
+      "currency": "USD",
+      "productCount": 5,
+      "sources": [
+        "bxc",
+        "websearch"
+      ]
+    },
+    {
+      "name": "Mall Of Toys",
+      "url": "https://malloftoys.com/collections/new-release-beyblade-x",
+      "domain": "malloftoys.com",
+      "category": "shop",
+      "region": "INT",
+      "type": "specialist",
+      "platform": "shopify",
+      "currency": "USD",
+      "productCount": 91,
+      "sources": [
+        "aphrody-search",
+        "bxc",
+        "websearch"
+      ]
+    },
+    {
+      "name": "Manchatoys",
+      "url": "https://manchatoys.com",
+      "domain": "manchatoys.com",
+      "category": "shop",
+      "region": "ES",
+      "type": "retailer",
+      "lang": "es",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Matty's Toys",
+      "url": "https://www.mattystoysbaby.com.au",
+      "domain": "mattystoysbaby.com.au",
+      "category": "shop",
+      "region": "AU",
+      "type": "retailer",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Micromania-Zing",
+      "url": "https://www.micromania.fr/",
+      "domain": "micromania.fr",
+      "category": "shop",
+      "region": "FR",
+      "type": "retailer",
+      "platform": "link-only",
+      "currency": "EUR",
+      "productCount": 0,
+      "sources": [
+        "aphrody-search"
+      ]
+    },
+    {
+      "name": "Mr Toys Toyworld",
+      "url": "https://www.mrtoys.com.au/beyblade-350",
+      "domain": "mrtoys.com.au",
+      "category": "shop",
+      "region": "INT",
+      "type": "retailer",
+      "platform": "link-only",
+      "currency": "USD",
+      "productCount": 0,
+      "sources": [
+        "aphrody-search"
+      ]
+    },
+    {
+      "name": "Müller",
+      "url": "https://www.mueller.de/b/beyblade-x/",
+      "domain": "mueller.de",
+      "category": "shop",
+      "region": "EU",
+      "type": "retailer",
+      "platform": "jsonld",
+      "currency": "EUR",
+      "productCount": 3,
+      "sources": [
+        "aphrody-search"
+      ]
+    },
+    {
+      "name": "Nerdbutiken",
+      "url": "https://www.nerdbutiken.se",
+      "domain": "nerdbutiken.se",
+      "category": "shop",
+      "region": "SE",
+      "type": "specialist",
+      "lang": "sv",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Otello Giocattoli",
+      "url": "https://www.otellogiocattoli.it",
+      "domain": "otellogiocattoli.it",
+      "category": "shop",
+      "region": "IT",
+      "type": "retailer",
+      "lang": "it",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Pokegeodude / Geo.Store",
+      "url": "https://pokegeodude.shop",
+      "domain": "pokegeodude.shop",
+      "category": "shop",
+      "region": "DE",
+      "type": "specialist",
+      "lang": "de",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Pops Planet",
+      "url": "https://www.popsplanet.it",
+      "domain": "popsplanet.it",
+      "category": "shop",
+      "region": "IT",
+      "type": "specialist",
+      "lang": "it",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Proshop NL",
+      "url": "https://www.proshop.nl",
+      "domain": "proshop.nl",
+      "category": "shop",
+      "region": "NL",
+      "type": "retailer",
+      "lang": "nl",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "ROFU",
+      "url": "https://www.rofu.de",
+      "domain": "rofu.de",
+      "category": "shop",
+      "region": "DE",
+      "type": "retailer",
+      "lang": "de",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Rot der Sammler",
+      "url": "https://www.rotdersammler.de/collections/beyblade-x",
+      "domain": "rotdersammler.de",
+      "category": "shop",
+      "region": "EU",
+      "type": "specialist",
+      "platform": "shopify",
+      "currency": "EUR",
+      "productCount": 11,
+      "sources": [
+        "aphrody-search"
+      ]
+    },
+    {
+      "name": "Roys",
+      "url": "https://www.roys.co.uk",
+      "domain": "roys.co.uk",
+      "category": "shop",
+      "region": "UK",
+      "type": "retailer",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Smyths Toys France",
+      "url": "https://www.smythstoys.com/fr/fr-fr/jouets/figurines/beyblade/",
+      "domain": "smythstoys.com",
+      "category": "shop",
+      "region": "FR",
+      "type": "retailer",
+      "platform": "link-only",
+      "currency": "EUR",
+      "productCount": 0,
+      "sources": [
+        "aphrody-search",
+        "bxc",
+        "websearch"
+      ]
+    },
+    {
+      "name": "Spin City Imports",
+      "url": "https://spincityimports.com/collections/beyblade-x-4th-generation",
+      "domain": "spincityimports.com",
+      "category": "shop",
+      "region": "US",
+      "type": "specialist",
+      "platform": "shopify",
+      "currency": "USD",
+      "productCount": 250,
+      "sources": [
+        "aphrody-search",
+        "bxc",
+        "websearch"
+      ]
+    },
+    {
+      "name": "The Beybladers (BuyBeyblades)",
+      "url": "https://www.buybeyblades.com/collections/beyblade-x",
+      "domain": "buybeyblades.com",
+      "category": "shop",
+      "region": "US",
+      "type": "specialist",
+      "platform": "shopify",
+      "currency": "USD",
+      "productCount": 44,
+      "sources": [
+        "aphrody-search",
+        "bxc",
+        "websearch"
+      ]
+    },
+    {
+      "name": "The Card Vault",
+      "url": "https://thecardvault.co.uk/collections/beyblade-x",
+      "domain": "thecardvault.co.uk",
+      "category": "shop",
+      "region": "UK",
+      "type": "specialist",
+      "platform": "shopify",
+      "currency": "GBP",
+      "productCount": 37,
+      "sources": [
+        "aphrody-search",
+        "bxc",
+        "websearch"
+      ]
+    },
+    {
+      "name": "The Playground Hobby Store",
+      "url": "https://theplayground.com.sg",
+      "domain": "theplayground.com.sg",
+      "category": "shop",
+      "region": "SG",
+      "type": "specialist",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "The Toy Barn",
+      "url": "https://thetoybarn.co.uk/action-toys-figures/beyblade/beyblade-x/",
+      "domain": "thetoybarn.co.uk",
+      "category": "shop",
+      "region": "UK",
+      "type": "retailer",
+      "platform": "bxc",
+      "currency": "GBP",
+      "productCount": 5,
+      "sources": [
+        "bxc"
+      ]
+    },
+    {
+      "name": "Tomodachi Game Italia",
+      "url": "https://tomodachigameitalia.it",
+      "domain": "tomodachigameitalia.it",
+      "category": "shop",
+      "region": "IT",
+      "type": "specialist",
+      "lang": "it",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Toupies Beyblade",
+      "url": "https://toupies-beyblade.fr/categorie-produit/toupies-beyblade-x/",
+      "domain": "toupies-beyblade.fr",
+      "category": "shop",
+      "region": "FR",
+      "type": "specialist",
+      "platform": "woocommerce",
+      "currency": "EUR",
+      "productCount": 24,
+      "sources": [
+        "aphrody-search",
+        "bxc"
+      ]
+    },
+    {
+      "name": "Toy Planet",
+      "url": "https://www.toyplanet.com/",
+      "domain": "toyplanet.com",
+      "category": "shop",
+      "region": "EU",
+      "type": "retailer",
+      "platform": "bxc",
+      "currency": "EUR",
+      "productCount": 1,
+      "sources": [
+        "aphrody-search"
+      ]
+    },
+    {
+      "name": "Toys on Fire",
+      "url": "https://www.toysonfire.ca/shop/category/beyblade-60",
+      "domain": "toysonfire.ca",
+      "category": "shop",
+      "region": "INT",
+      "type": "retailer",
+      "platform": "jsonld",
+      "currency": "USD",
+      "productCount": 14,
+      "sources": [
+        "aphrody-search",
+        "websearch"
+      ]
+    },
+    {
+      "name": "Toys\"R\"Us España",
+      "url": "https://www.toysrus.es/",
+      "domain": "toysrus.es",
+      "category": "shop",
+      "region": "EU",
+      "type": "retailer",
+      "platform": "link-only",
+      "currency": "EUR",
+      "productCount": 0,
+      "sources": [
+        "aphrody-search"
+      ]
+    },
+    {
+      "name": "ToyShnip",
+      "url": "https://www.toyshnip.com/",
+      "domain": "toyshnip.com",
+      "category": "shop",
+      "region": "US",
+      "type": "retailer",
+      "platform": "link-only",
+      "currency": "USD",
+      "productCount": 0,
+      "sources": [
+        "websearch"
+      ]
+    },
+    {
+      "name": "ToyWiz",
+      "url": "https://toywiz.com/beyblade/beyblade-x/",
+      "domain": "toywiz.com",
+      "category": "shop",
+      "region": "US",
+      "type": "specialist",
+      "platform": "bxc",
+      "currency": "USD",
+      "productCount": 1,
+      "sources": [
+        "aphrody-search",
+        "websearch"
+      ]
+    },
+    {
+      "name": "Toyworld Australia",
+      "url": "https://www.toyworld.com.au/collections/beyblade",
+      "domain": "toyworld.com.au",
+      "category": "shop",
+      "region": "INT",
+      "type": "retailer",
+      "platform": "bxc",
+      "currency": "USD",
+      "productCount": 44,
+      "sources": [
+        "aphrody-search"
+      ]
+    },
+    {
+      "name": "Toyworld Australia (Gamesmen)",
+      "url": "https://www.gamesmen.com.au",
+      "domain": "gamesmen.com.au",
+      "category": "shop",
+      "region": "AU",
+      "type": "retailer",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Trinity Hobby",
+      "url": "https://trinityhobby.com",
+      "domain": "trinityhobby.com",
+      "category": "shop",
+      "region": "CA",
+      "type": "retailer",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Valhalla Hobby",
+      "url": "https://valhallahobby.com",
+      "domain": "valhallahobby.com",
+      "category": "shop",
+      "region": "US",
+      "type": "retailer",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "VEDES",
+      "url": "https://www.vedes.com",
+      "domain": "vedes.com",
+      "category": "shop",
+      "region": "DE",
+      "type": "retailer",
+      "lang": "de",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "XS Leksaker",
+      "url": "https://www.xsleksaker.se",
+      "domain": "xsleksaker.se",
+      "category": "shop",
+      "region": "SE",
+      "type": "retailer",
+      "lang": "sv",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Young Toys Mall (KR officiel)",
+      "url": "https://youngtoysmall.com",
+      "domain": "youngtoysmall.com",
+      "category": "shop",
+      "region": "KR",
+      "type": "official",
+      "lang": "ko",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Zatu Games",
+      "url": "https://www.board-game.co.uk/product/beyblade-x-eu-dranzer/",
+      "domain": "board-game.co.uk",
+      "category": "shop",
+      "region": "UK",
+      "type": "retailer",
+      "platform": "jsonld",
+      "currency": "GBP",
+      "productCount": 1,
+      "sources": [
+        "websearch"
+      ]
+    },
+    {
+      "name": "Beyblade Official (X/Twitter)",
+      "url": "https://x.com/beyblade_info",
+      "domain": "x.com",
+      "category": "social",
+      "region": "JP",
+      "lang": "ja",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Zankye (YouTube)",
+      "url": "https://www.youtube.com/user/zankye",
+      "domain": "youtube.com",
+      "category": "social",
+      "region": "INT",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Beypointer (tournois US)",
+      "url": "https://www.beypointer.com",
+      "domain": "beypointer.com",
+      "category": "tournament",
+      "region": "US",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Challonge (brackets)",
+      "url": "https://challonge.com",
+      "domain": "challonge.com",
+      "category": "tournament",
+      "region": "INT",
+      "lang": "en",
+      "sources": [
+        "rpbey"
+      ]
+    },
+    {
+      "name": "WBO Challonge",
+      "url": "https://worldbeyblade.challonge.com",
+      "domain": "worldbeyblade.challonge.com",
+      "category": "tournament",
+      "region": "INT",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    },
+    {
+      "name": "Beyblade Wiki (Fandom)",
+      "url": "https://beyblade.fandom.com/wiki/Beyblade_X",
+      "domain": "beyblade.fandom.com",
+      "category": "wiki",
+      "region": "INT",
+      "lang": "en",
+      "sources": [
+        "rpbey"
+      ]
+    },
+    {
+      "name": "Metal Fight Beyblade Wiki (Fandom)",
+      "url": "https://mfbeyblade.fandom.com",
+      "domain": "mfbeyblade.fandom.com",
+      "category": "wiki",
+      "region": "INT",
+      "lang": "en",
+      "sources": [
+        "discovered"
+      ]
+    }
+  ]
+}
