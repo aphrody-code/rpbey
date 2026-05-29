@@ -60,10 +60,13 @@ export type WboCombo = z.infer<typeof WboComboSchema>;
 
 // ── Frame d'anime (→ table `anime_frames` @rpbey/db). ──
 // Miroir exact des colonnes : seriesId/episodeId résolus à l'import (le scraper
-// ne connaît que le slug + episodeNumber), source figée à "fancaps", sourceId =
-// id image fancaps, imageUrl/thumbUrl = URLs CDN proxifiées (cdn.rpbey.fr).
+// ne connaît que le slug + episodeNumber), sourceId unique par source,
+// imageUrl/thumbUrl = URLs HD re-hébergées au moment de l'import.
+//   - "fancaps" : sourceId = id image fancaps, imageUrl/thumbUrl = CDN proxifié.
+//   - "fandom"  : sourceId = `<wiki>:<pageId>` (id de fichier MediaWiki, stable),
+//                 imageUrl = URL static.wikia.nocookie.net directe (fetchable).
 export const AnimeFrameImportSchema = z.object({
-  source: z.literal("fancaps"),
+  source: z.enum(["fancaps", "fandom"]),
   sourceId: z.string().min(1),
   sourceUrl: z.url().nullish(),
   episodeNumber: z.number().int().positive().nullish(),
