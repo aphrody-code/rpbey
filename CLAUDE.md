@@ -58,6 +58,10 @@ Raison : better-auth écrit des `Date`. Conséquences : écrire une colonne **au
 - `packages/discordx/` — **fork discordx** vendu : fournit `@rpbey/discordx`, `@rpbey/di` (tsyringe registry), `@rpbey/pagination`. Ignoré par oxlint/oxfmt.
 - `@rose-griffon/challonge` (v3) — client Challonge canonique : API v1 + **scraper via `@aphrody-code/bxc`** (curl-impersonate Chrome, transports dans `src/transports/`). `@rose-griffon/challonge-core` — logique de brackets pure (modèle/manager/viewer).
 
+### Crawling & RAG X.com (Twitter)
+
+Pour comprendre le fonctionnement de la session de crawling, l'indexation Redis et la recherche RAG Gemini sur le métagame, se référer à **`docs/crawling-rag-x.md`**.
+
 ### Bot — invariants runtime (compile mais casse au runtime si violés)
 
 - **`import type` casse la DI tsyringe** : efface `design:paramtypes` → injection `undefined`. Toute classe injectée = `import { Class }`.
