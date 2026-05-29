@@ -72,6 +72,7 @@ résout là (couvert par le symlink `data`).
 - **Next est pinné en canary** (`16.3.0-canary.32` dans le catalog racine) — politique « canary/nightly partout ». Le canary corrige le panic JSX radix `<SlotClone>` qui bloquait le FS cache Turbopack en 16.2.6.
 - **Build = `next build --turbopack`** (script `build`) + `experimental.turbopackFileSystemCacheForBuild: true`. Mesuré : compile **cold ~25 s, warm ~1.1 s** (vs ~41 s webpack). Ne pas revenir à webpack sans raison.
 - Libs server-only lourdes dans `serverExternalPackages` (googleapis, puppeteer, xlsx, cheerio, sharp…) → pas bundlées = compile plus rapide.
+- **`.next/cache` Turbopack peut devenir STALE** : un build _warm_ échoue sur un import fantôme d'une version revertée d'un fichier, gelée dans le cache (vécu : `import { getPartsRandom }` supprimé sur disque mais toujours dans le cache). Signature = **`bunx tsc --noEmit` = 0 mais `next build` casse** sur un export « doesn't exist » (Turbopack bundle le `src`, `tsc` lit les `.d.ts`). Fix : `rm -rf apps/web/.next/cache` puis rebuild cold. À soupçonner après un fichier édité/reverté par une session parallèle.
 
 ## 3ter. Standalone sur VPS — nginx & systemd
 
@@ -94,6 +95,7 @@ résout là (couvert par le symlink `data`).
 - **Charger un JSON de `data/`** : toujours `loadJsonSafe("data/X.json")` de `@/lib/data-cache`
   (FS en dev/standalone, fetch CDN sur Vercel). **Jamais** `path.join(process.cwd(), "apps/web/data/X.json")`
   — en dev `cwd=apps/web` → chemin doublé inexistant, et le `fs` direct casse sur Vercel (FS absent).
+- **`component={Link}` depuis un SERVER component** (Next 16) : passer `next/link` directement → erreur RSC « Functions cannot be passed directly to Client Components ». Utiliser le wrapper `@/components/ui/NextLink` (re-export `"use client"` de `next/link`). Dans un client component (`"use client"`), `next/link` direct reste OK. **`tsc` ne voit PAS cette erreur** — seul `next build` la révèle (frontière server/client du bundler, pas un type).
 
 ## 5. Auth (better-auth)
 
@@ -144,3 +146,12 @@ retourne `null` si non-admin). Sans ça l'action est invocable par n'importe que
   - **Résolution des URLs d'images pour le SEO** : Ajout du helper `getAbsoluteImageUrl` dans `seo-utils.ts` pour s'assurer que toutes les balises meta Open Graph (`og:image` / `twitter:image`) utilisent des URLs absolues complètes avec protocole et hôte.
   - **CTA Flottant Discord** : Masquage automatique du CTA flottant sur toutes les pages `/comparateur*` (via `usePathname`) pour maximiser l'espace visuel et ne pas encombrer l'interface analytique et la comparaison des prix.
   - **Améliorations de la Page de Comparaison** : Ajout de badges "MEILLEUR PRIX" sur l'offre la moins chère, d'une barre de spread visuelle pour situer les prix, de l'affichage des devises d'origine, et d'un style de boutons plus dynamique et épuré avec dégradés.
+
+## 10. Anime — frames / galerie (captures CDN, façon « Google Images »)
+
+Captures HQ frame-par-frame réutilisées par le **gacha** (cartes des persos non dessinés, backgrounds) et indexées par la **recherche globale** (résultats visuels).
+
+- **Table** `anime_frames` (`@rpbey/db`, `mode:"string"`) — `uniqueIndex(source, sourceId)`. Source actuelle : `fancaps` (n'a QUE **Beyblade X** ; les autres saisons exigent des sources alternatives / wikis Fandom).
+- **Contrat** `@rpbey/api-contract` : `anime.ts` (`AnimeFrame*`), `scrapers.ts` (`AnimeFrameImport*`). **DAL** server-only `server/dal/anime.ts` (`listAnimeFrames` filtre `series/episode/character` jsonb `@>`/`q`/`notable` + curseur ; `listAnimeFramesForIndex`). **Route** `/api/v1/anime/frames` (OpenAPI → SDK hey-api). **GraphQL** `animeFrames`. **Recherche** : catégorie `"frame"` + champ `thumbnail`, §12 de `global-search.ts` (frames `isNotable`).
+- **Page** `/anime/[slug]/galerie` (RSC ; grille + lightbox = `GalerieClient` client, MUI v9 `styled()` + `sx`). CTA « Galerie » depuis `SeriesDetail`.
+- **Import** : `apps/web/scripts/import-anime-frames.ts` lit `apps/web/data/anime-frames/<slug>.json` (**gitignored, régénérable — la DB + le CDN sont la vérité**), fetch → **sharp PNG + oxipng lossless** → CDN `/var/www/cdn/static/rpb-dashboard/anime/<slug>/epNN/frame-<id>.png` (dir **`ubuntu:ubuntu`** — sinon `sudo chown`, le reste de `/var/www/cdn/static` est `www-data`) → upsert idempotent/resumable (`onConflictDoUpdate` sur `[source,sourceId]`). Scrapers amont : `scrape-anime-frames.ts` (fancaps, via **bxc** profil `static` — IP VPS blacklistée), `map-character-episodes.ts` + `merge-frames-characters.ts` (Fandom api.php, épisodes marquants → `isNotable=true`).
