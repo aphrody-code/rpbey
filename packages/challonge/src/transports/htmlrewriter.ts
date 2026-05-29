@@ -35,12 +35,13 @@ import { parseBracketSvg, type BracketMatch } from "../scrapers/bracket-svg";
 import {
   type ScrapedMatch,
   type ScrapedParticipant,
-  type ScrapedStanding,
   type ScrapedTournament,
   type ScrapedTournamentMetadata,
 } from "../types";
-import { bracketSideFromRound } from "../types";
-import { normalizeSets, setsToLegacyString } from "../scores";
+import {
+  snapshotToScrapedTournament as mapSnapshot,
+  type ChallongeSnapshotLike,
+} from "../mappers/snapshot";
 
 export type { BracketMatch, BracketPlayer } from "../scrapers/bracket-svg";
 
@@ -257,105 +258,27 @@ export async function fetchPublicTournamentJson(
 // Snapshot path — maps ChallongeTournamentSnapshot → ScrapedTournament
 // ---------------------------------------------------------------------------
 
+/**
+ * Local façade preserved for `parseModuleToScrapedTournament`. Delegates to the
+ * unified, bxc-free mapper (`../mappers/snapshot`) in htmlrewriter mode (no
+ * `extras`), additively stamping SVG `x`/`y` coords from `bracketMatches` when
+ * present. On the `/module` path `bracketMatches` is always empty, so the
+ * coord-stamping branch is inert and the output stays golden-identical.
+ *
+ * The `ChallongeTournamentSnapshot` is structurally assignable to the mapper's
+ * local `ChallongeSnapshotLike`, so no bxc type crosses into the pure module.
+ */
 function snapshotToScrapedTournament(
   slug: string,
   snap: ChallongeTournamentSnapshot,
-  _bracketMatches: BracketMatch[],
+  bracketMatches: BracketMatch[],
 ): ScrapedTournament {
-  const t = snap.tournament;
-  const tournamentType = t.tournament_type ?? "single elimination";
-
-  // Derive the maximum positive (winners-bracket) round for GF detection.
-  const maxPositiveRound = snap.matches.reduce(
-    (acc, m) => (m.round > 0 && m.round > acc ? m.round : acc),
-    0,
-  );
-
-  // Map participants.
-  const participants: ScrapedParticipant[] = snap.participants.map((p) => ({
-    id: p.id,
-    name: p.display_name,
-    seed: p.seed,
-    challongeUsername: null,
-    challongeProfileUrl: null,
-    challongeUserId: null,
-    emailHash: null,
-    portraitUrl: p.portrait_url ?? null,
-    finalRank: null,
-    clinched: false,
-    metadata: null,
-  }));
-
-  // Map matches.
-  const matches: ScrapedMatch[] = snap.matches.map((m) => {
-    // `m.games` is number[][] — each inner array is [p1Score, p2Score].
-    const sets = normalizeSets(m.games);
-    const round = m.round;
-    return {
-      id: m.id,
-      identifier: m.raw_identifier,
-      round,
-      bracketSide: bracketSideFromRound(round, tournamentType, round === maxPositiveRound),
-      player1Id: m.player1?.id ?? null,
-      player2Id: m.player2?.id ?? null,
-      winnerId: m.winner_id,
-      loserId: m.loser_id,
-      scores: setsToLegacyString(sets),
-      sets,
-      state: m.state,
-      forfeited: m.forfeited ?? null,
-      optional: null,
-      startedAt: null,
-      underwayAt: m.underway_at ?? null,
-      completedAt: null,
-      createdAt: null,
-      updatedAt: null,
-      attachmentCount: null,
-      hasAttachment: m.has_attachment ?? null,
-      suggestedPlayOrder: null,
-      groupId: null,
-    };
+  return mapSnapshot(snap as unknown as ChallongeSnapshotLike, {
+    slug,
+    url: `https://challonge.com/${slug}`,
+    withSvgCoords: true,
+    bracketMatches,
   });
-
-  // Map standings from derived standings array.
-  const standings: ScrapedStanding[] = snap.standings.map((s) => ({
-    rank: s.rank,
-    name: s.display_name,
-    challongeUsername: null,
-    challongeProfileUrl: null,
-    wins: s.wins,
-    losses: s.losses,
-    stats: {
-      finalRoundReached: s.final_round_reached,
-      seed: s.seed,
-    },
-  }));
-
-  // Extract slug from full_url when available.
-  const canonicalUrl = snap.tournament.full_url ?? `https://challonge.com/${slug}`;
-
-  const metadata: ScrapedTournamentMetadata = {
-    id: t.id,
-    name: t.name ?? slug,
-    url: canonicalUrl,
-    state: t.state,
-    type: tournamentType,
-    participantsCount: snap.participants.length,
-    startedAt: null,
-    completedAt: null,
-    game: null,
-    subdomain: null,
-  };
-
-  return {
-    metadata,
-    participants,
-    matches,
-    standings,
-    stations: [],
-    log: [],
-    raw: snap,
-  };
 }
 
 // ---------------------------------------------------------------------------

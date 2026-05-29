@@ -100,6 +100,10 @@ export interface ScrapedMatch {
   suggestedPlayOrder?: number | null;
   /** Round-robin group id, if applicable. */
   groupId?: number | null;
+  /** Horizontal pixel coordinate from the bracket SVG (when withSvgCoords). */
+  x?: number;
+  /** Vertical pixel coordinate from the bracket SVG (when withSvgCoords). */
+  y?: number;
 }
 
 export interface ScrapedTournamentMetadata {

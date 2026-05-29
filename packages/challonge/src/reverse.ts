@@ -27,6 +27,7 @@
 
 import { extractReactRoots, getReactRoot, readDataAttrs } from "./extractors/react-props";
 import { parseInitialStoreState } from "./extractors/store-state";
+import { parseStandingsTable as parseStandingsTableImpl } from "./extractors/stores/standings";
 import {
   type LogEntriesProps,
   type ChallongeRawLogEntry,
@@ -35,6 +36,7 @@ import {
 } from "./extractors/react-props";
 import { BxcTransport, type BxcTransportOptions, type BxcFetchOptions } from "./transports/bxc";
 import { isRedirectInfo, type CurlImpersonateOptions } from "./transports/curl-impersonate-types";
+import { type Transport } from "./transports/transport";
 import { type ScrapedLogEntry, type ScrapedStanding } from "./types";
 
 // ---------------------------------------------------------------------------
@@ -44,6 +46,16 @@ import { type ScrapedLogEntry, type ScrapedStanding } from "./types";
 export interface ChallongeReverseOptions extends CurlImpersonateOptions {
   /** Default base URL. Default `https://challonge.com/fr`. */
   baseUrl?: string;
+  /**
+   * Custom transport (M2 — optional dependency injection).
+   *
+   * When provided, all fetches go through this transport instead of the
+   * default {@link BxcTransport} built from the `CurlImpersonateOptions`
+   * surface. Useful for tests (in-memory fake) or alternate impersonation
+   * backends. Defaults to a fresh `BxcTransport`, preserving the exact
+   * behaviour and public API of every existing consumer.
+   */
+  transport?: Transport;
 }
 
 export interface ReversePage {
@@ -68,32 +80,63 @@ export interface LogPageResult {
   totalCount: number;
 }
 
+/**
+ * Public store dump shape returned by `getStore()` — mirrors
+ * `window._initialStoreState.TournamentStore`. Named alias of the
+ * previously-inlined return type so the JSON and `/module`-fallback paths
+ * share one definition.
+ */
+export interface TournamentStore {
+  requested_plotter?: string;
+  tournament: Record<string, unknown>;
+  rounds: Array<Record<string, unknown>>;
+  matches_by_round: Record<string, Array<Record<string, unknown>>>;
+  third_place_match?: Record<string, unknown> | null;
+  consolation_matches?: Array<Record<string, unknown>>;
+  groups?: Array<Record<string, unknown>>;
+}
+
 // ---------------------------------------------------------------------------
 // ChallongeReverse
 // ---------------------------------------------------------------------------
 
 export class ChallongeReverse {
-  readonly #transport: BxcTransport;
+  /**
+   * Default BxcTransport, built from the `CurlImpersonateOptions` surface.
+   * `null` when a custom transport is injected via `options.transport`.
+   * Backs the {@link transport} getter so its return type stays `BxcTransport`
+   * for the (unchanged) default code path.
+   */
+  readonly #bxc: BxcTransport | null;
+  /** Active transport used for every fetch — injected one, or `#bxc`. */
+  readonly #transport: Transport;
   readonly #baseUrl: string;
   readonly #fetchDefaults: BxcFetchOptions;
 
   constructor(options: ChallongeReverseOptions = {}) {
     this.#baseUrl = options.baseUrl ?? "https://challonge.com/fr";
 
-    // Build BxcTransportOptions from the CurlImpersonateOptions surface.
-    const transportOpts: BxcTransportOptions = {
-      profile: options.profile,
-      cookiePath: options.cookiePath,
-      timeoutMs: options.timeoutSec != null ? options.timeoutSec * 1000 : undefined,
-      followRedirects: options.followRedirects,
-      maxRedirects: options.maxRedirects,
-      safeRedirects: options.safeRedirects,
-      extraHeaders: options.extraHeaders,
-      cache: options.cache,
-      log: options.log,
-    };
+    if (options.transport) {
+      // Injected transport: skip building a BxcTransport entirely.
+      this.#bxc = null;
+      this.#transport = options.transport;
+    } else {
+      // Build BxcTransportOptions from the CurlImpersonateOptions surface.
+      const transportOpts: BxcTransportOptions = {
+        profile: options.profile,
+        cookiePath: options.cookiePath,
+        timeoutMs: options.timeoutSec != null ? options.timeoutSec * 1000 : undefined,
+        followRedirects: options.followRedirects,
+        maxRedirects: options.maxRedirects,
+        safeRedirects: options.safeRedirects,
+        extraHeaders: options.extraHeaders,
+        cache: options.cache,
+        log: options.log,
+      };
 
-    this.#transport = new BxcTransport(transportOpts);
+      this.#bxc = new BxcTransport(transportOpts);
+      this.#transport = this.#bxc;
+    }
 
     // Per-call overrides stay empty at the instance level — all config lives in
     // the transport constructor, keeping the fetch() calls lean.
@@ -274,48 +317,92 @@ export class ChallongeReverse {
    *   - `third_place_match`, `consolation_matches`, `groups`
    *
    * This is the most complete browser-less view of the bracket.
+   *
+   * Strategy (resilient to Cloudflare flakiness on `.json`):
+   *   1. Try the public JSON endpoint `https://challonge.com/<slug>.json`
+   *      (served without a cookie session, but CF-flaky — intermittent 403).
+   *   2. On ANY failure (non-200, cross-host redirect, empty/invalid JSON),
+   *      fall back to the reliable `/<slug>/module` page and extract
+   *      `_initialStoreState.TournamentStore` via {@link parseInitialStoreState}.
+   *
+   * The return shape is identical for both paths.
    */
-  async getStore(slug: string): Promise<{
-    requested_plotter?: string;
-    tournament: Record<string, unknown>;
-    rounds: Array<Record<string, unknown>>;
-    matches_by_round: Record<string, Array<Record<string, unknown>>>;
-    third_place_match?: Record<string, unknown> | null;
-    consolation_matches?: Array<Record<string, unknown>>;
-    groups?: Array<Record<string, unknown>>;
-  }> {
-    // Use the public JSON endpoint — same payload as _initialStoreState.TournamentStore
-    // but served without requiring a cookie session.
+  async getStore(slug: string): Promise<TournamentStore> {
+    // 1) Primary: public JSON endpoint.
     const url = `https://challonge.com/${slug.replace(/^\//, "")}.json`;
-    const r = await this.#transport.fetch(url, this.#fetchDefaults);
-
-    if (isRedirectInfo(r)) {
+    try {
+      const r = await this.#transport.fetch(url, this.#fetchDefaults);
+      if (isRedirectInfo(r)) {
+        throw new ChallongeReverseError(
+          `Cross-host redirect blocked: ${r.originalUrl} to ${r.redirectUrl}`,
+          r.statusCode,
+          null,
+        );
+      }
+      if (r.status >= 400) {
+        throw new ChallongeReverseError(
+          `HTTP ${r.status} on ${url}`,
+          r.status,
+          r.body.slice(0, 400),
+        );
+      }
+      const parsed = JSON.parse(r.body) as TournamentStore;
+      // Treat a body with no tournament payload as a parse miss → fall back.
+      if (!parsed || typeof parsed !== "object" || !parsed.tournament) {
+        throw new ChallongeReverseError(
+          `Empty TournamentStore payload on ${url}`,
+          r.status,
+          r.body.slice(0, 400),
+        );
+      }
+      return parsed;
+    } catch (jsonErr) {
+      // 2) Fallback: /<slug>/module is the reliable route. Extract the
+      //    TournamentStore from window._initialStoreState.
+      const fallback = await this.#getStoreFromModule(slug);
+      if (fallback) return fallback;
+      // Nothing usable from either path — surface the original error.
+      if (jsonErr instanceof ChallongeReverseError) throw jsonErr;
       throw new ChallongeReverseError(
-        `Cross-host redirect blocked: ${r.originalUrl} to ${r.redirectUrl}`,
-        r.statusCode,
+        `Invalid JSON on ${url}: ${(jsonErr as Error).message}`,
+        0,
         null,
       );
     }
-    if (r.status >= 400) {
-      throw new ChallongeReverseError(`HTTP ${r.status} on ${url}`, r.status, r.body.slice(0, 400));
-    }
-    try {
-      return JSON.parse(r.body) as {
-        requested_plotter?: string;
-        tournament: Record<string, unknown>;
-        rounds: Array<Record<string, unknown>>;
-        matches_by_round: Record<string, Array<Record<string, unknown>>>;
-        third_place_match?: Record<string, unknown> | null;
-        consolation_matches?: Array<Record<string, unknown>>;
-        groups?: Array<Record<string, unknown>>;
-      };
-    } catch (err) {
-      throw new ChallongeReverseError(
-        `Invalid JSON on ${url}: ${(err as Error).message}`,
-        r.status,
-        r.body.slice(0, 400),
-      );
-    }
+  }
+
+  /**
+   * Fetch `/<slug>/module` and reconstruct the TournamentStore from the inline
+   * `window._initialStoreState`. Returns `null` when the store is absent or has
+   * no usable `tournament` payload.
+   */
+  async #getStoreFromModule(slug: string): Promise<TournamentStore | null> {
+    const page = await this.getPage(slug, "/module");
+    const state = parseInitialStoreState(page.body);
+    const store = state["TournamentStore"];
+    if (!isRecord(store) || !isRecord(store["tournament"])) return null;
+    return {
+      requested_plotter:
+        typeof store["requested_plotter"] === "string"
+          ? (store["requested_plotter"] as string)
+          : undefined,
+      tournament: store["tournament"] as Record<string, unknown>,
+      rounds: Array.isArray(store["rounds"])
+        ? (store["rounds"] as Array<Record<string, unknown>>)
+        : [],
+      matches_by_round: isRecord(store["matches_by_round"])
+        ? (store["matches_by_round"] as Record<string, Array<Record<string, unknown>>>)
+        : {},
+      third_place_match: isRecord(store["third_place_match"])
+        ? (store["third_place_match"] as Record<string, unknown>)
+        : null,
+      consolation_matches: Array.isArray(store["consolation_matches"])
+        ? (store["consolation_matches"] as Array<Record<string, unknown>>)
+        : undefined,
+      groups: Array.isArray(store["groups"])
+        ? (store["groups"] as Array<Record<string, unknown>>)
+        : undefined,
+    };
   }
 
   /** Raw fetch with all the React roots — useful for ad-hoc reverse work. */
@@ -325,7 +412,7 @@ export class ChallongeReverse {
 
   /** Expose the underlying transport for callers that need direct access. */
   get transport(): BxcTransport {
-    return this.#transport;
+    return this.#bxc ?? (this.#transport as BxcTransport);
   }
 }
 
@@ -361,64 +448,15 @@ function extractInitialStoreState(html: string): Record<string, unknown> | null 
 }
 
 /**
- * Parse standings from current Challonge HTML table layout.
+ * Parse standings from the current Challonge HTML table layout.
  *
- * Each rank row :
- *   <tr>
- *     <td class='rank'><div class='rank-tile -centered -sm'><h5 class='lbl'>1</h5></div></td>
- *     <td class='white text-center display_name'><strong>Berserk91X</strong></td>
- *     <td class='text-center'><a href="https://challonge.com/fr/users/berserk91">berserk91</a></td>
- *     <td>...trend-box -win/-loss...<a class="match-report" data-match-id="..." data-match-state="complete">...</a>...</td>
- *   </tr>
+ * Thin facade over the unified {@link parseStandingsTableImpl}
+ * (`./extractors/stores/standings`) — same name, same signature, same output.
+ * The implementation was deduplicated out of this module (and `scraper.ts`,
+ * which carried a byte-identical copy) into one pure, bundlable extractor.
  */
 function parseStandingsTable(html: string): ScrapedStanding[] {
-  const out: ScrapedStanding[] = [];
-  // Capture each <tr>..</tr> within the standings <tbody>.
-  // Avoid HTMLRewriter for nested-text aggregation simplicity.
-  const tbodyMatch = /<tbody>([\s\S]+?)<\/tbody>/.exec(html);
-  if (!tbodyMatch) return out;
-  const tbody = tbodyMatch[1] ?? "";
-  const rowRe = /<tr[^>]*>([\s\S]*?)<\/tr>/g;
-  let m: RegExpExecArray | null;
-  while ((m = rowRe.exec(tbody)) !== null) {
-    const row = m[1] ?? "";
-    const rankMatch = /<h5[^>]*class=['"][^'"]*lbl[^'"]*['"][^>]*>\s*(\d+)/.exec(row);
-    if (!rankMatch) continue;
-    const rank = parseInt(rankMatch[1] ?? "0", 10);
-    const nameMatch =
-      /<td[^>]*class=['"][^'"]*display_name[^'"]*['"][^>]*>[\s\S]*?<strong[^>]*>([\s\S]*?)<\/strong>/.exec(
-        row,
-      );
-    const rawName = (nameMatch?.[1] ?? "").trim();
-    const name = rawName.replace(/[✅✅]/g, "").trim();
-    const userMatch =
-      /<a[^>]+href=["']https:\/\/challonge\.com\/(?:[a-z]{2}\/)?users\/([^"']+)["'][^>]*>([^<]+)/.exec(
-        row,
-      );
-    const challongeUsername = userMatch?.[1] ?? null;
-    const trendBoxes = [
-      ...row.matchAll(/<div[^>]+class=['"][^'"]*trend-box\s+-(\w+)[^'"]*['"][^>]*>/g),
-    ];
-    let wins = 0;
-    let losses = 0;
-    for (const t of trendBoxes) {
-      const verdict = t[1] ?? "";
-      if (verdict === "win") wins++;
-      else if (verdict === "loss") losses++;
-    }
-    out.push({
-      rank,
-      name,
-      challongeUsername,
-      challongeProfileUrl: challongeUsername
-        ? `https://challonge.com/users/${challongeUsername}`
-        : null,
-      wins,
-      losses,
-      stats: { rank, name, wins, losses, challongeUsername },
-    });
-  }
-  return out;
+  return parseStandingsTableImpl(html);
 }
 
 function isRecord(v: unknown): v is Record<string, unknown> {

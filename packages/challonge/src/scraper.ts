@@ -25,11 +25,11 @@ import {
 } from "@aphrody-code/bxc/scrapers/challonge";
 import { resolveDefaultCookiePath } from "./utils/cookies";
 import { parseInitialStoreState } from "./extractors/store-state";
-import { normalizeSets, setsToLegacyString } from "./scores";
+import { type ChallongeSnapshotLike, snapshotToScrapedTournament } from "./mappers/snapshot";
+import { parseStandingsTable as parseStandingsTableShared } from "./extractors/stores/standings";
+import type { Transport } from "./transports/transport";
 import {
   type ScrapedLogEntry,
-  type ScrapedMatch,
-  type ScrapedParticipant,
   type ScrapedStanding,
   type ScrapedStation,
   type ScrapedTournament,
@@ -218,6 +218,15 @@ function activityFeedSettings(store: Record<string, unknown>): ActivityFeedSetti
 // Snapshot -> ScrapedTournament mapper
 // ---------------------------------------------------------------------------
 
+/**
+ * Façade over the unified {@link snapshotToScrapedTournament} mapper.
+ *
+ * Keeps the historical name/signature so the internal `scrape()` call-site stays
+ * untouched. Delegates to the shared rich-mode mapper by passing `extras`
+ * (presence of `extras` selects the scraper superset: merged participant extras
+ * + standings, rank guard, sorted participants, leaner match shape). Output is
+ * byte-for-byte identical to the former inlined implementation.
+ */
 function mapSnapshotToScrapedTournament(
   snap: ChallongeTournamentSnapshot,
   url: string,
@@ -228,122 +237,15 @@ function mapSnapshotToScrapedTournament(
     participantsExtra: NormalizedParticipant[];
   },
 ): ScrapedTournament {
-  const t = snap.tournament;
-  const participantsMap = new Map<number, NormalizedParticipant>();
-
-  // Seed from snapshot participants (come from TournamentStore players)
-  for (const p of snap.participants) {
-    participantsMap.set(p.id, {
-      id: p.id,
-      display_name: p.display_name ?? "",
-      seed: p.seed ?? 0,
-      username: p.challonge_username ?? null,
-      challongeUsername: p.challonge_username ?? null,
-      challongeProfileUrl: p.challonge_username
-        ? `https://challonge.com/users/${p.challonge_username}`
-        : null,
-      final_rank: p.final_rank ?? null,
-      checked_in: false,
-      portrait_url:
-        p.portrait_url ??
-        p.attached_participatable_portrait_url ??
-        p.attached_participant_portrait_url ??
-        null,
-    });
-  }
-
-  // Merge extras from /participants page
-  for (const p of extras.participantsExtra) {
-    if (p.id && p.id > 0) {
-      const existing = participantsMap.get(p.id);
-      if (existing) {
-        // Merge supplemental fields
-        existing.challongeUsername ??= p.challongeUsername;
-        existing.challongeProfileUrl ??= p.challongeProfileUrl;
-        existing.portrait_url ??= p.portrait_url;
-      } else {
-        participantsMap.set(p.id, p);
-      }
-    }
-  }
-
-  const standingsByName = new Map<string, ScrapedStanding>();
-  for (const s of extras.standings) standingsByName.set(s.name, s);
-
-  const participants: ScrapedParticipant[] = Array.from(participantsMap.values()).map((p) => {
-    const name = (p.display_name || "").trim().replace("✅", "");
-    const std = standingsByName.get(name);
-    return {
-      id: p.id,
-      name,
-      seed: p.seed ?? 0,
-      challongeUsername: std?.challongeUsername ?? p.challongeUsername ?? p.username ?? undefined,
-      challongeProfileUrl:
-        std?.challongeProfileUrl ??
-        p.challongeProfileUrl ??
-        (p.username ? `https://challonge.com/users/${p.username}` : undefined),
-      portraitUrl: p.portrait_url ?? undefined,
-      finalRank: std ? std.rank : (p.final_rank ?? undefined),
-    };
-  });
-
-  // Sanity guard: strip ranks when tournament not yet complete
-  const ranksSet = new Set(participants.map((p) => p.finalRank).filter((r) => r != null));
-  if (
-    ranksSet.size <= 2 &&
-    participants.length > 8 &&
-    (t.state === "pending" || t.state === "underway") &&
-    !snap.tournament.completed_at
-  ) {
-    for (const p of participants) p.finalRank = undefined;
-  }
-
-  const cleanMatches: ScrapedMatch[] = snap.matches.map((m) => {
-    const sets = normalizeSets(m.scores);
-    return {
-      id: m.id,
-      identifier: String(m.raw_identifier ?? m.identifier),
-      round: m.round,
-      player1Id: m.player1?.id ?? null,
-      player2Id: m.player2?.id ?? null,
-      winnerId: m.winner_id ?? null,
-      loserId: m.loser_id ?? null,
-      scores: setsToLegacyString(sets),
-      sets,
-      state: m.state,
-    };
-  });
-
-  const toIso = (v: unknown): string | null => {
-    if (typeof v !== "string" || v.length === 0) return null;
-    const d = new Date(v);
-    return Number.isNaN(d.getTime()) ? null : d.toISOString();
-  };
-
-  const raw: Record<string, unknown> = {
-    tournament: t,
-    matches_by_round: snap.matches_by_round,
-    participants: snap.participants,
-  };
-
-  return {
-    metadata: {
-      id: t.id ?? 0,
-      name: t.name ?? "Tournoi Importé",
-      url,
-      state: t.state ?? "unknown",
-      type: t.tournament_type ?? "unknown",
-      participantsCount: participants.length,
-      startedAt: toIso((snap.tournament as unknown as Record<string, unknown>)["started_at"]),
-      completedAt: toIso((snap.tournament as unknown as Record<string, unknown>)["completed_at"]),
+  return snapshotToScrapedTournament(snap as unknown as ChallongeSnapshotLike, {
+    url,
+    extras: {
+      standings: extras.standings,
+      stations: extras.stations,
+      log: extras.log,
+      participants: extras.participantsExtra,
     },
-    participants: participants.sort((a, b) => (a.finalRank ?? 999) - (b.finalRank ?? 999)),
-    matches: cleanMatches,
-    standings: extras.standings,
-    stations: extras.stations,
-    log: extras.log,
-    raw,
-  };
+  });
 }
 
 // ---------------------------------------------------------------------------
@@ -405,52 +307,14 @@ function storeToParticipants(store: Record<string, unknown>): NormalizedParticip
 }
 
 /**
- * Parse standings from current Challonge HTML table layout (no _initialStoreState).
- * Each <tr> has rank-tile + display_name strong + match-report trend-boxes (-win/-loss).
+ * Façade over the unified {@link parseStandingsTableShared} parser.
+ *
+ * Kept as a local name so the `fetchStandings` HTML-table fallback below stays
+ * untouched. The implementation now lives in `extractors/stores/standings.ts`
+ * (single source of truth shared with `reverse.ts`); output is identical.
  */
 function parseStandingsTable(html: string): ScrapedStanding[] {
-  const out: ScrapedStanding[] = [];
-  const tbodyMatch = /<tbody>([\s\S]+?)<\/tbody>/.exec(html);
-  if (!tbodyMatch) return out;
-  const tbody = tbodyMatch[1] ?? "";
-  const rowRe = /<tr[^>]*>([\s\S]*?)<\/tr>/g;
-  let m: RegExpExecArray | null;
-  while ((m = rowRe.exec(tbody)) !== null) {
-    const row = m[1] ?? "";
-    const rankMatch = /<h5[^>]*class=['"][^'"]*lbl[^'"]*['"][^>]*>\s*(\d+)/.exec(row);
-    if (!rankMatch) continue;
-    const rank = parseInt(rankMatch[1] ?? "0", 10);
-    const nameMatch =
-      /<td[^>]*class=['"][^'"]*display_name[^'"]*['"][^>]*>[\s\S]*?<strong[^>]*>([\s\S]*?)<\/strong>/.exec(
-        row,
-      );
-    const rawName = (nameMatch?.[1] ?? "").trim();
-    const name = rawName.replace(/[✅✅]/g, "").trim();
-    const userMatch =
-      /<a[^>]+href=["']https:\/\/challonge\.com\/(?:[a-z]{2}\/)?users\/([^"']+)["'][^>]*>([^<]+)/.exec(
-        row,
-      );
-    const challongeUsername = userMatch?.[1] ?? null;
-    let wins = 0;
-    let losses = 0;
-    for (const t of row.matchAll(/<div[^>]+class=['"][^'"]*trend-box\s+-(\w+)[^'"]*['"][^>]*>/g)) {
-      const verdict = t[1] ?? "";
-      if (verdict === "win") wins++;
-      else if (verdict === "loss") losses++;
-    }
-    out.push({
-      rank,
-      name,
-      challongeUsername,
-      challongeProfileUrl: challongeUsername
-        ? `https://challonge.com/users/${challongeUsername}`
-        : null,
-      wins,
-      losses,
-      stats: { rank, name, wins, losses, challongeUsername },
-    });
-  }
-  return out;
+  return parseStandingsTableShared(html);
 }
 
 /** Extract standings from a /standings page store. */
@@ -481,10 +345,19 @@ function storeToStandings(store: Record<string, unknown>): ScrapedStanding[] {
 
 export class ChallongeScraper {
   private readonly opts: ResolvedOptions;
-  private transport: BxcTransport | null = null;
+  private transport: Transport | null = null;
+  private readonly injectedTransport: Transport | null;
 
-  constructor(options: ChallongeScraperOptions = {}) {
+  /**
+   * @param options    Scraper options (cookie path, logger, legacy ignored).
+   * @param transport  Optional pre-built {@link Transport} to inject. When
+   *                   omitted, a {@link BxcTransport} is lazily constructed on
+   *                   first use (unchanged default behaviour). Added in M2;
+   *                   optional + trailing → no existing call-site breaks.
+   */
+  constructor(options: ChallongeScraperOptions = {}, transport?: Transport) {
     this.opts = resolveOptions(options);
+    this.injectedTransport = transport ?? null;
   }
 
   // ── Lifecycle ────────────────────────────────────────────────────────────
@@ -497,24 +370,28 @@ export class ChallongeScraper {
     // Intentionally empty — BxcTransport is created on first use.
   }
 
-  /** Close the underlying BxcTransport (releases curl FFI handle). */
+  /** Close the underlying transport (releases curl FFI handle for BxcTransport). */
   async close(): Promise<void> {
     if (this.transport) {
-      this.transport.close();
+      this.transport.close?.();
       this.transport = null;
     }
   }
 
   // ── Transport access ─────────────────────────────────────────────────────
 
-  private getTransport(): BxcTransport {
+  private getTransport(): Transport {
     if (!this.transport) {
-      const tOpts: BxcTransportOptions = {
-        profile: "chrome131",
-        log: this.opts.log,
-      };
-      if (this.opts.cookiePath) tOpts.cookiePath = this.opts.cookiePath;
-      this.transport = new BxcTransport(tOpts);
+      if (this.injectedTransport) {
+        this.transport = this.injectedTransport;
+      } else {
+        const tOpts: BxcTransportOptions = {
+          profile: "chrome131",
+          log: this.opts.log,
+        };
+        if (this.opts.cookiePath) tOpts.cookiePath = this.opts.cookiePath;
+        this.transport = new BxcTransport(tOpts);
+      }
     }
     return this.transport;
   }
@@ -796,9 +673,14 @@ export interface DumpChallongeRawResult {
 /**
  * Low-level HTML + store dump for a Challonge page sub-path.
  *
- * @param slug  Tournament slug (e.g. "B_TS5", "fr/T_SS1")
- * @param sub   Sub-path: "module" | "log" | "standings" | "participants" | ""
- * @param opts  Optional { page, cookiePath }
+ * @param slug       Tournament slug (e.g. "B_TS5", "fr/T_SS1")
+ * @param sub        Sub-path: "module" | "log" | "standings" | "participants" | ""
+ * @param opts       Optional { page, cookiePath }
+ * @param transport  Optional pre-built {@link Transport} to inject. When omitted,
+ *                   a {@link BxcTransport} is built internally and closed on exit
+ *                   (unchanged default). An injected transport is NOT closed —
+ *                   its lifecycle stays owned by the caller. Added in M2;
+ *                   optional + trailing → no existing call-site breaks.
  *
  * Returns raw HTML, the parsed _initialStoreState map, and — when
  * sub === "module" — a fully parsed ChallongeTournamentSnapshot.
@@ -807,6 +689,7 @@ export async function dumpChallongeRaw(
   slug: string,
   sub: "module" | "log" | "standings" | "participants" | "" = "",
   opts?: { page?: number; cookiePath?: string },
+  transport?: Transport,
 ): Promise<DumpChallongeRawResult> {
   const transportOpts: BxcTransportOptions = {
     profile: "chrome131",
@@ -814,7 +697,8 @@ export async function dumpChallongeRaw(
   };
   if (opts?.cookiePath) transportOpts.cookiePath = opts.cookiePath;
 
-  const transport = new BxcTransport(transportOpts);
+  const ownsTransport = !transport;
+  const xport: Transport = transport ?? new BxcTransport(transportOpts);
 
   try {
     const cleanSlug = slug.replace("https://challonge.com/", "").replace(/^\//, "");
@@ -822,7 +706,7 @@ export async function dumpChallongeRaw(
     if (opts?.page && opts.page > 1) path += `?page=${opts.page}`;
 
     const url = `https://challonge.com/${path}`;
-    const resp = await transport.fetch(url);
+    const resp = await xport.fetch(url);
 
     if (isRedirectInfo(resp)) {
       throw new CurlImpersonateError(
@@ -846,6 +730,6 @@ export async function dumpChallongeRaw(
 
     return { html, store, parsed };
   } finally {
-    transport.close();
+    if (ownsTransport) xport.close?.();
   }
 }

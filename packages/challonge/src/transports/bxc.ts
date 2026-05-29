@@ -75,6 +75,26 @@ export interface BxcTransportOptions {
   cache?: boolean;
   /** Logger hook. */
   log?: (msg: string) => void;
+  /**
+   * Structured observability hook. Called once per request (and on retry /
+   * cookie-expiry signals) with a flat event record. Left `undefined` by
+   * default — injection is opt-in and never assumed.
+   */
+  onEvent?: (e: TransportEvent) => void;
+}
+
+/**
+ * Flat observability event emitted by `BxcTransport`. `kind` discriminates the
+ * event; the remaining fields are best-effort context. Extra keys are allowed
+ * so callers can pipe straight into a JSON logger.
+ */
+export interface TransportEvent {
+  kind: string;
+  url?: string;
+  status?: number;
+  ms?: number;
+  fromCache?: boolean;
+  [k: string]: unknown;
 }
 
 // Per-call override options (subset of BxcTransportOptions)
@@ -186,6 +206,7 @@ export class BxcTransport implements Transport {
   readonly #extraHeaders: Record<string, string>;
   readonly #cookiePath: string | null;
   readonly #log: (msg: string) => void;
+  readonly #onEvent: ((e: TransportEvent) => void) | undefined;
   readonly #client: ImpersonatedClient;
 
   #cacheHits = 0;
@@ -200,6 +221,7 @@ export class BxcTransport implements Transport {
     this.#safeRedirects = opts.safeRedirects ?? false;
     this.#extraHeaders = opts.extraHeaders ?? {};
     this.#log = opts.log ?? (() => {});
+    this.#onEvent = opts.onEvent;
 
     // Cookie path: explicit > auto-discover
     const explicitPath = opts.cookiePath ?? null;
@@ -259,6 +281,13 @@ export class BxcTransport implements Transport {
       if (hit) {
         this.#cacheHits++;
         log(`cache hit: ${upgraded}`);
+        this.#onEvent?.({
+          kind: "transport.fetch",
+          url: upgraded,
+          status: hit.status,
+          ms: hit.timeSec * 1000,
+          fromCache: true,
+        });
         return {
           status: hit.status,
           finalUrl: hit.finalUrl,
@@ -277,8 +306,16 @@ export class BxcTransport implements Transport {
     if (cookiePath) {
       try {
         cookieHeader = loadCookieJar(cookiePath).forFetch;
-      } catch {
+      } catch (err) {
         cookieHeader = "";
+        // Jar missing / unreadable / expired — the only cookie signal we can
+        // surface deterministically here.
+        this.#onEvent?.({
+          kind: "cookie.expired",
+          url: upgraded,
+          path: cookiePath,
+          error: err instanceof Error ? err.message : String(err),
+        });
       }
     }
 
@@ -323,6 +360,14 @@ export class BxcTransport implements Transport {
         const location = impRes.headers.get("location") ?? "";
         const next = new URL(location, currentUrl).toString();
         if (!isPermittedRedirect(currentUrl, next)) {
+          this.#onEvent?.({
+            kind: "transport.redirect",
+            url: currentUrl,
+            status: impRes.status,
+            ms: timeSec * 1000,
+            redirectUrl: next,
+            blocked: true,
+          });
           return {
             type: "redirect",
             originalUrl: currentUrl,
@@ -371,6 +416,14 @@ export class BxcTransport implements Transport {
           bytes: bodyBytes,
         });
       }
+
+      this.#onEvent?.({
+        kind: "transport.fetch",
+        url: finalUrl,
+        status: impRes.status,
+        ms: timeSec * 1000,
+        fromCache: false,
+      });
 
       return {
         status: impRes.status,

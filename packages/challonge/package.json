@@ -18,6 +18,8 @@
     "./transport": "./src/transports/transport.ts",
     "./htmlrewriter": "./src/transports/htmlrewriter.ts",
     "./bracket-svg": "./src/scrapers/bracket-svg.ts",
+    "./mappers/snapshot": "./src/mappers/snapshot.ts",
+    "./extractors/stores/standings": "./src/extractors/stores/standings.ts",
     "./react-props": "./src/extractors/react-props.ts",
     "./store-state": "./src/extractors/store-state.ts",
     "./types": "./src/types.ts",

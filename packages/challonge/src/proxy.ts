@@ -26,6 +26,7 @@
  */
 
 import { BxcTransport } from "./transports/bxc";
+import type { Transport } from "./transports/transport";
 import { ChallongeReverse, ChallongeReverseError } from "./reverse";
 import {
   CurlImpersonateError,
@@ -146,9 +147,15 @@ function jsonOk(payload: unknown): Response {
  *   const server = startChallongeProxy({ port: 7878 });
  *   console.log(server.url.href);
  *   server.stop();
+ *
+ * @param transport Optional `Transport` override for the raw-HTML route
+ *   (`/:slug/page/:sub`). Defaults to a `BxcTransport` built from `opts`.
+ *   Lets callers inject a mock/alternative transport without touching the
+ *   shared `ChallongeReverse` pipeline.
  */
 export function startChallongeProxy(
   opts: ChallongeProxyOptions = {},
+  transport?: Transport,
 ): ReturnType<typeof Bun.serve> {
   const port = opts.port ?? DEFAULT_PORT;
   const token = opts.token;
@@ -166,11 +173,14 @@ export function startChallongeProxy(
 
   // Per-call profile overrides bypass the shared reverse client and use a
   // throwaway BxcTransport sized for one-off raw HTML dumps via /page/:sub.
-  const htmlTransport = new BxcTransport({
-    ...(opts.profile ? { profile: opts.profile } : {}),
-    ...(opts.cookiePath ? { cookiePath: opts.cookiePath } : {}),
-    log,
-  });
+  // An injected `transport` (optional) overrides this default.
+  const htmlTransport: Transport =
+    transport ??
+    new BxcTransport({
+      ...(opts.profile ? { profile: opts.profile } : {}),
+      ...(opts.cookiePath ? { cookiePath: opts.cookiePath } : {}),
+      log,
+    });
 
   /** Build the upstream URL `${baseUrl}/${slug}${sub}` for raw HTML dumps. */
   function upstreamUrl(slug: string, sub: string, reqUrl: URL): string {

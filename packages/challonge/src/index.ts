@@ -95,3 +95,17 @@ export {
   type ScraperBackend,
   type DiffEntry,
 } from "./shadow-mode";
+
+// Unified pure mappers/extractors (P2 — zero bxc, universally bundlable).
+export {
+  snapshotToScrapedTournament,
+  type ChallongeSnapshotLike,
+  type SnapshotMapperOptions,
+  type SnapshotMapperExtras,
+  type SnapshotParticipantExtra,
+  type SnapshotTournament,
+  type SnapshotParticipant,
+  type SnapshotMatch,
+  type SnapshotStanding,
+} from "./mappers/snapshot";
+export { parseStandingsTable } from "./extractors/stores/standings";
