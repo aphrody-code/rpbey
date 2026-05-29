@@ -178,6 +178,7 @@ export function ComparateurClient({
       part: [] as any[],
       tournament: [] as any[],
       blader: [] as any[],
+      lexicon: [] as any[],
     };
 
     if (!query || globalItems.length === 0) return grouped;
@@ -201,10 +202,11 @@ export function ComparateurClient({
       if (matchedGroup) {
         setOpenGroup(matchedGroup);
         setTab(0);
-      } else {
+      } else if (item.url) {
         window.location.href = item.url;
       }
-    } else {
+    } else if (item.url) {
+      // Le lexique n'a pas d'URL (terme purement informatif) → pas de navigation.
       window.location.href = item.url;
     }
   };
@@ -1157,6 +1159,57 @@ export function ComparateurClient({
                                 fontSize: "0.72rem",
                                 color: "text.secondary",
                                 fontWeight: 700,
+                              }}
+                            >
+                              {item.details}
+                            </Typography>
+                          </Box>
+                        ))}
+                      </Stack>
+                    </Box>
+                  )}
+
+                  {/* Category: Lexique */}
+                  {globalResults.lexicon.length > 0 && (
+                    <Box>
+                      <Typography
+                        variant="subtitle2"
+                        sx={{
+                          color: "text.secondary",
+                          fontWeight: 800,
+                          fontSize: "0.68rem",
+                          textTransform: "uppercase",
+                          letterSpacing: 1,
+                          mb: 1,
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 0.5,
+                        }}
+                      >
+                        📖 Lexique ({globalResults.lexicon.length})
+                      </Typography>
+                      <Stack spacing={0.5}>
+                        {globalResults.lexicon.slice(0, 4).map((item: any) => (
+                          <Box key={item.id} sx={{ p: 1, borderRadius: 2 }}>
+                            <Typography sx={{ fontWeight: 800, fontSize: "0.82rem" }}>
+                              {item.title}{" "}
+                              <Typography
+                                component="span"
+                                variant="caption"
+                                sx={{
+                                  color: "text.secondary",
+                                  fontWeight: 600,
+                                }}
+                              >
+                                · {item.subtitle}
+                              </Typography>
+                            </Typography>
+                            <Typography
+                              variant="caption"
+                              sx={{
+                                color: "text.secondary",
+                                display: "block",
+                                mt: 0.25,
                               }}
                             >
                               {item.details}

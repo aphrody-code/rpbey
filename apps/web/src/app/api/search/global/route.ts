@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { db, schema } from "@/lib/db";
 import { loadCatalog, computeGroups, groupSlug } from "@/lib/bx-catalog";
+import { loadJsonSafe } from "@/lib/data-cache";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -9,7 +10,7 @@ export interface GlobalSearchItem {
   id: string;
   title: string;
   subtitle: string;
-  category: "product" | "part" | "tournament" | "blader";
+  category: "product" | "part" | "tournament" | "blader" | "lexicon";
   url: string;
   details?: string;
   badge?: string;
@@ -102,7 +103,12 @@ export async function GET() {
     // 4. Fetch Bladers from rankings (SATR, Stardust, WB)
     const bladersMap = new Map<
       string,
-      { satrRank?: number; stardustRank?: number; wbRank?: number; score?: number }
+      {
+        satrRank?: number;
+        stardustRank?: number;
+        wbRank?: number;
+        score?: number;
+      }
     >();
 
     const [satr, stardust, wb] = await Promise.all([
@@ -147,6 +153,27 @@ export async function GET() {
         url: `/rankings`,
         details: info.score ? `Score de saison: ${info.score} pts` : "Blader compétitif",
         badge: "Blader",
+      });
+    }
+
+    // 5. Lexique Beyblade X (termes/glossaire — généré par scrape-reddit.ts)
+    const lexique = await loadJsonSafe<{
+      terms?: Array<{
+        term: string;
+        definition: string;
+        category: string;
+        popularityTier?: string;
+      }>;
+    }>("data/beyblade-lexique.json");
+    for (const t of lexique?.terms ?? []) {
+      items.push({
+        id: `lexicon-${t.term}`,
+        title: t.term,
+        subtitle: t.category,
+        category: "lexicon",
+        url: "",
+        details: t.definition,
+        badge: t.popularityTier && t.popularityTier !== "Low" ? t.popularityTier : "Lexique",
       });
     }
 

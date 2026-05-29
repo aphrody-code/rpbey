@@ -1,5 +1,6 @@
 import { db, schema, count, isNotNull } from "@/lib/db";
 import { loadCatalog, computeGroups, groupSlug } from "@/lib/bx-catalog";
+import { loadJsonSafe } from "@/lib/data-cache";
 import type { BxProductGroup } from "@/lib/bx-catalog";
 
 // -------------------------------------------------------------
@@ -271,20 +272,14 @@ export async function getRecommendations(
     }
   }
 
-  // Load Reddit Hype Data if available
+  // Load Reddit Hype Data if available (via le loader canonique : FS en
+  // dev/standalone, fetch CDN sur Vercel — cf. data-cache.ts).
   let redditHypeScores: Record<string, number> = {};
-  try {
-    const fs = require("fs");
-    const path = require("path");
-    const hypePath = path.join(process.cwd(), "apps/web/data/reddit-hype.json");
-    if (fs.existsSync(hypePath)) {
-      const hypeReport = JSON.parse(fs.readFileSync(hypePath, "utf-8"));
-      if (hypeReport && hypeReport.hypeScores) {
-        redditHypeScores = hypeReport.hypeScores;
-      }
-    }
-  } catch (e) {
-    console.warn("Failed to load reddit-hype.json, using defaults.", e);
+  const hypeReport = await loadJsonSafe<{
+    hypeScores?: Record<string, number>;
+  }>("data/reddit-hype.json");
+  if (hypeReport?.hypeScores) {
+    redditHypeScores = hypeReport.hypeScores;
   }
 
   // 4. Calculate Scores for Each Product Group
@@ -424,12 +419,11 @@ export async function getRecommendations(
     }
 
     // Blend Reddit Hype Score if available (weight: 25% Reddit, 30% newness, 30% popularity/shop count, 15% demand)
+    // Match sur le code du produit DB, sinon sur le code du groupe catalogue.
     let redditScore = 0.5;
-    if (matchedDbProduct && matchedDbProduct.code) {
-      const code = matchedDbProduct.code.toUpperCase();
-      if (redditHypeScores[code] !== undefined) {
-        redditScore = redditHypeScores[code];
-      }
+    const hypeCode = (matchedDbProduct?.code ?? group.code)?.toUpperCase();
+    if (hypeCode && redditHypeScores[hypeCode] !== undefined) {
+      redditScore = redditHypeScores[hypeCode];
     }
 
     const hypeScore = 0.3 * newness + 0.3 * popularity + 0.15 * demand + 0.25 * redditScore;
