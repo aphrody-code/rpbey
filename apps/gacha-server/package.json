@@ -1,31 +1,31 @@
 {
-	"name": "@rose-griffon/gacha-server",
-	"version": "0.1.0",
-	"private": true,
-	"type": "module",
-	"description": "Serveur de jeu gacha (REST :5050) — recréé depuis le contrat client apps/bot/src/lib/gacha-api.ts. Backé par la DB partagée @rpbey/db.",
-	"scripts": {
-		"dev": "bun --watch src/index.ts",
-		"start": "bun src/index.ts",
-		"type-check": "tsc --noEmit",
-		"smoke": "bun test/smoke.ts",
-		"test:concurrency": "bun test/concurrency.ts"
-	},
-	"dependencies": {
-		"@colyseus/auth": "^0.17.9",
-		"@colyseus/bun-websockets": "^0.17.13",
-		"@colyseus/monitor": "^0.17.8",
-		"@colyseus/playground": "^0.17.12",
-		"@colyseus/schema": "^4.0.25",
-		"@colyseus/tools": "^0.17.19",
-		"@rpbey/api-contract": "workspace:*",
-		"@rpbey/db": "workspace:*",
-		"colyseus": "^0.17.10",
-		"drizzle-orm": "^0.45.2",
-		"express": "^5.2.1"
-	},
-	"devDependencies": {
-		"@types/express": "^5.0.6",
-		"typescript": "catalog:"
-	}
+  "name": "@rose-griffon/gacha-server",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Serveur de jeu gacha (REST :5050) — recréé depuis le contrat client apps/bot/src/lib/gacha-api.ts. Backé par la DB partagée @rpbey/db.",
+  "type": "module",
+  "scripts": {
+    "dev": "bun --watch src/index.ts",
+    "start": "bun src/index.ts",
+    "type-check": "tsc --noEmit",
+    "smoke": "bun test/smoke.ts",
+    "test:concurrency": "bun test/concurrency.ts"
+  },
+  "dependencies": {
+    "@colyseus/auth": "^0.17.9",
+    "@colyseus/bun-websockets": "^0.17.13",
+    "@colyseus/monitor": "^0.17.8",
+    "@colyseus/playground": "^0.17.12",
+    "@colyseus/schema": "^4.0.25",
+    "@colyseus/tools": "^0.17.19",
+    "@rpbey/api-contract": "workspace:*",
+    "@rpbey/db": "workspace:*",
+    "colyseus": "^0.17.10",
+    "drizzle-orm": "^0.45.2",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "typescript": "catalog:"
+  }
 }
