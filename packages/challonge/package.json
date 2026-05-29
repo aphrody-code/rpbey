@@ -1,6 +1,6 @@
 {
   "name": "@rose-griffon/challonge",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "private": true,
   "description": "Challonge client canonique (API v1 + scraper bxc curl-impersonate Chrome 131 via bun:ffi)",
   "type": "module",

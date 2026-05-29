@@ -208,7 +208,7 @@
     },
     "packages/challonge": {
       "name": "@rose-griffon/challonge",
-      "version": "3.0.0",
+      "version": "4.0.0",
       "dependencies": {
         "@aphrody-code/bxc": "^0.5.2",
         "lru-cache": "^11.3.5",

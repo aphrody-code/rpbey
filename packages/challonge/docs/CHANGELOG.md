@@ -1,5 +1,44 @@
 # Changelog — `@rose-griffon/challonge`
 
+## v4.0.0 (2026-05-29) — Refonte modulaire (crawler + transports/engine pluggables + write v2.1 + schémas Zod)
+
+Refonte interne en cinq phases (P1→P5). La surface publique est **préservée** : tous les ajouts sont additifs (nouveaux sub-paths, nouveaux exports), aucun consommateur existant n'a à changer. Le package passe de 13 à 33 sub-paths exportés.
+
+### P1 — Parseur store-state unifié + interface Transport
+
+- **`./store-state`** : `parseInitialStoreState` extrait `window._initialStoreState` une seule fois, partagé par tous les chemins d'extraction (scraper, reverse, crawler).
+- **`./transport`** : interface neutre `Transport` (`fetch(url, opts?)` + `close?()`) extraite de `BxcTransport`. Permet l'injection par interface (transport conforme injectable, fake en test) sans dupliquer les types (ré-exportés sous des noms neutres).
+
+### P2 — Mappers snapshot unifiés + injection Transport
+
+- **`./mappers/snapshot`** : `snapshotToScrapedTournament`, mapper **pur** (zéro bxc, universellement bundlable) qui fusionne le snapshot `module` et les pièces auxiliaires (log/standings/participants) en un `ScrapedTournament` canonique unique. Le scraper et le crawler le ré-utilisent verbatim — aucune réimplémentation.
+- `ChallongeScraper` accepte désormais un `Transport` injecté (défaut `BxcTransport`).
+
+### P3 — Registry d'extracteurs + nouvelles routes publiques
+
+- **`./extractors/registry`** : `STORE_EXTRACTORS` / `ROUTE_EXTRACTORS` + `registerRouteExtractor` / `getRouteExtractor` — table d'extracteurs purs, bundlables.
+- Stores existants extraits en modules dédiés (`./extractors/stores/standings|log|participants`) et **nouveaux extracteurs** : `./extractors/stores/user-profile` (`parseUserProfile`), `./extractors/stores/org-landing` (`parseOrgLanding`), `./extractors/stores/games-catalog` (`parseGamesCatalog` / `findGameByName`).
+
+### P4 — Crawler multi-page + recherche + FetchEngine/cache pluggables
+
+- **`./clients/crawler`** : `crawlTournament` / `crawlOrg` — orchestration polie d'une frontière ordonnée (`/module` → `/log?page=N` → `/standings` → `/participants`) fusionnée par le mapper P2. Pacing same-host, dedup d'URL visitées, retry sur 403/429/5xx, `AbortSignal` honoré à chaque await, hook `onEvent` (`crawler.page` / `crawler.retry`).
+- **`./clients/search`** : `searchTournaments` (endpoint JSON AJAX avec fallback scrape SSR), `listGames` / `findGame` (catalogue `/games.json`, cache disque P3, résolution de `game_id` stable).
+- **`./core/fetch-engine`** : moteur HTTP pluggable derrière l'interface `FetchEngine` — `ImpersonatedClientEngine` (FFI bxc), `NativeFetchEngine` (`globalThis.fetch`, bundlable), `CdpEngine` (Chrome DevTools, **import dynamique lazy** : le CDP n'est chargé qu'au besoin réel).
+- **`./core/cache`** : cache pluggable derrière l'interface `Cache` — `LruCache` (éviction par bytes + TTL, défauts 50 MB / 15 min).
+- **Capture HAR** : `scripts/har-capture.ts` (dev-only) enregistre une session réelle et émet `data/challonge-endpoints.manifest.json` (endpoints XHR/API internes confirmés) — source de vérité versionnée des routes, rejouable.
+
+### P5 — Client write v2.1 OAuth + attachments v1 + schémas Zod
+
+- **`./write`** : client **write** v2.1 unifié (JSON:API, OAuth 2.0 `client_credentials`, header `Authorization-Type: v1|v2`, token bearer caché jusqu'à ~5 min de l'expiry) — extrait de `apps/bot` (mutations tournois/participants/matches). Le bot devient un **shim** (`apps/bot/src/lib/challonge.ts`) ré-exportant `getChallongeClient`. N'utilise que `globalThis.fetch` (pas de bxc) → reste bundlable. Exporté sous l'alias `ChallongeWriteClient` (collision avec le `ChallongeClient` orchestrateur de `./client`).
+- **Attachments v1** sur `ChallongeApi` : `listAttachments` / `getAttachment` / `createAttachment` / `updateAttachment` / `deleteAttachment`.
+- **`./schemas`** : schémas Zod partagés (`ChallongeTournamentSchema` & co), validateurs runtime alignés sur les interfaces `Scraped*` de `./types`, bundlables.
+
+### Divers
+
+- **tsconfig durci** : `lib: ESNext + DOM + DOM.Iterable`, `types: ["bun"]`, `strict`. La baseline `tsc --noEmit` passe de **52 à 0** erreur.
+- **Tests** : 299 tests / 19 fichiers / 0 fail (les tests bxc se mettent en `skip` quand le `.so` libcurl-impersonate est absent).
+- **Rétrocompat publique préservée** : aucun export retiré, aucun changement de signature ; uniquement des ajouts.
+
 ## v3.0.0 (2026-05-10) — Bxc migration
 
 ### Breaking changes (internals only, public API preserved)
