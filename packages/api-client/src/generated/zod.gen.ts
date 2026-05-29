@@ -250,3 +250,160 @@ export const zListPartsResponse = z.object({
         totalPages: z.number()
     })
 });
+
+export const zGetRankingsQuery = z.object({
+    kind: z.enum([
+        'satr',
+        'wb',
+        'stardust',
+        'global'
+    ]).optional().default('global'),
+    view: z.enum(['ranking', 'career']).optional().default('ranking'),
+    season: z.int().gte(1).lte(9007199254740991).optional(),
+    search: z.string().optional(),
+    page: z.int().gte(1).lte(9007199254740991).optional().default(1),
+    pageSize: z.int().gte(1).lte(200).optional().default(100)
+});
+
+/**
+ * OK
+ */
+export const zGetRankingsResponse = z.object({
+    ok: z.literal(true),
+    data: z.object({
+        kind: z.enum([
+            'satr',
+            'wb',
+            'stardust',
+            'global'
+        ]),
+        view: z.enum(['ranking', 'career']),
+        season: z.int().gte(-9007199254740991).lte(9007199254740991).nullable(),
+        items: z.array(z.union([
+            z.object({
+                id: z.string(),
+                rank: z.int().gte(-9007199254740991).lte(9007199254740991),
+                playerName: z.string(),
+                score: z.int().gte(-9007199254740991).lte(9007199254740991),
+                wins: z.int().gte(-9007199254740991).lte(9007199254740991),
+                losses: z.int().gte(-9007199254740991).lte(9007199254740991),
+                participation: z.int().gte(-9007199254740991).lte(9007199254740991),
+                winRate: z.string(),
+                pointsAverage: z.string(),
+                createdAt: z.string().nullish(),
+                updatedAt: z.string().nullish()
+            }),
+            z.object({
+                id: z.string(),
+                name: z.string(),
+                totalWins: z.int().gte(-9007199254740991).lte(9007199254740991),
+                totalLosses: z.int().gte(-9007199254740991).lte(9007199254740991),
+                tournamentWins: z.int().gte(-9007199254740991).lte(9007199254740991),
+                tournamentsCount: z.int().gte(-9007199254740991).lte(9007199254740991),
+                history: z.unknown().nullish(),
+                linkedUserId: z.string().nullish(),
+                createdAt: z.string().nullish(),
+                updatedAt: z.string().nullish()
+            }),
+            z.object({
+                id: z.string(),
+                playerName: z.string(),
+                userId: z.string().nullish(),
+                points: z.int().gte(-9007199254740991).lte(9007199254740991),
+                wins: z.int().gte(-9007199254740991).lte(9007199254740991),
+                losses: z.int().gte(-9007199254740991).lte(9007199254740991),
+                tournamentWins: z.int().gte(-9007199254740991).lte(9007199254740991),
+                tournamentsCount: z.int().gte(-9007199254740991).lte(9007199254740991),
+                avatarUrl: z.string().nullish(),
+                updatedAt: z.string().nullish()
+            })
+        ])),
+        total: z.int().gte(0).lte(9007199254740991),
+        totalPages: z.int().gte(0).lte(9007199254740991),
+        lastUpdate: z.string().nullable()
+    })
+});
+
+export const zGetPublicUserPath = z.object({
+    id: z.string()
+});
+
+/**
+ * OK
+ */
+export const zGetPublicUserResponse = z.object({
+    ok: z.literal(true),
+    data: z.object({
+        user: z.object({
+            id: z.string(),
+            name: z.string().nullish(),
+            image: z.string().nullish(),
+            createdAt: z.string().nullish(),
+            discordTag: z.string().nullish(),
+            nickname: z.string().nullish(),
+            serverAvatar: z.string().nullish(),
+            globalName: z.string().nullish(),
+            roles: z.array(z.string()).nullish(),
+            profile: z.object({
+                bladerName: z.string().nullish(),
+                favoriteType: z.string().nullish(),
+                experience: z.string().nullish(),
+                bio: z.string().nullish(),
+                wins: z.int().gte(-9007199254740991).lte(9007199254740991),
+                losses: z.int().gte(-9007199254740991).lte(9007199254740991),
+                tournamentWins: z.int().gte(-9007199254740991).lte(9007199254740991),
+                rankingPoints: z.int().gte(-9007199254740991).lte(9007199254740991),
+                challongeUsername: z.string().nullish(),
+                twitterHandle: z.string().nullish(),
+                tiktokHandle: z.string().nullish()
+            }).nullable(),
+            counts: z.object({
+                tournaments: z.int().gte(0).lte(9007199254740991),
+                matches: z.int().gte(0).lte(9007199254740991)
+            })
+        }).nullable()
+    })
+});
+
+export const zGetUserMatchesPath = z.object({
+    id: z.string()
+});
+
+export const zGetUserMatchesQuery = z.object({
+    limit: z.int().gte(1).lte(100).optional().default(20),
+    offset: z.int().gte(0).lte(9007199254740991).optional().default(0)
+});
+
+/**
+ * OK
+ */
+export const zGetUserMatchesResponse = z.object({
+    ok: z.literal(true),
+    data: z.object({
+        matches: z.array(z.object({
+            id: z.string(),
+            tournamentId: z.string().nullish(),
+            tournamentName: z.string().nullish(),
+            round: z.int().gte(-9007199254740991).lte(9007199254740991).nullish(),
+            score: z.string().nullish(),
+            state: z.string().nullish(),
+            createdAt: z.string().nullish(),
+            player1: z.object({
+                id: z.string(),
+                name: z.string().nullish(),
+                image: z.string().nullish(),
+                bladerName: z.string().nullish()
+            }).nullable(),
+            player2: z.object({
+                id: z.string(),
+                name: z.string().nullish(),
+                image: z.string().nullish(),
+                bladerName: z.string().nullish()
+            }).nullable(),
+            winnerId: z.string().nullish()
+        })),
+        total: z.int().gte(0).lte(9007199254740991),
+        limit: z.int().gt(0).lte(9007199254740991),
+        offset: z.int().gte(0).lte(9007199254740991)
+    })
+});

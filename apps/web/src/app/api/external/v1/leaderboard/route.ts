@@ -1,6 +1,6 @@
 import crypto from "node:crypto";
 import { NextResponse } from "next/server";
-import { db, schema, desc, eq, ilike, or } from "@/lib/db";
+import { getExternalLeaderboardSnapshot } from "@/server/dal/rankings";
 
 export const revalidate = 60; // Cache for 1 minute
 
@@ -35,47 +35,8 @@ export async function GET(request: Request) {
   }
 
   try {
-    // 1. Get Ranking System Config
-    const rankingConfig = await db.query.rankingSystem.findFirst();
-
-    // 2. Get Bey-Tamashii Tournaments
-    const tournamentRows = await db.query.tournaments.findMany({
-      where: or(
-        ilike(schema.tournaments.name, "%Tamashii%"),
-        ilike(schema.tournaments.name, "%Tamashi%"),
-      ),
-      with: {
-        tournamentCategory: true,
-        tournamentParticipants: {
-          with: {
-            user: {
-              columns: {
-                id: true,
-                name: true,
-                username: true,
-                discordTag: true,
-                image: true,
-              },
-              with: { profiles: true },
-            },
-          },
-        },
-        tournamentMatches: {
-          with: {
-            user_player1Id: {
-              columns: { id: true, name: true, username: true },
-            },
-            user_player2Id: {
-              columns: { id: true, name: true, username: true },
-            },
-            user_winnerId: {
-              columns: { id: true, name: true, username: true },
-            },
-          },
-        },
-      },
-      orderBy: desc(schema.tournaments.date),
-    });
+    const { rankingConfig, tournamentRows, players, activeSeasonRow } =
+      await getExternalLeaderboardSnapshot();
 
     const tournaments = tournamentRows.map((t) => ({
       ...t,
@@ -91,38 +52,6 @@ export async function GET(request: Request) {
         winner: m.user_winnerId,
       })),
     }));
-
-    // 3. Get All Players with Profiles (for global leaderboard)
-    const players = await db.query.profiles.findMany({
-      with: {
-        user: {
-          columns: {
-            id: true,
-            name: true,
-            username: true,
-            discordTag: true,
-            image: true,
-          },
-        },
-      },
-      orderBy: desc(schema.profiles.rankingPoints),
-    });
-
-    // 4. Get active season if any
-    const activeSeasonRow = await db.query.rankingSeasons.findFirst({
-      where: eq(schema.rankingSeasons.isActive, true),
-      with: {
-        seasonEntries: {
-          with: {
-            user: {
-              columns: { id: true, name: true, username: true },
-              with: { profiles: true },
-            },
-          },
-          orderBy: desc(schema.seasonEntries.points),
-        },
-      },
-    });
 
     const activeSeason = activeSeasonRow
       ? {

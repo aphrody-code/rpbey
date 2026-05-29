@@ -4,7 +4,13 @@ import { readdir, readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { revalidatePath } from "next/cache";
 import { requireAdmin } from "@/lib/auth-utils";
-import { db, schema, eq, ilike } from "@/lib/db";
+import {
+  getBladerByName,
+  linkBlader,
+  listBladers,
+  listUsersForLinking,
+  replaceSatrSeason,
+} from "@/server/dal/rankings";
 
 // Season config: which BBT numbers belong to each season
 // Saison 1 = BBT 1-11
@@ -353,12 +359,10 @@ export async function syncSatrRanking(season = 2) {
       source = "compute";
     }
 
-    await db.transaction(async (tx) => {
-      await tx.delete(schema.satrRankings).where(eq(schema.satrRankings.season, season));
-      if (rankings.length > 0) {
-        await tx.insert(schema.satrRankings).values(rankings.map((r) => ({ ...r, season })));
-      }
-    });
+    await replaceSatrSeason(
+      season,
+      rankings.map((r) => ({ ...r, season })),
+    );
 
     revalidatePath("/tournaments/satr");
     return { success: true, count: rankings.length, source };
@@ -450,10 +454,8 @@ export async function getPlayerTournamentMatches(tournamentSlug: string, playerN
 export async function linkSatrBladers() {
   if (!(await requireAdmin())) throw new Error("Forbidden");
   try {
-    const bladers = await db.query.satrBladers.findMany();
-    const users = await db.query.users.findMany({
-      columns: { id: true, name: true, discordTag: true },
-    });
+    const bladers = await listBladers("satr");
+    const users = await listUsersForLinking();
 
     let linkedCount = 0;
     for (const blader of bladers) {
@@ -464,10 +466,7 @@ export async function linkSatrBladers() {
       );
 
       if (match && blader.linkedUserId !== match.id) {
-        await db
-          .update(schema.satrBladers)
-          .set({ linkedUserId: match.id })
-          .where(eq(schema.satrBladers.id, blader.id));
+        await linkBlader("satr", blader.id, match.id);
         linkedCount++;
       }
     }
@@ -524,9 +523,7 @@ export async function getTournamentMeta(slug: string) {
 
 export async function getSatrBladerByName(name: string) {
   try {
-    const blader = await db.query.satrBladers.findFirst({
-      where: ilike(schema.satrBladers.name, name),
-    });
+    const blader = await getBladerByName("satr", name);
     return { success: true, data: blader ?? null };
   } catch (error) {
     return { success: false, error: String(error) };

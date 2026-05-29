@@ -13,7 +13,12 @@ import { RankingModeSwitcher } from "@/components/rankings/RankingModeSwitcher";
 import { SeasonTabs } from "@/components/rankings/SeasonTabs";
 import { WbTabs } from "@/components/rankings/WbTabs";
 import { type WbBlader, type WbRanking } from "@/lib/types";
-import { db, schema, and, asc, count, desc, eq, ilike, sum } from "@/lib/db";
+import {
+  getBladerAggregateStats,
+  getRankingLastUpdate,
+  listCareerBladers,
+  listSeasonRankings,
+} from "@/server/dal/rankings";
 import { getWbSeasonStats } from "@/server/actions/wb";
 
 const DiscordIcon = (props: SvgIconProps) => (
@@ -92,63 +97,31 @@ export default async function WbPage({ searchParams }: WbPageProps) {
     (async () => {
       try {
         if (mode === "ranking") {
-          const whereCondition = and(
-            eq(schema.wbRankings.season, season),
-            ...(searchQuery ? [ilike(schema.wbRankings.playerName, `%${searchQuery}%`)] : []),
-          );
-          const [rankings, countRows] = await Promise.all([
-            db.query.wbRankings.findMany({
-              where: whereCondition,
-              orderBy: asc(schema.wbRankings.rank),
-              limit: pageSize,
-              offset: (page - 1) * pageSize,
-            }),
-            db.select({ value: count() }).from(schema.wbRankings).where(whereCondition),
-          ]);
-          return { items: rankings, total: countRows[0]?.value ?? 0 };
+          return await listSeasonRankings({
+            kind: "wb",
+            season,
+            search: searchQuery || undefined,
+            limit: pageSize,
+            offset: (page - 1) * pageSize,
+          });
         } else {
-          const whereCondition = searchQuery
-            ? ilike(schema.wbBladers.name, `%${searchQuery}%`)
-            : undefined;
-          const [bladers, countRows] = await Promise.all([
-            db.query.wbBladers.findMany({
-              where: whereCondition,
-              orderBy: [desc(schema.wbBladers.tournamentWins), desc(schema.wbBladers.totalWins)],
-              limit: pageSize,
-              offset: (page - 1) * pageSize,
-            }),
-            db.select({ value: count() }).from(schema.wbBladers).where(whereCondition),
-          ]);
-          return { items: bladers, total: countRows[0]?.value ?? 0 };
+          return await listCareerBladers({
+            kind: "wb",
+            search: searchQuery || undefined,
+            limit: pageSize,
+            offset: (page - 1) * pageSize,
+          });
         }
       } catch (e) {
         console.error("Data fetch error:", e);
         return { items: [], total: 0 };
       }
     })(),
-    (async () => {
-      try {
-        const [stats] = await db
-          .select({
-            totalWins: sum(schema.wbBladers.totalWins),
-            totalLosses: sum(schema.wbBladers.totalLosses),
-            count: count(),
-          })
-          .from(schema.wbBladers);
-        return {
-          totalBladers: stats?.count ?? 0,
-          totalMatches: Math.floor(
-            ((Number(stats?.totalWins) || 0) + (Number(stats?.totalLosses) || 0)) / 2,
-          ),
-        };
-      } catch {
-        return { totalBladers: 0, totalMatches: 0 };
-      }
-    })(),
-    db.query.wbRankings.findFirst({
-      orderBy: desc(schema.wbRankings.updatedAt),
-      columns: { updatedAt: true },
-    }),
+    getBladerAggregateStats("wb").catch(() => ({
+      totalBladers: 0,
+      totalMatches: 0,
+    })),
+    getRankingLastUpdate("wb").then((updatedAt) => ({ updatedAt })),
     // Stats adaptées à la saison demandée (count tournois, participants uniques…)
     getWbSeasonStats(season),
   ]);

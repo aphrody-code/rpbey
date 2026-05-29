@@ -4,7 +4,7 @@
  */
 
 import { type Metadata } from "next";
-import { db, schema, eq } from "@/lib/db";
+import { getProfileMeta } from "@/server/dal/users";
 import PublicProfile from "./_components/PublicProfile";
 
 interface PageProps {
@@ -14,22 +14,7 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { id } = await params;
 
-  const userRow = await db.query.users.findFirst({
-    where: eq(schema.users.id, id),
-    columns: { name: true, image: true },
-    with: {
-      profiles: {
-        columns: {
-          bladerName: true,
-          rankingPoints: true,
-          wins: true,
-          losses: true,
-          tournamentWins: true,
-        },
-      },
-    },
-  });
-  const user = userRow ? { ...userRow, profile: userRow.profiles[0] ?? null } : null;
+  const user = await getProfileMeta(id);
 
   if (!user) {
     return {

@@ -7,6 +7,12 @@ import {
 } from "./comparateur";
 import { MetaResponseSchema } from "./meta";
 import { PartsQuerySchema, PartsListResponseSchema } from "./parts";
+import { RankingsQuerySchema, RankingsListResponseSchema } from "./rankings";
+import {
+  PublicUserResponseSchema,
+  UserMatchesQuerySchema,
+  UserMatchesResponseSchema,
+} from "./users";
 import { ErrorEnvelopeSchema, okEnvelope } from "./envelope";
 
 /**
@@ -16,11 +22,13 @@ import { ErrorEnvelopeSchema, okEnvelope } from "./envelope";
  */
 export interface RouteDef {
   method: "get" | "post" | "put" | "patch" | "delete";
-  path: string; // ex. "/recommend"
+  path: string; // ex. "/recommend", "/users/{id}"
   operationId: string;
   summary: string;
   tags: string[];
   query?: z.ZodObject;
+  /** Paramètres de chemin (ex. `id` pour `/users/{id}`) — tous typés `string`. */
+  pathParams?: string[];
   body?: z.ZodType;
   /** Schéma du payload (hors enveloppe) ; enveloppé en `{ ok, data }`. */
   response: z.ZodType;
@@ -92,6 +100,35 @@ const ROUTES: RouteDef[] = [
     query: PartsQuerySchema,
     response: PartsListResponseSchema,
   },
+  {
+    method: "get",
+    path: "/rankings",
+    operationId: "getRankings",
+    summary:
+      "Classements RPB (SATR / Wild Breakers / Stardust par saison ou carrière, ou leaderboard global pondéré).",
+    tags: ["rankings"],
+    query: RankingsQuerySchema,
+    response: RankingsListResponseSchema,
+  },
+  {
+    method: "get",
+    path: "/users/{id}",
+    operationId: "getPublicUser",
+    summary: "Profil joueur public (compte + profil agrégé) par identifiant.",
+    tags: ["users"],
+    pathParams: ["id"],
+    response: PublicUserResponseSchema,
+  },
+  {
+    method: "get",
+    path: "/users/{id}/matches",
+    operationId: "getUserMatches",
+    summary: "Historique de matchs paginé d'un joueur.",
+    tags: ["users"],
+    pathParams: ["id"],
+    query: UserMatchesQuerySchema,
+    response: UserMatchesResponseSchema,
+  },
 ];
 
 export function listRoutes(): readonly RouteDef[] {
@@ -135,7 +172,19 @@ export function buildOpenApiDocument(opts: OpenApiOptions = {}) {
         },
       },
     };
-    if (r.query) op.parameters = queryParameters(r.query);
+    const parameters: JsonSchema[] = [];
+    if (r.pathParams) {
+      for (const name of r.pathParams) {
+        parameters.push({
+          name,
+          in: "path",
+          required: true,
+          schema: { type: "string" },
+        });
+      }
+    }
+    if (r.query) parameters.push(...queryParameters(r.query));
+    if (parameters.length > 0) op.parameters = parameters;
     if (r.body) {
       op.requestBody = {
         required: true,

@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { type MetadataRoute } from "next";
-import { db, schema, asc, desc, eq } from "@/lib/db";
+import { listSitemapAnime, listSitemapProfiles, listSitemapTournaments } from "@/server/dal/infra";
 
 export const dynamic = "force-dynamic";
 
@@ -90,15 +90,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Dynamic Tournaments
   let tournamentRoutes: MetadataRoute.Sitemap = [];
   try {
-    const tournaments = await db.query.tournaments.findMany({
-      columns: { id: true, updatedAt: true },
-      orderBy: desc(schema.tournaments.updatedAt),
-      limit: 1000,
-    });
-
+    const tournaments = await listSitemapTournaments(1000);
     tournamentRoutes = tournaments.map((tournament) => ({
-      url: `${baseUrl}/tournaments/${tournament.id}`,
-      lastModified: tournament.updatedAt,
+      url: `${baseUrl}/tournaments/${tournament.path}`,
+      lastModified: tournament.lastModified,
       changeFrequency: "weekly" as const,
       priority: 0.7,
     }));
@@ -109,15 +104,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Dynamic Profiles (Publicly visible)
   let profileRoutes: MetadataRoute.Sitemap = [];
   try {
-    const profiles = await db.query.profiles.findMany({
-      columns: { userId: true, updatedAt: true },
-      orderBy: desc(schema.profiles.updatedAt),
-      limit: 1000,
-    });
-
+    const profiles = await listSitemapProfiles(1000);
     profileRoutes = profiles.map((profile) => ({
-      url: `${baseUrl}/profile/${profile.userId}`,
-      lastModified: profile.updatedAt,
+      url: `${baseUrl}/profile/${profile.path}`,
+      lastModified: profile.lastModified,
       changeFrequency: "weekly" as const,
       priority: 0.5,
     }));
@@ -128,28 +118,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Dynamic Anime Series & Episodes
   const animeRoutes: MetadataRoute.Sitemap = [];
   try {
-    const series = await db.query.animeSeries.findMany({
-      where: eq(schema.animeSeries.isPublished, true),
-      columns: { slug: true, updatedAt: true },
-      with: {
-        animeEpisodes: {
-          columns: { number: true, updatedAt: true },
-          orderBy: asc(schema.animeEpisodes.number),
-        },
-      },
-    });
-
+    const series = await listSitemapAnime();
     for (const s of series) {
       animeRoutes.push({
-        url: `${baseUrl}/anime/${s.slug}`,
-        lastModified: s.updatedAt,
+        url: `${baseUrl}/anime/${s.path}`,
+        lastModified: s.lastModified,
         changeFrequency: "weekly",
         priority: 0.6,
       });
-      for (const ep of s.animeEpisodes) {
+      for (const ep of s.episodes) {
         animeRoutes.push({
-          url: `${baseUrl}/anime/${s.slug}/${ep.number}`,
-          lastModified: ep.updatedAt,
+          url: `${baseUrl}/anime/${s.path}/${ep.number}`,
+          lastModified: ep.lastModified,
           changeFrequency: "monthly",
           priority: 0.5,
         });

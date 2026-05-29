@@ -3,8 +3,23 @@
 import { revalidatePath } from "next/cache";
 import { requireAdmin } from "@/lib/auth-utils";
 import { autoSyncRankingForTournament } from "@/lib/auto-sync-ranking";
-import { db, schema, and, eq, inArray } from "@/lib/db";
 import { ChallongeScraper } from "@/lib/scrapers/challonge-scraper";
+import {
+  clearTournamentStandings,
+  createImportedParticipant,
+  createImportedUserWithProfile,
+  findParticipant,
+  getRankingSystemConfig,
+  listCompletedTournamentIds,
+  listUsersForMerge,
+  listUsersWithProfileForImport,
+  mergeUserInto,
+  updateParticipantResult,
+  updateRankingSystemConfig,
+  upsertImportedMatch,
+  upsertImportedTournament,
+  upsertLibraryPart,
+} from "@/server/dal/infra";
 import { recalculateRankings } from "./ranking";
 
 function normalizeName(s: string | null | undefined): string {
@@ -34,14 +49,7 @@ export async function actionRecalculateRankings() {
 export async function actionMergeDuplicates() {
   if (!(await requireAdmin())) throw new Error("Forbidden");
   try {
-    const allUsersRows = await db.query.users.findMany({
-      with: {
-        profiles: true,
-        tournamentParticipants: true,
-        decks: true,
-        seasonEntries: true,
-      },
-    });
+    const allUsersRows = await listUsersForMerge();
     const allUsers = allUsersRows.map((u) => ({
       ...u,
       profile: u.profiles[0] ?? null,
@@ -66,26 +74,7 @@ export async function actionMergeDuplicates() {
       });
 
       if (bestMatch) {
-        await db
-          .update(schema.tournamentParticipants)
-          .set({ userId: bestMatch.id })
-          .where(eq(schema.tournamentParticipants.userId, stub.id));
-        await db
-          .update(schema.tournamentMatches)
-          .set({ player1Id: bestMatch.id })
-          .where(eq(schema.tournamentMatches.player1Id, stub.id));
-        await db
-          .update(schema.tournamentMatches)
-          .set({ player2Id: bestMatch.id })
-          .where(eq(schema.tournamentMatches.player2Id, stub.id));
-        await db
-          .update(schema.tournamentMatches)
-          .set({ winnerId: bestMatch.id })
-          .where(eq(schema.tournamentMatches.winnerId, stub.id));
-
-        if (stub.profile)
-          await db.delete(schema.profiles).where(eq(schema.profiles.id, stub.profile.id));
-        await db.delete(schema.users).where(eq(schema.users.id, stub.id));
+        await mergeUserInto(stub.id, bestMatch.id, stub.profile?.id ?? null);
         mergedCount++;
       }
     }
@@ -112,31 +101,16 @@ export async function actionImportTournament(slug: string) {
   try {
     const result = await scraper.scrape(slug);
 
-    await db
-      .insert(schema.tournaments)
-      .values({
-        id: tournamentId,
-        name: result.metadata.name,
-        challongeUrl: result.metadata.url,
-        challongeId: String(result.metadata.id || ""),
-        date: new Date().toISOString(),
-        status: "COMPLETE",
-        standings: result.standings as never,
-        categoryId: categoryId,
-        description: result.raw.description || "",
-      })
-      .onConflictDoUpdate({
-        target: schema.tournaments.id,
-        set: {
-          name: result.metadata.name,
-          challongeUrl: result.metadata.url,
-          challongeId: String(result.metadata.id || ""),
-          status: "COMPLETE",
-          standings: result.standings as never,
-          categoryId: categoryId,
-          description: result.raw.description || "",
-        },
-      });
+    await upsertImportedTournament({
+      id: tournamentId,
+      name: result.metadata.name,
+      challongeUrl: result.metadata.url,
+      challongeId: String(result.metadata.id || ""),
+      status: "COMPLETE",
+      standings: result.standings,
+      categoryId,
+      description: result.raw.description || "",
+    });
 
     const statsMap = new Map<number, { wins: number; losses: number }>();
     for (const m of result.matches) {
@@ -152,9 +126,7 @@ export async function actionImportTournament(slug: string) {
       }
     }
 
-    const allUsersRows = await db.query.users.findMany({
-      with: { profiles: true },
-    });
+    const allUsersRows = await listUsersWithProfileForImport();
     const allUsers = allUsersRows.map((u) => ({
       ...u,
       profile: u.profiles[0] ?? null,
@@ -163,8 +135,8 @@ export async function actionImportTournament(slug: string) {
 
     for (const p of result.participants) {
       const sName = normalizeName(p.name);
-      let matchedUser: { id: string; profile: (typeof allUsers)[number]["profile"] } | undefined =
-        allUsers.find((u) => {
+      let matchedUser: { id: string; profileId: string | null } | undefined = (() => {
+        const found = allUsers.find((u) => {
           return (
             normalizeName(u.name) === sName ||
             normalizeName(u.username) === sName ||
@@ -173,26 +145,16 @@ export async function actionImportTournament(slug: string) {
               normalizeName(u.username) === normalizeName(p.challongeUsername))
           );
         });
+        return found ? { id: found.id, profileId: found.profile?.id ?? null } : undefined;
+      })();
 
       if (!matchedUser) {
-        const [createdUser] = await db
-          .insert(schema.users)
-          .values({
-            id: crypto.randomUUID(),
-            name: p.name,
-            username: p.challongeUsername || `${normalizedSlug}_${sName}`,
-            email: `${p.challongeUsername || sName}@placeholder.rpb`,
-          })
-          .returning();
-        const [createdProfile] = await db
-          .insert(schema.profiles)
-          .values({
-            userId: createdUser!.id,
-            bladerName: p.name,
-            rankingPoints: 0,
-          })
-          .returning();
-        matchedUser = { id: createdUser!.id, profile: createdProfile ?? null };
+        matchedUser = await createImportedUserWithProfile({
+          name: p.name,
+          username: p.challongeUsername || `${normalizedSlug}_${sName}`,
+          email: `${p.challongeUsername || sName}@placeholder.rpb`,
+          bladerName: p.name,
+        });
       }
 
       if (!matchedUser) continue;
@@ -201,31 +163,22 @@ export async function actionImportTournament(slug: string) {
       const stats = statsMap.get(p.id) || { wins: 0, losses: 0 };
       const standing = result.standings.find((s) => normalizeName(s.name) === sName);
 
-      const existingPart = await db.query.tournamentParticipants.findFirst({
-        where: and(
-          eq(schema.tournamentParticipants.tournamentId, tournamentId),
-          eq(schema.tournamentParticipants.userId, matchedUser.id),
-        ),
-      });
+      const existingPart = await findParticipant(tournamentId, matchedUser.id);
 
       if (existingPart) {
-        await db
-          .update(schema.tournamentParticipants)
-          .set({
-            finalPlacement: standing?.rank || p.finalRank || 999,
-            wins: stats.wins,
-            losses: stats.losses,
-          })
-          .where(eq(schema.tournamentParticipants.id, existingPart.id));
+        await updateParticipantResult(existingPart.id, {
+          finalPlacement: standing?.rank || p.finalRank || 999,
+          wins: stats.wins,
+          losses: stats.losses,
+        });
       } else {
-        await db.insert(schema.tournamentParticipants).values({
+        await createImportedParticipant({
           tournamentId,
           userId: matchedUser.id,
           challongeParticipantId: String(p.id),
           finalPlacement: standing?.rank || p.finalRank || 999,
           wins: stats.wins,
           losses: stats.losses,
-          checkedIn: true,
         });
       }
     }
@@ -237,32 +190,17 @@ export async function actionImportTournament(slug: string) {
 
       if (!p1Id && !p2Id) continue;
 
-      await db
-        .insert(schema.tournamentMatches)
-        .values({
-          id: `tm-${tournamentId}-${m.id}`,
-          tournamentId,
-          challongeMatchId: String(m.id),
-          round: m.round,
-          player1Id: p1Id || null,
-          player2Id: p2Id || null,
-          winnerId: winnerId || null,
-          score: m.scores,
-          state: m.state,
-        })
-        .onConflictDoUpdate({
-          target: [
-            schema.tournamentMatches.tournamentId,
-            schema.tournamentMatches.challongeMatchId,
-          ],
-          set: {
-            player1Id: p1Id,
-            player2Id: p2Id,
-            winnerId,
-            score: m.scores,
-            state: m.state,
-          },
-        });
+      await upsertImportedMatch({
+        id: `tm-${tournamentId}-${m.id}`,
+        tournamentId,
+        challongeMatchId: String(m.id),
+        round: m.round,
+        player1Id: p1Id || null,
+        player2Id: p2Id || null,
+        winnerId: winnerId || null,
+        score: m.scores,
+        state: m.state,
+      });
     }
 
     revalidatePath("/admin/tournaments");
@@ -299,33 +237,17 @@ export async function actionTriggerSyncParts() {
 
     for (const part of scrapedParts) {
       const system = part.code?.startsWith("UX") ? "UX" : part.code?.startsWith("CX") ? "CX" : "BX";
-      await db
-        .insert(schema.parts)
-        .values({
-          externalId: part.id,
-          name: part.name,
-          type: "BLADE",
-          imageUrl: part.imageUrl,
-          system: system,
-          attack: part.specs.Attack || "50",
-          defense: part.specs.Defense || "50",
-          stamina: part.specs.Stamina || "50",
-          dash: part.specs.Dash || "50",
-          burst: part.specs.Burst || "50",
-        })
-        .onConflictDoUpdate({
-          target: schema.parts.externalId,
-          set: {
-            name: part.name,
-            imageUrl: part.imageUrl,
-            system: system,
-            attack: part.specs.Attack || undefined,
-            defense: part.specs.Defense || undefined,
-            stamina: part.specs.Stamina || undefined,
-            dash: part.specs.Dash || undefined,
-            burst: part.specs.Burst || undefined,
-          },
-        });
+      await upsertLibraryPart({
+        externalId: part.id,
+        name: part.name,
+        imageUrl: part.imageUrl,
+        system,
+        attack: part.specs.Attack || "50",
+        defense: part.specs.Defense || "50",
+        stamina: part.specs.Stamina || "50",
+        dash: part.specs.Dash || "50",
+        burst: part.specs.Burst || "50",
+      });
     }
     return {
       success: true,
@@ -343,15 +265,9 @@ export async function actionTriggerSyncParts() {
 export async function actionClearTournamentCache() {
   if (!(await requireAdmin())) throw new Error("Forbidden");
   try {
-    const tournaments = await db.query.tournaments.findMany({
-      where: inArray(schema.tournaments.status, ["COMPLETE", "ARCHIVED"]),
-    });
-
-    for (const t of tournaments) {
-      await db
-        .update(schema.tournaments)
-        .set({ standings: [] as never })
-        .where(eq(schema.tournaments.id, t.id));
+    const ids = await listCompletedTournamentIds();
+    for (const id of ids) {
+      await clearTournamentStandings(id);
     }
 
     revalidatePath("/rankings");
@@ -366,7 +282,7 @@ export async function actionClearTournamentCache() {
 
 // 6. Ranking Config
 export async function getRankingConfig() {
-  return await db.query.rankingSystem.findFirst();
+  return getRankingSystemConfig();
 }
 
 export async function actionUpdateRankingConfig(
@@ -374,22 +290,19 @@ export async function actionUpdateRankingConfig(
 ) {
   if (!(await requireAdmin())) throw new Error("Forbidden");
   if (!data) return { success: false, error: "Données manquantes" };
-  const config = await db.query.rankingSystem.findFirst();
+  const config = await getRankingSystemConfig();
   if (!config) return { success: false, error: "Config non trouvée" };
 
   try {
-    await db
-      .update(schema.rankingSystem)
-      .set({
-        participation: Number(data.participation),
-        firstPlace: Number(data.firstPlace),
-        secondPlace: Number(data.secondPlace),
-        thirdPlace: Number(data.thirdPlace),
-        matchWinWinner: Number(data.matchWinWinner),
-        matchWinLoser: Number(data.matchWinLoser),
-        top8: Number(data.top8),
-      })
-      .where(eq(schema.rankingSystem.id, config.id));
+    await updateRankingSystemConfig(config.id, {
+      participation: Number(data.participation),
+      firstPlace: Number(data.firstPlace),
+      secondPlace: Number(data.secondPlace),
+      thirdPlace: Number(data.thirdPlace),
+      matchWinWinner: Number(data.matchWinWinner),
+      matchWinLoser: Number(data.matchWinLoser),
+      top8: Number(data.top8),
+    });
     return { success: true, message: "Barème mis à jour." };
   } catch (error: unknown) {
     return {

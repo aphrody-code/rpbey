@@ -11,32 +11,25 @@ import {
   Typography,
 } from "@mui/material";
 import { PageHeader } from "@/components/ui/PageHeader";
-import { db, schema, count, desc, eq, ilike } from "@/lib/db";
+import {
+  countCareerBladers,
+  countSeasonRankings,
+  countStardustSourceTournaments,
+  getRankingLastUpdate,
+} from "@/server/dal/rankings";
 import { formatDateTime } from "@/lib/utils";
 import StardustSyncActions from "./_components/StardustSyncActions";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminStardustPage() {
-  const [rankingCountRows, bladerCountRows, tournamentCountRows, lastUpdate] = await Promise.all([
-    db.select({ value: count() }).from(schema.stardustRankings),
-    db.select({ value: count() }).from(schema.stardustBladers),
-    db
-      .select({ value: count() })
-      .from(schema.tournaments)
-      .innerJoin(
-        schema.tournamentCategories,
-        eq(schema.tournaments.categoryId, schema.tournamentCategories.id),
-      )
-      .where(ilike(schema.tournamentCategories.name, "%STARDUST%")),
-    db.query.stardustRankings.findFirst({
-      orderBy: desc(schema.stardustRankings.updatedAt),
-      columns: { updatedAt: true },
-    }),
+  const [rankingCount, bladerCount, tournamentCount, lastUpdatedAt] = await Promise.all([
+    countSeasonRankings("stardust"),
+    countCareerBladers("stardust"),
+    countStardustSourceTournaments(),
+    getRankingLastUpdate("stardust"),
   ]);
-  const rankingCount = rankingCountRows[0]?.value ?? 0;
-  const bladerCount = bladerCountRows[0]?.value ?? 0;
-  const tournamentCount = tournamentCountRows[0]?.value ?? 0;
+  const lastUpdate = { updatedAt: lastUpdatedAt };
 
   return (
     <Box sx={{ py: 4 }}>

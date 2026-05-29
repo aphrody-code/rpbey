@@ -17,88 +17,35 @@ import { FadeIn } from "@/components/ui/FadeIn";
 import { TrophyIcon } from "@/components/ui/Icons";
 import { getBotStatus } from "@/lib/bot";
 import { getDiscordStats } from "@/lib/discord-data";
-import { db, schema, count, desc, gte, inArray, lte } from "@/lib/db";
 import { formatDateTime } from "@/lib/utils";
+import { getAdminOverview } from "@/server/dal/infra";
 import AdminOverviewIntegrations from "./_components/AdminOverviewIntegrations";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminDashboardPage() {
-  const thirtyDaysAgo = new Date();
-  thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+  // Fetch all necessary data in parallel (DB agrégée via la DAL infra).
+  const [overview, discordStats, botStatus] = await Promise.all([
+    getAdminOverview(),
+    getDiscordStats(),
+    getBotStatus(),
+  ]);
 
-  // Stats for charts (Last 6 months)
-  const sixMonthsAgo = new Date();
-  sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 5);
-  sixMonthsAgo.setDate(1);
-
-  const thirtyDaysAgoIso = thirtyDaysAgo.toISOString();
-  const sixMonthsAgoIso = sixMonthsAgo.toISOString();
-
-  // Fetch all necessary data in parallel
-  const [
-    userCountRows,
-    activeTournamentRows,
-    profileCountRows,
-    discordStats,
-    usersLastMonthRows,
-    profilesLastMonthRows,
+  const {
+    userCount,
+    activeTournamentCount,
+    profileCount,
+    usersLastMonth,
+    profilesLastMonth,
+    tournamentTotalCount,
     recentUsers,
     recentTournaments,
     chartUsers,
     chartTournaments,
     chartMatches,
-    tournamentTotalRows,
-    botStatus,
-  ] = await Promise.all([
-    db.select({ value: count() }).from(schema.users),
-    db
-      .select({ value: count() })
-      .from(schema.tournaments)
-      .where(inArray(schema.tournaments.status, ["REGISTRATION_OPEN", "UNDERWAY", "CHECKIN"])),
-    db.select({ value: count() }).from(schema.profiles),
-    getDiscordStats(),
-    db
-      .select({ value: count() })
-      .from(schema.users)
-      .where(lte(schema.users.createdAt, thirtyDaysAgo)),
-    db
-      .select({ value: count() })
-      .from(schema.profiles)
-      .where(lte(schema.profiles.createdAt, thirtyDaysAgoIso)),
-    db.query.users.findMany({
-      limit: 5,
-      orderBy: desc(schema.users.createdAt),
-      columns: { name: true, createdAt: true },
-    }),
-    db.query.tournaments.findMany({
-      limit: 5,
-      orderBy: desc(schema.tournaments.createdAt),
-      columns: { name: true, createdAt: true },
-    }),
-    db.query.users.findMany({
-      where: gte(schema.users.createdAt, sixMonthsAgo),
-      columns: { createdAt: true },
-    }),
-    db.query.tournaments.findMany({
-      where: gte(schema.tournaments.createdAt, sixMonthsAgoIso),
-      columns: { createdAt: true },
-    }),
-    db.query.tournamentMatches.findMany({
-      columns: { state: true },
-    }),
-    db.select({ value: count() }).from(schema.tournaments),
-    getBotStatus(),
-  ]);
+  } = overview;
 
   const botOnline = botStatus?.status === "running";
-
-  const userCount = userCountRows[0]?.value ?? 0;
-  const activeTournamentCount = activeTournamentRows[0]?.value ?? 0;
-  const profileCount = profileCountRows[0]?.value ?? 0;
-  const usersLastMonth = usersLastMonthRows[0]?.value ?? 0;
-  const profilesLastMonth = profilesLastMonthRows[0]?.value ?? 0;
-  const tournamentTotalCount = tournamentTotalRows[0]?.value ?? 0;
 
   // Helper to group by month
   const groupByMonth = (dates: { createdAt: Date | string }[]) => {

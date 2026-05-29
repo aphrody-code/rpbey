@@ -1,5 +1,5 @@
 import "server-only";
-import { db, schema, eq } from "@/lib/db";
+import { getTournamentForAutoSync } from "@/server/dal/rankings";
 
 type SyncKind = "wb" | "satr" | "stardust" | "global" | null;
 
@@ -30,10 +30,7 @@ export async function autoSyncRankingForTournament(
   tournamentId: string,
 ): Promise<{ triggered: SyncKind; success: boolean; error?: string }> {
   try {
-    const t = await db.query.tournaments.findFirst({
-      where: eq(schema.tournaments.id, tournamentId),
-      with: { tournamentCategory: true },
-    });
+    const t = await getTournamentForAutoSync(tournamentId);
     if (!t) return { triggered: null, success: false, error: "Tournament not found" };
     const kind = classifyRanking(t.tournamentCategory?.name);
 

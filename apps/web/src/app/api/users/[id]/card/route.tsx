@@ -6,8 +6,7 @@
 import { ImageResponse } from "next/og";
 import type { NextRequest } from "next/server";
 import { loadInterFonts } from "@/lib/og/fonts";
-import { db, schema, eq } from "@/lib/db";
-import { getUserStats } from "@/lib/stats";
+import { getUserStats, userExists } from "@/server/dal/users";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -38,9 +37,7 @@ export async function GET(_request: NextRequest, { params }: RouteParams) {
   try {
     const { id: userId } = await params;
 
-    const user = await db.query.users.findFirst({
-      where: eq(schema.users.id, userId),
-    });
+    const user = await userExists(userId);
 
     if (!user) {
       return new Response(JSON.stringify({ error: "User not found" }), {

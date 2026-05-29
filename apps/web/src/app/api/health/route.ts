@@ -1,5 +1,5 @@
-import { db, sql } from "@/lib/db";
 import { NextResponse } from "next/server";
+import { pingDatabase } from "@/server/dal/infra";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -7,12 +7,7 @@ export const runtime = "nodejs";
 export async function GET() {
   const checks: Record<string, "ok" | "error"> = {};
 
-  try {
-    await db.execute(sql`SELECT 1`);
-    checks.db = "ok";
-  } catch {
-    checks.db = "error";
-  }
+  checks.db = (await pingDatabase()) ? "ok" : "error";
 
   const allOk = Object.values(checks).every((v) => v === "ok");
 

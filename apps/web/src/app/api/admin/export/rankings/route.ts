@@ -1,6 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { requireAdmin } from "@/lib/auth-utils";
-import { db, schema, desc, eq, gt } from "@/lib/db";
+import { listGlobalRankings, listSeasonEntries } from "@/server/dal/rankings";
 
 export async function GET(req: NextRequest) {
   if (!(await requireAdmin())) {
@@ -16,11 +16,7 @@ export async function GET(req: NextRequest) {
 
   if (seasonId && seasonId !== "current") {
     // Historical Data
-    const entries = await db.query.seasonEntries.findMany({
-      where: eq(schema.seasonEntries.seasonId, seasonId),
-      with: { user: true },
-      orderBy: desc(schema.seasonEntries.points),
-    });
+    const entries = await listSeasonEntries(seasonId);
 
     data = entries.map((e, i) => ({
       Rank: i + 1,
@@ -34,15 +30,7 @@ export async function GET(req: NextRequest) {
     }));
   } else {
     // Live Data
-    const rankings = await db.query.globalRankings.findMany({
-      where: gt(schema.globalRankings.points, 0),
-      with: { user: true },
-      orderBy: [
-        desc(schema.globalRankings.points),
-        desc(schema.globalRankings.tournamentWins),
-        desc(schema.globalRankings.wins),
-      ],
-    });
+    const rankings = await listGlobalRankings();
 
     data = rankings.map((p, i) => ({
       Rank: i + 1,

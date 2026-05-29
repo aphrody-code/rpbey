@@ -11,23 +11,23 @@ import {
   Typography,
 } from "@mui/material";
 import { PageHeader } from "@/components/ui/PageHeader";
-import { db, schema, count, desc } from "@/lib/db";
+import {
+  countCareerBladers,
+  countSeasonRankings,
+  getRankingLastUpdate,
+} from "@/server/dal/rankings";
 import { formatDateTime } from "@/lib/utils";
 import WbSyncActions from "./_components/WbSyncActions";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminWbPage() {
-  const [rankingCountRows, bladerCountRows, lastUpdate] = await Promise.all([
-    db.select({ value: count() }).from(schema.wbRankings),
-    db.select({ value: count() }).from(schema.wbBladers),
-    db.query.wbRankings.findFirst({
-      orderBy: desc(schema.wbRankings.updatedAt),
-      columns: { updatedAt: true },
-    }),
+  const [rankingCount, bladerCount, lastUpdatedAt] = await Promise.all([
+    countSeasonRankings("wb"),
+    countCareerBladers("wb"),
+    getRankingLastUpdate("wb"),
   ]);
-  const rankingCount = rankingCountRows[0]?.value ?? 0;
-  const bladerCount = bladerCountRows[0]?.value ?? 0;
+  const lastUpdate = { updatedAt: lastUpdatedAt };
 
   return (
     <Box sx={{ py: 4 }}>

@@ -1,7 +1,7 @@
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
-import { db, schema, eq } from "@/lib/db";
+import { getOwnProfile, upsertOwnProfile } from "@/server/dal/users";
 
 export async function GET() {
   try {
@@ -13,33 +13,11 @@ export async function GET() {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const profileRow = await db.query.profiles.findFirst({
-      where: eq(schema.profiles.userId, session.user.id),
-      with: {
-        user: {
-          with: {
-            tournamentParticipants: {
-              with: {
-                tournament: true,
-              },
-            },
-          },
-        },
-      },
-    });
+    const profile = await getOwnProfile(session.user.id);
 
-    if (!profileRow) {
+    if (!profile) {
       return NextResponse.json({ error: "Profile not found" }, { status: 404 });
     }
-
-    // Remap relation field names to Prisma-style
-    const profile = {
-      ...profileRow,
-      user: {
-        ...profileRow.user,
-        tournaments: profileRow.user.tournamentParticipants,
-      },
-    };
 
     return NextResponse.json(profile);
   } catch (error) {
@@ -59,44 +37,22 @@ export async function PATCH(request: Request) {
     }
 
     const body = await request.json();
-    const {
-      bladerName,
-      favoriteType,
-      experience,
-      bio,
-      challongeUsername,
-      deckBoxImage,
-      image, // Add image (avatar)
-    } = body;
+    const { bladerName, favoriteType, experience, bio, challongeUsername, deckBoxImage, image } =
+      body;
 
-    // Update User first if image is provided
-    if (image) {
-      await db.update(schema.users).set({ image }).where(eq(schema.users.id, session.user.id));
-    }
-
-    const [profile] = await db
-      .insert(schema.profiles)
-      .values({
-        userId: session.user.id,
-        bladerName: bladerName ?? session.user.name,
+    const profile = await upsertOwnProfile(
+      session.user.id,
+      {
+        bladerName,
         favoriteType,
         experience,
         bio,
         challongeUsername,
         deckBoxImage,
-      })
-      .onConflictDoUpdate({
-        target: schema.profiles.userId,
-        set: {
-          bladerName,
-          favoriteType,
-          experience,
-          bio,
-          challongeUsername,
-          deckBoxImage,
-        },
-      })
-      .returning();
+        image,
+      },
+      session.user.name,
+    );
 
     return NextResponse.json(profile);
   } catch (error) {

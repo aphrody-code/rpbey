@@ -11,23 +11,23 @@ import {
   Typography,
 } from "@mui/material";
 import { PageHeader } from "@/components/ui/PageHeader";
-import { db, schema, count, desc } from "@/lib/db";
+import {
+  countCareerBladers,
+  countSeasonRankings,
+  getRankingLastUpdate,
+} from "@/server/dal/rankings";
 import { formatDateTime } from "@/lib/utils";
 import SatrSyncActions from "./_components/SatrSyncActions";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminSatrPage() {
-  const [rankingCountRows, bladerCountRows, lastUpdate] = await Promise.all([
-    db.select({ value: count() }).from(schema.satrRankings),
-    db.select({ value: count() }).from(schema.satrBladers),
-    db.query.satrRankings.findFirst({
-      orderBy: desc(schema.satrRankings.updatedAt),
-      columns: { updatedAt: true },
-    }),
+  const [rankingCount, bladerCount, lastUpdatedAt] = await Promise.all([
+    countSeasonRankings("satr"),
+    countCareerBladers("satr"),
+    getRankingLastUpdate("satr"),
   ]);
-  const rankingCount = rankingCountRows[0]?.value ?? 0;
-  const bladerCount = bladerCountRows[0]?.value ?? 0;
+  const lastUpdate = { updatedAt: lastUpdatedAt };
 
   return (
     <Box sx={{ py: 4 }}>

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { requireAdmin } from "@/lib/auth-utils";
-import { db, schema, eq } from "@/lib/db";
 import { RankingService } from "@/lib/ranking-service";
+import { getRankingSystem, insertRankingSystem, updateRankingSystem } from "@/server/dal/rankings";
 
 export async function GET() {
   try {
@@ -9,7 +9,7 @@ export async function GET() {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const rules = await db.query.rankingSystem.findFirst();
+    const rules = await getRankingSystem();
     return NextResponse.json(rules || {});
   } catch (error) {
     console.error("Failed to fetch ranking rules:", error);
@@ -34,15 +34,12 @@ export async function PUT(request: Request) {
       thirdPlace,
       top8,
     };
-    const existing = await db.query.rankingSystem.findFirst();
+    const existing = await getRankingSystem();
 
     if (existing) {
-      await db
-        .update(schema.rankingSystem)
-        .set(data)
-        .where(eq(schema.rankingSystem.id, existing.id));
+      await updateRankingSystem(existing.id, data);
     } else {
-      await db.insert(schema.rankingSystem).values(data);
+      await insertRankingSystem(data);
     }
 
     // Déclenchement du recalcul

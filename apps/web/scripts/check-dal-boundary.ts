@@ -35,6 +35,22 @@ const ENFORCED = [
   "app/api/v1/",
   "app/api/parts/",
   "server/actions/parts.ts",
+  // wave-1 : rankings
+  "app/api/v1/rankings/",
+  "server/dal/rankings.ts",
+  // wave-1 : users
+  // NB: `app/api/profile/` et `server/actions/claim-profile.ts` NON enforced —
+  // ces routes lisent la session via `@/lib/auth` (adapter Drizzle better-auth,
+  // seam framework inévitable, owned par la lane `auth`), donc transitivement
+  // couplées à la DB sans pouvoir passer par la DAL. Leur import DIRECT @rpbey/db
+  // a bien été retiré (dette réduite) ; l'enforcement strict reste hors de portée.
+  "app/api/v1/users/",
+  "app/api/users/",
+  "server/dal/users.ts",
+  "server/dal/stats.ts",
+  "app/(marketing)/profile/",
+  // wave-1 : infra
+  "server/dal/infra.ts",
 ];
 
 const glob = new Glob("**/*.{ts,tsx}");

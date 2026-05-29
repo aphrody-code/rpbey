@@ -12,7 +12,13 @@ import { RankingModeSwitcher } from "@/components/rankings/RankingModeSwitcher";
 import { SatrTabs } from "@/components/rankings/SatrTabs";
 import { SeasonTabs } from "@/components/rankings/SeasonTabs";
 import { type SatrBlader, type SatrRanking } from "@/lib/types";
-import { db, schema, and, asc, count, desc, eq, ilike, sum } from "@/lib/db";
+import {
+  getBladerAggregateStats,
+  getRankingLastUpdate,
+  listCareerBladers,
+  listSeasonRankings,
+  listSeasonRankingsAll,
+} from "@/server/dal/rankings";
 import { getSatrSeasonStats } from "@/server/actions/satr";
 
 export const dynamic = "force-dynamic";
@@ -75,72 +81,34 @@ export default async function SatrPage({ searchParams }: SatrPageProps) {
       (async () => {
         try {
           if (mode === "ranking") {
-            const whereCondition = and(
-              eq(schema.satrRankings.season, season),
-              ...(searchQuery ? [ilike(schema.satrRankings.playerName, `%${searchQuery}%`)] : []),
-            );
-            const [rankings, countRows] = await Promise.all([
-              db.query.satrRankings.findMany({
-                where: whereCondition,
-                orderBy: asc(schema.satrRankings.rank),
-                limit: pageSize,
-                offset: (page - 1) * pageSize,
-              }),
-              db.select({ value: count() }).from(schema.satrRankings).where(whereCondition),
-            ]);
-            return { items: rankings, total: countRows[0]?.value ?? 0 };
+            return await listSeasonRankings({
+              kind: "satr",
+              season,
+              search: searchQuery || undefined,
+              limit: pageSize,
+              offset: (page - 1) * pageSize,
+            });
           } else {
-            const whereCondition = searchQuery
-              ? ilike(schema.satrBladers.name, `%${searchQuery}%`)
-              : undefined;
-            const [bladers, countRows] = await Promise.all([
-              db.query.satrBladers.findMany({
-                where: whereCondition,
-                orderBy: [
-                  desc(schema.satrBladers.tournamentWins),
-                  desc(schema.satrBladers.totalWins),
-                ],
-                limit: pageSize,
-                offset: (page - 1) * pageSize,
-              }),
-              db.select({ value: count() }).from(schema.satrBladers).where(whereCondition),
-            ]);
-            return { items: bladers, total: countRows[0]?.value ?? 0 };
+            return await listCareerBladers({
+              kind: "satr",
+              search: searchQuery || undefined,
+              limit: pageSize,
+              offset: (page - 1) * pageSize,
+            });
           }
         } catch (e) {
           console.error("Data fetch error:", e);
           return { items: [], total: 0 };
         }
       })(),
-      (async () => {
-        try {
-          const [stats] = await db
-            .select({
-              totalWins: sum(schema.satrBladers.totalWins),
-              totalLosses: sum(schema.satrBladers.totalLosses),
-              count: count(),
-            })
-            .from(schema.satrBladers);
-          return {
-            totalBladers: stats?.count ?? 0,
-            totalMatches: Math.floor(
-              ((Number(stats?.totalWins) || 0) + (Number(stats?.totalLosses) || 0)) / 2,
-            ),
-          };
-        } catch {
-          return { totalBladers: 0, totalMatches: 0 };
-        }
-      })(),
-      db.query.satrRankings.findFirst({
-        orderBy: desc(schema.satrRankings.updatedAt),
-        columns: { updatedAt: true },
-      }),
+      getBladerAggregateStats("satr").catch(() => ({
+        totalBladers: 0,
+        totalMatches: 0,
+      })),
+      getRankingLastUpdate("satr").then((updatedAt) => ({ updatedAt })),
       getSatrSeasonStats(season),
       // All rankings for analysis charts (saison courante uniquement)
-      db.query.satrRankings.findMany({
-        where: eq(schema.satrRankings.season, season),
-        orderBy: asc(schema.satrRankings.rank),
-      }),
+      listSeasonRankingsAll("satr", season),
     ]);
 
   const allRankings = allRankingsRaw as SatrRanking[];

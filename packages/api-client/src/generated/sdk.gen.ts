@@ -4,8 +4,8 @@ import * as z from 'zod';
 
 import type { Client, Options as Options2, TDataShape } from './client';
 import { client } from './client.gen';
-import type { GetMetaData, GetMetaErrors, GetMetaResponses, GetRecommendationsData, GetRecommendationsErrors, GetRecommendationsResponses, GlobalSearchData, GlobalSearchErrors, GlobalSearchResponses, ListPartsData, ListPartsErrors, ListPartsResponses } from './types.gen';
-import { zGetMetaResponse, zGetRecommendationsQuery, zGetRecommendationsResponse, zGlobalSearchQuery, zGlobalSearchResponse, zListPartsQuery, zListPartsResponse } from './zod.gen';
+import type { GetMetaData, GetMetaErrors, GetMetaResponses, GetPublicUserData, GetPublicUserErrors, GetPublicUserResponses, GetRankingsData, GetRankingsErrors, GetRankingsResponses, GetRecommendationsData, GetRecommendationsErrors, GetRecommendationsResponses, GetUserMatchesData, GetUserMatchesErrors, GetUserMatchesResponses, GlobalSearchData, GlobalSearchErrors, GlobalSearchResponses, ListPartsData, ListPartsErrors, ListPartsResponses } from './types.gen';
+import { zGetMetaResponse, zGetPublicUserPath, zGetPublicUserResponse, zGetRankingsQuery, zGetRankingsResponse, zGetRecommendationsQuery, zGetRecommendationsResponse, zGetUserMatchesPath, zGetUserMatchesQuery, zGetUserMatchesResponse, zGlobalSearchQuery, zGlobalSearchResponse, zListPartsQuery, zListPartsResponse } from './zod.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean, TResponse = unknown> = Options2<TData, ThrowOnError, TResponse> & {
     /**
@@ -74,5 +74,47 @@ export const listParts = <ThrowOnError extends boolean = false>(options?: Option
     }).parseAsync(data),
     responseValidator: async (data) => await zListPartsResponse.parseAsync(data),
     url: '/api/v1/parts',
+    ...options
+});
+
+/**
+ * Classements RPB (SATR / Wild Breakers / Stardust par saison ou carrière, ou leaderboard global pondéré).
+ */
+export const getRankings = <ThrowOnError extends boolean = false>(options?: Options<GetRankingsData, ThrowOnError>) => (options?.client ?? client).get<GetRankingsResponses, GetRankingsErrors, ThrowOnError>({
+    requestValidator: async (data) => await z.object({
+        body: z.never().optional(),
+        path: z.never().optional(),
+        query: zGetRankingsQuery.optional()
+    }).parseAsync(data),
+    responseValidator: async (data) => await zGetRankingsResponse.parseAsync(data),
+    url: '/api/v1/rankings',
+    ...options
+});
+
+/**
+ * Profil joueur public (compte + profil agrégé) par identifiant.
+ */
+export const getPublicUser = <ThrowOnError extends boolean = false>(options: Options<GetPublicUserData, ThrowOnError>) => (options.client ?? client).get<GetPublicUserResponses, GetPublicUserErrors, ThrowOnError>({
+    requestValidator: async (data) => await z.object({
+        body: z.never().optional(),
+        path: zGetPublicUserPath,
+        query: z.never().optional()
+    }).parseAsync(data),
+    responseValidator: async (data) => await zGetPublicUserResponse.parseAsync(data),
+    url: '/api/v1/users/{id}',
+    ...options
+});
+
+/**
+ * Historique de matchs paginé d'un joueur.
+ */
+export const getUserMatches = <ThrowOnError extends boolean = false>(options: Options<GetUserMatchesData, ThrowOnError>) => (options.client ?? client).get<GetUserMatchesResponses, GetUserMatchesErrors, ThrowOnError>({
+    requestValidator: async (data) => await z.object({
+        body: z.never().optional(),
+        path: zGetUserMatchesPath,
+        query: zGetUserMatchesQuery.optional()
+    }).parseAsync(data),
+    responseValidator: async (data) => await zGetUserMatchesResponse.parseAsync(data),
+    url: '/api/v1/users/{id}/matches',
     ...options
 });

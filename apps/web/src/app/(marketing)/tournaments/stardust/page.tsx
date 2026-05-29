@@ -11,7 +11,13 @@ import { StardustTabs } from "@/components/rankings/StardustTabs";
 import { StardustThemeSync } from "@/components/theme/StardustThemeSync";
 import { type StardustBlader, type StardustRanking } from "@/lib/types";
 import { MuiDiscordIcon as DiscordIcon } from "@/components/ui/MuiIcons";
-import { db, schema, asc, count, desc, eq, ilike, inArray, sum } from "@/lib/db";
+import {
+  getBladerAggregateStats,
+  getRankingLastUpdate,
+  listCareerBladers,
+  listSeasonRankings,
+  listStardustChampions,
+} from "@/server/dal/rankings";
 import { createPageMetadata } from "@/lib/seo-utils";
 import { getStardustSeasonStats } from "@/server/actions/stardust";
 
@@ -37,88 +43,36 @@ export default async function StardustPage({ searchParams }: PageProps) {
   const searchQuery = typeof sp.search === "string" ? sp.search : "";
   const mode = (sp.view === "career" ? "career" : "ranking") as "ranking" | "career";
 
-  const whereRanking = searchQuery
-    ? ilike(schema.stardustRankings.playerName, `%${searchQuery}%`)
-    : undefined;
-  const whereBlader = searchQuery
-    ? ilike(schema.stardustBladers.name, `%${searchQuery}%`)
-    : undefined;
-
   const [rankingsRes, bladersRes, bladerStats, lastUpdate, seasonStatsRes, championsRaw] =
     await Promise.all([
       mode === "ranking"
-        ? Promise.all([
-            db.query.stardustRankings.findMany({
-              where: whereRanking,
-              orderBy: asc(schema.stardustRankings.rank),
-              limit: pageSize,
-              offset: (page - 1) * pageSize,
-            }),
-            db
-              .select({ value: count() })
-              .from(schema.stardustRankings)
-              .where(whereRanking)
-              .then((r) => r[0]?.value ?? 0),
-          ])
-        : Promise.resolve([[] as StardustRanking[], 0] as const),
+        ? listSeasonRankings({
+            kind: "stardust",
+            search: searchQuery || undefined,
+            limit: pageSize,
+            offset: (page - 1) * pageSize,
+          })
+        : Promise.resolve({ items: [] as StardustRanking[], total: 0 }),
       mode === "career"
-        ? Promise.all([
-            db.query.stardustBladers.findMany({
-              where: whereBlader,
-              orderBy: [
-                desc(schema.stardustBladers.tournamentWins),
-                desc(schema.stardustBladers.totalWins),
-              ],
-              limit: pageSize,
-              offset: (page - 1) * pageSize,
-            }),
-            db
-              .select({ value: count() })
-              .from(schema.stardustBladers)
-              .where(whereBlader)
-              .then((r) => r[0]?.value ?? 0),
-          ])
-        : Promise.resolve([[] as StardustBlader[], 0] as const),
-      db
-        .select({
-          totalWins: sum(schema.stardustBladers.totalWins),
-          totalLosses: sum(schema.stardustBladers.totalLosses),
-          count: count(),
-        })
-        .from(schema.stardustBladers)
-        .then((r) => r[0]),
-      db.query.stardustRankings.findFirst({
-        orderBy: desc(schema.stardustRankings.updatedAt),
-        columns: { updatedAt: true },
-      }),
+        ? listCareerBladers({
+            kind: "stardust",
+            search: searchQuery || undefined,
+            limit: pageSize,
+            offset: (page - 1) * pageSize,
+          })
+        : Promise.resolve({ items: [] as StardustBlader[], total: 0 }),
+      getBladerAggregateStats("stardust"),
+      getRankingLastUpdate("stardust").then((updatedAt) => ({ updatedAt })),
       getStardustSeasonStats(),
-      db.query.tournaments
-        .findMany({
-          where: inArray(schema.tournaments.status, ["COMPLETE", "ARCHIVED"]),
-          orderBy: desc(schema.tournaments.date),
-          columns: { id: true, name: true },
-          with: {
-            tournamentCategory: { columns: { name: true } },
-            tournamentParticipants: {
-              where: eq(schema.tournamentParticipants.finalPlacement, 1),
-              columns: { playerName: true },
-              limit: 1,
-            },
-          },
-        })
-        .then((rows) =>
-          rows.filter((t) => (t.tournamentCategory?.name ?? "").toUpperCase().includes("STARDUST")),
-        ),
+      listStardustChampions(),
     ]);
 
-  const [rankings, rankingTotal] = rankingsRes;
-  const [bladers, bladerTotal] = bladersRes;
-  const totalCount = mode === "ranking" ? rankingTotal : bladerTotal;
+  const rankings = rankingsRes.items;
+  const bladers = bladersRes.items;
+  const totalCount = mode === "ranking" ? rankingsRes.total : bladersRes.total;
   const totalPages = Math.ceil(totalCount / pageSize);
-  const totalBladers = bladerStats?.count ?? 0;
-  const totalMatches = Math.floor(
-    ((Number(bladerStats?.totalWins) || 0) + (Number(bladerStats?.totalLosses) || 0)) / 2,
-  );
+  const totalBladers = bladerStats.totalBladers;
+  const totalMatches = bladerStats.totalMatches;
   const seasonData = seasonStatsRes.success
     ? seasonStatsRes.data
     : { tournamentCount: 0, uniqueParticipants: 0, metas: [] };

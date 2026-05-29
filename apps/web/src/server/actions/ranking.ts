@@ -7,19 +7,25 @@ import { auth } from "@/lib/auth";
 import { requireAdmin } from "@/lib/auth-utils";
 import { loadJsonSafe } from "@/lib/data-cache";
 import {
-  db,
-  schema,
-  and,
-  or,
-  eq,
-  inArray,
-  notInArray,
-  gte,
-  desc,
-  ilike,
-  count,
-  sql,
-} from "@/lib/db";
+  bumpProfilePoints,
+  countTournamentsByCategory,
+  createTournamentCategory as dalCreateCategory,
+  deletePointAdjustment as dalDeletePointAdjustment,
+  deleteTournamentCategory as dalDeleteCategory,
+  getActiveSeason,
+  getOrCreateRankingSystem,
+  getPointAdjustment,
+  getUserWithProfile,
+  insertPointAdjustment,
+  listAllPointAdjustments,
+  listPointAdjustments,
+  listTournamentCategories,
+  listTournamentsForRecalc,
+  rebuildGlobalRankings,
+  searchUsers as dalSearchUsers,
+  updateRankingSystem,
+  updateTournamentCategory as dalUpdateCategory,
+} from "@/server/dal/rankings";
 
 // Zod Schemas
 const RankingConfigSchema = z.object({
@@ -40,32 +46,11 @@ const CategorySchema = z.object({
 
 // Cached Data Fetching
 export async function getRankingConfig() {
-  let config = await db.query.rankingSystem.findFirst();
-
-  if (!config) {
-    const [created] = await db
-      .insert(schema.rankingSystem)
-      .values({
-        participation: 500,
-        firstPlace: 10000,
-        secondPlace: 7000,
-        thirdPlace: 5000,
-        top8: 500,
-        matchWin: 300,
-        matchWinWinner: 1000,
-        matchWinLoser: 500,
-      })
-      .returning();
-    config = created;
-  }
-
-  return config!;
+  return getOrCreateRankingSystem();
 }
 
 export async function getTournamentCategories() {
-  return await db.query.tournamentCategories.findMany({
-    orderBy: desc(schema.tournamentCategories.multiplier),
-  });
+  return listTournamentCategories();
 }
 
 // Mutations
@@ -85,11 +70,7 @@ export async function updateRankingConfig(data: {
   }
 
   const config = await getRankingConfig();
-
-  await db
-    .update(schema.rankingSystem)
-    .set(result.data)
-    .where(eq(schema.rankingSystem.id, config.id));
+  await updateRankingSystem(config.id, result.data);
 
   revalidatePath("/admin/rankings");
 }
@@ -98,9 +79,7 @@ export async function recalculateRankings() {
   if (!(await requireAdmin())) throw new Error("Forbidden");
   const config = await getRankingConfig();
 
-  const currentSeason = await db.query.rankingSeasons.findFirst({
-    where: eq(schema.rankingSeasons.isActive, true),
-  });
+  const currentSeason = await getActiveSeason();
 
   const playerPoints = new Map<string, number>();
   const playerStats = new Map<
@@ -175,33 +154,23 @@ export async function recalculateRankings() {
 
   // 3. Optional: Process DB tournaments if they exist in current season (excluding auto-imported ones to avoid dupes)
   const startDate = currentSeason?.startDate || new Date(0).toISOString();
-  const dbTournaments = await db.query.tournaments.findMany({
-    where: and(
-      inArray(schema.tournaments.status, ["COMPLETE", "ARCHIVED", "UNDERWAY"]),
-      gte(schema.tournaments.date, startDate),
-      // Exclude the ones we just processed manually if they were somehow in DB
-      notInArray(schema.tournaments.id, [
-        "bts1",
-        "bts2",
-        "bts3",
-        "bts4",
-        "bts5",
-        "cm-fr_b_ts2-auto",
-        "cm-fr_b_ts3-auto",
-        "cmoq5x3yc000009ro7zq1i3uj", // BTS1
-        "cmoq5x49a005r09rosc122fr1", // BTS2
-        "cmoq5x4fo00aq09roq2og3ihk", // BTS3
-        "cmnukkwyt0000z4ro9fvkcko6", // BTS4
-        "cmp019bpax2u1m5idwluippk0", // BTS5
-      ]),
-    ),
-    with: {
-      tournamentCategory: true,
-      tournamentMatches: true,
-      tournamentParticipants: {
-        with: { user: { with: { profiles: true } } },
-      },
-    },
+  const dbTournaments = await listTournamentsForRecalc({
+    startDate,
+    // Exclude the ones we just processed manually if they were somehow in DB
+    excludeIds: [
+      "bts1",
+      "bts2",
+      "bts3",
+      "bts4",
+      "bts5",
+      "cm-fr_b_ts2-auto",
+      "cm-fr_b_ts3-auto",
+      "cmoq5x3yc000009ro7zq1i3uj", // BTS1
+      "cmoq5x49a005r09rosc122fr1", // BTS2
+      "cmoq5x4fo00aq09roq2og3ihk", // BTS3
+      "cmnukkwyt0000z4ro9fvkcko6", // BTS4
+      "cmp019bpax2u1m5idwluippk0", // BTS5
+    ],
   });
 
   for (const tournament of dbTournaments) {
@@ -270,12 +239,9 @@ export async function recalculateRankings() {
   }
 
   // 4. Manual adjustments
-  const adjustments = await db.query.pointAdjustments.findMany();
+  const adjustments = await listAllPointAdjustments();
   for (const adj of adjustments) {
-    const user = await db.query.users.findFirst({
-      where: eq(schema.users.id, adj.userId),
-      with: { profiles: true },
-    });
+    const user = await getUserWithProfile(adj.userId);
     const userProfile = user?.profiles[0] ?? null;
     const baseKey = (userProfile?.bladerName || "unknown").toLowerCase().replace(/[^a-z0-9]/g, "");
     const playerKey = aliasToKey.get(userProfile?.bladerName || "") || baseKey;
@@ -283,52 +249,36 @@ export async function recalculateRankings() {
     playerPoints.set(playerKey, currentPoints + adj.points);
   }
 
-  // 5. Batch update DB
-  await db.transaction(async (tx) => {
-    await tx.delete(schema.globalRankings); // Complete reset of current rankings to rebuild fresh
+  // 5. Batch update DB (reset + reinsert + sync profils) — via la DAL.
+  const newRankings: Array<{
+    playerName: string;
+    points: number;
+    wins: number;
+    losses: number;
+    tournamentWins: number;
+    tournamentsCount: number;
+    avatarUrl: string | null;
+    userId: string | null;
+    challongeUsername: string | null;
+  }> = [];
+  for (const [playerKey, points] of playerPoints.entries()) {
+    const stats = playerStats.get(playerKey);
+    if (!stats) continue;
 
-    const newRankings = [];
-    for (const [playerKey, points] of playerPoints.entries()) {
-      const stats = playerStats.get(playerKey);
-      if (!stats) continue;
+    newRankings.push({
+      playerName: stats.playerName,
+      points,
+      wins: stats.wins,
+      losses: stats.losses,
+      tournamentWins: stats.tournamentWins,
+      tournamentsCount: stats.tournamentsCount,
+      avatarUrl: stats.avatarUrl,
+      userId: stats.userId,
+      challongeUsername: stats.challongeUsername,
+    });
+  }
 
-      newRankings.push({
-        playerName: stats.playerName,
-        points: points,
-        wins: stats.wins,
-        losses: stats.losses,
-        tournamentWins: stats.tournamentWins,
-        tournamentsCount: stats.tournamentsCount,
-        avatarUrl: stats.avatarUrl,
-        userId: stats.userId,
-        challongeUsername: stats.challongeUsername,
-      });
-    }
-
-    if (newRankings.length > 0) {
-      await tx
-        .insert(schema.globalRankings)
-        .values(newRankings.map(({ challongeUsername: _challongeUsername, ...rest }) => rest))
-        .onConflictDoNothing();
-    }
-
-    // Sync Profiles for UI compatibility
-    for (const ranking of newRankings) {
-      if (ranking.userId) {
-        await tx
-          .update(schema.profiles)
-          .set({
-            rankingPoints: ranking.points,
-            wins: ranking.wins,
-            losses: ranking.losses,
-            tournamentWins: ranking.tournamentWins,
-            ...(ranking.challongeUsername ? { challongeUsername: ranking.challongeUsername } : {}),
-          })
-          .where(eq(schema.profiles.userId, ranking.userId))
-          .catch(() => {}); // Ignore if profile doesn't exist
-      }
-    }
-  });
+  await rebuildGlobalRankings(newRankings);
 
   try {
     revalidatePath("/rankings");
@@ -352,9 +302,8 @@ export async function createTournamentCategory(data: {
   const result = CategorySchema.safeParse(data);
   if (!result.success) throw new Error("Invalid category data");
 
-  const [category] = await db.insert(schema.tournamentCategories).values(result.data).returning();
+  const category = await dalCreateCategory(result.data);
 
-  // revalidateTag('tournament-categories');
   revalidatePath("/admin/rankings");
   return category;
 }
@@ -365,31 +314,21 @@ export async function updateTournamentCategory(
 ) {
   if (!(await requireAdmin())) throw new Error("Forbidden");
   // Partial validation
-  const [category] = await db
-    .update(schema.tournamentCategories)
-    .set(data)
-    .where(eq(schema.tournamentCategories.id, id))
-    .returning();
-  // revalidateTag('tournament-categories');
+  const category = await dalUpdateCategory(id, data);
   revalidatePath("/admin/rankings");
   return category;
 }
 
 export async function deleteTournamentCategory(id: string) {
   if (!(await requireAdmin())) throw new Error("Forbidden");
-  const [countRow] = await db
-    .select({ value: count() })
-    .from(schema.tournaments)
-    .where(eq(schema.tournaments.categoryId, id));
-  const used = countRow?.value ?? 0;
+  const used = await countTournamentsByCategory(id);
   if (used > 0) {
     throw new Error(
       `Impossible de supprimer cette catégorie car elle est utilisée par ${used} tournois.`,
     );
   }
 
-  await db.delete(schema.tournamentCategories).where(eq(schema.tournamentCategories.id, id));
-  // revalidateTag('tournament-categories');
+  await dalDeleteCategory(id);
   revalidatePath("/admin/rankings");
   return { success: true };
 }
@@ -397,24 +336,7 @@ export async function deleteTournamentCategory(id: string) {
 // --- GESTION DES AJUSTEMENTS MANUELS ---
 
 export async function getPointAdjustments(limit = 20) {
-  const rows = await db.query.pointAdjustments.findMany({
-    limit,
-    orderBy: desc(schema.pointAdjustments.createdAt),
-    with: {
-      user_userId: {
-        columns: { id: true, name: true, image: true },
-      },
-      user_adminId: {
-        columns: { name: true },
-      },
-    },
-  });
-
-  return rows.map((r) => ({
-    ...r,
-    user: r.user_userId,
-    admin: r.user_adminId,
-  }));
+  return listPointAdjustments(limit);
 }
 
 export async function addPointAdjustment(userId: string, points: number, reason: string) {
@@ -425,22 +347,14 @@ export async function addPointAdjustment(userId: string, points: number, reason:
 
   if (!session?.user) throw new Error("Unauthorized");
 
-  const [adjustment] = await db
-    .insert(schema.pointAdjustments)
-    .values({
-      userId,
-      points,
-      reason,
-      adminId: session.user.id,
-    })
-    .returning();
+  const adjustment = await insertPointAdjustment({
+    userId,
+    points,
+    reason,
+    adminId: session.user.id,
+  });
 
-  await db
-    .update(schema.profiles)
-    .set({
-      rankingPoints: sql`${schema.profiles.rankingPoints} + ${points}`,
-    })
-    .where(eq(schema.profiles.userId, userId));
+  await bumpProfilePoints(userId, points);
 
   revalidatePath("/admin/rankings");
   return adjustment;
@@ -448,19 +362,12 @@ export async function addPointAdjustment(userId: string, points: number, reason:
 
 export async function deletePointAdjustment(id: string) {
   if (!(await requireAdmin())) throw new Error("Forbidden");
-  const adjustment = await db.query.pointAdjustments.findFirst({
-    where: eq(schema.pointAdjustments.id, id),
-  });
+  const adjustment = await getPointAdjustment(id);
   if (!adjustment) throw new Error("Ajustement introuvable");
 
-  await db.delete(schema.pointAdjustments).where(eq(schema.pointAdjustments.id, id));
+  await dalDeletePointAdjustment(id);
 
-  await db
-    .update(schema.profiles)
-    .set({
-      rankingPoints: sql`${schema.profiles.rankingPoints} - ${adjustment.points}`,
-    })
-    .where(eq(schema.profiles.userId, adjustment.userId));
+  await bumpProfilePoints(adjustment.userId, -adjustment.points);
 
   revalidatePath("/admin/rankings");
 }
@@ -468,18 +375,5 @@ export async function deletePointAdjustment(id: string) {
 export async function searchUsers(query: string) {
   if (query.length < 2) return [];
 
-  return await db.query.users.findMany({
-    where: or(
-      ilike(schema.users.name, `%${query}%`),
-      ilike(schema.users.email, `%${query}%`),
-      ilike(schema.users.discordTag, `%${query}%`),
-    ),
-    limit: 5,
-    columns: {
-      id: true,
-      name: true,
-      image: true,
-      email: true,
-    },
-  });
+  return dalSearchUsers(query);
 }

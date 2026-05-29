@@ -4,7 +4,13 @@ import { readdir, readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { revalidatePath } from "next/cache";
 import { requireAdmin } from "@/lib/auth-utils";
-import { db, schema, eq, ilike } from "@/lib/db";
+import {
+  getBladerByName,
+  linkBlader,
+  listBladers,
+  listUsersForLinking,
+  replaceWbSeason,
+} from "@/server/dal/rankings";
 
 // Season config: which UB numbers and HS keys belong to each season
 // Saison 1  = UB1 → UB11 (pas de HS)
@@ -370,12 +376,10 @@ export async function syncWbRanking(season: number = CURRENT_SEASON) {
     const rankings = computeRanking(tournaments);
 
     // Ne toucher qu'à la saison demandée — préserve les autres saisons en DB.
-    await db.transaction(async (tx) => {
-      await tx.delete(schema.wbRankings).where(eq(schema.wbRankings.season, season));
-      if (rankings.length > 0) {
-        await tx.insert(schema.wbRankings).values(rankings.map((r) => ({ ...r, season })));
-      }
-    });
+    await replaceWbSeason(
+      season,
+      rankings.map((r) => ({ ...r, season })),
+    );
 
     revalidatePath("/tournaments/wb");
     return { success: true, count: rankings.length };
@@ -462,10 +466,8 @@ export async function getWbPlayerTournamentMatches(tournamentSlug: string, playe
 export async function linkWbBladers() {
   if (!(await requireAdmin())) throw new Error("Forbidden");
   try {
-    const bladers = await db.query.wbBladers.findMany();
-    const users = await db.query.users.findMany({
-      columns: { id: true, name: true, discordTag: true },
-    });
+    const bladers = await listBladers("wb");
+    const users = await listUsersForLinking();
 
     let linkedCount = 0;
     for (const blader of bladers) {
@@ -476,10 +478,7 @@ export async function linkWbBladers() {
       );
 
       if (match && blader.linkedUserId !== match.id) {
-        await db
-          .update(schema.wbBladers)
-          .set({ linkedUserId: match.id })
-          .where(eq(schema.wbBladers.id, blader.id));
+        await linkBlader("wb", blader.id, match.id);
         linkedCount++;
       }
     }
@@ -533,9 +532,7 @@ export async function getWbTournamentMeta(slug: string) {
 
 export async function getWbBladerByName(name: string) {
   try {
-    const blader = await db.query.wbBladers.findFirst({
-      where: ilike(schema.wbBladers.name, name),
-    });
+    const blader = await getBladerByName("wb", name);
     return { success: true, data: blader ?? null };
   } catch (error) {
     return { success: false, error: String(error) };

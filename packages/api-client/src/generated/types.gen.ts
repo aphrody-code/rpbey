@@ -361,3 +361,246 @@ export type ListPartsResponses = {
 };
 
 export type ListPartsResponse = ListPartsResponses[keyof ListPartsResponses];
+
+export type GetRankingsData = {
+    body?: never;
+    path?: never;
+    query?: {
+        kind?: 'satr' | 'wb' | 'stardust' | 'global';
+        view?: 'ranking' | 'career';
+        season?: number;
+        search?: string;
+        page?: number;
+        pageSize?: number;
+    };
+    url: '/api/v1/rankings';
+};
+
+export type GetRankingsErrors = {
+    /**
+     * Erreur de requête ou de validation
+     */
+    '4XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+    /**
+     * Erreur serveur
+     */
+    '5XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+};
+
+export type GetRankingsError = GetRankingsErrors[keyof GetRankingsErrors];
+
+export type GetRankingsResponses = {
+    /**
+     * OK
+     */
+    200: {
+        ok: true;
+        data: {
+            kind: 'satr' | 'wb' | 'stardust' | 'global';
+            view: 'ranking' | 'career';
+            season: number | null;
+            items: Array<{
+                id: string;
+                rank: number;
+                playerName: string;
+                score: number;
+                wins: number;
+                losses: number;
+                participation: number;
+                winRate: string;
+                pointsAverage: string;
+                createdAt?: string | null;
+                updatedAt?: string | null;
+            } | {
+                id: string;
+                name: string;
+                totalWins: number;
+                totalLosses: number;
+                tournamentWins: number;
+                tournamentsCount: number;
+                history?: unknown | null;
+                linkedUserId?: string | null;
+                createdAt?: string | null;
+                updatedAt?: string | null;
+            } | {
+                id: string;
+                playerName: string;
+                userId?: string | null;
+                points: number;
+                wins: number;
+                losses: number;
+                tournamentWins: number;
+                tournamentsCount: number;
+                avatarUrl?: string | null;
+                updatedAt?: string | null;
+            }>;
+            total: number;
+            totalPages: number;
+            lastUpdate: string | null;
+        };
+    };
+};
+
+export type GetRankingsResponse = GetRankingsResponses[keyof GetRankingsResponses];
+
+export type GetPublicUserData = {
+    body?: never;
+    path: {
+        id: string;
+    };
+    query?: never;
+    url: '/api/v1/users/{id}';
+};
+
+export type GetPublicUserErrors = {
+    /**
+     * Erreur de requête ou de validation
+     */
+    '4XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+    /**
+     * Erreur serveur
+     */
+    '5XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+};
+
+export type GetPublicUserError = GetPublicUserErrors[keyof GetPublicUserErrors];
+
+export type GetPublicUserResponses = {
+    /**
+     * OK
+     */
+    200: {
+        ok: true;
+        data: {
+            user: {
+                id: string;
+                name?: string | null;
+                image?: string | null;
+                createdAt?: string | null;
+                discordTag?: string | null;
+                nickname?: string | null;
+                serverAvatar?: string | null;
+                globalName?: string | null;
+                roles?: Array<string> | null;
+                profile: {
+                    bladerName?: string | null;
+                    favoriteType?: string | null;
+                    experience?: string | null;
+                    bio?: string | null;
+                    wins: number;
+                    losses: number;
+                    tournamentWins: number;
+                    rankingPoints: number;
+                    challongeUsername?: string | null;
+                    twitterHandle?: string | null;
+                    tiktokHandle?: string | null;
+                } | null;
+                counts: {
+                    tournaments: number;
+                    matches: number;
+                };
+            } | null;
+        };
+    };
+};
+
+export type GetPublicUserResponse = GetPublicUserResponses[keyof GetPublicUserResponses];
+
+export type GetUserMatchesData = {
+    body?: never;
+    path: {
+        id: string;
+    };
+    query?: {
+        limit?: number;
+        offset?: number;
+    };
+    url: '/api/v1/users/{id}/matches';
+};
+
+export type GetUserMatchesErrors = {
+    /**
+     * Erreur de requête ou de validation
+     */
+    '4XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+    /**
+     * Erreur serveur
+     */
+    '5XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+};
+
+export type GetUserMatchesError = GetUserMatchesErrors[keyof GetUserMatchesErrors];
+
+export type GetUserMatchesResponses = {
+    /**
+     * OK
+     */
+    200: {
+        ok: true;
+        data: {
+            matches: Array<{
+                id: string;
+                tournamentId?: string | null;
+                tournamentName?: string | null;
+                round?: number | null;
+                score?: string | null;
+                state?: string | null;
+                createdAt?: string | null;
+                player1: {
+                    id: string;
+                    name?: string | null;
+                    image?: string | null;
+                    bladerName?: string | null;
+                } | null;
+                player2: {
+                    id: string;
+                    name?: string | null;
+                    image?: string | null;
+                    bladerName?: string | null;
+                } | null;
+                winnerId?: string | null;
+            }>;
+            total: number;
+            limit: number;
+            offset: number;
+        };
+    };
+};
+
+export type GetUserMatchesResponse = GetUserMatchesResponses[keyof GetUserMatchesResponses];

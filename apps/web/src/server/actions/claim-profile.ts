@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
 import { auth } from "@/lib/auth";
-import { db, schema, eq } from "@/lib/db";
+import { getClaimableStub, mergeStubIntoUser } from "@/server/dal/users";
 import { trackEvent } from "@/server/actions/analytics";
 
 export async function claimProfile(stubUserId: string) {
@@ -19,9 +19,7 @@ export async function claimProfile(stubUserId: string) {
 
   try {
     // 1. Verify Stub Exists and is actually a stub
-    const stubUser = await db.query.users.findFirst({
-      where: eq(schema.users.id, stubUserId),
-    });
+    const stubUser = await getClaimableStub(stubUserId);
 
     if (!stubUser?.username?.startsWith("bts2_")) {
       return {
@@ -30,37 +28,8 @@ export async function claimProfile(stubUserId: string) {
       };
     }
 
-    // 2. Perform Merge
-    await db.transaction(async (tx) => {
-      // Move Participations
-      await tx
-        .update(schema.tournamentParticipants)
-        .set({ userId: realUser.id })
-        .where(eq(schema.tournamentParticipants.userId, stubUserId));
-
-      // Move Match History (P1, P2, Winner)
-      await tx
-        .update(schema.tournamentMatches)
-        .set({ player1Id: realUser.id })
-        .where(eq(schema.tournamentMatches.player1Id, stubUserId));
-      await tx
-        .update(schema.tournamentMatches)
-        .set({ player2Id: realUser.id })
-        .where(eq(schema.tournamentMatches.player2Id, stubUserId));
-      await tx
-        .update(schema.tournamentMatches)
-        .set({ winnerId: realUser.id })
-        .where(eq(schema.tournamentMatches.winnerId, stubUserId));
-
-      // Update real user profile stats if they are empty or just add them?
-      // Actually, we should trigger a recalculation properly, but for now we can just sum them
-      // For safety, let's just delete the stub profile and trigger a recalculation later or let the nightly job do it.
-      // Or better: Update the real user's profile with the points immediately to reflect changes.
-
-      // Delete Stub
-      await tx.delete(schema.profiles).where(eq(schema.profiles.userId, stubUserId));
-      await tx.delete(schema.users).where(eq(schema.users.id, stubUserId));
-    });
+    // 2. Perform Merge (participations + matchs P1/P2/vainqueur, puis suppression du stub)
+    await mergeStubIntoUser(stubUserId, realUser.id);
 
     revalidatePath("/rankings");
     void trackEvent({
