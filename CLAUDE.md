@@ -4,10 +4,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-`rpbey` — monorepo de la communauté Beyblade **République Populaire du Beyblade** (tournois, classements, gacha TCG, économie, duels). Deux applis prod sur le VPS + des packages partagés, le tout en **Bun** (jamais node/npm/tsx) orchestré par **Turborepo**.
+`rpbey` — monorepo de la communauté Beyblade **République Populaire du Beyblade** (tournois, classements, gacha TCG, économie, duels). Trois applis prod sur le VPS (web, bot, gacha-server) + des packages partagés, le tout en **Bun** (jamais node/npm/tsx) orchestré par **Turborepo**.
 
 - `apps/web` (`@rose-griffon/dashboard`) — dashboard **Next.js 16** (App Router, Turbopack, `output: standalone`), MUI v9 + Emotion, better-auth. systemd `rpbey-web.service` :3002, nginx `rpbey.fr`. Détails → **`apps/web/AGENTS.md`**.
 - `apps/bot` (`@rose-griffon/bot`) — **bot Discord** (discordx fork + tsyringe DI + discord.js v14, rendu image Skia). systemd `rpb-bot.service`, API `Bun.serve` :3001. **Aucune IA/LLM** : tout est algorithmique. Détails → **`apps/bot/AGENTS.md`**.
+- `apps/gacha-server` (`@rose-griffon/gacha-server`) — **serveur de jeu gacha** (Colyseus 0.17 sur Bun, transport `BunWebSockets`) : REST économie consommée par le bot + temps réel Discord Activity. systemd `rpbey-gacha.service` :5050 (loopback), nginx `api.rpbey.fr/gacha/` (WSS). Backé par `@rpbey/db`. Détails → **`docs/gacha/server.md`**.
 - `apps/cdn` (`cdn`) — serveur statique Bun (`server.ts`).
 
 > Naming : deux scopes coexistent — `@rose-griffon/*` (apps + challonge) et `@rpbey/*` (packages db/types/di/discordx/pagination). Filtres turbo canoniques : `@rose-griffon/dashboard`, `@rose-griffon/bot`.

@@ -1,12 +1,12 @@
-# Gacha — Bot Discord + serveur de jeu `:5050`
+# Gacha — Bot Discord (client du serveur `:5050`)
 
-Le bot (`apps/bot`, discordx + tsyringe) expose les commandes joueur. Pour le gacha « riche » (tirage, vente, fusion, badges, duel/échange async) il est **client d'un serveur de jeu externe** (`:5050`, hors monorepo). Pour le reste (parier, donner, duel rapide, dette) il tape la DB en direct via la **façade Prisma**.
+Le bot (`apps/bot`, discordx + tsyringe) expose les commandes joueur. Pour le gacha « riche » (tirage, vente, fusion, badges) il est **client du serveur de jeu `:5050`** (`apps/gacha-server`, dans le monorepo — voir [server.md](./server.md)). Pour le reste (parier, donner, duel rapide, dette) il tape la DB en direct via la **façade Prisma**.
 
-## Serveur gacha `:5050` (externe au monorepo)
+## Serveur gacha `:5050` — `apps/gacha-server`
 
 - Base URL : `process.env.GACHA_API_URL ?? "http://127.0.0.1:5050"` (`gacha-api.ts:31`).
-- Service de jeu (Discord Activity / temps réel, rendu d'images Skia). **Pas dans ce repo** — seul son *client* (`gacha-api.ts`) et le pont d'images (`gacha-images.ts`) y vivent.
-- Partage la **même DB** que web/bot (il lit/écrit `profiles.currency`, `card_inventory`, etc., et s'authentifie via la table `sessions`).
+- Serveur de jeu **dans le monorepo** (`apps/gacha-server`, Colyseus 0.17 / Bun) : REST économie + temps réel Discord Activity. Détails serveur → [server.md](./server.md). Côté bot vivent le *client* (`gacha-api.ts`) et le pont d'images (`gacha-images.ts`).
+- Partage la **même DB** que web/bot (lit/écrit `profiles.currency`, `card_inventory`, etc., s'authentifie via la table `sessions`).
 
 ### Authentification — sessions Bearer mintées par le bot (`gacha-api.ts`)
 
@@ -32,15 +32,15 @@ Le bot crée/réutilise une session Bearer par utilisateur Discord et la passe a
 | `badges()` / `claimBadge()` | GET/POST `/api/gacha/badges[/claim]` | — | paliers collection |
 | `fusionPreview()` / `fuse(id)` | GET/POST `/api/gacha/fusion[…]` | — | fusion de doublons |
 | `leaderboard(cat, limit)` | GET `/api/leaderboard/{cat}` | — | cat ∈ currency/wins/mmr/collection |
-| `duelPropose/Accept/Decline/Play/Forfeit/Active/History` | `/api/duel/*` | — | **duel TCG async** |
-| `tradePropose/Accept/Decline/Pending` | `/api/trade/*` | — | échange async |
+| `duelPropose/Accept/Decline/Play/Forfeit/Active/History` | `/api/duel/*` | — | **501** (duels bot = DB directe `duel_matches`) |
+| `tradePropose/Accept/Decline/Pending` | `/api/trade/*` | — | ⚠️ **501** — appelé par `/gacha echange` (gap, cf. server.md) |
 | `adminGrant(userId, amount, note)` | POST `/api/admin/currency/grant` | — | admin |
 
 Robustesse : timeout 15 s → `GachaApiError("TIMEOUT")` ; 502/503/504 → `SERVICE_UNAVAILABLE` ; `tryGachaClient()` renvoie `null` si down (dégradation gracieuse, le bot affiche un embed « service indispo »). Normalisation `balanceAfter` → `newBalance` (`:568-580`).
 
 ### Pont images Skia — `gacha-images.ts` (~179 l)
 
-Fetch PNG rendus par `:5050`, cache **ETag + buffer Redis** (TTL 1 h, clés `gacha:etag:{k}` / `gacha:buf:{k}`), réutilise via `If-None-Match` (304). Timeout 20 s, fallback `null` (embed-only). Fonctions :
+Fetch PNG rendus par `:5050`, cache **ETag + buffer Redis** (TTL 1 h, clés `gacha:etag:{k}` / `gacha:buf:{k}`), réutilise via `If-None-Match` (304). Timeout 20 s, fallback `null` (embed-only). **État serveur recréé** : seul `/api/cards/:id/image.png` répond (redirect 302 → OG web) ; les rendus Skia profil/mosaïque/leaderboard/pity ne sont pas réimplémentés → le bot tombe sur le fallback embed-only. Fonctions :
 - `fetchCardPng(cardId)` → `/api/cards/{id}/image.png`
 - `fetchProfileCardPng(userId, bearer?)` → `/api/profile/{userId}/card.png`
 - `fetchLeaderboardPng(cat)` → `/api/leaderboard/{cat}/image.png`
@@ -75,7 +75,7 @@ Invite à lancer la **Discord Activity** (deeplink si en vocal) ou fallback PWA 
 
 ## Partage économie bot ↔ web ↔ :5050
 
-- **Une seule DB** (`@rpbey/db`). 3 accès parallèles : web (Drizzle), bot (Prisma façade + appels HTTP `:5050`), serveur `:5050` (pg pool).
+- **Une seule DB** (`@rpbey/db`). 3 accès parallèles : web (Drizzle), bot (Prisma façade + appels HTTP `:5050`), serveur `:5050` (`apps/gacha-server`, Drizzle).
 - **API du bot** (`apps/bot` `Bun.serve` `:3001`, `BOT_API_KEY`) : le web l'appelle pour status/logs/commands (`/api/status`, `/api/bot/events` WS). Pont Discord Activity : `/api/discord/token-exchange` (OAuth → session gacha), `/api/discord/webhook/entitlement` (IAP → crédite `currency`, idempotence via note `iap:%`).
 - **Écriture monnaie** : commandes gacha → `:5050` ; `parier`/`donner`/duel rapide → Prisma direct ; IAP → webhook bot. **Lecture web** : Drizzle direct.
 
@@ -96,4 +96,4 @@ Invite à lancer la **Discord Activity** (deeplink si en vocal) ou fallback PWA 
 | duel cooldown / sélection / round | 3 min / 90 s / 3,5 s | DuelCommand:64-67 |
 | mise duel max | 5000 | DuelCommand |
 
-> Les détails internes du serveur `:5050` (rendu Skia, persistance temps réel, signature webhook) ne sont pas dans ce repo ; ce qui précède est observé **côté client** (`gacha-api.ts`, `gacha-images.ts`, `discord-activity.ts`).
+> Le serveur `:5050` est désormais dans le repo (`apps/gacha-server`, cf. [server.md](./server.md)). Ce qui précède décrit le **côté client** (`gacha-api.ts`, `gacha-images.ts`, `discord-activity.ts`) ; le rendu Skia temps réel et la signature webhook restent non réimplémentés côté serveur.

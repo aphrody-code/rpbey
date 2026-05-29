@@ -10,9 +10,11 @@ Documentation canonique et complète du **gacha TCG Beyblade** de la République
 | --- | --- |
 | [database.md](./database.md) | Tables `@rpbey/db`, colonnes, enums, invariant timestamp |
 | [web.md](./web.md) | `apps/web` — routes `/api/gacha` + `/api/v1/gacha`, service, DAL, actions, contrat, pages dashboard |
-| [bot.md](./bot.md) | `apps/bot` — serveur gacha `:5050` (externe) + client `gacha-api.ts`, commandes `/gacha` `/duel` `/jeu`, canvas |
+| [server.md](./server.md) | `apps/gacha-server` — serveur de jeu `:5050` (Colyseus/Bun) : REST économie, CORS, déploiement, gaps |
+| [bot.md](./bot.md) | `apps/bot` — client `gacha-api.ts` du serveur `:5050`, commandes `/gacha` `/duel` `/jeu`, canvas |
 | [rules.md](./rules.md) | Mécaniques : raretés, taux, pity, daily/streak, duel, économie/dette, badges, fusion + roster bannière 1 |
 | [assets-pipeline.md](./assets-pipeline.md) | Pipeline catalogue (scrape → optim → classif → montage template → post Discord) |
+| [server-references.md](./server-references.md) | Liens Colyseus / Discord Activity / PixiJS + notes d'intégration |
 
 ## Vue d'ensemble
 
@@ -27,20 +29,20 @@ Le gacha est un jeu de cartes communautaire (thème Beyblade : *Metal Fusion / B
                          │  currency_transactions · …    │
                          └──────────────┬──────────────┘
             ┌───────────────────────────┼───────────────────────────┐
-            │ Drizzle (DAL)             │ Pool pg (sessions)         │ façade Prisma
+            │ Drizzle (DAL)             │ Drizzle (sessions⋈users)   │ façade Prisma
    ┌────────┴─────────┐      ┌──────────┴──────────┐       ┌─────────┴──────────┐
-   │ apps/web  :3002  │      │ serveur gacha :5050 │       │ apps/bot           │
-   │ Next.js dashboard│      │ (HORS monorepo —    │◄──────┤ slash commands     │
+   │ apps/web  :3002  │      │ apps/gacha-server   │       │ apps/bot           │
+   │ Next.js dashboard│      │ :5050 (Colyseus/Bun)│◄──────┤ slash commands     │
    │ /api/gacha/*     │      │  Discord Activity / │ Bearer│ /gacha /duel /jeu  │
-   │ /api/v1/gacha/*  │      │  jeu temps réel)    │ HTTP  │ gacha-api.ts client│
-   │ mobile (Bearer)  │      │ /api/gacha/pull …   │       │ + Prisma direct    │
+   │ /api/v1/gacha/*  │      │  jeu temps réel     │ HTTP  │ gacha-api.ts client│
+   │ mobile (Bearer)  │      │ /api/gacha/pull …   │ loop  │ + Prisma direct    │
    └──────────────────┘      └─────────────────────┘       └────────────────────┘
 ```
 
 ### Les 3 surfaces (à ne PAS confondre)
 
 1. **`apps/web` (Next.js, `:3002`)** — dashboard web + API mobile (Bearer). Routes `/api/gacha/*` (legacy, authentifiées) et `/api/v1/gacha/*` (publiques, contrat Zod → SDK). Accès DB direct via **Drizzle DAL** (`server/dal/gacha.ts`). Coût pull simple = **100**. Voir [web.md](./web.md).
-2. **Serveur gacha `:5050`** — service de jeu **externe au monorepo** (Discord Activity, temps réel, rendu Skia). Le bot en est le **client** via `apps/bot/src/lib/gacha-api.ts` (`GACHA_API_URL`, défaut `http://127.0.0.1:5050`). Endpoints `/api/gacha/pull` (coût **50**), `/api/gacha/pull10`, `/api/gacha/sell`, `/api/gacha/fusion`, `/api/duel/*`, `/api/trade/*`… Auth = **sessions Bearer mintées par le bot** dans la table `sessions` partagée. Voir [bot.md](./bot.md).
+2. **Serveur gacha `:5050` — `apps/gacha-server`** — service de jeu **dans le monorepo** (Colyseus 0.17 sur Bun, transport `BunWebSockets`) : REST économie + temps réel Discord Activity. Le bot en est le **client** via `apps/bot/src/lib/gacha-api.ts` (`GACHA_API_URL`, défaut `http://127.0.0.1:5050`). Endpoints `/api/gacha/pull` (coût **50**), `/api/gacha/pull10`, `/api/gacha/sell`, `/api/gacha/fusion`, badges, leaderboard… Auth = **sessions Bearer mintées par le bot** dans la table `sessions` partagée (validées via Drizzle `sessions ⋈ users`). systemd loopback + nginx `/gacha/` (WSS). Voir [server.md](./server.md).
 3. **`apps/bot` (Discord)** — slash commands `/gacha *`, `/duel`, `/jeu`, `/play`. Appelle le serveur `:5050` (gacha-api) **ou** tape la DB en direct (façade Prisma) pour `parier`, `donner`, duel rapide, dette. Voir [bot.md](./bot.md).
 
 ### Divergence assumée — deux économies
@@ -62,6 +64,8 @@ Ce sont des chemins identiques sur des services distincts. Les deux écrivent `p
 | Web actions (parts) | `apps/web/src/server/actions/gacha.ts` |
 | Web constantes | `apps/web/src/app/api/gacha/helpers.ts` |
 | Contrat Zod | `packages/api-contract/src/gacha.ts` |
+| Serveur :5050 | `apps/gacha-server/src/{index,handlers,rest,cors,auth,config,discord-token}.ts`, `rooms/GachaRoom.ts` |
+| Serveur déploiement | `apps/gacha-server/deploy/{rpbey-gacha.service,nginx-gacha.location.conf}` |
 | Bot client :5050 | `apps/bot/src/lib/gacha-api.ts` |
 | Bot images (Skia) | `apps/bot/src/lib/gacha-images.ts` |
 | Bot commandes | `apps/bot/src/commands/General/{EconomyGroup,DuelCommand,GameGroup,PlayCommand}.ts` |
@@ -76,5 +80,6 @@ Ce sont des chemins identiques sur des services distincts. Les deux écrivent `p
 - **`gacha_audit_log` jamais écrite** par la DAL web (table morte côté web).
 - **`gacha_friendships`** : table présente, aucune route web (réservée / gérée côté `:5050`).
 - **Validation Zod absente** sur les routes web legacy `/api/gacha/{pull,multi,duel,wishlist}` (entrées non validées).
+- **`apps/gacha-server` — `/api/trade/*` en 501** : `/gacha echange` (bot) appelle `tradePropose()` → l'échange async n'est pas (encore) réimplémenté. Les `/api/duel/*` (501 aussi) sont sans impact : le bot fait ses duels en DB directe (`duel_matches`). Cf. [server.md](./server.md).
 
 Pistes de refonte : centraliser les constantes (`lib/gacha-config.ts`), lire la pity dans la tx, wrapper le duel dans une tx, brancher l'audit log. (Non fait — touche l'économie prod.)
