@@ -1,0 +1,264 @@
+/* SearchField — barre de recherche RPB Google-style, CSS Modules, 0 @mui */
+/* Gradient Gemini (brand IA) : défini une seule fois comme var locale,
+   consommé par .sparkle et .sparkleSmall. */
+:root {
+  --rpb-gradient-ai: linear-gradient(
+    90deg,
+    var(--rpb-ai-start, #4285f4),
+    var(--rpb-ai-mid, #9b72cb),
+    var(--rpb-ai-end, #d96570)
+  );
+}
+
+.wrap {
+  width: 100%;
+  max-width: var(--field-max-width, 584px);
+  margin: 0 auto;
+  position: relative;
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  height: 52px;
+  border-radius: 24px;
+  background: var(--rpb-surface-main, #303134);
+  border: 1px solid transparent;
+  padding: 0 8px;
+  gap: 4px;
+  transition:
+    border-color 0.2s,
+    border-radius 0.15s,
+    background 0.15s;
+}
+
+.bar:hover {
+  background: var(--rpb-surface-high, #3c4043);
+}
+
+.barFocused {
+  border-color: var(--rpb-outline, #5f6368);
+}
+
+.barDropdownOpen {
+  border-radius: 24px 24px 0 0;
+  border-bottom-color: transparent;
+}
+
+.iconBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--rpb-text-secondary, #bdc1c6);
+  flex-shrink: 0;
+  transition: background 0.15s;
+  padding: 0;
+}
+
+.iconBtn:hover {
+  background: color-mix(in srgb, var(--rpb-text, #e8eaed) 8%, transparent);
+}
+
+.iconBtn:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.iconBtn svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+.input {
+  flex: 1;
+  font-size: 1rem;
+  color: var(--rpb-text, #e8eaed);
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0;
+  min-width: 0;
+}
+
+.input::placeholder {
+  color: var(--rpb-text-tertiary, #9aa0a6);
+  opacity: 1;
+}
+
+.divider {
+  width: 1px;
+  height: 24px;
+  background: var(--rpb-border, #3c4043);
+  flex-shrink: 0;
+  margin: 0 4px;
+}
+
+/* Pilule Mode IA */
+.aiPill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid transparent;
+  background: var(--rpb-surface-high, #3c4043);
+  cursor: pointer;
+  flex-shrink: 0;
+  white-space: nowrap;
+  transition:
+    background 0.2s,
+    border-color 0.2s;
+  min-height: 32px;
+}
+
+.aiPill:hover {
+  background: color-mix(in srgb, var(--rpb-primary) 22%, var(--rpb-surface-high, #3c4043));
+}
+
+.aiPillActive {
+  background: color-mix(in srgb, var(--rpb-primary) 18%, var(--rpb-surface-high, #3c4043));
+  border-color: color-mix(in srgb, var(--rpb-primary) 40%, transparent);
+}
+
+.aiPillLabel {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--rpb-text-secondary, #bdc1c6);
+}
+
+.aiPillLabelActive {
+  color: var(--rpb-primary);
+}
+
+/* Cercle sparkle gradient — affordance IA uniquement.
+   Hex Gemini brand intentionnels (spec design : seul usage autorisé hors vars RPB). */
+.sparkle {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  /* stylelint-disable-next-line color-no-invalid-hex -- brand Gemini intentionnel */
+  background: var(--rpb-gradient-ai);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sparkle svg {
+  width: 10px;
+  height: 10px;
+  fill: var(--rpb-primary-on-container, #fff);
+}
+
+/* Dropdown autocomplétion */
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--rpb-surface-main, #303134);
+  border: 1px solid var(--rpb-outline, #5f6368);
+  border-top: none;
+  border-radius: 0 0 24px 24px;
+  z-index: 1300;
+  overflow: hidden;
+}
+
+.dropdownDivider {
+  height: 1px;
+  background: var(--rpb-border, #3c4043);
+  margin: 0 16px;
+}
+
+.suggRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 16px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  color: var(--rpb-text, #e8eaed);
+  transition: background 0.12s;
+  min-height: 48px;
+}
+
+.suggRow:hover {
+  background: var(--rpb-surface-high, #3c4043);
+}
+
+.suggIcon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  color: var(--rpb-text-tertiary, #9aa0a6);
+}
+
+.suggIcon svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.sparkleSmall {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--rpb-gradient-ai);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sparkleSmall svg {
+  width: 11px;
+  height: 11px;
+  fill: var(--rpb-primary-on-container, #fff);
+}
+
+.suggLabel {
+  font-size: 0.9rem;
+  color: var(--rpb-text, #e8eaed);
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.suggBadge {
+  font-size: 0.72rem;
+  color: var(--rpb-text-tertiary, #9aa0a6);
+  flex-shrink: 0;
+}
+
+.dropdownFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  padding: 8px 16px;
+}
+
+.dropdownFooterBtn {
+  font-size: 0.75rem;
+  color: var(--rpb-text-tertiary, #9aa0a6);
+  text-decoration: none;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.dropdownFooterBtn:hover {
+  text-decoration: underline;
+  color: var(--rpb-text-secondary, #bdc1c6);
+}

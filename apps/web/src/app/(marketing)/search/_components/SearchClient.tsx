@@ -1,0 +1,434 @@
+"use client";
+
+import * as React from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { AnimatePresence, motion } from "framer-motion";
+import { globalSearch } from "@rpbey/api-client";
+import type { GlobalSearchItem, SearchCategory } from "@rpbey/api-contract";
+import { facetCounts, normalize, rankSearch, suggest } from "@/lib/search-rank";
+import type { BxProductGroup, RecommendedProduct } from "../../comparateur/_components/types";
+import { AiSynthesis } from "./AiSynthesis";
+import { KnowledgePanel } from "./KnowledgePanel";
+import { SearchField } from "./SearchField";
+import { SerpResults } from "./SerpResults";
+import { SerpTabs } from "./SerpTabs";
+import styles from "./SearchClient.module.css";
+import "./shimmer.css";
+
+// ── Easings M3 ────────────────────────────────────────────────────────────────
+const EASING_STANDARD = [0.2, 0, 0, 1] as const;
+const EASING_ENTER = [0.05, 0.7, 0.1, 1] as const;
+
+// ── Variantes framer-motion ───────────────────────────────────────────────────
+
+// Fade-through : sortant disparaît vite, entrant apparaît avec légère montée
+const fadeThrough = {
+  initial: { opacity: 0, scale: 0.96 },
+  animate: { opacity: 1, scale: 1, transition: { duration: 0.21, ease: EASING_ENTER } },
+  exit: { opacity: 0, scale: 0.96, transition: { duration: 0.09, ease: EASING_STANDARD } },
+};
+
+// Navigation liens du top-bar
+const NAV_LINKS: { label: string; href: string; hideMobile?: boolean }[] = [
+  { label: "Comparateur", href: "/comparateur" },
+  { label: "Tournois", href: "/tournaments" },
+  { label: "Classement", href: "/rankings" },
+  { label: "Méta", href: "/meta", hideMobile: true },
+  { label: "Anime", href: "/anime", hideMobile: true },
+];
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
+
+type ViewState = "home" | "serp" | "synthesis";
+
+function matchesGroup(g: BxProductGroup, q: string): boolean {
+  const nq = normalize(q);
+  return normalize(g.name).includes(nq) || (g.code != null && normalize(g.code).includes(nq));
+}
+
+// ── Props ─────────────────────────────────────────────────────────────────────
+
+interface SearchClientProps {
+  groups: BxProductGroup[];
+  recommendations: RecommendedProduct[];
+}
+
+// ── SearchClient ──────────────────────────────────────────────────────────────
+
+export function SearchClient({ groups, recommendations }: SearchClientProps) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const initialQ = searchParams.get("q") ?? "";
+  const initialMode = searchParams.get("mode") === "ai";
+
+  const [view, setView] = React.useState<ViewState>(initialQ ? "serp" : "home");
+  const [query, setQuery] = React.useState(initialQ);
+  const [aiMode, setAiMode] = React.useState(initialMode);
+  const [category, setCategory] = React.useState<SearchCategory | "all" | "ai">(
+    initialMode ? "ai" : "all",
+  );
+
+  // ── Index de recherche via le SDK (GET /api/v1/search, sans q = index complet) ──
+  const [searchIndex, setSearchIndex] = React.useState<GlobalSearchItem[]>([]);
+  const [indexLoading, setIndexLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    globalSearch()
+      .then((res) => {
+        const items = res.data?.data?.data;
+        if (res.data?.ok && Array.isArray(items)) {
+          setSearchIndex(items as GlobalSearchItem[]);
+        }
+      })
+      .catch(() => {})
+      .finally(() => setIndexLoading(false));
+  }, []);
+
+  // ── Recherche live : debounce 150ms, déclenché à chaque frappe ───────────────
+  const [liveResults, setLiveResults] = React.useState<GlobalSearchItem[]>([]);
+  const [liveFacets, setLiveFacets] = React.useState<Record<string, number>>({});
+
+  React.useEffect(() => {
+    if (!query.trim()) {
+      setLiveResults([]);
+      setLiveFacets({});
+      return;
+    }
+    const tid = setTimeout(async () => {
+      try {
+        // Appel API live avec q (BM25F + facettes côté serveur)
+        const res = await globalSearch({ query: { q: query, limit: 50 } });
+        const payload = res.data?.data;
+        if (res.data?.ok && payload) {
+          const items = payload.data ?? [];
+          setLiveResults(items as GlobalSearchItem[]);
+          setLiveFacets(payload.facets ?? facetCounts(items as GlobalSearchItem[], query));
+        } else {
+          // Fallback : ranking client-side sur l'index complet
+          const ranked = rankSearch(searchIndex, query, { limit: 50 });
+          setLiveResults(ranked);
+          setLiveFacets(facetCounts(searchIndex, query));
+        }
+      } catch {
+        const ranked = rankSearch(searchIndex, query, { limit: 50 });
+        setLiveResults(ranked);
+        setLiveFacets(facetCounts(searchIndex, query));
+      }
+    }, 150);
+    return () => clearTimeout(tid);
+  }, [query, searchIndex]);
+
+  // ── Suggestions autocomplétion ────────────────────────────────────────────
+  const suggestions = React.useMemo(
+    (): GlobalSearchItem[] => suggest(searchIndex, query, 8),
+    [query, searchIndex],
+  );
+
+  // ── Résultats filtrés par catégorie active ────────────────────────────────
+  const results = React.useMemo((): GlobalSearchItem[] => {
+    const base = liveResults.length > 0 ? liveResults : rankSearch(searchIndex, query);
+    if (category === "all" || category === "ai") return base;
+    return base.filter((i) => i.category === category);
+  }, [liveResults, searchIndex, query, category]);
+
+  // ── Knowledge Panel : entité produit matchée ──────────────────────────────
+  const matchedGroup = React.useMemo((): BxProductGroup | null => {
+    if (!query.trim()) return null;
+    return groups.find((g) => matchesGroup(g, query)) ?? null;
+  }, [query, groups]);
+
+  const matchedReco = React.useMemo((): RecommendedProduct | null => {
+    if (!matchedGroup) return null;
+    return (
+      recommendations.find((r) => r.key === matchedGroup.key || r.slug === matchedGroup.slug) ??
+      null
+    );
+  }, [matchedGroup, recommendations]);
+
+  const topReco = recommendations[0] ?? null;
+
+  const relatedGroups = React.useMemo((): BxProductGroup[] => {
+    if (!matchedGroup) return [];
+    return groups.filter((g) => g.key !== matchedGroup.key).slice(0, 6);
+  }, [matchedGroup, groups]);
+
+  // ── Bandeau tendances home : vraies recommandations ───────────────────────
+  const trends = React.useMemo(
+    (): RecommendedProduct[] => recommendations.slice(0, 8),
+    [recommendations],
+  );
+
+  // ── Sync URL ──────────────────────────────────────────────────────────────
+  function syncUrl(q: string, mode: boolean) {
+    const params = new URLSearchParams();
+    if (q) params.set("q", q);
+    if (mode) params.set("mode", "ai");
+    router.replace(params.toString() ? `/search?${params}` : "/search", { scroll: false });
+  }
+
+  function handleSubmit(q: string) {
+    if (!q.trim()) return;
+    setQuery(q);
+    const newMode = aiMode;
+    setView(newMode ? "synthesis" : "serp");
+    setCategory(newMode ? "ai" : "all");
+    syncUrl(q, newMode);
+  }
+
+  function handleChange(v: string) {
+    setQuery(v);
+    if (!v.trim() && view !== "home") {
+      setView("home");
+      syncUrl("", aiMode);
+    }
+  }
+
+  function handleToggleAi() {
+    const next = !aiMode;
+    setAiMode(next);
+    if (view === "serp") setView("synthesis");
+    else if (view === "synthesis") setView("serp");
+    if (query.trim()) syncUrl(query, next);
+  }
+
+  function handleTabChange(v: SearchCategory | "all" | "ai") {
+    setCategory(v);
+    if (v === "ai") {
+      setAiMode(true);
+      setView("synthesis");
+      syncUrl(query, true);
+    } else {
+      setAiMode(false);
+      setView("serp");
+      syncUrl(query, false);
+    }
+  }
+
+  function handleLucky() {
+    if (!topReco) return;
+    router.push(`/comparateur/${topReco.slug}`);
+  }
+
+  // ── Shimmer de chargement (feedback vrai fetch) ────────────────────────────
+  const showShimmer = indexLoading && searchIndex.length === 0;
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // VUE HOME
+  // ─────────────────────────────────────────────────────────────────────────────
+  if (view === "home") {
+    return (
+      <div className={styles.root}>
+        <motion.div className={styles.homeWrap} key="home" {...fadeThrough}>
+          {/* Top-bar navigation */}
+          <header className={styles.homeTopBar}>
+            {NAV_LINKS.map((l) => (
+              <a
+                key={l.label}
+                href={l.href}
+                className={
+                  l.hideMobile
+                    ? `${styles.homeTopBarLink} ${styles.homeTopBarLinkHideMobile}`
+                    : styles.homeTopBarLink
+                }
+              >
+                {l.label}
+              </a>
+            ))}
+          </header>
+
+          {/* Zone centrale */}
+          <div className={styles.homeCenter}>
+            <h1 className={styles.wordmark} aria-label="RPB — Recherche Beyblade">
+              RPB
+            </h1>
+            <p className={styles.tagline}>
+              Le moteur de recherche Beyblade — beys, parts, combos, tournois, bladers, anime &amp;
+              lexique
+            </p>
+
+            {/* Barre de recherche home */}
+            <SearchField
+              value={query}
+              suggestions={suggestions}
+              aiMode={aiMode}
+              onChange={handleChange}
+              onSubmit={handleSubmit}
+              onToggleAi={handleToggleAi}
+            />
+
+            {/* Boutons home */}
+            <div className={styles.homeActions}>
+              <button type="button" className={styles.homeBtn} onClick={() => handleSubmit(query)}>
+                Rechercher
+              </button>
+              <button
+                type="button"
+                className={styles.homeBtn}
+                onClick={handleLucky}
+                disabled={!topReco}
+                title={topReco ? `Meilleure reco : ${topReco.name}` : "Calcul en cours…"}
+              >
+                J&apos;ai de la chance
+              </button>
+            </div>
+
+            <p className={styles.homeSubtext}>
+              Recherche Beyblade — toutes générations (Bakuten, Metal, Burst, X) · français
+            </p>
+
+            {/* Bandeau tendances (vraies recommandations) */}
+            {trends.length > 0 && (
+              <div className={styles.trendsBand}>
+                <p className={styles.trendsTitle}>Top Beys du moment</p>
+                <div className={styles.trendsGrid}>
+                  {trends.map((r) => (
+                    <a
+                      key={r.key}
+                      href={`/search?q=${encodeURIComponent(r.name)}`}
+                      className={styles.trendChip}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleSubmit(r.name);
+                      }}
+                    >
+                      {r.name}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </motion.div>
+      </div>
+    );
+  }
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // VUE SERP / SYNTHESIS
+  // ─────────────────────────────────────────────────────────────────────────────
+  return (
+    <div className={styles.root}>
+      {/* Header SERP sticky */}
+      <div className={styles.serpHeader}>
+        <div className={styles.serpHeaderInner}>
+          {/* Logo compact → retour home */}
+          <button
+            type="button"
+            className={styles.serpLogo}
+            onClick={() => {
+              setView("home");
+              setQuery("");
+              syncUrl("", aiMode);
+            }}
+            aria-label="Retour à l'accueil de la recherche"
+          >
+            RPB
+          </button>
+
+          {/* Champ inline */}
+          <div className={styles.serpFieldWrap}>
+            <SearchField
+              value={query}
+              suggestions={suggestions}
+              aiMode={aiMode}
+              maxWidth="100%"
+              onChange={handleChange}
+              onSubmit={handleSubmit}
+              onToggleAi={handleToggleAi}
+            />
+          </div>
+
+          {/* Liens nav droite */}
+          <nav className={styles.serpTopLinks} aria-label="Navigation secondaire">
+            {NAV_LINKS.map((l) => (
+              <a key={l.label} href={l.href} className={styles.serpTopLink}>
+                {l.label}
+              </a>
+            ))}
+          </nav>
+        </div>
+
+        {/* Onglets facettes */}
+        <SerpTabs active={category} onChange={handleTabChange} facets={liveFacets} />
+      </div>
+
+      {/* Corps */}
+      <div className={styles.serpBody}>
+        <div className={`${styles.serpGrid} ${matchedGroup ? styles.hasPanel : ""}`}>
+          {/* Colonne résultats / synthèse */}
+          <div>
+            <AnimatePresence mode="wait">
+              {view === "synthesis" ? (
+                <motion.div key="synthesis" {...fadeThrough}>
+                  <AiSynthesis
+                    query={query}
+                    group={matchedGroup}
+                    reco={matchedReco}
+                    suggestions={suggestions}
+                    onNewSearch={handleSubmit}
+                  />
+                </motion.div>
+              ) : (
+                <motion.div key="serp" {...fadeThrough}>
+                  {showShimmer ? <SearchShimmer /> : <SerpResults items={results} query={query} />}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* Knowledge Panel (colonne droite) */}
+          {matchedGroup && view !== "synthesis" && (
+            <AnimatePresence>
+              <motion.div
+                key="panel"
+                initial={{ opacity: 0, x: 16 }}
+                animate={{ opacity: 1, x: 0, transition: { duration: 0.25, ease: EASING_ENTER } }}
+                exit={{ opacity: 0, x: 16, transition: { duration: 0.15, ease: EASING_STANDARD } }}
+              >
+                <KnowledgePanel group={matchedGroup} reco={matchedReco} related={relatedGroups} />
+              </motion.div>
+            </AnimatePresence>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── Shimmer de chargement (pendant le premier fetch de l'index) ───────────────
+
+function SearchShimmer() {
+  return (
+    <div aria-busy="true" aria-label="Chargement des résultats">
+      {[1, 2, 3, 4].map((i) => (
+        <div
+          key={i}
+          style={{
+            padding: "20px 0",
+            borderBottom: "1px solid var(--rpb-border, #3c4043)",
+            display: "flex",
+            flexDirection: "column",
+            gap: 8,
+          }}
+        >
+          <div style={shimmerBar(140, 12)} />
+          <div style={shimmerBar(320, 18)} />
+          <div style={shimmerBar(480, 13)} />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function shimmerBar(width: number, height: number): React.CSSProperties {
+  return {
+    width,
+    height,
+    borderRadius: 4,
+    background:
+      "linear-gradient(90deg, var(--rpb-surface-main,#303134) 25%, var(--rpb-surface-high,#3c4043) 50%, var(--rpb-surface-main,#303134) 75%)",
+    backgroundSize: "200% 100%",
+    animation: "shimmer 1.4s infinite linear",
+  };
+}

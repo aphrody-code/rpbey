@@ -1,0 +1,238 @@
+/* KnowledgePanel — carte entité latérale, CSS Modules, 0 @mui */
+
+.panel {
+  background: var(--rpb-surface-main, #303134);
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid var(--rpb-border, #3c4043);
+  position: sticky;
+  top: 80px;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--rpb-border, #3c4043) transparent;
+  /* Shared-axis entrance */
+  animation: slideIn 0.25s cubic-bezier(0.05, 0.7, 0.1, 1) both;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel {
+    animation: none;
+  }
+}
+
+.title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--rpb-text, #e8eaed);
+  margin: 0 0 12px;
+  line-height: 1.2;
+}
+
+/* Image produit */
+.imageWrap {
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  background: var(--rpb-surface-scrim, color-mix(in srgb, var(--rpb-bg, #202124) 60%, transparent));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 180px;
+}
+
+.productImage {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  padding: 8px;
+}
+
+.imagePlaceholder {
+  border-radius: 8px;
+  background: var(--rpb-surface-scrim, color-mix(in srgb, var(--rpb-bg, #202124) 60%, transparent));
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.imagePlaceholder svg {
+  width: 40px;
+  height: 40px;
+  fill: var(--rpb-text-tertiary, #9aa0a6);
+}
+
+/* Prix */
+.priceRow {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.priceMin {
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: var(--rpb-price-good, #22c55e);
+}
+
+.priceMax {
+  font-size: 0.85rem;
+  color: var(--rpb-text-secondary, #bdc1c6);
+}
+
+/* Boutiques */
+.shopRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.shopRow svg {
+  width: 15px;
+  height: 15px;
+  fill: var(--rpb-text-tertiary, #9aa0a6);
+  flex-shrink: 0;
+}
+
+.shopCount {
+  font-size: 0.82rem;
+  color: var(--rpb-text-secondary, #bdc1c6);
+}
+
+/* Tier */
+.tierRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.tierBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  border: 1px solid transparent;
+}
+
+.tierScore {
+  font-size: 0.72rem;
+  color: var(--rpb-text-tertiary, #9aa0a6);
+}
+
+/* Pièces incluses */
+.sectionLabel {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--rpb-text-tertiary, #9aa0a6);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0 0 6px;
+}
+
+.chipsWrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  height: 20px;
+  font-size: 0.68rem;
+  color: var(--rpb-text-secondary, #bdc1c6);
+  background: color-mix(in srgb, var(--rpb-text, #e8eaed) 5%, transparent);
+  border: 1px solid var(--rpb-border, #3c4043);
+  border-radius: 10px;
+}
+
+/* CTA */
+.cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: var(--rpb-primary);
+  color: var(--rpb-primary-on-container, #fff);
+  font-weight: 700;
+  font-size: 0.875rem;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 16px;
+  transition: background 0.15s;
+  min-height: 48px;
+}
+
+.cta:hover {
+  background: color-mix(in srgb, var(--rpb-primary) 85%, #000);
+}
+
+.cta svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
+/* Divider */
+.divider {
+  height: 1px;
+  background: var(--rpb-border, #3c4043);
+  margin: 0 0 16px;
+}
+
+/* Recherches associées */
+.relatedList {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.relatedLink {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.82rem;
+  color: var(--rpb-link, #8ab4f8);
+  text-decoration: none;
+  min-height: 32px;
+}
+
+.relatedLink:hover {
+  text-decoration: underline;
+}
+
+.relatedLink svg {
+  width: 12px;
+  height: 12px;
+  fill: currentColor;
+  opacity: 0.6;
+  flex-shrink: 0;
+}

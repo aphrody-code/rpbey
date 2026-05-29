@@ -1,0 +1,193 @@
+/* SerpResults — liste résultats style Google dark, CSS Modules, 0 @mui */
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Résultat texte (ligne Google) ── */
+.item {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--rpb-border, #3c4043);
+  /* stagger fade-in via animation-delay défini inline */
+  animation: fadeIn 0.21s cubic-bezier(0.05, 0.7, 0.1, 1) both;
+}
+
+.item:last-child {
+  border-bottom: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .item {
+    animation: none;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Ligne site : favicon + nom + URL */
+.siteLine {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.favicon {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--rpb-surface-main, #303134);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.favicon img {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+.favicon svg {
+  width: 16px;
+  height: 16px;
+  fill: var(--rpb-text-tertiary, #9aa0a6);
+}
+
+.siteName {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--rpb-text, #e8eaed);
+  display: block;
+  line-height: 1.3;
+}
+
+.siteUrl {
+  font-size: 0.72rem;
+  color: var(--rpb-text-secondary, #bdc1c6);
+  display: block;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 480px;
+}
+
+/* Titre lien bleu */
+.titleLink {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--rpb-link, #8ab4f8);
+  text-decoration: none;
+  line-height: 1.3;
+  margin-bottom: 4px;
+}
+
+.titleLink:hover {
+  text-decoration: underline;
+}
+
+.titleLink:visited {
+  color: var(--rpb-link-visited, #c58af9);
+}
+
+/* Snippet */
+.snippet {
+  font-size: 0.875rem;
+  color: var(--rpb-text-secondary, #bdc1c6);
+  line-height: 1.55;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Badge tier/prix */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 8px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  border: 1px solid transparent;
+}
+
+/* ── Grille images (frames / anime) ── */
+.imageGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 8px;
+}
+
+@media (min-width: 600px) {
+  .imageGrid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  }
+}
+
+.imageCard {
+  display: block;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--rpb-surface-main, #303134);
+  text-decoration: none;
+  border: 1px solid var(--rpb-border, #3c4043);
+  transition:
+    border-color 0.15s,
+    transform 0.15s;
+  animation: fadeIn 0.21s cubic-bezier(0.05, 0.7, 0.1, 1) both;
+}
+
+.imageCard:hover {
+  border-color: var(--rpb-primary);
+  transform: scale(1.02);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .imageCard:hover {
+    transform: none;
+  }
+  .imageCard {
+    animation: none;
+  }
+}
+
+.imageThumb {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+}
+
+.imageLabel {
+  padding: 6px 8px;
+  font-size: 0.75rem;
+  color: var(--rpb-text-secondary, #bdc1c6);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Empty state ── */
+.empty {
+  padding: 48px 0;
+  text-align: center;
+  color: var(--rpb-text-tertiary, #9aa0a6);
+  font-size: 0.95rem;
+}

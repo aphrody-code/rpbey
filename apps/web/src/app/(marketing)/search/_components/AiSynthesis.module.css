@@ -1,0 +1,240 @@
+/* AiSynthesis — vue synthèse algorithmique IA, CSS Modules, 0 @mui */
+
+.wrap {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+/* Colonne principale */
+.main {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Bulle requête */
+.queryBubble {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 24px;
+}
+
+.queryChip {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  border-radius: 18px;
+  background: var(--rpb-surface-high, #3c4043);
+  border: 1px solid var(--rpb-border, #3c4043);
+  color: var(--rpb-text, #e8eaed);
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+/* En-tête IA */
+.aiHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.aiSparkle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--rpb-gradient-ai);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.aiSparkle svg {
+  width: 12px;
+  height: 12px;
+  fill: var(--rpb-primary-on-container, #fff);
+}
+
+.aiLabel {
+  font-size: 0.8rem;
+  color: var(--rpb-text-tertiary, #9aa0a6);
+  font-style: italic;
+}
+
+/* Corps synthèse */
+.paragraph {
+  font-size: 1rem;
+  color: var(--rpb-text, #e8eaed);
+  line-height: 1.7;
+  margin: 0 0 16px;
+}
+
+.strong {
+  font-weight: 600;
+}
+
+.priceGood {
+  font-weight: 700;
+  color: var(--rpb-price-good, #22c55e);
+}
+
+.secondary {
+  color: var(--rpb-text-secondary, #bdc1c6);
+}
+
+/* Citation inline */
+.citation {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 1px 6px;
+  margin-left: 4px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--rpb-primary) 12%, var(--rpb-surface-main, #303134));
+  border: 1px solid color-mix(in srgb, var(--rpb-primary) 20%, transparent);
+  font-size: 0.72rem;
+  color: var(--rpb-link, #8ab4f8);
+  text-decoration: none;
+  vertical-align: middle;
+  line-height: 1.4;
+}
+
+.citation:hover {
+  background: color-mix(in srgb, var(--rpb-primary) 20%, var(--rpb-surface-high, #3c4043));
+}
+
+.divider {
+  height: 1px;
+  background: var(--rpb-border, #3c4043);
+  margin: 16px 0;
+}
+
+/* Sections */
+.sectionTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--rpb-text, #e8eaed);
+  margin: 0 0 8px;
+}
+
+.sectionText {
+  font-size: 0.9rem;
+  color: var(--rpb-text-secondary, #bdc1c6);
+  line-height: 1.6;
+  margin: 0 0 8px;
+}
+
+.partsWrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.partChip {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  color: var(--rpb-text-secondary, #bdc1c6);
+  background: color-mix(in srgb, var(--rpb-text, #e8eaed) 5%, transparent);
+  border: 1px solid var(--rpb-border, #3c4043);
+  border-radius: 10px;
+}
+
+.relanceLabel {
+  font-size: 0.8rem;
+  color: var(--rpb-text-tertiary, #9aa0a6);
+  margin-bottom: 12px;
+}
+
+/* Panneau sources (droite) */
+.sources {
+  width: 240px;
+  flex-shrink: 0;
+  display: none;
+}
+
+@media (min-width: 1200px) {
+  .sources {
+    display: block;
+  }
+}
+
+.sourcesPanel {
+  background: var(--rpb-surface-main, #303134);
+  border: 1px solid var(--rpb-border, #3c4043);
+  border-radius: 12px;
+  padding: 16px;
+  position: sticky;
+  top: 80px;
+}
+
+.sourcesHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.sourcesHeader svg {
+  width: 16px;
+  height: 16px;
+  fill: var(--rpb-text-tertiary, #9aa0a6);
+}
+
+.sourcesTitle {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--rpb-text, #e8eaed);
+}
+
+.sourceCard {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px;
+  border-radius: 8px;
+  background: var(--rpb-surface-high, #3c4043);
+  border: 1px solid var(--rpb-border, #3c4043);
+  text-decoration: none;
+  margin-bottom: 8px;
+  transition: border-color 0.15s;
+}
+
+.sourceCard:hover {
+  border-color: var(--rpb-primary);
+}
+
+.sourceCard img {
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.sourceTitle {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--rpb-text, #e8eaed);
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.sourceDomain {
+  font-size: 0.68rem;
+  color: var(--rpb-text-tertiary, #9aa0a6);
+  margin-top: 2px;
+}
+
+/* Empty */
+.empty {
+  padding: 48px 0;
+  text-align: center;
+  color: var(--rpb-text-tertiary, #9aa0a6);
+  font-size: 0.95rem;
+}
