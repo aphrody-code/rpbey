@@ -32,7 +32,7 @@ import LinkExtension from "@tiptap/extension-link";
 import TextAlign from "@tiptap/extension-text-align";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useToast } from "@/components/ui";
 
 interface RichTextEditorProps {
@@ -46,6 +46,14 @@ export function RichTextEditor({ value, onChange, minHeight = 300 }: RichTextEdi
   const { showToast } = useToast();
   const [linkDialogOpen, setLinkDialogOpen] = useState(false);
   const [linkUrl, setLinkUrl] = useState("");
+  const linkInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (linkDialogOpen) {
+      const id = setTimeout(() => linkInputRef.current?.focus(), 0);
+      return () => clearTimeout(id);
+    }
+  }, [linkDialogOpen]);
 
   const editor = useEditor({
     extensions: [
@@ -282,7 +290,7 @@ export function RichTextEditor({ value, onChange, minHeight = 300 }: RichTextEdi
         <DialogTitle>Ajouter un lien</DialogTitle>
         <DialogContent>
           <TextField
-            autoFocus
+            inputRef={linkInputRef}
             margin="dense"
             label="URL"
             type="url"

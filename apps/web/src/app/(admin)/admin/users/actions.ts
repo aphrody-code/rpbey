@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
 import { auth } from "@/lib/auth";
-import { db, schema, and, count, desc, eq, ilike, inArray, or } from "@/lib/db";
+import { db, schema, count, desc, eq, ilike, inArray, or } from "@/lib/db";
 
 export async function getUsers(page = 1, pageSize = 10, search = "") {
   const skip = (page - 1) * pageSize;

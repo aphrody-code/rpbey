@@ -19,7 +19,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { archiveCurrentSeason } from "@/server/actions/season";
 
 interface Season {
@@ -35,6 +35,14 @@ export default function SeasonManager({ seasons }: { seasons: Season[] }) {
   const [open, setOpen] = useState(false);
   const [nextName, setNextName] = useState("");
   const [loading, setLoading] = useState(false);
+  const nameInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (open) {
+      const id = setTimeout(() => nameInputRef.current?.focus(), 0);
+      return () => clearTimeout(id);
+    }
+  }, [open]);
 
   const currentSeason = seasons.find((s) => s.isActive);
 
@@ -219,7 +227,7 @@ export default function SeasonManager({ seasons }: { seasons: Season[] }) {
             3. Démarrer une nouvelle saison immédiatement.
           </DialogContentText>
           <TextField
-            autoFocus
+            inputRef={nameInputRef}
             margin="dense"
             label="Nom de la nouvelle saison"
             placeholder="Ex: Saison 2 - Hiver 2026"

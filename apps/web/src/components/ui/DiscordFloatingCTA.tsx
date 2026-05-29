@@ -81,7 +81,7 @@ export function DiscordFloatingCTA() {
 
   return (
     <Box
-      role="complementary"
+      component="aside"
       aria-label={config.ariaLabel}
       sx={{
         position: "fixed",

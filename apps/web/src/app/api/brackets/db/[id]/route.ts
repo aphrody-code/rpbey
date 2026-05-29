@@ -84,7 +84,7 @@ export async function GET(_req: Request, { params }: RouteParams): Promise<Respo
   }
 
   // Si on a un export JSON par le nom du tournoi (cas d'un CUID Prisma pointant vers un BTS)
-  const nameSlugMatch = Object.entries(JSON_MAPPING).find(([slug, file]) => {
+  const nameSlugMatch = Object.entries(JSON_MAPPING).find(([slug, _file]) => {
     return tournament.name.toLowerCase().includes(slug) || tournament.challongeUrl?.includes(slug);
   });
 

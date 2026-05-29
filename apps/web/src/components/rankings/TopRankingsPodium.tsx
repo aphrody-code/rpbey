@@ -41,7 +41,7 @@ export default function TopRankingsPodium({ topProfiles }: TopRankingsPodiumProp
 
   return (
     <Box
-      role="region"
+      component="section"
       aria-label="Podium des 3 meilleurs bladers"
       sx={{
         display: "flex",

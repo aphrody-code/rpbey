@@ -55,7 +55,7 @@ export async function POST(req: Request) {
     const { event, subscription } = data;
 
     if (subscription.type === "stream.online") {
-      console.log(`Stream online event for ${event.broadcaster_user_name}`);
+      console.warn(`Stream online event for ${event.broadcaster_user_name}`);
     }
 
     return new NextResponse("OK", { status: 200 });

@@ -4,7 +4,7 @@
  */
 
 import { type NextRequest, NextResponse } from "next/server";
-import { db, schema, and, asc, count, eq, inArray, or } from "@/lib/db";
+import { db, schema, count, eq } from "@/lib/db";
 
 interface RouteParams {
   params: Promise<{ id: string }>;

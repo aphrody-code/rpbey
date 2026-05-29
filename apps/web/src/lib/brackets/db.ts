@@ -109,7 +109,7 @@ export function bracketDbToViewerData(
   ];
 
   // === Groups ===
-  const groups: Group[] = [
+  const _groups: Group[] = [
     { id: groupWb, stage_id: stageId, number: 1 },
     { id: groupLb, stage_id: stageId, number: 2 },
     { id: groupGf, stage_id: stageId, number: 3 },

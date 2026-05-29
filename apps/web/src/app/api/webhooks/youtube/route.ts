@@ -31,7 +31,7 @@ export async function POST(req: Request) {
     const title = entry.title;
     const authorName = entry.author?.name;
 
-    console.log(`YouTube Notification: ${title} by ${authorName} (${videoId})`);
+    console.warn(`YouTube Notification: ${title} by ${authorName} (${videoId})`);
 
     return new NextResponse("OK", { status: 200 });
   } catch (error) {

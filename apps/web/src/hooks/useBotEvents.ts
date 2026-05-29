@@ -37,8 +37,10 @@ export function useBotEvents(options: Options = {}) {
   const [events, setEvents] = useState<BotEvent[]>([]);
   const [connected, setConnected] = useState(false);
 
+  const topicsKey = topics.join(",");
+
   useEffect(() => {
-    const url = `/api/bot/events?topics=${topics.join(",")}`;
+    const url = `/api/bot/events?topics=${topicsKey}`;
     const es = new EventSource(url);
 
     es.onopen = () => setConnected(true);
@@ -65,7 +67,7 @@ export function useBotEvents(options: Options = {}) {
       es.close();
       setConnected(false);
     };
-  }, [bufferSize, topics.join]);
+  }, [bufferSize, topicsKey]);
 
   return { events, connected };
 }

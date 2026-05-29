@@ -71,7 +71,7 @@ export async function deleteStaffMember(id: string) {
 export async function syncStaffFromDiscord() {
   await checkAdmin();
 
-  console.log("[SyncStaff] Triggering sync script...");
+  console.warn("[SyncStaff] Triggering sync script...");
 
   try {
     const proc = Bun.spawn(["bun", "scripts/sync-staff-db.ts"], {
@@ -83,7 +83,7 @@ export async function syncStaffFromDiscord() {
     const stderr = await new Response(proc.stderr).text();
     const exitCode = await proc.exited;
 
-    console.log("[SyncStaff] Script output:", stdout);
+    console.warn("[SyncStaff] Script output:", stdout);
     if (stderr) console.error("[SyncStaff] Script stderr:", stderr);
     if (exitCode !== 0) throw new Error(`Script failed with exit code ${exitCode}`);
 

@@ -442,9 +442,11 @@ export async function handleEntitlementWebhook(args: {
 
   try {
     // Credit via Prisma (shared `users` + `profiles` tables with gacha server).
-    // Pas d'enum `IAP_PURCHASE` actuellement → on utilise `ADMIN_GIVE` avec une
-    // `note` typée pour la traçabilité (entitlement.id Discord = idempotent ref).
-    // TODO : ajouter `IAP_PURCHASE` au TransactionType enum quand schema:sync ok.
+    // Les achats IAP sont tracés via `ADMIN_GIVE` + une `note` typée `iap:…`
+    // (entitlement.id Discord = référence idempotente). Choix assumé : pas de
+    // valeur d'enum `IAP_PURCHASE` dédiée (éviterait une migration de l'enum
+    // `TransactionType` partagé avec le serveur gacha) — la `note` suffit au
+    // reporting et garantit l'idempotence via l'index unique ci-dessous.
     //
     // Idempotence stratégie :
     //   1. Pre-check `findFirst` (fast path, no DB lock).

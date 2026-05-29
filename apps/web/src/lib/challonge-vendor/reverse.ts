@@ -22,18 +22,11 @@
  */
 
 import { extractReactRoots, getReactRoot, readDataAttrs } from "./extractors/react-props";
-import type {
-  LogEntriesProps,
-  ParticipantsProps,
-  ReactRoot,
-  StandingsProps,
-} from "./extractors/react-props";
+import type { LogEntriesProps, ReactRoot, StandingsProps } from "./extractors/react-props";
 import {
   curlImpersonateGet,
   isRedirectInfo,
   type CurlImpersonateOptions,
-  type CurlImpersonateResponse,
-  type RedirectInfo,
 } from "./transports/curl-impersonate";
 import type { ScrapedLogEntry, ScrapedStanding } from "./types";
 

@@ -1,6 +1,5 @@
 "use server";
 
-import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 
 import { loadJsonSafe } from "@/lib/data-cache";

@@ -145,7 +145,13 @@ export function ProfileSettingsForm() {
                 disabled={isUploading}
               >
                 Changer la photo
-                <input type="file" hidden accept="image/*" onChange={handleImageUpload} />
+                <input
+                  type="file"
+                  hidden
+                  accept="image/*"
+                  aria-label="Changer la photo de profil"
+                  onChange={handleImageUpload}
+                />
               </Button>
               <Typography
                 variant="caption"

@@ -27,7 +27,7 @@ export function NextEpisodeOverlay({ seriesSlug, nextNumber, nextTitle }: NextEp
     }
     const timer = setTimeout(() => setSecondsLeft((s) => s - 1), 1000);
     return () => clearTimeout(timer);
-  }, [secondsLeft, dismissed, seriesSlug, nextNumber]);
+  }, [secondsLeft, dismissed, seriesSlug, nextNumber, router]);
 
   if (dismissed) return null;
 

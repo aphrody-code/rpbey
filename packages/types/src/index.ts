@@ -1,8 +1,10 @@
 import type { InferInsertModel, InferSelectModel } from "drizzle-orm";
+import type { schema as DbSchema } from "@rpbey/db";
 
-// Schéma référencé en type-only (`typeof import(...)`) : effacé à la compilation,
-// donc importer un type d'ici ne tire JAMAIS postgres.js dans un bundle client.
-type Schema = typeof import("@rpbey/db").schema;
+// Schéma référencé en type-only (`import type` + `typeof`) : effacé à la
+// compilation, donc importer un type d'ici ne tire JAMAIS postgres.js dans un
+// bundle client.
+type Schema = typeof DbSchema;
 
 // === Base model types (Drizzle), exported under their Prisma model names ===
 export type User = InferSelectModel<Schema["users"]>;

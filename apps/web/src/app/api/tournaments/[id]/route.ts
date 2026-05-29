@@ -7,7 +7,7 @@ import { type NextRequest, NextResponse } from "next/server";
 import { type TournamentStatus } from "@/lib/types";
 import { requireAdmin, requireStaff } from "@/lib/auth-utils";
 import { getChallongeService } from "@/lib/challonge";
-import { db, schema, and, asc, eq, ilike, or } from "@/lib/db";
+import { db, schema, asc, eq, ilike, or } from "@/lib/db";
 
 interface RouteParams {
   params: Promise<{ id: string }>;

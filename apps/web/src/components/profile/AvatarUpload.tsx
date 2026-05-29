@@ -122,7 +122,13 @@ export function AvatarUpload({ currentImage, onUpload }: AvatarUploadProps) {
         sx={{ borderRadius: 2 }}
       >
         Modifier
-        <input hidden accept="image/*" type="file" onChange={handleFileChange} />
+        <input
+          hidden
+          accept="image/*"
+          type="file"
+          aria-label="Modifier l'avatar"
+          onChange={handleFileChange}
+        />
       </Button>
     </Box>
   );

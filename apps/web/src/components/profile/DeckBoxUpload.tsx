@@ -124,7 +124,13 @@ export function DeckBoxUpload({ currentImage, onUpload }: DeckBoxUploadProps) {
                 sx={{ borderRadius: 2 }}
               >
                 {currentImage ? "Changer" : "Ajouter une photo"}
-                <input hidden accept="image/*" type="file" onChange={handleFileChange} />
+                <input
+                  hidden
+                  accept="image/*"
+                  type="file"
+                  aria-label="Ajouter ou changer la photo de la deck box"
+                  onChange={handleFileChange}
+                />
               </Button>
 
               {currentImage && (

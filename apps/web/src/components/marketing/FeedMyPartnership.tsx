@@ -164,16 +164,10 @@ export function FeedMyPartnership() {
           >
             {/* Copy code box - MD3 touch target */}
             <Box
-              role="button"
-              tabIndex={0}
+              component="button"
+              type="button"
               aria-label="Copier le code promo RPB10"
               onClick={handleCopyCode}
-              onKeyDown={(e: React.KeyboardEvent) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  e.preventDefault();
-                  handleCopyCode();
-                }
-              }}
               sx={{
                 display: "flex",
                 alignItems: "center",

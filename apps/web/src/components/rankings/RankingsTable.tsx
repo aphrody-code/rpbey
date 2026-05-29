@@ -322,7 +322,6 @@ export function RankingsTable({
       <TableContainer
         component={Paper}
         elevation={0}
-        role="region"
         aria-label="Tableau des classements"
         tabIndex={0}
         sx={{

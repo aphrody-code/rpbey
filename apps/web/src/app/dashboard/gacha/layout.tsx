@@ -1,6 +1,6 @@
 "use client";
 
-import { Casino, EmojiEvents, History, Inventory2, Person } from "@mui/icons-material";
+import { EmojiEvents, History, Inventory2, Person } from "@mui/icons-material";
 import { Box, Tab, Tabs } from "@mui/material";
 import Link from "next/link";
 import { usePathname } from "next/navigation";

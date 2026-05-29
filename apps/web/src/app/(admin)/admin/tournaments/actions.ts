@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { type TournamentStatus } from "@/lib/types";
 import { getChallongeService } from "@/lib/challonge";
-import { db, schema, and, count, desc, eq, ilike, inArray, or } from "@/lib/db";
+import { db, schema, count, desc, eq, ilike, inArray, or } from "@/lib/db";
 import { requireAdmin } from "@/lib/auth-utils";
 
 export type TournamentInput = {

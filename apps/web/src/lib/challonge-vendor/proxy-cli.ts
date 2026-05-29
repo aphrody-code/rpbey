@@ -22,8 +22,8 @@ const cookiePath = process.env.CHALLONGE_COOKIE_PATH || undefined;
 const server = startChallongeProxy({ port, token, cookiePath });
 
 const auth = token ? " [token auth ON]" : " [no auth]";
-console.log(`challonge-proxy on ${server.url}${auth}`);
-console.log(
+console.warn(`challonge-proxy on ${server.url}${auth}`);
+console.warn(
   "    routes: GET /, /:slug, /:slug/store, /:slug/log, /:slug/standings, /:slug/participants, /:slug/page/:sub",
 );
-console.log("    ?profile=chrome131|chrome136|firefox147|...  override curl profile");
+console.warn("    ?profile=chrome131|chrome136|firefox147|...  override curl profile");

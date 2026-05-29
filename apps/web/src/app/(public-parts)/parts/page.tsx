@@ -863,7 +863,13 @@ function ImportTab({ onStatsChange }: { onStatsChange: () => void }) {
 
             <Button component="label" variant="outlined" startIcon={<FileUpload />} sx={{ mb: 2 }}>
               Charger un fichier JSON
-              <input type="file" accept=".json" hidden onChange={handleFileUpload} />
+              <input
+                type="file"
+                accept=".json"
+                hidden
+                aria-label="Charger un fichier JSON de pièces"
+                onChange={handleFileUpload}
+              />
             </Button>
 
             <TextField

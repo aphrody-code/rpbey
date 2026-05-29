@@ -11,7 +11,7 @@ import { StardustTabs } from "@/components/rankings/StardustTabs";
 import { StardustThemeSync } from "@/components/theme/StardustThemeSync";
 import { type StardustBlader, type StardustRanking } from "@/lib/types";
 import { MuiDiscordIcon as DiscordIcon } from "@/components/ui/MuiIcons";
-import { db, schema, and, asc, count, desc, eq, ilike, inArray, sum } from "@/lib/db";
+import { db, schema, asc, count, desc, eq, ilike, inArray, sum } from "@/lib/db";
 import { createPageMetadata } from "@/lib/seo-utils";
 import { getStardustSeasonStats } from "@/server/actions/stardust";
 

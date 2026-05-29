@@ -24,7 +24,8 @@ describe("date helpers — Date|string (régression timestamp mode)", () => {
 
 describe("cn / truncate", () => {
   test("cn merge conditionnel", () => {
-    expect(cn("a", false && "b", "c")).toBe("a c");
+    const falsy = false as boolean;
+    expect(cn("a", falsy && "b", "c")).toBe("a c");
   });
   test("truncate coupe avec ellipse", () => {
     expect(truncate("abcdefghij", 5)).toBe("ab...");

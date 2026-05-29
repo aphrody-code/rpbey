@@ -142,9 +142,9 @@ function damerau(a: string, b: string, max: number): number {
   if (Math.abs(al - bl) > max) return max + 1;
   if (al === 0) return bl;
   if (bl === 0) return al;
-  let prev = new Array<number>(bl + 1);
-  let curr = new Array<number>(bl + 1);
-  let beforePrev = new Array<number>(bl + 1);
+  let prev = Array.from<number>({ length: bl + 1 });
+  let curr = Array.from<number>({ length: bl + 1 });
+  let beforePrev = Array.from<number>({ length: bl + 1 });
   for (let j = 0; j <= bl; j++) prev[j] = j;
   for (let i = 1; i <= al; i++) {
     curr[0] = i;
@@ -165,7 +165,7 @@ function damerau(a: string, b: string, max: number): number {
     if (rowMin > max) return max + 1; // élagage : plus aucune amélioration possible
     beforePrev = prev;
     prev = curr;
-    curr = new Array<number>(bl + 1);
+    curr = Array.from<number>({ length: bl + 1 });
   }
   return prev[bl] ?? max + 1;
 }

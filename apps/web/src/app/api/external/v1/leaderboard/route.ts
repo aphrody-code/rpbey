@@ -1,6 +1,6 @@
 import crypto from "node:crypto";
 import { NextResponse } from "next/server";
-import { db, schema, asc, desc, eq, ilike, or } from "@/lib/db";
+import { db, schema, desc, eq, ilike, or } from "@/lib/db";
 
 export const revalidate = 60; // Cache for 1 minute
 

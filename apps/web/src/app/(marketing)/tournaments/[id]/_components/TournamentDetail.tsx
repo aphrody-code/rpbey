@@ -3,7 +3,7 @@
 import { GridView as PoolsIcon, Leaderboard, EmojiEvents as Trophy } from "@mui/icons-material";
 import { Box, Grid, Paper, Tab, Tabs } from "@mui/material";
 import { useEffect, useState } from "react";
-import { ChallongeBracket, TournamentBracketDb } from "@/components/tournaments";
+import { TournamentBracketDb } from "@/components/tournaments";
 import { MirrorReact } from "@/components/challonge/MirrorReact";
 import { useThemeMode } from "@/components/theme/ThemeRegistry";
 import { AboutSection } from "./AboutSection";

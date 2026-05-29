@@ -7,7 +7,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { type ReactNode, useCallback, useState } from "react";
+import { type ReactNode, useCallback, useEffect, useRef, useState } from "react";
 
 interface ConfirmDialogProps {
   open: boolean;
@@ -33,6 +33,14 @@ export function ConfirmDialog({
   onCancel,
 }: ConfirmDialogProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const confirmBtnRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (open) {
+      const id = setTimeout(() => confirmBtnRef.current?.focus(), 0);
+      return () => clearTimeout(id);
+    }
+  }, [open]);
 
   const handleConfirm = useCallback(async () => {
     setIsSubmitting(true);
@@ -67,11 +75,11 @@ export function ConfirmDialog({
           {cancelText}
         </Button>
         <Button
+          ref={confirmBtnRef}
           onClick={handleConfirm}
           disabled={isLoading}
           color={confirmColor}
           variant="contained"
-          autoFocus
           startIcon={isLoading ? <CircularProgress size={16} color="inherit" /> : undefined}
         >
           {confirmText}

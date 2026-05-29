@@ -243,21 +243,31 @@ export default function AdminAnimePage() {
                     <VisibilityOff sx={{ color: "text.secondary", fontSize: 20 }} />
                   )}
                 </td>
-                <td>
+                <td aria-label="Actions">
                   <Stack direction="row" spacing={0.5}>
                     <Tooltip title="Modifier">
-                      <IconButton size="small" onClick={() => handleEdit(s)}>
+                      <IconButton
+                        size="small"
+                        aria-label="Modifier la série"
+                        onClick={() => handleEdit(s)}
+                      >
                         <Edit fontSize="small" />
                       </IconButton>
                     </Tooltip>
                     <Tooltip title="Gérer les épisodes">
-                      <IconButton size="small" component={Link} href={`/admin/anime/${s.id}`}>
+                      <IconButton
+                        size="small"
+                        aria-label="Gérer les épisodes"
+                        component={Link}
+                        href={`/admin/anime/${s.id}`}
+                      >
                         <Add fontSize="small" />
                       </IconButton>
                     </Tooltip>
                     <Tooltip title="Supprimer">
                       <IconButton
                         size="small"
+                        aria-label="Supprimer la série"
                         onClick={() => handleDelete(s.id)}
                         sx={{ color: "error.main" }}
                       >

@@ -161,7 +161,7 @@ export function DeckComposition() {
     } finally {
       setIsSaving(false);
     }
-  }, [session, state, allComplete, validation, dispatch]);
+  }, [session, state, allComplete, validation, dispatch, router]);
 
   const handleNewDeck = () => {
     if (confirm("Voulez-vous vraiment créer un nouveau deck ? Le brouillon actuel sera effacé.")) {

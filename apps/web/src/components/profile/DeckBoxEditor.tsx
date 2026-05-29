@@ -258,6 +258,7 @@ export function DeckBoxEditor({ open, imageUrl, onClose, onSave }: DeckBoxEditor
           >
             <canvas
               ref={canvasRef}
+              aria-label="Éditeur de deck box"
               style={{ maxWidth: "100%", height: "auto" }}
               onMouseDown={handleStart}
               onMouseMove={handleMove}

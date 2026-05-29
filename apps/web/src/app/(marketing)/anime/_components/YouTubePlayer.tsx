@@ -13,17 +13,6 @@ export function YouTubePlayer({ videoId, title }: YouTubePlayerProps) {
 
   const activate = useCallback(() => setActive(true), []);
 
-  // Keyboard handler for accessibility
-  const handleKeyDown = useCallback(
-    (e: React.KeyboardEvent) => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        activate();
-      }
-    },
-    [activate],
-  );
-
   const thumbUrl = `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`;
   const thumbFallback = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
 
@@ -67,10 +56,9 @@ export function YouTubePlayer({ videoId, title }: YouTubePlayerProps) {
 
   return (
     <Box
+      component="button"
+      type="button"
       onClick={activate}
-      onKeyDown={handleKeyDown}
-      role="button"
-      tabIndex={0}
       aria-label={`Lire ${title}`}
       sx={{
         width: "100%",
