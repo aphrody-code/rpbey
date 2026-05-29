@@ -2,17 +2,16 @@
 /// <reference types="bun" />
 /**
  * « Utilise le template de soupy » : composite la meilleure illustration de
- * chaque carte DANS le cadre de carte (template à corps transparent), ajoute
- * le nom (header bordeaux) et la rareté · série (footer), via ImageMagick.
- * Le texte est rendu en `caption:` auto-ajusté à la largeur du bandeau, donc
- * les noms longs (« Kai Hiwatari & Kyoya Tategami ») ne débordent jamais.
+ * chaque carte DANS le cadre (template à corps transparent), nom (header) +
+ * rareté · série (footer) en `caption:` auto-ajusté (noms longs OK), via
+ * ImageMagick. Cadrage UNIFORME : crop `gravity north` (garde la tête/visage),
+ * même taille de sortie pour toutes les cartes.
  *
- * Le template est l'entrée `kind:"template"` de gacha.json (cadre 4961x7016,
- * corps transparent x[200..4760] y[860..5760]). Sortie : images-card/<slug>.png
- * + cards-manifest.json (character -> fichier rendu) consommé par post-gacha.ts.
+ * Template = entrée `kind:"template"` de gacha.json (cadre 4961x7016, corps
+ * transparent x[200..4760] y[860..5760]). Sortie : images-card/<slug>.png
+ * + cards-manifest.json (character -> fichier) consommé par post-gacha.ts.
  *
  * Une carte = meilleur stade par personnage (final > wip > lineart > sketch).
- * Les WIP restent disponibles séparément dans gacha.json.
  *
  * Usage : bun scripts/render-cards.ts --channel=<id> [--width=1240] [--force]
  */
@@ -47,9 +46,9 @@ if (!baseDir) {
 // Géométrie du template (réel 4961x7016 ; corps transparent + bandeaux mesurés).
 const TPL_REAL_W = 4961;
 const TPL_REAL_H = 7016;
-const BODY = { x: 200, y: 860, w: 4560, h: 4900 }; // fenêtre transparente
-const HDR = { boxW: 4121, boxH: 430, offTop: 330 }; // bandeau bordeaux haut
-const FTR = { boxW: 4121, boxH: 540, offBot: 430 }; // bandeau bordeaux bas
+const BODY = { x: 200, y: 860, w: 4560, h: 4900 };
+const HDR = { boxW: 4121, boxH: 430, offTop: 330 };
+const FTR = { boxW: 4121, boxH: 540, offBot: 430 };
 const FONT = "DejaVu-Sans-Bold";
 const OUT_W = Math.max(600, Number(args.get("width") ?? "1240") || 1240);
 const SCALE = OUT_W / TPL_REAL_W;
@@ -136,23 +135,21 @@ async function renderCard(e: GachaEntry, character: string): Promise<string> {
     "-size",
     `${OUT_W}x${OUT_H}`,
     "xc:white",
-    // illustration en cover du corps transparent
+    // illustration en cover du corps transparent — crop gravity NORTH (uniforme, garde le visage)
     "(",
     illu,
     "-resize",
     `${r(BODY.w)}x${r(BODY.h)}^`,
     "-gravity",
-    "center",
+    "north",
     "-extent",
     `${r(BODY.w)}x${r(BODY.h)}`,
     ")",
     "-geometry",
     `+${r(BODY.x)}+${r(BODY.y)}`,
     "-composite",
-    // cadre par-dessus
     tplResized,
     "-composite",
-    // nom (header) — caption auto-ajusté à la largeur du bandeau
     "(",
     "-background",
     "none",
@@ -171,7 +168,6 @@ async function renderCard(e: GachaEntry, character: string): Promise<string> {
     "-geometry",
     `+0+${r(HDR.offTop)}`,
     "-composite",
-    // rareté · série (footer)
     "(",
     "-background",
     "none",
@@ -212,5 +208,7 @@ for (const e of best.values()) {
   }
 }
 await Bun.write(join(baseDir, "cards-manifest.json"), `${JSON.stringify(manifest, null, 2)}\n`);
-log(`[render] ${done} cartes encadrées (template soupy) -> ${outDir} (${OUT_W}x${OUT_H})`);
+log(
+  `[render] ${done} cartes encadrées (template soupy, gravity north) -> ${outDir} (${OUT_W}x${OUT_H})`,
+);
 process.exit(0);

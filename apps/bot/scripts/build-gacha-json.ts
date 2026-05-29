@@ -10,11 +10,13 @@
  *     (analyse visuelle + contexte d'envoi, clé = attachmentId) quand présent ;
  *     sinon character est déduit heuristiquement du nom de fichier (sans rien
  *     inventer ; null + needsReview si indéterminable).
- *   - exclude:true dans l'override => l'image est retirée du catalogue (hors histoire).
+ *   - exclude:true dans l'override => image retirée du catalogue (hors histoire).
+ *   - `extra-cards.json` => cartes dérivées/manuelles (découpes d'illustrations…)
+ *     ajoutées au catalogue et rendues uniformément.
  *
  * Usage :
  *   bun scripts/build-gacha-json.ts --channel=<id>
- *   bun scripts/build-gacha-json.ts --dir=data/scrape/<id> --overrides=gacha-overrides.json
+ *   bun scripts/build-gacha-json.ts --dir=data/scrape/<id> --overrides=… --extra=…
  *   bun scripts/build-gacha-json.ts --channel=<id> --all
  */
 import { resolve, join } from "node:path";
@@ -166,6 +168,12 @@ function extractCharacter(filename: string): string | null {
   return titleCase(toks.slice(0, 2).join(" "));
 }
 
+function fmtOf(file: string): "png" | "webp" | "other" {
+  const l = file.toLowerCase();
+  if (l.endsWith(".png")) return "png";
+  if (l.endsWith(".webp")) return "webp";
+  return "other";
+}
 function optimizedFor(scrapeFile: string): {
   path: string;
   format: "png" | "webp" | "other";
@@ -208,6 +216,17 @@ interface Override {
   status?: string;
   note?: string;
   exclude?: boolean;
+}
+interface ExtraCard {
+  image: string;
+  character: string;
+  series?: string;
+  rarity?: string;
+  kind?: Kind;
+  status?: string;
+  artist?: string;
+  note?: string;
+  postedAt?: string;
 }
 interface GachaEntry {
   id: string;
@@ -287,6 +306,40 @@ for (const m of lines) {
   }
 }
 
+// Cartes dérivées / manuelles (découpes d'illustrations, etc.).
+const extraPath = args.get("extra") ?? join(baseDir, "extra-cards.json");
+let extra = 0;
+if (await Bun.file(extraPath).exists()) {
+  const ex = JSON.parse(await Bun.file(extraPath).text()) as {
+    cards?: ExtraCard[];
+  };
+  for (const c of ex.cards ?? []) {
+    entries.push({
+      id: "",
+      character: c.character,
+      series: c.series ?? null,
+      rarity: c.rarity ?? null,
+      kind: c.kind ?? "card",
+      status: c.status ?? "final",
+      artist: c.artist ?? "?",
+      artistId: "",
+      image: c.image,
+      original: c.image,
+      format: fmtOf(c.image),
+      url: "",
+      messageId: "extra",
+      attachmentId: `extra:${c.image}`,
+      postedAt: c.postedAt ?? "",
+      sourceFilename: c.image.split("/").pop() ?? "",
+      content: "",
+      note: c.note ?? null,
+      needsReview: false,
+    });
+    extra++;
+  }
+  if (extra > 0) log(`[gacha] cartes dérivées ajoutées : ${extra} (${extraPath})`);
+}
+
 const KIND_RANK: Record<Kind, number> = {
   card: 0,
   illustration: 1,
@@ -320,7 +373,7 @@ await Bun.write(outPath, `${JSON.stringify(entries, null, 2)}\n`);
 const cards = entries.filter((e) => e.kind === "card");
 const review = entries.filter((e) => e.needsReview);
 const artists = [...new Set(entries.map((e) => e.artist))];
-log(`[gacha] ${entries.length} images -> ${outPath} (${excluded} exclues hors histoire)`);
+log(`[gacha] ${entries.length} images -> ${outPath} (${excluded} exclues, ${extra} dérivées)`);
 log(
   `[gacha] cartes : ${cards.length} · hors-bannière : ${entries.length - cards.length} · à revoir : ${review.length}`,
 );
