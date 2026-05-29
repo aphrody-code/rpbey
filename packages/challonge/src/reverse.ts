@@ -26,6 +26,7 @@
  */
 
 import { extractReactRoots, getReactRoot, readDataAttrs } from "./extractors/react-props";
+import { parseInitialStoreState } from "./extractors/store-state";
 import {
   type LogEntriesProps,
   type ChallongeRawLogEntry,
@@ -348,90 +349,15 @@ function parseJsonAttr<T>(value: string | undefined): T | null {
  *   `window._initialStoreState = {...};`
  * or:
  *   `window._initialStoreState=JSON.parse('...');`
+ * or as keyed assignments (current 2026 layout).
  *
- * Returns null when not found or when the JSON cannot be parsed.
+ * Thin facade over the shared {@link parseInitialStoreState} walker — preserves
+ * the legacy "null when nothing parsed" contract that this module's callers
+ * depend on.
  */
 function extractInitialStoreState(html: string): Record<string, unknown> | null {
-  // Pattern: window._initialStoreState = { ... }; (object literal — old layout)
-  const literalMatch = /window\._initialStoreState\s*=\s*(\{[\s\S]*?\});\s*<\/script>/.exec(html);
-  if (literalMatch) {
-    try {
-      return JSON.parse(literalMatch[1]) as Record<string, unknown>;
-    } catch {
-      // Fall through to next pattern
-    }
-  }
-
-  // Pattern: window._initialStoreState = JSON.parse('...');
-  const parseMatch =
-    /window\._initialStoreState\s*=\s*JSON\.parse\s*\(\s*(['"`])([\s\S]*?)\1\s*\)/.exec(html);
-  if (parseMatch) {
-    try {
-      const raw = parseMatch[2]
-        .replace(/\\n/g, "\n")
-        .replace(/\\r/g, "\r")
-        .replace(/\\t/g, "\t")
-        .replace(/\\'/g, "'")
-        .replace(/\\"/g, '"')
-        .replace(/\\\\/g, "\\");
-      return JSON.parse(raw) as Record<string, unknown>;
-    } catch {
-      // Store not available — not fatal
-    }
-  }
-
-  // Pattern: window._initialStoreState['KEY'] = JSON_VALUE; (current 2026 layout)
-  // Multiple keyed assignments. Brace-counting parser to handle nested objects.
-  const keyRe = /window\._initialStoreState\[\s*['"]([\w]+)['"]\s*\]\s*=\s*/g;
-  const result: Record<string, unknown> = {};
-  let m: RegExpExecArray | null;
-  let foundAny = false;
-  while ((m = keyRe.exec(html)) !== null) {
-    const key = m[1] ?? "";
-    const valueStart = m.index + m[0].length;
-    // Detect array vs object start
-    let i = valueStart;
-    while (i < html.length && /\s/.test(html[i] ?? "")) i++;
-    const opener = html[i] ?? "";
-    if (opener !== "{" && opener !== "[") continue;
-    const closer = opener === "{" ? "}" : "]";
-    let depth = 0;
-    let inString = false;
-    let escape = false;
-    for (; i < html.length; i++) {
-      const ch = html[i] ?? "";
-      if (escape) {
-        escape = false;
-        continue;
-      }
-      if (ch === "\\") {
-        if (inString) escape = true;
-        continue;
-      }
-      if (ch === '"' || ch === "'") {
-        inString = !inString;
-        continue;
-      }
-      if (inString) continue;
-      if (ch === opener) depth++;
-      else if (ch === closer) {
-        depth--;
-        if (depth === 0) {
-          i++;
-          break;
-        }
-      }
-    }
-    const raw = html.slice(valueStart, i).trim();
-    try {
-      result[key] = JSON.parse(raw);
-      foundAny = true;
-    } catch {
-      // malformed JSON for this key — skip
-    }
-    keyRe.lastIndex = i;
-  }
-  return foundAny ? result : null;
+  const result = parseInitialStoreState(html);
+  return Object.keys(result).length > 0 ? result : null;
 }
 
 /**

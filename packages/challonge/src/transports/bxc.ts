@@ -22,6 +22,7 @@ import {
   type ImpersonatedResponse,
 } from "@aphrody-code/bxc/ffi/curl-impersonate";
 import { loadCookieJar, resolveDefaultCookiePath } from "../utils/cookies";
+import type { Transport } from "./transport";
 import {
   type CurlImpersonateProfile,
   type CurlImpersonateResponse,
@@ -174,7 +175,7 @@ function toFfiProfile(p: CurlImpersonateProfile): ImpersonateProfile {
 // BxcTransport
 // ---------------------------------------------------------------------------
 
-export class BxcTransport {
+export class BxcTransport implements Transport {
   readonly #defaultProfile: ImpersonateProfile;
   readonly #cacheEnabled: boolean;
   readonly #cache: LRUCache<string, CacheEntry>;

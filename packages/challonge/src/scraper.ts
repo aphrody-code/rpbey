@@ -24,6 +24,7 @@ import {
   type ChallongeTournamentSnapshot,
 } from "@aphrody-code/bxc/scrapers/challonge";
 import { resolveDefaultCookiePath } from "./utils/cookies";
+import { parseInitialStoreState } from "./extractors/store-state";
 import { normalizeSets, setsToLegacyString } from "./scores";
 import {
   type ScrapedLogEntry,
@@ -91,83 +92,13 @@ export interface FakePage {
 
 const QUIET_LOG: (msg: string) => void = () => {};
 
-// Regex to extract all window._initialStoreState['KEY'] = {...}; assignments.
-// Non-greedy on the value — works for Challonge's inline JSON (no nested
-// unescaped braces in top-level assignments).
-const STORE_STATE_RE =
-  /window\._initialStoreState\[['"](\w+)['"]\]\s*=\s*(\{[\s\S]*?\});\s*(?:window\._initialStoreState|\s*$|<\/script>)/g;
-
-/** Parse all _initialStoreState key assignments from a Challonge HTML page. */
+/**
+ * Parse all `_initialStoreState` key assignments from a Challonge HTML page.
+ * Thin facade over the shared {@link parseInitialStoreState} walker — kept as a
+ * local name so the ~5 call-sites below stay untouched.
+ */
 function parseStoreState(html: string): Record<string, unknown> {
-  // Use a line-oriented approach: split on "window._initialStoreState" markers,
-  // parse each JSON value individually.
-  const result: Record<string, unknown> = {};
-
-  // Match pattern: window._initialStoreState['KEY'] = JSON_VALUE;
-  // JSON value ends at the first ";" that is followed by optional whitespace
-  // and another window._initialStoreState or </script>
-  const keyRe = /window\._initialStoreState\[['"](\w+)['"]\]\s*=\s*/g;
-  let m: RegExpExecArray | null;
-
-  while ((m = keyRe.exec(html)) !== null) {
-    const key = m[1] ?? "";
-    const valueStart = m.index + m[0].length;
-
-    // Detect opener (object or array). Challonge serializes some stores as
-    // arrays directly, e.g. _initialStoreState['LogEntryListStore'] = [...].
-    let i = valueStart;
-    while (i < html.length && /\s/.test(html[i] ?? "")) i++;
-    const opener = html[i] ?? "";
-    if (opener !== "{" && opener !== "[") {
-      keyRe.lastIndex = i;
-      continue;
-    }
-    const closer = opener === "{" ? "}" : "]";
-
-    let depth = 0;
-    let inString = false;
-    let escape = false;
-    for (; i < html.length; i++) {
-      const ch = html[i] ?? "";
-      if (escape) {
-        escape = false;
-        continue;
-      }
-      if (ch === "\\") {
-        if (inString) escape = true;
-        continue;
-      }
-      if (ch === '"' || ch === "'") {
-        inString = !inString;
-        continue;
-      }
-      if (inString) continue;
-      if (ch === opener) {
-        depth++;
-      } else if (ch === closer) {
-        depth--;
-        if (depth === 0) {
-          i++; // include the closing "}" or "]"
-          break;
-        }
-      }
-    }
-
-    const raw = html.slice(valueStart, i).trim();
-    try {
-      result[key] = JSON.parse(raw);
-    } catch {
-      // malformed JSON for this key — skip silently
-    }
-
-    // Advance keyRe past the value we just consumed
-    keyRe.lastIndex = i;
-  }
-
-  // Suppress unused variable warning (the const above was for documentation)
-  void STORE_STATE_RE;
-
-  return result;
+  return parseInitialStoreState(html);
 }
 
 interface ResolvedOptions {

@@ -4,6 +4,7 @@
   "private": true,
   "description": "Challonge client canonique (API v1 + scraper bxc curl-impersonate Chrome 131 via bun:ffi)",
   "type": "module",
+  "sideEffects": false,
   "main": "./src/index.ts",
   "types": "./src/index.ts",
   "exports": {
@@ -14,9 +15,11 @@
     "./reverse": "./src/reverse.ts",
     "./curl": "./src/transports/curl-impersonate.ts",
     "./bxc-transport": "./src/transports/bxc.ts",
+    "./transport": "./src/transports/transport.ts",
     "./htmlrewriter": "./src/transports/htmlrewriter.ts",
     "./bracket-svg": "./src/scrapers/bracket-svg.ts",
     "./react-props": "./src/extractors/react-props.ts",
+    "./store-state": "./src/extractors/store-state.ts",
     "./types": "./src/types.ts",
     "./scores": "./src/scores.ts",
     "./cookies": "./src/utils/cookies.ts",
@@ -33,10 +36,6 @@
   },
   "dependencies": {
     "@aphrody-code/bxc": "^0.5.2",
-    "@rose-griffon/challonge-core": "workspace:*",
-    "brackets-memory-db": "latest",
-    "i18next": "^21.6.14",
-    "i18next-browser-languagedetector": "^6.1.4",
     "lru-cache": "^11.3.5"
   },
   "devDependencies": {

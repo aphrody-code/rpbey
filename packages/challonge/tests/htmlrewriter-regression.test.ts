@@ -104,8 +104,10 @@ describe("parseModuleToScrapedTournament — metadata (snapshot path)", () => {
     expect(fromModule.metadata.type).toBe("double elimination");
   });
 
-  test("metadata.state === 'underway'", () => {
-    expect(fromModule.metadata.state).toBe("underway");
+  test("metadata.state === 'complete'", () => {
+    // Live-recaptured fixture: B_TS4 finished since the original capture, so the
+    // embedded TournamentStore now reports `complete` (was `underway`).
+    expect(fromModule.metadata.state).toBe("complete");
   });
 
   test("metadata.url contains the slug", () => {
