@@ -1,7 +1,9 @@
 import "server-only";
+import { globalSearch } from "@rpbey/api-client";
 import type { GlobalSearchItem } from "@rpbey/api-contract";
 import { loadCatalog, computeGroups, groupSlug } from "@/lib/bx-catalog";
 import { loadJsonSafe } from "@/lib/data-cache";
+import { isRemote, unwrap } from "@/server/data-source";
 import { listAnimeSeries, listParts, listRankings, listTournaments } from "@/server/dal/search";
 
 /**
@@ -82,6 +84,9 @@ const BLADE_TIERS: Record<string, string> = {
 };
 
 export async function buildGlobalSearchIndex(): Promise<GlobalSearchItem[]> {
+  // Standalone (Vercel) : l'index complet est servi par l'API distante (q absent).
+  if (isRemote) return unwrap(await globalSearch()).data;
+
   const items: GlobalSearchItem[] = [];
 
   // 1. Produits du catalogue (groupés).

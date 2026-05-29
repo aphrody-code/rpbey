@@ -1,7 +1,9 @@
 import "server-only";
+import { getMeta } from "@rpbey/api-client";
 import type { BbxWeeklyData, PartStats } from "@rpbey/api-contract";
 import { loadJsonSafe } from "@/lib/data-cache";
 import { getPartsForMeta } from "@/server/dal/parts";
+import { isRemote, unwrap } from "@/server/data-source";
 
 /**
  * Service méta — charge `data/bbx-weekly.json` et l'enrichit avec les stats/images
@@ -179,6 +181,11 @@ function enrichWithStats(
 
 /** Méta hebdo enrichie (stats + images), ou `null` si pas encore scrapée. */
 export async function getEnrichedMeta(): Promise<BbxWeeklyData | null> {
+  // Standalone (Vercel) : la méta est déjà enrichie côté API distante.
+  // L'enveloppe `{ ok, data }` du SDK porte ici un payload `{ data: BbxWeeklyData | null }`
+  // (le contrat MetaResponse nomme son champ `data`) → on déballe les deux niveaux.
+  if (isRemote) return unwrap(await getMeta()).data;
+
   const [data, metadataMap] = await Promise.all([
     loadJsonSafe<BbxWeeklyData>("data/bbx-weekly.json"),
     getPartMetadataMap(),

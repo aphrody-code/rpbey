@@ -75,6 +75,7 @@
         "@mui/x-date-pickers": "^9.0.2",
         "@next/third-parties": "^16.1.5",
         "@rose-griffon/challonge-core": "workspace:*",
+        "@rpbey/api-client": "workspace:*",
         "@rpbey/api-contract": "workspace:*",
         "@rpbey/db": "workspace:*",
         "@rpbey/types": "workspace:*",
