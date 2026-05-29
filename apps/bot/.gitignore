@@ -34,3 +34,6 @@ src/_entry-imports.generated.ts
 # Process IDs
 *.pid
 
+
+# scrape-channel.ts output (messages + images)
+data/scrape/
