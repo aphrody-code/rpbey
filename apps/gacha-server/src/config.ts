@@ -6,8 +6,65 @@
 
 export const PORT = Number(process.env.GACHA_PORT ?? process.env.PORT ?? "5050") || 5050;
 
+/**
+ * Adresse de bind. Défaut `127.0.0.1` : le serveur reste en loopback et n'est
+ * exposé que via nginx (TLS + upgrade WS sur 443). Mettre `0.0.0.0` seulement
+ * pour un accès direct (tests réseau local).
+ */
+export const HOST = process.env.GACHA_HOST ?? "127.0.0.1";
+
 /** Base web pour rediriger les images de carte vers le rendu OG existant. */
 export const WEB_BASE = process.env.WEB_BASE ?? "https://rpbey.fr";
+
+/**
+ * Origines autorisées en CORS. Le bot tape le serveur server-side (pas de
+ * CORS), mais le **client Discord Activity** (navigateur dans l'iframe
+ * `*.discordsays.com`) et la PWA `bot.rpbey.fr/play` font des fetch cross-origin.
+ * Aligné sur l'allowlist du bot (apps/bot/src/lib/discord-activity.ts).
+ *
+ * - origines exactes : liste ci-dessous (+ `GACHA_EXTRA_ORIGINS` séparées par `,`)
+ * - patterns dynamiques : tout sous-domaine `*.discordsays.com` (proxy Discord)
+ *   et `*.vercel.app` (previews du site).
+ */
+export const ALLOWED_ORIGINS: ReadonlySet<string> = new Set(
+  [
+    "https://rpbey.fr",
+    "https://www.rpbey.fr",
+    "https://bot.rpbey.fr",
+    "https://play.rpbey.fr",
+    "https://discord.com",
+    "http://localhost:3002",
+    "http://127.0.0.1:3002",
+    ...(process.env.GACHA_EXTRA_ORIGINS ?? "")
+      .split(",")
+      .map((s) => s.trim())
+      .filter(Boolean),
+  ].filter(Boolean),
+);
+
+/** Sous-domaines acceptés dynamiquement (proxy Discord Activity + previews Vercel). */
+export const ALLOWED_ORIGIN_PATTERNS: readonly RegExp[] = [
+  /^https:\/\/[a-z0-9-]+\.discordsays\.com$/i,
+  /^https:\/\/[a-z0-9-]+\.vercel\.app$/i,
+];
+
+/** True si l'origine HTTP est autorisée (exacte ou pattern). */
+export function isAllowedOrigin(origin: string | undefined): boolean {
+  if (!origin) return false;
+  if (ALLOWED_ORIGINS.has(origin)) return true;
+  return ALLOWED_ORIGIN_PATTERNS.some((re) => re.test(origin));
+}
+
+/** Méthodes / headers CORS exposés. */
+export const ALLOWED_METHODS = "GET, POST, PUT, PATCH, DELETE, OPTIONS";
+export const ALLOWED_HEADERS = "Authorization, Content-Type, X-Requested-With";
+
+/**
+ * Origine renvoyée quand l'origine de la requête n'est pas autorisée. Fixe et
+ * canonique : un navigateur tiers reçoit un ACAO qui ne correspond pas à sa
+ * propre origine → la réponse cross-origin est bloquée.
+ */
+export const FALLBACK_ORIGIN = "https://rpbey.fr";
 
 export const PULL_COST = 50;
 export const MULTI_PULL_COST = 450; // 10 tirages, ~10 % d'économie

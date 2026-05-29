@@ -15,7 +15,8 @@ import { monitor } from "@colyseus/monitor";
 import { playground } from "@colyseus/playground";
 import { defineRoom, defineServer } from "colyseus";
 import express from "express";
-import { PORT } from "./config";
+import { HOST, PORT } from "./config";
+import { configureCors } from "./cors";
 import { mountDiscordToken } from "./discord-token";
 import { mountRest } from "./rest";
 import { GachaRoom } from "./rooms/GachaRoom";
@@ -23,6 +24,9 @@ import { GachaRoom } from "./rooms/GachaRoom";
 // Secret JWT pour l'auth de la Room (Discord Activity).
 JWT.settings.secret =
   process.env.JWT_SECRET ?? process.env.AUTH_SECRET ?? "gacha-dev-secret-change-me";
+
+// Restreint le CORS de Colyseus (permissif par défaut : reflète toute origine).
+configureCors();
 
 const server = defineServer({
   transport: new BunWebSockets(),
@@ -49,5 +53,5 @@ const server = defineServer({
   },
 });
 
-server.listen(PORT);
-process.stderr.write(`[gacha-server] Colyseus écoute sur http://127.0.0.1:${PORT}\n`);
+server.listen(PORT, HOST);
+process.stderr.write(`[gacha-server] Colyseus écoute sur http://${HOST}:${PORT}\n`);

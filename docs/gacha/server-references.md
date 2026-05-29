@@ -34,3 +34,21 @@ Le serveur de jeu gacha (`apps/gacha-server`, REST + temps réel `:5050`) et son
 | (plugin) `pixijs/pixijs-skills` | Skills Claude PixiJS v8 ajoutées au workspace pour le client |
 
 > Le serveur recréé vit dans `apps/gacha-server` (cf. [bot.md](./bot.md) et le code). Le client Discord Activity (Pixi/React) reste à intégrer dans `apps/gacha-client` à partir du template ci-dessus.
+
+## Déploiement & exposition réseau
+
+### Service
+
+- systemd **`rpbey-gacha.service`** (`apps/gacha-server/deploy/rpbey-gacha.service`) — `bun src/index.ts`, bind **`127.0.0.1:5050`** (loopback), partage `apps/bot/.env` (AUTH_SECRET pour le JWT Colyseus). DB via le socket local (défauts `@rpbey/db`, aucune var requise). Durcissement JIT-safe (cf. unité). `enable --now`.
+- Le bot consomme le serveur en **loopback** (`GACHA_API_URL` défaut `http://127.0.0.1:5050`) — aucun port public requis pour ce chemin.
+
+### Ports / proxy public (Discord Activity)
+
+- `5050` reste **loopback** (jamais exposé brut ; pas d'entrée ufw).
+- Exposition HTTPS/WSS via **nginx `api.rpbey.fr`** → `location /gacha/` (snippet `apps/gacha-server/deploy/nginx-gacha.location.conf`, upstream `gacha_rt`). Préfixe `/gacha/` retiré, upgrade WebSocket (`$connection_upgrade`), placé avant le `location /` du bot (:3001).
+  - REST : `https://api.rpbey.fr/gacha/api/gacha/*` · Token : `…/gacha/discord_token` · WS : `wss://api.rpbey.fr/gacha/...`
+
+### CORS
+
+- Colyseus pose un CORS **permissif par défaut** (reflète toute origine, `ACAO: *` + credentials) via un `prependListener` HTTP de `@colyseus/core`, **avant** express → un middleware express ne suffit pas.
+- `src/cors.ts` **override `matchMaker.controller.getCorsHeaders` + `DEFAULT_CORS_HEADERS`** : reflet de l'origine **uniquement** si autorisée (`config.isAllowedOrigin` : `*.discordsays.com`, `*.vercel.app`, `rpbey.fr`/`bot.rpbey.fr`/`play.rpbey.fr`, localhost:3002, + `GACHA_EXTRA_ORIGINS`), sinon origine canonique fixe `rpbey.fr` (bloque le cross-origin tiers). Couvert par `test/smoke.ts`.

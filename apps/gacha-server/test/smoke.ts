@@ -74,6 +74,30 @@ try {
   const noauth = await fetch(`${BASE}/api/gacha/balance`);
   check("401 sans token", noauth.status === 401);
 
+  // CORS : préflight depuis une origine Discord Activity → 204 + reflet de l'origine.
+  const preflight = await fetch(`${BASE}/api/gacha/pull`, {
+    method: "OPTIONS",
+    headers: {
+      origin: "https://1234567890.discordsays.com",
+      "access-control-request-method": "POST",
+    },
+  });
+  check(
+    "CORS préflight (discordsays)",
+    preflight.status === 204 &&
+      preflight.headers.get("access-control-allow-origin") === "https://1234567890.discordsays.com",
+    `status=${preflight.status} acao=${preflight.headers.get("access-control-allow-origin")}`,
+  );
+  const badOrigin = await fetch(`${BASE}/api/gacha/rates`, {
+    headers: { ...auth, origin: "https://evil.example.com" },
+  });
+  const acao = badOrigin.headers.get("access-control-allow-origin");
+  check(
+    "CORS origine refusée (pas de reflet)",
+    acao !== "https://evil.example.com" && acao !== "*",
+    `acao=${acao}`,
+  );
+
   const bal = (await (await fetch(`${BASE}/api/gacha/balance`, { headers: auth })).json()) as {
     currency?: number;
     userId?: string;
