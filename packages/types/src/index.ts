@@ -1,4 +1,4 @@
-import type { InferSelectModel } from "drizzle-orm";
+import type { InferInsertModel, InferSelectModel } from "drizzle-orm";
 
 // Schéma référencé en type-only (`typeof import(...)`) : effacé à la compilation,
 // donc importer un type d'ici ne tire JAMAIS postgres.js dans un bundle client.
@@ -118,3 +118,38 @@ export type TournamentFull = Tournament & {
     winner: UserWithProfile | null;
   })[];
 };
+
+// === Tables annexes (gacha annexe / modération / analytics) ===
+export type AnalyticsEvent = InferSelectModel<Schema["analyticsEvents"]>;
+export type GachaAnnouncement = InferSelectModel<Schema["gachaAnnouncements"]>;
+export type GachaAuditLog = InferSelectModel<Schema["gachaAuditLog"]>;
+export type GachaFriendship = InferSelectModel<Schema["gachaFriendships"]>;
+export type Ticket = InferSelectModel<Schema["tickets"]>;
+
+// === Insert types (payloads d'écriture pour la DAL / mutations API-first) ===
+// `*Input` = forme acceptée par un INSERT Drizzle (colonnes à défaut/optionnelles
+// rendues facultatives). À utiliser pour valider/typer les corps de mutation.
+export type UserInput = InferInsertModel<Schema["users"]>;
+export type ProfileInput = InferInsertModel<Schema["profiles"]>;
+export type PartInput = InferInsertModel<Schema["parts"]>;
+export type BeybladeInput = InferInsertModel<Schema["beyblades"]>;
+export type DeckInput = InferInsertModel<Schema["decks"]>;
+export type DeckItemInput = InferInsertModel<Schema["deckItems"]>;
+export type TournamentInput = InferInsertModel<Schema["tournaments"]>;
+export type TournamentCategoryInput = InferInsertModel<Schema["tournamentCategories"]>;
+export type TournamentParticipantInput = InferInsertModel<Schema["tournamentParticipants"]>;
+export type TournamentMatchInput = InferInsertModel<Schema["tournamentMatches"]>;
+export type StaffMemberInput = InferInsertModel<Schema["staffMembers"]>;
+export type ContentBlockInput = InferInsertModel<Schema["contentBlocks"]>;
+export type ProductInput = InferInsertModel<Schema["products"]>;
+export type AnimeSeriesInput = InferInsertModel<Schema["animeSeries"]>;
+export type AnimeEpisodeInput = InferInsertModel<Schema["animeEpisodes"]>;
+export type AnimeEpisodeSourceInput = InferInsertModel<Schema["animeEpisodeSources"]>;
+export type GachaCardInput = InferInsertModel<Schema["gachaCards"]>;
+export type CardInventoryInput = InferInsertModel<Schema["cardInventory"]>;
+export type CurrencyTransactionInput = InferInsertModel<Schema["currencyTransactions"]>;
+export type WarningInput = InferInsertModel<Schema["warnings"]>;
+export type ReminderInput = InferInsertModel<Schema["reminders"]>;
+export type TicketInput = InferInsertModel<Schema["tickets"]>;
+export type StreamStateInput = InferInsertModel<Schema["streamStates"]>;
+export type BeyLibraryPartInput = InferInsertModel<Schema["beyLibraryParts"]>;

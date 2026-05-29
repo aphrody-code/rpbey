@@ -119,3 +119,14 @@ export const SearchResponseSchema = z.object({
   facets: z.record(z.string(), z.number()).optional(),
 });
 export type SearchResponse = z.infer<typeof SearchResponseSchema>;
+
+/** Query string de `/v1/search` (source de vérité unique, consommée route + OpenAPI). */
+export const SearchQuerySchema = z.object({
+  /** Requête plein-texte. Absente = index complet (compat suggestions/SSR). */
+  q: z.string().optional(),
+  /** Filtre de catégorie (les facettes restent calculées sur toutes catégories). */
+  category: SearchCategorySchema.optional(),
+  /** Plafond de résultats (défaut 50 quand q présent). */
+  limit: z.coerce.number().int().positive().max(500).optional(),
+});
+export type SearchQuery = z.infer<typeof SearchQuerySchema>;

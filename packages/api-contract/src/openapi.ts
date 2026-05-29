@@ -1,5 +1,10 @@
 import { z } from "zod";
-import { RecommendQuerySchema, RecommendResponseSchema, SearchResponseSchema } from "./comparateur";
+import {
+  RecommendQuerySchema,
+  RecommendResponseSchema,
+  SearchQuerySchema,
+  SearchResponseSchema,
+} from "./comparateur";
 import { MetaResponseSchema } from "./meta";
 import { PartsQuerySchema, PartsListResponseSchema } from "./parts";
 import { ErrorEnvelopeSchema, okEnvelope } from "./envelope";
@@ -63,8 +68,10 @@ const ROUTES: RouteDef[] = [
     method: "get",
     path: "/search",
     operationId: "globalSearch",
-    summary: "Index de recherche globale (produits, pièces, tournois, bladers, lexique).",
+    summary:
+      "Recherche globale Beyblade toutes saisons (produits, beys, pièces, combos, tournois, bladers, anime, lexique, sites). `q` absent = index complet ; sinon classement BM25F + facettes.",
     tags: ["comparateur"],
+    query: SearchQuerySchema,
     response: SearchResponseSchema,
   },
   {

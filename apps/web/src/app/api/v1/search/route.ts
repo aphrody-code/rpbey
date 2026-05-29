@@ -1,20 +1,10 @@
-import { z } from "zod";
-import { SearchCategorySchema, SearchResponseSchema } from "@rpbey/api-contract";
+import { SearchQuerySchema, SearchResponseSchema } from "@rpbey/api-contract";
 import { getRoute } from "@/server/api/handler";
 import { buildGlobalSearchIndex } from "@/server/services/global-search";
 import { facetCounts, rankSearch } from "@/lib/search-rank";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
-
-const SearchQuerySchema = z.object({
-  /** Requête plein-texte. Absente = index complet (compat suggestions/SSR). */
-  q: z.string().optional(),
-  /** Filtre de catégorie (les facettes restent calculées sur toutes catégories). */
-  category: SearchCategorySchema.optional(),
-  /** Plafond de résultats (défaut 50 quand q présent). */
-  limit: z.coerce.number().int().positive().max(500).optional(),
-});
 
 export const GET = getRoute({
   query: SearchQuerySchema,
