@@ -115,3 +115,17 @@ Toute `"use server"` de **mutation** (create/update/delete/sync/merge/import) DO
 `if (!(await requireAdmin())) throw new Error("Forbidden");` (`requireAdmin` de `@/lib/auth-utils`,
 retourne `null` si non-admin). Sans ça l'action est invocable par n'importe quel client connecté
 (privesc). Exceptions explicites : `claimProfile` (auth-gated différemment) et les getters read-only.
+
+## 9. Moteur de Recommandation & Recherche Globale Google-Style
+
+- **Recommandation Modulaire** :
+  - Les coefficients de pondération (Intérêt Méta, Facteur Hype, Rapport Qualité/Prix) sont ajustables via des curseurs Material-UI et réévalués en temps réel côté client.
+  - Les détails de chaque produit affichent une analyse des pièces avec leur **Tier WBO** (S, A, B, C) et leur **usage en tournoi** réel (issu de la table `deck_items`).
+- **Recherche Globale type Google** :
+  - Une route d'API `/api/search/global` fusionne et indexe les produits du catalogue, les pièces de la base de données, les tournois à venir/passés et le classement de tous les Bladers.
+  - Le champ de recherche filtre cet index en temps réel (via `Fuse.js`) et affiche les résultats groupés par type de contenu sous forme de dropdown overlay.
+- **Optimisations du Scraper** :
+  - Les places de marché (`amazon.*`, `ebay.*`, `aliexpress.*`, etc.) sont étiquetées `link-only` et court-circuitées pour éviter des ralentissements inutiles.
+  - Les plateformes WooCommerce / Shopify ne sont interrogées que pour les boutiques indépendantes (`isIndependent`), accélérant significativement le run.
+  - Bypasses spécifiques (ex: queue-it sur `takaratomymall.jp`, timeouts HTTP/1.1 Akamai sur `bigw.com.au`).
+

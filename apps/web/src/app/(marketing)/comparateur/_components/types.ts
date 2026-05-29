@@ -55,6 +55,53 @@ export interface BxCatalog {
 	shopCount: number;
 	scrapedShopCount: number;
 	productCount: number;
+	platforms?: Record<string, number>;
+	stats?: {
+		averagePriceEur: number;
+		successRate: number;
+		regionStats: Array<{
+			region: string;
+			productCount: number;
+			averagePriceEur: number | null;
+		}>;
+		platformStats: Array<{
+			platform: string;
+			total: number;
+			active: number;
+		}>;
+	};
 	shops: BxShop[];
 	products: BxProduct[];
 }
+
+export interface PartAnalysis {
+	id: string;
+	name: string;
+	type: string;
+	usageCount: number;
+	normalizedUsage: number;
+	tier: "S" | "A" | "B" | "C";
+	metaScore: number;
+}
+
+export interface RecommendedProduct {
+	key: string;
+	code: string | null;
+	name: string;
+	slug: string;
+	cheapestEur: number | null;
+	shopCount: number;
+	imageUrl: string | null;
+	offers: BxOffer[];
+
+	// Calculated Scores (0.0 to 1.0)
+	metaRelevanceScore: number;
+	hypeScore: number;
+	priceEfficiencyScore: number;
+	overallScore: number;
+
+	// Component & Product Metadata analysis
+	includedParts: PartAnalysis[];
+	classifications: string[];
+}
+

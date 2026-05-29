@@ -10,10 +10,11 @@ export type { BxCatalog, BxOffer, BxProduct, BxProductGroup };
 
 // Taux de change approximatifs → EUR (comparaison cross-devise).
 export const FX_TO_EUR: Record<string, number> = {
-	EUR: 1, USD: 0.92, GBP: 1.17, CHF: 1.04, JPY: 0.0061,
+	EUR: 1, USD: 0.86, GBP: 1.15, CHF: 1.09, JPY: 0.0054,
 };
 
-const CODE_RE = /\b(\d-\d{2}[A-Z]{1,3})\b/i;
+const PRODUCT_CODE_RE = /\b([BUC]X-\d{2,3}(?:-[A-Z0-9]+)?|[BUC]X-\d{2,3}[A-Z]?)\b/i;
+const COMBO_CODE_RE = /\b(\d-\d{2}[A-Z]{1,3})\b/i;
 
 export function normalizeName(title: string): string {
 	return title
@@ -26,8 +27,16 @@ export function normalizeName(title: string): string {
 }
 
 export function groupKey(title: string): { key: string; code: string | null } {
-	const code = title.match(CODE_RE)?.[1]?.toUpperCase() ?? null;
-	if (code) return { key: code, code };
+	const prodCodeMatch = title.match(PRODUCT_CODE_RE);
+	if (prodCodeMatch && prodCodeMatch[1]) {
+		const code = prodCodeMatch[1].toUpperCase();
+		return { key: code, code };
+	}
+	const comboCodeMatch = title.match(COMBO_CODE_RE);
+	if (comboCodeMatch && comboCodeMatch[1]) {
+		const code = comboCodeMatch[1].toUpperCase();
+		return { key: code, code };
+	}
 	const n = normalizeName(title);
 	return { key: n || title.toLowerCase().trim(), code: null };
 }

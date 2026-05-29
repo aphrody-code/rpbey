@@ -36,6 +36,9 @@ interface Product {
 const CURRENCY_BY_REGION: Record<string, string> = {
 	FR: "EUR", BE: "EUR", EU: "EUR", CH: "CHF", UK: "GBP", US: "USD", JP: "JPY", INT: "USD",
 };
+const FX_TO_EUR: Record<string, number> = {
+	EUR: 1, USD: 0.86, GBP: 1.15, CHF: 1.09, JPY: 0.0054,
+};
 const UA =
 	"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36";
 const BXC_BIN = "/home/ubuntu/.local/bin/bxc";
@@ -55,11 +58,15 @@ async function mergeSources(): Promise<{ shops: Shop[]; sourceCount: number }> {
 		const data = (await Bun.file(`${SRC_DIR}/${file}`).json()) as { source: string; shops: Shop[] };
 		for (const s of data.shops ?? []) {
 			const dom = normDomain(s.domain);
+			let url = s.url;
+			if (dom === "takaratomymall.jp") {
+				url = "https://takaratomymall.jp/shop/c/cBeyX/";
+			}
 			const cur = byDomain.get(dom);
 			if (cur) {
 				cur.sources = [...new Set([...(cur.sources ?? []), data.source])];
-				if (isCollectionUrl(s.url) && !isCollectionUrl(cur.url)) cur.url = s.url;
-			} else byDomain.set(dom, { ...s, domain: dom, sources: [data.source] });
+				if (isCollectionUrl(url) && !isCollectionUrl(cur.url)) cur.url = url;
+			} else byDomain.set(dom, { ...s, domain: dom, url, sources: [data.source] });
 		}
 	}
 	return { shops: [...byDomain.values()], sourceCount };
@@ -68,52 +75,106 @@ async function mergeSources(): Promise<{ shops: Shop[]; sourceCount: number }> {
 function collectionBase(url: string): string | null {
 	return url.match(/^(https?:\/\/[^/]+\/collections\/[^/?#]+)/i)?.[1] ?? null;
 }
-const CURL_IMP = "/home/ubuntu/.local/bin/curl_chrome131";
+const CURL_IMPERSONATE_BIN = "/home/ubuntu/.local/bin/curl-impersonate";
+const IMP_ARGS = [
+	"--ciphers", "TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-RSA-AES128-SHA:ECDHE-RSA-AES256-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA:AES256-SHA",
+	"--curves", "X25519MLKEM768:X25519:P-256:P-384",
+	"-H", 'sec-ch-ua: "Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"',
+	"-H", "sec-ch-ua-mobile: ?0",
+	"-H", 'sec-ch-ua-platform: "macOS"',
+	"-H", "Upgrade-Insecure-Requests: 1",
+	"-H", "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+	"-H", "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+	"-H", "Sec-Fetch-Site: none",
+	"-H", "Sec-Fetch-Mode: navigate",
+	"-H", "Sec-Fetch-User: ?1",
+	"-H", "Sec-Fetch-Dest: document",
+	"-H", "Accept-Encoding: gzip, deflate, br, zstd",
+	"-H", "Accept-Language: en-US,en;q=0.9",
+	"-H", "Priority: u=0, i",
+	"--split-cookies",
+	"--http2",
+	"--http2-settings", "1:65536;2:0;4:6291456;6:262144",
+	"--http2-window-update", "15663105",
+	"--http2-stream-weight", "256",
+	"--http2-stream-exclusive", "1",
+	"--compressed",
+	"--ech", "true",
+	"--tlsv1.2", "--alps", "--tls-permute-extensions",
+	"--cert-compression", "brotli",
+	"--tls-grease",
+	"--tls-signed-cert-timestamps"
+];
+
+function getDomainConfig(domain: string) {
+	const isBigW = domain.includes("bigw.com.au");
+	return {
+		timeout: isBigW ? 5000 : 12000,
+		forceHttp1: isBigW,
+	};
+}
 
 // Fetch TLS-impersonate (Chrome 131) — contourne Cloudflare / blocages JA3/JA4.
-async function impFetch(u: string, timeoutMs = 15000): Promise<string | null> {
+async function impFetch(u: string, timeoutMs = 15000, forceHttp1 = false): Promise<string | null> {
 	try {
+		const args = [...IMP_ARGS];
+		if (forceHttp1) {
+			const idx = args.indexOf("--http2");
+			if (idx !== -1) {
+				args[idx] = "--http1.1";
+			}
+		}
 		const proc = Bun.spawn(
-			[CURL_IMP, "-s", "-L", "--compressed", "--max-time", String(Math.round(timeoutMs / 1000)), u],
+			[CURL_IMPERSONATE_BIN, ...args, "-s", "-L", "--max-time", String(Math.round(timeoutMs / 1000)), u],
 			{ stdout: "pipe", stderr: "ignore" },
 		);
+		const timer = setTimeout(() => {
+			try { proc.kill(9); } catch {}
+		}, timeoutMs + 2000);
 		const txt = await new Response(proc.stdout).text();
 		await proc.exited;
+		clearTimeout(timer);
 		return txt && txt.length > 20 ? txt : null;
 	} catch { return null; }
 }
 
 // fetch rapide (plain) puis fallback impersonate si bloqué/échoué.
 async function fetchText(u: string, timeoutMs = 8000): Promise<string | null> {
+	const domain = new URL(u).hostname.replace(/^www\./, "");
+	const cfg = getDomainConfig(domain);
 	try {
-		const r = await fetch(u, { headers: { "user-agent": UA }, signal: AbortSignal.timeout(timeoutMs) });
+		const r = await fetch(u, { headers: { "user-agent": UA }, signal: AbortSignal.timeout(cfg.timeout) });
 		if (r.ok) {
 			const t = await r.text();
 			if (t && !/just a moment|checkpoint|cf-browser-verification/i.test(t.slice(0, 600))) return t;
 		}
 	} catch { /* fallthrough */ }
-	return impFetch(u, Math.max(timeoutMs, 15000));
+	return impFetch(u, Math.max(cfg.timeout, 12000), cfg.forceHttp1);
 }
 async function fetchJson(u: string, timeoutMs = 8000): Promise<unknown> {
+	const domain = new URL(u).hostname.replace(/^www\./, "");
+	const cfg = getDomainConfig(domain);
 	try {
 		const r = await fetch(u, {
 			headers: { "user-agent": UA, accept: "application/json" },
-			signal: AbortSignal.timeout(timeoutMs),
+			signal: AbortSignal.timeout(cfg.timeout),
 		});
 		if (r.ok && (r.headers.get("content-type") ?? "").includes("json")) return await r.json();
 	} catch { /* fallthrough */ }
 	// fallback TLS-impersonate (raw body → JSON.parse)
-	const raw = await impFetch(u, Math.max(timeoutMs, 15000));
+	const raw = await impFetch(u, Math.max(cfg.timeout, 12000), cfg.forceHttp1);
 	if (!raw) return null;
 	try { return JSON.parse(raw); } catch { return null; }
 }
 
 // fetch JSON plain uniquement (rapide) — pour le multi-probe Shopify.
 async function fetchJsonFast(u: string, timeoutMs = 6000): Promise<unknown> {
+	const domain = new URL(u).hostname.replace(/^www\./, "");
+	const cfg = getDomainConfig(domain);
 	try {
 		const r = await fetch(u, {
 			headers: { "user-agent": UA, accept: "application/json" },
-			signal: AbortSignal.timeout(timeoutMs),
+			signal: AbortSignal.timeout(cfg.timeout),
 		});
 		if (r.ok && (r.headers.get("content-type") ?? "").includes("json")) return await r.json();
 	} catch { /* ignore */ }
@@ -256,48 +317,110 @@ async function scrapeJsonLd(shop: Shop, currency: string): Promise<Product[] | n
 	return out.length ? out : null;
 }
 
+function parsePrice(raw: string, currency: string): number | null {
+	let clean = raw.replace(/[^\d.,']/g, "").trim();
+	if (!clean) return null;
+
+	if (currency === "EUR") {
+		clean = clean.replace(/\./g, "").replace(",", ".");
+	} else {
+		clean = clean.replace(/[,']/g, "");
+	}
+	const v = parseFloat(clean);
+	return Number.isFinite(v) && v > 0 ? v : null;
+}
+
 // ── 4. bxc (curl-impersonate, contourne Cloudflare) ───────────────
 async function scrapeBxc(shop: Shop, currency: string): Promise<Product[] | null> {
+	const cfg = getDomainConfig(shop.domain);
 	try {
 		const proc = Bun.spawn(
-			[BXC_BIN, "scrape", shop.url, "--markdown", "--profile", "static", "--timeout", "15000"],
+			[BXC_BIN, "--timeout", String(cfg.timeout), "scrape", shop.url, "--markdown", "--profile", "http"],
 			{ stdout: "pipe", stderr: "ignore" },
 		);
+		const timer = setTimeout(() => {
+			console.warn(`[timeout] bxc scraping ${shop.domain} hung, killing process...`);
+			try { proc.kill(9); } catch {}
+		}, cfg.timeout + 4000);
 		const md = await new Response(proc.stdout).text();
 		await proc.exited;
+		clearTimeout(timer);
 		if (!md || /checkpoint|verifying|just a moment/i.test(md.slice(0, 500))) return null;
-		// Associe chaque lien produit au 1er prix qui suit sur la même portion.
+		
 		const out: Product[] = [];
-		const linkRe = /\[([^\]]{4,90})\]\((https?:\/\/[^)]+)\)/g;
-		const priceRe = /(?:€|£|\$|EUR|USD|GBP|CHF|¥|JPY)\s?(\d[\d.,]*)|(\d[\d.,]*)\s?(?:€|£|\$)/;
+		const linkRe = /\[(?:!\[[^\]]*\]\([^)]+\)\s*)?([^\]]{4,150})\]\(((?:https?:\/\/|\/)[^)]+)\)/g;
+		const priceRe = /(?:€|£|\$|EUR|USD|GBP|CHF|¥|JPY)\s?(\d[\d.,]+)|(\d[\d.,]+)\s?[\uFFFD]?\s?(?:€|£|\$|円|¥|~|￥)/;
 		const lines = md.split("\n");
+		
 		for (let i = 0; i < lines.length; i++) {
 			const line = lines[i] ?? "";
 			linkRe.lastIndex = 0;
-			const lm = linkRe.exec(line);
-			if (!lm || !BX_RE.test(lm[1] ?? "")) continue;
-			let price: number | null = null;
-			for (let j = i; j < Math.min(i + 3, lines.length); j++) {
-				const pm = (lines[j] ?? "").match(priceRe);
-				if (pm) {
-					const raw = (pm[1] ?? pm[2] ?? "").replace(/\.(?=\d{3}\b)/g, "").replace(",", ".");
-					const v = parseFloat(raw);
-					if (Number.isFinite(v) && v > 0) { price = v; break; }
+			
+			let match;
+			while ((match = linkRe.exec(line)) !== null) {
+				const title = match[1] ?? "";
+				const prodUrl = match[2] ?? "";
+				
+				if (!BX_RE.test(title)) continue;
+				
+				let price: number | null = null;
+				// 1. Try to find price inside the link title itself
+				const titlePm = title.match(priceRe);
+				if (titlePm) {
+					price = parsePrice(titlePm[1] ?? titlePm[2] ?? titlePm[0], currency);
 				}
+				
+				// 2. Try to find price in lines after the link
+				if (price === null) {
+					for (let j = i; j < Math.min(i + 3, lines.length); j++) {
+						const pm = (lines[j] ?? "").match(priceRe);
+						if (pm) {
+							price = parsePrice(pm[1] ?? pm[2] ?? pm[0], currency);
+							if (price !== null) break;
+						}
+					}
+				}
+				
+				let absoluteUrl = prodUrl;
+				if (absoluteUrl.startsWith("/")) {
+					absoluteUrl = `https://${shop.domain}${absoluteUrl}`;
+				}
+				
+				out.push(mkProduct(shop, currency, { title: title.trim(), price, priceMax: price, url: absoluteUrl }));
 			}
-			out.push(mkProduct(shop, currency, { title: lm[1]!.trim(), price, priceMax: price, url: lm[2]! }));
 		}
 		return out.length ? dedup(out) : null;
 	} catch { return null; }
 }
 
+const SHOP_CURRENCY_OVERRIDES: Record<string, string> = {
+	"beyblade-kingdom.com": "USD",
+	"itsukijapan.com": "USD",
+	"toysonejapan.com": "USD",
+	"toysstorejapan.com": "USD",
+};
+
+const MARKETPLACES = [
+	"amazon.fr", "amazon.com", "amazon.co.uk", "amazon.ca", "amazon.com.au", "amazon.it", "amazon.nl", "amazon.com.be",
+	"ebay.com", "ebay.co.uk", "ebay.de", "aliexpress.com", "fr.aliexpress.com", "walmart.com", "walmart.ca", "target.com",
+	"cdiscount.com", "miravia.es", "etsy.com", "fr.shopping.rakuten.com", "kaufland.de"
+];
+
 // ── orchestration ─────────────────────────────────────────────────
 async function scrapeShop(shop: Shop): Promise<{ products: Product[]; platform: string }> {
-	const currency = CURRENCY_BY_REGION[shop.region] ?? "?";
+	if (MARKETPLACES.includes(shop.domain)) {
+		return { products: [], platform: "link-only" };
+	}
+	const currency = SHOP_CURRENCY_OVERRIDES[shop.domain] ?? (CURRENCY_BY_REGION[shop.region] ?? "?");
+	
+	const isIndependent = ["specialist", "import"].includes(shop.type);
 	const deepShop = ["specialist", "import", "official", "retailer"].includes(shop.type);
+	
 	const chain: [string, (s: Shop, c: string) => Promise<Product[] | null>][] = [
-		["shopify", scrapeShopify],
-		["woocommerce", scrapeWoo],
+		...(isIndependent ? ([
+			["shopify", scrapeShopify],
+			["woocommerce", scrapeWoo]
+		] as [string, typeof scrapeShopify][]) : []),
 		["jsonld", scrapeJsonLd],
 		// bxc (process spawn, plus lent) réservé aux boutiques à vrai catalogue BX
 		...(deepShop ? ([["bxc", scrapeBxc]] as [string, typeof scrapeBxc][]) : []),
@@ -319,21 +442,85 @@ for (let i = 0; i < shops.length; i += CONCURRENCY) {
 	const batch = shops.slice(i, i + CONCURRENCY);
 	const results = await Promise.all(batch.map(async (shop) => ({ shop, ...(await scrapeShop(shop)) })));
 	for (const { shop, products, platform } of results) {
-		allProducts.push(...products);
-		shopRows.push({ ...shop, currency: CURRENCY_BY_REGION[shop.region] ?? "?", platform, productCount: products.length });
-		console.log(`[${platform.padEnd(11)}] ${shop.domain.padEnd(26)} ${String(products.length).padStart(3)}`);
+		const shopCurrency = SHOP_CURRENCY_OVERRIDES[shop.domain] ?? (CURRENCY_BY_REGION[shop.region] ?? "?");
+		const validProducts = products.filter((p) => {
+			const rate = FX_TO_EUR[p.currency];
+			const priceEur = p.price != null && rate ? p.price * rate : null;
+			return priceEur === null || priceEur >= 1.5;
+		});
+		allProducts.push(...validProducts);
+		shopRows.push({ ...shop, currency: shopCurrency, platform, productCount: validProducts.length });
+		console.log(`[${platform.padEnd(11)}] ${shop.domain.padEnd(26)} ${String(validProducts.length).padStart(3)}`);
 	}
 }
 
 shopRows.sort((a, b) => b.productCount - a.productCount || a.name.localeCompare(b.name));
 allProducts.sort((a, b) => (a.price ?? 1e9) - (b.price ?? 1e9));
 
+const validPrices = allProducts
+	.map((p) => {
+		const rate = FX_TO_EUR[p.currency];
+		return p.price != null && rate ? p.price * rate : null;
+	})
+	.filter((v): v is number => v !== null);
+
+const averagePriceEur = validPrices.length
+	? Math.round((validPrices.reduce((sum, v) => sum + v, 0) / validPrices.length) * 100) / 100
+	: 0;
+
+const scrapedShops = shopRows.filter((s) => s.productCount > 0);
+const successRate = shops.length ? Math.round((scrapedShops.length / shops.length) * 10000) / 100 : 0;
+
+// Region statistics: product count and average price
+const regionsList = [...new Set(allProducts.map((p) => p.region))].sort();
+const regionStats = regionsList.map((reg) => {
+	const regProducts = allProducts.filter((p) => p.region === reg);
+	const regPrices = regProducts
+		.map((p) => {
+			const rate = FX_TO_EUR[p.currency];
+			return p.price != null && rate ? p.price * rate : null;
+		})
+		.filter((v): v is number => v !== null);
+	const avgPrice = regPrices.length
+		? Math.round((regPrices.reduce((sum, v) => sum + v, 0) / regPrices.length) * 100) / 100
+		: null;
+	return {
+		region: reg,
+		productCount: regProducts.length,
+		averagePriceEur: avgPrice,
+	};
+});
+
+// Platform distribution
+const platformCounts = shopRows.reduce<Record<string, { total: number; active: number }>>((acc, s) => {
+	if (!acc[s.platform]) {
+		acc[s.platform] = { total: 0, active: 0 };
+	}
+	acc[s.platform].total += 1;
+	if (s.productCount > 0) {
+		acc[s.platform].active += 1;
+	}
+	return acc;
+}, {});
+
+const platformStats = Object.entries(platformCounts).map(([platform, counts]) => ({
+	platform,
+	total: counts.total,
+	active: counts.active,
+})).sort((a, b) => b.active - a.active);
+
 const out = {
 	generatedAt: new Date().toISOString(),
 	shopCount: shops.length,
-	scrapedShopCount: shopRows.filter((s) => s.productCount > 0).length,
+	scrapedShopCount: scrapedShops.length,
 	productCount: allProducts.length,
 	platforms: shopRows.reduce<Record<string, number>>((a, s) => { if (s.productCount) a[s.platform] = (a[s.platform] ?? 0) + 1; return a; }, {}),
+	stats: {
+		averagePriceEur,
+		successRate,
+		regionStats,
+		platformStats,
+	},
 	shops: shopRows,
 	products: allProducts,
 };
