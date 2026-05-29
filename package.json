@@ -58,6 +58,7 @@
   },
   "devDependencies": {
     "@happy-dom/global-registrator": "^20.9.0",
+    "@hey-api/openapi-ts": "^0.97.3",
     "@types/bun": "catalog:",
     "@types/node": "catalog:",
     "oxfmt": "^0.52.0",
