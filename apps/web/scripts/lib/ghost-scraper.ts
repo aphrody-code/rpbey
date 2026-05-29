@@ -57,6 +57,28 @@ const DEFAULTS = {
   minHtmlLength: 800,
 };
 
+// Marqueurs de page-challenge anti-bot (CF/Vercel). Une telle page renvoie 200 +
+// un HTML volumineux → passe le seuil minHtmlLength : il faut la détecter par
+// contenu, sinon on valide un blocage comme une réussite (faux positif).
+const CHALLENGE_MARKERS = [
+  "just a moment",
+  "vercel security checkpoint",
+  "attention required! | cloudflare",
+  "checking your browser before",
+  "enable javascript and cookies to continue",
+  "cf-browser-verification",
+  "__cf_chl_",
+  "challenge-platform",
+  "/cdn-cgi/challenge-platform",
+];
+
+/** Détecte une page-challenge (titre court + marqueur connu) malgré un 200 et un gros HTML. */
+function isChallengePage(html: string, title: string): boolean {
+  const t = title.toLowerCase();
+  const head = html.slice(0, 4_000).toLowerCase();
+  return CHALLENGE_MARKERS.some((m) => t.includes(m) || head.includes(m));
+}
+
 async function fetchOnce(url: string, o: FetchOptions): Promise<FetchResult | null> {
   const profile = o.profile ?? DEFAULTS.profile;
   const needsEngine = profile === "fast" || profile === "stealth";
@@ -96,6 +118,13 @@ export async function fetchSource(
   const minLen = opts.minHtmlLength ?? DEFAULTS.minHtmlLength;
   for (let attempt = 1; attempt <= retries; attempt++) {
     const res = await fetchOnce(url, opts);
+    if (res && isChallengePage(res.html, res.title)) {
+      console.warn(
+        `  ⚠ page-challenge anti-bot détectée (« ${res.title.slice(0, 40)} ») : ${url} — contournement requis (cookies clearance / proxy résidentiel).`,
+      );
+      if (attempt < retries) await Bun.sleep(2_000);
+      continue;
+    }
     if (res && res.status >= 200 && res.status < 400 && res.html.length >= minLen) {
       console.log(`  [${res.status}] ${res.html.length}o « ${res.title.slice(0, 50)} » <- ${url}`);
       return res;

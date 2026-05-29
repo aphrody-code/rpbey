@@ -16,6 +16,7 @@
  */
 import { mkdirSync } from "node:fs";
 import { join } from "node:path";
+import { BbxWeeklyDataSchema } from "@rpbey/api-contract";
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const puppeteer = require("puppeteer-extra");
 // eslint-disable-next-line @typescript-eslint/no-require-imports
@@ -66,12 +67,26 @@ async function scrapePeriod(
     waitUntil: "networkidle2",
     timeout: 60000,
   });
-  // franchir le checkpoint si présent
-  for (let i = 0; i < 20; i++) {
-    const blocked = await page.evaluate(() =>
-      /checkpoint|verifying/i.test(document.body?.innerText ?? ""),
+  // Franchir le "Vercel Security Checkpoint" : le challenge re-navigue vers la
+  // vraie page → l'execution context peut être détruit pendant `page.evaluate`.
+  // On sonde donc avec un evaluate tolérant à la destruction de contexte, et on
+  // attend l'apparition du DOM réel (data-slot="card-title").
+  const safeEval = async <T>(fn: () => T, fallback: T): Promise<T> => {
+    try {
+      return await page.evaluate(fn);
+    } catch {
+      return fallback; // contexte détruit (navigation) → on retentera au tour suivant
+    }
+  };
+  for (let i = 0; i < 30; i++) {
+    const state = await safeEval(
+      () => ({
+        blocked: /checkpoint|verifying|just a moment/i.test(document.body?.innerText ?? ""),
+        ready: !!document.querySelector('[data-slot="card-title"]'),
+      }),
+      { blocked: true, ready: false },
     );
-    if (!blocked) break;
+    if (!state.blocked && state.ready) break;
     await new Promise((r) => setTimeout(r, 2500));
   }
   await new Promise((r) => setTimeout(r, 1500));
@@ -80,7 +95,13 @@ async function scrapePeriod(
     const knownCats = ["LOCK CHIP", "RATCHET", "BLADE", "OVER BLADE", "ASSIST BLADE", "BIT"];
     const out: {
       category: string;
-      comps: { rank: number; name: string; score: number; dir: number; isNew: boolean }[];
+      comps: {
+        rank: number;
+        name: string;
+        score: number;
+        dir: number;
+        isNew: boolean;
+      }[];
     }[] = [];
     let current: (typeof out)[number] | null = null;
 
@@ -141,7 +162,13 @@ async function scrapePeriod(
   // apparaître 2× dans le DOM. On garde la 1ʳᵉ occurrence (desktop, complète).
   type RawCat = {
     category: string;
-    comps: { rank: number; name: string; score: number; dir: number; isNew: boolean }[];
+    comps: {
+      rank: number;
+      name: string;
+      score: number;
+      dir: number;
+      isNew: boolean;
+    }[];
   };
   const seen = new Set<string>();
   const categories: Cat[] = [];
@@ -220,11 +247,44 @@ for (const c of fourWeeks.categories)
       .join(", ")}…`,
   );
 
+// Validation contrat (BbxWeeklyDataSchema) avant toute écriture — un checkpoint
+// non franchi (0 catégorie) ne doit jamais écraser data/bbx-weekly.json.
+const parsed = BbxWeeklyDataSchema.safeParse(result);
+const totalComps =
+  twoWeeks.categories.reduce((n, c) => n + c.components.length, 0) +
+  fourWeeks.categories.reduce((n, c) => n + c.components.length, 0);
+
+if (!parsed.success) {
+  console.error(
+    "\n✗ Sortie non conforme à BbxWeeklyDataSchema :",
+    parsed.error.issues
+      .slice(0, 5)
+      .map((i) => `${i.path.join(".")}: ${i.message}`)
+      .join(" · "),
+  );
+  console.error(
+    "  Probable checkpoint Vercel non franchi (0 contenu). data/bbx-weekly.json PRÉSERVÉ.",
+  );
+  process.exit(2);
+}
+
 if (DRY) {
-  console.log("\n[dry] pas d'écriture. JSON valide:", !!result.periods["4weeks"].categories.length);
+  console.log(
+    `\n[dry] pas d'écriture. Schéma OK: ${parsed.success} | ${totalComps} composants au total.`,
+  );
+} else if (totalComps === 0) {
+  console.error(
+    "\n✗ 0 composant extrait (checkpoint non franchi ?). data/bbx-weekly.json PRÉSERVÉ.",
+  );
+  process.exit(2);
 } else {
   const out = join(process.cwd(), "data", "bbx-weekly.json");
-  await Bun.write(out, JSON.stringify(result, null, 2));
-  console.log(`\nÉcrit → ${out}`);
+  const tmp = `${out}.tmp`;
+  await Bun.write(tmp, JSON.stringify(parsed.data, null, 2));
+  await Bun.write(out, Bun.file(tmp));
+  await Bun.file(tmp)
+    .unlink?.()
+    .catch(() => {});
+  console.log(`\n✓ ${totalComps} composants validés → ${out}`);
 }
 process.exit(0);
