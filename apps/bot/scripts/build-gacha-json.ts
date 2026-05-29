@@ -10,6 +10,7 @@
  *     (analyse visuelle + contexte d'envoi, clé = attachmentId) quand présent ;
  *     sinon character est déduit heuristiquement du nom de fichier (sans rien
  *     inventer ; null + needsReview si indéterminable).
+ *   - exclude:true dans l'override => l'image est retirée du catalogue (hors histoire).
  *
  * Usage :
  *   bun scripts/build-gacha-json.ts --channel=<id>
@@ -206,6 +207,7 @@ interface Override {
   kind?: Kind;
   status?: string;
   note?: string;
+  exclude?: boolean;
 }
 interface GachaEntry {
   id: string;
@@ -231,7 +233,7 @@ interface GachaEntry {
 
 // Overrides curés (analyse visuelle + contexte), clé = attachmentId.
 const ovPath = args.get("overrides") ?? join(baseDir, "gacha-overrides.json");
-let overrides: Record<string, Override> = {};
+const overrides: Record<string, Override> = {};
 if (await Bun.file(ovPath).exists()) {
   const raw = JSON.parse(await Bun.file(ovPath).text()) as Record<string, unknown>;
   for (const [k, v] of Object.entries(raw)) {
@@ -247,13 +249,18 @@ const lines = (await Bun.file(msgPath).text())
   .map((l) => JSON.parse(l) as ScrapedMsg);
 
 const entries: GachaEntry[] = [];
+let excluded = 0;
 for (const m of lines) {
   for (const a of m.attachments ?? []) {
     const isImg = (a.contentType ?? "").startsWith("image/") || IMAGE_EXT.test(a.name ?? "");
     if (!ALL && !isImg) continue;
+    const ov = overrides[a.id];
+    if (ov?.exclude) {
+      excluded++;
+      continue; // hors histoire (portfolio/emote) — retiré du catalogue
+    }
     const scrapeFile = `${m.id}-${a.id}-${(a.name ?? "att").replace(/[^\w.-]+/g, "_").slice(0, 120)}`;
     const opt = optimizedFor(scrapeFile);
-    const ov = overrides[a.id];
     const character =
       ov && "character" in ov ? (ov.character ?? null) : extractCharacter(a.name ?? "");
     entries.push({
@@ -291,7 +298,7 @@ const RARITY_RANK: Record<string, number> = { LR: 0, SR: 1, R: 2, special: 3 };
 const rarityRank = (r: string | null) => (r && r in RARITY_RANK ? RARITY_RANK[r]! : 9);
 
 // Tri : cartes d'abord (par rareté LR>SR>R), puis personnage, dessinateur, date ;
-// le hors-bannière (illustration/portfolio/template/meme) ensuite.
+// le hors-bannière (illustration/template) ensuite.
 entries.sort((a, b) => {
   if (KIND_RANK[a.kind] !== KIND_RANK[b.kind]) return KIND_RANK[a.kind] - KIND_RANK[b.kind];
   if (a.kind === "card" && rarityRank(a.rarity) !== rarityRank(b.rarity)) {
@@ -313,7 +320,7 @@ await Bun.write(outPath, `${JSON.stringify(entries, null, 2)}\n`);
 const cards = entries.filter((e) => e.kind === "card");
 const review = entries.filter((e) => e.needsReview);
 const artists = [...new Set(entries.map((e) => e.artist))];
-log(`[gacha] ${entries.length} images -> ${outPath}`);
+log(`[gacha] ${entries.length} images -> ${outPath} (${excluded} exclues hors histoire)`);
 log(
   `[gacha] cartes : ${cards.length} · hors-bannière : ${entries.length - cards.length} · à revoir : ${review.length}`,
 );

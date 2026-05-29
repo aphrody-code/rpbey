@@ -2,14 +2,14 @@
 /// <reference types="bun" />
 /**
  * Poste le catalogue gacha sur Discord via le bot RPBey (REST v10, multipart natif).
- *   - --catalog : images optimisées triées, groupées par (personnage, dessinateur).
- *     Salon texte -> 1 message/groupe ; salon Forum/Media -> 1 post (thread)/groupe.
- *     Légendes riches : rareté · série · statut + notes par image.
+ *   - --catalog : 1 post (forum) par personnage = la CARTE ENCADRÉE (template de
+ *     soupy, via render-cards.ts) en tête + les étapes WIP brutes derrière.
+ *     Salon texte -> 1 message/groupe. Le template nu et le hors-histoire ne sont
+ *     pas postés (exclus en amont).
  *   - --summary : résumé règles/lore/vibe (fichier .md, découpé sur @@@).
  *   - --purge   : supprime d'abord les posts existants du bot dans le forum cible.
  *
- * Token lu depuis DISCORD_TOKEN (.env auto-chargé). Le bot doit avoir
- * Send Messages + Attach Files (+ Create Posts / Manage Threads) sur la cible.
+ * Token lu depuis DISCORD_TOKEN (.env auto-chargé).
  *
  * Usage :
  *   bun scripts/post-gacha.ts --channel=<srcId> --catalog=<id> [--summary=<id>] [--purge] [--dry]
@@ -71,10 +71,8 @@ interface GachaEntry {
   artist: string;
   image: string;
   note: string | null;
-  sourceFilename: string;
 }
 
-/** fetch + retry réseau / 429 / 5xx + respect du bucket. */
 async function api(path: string, init: RequestInit, files: string[] = []): Promise<Response> {
   for (let attempt = 0; attempt < 8; attempt++) {
     let res: Response;
@@ -146,7 +144,6 @@ async function createForumPost(
   await ensureOk(res, channel);
 }
 
-/** Supprime les posts existants du bot dans un forum (avant re-publication). */
 async function purgeForum(channel: string, guildId: string): Promise<void> {
   const res = await api(`/guilds/${guildId}/threads/active`, { method: "GET" });
   await ensureOk(res, channel);
@@ -193,32 +190,27 @@ async function postSummary(): Promise<void> {
 
 // ── catalogue ─────────────────────────────────────────────────────────────────
 interface Group {
+  character: string;
   entries: GachaEntry[];
 }
-function caption(g: Group): string {
+function caption(g: Group, framed: boolean): string {
   const e = g.entries[0]!;
   const head =
     e.kind === "card"
-      ? `**${e.character}** · ${e.rarity ?? "?"}${e.series ? ` · ${e.series}` : ""} — par ${e.artist}`
-      : e.kind === "illustration"
-        ? `🖼️ **${e.character}** *(illustration spéciale)* — par ${e.artist}`
-        : `*[hors bannière · ${e.kind}]* ${e.character ?? ""} — par ${e.artist}`.trim();
-  const detail =
-    g.entries.length > 1
-      ? `\n` +
-        g.entries
-          .map((x) => `• \`${x.id}\` ${x.status ?? "—"}${x.note ? ` · ${x.note}` : ""}`)
-          .join("\n")
-      : g.entries[0]!.note
-        ? ` · ${g.entries[0]!.note}`
-        : "";
-  return `${head}${detail}`;
+      ? `**${g.character}** · ${e.rarity ?? "?"}${e.series ? ` · ${e.series}` : ""} — par ${e.artist}`
+      : `🖼️ **${g.character}** *(illustration spéciale)* — par ${e.artist}`;
+  const stages = g.entries
+    .map((x) => `• \`${x.id}\` ${x.status ?? "—"}${x.note ? ` · ${x.note}` : ""}`)
+    .join("\n");
+  const lead = framed
+    ? `🎴 *Carte montée sur le template de soupy* + ${g.entries.length} étape(s)\n`
+    : "";
+  return `${head}\n${lead}${stages}`;
 }
 function threadName(g: Group): string {
   const e = g.entries[0]!;
-  if (e.kind === "card") return `${e.character} · ${e.rarity ?? "?"} — ${e.artist}`;
-  if (e.kind === "illustration") return `${e.character} — ${e.artist}`;
-  return `[Hors bannière] ${e.character ?? e.kind} — ${e.artist}`;
+  if (e.kind === "card") return `${g.character} · ${e.rarity ?? "?"} — ${e.artist}`;
+  return `${g.character} — ${e.artist}`;
 }
 
 async function postCatalog(): Promise<void> {
@@ -228,49 +220,60 @@ async function postCatalog(): Promise<void> {
     log(`[post] gacha.json introuvable (lance build-gacha-json.ts).`);
     return;
   }
-  const entries = JSON.parse(await Bun.file(gachaPath).text()) as GachaEntry[];
-  const { type, guild_id } = await getChannel(CATALOG);
-  const isForum = type === CH_FORUM || type === CH_MEDIA;
+  const all = JSON.parse(await Bun.file(gachaPath).text()) as GachaEntry[];
+  // Seules les cartes + illustrations sont publiées (template nu / hors-histoire exclus).
+  const entries = all.filter(
+    (e) => (e.kind === "card" || e.kind === "illustration") && e.character,
+  );
 
-  if (PURGE) await purgeForum(CATALOG, guild_id);
+  const manifestPath = join(baseDir, "cards-manifest.json");
+  const manifest: Record<string, string> = (await Bun.file(manifestPath).exists())
+    ? (JSON.parse(await Bun.file(manifestPath).text()) as Record<string, string>)
+    : {};
 
-  // Groupe par (personnage, dessinateur, kind), ≤10 fichiers/post.
+  // Groupe par personnage (les étapes WIP d'un même perso ensemble).
   const groups: Group[] = [];
   let curKey = "";
   for (const e of entries) {
-    const key = `${e.kind}|${e.character ?? ""}|${e.artist}`;
+    const key = `${e.character}`;
     const last = groups[groups.length - 1];
-    if (key !== curKey || (last?.entries.length ?? 0) >= MAX_FILES) {
-      groups.push({ entries: [] });
+    if (key !== curKey || (last?.entries.length ?? 0) >= MAX_FILES - 1) {
+      groups.push({ character: e.character!, entries: [] });
       curKey = key;
     }
     groups[groups.length - 1]?.entries.push(e);
   }
 
-  log(
-    `[post] catalogue → ${CATALOG} (${isForum ? "forum/media" : "texte"}, ${groups.length} groupes)`,
-  );
+  const { type, guild_id } = await getChannel(CATALOG);
+  const isForum = type === CH_FORUM || type === CH_MEDIA;
+  if (PURGE) await purgeForum(CATALOG, guild_id);
+
+  log(`[post] catalogue → ${CATALOG} (${isForum ? "forum" : "texte"}, ${groups.length} cartes)`);
   if (DRY) {
-    for (const g of groups) log(`  [dry] ${threadName(g)} (${g.entries.length})`);
+    for (const g of groups) {
+      const framed = !!manifest[g.character];
+      log(`  [dry] ${threadName(g)} ${framed ? "[+carte]" : ""} (${g.entries.length} wip)`);
+    }
     return;
   }
-
   if (!isForum) {
-    const cards = entries.filter((e) => e.kind === "card").length;
     await postMessage(
       CATALOG,
-      `# 🎴 Catalogue Gacha — ${entries.length} illustrations (${cards} cartes)\n` +
-        `Trié par rareté puis personnage. PNG lossless / JPEG→WebP q90.`,
+      `# 🎴 Catalogue Gacha — ${groups.length} cartes (montées sur le template de soupy)\nTrié par rareté puis personnage.`,
     );
   }
 
   let i = 0;
   for (const g of groups) {
     i++;
-    const files = g.entries.map((e) => join(baseDir, e.image));
-    if (isForum) await createForumPost(CATALOG, threadName(g), caption(g), files);
-    else await postMessage(CATALOG, caption(g), files);
-    log(`  ✓ ${i}/${groups.length} ${threadName(g)} (${files.length})`);
+    const framedRel = manifest[g.character];
+    const framed = framedRel ? join(baseDir, framedRel) : null;
+    const wip = g.entries.map((e) => join(baseDir, e.image));
+    const files = (framed ? [framed, ...wip] : wip).slice(0, MAX_FILES);
+    const text = caption(g, !!framed);
+    if (isForum) await createForumPost(CATALOG, threadName(g), text, files);
+    else await postMessage(CATALOG, text, files);
+    log(`  ✓ ${i}/${groups.length} ${threadName(g)} (${files.length} img)`);
   }
 }
 
