@@ -1017,27 +1017,27 @@ export async function persistStardustRankings(
   await db.transaction(async (tx) => {
     await tx.delete(schema.stardustRankings);
     if (ranked.length > 0) await tx.insert(schema.stardustRankings).values(ranked);
-  });
-  for (const b of bladers) {
-    await db
-      .insert(schema.stardustBladers)
-      .values({
-        name: b.name,
-        totalWins: b.totalWins,
-        totalLosses: b.totalLosses,
-        tournamentWins: b.tournamentWins,
-        tournamentsCount: b.tournamentsCount,
-        history: b.history as never,
-      })
-      .onConflictDoUpdate({
-        target: schema.stardustBladers.name,
-        set: {
+    for (const b of bladers) {
+      await tx
+        .insert(schema.stardustBladers)
+        .values({
+          name: b.name,
           totalWins: b.totalWins,
           totalLosses: b.totalLosses,
           tournamentWins: b.tournamentWins,
           tournamentsCount: b.tournamentsCount,
           history: b.history as never,
-        },
-      });
-  }
+        })
+        .onConflictDoUpdate({
+          target: schema.stardustBladers.name,
+          set: {
+            totalWins: b.totalWins,
+            totalLosses: b.totalLosses,
+            tournamentWins: b.tournamentWins,
+            tournamentsCount: b.tournamentsCount,
+            history: b.history as never,
+          },
+        });
+    }
+  });
 }

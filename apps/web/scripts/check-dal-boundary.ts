@@ -39,9 +39,18 @@ const SINK_FILES = new Set(["lib/db.ts", "lib/auth.ts"]);
 /** Un `rel` est un puits propre s'il est dans la DAL ou l'un des 2 seams framework. */
 const isSink = (rel: string): boolean => rel.startsWith(DAL_PREFIX) || SINK_FILES.has(rel);
 // Import direct de la DB (barrel `@/lib/db` ou paquet `@rpbey/db`).
-const DB_IMPORT = /from\s+["'](@rpbey\/db|@\/lib\/db|@lib\/db)["']/;
+// ⚠️ Inclut les SUBPATHS : `@rpbey/db` ré-exporte le même `db` live via ses
+// sous-chemins (`@rpbey/db/client`, `@rpbey/db/schema`, …) et `@/lib/db` peut
+// aussi être atteint via un sous-module — un offender pouvait donc contourner le
+// gate en important `@rpbey/db/client` au lieu du specifier exact. Le groupe
+// optionnel `(?:\/[\w./-]+)?` capture ces formes (et le `require()` équivalent).
+const DB_IMPORT = /(?:from\s+|require\(\s*)["'](@rpbey\/db|@\/lib\/db|@lib\/db)(?:\/[\w./-]+)?["']/;
 // Capture toutes les sources d'import/`export … from` locales pour bâtir le graphe.
 const IMPORT_FROM = /(?:import|export)\b[^;]*?\bfrom\s+["']([^"']+)["']/g;
+// Imports DYNAMIQUES (`import("…")`) — non capturés par IMPORT_FROM (qui exige
+// `from`). Sans cette 2e passe, un fichier pouvait atteindre la DB transitivement
+// via un `await import("@/lib/stats")` et rester invisible au graphe.
+const IMPORT_DYNAMIC = /import\(\s*["']([^"']+)["']\s*\)/g;
 
 // Zones dont la frontière est STRICTEMENT appliquée.
 //
@@ -74,6 +83,11 @@ for (const rel of files) {
   for (const m of content.matchAll(IMPORT_FROM)) {
     if (m[1]) imports.push(m[1]);
   }
+  // 2e passe : imports DYNAMIQUES `import("…")`, même résolution que les
+  // statiques (poussés dans le même tableau `node.imports`).
+  for (const m of content.matchAll(IMPORT_DYNAMIC)) {
+    if (m[1]) imports.push(m[1]);
+  }
   nodes.set(rel, { rel, imports, directDb: DB_IMPORT.test(content) });
 }
 
@@ -88,6 +102,10 @@ function resolveImport(fromRel: string, spec: string): string | null {
   if (spec.startsWith("@/")) base = spec.slice(2);
   else if (spec.startsWith("@lib/")) base = `lib/${spec.slice(5)}`;
   else if (spec.startsWith("@components/")) base = `components/${spec.slice(12)}`;
+  // alias `@hooks/*` → `src/hooks/*` (déclaré dans apps/web/tsconfig.json paths) :
+  // sans ça, un import `@hooks/useFoo` ne se résolvait pas et l'arête de couplage
+  // transitif via un hook était invisible au graphe.
+  else if (spec.startsWith("@hooks/")) base = `hooks/${spec.slice(7)}`;
   else if (spec.startsWith("./") || spec.startsWith("../")) {
     const dir = fromRel.includes("/") ? fromRel.slice(0, fromRel.lastIndexOf("/")) : "";
     const parts = `${dir}/${spec}`.split("/");

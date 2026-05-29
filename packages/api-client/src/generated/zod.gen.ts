@@ -587,7 +587,7 @@ export const zListAnimeSeriesQuery = z.object({
         'BURST',
         'X'
     ]).optional(),
-    featured: z.boolean().optional()
+    featured: z.enum(['true', 'false']).optional()
 });
 
 /**
@@ -1045,7 +1045,7 @@ export const zGachaCardsQuery = z.object({
     dropId: z.string().optional(),
     series: z.string().optional(),
     search: z.string().optional(),
-    activeOnly: z.boolean().optional(),
+    activeOnly: z.enum(['true', 'false']).optional(),
     limit: z.int().gte(1).lte(200).optional()
 });
 

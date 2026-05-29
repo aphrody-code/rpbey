@@ -863,7 +863,7 @@ export type ListAnimeSeriesData = {
     path?: never;
     query?: {
         generation?: 'ORIGINAL' | 'METAL' | 'BURST' | 'X';
-        featured?: boolean;
+        featured?: 'true' | 'false';
     };
     url: '/api/v1/anime';
 };
@@ -1611,7 +1611,7 @@ export type GachaCardsData = {
         dropId?: string;
         series?: string;
         search?: string;
-        activeOnly?: boolean;
+        activeOnly?: 'true' | 'false';
         limit?: number;
     };
     url: '/api/v1/gacha/cards';

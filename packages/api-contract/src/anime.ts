@@ -80,7 +80,10 @@ export type AnimeSeriesDetail = z.infer<typeof AnimeSeriesDetailSchema>;
 
 export const AnimeListQuerySchema = z.object({
   generation: AnimeGenerationSchema.optional(),
-  featured: z.coerce.boolean().optional(),
+  featured: z
+    .enum(["true", "false"])
+    .optional()
+    .transform((v) => v === "true"),
 });
 export type AnimeListQuery = z.infer<typeof AnimeListQuerySchema>;
 

@@ -41,7 +41,10 @@ export const GachaCardsQuerySchema = z.object({
   dropId: z.string().optional(),
   series: z.string().optional(),
   search: z.string().optional(),
-  activeOnly: z.coerce.boolean().optional(),
+  activeOnly: z
+    .enum(["true", "false"])
+    .optional()
+    .transform((v) => v === "true"),
   limit: z.coerce.number().int().min(1).max(200).optional(),
 });
 export type GachaCardsQuery = z.infer<typeof GachaCardsQuerySchema>;

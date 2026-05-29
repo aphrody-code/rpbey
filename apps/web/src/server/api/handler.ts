@@ -38,9 +38,10 @@ export function getRoute<R extends z.ZodType, Q extends z.ZodType = z.ZodType>(o
       const validated = opts.response.parse(data);
       return jsonOk(validated);
     } catch (e) {
+      // Log complet côté serveur, message GÉNÉRIQUE côté client : ne jamais
+      // exposer `e.message` brut (peut fuiter du SQL/Zod/chemins internes).
       console.error("[api/v1] handler error:", e);
-      const message = e instanceof Error ? e.message : "internal error";
-      return jsonErr({ code: "internal", message }, 500);
+      return jsonErr({ code: "internal", message: "Erreur interne" }, 500);
     }
   };
 }
@@ -93,9 +94,10 @@ export function mutationRoute<
       const validated = opts.response.parse(data);
       return jsonOk(validated, { status: opts.status ?? 200 });
     } catch (e) {
+      // Log complet côté serveur, message GÉNÉRIQUE côté client : ne jamais
+      // exposer `e.message` brut (peut fuiter du SQL/Zod/chemins internes).
       console.error("[api/v1] mutation error:", e);
-      const message = e instanceof Error ? e.message : "internal error";
-      return jsonErr({ code: "internal", message }, 500);
+      return jsonErr({ code: "internal", message: "Erreur interne" }, 500);
     }
   };
 }

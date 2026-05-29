@@ -59,7 +59,10 @@ for (let i = 0; i < ids.length; i++) {
 }
 
 // --- Invariant 2 : couverture de la dette ---------------------------------
-const DB_RE = /from\s+["'](@rpbey\/db|@\/lib\/db)["']|require\(["'](@rpbey\/db|@\/lib\/db)["']\)/;
+// ⚠️ Inclut les SUBPATHS (`@rpbey/db/client`, `@rpbey/db/schema`, …) qui exportent
+// le même `db` live — même blindspot anti-contournement aligné sur check-dal-boundary.ts.
+const DB_RE =
+  /from\s+["'](@rpbey\/db|@\/lib\/db)(?:\/[\w./-]+)?["']|require\(["'](@rpbey\/db|@\/lib\/db)(?:\/[\w./-]+)?["']\)/;
 const owned = new Set<string>([...sharedSet]);
 for (const s of laneFiles.values()) for (const f of s) owned.add(f);
 
