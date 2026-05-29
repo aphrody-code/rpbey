@@ -5,9 +5,7 @@ import {
   FilterList,
   OpenInNew,
   Search,
-  Storefront,
   TrendingUp,
-  Speed,
   AccountBalanceWallet,
   Tune,
   Shield,
@@ -38,14 +36,7 @@ import Fuse from "fuse.js";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { useMemo, useState, useEffect } from "react";
-import type {
-  BxCatalog,
-  BxProduct,
-  BxProductGroup,
-  BxShop,
-  RecommendedProduct,
-  PartAnalysis,
-} from "./types";
+import type { BxCatalog, BxProduct, BxProductGroup, BxShop, RecommendedProduct } from "./types";
 
 interface Props {
   products: BxProduct[];
@@ -98,7 +89,10 @@ const fmtPrice = (v: number | null | undefined, currency: string) =>
 const fmtEur = (v: number | null | undefined) =>
   v == null
     ? "—"
-    : new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(v);
+    : new Intl.NumberFormat("fr-FR", {
+        style: "currency",
+        currency: "EUR",
+      }).format(v);
 
 const normalizeText = (str: string): string => {
   if (!str) return "";
@@ -163,6 +157,20 @@ export function ComparateurClient({
     return () => document.removeEventListener("click", handleOutsideClick);
   }, [showGlobalDropdown]);
 
+  // Index Fuse construit une seule fois par jeu d'items (pas à chaque frappe).
+  const globalFuse = useMemo(
+    () =>
+      new Fuse(globalItems, {
+        keys: [
+          { name: "title", weight: 0.7 },
+          { name: "subtitle", weight: 0.2 },
+          { name: "badge", weight: 0.1 },
+        ],
+        threshold: 0.45,
+      }),
+    [globalItems],
+  );
+
   const globalResults = useMemo(() => {
     const query = search.trim();
     const grouped = {
@@ -174,16 +182,7 @@ export function ComparateurClient({
 
     if (!query || globalItems.length === 0) return grouped;
 
-    const fuse = new Fuse(globalItems, {
-      keys: [
-        { name: "title", weight: 0.7 },
-        { name: "subtitle", weight: 0.2 },
-        { name: "badge", weight: 0.1 },
-      ],
-      threshold: 0.45,
-    });
-
-    const matched = fuse.search(query).map((r) => r.item);
+    const matched = globalFuse.search(query).map((r) => r.item);
 
     for (const item of matched) {
       if (grouped[item.category as keyof typeof grouped]) {
@@ -192,7 +191,7 @@ export function ComparateurClient({
     }
 
     return grouped;
-  }, [search, globalItems]);
+  }, [search, globalItems, globalFuse]);
 
   const handleGlobalItemClick = (item: any) => {
     setShowGlobalDropdown(false);
@@ -281,7 +280,12 @@ export function ComparateurClient({
               }}
             />
             <Typography
-              sx={{ fontWeight: 800, fontSize: "0.78rem", width: 35, textAlign: "right" }}
+              sx={{
+                fontWeight: 800,
+                fontSize: "0.78rem",
+                width: 35,
+                textAlign: "right",
+              }}
             >
               {Math.round(val)}%
             </Typography>
@@ -323,7 +327,11 @@ export function ComparateurClient({
           <Chip
             size="small"
             label={p.value}
-            sx={{ fontWeight: 800, fontSize: "0.65rem", bgcolor: "rgba(255,255,255,0.06)" }}
+            sx={{
+              fontWeight: 800,
+              fontSize: "0.65rem",
+              bgcolor: "rgba(255,255,255,0.06)",
+            }}
           />
         ) : (
           "—"
@@ -566,7 +574,11 @@ export function ComparateurClient({
           <Chip
             size="small"
             label={p.value}
-            sx={{ fontWeight: 800, fontSize: "0.65rem", bgcolor: "rgba(255,255,255,0.06)" }}
+            sx={{
+              fontWeight: 800,
+              fontSize: "0.65rem",
+              bgcolor: "rgba(255,255,255,0.06)",
+            }}
           />
         ) : (
           "—"
@@ -638,7 +650,12 @@ export function ComparateurClient({
         </MuiLink>
       ),
     },
-    { field: "shop", headerName: "Boutique", flex: 1, minWidth: isMobile ? 110 : 150 },
+    {
+      field: "shop",
+      headerName: "Boutique",
+      flex: 1,
+      minWidth: isMobile ? 110 : 150,
+    },
     {
       field: "region",
       headerName: "Région",
@@ -938,7 +955,11 @@ export function ComparateurClient({
                             <Stack direction="row" spacing={1} sx={{ alignItems: "center" }}>
                               {item.price && (
                                 <Typography
-                                  sx={{ fontWeight: 800, color: "#22c55e", fontSize: "0.82rem" }}
+                                  sx={{
+                                    fontWeight: 800,
+                                    color: "#22c55e",
+                                    fontSize: "0.82rem",
+                                  }}
                                 >
                                   {fmtEur(item.price)}
                                 </Typography>
@@ -1052,7 +1073,9 @@ export function ComparateurClient({
                               display: "flex",
                               justifyContent: "space-between",
                               alignItems: "center",
-                              "&:hover": { bgcolor: "rgba(255,255,255,0.04)" },
+                              "&:hover": {
+                                bgcolor: "rgba(255,255,255,0.04)",
+                              },
                             }}
                           >
                             <Box>
@@ -1074,7 +1097,11 @@ export function ComparateurClient({
                                     : "primary"
                               }
                               variant="outlined"
-                              sx={{ height: 18, fontSize: "0.58rem", fontWeight: 800 }}
+                              sx={{
+                                height: 18,
+                                fontSize: "0.58rem",
+                                fontWeight: 800,
+                              }}
                             />
                           </Box>
                         ))}
@@ -1126,7 +1153,11 @@ export function ComparateurClient({
                               </Typography>
                             </Box>
                             <Typography
-                              sx={{ fontSize: "0.72rem", color: "text.secondary", fontWeight: 700 }}
+                              sx={{
+                                fontSize: "0.72rem",
+                                color: "text.secondary",
+                                fontWeight: 700,
+                              }}
                             >
                               {item.details}
                             </Typography>
@@ -1261,7 +1292,9 @@ export function ComparateurClient({
               columns={groupCols}
               density="compact"
               sx={gridSx}
-              initialState={{ pagination: { paginationModel: { pageSize: 50 } } }}
+              initialState={{
+                pagination: { paginationModel: { pageSize: 50 } },
+              }}
               pageSizeOptions={[25, 50, 100]}
               onRowClick={(p) => setOpenGroup(p.row as BxProductGroup)}
               disableRowSelectionOnClick
@@ -1316,7 +1349,11 @@ export function ComparateurClient({
                   <Box>
                     <Stack
                       direction="row"
-                      sx={{ justifyContent: "space-between", alignItems: "center", mb: 1 }}
+                      sx={{
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        mb: 1,
+                      }}
                     >
                       <Typography
                         sx={{
@@ -1329,7 +1366,13 @@ export function ComparateurClient({
                       >
                         <Shield sx={{ fontSize: 16, color: "#a855f7" }} /> Intérêt Méta
                       </Typography>
-                      <Typography sx={{ fontWeight: 900, color: "#a855f7", fontSize: "0.85rem" }}>
+                      <Typography
+                        sx={{
+                          fontWeight: 900,
+                          color: "#a855f7",
+                          fontSize: "0.85rem",
+                        }}
+                      >
                         {Math.round(wMeta * 100)}%
                       </Typography>
                     </Stack>
@@ -1349,7 +1392,12 @@ export function ComparateurClient({
                     />
                     <Typography
                       variant="caption"
-                      sx={{ color: "text.secondary", display: "block", mt: 0.5, lineHeight: 1.4 }}
+                      sx={{
+                        color: "text.secondary",
+                        display: "block",
+                        mt: 0.5,
+                        lineHeight: 1.4,
+                      }}
                     >
                       Coefficients des pièces basés sur l'usage en tournoi (decks enregistrés) et la
                       classification WBO.
@@ -1360,7 +1408,11 @@ export function ComparateurClient({
                   <Box>
                     <Stack
                       direction="row"
-                      sx={{ justifyContent: "space-between", alignItems: "center", mb: 1 }}
+                      sx={{
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        mb: 1,
+                      }}
                     >
                       <Typography
                         sx={{
@@ -1373,7 +1425,13 @@ export function ComparateurClient({
                       >
                         <TrendingUp sx={{ fontSize: 16, color: "#f43f5e" }} /> Facteur Hype
                       </Typography>
-                      <Typography sx={{ fontWeight: 900, color: "#f43f5e", fontSize: "0.85rem" }}>
+                      <Typography
+                        sx={{
+                          fontWeight: 900,
+                          color: "#f43f5e",
+                          fontSize: "0.85rem",
+                        }}
+                      >
                         {Math.round(wHype * 100)}%
                       </Typography>
                     </Stack>
@@ -1393,7 +1451,12 @@ export function ComparateurClient({
                     />
                     <Typography
                       variant="caption"
-                      sx={{ color: "text.secondary", display: "block", mt: 0.5, lineHeight: 1.4 }}
+                      sx={{
+                        color: "text.secondary",
+                        display: "block",
+                        mt: 0.5,
+                        lineHeight: 1.4,
+                      }}
                     >
                       Popularité en magasin, fraîcheur de sortie (&lt;1 an) et statut d'édition
                       Collector/Limitée.
@@ -1404,7 +1467,11 @@ export function ComparateurClient({
                   <Box>
                     <Stack
                       direction="row"
-                      sx={{ justifyContent: "space-between", alignItems: "center", mb: 1 }}
+                      sx={{
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        mb: 1,
+                      }}
                     >
                       <Typography
                         sx={{
@@ -1418,7 +1485,13 @@ export function ComparateurClient({
                         <AccountBalanceWallet sx={{ fontSize: 16, color: "#06b6d4" }} /> Rapport
                         Qualité/Prix
                       </Typography>
-                      <Typography sx={{ fontWeight: 900, color: "#06b6d4", fontSize: "0.85rem" }}>
+                      <Typography
+                        sx={{
+                          fontWeight: 900,
+                          color: "#06b6d4",
+                          fontSize: "0.85rem",
+                        }}
+                      >
                         {Math.round(wPrice * 100)}%
                       </Typography>
                     </Stack>
@@ -1438,7 +1511,12 @@ export function ComparateurClient({
                     />
                     <Typography
                       variant="caption"
-                      sx={{ color: "text.secondary", display: "block", mt: 0.5, lineHeight: 1.4 }}
+                      sx={{
+                        color: "text.secondary",
+                        display: "block",
+                        mt: 0.5,
+                        lineHeight: 1.4,
+                      }}
                     >
                       Rapport entre la valeur estimée (méta + hype) et le meilleur tarif constaté
                       sur le marché.
@@ -1453,7 +1531,9 @@ export function ComparateurClient({
                 columns={recCols}
                 density="compact"
                 sx={gridSx}
-                initialState={{ pagination: { paginationModel: { pageSize: 50 } } }}
+                initialState={{
+                  pagination: { paginationModel: { pageSize: 50 } },
+                }}
                 pageSizeOptions={[25, 50, 100]}
                 onRowClick={(p) => handleRecClick(p.row)}
                 disableRowSelectionOnClick
@@ -1503,7 +1583,9 @@ export function ComparateurClient({
               sx={gridSx}
               initialState={{
                 pagination: { paginationModel: { pageSize: 50 } },
-                sorting: { sortModel: [{ field: "productCount", sort: "desc" }] },
+                sorting: {
+                  sortModel: [{ field: "productCount", sort: "desc" }],
+                },
               }}
               pageSizeOptions={[25, 50, 100]}
               disableRowSelectionOnClick
@@ -1559,7 +1641,12 @@ export function ComparateurClient({
                   </Typography>
                   <Typography
                     variant="caption"
-                    sx={{ color: "text.secondary", mt: 1, display: "block", lineHeight: 1.4 }}
+                    sx={{
+                      color: "text.secondary",
+                      mt: 1,
+                      display: "block",
+                      lineHeight: 1.4,
+                    }}
                   >
                     Calculé à partir de toutes les offres indexées avec un prix valide converti en
                     euros.
@@ -1596,7 +1683,12 @@ export function ComparateurClient({
                   </Typography>
                   <Typography
                     variant="caption"
-                    sx={{ color: "text.secondary", mt: 1, display: "block", lineHeight: 1.4 }}
+                    sx={{
+                      color: "text.secondary",
+                      mt: 1,
+                      display: "block",
+                      lineHeight: 1.4,
+                    }}
                   >
                     {shops.filter((s) => s.productCount > 0).length} boutiques scrapées avec succès
                     sur un total de {shops.length}.
@@ -1655,7 +1747,10 @@ export function ComparateurClient({
                           </Typography>
                           <Typography
                             variant="caption"
-                            sx={{ color: "text.secondary", fontSize: "0.68rem" }}
+                            sx={{
+                              color: "text.secondary",
+                              fontSize: "0.68rem",
+                            }}
                           >
                             Prix moyen
                           </Typography>
@@ -1731,7 +1826,12 @@ export function ComparateurClient({
 
           <Typography
             variant="caption"
-            sx={{ color: "text.secondary", display: "block", mt: 2.5, opacity: 0.6 }}
+            sx={{
+              color: "text.secondary",
+              display: "block",
+              mt: 2.5,
+              opacity: 0.6,
+            }}
           >
             Données mises à jour le {new Date(generatedAt).toLocaleString("fr-FR")} · prix convertis
             en € à titre indicatif (taux approximatifs).
@@ -1838,7 +1938,9 @@ export function ComparateurClient({
               </Typography>
               <Stack
                 spacing={1.5}
-                sx={{ mb: activeRec && activeRec.includedParts.length > 0 ? 4 : 0 }}
+                sx={{
+                  mb: activeRec && activeRec.includedParts.length > 0 ? 4 : 0,
+                }}
               >
                 {openGroup.offers.map((o, i) => (
                   <Box
@@ -1920,7 +2022,11 @@ export function ComparateurClient({
                       {o.currency !== "EUR" && (
                         <Typography
                           variant="caption"
-                          sx={{ color: "text.secondary", fontSize: "0.7rem", display: "block" }}
+                          sx={{
+                            color: "text.secondary",
+                            fontSize: "0.7rem",
+                            display: "block",
+                          }}
                         >
                           {fmtPrice(o.price, o.currency)}
                         </Typography>
@@ -1961,11 +2067,19 @@ export function ComparateurClient({
                       >
                         <Stack
                           direction="row"
-                          sx={{ justifyContent: "space-between", alignItems: "center", mb: 1 }}
+                          sx={{
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                            mb: 1,
+                          }}
                         >
                           <Box>
                             <Typography
-                              sx={{ fontWeight: 850, fontSize: "0.85rem", lineHeight: 1.2 }}
+                              sx={{
+                                fontWeight: 850,
+                                fontSize: "0.85rem",
+                                lineHeight: 1.2,
+                              }}
                             >
                               {part.name}
                             </Typography>
@@ -2010,17 +2124,27 @@ export function ComparateurClient({
 
                         <Stack
                           direction="row"
-                          sx={{ alignItems: "center", justifyContent: "space-between", gap: 1 }}
+                          sx={{
+                            alignItems: "center",
+                            justifyContent: "space-between",
+                            gap: 1,
+                          }}
                         >
                           <Typography
                             variant="caption"
-                            sx={{ color: "text.secondary", fontSize: "0.68rem" }}
+                            sx={{
+                              color: "text.secondary",
+                              fontSize: "0.68rem",
+                            }}
                           >
                             Usage deck: <strong>{part.usageCount}</strong>
                           </Typography>
                           <Typography
                             variant="caption"
-                            sx={{ color: "text.secondary", fontSize: "0.68rem" }}
+                            sx={{
+                              color: "text.secondary",
+                              fontSize: "0.68rem",
+                            }}
                           >
                             Score Méta: <strong>{Math.round(part.metaScore * 100)}%</strong>
                           </Typography>
@@ -2099,7 +2223,11 @@ export function ComparateurClient({
             <Chip
               size="small"
               label={openGroup.code}
-              sx={{ fontWeight: 800, fontSize: "0.65rem", bgcolor: "rgba(255,255,255,0.08)" }}
+              sx={{
+                fontWeight: 800,
+                fontSize: "0.65rem",
+                bgcolor: "rgba(255,255,255,0.08)",
+              }}
             />
           )}
         </DialogTitle>
@@ -2225,7 +2353,11 @@ export function ComparateurClient({
                   {o.currency !== "EUR" && (
                     <Typography
                       variant="caption"
-                      sx={{ color: "text.secondary", fontSize: "0.7rem", display: "block" }}
+                      sx={{
+                        color: "text.secondary",
+                        fontSize: "0.7rem",
+                        display: "block",
+                      }}
                     >
                       {fmtPrice(o.price, o.currency)}
                     </Typography>
@@ -2269,11 +2401,19 @@ export function ComparateurClient({
                       >
                         <Stack
                           direction="row"
-                          sx={{ justifyContent: "space-between", alignItems: "center", mb: 1 }}
+                          sx={{
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                            mb: 1,
+                          }}
                         >
                           <Box>
                             <Typography
-                              sx={{ fontWeight: 850, fontSize: "0.85rem", lineHeight: 1.2 }}
+                              sx={{
+                                fontWeight: 850,
+                                fontSize: "0.85rem",
+                                lineHeight: 1.2,
+                              }}
                             >
                               {part.name}
                             </Typography>
@@ -2318,7 +2458,11 @@ export function ComparateurClient({
 
                         <Stack
                           direction="row"
-                          sx={{ alignItems: "center", justifyContent: "space-between", gap: 1 }}
+                          sx={{
+                            alignItems: "center",
+                            justifyContent: "space-between",
+                            gap: 1,
+                          }}
                         >
                           <Typography
                             variant="caption"

@@ -1,5 +1,5 @@
 import { db, schema, count, isNotNull } from "@/lib/db";
-import { loadCatalog, computeGroups } from "@/lib/bx-catalog";
+import { loadCatalog, computeGroups, groupSlug } from "@/lib/bx-catalog";
 import type { BxProductGroup } from "@/lib/bx-catalog";
 
 // -------------------------------------------------------------
@@ -524,7 +524,7 @@ export async function getRecommendations(
       key: sg.group.key,
       code: sg.matchedDbProduct?.code ?? sg.group.code ?? null,
       name: sg.group.name,
-      slug: sg.group.slug ?? "",
+      slug: sg.group.slug ?? groupSlug(sg.group),
       cheapestEur: cheapestPrice,
       shopCount: sg.group.shopCount,
       imageUrl: sg.group.cheapest?.image ?? null,
