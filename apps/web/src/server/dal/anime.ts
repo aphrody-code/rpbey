@@ -13,6 +13,7 @@ import {
   lt,
   or,
   schema,
+  sql,
 } from "@/lib/db";
 import type { AnimeEpisodeInput, AnimeEpisodeSourceInput, AnimeSeriesInput } from "@rpbey/types";
 
@@ -475,4 +476,83 @@ export async function saveWatchProgress(
     })
     .returning();
   return row ?? null;
+}
+
+// ---- Frames d'anime (galerie de captures — table `anime_frames`) ----
+
+export interface AnimeFramesFilter {
+  series?: string; // slug de série
+  episode?: number; // numéro d'épisode
+  character?: string; // nom de personnage (tag jsonb)
+  notable?: boolean; // uniquement les moments marquants
+  q?: string; // recherche libre (caption + personnages)
+  limit?: number;
+  cursor?: string; // createdAt ISO (pagination descendante)
+}
+
+/** Galerie de frames filtrée (série/épisode/personnage/marquant/recherche) + pagination curseur. */
+export async function listAnimeFrames(params: AnimeFramesFilter) {
+  const { series, episode, character, notable, q, limit = 40, cursor } = params;
+  const cap = Math.min(100, Math.max(1, limit));
+  const conds = [];
+  if (series) {
+    const s = await db.query.animeSeries.findFirst({
+      where: eq(schema.animeSeries.slug, series),
+      columns: { id: true },
+    });
+    if (!s) return { frames: [], nextCursor: null, total: 0 };
+    conds.push(eq(schema.animeFrames.seriesId, s.id));
+  }
+  if (episode !== undefined) conds.push(eq(schema.animeFrames.episodeNumber, episode));
+  if (notable) conds.push(eq(schema.animeFrames.isNotable, true));
+  // Containment jsonb : la frame est taggée avec ce personnage.
+  if (character)
+    conds.push(sql`${schema.animeFrames.characterNames} @> ${JSON.stringify([character])}::jsonb`);
+  if (q)
+    conds.push(
+      or(
+        ilike(schema.animeFrames.caption, `%${q}%`),
+        sql`${schema.animeFrames.characterNames}::text ILIKE ${`%${q}%`}`,
+      ),
+    );
+  if (cursor) conds.push(lt(schema.animeFrames.createdAt, cursor));
+  const where = conds.length > 0 ? and(...conds) : undefined;
+
+  const [rows, totalRes] = await Promise.all([
+    db
+      .select()
+      .from(schema.animeFrames)
+      .where(where)
+      .orderBy(desc(schema.animeFrames.createdAt))
+      .limit(cap + 1),
+    db.select({ value: count() }).from(schema.animeFrames).where(where),
+  ]);
+  const hasMore = rows.length > cap;
+  const frames = rows.slice(0, cap);
+  return {
+    frames,
+    nextCursor: hasMore ? (frames[frames.length - 1]?.createdAt ?? null) : null,
+    total: totalRes[0]?.value ?? 0,
+  };
+}
+
+/** Frames marquantes + métadonnées série, pour l'index de recherche « Google Images ». */
+export async function listAnimeFramesForIndex(max = 2000) {
+  return db
+    .select({
+      id: schema.animeFrames.id,
+      thumbUrl: schema.animeFrames.thumbUrl,
+      imageUrl: schema.animeFrames.imageUrl,
+      episodeNumber: schema.animeFrames.episodeNumber,
+      characterNames: schema.animeFrames.characterNames,
+      caption: schema.animeFrames.caption,
+      seriesSlug: schema.animeSeries.slug,
+      seriesTitle: schema.animeSeries.title,
+      generation: schema.animeSeries.generation,
+    })
+    .from(schema.animeFrames)
+    .innerJoin(schema.animeSeries, eq(schema.animeFrames.seriesId, schema.animeSeries.id))
+    .where(eq(schema.animeFrames.isNotable, true))
+    .orderBy(desc(schema.animeFrames.createdAt))
+    .limit(max);
 }

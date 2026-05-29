@@ -107,7 +107,7 @@ export type GlobalSearchData = {
     path?: never;
     query?: {
         q?: string;
-        category?: 'product' | 'part' | 'tournament' | 'blader' | 'lexicon' | 'combo' | 'anime' | 'site' | 'page';
+        category?: 'product' | 'part' | 'tournament' | 'blader' | 'lexicon' | 'combo' | 'anime' | 'frame' | 'site' | 'page';
         limit?: number;
     };
     url: '/api/v1/search';
@@ -150,11 +150,12 @@ export type GlobalSearchResponses = {
                 id: string;
                 title: string;
                 subtitle: string;
-                category: 'product' | 'part' | 'tournament' | 'blader' | 'lexicon' | 'combo' | 'anime' | 'site' | 'page';
+                category: 'product' | 'part' | 'tournament' | 'blader' | 'lexicon' | 'combo' | 'anime' | 'frame' | 'site' | 'page';
                 url: string;
                 details?: string;
                 badge?: string;
                 price?: number | null;
+                thumbnail?: string;
                 score?: number;
             }>;
             query?: string;
@@ -1092,6 +1093,87 @@ export type SearchAnimeResponses = {
 };
 
 export type SearchAnimeResponse = SearchAnimeResponses[keyof SearchAnimeResponses];
+
+export type ListAnimeFramesData = {
+    body?: never;
+    path?: never;
+    query?: {
+        series?: string;
+        episode?: number;
+        character?: string;
+        notable?: 'true' | 'false';
+        q?: string;
+        limit?: number;
+        cursor?: string;
+    };
+    url: '/api/v1/anime/frames';
+};
+
+export type ListAnimeFramesErrors = {
+    /**
+     * Erreur de requête ou de validation
+     */
+    '4XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+    /**
+     * Erreur serveur
+     */
+    '5XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+};
+
+export type ListAnimeFramesError = ListAnimeFramesErrors[keyof ListAnimeFramesErrors];
+
+export type ListAnimeFramesResponses = {
+    /**
+     * OK
+     */
+    200: {
+        ok: true;
+        data: {
+            frames: Array<{
+                id: string;
+                seriesId: string;
+                episodeId?: string | null;
+                episodeNumber?: number | null;
+                source: string;
+                sourceId: string;
+                sourceUrl?: string | null;
+                imageUrl: string;
+                thumbUrl?: string | null;
+                width?: number | null;
+                height?: number | null;
+                characterNames: Array<string>;
+                tags: Array<string>;
+                caption?: string | null;
+                isNotable: boolean;
+                sortOrder: number;
+                /**
+                 * ISO 8601 date-time string
+                 */
+                createdAt: string;
+                /**
+                 * ISO 8601 date-time string
+                 */
+                updatedAt: string;
+            }>;
+            nextCursor: string | null;
+            total: number;
+        };
+    };
+};
+
+export type ListAnimeFramesResponse = ListAnimeFramesResponses[keyof ListAnimeFramesResponses];
 
 export type GetAnimeSeriesData = {
     body?: never;

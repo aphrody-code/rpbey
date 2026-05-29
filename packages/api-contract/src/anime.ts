@@ -129,3 +129,51 @@ export const AnimeSearchResponseSchema = z.object({
   ),
 });
 export type AnimeSearchResponse = z.infer<typeof AnimeSearchResponseSchema>;
+
+// ---- Frames (galerie de captures d'anime — table `anime_frames`) ----
+// Source fancaps.net via proxy `cdn.rpbey.fr`. Usages : gacha (cartes persos non
+// dessinés), backgrounds, recherche « Google Images ». Timestamps ISO (mode:"string").
+
+export const AnimeFrameSchema = z.object({
+  id: z.string(),
+  seriesId: z.string(),
+  episodeId: z.string().nullish(),
+  episodeNumber: z.number().int().nullish(),
+  source: z.string(),
+  sourceId: z.string(),
+  sourceUrl: z.string().nullish(),
+  imageUrl: z.string(),
+  thumbUrl: z.string().nullish(),
+  width: z.number().int().nullish(),
+  height: z.number().int().nullish(),
+  characterNames: z.array(z.string()),
+  tags: z.array(z.string()),
+  caption: z.string().nullish(),
+  isNotable: z.boolean(),
+  sortOrder: z.number().int(),
+  createdAt: IsoDateSchema,
+  updatedAt: IsoDateSchema,
+});
+export type AnimeFrameContract = z.infer<typeof AnimeFrameSchema>;
+
+/** Filtres galerie : par série (slug), épisode, personnage, « marquant », recherche libre. */
+export const AnimeFramesQuerySchema = z.object({
+  series: z.string().optional(),
+  episode: z.coerce.number().int().optional(),
+  character: z.string().optional(),
+  notable: z
+    .enum(["true", "false"])
+    .optional()
+    .transform((v) => v === "true"),
+  q: z.string().optional(),
+  limit: z.coerce.number().int().min(1).max(100).optional(),
+  cursor: z.string().optional(),
+});
+export type AnimeFramesQuery = z.infer<typeof AnimeFramesQuerySchema>;
+
+export const AnimeFramesResponseSchema = z.object({
+  frames: z.array(AnimeFrameSchema),
+  nextCursor: z.string().nullable(),
+  total: z.number().int(),
+});
+export type AnimeFramesResponse = z.infer<typeof AnimeFramesResponseSchema>;

@@ -20,6 +20,8 @@ import {
 } from "./tournaments";
 import { StreamListResponseSchema, StreamQuerySchema } from "./stream";
 import {
+  AnimeFramesQuerySchema,
+  AnimeFramesResponseSchema,
   AnimeListQuerySchema,
   AnimeSearchQuerySchema,
   AnimeSearchResponseSchema,
@@ -218,6 +220,16 @@ const ROUTES: RouteDef[] = [
     tags: ["anime"],
     query: AnimeSearchQuerySchema,
     response: AnimeSearchResponseSchema,
+  },
+  {
+    method: "get",
+    path: "/anime/frames",
+    operationId: "listAnimeFrames",
+    summary:
+      "Galerie publique de frames d'anime (captures), filtrable par série, épisode, personnage, « marquant » ou recherche libre. Pagination par curseur.",
+    tags: ["anime"],
+    query: AnimeFramesQuerySchema,
+    response: AnimeFramesResponseSchema,
   },
   {
     method: "get",

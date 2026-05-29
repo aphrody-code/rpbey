@@ -91,6 +91,7 @@ export const SearchCategorySchema = z.enum([
   "lexicon",
   "combo",
   "anime",
+  "frame",
   "site",
   "page",
 ]);
@@ -105,6 +106,8 @@ export const GlobalSearchItemSchema = z.object({
   details: z.string().optional(),
   badge: z.string().optional(),
   price: z.number().nullable().optional(),
+  /** Vignette image (résultats visuels « Google Images » : frames d'anime, etc.). */
+  thumbnail: z.string().optional(),
   /** Score de pertinence (présent uniquement sur une réponse triée par requête). */
   score: z.number().optional(),
 });

@@ -6,6 +6,7 @@ import {
   listGachaCards,
   listGachaDrops,
 } from "@/server/dal/gacha";
+import { listAnimeFrames } from "@/server/dal/anime";
 import type { CardRarity } from "@/lib/types";
 
 /**
@@ -277,4 +278,26 @@ export function gqlGachaLeaderboard(limit: number) {
 /** Profil gacha public d'un joueur (currency, streak, duels, nb de cartes). */
 export function gqlGachaProfile(userId: string) {
   return getGachaProfile(userId);
+}
+
+// ── Anime frames (galerie de captures) ───────────────────────────────────────
+
+/** Galerie de frames d'anime filtrée (réutilise le puits DAL anime). */
+export async function gqlAnimeFrames(args: {
+  series?: string;
+  episode?: number;
+  character?: string;
+  notable?: boolean;
+  q?: string;
+  limit: number;
+}) {
+  const { frames } = await listAnimeFrames({
+    series: args.series,
+    episode: args.episode,
+    character: args.character,
+    notable: args.notable,
+    q: args.q,
+    limit: Math.min(args.limit, 100),
+  });
+  return frames;
 }

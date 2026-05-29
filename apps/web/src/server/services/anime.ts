@@ -5,7 +5,13 @@ import {
   listAnimeSeriesByGeneration as sdkListAnimeSeriesByGeneration,
 } from "@rpbey/api-client";
 import { isRemote, unwrap } from "@/server/data-source";
-import { getSeriesBySlug, listFeaturedSeries, listSeriesByGeneration } from "@/server/dal/anime";
+import {
+  type AnimeFramesFilter,
+  getSeriesBySlug,
+  listAnimeFrames,
+  listFeaturedSeries,
+  listSeriesByGeneration,
+} from "@/server/dal/anime";
 
 /**
  * Service anime — orchestration DAL ↔ SDK derrière le seam `isRemote`.
@@ -64,4 +70,14 @@ export async function getSeriesDetail(slug: string): Promise<SeriesDetail> {
     return (series ?? null) as unknown as SeriesDetail;
   }
   return getSeriesBySlug(slug);
+}
+
+/**
+ * Galerie de frames d'anime (captures fancaps re-hébergées en PNG lossless),
+ * filtrable série/épisode/personnage/marquant. Sert la galerie « Google Images »
+ * + le gacha. Co-localisé : DAL `listAnimeFrames`. La branche SDK
+ * (`/api/v1/anime/frames`) sera branchée après `bun run gen:api`.
+ */
+export async function getAnimeFrames(filter: AnimeFramesFilter) {
+  return listAnimeFrames(filter);
 }

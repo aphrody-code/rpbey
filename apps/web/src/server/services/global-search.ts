@@ -5,6 +5,7 @@ import { loadCatalog, computeGroups, groupSlug } from "@/lib/bx-catalog";
 import { loadJsonSafe } from "@/lib/data-cache";
 import { isRemote, unwrap } from "@/server/data-source";
 import { listAnimeSeries, listParts, listRankings, listTournaments } from "@/server/dal/search";
+import { listAnimeFramesForIndex } from "@/server/dal/anime";
 
 /**
  * Service de recherche globale — assemble l'index `GlobalSearchItem[]`
@@ -396,6 +397,22 @@ export async function buildGlobalSearchIndex(): Promise<GlobalSearchItem[]> {
       url: ch.url || `/search?q=${encodeURIComponent(title)}`,
       details: ch.summary?.trim() || "Personnage de l'univers Beyblade",
       badge: "Personnage",
+    });
+  }
+
+  // 12. Frames d'anime (galerie « Google Images ») — moments marquants taggés perso/épisode/saison.
+  const frames = await listAnimeFramesForIndex(2000);
+  for (const f of frames) {
+    const chars = f.characterNames.join(", ");
+    items.push({
+      id: `frame-${f.id}`,
+      title: chars || `${f.seriesTitle} — Ép. ${f.episodeNumber ?? "?"}`,
+      subtitle: `${f.seriesTitle}${f.episodeNumber ? ` · Épisode ${f.episodeNumber}` : ""}`,
+      category: "frame",
+      url: f.imageUrl,
+      thumbnail: f.thumbUrl ?? f.imageUrl,
+      details: [f.caption?.trim(), chars, f.generation].filter(Boolean).join(" · ") || undefined,
+      badge: "Frame",
     });
   }
 

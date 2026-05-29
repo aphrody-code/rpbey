@@ -353,6 +353,7 @@ const CATEGORY_BOOST: Record<string, number> = {
   tournament: 1.0,
   combo: 1.05,
   anime: 0.95,
+  frame: 0.9,
   lexicon: 0.85,
   site: 0.8,
   page: 0.75,

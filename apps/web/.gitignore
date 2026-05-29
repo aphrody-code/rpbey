@@ -86,3 +86,6 @@ bey-library-mirror/
 
 # Spec OpenAPI émis (dérivé du contrat Zod, régénéré par gen:api)
 openapi.json
+
+# Frames d'anime scrapées (régénérables via scrape-anime-frames.ts ; la DB porte la vérité)
+data/anime-frames/

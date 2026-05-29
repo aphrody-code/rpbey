@@ -57,3 +57,44 @@ export const WboComboSchema = z.object({
   tier: z.enum(["S", "A", "B", "C"]).nullish(),
 });
 export type WboCombo = z.infer<typeof WboComboSchema>;
+
+// ── Frame d'anime (→ table `anime_frames` @rpbey/db). ──
+// Miroir exact des colonnes : seriesId/episodeId résolus à l'import (le scraper
+// ne connaît que le slug + episodeNumber), source figée à "fancaps", sourceId =
+// id image fancaps, imageUrl/thumbUrl = URLs CDN proxifiées (cdn.rpbey.fr).
+export const AnimeFrameImportSchema = z.object({
+  source: z.literal("fancaps"),
+  sourceId: z.string().min(1),
+  sourceUrl: z.url().nullish(),
+  episodeNumber: z.number().int().positive().nullish(),
+  imageUrl: z.url(),
+  thumbUrl: z.url().nullish(),
+  width: z.number().int().positive().nullish(),
+  height: z.number().int().positive().nullish(),
+  characterNames: z.array(z.string()),
+  tags: z.array(z.string()),
+  caption: z.string().nullish(),
+  isNotable: z.boolean(),
+  sortOrder: z.number().int().nonnegative(),
+});
+export type AnimeFrameImport = z.infer<typeof AnimeFrameImportSchema>;
+
+// ── Episode listé sur fancaps (numéro + id galerie + URL). ──
+export const FancapsEpisodeSchema = z.object({
+  number: z.number().int().positive(),
+  fancapsId: z.string().min(1),
+  url: z.url(),
+  title: z.string().nullish(),
+});
+export type FancapsEpisode = z.infer<typeof FancapsEpisodeSchema>;
+
+// ── Mapping perso → épisodes marquants (sortie map-character-episodes). ──
+// notableEpisodes = début (AppearAnime) ∪ épisodes de combat (Featured Battles).
+// battleEpisodes  = sous-ensemble "combat" — signal le plus fort (isNotable au merge).
+export const CharacterEpisodeMapSchema = z.object({
+  notableEpisodes: z.array(z.number().int().positive()),
+  battleEpisodes: z.array(z.number().int().positive()).default([]),
+  debutEpisode: z.number().int().positive().nullish(),
+  role: z.string().nullish(),
+});
+export type CharacterEpisodeMap = z.infer<typeof CharacterEpisodeMapSchema>;

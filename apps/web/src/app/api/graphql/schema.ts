@@ -6,6 +6,7 @@ import {
   getProfileByUserId,
   getSeasonBySlug,
   getTournamentById,
+  gqlAnimeFrames,
   gqlGachaCards,
   gqlGachaDrops,
   gqlGachaLeaderboard,
@@ -188,6 +189,22 @@ export const schema = createSchema({
       episodeCount: Int!
     }
 
+    # Frame / capture d'anime (galerie « Google Images »).
+    type AnimeFrame {
+      id: ID!
+      seriesId: ID!
+      episodeNumber: Int
+      imageUrl: String!
+      thumbUrl: String
+      sourceUrl: String
+      width: Int
+      height: Int
+      characterNames: [String!]!
+      tags: [String!]!
+      caption: String
+      isNotable: Boolean!
+    }
+
     # ── Gacha ────────────────────────────────────────
 
     enum GachaRarity {
@@ -328,6 +345,18 @@ export const schema = createSchema({
       animeSeries: [AnimeSeries!]!
 
       """
+      Anime frame gallery (screencaps), filterable by series slug / episode / character / notable / free text
+      """
+      animeFrames(
+        series: String
+        episode: Int
+        character: String
+        notable: Boolean
+        q: String
+        limit: Int = 60
+      ): [AnimeFrame!]!
+
+      """
       Public gacha card catalogue (active cards), filterable by rarity / drop / series / search
       """
       gachaCards(
@@ -397,6 +426,18 @@ export const schema = createSchema({
       profile: (_: unknown, { userId }: { userId: string }) => getProfileByUserId(userId),
 
       animeSeries: () => listPublishedAnimeSeries(),
+
+      animeFrames: (
+        _: unknown,
+        args: {
+          series?: string;
+          episode?: number;
+          character?: string;
+          notable?: boolean;
+          q?: string;
+          limit: number;
+        },
+      ) => gqlAnimeFrames(args),
 
       gachaCards: (
         _: unknown,

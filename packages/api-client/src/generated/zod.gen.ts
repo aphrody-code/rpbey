@@ -81,6 +81,7 @@ export const zGlobalSearchQuery = z.object({
         'lexicon',
         'combo',
         'anime',
+        'frame',
         'site',
         'page'
     ]).optional(),
@@ -106,6 +107,7 @@ export const zGlobalSearchResponse = z.object({
                 'lexicon',
                 'combo',
                 'anime',
+                'frame',
                 'site',
                 'page'
             ]),
@@ -113,6 +115,7 @@ export const zGlobalSearchResponse = z.object({
             details: z.string().optional(),
             badge: z.string().optional(),
             price: z.number().nullish(),
+            thumbnail: z.string().optional(),
             score: z.number().optional()
         })),
         query: z.string().optional(),
@@ -702,6 +705,47 @@ export const zSearchAnimeResponse = z.object({
                 title: z.string()
             })
         }))
+    })
+});
+
+export const zListAnimeFramesQuery = z.object({
+    series: z.string().optional(),
+    episode: z.int().gte(-9007199254740991).lte(9007199254740991).optional(),
+    character: z.string().optional(),
+    notable: z.enum(['true', 'false']).optional(),
+    q: z.string().optional(),
+    limit: z.int().gte(1).lte(100).optional(),
+    cursor: z.string().optional()
+});
+
+/**
+ * OK
+ */
+export const zListAnimeFramesResponse = z.object({
+    ok: z.literal(true),
+    data: z.object({
+        frames: z.array(z.object({
+            id: z.string(),
+            seriesId: z.string(),
+            episodeId: z.string().nullish(),
+            episodeNumber: z.int().gte(-9007199254740991).lte(9007199254740991).nullish(),
+            source: z.string(),
+            sourceId: z.string(),
+            sourceUrl: z.string().nullish(),
+            imageUrl: z.string(),
+            thumbUrl: z.string().nullish(),
+            width: z.int().gte(-9007199254740991).lte(9007199254740991).nullish(),
+            height: z.int().gte(-9007199254740991).lte(9007199254740991).nullish(),
+            characterNames: z.array(z.string()),
+            tags: z.array(z.string()),
+            caption: z.string().nullish(),
+            isNotable: z.boolean(),
+            sortOrder: z.int().gte(-9007199254740991).lte(9007199254740991),
+            createdAt: z.string(),
+            updatedAt: z.string()
+        })),
+        nextCursor: z.string().nullable(),
+        total: z.int().gte(-9007199254740991).lte(9007199254740991)
     })
 });
 
