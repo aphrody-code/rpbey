@@ -9,8 +9,8 @@ import { ACCENT, BG_DEEP, BORDER, GRADIENT_AI, ON_GRADIENT, TEXT_SECONDARY } fro
 const TABS: { label: string; value: SearchCategory | "all" | "ai" }[] = [
   { label: "Mode IA", value: "ai" },
   { label: "Tous", value: "all" },
-  { label: "Boutiques", value: "product" },
-  { label: "Pieces", value: "part" },
+  { label: "Beys", value: "product" },
+  { label: "Parts", value: "part" },
   { label: "Combos", value: "combo" },
   { label: "Tournois", value: "tournament" },
   { label: "Bladers", value: "blader" },
