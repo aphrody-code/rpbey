@@ -1,3 +1,18 @@
+---
+title: "Gacha — Couche web (`apps/web`, Next.js `:3002`)"
+description: "Routes API gacha Next.js (legacy + v1), DAL Drizzle, service, server actions et pages dashboard."
+scope:
+  - apps/web
+status: "stable"
+last_updated: "2026-05-29"
+related_symbols:
+  - executeCardPullTx
+  - claimDailyTx
+  - getApiUser
+  - GachaCardsResponse
+  - server/dal/gacha.ts
+---
+
 # Gacha — Couche web (`apps/web`, Next.js `:3002`)
 
 Dashboard + API mobile. Accès DB direct via **Drizzle DAL** (`server/dal/gacha.ts`, server-only). Deux familles de routes :

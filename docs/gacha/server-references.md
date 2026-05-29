@@ -1,3 +1,16 @@
+---
+title: "Gacha server — références (Colyseus / Discord Activity)"
+description: "Liens de référence Colyseus 0.17, Discord Activity template, PixiJS et notes d'intégration réseau."
+scope:
+  - apps/gacha-server
+status: "stable"
+last_updated: "2026-05-29"
+related_symbols:
+  - GachaRoom
+  - BunWebSockets
+  - configureCors
+---
+
 # Gacha server — références (Colyseus / Discord Activity)
 
 Le serveur de jeu gacha (`apps/gacha-server`, REST + temps réel `:5050`) et son client Discord Activity sont bâtis sur **Colyseus 0.17** (transport **Bun**) + **PixiJS** (rendu client). Liens de référence rassemblés ci-dessous.

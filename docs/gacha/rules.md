@@ -1,3 +1,18 @@
+---
+title: "Gacha — Règles & mécaniques"
+description: "Raretés, coûts, pity, daily/streak, duel, économie/dette, badges, fusion et roster bannière 1."
+scope:
+  - apps/gacha-server
+  - apps/web
+status: "stable"
+last_updated: "2026-05-29"
+related_symbols:
+  - cardRarity
+  - PULL_COST
+  - pityCount
+  - duelRating
+---
+
 # Gacha — Règles & mécaniques
 
 Mécaniques de jeu, valeurs d'équilibre, et roster de la bannière 1. Les valeurs **divergent entre les surfaces** (web `:3002` vs serveur `:5050`) — voir colonnes.

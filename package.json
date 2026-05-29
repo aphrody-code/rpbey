@@ -54,9 +54,13 @@
     "e2e": "CHROME=/usr/local/bin/chromium bun scripts/e2e.ts",
     "type-check": "turbo run type-check",
     "test": "turbo run test",
+    "docs": "bun scripts/docs.ts map --write && bun scripts/docs.ts index --write && bun scripts/docs.ts fmt --write && bun scripts/docs.ts check",
     "docs:check": "bun scripts/docs.ts check",
     "docs:fmt": "bun scripts/docs.ts fmt --write",
     "docs:index": "bun scripts/docs.ts index --write",
+    "docs:map": "bun scripts/docs.ts map --write",
+    "docs:list": "bun scripts/docs.ts list",
+    "prepare": "git config core.hooksPath .githooks 2>/dev/null || true",
     "clean": "rm -rf node_modules apps/*/node_modules packages/*/node_modules .turbo apps/*/.turbo packages/*/.turbo"
   },
   "devDependencies": {

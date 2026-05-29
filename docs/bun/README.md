@@ -1,3 +1,17 @@
+---
+title: "Bun — doc vendorée (knowledge base monorepo rpbey)"
+description: "Documentation vendorée du runtime Bun 1.3.x utilisé par tout le monorepo rpbey."
+scope:
+  - bunfig.toml
+status: "stable"
+last_updated: "2026-05-29"
+related_symbols:
+  - Bun.serve
+  - Bun.RedisClient
+  - Bun.Glob
+  - bun:ffi
+---
+
 # Bun — doc vendorée (knowledge base monorepo rpbey)
 
 Doc complète Bun récupérée le **2026-05-26**. Cible runtime : **Bun 1.3.x** (upgrade depuis 1.2.20).

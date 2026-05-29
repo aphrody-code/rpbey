@@ -1,3 +1,18 @@
+---
+title: "Gacha — Pipeline d'assets (catalogue)"
+description: "Chaîne Bun-native scrape→optim→classif→montage→publication Discord pour le catalogue de cartes gacha."
+scope:
+  - apps/bot
+  - apps/web
+status: "stable"
+last_updated: "2026-05-29"
+related_symbols:
+  - scrape-channel.ts
+  - build-gacha-json.ts
+  - render-cards.ts
+  - post-gacha.ts
+---
+
 # Gacha — Pipeline d'assets (catalogue)
 
 Chaîne d'outils pour construire le **catalogue des cartes** à partir du salon WIP Discord des artistes : scrape → optimisation → classification → montage sur le template → publication forum. 100 % Bun natif, dans `apps/bot/scripts/`. Données produites sous `apps/bot/data/scrape/<channelId>/` (**gitignored**).

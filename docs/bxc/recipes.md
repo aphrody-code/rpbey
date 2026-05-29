@@ -1,3 +1,16 @@
+---
+title: "bxc — Recettes"
+description: "Recettes pratiques bxc testées sur le VPS : Challonge TLS, checkpoint Vercel, SPA, miroir."
+scope:
+  - packages/challonge
+  - scripts
+status: "stable"
+last_updated: "2026-05-29"
+related_symbols:
+  - Browser.newPage
+  - bxc-engine
+---
+
 # bxc — Recettes
 
 Commandes testées sur ce VPS. Toutes sous **bun**.

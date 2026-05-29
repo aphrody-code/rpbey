@@ -1,3 +1,18 @@
+---
+title: "Gacha — Bot Discord (client du serveur `:5050`)"
+description: "Client gacha du bot Discord : authentification Bearer, endpoints appelés, commandes /gacha /duel /jeu."
+scope:
+  - apps/bot
+status: "stable"
+last_updated: "2026-05-29"
+related_symbols:
+  - gacha-api.ts
+  - gacha-images.ts
+  - EconomyGroup.ts
+  - DuelCommand.ts
+  - ensureGachaSession
+---
+
 # Gacha — Bot Discord (client du serveur `:5050`)
 
 Le bot (`apps/bot`, discordx + tsyringe) expose les commandes joueur. Pour le gacha « riche » (tirage, vente, fusion, badges) il est **client du serveur de jeu `:5050`** (`apps/gacha-server`, dans le monorepo — voir [server.md](./server.md)). Pour le reste (parier, donner, duel rapide, dette) il tape la DB en direct via la **façade Prisma**.

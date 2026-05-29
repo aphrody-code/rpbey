@@ -1,3 +1,17 @@
+---
+title: "bxc — API TypeScript"
+description: "Référence de l'API TypeScript bxc : Browser.newPage, Page, profil ghost et interop Puppeteer."
+scope:
+  - packages/challonge
+status: "stable"
+last_updated: "2026-05-29"
+related_symbols:
+  - Browser.newPage
+  - ImpersonatedClient
+  - launchGhostBrowser
+  - HttpPage
+---
+
 # bxc — API TypeScript
 
 Import : `@aphrody-code/bxc` (publié sur GitHub Packages) ou depuis la source

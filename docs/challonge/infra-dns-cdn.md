@@ -1,3 +1,16 @@
+---
+title: "Challonge — Infrastructure / DNS / CDN"
+description: "DNS, IPs Cloudflare, sous-domaines, TLS, posture bot-management et impact sur le scraper curl-impersonate."
+scope:
+  - packages/challonge
+status: "stable"
+last_updated: "2026-05-29"
+related_symbols:
+  - BxcTransport
+  - hasCfClearance
+  - isSessionCookieValid
+---
+
 # Challonge — Infrastructure / DNS / CDN
 
 Probé live le 2026-05-29 (`dig`, `host`, `curl`, `curl_chrome131`, `bxc detect`).

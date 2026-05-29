@@ -1,3 +1,17 @@
+---
+title: "Audit complet — rpbey.fr (apps/web)"
+description: "Rapport d'audit Chromium prod rpbey.fr (27 routes, desktop + mobile) du 2026-05-28 avec top 10 problèmes prioritaires."
+scope:
+  - apps/web
+status: "stable"
+last_updated: "2026-05-29"
+related_symbols:
+  - /comparateur/[slug]
+  - /parts
+  - /rankings
+  - /api/avatar
+---
+
 # Audit complet — rpbey.fr (apps/web)
 
 **Date** : 2026-05-28 · **Cible** : `https://rpbey.fr` (prod) · **Méthode** : Chromium réel (Puppeteer), desktop 1440x900 + mobile 390x844, `fullPage`, ~1.5 s d'hydratation. Capture du status HTTP, console (`error`), `pageerror`, requêtes échouées/≥400, images cassées (`naturalWidth===0`).

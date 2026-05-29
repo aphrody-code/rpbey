@@ -1,3 +1,18 @@
+---
+title: "bxc — Serveur MCP"
+description: "Serveur MCP stdio bxc-native-mcp : installation, 6 outils exposés et cas d'usage agent."
+scope:
+  - packages/challonge
+status: "stable"
+last_updated: "2026-05-29"
+related_symbols:
+  - bxc_scrape_markdown
+  - bxc_search
+  - bxc_cdp_evaluate
+  - bxc_detect_frameworks
+  - bxc_google_fetch
+---
+
 # bxc — Serveur MCP
 
 Serveur stdio JSON-RPC (`/home/ubuntu/bxc/src/mcp/server.ts`, nom `bxc-native-mcp`)

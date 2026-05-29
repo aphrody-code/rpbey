@@ -1,3 +1,17 @@
+---
+title: "Challonge — Types de page, stores & sélecteurs CSS"
+description: "Par type de page : url pattern, statut CF live, stores _initialStoreState, sélecteurs CSS exacts et données extractables."
+scope:
+  - packages/challonge
+status: "stable"
+last_updated: "2026-05-29"
+related_symbols:
+  - ChallongeScraper
+  - parseStandingsTable
+  - _initialStoreState
+  - extractStore
+---
+
 # Challonge — Types de page, stores & sélecteurs CSS
 
 Pour chaque type de page : url pattern, statut live, stores `_initialStoreState`,

@@ -1,3 +1,18 @@
+---
+title: "Drizzle — doc vendorée (knowledge base refactor rpbey)"
+description: "Documentation vendorée de Drizzle ORM 0.45.2 et drizzle-kit 0.31.10 pour le schéma partagé rpbey."
+scope:
+  - packages/db
+status: "stable"
+last_updated: "2026-05-29"
+related_symbols:
+  - drizzle()
+  - pgEnum
+  - relations
+  - $defaultFn
+  - $onUpdate
+---
+
 # Drizzle — doc vendorée (knowledge base refactor rpbey)
 
 Doc complète Drizzle récupérée le **2026-05-26** pour le refactor monorepo `rpbey`.

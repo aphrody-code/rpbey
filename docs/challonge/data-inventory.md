@@ -1,3 +1,17 @@
+---
+title: "Challonge — Inventaire des données (extrait vs manquant)"
+description: "Mapping fixtures vs données déjà extraites par ScrapedTournament, et gaps à combler dans le module scraper."
+scope:
+  - packages/challonge
+status: "stable"
+last_updated: "2026-05-29"
+related_symbols:
+  - ScrapedTournament
+  - ChallongeScraper
+  - ChallongeApi
+  - parseBracketSvg
+---
+
 # Challonge — Inventaire des données (extrait vs manquant)
 
 Ce qu'on extrait déjà, sous quelle forme, et ce qui manque pour étendre le module.

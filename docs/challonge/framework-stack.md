@@ -1,3 +1,15 @@
+---
+title: "Challonge — Stack applicative & signatures de détection"
+description: "Ruby on Rails, react-rails, asset pipeline dual, Faye, analytics et signatures CSS/HTML de détection pour le scraper."
+scope:
+  - packages/challonge
+status: "stable"
+last_updated: "2026-05-29"
+related_symbols:
+  - _initialStoreState
+  - parseInitialStoreState
+---
+
 # Challonge — Stack applicative & signatures de détection
 
 Confirmé via fixtures (ground truth) + recon live. challonge.com = **Ruby on Rails**

@@ -1,3 +1,17 @@
+---
+title: "Challonge — Cartographie des routes & API"
+description: "Table exhaustive des endpoints Challonge : REST v1, v2.1 OAuth JSON:API, routes SSR internes et GraphQL interne."
+scope:
+  - packages/challonge
+status: "stable"
+last_updated: "2026-05-29"
+related_symbols:
+  - ChallongeApi
+  - ChallongeApiTournament
+  - ChallongeApiMatch
+  - getChallongeClient
+---
+
 # Challonge — Cartographie des routes & API
 
 Quatre couches : (1) REST v1 read-only, (2) REST v2.1 read+write OAuth JSON:API,

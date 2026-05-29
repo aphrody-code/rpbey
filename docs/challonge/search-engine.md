@@ -1,3 +1,15 @@
+---
+title: "Challonge — Moteur de recherche / découverte de tournois"
+description: "Endpoints de recherche et découverte de tournois Challonge : XHR tournaments.json, games.json, filtres game_id et gating CF."
+scope:
+  - packages/challonge
+status: "stable"
+last_updated: "2026-05-29"
+related_symbols:
+  - ChallongeApi
+  - findGameByName
+---
+
 # Challonge — Moteur de recherche / découverte de tournois
 
 La recherche/découverte globale est la surface **la plus CF-gatée** de challonge.com.

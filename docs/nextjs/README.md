@@ -1,3 +1,16 @@
+---
+title: "Next.js — doc vendorée (knowledge base monorepo rpbey)"
+description: "Documentation vendorée de Next.js 16.2.6 App Router pour le dashboard rpbey déployé en standalone VPS."
+scope:
+  - apps/web
+status: "stable"
+last_updated: "2026-05-29"
+related_symbols:
+  - next/config
+  - transpilePackages
+  - serverExternalPackages
+---
+
 # Next.js — doc vendorée (knowledge base monorepo rpbey)
 
 Doc complète Next.js récupérée le **2026-05-27** depuis `nextjs.org/docs/llms-full.txt`.

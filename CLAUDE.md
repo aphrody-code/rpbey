@@ -25,7 +25,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 | Format / check         | `bun run format` (oxfmt) · `bun run format:check`                             |
 | Test                   | `bun run test` (turbo)                                                        |
 | E2E (chromium réel)    | `bun run e2e` (== `CHROME=/usr/local/bin/chromium bun scripts/e2e.ts`)        |
-| Docs (sync/format)     | `bun run docs:check` · `docs:fmt` · `docs:index` (outil Bun-natif `scripts/docs.ts`) |
+| Docs (sync/format)     | `bun run docs` (umbrella : map+index+fmt+check) · `docs:check` · `docs:map` · `docs:index` · `docs:fmt` (outil Bun-natif `scripts/docs.ts`) |
+
+> Doc structurée : tout fichier sous `docs/` porte un **frontmatter Zod-typé obligatoire** (`title/description/scope/status/last_updated`) ; `docs/README.md` (index) et `docs/REPO_MAP.md` (cartographie) sont **générés**, ne pas les éditer. Le hook `.githooks/pre-commit` régénère + vérifie à chaque commit. Convention complète → **`docs/documentation-system.md`**.
 
 **Lint = oxlint** (`.oxlintrc.json`) **+ oxfmt** (`.oxfmtrc.json`) **uniquement** (ESLint totalement retiré de web+bot le 2026-05-29 ; `apps/web` `bun run lint` = `oxlint . && bun scripts/check-dal-boundary.ts`). **Indentation TS/TSX = 2 espaces** (défaut oxfmt — le `.oxfmtrc` n'override pas). ⚠️ Un hook d'éditeur **re-tabule** les fichiers après chaque `Edit` (tabs **non**-canoniques, rejetés par `oxfmt --check`) : lancer `bunx oxfmt <fichiers>` puis `bunx oxfmt --check` avant tout commit (c'est le gate). Bun ≥ 1.3 requis (`Bun.cron`). Linker `hoisted` dans `bunfig.toml` (le défaut `isolated` casse les bundlers Next.js).
 

@@ -1,3 +1,18 @@
+---
+title: "Challonge.com — cartographie pour le scraper rpbey"
+description: "Vue d'ensemble factuelle de challonge.com — stack, routes, accès API et scraper — pour le module @rose-griffon/challonge."
+scope:
+  - packages/challonge
+status: "stable"
+last_updated: "2026-05-29"
+related_symbols:
+  - ChallongeScraper
+  - ChallongeApi
+  - ChallongeReverse
+  - BxcTransport
+  - _initialStoreState
+---
+
 # Challonge.com — cartographie pour le scraper rpbey
 
 Documentation factuelle de challonge.com du point de vue du module de scraping

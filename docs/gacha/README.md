@@ -1,3 +1,19 @@
+---
+title: "Système Gacha — RPBey"
+description: "Documentation canonique du gacha TCG Beyblade : trois surfaces web, bot, serveur sur une DB partagée."
+scope:
+  - apps/gacha-server
+  - apps/web
+status: "stable"
+last_updated: "2026-05-29"
+related_symbols:
+  - gacha_cards
+  - card_inventory
+  - currency_transactions
+  - GachaRoom
+  - gacha-api.ts
+---
+
 # Système Gacha — RPBey
 
 Documentation canonique et complète du **gacha TCG Beyblade** de la République Populaire du Beyblade.

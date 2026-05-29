@@ -1,3 +1,17 @@
+---
+title: "bxc — moteur de navigation « Zero-Spawn » pour agents"
+description: "Présentation du toolchain bxc : profils, CLI, pièges bxc-engine et intégration rpbey."
+scope:
+  - packages/challonge
+status: "stable"
+last_updated: "2026-05-29"
+related_symbols:
+  - Browser.newPage
+  - ImpersonatedClient
+  - bxc-engine
+  - launchGhostBrowser
+---
+
 # bxc — moteur de navigation « Zero-Spawn » pour agents
 
 > Doc interne rpbey. Source : `/home/ubuntu/bxc` (repo `aphrody-code/bxc`,

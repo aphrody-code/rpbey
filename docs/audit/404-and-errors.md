@@ -1,3 +1,16 @@
+---
+title: "404 / 500 / erreurs console / images cassées — consolidé"
+description: "Détail des erreurs réseau (404, 500, ORB, 429) relevées lors de l'audit prod rpbey.fr du 2026-05-28."
+scope:
+  - apps/web
+status: "stable"
+last_updated: "2026-05-29"
+related_symbols:
+  - /api/auth/get-session
+  - /comparateur/[slug]
+  - /api/image
+---
+
 # 404 / 500 / erreurs console / images cassées — consolidé
 
 Audit prod `https://rpbey.fr` du **2026-05-28** (Chromium réel, viewport desktop 1440x900 + mobile 390x844, ~1.5 s d'hydratation). Données brutes : `docs/audit/results.json`.

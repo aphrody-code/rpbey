@@ -1,3 +1,18 @@
+---
+title: "Serveur gacha `:5050` — `apps/gacha-server` (Colyseus / Bun)"
+description: "Serveur de jeu gacha Colyseus/Bun : REST économie, salle temps réel, CORS, déploiement systemd/nginx."
+scope:
+  - apps/gacha-server
+status: "stable"
+last_updated: "2026-05-29"
+related_symbols:
+  - GachaRoom
+  - mountRest
+  - configureCors
+  - rpbey-gacha.service
+  - handlers.ts
+---
+
 # Serveur gacha `:5050` — `apps/gacha-server` (Colyseus / Bun)
 
 Serveur de jeu gacha : **REST économie** (consommée par le bot) + **temps réel** (Discord Activity). Recréé dans le monorepo (`apps/gacha-server`) depuis le contrat client `apps/bot/src/lib/gacha-api.ts`. Bâti sur **Colyseus 0.17** (transport `BunWebSockets`), backé par la DB partagée `@rpbey/db`.

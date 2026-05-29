@@ -1,3 +1,19 @@
+---
+title: "Gacha — Base de données"
+description: "Tables gacha dans @rpbey/db : schéma, enums, invariant timestamp mode string vs date."
+scope:
+  - packages/db
+  - apps/gacha-server
+status: "stable"
+last_updated: "2026-05-29"
+related_symbols:
+  - gacha_cards
+  - card_inventory
+  - currency_transactions
+  - cardRarity
+  - transactionType
+---
+
 # Gacha — Base de données
 
 Toutes les tables vivent dans **`@rpbey/db`** (`packages/db/src/schema.ts` + `relations.ts`), Postgres `rpb_neon`. Source de vérité unique du schéma : toute évolution passe par ce package.

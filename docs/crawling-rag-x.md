@@ -1,3 +1,16 @@
+---
+title: "Guide de Crawling & RAG X.com (Twitter)"
+description: "Système de crawling autonome et RAG Gemini sur les discussions métagame Beyblade X depuis x.com."
+scope:
+  - scripts
+status: "draft"
+last_updated: "2026-05-29"
+related_symbols:
+  - BeybladeXRag
+  - XSession
+  - XClient
+---
+
 # Guide de Crawling & RAG X.com (Twitter)
 
 Ce document décrit le fonctionnement et la structure du système de crawling autonome et de RAG (Retrieval-Augmented Generation) pour extraire, stocker et exploiter les discussions stratégiques Beyblade X depuis x.com.

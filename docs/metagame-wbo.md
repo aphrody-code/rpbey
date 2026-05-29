@@ -1,3 +1,17 @@
+---
+title: "Métagame WBO — extraction & données consommées par rpbey"
+description: "Pipeline d'extraction des classements et du métagame WBO (Wayback Machine) consommé par le dashboard rpbey."
+scope:
+  - apps/web/data
+  - apps/web/src/server/services/global-search.ts
+status: "stable"
+last_updated: "2026-05-29"
+related_symbols:
+  - wbo-combos.json
+  - wbo-meta.json
+  - refresh_combos_wayback.ts
+---
+
 # Métagame WBO — extraction & données consommées par rpbey
 
 Ce document décrit la chaîne d'extraction des classements (*rankings*) et du

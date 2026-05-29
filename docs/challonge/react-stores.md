@@ -1,3 +1,18 @@
+---
+title: "Challonge — Stores `window._initialStoreState`"
+description: "Inventaire de chaque store Flux Challonge : clé, shape, sérialisation JS-literal vs JSON et parsers disponibles."
+scope:
+  - packages/challonge
+status: "stable"
+last_updated: "2026-05-29"
+related_symbols:
+  - _initialStoreState
+  - parseStoreState
+  - extractInitialStoreState
+  - TournamentStore
+  - LogEntryListStore
+---
+
 # Challonge — Stores `window._initialStoreState`
 
 L'hydratation React de Challonge se fait par **stores Flux** (PAS Redux, PAS un
