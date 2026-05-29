@@ -60,6 +60,13 @@ Cartographie du repo (apps/packages) : [REPO_MAP.md](REPO_MAP.md).
 - [Serveur gacha `:5050` — `apps/gacha-server` (Colyseus / Bun)](gacha/server.md) `stable` — Serveur de jeu gacha Colyseus/Bun : REST économie, salle temps réel, CORS, déploiement systemd/nginx.
 - [Gacha — Couche web (`apps/web`, Next.js `:3002`)](gacha/web.md) `stable` — Routes API gacha Next.js (legacy + v1), DAL Drizzle, service, server actions et pages dashboard.
 
+## m3
+
+- [Mapping composants MUI → Material Design 3 (web)](m3/component-mapping.md) `draft` — Table de correspondance MUI v9 → composants M3 (md-* @material/web + Md* @aphrody-code/m3-react), disponibilité web, gaps et composants sans équivalent.
+- [Plan de migration MUI → Material Design 3 (apps/web)](m3/migration-plan.md) `draft` — Stratégie, véhicule, phasage en vagues, gates et risques pour migrer le dashboard Next.js de MUI v9 + Emotion vers Material Design 3 sur le web.
+- [Inventaire MUI — surface actuelle (apps/web)](m3/mui-inventory.md) `draft` — Volume, composants, idiomes de style, système de thème et surface MUI X du dashboard, snapshot pré-migration M3.
+- [Stratégie tokens, thème, typo & motion (MUI → M3)](m3/theme-tokens.md) `draft` — Mapping palette/typo/forme MUI → tokens M3 (--md-sys-*), dynamic color HCT, comparatif des véhicules web, échelle typographique et tokens de motion.
+
 ## nextjs
 
 - [Next.js — doc vendorée (knowledge base monorepo rpbey)](nextjs/README.md) `stable` — Documentation vendorée de Next.js 16.2.6 App Router pour le dashboard rpbey déployé en standalone VPS.
