@@ -1,4 +1,4 @@
-import { db, schema, count, isNotNull } from "@/lib/db";
+import { getPartUsageStats, getPartsAndProducts } from "@/server/dal/recommendations";
 import { loadCatalog, computeGroups, groupSlug } from "@/lib/bx-catalog";
 import { loadJsonSafe } from "@/lib/data-cache";
 import type { BxProductGroup } from "@/lib/bx-catalog";
@@ -198,24 +198,8 @@ function escapeRegExp(string: string) {
 export async function getRecommendations(
   options: RecommendationOptions = {},
 ): Promise<RecommendedProduct[]> {
-  // 1. Fetch live database usage stats from deckItems
-  const [bladeUsage, ratchetUsage, bitUsage] = await Promise.all([
-    db
-      .select({ id: schema.deckItems.bladeId, count: count() })
-      .from(schema.deckItems)
-      .where(isNotNull(schema.deckItems.bladeId))
-      .groupBy(schema.deckItems.bladeId),
-    db
-      .select({ id: schema.deckItems.ratchetId, count: count() })
-      .from(schema.deckItems)
-      .where(isNotNull(schema.deckItems.ratchetId))
-      .groupBy(schema.deckItems.ratchetId),
-    db
-      .select({ id: schema.deckItems.bitId, count: count() })
-      .from(schema.deckItems)
-      .where(isNotNull(schema.deckItems.bitId))
-      .groupBy(schema.deckItems.bitId),
-  ]);
+  // 1. Live database usage stats from deckItems (via DAL).
+  const { bladeUsage, ratchetUsage, bitUsage } = await getPartUsageStats();
 
   const usageMap = new Map<string, number>();
   let maxBladeCount = 1;
@@ -241,21 +225,8 @@ export async function getRecommendations(
     }
   }
 
-  // 2. Fetch database parts and products
-  const [dbParts, dbProducts] = await Promise.all([
-    db.query.parts.findMany(),
-    db.query.products.findMany({
-      with: {
-        beyblades: {
-          with: {
-            part_bladeId: true,
-            part_ratchetId: true,
-            part_bitId: true,
-          },
-        },
-      },
-    }),
-  ]);
+  // 2. Database parts and products (via DAL).
+  const { parts: dbParts, products: dbProducts } = await getPartsAndProducts();
 
   // 3. Load product catalog
   const catalog = await loadCatalog();

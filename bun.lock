@@ -73,6 +73,7 @@
         "@mui/x-date-pickers": "^9.0.2",
         "@next/third-parties": "^16.1.5",
         "@rose-griffon/challonge-core": "workspace:*",
+        "@rpbey/api-contract": "workspace:*",
         "@rpbey/db": "workspace:*",
         "@rpbey/types": "workspace:*",
         "@tiptap/core": "3.22.4",
@@ -170,6 +171,16 @@
         "typescript-eslint": "^8.51.0",
         "unfetch": "^5.0.0",
         "vitest": "catalog:",
+      },
+    },
+    "packages/api-contract": {
+      "name": "@rpbey/api-contract",
+      "version": "0.1.0",
+      "dependencies": {
+        "zod": "catalog:",
+      },
+      "devDependencies": {
+        "typescript": "catalog:",
       },
     },
     "packages/challonge": {
@@ -1526,6 +1537,8 @@
     "@rose-griffon/challonge-core": ["@rose-griffon/challonge-core@workspace:packages/challonge-core"],
 
     "@rose-griffon/dashboard": ["@rose-griffon/dashboard@workspace:apps/web"],
+
+    "@rpbey/api-contract": ["@rpbey/api-contract@workspace:packages/api-contract"],
 
     "@rpbey/create-discordx": ["@rpbey/create-discordx@workspace:packages/discordx/packages/create-discordx"],
 
