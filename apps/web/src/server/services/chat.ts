@@ -5,16 +5,17 @@ import { searchVectorIds } from "@/server/services/embeddings";
 import { getSearchCorpus } from "@/server/services/search-corpus";
 import { fuseHybrid, rankSearch } from "@/lib/search-rank";
 import { detectIntent, INTENT_CATEGORY, type Intent, searchTerms } from "@/lib/chat-nlp";
-import { generate, isLlmEnabled } from "@/server/services/llm";
+import { type ChatTurn, generate, isLlmEnabled } from "@/server/services/llm";
 
 /**
  * Cerveau du chat RAG web — équivalent in-process de `apps/bot/src/lib/rpbey/answer.ts`.
  * Retrieval HYBRIDE BM25F ⊕ dense (RRF) sur le corpus unifié (wiki toutes saisons, combos
- * WBO, méta, produits, pièces DB, tournois), puis SYNTHÈSE LLM en français (Gemini/Vertex,
- * cf. `services/llm.ts`) GROUNDÉE sur les seuls faits récupérés — le corpus wiki est en
- * anglais, le modèle traduit + reformule sans rien inventer. Repli déterministe EXTRACTIF
- * (brouillon Markdown) si le LLM est inactif/indisponible. Appelé par `POST /api/chat`.
- * Pas d'aller-retour HTTP : on tape directement les services de recherche.
+ * WBO, méta, produits, pièces DB, tournois), puis SYNTHÈSE LLM en français par NOTRE modèle
+ * local (llama.cpp, cf. `services/llm.ts`) GROUNDÉE sur les faits récupérés + l'HISTORIQUE
+ * de conversation (mémoire multi-tour) — le corpus wiki est en anglais, le modèle traduit +
+ * reformule sans rien inventer. Repli déterministe EXTRACTIF (brouillon Markdown) si le LLM
+ * est inactif/indisponible. `prepareTurn` fait retrieval + messages (partagé streaming/non-
+ * stream). Pas d'aller-retour HTTP vers la recherche : on tape directement les services.
  *
  * Confidentialité : le salon Discord « Beyblade X » est EXCLU du corpus (cf.
  * global-search) et le bavardage communautaire (X/Reddit, `CHATTER`) est écarté des
@@ -175,7 +176,11 @@ const COMPARE_SPLIT =
   /\s+(?:vs\.?|versus|contre|ou bien|ou alors|plut[ôo]t que|mieux que|compar[ée]e? [àa]|\bou\b)\s+/i;
 
 /** Réponse « comparaison » : oppose deux entités côte à côte (faits du corpus). */
-async function answerCompare(message: string, intent: Intent): Promise<ChatAnswer | null> {
+async function answerCompare(
+  message: string,
+  intent: Intent,
+  history: ChatTurn[],
+): Promise<PreparedTurn | null> {
   const raw = searchTerms(message);
   const parts = raw
     .split(COMPARE_SPLIT)
@@ -206,11 +211,11 @@ async function answerCompare(message: string, intent: Intent): Promise<ChatAnswe
     verdict = `\n\n**Verdict méta :** \`${na > nb ? sa : sb}\` donne l'avantage à **${win.title}**.`;
   }
   const draft = `${side(ea.title, ea)}\n\n${side(eb.title, eb)}${verdict}`;
-  const answerMd = await synthesize(message, intent, [ea, eb], draft);
   return {
     found: true,
     intent,
-    answerMd,
+    draft,
+    messages: buildMessages(message, intent, [ea, eb], history),
     sources: [ea, eb].map(toSource),
     followups: ["Lequel en tournoi ?", "Un combo avec le gagnant ?", "Le contre des deux ?"],
   };
@@ -282,60 +287,109 @@ function factsBlock(items: Item[], n: number): string {
     .join("\n");
 }
 
+// Mémoire conversationnelle : on conserve les N derniers tours (hors système), bornés en
+// taille, pour donner le contexte au modèle sans exploser le prompt (coûteux sur CPU).
+const MAX_HISTORY_TURNS = 8;
+const MAX_TURN_CHARS = 1200;
+
 /**
- * Réécrit la réponse en français naturel via Gemini, groundée sur les faits récupérés.
- * Renvoie le brouillon extractif (`fallback`) tel quel si le LLM est inactif ou échoue.
+ * Construit les messages multi-tour pour le LLM : système + HISTORIQUE (mémoire) + tour
+ * courant enrichi du CONTEXTE RAG. Le contexte RAG n'est mis QUE sur le tour courant (frais
+ * à chaque question) ; l'historique ne garde que le texte des échanges.
  */
-async function synthesize(
+function buildMessages(
   message: string,
   intent: Intent,
   items: Item[],
-  fallback: string,
-): Promise<string> {
-  if (!isLlmEnabled() || items.length === 0) return fallback;
+  history: ChatTurn[],
+): ChatTurn[] {
   const hint = LLM_INTENT_HINT[intent] ?? "";
-  const user = `Question du joueur : « ${message} »
+  const userTurn = `Question du joueur : « ${message} »
 ${hint ? `\n${hint}\n` : ""}
 CONTEXTE (faits du corpus Beyblade, à traduire/reformuler en français — n'utilise rien d'autre) :
 ${factsBlock(items, 6)}`;
-  const out = await generate({ system: LLM_SYSTEM, user, maxOutputTokens: 700, temperature: 0.4 });
-  return out ?? fallback;
+  const trimmed = history
+    .filter((t) => t.role !== "system")
+    .slice(-MAX_HISTORY_TURNS)
+    .map((t) => ({ role: t.role, content: t.content.slice(0, MAX_TURN_CHARS) }));
+  return [{ role: "system", content: LLM_SYSTEM }, ...trimmed, { role: "user", content: userTurn }];
 }
 
-/** Compose la réponse factuelle (Markdown) à une question Beyblade. */
-export async function answerQuestion(message: string): Promise<ChatAnswer> {
+/**
+ * Tour de chat PRÉPARÉ (retrieval + brouillon + messages), SANS l'appel LLM — partagé par
+ * le flux streaming (`POST /api/chat`) et `answerQuestion` (non-stream / repli).
+ * - `fixed` : réponse déterministe immédiate (greeting/thanks/stats/rien-trouvé), pas de LLM.
+ * - `draft` + `messages` : intents RAG → on stream `messages`, repli sur `draft` si le LLM lâche.
+ */
+export interface PreparedTurn {
+  found: boolean;
+  intent: Intent;
+  sources: ChatSource[];
+  followups: string[];
+  fixed?: string;
+  draft?: string;
+  messages?: ChatTurn[];
+}
+
+// Termes de recherche conscients du contexte : sur une relance courte/anaphorique
+// (« et sa toupie ? », « lui »), on réinjecte le dernier tour utilisateur pour que le RAG
+// retrouve la bonne entité (la mémoire vit au niveau du modèle, le retrieval doit suivre).
+function contextualTerms(message: string, history: ChatTurn[]): string {
+  const base = searchTerms(message);
+  if (base.length >= 14) return base;
+  const lastUser = [...history].reverse().find((t) => t.role === "user")?.content;
+  return lastUser ? searchTerms(`${lastUser} ${message}`) : base;
+}
+
+/**
+ * Prépare un tour de chat (retrieval + brouillon + messages), SANS appel LLM. Cœur partagé
+ * du streaming et du non-stream. `history` = tours précédents (mémoire conversationnelle).
+ */
+export async function prepareTurn(
+  message: string,
+  history: ChatTurn[] = [],
+): Promise<PreparedTurn> {
   const intent = detectIntent(message);
 
   if (intent === "greeting") {
     return {
       found: true,
       intent,
-      answerMd: GREETINGS[Math.floor(Math.random() * GREETINGS.length)]!,
       sources: [],
       followups: ["Meilleur combo méta ?", "Qui est Ryuga ?", "Explique le Burst Finish"],
+      fixed: GREETINGS[Math.floor(Math.random() * GREETINGS.length)]!,
     };
   }
   if (intent === "thanks") {
     return {
       found: true,
       intent,
-      answerMd: "Avec plaisir. Reviens quand tu veux dominer la méta.",
       sources: [],
       followups: followupsFor("meta"),
+      fixed: "Avec plaisir. Reviens quand tu veux dominer la méta.",
     };
   }
 
   // Statistiques du savoir : réponse chiffrée RÉELLE (compte du corpus, zéro invention).
-  if (intent === "stats") return answerStats(intent);
+  if (intent === "stats") {
+    const s = await answerStats(intent);
+    return {
+      found: s.found,
+      intent,
+      sources: s.sources,
+      followups: s.followups,
+      fixed: s.answerMd,
+    };
+  }
 
   // Comparaison « X vs Y » : opposition côte à côte si deux entités sont isolables.
   if (intent === "compare") {
-    const cmp = await answerCompare(message, intent);
+    const cmp = await answerCompare(message, intent, history);
     if (cmp) return cmp; // sinon : repli sur le flux générique ci-dessous.
   }
 
   const cat = INTENT_CATEGORY[intent];
-  const terms = searchTerms(message);
+  const terms = contextualTerms(message, history);
   let items = await retrieve(terms, cat, 8);
   if (items.length === 0 && cat) items = await retrieve(terms, null, 8);
 
@@ -352,12 +406,12 @@ export async function answerQuestion(message: string): Promise<ChatAnswer> {
     return {
       found: false,
       intent,
-      answerMd:
-        "Je n'ai rien trouvé de précis là-dessus. Donne-moi le nom exact (toupie, pièce, perso) et je creuse — ou tente une de ces pistes.",
       sources: [],
       followups: suggestions.length
         ? suggestions
         : ["Meilleur combo méta ?", "Les pièces les plus fortes ?", "Prochain tournoi ?"],
+      fixed:
+        "Je n'ai rien trouvé de précis là-dessus. Donne-moi le nom exact (toupie, pièce, perso) et je creuse — ou tente une de ces pistes.",
     };
   }
 
@@ -365,7 +419,7 @@ export async function answerQuestion(message: string): Promise<ChatAnswer> {
   const followups = followupsFor(intent);
 
   // Brouillon EXTRACTIF déterministe par intention. Sert de repli si le LLM est inactif
-  // ou échoue ; sinon il est reformulé en français naturel par `synthesize` (RAG).
+  // ou échoue ; sinon il est reformulé en français naturel par le LLM (RAG + mémoire).
   let draft: string;
 
   if (intent === "combo") {
@@ -395,6 +449,32 @@ export async function answerQuestion(message: string): Promise<ChatAnswer> {
     if (more.length) draft += `\n\n**À explorer aussi :**\n${more.join("\n")}`;
   }
 
-  const answerMd = await synthesize(message, intent, items, draft);
-  return { found: true, intent, answerMd, sources, followups };
+  return {
+    found: true,
+    intent,
+    sources,
+    followups,
+    draft,
+    messages: buildMessages(message, intent, items, history),
+  };
+}
+
+/**
+ * Réponse complète NON-streaming (repli / clients sans SSE). Le streaming passe par
+ * `prepareTurn` + `generateStream` directement dans la route `POST /api/chat`.
+ */
+export async function answerQuestion(
+  message: string,
+  history: ChatTurn[] = [],
+): Promise<ChatAnswer> {
+  const p = await prepareTurn(message, history);
+  let answerMd: string;
+  if (p.fixed != null) {
+    answerMd = p.fixed;
+  } else if (p.messages && isLlmEnabled()) {
+    answerMd = (await generate(p.messages)) ?? p.draft ?? "";
+  } else {
+    answerMd = p.draft ?? "";
+  }
+  return { found: p.found, intent: p.intent, answerMd, sources: p.sources, followups: p.followups };
 }

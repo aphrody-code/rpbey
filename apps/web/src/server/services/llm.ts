@@ -1,122 +1,144 @@
 import "server-only";
 
-import { GoogleAuth } from "google-auth-library";
-
 /**
- * Couche LLM du chat RAG (Vertex AI / Gemini) — branchée APRÈS le retrieval hybride pour
- * synthétiser une réponse en FRANÇAIS, texte naturel, à partir des seuls faits récupérés
- * dans le corpus (cf. `services/chat.ts`). Le corpus wiki est en anglais (Fandom) : le
- * modèle traduit + reformule, mais ne doit RIEN inventer hors du contexte fourni.
+ * Couche LLM du chat RAG — branchée APRÈS le retrieval hybride pour synthétiser une réponse
+ * en FRANÇAIS, texte naturel, à partir des seuls faits récupérés (cf. `services/chat.ts`)
+ * ET de l'historique de conversation (mémoire multi-tour).
  *
- * Auth : service account ADC via `GOOGLE_APPLICATION_CREDENTIALS` (partagé avec aphrody).
- * Aucun nouveau SDK : `google-auth-library` (déjà présent) signe le token, l'appel passe
- * par l'API REST Vertex `generateContent`. Si la config manque ou l'appel échoue/dépasse
- * le délai, on renvoie `null` et l'appelant retombe sur la synthèse extractive déterministe.
+ * Backend = NOTRE PROPRE LLM auto-hébergé : `llama.cpp` (`llama-server`) en loopback,
+ * API OpenAI-compatible `/v1/chat/completions`. Zéro service tiers, zéro coût par message,
+ * privé. Modèle swappable côté serveur (systemd `rpbey-llm.service`).
+ *
+ * Le corpus wiki est en anglais (Fandom) : le modèle traduit + reformule, mais ne doit RIEN
+ * inventer hors du contexte fourni. Si le serveur LLM est absent/lent/en erreur, on renvoie
+ * `null` (jamais une exception) et l'appelant retombe sur la synthèse extractive déterministe.
  */
 
-const PROJECT = process.env.GOOGLE_CLOUD_PROJECT ?? "";
-const LOCATION =
-  process.env.GOOGLE_CLOUD_LOCATION ?? process.env.GOOGLE_CLOUD_REGION ?? "us-central1";
-const MODEL = process.env.RPBEY_CHAT_MODEL ?? "gemini-2.5-flash";
-const TIMEOUT_MS = Number(process.env.RPBEY_CHAT_LLM_TIMEOUT_MS ?? "9000");
+const LLM_URL = process.env.RPBEY_LLM_URL ?? "http://127.0.0.1:8080/v1/chat/completions";
+const MODEL = process.env.RPBEY_LLM_MODEL ?? "rpbey-local";
+const TIMEOUT_MS = Number(process.env.RPBEY_LLM_TIMEOUT_MS ?? "60000");
 
-/** Le LLM est actif si un projet GCP + des credentials ADC sont configurés. */
+/** Le LLM est actif sauf désactivation explicite (`RPBEY_CHAT_LLM=0`). */
 export function isLlmEnabled(): boolean {
-  if (process.env.RPBEY_CHAT_LLM === "0") return false;
-  return Boolean(PROJECT) && Boolean(process.env.GOOGLE_APPLICATION_CREDENTIALS);
+  return process.env.RPBEY_CHAT_LLM !== "0";
 }
 
-let auth: GoogleAuth | null = null;
-// Token d'accès mis en cache (TTL ~1 h côté Google) pour éviter une signature par requête.
-let cachedToken: { value: string; expiresAt: number } | null = null;
-
-async function accessToken(): Promise<string | null> {
-  if (cachedToken && cachedToken.expiresAt - 60_000 > nowMs()) return cachedToken.value;
-  auth ??= new GoogleAuth({ scopes: ["https://www.googleapis.com/auth/cloud-platform"] });
-  const token = await auth.getAccessToken();
-  if (!token) return null;
-  // google-auth-library ne renvoie pas l'expiry ici : on prend une marge prudente de 50 min.
-  cachedToken = { value: token, expiresAt: nowMs() + 50 * 60_000 };
-  return token;
-}
-
-// `Date.now()` isolé pour rester testable et lisible.
-function nowMs(): number {
-  return Date.now();
+export interface ChatTurn {
+  role: "system" | "user" | "assistant";
+  content: string;
 }
 
 interface GenerateOptions {
-  system: string;
-  user: string;
-  maxOutputTokens?: number;
+  maxTokens?: number;
   temperature?: number;
 }
 
-interface VertexResponse {
-  candidates?: { content?: { parts?: { text?: string }[] } }[];
+interface CompletionResponse {
+  choices?: { message?: { content?: string } }[];
+}
+
+function body(messages: ChatTurn[], opts: GenerateOptions, stream: boolean): string {
+  return JSON.stringify({
+    model: MODEL,
+    messages,
+    stream,
+    temperature: opts.temperature ?? 0.35,
+    max_tokens: opts.maxTokens ?? 768,
+    // Bride l'invention sur les petits modèles : pénalise la répétition, top_p resserré.
+    top_p: 0.9,
+    repeat_penalty: 1.1,
+  });
 }
 
 /**
- * Génère une réponse texte via Gemini sur Vertex. Renvoie `null` (jamais une exception)
- * si le LLM est désactivé, indisponible, trop lent, ou répond vide — l'appelant doit
- * alors retomber sur sa synthèse extractive.
+ * Génère une réponse complète (non-stream). Renvoie `null` (jamais throw) si le LLM est
+ * désactivé, indisponible, trop lent, ou répond vide — l'appelant retombe sur l'extractif.
  */
-export async function generate(opts: GenerateOptions): Promise<string | null> {
+export async function generate(
+  messages: ChatTurn[],
+  opts: GenerateOptions = {},
+): Promise<string | null> {
   if (!isLlmEnabled()) return null;
-  let token: string | null;
-  try {
-    token = await accessToken();
-  } catch (err) {
-    console.warn("[chat/llm] token indisponible:", (err as Error).message);
-    return null;
-  }
-  if (!token) return null;
-
-  const url = `https://${LOCATION}-aiplatform.googleapis.com/v1/projects/${PROJECT}/locations/${LOCATION}/publishers/google/models/${MODEL}:generateContent`;
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
   try {
-    const res = await fetch(url, {
+    const res = await fetch(LLM_URL, {
       method: "POST",
-      headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json" },
       signal: controller.signal,
-      body: JSON.stringify({
-        systemInstruction: { parts: [{ text: opts.system }] },
-        contents: [{ role: "user", parts: [{ text: opts.user }] }],
-        generationConfig: {
-          temperature: opts.temperature ?? 0.4,
-          topP: 0.95,
-          maxOutputTokens: opts.maxOutputTokens ?? 1024,
-          // gemini-2.5-flash est un modèle « thinking » : sans bride, le raisonnement
-          // interne consomme le budget de sortie et TRONQUE la réponse visible. On le
-          // coupe (budget 0) — le chat veut une réponse directe, pas de la réflexion.
-          thinkingConfig: { thinkingBudget: 0 },
-        },
-        // Sécurité large : le contexte est du savoir Beyblade public, on ne veut pas de
-        // blocage spurious sur des noms de personnages « méchants », « antagoniste »…
-        safetySettings: [
-          "HARM_CATEGORY_HARASSMENT",
-          "HARM_CATEGORY_HATE_SPEECH",
-          "HARM_CATEGORY_SEXUALLY_EXPLICIT",
-          "HARM_CATEGORY_DANGEROUS_CONTENT",
-        ].map((category) => ({ category, threshold: "BLOCK_ONLY_HIGH" })),
-      }),
+      body: body(messages, opts, false),
     });
     if (!res.ok) {
-      console.warn(`[chat/llm] Vertex ${res.status}: ${(await res.text()).slice(0, 200)}`);
+      console.warn(`[chat/llm] ${res.status}: ${(await res.text()).slice(0, 160)}`);
       return null;
     }
-    const data = (await res.json()) as VertexResponse;
-    const text = (data.candidates?.[0]?.content?.parts ?? [])
-      .map((p) => p.text ?? "")
-      .join("")
-      .trim();
+    const data = (await res.json()) as CompletionResponse;
+    const text = (data.choices?.[0]?.message?.content ?? "").trim();
     return text.length > 0 ? text : null;
   } catch (err) {
     if ((err as Error).name !== "AbortError") {
       console.warn("[chat/llm] appel échoué:", (err as Error).message);
     }
     return null;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+/**
+ * Génère en STREAMING (SSE OpenAI-compatible) : yield chaque fragment de texte dès qu'il
+ * arrive. Indispensable sur CPU (~11 tok/s) pour que la réponse s'écrive en direct plutôt
+ * que de figer plusieurs secondes. Si le LLM est indisponible, le générateur ne yield rien
+ * (l'appelant détecte le vide et bascule sur l'extractif).
+ */
+export async function* generateStream(
+  messages: ChatTurn[],
+  opts: GenerateOptions = {},
+): AsyncGenerator<string, void, unknown> {
+  if (!isLlmEnabled()) return;
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
+  try {
+    const res = await fetch(LLM_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      signal: controller.signal,
+      body: body(messages, opts, true),
+    });
+    if (!res.ok || !res.body) {
+      console.warn(`[chat/llm] stream ${res.status}`);
+      return;
+    }
+    const reader = res.body.getReader();
+    const decoder = new TextDecoder();
+    let buf = "";
+    for (;;) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buf += decoder.decode(value, { stream: true });
+      // Découpe par lignes SSE ; chaque event = `data: {json}` (ou `data: [DONE]`).
+      let nl: number;
+      while ((nl = buf.indexOf("\n")) !== -1) {
+        const line = buf.slice(0, nl).trim();
+        buf = buf.slice(nl + 1);
+        if (!line.startsWith("data:")) continue;
+        const payload = line.slice(5).trim();
+        if (payload === "[DONE]") return;
+        try {
+          const json = JSON.parse(payload) as {
+            choices?: { delta?: { content?: string } }[];
+          };
+          const delta = json.choices?.[0]?.delta?.content;
+          if (delta) yield delta;
+        } catch {
+          // fragment JSON incomplet : ignoré (rare, llama-server émet des events entiers).
+        }
+      }
+    }
+  } catch (err) {
+    if ((err as Error).name !== "AbortError") {
+      console.warn("[chat/llm] stream échoué:", (err as Error).message);
+    }
   } finally {
     clearTimeout(timer);
   }

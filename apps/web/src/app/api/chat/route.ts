@@ -1,43 +1,102 @@
-import { type NextRequest, NextResponse } from "next/server";
-import { answerQuestion } from "@/server/services/chat";
+import { type NextRequest } from "next/server";
+import { prepareTurn } from "@/server/services/chat";
+import { type ChatTurn, generateStream } from "@/server/services/llm";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 /**
- * POST /api/chat — chat RAG Beyblade (ZÉRO LLM). Body `{ message: string }`.
- * Retrieval hybride sur le corpus unifié + synthèse extractive (cf. `services/chat.ts`).
- * Réponse `{ ok, data: ChatAnswer }`. Self-contained (validation inline, pas de contrat
- * partagé) pour rester découplé des autres évolutions d'API.
+ * POST /api/chat — chat RAG Beyblade avec MÉMOIRE conversationnelle + STREAMING.
+ * Body `{ message: string, history?: {role,content}[] }`.
+ *
+ * Réponse = flux SSE (`text/event-stream`), une ligne `data: {json}` par événement :
+ *   { type:"meta",  intent, found, sources, followups }   (1×, en tête)
+ *   { type:"delta", text }                                 (N×, le texte qui s'écrit)
+ *   { type:"done" }                                        (1×, fin)
+ * Le retrieval + la construction des messages se font dans `prepareTurn` ; la génération
+ * est streamée depuis NOTRE LLM local (cf. `services/llm.ts`). Si le LLM lâche, on envoie
+ * le brouillon extractif déterministe en un seul `delta` (jamais d'écran vide).
  */
 export async function POST(req: NextRequest) {
   let message = "";
+  let history: ChatTurn[] = [];
   try {
-    const body = (await req.json()) as { message?: unknown };
-    if (typeof body.message === "string") message = body.message.trim();
+    const b = (await req.json()) as { message?: unknown; history?: unknown };
+    if (typeof b.message === "string") message = b.message.trim();
+    if (Array.isArray(b.history)) history = sanitizeHistory(b.history);
   } catch {
-    return NextResponse.json(
-      { ok: false, error: { code: "BAD_REQUEST", message: "Corps JSON invalide" } },
-      { status: 400 },
-    );
+    return sseError("Corps JSON invalide");
   }
-
-  if (message.length < 2) {
-    return NextResponse.json(
-      { ok: false, error: { code: "BAD_REQUEST", message: "Message trop court" } },
-      { status: 400 },
-    );
-  }
+  if (message.length < 2) return sseError("Message trop court");
   if (message.length > 400) message = message.slice(0, 400);
 
-  try {
-    const data = await answerQuestion(message);
-    return NextResponse.json({ ok: true, data });
-  } catch (err) {
-    console.error("[api/chat] erreur:", err);
-    return NextResponse.json(
-      { ok: false, error: { code: "INTERNAL", message: "Le savoir vacille, réessaie." } },
-      { status: 500 },
-    );
+  const encoder = new TextEncoder();
+  const stream = new ReadableStream<Uint8Array>({
+    async start(controller) {
+      const send = (obj: unknown) =>
+        controller.enqueue(encoder.encode(`data: ${JSON.stringify(obj)}\n\n`));
+      try {
+        const p = await prepareTurn(message, history);
+        send({
+          type: "meta",
+          intent: p.intent,
+          found: p.found,
+          sources: p.sources,
+          followups: p.followups,
+        });
+
+        if (p.fixed != null) {
+          send({ type: "delta", text: p.fixed });
+        } else if (p.messages) {
+          let got = false;
+          for await (const chunk of generateStream(p.messages)) {
+            got = true;
+            send({ type: "delta", text: chunk });
+          }
+          // LLM indisponible / vide → repli sur le brouillon extractif (jamais vide).
+          if (!got) send({ type: "delta", text: p.draft ?? "Le savoir vacille, réessaie." });
+        } else {
+          send({ type: "delta", text: p.draft ?? "Le savoir vacille, réessaie." });
+        }
+        send({ type: "done" });
+      } catch (err) {
+        console.error("[api/chat] erreur:", err);
+        send({ type: "delta", text: "Le savoir vacille un instant. Réessaie." });
+        send({ type: "done" });
+      } finally {
+        controller.close();
+      }
+    },
+  });
+
+  return new Response(stream, {
+    headers: {
+      "Content-Type": "text/event-stream; charset=utf-8",
+      "Cache-Control": "no-cache, no-transform",
+      Connection: "keep-alive",
+    },
+  });
+}
+
+/** Borne et nettoie l'historique reçu du client (mémoire) : rôles valides, tailles capées. */
+function sanitizeHistory(raw: unknown[]): ChatTurn[] {
+  const out: ChatTurn[] = [];
+  for (const t of raw.slice(-16)) {
+    if (!t || typeof t !== "object") continue;
+    const r = (t as { role?: unknown }).role;
+    const c = (t as { content?: unknown }).content;
+    if ((r === "user" || r === "assistant") && typeof c === "string" && c.trim()) {
+      out.push({ role: r, content: c.slice(0, 1200) });
+    }
   }
+  return out;
+}
+
+/** Réponse SSE d'erreur (le client parse le même format que le flux normal). */
+function sseError(msg: string): Response {
+  const body = `data: ${JSON.stringify({ type: "error", message: msg })}\n\n`;
+  return new Response(body, {
+    status: 400,
+    headers: { "Content-Type": "text/event-stream; charset=utf-8", "Cache-Control": "no-cache" },
+  });
 }

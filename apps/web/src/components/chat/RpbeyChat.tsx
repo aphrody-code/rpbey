@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { type ChatAnswer, type ChatSource, STARTER_PROMPTS } from "@/lib/chat-nlp";
+import { type ChatSource, STARTER_PROMPTS } from "@/lib/chat-nlp";
 
 /**
  * Chat RAG « Rpbey » — style Gemini app (gradient signature `--rpb-gradient-ai`, sparkle
@@ -267,10 +267,13 @@ function MessageBubble({ msg, reduce }: { msg: Msg; reduce: boolean | null }) {
           >
             {isUser ? (
               msg.content
-            ) : (
+            ) : msg.content ? (
               <ReactMarkdown remarkPlugins={[remarkGfm]} components={MD_COMPONENTS}>
                 {msg.content}
               </ReactMarkdown>
+            ) : (
+              // Bulle assistant encore vide = réponse en cours de génération (streaming).
+              <ThinkingDots />
             )}
           </Box>
           {/* Sources citées */}
@@ -302,44 +305,82 @@ export function RpbeyChat({ initialQuery, height = "100%" }: RpbeyChatProps) {
   const idRef = useRef(0);
   const scrollRef = useRef<HTMLDivElement>(null);
   const startedRef = useRef(false);
+  // Miroir des messages pour lire l'historique (mémoire) sans recréer `send` à chaque tour.
+  const messagesRef = useRef<Msg[]>([]);
+  useEffect(() => {
+    messagesRef.current = messages;
+  }, [messages]);
 
   const send = useCallback(
     async (raw: string) => {
       const text = raw.trim();
       if (text.length < 2 || busy) return;
+      // Mémoire : on transmet les tours déjà échangés (hors erreurs), bornés côté serveur.
+      const history = messagesRef.current
+        .filter((m) => !m.error && m.content)
+        .slice(-12)
+        .map((m) => ({ role: m.role, content: m.content }));
       const userMsg: Msg = { id: ++idRef.current, role: "user", content: text };
-      setMessages((m) => [...m, userMsg]);
+      const aId = ++idRef.current;
+      // Place tout de suite la bulle assistant (vide) : elle se remplit en streaming.
+      setMessages((m) => [...m, userMsg, { id: aId, role: "assistant", content: "" }]);
       setInput("");
       setBusy(true);
+      const patch = (fn: (x: Msg) => Msg) =>
+        setMessages((m) => m.map((x) => (x.id === aId ? fn(x) : x)));
       try {
         const res = await fetch("/api/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message: text }),
+          body: JSON.stringify({ message: text, history }),
         });
-        const json = (await res.json()) as { ok: boolean; data?: ChatAnswer };
-        const a = json.data;
-        setMessages((m) => [
-          ...m,
-          {
-            id: ++idRef.current,
-            role: "assistant",
-            content: a?.answerMd ?? "Le savoir vacille un instant. Réessaie.",
-            sources: a?.sources,
-            followups: a?.followups,
-            error: !json.ok || !a,
-          },
-        ]);
+        if (!res.body) throw new Error("flux absent");
+        const reader = res.body.getReader();
+        const decoder = new TextDecoder();
+        let buf = "";
+        for (;;) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          buf += decoder.decode(value, { stream: true });
+          // Frames SSE séparées par une ligne vide ; chaque frame porte une ligne `data:`.
+          let sep: number;
+          while ((sep = buf.indexOf("\n\n")) !== -1) {
+            const frame = buf.slice(0, sep);
+            buf = buf.slice(sep + 2);
+            const line = frame.split("\n").find((l) => l.startsWith("data:"));
+            if (!line) continue;
+            let evt: {
+              type: string;
+              text?: string;
+              sources?: ChatSource[];
+              followups?: string[];
+              found?: boolean;
+              message?: string;
+            };
+            try {
+              evt = JSON.parse(line.slice(5).trim());
+            } catch {
+              continue;
+            }
+            if (evt.type === "meta") {
+              patch((x) => ({ ...x, sources: evt.sources, followups: evt.followups }));
+            } else if (evt.type === "delta" && evt.text) {
+              patch((x) => ({ ...x, content: x.content + evt.text }));
+            } else if (evt.type === "error") {
+              patch((x) => ({ ...x, content: evt.message ?? "Erreur.", error: true }));
+            }
+          }
+        }
+        // Flux clos sans aucun texte → message de repli (jamais de bulle vide).
+        patch((x) =>
+          x.content ? x : { ...x, content: "Le savoir vacille un instant. Réessaie.", error: true },
+        );
       } catch {
-        setMessages((m) => [
-          ...m,
-          {
-            id: ++idRef.current,
-            role: "assistant",
-            content: "Connexion interrompue. Repose ta question.",
-            error: true,
-          },
-        ]);
+        patch((x) => ({
+          ...x,
+          content: x.content || "Connexion interrompue. Repose ta question.",
+          error: true,
+        }));
       } finally {
         setBusy(false);
       }
@@ -444,46 +485,7 @@ export function RpbeyChat({ initialQuery, height = "100%" }: RpbeyChatProps) {
               {messages.map((msg) => (
                 <MessageBubble key={msg.id} msg={msg} reduce={reduce} />
               ))}
-              {busy && (
-                <Box sx={{ display: "flex", gap: 1.25 }}>
-                  <Box
-                    sx={{
-                      flexShrink: 0,
-                      width: 32,
-                      height: 32,
-                      borderRadius: "50%",
-                      p: "2px",
-                      background: "var(--rpb-gradient-ai)",
-                      display: "grid",
-                      placeItems: "center",
-                    }}
-                  >
-                    <Box
-                      sx={{
-                        width: "100%",
-                        height: "100%",
-                        borderRadius: "50%",
-                        bgcolor: "var(--rpb-surface-main)",
-                        display: "grid",
-                        placeItems: "center",
-                      }}
-                    >
-                      <GeminiSparkle size={17} />
-                    </Box>
-                  </Box>
-                  <Box
-                    sx={{
-                      bgcolor: "var(--rpb-surface-main)",
-                      border: "1px solid var(--rpb-divider)",
-                      borderRadius: "22px",
-                      borderBottomLeftRadius: "6px",
-                      px: 1.5,
-                    }}
-                  >
-                    <ThinkingDots />
-                  </Box>
-                </Box>
-              )}
+              {/* L'indicateur de génération vit dans la bulle assistant vide (cf. MessageBubble). */}
             </Box>
           )}
         </Box>
