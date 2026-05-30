@@ -4,12 +4,15 @@ import {
   BarChart as BarChartIcon,
   CalendarMonth,
   Circle,
+  Download,
+  FilterAlt,
   Insights,
   Language,
   Visibility,
 } from "@mui/icons-material";
 import {
   Box,
+  Button,
   Card,
   CardContent,
   CardHeader,
@@ -20,8 +23,10 @@ import {
   ListItem,
   ListItemText,
   Stack,
+  TextField,
   Typography,
 } from "@mui/material";
+import { useMemo, useState } from "react";
 import { type AnalyticsSummary, useAnalyticsStream } from "@/hooks/useAnalyticsStream";
 
 function timeAgo(iso: string): string {
@@ -40,7 +45,7 @@ const EVENT_LABELS: Record<string, string> = {
   tournament_register: "Inscription tournoi",
   profile_claim: "Liaison profil",
   gacha_pull: "Tirage gacha",
-  deck_create: "Création deck",
+  deck_create: "Creation deck",
 };
 
 function StatCard({
@@ -80,41 +85,84 @@ function StatCard({
   );
 }
 
+/** ISO date string for an input[type=date] value (YYYY-MM-DD). */
+function toDateInput(d: Date): string {
+  return d.toISOString().slice(0, 10);
+}
+
 export function AnalyticsDashboard({ initial }: { initial: AnalyticsSummary }) {
   const { data, live } = useAnalyticsStream(initial);
 
+  // Date-range filter — only applied to the recentEvents list (the counters and
+  // topPages/topReferrers come from the server already aggregated over 7d; the
+  // filter narrows the visible events feed without re-fetching).
+  const defaultFrom = toDateInput(new Date(Date.now() - 7 * 24 * 60 * 60_000));
+  const defaultTo = toDateInput(new Date());
+
+  const [fromDate, setFromDate] = useState<string>(defaultFrom);
+  const [toDate, setToDate] = useState<string>(defaultTo);
+  const [filterActive, setFilterActive] = useState(false);
+
+  const filteredEvents = useMemo(() => {
+    if (!filterActive) return data.recentEvents;
+    const from = fromDate ? new Date(fromDate).getTime() : 0;
+    const to = toDate ? new Date(toDate + "T23:59:59").getTime() : Infinity;
+    return data.recentEvents.filter((e) => {
+      const t = new Date(e.createdAt).getTime();
+      return t >= from && t <= to;
+    });
+  }, [data.recentEvents, filterActive, fromDate, toDate]);
+
   const maxPageViews = Math.max(1, ...data.topPages.map((p) => p.views));
   const maxRef = Math.max(1, ...data.topReferrers.map((r) => r.count));
+
+  function handleExport() {
+    const a = document.createElement("a");
+    a.href = "/api/admin/analytics/export";
+    a.download = "";
+    a.click();
+  }
 
   return (
     <Box sx={{ py: 4 }}>
       <Stack direction="row" sx={{ justifyContent: "space-between", alignItems: "center", mb: 4 }}>
         <Box>
           <Typography variant="h4" gutterBottom sx={{ fontWeight: "bold" }}>
-            Analytics temps réel
+            Analytics temps reel
           </Typography>
           <Typography variant="body1" sx={{ color: "text.secondary" }}>
-            Trafic en direct, pages vues et événements métier
+            Trafic en direct, pages vues et evenements metier
           </Typography>
         </Box>
-        <Chip
-          icon={
-            <Circle
-              sx={{
-                fontSize: "0.7rem !important",
-                color: live ? "success.main" : "warning.main",
-              }}
-            />
-          }
-          label={live ? "Direct (SSE)" : "Polling"}
-          variant="outlined"
-          sx={{
-            fontWeight: 600,
-            borderColor: live
-              ? "color-mix(in srgb, var(--rpb-secondary) 40%, transparent)"
-              : "divider",
-          }}
-        />
+        <Stack direction="row" spacing={1.5} sx={{ alignItems: "center" }}>
+          <Chip
+            icon={
+              <Circle
+                sx={{
+                  fontSize: "0.7rem !important",
+                  color: live ? "success.main" : "warning.main",
+                }}
+              />
+            }
+            label={live ? "Direct (SSE)" : "Polling"}
+            variant="outlined"
+            sx={{
+              fontWeight: 600,
+              borderColor: live
+                ? "color-mix(in srgb, var(--rpb-secondary) 40%, transparent)"
+                : "divider",
+            }}
+          />
+          <Button
+            variant="outlined"
+            size="small"
+            startIcon={<Download />}
+            onClick={handleExport}
+            sx={{ fontWeight: 600 }}
+          >
+            Exporter CSV
+          </Button>
+        </Stack>
       </Stack>
 
       <Grid container spacing={3} sx={{ mb: 4 }}>
@@ -122,7 +170,7 @@ export function AnalyticsDashboard({ initial }: { initial: AnalyticsSummary }) {
           <StatCard
             label="Visiteurs en direct"
             value={data.liveVisitors.toLocaleString("fr-FR")}
-            change="5 dernières minutes"
+            change="5 dernieres minutes"
             icon={Insights}
             color="var(--rpb-secondary)"
           />
@@ -132,7 +180,7 @@ export function AnalyticsDashboard({ initial }: { initial: AnalyticsSummary }) {
             label="Pages vues (aujourd'hui)"
             value={data.pageviewsToday.toLocaleString("fr-FR")}
             icon={Visibility}
-            color="#3b82f6"
+            color="var(--md-sys-color-tertiary)"
           />
         </Grid>
         <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
@@ -145,10 +193,10 @@ export function AnalyticsDashboard({ initial }: { initial: AnalyticsSummary }) {
         </Grid>
         <Grid size={{ xs: 12, sm: 6, lg: 3 }}>
           <StatCard
-            label="Événements (aujourd'hui)"
+            label="Evenements (aujourd'hui)"
             value={data.eventsToday.toLocaleString("fr-FR")}
             icon={BarChartIcon}
-            color="#10b981"
+            color="var(--md-sys-color-secondary)"
           />
         </Grid>
       </Grid>
@@ -167,7 +215,7 @@ export function AnalyticsDashboard({ initial }: { initial: AnalyticsSummary }) {
             <CardContent>
               {data.topPages.length === 0 ? (
                 <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                  Aucune donnée pour l'instant.
+                  Aucune donnee pour l'instant.
                 </Typography>
               ) : (
                 <Stack spacing={2}>
@@ -266,23 +314,71 @@ export function AnalyticsDashboard({ initial }: { initial: AnalyticsSummary }) {
           <Card variant="outlined">
             <CardHeader
               title={
-                <Stack direction="row" spacing={1} sx={{ alignItems: "center" }}>
-                  <Insights fontSize="small" />
-                  <Typography variant="h6">Événements récents</Typography>
+                <Stack
+                  direction={{ xs: "column", sm: "row" }}
+                  spacing={2}
+                  sx={{ alignItems: { xs: "flex-start", sm: "center" } }}
+                >
+                  <Stack direction="row" spacing={1} sx={{ alignItems: "center", flex: 1 }}>
+                    <Insights fontSize="small" />
+                    <Typography variant="h6">
+                      Evenements recents
+                      {filterActive && (
+                        <Typography
+                          component="span"
+                          variant="caption"
+                          sx={{ ml: 1, color: "text.secondary" }}
+                        >
+                          ({filteredEvents.length} / {data.recentEvents.length})
+                        </Typography>
+                      )}
+                    </Typography>
+                  </Stack>
+                  <Stack direction="row" spacing={1} sx={{ alignItems: "center" }}>
+                    <TextField
+                      type="date"
+                      size="small"
+                      label="Du"
+                      value={fromDate}
+                      onChange={(e) => setFromDate(e.target.value)}
+                      slotProps={{ inputLabel: { shrink: true } }}
+                      sx={{ width: 155 }}
+                    />
+                    <TextField
+                      type="date"
+                      size="small"
+                      label="Au"
+                      value={toDate}
+                      onChange={(e) => setToDate(e.target.value)}
+                      slotProps={{ inputLabel: { shrink: true } }}
+                      sx={{ width: 155 }}
+                    />
+                    <Button
+                      size="small"
+                      variant={filterActive ? "contained" : "outlined"}
+                      startIcon={<FilterAlt />}
+                      onClick={() => setFilterActive((v) => !v)}
+                      sx={{ fontWeight: 600, whiteSpace: "nowrap" }}
+                    >
+                      {filterActive ? "Filtrer (on)" : "Filtrer"}
+                    </Button>
+                  </Stack>
                 </Stack>
               }
             />
             <CardContent>
-              {data.recentEvents.length === 0 ? (
+              {filteredEvents.length === 0 ? (
                 <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                  Aucun événement récent.
+                  {filterActive
+                    ? "Aucun evenement sur cette plage de dates."
+                    : "Aucun evenement recent."}
                 </Typography>
               ) : (
                 <List dense disablePadding>
-                  {data.recentEvents.map((e, i) => (
+                  {filteredEvents.map((e, i) => (
                     <ListItem
                       key={e.id}
-                      divider={i !== data.recentEvents.length - 1}
+                      divider={i !== filteredEvents.length - 1}
                       secondaryAction={
                         <Typography variant="caption" sx={{ color: "text.secondary" }}>
                           {timeAgo(e.createdAt)}

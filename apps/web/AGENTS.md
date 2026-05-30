@@ -155,3 +155,9 @@ Captures HQ frame-par-frame réutilisées par le **gacha** (cartes des persos no
 - **Contrat** `@rpbey/api-contract` : `anime.ts` (`AnimeFrame*`), `scrapers.ts` (`AnimeFrameImport*`). **DAL** server-only `server/dal/anime.ts` (`listAnimeFrames` filtre `series/episode/character` jsonb `@>`/`q`/`notable` + curseur ; `listAnimeFramesForIndex`). **Route** `/api/v1/anime/frames` (OpenAPI → SDK hey-api). **GraphQL** `animeFrames`. **Recherche** : catégorie `"frame"` + champ `thumbnail`, §12 de `global-search.ts` (frames `isNotable`).
 - **Page** `/anime/[slug]/galerie` (RSC ; grille + lightbox = `GalerieClient` client, MUI v9 `styled()` + `sx`). CTA « Galerie » depuis `SeriesDetail`.
 - **Import** : `apps/web/scripts/import-anime-frames.ts` lit `apps/web/data/anime-frames/<slug>.json` (**gitignored, régénérable — la DB + le CDN sont la vérité**), fetch → **sharp PNG + oxipng lossless** → CDN `/var/www/cdn/static/rpb-dashboard/anime/<slug>/epNN/frame-<id>.png` (dir **`ubuntu:ubuntu`** — sinon `sudo chown`, le reste de `/var/www/cdn/static` est `www-data`) → upsert idempotent/resumable (`onConflictDoUpdate` sur `[source,sourceId]`). Scrapers amont : `scrape-anime-frames.ts` (fancaps, via **bxc** profil `static` — IP VPS blacklistée), `map-character-episodes.ts` + `merge-frames-characters.ts` (Fandom api.php, épisodes marquants → `isNotable=true`).
+
+<!-- BEGIN:nextjs-agent-rules -->
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
+<!-- END:nextjs-agent-rules -->

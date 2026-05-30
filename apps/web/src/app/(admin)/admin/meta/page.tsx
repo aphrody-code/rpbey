@@ -1,16 +1,19 @@
 "use client";
 
-import { BarChart, Hub, Shield, TrendingUp } from "@mui/icons-material";
+import { BarChart, Download, Hub, Shield, TrendingUp } from "@mui/icons-material";
 import {
   Avatar,
   alpha,
   Box,
+  Button,
   Card,
   CardContent,
   CircularProgress,
   Grid,
   List,
   ListItem,
+  Stack,
+  Tooltip,
   Typography,
   useTheme,
 } from "@mui/material";
@@ -19,6 +22,36 @@ import { getMetaStats } from "@/server/actions/admin-meta";
 
 type MetaStats = Awaited<ReturnType<typeof getMetaStats>>;
 type MetaItem = MetaStats["blades"][number];
+
+function downloadBlob(content: string, filename: string, type: string) {
+  const blob = new Blob([content], { type });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function buildMetaCsv(stats: MetaStats): string {
+  const sections: string[] = [];
+  const categories: Array<[string, MetaItem[]]> = [
+    ["Top Blades", stats.blades],
+    ["Top Ratchets", stats.ratchets],
+    ["Top Bits", stats.bits],
+    ["Top Assists (CX)", stats.assists],
+  ];
+  for (const [title, items] of categories) {
+    sections.push(`# ${title}`);
+    sections.push("Rang,Nom,Utilisations");
+    items.forEach((item, idx) => {
+      const name = (item.name ?? "").replace(/"/g, '""');
+      sections.push(`${idx + 1},"${name}",${item.count}`);
+    });
+    sections.push("");
+  }
+  return sections.join("\n");
+}
 
 export default function AdminMetaPage() {
   const theme = useTheme();
@@ -31,6 +64,18 @@ export default function AdminMetaPage() {
       setLoading(false);
     });
   }, []);
+
+  const today = new Date().toISOString().slice(0, 10);
+
+  function handleExportCsv() {
+    if (!stats) return;
+    downloadBlob(buildMetaCsv(stats), `rpb-meta-${today}.csv`, "text/csv;charset=utf-8");
+  }
+
+  function handleExportJson() {
+    if (!stats) return;
+    downloadBlob(JSON.stringify(stats, null, 2), `rpb-meta-${today}.json`, "application/json");
+  }
 
   if (loading || !stats) {
     return (
@@ -61,7 +106,7 @@ export default function AdminMetaPage() {
         >
           <Hub sx={{ fontSize: { xs: 32, md: 40 }, color: "primary.main" }} />
         </Box>
-        <Box>
+        <Box sx={{ flex: 1 }}>
           <Typography
             variant="h4"
             sx={{
@@ -76,9 +121,33 @@ export default function AdminMetaPage() {
               color: "text.secondary",
             }}
           >
-            Analyse de l'utilisation des pièces basée sur les decks de la communauté.
+            Analyse de l'utilisation des pieces basee sur les decks de la communaute.
           </Typography>
         </Box>
+        <Stack direction="row" spacing={1}>
+          <Tooltip title="Exporter en CSV">
+            <Button
+              variant="outlined"
+              size="small"
+              startIcon={<Download />}
+              onClick={handleExportCsv}
+              sx={{ fontWeight: 600 }}
+            >
+              CSV
+            </Button>
+          </Tooltip>
+          <Tooltip title="Exporter en JSON">
+            <Button
+              variant="outlined"
+              size="small"
+              startIcon={<Download />}
+              onClick={handleExportJson}
+              sx={{ fontWeight: 600 }}
+            >
+              JSON
+            </Button>
+          </Tooltip>
+        </Stack>
       </Box>
       <Grid container spacing={3}>
         <StatSection
@@ -93,12 +162,17 @@ export default function AdminMetaPage() {
           icon={<TrendingUp />}
           color={theme.palette.secondary.main}
         />
-        <StatSection title="Top Bits" data={stats.bits} icon={<TrendingUp />} color="#3b82f6" />
+        <StatSection
+          title="Top Bits"
+          data={stats.bits}
+          icon={<TrendingUp />}
+          color="var(--md-sys-color-tertiary)"
+        />
         <StatSection
           title="Top Assists (CX)"
           data={stats.assists}
           icon={<Shield />}
-          color="#8b5cf6"
+          color="var(--md-sys-color-secondary)"
         />
       </Grid>
     </Box>

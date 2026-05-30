@@ -11,6 +11,7 @@ import {
   Logout,
   Menu as MenuIcon,
   People,
+  Settings,
   Terminal,
   Theaters,
   Videocam,
@@ -61,6 +62,7 @@ const ADMIN_NAV_ITEMS = [
   { label: "Classements", path: "/admin/rankings", icon: Leaderboard },
   { label: "Équipe", path: "/admin/staff", icon: People },
   { label: "Utilisateurs", path: "/admin/users", icon: People },
+  { label: "Configuration", path: "/admin/config", icon: Settings },
 ];
 
 export function AdminShell({ children }: { children: React.ReactNode }) {
@@ -121,9 +123,9 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
             sx={{
               p: 2,
               borderRadius: 3,
-              bgcolor: "rgba(255,255,255,0.05)",
+              bgcolor: "var(--md-sys-color-surface-variant)",
               border: "1px solid",
-              borderColor: "rgba(255,255,255,0.1)",
+              borderColor: "var(--md-sys-color-outline-variant)",
               display: "flex",
               alignItems: "center",
               gap: 2,
@@ -183,13 +185,13 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
                     minHeight: 48,
                     borderRadius: 0,
                     gap: 1.5,
-                    color: isActive ? "secondary.main" : "rgba(255,255,255,0.7)",
+                    color: isActive ? "secondary.main" : "var(--md-sys-color-on-surface-variant)",
                     bgcolor: isActive
                       ? (theme) => alpha(theme.palette.secondary.main, 0.1)
                       : "transparent",
                     "&:hover": {
-                      bgcolor: "rgba(255,255,255,0.05)",
-                      color: "white",
+                      bgcolor: "var(--md-sys-color-surface-variant)",
+                      color: "var(--md-sys-color-on-surface)",
                     },
                     "&.Mui-selected": {
                       bgcolor: (theme) => alpha(theme.palette.secondary.main, 0.15),
@@ -230,7 +232,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
         sx={{
           p: 2,
           borderTop: "1px solid",
-          borderColor: "rgba(255,255,255,0.1)",
+          borderColor: "var(--md-sys-color-outline-variant)",
         }}
       >
         <ListItemButton
