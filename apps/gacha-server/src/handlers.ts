@@ -25,17 +25,21 @@ import type {
   WishlistToggleResult,
 } from "@rpbey/api-contract";
 import { db, schema } from "@rpbey/db";
-import { and, asc, desc, eq, gt, ilike, lt, sql } from "drizzle-orm";
+import { and, asc, desc, eq, gt, ilike, inArray, lt, sql } from "drizzle-orm";
 import type { AuthUser } from "./auth";
 import {
   BADGES,
   DAILY_BASE,
   DAILY_COOLDOWN_H,
   DEBT_INTEREST,
+  DUPE_CAP,
   FUSION_DUPES_REQUIRED,
   GIFT_COOLDOWN_H,
   MULTI_PULL_COST,
   MULTI_PULL_COUNT,
+  NEW_CARD_BIAS_WEIGHT,
+  PITY_LEGENDARY_THRESHOLD,
+  PITY_SR_SOFT_START,
   PITY_THRESHOLD,
   PULL_COST,
   RARITY_ORDER,
@@ -44,10 +48,12 @@ import {
   SR_PLUS,
   STREAK_MILESTONES,
   STREAK_RESET_H,
+  WISHLIST_BIAS_WEIGHT,
   type Rarity,
 } from "./config";
 import { cardDto, type CardDto, rollRarity, type CardRow } from "./game";
 import { ApiError } from "./http";
+import { getTier, percentile } from "./ranking";
 
 /** Enveloppe de succès `{ ok: true, <key>: payload }`. */
 type Ok<K extends string, T> = { ok: true } & { [P in K]: T };
@@ -165,19 +171,55 @@ async function lockInventoryTx(tx: Tx, userId: string, cardId: string): Promise<
   return rows[0]?.count ?? null;
 }
 
-/** Carte active aléatoire de la rareté demandée, fallback raretés inférieures puis n'importe laquelle. */
-async function pickCard(rarity: Rarity): Promise<CardRow | null> {
+/**
+ * Selectionne une carte active de la rareté demandée avec biais wishlist +
+ * biais "nouvelle carte". Fallback : raretés inférieures, puis n'importe quelle
+ * carte active.
+ *
+ * Algorithme de selection pondérée (Weighted Reservoir Sampling, 1 tirage) :
+ *   - poids de base : 1.0 pour toutes les cartes
+ *   - ×WISHLIST_BIAS_WEIGHT si la carte est dans la wishlist du joueur
+ *   - ×NEW_CARD_BIAS_WEIGHT si le joueur ne la possede pas encore
+ *   - si ni wishlist ni owned : poids 1.0
+ *
+ * @param rarity       Rareté cible.
+ * @param wishedIds    IDs des cartes dans la wishlist (optionnel).
+ * @param ownedIds     IDs des cartes déjà possédées (optionnel).
+ */
+async function pickCard(
+  rarity: Rarity,
+  wishedIds?: Set<string>,
+  ownedIds?: Set<string>,
+): Promise<CardRow | null> {
   const idx = RARITY_ORDER.indexOf(rarity);
   const tryOrder = [rarity, ...RARITY_ORDER.slice(0, idx).reverse()];
   for (const r of tryOrder) {
     const rows = await db
       .select(CARD_COLS)
       .from(gachaCards)
-      .where(and(eq(gachaCards.isActive, true), eq(gachaCards.rarity, r)))
-      .orderBy(sql`random()`)
-      .limit(1);
-    if (rows[0]) return rows[0];
+      .where(and(eq(gachaCards.isActive, true), eq(gachaCards.rarity, r)));
+    if (rows.length === 0) continue;
+
+    // Si pas de biais (pas de contexte joueur), tirage uniforme.
+    if (!wishedIds && !ownedIds) {
+      return rows[Math.floor(Math.random() * rows.length)] ?? null;
+    }
+
+    // Tirage pondéré (Weighted Reservoir Sampling).
+    let chosen: CardRow | null = null;
+    let totalWeight = 0;
+    for (const row of rows) {
+      let w = 1.0;
+      if (wishedIds?.has(row.id)) w *= WISHLIST_BIAS_WEIGHT;
+      if (ownedIds && !ownedIds.has(row.id)) w *= NEW_CARD_BIAS_WEIGHT;
+      totalWeight += w;
+      // Acceptation avec probabilite w/totalWeight (reservoir 1 slot).
+      if (Math.random() < w / totalWeight) chosen = row;
+    }
+    if (chosen) return chosen;
   }
+
+  // Fallback absolu : n'importe quelle carte active.
   const any = await db
     .select(CARD_COLS)
     .from(gachaCards)
@@ -185,6 +227,50 @@ async function pickCard(rarity: Rarity): Promise<CardRow | null> {
     .orderBy(sql`random()`)
     .limit(1);
   return any[0] ?? null;
+}
+
+/**
+ * Renvoie les IDs de cartes possédées par le joueur (count > 0).
+ * Utilisé pour le biais "nouvelle carte" dans pickCard.
+ */
+async function ownedCardIds(userId: string): Promise<Set<string>> {
+  const rows = await db
+    .select({ cardId: cardInventory.cardId })
+    .from(cardInventory)
+    .where(and(eq(cardInventory.userId, userId), gt(cardInventory.count, 0)));
+  return new Set(rows.map((r) => r.cardId));
+}
+
+/**
+ * Dérive le compteur de pity LEGENDARY depuis l'historique des transactions.
+ * Compte les tirages GACHA_PULL / MULTI_PULL depuis le dernier tirage ayant
+ * renvoyé une carte LEGENDARY ou SECRET (note contient "LEGENDARY" ou "SECRET").
+ *
+ * Approche : lit les N dernières transactions de tirage (max 200 pour limiter
+ * la requête) et compte jusqu'à trouver un gain légendaire.
+ * Si l'historique est vide ou qu'aucune légendaire n'a été tirée, renvoie le
+ * nombre total de tirages (plafonné à PITY_LEGENDARY_THRESHOLD - 1).
+ */
+async function getLegendaryPityCount(userId: string): Promise<number> {
+  const rows = await db
+    .select({ note: currencyTransactions.note, type: currencyTransactions.type })
+    .from(currencyTransactions)
+    .where(
+      and(
+        eq(currencyTransactions.userId, userId),
+        inArray(currencyTransactions.type, ["GACHA_PULL" as never, "MULTI_PULL" as never]),
+      ),
+    )
+    .orderBy(desc(currencyTransactions.createdAt))
+    .limit(200);
+
+  let count = 0;
+  for (const row of rows) {
+    const note = row.note ?? "";
+    if (note.includes("LEGENDARY") || note.includes("SECRET")) break;
+    count++;
+  }
+  return Math.min(count, PITY_LEGENDARY_THRESHOLD - 1);
 }
 
 async function uniqueCardCount(userId: string): Promise<number> {
@@ -234,45 +320,94 @@ async function addCard(tx: Tx, userId: string, cardId: string): Promise<boolean>
   return (res[0]?.count ?? 1) > 1;
 }
 
-/** Résout un tirage (rareté + carte) en respectant la pity. Renvoie aussi la pity mise à jour. */
+/**
+ * Résout un tirage (rareté + carte) en respectant la pity SR+ et LEGENDARY.
+ *
+ * Invariant : la pity SR+ est remise à 0 UNIQUEMENT si la carte réellement
+ * servie est SR+ (protection contre fallback de stock vide). De même pour la
+ * pity LEGENDARY. Si pickCard retombe sur une rareté inférieure, la garantie
+ * reste due au prochain tirage.
+ *
+ * @param pityBefore          Compteur pity SR+ avant ce tirage.
+ * @param pityLegendaryBefore Compteur pity LEGENDARY avant ce tirage.
+ * @param wishedIds           IDs wishlist du joueur (biais pickCard).
+ * @param ownedIds            IDs possédées (biais "nouvelle carte").
+ */
 async function resolvePull(
   pityBefore: number,
-): Promise<{ rarity: Rarity | null; card: CardRow | null; pityAfter: number }> {
-  let rolled = rollRarity();
-  const atPity = pityBefore + 1 >= PITY_THRESHOLD;
-  const rolledSrPlus = rolled !== "MISS" && SR_PLUS.includes(rolled);
-  // Garantie pity : au seuil, force un SUPER_RARE (sauf si le roll est déjà SR+).
-  if (atPity && !rolledSrPlus) rolled = "SUPER_RARE";
+  pityLegendaryBefore: number,
+  wishedIds?: Set<string>,
+  ownedIds?: Set<string>,
+): Promise<{
+  rarity: Rarity | null;
+  card: CardRow | null;
+  pityAfter: number;
+  pityLegendaryAfter: number;
+}> {
+  let rolled = rollRarity(pityBefore, pityLegendaryBefore);
 
-  const card = rolled === "MISS" ? null : await pickCard(rolled);
+  // Hard pity SR+ : au seuil, force SUPER_RARE si le roll n'est pas déjà SR+.
+  const atSrPity = pityBefore + 1 >= PITY_THRESHOLD;
+  const rolledSrPlus = rolled !== "MISS" && (SR_PLUS as string[]).includes(rolled);
+  if (atSrPity && !rolledSrPlus) rolled = "SUPER_RARE";
+
+  const card = rolled === "MISS" ? null : await pickCard(rolled, wishedIds, ownedIds);
   const servedRarity = card ? (card.rarity as Rarity) : null;
-  // Pity remise à 0 UNIQUEMENT si la carte réellement servie est SR+ : si le
-  // stock SR+ est vide, `pickCard` retombe sur une rareté inférieure → on ne
-  // consomme pas la garantie (sinon le joueur paie, perd sa pity et reçoit une
-  // commune). La garantie reste due au prochain tirage.
-  const pityAfter = servedRarity && SR_PLUS.includes(servedRarity) ? 0 : pityBefore + 1;
-  return { rarity: servedRarity, card, pityAfter };
+
+  // Pity SR+ : reset si la carte servie est effectivement SR+.
+  const pityAfter =
+    servedRarity && (SR_PLUS as string[]).includes(servedRarity) ? 0 : pityBefore + 1;
+
+  // Pity LEGENDARY : reset si la carte servie est LEGENDARY ou SECRET.
+  const isLegendaryServed = servedRarity === "LEGENDARY" || servedRarity === "SECRET";
+  const pityLegendaryAfter = isLegendaryServed ? 0 : pityLegendaryBefore + 1;
+
+  return { rarity: servedRarity, card, pityAfter, pityLegendaryAfter };
 }
 
 // ─── Handlers ──────────────────────────────────────────────────────────────
 
 export async function pull(user: AuthUser): Promise<Ok<"result", PullResult>> {
-  await ensureProfile(user.id);
+  const profRow = await ensureProfile(user.id);
 
-  // Tout l'invariant financier (contrôle solde + débit + pity) est sérialisé
-  // par le verrou FOR UPDATE sur le profil → pas d'overspend / pity sautée.
+  // Biais et pity legendary calcules hors transaction (lectures seules).
+  const wished = await wishlistedCardIds(profRow.id);
+  const owned = await ownedCardIds(user.id);
+  const pityLegendary = await getLegendaryPityCount(user.id);
+
+  // Tout l'invariant financier (controle solde + debit + pity) est serialise
+  // par le verrou FOR UPDATE sur le profil.
   const out = await db.transaction(async (tx) => {
     const prof = await lockProfileTx(tx, user.id);
     if (prof.currency < PULL_COST)
-      throw new ApiError("INSUFFICIENT_FUNDS", `Solde insuffisant (${PULL_COST} 🪙 requis)`, 400);
+      throw new ApiError("INSUFFICIENT_FUNDS", `Solde insuffisant (${PULL_COST} requis)`, 400);
 
-    const { rarity, card, pityAfter } = await resolvePull(prof.pityCount);
-    const wished = card ? await wishlistedCardIds(prof.id) : new Set<string>();
+    const { rarity, card, pityAfter, pityLegendaryAfter } = await resolvePull(
+      prof.pityCount,
+      pityLegendary,
+      wished,
+      owned,
+    );
 
-    await moveCurrency(tx, user.id, -PULL_COST, "GACHA_PULL", `Tirage simple`);
+    // Inclut la rarete dans la note pour reconstruire le pity legendary.
+    const pullNote = `Tirage simple${rarity ? `:${rarity}` : ""}`;
+    await moveCurrency(tx, user.id, -PULL_COST, "GACHA_PULL", pullNote);
     await tx.update(profiles).set({ pityCount: pityAfter }).where(eq(profiles.userId, user.id));
+
     let isDuplicate = false;
-    if (card) isDuplicate = await addCard(tx, user.id, card.id);
+    if (card) {
+      const currentCount = await lockInventoryTx(tx, user.id, card.id);
+      if (currentCount !== null && currentCount >= DUPE_CAP) {
+        // Anti-doublon : conversion automatique en monnaie.
+        const price =
+          SELL_PRICE[(card.rarity as Rarity) in SELL_PRICE ? (card.rarity as Rarity) : "COMMON"];
+        await moveCurrency(tx, user.id, price, "SELL_CARD", `Auto-vente doublon ${card.name}`);
+        isDuplicate = true;
+      } else {
+        isDuplicate = await addCard(tx, user.id, card.id);
+      }
+    }
+
     const bal = await tx
       .select({ c: profiles.currency })
       .from(profiles)
@@ -282,6 +417,7 @@ export async function pull(user: AuthUser): Promise<Ok<"result", PullResult>> {
       rarity,
       card,
       pityAfter,
+      pityLegendaryAfter,
       isDuplicate,
       isWished: card ? wished.has(card.id) : false,
       newBalance: bal[0]?.c ?? 0,
@@ -306,17 +442,24 @@ export async function pull(user: AuthUser): Promise<Ok<"result", PullResult>> {
 }
 
 export async function pullMulti(user: AuthUser): Promise<Ok<"result", MultiPullResult>> {
-  await ensureProfile(user.id);
+  const profRow = await ensureProfile(user.id);
 
-  // Tire 10 fois ; garantit au moins 1 SR+ (force le dernier si besoin).
-  // Aléatoire pur (indépendant du solde) → préparé hors transaction.
+  // Biais calcules hors transaction. Multi reset la pity SR+ a 0 apres donc
+  // on tire avec pity=0 pour chaque slot (garantie 1 SR+ en fin de serie).
+  const wished = await wishlistedCardIds(profRow.id);
+  const owned = await ownedCardIds(user.id);
+  const pityLegendaryStart = await getLegendaryPityCount(user.id);
+
+  // Tire 10 fois avec biais wishlist/owned ; garantit au moins 1 SR+.
   const draws: { rarity: Rarity | null; card: CardRow | null }[] = [];
+  let runningLegPity = pityLegendaryStart;
   for (let i = 0; i < MULTI_PULL_COUNT; i++) {
-    const r = await resolvePull(0); // pity neutralisée pendant le multi (reset après)
+    const r = await resolvePull(0, runningLegPity, wished, owned);
     draws.push({ rarity: r.rarity, card: r.card });
+    runningLegPity = r.pityLegendaryAfter;
   }
-  if (!draws.some((d) => d.rarity && SR_PLUS.includes(d.rarity as Rarity))) {
-    const card = await pickCard("SUPER_RARE");
+  if (!draws.some((d) => d.rarity && (SR_PLUS as string[]).includes(d.rarity as Rarity))) {
+    const card = await pickCard("SUPER_RARE", wished, owned);
     draws[MULTI_PULL_COUNT - 1] = {
       rarity: card ? (card.rarity as Rarity) : "SUPER_RARE",
       card,
@@ -328,22 +471,33 @@ export async function pullMulti(user: AuthUser): Promise<Ok<"result", MultiPullR
     if (prof.currency < MULTI_PULL_COST)
       throw new ApiError(
         "INSUFFICIENT_FUNDS",
-        `Solde insuffisant (${MULTI_PULL_COST} 🪙 requis)`,
+        `Solde insuffisant (${MULTI_PULL_COST} requis)`,
         400,
       );
-    const wished = await wishlistedCardIds(prof.id);
     await moveCurrency(
       tx,
       user.id,
       -MULTI_PULL_COST,
       "MULTI_PULL",
-      `Multi-tirage ×${MULTI_PULL_COUNT}`,
+      `Multi-tirage x${MULTI_PULL_COUNT}`,
     );
     await tx.update(profiles).set({ pityCount: 0 }).where(eq(profiles.userId, user.id));
     const out = [];
     for (const d of draws) {
       let isDuplicate = false;
-      if (d.card) isDuplicate = await addCard(tx, user.id, d.card.id);
+      if (d.card) {
+        const currentCount = await lockInventoryTx(tx, user.id, d.card.id);
+        if (currentCount !== null && currentCount >= DUPE_CAP) {
+          const price =
+            SELL_PRICE[
+              (d.card.rarity as Rarity) in SELL_PRICE ? (d.card.rarity as Rarity) : "COMMON"
+            ];
+          await moveCurrency(tx, user.id, price, "SELL_CARD", `Auto-vente doublon ${d.card.name}`);
+          isDuplicate = true;
+        } else {
+          isDuplicate = await addCard(tx, user.id, d.card.id);
+        }
+      }
       out.push({
         rarity: d.rarity,
         card: d.card ? cardDto(d.card) : null,
@@ -743,8 +897,18 @@ export async function history(
   };
 }
 
-export function rates(): { ok: true } & GachaRatesResponse {
-  return { ok: true, ...RATES, pityThreshold: PITY_THRESHOLD };
+export function rates(): { ok: true } & GachaRatesResponse & {
+    pityThreshold: number;
+    pitySrSoftStart: number;
+    pityLegendaryThreshold: number;
+  } {
+  return {
+    ok: true,
+    ...RATES,
+    pityThreshold: PITY_THRESHOLD,
+    pitySrSoftStart: PITY_SR_SOFT_START,
+    pityLegendaryThreshold: PITY_LEGENDARY_THRESHOLD,
+  };
 }
 
 export async function cardById(id: string): Promise<Ok<"card", CardDto>> {
@@ -971,17 +1135,25 @@ export async function fuse(
 
 const LEADERBOARD_CATEGORIES = ["currency", "wins", "mmr", "collection"] as const;
 
+/** Entree etendue du leaderboard (superset additif de GameLeaderboardEntry). */
+interface LeaderboardEntryExtended extends GameLeaderboardEntry {
+  rank: number;
+  tier?: string;
+  percentile?: number;
+}
+
 export async function leaderboard(
   category: string,
   q: URLSearchParams,
-): Promise<Ok<"entries", GameLeaderboardEntry[]>> {
+): Promise<Ok<"entries", LeaderboardEntryExtended[]>> {
   if (!(LEADERBOARD_CATEGORIES as readonly string[]).includes(category))
     throw new ApiError(
       "BAD_REQUEST",
-      `Catégorie invalide (attendu : ${LEADERBOARD_CATEGORIES.join(", ")})`,
+      `Categorie invalide (attendu : ${LEADERBOARD_CATEGORIES.join(", ")})`,
       400,
     );
   const limit = Math.min(100, Math.max(1, Number(q.get("limit") ?? "10") || 10));
+
   if (category === "collection") {
     const rows = await db
       .select({
@@ -996,14 +1168,23 @@ export async function leaderboard(
       .groupBy(cardInventory.userId, users.name, users.image)
       .orderBy(desc(sql`count(*)`))
       .limit(limit);
-    return { ok: true, entries: rows };
+    return {
+      ok: true,
+      entries: rows.map((r, i) => ({ ...r, rank: i + 1 })),
+    };
   }
+
+  const isMmr = category === "mmr";
   const valueCol =
-    category === "wins"
-      ? profiles.duelWins
-      : category === "mmr"
-        ? profiles.duelRating
-        : profiles.currency;
+    category === "wins" ? profiles.duelWins : isMmr ? profiles.duelRating : profiles.currency;
+
+  // Pour le percentile MMR on a besoin du total de joueurs.
+  let totalPlayers = 0;
+  if (isMmr) {
+    const countRes = await db.select({ n: sql<number>`count(*)::int` }).from(profiles);
+    totalPlayers = countRes[0]?.n ?? 0;
+  }
+
   const rows = await db
     .select({
       userId: profiles.userId,
@@ -1015,7 +1196,18 @@ export async function leaderboard(
     .innerJoin(users, eq(profiles.userId, users.id))
     .orderBy(desc(valueCol))
     .limit(limit);
-  return { ok: true, entries: rows };
+
+  return {
+    ok: true,
+    entries: rows.map((r, i) => {
+      const rank = i + 1;
+      if (isMmr) {
+        const tier = getTier(r.value);
+        return { ...r, rank, tier: tier.name, percentile: percentile(rank, totalPlayers) };
+      }
+      return { ...r, rank };
+    }),
+  };
 }
 
 export async function adminGrant(

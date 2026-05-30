@@ -85,8 +85,41 @@ export const RATES: { MISS: number } & Record<Rarity, number> = {
   SECRET: 1,
 };
 
-/** Pity : après N tirages sans SR+, le suivant est un SUPER_RARE garanti. */
-export const PITY_THRESHOLD = 3;
+/**
+ * Pity SR+ — hard pity garanti.
+ * Un tirage sans SR+ au rang PITY_SR_THRESHOLD est forcé SUPER_RARE.
+ * Doit etre > PITY_SR_SOFT_START.
+ */
+export const PITY_THRESHOLD = 10; // hard pity
+export const PITY_SR_SOFT_START = 6; // le soft-pity commence a monter ici
+
+/**
+ * Pity LEGENDARY — hard pity garanti (compte les pulls depuis la derniere LEGENDARY+).
+ * Soft pity demarre a PITY_LEGENDARY_SOFT_START.
+ * Stocké hors DB (derive de l'historique des transactions), donc non persisté
+ * entre sessions si le serveur redémarre ; c'est acceptable pour un gacha leger.
+ */
+export const PITY_LEGENDARY_THRESHOLD = 80; // hard pity legendary
+export const PITY_LEGENDARY_SOFT_START = 60; // soft pity legendary
+
+/**
+ * Biais wishlist : poids multiplicatif appliqué aux cartes de la wishlist
+ * du joueur lors du pickCard pondéré. 1.0 = aucun biais.
+ */
+export const WISHLIST_BIAS_WEIGHT = 3.0;
+
+/**
+ * Biais "nouvelle carte" : poids multiplicatif appliqué aux cartes non encore
+ * possédées dans le pickCard pondéré. Réduit les doublons sans les supprimer.
+ */
+export const NEW_CARD_BIAS_WEIGHT = 2.0;
+
+/**
+ * Anti-doublon : si un joueur possede deja DUPE_CAP exemplaires d'une carte,
+ * les doublons suivants sont automatiquement convertis en monnaie (prix de vente).
+ * Mettre a Infinity pour desactiver.
+ */
+export const DUPE_CAP = 5;
 
 export const SELL_PRICE: Record<Rarity, number> = {
   COMMON: 5,
