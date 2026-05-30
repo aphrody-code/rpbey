@@ -111,9 +111,18 @@ Schéma source : `packages/db/src/schema.ts` + `relations.ts`. Migration SQL :
   `/api/v1/users/[id]`).
 - Équipes : `apps/web/src/app/(marketing)/equipes` (annuaire + détail public, SEO) et
   `apps/web/src/app/dashboard/team` (création, membres, recrutement, chat, paramètres) +
-  `apps/web/src/components/teams/`.
-- Navigation : lien « Équipes » (Header) et « Mon équipe » (DashboardShell).
+  `apps/web/src/components/teams/`. L'annuaire porte un CTA **« Créer mon équipe »**
+  (en-tête + état vide), session-aware (connecté → `/dashboard/team` où vit
+  `CreateTeamForm`, sinon → `/sign-in`).
+- Navigation : « Équipes » et « Sondages » sont présents dans le rail principal
+  (`IconNav`), le groupe **« Communauté & Site »** du `DashboardShell` (le dashboard
+  n'est plus un cul-de-sac) et **« Site public »** de l'`AdminShell`. « Mon équipe »
+  reste dans le menu perso du dashboard.
 
 ## 6. SEO
 Voir **[Stratégie SEO](seo-strategy.md)** — les pages équipes/profils sont rendues SSR
 avec métadonnées et données structurées, à l'inverse des concurrents (CSR sans sitemap).
+
+## 7. Sondages, Tier Lists & Awards
+Pilier de vote communautaire (page `/sondages`) traité dans son propre document :
+**[Sondages, Tier Lists & Beyblade Awards](polls-awards.md)**.
