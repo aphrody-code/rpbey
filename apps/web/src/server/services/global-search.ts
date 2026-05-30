@@ -495,37 +495,117 @@ export async function buildGlobalSearchIndex(): Promise<GlobalSearchItem[]> {
   return items;
 }
 
-/** Tier-list métagame WBO (bbx-weekly, période la plus large dispo) → items uniformes. */
-async function loadMetaTierList(): Promise<GlobalSearchItem[]> {
+/** Normalise un nom de pièce/blade pour la clé de fusion méta (lowercase,
+ * non-alphanum → tiret, trim) — aligné sur le schéma d'id `meta-…`. */
+function metaNameKey(name: string): string {
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+/** Signaux communautaires d'une blade (X + Reddit + web), agrégés hors-DB. */
+type CommunitySignal = {
+  name: string;
+  communityScore: number;
+  xEngagement: number;
+  redditScore: number;
+  xMentions: number;
+  redditPosts: number;
+};
+
+/** Charge `meta-enrichment.json` (signaux X+Reddit+web par blade) indexé par
+ * nom normalisé. Fichier optionnel : aucune erreur s'il manque (Map vide). */
+async function loadCommunitySignals(): Promise<Map<string, CommunitySignal>> {
   const data = await loadJsonSafe<{
-    periods?: Record<
-      string,
-      {
-        metadata?: { weekId?: string; eventsScanned?: number };
-        categories?: Array<{
-          category?: string;
-          components?: Array<{
-            name?: string;
-            score?: number;
-            synergy?: Array<{ name?: string; score?: number }>;
+    blades?: Array<{
+      name?: string;
+      xMentions?: number;
+      xEngagement?: number;
+      redditPosts?: number;
+      redditScore?: number;
+      webHits?: number;
+      communityScore?: number;
+    }>;
+  }>("data/meta-enrichment.json");
+  const map = new Map<string, CommunitySignal>();
+  for (const b of data?.blades ?? []) {
+    const name = (b.name ?? "").trim();
+    if (!name) continue;
+    map.set(metaNameKey(name), {
+      name,
+      communityScore: typeof b.communityScore === "number" ? b.communityScore : 0,
+      xEngagement: b.xEngagement ?? 0,
+      redditScore: b.redditScore ?? 0,
+      xMentions: b.xMentions ?? 0,
+      redditPosts: b.redditPosts ?? 0,
+    });
+  }
+  return map;
+}
+
+/** Phrase lisible de buzz communautaire injectée dans `details` / `subtitle`. */
+function communityBlurb(sig: CommunitySignal): string {
+  const parts = [`Buzz communauté ${Math.round(sig.communityScore)}/100`];
+  if (sig.xEngagement) parts.push(`${sig.xEngagement} likes X`);
+  if (sig.redditScore) parts.push(`${sig.redditScore} score Reddit`);
+  return parts.join(" · ");
+}
+
+/**
+ * Tier-list métagame WBO (bbx-weekly, période la plus large dispo) → items uniformes,
+ * enrichie des signaux communautaires X+Reddit+web (`meta-enrichment.json`).
+ *
+ * Fusion du score : la `popularity` méta combine le score compétitif WBO (0-100,
+ * placements en tournoi) et le `communityScore` (0-100, buzz X/Reddit/web) en
+ * `max(scoreWBO, communityScore)` — on garde le signal le plus fort des deux axes
+ * (une blade peut être méta sans buzz, ou virale sans podium) plutôt qu'une moyenne
+ * qui diluerait les deux. Le buzz brut reste lisible dans `subtitle`/`details`.
+ * Une blade enrichie sans composant WBO « Blade » correspondant devient un item meta
+ * communautaire (popularity = communityScore). Dédup par nom normalisé : une blade
+ * présente dans les deux sources n'apparaît que sur un seul item meta.
+ */
+async function loadMetaTierList(): Promise<GlobalSearchItem[]> {
+  const [data, community] = await Promise.all([
+    loadJsonSafe<{
+      periods?: Record<
+        string,
+        {
+          metadata?: { weekId?: string; eventsScanned?: number };
+          categories?: Array<{
+            category?: string;
+            components?: Array<{
+              name?: string;
+              score?: number;
+              synergy?: Array<{ name?: string; score?: number }>;
+            }>;
           }>;
-        }>;
-      }
-    >;
-  }>("data/bbx-weekly.json");
+        }
+      >;
+    }>("data/bbx-weekly.json"),
+    loadCommunitySignals(),
+  ]);
   const periods = data?.periods ?? {};
   // Période la plus large (4weeks > 2weeks) pour un échantillon plus stable.
   const period = periods["4weeks"] ?? periods["2weeks"] ?? Object.values(periods)[0];
-  if (!period) return [];
-  const weekId = period.metadata?.weekId ?? "";
-  const events = period.metadata?.eventsScanned;
+  const weekId = period?.metadata?.weekId ?? "";
+  const events = period?.metadata?.eventsScanned;
   const out: GlobalSearchItem[] = [];
-  for (const cat of period.categories ?? []) {
+  // Signaux communautaires consommés lors de la fusion (les restants → items meta dédiés).
+  const usedCommunity = new Set<string>();
+  for (const cat of period?.categories ?? []) {
     const category = (cat.category ?? "").trim();
+    const isBlade = category.toLowerCase() === "blade";
     for (const comp of cat.components ?? []) {
       const name = (comp.name ?? "").trim();
       if (!name) continue;
-      const score = typeof comp.score === "number" ? comp.score : 0;
+      const scoreWbo = typeof comp.score === "number" ? comp.score : 0;
+      // Fusion : on ne rapproche le buzz communautaire que des composants « Blade »
+      // (les signaux enrichis sont par blade, pas par ratchet/bit).
+      const key = metaNameKey(name);
+      const sig = isBlade ? community.get(key) : undefined;
+      if (sig) usedCommunity.add(key);
+      const score = sig ? Math.max(scoreWbo, Math.round(sig.communityScore)) : scoreWbo;
       const synergies = (comp.synergy ?? [])
         .filter((s) => s.name)
         .slice(0, 4)
@@ -534,21 +614,43 @@ async function loadMetaTierList(): Promise<GlobalSearchItem[]> {
       out.push({
         id: `meta-${category}-${name}`.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
         title: name,
-        subtitle: `Méta ${category || "pièce"} · score ${score}/100`,
+        subtitle: `Méta ${category || "pièce"} · score ${score}/100${
+          sig ? ` · ${communityBlurb(sig)}` : ""
+        }`,
         category: "meta",
         url: "/meta",
         details:
           [
             `Tier méta${weekId ? ` ${weekId}` : ""}${events ? ` · ${events} events analysés` : ""}`,
+            sig ? communityBlurb(sig) : "",
             synergies ? `Synergies : ${synergies}` : "",
           ]
             .filter(Boolean)
             .join(" — ") || undefined,
         badge: "Méta",
-        source: "wbo",
+        source: sig ? "wbo+community" : "wbo",
         popularity: score,
       });
     }
+  }
+  // Blades enrichies sans composant WBO « Blade » correspondant : item meta
+  // purement communautaire (popularity = communityScore), dédupé par nom normalisé.
+  for (const [key, sig] of community) {
+    if (usedCommunity.has(key)) continue;
+    const score = Math.round(sig.communityScore);
+    out.push({
+      id: `meta-community-${key}`,
+      title: sig.name,
+      subtitle: `Méta blade · ${communityBlurb(sig)}`,
+      category: "meta",
+      url: "/meta",
+      details: `Buzz communautaire (X ${sig.xMentions} posts / Reddit ${sig.redditPosts} posts) — ${communityBlurb(
+        sig,
+      )}`,
+      badge: "Méta",
+      source: "community",
+      popularity: score,
+    });
   }
   return out;
 }
