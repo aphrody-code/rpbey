@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { buildGlobalSearchIndex } from "@/server/services/global-search";
+import { getSearchCorpus } from "@/server/services/search-corpus";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -11,7 +11,7 @@ export const runtime = "nodejs";
  */
 export async function GET() {
   try {
-    const data = await buildGlobalSearchIndex();
+    const data = await getSearchCorpus();
     return NextResponse.json({ success: true, count: data.length, data });
   } catch (error) {
     const message = error instanceof Error ? error.message : "internal error";
