@@ -79,34 +79,6 @@
   }
 }
 
-.homeActions {
-  display: flex;
-  gap: 12px;
-  margin-top: 24px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-/* Boutons home = vrais md-filled-button / md-filled-tonal-button.
-   On ne fait QUE re-thémer leurs tokens composant : le rouge de marque
-   (--rpb-primary) au lieu du primary M3 (salmon en dark). Forme, ripple,
-   state-layer, focus-ring, taille = gérés par le composant. */
-.homeBtnFilled {
-  --md-filled-button-container-color: var(--rpb-primary, #dc2626);
-  --md-filled-button-label-text-color: #fff;
-  --md-filled-button-hover-label-text-color: #fff;
-  --md-filled-button-focus-label-text-color: #fff;
-  --md-filled-button-pressed-label-text-color: #fff;
-  --md-filled-button-hover-state-layer-color: #fff;
-  --md-filled-button-container-height: 48px;
-}
-
-.homeBtnTonal {
-  --md-filled-tonal-button-container-color: var(--md-sys-color-secondary-container, #653c2a);
-  --md-filled-tonal-button-label-text-color: var(--md-sys-color-on-secondary-container, #ffdbcd);
-  --md-filled-tonal-button-container-height: 48px;
-}
-
 /* ── SERP ── */
 .serpHeader {
   background: var(--md-sys-color-surface-container-low, #271816);

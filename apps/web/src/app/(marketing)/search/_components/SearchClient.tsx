@@ -4,7 +4,6 @@ import * as React from "react";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { AnimatePresence, MotionConfig, motion, useReducedMotion } from "framer-motion";
-import { MdFilledButton, MdFilledTonalButton } from "@aphrody-code/m3-react";
 import { globalSearch } from "@rpbey/api-client";
 import type { GlobalSearchItem, SearchCategory } from "@rpbey/api-contract";
 import { facetCounts, normalize, rankSearch, suggest } from "@/lib/search-rank";
@@ -152,8 +151,6 @@ export function SearchClient({ groups, recommendations }: SearchClientProps) {
     );
   }, [matchedGroup, recommendations]);
 
-  const topReco = recommendations[0] ?? null;
-
   const relatedGroups = React.useMemo((): BxProductGroup[] => {
     if (!matchedGroup) return [];
     return groups.filter((g) => g.key !== matchedGroup.key).slice(0, 6);
@@ -205,11 +202,6 @@ export function SearchClient({ groups, recommendations }: SearchClientProps) {
     }
   }
 
-  function handleLucky() {
-    if (!topReco) return;
-    router.push(`/comparateur/${topReco.slug}`);
-  }
-
   // ── Shimmer de chargement (feedback vrai fetch) ────────────────────────────
   const showShimmer = indexLoading && searchIndex.length === 0;
 
@@ -233,7 +225,7 @@ export function SearchClient({ groups, recommendations }: SearchClientProps) {
                 unoptimized
               />
 
-              {/* Barre de recherche home */}
+              {/* Barre de recherche home — Entrée lance la recherche */}
               <SearchField
                 value={query}
                 suggestions={suggestions}
@@ -242,23 +234,6 @@ export function SearchClient({ groups, recommendations }: SearchClientProps) {
                 onSubmit={handleSubmit}
                 onToggleAi={handleToggleAi}
               />
-
-              {/* Boutons home — vrais composants M3 (ripple/state/focus-ring) */}
-              <div className={styles.homeActions}>
-                <MdFilledButton
-                  className={styles.homeBtnFilled}
-                  onClick={() => handleSubmit(query)}
-                >
-                  Rechercher
-                </MdFilledButton>
-                <MdFilledTonalButton
-                  className={styles.homeBtnTonal}
-                  onClick={handleLucky}
-                  disabled={!topReco}
-                >
-                  J&apos;ai de la chance
-                </MdFilledTonalButton>
-              </div>
             </div>
           </motion.div>
         </div>
