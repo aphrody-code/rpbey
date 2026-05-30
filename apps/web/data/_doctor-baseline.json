@@ -1,0 +1,15 @@
+{
+  "description": "Baseline de volume pour data-doctor (map source → count). Régénéré via --update-baseline.",
+  "generatedAt": "2026-05-30T11:38:29.381Z",
+  "counts": {
+    "bx-catalog": 2927,
+    "x-discussions": 800,
+    "reddit-discussions": 500,
+    "bbx-weekly": 2,
+    "meta-enrichment": 55,
+    "wbo-combos": 1040,
+    "universe_beys": 180,
+    "universe_characters": 79,
+    "beyblade-sites": 254
+  }
+}
