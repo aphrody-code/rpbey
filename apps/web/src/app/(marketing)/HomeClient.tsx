@@ -10,9 +10,8 @@ import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import { alpha } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
-import { domAnimation, LazyMotion, m, useScroll, useTransform } from "framer-motion";
+import { domAnimation, LazyMotion, m } from "framer-motion";
 import Link from "next/link";
-import { useRef } from "react";
 import {
   FeedMyPartnership,
   type MetaPartPreview,
@@ -25,28 +24,17 @@ import {
   type TournamentShowcaseItem,
 } from "@/components/marketing/TournamentShowcase";
 import { VideoCarousel } from "@/components/marketing/VideoCarousel";
-import { LivingBackdrop } from "@/components/ui/LivingBackdrop";
+import { SectionFrameBg } from "@/components/ui/SectionFrameBg";
 
-// Dynamic imports for heavy components below the fold
-
-// MD3 Expressive 2026 - Spring-based easing for organic motion
+// MD3 Expressive 2026 — easing organique.
 const EASE = {
-  // Emphasized - main transitions
   EMPHASIZED: [0.2, 0.0, 0.0, 1.0] as const,
-  // Emphasized Decelerate - entries
   EMPHASIZED_DECELERATE: [0.05, 0.7, 0.1, 1.0] as const,
-  // Emphasized Accelerate - exits
-  EMPHASIZED_ACCELERATE: [0.3, 0.0, 0.8, 0.15] as const,
-  // Standard - subtle transitions
-  STANDARD: [0.2, 0.0, 0, 1.0] as const,
-  // Expressive - playful, bouncy (MD3 2026)
-  EXPRESSIVE: [0.34, 1.56, 0.64, 1] as const,
 };
 
-// --- Scroll-triggered animation variants ---
-
-const sectionVariants = {
-  hidden: { opacity: 0, y: 50 },
+// Entrée de contenu au scroll (le fond de section gère sa propre parallaxe).
+const contentVariants = {
+  hidden: { opacity: 0, y: 40 },
   visible: {
     opacity: 1,
     y: 0,
@@ -56,13 +44,7 @@ const sectionVariants = {
 
 const staggerContainerVariants = {
   hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      delayChildren: 0.15,
-      staggerChildren: 0.12,
-    },
-  },
+  visible: { opacity: 1, transition: { delayChildren: 0.12, staggerChildren: 0.12 } },
 };
 
 const staggerItemVariants = {
@@ -70,17 +52,15 @@ const staggerItemVariants = {
   visible: {
     y: 0,
     opacity: 1,
-    transition: {
-      type: "spring" as const,
-      stiffness: 300,
-      damping: 24,
-    },
+    transition: { type: "spring" as const, stiffness: 300, damping: 24 },
   },
 };
 
-// --- Shared card style ---
+// Carte sur fond de frame : surface translucide + flou → la frame respire derrière.
 const CARD_SX = {
-  bgcolor: "surface.high",
+  bgcolor: (t: { palette: { background: { paper: string } } }) =>
+    alpha(t.palette.background.paper, 0.72),
+  backdropFilter: "blur(12px)",
   borderRadius: 3,
   p: 1,
   overflow: "hidden",
@@ -88,8 +68,15 @@ const CARD_SX = {
   borderColor: "divider",
 } as const;
 
-// --- Section wrapper padding ---
-const SECTION_PY = { xs: 5, md: 8 } as const;
+const SECTION_PY = { xs: 6, md: 9 } as const;
+
+// Une « saison » d'animé par section → le scroll fait défiler les générations.
+const SERIES = {
+  tournaments: "beyblade-x",
+  videos: "metal-fight-beyblade",
+  rankings: "beyblade-burst-chouzetsu",
+  partnership: "bakuten-shoot-beyblade",
+} as const;
 
 interface HomeClientProps {
   activeTournament?: {
@@ -111,6 +98,44 @@ interface HomeClientProps {
   tournaments?: TournamentShowcaseItem[];
 }
 
+/** Section plein-cadre : fond de frame d'animé (parallaxe) + contenu lisible au-dessus. */
+function FrameSection({
+  series,
+  scrim,
+  focus,
+  py,
+  children,
+}: {
+  series: string;
+  scrim?: number;
+  focus?: "top" | "center" | "bottom";
+  py?: boolean;
+  children: React.ReactNode;
+}) {
+  return (
+    <Box
+      component="section"
+      sx={{
+        position: "relative",
+        overflow: "hidden",
+        ...(py ? { py: SECTION_PY } : null),
+      }}
+    >
+      <SectionFrameBg series={series} scrim={scrim} focus={focus} />
+      <Box
+        component={m.div}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.15 }}
+        variants={contentVariants}
+        sx={{ position: "relative", zIndex: 1 }}
+      >
+        {children}
+      </Box>
+    </Box>
+  );
+}
+
 export default function HomeClient({
   activeTournament,
   rankingBoards = [],
@@ -118,135 +143,52 @@ export default function HomeClient({
   recentVideos = [],
   tournaments = [],
 }: HomeClientProps) {
-  // Hero : fondu du contenu au scroll (le fond vivant gère son propre mouvement).
-  const heroRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress: heroScrollProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
-  });
-  const heroContentOpacity = useTransform(heroScrollProgress, [0, 0.6], [1, 0]);
-
   return (
     <LazyMotion features={domAnimation}>
-      {/* Hero Section - MD3 Expressive 2026 */}
-      <Box
-        ref={heroRef}
-        sx={{
-          position: "relative",
-          minHeight: { xs: "44vh", md: "52vh" },
-          display: "flex",
-          alignItems: "center",
-          overflow: "hidden",
-          bgcolor: "black",
-        }}
-      >
-        {/* Fond vivant : frames d'animé (corpus RAG) + braises Pixi, adaptatif/mobile */}
-        <LivingBackdrop intensity={0.82} />
-
-        <m.div style={{ opacity: heroContentOpacity }}>
-          <Container
-            maxWidth="lg"
-            sx={{
-              position: "relative",
-              zIndex: 3,
-              px: { xs: 2.5, md: 4 },
-              py: { xs: 3, md: 5 },
-            }}
-          >
-            <Grid
-              container
-              spacing={6}
+      {/* Tournois — saison Beyblade X. Puce « EN DIRECT » en tête si un tournoi tourne. */}
+      <FrameSection series={SERIES.tournaments} scrim={0.62} focus="center">
+        {activeTournament && (
+          <Container maxWidth="lg" sx={{ pt: { xs: 4, md: 6 }, pb: 0 }}>
+            <Chip
+              icon={<FiberManualRecord sx={{ fontSize: 12, animation: "pulse 1.5s infinite" }} />}
+              label={`EN DIRECT : ${activeTournament.name}`}
+              component={Link}
+              href={`/tournaments/${activeTournament.id}`}
               sx={{
-                alignItems: "center",
+                px: 1,
+                py: 2.5,
+                borderRadius: 3,
+                bgcolor: (t) => alpha(t.palette.primary.main, 0.16),
+                color: "primary.main",
+                fontWeight: 800,
+                border: (t) => `1px solid ${alpha(t.palette.primary.main, 0.4)}`,
+                backdropFilter: "blur(8px)",
+                cursor: "pointer",
+                "&:hover": {
+                  bgcolor: (t) => alpha(t.palette.primary.main, 0.26),
+                  borderColor: "primary.main",
+                },
+                "@keyframes pulse": {
+                  "0%": { opacity: 1 },
+                  "50%": { opacity: 0.5 },
+                  "100%": { opacity: 1 },
+                },
               }}
-            >
-              <Grid size={{ xs: 12, md: 7 }}>
-                <Box
-                  component={m.div}
-                  initial={{ opacity: 0, x: -30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8, ease: EASE.EMPHASIZED }}
-                >
-                  {activeTournament && (
-                    <Box
-                      component={m.div}
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: 0.2 }}
-                    >
-                      <Chip
-                        icon={
-                          <FiberManualRecord
-                            sx={{
-                              fontSize: 12,
-                              animation: "pulse 1.5s infinite",
-                            }}
-                          />
-                        }
-                        label={`EN DIRECT : ${activeTournament.name}`}
-                        component={Link}
-                        href={`/tournaments/${activeTournament.id}`}
-                        sx={{
-                          mb: 3,
-                          px: 1,
-                          py: 2.5,
-                          borderRadius: 3,
-                          bgcolor: (t) => alpha(t.palette.primary.main, 0.1),
-                          color: "primary.main",
-                          fontWeight: 800,
-                          border: (t) => `1px solid ${alpha(t.palette.primary.main, 0.3)}`,
-                          backdropFilter: "blur(8px)",
-                          cursor: "pointer",
-                          "&:hover": {
-                            bgcolor: (t) => alpha(t.palette.primary.main, 0.2),
-                            borderColor: "primary.main",
-                          },
-                          "@keyframes pulse": {
-                            "0%": { opacity: 1 },
-                            "50%": { opacity: 0.5 },
-                            "100%": { opacity: 1 },
-                          },
-                        }}
-                      />
-                    </Box>
-                  )}
-                </Box>
-              </Grid>
-            </Grid>
+            />
           </Container>
-        </m.div>
-      </Box>
-      {/* Tournament Showcase Section */}
-      <Box
-        component={m.section}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.15 }}
-        variants={sectionVariants}
-      >
+        )}
         <TournamentShowcase tournaments={tournaments} />
-      </Box>
-      {/* Videos Section */}
+      </FrameSection>
+
+      {/* Vidéos — saison Metal Fight. */}
       {recentVideos.length > 0 && (
-        <Box
-          component={m.section}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.15 }}
-          variants={sectionVariants}
-        >
+        <FrameSection series={SERIES.videos} scrim={0.66} focus="center">
           <VideoCarousel videos={recentVideos} />
-        </Box>
+        </FrameSection>
       )}
-      {/* Ranking + Meta Section */}
-      <Box
-        component={m.section}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.15 }}
-        variants={sectionVariants}
-        sx={{ bgcolor: "surface.low", py: SECTION_PY }}
-      >
+
+      {/* Classements + Meta — saison Burst. */}
+      <FrameSection series={SERIES.rankings} scrim={0.74} focus="top" py>
         <Container maxWidth="lg">
           <Box
             component={m.div}
@@ -257,40 +199,23 @@ export default function HomeClient({
           >
             <Grid container spacing={4}>
               <Grid size={12} component={m.div} variants={staggerItemVariants}>
-                <Card
-                  variant="elevation"
-                  sx={{
-                    ...CARD_SX,
-                    height: "100%",
-                  }}
-                >
+                <Card variant="elevation" sx={{ ...CARD_SX, height: "100%" }}>
                   <CardContent>
                     <Stack
                       direction="row"
-                      sx={{
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        mb: 3,
-                      }}
+                      sx={{ justifyContent: "space-between", alignItems: "center", mb: 3 }}
                     >
                       <Box>
                         <Typography
                           variant="h5"
                           component="h2"
-                          sx={{
-                            fontWeight: 900,
-                            color: "text.primary",
-                            letterSpacing: "-0.02em",
-                          }}
+                          sx={{ fontWeight: 900, color: "text.primary", letterSpacing: "-0.02em" }}
                         >
                           Classements Live
                         </Typography>
                         <Typography
                           variant="caption"
-                          sx={{
-                            color: "text.secondary",
-                            fontWeight: 600,
-                          }}
+                          sx={{ color: "text.secondary", fontWeight: 600 }}
                         >
                           BTS · WILD BREAKERS · SATR · STARDUST
                         </Typography>
@@ -300,30 +225,29 @@ export default function HomeClient({
                           width: 8,
                           height: 8,
                           borderRadius: "50%",
-                          bgcolor: "#22c55e",
-                          boxShadow: "0 0 12px #22c55e",
+                          bgcolor: "success.main",
+                          boxShadow: (t) => `0 0 12px ${t.palette.success.main}`,
                           animation: "pulse 2s infinite",
+                          "@keyframes pulse": {
+                            "0%": { opacity: 1 },
+                            "50%": { opacity: 0.5 },
+                            "100%": { opacity: 1 },
+                          },
                         }}
                       />
                     </Stack>
-
                     <RankingsCarousel boards={rankingBoards} />
                   </CardContent>
                 </Card>
               </Grid>
 
-              {/* Meta Preview */}
               {metaParts.length > 0 && (
                 <Grid size={12} component={m.div} variants={staggerItemVariants}>
                   <Card variant="elevation" sx={CARD_SX}>
                     <CardContent>
                       <Stack
                         direction="row"
-                        sx={{
-                          justifyContent: "space-between",
-                          alignItems: "center",
-                          mb: 3,
-                        }}
+                        sx={{ justifyContent: "space-between", alignItems: "center", mb: 3 }}
                       >
                         <Box>
                           <Typography
@@ -339,10 +263,7 @@ export default function HomeClient({
                           </Typography>
                           <Typography
                             variant="caption"
-                            sx={{
-                              color: "text.secondary",
-                              fontWeight: 600,
-                            }}
+                            sx={{ color: "text.secondary", fontWeight: 600 }}
                           >
                             TOP PIECES PAR CATEGORIE - WBO
                           </Typography>
@@ -361,7 +282,6 @@ export default function HomeClient({
                           }}
                         />
                       </Stack>
-
                       <MetaPreview parts={metaParts} />
                     </CardContent>
                   </Card>
@@ -370,20 +290,14 @@ export default function HomeClient({
             </Grid>
           </Box>
         </Container>
-      </Box>
-      {/* Partnership Section */}
-      <Box
-        component={m.section}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={sectionVariants}
-        sx={{ py: SECTION_PY }}
-      >
+      </FrameSection>
+
+      {/* Partenariat — saison classique (Bakuten Shoot). */}
+      <FrameSection series={SERIES.partnership} scrim={0.7} focus="center" py>
         <Container maxWidth="lg">
           <FeedMyPartnership />
         </Container>
-      </Box>
+      </FrameSection>
     </LazyMotion>
   );
 }

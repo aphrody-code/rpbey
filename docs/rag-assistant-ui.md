@@ -1,13 +1,13 @@
 ---
 title: "Assistant RAG conversationnel & UI d'ambiance"
-description: "Couche de consommation du RAG rpbey : chat « Rpbey » style Gemini branché au NLP algorithmique (zéro LLM) sur la recherche hybride, et fonds d'ambiance par page (frames d'animé, PixiJS) tirés du corpus."
+description: "Couche de consommation du RAG rpbey : chat « Rpbey » style Gemini branché au NLP algorithmique (zéro LLM) sur la recherche hybride, et fonds d'ambiance par page/section (frames d'animé, parallaxe au scroll) tirés du corpus."
 scope:
   - apps/web/src/server/services/chat.ts
   - apps/web/src/lib/chat-nlp.ts
   - apps/web/src/app/api/chat
   - apps/web/src/components/chat
   - apps/web/src/components/ui/FrameBackdrop.tsx
-  - apps/web/src/components/ui/LivingBackdrop.tsx
+  - apps/web/src/components/ui/SectionFrameBg.tsx
   - apps/web/src/app/api/v1/anime/frames/ambient
 status: "stable"
 last_updated: "2026-05-30"
@@ -17,7 +17,7 @@ related_symbols:
   - RpbeyChat
   - RpbeyChatLauncher
   - FrameBackdrop
-  - LivingBackdrop
+  - SectionFrameBg
 ---
 
 # Assistant RAG conversationnel & UI d'ambiance
@@ -60,18 +60,15 @@ thème actif.
 | --- | --- | --- |
 | Route ambient | `apps/web/src/app/api/v1/anime/frames/ambient/route.ts` | `GET …?series=&count=` — sert un échantillon léger d'URLs **lu directement des JSON** (échantillon stridé, repli diversifié). Indépendant de l'import DB lourd `anime_frames` (re-hébergement CDN, souvent non exécuté). |
 | Fond de page | `apps/web/src/components/ui/FrameBackdrop.tsx` | Fond fixe `z-index:-1` derrière le contenu : frame keyée par série + **teinte thème** (`--rpb-primary-rgb`), Ken Burns, scrim `color-mix` (contraste AA), `prefers-reduced-motion`. Câblé sur `anime`, `anime/[slug]`, `meta`, `builder`, `comparateur`. |
-| Hero vivant | `apps/web/src/components/ui/LivingBackdrop.tsx` | Fond du hero home : frame en Ken Burns CSS + calque **PixiJS v8** de braises **procédurales** (texture canvas runtime). Hero **épuré** (commit `7a501b4`) : gros titre + tagline + 2 CTAs retirés, ne reste que la puce « EN DIRECT » + le fond ; `minHeight` 44/52vh, frame **prominente** (`intensity` 0.82, voile léger 26/8/92 %). Perf mobile : DPR capé 2, `maxFPS=30`, pause `visibilitychange`, désactivé en reduced-motion, `app.destroy()` au démontage, fallback si WebGL absent. `import("pixi.js")` dynamique (hors bundle initial). |
-
-> `pixi.js` est dep de `apps/web` (et `apps/gacha-client`). Toujours via import
-> dynamique dans un `useEffect` — Pixi est WebGL/browser-only, jamais en SSR.
+| Fond de section (home) | `apps/web/src/components/ui/SectionFrameBg.tsx` | Fond plein-cadre **par section** de la home : une frame d'animé (« meilleur moment » d'une saison) en `background-image`, avec **parallaxe + scale au scroll** (framer-motion `useScroll`/`useTransform`) et fondu d'apparition. La home n'a **plus de hero/header** : chaque section porte sa saison (Tournois→Beyblade X, Vidéos→Metal Fight, Classements/Meta→Burst, Partenariat→Bakuten) → le scroll fait défiler les générations. Scrim vertical (dense aux jointures, clair au centre) pour la lisibilité du contenu. Parallaxe coupée en `prefers-reduced-motion`. Pas de Pixi (CSS pur, perf sur page longue). |
 
 > ⚠️ **Frames chargées en direct depuis le CDN**, jamais via le proxy `/api/img`
-> (commit `7a501b4`). Une frame est un `background-image` CSS décoratif → **aucun
-> CORS requis**. Le proxy ferait deux dégâts : (1) `cdn.rpbey.fr` **n'est pas dans
-> `ALLOWED_IMAGE_HOSTS`** (`lib/img-proxy.ts`) → **403** → fond invisible ; (2) il
-> applique `removeUniformLightBackground` (détourage produit) → troue les ciels /
-> aplats clairs des frames. Régression vécue : avant le fix, seul le dégradé de
-> marque s'affichait.
+> (commits `7a501b4`, `SectionFrameBg`). Une frame est un `background-image` CSS
+> décoratif → **aucun CORS requis**. Le proxy ferait deux dégâts : (1) `cdn.rpbey.fr`
+> **n'est pas dans `ALLOWED_IMAGE_HOSTS`** (`lib/img-proxy.ts`) → **403** → fond
+> invisible ; (2) il applique `removeUniformLightBackground` (détourage produit) →
+> troue les ciels / aplats clairs des frames. Régression vécue : avant le fix, seul
+> le dégradé de marque s'affichait.
 
 ## Invariants
 
@@ -80,8 +77,8 @@ thème actif.
 - **Découplage API** : `/api/chat` ne dépend pas de `@rpbey/api-contract`
   (validation inline) — évolue sans toucher le contrat partagé.
 - **Dégradation gracieuse** : sidecar embeddings / Redis absent → `fuseHybrid`
-  préserve l'ordre BM25F ; WebGL absent → `LivingBackdrop` reste sur l'image CSS ;
-  frames indisponibles → dégradé de marque (jamais d'état vide).
+  préserve l'ordre BM25F ; frames indisponibles / lentes → dégradé de marque visible
+  d'emblée (jamais d'état vide) ; `prefers-reduced-motion` → parallaxe coupée.
 - **Hands-off** : le chat est monté via le layout marketing, sans toucher
   `app/(marketing)/search/_components/*` (refonte M3 en cours, cf.
   [plan de refonte search](m3/search-redesign-plan.md)).
