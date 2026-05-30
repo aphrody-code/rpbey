@@ -106,6 +106,7 @@ export async function buildGlobalSearchIndex(): Promise<GlobalSearchItem[]> {
           : "Prix non dispo",
         badge: group.code || undefined,
         price: group.cheapestEur,
+        source: "catalog",
       });
     }
   }
@@ -129,6 +130,7 @@ export async function buildGlobalSearchIndex(): Promise<GlobalSearchItem[]> {
       url: `/parts`,
       details: `Type: ${part.type} | Poids: ${part.weight ? part.weight + "g" : "non dispo"}`,
       badge: `Tier ${tier}`,
+      source: "db",
     });
   }
 
@@ -144,6 +146,7 @@ export async function buildGlobalSearchIndex(): Promise<GlobalSearchItem[]> {
       url: `/tournaments/${t.id}`,
       details: `Statut: ${t.status} | Format: ${t.format}`,
       badge: t.status,
+      source: "db",
     });
   }
 
@@ -190,6 +193,8 @@ export async function buildGlobalSearchIndex(): Promise<GlobalSearchItem[]> {
       url: `/rankings`,
       details: info.score ? `Score de saison: ${info.score} pts` : "Blader compétitif",
       badge: "Blader",
+      source: "db",
+      popularity: info.score ?? undefined,
     });
   }
 
@@ -211,6 +216,7 @@ export async function buildGlobalSearchIndex(): Promise<GlobalSearchItem[]> {
       url: "",
       details: term.definition,
       badge: term.popularityTier && term.popularityTier !== "Low" ? term.popularityTier : "Lexique",
+      source: "lexicon",
     });
   }
 
@@ -228,6 +234,7 @@ export async function buildGlobalSearchIndex(): Promise<GlobalSearchItem[]> {
       details:
         s.synopsis ?? `Série Beyblade${s.episodeCount ? ` · ${s.episodeCount} épisodes` : ""}`,
       badge: "Anime",
+      source: "db",
     });
   }
 
@@ -251,6 +258,7 @@ export async function buildGlobalSearchIndex(): Promise<GlobalSearchItem[]> {
       url: site.url,
       details: site.domain,
       badge: "Site",
+      source: "site",
     });
   }
 
@@ -264,6 +272,7 @@ export async function buildGlobalSearchIndex(): Promise<GlobalSearchItem[]> {
       url: page.url,
       details: page.desc,
       badge: "Page",
+      source: "site",
     });
   }
 
@@ -344,6 +353,8 @@ export async function buildGlobalSearchIndex(): Promise<GlobalSearchItem[]> {
         ? `Top: ${c.player}${c.event ? ` (${c.event})` : ""}`
         : "Combinaison vue en tournoi WBO",
       badge: c.best === 1 ? "Combo gagnant" : "Combo",
+      source: "wbo",
+      popularity: c.count,
     });
   }
 
@@ -374,6 +385,7 @@ export async function buildGlobalSearchIndex(): Promise<GlobalSearchItem[]> {
       url: bey.url || `/search?q=${encodeURIComponent(title)}`,
       details: bey.summary?.trim() || "Toupie Beyblade (encyclopédie, toutes générations)",
       badge: "Bey",
+      source: "wiki",
     });
   }
 
@@ -397,6 +409,7 @@ export async function buildGlobalSearchIndex(): Promise<GlobalSearchItem[]> {
       url: ch.url || `/search?q=${encodeURIComponent(title)}`,
       details: ch.summary?.trim() || "Personnage de l'univers Beyblade",
       badge: "Personnage",
+      source: "wiki",
     });
   }
 
@@ -413,8 +426,97 @@ export async function buildGlobalSearchIndex(): Promise<GlobalSearchItem[]> {
       thumbnail: f.thumbUrl ?? f.imageUrl,
       details: [f.caption?.trim(), chars, f.generation].filter(Boolean).join(" · ") || undefined,
       badge: "Frame",
+      source: "wiki",
     });
   }
 
+  // 13. Discussions communautaires (RAG) — X.com (tweets Beyblade triés/nettoyés)
+  // + Reddit (r/Beyblade, r/BeybladeX). Corpus exploité par la recherche : le contenu
+  // est cherchable plein-texte (texte complet dans `details`, poids BM25F 1).
+  for (const d of await loadXDiscussions()) {
+    items.push(d);
+  }
+  for (const d of await loadRedditDiscussions()) {
+    items.push(d);
+  }
+
   return items;
+}
+
+/** Tronque un texte au mot, pour un titre de résultat lisible. */
+function lead(text: string, max = 120): string {
+  const t = text.replace(/\s+/g, " ").trim();
+  if (t.length <= max) return t;
+  const cut = t.slice(0, max);
+  const sp = cut.lastIndexOf(" ");
+  return `${(sp > max * 0.6 ? cut.slice(0, sp) : cut).trimEnd()}…`;
+}
+
+/** Discussions X.com (tweets Beyblade nettoyés/classés) → items uniformes. */
+async function loadXDiscussions(): Promise<GlobalSearchItem[]> {
+  const data = await loadJsonSafe<{
+    discussions?: Array<{
+      id: string;
+      author: string;
+      authorName?: string;
+      text: string;
+      likes?: number;
+      retweets?: number;
+      url: string;
+      topic?: string;
+    }>;
+  }>("data/x-discussions.json");
+  const out: GlobalSearchItem[] = [];
+  for (const d of data?.discussions ?? []) {
+    const text = (d.text ?? "").trim();
+    if (!text) continue;
+    out.push({
+      id: `tweet-${d.id}`,
+      title: lead(text),
+      subtitle: `@${d.author}${d.likes ? ` · ${d.likes} ❤` : ""}`,
+      category: "discussion",
+      url: d.url,
+      details: text,
+      badge: "Discussion",
+      source: "x",
+      popularity: (d.likes ?? 0) + (d.retweets ?? 0) * 2,
+    });
+  }
+  return out;
+}
+
+/** Discussions Reddit (r/Beyblade, r/BeybladeX) → items uniformes. Absent tant que
+ * le crawler n'a pas tourné (le fichier est optionnel ; aucune erreur si manquant). */
+async function loadRedditDiscussions(): Promise<GlobalSearchItem[]> {
+  const data = await loadJsonSafe<{
+    discussions?: Array<{
+      id: string;
+      subreddit?: string;
+      author?: string;
+      title?: string;
+      text?: string;
+      score?: number;
+      comments?: number;
+      url: string;
+    }>;
+  }>("data/reddit-discussions.json");
+  const out: GlobalSearchItem[] = [];
+  for (const d of data?.discussions ?? []) {
+    const title = (d.title ?? "").trim();
+    const body = (d.text ?? "").trim();
+    if (!title && !body) continue;
+    const sub = d.subreddit ? `r/${d.subreddit.replace(/^r\//, "")}` : "Reddit";
+    out.push({
+      id: `reddit-${d.id}`,
+      title: title || lead(body),
+      subtitle: `${sub}${d.author ? ` · ${d.author.replace(/^u\//, "u/")}` : ""}`,
+      category: "discussion",
+      url: d.url,
+      details: body || title,
+      badge: "Reddit",
+      source: "reddit",
+      popularity: (d.score ?? 0) + (d.comments ?? 0),
+    });
+  }
+  return out;
 }

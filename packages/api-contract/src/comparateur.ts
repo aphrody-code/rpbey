@@ -94,6 +94,7 @@ export const SearchCategorySchema = z.enum([
   "frame",
   "site",
   "page",
+  "discussion",
 ]);
 export type SearchCategory = z.infer<typeof SearchCategorySchema>;
 
@@ -108,6 +109,10 @@ export const GlobalSearchItemSchema = z.object({
   price: z.number().nullable().optional(),
   /** Vignette image (résultats visuels « Google Images » : frames d'anime, etc.). */
   thumbnail: z.string().optional(),
+  /** Provenance de la donnée dans le corpus unifié (`db`, `catalog`, `x`, `reddit`, `wbo`, `wiki`, `site`…). */
+  source: z.string().optional(),
+  /** Signaux d'engagement/popularité bruts (likes, score Reddit, fréquence combo…) — tri secondaire. */
+  popularity: z.number().optional(),
   /** Score de pertinence (présent uniquement sur une réponse triée par requête). */
   score: z.number().optional(),
 });

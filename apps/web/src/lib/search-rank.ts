@@ -356,6 +356,7 @@ const CATEGORY_BOOST: Record<string, number> = {
   frame: 0.9,
   lexicon: 0.85,
   site: 0.8,
+  discussion: 0.78,
   page: 0.75,
 };
 
@@ -398,6 +399,13 @@ export function rankSearch(
     const tierKey = tierMatch?.[1];
     if (tierKey) score += TIER_BONUS[tierKey] ?? 0;
     if (typeof doc.item.price === "number" && doc.item.price > 0) score += 1;
+
+    // Engagement (likes tweet, score Reddit, fréquence combo…) : bonus log-scalé,
+    // plafonné à +2 pour départager des résultats de pertinence proche sans jamais
+    // dominer le signal textuel BM25F.
+    if (typeof doc.item.popularity === "number" && doc.item.popularity > 0) {
+      score += Math.min(2, Math.log10(1 + doc.item.popularity));
+    }
 
     score *= CATEGORY_BOOST[doc.item.category] ?? 1;
     ranked.push({ ...doc.item, score });

@@ -83,7 +83,8 @@ export const zGlobalSearchQuery = z.object({
         'anime',
         'frame',
         'site',
-        'page'
+        'page',
+        'discussion'
     ]).optional(),
     limit: z.int().gt(0).lte(500).optional()
 });
@@ -109,13 +110,16 @@ export const zGlobalSearchResponse = z.object({
                 'anime',
                 'frame',
                 'site',
-                'page'
+                'page',
+                'discussion'
             ]),
             url: z.string(),
             details: z.string().optional(),
             badge: z.string().optional(),
             price: z.number().nullish(),
             thumbnail: z.string().optional(),
+            source: z.string().optional(),
+            popularity: z.number().optional(),
             score: z.number().optional()
         })),
         query: z.string().optional(),
