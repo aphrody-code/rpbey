@@ -4,6 +4,7 @@ import * as React from "react";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { AnimatePresence, MotionConfig, motion, useReducedMotion } from "framer-motion";
+import { MdFilledButton, MdFilledTonalButton } from "@aphrody-code/m3-react";
 import { globalSearch } from "@rpbey/api-client";
 import type { GlobalSearchItem, SearchCategory } from "@rpbey/api-contract";
 import { facetCounts, normalize, rankSearch, suggest } from "@/lib/search-rank";
@@ -242,24 +243,21 @@ export function SearchClient({ groups, recommendations }: SearchClientProps) {
                 onToggleAi={handleToggleAi}
               />
 
-              {/* Boutons home */}
+              {/* Boutons home — vrais composants M3 (ripple/state/focus-ring) */}
               <div className={styles.homeActions}>
-                <button
-                  type="button"
-                  className={`${styles.homeBtn} ${styles.homeBtnFilled}`}
+                <MdFilledButton
+                  className={styles.homeBtnFilled}
                   onClick={() => handleSubmit(query)}
                 >
                   Rechercher
-                </button>
-                <button
-                  type="button"
-                  className={`${styles.homeBtn} ${styles.homeBtnTonal}`}
+                </MdFilledButton>
+                <MdFilledTonalButton
+                  className={styles.homeBtnTonal}
                   onClick={handleLucky}
                   disabled={!topReco}
-                  title={topReco ? `Meilleure reco : ${topReco.name}` : "Calcul en cours…"}
                 >
                   J&apos;ai de la chance
-                </button>
+                </MdFilledTonalButton>
               </div>
             </div>
           </motion.div>

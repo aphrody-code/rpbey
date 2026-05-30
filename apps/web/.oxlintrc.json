@@ -1,6 +1,7 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
   "plugins": ["import", "typescript", "react", "jsx-a11y", "nextjs", "unicorn"],
+  "jsPlugins": ["../../node_modules/@aphrody-code/eslint-plugin-m3/index.js"],
   "env": {
     "browser": true,
     "node": true
@@ -69,6 +70,19 @@
       "rules": {
         "typescript/no-explicit-any": "off",
         "no-console": "off"
+      }
+    },
+    {
+      "files": ["**/search/_components/**"],
+      "rules": {
+        "m3/valid-color-role": "error",
+        "m3/valid-icon-name": "error",
+        "m3/no-sx-prop": "error",
+        "m3/no-mui-prop-on-md": "error",
+        "m3/no-mui-import": "error",
+        "m3/prefer-icon-token": "warn",
+        "m3/require-icon-button-label": "warn",
+        "m3/no-hardcoded-color": "warn"
       }
     }
   ]

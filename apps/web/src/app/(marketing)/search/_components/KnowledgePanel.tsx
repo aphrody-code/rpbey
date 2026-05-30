@@ -1,6 +1,9 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import Link from "next/link";
+import { MdFilledButton } from "@aphrody-code/m3-react";
+import { applyDynamicColor, clearDynamicColor, dominantColorFromImage } from "@/lib/m3-dynamic";
 import type { BxProductGroup, RecommendedProduct } from "../../comparateur/_components/types";
 import styles from "./KnowledgePanel.module.css";
 
@@ -71,8 +74,26 @@ export function KnowledgePanel({ group, reco, related }: KnowledgePanelProps) {
   const parts = reco?.includedParts ?? [];
   const tier = reco?.includedParts[0]?.tier ?? null;
 
+  // Material You : reteinte le panel autour de la couleur dominante du produit
+  // (m3-tokens dynamic-color). Fallback marque si image absente / cross-origin.
+  const panelRef = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const el = panelRef.current;
+    if (!el || !image) return;
+    let cancelled = false;
+    dominantColorFromImage(image).then((seed) => {
+      if (cancelled || !panelRef.current) return;
+      if (seed)
+        applyDynamicColor(seed, { dark: true, variant: "vibrant", target: panelRef.current });
+    });
+    return () => {
+      cancelled = true;
+      clearDynamicColor(el);
+    };
+  }, [image]);
+
   return (
-    <aside className={styles.panel} aria-label={`Fiche ${group.name}`}>
+    <aside ref={panelRef} className={styles.panel} aria-label={`Fiche ${group.name}`}>
       <h2 className={styles.title}>{group.name}</h2>
 
       {/* Image produit */}
@@ -131,11 +152,13 @@ export function KnowledgePanel({ group, reco, related }: KnowledgePanelProps) {
         </div>
       )}
 
-      {/* CTA */}
-      <Link href={`/comparateur/${slug}`} className={styles.cta}>
-        <IconCart />
+      {/* CTA — vrai md-filled-button (ripple/state/focus), thémé marque */}
+      <MdFilledButton href={`/comparateur/${slug}`} className={styles.cta}>
+        <span slot="icon" className={styles.ctaIcon}>
+          <IconCart />
+        </span>
         Comparer {group.shopCount} offre{group.shopCount > 1 ? "s" : ""}
-      </Link>
+      </MdFilledButton>
 
       <div className={styles.divider} aria-hidden="true" />
 
