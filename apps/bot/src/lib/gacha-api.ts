@@ -268,41 +268,6 @@ export type FusionResult = ContractFusionResult;
 export type LeaderboardEntry = GameLeaderboardEntry;
 export type GiftResult = ContractGiftResult;
 
-// ─── Duel / Trade async — propres au client (pas dans le contrat REST partagé) ─
-export interface DuelProposal {
-  id: string;
-  challengerId: string;
-  opponentId: string;
-  bet: number;
-  status: string;
-  expiresAt: string;
-}
-
-export interface DuelState {
-  id: string;
-  challengerId: string;
-  opponentId: string;
-  bet: number;
-  status: string;
-  currentRound: number;
-  challengerHp: number;
-  opponentHp: number;
-  log: string[];
-  winnerId: string | null;
-  finished: boolean;
-  finishLabel: string | null;
-}
-
-export interface TradeProposal {
-  id: string;
-  fromUserId: string;
-  toUserId: string;
-  offeredCardId: string;
-  requestedCardId: string;
-  status: string;
-  createdAt: string;
-}
-
 // ─── Error type ───────────────────────────────────────────────────────────────
 
 export class GachaApiError extends Error {
@@ -347,29 +312,6 @@ export interface GachaApiClient {
     category: "currency" | "wins" | "mmr" | "collection",
     limit?: number,
   ): Promise<LeaderboardEntry[]>;
-  // Duel (async TCG flow)
-  duelPropose(opts: {
-    opponentUserId: string;
-    bet?: number;
-    cardIds?: string[];
-  }): Promise<DuelProposal>;
-  duelAccept(id: string): Promise<DuelState>;
-  duelDecline(id: string): Promise<{ ok: boolean }>;
-  duelPlay(
-    id: string,
-  ): Promise<DuelState & { finished: boolean; winnerId?: string; finishLabel?: string }>;
-  duelForfeit(id: string): Promise<DuelState>;
-  duelActive(): Promise<DuelState | null>;
-  duelHistory(limit?: number): Promise<DuelState[]>;
-  // Trade
-  tradePropose(opts: {
-    toUserId: string;
-    offeredCardId: string;
-    requestedCardId: string;
-  }): Promise<TradeProposal>;
-  tradeAccept(id: string): Promise<{ ok: boolean }>;
-  tradeDecline(id: string): Promise<{ ok: boolean }>;
-  tradePending(): Promise<TradeProposal[]>;
   // Admin (requires admin role on caller)
   adminGrant(targetUserId: string, amount: number, note?: string): Promise<{ newBalance: number }>;
 }
@@ -585,69 +527,6 @@ export async function createGachaClient(
         { limit },
       );
       return r.entries;
-    },
-
-    // ── Duel (async TCG) ──
-    async duelPropose({ opponentUserId, bet, cardIds }) {
-      const r = await post<{ ok: boolean; result: DuelProposal }>("/api/duel/propose", {
-        opponentUserId,
-        bet,
-        cardIds,
-      });
-      return r.result;
-    },
-    async duelAccept(id) {
-      const r = await post<{ ok: boolean; result: DuelState }>(`/api/duel/${id}/accept`);
-      return r.result;
-    },
-    async duelDecline(id) {
-      await post(`/api/duel/${id}/decline`);
-      return { ok: true };
-    },
-    async duelPlay(id) {
-      const r = await post<{
-        ok: boolean;
-        result: DuelState & {
-          finished: boolean;
-          winnerId?: string;
-          finishLabel?: string;
-        };
-      }>(`/api/duel/${id}/play`);
-      return r.result;
-    },
-    async duelForfeit(id) {
-      const r = await post<{ ok: boolean; result: DuelState }>(`/api/duel/${id}/forfeit`);
-      return r.result;
-    },
-    async duelActive() {
-      const r = await get<{ ok: boolean; duel: DuelState | null }>("/api/duel/active");
-      return r.duel;
-    },
-    async duelHistory(limit) {
-      const r = await get<{ ok: boolean; items: DuelState[] }>("/api/duel/history", { limit });
-      return r.items;
-    },
-
-    // ── Trade ──
-    async tradePropose({ toUserId, offeredCardId, requestedCardId }) {
-      const r = await post<{ ok: boolean; proposal: TradeProposal }>("/api/trade/propose", {
-        toUserId,
-        offeredCardId,
-        requestedCardId,
-      });
-      return r.proposal;
-    },
-    async tradeAccept(id) {
-      await post(`/api/trade/${id}/accept`);
-      return { ok: true };
-    },
-    async tradeDecline(id) {
-      await post(`/api/trade/${id}/decline`);
-      return { ok: true };
-    },
-    async tradePending() {
-      const r = await get<{ ok: boolean; items: TradeProposal[] }>("/api/trade/pending");
-      return r.items;
     },
 
     // ── Admin ──

@@ -82,18 +82,6 @@ function authed(fn: (user: AuthUser, req: Req) => Promise<unknown> | unknown) {
   };
 }
 
-function notImplemented(feature: string) {
-  return (_req: Req, res: Res) => {
-    res.status(501).json({
-      ok: false,
-      error: {
-        code: "NOT_IMPLEMENTED",
-        message: `${feature} non disponible`,
-      },
-    });
-  };
-}
-
 export function mountRest(app: ExpressApp): void {
   // ── Gacha ──
   app.post(
@@ -189,15 +177,4 @@ export function mountRest(app: ExpressApp): void {
   app.get("/api/cards/:id/image.png", (req: Req, res: Res) => {
     res.redirect(302, `${WEB_BASE}/api/gacha/card?id=${encodeURIComponent(req.params.id ?? "")}`);
   });
-
-  // ── Duel / Trade async : non réimplémentés côté REST (routes paramétrées, pas de wildcard) ──
-  const duelNI = notImplemented("Duel asynchrone");
-  app.post("/api/duel/propose", duelNI);
-  app.get("/api/duel/active", duelNI);
-  app.get("/api/duel/history", duelNI);
-  app.post("/api/duel/:id/:action", duelNI);
-  const tradeNI = notImplemented("Échange asynchrone");
-  app.post("/api/trade/propose", tradeNI);
-  app.get("/api/trade/pending", tradeNI);
-  app.post("/api/trade/:id/:action", tradeNI);
 }

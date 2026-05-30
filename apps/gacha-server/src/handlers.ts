@@ -1234,8 +1234,3 @@ export async function adminGrant(
   });
   return { ok: true, newBalance: out.newBalance, prevBalance: out.prevBalance };
 }
-
-/** Duel/Trade temps-réel async : non réimplémentés côté REST (cf. docs/gacha/bot.md). */
-export function notImplemented(feature: string): never {
-  throw new ApiError("NOT_IMPLEMENTED", `${feature} non disponible sur ce serveur`, 501);
-}

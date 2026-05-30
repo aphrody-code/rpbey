@@ -263,7 +263,6 @@ export class EconomyGroup {
             "`/gacha classement` — Top collectionneurs + top fortunes",
             "`/gacha drop` — Info sur le drop actif et ta progression",
             "`/gacha donner @user <montant>` — Donne des pièces (12h cooldown)",
-            "`/gacha echange @user <ta-carte> <sa-carte>` — Échange de cartes",
             "`/gacha taux` — Tableau des mécaniques",
             "`/gacha admin-give @user <montant>` — [ADMIN] Donner/retirer des 🪙",
           ].join("\n"),
@@ -1887,131 +1886,6 @@ export class EconomyGroup {
         ),
       ],
     });
-  }
-
-  // ═══ /gacha echange — Trade a card with another player ═══
-  // This is the legacy direct trade. The new async trade flow is via /api/trade/
-  // but the slash-command user experience is kept synchronous here for simplicity.
-  // Uses the gacha API trade endpoints for atomicity.
-  @Slash({ name: "echange", description: "Échange une carte avec un autre joueur" })
-  async tradeCard(
-    @SlashOption({
-      name: "adversaire",
-      description: "Le joueur avec qui échanger",
-      required: true,
-      type: ApplicationCommandOptionType.User,
-    })
-    target: { id: string; displayName: string; bot?: boolean },
-    @SlashOption({
-      name: "ta-carte",
-      description: "Nom de la carte que tu donnes",
-      required: true,
-      type: ApplicationCommandOptionType.String,
-    })
-    myCardName: string,
-    @SlashOption({
-      name: "sa-carte",
-      description: "Nom de la carte que tu veux",
-      required: true,
-      type: ApplicationCommandOptionType.String,
-    })
-    theirCardName: string,
-    interaction: CommandInteraction,
-  ) {
-    if (target.id === interaction.user.id) {
-      return interaction.reply({
-        content: "❌ Tu ne peux pas échanger avec toi-même !",
-        flags: MessageFlags.Ephemeral,
-      });
-    }
-    if (target.bot) {
-      return interaction.reply({
-        content: "❌ Pas d'échange avec un bot !",
-        flags: MessageFlags.Ephemeral,
-      });
-    }
-
-    await interaction.deferReply();
-
-    let myApi: GachaApiClient;
-    try {
-      myApi = await this.api(interaction);
-    } catch (err) {
-      console.error(`[gacha:${interaction.commandName}] api init failed`, err);
-      return interaction.editReply({ embeds: [serviceDownEmbed()] });
-    }
-
-    try {
-      // Search for both cards
-      const [myCards, theirCards] = await Promise.all([
-        myApi.searchCards(myCardName, 1),
-        myApi.searchCards(theirCardName, 1),
-      ]);
-
-      if (myCards.length === 0) {
-        return interaction.editReply({
-          embeds: [errorEmbed("Introuvable", `Carte "${myCardName}" introuvable.`)],
-        });
-      }
-      if (theirCards.length === 0) {
-        return interaction.editReply({
-          embeds: [errorEmbed("Introuvable", `Carte "${theirCardName}" introuvable.`)],
-        });
-      }
-
-      const myCard = myCards[0]!;
-      const theirCard = theirCards[0]!;
-
-      // Check I own my card
-      const myInv = await myApi.inventory({ limit: 200 });
-      const myInvItem = myInv.items.find((i) => i.cardId === myCard.id);
-      if (!myInvItem || myInvItem.count < 1) {
-        return interaction.editReply({
-          embeds: [errorEmbed("Carte manquante", `Tu ne possèdes pas **${myCard.name}** !`)],
-        });
-      }
-
-      // Resolve target user's internal ID
-      const targetDbUser = await this.prisma.user.findUnique({ where: { discordId: target.id } });
-      if (!targetDbUser) {
-        return interaction.editReply({
-          embeds: [
-            errorEmbed("Compte introuvable", `**${target.displayName}** n'a pas de compte gacha.`),
-          ],
-        });
-      }
-
-      // Propose trade via gacha API
-      const proposal = await myApi.tradePropose({
-        toUserId: targetDbUser.id,
-        offeredCardId: myCard.id,
-        requestedCardId: theirCard.id,
-      });
-
-      const myCfg = RARITY_CONFIG[myCard.rarity]!;
-      const theirCfg = RARITY_CONFIG[theirCard.rarity]!;
-
-      return interaction.editReply({
-        embeds: [
-          new EmbedBuilder()
-            .setColor(Colors.Info)
-            .setTitle("🔄 Proposition d'échange envoyée !")
-            .setDescription(
-              `**${interaction.user.displayName}** propose de donner ${myCfg.emoji} **${myCard.name}**\n` +
-                `En échange de ${theirCfg.emoji} **${theirCard.name}** de **${target.displayName}**\n\n` +
-                `> ID de l'échange : \`${proposal.id.slice(-8)}\`\n` +
-                `> **${target.displayName}** doit accepter ou refuser via la web app.`,
-            )
-            .setFooter({ text: "Échange en attente d'acceptation" }),
-        ],
-      });
-    } catch (err) {
-      if (!(err instanceof GachaApiError))
-        console.error(`[gacha:${interaction.commandName}] unhandled`, err);
-      if (err instanceof GachaApiError)
-        return interaction.editReply({ embeds: [gachaErrorEmbed(err)] });
-      return interaction.editReply({ embeds: [serviceDownEmbed()] });
-    }
   }
 
   // ═══ /gacha drop — Show active drop info ═══
