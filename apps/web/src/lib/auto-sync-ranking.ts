@@ -61,10 +61,10 @@ export async function autoSyncRankingForTournament(
         error: r.success ? undefined : (r as { error?: string }).error,
       };
     }
-    // Global: recompute via RankingService if present
+    // Global : recalcul COMPLET (global_rankings + miroir profils, inscrits + non-inscrits).
     try {
-      const { RankingService } = await import("@/lib/ranking-service");
-      await RankingService.recalculateAll();
+      const { runFullRecalculation } = await import("@/server/services/rankings");
+      await runFullRecalculation();
       return { triggered: "global", success: true };
     } catch (e) {
       return { triggered: "global", success: false, error: String(e) };

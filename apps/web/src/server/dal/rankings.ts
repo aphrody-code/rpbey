@@ -206,17 +206,26 @@ export async function getTournamentForAutoSync(tournamentId: string) {
 
 // --- Recalcul global (server action `recalculateRankings`) ------------------
 
-/** Tournois éligibles au recalcul global (status + date saison, hors imports BTS). */
+/**
+ * Tournois éligibles au recalcul global (status COMPLETE/ARCHIVED/UNDERWAY).
+ *
+ * `startDate` OPTIONNEL : le leaderboard global RPB est ALL-TIME (cross-saison), donc
+ * par défaut aucun filtre date — on agrège TOUS les tournois terminés (sinon les BTS
+ * antérieurs à la saison active seraient amputés). Passer `startDate` ne sert qu'à un
+ * recalcul borné par saison. `excludeIds` reste l'anti-double-compte BTS↔enrichi.
+ */
 export async function listTournamentsForRecalc(params: {
-  startDate: string;
+  startDate?: string;
   excludeIds: string[];
 }) {
+  const conditions = [inArray(schema.tournaments.status, ["COMPLETE", "ARCHIVED", "UNDERWAY"])];
+  // `NOT IN ()` est invalide en SQL → n'ajouter le filtre que si la liste est non vide.
+  if (params.excludeIds.length > 0) {
+    conditions.push(notInArray(schema.tournaments.id, params.excludeIds));
+  }
+  if (params.startDate) conditions.push(gte(schema.tournaments.date, params.startDate));
   return db.query.tournaments.findMany({
-    where: and(
-      inArray(schema.tournaments.status, ["COMPLETE", "ARCHIVED", "UNDERWAY"]),
-      gte(schema.tournaments.date, params.startDate),
-      notInArray(schema.tournaments.id, params.excludeIds),
-    ),
+    where: and(...conditions),
     with: {
       tournamentCategory: true,
       tournamentMatches: true,
@@ -229,11 +238,47 @@ export async function listAllPointAdjustments() {
   return db.query.pointAdjustments.findMany();
 }
 
-export async function getUserWithProfile(userId: string) {
-  return db.query.users.findFirst({
-    where: eq(schema.users.id, userId),
-    with: { profiles: true },
+/**
+ * Identités de tous les users (+ profil) pour la liaison nom→compte du recalcul global.
+ * Renvoie chaque user avec ses noms possibles (username/displayUsername/name/globalName/
+ * discordTag) + challongeUsername/bladerName du profil → matching normalisé conservateur
+ * dans `computeRankings`, pour rattacher un `playerName` non-inscrit à un compte.
+ */
+export async function listUsersForRankingLink() {
+  const rows = await db.query.users.findMany({
+    columns: {
+      id: true,
+      image: true,
+      username: true,
+      displayUsername: true,
+      name: true,
+      globalName: true,
+      discordTag: true,
+    },
+    with: {
+      profiles: { columns: { bladerName: true, challongeUsername: true } },
+    },
   });
+  return rows.map((u) => {
+    const profile = u.profiles?.[0] ?? null;
+    return {
+      userId: u.id,
+      image: u.image ?? null,
+      names: [u.username, u.displayUsername, u.name, u.globalName, u.discordTag],
+      challongeUsername: profile?.challongeUsername ?? null,
+      bladerName: profile?.bladerName ?? null,
+    };
+  });
+}
+
+/** Profils (bladerName) des users ajustés → clé d'agrégation des ajustements manuels. */
+export async function listAdjustmentUserProfiles(userIds: string[]) {
+  if (userIds.length === 0) return [];
+  const rows = await db.query.profiles.findMany({
+    where: inArray(schema.profiles.userId, userIds),
+    columns: { userId: true, bladerName: true },
+  });
+  return rows.map((r) => ({ userId: r.userId, bladerName: r.bladerName ?? null }));
 }
 
 /**
@@ -269,50 +314,6 @@ export async function rebuildGlobalRankings(
       }
     }
   });
-}
-
-// --- RankingService.recalculateAll (helper `lib/ranking-service`) -----------
-
-/** Tournois COMPLETE avec participants + matches (recalcul "RankingService"). */
-export async function listCompleteTournamentsForGlobal() {
-  return db.query.tournaments.findMany({
-    where: eq(schema.tournaments.status, "COMPLETE"),
-    with: { tournamentParticipants: true, tournamentMatches: true },
-  });
-}
-
-export async function listAllUserIds() {
-  return db.select({ id: schema.users.id }).from(schema.users);
-}
-
-/** Upsert profil (points/W/L/tournamentWins) — boucle de `recalculateAll`. */
-export async function upsertProfileStats(
-  userId: string,
-  stats: {
-    points: number;
-    wins: number;
-    losses: number;
-    tournamentWins: number;
-  },
-) {
-  await db
-    .insert(schema.profiles)
-    .values({
-      userId,
-      rankingPoints: stats.points,
-      wins: stats.wins,
-      losses: stats.losses,
-      tournamentWins: stats.tournamentWins,
-    })
-    .onConflictDoUpdate({
-      target: schema.profiles.userId,
-      set: {
-        rankingPoints: stats.points,
-        wins: stats.wins,
-        losses: stats.losses,
-        tournamentWins: stats.tournamentWins,
-      },
-    });
 }
 
 // --- Sync par saison : SATR / WB (remplace une saison sans toucher les autres)

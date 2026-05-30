@@ -6,16 +6,110 @@ import type {
   RankingsQuery,
   RankingStats,
 } from "@rpbey/api-contract";
+import { loadJsonSafe } from "@/lib/data-cache";
+import {
+  computeRankings,
+  type EnrichedRankingEntry,
+  type MapperEntry,
+} from "@/lib/ranking-recompute";
 import { isRemote, unwrap } from "@/server/data-source";
 import {
   countSeasonRankings,
   getBladerAggregateStats,
+  getOrCreateRankingSystem,
   getRankingLastUpdate,
+  listAdjustmentUserProfiles,
+  listAllPointAdjustments,
   listCareerBladers,
   listGlobalRankings,
   listSeasonRankings,
+  listTournamentsForRecalc,
+  listUsersForRankingLink,
+  rebuildGlobalRankings,
   type SeasonRankingKind,
 } from "@/server/dal/rankings";
+
+/**
+ * Tournois BTS importés en DB ET déjà pré-agrégés dans le JSON enrichi.
+ *
+ * ⚠️ Exclus du calcul DB UNIQUEMENT si le JSON enrichi est réellement chargé — sinon on
+ * supprimerait ~354 participants réels (les BTS sont désormais des tournois COMPLETE en
+ * base). Le JSON `recalculated_ranking_s2_enriched.json` étant un artefact transitoire
+ * (gitignored, absent en prod), la voie par défaut agrège DIRECTEMENT les BTS depuis la
+ * DB. L'exclusion ne se réactive que si quelqu'un régénère cet enrichi (anti double-compte).
+ */
+const BTS_EXCLUDE_IDS = [
+  "bts1",
+  "bts2",
+  "bts3",
+  "bts4",
+  "bts5",
+  "cm-fr_b_ts2-auto",
+  "cm-fr_b_ts3-auto",
+  "cmoq5x3yc000009ro7zq1i3uj", // BTS1
+  "cmoq5x49a005r09rosc122fr1", // BTS2
+  "cmoq5x4fo00aq09roq2og3ihk", // BTS3
+  "cmnukkwyt0000z4ro9fvkcko6", // BTS4
+  "cmp019bpax2u1m5idwluippk0", // BTS5
+];
+
+/**
+ * Recalcul COMPLET du classement global — UNIQUE source de vérité serveur.
+ *
+ * Charge tout (config, saison, tournois COMPLETE/ARCHIVED/UNDERWAY, ajustements,
+ * identités users, JSON BTS) via la DAL, agrège via la fonction PURE `computeRankings`
+ * (qui combine les stats de chaque joueur dans chaque tournoi + liaison nom→compte),
+ * puis réécrit `global_rankings` + miroir `profiles` (inscrits ET non-inscrits) via
+ * `rebuildGlobalRankings`. Idempotent (rebuild = reset+reinsert transactionnel).
+ *
+ * Appelé par : `recalculateRankings` (action admin), `RankingService.recalculateAll`
+ * (wrapper), `/api/admin/ranking` PUT, l'auto-sync post-tournoi et le script CLI.
+ */
+export async function runFullRecalculation(): Promise<{
+  playersRanked: number;
+  linkedToUser: number;
+}> {
+  const config = await getOrCreateRankingSystem();
+
+  let mapper: Record<string, MapperEntry> = {};
+  let enrichedData: EnrichedRankingEntry[] = [];
+  try {
+    // Sur Vercel : fetch CDN (cdn.rpbey.fr). Sur VPS : lecture FS directe.
+    const [mapperData, enriched] = await Promise.all([
+      loadJsonSafe<typeof mapper>("data/exports/participants_map.json"),
+      loadJsonSafe<EnrichedRankingEntry[]>("data/exports/recalculated_ranking_s2_enriched.json"),
+    ]);
+    if (mapperData) mapper = mapperData;
+    if (enriched) enrichedData = enriched;
+  } catch {
+    // Fichiers JSON BTS indisponibles → on continue avec la DB seule.
+  }
+
+  // N'exclure les BTS de la DB QUE si l'enrichi BTS est réellement présent (anti
+  // double-compte) ; sinon agréger TOUS les tournois en base (cas par défaut prod).
+  // Pas de `startDate` : leaderboard global = ALL-TIME (cross-saison).
+  const excludeIds = enrichedData.length > 0 ? BTS_EXCLUDE_IDS : [];
+  const [tournaments, adjustments, userLinks] = await Promise.all([
+    listTournamentsForRecalc({ excludeIds }),
+    listAllPointAdjustments(),
+    listUsersForRankingLink(),
+  ]);
+  const adjustmentProfiles = await listAdjustmentUserProfiles(adjustments.map((a) => a.userId));
+
+  const { rankings, linkedCount } = computeRankings({
+    tournaments,
+    config,
+    adjustments,
+    adjustmentProfiles,
+    mapper,
+    enrichedData,
+    userLinks,
+  });
+
+  await rebuildGlobalRankings(rankings);
+
+  return { playersRanked: rankings.length, linkedToUser: linkedCount };
+}
 
 /**
  * Service classements — assemble la forme contrat `RankingsListResponse`

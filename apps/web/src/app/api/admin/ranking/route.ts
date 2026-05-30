@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { requireAdmin } from "@/lib/auth-utils";
-import { RankingService } from "@/lib/ranking-service";
 import { getRankingSystem, insertRankingSystem, updateRankingSystem } from "@/server/dal/rankings";
+import { runFullRecalculation } from "@/server/services/rankings";
 
 export async function GET() {
   try {
@@ -42,8 +42,8 @@ export async function PUT(request: Request) {
       await insertRankingSystem(data);
     }
 
-    // Déclenchement du recalcul
-    await RankingService.recalculateAll();
+    // Déclenchement du recalcul COMPLET (global_rankings + miroir profils).
+    await runFullRecalculation();
 
     return NextResponse.json({ success: true });
   } catch (error) {
