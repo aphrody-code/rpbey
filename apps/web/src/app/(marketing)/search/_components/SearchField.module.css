@@ -136,8 +136,7 @@
 }
 
 .aiPillLabel {
-  font-size: 0.82rem;
-  font-weight: 500;
+  font: var(--md-sys-typescale-label-large, 500 0.875rem/1.25rem system-ui);
   color: var(--rpb-text-secondary, #bdc1c6);
 }
 
@@ -236,7 +235,7 @@
 }
 
 .suggLabel {
-  font-size: 0.9rem;
+  font: var(--md-sys-typescale-body-large, 400 1rem/1.5rem system-ui);
   color: var(--rpb-text, #e8eaed);
   flex: 1;
   overflow: hidden;
@@ -245,7 +244,7 @@
 }
 
 .suggBadge {
-  font-size: 0.72rem;
+  font: var(--md-sys-typescale-label-medium, 500 0.75rem/1rem system-ui);
   color: var(--rpb-text-tertiary, #9aa0a6);
   flex-shrink: 0;
 }
@@ -258,7 +257,7 @@
 }
 
 .dropdownFooterBtn {
-  font-size: 0.75rem;
+  font: var(--md-sys-typescale-label-medium, 500 0.75rem/1rem system-ui);
   color: var(--rpb-text-tertiary, #9aa0a6);
   text-decoration: none;
   border: none;

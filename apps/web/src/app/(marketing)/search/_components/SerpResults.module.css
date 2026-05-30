@@ -55,11 +55,11 @@
 }
 
 .itemLink:hover::after {
-  opacity: 0.06;
+  opacity: var(--md-sys-state-hover-opacity, 0.08);
 }
 
 .itemLink:active::after {
-  opacity: 0.1;
+  opacity: var(--md-sys-state-pressed-opacity, 0.1);
 }
 
 .itemLink:focus-visible {

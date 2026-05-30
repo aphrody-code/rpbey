@@ -64,11 +64,11 @@
 }
 
 .tab:hover::before {
-  opacity: 0.06;
+  opacity: var(--md-sys-state-hover-opacity, 0.08);
 }
 
 .tab:active::before {
-  opacity: 0.1;
+  opacity: var(--md-sys-state-pressed-opacity, 0.1);
 }
 
 .tabActive {

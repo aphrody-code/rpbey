@@ -1,4 +1,5 @@
-/* AiSynthesis — vue synthèse algorithmique IA, CSS Modules, 0 @mui */
+/* AiSynthesis — vue synthèse IA, Material 3 (rôles --md-sys-color-*, typescale,
+ * shape, state-layer). Couleurs via .m3-search ; gradient Gemini conservé. */
 
 .wrap {
   display: flex;
@@ -6,13 +7,12 @@
   align-items: flex-start;
 }
 
-/* Colonne principale */
 .main {
   flex: 1;
   min-width: 0;
 }
 
-/* Bulle requête */
+/* Bulle requête (message « envoyé ») */
 .queryBubble {
   display: flex;
   justify-content: flex-end;
@@ -23,12 +23,10 @@
   display: inline-flex;
   align-items: center;
   padding: 8px 16px;
-  border-radius: 16px;
-  background: var(--rpb-surface-high, #3c4043);
-  border: 1px solid var(--rpb-border, #3c4043);
-  color: var(--rpb-text, #e8eaed);
-  font-weight: 500;
-  font-size: 0.9rem;
+  border-radius: var(--md-sys-shape-corner-large, 16px);
+  background: var(--md-sys-color-secondary-container, #653c2a);
+  color: var(--md-sys-color-on-secondary-container, #ffdbcd);
+  font: var(--md-sys-typescale-label-large, 500 0.875rem/1.25rem system-ui);
 }
 
 /* En-tête IA */
@@ -53,20 +51,21 @@
 .aiSparkle svg {
   width: 12px;
   height: 12px;
-  fill: var(--rpb-primary-on-container, #fff);
+  fill: #fff;
 }
 
 .aiLabel {
-  font-size: 0.8rem;
-  color: var(--rpb-text-tertiary, #9aa0a6);
+  font: var(--md-sys-typescale-label-medium, 500 0.75rem/1rem system-ui);
+  color: var(--md-sys-color-on-surface-variant, #dfbfbb);
   font-style: italic;
 }
 
 /* Corps synthèse */
 .paragraph {
-  font-size: 1rem;
-  color: var(--rpb-text, #e8eaed);
-  line-height: 1.7;
+  font: var(--md-sys-typescale-body-large, 400 1rem/1.5rem system-ui);
+  letter-spacing: 0.03125em;
+  color: var(--md-sys-color-on-surface, #f9dcd9);
+  line-height: 1.65;
   margin: 0 0 16px;
 }
 
@@ -76,11 +75,11 @@
 
 .priceGood {
   font-weight: 700;
-  color: var(--rpb-price-good, #22c55e);
+  color: var(--rpb-price-good, #5fd068);
 }
 
 .secondary {
-  color: var(--rpb-text-secondary, #bdc1c6);
+  color: var(--md-sys-color-on-surface-variant, #dfbfbb);
 }
 
 /* Citation inline */
@@ -90,38 +89,42 @@
   gap: 4px;
   padding: 2px 8px;
   margin-left: 4px;
-  border-radius: 12px;
-  background: color-mix(in srgb, var(--rpb-primary) 12%, var(--rpb-surface-main, #303134));
-  border: 1px solid color-mix(in srgb, var(--rpb-primary) 20%, transparent);
-  font-size: 0.72rem;
-  color: var(--rpb-link, #8ab4f8);
+  border-radius: var(--md-sys-shape-corner-full, 9999px);
+  background: var(--md-sys-color-primary-container, #93000b);
+  color: var(--md-sys-color-on-primary-container, #ffdad6);
+  font: var(--md-sys-typescale-label-medium, 500 0.75rem/1rem system-ui);
   text-decoration: none;
   vertical-align: middle;
-  line-height: 1.4;
+  transition: background-color 0.15s var(--md-sys-motion-standard, cubic-bezier(0.2, 0, 0, 1));
 }
 
 .citation:hover {
-  background: color-mix(in srgb, var(--rpb-primary) 20%, var(--rpb-surface-high, #3c4043));
+  background: color-mix(
+    in srgb,
+    var(--md-sys-color-on-primary-container, #ffdad6) 12%,
+    var(--md-sys-color-primary-container, #93000b)
+  );
 }
 
 .divider {
   height: 1px;
-  background: var(--rpb-border, #3c4043);
+  background: var(--md-sys-color-outline-variant, #58413f);
   margin: 16px 0;
 }
 
 /* Sections */
 .sectionTitle {
-  font-size: 1rem;
+  font: var(--md-sys-typescale-title-medium, 500 1rem/1.5rem system-ui);
   font-weight: 700;
-  color: var(--rpb-text, #e8eaed);
+  color: var(--md-sys-color-on-surface, #f9dcd9);
   margin: 0 0 8px;
 }
 
 .sectionText {
-  font-size: 0.9rem;
-  color: var(--rpb-text-secondary, #bdc1c6);
-  line-height: 1.6;
+  font: var(--md-sys-typescale-body-medium, 400 0.875rem/1.25rem system-ui);
+  letter-spacing: var(--md-sys-typescale-body-medium-tracking, 0.0178571em);
+  color: var(--md-sys-color-on-surface-variant, #dfbfbb);
+  line-height: 1.55;
   margin: 0 0 8px;
 }
 
@@ -135,17 +138,16 @@
 .partChip {
   display: inline-flex;
   align-items: center;
-  padding: 4px 10px;
-  font-size: 0.75rem;
-  color: var(--rpb-text-secondary, #bdc1c6);
-  background: color-mix(in srgb, var(--rpb-text, #e8eaed) 5%, transparent);
-  border: 1px solid var(--rpb-border, #3c4043);
-  border-radius: 12px;
+  padding: 4px 12px;
+  font: var(--md-sys-typescale-label-medium, 500 0.75rem/1rem system-ui);
+  color: var(--md-sys-color-on-secondary-container, #ffdbcd);
+  background: var(--md-sys-color-secondary-container, #653c2a);
+  border-radius: var(--md-sys-shape-corner-full, 9999px);
 }
 
 .relanceLabel {
-  font-size: 0.8rem;
-  color: var(--rpb-text-tertiary, #9aa0a6);
+  font: var(--md-sys-typescale-label-medium, 500 0.75rem/1rem system-ui);
+  color: var(--md-sys-color-on-surface-variant, #dfbfbb);
   margin-bottom: 12px;
 }
 
@@ -163,9 +165,10 @@
 }
 
 .sourcesPanel {
-  background: var(--rpb-surface-main, #303134);
-  border: 1px solid var(--rpb-border, #3c4043);
-  border-radius: 12px;
+  background: var(--md-sys-color-surface-container, #2b1c1a);
+  border: 1px solid var(--md-sys-color-outline-variant, #58413f);
+  border-radius: var(--md-sys-shape-corner-large, 16px);
+  box-shadow: var(--md-sys-elevation-1, 0 1px 3px rgba(0, 0, 0, 0.3));
   padding: 16px;
   position: sticky;
   top: 80px;
@@ -181,30 +184,34 @@
 .sourcesHeader svg {
   width: 16px;
   height: 16px;
-  fill: var(--rpb-text-tertiary, #9aa0a6);
+  fill: var(--md-sys-color-on-surface-variant, #dfbfbb);
 }
 
 .sourcesTitle {
-  font-size: 0.82rem;
+  font: var(--md-sys-typescale-label-large, 500 0.875rem/1.25rem system-ui);
   font-weight: 600;
-  color: var(--rpb-text, #e8eaed);
+  color: var(--md-sys-color-on-surface, #f9dcd9);
 }
 
 .sourceCard {
+  position: relative;
   display: flex;
   align-items: flex-start;
   gap: 8px;
   padding: 10px;
-  border-radius: 8px;
-  background: var(--rpb-surface-high, #3c4043);
-  border: 1px solid var(--rpb-border, #3c4043);
+  border-radius: var(--md-sys-shape-corner-medium, 12px);
+  background: var(--md-sys-color-surface-container-high, #372624);
+  border: 1px solid transparent;
   text-decoration: none;
   margin-bottom: 8px;
-  transition: border-color 0.15s;
+  transition:
+    border-color 0.15s var(--md-sys-motion-standard, cubic-bezier(0.2, 0, 0, 1)),
+    box-shadow 0.15s var(--md-sys-motion-standard, cubic-bezier(0.2, 0, 0, 1));
 }
 
 .sourceCard:hover {
-  border-color: var(--rpb-primary);
+  border-color: var(--md-sys-color-outline-variant, #58413f);
+  box-shadow: var(--md-sys-elevation-1, 0 1px 3px rgba(0, 0, 0, 0.3));
 }
 
 .sourceCard img {
@@ -212,13 +219,13 @@
   height: 16px;
   margin-top: 2px;
   flex-shrink: 0;
+  border-radius: 4px;
 }
 
 .sourceTitle {
-  font-size: 0.78rem;
+  font: var(--md-sys-typescale-body-medium, 400 0.875rem/1.25rem system-ui);
   font-weight: 500;
-  color: var(--rpb-text, #e8eaed);
-  line-height: 1.3;
+  color: var(--md-sys-color-on-surface, #f9dcd9);
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -226,15 +233,15 @@
 }
 
 .sourceDomain {
-  font-size: 0.68rem;
-  color: var(--rpb-text-tertiary, #9aa0a6);
+  font: var(--md-sys-typescale-label-small, 500 0.6875rem/1rem system-ui);
+  color: var(--md-sys-color-outline, #a78a87);
   margin-top: 2px;
 }
 
 /* Empty */
 .empty {
-  padding: 48px 0;
+  padding: 48px 24px;
   text-align: center;
-  color: var(--rpb-text-tertiary, #9aa0a6);
-  font-size: 0.95rem;
+  color: var(--md-sys-color-on-surface-variant, #dfbfbb);
+  font: var(--md-sys-typescale-body-large, 400 1rem/1.5rem system-ui);
 }

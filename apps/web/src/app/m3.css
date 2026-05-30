@@ -136,9 +136,9 @@
   --md-sys-typescale-label-large: 500 0.875rem/1.25rem var(--font-google-sans-flex, system-ui);
   --md-sys-typescale-label-medium: 500 0.75rem/1rem var(--font-google-sans-flex, system-ui);
   --md-sys-typescale-label-small: 500 0.6875rem/1rem var(--font-google-sans-flex, system-ui);
-  --md-sys-typescale-title-medium-tracking: 0.009375em;
-  --md-sys-typescale-label-large-tracking: 0.00625em;
-  --md-sys-typescale-body-medium-tracking: 0.015625em;
+  --md-sys-typescale-title-medium-tracking: 0.009375em; /* 0.15px @16px */
+  --md-sys-typescale-label-large-tracking: 0.0071428em; /* 0.1px @14px */
+  --md-sys-typescale-body-medium-tracking: 0.0178571em; /* 0.25px @14px */
 
   /* ---- Brand & semantic tokens (RPB DA) --------------------------------- */
   /* Rouge de marque pour REMPLISSAGES (CTA / indicateur / FAB). Statique :

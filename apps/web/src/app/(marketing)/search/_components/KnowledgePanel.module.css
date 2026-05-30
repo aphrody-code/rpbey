@@ -216,7 +216,7 @@
   font: var(--md-sys-typescale-body-medium, 400 0.875rem/1.25rem system-ui);
   color: var(--md-sys-color-on-surface, #f9dcd9);
   text-decoration: none;
-  min-height: 40px;
+  min-height: 48px; /* cible tactile M3 ≥ 48dp */
   transition:
     background-color 0.15s var(--md-sys-motion-standard, cubic-bezier(0.2, 0, 0, 1)),
     color 0.15s var(--md-sys-motion-standard, cubic-bezier(0.2, 0, 0, 1));
