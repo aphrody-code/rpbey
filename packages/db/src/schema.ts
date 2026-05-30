@@ -2587,3 +2587,197 @@ export const awardsEditions = pgTable(
     ),
   ],
 );
+
+/**
+ * Agent Auth Protocol (@better-auth/agent-auth) — hosts, agents, grants de
+ * capabilities et demandes d'approbation. Tables AUTH gérées par better-auth
+ * (drizzleAdapter, usePlural) → timestamps en `mode:"date"` (better-auth écrit
+ * des objets Date). DDL : packages/db/sql/agent-auth-tables.sql. Les clés
+ * d'export DOIVENT rester les noms de modèle pluralisés (agentHosts, agents,
+ * agentCapabilityGrants, approvalRequests) — c'est par elles que l'adapter
+ * résout chaque table.
+ */
+export const agentHosts = pgTable(
+  "agent_hosts",
+  {
+    id: text().primaryKey().notNull(),
+    name: text(),
+    userId: text(),
+    defaultCapabilities: text(),
+    publicKey: text(),
+    kid: text(),
+    jwksUrl: text(),
+    enrollmentTokenHash: text(),
+    enrollmentTokenExpiresAt: timestamp({ precision: 3, mode: "date" }),
+    status: text().notNull(),
+    activatedAt: timestamp({ precision: 3, mode: "date" }),
+    expiresAt: timestamp({ precision: 3, mode: "date" }),
+    lastUsedAt: timestamp({ precision: 3, mode: "date" }),
+    createdAt: timestamp({ precision: 3, mode: "date" })
+      .default(sql`CURRENT_TIMESTAMP`)
+      .notNull(),
+    updatedAt: timestamp({ precision: 3, mode: "date" })
+      .notNull()
+      .$onUpdate(() => new Date()),
+  },
+  (table) => [
+    index("agent_hosts_userId_idx").using("btree", table.userId.asc().nullsLast().op("text_ops")),
+    foreignKey({
+      columns: [table.userId],
+      foreignColumns: [users.id],
+      name: "agent_hosts_userId_fkey",
+    })
+      .onUpdate("cascade")
+      .onDelete("cascade"),
+  ],
+);
+
+export const agents = pgTable(
+  "agents",
+  {
+    id: text().primaryKey().notNull(),
+    name: text().notNull(),
+    userId: text(),
+    hostId: text().notNull(),
+    status: text().notNull(),
+    mode: text().notNull(),
+    publicKey: text().notNull(),
+    kid: text(),
+    jwksUrl: text(),
+    lastUsedAt: timestamp({ precision: 3, mode: "date" }),
+    activatedAt: timestamp({ precision: 3, mode: "date" }),
+    expiresAt: timestamp({ precision: 3, mode: "date" }),
+    metadata: text(),
+    createdAt: timestamp({ precision: 3, mode: "date" })
+      .default(sql`CURRENT_TIMESTAMP`)
+      .notNull(),
+    updatedAt: timestamp({ precision: 3, mode: "date" })
+      .notNull()
+      .$onUpdate(() => new Date()),
+  },
+  (table) => [
+    index("agents_userId_idx").using("btree", table.userId.asc().nullsLast().op("text_ops")),
+    index("agents_hostId_idx").using("btree", table.hostId.asc().nullsLast().op("text_ops")),
+    foreignKey({
+      columns: [table.userId],
+      foreignColumns: [users.id],
+      name: "agents_userId_fkey",
+    })
+      .onUpdate("cascade")
+      .onDelete("cascade"),
+    foreignKey({
+      columns: [table.hostId],
+      foreignColumns: [agentHosts.id],
+      name: "agents_hostId_fkey",
+    })
+      .onUpdate("cascade")
+      .onDelete("cascade"),
+  ],
+);
+
+export const agentCapabilityGrants = pgTable(
+  "agent_capability_grants",
+  {
+    id: text().primaryKey().notNull(),
+    agentId: text().notNull(),
+    capability: text().notNull(),
+    status: text().notNull(),
+    reason: text(),
+    constraints: text(),
+    deniedBy: text(),
+    grantedBy: text(),
+    expiresAt: timestamp({ precision: 3, mode: "date" }),
+    createdAt: timestamp({ precision: 3, mode: "date" })
+      .default(sql`CURRENT_TIMESTAMP`)
+      .notNull(),
+    updatedAt: timestamp({ precision: 3, mode: "date" })
+      .notNull()
+      .$onUpdate(() => new Date()),
+  },
+  (table) => [
+    index("agent_capability_grants_agentId_idx").using(
+      "btree",
+      table.agentId.asc().nullsLast().op("text_ops"),
+    ),
+    foreignKey({
+      columns: [table.agentId],
+      foreignColumns: [agents.id],
+      name: "agent_capability_grants_agentId_fkey",
+    })
+      .onUpdate("cascade")
+      .onDelete("cascade"),
+    foreignKey({
+      columns: [table.deniedBy],
+      foreignColumns: [users.id],
+      name: "agent_capability_grants_deniedBy_fkey",
+    })
+      .onUpdate("cascade")
+      .onDelete("cascade"),
+    foreignKey({
+      columns: [table.grantedBy],
+      foreignColumns: [users.id],
+      name: "agent_capability_grants_grantedBy_fkey",
+    })
+      .onUpdate("cascade")
+      .onDelete("cascade"),
+  ],
+);
+
+export const approvalRequests = pgTable(
+  "approval_requests",
+  {
+    id: text().primaryKey().notNull(),
+    method: text().notNull(),
+    agentId: text(),
+    hostId: text(),
+    userId: text(),
+    capabilities: text(),
+    status: text().notNull(),
+    userCodeHash: text(),
+    loginHint: text(),
+    bindingMessage: text(),
+    clientNotificationToken: text(),
+    clientNotificationEndpoint: text(),
+    deliveryMode: text(),
+    interval: integer().notNull(),
+    lastPolledAt: timestamp({ precision: 3, mode: "date" }),
+    expiresAt: timestamp({ precision: 3, mode: "date" }).notNull(),
+    createdAt: timestamp({ precision: 3, mode: "date" })
+      .default(sql`CURRENT_TIMESTAMP`)
+      .notNull(),
+    updatedAt: timestamp({ precision: 3, mode: "date" })
+      .notNull()
+      .$onUpdate(() => new Date()),
+  },
+  (table) => [
+    index("approval_requests_userId_idx").using(
+      "btree",
+      table.userId.asc().nullsLast().op("text_ops"),
+    ),
+    index("approval_requests_agentId_idx").using(
+      "btree",
+      table.agentId.asc().nullsLast().op("text_ops"),
+    ),
+    foreignKey({
+      columns: [table.agentId],
+      foreignColumns: [agents.id],
+      name: "approval_requests_agentId_fkey",
+    })
+      .onUpdate("cascade")
+      .onDelete("cascade"),
+    foreignKey({
+      columns: [table.hostId],
+      foreignColumns: [agentHosts.id],
+      name: "approval_requests_hostId_fkey",
+    })
+      .onUpdate("cascade")
+      .onDelete("cascade"),
+    foreignKey({
+      columns: [table.userId],
+      foreignColumns: [users.id],
+      name: "approval_requests_userId_fkey",
+    })
+      .onUpdate("cascade")
+      .onDelete("cascade"),
+  ],
+);

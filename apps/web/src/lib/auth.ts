@@ -1,7 +1,11 @@
+import { agentAuth } from "@better-auth/agent-auth";
+import { createFromOpenAPI } from "@better-auth/agent-auth/openapi";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { nextCookies } from "better-auth/next-js";
-import { admin, twoFactor, username } from "better-auth/plugins";
+import { admin, bearer, twoFactor, username } from "better-auth/plugins";
+import { eq } from "drizzle-orm";
+import openapiSpec from "../../openapi.json";
 import { db, schema } from "@/lib/db";
 
 const isProduction = process.env.NODE_ENV === "production";
@@ -9,6 +13,68 @@ const baseURL =
   process.env.BETTER_AUTH_URL ||
   process.env.NEXT_PUBLIC_APP_URL ||
   (isProduction ? "https://rpbey.fr" : "http://localhost:3000");
+
+// ── Agent Auth (Agent Auth Protocol) ───────────────────────────────────────
+// Transforme l'API publique RPB (contrat Zod → openapi.json, 36 endpoints) en
+// provider d'auth pour agents IA : découverte, enregistrement d'agents/hosts,
+// grants de capabilities scopés, JWT signés courts, flux d'approbation.
+// `createFromOpenAPI` dérive 1 capability par operationId + un proxy `onExecute`.
+//
+// Upstream auth : le proxy appelle nos propres routes ; pour les endpoints
+// protégés, `resolveHeaders` forge un token de session better-auth pour
+// l'utilisateur de l'agent et le passe en `Authorization: Bearer` (lu par le
+// plugin `bearer`). Best-effort : un échec ne casse jamais l'exécution (les
+// endpoints publics restent accessibles).
+//
+// Toute l'init est défensive : si `createFromOpenAPI` échoue, le plugin est
+// simplement omis — le login better-auth existant reste intact.
+const AGENT_UPSTREAM =
+  process.env.AGENT_AUTH_UPSTREAM ||
+  (isProduction ? "http://127.0.0.1:3002" : "http://localhost:3000");
+const SERVICE_AGENT_EMAIL = process.env.AGENT_SERVICE_EMAIL || "agent-service@rpbey.fr";
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function buildAgentAuthPlugin(): any {
+  try {
+    const fromSpec = createFromOpenAPI(openapiSpec as Parameters<typeof createFromOpenAPI>[0], {
+      baseUrl: AGENT_UPSTREAM,
+      // Toutes les capabilities dérivées sont auto-accordées aux nouveaux hosts.
+      defaultHostCapabilities: true,
+      async resolveHeaders({ ctx, agentSession }): Promise<Record<string, string>> {
+        try {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const internal = (ctx.context as any)?.internalAdapter;
+          const session = await internal?.createSession?.(agentSession.user.id, ctx);
+          return session?.token ? { Authorization: `Bearer ${session.token}` } : {};
+        } catch {
+          return {};
+        }
+      },
+    });
+
+    return agentAuth({
+      ...fromSpec,
+      providerName: fromSpec.providerName ?? "République Populaire du Beyblade",
+      providerDescription:
+        fromSpec.providerDescription ??
+        "API publique RPB pour agents IA — classements, profils, parts, méta, recherche.",
+      modes: ["delegated", "autonomous"],
+      trustProxy: true,
+      async resolveAutonomousUser() {
+        const u = await db.query.users.findFirst({
+          where: eq(schema.users.email, SERVICE_AGENT_EMAIL),
+          columns: { id: true, name: true, email: true },
+        });
+        return u ? { id: u.id, name: u.name ?? "Agent RPB", email: u.email } : null;
+      },
+    });
+  } catch (error) {
+    console.error("agentAuth init skipped (login intact):", error);
+    return null;
+  }
+}
+
+const agentAuthPlugin = buildAgentAuthPlugin();
 
 export const auth = betterAuth({
   baseURL,
@@ -28,6 +94,11 @@ export const auth = betterAuth({
     twoFactor({
       issuer: "RPB Dashboard",
     }),
+    // bearer : auth par `Authorization: Bearer <session-token>` (utilisé par le
+    // proxy Agent Auth pour s'authentifier upstream sur nos propres routes).
+    bearer(),
+    // Agent Auth — omis si l'init a échoué (login inchangé dans ce cas).
+    ...(agentAuthPlugin ? [agentAuthPlugin] : []),
     // nextCookies() OBLIGATOIRE Next.js — propage Set-Cookie depuis server actions.
     // DOIT être le DERNIER plugin (Better Auth doc).
     nextCookies(),

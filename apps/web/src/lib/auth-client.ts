@@ -1,5 +1,6 @@
 "use client";
 
+import { agentAuthClient } from "@better-auth/agent-auth/client";
 import { adminClient, twoFactorClient, usernameClient } from "better-auth/client/plugins";
 import { createAuthClient } from "better-auth/react";
 
@@ -15,6 +16,7 @@ export const authClient = createAuthClient({
         window.location.href = "/two-factor";
       },
     }),
+    agentAuthClient(),
   ],
 });
 
