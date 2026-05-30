@@ -89,3 +89,6 @@ openapi.json
 
 # Frames d'anime scrapées (régénérables via scrape-anime-frames.ts ; la DB porte la vérité)
 data/anime-frames/
+
+# Checkpoint résumable du crawler Fandom (état + entités, régénérable)
+data/.fandom-crawl-state.json
