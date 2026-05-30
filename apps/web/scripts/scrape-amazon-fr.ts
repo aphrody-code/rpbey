@@ -117,38 +117,37 @@ async function parseProducts(html: string): Promise<RawItem[]> {
   const items: RawItem[] = [];
   let cur: RawItem | null = null;
   let titleActive = false;
-  await new Response(
-    new HTMLRewriter()
-      .on('div[data-component-type="s-search-result"]', {
-        element(el) {
-          const asin = el.getAttribute("data-asin");
-          if (asin) {
-            cur = { asin };
-            items.push(cur);
-          }
-        },
-      })
-      .on("img.s-image", {
-        element(el) {
-          if (cur && !cur.img) cur.img = el.getAttribute("src") ?? undefined;
-        },
-      })
-      .on("h2 span", {
-        element() {
-          titleActive = true;
-        },
-        text(t) {
-          if (cur && !cur.title && t.text.trim()) cur.title = (cur.title ?? "") + t.text;
-          if (t.lastInTextNode) titleActive = false;
-        },
-      })
-      .on("span.a-price > span.a-offscreen", {
-        text(t) {
-          if (cur && !cur.price && t.text.trim()) cur.price = t.text.trim();
-        },
-      })
-      .transform(new Response(html)),
-  ).text();
+  await new HTMLRewriter()
+    .on('div[data-component-type="s-search-result"]', {
+      element(el) {
+        const asin = el.getAttribute("data-asin");
+        if (asin) {
+          cur = { asin };
+          items.push(cur);
+        }
+      },
+    })
+    .on("img.s-image", {
+      element(el) {
+        if (cur && !cur.img) cur.img = el.getAttribute("src") ?? undefined;
+      },
+    })
+    .on("h2 span", {
+      element() {
+        titleActive = true;
+      },
+      text(t) {
+        if (cur && !cur.title && t.text.trim()) cur.title = (cur.title ?? "") + t.text;
+        if (t.lastInTextNode) titleActive = false;
+      },
+    })
+    .on("span.a-price > span.a-offscreen", {
+      text(t) {
+        if (cur && !cur.price && t.text.trim()) cur.price = t.text.trim();
+      },
+    })
+    .transform(new Response(html))
+    .text();
   return items;
 }
 
@@ -236,3 +235,5 @@ async function main() {
 }
 
 await main();
+
+export {};

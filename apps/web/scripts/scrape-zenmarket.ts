@@ -92,38 +92,37 @@ async function parseMercariLike(html: string, store: string): Promise<RawItem[]>
   const items: RawItem[] = [];
   let cur: RawItem | null = null;
   let titleActive = false;
-  await new Response(
-    new HTMLRewriter()
-      .on("a.product-item.product-link", {
-        element(el) {
-          cur = { href: el.getAttribute("href") ?? undefined };
-          items.push(cur);
-        },
-      })
-      .on("a.product-item.product-link img", {
-        element(el) {
-          if (cur && !cur.img) cur.img = el.getAttribute("src") ?? undefined;
-        },
-      })
-      .on("h3.item-title", {
-        element() {
-          titleActive = true;
-        },
-        text(t) {
-          if (cur && titleActive && t.text.trim()) cur.title = (cur.title ?? "") + t.text;
-          if (t.lastInTextNode) titleActive = false;
-        },
-      })
-      .on("span.current-price span.amount", {
-        element(el) {
-          if (cur) {
-            if (!cur.eur) cur.eur = el.getAttribute("data-eur") ?? undefined;
-            if (!cur.jpy) cur.jpy = el.getAttribute("data-jpy") ?? undefined;
-          }
-        },
-      })
-      .transform(new Response(html)),
-  ).text();
+  await new HTMLRewriter()
+    .on("a.product-item.product-link", {
+      element(el) {
+        cur = { href: el.getAttribute("href") ?? undefined };
+        items.push(cur);
+      },
+    })
+    .on("a.product-item.product-link img", {
+      element(el) {
+        if (cur && !cur.img) cur.img = el.getAttribute("src") ?? undefined;
+      },
+    })
+    .on("h3.item-title", {
+      element() {
+        titleActive = true;
+      },
+      text(t) {
+        if (cur && titleActive && t.text.trim()) cur.title = (cur.title ?? "") + t.text;
+        if (t.lastInTextNode) titleActive = false;
+      },
+    })
+    .on("span.current-price span.amount", {
+      element(el) {
+        if (cur) {
+          if (!cur.eur) cur.eur = el.getAttribute("data-eur") ?? undefined;
+          if (!cur.jpy) cur.jpy = el.getAttribute("data-jpy") ?? undefined;
+        }
+      },
+    })
+    .transform(new Response(html))
+    .text();
   return items;
 }
 
@@ -131,41 +130,40 @@ async function parseYahoo(html: string): Promise<RawItem[]> {
   const items: RawItem[] = [];
   let cur: RawItem | null = null;
   let titleActive = false;
-  await new Response(
-    new HTMLRewriter()
-      .on("div.yahoo-search-result", {
-        element() {
-          cur = {};
-          items.push(cur);
-        },
-      })
-      .on("div.yahoo-search-result .img-wrap img", {
-        element(el) {
-          if (cur && !cur.img) cur.img = el.getAttribute("src") ?? undefined;
-        },
-      })
-      .on("div.yahoo-search-result .translate a.auction-url", {
-        element(el) {
-          if (cur && !cur.href) {
-            cur.href = el.getAttribute("href") ?? undefined;
-            titleActive = true;
-          }
-        },
-        text(t) {
-          if (cur && titleActive && t.text.trim()) cur.title = (cur.title ?? "") + t.text;
-          if (t.lastInTextNode) titleActive = false;
-        },
-      })
-      .on("div.auction-blitzprice span.amount, div.auction-price span.amount", {
-        element(el) {
-          if (cur) {
-            if (!cur.eur) cur.eur = el.getAttribute("data-eur") ?? undefined;
-            if (!cur.jpy) cur.jpy = el.getAttribute("data-jpy") ?? undefined;
-          }
-        },
-      })
-      .transform(new Response(html)),
-  ).text();
+  await new HTMLRewriter()
+    .on("div.yahoo-search-result", {
+      element() {
+        cur = {};
+        items.push(cur);
+      },
+    })
+    .on("div.yahoo-search-result .img-wrap img", {
+      element(el) {
+        if (cur && !cur.img) cur.img = el.getAttribute("src") ?? undefined;
+      },
+    })
+    .on("div.yahoo-search-result .translate a.auction-url", {
+      element(el) {
+        if (cur && !cur.href) {
+          cur.href = el.getAttribute("href") ?? undefined;
+          titleActive = true;
+        }
+      },
+      text(t) {
+        if (cur && titleActive && t.text.trim()) cur.title = (cur.title ?? "") + t.text;
+        if (t.lastInTextNode) titleActive = false;
+      },
+    })
+    .on("div.auction-blitzprice span.amount, div.auction-price span.amount", {
+      element(el) {
+        if (cur) {
+          if (!cur.eur) cur.eur = el.getAttribute("data-eur") ?? undefined;
+          if (!cur.jpy) cur.jpy = el.getAttribute("data-jpy") ?? undefined;
+        }
+      },
+    })
+    .transform(new Response(html))
+    .text();
   return items;
 }
 
@@ -257,3 +255,5 @@ async function main() {
 }
 
 await main();
+
+export {};
