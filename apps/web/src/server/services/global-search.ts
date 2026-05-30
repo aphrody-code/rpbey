@@ -127,6 +127,7 @@ export async function buildGlobalSearchIndex(): Promise<GlobalSearchItem[]> {
           : "Prix non dispo",
         badge: group.code || undefined,
         price: group.cheapestEur,
+        thumbnail: group.cheapest?.image ?? undefined,
         source: "catalog",
       });
     }
@@ -151,6 +152,7 @@ export async function buildGlobalSearchIndex(): Promise<GlobalSearchItem[]> {
       url: `/parts`,
       details: `Type: ${part.type} | Poids: ${part.weight ? part.weight + "g" : "non dispo"}`,
       badge: `Tier ${tier}`,
+      thumbnail: part.imageUrl ?? undefined,
       source: "db",
     });
   }

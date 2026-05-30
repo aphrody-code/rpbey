@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import type { GlobalSearchItem, SearchCategory } from "@rpbey/api-contract";
 import styles from "./SerpResults.module.css";
 
@@ -109,13 +110,49 @@ function ImageGrid({ items }: { items: GlobalSearchItem[] }) {
   );
 }
 
+// ── Leading visuel (thumbnail produit/part → avatar tonal en fallback) ──────────
+
+function ResultLeading({
+  item,
+  faviconSrc,
+}: {
+  item: GlobalSearchItem;
+  faviconSrc: string | null;
+}) {
+  const [thumbFailed, setThumbFailed] = useState(false);
+  // Thumbnail réel (produit/part) tant qu'il charge ; sinon avatar tonal.
+  if (item.thumbnail && !thumbFailed) {
+    return (
+      <div className={styles.thumb}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={item.thumbnail}
+          alt=""
+          className={styles.thumbImg}
+          loading="lazy"
+          onError={() => setThumbFailed(true)}
+        />
+      </div>
+    );
+  }
+  return (
+    <div className={styles.avatar} data-cat={item.category} aria-hidden="true">
+      {faviconSrc ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={faviconSrc} alt="" width={20} height={20} className={styles.faviconImg} />
+      ) : (
+        <CategoryIcon category={item.category} />
+      )}
+    </div>
+  );
+}
+
 // ── TextResult ────────────────────────────────────────────────────────────────
 
 function TextResult({ item, index }: { item: GlobalSearchItem; index: number }) {
   const isExternal = item.url.startsWith("http");
   const domain = isExternal ? domainFrom(item.url) : null;
   const faviconSrc = domain ? `https://www.google.com/s2/favicons?domain=${domain}&sz=64` : null;
-  const hasThumb = Boolean(item.thumbnail);
 
   return (
     <li className={styles.item} style={{ animationDelay: `${index * 45}ms` }}>
@@ -126,21 +163,7 @@ function TextResult({ item, index }: { item: GlobalSearchItem; index: number }) 
         rel={isExternal ? "noopener noreferrer" : undefined}
       >
         {/* Leading : thumbnail produit OU avatar tonal (favicon / icône type) */}
-        {hasThumb ? (
-          <div className={styles.thumb}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={item.thumbnail} alt="" className={styles.thumbImg} loading="lazy" />
-          </div>
-        ) : (
-          <div className={styles.avatar} data-cat={item.category} aria-hidden="true">
-            {faviconSrc ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={faviconSrc} alt="" width={20} height={20} className={styles.faviconImg} />
-            ) : (
-              <CategoryIcon category={item.category} />
-            )}
-          </div>
-        )}
+        <ResultLeading item={item} faviconSrc={faviconSrc} />
 
         {/* Corps */}
         <div className={styles.itemBody}>
