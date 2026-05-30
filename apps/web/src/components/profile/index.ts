@@ -13,6 +13,7 @@ export { ProfileDecksSection } from "./ProfileDecksSection";
 export { ProfileIdentityCard } from "./ProfileIdentityCard";
 export { ProfileSocialsRow } from "./ProfileSocialsRow";
 export { ProfileTeamBadge } from "./ProfileTeamBadge";
+export { ProfileView } from "./ProfileView";
 export { RivalriesCard } from "./RivalriesCard";
 export { default as SecuritySettings } from "./SecuritySettings";
 export { useBeybladeOptions } from "./useBeybladeOptions";
