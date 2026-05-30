@@ -44,12 +44,15 @@ function itemText(it: Item): string {
 /** Corpus depuis l'API web (source de vérité), fallback clé Redis. */
 async function loadCorpus(redis: RedisClient): Promise<Item[]> {
   try {
-    const res = await fetch(INDEX_URL, { signal: AbortSignal.timeout(20_000) });
+    const res = await fetch(INDEX_URL, { signal: AbortSignal.timeout(45_000) });
     if (res.ok) {
-      const json = (await res.json()) as { data?: Item[] };
-      if (Array.isArray(json.data) && json.data.length > 0) {
-        console.log(`[vec] corpus via API (${json.data.length} items)`);
-        return json.data;
+      // L'API enveloppe sa réponse (`getRoute`) : `{ ok, data: { count, data: [...] } }`.
+      // On accepte aussi un tableau direct (`{ data: [...] }`) par robustesse.
+      const json = (await res.json()) as { data?: Item[] | { data?: Item[] } };
+      const items = Array.isArray(json.data) ? json.data : (json.data?.data ?? []);
+      if (items.length > 0) {
+        console.log(`[vec] corpus via API (${items.length} items)`);
+        return items;
       }
     }
   } catch {

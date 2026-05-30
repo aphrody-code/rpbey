@@ -481,6 +481,10 @@ export async function buildGlobalSearchIndex(): Promise<GlobalSearchItem[]> {
   for (const d of await loadRedditDiscussions()) {
     items.push(d);
   }
+  // Discord : dump exhaustif du salon Beyblade X (+ fils) via scrape-discord-channel.ts.
+  for (const d of await loadDiscordDiscussions()) {
+    items.push(d);
+  }
 
   // 14. Métagame WBO (tier-list par pièce, fraîche) — `bbx-weekly.json` produit par
   // l'analyse des events organisés. Chaque composant (Blade/Ratchet/Bit/Lock Chip…)
@@ -823,6 +827,52 @@ async function loadRedditDiscussions(): Promise<GlobalSearchItem[]> {
       badge: "Reddit",
       source: "reddit",
       popularity: (d.score ?? 0) + (d.comments ?? 0),
+    });
+  }
+  return out;
+}
+
+/** Discussions Discord (dump du salon Beyblade X + fils, `scrape-discord-channel.ts`)
+ * → items uniformes. Plafonné pour borner la charge utile de l'index client ; le dump
+ * INTÉGRAL reste dans `discord-discussions.json` (consommé tel quel par le RAG). On
+ * curate par signal communautaire (réactions) puis récence. */
+async function loadDiscordDiscussions(): Promise<GlobalSearchItem[]> {
+  const data = await loadJsonSafe<{
+    channelName?: string;
+    discussions?: Array<{
+      id: string;
+      author: string;
+      authorName?: string;
+      text: string;
+      url: string;
+      channel?: string;
+      reactions?: number;
+      topic?: string;
+      ts?: string;
+    }>;
+  }>("data/discord-discussions.json");
+  const ranked = [...(data?.discussions ?? [])].sort(
+    (a, b) => (b.reactions ?? 0) - (a.reactions ?? 0) || (b.ts ?? "").localeCompare(a.ts ?? ""),
+  );
+  const CAP = 3000;
+  const out: GlobalSearchItem[] = [];
+  for (const d of ranked.slice(0, CAP)) {
+    const text = (d.text ?? "").trim();
+    if (!text) continue;
+    // Messages image-only (placeholder « [N pièce(s) jointe(s)] ») : aucun texte
+    // cherchable → exclus de l'index live (restent dans le dump pour le RAG).
+    if (/^\[\d+ pièce/.test(text)) continue;
+    const chan = d.channel ?? data?.channelName ?? "beyblade-x";
+    out.push({
+      id: `discord-${d.id}`,
+      title: lead(text),
+      subtitle: `#${chan} · ${d.authorName ?? d.author}${d.reactions ? ` · ${d.reactions} ★` : ""}`,
+      category: "discussion",
+      url: d.url,
+      details: text,
+      badge: "Discord",
+      source: "discord",
+      popularity: d.reactions ?? 0,
     });
   }
   return out;

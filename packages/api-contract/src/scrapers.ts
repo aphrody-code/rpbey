@@ -209,3 +209,36 @@ export const WikiEntitySchema = z.object({
   infobox: z.record(z.string(), z.string()),
 });
 export type WikiEntity = z.infer<typeof WikiEntitySchema>;
+
+// ── Discussion Discord (→ data/discord-discussions.json, indexée par global-search). ──
+// Sortie de scrape-discord-channel.ts : dump exhaustif d'un salon (Beyblade X) +
+// ses fils, nettoyé/classé pour le RAG. Shape consommé par loadDiscordDiscussions
+// (catégorie "discussion", source "discord"). `id` = id de message Discord (snowflake),
+// `ts` = timestamp ISO, `url` = lien profond discord.com/channels/g/c/m.
+export const DiscordTopicSchema = z.enum([
+  "plainte_pieces",
+  "sortie_produit",
+  "tournoi",
+  "meta_combo",
+  "anime",
+  "communaute",
+]);
+export type DiscordTopic = z.infer<typeof DiscordTopicSchema>;
+
+export const DiscordDiscussionSchema = z.object({
+  id: z.string().min(1),
+  author: z.string().min(1),
+  authorName: z.string().min(1),
+  authorId: z.string().min(1),
+  text: z.string().min(1),
+  ts: z.string().min(1),
+  url: z.url(),
+  channel: z.string(),
+  replyTo: z.string().nullable(),
+  attachments: z.array(z.object({ url: z.string(), type: z.string(), name: z.string() })),
+  reactions: z.number().int().nonnegative(),
+  topic: DiscordTopicSchema,
+  lang: z.string(),
+  relevance: z.number().min(0).max(1),
+});
+export type DiscordDiscussion = z.infer<typeof DiscordDiscussionSchema>;

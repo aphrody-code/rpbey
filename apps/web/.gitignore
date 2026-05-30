@@ -92,3 +92,6 @@ data/anime-frames/
 
 # Checkpoint résumable du crawler Fandom (état + entités, régénérable)
 data/.fandom-crawl-state.json
+
+# Discord scraper checkpoint (résumable)
+data/.discord-crawl-state.json
