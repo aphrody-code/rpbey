@@ -33,6 +33,8 @@ import {
   Swords,
   Trophy,
   Tv,
+  Users,
+  Vote,
   Wrench,
 } from "lucide-react";
 import Image from "next/image";
@@ -48,6 +50,8 @@ const navItems: { icon: LucideIcon; label: string; href: string }[] = [
   { icon: Search, label: "Recherche", href: "/search" },
   { icon: Trophy, label: "Tournois", href: "/tournaments" },
   { icon: Crown, label: "Classements", href: "/rankings" },
+  { icon: Users, label: "Équipes", href: "/equipes" },
+  { icon: Vote, label: "Sondages", href: "/sondages" },
   { icon: Swords, label: "Meta", href: "/meta" },
   { icon: Tv, label: "TV", href: "/tv" },
   { icon: Clapperboard, label: "Anime", href: "/anime" },
@@ -149,6 +153,11 @@ export function IconNav() {
           flexDirection: "column",
           gap: 0.25,
           mt: 1,
+          minHeight: 0,
+          overflowY: "auto",
+          // masque la scrollbar (rail compact) tout en gardant le scroll si l'écran est court
+          scrollbarWidth: "none",
+          "&::-webkit-scrollbar": { display: "none" },
         }}
       >
         {/* Nav items */}
