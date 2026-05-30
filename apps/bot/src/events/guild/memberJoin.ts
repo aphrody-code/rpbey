@@ -1,15 +1,20 @@
 import { type ArgsOf, Discord, On } from "@rpbey/discordx";
 import { AttachmentBuilder, EmbedBuilder, type TextChannel } from "discord.js";
+import { inject, injectable } from "tsyringe";
 
 import { generateWelcomeImage } from "../../lib/canvas-utils.js";
 import { getTemplate } from "../../lib/cms.js";
 import { Colors, RPB } from "../../lib/constants.js";
+import { ConfigService } from "../../lib/config-service.js";
 import { logger } from "../../lib/logger.js";
 
 @Discord()
+@injectable()
 export class MemberJoinListener {
   // Dedup: prevent sending multiple welcome messages for the same member
   private static recentJoins = new Set<string>();
+
+  constructor(@inject(ConfigService) private readonly config: ConfigService) {}
 
   @On({ event: "guildMemberAdd" })
   async onMemberJoin([member]: ArgsOf<"guildMemberAdd">) {
@@ -23,12 +28,35 @@ export class MemberJoinListener {
 
     logger.info(`Nouveau membre: ${member.user.tag} sur ${member.guild.name}`);
 
-    // Auto-assign Blader role
+    // Auto-assign rôle depuis ConfigService (autorole welcome) → fallback Blader
+    const guildId = member.guild.id;
+    let autoroleId: string = RPB.Roles.Blader; // fallback constants
     try {
-      await member.roles.add(RPB.Roles.Blader);
-      logger.info(`[AutoRole] Blader role assigned to ${member.user.tag}`);
+      const welcomeCfg = (await this.config.getConfig(guildId)).welcome;
+      const autoroleIds = (welcomeCfg as { autoroleIds?: string[] }).autoroleIds ?? [];
+      if (autoroleIds.length > 0) {
+        for (const roleId of autoroleIds) {
+          try {
+            await member.roles.add(roleId);
+            logger.info(`[AutoRole] Rôle ${roleId} assigné à ${member.user.tag}`);
+          } catch (err) {
+            logger.error(`[AutoRole] Impossible d'assigner ${roleId} à ${member.user.tag}:`, err);
+          }
+        }
+      } else {
+        // Pas d'autoroles configurés → fallback Blader via rôle DB ou constant
+        autoroleId = (await this.config.getRole(guildId, "blader")) ?? RPB.Roles.Blader;
+        await member.roles.add(autoroleId);
+        logger.info(`[AutoRole] Blader (fallback) assigné à ${member.user.tag}`);
+      }
     } catch (err) {
-      logger.error(`[AutoRole] Failed to assign Blader role to ${member.user.tag}:`, err);
+      // Fallback ultime
+      try {
+        await member.roles.add(autoroleId);
+        logger.info(`[AutoRole] Blader (ultime fallback) assigné à ${member.user.tag}`);
+      } catch (e2) {
+        logger.error(`[AutoRole] Échec total assignation rôle à ${member.user.tag}:`, e2);
+      }
     }
 
     let attachmentItems: AttachmentBuilder[] = [];
@@ -60,7 +88,10 @@ export class MemberJoinListener {
               search.toLowerCase().replace(/[^a-z0-9]/g, "")),
       ) as TextChannel | undefined;
 
-    let welcomeChannel = findChannel(RPB.Channels.Welcome);
+    // Canal welcome : ConfigService (DB) → fallback RPB.Channels.Welcome
+    const welcomeChannelId =
+      (await this.config.getChannel(guildId, "welcome")) ?? RPB.Channels.Welcome;
+    let welcomeChannel = findChannel(welcomeChannelId);
 
     if (!welcomeChannel?.isTextBased()) {
       welcomeChannel = member.guild.systemChannel as TextChannel;

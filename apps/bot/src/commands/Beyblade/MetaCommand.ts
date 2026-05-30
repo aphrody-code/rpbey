@@ -7,6 +7,8 @@ import {
 } from "discord.js";
 import { injectable } from "tsyringe";
 
+const WEB_BASE = "http://127.0.0.1:3002";
+
 import { logger } from "../../lib/logger.js";
 import {
   generateMetaCategoryCanvas,
@@ -339,6 +341,58 @@ export class MetaCommand {
       return interaction.editReply({ files: [attachment] });
     } catch (err) {
       logger.error("Failed to generate meta piece:", err);
+      return interaction.editReply({ embeds: [fallbackEmbed()] });
+    }
+  }
+
+  // ─── /meta live ───────────────────────────────────────────────────────────
+  // Fetches the enriched meta from the web API instead of the local file.
+  // Falls back gracefully if the API is unavailable.
+
+  @Slash({
+    name: "live",
+    description: "Méta Beyblade X fraîche depuis le site rpbey.fr",
+  })
+  @SlashGroup("meta")
+  async live(interaction: CommandInteraction) {
+    await interaction.deferReply();
+
+    try {
+      const res = await fetch(`${WEB_BASE}/api/v1/meta`, {
+        signal: AbortSignal.timeout(5_000),
+        headers: { Accept: "application/json" },
+      });
+
+      if (!res.ok) {
+        return interaction.editReply({ embeds: [fallbackEmbed()] });
+      }
+
+      const json = (await res.json()) as { data: MetaFileData | null };
+
+      if (!json.data) {
+        return interaction.editReply({ embeds: [fallbackEmbed()] });
+      }
+
+      // Re-use the existing canvas renderer with the fresh data
+      const resolved = resolvePeriod(json.data, "2weeks");
+      if (!resolved) return interaction.editReply({ embeds: [fallbackEmbed()] });
+
+      const { period, pKey } = resolved;
+      const buffer = await generateMetaTopCanvas(period, json.data.scrapedAt, pKey);
+      const attachment = new AttachmentBuilder(buffer, { name: "meta-live.png" });
+
+      const scrapedTs = Math.floor(new Date(json.data.scrapedAt).getTime() / 1000);
+      const caption = new EmbedBuilder()
+        .setColor(0xfbbf24)
+        .setTitle("Méta live — Beyblade X")
+        .setDescription(
+          `Données fraîches du site · Mis à jour <t:${scrapedTs}:R>\n` +
+            `[Voir la méta complète](https://rpbey.fr/meta)`,
+        );
+
+      return interaction.editReply({ embeds: [caption], files: [attachment] });
+    } catch (err) {
+      logger.error("Failed to fetch live meta:", err);
       return interaction.editReply({ embeds: [fallbackEmbed()] });
     }
   }

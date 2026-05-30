@@ -21,10 +21,50 @@ import { type BtsSeason, getBtsRanking } from "./bts-ranking.js";
 import { generateLeaderboardCard, type LeaderboardEntry } from "./canvas-utils.js";
 import { logger } from "./logger.js";
 
-// IDs prod RPB guild — verrouilles, mais override possible via env
-// (utile pour tests ou si on veut publier dans un autre salon).
+// IDs prod RPB guild — verrouilles en fallback, surchargés via ConfigService si disponible.
 export const CLASSEMENT_CHANNEL_ID = process.env.CLASSEMENT_CHANNEL_ID ?? "1489804785430302851";
 export const TOURNOIS_ROLE_ID = process.env.TOURNOIS_ROLE_ID ?? "1451549606608371814";
+
+/**
+ * Résout le channelId de publication du classement.
+ * Priorité : ConfigService (DB) → env → hardcode.
+ */
+export async function resolveClassementChannelId(channelIdOverride?: string): Promise<string> {
+  if (channelIdOverride) return channelIdOverride;
+  try {
+    const { container } = await import("tsyringe");
+    const { ConfigService, primaryGuildId } = await import("./config-service.js");
+    const svc = container.resolve(ConfigService);
+    const guildId = primaryGuildId();
+    if (guildId) {
+      const fromDb = await svc.getChannel(guildId, "classement");
+      if (fromDb) return fromDb;
+    }
+  } catch {
+    // fallback silencieux
+  }
+  return CLASSEMENT_CHANNEL_ID;
+}
+
+/**
+ * Résout le roleId de ping tournoi.
+ * Priorité : ConfigService (DB) → env → hardcode.
+ */
+export async function resolveTournoisRoleId(): Promise<string> {
+  try {
+    const { container } = await import("tsyringe");
+    const { ConfigService, primaryGuildId } = await import("./config-service.js");
+    const svc = container.resolve(ConfigService);
+    const guildId = primaryGuildId();
+    if (guildId) {
+      const fromDb = await svc.getRole(guildId, "tournoiNotification");
+      if (fromDb) return fromDb;
+    }
+  } catch {
+    // fallback silencieux
+  }
+  return TOURNOIS_ROLE_ID;
+}
 
 const SEASON_LABELS: Record<BtsSeason, string> = {
   1: "Saison 1 · BTS 1",
@@ -65,8 +105,9 @@ export async function publishBtsRanking(
 ): Promise<PublishRankingResult> {
   const season = options.season ?? 2;
   const topN = options.topN ?? 10;
-  const channelId = options.channelId ?? CLASSEMENT_CHANNEL_ID;
+  const channelId = await resolveClassementChannelId(options.channelId);
   const silent = options.silent ?? false;
+  const tournoisRoleId = await resolveTournoisRoleId();
 
   const result: PublishRankingResult = {
     ok: false,
@@ -130,12 +171,12 @@ export async function publishBtsRanking(
     });
     const content = silent
       ? `Mise à jour du classement Bey-Tamashii Séries\nhttps://rpbey.fr/rankings`
-      : `Mise à jour du classement Bey-Tamashii Séries <@&${TOURNOIS_ROLE_ID}>\nhttps://rpbey.fr/rankings`;
+      : `Mise à jour du classement Bey-Tamashii Séries <@&${tournoisRoleId}>\nhttps://rpbey.fr/rankings`;
 
     const msg = await textChannel.send({
       content,
       files: [file],
-      allowedMentions: silent ? { parse: [] } : { roles: [TOURNOIS_ROLE_ID] },
+      allowedMentions: silent ? { parse: [] } : { roles: [tournoisRoleId] },
     });
 
     result.ok = true;

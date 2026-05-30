@@ -4,9 +4,13 @@ import { bbxWeeklySyncTask } from "./tasks/BbxWeeklySync.js";
 import { liveTournamentSyncTask } from "./tasks/LiveTournamentSync.js";
 import { mentionsScanTask } from "./tasks/MentionsScan.js";
 import { preTournamentSyncTask } from "./tasks/PreTournamentSync.js";
+import { refreshSearchCorpusTask } from "./tasks/RefreshSearchCorpus.js";
+import { refreshSearchVectorsTask } from "./tasks/RefreshSearchVectors.js";
 import { sessionCleanupTask } from "./tasks/SessionCleanup.js";
+import { syncMetaEnrichmentTask } from "./tasks/SyncMetaEnrichment.js";
 import { syncRankingRolesTask } from "./tasks/SyncRankingRoles.js";
 import { syncSatrRolesTask } from "./tasks/SyncSatrRoles.js";
+import { tempBanExpiryTask } from "./tasks/TempBanExpiry.js";
 import { tournamentReminderTask } from "./tasks/TournamentReminder.js";
 
 /**
@@ -118,12 +122,42 @@ export function setupCronJobs() {
     run: bbxWeeklySyncTask,
   });
 
+  // ─── Recherche / méta ─────────────────────────────────────────────────
+  schedule({
+    name: "Refresh search corpus (invalide rpbey:search:corpus:v1)",
+    cron: "0 */6 * * *",
+    paris: "toutes les 6h",
+    run: refreshSearchCorpusTask,
+  });
+
+  schedule({
+    name: "Rebuild search vectors (index vectoriel Redis rpbey:search:vec)",
+    cron: "0 */2 * * *",
+    paris: "toutes les 2h",
+    run: refreshSearchVectorsTask,
+  });
+
+  schedule({
+    name: "Sync meta enrichment (X + Reddit + Web → meta-enrichment.json)",
+    cron: "0 16 * * 1,3,5",
+    paris: "lun/mer/ven 18:00 CEST",
+    run: syncMetaEnrichmentTask,
+  });
+
   schedule({
     name: "Mentions scan (analytics Discord)",
     cron: "0 */6 * * *",
     paris: "toutes les 6h",
     run: mentionsScanTask,
     runOnBoot: { delayMs: 30_000 },
+  });
+
+  // ─── Modération ───────────────────────────────────────────────────────────
+  schedule({
+    name: "TempBan expiry (lever les bans temporaires échus)",
+    cron: "*/5 * * * *",
+    paris: "toutes les 5 min",
+    run: tempBanExpiryTask,
   });
 
   // ─── Maintenance ──────────────────────────────────────────────────────

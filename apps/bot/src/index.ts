@@ -9,11 +9,12 @@ import { bot } from "./lib/bot.js";
 import { setupEventBridge } from "./lib/event-bridge.js";
 import { setupLogCapture } from "./lib/log-capture.js";
 import { logger } from "./lib/logger.js";
+import { client as dbClient } from "@rpbey/db";
 import { prisma } from "./lib/prisma.js";
 import { claimSingletonOrExit } from "./lib/singleton-guard.js";
 
 // Refuse to start a second instance — exit(11) if another PID owns the lock.
-claimSingletonOrExit();
+const releaseLock = claimSingletonOrExit();
 
 // Preconnect to hot hosts to reduce first-request latency (Bun-native)
 // Wrapped in try/catch: Bun 1.3.13-canary throws "Invalid port" on bare hostnames.
@@ -29,6 +30,74 @@ if (typeof fetch.preconnect === "function") {
 
 // Capture logs to in-memory buffer for API access
 setupLogCapture();
+
+/**
+ * Wire discord.js Client-level error/warn/shard events to the logger.
+ * Called once, before login. Keeps telemetry in the structured log stream
+ * rather than relying solely on the WebSocket pub/sub (event-bridge).
+ */
+function setupClientErrorHandlers() {
+  // Client-level error — emitted when the gateway WebSocket encounters an error.
+  // Must be listened; unhandled 'error' events crash the process in Node.
+  bot.on("error", (err) => {
+    logger.error("[Client] error:", err);
+  });
+
+  // Warnings emitted by discord.js itself (rate-limit approach, deprecated usage…).
+  bot.on("warn", (msg) => {
+    logger.warn("[Client] warn:", msg);
+  });
+
+  // Shard-level WebSocket error (fired per-shard when the WS errors).
+  bot.on("shardError", (err, shardId) => {
+    logger.error(`[Shard ${shardId}] error:`, err);
+  });
+
+  // Shard disconnected — the CloseEvent carries the WS close code.
+  // Note: CloseEvent.reason is @deprecated (unused by @discordjs/ws internally);
+  // only .code is reliably populated.
+  bot.on("shardDisconnect", (event, shardId) => {
+    logger.warn(`[Shard ${shardId}] disconnected — code ${event.code}`);
+  });
+
+  // Token was invalidated by Discord — the bot can no longer reconnect.
+  bot.on("invalidated", () => {
+    logger.fatal("[Client] session invalidated — token revoked or application deleted. Exiting.");
+    // Give the logger a tick to flush before terminating.
+    setTimeout(() => process.exit(1), 500);
+  });
+}
+
+setupClientErrorHandlers();
+
+/**
+ * Graceful shutdown — called on SIGTERM (systemd stop) or SIGINT (Ctrl-C).
+ * Drains the Discord gateway cleanly, closes the DB pool, releases the PID
+ * lock, then exits with the conventional signal exit code.
+ */
+async function gracefulShutdown(signal: "SIGTERM" | "SIGINT" | "SIGHUP"): Promise<never> {
+  const exitCode = signal === "SIGINT" ? 130 : 143;
+  logger.info(`[Bot] ${signal} received — shutting down gracefully…`);
+
+  // 1. Destroy the Discord gateway connection (sends WS close frame).
+  try {
+    bot.destroy();
+  } catch (err) {
+    logger.warn("[Bot] bot.destroy() error:", err);
+  }
+
+  // 2. End the shared postgres-js connection pool.
+  try {
+    await dbClient.end({ timeout: 5 });
+  } catch (err) {
+    logger.warn("[Bot] DB pool close error:", err);
+  }
+
+  // 3. Release the PID lock file.
+  releaseLock();
+
+  process.exit(exitCode);
+}
 
 // Start the bot HTTP API server
 startApiServer(parseInt(process.env.BOT_API_PORT ?? "3001", 10));
@@ -77,6 +146,11 @@ async function run() {
   // Config DI
   DIService.engine = tsyringeDependencyRegistryEngine.setInjector(container);
 
+  // Enregistre ConfigService dans le container AVANT l'import des modules décorés
+  // (les commandes/events qui l'injectent doivent trouver le singleton déjà résolu).
+  const { ConfigService } = await import("./lib/config-service.js");
+  container.registerSingleton(ConfigService);
+
   // Import Commands/Events/Components
   // Static side-effect import — the bundler needs to see every decorated file
   // as a direct dependency so `bun build --compile` packs them into the binary.
@@ -94,6 +168,13 @@ async function run() {
   // ffmpeg-static, libsodium-wrappers) ne sont plus installées.
 
   await bot.login(process.env.DISCORD_TOKEN);
+
+  // Replace singleton-guard's synchronous signal handlers with proper async
+  // graceful shutdown that first drains Discord + DB before exiting.
+  for (const sig of ["SIGINT", "SIGTERM", "SIGHUP"] as const) {
+    process.removeAllListeners(sig);
+    process.once(sig, () => void gracefulShutdown(sig));
+  }
 
   bot.once("clientReady", async () => {
     try {
@@ -184,6 +265,19 @@ async function run() {
       void bot.executeInteraction(interaction);
     } catch (e) {
       logger.error("[Bot] Interaction error:", e);
+      // Best-effort ephemeral fallback so the user doesn't see a stuck spinner.
+      if (interaction.isRepliable()) {
+        const content = "Une erreur est survenue. Veuillez réessayer.";
+        try {
+          if (!interaction.replied && !interaction.deferred) {
+            await interaction.reply({ content, flags: MessageFlags.Ephemeral });
+          } else if (interaction.deferred) {
+            await interaction.editReply(content);
+          }
+        } catch {
+          // Already replied or timed out — ignore.
+        }
+      }
     }
   });
 
@@ -211,11 +305,16 @@ async function run() {
 }
 
 // Global error handlers
+// unhandledRejection: log and keep running (discord.js may reject promises on
+// reconnect races; crashing the process would be worse than the leak).
 process.on("unhandledRejection", (err) => {
-  logger.error("unhandled rejection:", err);
+  logger.error("[Process] unhandledRejection:", err);
 });
+// uncaughtException: singleton-guard already registered a process.once handler
+// that releases the PID lock and calls process.exit(1). We add a second handler
+// here only to log the error to the structured logger before that exit fires.
 process.on("uncaughtException", (err) => {
-  logger.error("uncaught exception:", err);
+  logger.fatal("[Process] uncaughtException:", err);
 });
 
 void run().catch(async (err) => {

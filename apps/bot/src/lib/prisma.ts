@@ -98,6 +98,8 @@ const MODEL_TABLE: Record<string, keyof typeof schema> = {
   animeEpisodeSource: "animeEpisodeSources",
   animeWatchProgress: "animeWatchProgress",
   warning: "warnings",
+  tempBan: "tempBans",
+  botConfig: "botConfig",
   reminder: "reminders",
   beyLibraryPart: "beyLibraryParts",
   legacyTournamentArchive: "legacyTournamentArchives",

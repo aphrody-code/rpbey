@@ -6,9 +6,10 @@ import {
   type Guild,
   type GuildTextBasedChannel,
 } from "discord.js";
-import { injectable } from "tsyringe";
+import { inject, injectable } from "tsyringe";
 
 import { Colors } from "../lib/constants.js";
+import { ConfigService } from "../lib/config-service.js";
 import { logger } from "../lib/logger.js";
 
 const AUDIT_LOG_DELAY = 1500;
@@ -16,10 +17,19 @@ const AUDIT_LOG_DELAY = 1500;
 @Discord()
 @injectable()
 export class AdvancedLogs {
-  private getLogChannel(guild: Guild) {
-    const logChannelId = process.env.LOG_CHANNEL_ID;
+  constructor(@inject(ConfigService) private readonly config: ConfigService) {}
+
+  private async getLogChannel(guild: Guild): Promise<GuildTextBasedChannel | null> {
+    // Priorité : ConfigService (DB) → env LOG_CHANNEL_ID
+    let logChannelId: string | null = null;
+    try {
+      logChannelId = await this.config.getChannel(guild.id, "log");
+    } catch {
+      // ignore
+    }
+    if (!logChannelId) logChannelId = process.env.LOG_CHANNEL_ID ?? null;
     if (!logChannelId) return null;
-    return guild.channels.cache.get(logChannelId) as GuildTextBasedChannel | undefined;
+    return (guild.channels.cache.get(logChannelId) as GuildTextBasedChannel | undefined) ?? null;
   }
 
   private async sendLog(channel: GuildTextBasedChannel, embed: EmbedBuilder) {
@@ -45,7 +55,7 @@ export class AdvancedLogs {
 
   @On({ event: "guildMemberUpdate" })
   async onMemberUpdate([oldMember, newMember]: ArgsOf<"guildMemberUpdate">) {
-    const channel = this.getLogChannel(newMember.guild);
+    const channel = await this.getLogChannel(newMember.guild);
     if (!channel) return;
 
     // Role additions
@@ -203,7 +213,7 @@ export class AdvancedLogs {
 
   @On({ event: "guildMemberAdd" })
   async onMemberJoin([member]: ArgsOf<"guildMemberAdd">) {
-    const channel = this.getLogChannel(member.guild);
+    const channel = await this.getLogChannel(member.guild);
     if (!channel) return;
 
     const created = Math.floor(member.user.createdTimestamp / 1000);
@@ -248,7 +258,7 @@ export class AdvancedLogs {
 
   @On({ event: "guildMemberRemove" })
   async onMemberLeave([member]: ArgsOf<"guildMemberRemove">) {
-    const channel = this.getLogChannel(member.guild);
+    const channel = await this.getLogChannel(member.guild);
     if (!channel) return;
 
     const roles = member.roles.cache
@@ -312,7 +322,7 @@ export class AdvancedLogs {
   async onMessageDelete([message]: ArgsOf<"messageDelete">) {
     if (!message.guild || message.author?.bot) return;
 
-    const channel = this.getLogChannel(message.guild);
+    const channel = await this.getLogChannel(message.guild);
     if (!channel) return;
     if (message.channelId === channel.id) return; // Don't log deletions in log channel
 
@@ -369,7 +379,7 @@ export class AdvancedLogs {
     const guild = bulkChannel.guild;
     if (!guild) return;
 
-    const logChannel = this.getLogChannel(guild);
+    const logChannel = await this.getLogChannel(guild);
     if (!logChannel) return;
 
     const authors = new Set(messages.filter((m) => m.author).map((m) => m.author?.tag));
@@ -394,7 +404,7 @@ export class AdvancedLogs {
     if (!newMessage.guild || newMessage.author?.bot) return;
     if (oldMessage.content === newMessage.content) return;
 
-    const channel = this.getLogChannel(newMessage.guild);
+    const channel = await this.getLogChannel(newMessage.guild);
     if (!channel) return;
 
     const before = oldMessage.content ? oldMessage.content.slice(0, 1024) : "*non disponible*";
@@ -416,7 +426,7 @@ export class AdvancedLogs {
 
   @On({ event: "guildBanAdd" })
   async onBan([ban]: ArgsOf<"guildBanAdd">) {
-    const channel = this.getLogChannel(ban.guild);
+    const channel = await this.getLogChannel(ban.guild);
     if (!channel) return;
 
     const entry = await this.fetchAuditEntry(ban.guild, AuditLogEvent.MemberBanAdd, ban.user.id);
@@ -446,7 +456,7 @@ export class AdvancedLogs {
 
   @On({ event: "guildBanRemove" })
   async onUnban([ban]: ArgsOf<"guildBanRemove">) {
-    const channel = this.getLogChannel(ban.guild);
+    const channel = await this.getLogChannel(ban.guild);
     if (!channel) return;
 
     const entry = await this.fetchAuditEntry(ban.guild, AuditLogEvent.MemberBanRemove, ban.user.id);
@@ -478,7 +488,7 @@ export class AdvancedLogs {
   @On({ event: "voiceStateUpdate" })
   async onVoiceState([oldState, newState]: ArgsOf<"voiceStateUpdate">) {
     const guild = newState.guild;
-    const channel = this.getLogChannel(guild);
+    const channel = await this.getLogChannel(guild);
     if (!channel) return;
     if (newState.member?.user.bot) return;
 
@@ -559,7 +569,7 @@ export class AdvancedLogs {
   @On({ event: "channelCreate" })
   async onChannelCreate([ch]: ArgsOf<"channelCreate">) {
     if (!ch.guild) return;
-    const logChannel = this.getLogChannel(ch.guild);
+    const logChannel = await this.getLogChannel(ch.guild);
     if (!logChannel) return;
 
     const typeLabel = this.channelTypeLabel(ch.type);
@@ -593,7 +603,7 @@ export class AdvancedLogs {
   @On({ event: "channelDelete" })
   async onChannelDelete([ch]: ArgsOf<"channelDelete">) {
     if (!("guild" in ch) || !ch.guild) return;
-    const logChannel = this.getLogChannel(ch.guild);
+    const logChannel = await this.getLogChannel(ch.guild);
     if (!logChannel) return;
 
     const typeLabel = this.channelTypeLabel(ch.type);
@@ -619,7 +629,7 @@ export class AdvancedLogs {
 
   @On({ event: "roleCreate" })
   async onRoleCreate([role]: ArgsOf<"roleCreate">) {
-    const logChannel = this.getLogChannel(role.guild);
+    const logChannel = await this.getLogChannel(role.guild);
     if (!logChannel) return;
 
     const entry = await this.fetchAuditEntry(role.guild, AuditLogEvent.RoleCreate, role.id);
@@ -646,7 +656,7 @@ export class AdvancedLogs {
 
   @On({ event: "roleDelete" })
   async onRoleDelete([role]: ArgsOf<"roleDelete">) {
-    const logChannel = this.getLogChannel(role.guild);
+    const logChannel = await this.getLogChannel(role.guild);
     if (!logChannel) return;
 
     const entry = await this.fetchAuditEntry(role.guild, AuditLogEvent.RoleDelete, role.id);
@@ -669,7 +679,7 @@ export class AdvancedLogs {
 
   @On({ event: "roleUpdate" })
   async onRoleUpdate([oldRole, newRole]: ArgsOf<"roleUpdate">) {
-    const logChannel = this.getLogChannel(newRole.guild);
+    const logChannel = await this.getLogChannel(newRole.guild);
     if (!logChannel) return;
 
     const changes: string[] = [];
@@ -718,7 +728,7 @@ export class AdvancedLogs {
   @On({ event: "threadCreate" })
   async onThreadCreate([thread]: ArgsOf<"threadCreate">) {
     if (!thread.guild) return;
-    const logChannel = this.getLogChannel(thread.guild);
+    const logChannel = await this.getLogChannel(thread.guild);
     if (!logChannel) return;
 
     const embed = new EmbedBuilder()
@@ -741,7 +751,7 @@ export class AdvancedLogs {
   @On({ event: "threadDelete" })
   async onThreadDelete([thread]: ArgsOf<"threadDelete">) {
     if (!thread.guild) return;
-    const logChannel = this.getLogChannel(thread.guild);
+    const logChannel = await this.getLogChannel(thread.guild);
     if (!logChannel) return;
 
     const embed = new EmbedBuilder()
@@ -758,7 +768,7 @@ export class AdvancedLogs {
   @On({ event: "emojiCreate" })
   async onEmojiCreate([emoji]: ArgsOf<"emojiCreate">) {
     if (!emoji.guild) return;
-    const logChannel = this.getLogChannel(emoji.guild);
+    const logChannel = await this.getLogChannel(emoji.guild);
     if (!logChannel) return;
 
     const embed = new EmbedBuilder()
@@ -774,7 +784,7 @@ export class AdvancedLogs {
   @On({ event: "emojiDelete" })
   async onEmojiDelete([emoji]: ArgsOf<"emojiDelete">) {
     if (!emoji.guild) return;
-    const logChannel = this.getLogChannel(emoji.guild);
+    const logChannel = await this.getLogChannel(emoji.guild);
     if (!logChannel) return;
 
     const embed = new EmbedBuilder()

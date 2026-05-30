@@ -10,6 +10,7 @@ import { inject, injectable } from "tsyringe";
 
 import { StaffOnly } from "../../guards/StaffOnly.js";
 import { Colors, RPB } from "../../lib/constants.js";
+import { ConfigService } from "../../lib/config-service.js";
 import { GachaApiError, createGachaClient, type GachaApiClient } from "../../lib/gacha-api.js";
 import {
   fetchBannerPromoPng,
@@ -120,11 +121,34 @@ function debtEmbedLocal(currency: number): EmbedBuilder | null {
 @Guard(StaffOnly)
 @injectable()
 export class EconomyGroup {
-  constructor(@inject(PrismaService) private prisma: PrismaService) {}
+  constructor(
+    @inject(PrismaService) private prisma: PrismaService,
+    @inject(ConfigService) private config: ConfigService,
+  ) {}
 
   /** Get a gacha API client for the calling user. */
   private async api(interaction: CommandInteraction): Promise<GachaApiClient> {
     return createGachaClient(interaction.user.id, interaction.user.displayName);
+  }
+
+  /** Résout le cooldown de don depuis ConfigService, fallback GIFT_COOLDOWN_MS. */
+  private async getGiftCooldownMs(guildId: string): Promise<number> {
+    try {
+      const eco = await this.config.getEconomy(guildId);
+      return eco.giftCooldownMs ?? GIFT_COOLDOWN_MS;
+    } catch {
+      return GIFT_COOLDOWN_MS;
+    }
+  }
+
+  /** Résout le taux d'intérêt sur la dette depuis ConfigService, fallback 15%. */
+  private async getDebtInterestPct(guildId: string): Promise<number> {
+    try {
+      const eco = await this.config.getEconomy(guildId);
+      return eco.debtInterestPct ?? 15;
+    } catch {
+      return 15;
+    }
   }
 
   // ═══ /gacha aide ═══
@@ -1409,7 +1433,8 @@ export class EconomyGroup {
     }
 
     const debt = Math.abs(profile.currency);
-    const dailyInterest = Math.round(debt * 0.15);
+    const interestPct = await this.getDebtInterestPct(interaction.guildId ?? "");
+    const dailyInterest = Math.round(debt * (interestPct / 100));
     const daysToRepay = Math.ceil(debt / 80);
 
     return interaction.reply({
@@ -1426,7 +1451,7 @@ export class EconomyGroup {
             },
             {
               name: "📈 Intérêts / daily",
-              value: `**${dailyInterest.toLocaleString("fr-FR")}** 🪙 (15%)`,
+              value: `**${dailyInterest.toLocaleString("fr-FR")}** 🪙 (${interestPct}%)`,
               inline: true,
             },
             { name: "📅 Jours estimés", value: `~**${daysToRepay}** jours`, inline: true },
@@ -1780,12 +1805,13 @@ export class EconomyGroup {
       });
     }
 
+    const giftCooldownMs = await this.getGiftCooldownMs(interaction.guildId ?? "");
     if (
       profile.lastGiftSent &&
-      Date.now() - new Date(profile.lastGiftSent).getTime() < GIFT_COOLDOWN_MS
+      Date.now() - new Date(profile.lastGiftSent).getTime() < giftCooldownMs
     ) {
       const nextGift = Math.floor(
-        (new Date(profile.lastGiftSent).getTime() + GIFT_COOLDOWN_MS) / 1000,
+        (new Date(profile.lastGiftSent).getTime() + giftCooldownMs) / 1000,
       );
       return interaction.editReply({
         embeds: [warningEmbed("Cooldown", `Tu pourras donner à nouveau <t:${nextGift}:R>`)],

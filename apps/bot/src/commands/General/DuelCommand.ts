@@ -34,6 +34,7 @@ import {
   pickRandom,
 } from "../../lib/battle-engine.js";
 import { Colors, RPB } from "../../lib/constants.js";
+import { ConfigService } from "../../lib/config-service.js";
 import { logger } from "../../lib/logger.js";
 import { PrismaService } from "../../lib/prisma.js";
 import { errorEmbed, v2Container } from "../../lib/ui.js";
@@ -58,7 +59,7 @@ import { errorEmbed, v2Container } from "../../lib/ui.js";
 // ═══════════════════════════════════════════════════════════════════════════════
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// CONSTANTS
+// CONSTANTS (fallbacks — valeurs réelles lues via ConfigService à l'exécution)
 // ═══════════════════════════════════════════════════════════════════════════════
 
 const CHALLENGE_TIMEOUT = 60_000;
@@ -133,7 +134,30 @@ type CardRow = {
 @SlashGroup("duel")
 @injectable()
 export class DuelCommand {
-  constructor(@inject(PrismaService) private prisma: PrismaService) {}
+  constructor(
+    @inject(PrismaService) private prisma: PrismaService,
+    @inject(ConfigService) private config: ConfigService,
+  ) {}
+
+  /** Résout les timeouts/cooldowns depuis ConfigService, fallback constants. */
+  private async getCooldownValues(guildId: string) {
+    try {
+      const cd = await this.config.getCooldowns(guildId);
+      return {
+        challengeTimeout: cd.duelChallengeTimeoutMs ?? CHALLENGE_TIMEOUT,
+        selectionTimeout: cd.duelSelectionTimeoutMs ?? SELECTION_TIMEOUT,
+        roundDelay: cd.duelRoundDelayMs ?? ROUND_DELAY,
+        duelCooldown: cd.duelCooldownMs ?? DUEL_COOLDOWN,
+      };
+    } catch {
+      return {
+        challengeTimeout: CHALLENGE_TIMEOUT,
+        selectionTimeout: SELECTION_TIMEOUT,
+        roundDelay: ROUND_DELAY,
+        duelCooldown: DUEL_COOLDOWN,
+      };
+    }
+  }
 
   private async ensureProfile(discordId: string, displayName: string) {
     let user = await this.prisma.user.findUnique({
@@ -206,14 +230,17 @@ export class DuelCommand {
       });
 
     const now = Date.now();
-    const cd = cooldowns.get(interaction.user.id) ?? 0;
-    if (now < cd) {
-      const secs = Math.ceil((cd - now) / 1000);
+    const cdExpiry = cooldowns.get(interaction.user.id) ?? 0;
+    if (now < cdExpiry) {
+      const secs = Math.ceil((cdExpiry - now) / 1000);
       return interaction.reply({
         content: `⏳ Cooldown : **${secs}s** avant un nouveau duel.`,
         flags: MessageFlags.Ephemeral,
       });
     }
+
+    // Résout les timeouts depuis ConfigService (fallback constants si DB absente)
+    const cdValues = await this.getCooldownValues(interaction.guildId ?? "");
 
     const [userA, userB] = await Promise.all([
       this.ensureProfile(interaction.user.id, interaction.user.displayName),
@@ -269,6 +296,7 @@ export class DuelCommand {
         userB as { id: string; profile: NonNullable<typeof userB.profile> },
         invA,
         invB,
+        cdValues,
       );
     } catch (err) {
       logger.error("[Duel] Unexpected error:", err);
@@ -313,6 +341,17 @@ export class DuelCommand {
     },
     invA: Array<{ card: CardRow }>,
     invB: Array<{ card: CardRow }>,
+    cdValues: {
+      challengeTimeout: number;
+      selectionTimeout: number;
+      roundDelay: number;
+      duelCooldown: number;
+    } = {
+      challengeTimeout: CHALLENGE_TIMEOUT,
+      selectionTimeout: SELECTION_TIMEOUT,
+      roundDelay: ROUND_DELAY,
+      duelCooldown: DUEL_COOLDOWN,
+    },
   ) {
     const nameA = interaction.user.displayName;
     const nameB = target.displayName;
@@ -351,7 +390,7 @@ export class DuelCommand {
       )
       .setColor(Colors.Primary)
       .setThumbnail(interaction.user.displayAvatarURL({ size: 128 }))
-      .setFooter({ text: "Expire dans 60 secondes" });
+      .setFooter({ text: `Expire dans ${Math.round(cdValues.challengeTimeout / 1000)} secondes` });
 
     const buttons = new ActionRowBuilder<ButtonBuilder>().addComponents(
       new ButtonBuilder()
@@ -375,7 +414,7 @@ export class DuelCommand {
       btnResponse = await challengeMsg.awaitMessageComponent({
         componentType: ComponentType.Button,
         filter: (i) => i.user.id === target.id,
-        time: CHALLENGE_TIMEOUT,
+        time: cdValues.challengeTimeout,
       });
     } catch {
       return interaction.editReply({
@@ -462,7 +501,7 @@ export class DuelCommand {
         const collector = msg.createMessageComponentCollector({
           componentType: ComponentType.StringSelect,
           filter: (i) => i.user.id === userId,
-          time: SELECTION_TIMEOUT,
+          time: cdValues.selectionTimeout,
           max: 1,
         });
         collector.on("collect", async (i) => {
@@ -638,7 +677,7 @@ export class DuelCommand {
       await interaction.editReply({ embeds: [roundEmbed] });
 
       if (scoreA >= 2 || scoreB >= 2) break;
-      await new Promise((r) => setTimeout(r, ROUND_DELAY));
+      await new Promise((r) => setTimeout(r, cdValues.roundDelay));
     }
 
     // ══════════════ PHASE 4: RESULTS + ELO ══════════════
@@ -772,8 +811,8 @@ export class DuelCommand {
       },
     });
 
-    cooldowns.set(interaction.user.id, Date.now() + DUEL_COOLDOWN);
-    cooldowns.set(target.id, Date.now() + DUEL_COOLDOWN);
+    cooldowns.set(interaction.user.id, Date.now() + cdValues.duelCooldown);
+    cooldowns.set(target.id, Date.now() + cdValues.duelCooldown);
 
     await new Promise((r) => setTimeout(r, 1500));
 

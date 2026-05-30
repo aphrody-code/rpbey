@@ -1,5 +1,6 @@
 import { publishEvent } from "./api-server.js";
 import { bot } from "./bot.js";
+import { logger } from "./logger.js";
 
 /**
  * Wire Discord client lifecycle + interactions to the WebSocket pub/sub topics
@@ -25,6 +26,7 @@ export function setupEventBridge() {
   });
 
   bot.on("shardError", (error, shardId) => {
+    logger.error(`[EventBridge] shardError shard=${shardId}:`, error);
     publishEvent("bot-events", {
       type: "shard-error",
       shardId,
@@ -33,6 +35,7 @@ export function setupEventBridge() {
   });
 
   bot.on("error", (error) => {
+    logger.error("[EventBridge] client error:", error);
     publishEvent("bot-events", { type: "error", message: error.message });
   });
 
