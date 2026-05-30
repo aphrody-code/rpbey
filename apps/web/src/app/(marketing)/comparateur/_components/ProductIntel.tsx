@@ -9,30 +9,116 @@ import { getProductIntel } from "@/server/services/entity-graph";
  * Section « intelligence produit » de la page `/comparateur/[slug]` — server
  * component qui réunit, via le graphe d'entités (`getProductIntel`), les faits
  * compétitifs jusque-là invisibles sur une fiche prix :
+ *   - fiche encyclopédique wiki (génération, type, système, JP, image, résumé),
  *   - tier méta + score WBO + buzz communautaire de la blade,
  *   - meilleurs combos gagnants la contenant,
- *   - produits sémantiquement proches (voisins denses).
- * Best-effort : rend `null` si aucune intel n'est disponible (le reste de la fiche
- * — prix, offres — n'en dépend pas). Aucune dépendance aux composants de recherche.
+ *   - produits sémantiquement proches (voisins denses + fallback même-blade).
+ *
+ * UI Material 3 expressive : en-têtes à pastille tonale, cartes `surface-container`
+ * + bordure `outline-variant`, barres de score, mouvement ressort au survol.
+ * Best-effort : rend `null` si aucune intel n'est disponible.
  */
+
+// Mouvement « expressif » M3 (ressort léger au survol).
+const SPRING = "cubic-bezier(0.34, 1.4, 0.64, 1)";
+const CARD_SX = {
+  borderRadius: 4,
+  border: "1px solid",
+  borderColor: "var(--md-sys-color-outline-variant, rgba(255,255,255,0.08))",
+  bgcolor: "var(--md-sys-color-surface-container, rgba(255,255,255,0.03))",
+} as const;
 
 const eur = (v: number | null | undefined) =>
   v == null
     ? "—"
     : new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(v);
 
-function TierBadge({ tier }: { tier: Tier }) {
+const GEN_LABEL: Record<string, string> = {
+  ORIGINAL: "Original",
+  HMS: "HMS",
+  METAL: "Metal",
+  BURST: "Burst",
+  X: "Beyblade X",
+};
+
+/** En-tête de section : pastille tonale + titre + complément optionnel. */
+function SectionHeader({
+  icon,
+  title,
+  accent,
+  trailing,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  accent: string;
+  trailing?: React.ReactNode;
+}) {
+  return (
+    <Stack direction="row" sx={{ alignItems: "center", gap: 1.25, mt: 5, mb: 2 }}>
+      <Box
+        sx={{
+          display: "inline-flex",
+          alignItems: "center",
+          justifyContent: "center",
+          width: 36,
+          height: 36,
+          borderRadius: 2.5,
+          flexShrink: 0,
+          color: accent,
+          bgcolor: `color-mix(in srgb, ${accent} 16%, transparent)`,
+        }}
+      >
+        {icon}
+      </Box>
+      <Typography
+        variant="h6"
+        sx={{ fontWeight: 900, letterSpacing: "-0.01em", lineHeight: 1.1, flex: 1 }}
+      >
+        {title}
+      </Typography>
+      {trailing}
+    </Stack>
+  );
+}
+
+/** Barre de score 0-100 (couleur paramétrable). */
+function ScoreBar({ value, color }: { value: number; color: string }) {
+  return (
+    <Box
+      sx={{
+        position: "relative",
+        height: 6,
+        mt: 0.75,
+        borderRadius: 3,
+        bgcolor: "rgba(255,255,255,0.07)",
+        overflow: "hidden",
+      }}
+    >
+      <Box
+        sx={{
+          position: "absolute",
+          inset: 0,
+          width: `${Math.max(0, Math.min(100, value))}%`,
+          borderRadius: 3,
+          background: `linear-gradient(90deg, color-mix(in srgb, ${color} 50%, transparent), ${color})`,
+        }}
+      />
+    </Box>
+  );
+}
+
+function TierBadge({ tier, size = 34 }: { tier: Tier; size?: number }) {
   return (
     <Box
       sx={{
         display: "inline-flex",
         alignItems: "center",
         justifyContent: "center",
-        width: 34,
-        height: 34,
+        width: size,
+        height: size,
         borderRadius: 2,
         fontWeight: 900,
-        fontSize: "1.05rem",
+        fontSize: size > 30 ? "1.05rem" : "0.85rem",
         color: "#fff",
         background: `linear-gradient(135deg, ${TIER_COLOR[tier]}, color-mix(in srgb, ${TIER_COLOR[tier]} 60%, #000))`,
         boxShadow: `0 4px 14px ${TIER_COLOR[tier]}55`,
@@ -44,16 +130,6 @@ function TierBadge({ tier }: { tier: Tier }) {
   );
 }
 
-const sectionTitleSx = {
-  fontWeight: 900,
-  mt: 5,
-  mb: 2,
-  letterSpacing: "-0.01em",
-  display: "flex",
-  alignItems: "center",
-  gap: 1,
-} as const;
-
 export default async function ProductIntel({ group }: { group: BxProductGroup }) {
   const intel = await getProductIntel(group);
   const hasMeta = intel.tier != null || intel.metaScore != null || intel.community != null;
@@ -62,111 +138,133 @@ export default async function ProductIntel({ group }: { group: BxProductGroup })
 
   const accent = "var(--rpb-primary)";
   const accent2 = "var(--rpb-secondary)";
-  const GEN_LABEL: Record<string, string> = {
-    ORIGINAL: "Original",
-    HMS: "HMS",
-    METAL: "Metal",
-    BURST: "Burst",
-    X: "Beyblade X",
-  };
 
   return (
     <>
       {/* ── Fiche encyclopédique (Beyblade Wiki) ──────────────────────── */}
       {intel.wiki && (intel.wiki.summary || intel.wiki.generation || intel.wiki.jpName) && (
         <>
-          <Typography variant="h6" sx={sectionTitleSx}>
-            <MenuBook sx={{ fontSize: 22, color: accent2 }} />
-            Fiche encyclopédique
-          </Typography>
-          <Box
-            sx={{
-              p: { xs: 2, md: 2.5 },
-              borderRadius: 3,
-              border: "1px solid",
-              borderColor: "divider",
-              bgcolor: "var(--mui-palette-surface-high, rgba(255,255,255,0.02))",
-            }}
-          >
-            <Stack direction="row" sx={{ flexWrap: "wrap", gap: 0.75, mb: 1 }}>
-              {intel.wiki.generation && (
-                <Chip
-                  size="small"
-                  label={GEN_LABEL[intel.wiki.generation] ?? intel.wiki.generation}
+          <SectionHeader
+            icon={<MenuBook sx={{ fontSize: 20 }} />}
+            title="Fiche encyclopédique"
+            accent={accent2}
+          />
+          <Box sx={{ ...CARD_SX, p: { xs: 2, md: 2.5 } }}>
+            <Stack direction={{ xs: "column", sm: "row" }} spacing={2.5}>
+              {intel.wiki.imageUrl && (
+                <Box
                   sx={{
-                    fontWeight: 800,
-                    fontSize: "0.65rem",
-                    bgcolor: "color-mix(in srgb, var(--rpb-secondary) 16%, transparent)",
-                    color: accent2,
+                    width: { xs: "100%", sm: 132 },
+                    flexShrink: 0,
+                    aspectRatio: { xs: "16/9", sm: "1" },
+                    borderRadius: 3,
+                    overflow: "hidden",
+                    bgcolor: "rgba(0,0,0,0.25)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
                   }}
-                />
+                >
+                  <Box
+                    component="img"
+                    src={intel.wiki.imageUrl}
+                    alt={intel.wiki.title}
+                    loading="lazy"
+                    sx={{ width: "100%", height: "100%", objectFit: "contain" }}
+                  />
+                </Box>
               )}
-              {intel.wiki.beyType && (
-                <Chip
-                  size="small"
-                  label={intel.wiki.beyType}
-                  variant="outlined"
-                  sx={{ fontWeight: 700, fontSize: "0.65rem" }}
-                />
-              )}
-              {intel.wiki.system && (
-                <Chip
-                  size="small"
-                  label={intel.wiki.system}
-                  variant="outlined"
-                  sx={{ fontWeight: 700, fontSize: "0.65rem" }}
-                />
-              )}
-              {intel.wiki.jpName && (
-                <Chip
-                  size="small"
-                  label={intel.wiki.jpName}
-                  variant="outlined"
-                  sx={{ fontWeight: 700, fontSize: "0.65rem", opacity: 0.85 }}
-                />
-              )}
+              <Box sx={{ minWidth: 0, flex: 1 }}>
+                <Stack direction="row" sx={{ flexWrap: "wrap", gap: 0.75, mb: 1 }}>
+                  {intel.wiki.generation && (
+                    <Chip
+                      size="small"
+                      label={GEN_LABEL[intel.wiki.generation] ?? intel.wiki.generation}
+                      sx={{
+                        fontWeight: 800,
+                        fontSize: "0.65rem",
+                        bgcolor: "color-mix(in srgb, var(--rpb-secondary) 18%, transparent)",
+                        color: accent2,
+                      }}
+                    />
+                  )}
+                  {intel.wiki.beyType && (
+                    <Chip
+                      size="small"
+                      label={intel.wiki.beyType}
+                      variant="outlined"
+                      sx={{ fontWeight: 700, fontSize: "0.65rem" }}
+                    />
+                  )}
+                  {intel.wiki.system && (
+                    <Chip
+                      size="small"
+                      label={intel.wiki.system}
+                      variant="outlined"
+                      sx={{ fontWeight: 700, fontSize: "0.65rem" }}
+                    />
+                  )}
+                  {intel.wiki.jpName && (
+                    <Chip
+                      size="small"
+                      label={intel.wiki.jpName}
+                      variant="outlined"
+                      sx={{ fontWeight: 700, fontSize: "0.65rem", opacity: 0.85 }}
+                    />
+                  )}
+                </Stack>
+                {intel.wiki.summary && (
+                  <Typography
+                    sx={{ fontSize: "0.88rem", lineHeight: 1.55, color: "text.secondary" }}
+                  >
+                    {intel.wiki.summary}
+                  </Typography>
+                )}
+                <Typography
+                  component="a"
+                  href={intel.wiki.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  sx={{
+                    display: "inline-block",
+                    mt: 1.25,
+                    fontSize: "0.72rem",
+                    fontWeight: 800,
+                    color: accent2,
+                    textDecoration: "none",
+                    "&:hover": { textDecoration: "underline" },
+                  }}
+                >
+                  Lire sur le Beyblade Wiki →
+                </Typography>
+              </Box>
             </Stack>
-            {intel.wiki.summary && (
-              <Typography sx={{ fontSize: "0.88rem", lineHeight: 1.55, color: "text.secondary" }}>
-                {intel.wiki.summary}
-              </Typography>
-            )}
-            <Typography
-              component="a"
-              href={intel.wiki.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              sx={{
-                display: "inline-block",
-                mt: 1,
-                fontSize: "0.72rem",
-                fontWeight: 700,
-                color: accent2,
-                textDecoration: "none",
-                "&:hover": { textDecoration: "underline" },
-              }}
-            >
-              Lire sur le Beyblade Wiki →
-            </Typography>
           </Box>
         </>
       )}
 
-      {/* ── Carte compétitif & méta ───────────────────────────────────── */}
+      {/* ── Analyse compétitive & méta ────────────────────────────────── */}
       {hasMeta && (
         <>
-          <Typography variant="h6" sx={sectionTitleSx}>
-            <AutoAwesome sx={{ fontSize: 22, color: accent }} />
-            Analyse compétitive
-            {intel.blade && (
-              <Typography
-                component="span"
-                sx={{ color: "text.secondary", fontWeight: 600, fontSize: "0.9rem" }}
-              >
-                · {intel.blade}
-              </Typography>
-            )}
-          </Typography>
+          <SectionHeader
+            icon={<AutoAwesome sx={{ fontSize: 20 }} />}
+            title="Analyse compétitive"
+            accent={accent}
+            trailing={
+              intel.blade ? (
+                <Chip
+                  size="small"
+                  label={intel.blade}
+                  sx={{
+                    fontWeight: 800,
+                    fontSize: "0.68rem",
+                    bgcolor: "color-mix(in srgb, var(--rpb-primary) 14%, transparent)",
+                    color: accent,
+                  }}
+                />
+              ) : undefined
+            }
+          />
           <Stack
             direction={{ xs: "column", sm: "row" }}
             spacing={1.5}
@@ -176,20 +274,17 @@ export default async function ProductIntel({ group }: { group: BxProductGroup })
             {intel.tier != null && (
               <Box
                 sx={{
+                  ...CARD_SX,
                   flex: 1,
-                  minWidth: 150,
+                  minWidth: 170,
                   p: 2,
-                  borderRadius: 3,
-                  border: "1px solid",
-                  borderColor: "divider",
-                  bgcolor: "var(--mui-palette-surface-high, rgba(255,255,255,0.02))",
                   display: "flex",
                   alignItems: "center",
                   gap: 1.5,
                 }}
               >
                 <TierBadge tier={intel.tier} />
-                <Box>
+                <Box sx={{ minWidth: 0, flex: 1 }}>
                   <Typography
                     sx={{
                       fontSize: "0.62rem",
@@ -208,31 +303,31 @@ export default async function ProductIntel({ group }: { group: BxProductGroup })
                         component="span"
                         sx={{ color: "text.secondary", fontWeight: 700, fontSize: "0.82rem" }}
                       >
-                        {" "}
-                        · {intel.metaScore}/100
+                        {" · "}
+                        {intel.metaScore}/100
                       </Box>
                     )}
                   </Typography>
+                  {intel.metaScore != null && (
+                    <ScoreBar value={intel.metaScore} color={TIER_COLOR[intel.tier]} />
+                  )}
                 </Box>
               </Box>
             )}
             {intel.community != null && intel.community.score > 0 && (
               <Box
                 sx={{
+                  ...CARD_SX,
                   flex: 1,
-                  minWidth: 150,
+                  minWidth: 170,
                   p: 2,
-                  borderRadius: 3,
-                  border: "1px solid",
-                  borderColor: "divider",
-                  bgcolor: "var(--mui-palette-surface-high, rgba(255,255,255,0.02))",
                   display: "flex",
                   alignItems: "center",
                   gap: 1.5,
                 }}
               >
                 <Whatshot sx={{ color: "#f59e0b", fontSize: 30, flexShrink: 0 }} />
-                <Box>
+                <Box sx={{ minWidth: 0, flex: 1 }}>
                   <Typography
                     sx={{
                       fontSize: "0.62rem",
@@ -247,7 +342,7 @@ export default async function ProductIntel({ group }: { group: BxProductGroup })
                   <Typography sx={{ fontWeight: 900, fontSize: "1rem" }}>
                     {intel.community.score}/100
                   </Typography>
-                  <Typography sx={{ color: "text.secondary", fontSize: "0.72rem" }}>
+                  <Typography noWrap sx={{ color: "text.secondary", fontSize: "0.72rem" }}>
                     {[
                       intel.community.xEngagement ? `${intel.community.xEngagement} likes X` : null,
                       intel.community.redditScore
@@ -257,6 +352,7 @@ export default async function ProductIntel({ group }: { group: BxProductGroup })
                       .filter(Boolean)
                       .join(" · ") || "Mentionnée par la communauté"}
                   </Typography>
+                  <ScoreBar value={intel.community.score} color="#f59e0b" />
                 </Box>
               </Box>
             )}
@@ -267,25 +363,35 @@ export default async function ProductIntel({ group }: { group: BxProductGroup })
       {/* ── Top combos gagnants ───────────────────────────────────────── */}
       {intel.topCombos.length > 0 && (
         <>
-          <Typography variant="h6" sx={sectionTitleSx}>
-            <EmojiEvents sx={{ fontSize: 22, color: "#FFD700" }} />
-            Combos gagnants en tournoi
-          </Typography>
+          <SectionHeader
+            icon={<EmojiEvents sx={{ fontSize: 20 }} />}
+            title="Combos gagnants en tournoi"
+            accent="#FFD700"
+          />
           <Stack spacing={1}>
-            {intel.topCombos.map((c) => (
+            {intel.topCombos.map((c, i) => (
               <Box
                 key={c.label}
                 sx={{
+                  ...CARD_SX,
                   display: "flex",
                   alignItems: "center",
                   gap: 1.5,
                   p: { xs: 1.25, md: 1.75 },
-                  borderRadius: 3,
-                  border: "1px solid",
-                  borderColor: "divider",
-                  bgcolor: "var(--mui-palette-surface-high, rgba(255,255,255,0.02))",
                 }}
               >
+                <Typography
+                  sx={{
+                    fontWeight: 900,
+                    fontSize: "0.8rem",
+                    color: "text.disabled",
+                    width: 18,
+                    flexShrink: 0,
+                    textAlign: "center",
+                  }}
+                >
+                  {i + 1}
+                </Typography>
                 {c.tier && <TierBadge tier={c.tier} />}
                 <Box sx={{ flex: 1, minWidth: 0 }}>
                   <Typography noWrap sx={{ fontWeight: 800, fontSize: "0.95rem" }}>
@@ -326,10 +432,11 @@ export default async function ProductIntel({ group }: { group: BxProductGroup })
       {/* ── Produits similaires (voisins sémantiques) ─────────────────── */}
       {intel.related.length > 0 && (
         <>
-          <Typography variant="h6" sx={sectionTitleSx}>
-            <AutoAwesome sx={{ fontSize: 22, color: accent2 }} />
-            Produits similaires
-          </Typography>
+          <SectionHeader
+            icon={<AutoAwesome sx={{ fontSize: 20 }} />}
+            title="Produits similaires"
+            accent={accent2}
+          />
           <Box
             sx={{
               display: "grid",
@@ -347,25 +454,45 @@ export default async function ProductIntel({ group }: { group: BxProductGroup })
                 component={NextLink}
                 href={`/comparateur/${r.slug}`}
                 sx={{
+                  ...CARD_SX,
+                  position: "relative",
                   p: 1.25,
-                  borderRadius: 3,
-                  border: "1px solid",
-                  borderColor: "divider",
-                  bgcolor: "var(--mui-palette-surface-high, rgba(255,255,255,0.02))",
                   textDecoration: "none",
                   color: "inherit",
-                  transition: "all 0.25s cubic-bezier(0.16,1,0.3,1)",
                   display: "flex",
                   flexDirection: "column",
                   gap: 0.75,
+                  transition: `transform 0.3s ${SPRING}, border-color 0.25s, box-shadow 0.25s`,
                   "&:hover": {
-                    transform: "translateY(-4px)",
+                    transform: "translateY(-5px)",
                     borderColor: accent,
                     boxShadow:
-                      "0 8px 24px -8px color-mix(in srgb, var(--rpb-primary) 25%, transparent)",
+                      "0 10px 28px -10px color-mix(in srgb, var(--rpb-primary) 30%, transparent)",
                   },
                 }}
               >
+                {r.similarity > 0 && (
+                  <Box
+                    title={`${Math.round(r.similarity * 100)}% de similarité`}
+                    sx={{
+                      position: "absolute",
+                      top: 8,
+                      right: 8,
+                      px: 0.75,
+                      height: 18,
+                      borderRadius: 9,
+                      display: "inline-flex",
+                      alignItems: "center",
+                      fontSize: "0.58rem",
+                      fontWeight: 900,
+                      color: accent,
+                      bgcolor: "color-mix(in srgb, var(--rpb-primary) 18%, rgba(0,0,0,0.55))",
+                      backdropFilter: "blur(4px)",
+                    }}
+                  >
+                    {Math.round(r.similarity * 100)}%
+                  </Box>
+                )}
                 <Box
                   sx={{
                     aspectRatio: "1",

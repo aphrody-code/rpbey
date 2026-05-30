@@ -87,12 +87,12 @@ export function DeckSynergy() {
         </Stack>
       </Stack>
 
-      {/* Barre de synergie */}
+      {/* Barre de synergie + repères de seuils de tier (B 56 · A 74 · S 88) */}
       <Box
         sx={{
           position: "relative",
-          height: 8,
-          borderRadius: 4,
+          height: 10,
+          borderRadius: 5,
           bgcolor: "rgba(255,255,255,0.06)",
           overflow: "hidden",
         }}
@@ -100,13 +100,28 @@ export function DeckSynergy() {
         <Box
           sx={{
             position: "absolute",
-            inset: 0,
+            insetBlock: 0,
+            left: 0,
             width: `${deckScore}%`,
-            borderRadius: 4,
-            background: `linear-gradient(90deg, color-mix(in srgb, ${color} 55%, transparent), ${color})`,
-            transition: "width 0.4s cubic-bezier(0.16,1,0.3,1)",
+            borderRadius: 5,
+            background: `linear-gradient(90deg, color-mix(in srgb, ${color} 50%, transparent), ${color})`,
+            boxShadow: `0 0 12px color-mix(in srgb, ${color} 55%, transparent)`,
+            transition: "width 0.45s cubic-bezier(0.34,1.4,0.64,1)",
           }}
         />
+        {[56, 74, 88].map((t) => (
+          <Box
+            key={t}
+            sx={{
+              position: "absolute",
+              top: 0,
+              bottom: 0,
+              left: `${t}%`,
+              width: "1px",
+              bgcolor: "rgba(255,255,255,0.22)",
+            }}
+          />
+        ))}
       </Box>
 
       {/* Score par bey */}

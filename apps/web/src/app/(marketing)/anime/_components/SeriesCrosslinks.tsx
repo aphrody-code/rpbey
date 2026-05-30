@@ -1,6 +1,16 @@
-import { SportsEsports, Toys } from "@mui/icons-material";
+import { AutoAwesome, SportsEsports, Toys } from "@mui/icons-material";
 import { Box, Chip, Container, Stack, Typography } from "@mui/material";
 import { getGenerationShowcase, type WikiIntel } from "@/server/services/entity-graph";
+
+// Langage visuel « intelligence RAG » partagé avec ProductIntel (cohérence) :
+// carte surface-container + bordure outline-variant + ressort M3 au survol.
+const SPRING = "cubic-bezier(0.34, 1.4, 0.64, 1)";
+const CARD_SX = {
+  borderRadius: 3,
+  border: "1px solid",
+  borderColor: "var(--md-sys-color-outline-variant, rgba(255,255,255,0.08))",
+  bgcolor: "var(--md-sys-color-surface-container, rgba(255,255,255,0.02))",
+} as const;
 
 /**
  * Cross-links de la page anime `/anime/[slug]` — relie une série à l'univers de sa
@@ -31,21 +41,19 @@ function CardGrid({ items, kind }: { items: WikiIntel[]; kind: "bey" | "characte
           target="_blank"
           rel="noopener noreferrer"
           sx={{
+            ...CARD_SX,
             p: 1.25,
-            borderRadius: 3,
-            border: "1px solid",
-            borderColor: "divider",
-            bgcolor: "var(--mui-palette-surface-high, rgba(255,255,255,0.02))",
             textDecoration: "none",
             color: "inherit",
             display: "flex",
             flexDirection: "column",
             gap: 0.75,
-            transition: "all 0.25s cubic-bezier(0.16,1,0.3,1)",
+            transition: `transform 0.3s ${SPRING}, border-color 0.25s, box-shadow 0.25s`,
             "&:hover": {
-              transform: "translateY(-4px)",
+              transform: "translateY(-5px)",
               borderColor: "var(--rpb-primary)",
-              boxShadow: "0 8px 24px -8px color-mix(in srgb, var(--rpb-primary) 25%, transparent)",
+              boxShadow:
+                "0 10px 28px -10px color-mix(in srgb, var(--rpb-primary) 30%, transparent)",
             },
           }}
         >
@@ -110,17 +118,33 @@ export default async function SeriesCrosslinks({ generation }: { generation: str
 
   return (
     <Container maxWidth="lg" sx={{ py: { xs: 3, md: 5 } }}>
-      <Typography
-        component="h2"
-        sx={{
-          fontWeight: 900,
-          fontSize: { xs: "1.3rem", md: "1.7rem" },
-          mb: 0.5,
-          letterSpacing: "-0.02em",
-        }}
-      >
-        L'univers de cette génération
-      </Typography>
+      <Stack direction="row" sx={{ alignItems: "center", gap: 1.25, mb: 0.5 }}>
+        <Box
+          sx={{
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: 38,
+            height: 38,
+            borderRadius: 2.5,
+            flexShrink: 0,
+            color: "var(--rpb-secondary)",
+            bgcolor: "color-mix(in srgb, var(--rpb-secondary) 16%, transparent)",
+          }}
+        >
+          <AutoAwesome sx={{ fontSize: 22 }} />
+        </Box>
+        <Typography
+          component="h2"
+          sx={{
+            fontWeight: 900,
+            fontSize: { xs: "1.3rem", md: "1.7rem" },
+            letterSpacing: "-0.02em",
+          }}
+        >
+          L'univers de cette génération
+        </Typography>
+      </Stack>
       <Typography sx={{ color: "text.secondary", fontSize: "0.9rem", mb: 3 }}>
         Toupies, bladers et jeux liés — issus du Beyblade Wiki.
       </Typography>
@@ -169,16 +193,16 @@ export default async function SeriesCrosslinks({ generation }: { generation: str
                 target="_blank"
                 rel="noopener noreferrer"
                 sx={{
+                  ...CARD_SX,
                   p: 1.5,
-                  borderRadius: 3,
-                  border: "1px solid",
-                  borderColor: "divider",
-                  bgcolor: "var(--mui-palette-surface-high, rgba(255,255,255,0.02))",
                   textDecoration: "none",
                   color: "inherit",
                   display: "block",
-                  transition: "all 0.2s",
-                  "&:hover": { borderColor: "var(--rpb-secondary)" },
+                  transition: `transform 0.3s ${SPRING}, border-color 0.2s`,
+                  "&:hover": {
+                    transform: "translateY(-3px)",
+                    borderColor: "var(--rpb-secondary)",
+                  },
                 }}
               >
                 <Typography sx={{ fontWeight: 800, fontSize: "0.9rem" }}>{g.title}</Typography>
