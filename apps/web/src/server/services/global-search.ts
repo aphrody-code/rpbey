@@ -440,7 +440,72 @@ export async function buildGlobalSearchIndex(): Promise<GlobalSearchItem[]> {
     items.push(d);
   }
 
+  // 14. Métagame WBO (tier-list par pièce, fraîche) — `bbx-weekly.json` produit par
+  // l'analyse des events organisés. Chaque composant (Blade/Ratchet/Bit/Lock Chip…)
+  // porte un score méta 0-100 + ses synergies. Rend la méta du moment cherchable.
+  for (const m of await loadMetaTierList()) {
+    items.push(m);
+  }
+
   return items;
+}
+
+/** Tier-list métagame WBO (bbx-weekly, période la plus large dispo) → items uniformes. */
+async function loadMetaTierList(): Promise<GlobalSearchItem[]> {
+  const data = await loadJsonSafe<{
+    periods?: Record<
+      string,
+      {
+        metadata?: { weekId?: string; eventsScanned?: number };
+        categories?: Array<{
+          category?: string;
+          components?: Array<{
+            name?: string;
+            score?: number;
+            synergy?: Array<{ name?: string; score?: number }>;
+          }>;
+        }>;
+      }
+    >;
+  }>("data/bbx-weekly.json");
+  const periods = data?.periods ?? {};
+  // Période la plus large (4weeks > 2weeks) pour un échantillon plus stable.
+  const period = periods["4weeks"] ?? periods["2weeks"] ?? Object.values(periods)[0];
+  if (!period) return [];
+  const weekId = period.metadata?.weekId ?? "";
+  const events = period.metadata?.eventsScanned;
+  const out: GlobalSearchItem[] = [];
+  for (const cat of period.categories ?? []) {
+    const category = (cat.category ?? "").trim();
+    for (const comp of cat.components ?? []) {
+      const name = (comp.name ?? "").trim();
+      if (!name) continue;
+      const score = typeof comp.score === "number" ? comp.score : 0;
+      const synergies = (comp.synergy ?? [])
+        .filter((s) => s.name)
+        .slice(0, 4)
+        .map((s) => `${s.name}${typeof s.score === "number" ? ` (${s.score})` : ""}`)
+        .join(", ");
+      out.push({
+        id: `meta-${category}-${name}`.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+        title: name,
+        subtitle: `Méta ${category || "pièce"} · score ${score}/100`,
+        category: "meta",
+        url: "/meta",
+        details:
+          [
+            `Tier méta${weekId ? ` ${weekId}` : ""}${events ? ` · ${events} events analysés` : ""}`,
+            synergies ? `Synergies : ${synergies}` : "",
+          ]
+            .filter(Boolean)
+            .join(" — ") || undefined,
+        badge: "Méta",
+        source: "wbo",
+        popularity: score,
+      });
+    }
+  }
+  return out;
 }
 
 /** Tronque un texte au mot, pour un titre de résultat lisible. */

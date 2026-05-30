@@ -352,6 +352,7 @@ const CATEGORY_BOOST: Record<string, number> = {
   blader: 1.0,
   tournament: 1.0,
   combo: 1.05,
+  meta: 1.08,
   anime: 0.95,
   frame: 0.9,
   lexicon: 0.85,

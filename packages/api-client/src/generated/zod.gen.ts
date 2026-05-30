@@ -84,7 +84,8 @@ export const zGlobalSearchQuery = z.object({
         'frame',
         'site',
         'page',
-        'discussion'
+        'discussion',
+        'meta'
     ]).optional(),
     limit: z.int().gt(0).lte(500).optional()
 });
@@ -111,7 +112,8 @@ export const zGlobalSearchResponse = z.object({
                 'frame',
                 'site',
                 'page',
-                'discussion'
+                'discussion',
+                'meta'
             ]),
             url: z.string(),
             details: z.string().optional(),

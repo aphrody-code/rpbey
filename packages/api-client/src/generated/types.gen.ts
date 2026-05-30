@@ -107,7 +107,7 @@ export type GlobalSearchData = {
     path?: never;
     query?: {
         q?: string;
-        category?: 'product' | 'part' | 'tournament' | 'blader' | 'lexicon' | 'combo' | 'anime' | 'frame' | 'site' | 'page' | 'discussion';
+        category?: 'product' | 'part' | 'tournament' | 'blader' | 'lexicon' | 'combo' | 'anime' | 'frame' | 'site' | 'page' | 'discussion' | 'meta';
         limit?: number;
     };
     url: '/api/v1/search';
@@ -150,7 +150,7 @@ export type GlobalSearchResponses = {
                 id: string;
                 title: string;
                 subtitle: string;
-                category: 'product' | 'part' | 'tournament' | 'blader' | 'lexicon' | 'combo' | 'anime' | 'frame' | 'site' | 'page' | 'discussion';
+                category: 'product' | 'part' | 'tournament' | 'blader' | 'lexicon' | 'combo' | 'anime' | 'frame' | 'site' | 'page' | 'discussion' | 'meta';
                 url: string;
                 details?: string;
                 badge?: string;

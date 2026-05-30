@@ -95,6 +95,7 @@ export const SearchCategorySchema = z.enum([
   "site",
   "page",
   "discussion",
+  "meta",
 ]);
 export type SearchCategory = z.infer<typeof SearchCategorySchema>;
 
