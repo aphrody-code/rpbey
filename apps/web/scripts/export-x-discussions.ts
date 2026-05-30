@@ -24,6 +24,8 @@
 import { Database } from "bun:sqlite";
 import { homedir } from "node:os";
 import { join } from "node:path";
+import { XDiscussionSchema } from "@rpbey/api-contract";
+import { contentFingerprint } from "./lib/scrape-utils";
 
 const STORE = process.env.X_STORE_PATH ?? join(homedir(), ".aphrody", "x-store.sqlite");
 const OUT = join(import.meta.dir, "..", "data", "x-discussions.json");
@@ -175,17 +177,6 @@ function cleanText(t: string): string {
     .trim();
 }
 
-function normalizeForDedup(t: string): string {
-  return t
-    .toLowerCase()
-    .replace(/https?:\/\/\S+/g, "")
-    .replace(/[@#]\w+/g, "")
-    .replace(/[^\p{L}\p{N}\s]/gu, "")
-    .replace(/\s+/g, " ")
-    .trim()
-    .slice(0, 90);
-}
-
 function countMatches(text: string, patterns: RegExp[]): number {
   let n = 0;
   for (const p of patterns) if (p.test(text)) n++;
@@ -239,6 +230,8 @@ interface Discussion {
 }
 
 function main() {
+  // Store RAG partagé (aphrody) : ouverture STRICTEMENT en lecture seule —
+  // ce script n'écrit jamais dans x-store.sqlite.
   const db = new Database(STORE, { readonly: true });
   const rows = db
     .query<TweetRow, []>(
@@ -253,18 +246,26 @@ function main() {
   // Tri par engagement d'abord : la dédup garde la version la plus engageante.
   rows.sort((a, b) => b.like_count + b.retweet_count - (a.like_count + a.retweet_count));
 
-  const seen = new Set<string>();
+  const seenFp = new Set<string>(); // dédup par fingerprint de contenu normalisé
   const discussions: Discussion[] = [];
+  let rejected = 0;
+  let dupContent = 0;
 
   for (const r of rows) {
     const text = cleanText(r.text);
     if (text.length < MIN_LEN) continue;
     const relevance = relevanceScore(r, text);
     if (relevance < RELEVANCE_THRESHOLD) continue;
-    const dedupKey = normalizeForDedup(text);
-    if (seen.has(dedupKey)) continue;
-    seen.add(dedupKey);
-    discussions.push({
+
+    // Dédup par empreinte de contenu (le texte porte un dédoublonnage plus robuste
+    // que l'URL : retweets / quasi-doublons sur des ids de tweet distincts).
+    const fp = contentFingerprint(text);
+    if (seenFp.has(fp)) {
+      dupContent++;
+      continue;
+    }
+
+    const candidate = {
       id: r.id,
       author: r.author_username,
       authorName: r.author_name || r.author_username,
@@ -277,7 +278,17 @@ function main() {
       createdAt: r.created_at,
       topic: classifyTopic(text),
       relevance: Math.round(relevance * 100) / 100,
-    });
+    };
+
+    // Validation Zod à l'ingestion : on n'écrit que les enregistrements conformes
+    // au contrat consommé par global-search (loadXDiscussions).
+    const parsed = XDiscussionSchema.safeParse(candidate);
+    if (!parsed.success) {
+      rejected++;
+      continue;
+    }
+    seenFp.add(fp);
+    discussions.push(parsed.data);
   }
 
   // Tri final : pertinence décroissante, puis engagement décroissant.
@@ -286,6 +297,14 @@ function main() {
   );
 
   const capped = discussions.slice(0, CAP);
+
+  if (rejected > 0) console.log(`[x] ${rejected} rejetés au schéma`);
+  if (dupContent > 0) console.log(`[x] ${dupContent} doublons de contenu écartés`);
+
+  if (capped.length === 0) {
+    console.error("[x] 0 discussion valide — fichier préservé (non destructif).");
+    return;
+  }
 
   const payload = {
     generatedAt: new Date().toISOString(),

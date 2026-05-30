@@ -118,3 +118,30 @@ export const RedditDiscussionSchema = z.object({
   createdAt: z.string().min(1),
 });
 export type RedditDiscussion = z.infer<typeof RedditDiscussionSchema>;
+
+// ── Discussion X.com / Twitter (→ data/x-discussions.json, indexée par global-search). ──
+// Sortie de export-x-discussions.ts : tweets Beyblade isolés du store RAG partagé,
+// classés par pertinence + topic. Shape consommé par loadXDiscussions (catégorie
+// "discussion", source "x"). `id` = id de tweet, `author` = handle sans @.
+export const XDiscussionSchema = z.object({
+  id: z.string().min(1),
+  author: z.string().min(1),
+  authorName: z.string(),
+  text: z.string().min(1),
+  likes: z.number().int().nonnegative(),
+  retweets: z.number().int().nonnegative(),
+  replies: z.number().int().nonnegative(),
+  url: z.url(),
+  lang: z.string().nullable(),
+  createdAt: z.string().nullable(),
+  topic: z.enum([
+    "plainte_pieces",
+    "sortie_produit",
+    "tournoi",
+    "meta_combo",
+    "anime",
+    "communaute",
+  ]),
+  relevance: z.number().min(0).max(1),
+});
+export type XDiscussion = z.infer<typeof XDiscussionSchema>;

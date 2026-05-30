@@ -1,24 +1,12 @@
 // Scraper ZenMarket (proxy JP) -> produits Beyblade pour bx-catalog.json.
 // HTTP 200 direct (pas d'auth). ZenMarket fournit deja un prix EUR converti
 // dans `span.amount[data-eur]` (ex "€11,21"). Fallback frankfurter JPY->EUR
-// uniquement si data-eur absent. 100% Bun natif (HTMLRewriter / Bun.spawn curl).
+// uniquement si data-eur absent. 100% Bun natif (HTMLRewriter / curlGet).
+// Validation Zod a l'ingestion (CatalogProductSchema) + dedup par fingerprint de
+// contenu, en plus de la dedup par URL. Rate-limiting par domaine.
 
-const UA =
-  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36";
-
-type CatalogProduct = {
-  shop: string;
-  domain: string;
-  region: string;
-  type: string;
-  currency: string;
-  title: string;
-  price: number;
-  priceMax?: number;
-  available: boolean;
-  url: string;
-  image: string;
-};
+import { CatalogProductSchema, type CatalogProduct } from "@rpbey/api-contract";
+import { contentFingerprint, curlGet, RateLimiter } from "./lib/scrape-utils";
 
 type RawItem = { href?: string; img?: string; title?: string; eur?: string; jpy?: string };
 
@@ -30,29 +18,12 @@ const STORES = [
 
 const QUERIES = ["beyblade x", "ベイブレードX", "beyblade burst"];
 
-const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+// Crawl de contenu : ~2 s entre requetes zenmarket.jp (token bucket par domaine).
+const limiter = new RateLimiter({ "zenmarket.jp": 2000 }, 2000);
 
 async function fetchHtml(url: string): Promise<{ html: string; status: number }> {
-  const proc = Bun.spawn(
-    [
-      "curl",
-      "-s",
-      "-A",
-      UA,
-      "-H",
-      "Accept-Language: en-US,en;q=0.9",
-      "-w",
-      "\n__HTTP_STATUS__%{http_code}",
-      url,
-    ],
-    { stdout: "pipe", stderr: "ignore" },
-  );
-  const out = await new Response(proc.stdout).text();
-  await proc.exited;
-  const marker = out.lastIndexOf("\n__HTTP_STATUS__");
-  if (marker === -1) return { html: out, status: 0 };
-  const status = Number(out.slice(marker + "\n__HTTP_STATUS__".length).trim());
-  return { html: out.slice(0, marker), status };
+  await limiter.wait(RateLimiter.hostOf(url));
+  return curlGet(url, { headers: ["Accept-Language: en-US,en;q=0.9"] });
 }
 
 // EUR string "€364,54" / "€11,21" -> 364.54
@@ -177,8 +148,11 @@ async function main() {
   console.log(`[zenmarket] JPY->EUR rate = ${jpyToEur}`);
 
   const products: CatalogProduct[] = [];
-  const seen = new Set<string>();
+  const seenUrl = new Set<string>();
+  const seenFp = new Set<string>(); // dedup par fingerprint de titre normalise
   let fallbackConverts = 0;
+  let rejected = 0;
+  let dupContent = 0;
 
   for (const store of STORES) {
     for (const q of QUERIES) {
@@ -186,7 +160,6 @@ async function main() {
       const { html, status } = await fetchHtml(url);
       if (status !== 200) {
         console.log(`[zenmarket] ${store.key} "${q}" -> HTTP ${status}, skip`);
-        await sleep(1500);
         continue;
       }
       const raw =
@@ -195,8 +168,8 @@ async function main() {
       let added = 0;
       for (const it of raw) {
         if (!it.href || !it.title) continue;
-        const url = absUrl(it.href);
-        if (seen.has(url)) continue;
+        const itemUrl = absUrl(it.href);
+        if (seenUrl.has(itemUrl)) continue;
 
         let price = parseEur(it.eur);
         if (price == null) {
@@ -211,31 +184,54 @@ async function main() {
         // qui n'est pas un vrai prix de vente -> on ecarte.
         if (price < 0.5) continue;
 
-        seen.add(url);
-        products.push({
+        seenUrl.add(itemUrl);
+
+        const title = it.title.trim().replace(/\s+/g, " ");
+        // Dedup par contenu : meme article reliste sur plusieurs stores / URLs.
+        const fp = contentFingerprint(title);
+        if (seenFp.has(fp)) {
+          dupContent++;
+          continue;
+        }
+
+        const candidate = {
           shop: "ZenMarket (JP)",
           domain: "zenmarket.jp",
           region: "JP",
           type: "proxy",
           currency: "EUR",
-          title: it.title.trim().replace(/\s+/g, " "),
+          title,
           price,
+          priceMax: null,
           available: true,
-          url,
-          image: it.img?.startsWith("//") ? `https:${it.img}` : (it.img ?? ""),
-        });
+          url: itemUrl,
+          image: it.img?.startsWith("//") ? `https:${it.img}` : (it.img ?? null),
+        };
+
+        // Validation Zod a l'ingestion : on n'ecrit que les enregistrements conformes.
+        const parsed = CatalogProductSchema.safeParse(candidate);
+        if (!parsed.success) {
+          rejected++;
+          continue;
+        }
+        seenFp.add(fp);
+        products.push(parsed.data);
         added++;
       }
       console.log(`[zenmarket] ${store.key} "${q}" -> ${raw.length} cards, +${added} nouveaux`);
-      await sleep(2000);
     }
   }
 
+  if (rejected > 0) console.log(`[zenmarket] ${rejected} rejetes au schema`);
+  if (dupContent > 0) console.log(`[zenmarket] ${dupContent} doublons de contenu ecartes`);
   console.log(
     `\n[zenmarket] TOTAL ${products.length} produits uniques (fallback JPY x${fallbackConverts})`,
   );
   if (products.length) {
-    const prices = products.map((p) => p.price).sort((a, b) => a - b);
+    const prices = products
+      .map((p) => p.price)
+      .filter((n): n is number => n != null)
+      .sort((a, b) => a - b);
     console.log(
       `[zenmarket] prix EUR min=${prices[0]} max=${prices[prices.length - 1]} median=${
         prices[Math.floor(prices.length / 2)]
@@ -250,7 +246,13 @@ async function main() {
     return;
   }
 
-  await Bun.write("/tmp/zenmarket-products.json", JSON.stringify(products, null, 2));
+  const payload = {
+    generatedAt: new Date().toISOString(),
+    source: "zenmarket.jp",
+    count: products.length,
+    products,
+  };
+  await Bun.write("/tmp/zenmarket-products.json", JSON.stringify(payload, null, 2));
   console.log(`[zenmarket] ecrit /tmp/zenmarket-products.json (${products.length})`);
 }
 

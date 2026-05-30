@@ -5,59 +5,31 @@
 //      sleep 5s, re-GET dessus (le -c met a jour bm_sv dans le jar).
 //   2. La 2e reponse (ou la 1ere si le jar est deja chaud) = vrais resultats.
 // Si la session a expire (bm-verify SANS >=50 data-asin), skip Amazon proprement.
-// 100% Bun natif (HTMLRewriter / Bun.spawn curl / Bun.file).
+// 100% Bun natif (HTMLRewriter / curlGet / Bun.file).
+// Validation Zod a l'ingestion (CatalogProductSchema) + dedup par fingerprint de
+// contenu, en plus de la dedup par ASIN. Rate-limiting par domaine.
+
+import { CatalogProductSchema, type CatalogProduct } from "@rpbey/api-contract";
+import { contentFingerprint, curlGet, RateLimiter } from "./lib/scrape-utils";
 
 const JAR = "/home/ubuntu/.aphrody/amazon-fr-cookies.txt";
-const UA =
-  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36";
-
-type CatalogProduct = {
-  shop: string;
-  domain: string;
-  region: string;
-  type: string;
-  currency: string;
-  title: string;
-  price: number;
-  priceMax?: number;
-  available: boolean;
-  url: string;
-  image: string;
-};
 
 type RawItem = { asin: string; title?: string; price?: string; img?: string };
 
 const QUERIES = ["beyblade x", "beyblade x toupie", "beyblade x stadium", "beyblade x lanceur"];
 
-const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+// Crawl de contenu : ~4 s entre requetes amazon.fr (token bucket par domaine).
+const limiter = new RateLimiter({ "www.amazon.fr": 4000 }, 4000);
 
-async function curlGet(url: string): Promise<{ html: string; status: number }> {
-  const proc = Bun.spawn(
-    [
-      "curl",
-      "-s",
-      "-c",
-      JAR,
-      "-b",
-      JAR,
-      "-A",
-      UA,
-      "-H",
+async function amazonGet(url: string): Promise<{ html: string; status: number }> {
+  await limiter.wait(RateLimiter.hostOf(url));
+  return curlGet(url, {
+    jar: JAR,
+    headers: [
       "Accept-Language: fr-FR,fr;q=0.9",
-      "-H",
       "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-      "-w",
-      "\n__HTTP_STATUS__%{http_code}",
-      url,
     ],
-    { stdout: "pipe", stderr: "ignore" },
-  );
-  const out = await new Response(proc.stdout).text();
-  await proc.exited;
-  const marker = out.lastIndexOf("\n__HTTP_STATUS__");
-  if (marker === -1) return { html: out, status: 0 };
-  const status = Number(out.slice(marker + "\n__HTTP_STATUS__".length).trim());
-  return { html: out.slice(0, marker), status };
+  });
 }
 
 function countAsins(html: string): number {
@@ -82,9 +54,12 @@ function decodeHtml(s: string): string {
     .trim();
 }
 
+// Sleep dedie au challenge Akamai (delai metier, pas du pacing par domaine).
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
 async function fetchSearch(query: string): Promise<string | null> {
   const base = `https://www.amazon.fr/s?k=${encodeURIComponent(query)}`;
-  let { html, status } = await curlGet(base);
+  let { html, status } = await amazonGet(base);
   console.log(
     `[amazon] "${query}" step1 -> HTTP ${status}, ${html.length}o, ${countAsins(html)} asins`,
   );
@@ -98,7 +73,7 @@ async function fetchSearch(query: string): Promise<string | null> {
     const verifyUrl = bm.startsWith("http") ? bm : `https://www.amazon.fr${bm}`;
     console.log(`[amazon] "${query}" challenge bm-verify, sleep 5s puis retry`);
     await sleep(5000);
-    ({ html, status } = await curlGet(verifyUrl));
+    ({ html, status } = await amazonGet(verifyUrl));
     console.log(
       `[amazon] "${query}" step2 -> HTTP ${status}, ${html.length}o, ${countAsins(html)} asins`,
     );
@@ -164,43 +139,64 @@ function parsePrice(raw?: string): number | null {
 
 async function main() {
   const products: CatalogProduct[] = [];
-  const seen = new Set<string>();
+  const seenAsin = new Set<string>();
+  const seenFp = new Set<string>(); // dedup par fingerprint de titre normalise
+  let rejected = 0;
+  let dupContent = 0;
   let anyResults = false;
 
   for (const q of QUERIES) {
     const html = await fetchSearch(q);
-    if (!html) {
-      await sleep(4000);
-      continue;
-    }
+    if (!html) continue;
     if (countAsins(html) >= 50) anyResults = true;
 
     const raw = await parseProducts(html);
     let added = 0;
     for (const it of raw) {
-      if (seen.has(it.asin)) continue;
+      if (seenAsin.has(it.asin)) continue;
       if (!it.title) continue;
+      seenAsin.add(it.asin);
+
+      const title = it.title.trim().replace(/\s+/g, " ");
+      // Dedup par contenu : meme produit reliste sous un ASIN different.
+      const fp = contentFingerprint(title);
+      if (seenFp.has(fp)) {
+        dupContent++;
+        continue;
+      }
+
       const price = parsePrice(it.price);
-      seen.add(it.asin);
-      products.push({
+      const candidate = {
         shop: "Amazon.fr",
         domain: "amazon.fr",
         region: "FR",
         type: "marketplace",
         currency: "EUR",
-        title: it.title.trim().replace(/\s+/g, " "),
-        price: price ?? 0,
+        title,
+        price,
+        priceMax: null,
         available: price != null,
         url: `https://www.amazon.fr/dp/${it.asin}`,
-        image: it.img ?? "",
-      });
+        image: it.img ?? null,
+      };
+
+      // Validation Zod a l'ingestion : on n'ecrit que les enregistrements conformes.
+      const parsed = CatalogProductSchema.safeParse(candidate);
+      if (!parsed.success) {
+        rejected++;
+        continue;
+      }
+      seenFp.add(fp);
+      products.push(parsed.data);
       added++;
     }
     console.log(
       `[amazon] "${q}" -> ${raw.length} cards, +${added} nouveaux (total ${products.length})`,
     );
-    await sleep(4000);
   }
+
+  if (rejected > 0) console.log(`[amazon] ${rejected} rejetes au schema`);
+  if (dupContent > 0) console.log(`[amazon] ${dupContent} doublons de contenu ecartes`);
 
   if (!anyResults && products.length === 0) {
     console.log(
@@ -210,12 +206,12 @@ async function main() {
   }
 
   // On ne garde que les produits avec un prix (un comparateur de prix sans prix = bruit)
-  const priced = products.filter((p) => p.available && p.price > 0);
+  const priced = products.filter((p) => p.available && p.price != null && p.price > 0);
   console.log(
     `\n[amazon] TOTAL ${products.length} produits uniques, ${priced.length} avec prix EUR`,
   );
   if (priced.length) {
-    const prices = priced.map((p) => p.price).sort((a, b) => a - b);
+    const prices = priced.map((p) => p.price as number).sort((a, b) => a - b);
     console.log(
       `[amazon] prix EUR min=${prices[0]} max=${prices[prices.length - 1]} median=${
         prices[Math.floor(prices.length / 2)]
@@ -230,7 +226,13 @@ async function main() {
     return;
   }
 
-  await Bun.write("/tmp/amazon-fr-products.json", JSON.stringify(priced, null, 2));
+  const payload = {
+    generatedAt: new Date().toISOString(),
+    source: "amazon.fr",
+    count: priced.length,
+    products: priced,
+  };
+  await Bun.write("/tmp/amazon-fr-products.json", JSON.stringify(payload, null, 2));
   console.log(`[amazon] ecrit /tmp/amazon-fr-products.json (${priced.length})`);
 }
 
