@@ -15,6 +15,7 @@ Cartographie du repo (apps/packages) : [REPO_MAP.md](REPO_MAP.md).
 ## Général
 
 - [Guide de Crawling & RAG X.com (Twitter)](crawling-rag-x.md) `draft` — Système de crawling autonome et RAG Gemini sur les discussions métagame Beyblade X depuis x.com.
+- [Best practices du pipeline de données rpbey](data-pipeline-best-practices.md) `draft` — Référentiel opinioné — scraping → validation → consolidation → recherche hybride/RAG → observabilité — confronté à l'état réel du pipeline rpbey, avec backlog d'actions priorisé.
 - [Système de documentation (structuré, automatisé, sync)](documentation-system.md) `stable` — Convention frontmatter, commandes docs.ts et hook git qui gardent la doc typée et synchronisée avec le code.
 - [Métagame WBO — extraction & données consommées par rpbey](metagame-wbo.md) `stable` — Pipeline d'extraction des classements et du métagame WBO (Wayback Machine) consommé par le dashboard rpbey.
 
