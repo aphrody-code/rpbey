@@ -1998,3 +1998,63 @@ export const animeFrames = pgTable(
       .onDelete("set null"),
   ],
 );
+
+export const tempBans = pgTable(
+  "temp_bans",
+  {
+    id: text()
+      .primaryKey()
+      .notNull()
+      .$defaultFn(() => createId()),
+    guildId: text().notNull(),
+    discordId: text().notNull(),
+    discordTag: text().notNull(),
+    moderatorId: text().notNull(),
+    reason: text().notNull(),
+    expiresAt: timestamp({ precision: 3, mode: "string" }).notNull(),
+    unbannedAt: timestamp({ precision: 3, mode: "string" }),
+    createdAt: timestamp({ precision: 3, mode: "string" })
+      .default(sql`CURRENT_TIMESTAMP`)
+      .notNull(),
+  },
+  (table) => [
+    index("temp_bans_guildId_discordId_idx").using(
+      "btree",
+      table.guildId.asc().nullsLast().op("text_ops"),
+      table.discordId.asc().nullsLast().op("text_ops"),
+    ),
+    index("temp_bans_expiresAt_idx").using(
+      "btree",
+      table.expiresAt.asc().nullsLast().op("timestamp_ops"),
+    ),
+  ],
+);
+
+/**
+ * Configuration du bot pilotée par la DB (mono-guilde — une ligne par `guildId`).
+ * Source de vérité unique pour le bot (ConfigService) et le dashboard web.
+ * Tous les blobs sont en `jsonb` typés ; aucune table auth → timestamp `mode:"string"`.
+ */
+export const botConfig = pgTable("bot_config", {
+  guildId: text().primaryKey().notNull(),
+  channels: jsonb().$type<Record<string, string | null>>().default({}).notNull(),
+  roles: jsonb().$type<Record<string, string | null>>().default({}).notNull(),
+  ownerIds: jsonb().$type<string[]>().default([]).notNull(),
+  moderation: jsonb().$type<Record<string, unknown>>().default({}).notNull(),
+  economy: jsonb().$type<Record<string, unknown>>().default({}).notNull(),
+  cooldowns: jsonb().$type<Record<string, number>>().default({}).notNull(),
+  leveling: jsonb().$type<Record<string, unknown>>().default({}).notNull(),
+  welcome: jsonb().$type<Record<string, unknown>>().default({}).notNull(),
+  goodbye: jsonb().$type<Record<string, unknown>>().default({}).notNull(),
+  panels: jsonb().$type<unknown[]>().default([]).notNull(),
+  logging: jsonb().$type<Record<string, string | null>>().default({}).notNull(),
+  features: jsonb()
+    .$type<
+      Record<string, { enabled: boolean; allowedRoles?: string[]; allowedChannels?: string[] }>
+    >()
+    .default({})
+    .notNull(),
+  updatedAt: timestamp({ mode: "string" }).defaultNow().notNull(),
+});
+
+export type BotConfigRow = typeof botConfig.$inferSelect;

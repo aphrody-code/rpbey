@@ -14,5 +14,6 @@ export * from "./decks";
 export * from "./gacha";
 export * from "./gacha-game";
 export * from "./bot";
+export * from "./bot-config";
 export * from "./moderation";
 export * from "./openapi";

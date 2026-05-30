@@ -15,6 +15,20 @@
       "when": 1779997422529,
       "tag": "0001_lucky_blade",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1780142400000,
+      "tag": "0002_temp_bans",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1780488000000,
+      "tag": "0003_bot_config",
+      "breakpoints": true
     }
   ]
 }
