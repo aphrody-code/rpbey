@@ -1,4 +1,5 @@
 import { loadJsonSafe } from "@/lib/data-cache";
+import { proxyImage } from "@/lib/img-proxy";
 import type {
   BxCatalog,
   BxOffer,
@@ -75,6 +76,9 @@ async function _loadCatalogUncached(): Promise<BxCatalog | null> {
   for (const p of catalog.products) {
     const rate = FX_TO_EUR[p.currency];
     p.priceEur = p.price != null && rate ? Math.round(p.price * rate * 100) / 100 : null;
+    // Détourage du fond clair des photos produits scrappées (proxy `/api/img`).
+    // Chokepoint unique : search, comparateur et reco consomment tous le catalogue ici.
+    if (p.image) p.image = proxyImage(p.image) ?? p.image;
   }
   return catalog;
 }

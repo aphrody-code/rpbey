@@ -3,8 +3,8 @@ title: "Stratégie tokens, thème, typo & motion (MUI → M3)"
 description: "Mapping palette/typo/forme MUI → tokens M3 (--md-sys-*), dynamic color HCT, comparatif des véhicules web, échelle typographique et tokens de motion."
 scope:
   - apps/web
-status: "draft"
-last_updated: "2026-05-29"
+status: draft
+last_updated: "2026-05-30"
 related_symbols:
   - createTheme
   - muiThemeToTokens
@@ -45,12 +45,27 @@ proprement sur les 5 niveaux `--md-sys-color-surface-container-*`. Les `--rpb-*`
 des **alias** des rôles M3 → les `*.module.css` existants (search/comparateur) continuent
 de fonctionner sans réécriture.
 
+> **Piège vérifié — l'alias doit être SCOPÉ.** `ThemeRegistry` injecte `--rpb-*` au runtime
+> en `documentElement.style` (inline). Un `:root{ --rpb-*: var(--md-sys-*) }` global est donc
+> **écrasé** par l'inline. Solution livrée pour `/search` : redéfinir les `--rpb-*` consommés
+> sous un wrapper `.m3-search` (ancêtre plus proche que `:root` → l'emporte localement), en
+> **laissant `--rpb-primary/secondary`** porter l'accent de marque. Voir
+> [migration-plan §3](./migration-plan.md). Bascule en alias global à la vague 5 (démantèlement
+> ThemeRegistry).
+
 ### Schéma dark canonique (réutilisable)
 
-rpbey est dark-first. Valeurs dark canoniques (Material Theme Builder `SchemeTonalSpot`,
-`docs/design/aphrody-m3-tokens.md`) — la **structure** (échelle `surface-container`, paires
-`container`/`on-container`) est réutilisable telle quelle, **en changeant le seed** vers la
-teinte de marque rpbey :
+> **Schéma LIVRÉ ≠ tonalSpot ci-dessous.** `m3.css` embarque le variant **`vibrant`** (seed
+> rouge `#dc2626`), choisi sur données réelles pour la DA RPB : `primary-container #93000b`
+> (rouge sang punchy) vs tonalSpot `#73332e` (brique terne), `tertiary-container #683c10`
+> (or-ambre, harmonise avec le gold de marque). `primary #ffb4ab`, `surface #1e100e`. Le bleu
+> tournoi dérive du seed `#60a5fa` (vibrant) sur `[data-theme="blue"]`. Le bloc tonalSpot
+> ci-dessous reste l'**alternative** (surfaces plus neutres/charbon) si l'on veut moins de
+> chroma dans les surfaces.
+
+rpbey est dark-first. Valeurs dark `SchemeTonalSpot` (`docs/design/aphrody-m3-tokens.md`) — la
+**structure** (échelle `surface-container`, paires `container`/`on-container`) est réutilisable
+telle quelle, **en changeant le seed** vers la teinte de marque rpbey :
 
 ```css
 :root {
@@ -102,11 +117,12 @@ M3 dérive light ET dark d'un seul seed via `material-color-utilities` :
 « thème » (red/blue/…) devient **un seed**, régénérant tous les rôles au build — remplace les
 palettes écrites à la main.
 
-**Caveat fidélité :** MCU `0.2.7` (version vendorée) n'émet que **~29 rôles** — **pas** les
-surfaces tonales `surface-bright/-dim/-container-low/-lowest/-high/-highest`, `*-fixed`,
-`surface-tint`, exactement celles dont rpbey a besoin. Options : (a) **Material Theme
-Builder** (pleine fidélité, recommandé pour le thème canonique) ; (b) accepter les fallbacks
-internes `md-*`. Vérifier la version MCU à la migration.
+**Caveat fidélité — levé.** Ne PAS utiliser le MCU `0.2.7` vendoré (~29 rôles, sans les
+surfaces tonales). Consommer **`@aphrody-code/m3-tokens@3.2.0`** (MCU 0.4.0) :
+`schemeFromSeed(seed, {dark, variant})` émet l'échelle **complète** (~47 rôles, dont
+`surface-bright/-dim/-container-*`, `*-fixed`, `surface-tint`). C'est la source de `m3.css`.
+`cssFromSeed`/`applyDynamicColor` couvrent le statique et le runtime (Material You). Material
+Theme Builder n'est plus nécessaire.
 
 ## 5. Typographie
 

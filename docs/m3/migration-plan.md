@@ -3,14 +3,29 @@ title: "Plan de migration MUI → Material Design 3 (apps/web)"
 description: "Stratégie, véhicule, phasage en vagues, gates et risques pour migrer le dashboard Next.js de MUI v9 + Emotion vers Material Design 3 sur le web."
 scope:
   - apps/web
-status: "draft"
-last_updated: "2026-05-29"
+status: draft
+last_updated: "2026-05-30"
 related_symbols:
   - ThemeRegistry
   - createTheme
 ---
 
 # Plan de migration MUI → Material Design 3 (apps/web)
+
+> **État d'exécution (2026-05-30).** La **vague 0** et le **pilote `/search`** sont
+> livrés (branche `feat/search-m3-redesign`) :
+> - `apps/web/src/app/m3.css` : les ~47 rôles `--md-sys-color-*` (rouge défaut +
+>   bleu `[data-theme="blue"]`) + shape/elevation/motion/typescale/state-layer, générés
+>   via `@aphrody-code/m3-tokens` `schemeFromSeed(seed,{variant:"vibrant"})`.
+> - `@aphrody-code/m3-tokens`, `@aphrody-code/m3-react`, `@aphrody-code/eslint-plugin-m3`
+>   **sont installés** (la question ouverte de la vague 0 est tranchée : install + génération).
+> - Gate lint M3 branché sous oxlint (`jsPlugins`), scopé à `search/_components`.
+> - `/search` refait : profondeur tonale, cartes + imagerie, motion, `dynamic-color`
+>   (Material You autour du produit), boutons/CTA en `Md*`. Détails :
+>   [search-redesign-plan](./search-redesign-plan.md).
+>
+> Conséquences sur ce plan : le risque MCU (§6) est **levé** (m3-tokens émet l'échelle
+> complète) ; l'alias `--rpb-*` n'est PAS global mais **scopé** (cf. §3, piège ThemeRegistry).
 
 Migration de `@rose-griffon/dashboard` (Next.js 16 App Router, RSC + SSR, MUI v9 +
 Emotion) vers **Material Design 3** sur le web. Plan établi à partir de trois audits
@@ -63,10 +78,18 @@ coûts dominants sont, dans l'ordre : retrait des `sx` (3 383), remplacement `@m
 Détail et comparatif complet : [tokens & thème](./theme-tokens.md) §3. Synthèse :
 
 1. **Tokens = source de vérité unique `--md-sys-*`.** Générer le CSS statique des ~47 rôles
-   (script `material-web/migration/scripts/theme-to-tokens.ts`, ou Material Theme Builder
-   pour la pleine fidélité de l'échelle `surface-container-*`). C'est du **CSS pur** :
-   SSR-safe, zéro coût shadow-DOM, remplace `lib/theme.ts` + les schémas OKLCH. Les `--rpb-*`
-   actuels deviennent des **alias** des rôles M3 (rétro-compat des `*.module.css` existants).
+   (fait : `apps/web/src/app/m3.css` via `@aphrody-code/m3-tokens`). C'est du **CSS pur** :
+   SSR-safe, zéro coût shadow-DOM, remplace à terme `lib/theme.ts` + les schémas OKLCH. Les
+   `--rpb-*` deviennent des **alias** des rôles M3 (rétro-compat des `*.module.css` existants).
+   > **Piège vérifié (correction du plan initial).** Aliaser `--rpb-*` **globalement** sur
+   > `:root{ --rpb-bg: var(--md-sys-color-surface); … }` **ne marche pas** tant que
+   > `ThemeRegistry` injecte `--rpb-*` au runtime via `documentElement.style` (inline) : le
+   > style inline sur `:root` **gagne** sur la règle de feuille. Deux issues : (a) **scoper**
+   > l'alias sur un ancêtre plus proche que `:root` — un wrapper `.m3-search` par surface
+   > migrée écrase les valeurs runtime *localement* sans toucher les ~40 fichiers qui lisent
+   > `--rpb-*` (mécanisme retenu pour `/search`) ; (b) à la **vague 5**, faire injecter à
+   > ThemeRegistry les rôles M3 (ou retirer l'injection) et basculer l'alias en global. Garder
+   > `--rpb-primary`/`--rpb-secondary` non-aliasés = accents de marque (rouge/bleu) conservés.
 2. **Véhicule de rendu par défaut = React + CSS Modules + rôles** (pattern `/search`).
    RSC/SSR-propre, déjà possédé, pas de mur shadow-DOM ni de taxe `'use client'`/FOUC sur
    235 fichiers. Porte le gros : layout, surfaces, cards, listes, typo, tout le `sx`.
@@ -76,8 +99,11 @@ Détail et comparatif complet : [tokens & thème](./theme-tokens.md) §3. Synth�
    (focus-trap + top-layer), `MdTextField`/`MdSelect`, et les gains **fork-only**
    (`MdTable`, snackbar, autocomplete, date/time pickers). Isolés en leaf `'use client'`.
 
-> `@aphrody-code/m3-react`, `@aphrody-code/m3-tokens` et `@lit/react` **ne sont pas
-> installés** aujourd'hui. La vague 0 décide install vs génération CSS statique.
+> ~~`@aphrody-code/m3-react`, `@aphrody-code/m3-tokens` et `@lit/react` ne sont pas
+> installés~~ → **installés (2026-05-30, @3.2.0)** dans `apps/web` via le scope GitHub
+> Packages déjà câblé (bunfig `@aphrody-code` → npm.pkg.github.com). Décision tranchée :
+> **install + génération CSS** (le CSS statique sert les rôles, `dynamic-color` le runtime,
+> les `Md*` les leaves interactifs). `m3-motion` écarté (redondant avec `framer-motion`).
 
 Décisions annexes :
 
@@ -127,9 +153,10 @@ Issus des invariants prod du repo (cf. `apps/web/AGENTS.md`, CLAUDE.md) :
 
 - **Shadow-DOM / SSR** si véhicule `Md*` : web components ne SSR pas (FOUC, `'use client'`,
   `:not(:defined){visibility:hidden}`). **Mitigé** en menant par les CSS Modules.
-- **Fidélité tokens** : `material-color-utilities@0.2.7` (vendoré) n'émet que ~29 rôles, pas
-  l'échelle `surface-*-container-*` complète → utiliser Material Theme Builder pour le thème
-  canonique, ou accepter les fallbacks internes `md-*`. Vérifier la version MCU à la migration.
+- ~~**Fidélité tokens** : `material-color-utilities@0.2.7` (vendoré) n'émet que ~29 rôles~~ →
+  **levé.** `@aphrody-code/m3-tokens@3.2.0` (MCU 0.4.0) `schemeFromSeed()` émet l'échelle
+  **complète** (~47 rôles : `surface-container-*`, `*-fixed`, `surface-tint`, `inverse-*`).
+  Material Theme Builder n'est plus requis. `m3.css` est déjà rempli de cette source.
 - **Composants fork-only** (`md-table`, charts, snackbar, autocomplete, Expressive) : **aucune
   release npm Google** — leur pérennité = celle de la fork aphrody, pas de Google.
 - **Gap M3 Expressive web** : split button, button groups, FAB menu, docked toolbar, loading
