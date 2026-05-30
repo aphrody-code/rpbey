@@ -1,7 +1,7 @@
 export const APP_NAME = "RPB Dashboard";
 export const APP_DESCRIPTION = "Le dashboard officiel de la République Populaire du Beyblade";
 
-export const DISCORD_INVITE_URL = "https://discord.gg/9ENMe2hQyU";
+export const DISCORD_INVITE_URL = "https://discord.gg/rpb";
 
 export const ROUTES = {
   HOME: "/",

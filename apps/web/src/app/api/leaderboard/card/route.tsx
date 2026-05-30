@@ -16,9 +16,9 @@ function ellipsize(text: string, max: number): string {
 }
 
 function rankColor(rank: number): string {
-  if (rank === 1) return "#fbbf24";
-  if (rank === 2) return "#e2e8f0";
-  if (rank === 3) return "#cd7f32";
+  if (rank === 1) return "#FFD700";
+  if (rank === 2) return "#C0C0C0";
+  if (rank === 3) return "#CD7F32";
   return "#94a3b8";
 }
 
@@ -56,7 +56,7 @@ export async function GET() {
           style={{
             display: "flex",
             alignSelf: "center",
-            color: "#fbbf24",
+            color: "#FFD700",
             fontWeight: 700,
             fontSize: 56,
           }}
@@ -125,7 +125,7 @@ export async function GET() {
                   style={{
                     display: "flex",
                     flex: 1,
-                    color: rank === 1 ? "#fbbf24" : "#ffffff",
+                    color: rank === 1 ? "#FFD700" : "#ffffff",
                     fontWeight: 700,
                     fontSize: 28,
                   }}

@@ -134,7 +134,7 @@ export default async function RankingsPage({ searchParams }: RankingsPageProps) 
     },
     {
       name: "Discord",
-      url: "https://discord.gg/V8H2vHWeU6",
+      url: "https://discord.gg/rpb",
       icon: DiscordIcon,
       color: "#5865F2",
     },

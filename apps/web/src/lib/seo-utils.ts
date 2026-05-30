@@ -179,7 +179,7 @@ export function generateOrganizationJsonLd(): WithContext<SportsOrganization> {
       "La 1ère communauté Beyblade X en France. Tournois officiels, classements nationaux et événements.",
     sport: "Beyblade X",
     sameAs: [
-      "https://discord.gg/V8H2vHWeU6",
+      "https://discord.gg/rpb",
       "https://twitter.com/RPBey_fr",
       "https://www.instagram.com/rpb_bey",
       "https://www.tiktok.com/@rpb_bey",
@@ -190,7 +190,7 @@ export function generateOrganizationJsonLd(): WithContext<SportsOrganization> {
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "customer service",
-      url: "https://discord.gg/V8H2vHWeU6",
+      url: "https://discord.gg/rpb",
     },
   };
 }
