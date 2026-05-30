@@ -205,6 +205,17 @@ export function SearchClient({ groups, recommendations }: SearchClientProps) {
   // ── Shimmer de chargement (feedback vrai fetch) ────────────────────────────
   const showShimmer = indexLoading && searchIndex.length === 0;
 
+  // ── Frame anime en image de fond de la home (full-bleed cinématique) ───────
+  const animeBackdrop = React.useMemo((): string | null => {
+    const frames = searchIndex.filter(
+      (i) => (i.category === "anime" || i.category === "frame") && Boolean(i.thumbnail),
+    );
+    if (frames.length === 0) return null;
+    // Pioche stable par chargement d'index (varie d'une visite à l'autre).
+    const idx = Math.floor(Math.random() * frames.length);
+    return frames[idx]?.thumbnail ?? null;
+  }, [searchIndex]);
+
   // ─────────────────────────────────────────────────────────────────────────────
   // VUE HOME
   // ─────────────────────────────────────────────────────────────────────────────
@@ -212,6 +223,13 @@ export function SearchClient({ groups, recommendations }: SearchClientProps) {
     return (
       <MotionConfig reducedMotion="user">
         <div className={`${styles.root} m3-search`}>
+          {animeBackdrop && (
+            <div
+              className={styles.homeBackdrop}
+              style={{ backgroundImage: `url(${animeBackdrop})` }}
+              aria-hidden="true"
+            />
+          )}
           <motion.div className={styles.homeWrap} key="home" {...fadeThrough}>
             {/* Zone centrale */}
             <div className={styles.homeCenter}>

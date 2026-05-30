@@ -3,10 +3,57 @@
 .root {
   background: var(--md-sys-color-surface, #1e100e);
   min-height: 100vh;
+  position: relative;
+}
+
+/* Frame anime en fond de home — full-bleed, scrim tonal pour lisibilité */
+.homeBackdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.42;
+  filter: blur(6px) saturate(1.15);
+  pointer-events: none;
+  animation: backdropIn 1.2s var(--md-sys-motion-standard, cubic-bezier(0.2, 0, 0, 1)) both;
+}
+
+/* Scrim : vignette radiale centrale (logo + champ pop) + fondu vers le fond plein.
+   Laisse l'image respirer sur les bords, la protège au centre. */
+.homeBackdrop::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      ellipse 65% 55% at 50% 44%,
+      var(--md-sys-color-surface, #1e100e) 0%,
+      color-mix(in srgb, var(--md-sys-color-surface, #1e100e) 40%, transparent) 55%,
+      transparent 80%
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--md-sys-color-surface, #1e100e) 35%, transparent) 0%,
+      color-mix(in srgb, var(--md-sys-color-surface, #1e100e) 50%, transparent) 40%,
+      var(--md-sys-color-surface, #1e100e) 100%
+    );
+}
+
+@keyframes backdropIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.42;
+  }
 }
 
 /* ── HOME ── */
 .homeWrap {
+  position: relative;
+  z-index: 1;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
