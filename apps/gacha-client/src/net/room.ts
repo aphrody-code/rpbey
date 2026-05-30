@@ -7,7 +7,7 @@
  * pity,lastPull}>`. On suit le PlayerState dont `userId` == le nôtre.
  */
 import { Client, type Room } from "colyseus.js";
-import { GACHA_WS_URL } from "../env";
+import { GACHA_WS_URL, proxifyUrl } from "../env";
 import type { DailyResult, PullResult } from "../types";
 
 export interface RoomHud {
@@ -51,7 +51,11 @@ export class GachaRoomClient {
    */
   async join(jwt: string, userId: string, channelId?: string): Promise<void> {
     this.userId = userId;
-    const client = new Client(GACHA_WS_URL);
+    // Dans Discord, le WS Colyseus DOIT passer par le proxy de l'Activity
+    // (`/.proxy/api/gacha`) : la CSP bloque toute connexion directe vers
+    // api.rpbey.fr. Hors Discord, `proxifyUrl` renvoie l'URL absolue inchangée.
+    const endpoint = proxifyUrl(GACHA_WS_URL, "api");
+    const client = new Client(endpoint);
     try {
       this.room = await client.joinOrCreate<GachaStateSchema>("gacha", {
         token: jwt,

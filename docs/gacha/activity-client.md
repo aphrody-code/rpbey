@@ -129,14 +129,15 @@ bunx oxfmt apps/gacha-client   # indent 2 espaces
 
 `bunx vite preview` + Chromium (`/usr/local/bin/chromium`) via puppeteer : la page charge, le **canvas Pixi monte** (`#app canvas` présent, 1800×1200 @ DPR=2), **0 erreur de page JS**, le splash se masque. Hors VPS (pas d'accès aux API depuis le sandbox), l'auth/frames échouent **proprement** (catch → statut HUD, pas de crash) — comportement attendu et géré. En prod (origine `play.rpbey.fr` autorisée par le CORS du serveur gacha), l'auth aboutit.
 
-## Déploiement — `play.rpbey.fr` (TODO côté humain)
+## Déploiement — `play.rpbey.fr` (LIVE)
 
-> Le client est un **statique** (`dist/`). Le servir derrière nginx (ou le CDN existant), TLS via certbot/Let's Encrypt.
+> Le client est un **statique** (`dist/`) servi par nginx sur `play.rpbey.fr` (TLS Let's Encrypt), déployé en prod le 2026-05-30. DNS `play.rpbey.fr` → VPS.
 
-1. **Build + copie** :
+1. **Build + déploiement (un seul script, reproductible)** :
    ```bash
-   cd apps/gacha-client && VITE_DISCORD_CLIENT_ID=<APP_ID> bun run build
-   # copier dist/ vers le webroot, p. ex. /var/www/play.rpbey.fr/
+   bash scripts/deploy-gacha-client.sh
+   # type-check → vite build (VITE_DISCORD_CLIENT_ID lu depuis apps/bot/.env, public)
+   # → rsync dist/ vers /var/www/play.rpbey.fr → reload nginx
    ```
 2. **nginx** — nouveau server TLS `play.rpbey.fr` :
    ```nginx
@@ -166,3 +167,5 @@ bunx oxfmt apps/gacha-client   # indent 2 espaces
 - **Ne pas importer `@rpbey/*`** (db/api-contract) dans ce bundle : ça tirerait Drizzle/postgres dans le navigateur. Les types sont **dupliqués** dans `src/types.ts` (garder synchro avec `packages/api-contract/src/gacha-game.ts`).
 - **`label` est réservé** sur `Container` (PixiJS v8) — ne pas l'utiliser comme nom de champ pour un sous-objet (collision de type).
 - Le pull ×10 n'a **pas** de message Colyseus (la room ne gère que `pull`/`daily`/`balance`) → il passe toujours par REST.
+- **WS Colyseus proxifié dans Discord** : `net/room.ts` connecte via `proxifyUrl(GACHA_WS_URL, "api")` (→ `/.proxy/api/gacha`), JAMAIS en `wss://api.rpbey.fr` direct (la CSP de l'Activity bloque le réseau hors `/.proxy/`). Hors Discord, l'URL absolue est conservée. Sans ça, la room temps réel est muette dans Discord (seul le fallback REST tirerait).
+- **`mock_code` désactivé en production** (`apps/gacha-server/src/discord-token.ts`) : en prod (`NODE_ENV=production`) le code mock renvoie **403** — sinon n'importe quel navigateur minterait une session gacha réelle hors Discord (pollution `users` + abus éco). Seul le vrai flux OAuth Discord est accepté.

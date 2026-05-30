@@ -67,8 +67,15 @@ export function mountDiscordToken(app: ExpressApp): void {
   app.post("/discord_token", async (req: Req, res: Res) => {
     const code = String(req.body?.code ?? "");
     try {
-      // Dev : code mock → session anonyme.
+      // Dev/QA UNIQUEMENT : code mock → session anonyme. DÉSACTIVÉ en production
+      // (sinon n'importe quel navigateur minterait une session gacha réelle hors
+      // Discord → pollution de `users` + abus de l'économie). En prod, l'unique
+      // voie est le vrai flux OAuth Discord (Activity).
       if (code === "mock_code") {
+        if (process.env.NODE_ENV === "production") {
+          res.status(403).send({ error: "mock_code désactivé en production (Discord requis)" });
+          return;
+        }
         const profile: DiscordProfile = {
           id: `mock${Date.now()}`,
           username: "MockBlader",
