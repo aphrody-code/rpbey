@@ -25,6 +25,7 @@ import { useSession } from "@/lib/auth-client";
 import { validateDeck } from "@/lib/tournament-logic";
 import { BeySlotCard } from "./BeySlotCard";
 import { clearDraft, isCXBlade, useBuilder } from "./BuilderContext";
+import { DeckSynergy } from "./DeckSynergy";
 
 export function DeckComposition() {
   const { state, dispatch } = useBuilder();
@@ -234,6 +235,8 @@ export function DeckComposition() {
           <BeySlotCard key={i} slotIndex={i} />
         ))}
       </Box>
+      {/* Synergie méta temps réel (table de tier canonique, pur client). */}
+      <DeckSynergy />
       <Box sx={{ mt: 1 }}>
         {validation && !validation.isValid ? (
           <Alert

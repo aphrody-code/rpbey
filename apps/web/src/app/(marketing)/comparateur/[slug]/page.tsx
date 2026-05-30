@@ -14,6 +14,7 @@ import { notFound } from "next/navigation";
 import { type Product, type WithContext } from "schema-dts";
 import { JsonLd } from "@/components/seo/JsonLd";
 import NextLink from "@/components/ui/NextLink";
+import ProductIntel from "@/app/(marketing)/comparateur/_components/ProductIntel";
 import { type BxProductGroup, computeGroups, groupSlug, loadCatalog } from "@/lib/bx-catalog";
 import {
   createPageMetadata,
@@ -620,6 +621,9 @@ export default async function ProductComparePage({
             );
           })}
         </Stack>
+
+        {/* Intel produit : tier méta, combos gagnants, buzz, produits similaires. */}
+        <ProductIntel group={g} />
 
         <Typography
           variant="caption"
