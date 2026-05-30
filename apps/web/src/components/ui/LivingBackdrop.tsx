@@ -16,16 +16,11 @@ import { useEffect, useRef, useState } from "react";
  */
 
 const AMBIENT_API = "/api/v1/anime/frames/ambient";
-const PROXY = "/api/img?u=";
-
-function proxied(url: string): string {
-  return url.startsWith("http") ? `${PROXY}${encodeURIComponent(url)}` : url;
-}
 
 export interface LivingBackdropProps {
   /** Slug de série pour cibler l'ambiance. Vide → échantillon diversifié. */
   series?: string;
-  /** Opacité crête de la frame (0..1). Défaut 0.42. */
+  /** Opacité crête de la frame (0..1). Défaut 0.82. */
   intensity?: number;
 }
 
@@ -44,7 +39,7 @@ function makeMoteCanvas(): HTMLCanvasElement {
   return c;
 }
 
-export function LivingBackdrop({ series, intensity = 0.42 }: LivingBackdropProps) {
+export function LivingBackdrop({ series, intensity = 0.82 }: LivingBackdropProps) {
   const hostRef = useRef<HTMLDivElement>(null);
   const [frameSrc, setFrameSrc] = useState<string | null>(null);
   const [frameShown, setFrameShown] = useState(false);
@@ -65,7 +60,9 @@ export function LivingBackdrop({ series, intensity = 0.42 }: LivingBackdropProps
         const arr = json.data ?? [];
         if (arr.length === 0 || !alive) return;
         const pick = arr[Math.floor(Math.random() * arr.length)]!;
-        const src = proxied(pick.imageUrl);
+        // Frame en background CSS (décoratif) : pas de CORS, donc URL CDN directe —
+        // surtout PAS le proxy /api/img (détourage de fond + cdn.rpbey.fr hors allowlist → 403).
+        const src = pick.imageUrl;
         const img = new Image();
         img.onload = () => {
           if (alive) {
@@ -223,16 +220,17 @@ export function LivingBackdrop({ series, intensity = 0.42 }: LivingBackdropProps
       )}
       {/* Calque Pixi (braises) */}
       <div ref={hostRef} style={{ position: "absolute", inset: 0 }} />
-      {/* Voile de lisibilité (contraste AA du contenu hero) */}
+      {/* Voile léger : la frame ressort (aucun gros titre à protéger), vignette
+          basse pour fondre proprement dans la section suivante. */}
       <div
         style={{
           position: "absolute",
           inset: 0,
           background:
             "linear-gradient(180deg," +
-            "color-mix(in srgb, var(--rpb-bg, #0f0f0f) 55%, transparent) 0%," +
-            "color-mix(in srgb, var(--rpb-bg, #0f0f0f) 40%, transparent) 38%," +
-            "color-mix(in srgb, var(--rpb-bg, #0f0f0f) 88%, transparent) 100%)",
+            "color-mix(in srgb, var(--rpb-bg, #0f0f0f) 26%, transparent) 0%," +
+            "color-mix(in srgb, var(--rpb-bg, #0f0f0f) 8%, transparent) 48%," +
+            "color-mix(in srgb, var(--rpb-bg, #0f0f0f) 92%, transparent) 100%)",
         }}
       />
       <style>{`

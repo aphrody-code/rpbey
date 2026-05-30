@@ -2,7 +2,6 @@
 
 import { FiberManualRecord } from "@mui/icons-material";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Chip from "@mui/material/Chip";
@@ -14,7 +13,6 @@ import Typography from "@mui/material/Typography";
 import { domAnimation, LazyMotion, m, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
 import { useRef } from "react";
-import { DynamicBlock } from "@/components/cms/DynamicBlock";
 import {
   FeedMyPartnership,
   type MetaPartPreview,
@@ -115,7 +113,6 @@ interface HomeClientProps {
 
 export default function HomeClient({
   activeTournament,
-  heroContent,
   rankingBoards = [],
   metaParts = [],
   recentVideos = [],
@@ -136,17 +133,15 @@ export default function HomeClient({
         ref={heroRef}
         sx={{
           position: "relative",
-          minHeight: { xs: "68vh", md: "62vh" },
+          minHeight: { xs: "44vh", md: "52vh" },
           display: "flex",
           alignItems: "center",
           overflow: "hidden",
-          pt: { xs: 2, md: 0 },
-          pb: { xs: 4, md: 0 },
           bgcolor: "black",
         }}
       >
         {/* Fond vivant : frames d'animé (corpus RAG) + braises Pixi, adaptatif/mobile */}
-        <LivingBackdrop intensity={0.42} />
+        <LivingBackdrop intensity={0.82} />
 
         <m.div style={{ opacity: heroContentOpacity }}>
           <Container
@@ -155,7 +150,7 @@ export default function HomeClient({
               position: "relative",
               zIndex: 3,
               px: { xs: 2.5, md: 4 },
-              py: { xs: 4, md: 10 },
+              py: { xs: 3, md: 5 },
             }}
           >
             <Grid
@@ -215,79 +210,6 @@ export default function HomeClient({
                       />
                     </Box>
                   )}
-
-                  <Box
-                    sx={{
-                      mb: { xs: 3, md: 5 },
-                      pl: 0.5,
-                      borderLeft: { xs: "none", md: "4px solid" },
-                      borderColor: "primary.main",
-                      textAlign: { xs: "center", md: "left" },
-                    }}
-                  >
-                    <DynamicBlock
-                      slug="home-hero-text"
-                      initialContent={heroContent}
-                      fallback="La plus grande communauté française de Beyblade X. Compétition, partage et passion."
-                      className="hero-text-block"
-                    />
-                  </Box>
-
-                  <Stack
-                    direction={{ xs: "column", sm: "row" }}
-                    spacing={2}
-                    sx={{
-                      alignItems: { xs: "center", md: "flex-start" },
-                    }}
-                  >
-                    <Button
-                      component={Link}
-                      href="/tournaments"
-                      variant="contained"
-                      size="large"
-                      sx={{
-                        width: { xs: "100%", sm: "auto" },
-                        height: { xs: 48, sm: 64 },
-                        px: { xs: 4, sm: 6 },
-                        borderRadius: 3,
-                        fontSize: { xs: "0.95rem", sm: "1.1rem" },
-                        fontWeight: 800,
-                        bgcolor: "primary.main",
-                        color: "white",
-                        boxShadow: (t) => `0 15px 30px ${t.palette.primary.main}66`,
-                        "&:hover": {
-                          bgcolor: "primary.dark",
-                          transform: "scale(1.05)",
-                        },
-                        transition: "all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)",
-                      }}
-                    >
-                      Rejoindre l'Arène
-                    </Button>
-                    <Button
-                      component="a"
-                      href="https://discord.gg/rpb"
-                      variant="outlined"
-                      size="large"
-                      sx={{
-                        width: { xs: "100%", sm: "auto" },
-                        height: { xs: 48, sm: 64 },
-                        px: 4,
-                        borderRadius: 3,
-                        borderWidth: 2,
-                        borderColor: "rgba(255,255,255,0.2)",
-                        color: "white",
-                        backdropFilter: "blur(10px)",
-                        "&:hover": {
-                          borderWidth: 2,
-                          borderColor: "white",
-                          bgcolor: "rgba(255,255,255,0.1)",
-                        },
-                      }}
-                    >
-                      Notre Discord
-                    </Button>
-                  </Stack>
                 </Box>
               </Grid>
             </Grid>

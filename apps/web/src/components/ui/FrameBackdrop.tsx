@@ -35,11 +35,6 @@ export interface FrameBackdropProps {
 }
 
 const API = "/api/v1/anime/frames/ambient";
-const PROXY = "/api/img?u=";
-
-function proxied(url: string): string {
-  return url.startsWith("http") ? `${PROXY}${encodeURIComponent(url)}` : url;
-}
 
 export function FrameBackdrop({ series, intensity = 0.22, focus = "top" }: FrameBackdropProps) {
   const reduce = useReducedMotion();
@@ -69,15 +64,16 @@ export function FrameBackdrop({ series, intensity = 0.22, focus = "top" }: Frame
         const pool = wide.length > 0 ? wide : arr.filter((f) => f.imageUrl);
         if (pool.length === 0 || !alive) return;
         const pick = pool[Math.floor(Math.random() * pool.length)]!;
-        // Précharge avant d'afficher : évite le flash d'une image partielle.
+        // Frame en background CSS (décoratif) : URL CDN directe, jamais le proxy
+        // /api/img (détourage de fond + cdn.rpbey.fr hors allowlist → 403).
         const img = new Image();
         img.onload = () => {
           if (alive) {
-            setSrc(proxied(pick.imageUrl));
+            setSrc(pick.imageUrl);
             setShown(true);
           }
         };
-        img.src = proxied(pick.imageUrl);
+        img.src = pick.imageUrl;
       } catch {
         /* décoratif : on ignore l'échec, la page reste nette */
       }
