@@ -1,10 +1,12 @@
 "use client";
 
+import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import GroupsIcon from "@mui/icons-material/Groups";
 import SearchIcon from "@mui/icons-material/Search";
 import {
   alpha,
   Box,
+  Button,
   Chip,
   CircularProgress,
   Container,
@@ -19,10 +21,12 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import useSWR from "swr";
 import type { TeamsListResponse, TeamSummary } from "@rpbey/api-contract";
 import { useDebounce } from "@/hooks/use-debounce";
+import { useSession } from "@/lib/auth-client";
 import { TeamCard } from "./TeamCard";
 import { teamsFetcher, TEAM_REGIONS } from "./shared";
 
@@ -43,6 +47,9 @@ export function TeamsDirectory({
   leaderboard: TeamSummary[];
 }) {
   const theme = useTheme();
+  const { data: session } = useSession();
+  // Connecté → tableau de bord équipe (création/gestion) ; sinon → connexion.
+  const createHref = session?.user ? "/dashboard/team" : "/sign-in";
   const [q, setQ] = useState("");
   const [region, setRegion] = useState("");
   const [recruiting, setRecruiting] = useState(false);
@@ -79,16 +86,36 @@ export function TeamsDirectory({
   return (
     <Container maxWidth="lg" sx={{ py: { xs: 4, md: 6 } }}>
       {/* En-tête */}
-      <Stack spacing={1} sx={{ mb: 4 }}>
-        <Stack direction="row" spacing={1.5} sx={{ alignItems: "center" }}>
-          <GroupsIcon sx={{ fontSize: 36, color: "primary.main" }} />
-          <Typography variant="h3" sx={{ fontWeight: 900, letterSpacing: "-0.03em" }}>
-            Équipes & Clans
+      <Stack
+        direction={{ xs: "column", sm: "row" }}
+        spacing={2}
+        sx={{
+          mb: 4,
+          alignItems: { xs: "flex-start", sm: "flex-end" },
+          justifyContent: "space-between",
+        }}
+      >
+        <Stack spacing={1}>
+          <Stack direction="row" spacing={1.5} sx={{ alignItems: "center" }}>
+            <GroupsIcon sx={{ fontSize: 36, color: "primary.main" }} />
+            <Typography variant="h3" sx={{ fontWeight: 900, letterSpacing: "-0.03em" }}>
+              Équipes & Clans
+            </Typography>
+          </Stack>
+          <Typography variant="h6" sx={{ color: "text.secondary", fontWeight: 400 }}>
+            Découvre les clans de la communauté Beyblade, leurs rosters et leurs performances.
           </Typography>
         </Stack>
-        <Typography variant="h6" sx={{ color: "text.secondary", fontWeight: 400 }}>
-          Découvre les clans de la communauté Beyblade, leurs rosters et leurs performances.
-        </Typography>
+        <Button
+          component={Link}
+          href={createHref}
+          variant="contained"
+          size="large"
+          startIcon={<GroupAddIcon />}
+          sx={{ borderRadius: 3, fontWeight: 800, whiteSpace: "nowrap", flexShrink: 0 }}
+        >
+          Créer mon équipe
+        </Button>
       </Stack>
 
       {/* Top équipes (leaderboard) */}
@@ -219,22 +246,38 @@ export function TeamsDirectory({
           }}
         >
           <Typography variant="h6" sx={{ fontWeight: 700 }}>
-            Aucune équipe trouvée
+            Aucune équipe pour l'instant
           </Typography>
           <Typography color="text.secondary" sx={{ mt: 0.5 }}>
-            Ajuste tes filtres ou crée la tienne depuis ton tableau de bord.
+            Sois le premier à fonder un clan, ou ajuste tes filtres.
           </Typography>
-          <Chip
-            label="Réinitialiser les filtres"
-            sx={{ mt: 2, cursor: "pointer" }}
-            onClick={() => {
-              setQ("");
-              setRegion("");
-              setRecruiting(false);
-              setSort("points");
-              resetPage();
-            }}
-          />
+          <Stack
+            direction="row"
+            spacing={1.5}
+            sx={{ mt: 2.5, justifyContent: "center", flexWrap: "wrap", gap: 1.5 }}
+          >
+            <Button
+              component={Link}
+              href={createHref}
+              variant="contained"
+              startIcon={<GroupAddIcon />}
+              sx={{ borderRadius: 3, fontWeight: 800 }}
+            >
+              Créer mon équipe
+            </Button>
+            <Chip
+              label="Réinitialiser les filtres"
+              variant="outlined"
+              sx={{ cursor: "pointer", alignSelf: "center" }}
+              onClick={() => {
+                setQ("");
+                setRegion("");
+                setRecruiting(false);
+                setSort("points");
+                resetPage();
+              }}
+            />
+          </Stack>
         </Box>
       ) : (
         <Grid container spacing={2.5}>

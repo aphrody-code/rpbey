@@ -26,7 +26,7 @@ import {
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import useSWR from "swr";
-import type { PollDetail } from "@rpbey/api-contract";
+import type { PollDetail, PollDetailResponse } from "@rpbey/api-contract";
 import { useToast } from "@/components/ui";
 import {
   AWARDS_CATEGORY,
@@ -46,12 +46,14 @@ export function PollVote({ slug, initialPoll }: Props) {
   const theme = useTheme();
   const { showToast } = useToast();
 
-  const { data: poll, mutate } = useSWR<PollDetail>(`/api/v1/polls/${slug}`, pollsFetcher, {
-    fallbackData: initialPoll,
+  // L'endpoint v1 renvoie une enveloppe { poll }, pas un PollDetail brut :
+  // typer en PollDetailResponse et déballer `.poll` (sinon current.votedOptionIds === undefined → crash).
+  const { data, mutate } = useSWR<PollDetailResponse>(`/api/v1/polls/${slug}`, pollsFetcher, {
+    fallbackData: { poll: initialPoll },
     revalidateOnFocus: false,
   });
 
-  const current = poll ?? initialPoll;
+  const current = data?.poll ?? initialPoll;
   const isMultiple = current.kind === "MULTIPLE";
   const isAward = current.category === AWARDS_CATEGORY;
 
@@ -91,7 +93,7 @@ export function PollVote({ slug, initialPoll }: Props) {
         { optionIds: selected },
       );
       if (updated.poll) {
-        await mutate(updated.poll, { revalidate: false });
+        await mutate({ poll: updated.poll }, { revalidate: false });
         setSelected(updated.poll.votedOptionIds);
       }
       setShowResults(true);

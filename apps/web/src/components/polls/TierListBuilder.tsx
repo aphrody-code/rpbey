@@ -24,7 +24,12 @@ import {
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import useSWR from "swr";
-import type { Tier, TierListDetail, TierListSubject } from "@rpbey/api-contract";
+import type {
+  Tier,
+  TierListDetail,
+  TierListDetailResponse,
+  TierListSubject,
+} from "@rpbey/api-contract";
 import { useToast } from "@/components/ui";
 import {
   formatSubmissions,
@@ -136,11 +141,17 @@ export function TierListBuilder({ slug, initialTierList }: Props) {
   const theme = useTheme();
   const { showToast } = useToast();
 
-  const { data, mutate } = useSWR<TierListDetail>(`/api/v1/tier-lists/${slug}`, pollsFetcher, {
-    fallbackData: initialTierList,
-    revalidateOnFocus: false,
-  });
-  const tierList = data ?? initialTierList;
+  // L'endpoint v1 renvoie une enveloppe { tierList }, pas un TierListDetail brut :
+  // typer en TierListDetailResponse et déballer `.tierList` (sinon tierList.subjects === undefined → crash).
+  const { data, mutate } = useSWR<TierListDetailResponse>(
+    `/api/v1/tier-lists/${slug}`,
+    pollsFetcher,
+    {
+      fallbackData: { tierList: initialTierList },
+      revalidateOnFocus: false,
+    },
+  );
+  const tierList = data?.tierList ?? initialTierList;
 
   const subjectsById = useMemo(
     () => new Map(tierList.subjects.map((s) => [s.id, s])),
@@ -234,7 +245,7 @@ export function TierListBuilder({ slug, initialTierList }: Props) {
         { placements: list },
       );
       if (updated.tierList) {
-        await mutate(updated.tierList, { revalidate: false });
+        await mutate({ tierList: updated.tierList }, { revalidate: false });
         setPlacements(updated.tierList.myPlacements);
       }
       showToast("Ton classement a été enregistré !", "success");
