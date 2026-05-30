@@ -2,6 +2,7 @@
 
 import { m, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import { SEASON_COLORS } from "@/lib/season-colors.generated";
 
 /**
  * Fond d'une **section** plein-cadre : une frame d'animé (un « meilleur moment » d'une
@@ -100,6 +101,15 @@ export function SectionFrameBg({
     const pool = CURATED[series];
     const direct = image ?? (pool ? pool[Math.floor(Math.random() * pool.length)] : undefined);
     if (direct) {
+      // Couleur dynamique : pose l'accent/teinte dérivés de l'image sur la SECTION
+      // parente → texte/cartes/chips s'y adaptent (cf. season-colors.generated).
+      const color = SEASON_COLORS[direct];
+      const section = ref.current?.parentElement;
+      if (section && color) {
+        section.style.setProperty("--rpb-frame-accent", color.accent);
+        section.style.setProperty("--rpb-frame-accent-soft", color.accentSoft);
+        section.style.setProperty("--rpb-frame-tint", color.tint);
+      }
       preload(direct);
       return () => {
         alive = false;
@@ -175,13 +185,14 @@ export function SectionFrameBg({
             ` ${bg(contentVeil * 100)} 100%)`,
         }}
       />
-      {/* Lueur rouge de marque (coin haut) — chaleur d'arène */}
+      {/* Lueur d'accent (coin haut) — couleur DYNAMIQUE dérivée de l'image (repli marque) */}
       <div
         style={{
           position: "absolute",
           inset: 0,
           background:
-            "radial-gradient(80% 55% at 12% 0%, rgba(var(--rpb-primary-rgb),0.22), transparent 60%)",
+            "radial-gradient(80% 55% at 12% 0%, var(--rpb-frame-accent-soft, rgba(var(--rpb-primary-rgb),0.5)), transparent 62%)",
+          opacity: 0.3,
           mixBlendMode: "screen",
         }}
       />

@@ -55,7 +55,8 @@ const CARD_SX = {
   border: "1px solid",
   borderColor: (t: Theme) => alpha(t.palette.common.white, 0.12),
   borderTop: "3px solid",
-  borderTopColor: "primary.main",
+  // Liseré adaptatif : couleur dérivée de la frame de la section (repli rouge marque).
+  borderTopColor: "var(--rpb-frame-accent, #e11d2a)",
   boxShadow: "0 18px 50px rgba(0,0,0,0.5)",
 };
 
