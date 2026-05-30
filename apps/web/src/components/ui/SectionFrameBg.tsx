@@ -20,6 +20,10 @@ import { useEffect, useRef, useState } from "react";
 
 const AMBIENT_API = "/api/v1/anime/frames/ambient";
 
+// Grain argentique (SVG fractalNoise) — texture/atmosphère, anti-aplat numérique.
+const GRAIN =
+  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")";
+
 export interface SectionFrameBgProps {
   /** Slug de saison (= fichier `data/anime-frames/<slug>.json`). */
   series: string;
@@ -125,6 +129,27 @@ export function SectionFrameBg({
             ` ${bg(dim * 100)} 46%,` +
             ` ${bg(Math.max(dim, contentVeil * 0.64) * 100)} 72%,` +
             ` ${bg(contentVeil * 100)} 100%)`,
+        }}
+      />
+      {/* Lueur rouge de marque (coin haut) — chaleur d'arène */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          background:
+            "radial-gradient(80% 55% at 12% 0%, rgba(var(--rpb-primary-rgb),0.22), transparent 60%)",
+          mixBlendMode: "screen",
+        }}
+      />
+      {/* Grain argentique */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundImage: GRAIN,
+          backgroundSize: "160px 160px",
+          opacity: 0.07,
+          mixBlendMode: "overlay",
         }}
       />
     </div>

@@ -6,35 +6,45 @@ import { m, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
 /**
- * Bande de **transition « changement d'univers »** entre deux sections de la home.
- * On la traverse au scroll : le nom de la prochaine saison surgit en grand (gradient de
- * marque), glisse et se dissout — l'impression de **basculer dans un autre monde** avant
- * que la frame suivante n'apparaisse. Purement décoratif (`aria-hidden`).
+ * Bande-CHAPITRE de transition « changement d'univers » entre deux sections de la home,
+ * en langage **propagande constructiviste** (République Populaire du Beyblade) : chiffre
+ * romain géant fantôme, barre rouge en biais qui balaie au scroll, nom de la saison en
+ * display condensé. On la traverse → on bascule dans un autre monde. `aria-hidden`.
  *
- * Piloté par `useScroll` sur la bande elle-même : opacité 0→1→0 et glissement latéral au
- * passage ; coupé en `prefers-reduced-motion` (label statique centré).
+ * Le wipe rouge + le glissement sont pilotés par `useScroll` ; coupés en
+ * `prefers-reduced-motion`. La police display est héritée via `var(--rpb-display)`.
  */
 export interface UniverseDividerProps {
+  /** Numéro de chapitre romain (ex. « II »). */
+  chapter: string;
   /** Nom de l'univers suivant (ex. « Metal Fight »). */
   label: string;
-  /** Sous-titre court (année, génération…). */
+  /** Sous-titre court (génération, année…). */
   sub?: string;
 }
 
-export function UniverseDivider({ label, sub }: UniverseDividerProps) {
+export function UniverseDivider({ chapter, label, sub }: UniverseDividerProps) {
   const reduce = useReducedMotion();
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
 
-  const x = useTransform(
+  // Barre rouge diagonale qui balaie l'écran au passage.
+  const wipeX = useTransform(
+    scrollYProgress,
+    [0, 1],
+    reduce ? ["-40%", "-40%"] : ["-120%", "120%"],
+  );
+  const labelX = useTransform(
     scrollYProgress,
     [0, 0.5, 1],
-    reduce ? ["0%", "0%", "0%"] : ["-9%", "0%", "9%"],
+    reduce ? ["0%", "0%", "0%"] : ["-7%", "0%", "7%"],
   );
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], reduce ? [1, 1, 1] : [0.9, 1.04, 0.9]);
-  const opacity = useTransform(scrollYProgress, [0, 0.32, 0.68, 1], [0, 1, 1, 0]);
-  // Trait lumineux qui balaie horizontalement.
-  const sweep = useTransform(scrollYProgress, [0, 1], reduce ? ["0%", "0%"] : ["-30%", "130%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
+  const ghostScale = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    reduce ? [1, 1, 1] : [1.25, 1, 1.25],
+  );
 
   return (
     <Box
@@ -42,66 +52,89 @@ export function UniverseDivider({ label, sub }: UniverseDividerProps) {
       aria-hidden
       sx={{
         position: "relative",
-        height: { xs: "30vh", md: "38vh" },
+        height: { xs: "32vh", md: "40vh" },
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         overflow: "hidden",
-        bgcolor: "#06060a",
+        bgcolor: "#08070b",
+        // liserés rouges haut/bas (raccord de section)
+        borderTop: "2px solid rgba(var(--rpb-primary-rgb),0.55)",
+        borderBottom: "2px solid rgba(var(--rpb-primary-rgb),0.55)",
       }}
     >
-      {/* Halo de marque */}
+      {/* Chiffre romain géant fantôme */}
       <Box
+        component={m.div}
+        aria-hidden
+        style={{ scale: ghostScale }}
         sx={{
           position: "absolute",
           inset: 0,
-          background:
-            "radial-gradient(120% 80% at 50% 50%, rgba(var(--rpb-primary-rgb),0.20), transparent 62%)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          fontFamily: "var(--rpb-display, inherit)",
+          fontWeight: 900,
+          fontSize: { xs: "16rem", md: "30rem" },
+          lineHeight: 1,
+          color: "transparent",
+          WebkitTextStroke: "2px rgba(var(--rpb-primary-rgb),0.16)",
+          userSelect: "none",
         }}
-      />
-      {/* Trait lumineux balayant */}
+      >
+        {chapter}
+      </Box>
+
+      {/* Wipe rouge diagonal */}
       <Box
         component={m.div}
-        style={{ left: sweep }}
+        style={{ x: wipeX }}
         sx={{
           position: "absolute",
-          top: 0,
-          bottom: 0,
-          width: "40%",
+          top: "-20%",
+          bottom: "-20%",
+          width: "55%",
           background:
-            "linear-gradient(90deg, transparent, rgba(var(--rpb-primary-rgb),0.16), transparent)",
-          filter: "blur(8px)",
+            "linear-gradient(100deg, transparent, rgba(var(--rpb-primary-rgb),0.30) 45%, rgba(var(--rpb-primary-rgb),0.30) 55%, transparent)",
+          transform: "skewX(-12deg)",
+          filter: "blur(2px)",
         }}
       />
-      <Box component={m.div} style={{ x, scale, opacity }} sx={{ textAlign: "center", px: 2 }}>
+
+      {/* Texte chapitre */}
+      <Box
+        component={m.div}
+        style={{ x: labelX, opacity }}
+        sx={{ position: "relative", textAlign: "center", px: 2 }}
+      >
         <Typography
           component="span"
           sx={{
             display: "block",
-            mb: 1,
-            color: "var(--rpb-text-tertiary, #9aa)",
-            letterSpacing: 8,
+            mb: { xs: 0.5, md: 1 },
+            color: "rgba(var(--rpb-primary-rgb),1)",
+            letterSpacing: "0.5em",
             textTransform: "uppercase",
-            fontSize: { xs: "0.6rem", md: "0.72rem" },
             fontWeight: 800,
+            fontSize: { xs: "0.66rem", md: "0.8rem" },
+            pl: "0.5em",
           }}
         >
-          {"—"} Univers suivant {"—"}
+          Chapitre {chapter}
         </Typography>
         <Typography
           component="span"
           sx={{
             display: "block",
-            fontSize: { xs: "2.1rem", md: "4.2rem" },
+            fontFamily: "var(--rpb-display, inherit)",
+            fontSize: { xs: "2.6rem", md: "5.4rem" },
             fontWeight: 900,
-            lineHeight: 1,
-            letterSpacing: "-0.02em",
+            lineHeight: 0.86,
+            letterSpacing: { xs: "0.01em", md: "0.005em" },
             textTransform: "uppercase",
-            backgroundImage:
-              "var(--rpb-gradient-ai, linear-gradient(90deg,#dc2626 0%,#fb7185 50%,#fbbf24 100%))",
-            WebkitBackgroundClip: "text",
-            backgroundClip: "text",
-            color: "transparent",
+            color: "#f5f0e6",
+            textShadow: "0 6px 40px rgba(0,0,0,0.6)",
           }}
         >
           {label}
@@ -111,12 +144,13 @@ export function UniverseDivider({ label, sub }: UniverseDividerProps) {
             component="span"
             sx={{
               display: "block",
-              mt: 1.5,
-              color: "var(--rpb-text-secondary, #bbb)",
-              letterSpacing: 5,
+              mt: { xs: 1, md: 1.5 },
+              color: "rgba(245,240,230,0.62)",
+              letterSpacing: "0.42em",
               textTransform: "uppercase",
-              fontSize: { xs: "0.65rem", md: "0.8rem" },
               fontWeight: 700,
+              fontSize: { xs: "0.6rem", md: "0.72rem" },
+              pl: "0.42em",
             }}
           >
             {sub}
