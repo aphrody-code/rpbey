@@ -98,19 +98,24 @@ export function RichTextEditor({ value, onChange, minHeight = 300 }: RichTextEdi
         if (!file) return; // Null check
         const formData = new FormData();
         formData.append("file", file);
-        formData.append("type", "deckbox"); // Reuse existing folder or create 'content' later
+        formData.append("type", "content"); // images de contenu (bio) → scope CDN dédié
 
         try {
           const res = await fetch("/api/upload", {
             method: "POST",
             body: formData,
           });
-          const data = await res.json();
-          if (data.url && editor) {
+          const data = await res.json().catch(() => null);
+          if (!res.ok) {
+            throw new Error(data?.error || "Upload échoué");
+          }
+          if (data?.url && editor) {
             editor.chain().focus().setImage({ src: data.url }).run();
           }
-        } catch {
-          showToast("Erreur lors de l'upload de l'image", "error");
+        } catch (error) {
+          const message =
+            error instanceof Error ? error.message : "Erreur lors de l'upload de l'image";
+          showToast(message, "error");
         }
       }
     };
