@@ -6,14 +6,16 @@
  *      → { token (JWT Colyseus), gacha_token (Bearer), gacha_user_id }
  *      → authenticate() côté SDK avec l'access_token Discord.
  *
- *  - HORS Discord (navigateur, dev/QA) : on POST `/discord_token` avec
- *      `code: "mock_code"` → le serveur minte une session anonyme de test.
+ *  - HORS Discord (navigateur sur play.rpbey.fr) : « proxy login rpbey ». On
+ *      interroge `GET rpbey.fr/api/gacha/auth` avec le cookie de session
+ *      better-auth (`credentials: "include"`, same-site rpbey.fr) → le joueur
+ *      joue avec SON vrai compte rpbey (pas de mode invité). 401 si non connecté.
  *
  * Aucun secret en dur : seul le CLIENT_ID public (Application ID) est utilisé,
  * lu via `import.meta.env` (VITE_DISCORD_CLIENT_ID).
  */
 import { DiscordSDK } from "@discord/embedded-app-sdk";
-import { DISCORD_CLIENT_ID, GACHA_REST_URL, IS_DISCORD, proxifyUrl } from "../env";
+import { DISCORD_CLIENT_ID, GACHA_REST_URL, IS_DISCORD, proxifyUrl, WEB_BASE } from "../env";
 import type { DiscordTokenResponse } from "../types";
 
 export interface Session {
@@ -70,18 +72,29 @@ async function authViaDiscord(): Promise<Session> {
   };
 }
 
-/** Fallback navigateur : session mock anonyme. */
-async function authMock(): Promise<Session> {
-  const tok = await exchangeCode("mock_code");
+/** Navigateur (hors Discord) : proxy login rpbey — joue avec le vrai compte. */
+async function authViaWeb(): Promise<Session> {
+  const res = await fetch(`${WEB_BASE}/api/gacha/auth`, {
+    method: "GET",
+    credentials: "include",
+  });
+  if (res.status === 401) {
+    throw new Error("Connecte-toi sur rpbey.fr pour jouer");
+  }
+  if (!res.ok) {
+    const txt = await res.text().catch(() => "");
+    throw new Error(`Auth rpbey ${res.status} ${txt}`);
+  }
+  const tok = (await res.json()) as DiscordTokenResponse;
   return {
     jwt: tok.token,
     bearer: tok.gacha_token,
     userId: tok.gacha_user_id,
-    name: tok.user.global_name || tok.user.username || "MockBlader",
+    name: tok.user.global_name || tok.user.username || "Blader",
     viaDiscord: false,
   };
 }
 
 export async function authenticate(): Promise<Session> {
-  return IS_DISCORD ? authViaDiscord() : authMock();
+  return IS_DISCORD ? authViaDiscord() : authViaWeb();
 }
