@@ -53,6 +53,7 @@ Cartographie du repo (apps/packages) : [REPO_MAP.md](REPO_MAP.md).
 
 ## gacha
 
+- [Client Discord Activity gacha — `apps/gacha-client` (PixiJS v8)](gacha/activity-client.md) `stable` — Client de jeu gacha embarqué dans Discord (Activity) : rendu PixiJS pixel-perfect des frames d'anime, scène de pull/reveal, Colyseus temps réel, auth Embedded App SDK, build Vite/Bun, déploiement play.rpbey.fr.
 - [Gacha — Pipeline d'assets (catalogue)](gacha/assets-pipeline.md) `stable` — Chaîne Bun-native scrape→optim→classif→montage→publication Discord pour le catalogue de cartes gacha.
 - [Gacha — Bot Discord (client du serveur `:5050`)](gacha/bot.md) `stable` — Client gacha du bot Discord : authentification Bearer, endpoints appelés, commandes /gacha /duel /jeu.
 - [Gacha — Base de données](gacha/database.md) `stable` — Tables gacha dans @rpbey/db : schéma, enums, invariant timestamp mode string vs date.
