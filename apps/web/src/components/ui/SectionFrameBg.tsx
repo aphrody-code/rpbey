@@ -20,6 +20,33 @@ import { useEffect, useRef, useState } from "react";
 
 const AMBIENT_API = "/api/v1/anime/frames/ambient";
 
+// Images d'ambiance CURÉES (HD, vérifiées à l'œil), servies par NOTRE CDN :
+// - beyblade-x : frames fancaps déjà reverse-proxiées par cdn.rpbey.fr ;
+// - metal / burst / bakuten : uploadées sous /static/data/rpb/seasons/.
+// Une saison curée n'appelle PAS l'échantillon aléatoire (qui tombe sur des caps
+// watermarkés/flous) — on sert la bonne image directement.
+const CDN = "https://cdn.rpbey.fr";
+const CURATED: Record<string, readonly string[]> = {
+  "beyblade-x": [
+    `${CDN}/fancaps-anime-full/29133604.jpg`,
+    `${CDN}/fancaps-anime-full/29131028.jpg`,
+    `${CDN}/fancaps-anime-full/29132373.jpg`,
+  ],
+  "metal-fight-beyblade": [
+    `${CDN}/static/data/rpb/seasons/metal-champion.png`,
+    `${CDN}/static/data/rpb/seasons/metal-team.png`,
+  ],
+  "beyblade-burst-chouzetsu": [
+    `${CDN}/static/data/rpb/seasons/burst-clash.png`,
+    `${CDN}/static/data/rpb/seasons/burst-valt.png`,
+    `${CDN}/static/data/rpb/seasons/burst-aura.png`,
+  ],
+  "bakuten-shoot-beyblade": [
+    `${CDN}/static/data/rpb/seasons/bakuten-team.png`,
+    `${CDN}/static/data/rpb/seasons/bakuten-team2.png`,
+  ],
+};
+
 // Grain argentique (SVG fractalNoise) — texture/atmosphère, anti-aplat numérique.
 const GRAIN =
   "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")";
@@ -35,6 +62,8 @@ export interface SectionFrameBgProps {
   contentVeil?: number;
   /** Voile de base au centre (lisibilité du texte) sans tuer l'image, 0..1. Défaut 0.34. */
   dim?: number;
+  /** URL d'image explicite (prioritaire sur la curation et l'échantillon). */
+  image?: string;
 }
 
 export function SectionFrameBg({
@@ -43,6 +72,7 @@ export function SectionFrameBg({
   focus = "center",
   contentVeil = 0.86,
   dim = 0.34,
+  image,
 }: SectionFrameBgProps) {
   const reduce = useReducedMotion();
   const ref = useRef<HTMLDivElement>(null);
@@ -55,6 +85,28 @@ export function SectionFrameBg({
 
   useEffect(() => {
     let alive = true;
+    const preload = (url: string) => {
+      const img = new Image();
+      img.onload = () => {
+        if (alive) {
+          setSrc(url);
+          setShown(true);
+        }
+      };
+      img.src = url; // CDN direct, jamais le proxy /api/img
+    };
+
+    // 1) image explicite  2) saison curée (HD)  → on sert directement, sans aléatoire.
+    const pool = CURATED[series];
+    const direct = image ?? (pool ? pool[Math.floor(Math.random() * pool.length)] : undefined);
+    if (direct) {
+      preload(direct);
+      return () => {
+        alive = false;
+      };
+    }
+
+    // 3) Repli : échantillon ambient (séries non curées).
     const params = new URLSearchParams({ series, count: "24" });
     (async () => {
       try {
@@ -66,15 +118,7 @@ export function SectionFrameBg({
         const json = (await res.json()) as { data?: { imageUrl: string }[] };
         const arr = json.data ?? [];
         if (arr.length === 0 || !alive) return;
-        const url = arr[Math.floor(Math.random() * arr.length)]!.imageUrl;
-        const img = new Image();
-        img.onload = () => {
-          if (alive) {
-            setSrc(url);
-            setShown(true);
-          }
-        };
-        img.src = url; // CDN direct, jamais le proxy
+        preload(arr[Math.floor(Math.random() * arr.length)]!.imageUrl);
       } catch {
         /* décoratif : le fond de marque reste */
       }
@@ -82,7 +126,7 @@ export function SectionFrameBg({
     return () => {
       alive = false;
     };
-  }, [series]);
+  }, [series, image]);
 
   const bg = (pct: number) =>
     `color-mix(in srgb, var(--rpb-bg, #0f0f0f) ${Math.round(Math.min(100, pct))}%, transparent)`;
