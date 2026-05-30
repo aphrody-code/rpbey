@@ -521,6 +521,36 @@ export async function upsertOwnProfile(
   return profile ?? null;
 }
 
+/**
+ * Source de l'avatar Discord d'un utilisateur. `image` est posée au login Discord
+ * (cf. `mapProfileToUser` → `cdn.discordapp.com/avatars/<id>/<hash>.png`).
+ * `discordId` permet de reconstruire une URL par défaut si `image` est absente.
+ */
+export async function getDiscordAvatarSource(
+  userId: string,
+): Promise<{ image: string | null; discordId: string | null } | null> {
+  const row = await db.query.users.findFirst({
+    where: eq(schema.users.id, userId),
+    columns: { image: true, discordId: true },
+  });
+  return row ?? null;
+}
+
+/** Met à jour l'avatar (`users.image`) de l'utilisateur connecté. Retourne l'URL posée. */
+export async function setUserAvatar(userId: string, image: string): Promise<string> {
+  await db.update(schema.users).set({ image }).where(eq(schema.users.id, userId));
+  return image;
+}
+
+/** Pose un avatar par défaut au 1er login si le compte n'en a pas encore (best-effort). */
+export async function getUserAvatar(userId: string): Promise<string | null> {
+  const row = await db.query.users.findFirst({
+    where: eq(schema.users.id, userId),
+    columns: { image: true },
+  });
+  return row?.image ?? null;
+}
+
 /** Levée si le `username` choisi à l'onboarding est déjà pris par un autre compte. */
 export class UsernameTakenError extends Error {
   constructor() {

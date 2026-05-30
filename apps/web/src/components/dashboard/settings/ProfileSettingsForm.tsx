@@ -2,6 +2,7 @@
 
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import SaveIcon from "@mui/icons-material/Save";
+import SyncIcon from "@mui/icons-material/Sync";
 import {
   Alert,
   Avatar,
@@ -20,6 +21,7 @@ import { authClient, useSession } from "@/lib/auth-client";
 export function ProfileSettingsForm() {
   const { data: session, isPending } = useSession();
   const [isUploading, setIsUploading] = useState(false);
+  const [isSyncing, setIsSyncing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [message, setMessage] = useState<{
     type: "success" | "error";
@@ -68,6 +70,33 @@ export function ProfileSettingsForm() {
       });
     } finally {
       setIsUploading(false);
+    }
+  };
+
+  const handleSyncDiscord = async () => {
+    setIsSyncing(true);
+    setMessage(null);
+    try {
+      const res = await fetch("/api/profile/sync-discord-avatar", { method: "POST" });
+      const data = await res.json().catch(() => null);
+      if (!res.ok) throw new Error(data?.error || "Synchronisation échouée");
+
+      setImagePreview(data.url);
+      // Persiste immédiatement sur le compte (l'URL CDN est déjà posée côté serveur,
+      // updateUser synchronise la session better-auth).
+      await authClient.updateUser({ image: data.url });
+      setMessage({
+        type: "success",
+        text: "Avatar Discord synchronisé et hébergé sur le CDN.",
+      });
+      router.refresh();
+    } catch (error) {
+      setMessage({
+        type: "error",
+        text: error instanceof Error ? error.message : "Erreur lors de la synchronisation.",
+      });
+    } finally {
+      setIsSyncing(false);
     }
   };
 
@@ -138,21 +167,31 @@ export function ProfileSettingsForm() {
               sx={{ width: 100, height: 100 }}
             />
             <Box>
-              <Button
-                component="label"
-                variant="outlined"
-                startIcon={isUploading ? <CircularProgress size={20} /> : <CloudUploadIcon />}
-                disabled={isUploading}
-              >
-                Changer la photo
-                <input
-                  type="file"
-                  hidden
-                  accept="image/*"
-                  aria-label="Changer la photo de profil"
-                  onChange={handleImageUpload}
-                />
-              </Button>
+              <Stack direction="row" spacing={1} useFlexGap sx={{ flexWrap: "wrap" }}>
+                <Button
+                  component="label"
+                  variant="outlined"
+                  startIcon={isUploading ? <CircularProgress size={20} /> : <CloudUploadIcon />}
+                  disabled={isUploading || isSyncing}
+                >
+                  Changer la photo
+                  <input
+                    type="file"
+                    hidden
+                    accept="image/*"
+                    aria-label="Changer la photo de profil"
+                    onChange={handleImageUpload}
+                  />
+                </Button>
+                <Button
+                  variant="text"
+                  startIcon={isSyncing ? <CircularProgress size={20} /> : <SyncIcon />}
+                  disabled={isUploading || isSyncing}
+                  onClick={handleSyncDiscord}
+                >
+                  Synchroniser l'avatar Discord
+                </Button>
+              </Stack>
               <Typography
                 variant="caption"
                 sx={{
