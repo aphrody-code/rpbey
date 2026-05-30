@@ -70,11 +70,11 @@
 }
 
 .strong {
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .priceGood {
-  font-weight: 700;
+  font-weight: 500;
   color: var(--rpb-price-good, #5fd068);
 }
 
@@ -115,7 +115,7 @@
 /* Sections */
 .sectionTitle {
   font: var(--md-sys-typescale-title-medium, 500 1rem/1.5rem system-ui);
-  font-weight: 700;
+  font-weight: 500;
   color: var(--md-sys-color-on-surface, #f9dcd9);
   margin: 0 0 8px;
 }
@@ -189,7 +189,7 @@
 
 .sourcesTitle {
   font: var(--md-sys-typescale-label-large, 500 0.875rem/1.25rem system-ui);
-  font-weight: 600;
+  font-weight: 500;
   color: var(--md-sys-color-on-surface, #f9dcd9);
 }
 
@@ -219,7 +219,7 @@
   height: 16px;
   margin-top: 2px;
   flex-shrink: 0;
-  border-radius: 4px;
+  border-radius: var(--md-sys-shape-corner-extra-small, 4px);
 }
 
 .sourceTitle {

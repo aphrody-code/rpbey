@@ -71,9 +71,19 @@
   opacity: var(--md-sys-state-pressed-opacity, 0.1);
 }
 
+.tab:focus-visible {
+  outline: 2px solid var(--md-sys-color-primary, #ffb4ab);
+  outline-offset: -3px;
+  border-radius: var(--md-sys-shape-corner-small, 8px);
+}
+
+.tab:focus-visible::before {
+  opacity: var(--md-sys-state-focus-opacity, 0.1);
+}
+
 .tabActive {
   color: var(--md-sys-color-on-surface, #f9dcd9);
-  font-weight: 700;
+  font-weight: 500;
 }
 
 /* Indicateur actif : barre marque 3 dp, coin haut arrondi, scale-in animé */
