@@ -237,7 +237,6 @@ export function AiSynthesis({ query, group, reco, suggestions, onNewSearch }: Ai
             setNewQuery("");
             onNewSearch(v);
           }}
-          onToggleAi={() => onNewSearch(newQuery)}
         />
       </div>
 

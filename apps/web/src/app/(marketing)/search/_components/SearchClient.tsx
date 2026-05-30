@@ -181,14 +181,6 @@ export function SearchClient({ groups, recommendations }: SearchClientProps) {
     }
   }
 
-  function handleToggleAi() {
-    const next = !aiMode;
-    setAiMode(next);
-    if (view === "serp") setView("synthesis");
-    else if (view === "synthesis") setView("serp");
-    if (query.trim()) syncUrl(query, next);
-  }
-
   function handleTabChange(v: SearchCategory | "all" | "ai") {
     setCategory(v);
     if (v === "ai") {
@@ -250,7 +242,6 @@ export function SearchClient({ groups, recommendations }: SearchClientProps) {
                 aiMode={aiMode}
                 onChange={handleChange}
                 onSubmit={handleSubmit}
-                onToggleAi={handleToggleAi}
               />
             </div>
           </motion.div>
@@ -298,7 +289,6 @@ export function SearchClient({ groups, recommendations }: SearchClientProps) {
                 maxWidth="100%"
                 onChange={handleChange}
                 onSubmit={handleSubmit}
-                onToggleAi={handleToggleAi}
               />
             </div>
           </div>

@@ -96,7 +96,6 @@ interface SearchFieldProps {
   maxWidth?: string;
   onChange: (v: string) => void;
   onSubmit: (v: string) => void;
-  onToggleAi: () => void;
   onFocus?: () => void;
 }
 
@@ -110,7 +109,6 @@ export function SearchField({
   maxWidth,
   onChange,
   onSubmit,
-  onToggleAi,
   onFocus,
 }: SearchFieldProps) {
   const [focused, setFocused] = React.useState(false);
@@ -167,11 +165,6 @@ export function SearchField({
     .filter(Boolean)
     .join(" ");
 
-  const pillClass = [styles.aiPill, aiMode ? styles.aiPillActive : ""].filter(Boolean).join(" ");
-  const pillLabelClass = [styles.aiPillLabel, aiMode ? styles.aiPillLabelActive : ""]
-    .filter(Boolean)
-    .join(" ");
-
   return (
     <div
       ref={wrapRef}
@@ -179,15 +172,10 @@ export function SearchField({
       style={{ "--field-max-width": resolvedMaxWidth } as React.CSSProperties}
     >
       <div className={barClass}>
-        {/* Loupe submit */}
-        <button
-          type="button"
-          className={styles.iconBtn}
-          aria-label="Lancer la recherche"
-          onClick={handleSubmit}
-        >
+        {/* Icône décorative (affordance recherche) */}
+        <span className={styles.leadingIcon} aria-hidden="true">
           <IconSearch />
-        </button>
+        </span>
 
         {/* Saisie */}
         <input
@@ -219,20 +207,14 @@ export function SearchField({
           </button>
         )}
 
-        <div className={styles.divider} aria-hidden="true" />
-
-        {/* Pilule Mode IA */}
+        {/* Bouton search Material (submit, trailing) */}
         <button
           type="button"
-          className={pillClass}
-          onClick={onToggleAi}
-          aria-pressed={aiMode}
-          aria-label={aiMode ? "Désactiver le mode synthèse IA" : "Activer le mode synthèse IA"}
+          className={styles.searchBtn}
+          aria-label="Lancer la recherche"
+          onClick={handleSubmit}
         >
-          <span className={styles.sparkle} aria-hidden="true">
-            <IconSparkle />
-          </span>
-          <span className={pillLabelClass}>{value && aiMode ? "Mode IA →" : "Mode IA"}</span>
+          <IconSearch />
         </button>
       </div>
 

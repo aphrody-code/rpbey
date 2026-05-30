@@ -69,23 +69,38 @@
   position: relative;
 }
 
-/* Halo marque diffus derrière le hero (M3 Expressive, signature RPB) */
+/* Aurora de marque — deux teintes radiales (rouge+or / bleu+cyan selon le thème),
+   dérive lente et éthérée. Signature « soft radial gradient waves » Gemini. */
 .homeCenter::before {
   content: "";
   position: absolute;
-  top: 28%;
-  left: 50%;
-  width: min(560px, 80vw);
-  height: min(560px, 80vw);
-  transform: translate(-50%, -50%);
-  background: radial-gradient(
-    circle,
-    color-mix(in srgb, var(--rpb-primary, #dc2626) 18%, transparent) 0%,
-    transparent 62%
-  );
+  inset: -12%;
+  background:
+    radial-gradient(
+      38% 38% at 38% 36%,
+      color-mix(in srgb, var(--rpb-glow-1, #dc2626) 30%, transparent) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      44% 44% at 64% 58%,
+      color-mix(in srgb, var(--rpb-glow-2, #fbbf24) 22%, transparent) 0%,
+      transparent 72%
+    );
+  filter: blur(44px);
   pointer-events: none;
   z-index: 0;
-  filter: blur(8px);
+  animation: aurora 16s ease-in-out infinite alternate;
+}
+
+@keyframes aurora {
+  from {
+    transform: translate3d(-2%, -1%, 0) scale(1);
+    opacity: 0.85;
+  }
+  to {
+    transform: translate3d(2%, 2%, 0) scale(1.08);
+    opacity: 1;
+  }
 }
 
 .homeCenter > * {

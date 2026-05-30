@@ -152,6 +152,13 @@
   --rpb-success: #5fd068; /* prix favorable / éco */
   --rpb-success-dim: #2f6f35;
 
+  /* Gradient de marque ADAPTATIF (rouge→or en thème rouge ; bleu→cyan en bleu) —
+     « context builder » Gemini-style pour les halos ambiants et les focus.
+     Distinct du --gemini-sparkle (réservé aux affordances IA). */
+  --rpb-gradient-brand: linear-gradient(135deg, #dc2626 0%, #fb7185 45%, #fbbf24 100%);
+  --rpb-glow-1: #dc2626; /* teinte chaude du halo */
+  --rpb-glow-2: #fbbf24; /* teinte d'appoint (or) */
+
   /* Défauts SSR pour les vars injectées par ThemeRegistry (évite le flash). */
   --rpb-primary: #dc2626;
   --rpb-primary-rgb: 220, 38, 38;
@@ -237,6 +244,11 @@
   --rpb-brand-hover: #93c5fd;
   --rpb-primary: #60a5fa;
   --rpb-primary-rgb: 96, 165, 250;
+
+  /* Gradient de marque — bleu→cyan en mode tournoi. */
+  --rpb-gradient-brand: linear-gradient(135deg, #2563eb 0%, #60a5fa 45%, #22d3ee 100%);
+  --rpb-glow-1: #3b82f6;
+  --rpb-glow-2: #22d3ee;
 }
 
 /* =============================================================================

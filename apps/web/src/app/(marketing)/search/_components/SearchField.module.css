@@ -39,17 +39,77 @@
   box-shadow: var(--md-sys-elevation-2, 0 2px 6px rgba(0, 0, 0, 0.3));
 }
 
-/* Focus : le champ s'éveille — elevation 3 + halo accent marque */
+/* Focus : le champ s'éveille — anneau marque net + halo diffus éthéré (Gemini),
+   adaptatif rouge/bleu via --rpb-primary / --rpb-glow-1. */
 .barFocused {
-  border-color: var(--rpb-primary, #dc2626);
+  border-color: color-mix(in srgb, var(--rpb-primary, #dc2626) 60%, transparent);
   box-shadow:
     var(--md-sys-elevation-3, 0 4px 8px rgba(0, 0, 0, 0.3)),
-    0 0 0 3px color-mix(in srgb, var(--rpb-primary, #dc2626) 22%, transparent);
+    0 0 0 2px color-mix(in srgb, var(--rpb-primary, #dc2626) 55%, transparent),
+    0 10px 40px color-mix(in srgb, var(--rpb-glow-1, #dc2626) 26%, transparent);
 }
 
 .barDropdownOpen {
   border-radius: var(--md-sys-shape-corner-large, 16px) var(--md-sys-shape-corner-large, 16px) 0 0;
   border-bottom-color: transparent;
+}
+
+/* Icône loupe décorative (affordance, non interactive) */
+.leadingIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  min-width: 40px;
+  flex-shrink: 0;
+  color: var(--md-sys-color-on-surface-variant, #dfbfbb);
+}
+
+.leadingIcon svg {
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+}
+
+/* Bouton search Material — filled marque (rouge/bleu selon thème), circulaire */
+.searchBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  margin-right: 2px;
+  border: none;
+  border-radius: var(--md-sys-shape-corner-full, 9999px);
+  cursor: pointer;
+  flex-shrink: 0;
+  background: var(--rpb-primary, #dc2626);
+  color: #fff;
+  transition:
+    background-color 0.15s var(--md-sys-motion-standard, cubic-bezier(0.2, 0, 0, 1)),
+    box-shadow 0.15s var(--md-sys-motion-standard, cubic-bezier(0.2, 0, 0, 1)),
+    transform 0.12s var(--md-sys-motion-standard, cubic-bezier(0.2, 0, 0, 1));
+}
+
+.searchBtn:hover {
+  background: var(--rpb-brand-hover, #ef4444);
+  box-shadow: var(--md-sys-elevation-1, 0 1px 3px rgba(0, 0, 0, 0.3));
+}
+
+.searchBtn:active {
+  transform: scale(0.94);
+}
+
+.searchBtn:focus-visible {
+  outline: 2px solid var(--rpb-primary, #dc2626);
+  outline-offset: 2px;
+}
+
+.searchBtn svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
 }
 
 .iconBtn {
