@@ -1,9 +1,7 @@
-import crypto from "node:crypto";
-import { mkdir } from "node:fs/promises";
-import path from "node:path";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
+import { storeUploadedImage, UploadValidationError } from "@/server/services/upload-store";
 
 export async function POST(request: Request) {
   try {
@@ -16,39 +14,19 @@ export async function POST(request: Request) {
     }
 
     const formData = await request.formData();
-    const file = formData.get("file") as File;
+    const file = formData.get("file");
 
-    if (!file) {
+    if (!(file instanceof File)) {
       return NextResponse.json({ error: "No file uploaded" }, { status: 400 });
     }
 
-    // Validation
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
+    const url = await storeUploadedImage("avatars", session.user.id, file);
 
-    if (!file.type.startsWith("image/")) {
-      return NextResponse.json({ error: "File must be an image" }, { status: 400 });
-    }
-
-    if (file.size > 5 * 1024 * 1024) {
-      // 5MB limit
-      return NextResponse.json({ error: "File size too large (max 5MB)" }, { status: 400 });
-    }
-
-    // Save file
-    const uploadDir = path.join(process.cwd(), "public/uploads/avatars");
-    await mkdir(uploadDir, { recursive: true });
-
-    const ext = path.extname(file.name) || ".jpg";
-    const filename = `${session.user.id}-${crypto.randomUUID()}${ext}`;
-    const filepath = path.join(uploadDir, filename);
-
-    await Bun.write(filepath, buffer);
-
-    const imageUrl = `/uploads/avatars/${filename}`;
-
-    return NextResponse.json({ url: imageUrl });
+    return NextResponse.json({ url });
   } catch (error) {
+    if (error instanceof UploadValidationError) {
+      return NextResponse.json({ error: error.message }, { status: error.status });
+    }
     console.error("Upload error:", error);
     const errorMessage = error instanceof Error ? error.message : "Unknown error";
     return NextResponse.json({ error: `Internal Server Error: ${errorMessage}` }, { status: 500 });
