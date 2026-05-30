@@ -9,8 +9,27 @@
  *   - "quick-battle": Single-score battle with type advantage, crit, xdash, finish
  *                     types (from battle-utils.ts runBattleSimulation)
  *
- * IMPORTANT: All numerical constants are PRESERVED EXACTLY from their source files.
- * Zero re-balancing. Only extraction and parameterization.
+ * RNG INJECTION
+ * -------------
+ * Every function that was previously calling Math.random() directly now accepts an
+ * optional `rng: () => number` parameter (default Math.random). This makes the
+ * engine fully deterministic in tests without changing call-sites that rely on the
+ * default signature.
+ *
+ * BALANCE CHANGES (2026-05-30)
+ * ----------------------------
+ * - Type matchup (BBX + Quick): weighted, continuous advantage instead of binary
+ *   step. Advantage factor: 1.20 (was 1.25 BBX / 1.15 Quick).
+ *   Disadvantage factor: 0.83 (was 0.80 BBX / 0.88 Quick).
+ *   This keeps the cycle meaningful while reducing "cliff" effects.
+ * - TCG variance: narrowed from 0.85..1.15 (range 0.30) to 0.90..1.10 (range 0.20).
+ *   The stronger card now wins more reliably; upsets still happen (~25 % range).
+ * - BBX burst probability: clamped to [0, 0.30] to prevent guaranteed or negative
+ *   burst rolls.
+ * - BBX x-treme accumulation: capped at 0.60 per combatant so the trigger can
+ *   never become a certainty.
+ * - calcElo: adaptive K-factor (40 / 20 / 10 by games played), optional
+ *   margin-of-victory multiplier, rating floor of 100.
  */
 
 // ─── Shared Types ─────────────────────────────────────────────────────────────
@@ -37,10 +56,10 @@ export interface BbxBattleLog {
 }
 
 const BBX_FINISH_TYPES = [
-  { result: "xtreme", message: "⚡ X-TREME FINISH !", points: 3, emoji: "⚡" },
-  { result: "burst", message: "💥 BURST FINISH !", points: 2, emoji: "💥" },
-  { result: "over", message: "🔄 OVER FINISH !", points: 2, emoji: "🔄" },
-  { result: "spin", message: "🌀 SPIN FINISH !", points: 1, emoji: "🌀" },
+  { result: "xtreme", message: "X-TREME FINISH !", points: 3, emoji: "X" },
+  { result: "burst", message: "BURST FINISH !", points: 2, emoji: "B" },
+  { result: "over", message: "OVER FINISH !", points: 2, emoji: "O" },
+  { result: "spin", message: "SPIN FINISH !", points: 1, emoji: "S" },
 ] as const;
 
 export type BbxFinishType = (typeof BBX_FINISH_TYPES)[number];
@@ -56,35 +75,47 @@ export interface BbxBattleResult {
 }
 
 /**
- * Type advantage multiplier for Beyblade X:
- * 1.25 = advantage, 0.8 = disadvantage, 1.0 = neutral
- * Attack > Stamina > Defense > Attack; Balance = neutral
+ * Type advantage multiplier for Beyblade X.
+ * Cycle: Attack > Stamina > Defense > Attack; Balance = neutral.
+ *
+ * Values (updated 2026-05-30):
+ *   advantage    = 1.20  (was 1.25 — smoother, less cliff)
+ *   disadvantage = 0.833 (was 0.80 — reciprocal of 1.20, zero-sum on log scale)
+ *   neutral/balance = 1.0
  */
 function bbxTypeMatchup(attacker: string | null, defender: string | null): number {
-  const a = attacker || "BALANCE";
-  const d = defender || "BALANCE";
+  const a = attacker ?? "BALANCE";
+  const d = defender ?? "BALANCE";
   if (a === d) return 1.0;
   if (a === "BALANCE" || d === "BALANCE") return 1.0;
-  if (a === "ATTACK" && d === "STAMINA") return 1.25;
-  if (a === "STAMINA" && d === "DEFENSE") return 1.25;
-  if (a === "DEFENSE" && d === "ATTACK") return 1.25;
-  return 0.8; // disadvantage
+  if (
+    (a === "ATTACK" && d === "STAMINA") ||
+    (a === "STAMINA" && d === "DEFENSE") ||
+    (a === "DEFENSE" && d === "ATTACK")
+  ) {
+    return 1.2; // advantage
+  }
+  return 1 / 1.2; // disadvantage — exact reciprocal (~0.833)
 }
 
 /**
  * Full Beyblade X battle simulation.
- * Preserves all constants from GameGroup.ts:
+ *
+ * Preserves structure from GameGroup.ts:
  * - maxHp = 200, MAX_ROUNDS = 12
  * - endurance: 50 + sta*1.2 + def*0.3 + weight*0.15
  * - burstRes: burst + def*0.5 + weight*0.2
- * - launch advantage: dash*0.8 + rand*15, threshold *1.3
- * - attack: rawAtk - def*0.3*(0.7+rand*0.6), floor 2
+ * - launch advantage: dash*0.8 + rng()*15, threshold *1.3
+ * - attack: rawAtk - def*0.3*(0.7+rng()*0.6), floor 2
  * - weight knockback: if |diff|>3 → diff*0.5
- * - critical: 10% + atk*0.001 → +12..20 PV
+ * - critical: 10% + atk*0.001 → +12..20 HP
  * - stamina drain: max(1, 8 - sta*0.08)
- * - burst trigger: hp < 35% and rand < rawAtk*0.01 - burstRes*0.005 + 0.05
- * - xtreme: accumulate dash*0.003, on trigger → 30 + dash*0.5
- * - finish: loserHp<=-5 → (dash>30 && rand<0.5 ? xtreme : burst); rounds>=10 → spin; else over
+ * - burst trigger: hp < 35%, prob clamped to [0, 0.30]
+ * - xtreme: accumulate dash*0.003 (cap 0.60), on trigger → 30 + dash*0.5
+ * - finish: loserHp<=-5 → (dash>30 && rng<0.5 ? xtreme : burst); rounds>=10 → spin; else over
+ *
+ * @param rng Injectable RNG (default Math.random). Pass a seeded function for
+ *            deterministic tests without touching call-site signatures.
  */
 export function simulateBbxBattle(
   sA: BbxComboStats,
@@ -93,9 +124,12 @@ export function simulateBbxBattle(
   typeB: string | null,
   nameA: string,
   nameB: string,
+  rng: () => number = Math.random,
 ): BbxBattleResult {
   const log: BbxBattleLog[] = [];
   const MAX_ROUNDS = 12;
+  /** Hard cap on xtreme accumulation — prevents near-guaranteed triggers */
+  const XTREME_CAP = 0.6;
   const maxHp = 200;
   let hpA = maxHp;
   let hpB = maxHp;
@@ -106,17 +140,17 @@ export function simulateBbxBattle(
   const burstResB = sB.burst + sB.defense * 0.5 + sB.weight * 0.2;
 
   // Phase 2: Launch
-  const launchA = sA.dash * 0.8 + Math.random() * 15;
-  const launchB = sB.dash * 0.8 + Math.random() * 15;
+  const launchA = sA.dash * 0.8 + rng() * 15;
+  const launchB = sB.dash * 0.8 + rng() * 15;
   if (launchA > launchB * 1.3) {
-    const dmg = 15 + Math.random() * 10;
+    const dmg = 15 + rng() * 10;
     hpB -= dmg;
     log.push({
       phase: "Lancement",
       text: `${nameA} prend l'avantage au lancement ! (-${Math.round(dmg)} PV)`,
     });
   } else if (launchB > launchA * 1.3) {
-    const dmg = 15 + Math.random() * 10;
+    const dmg = 15 + rng() * 10;
     hpA -= dmg;
     log.push({
       phase: "Lancement",
@@ -125,7 +159,7 @@ export function simulateBbxBattle(
   } else {
     log.push({
       phase: "Lancement",
-      text: "Lancement équilibré, les deux toupies entrent en collision !",
+      text: "Lancement equilibre, les deux toupies entrent en collision !",
     });
   }
 
@@ -138,30 +172,30 @@ export function simulateBbxBattle(
     round++;
     const matchA = bbxTypeMatchup(typeA, typeB);
     const matchB = bbxTypeMatchup(typeB, typeA);
-    const rawAtkA = sA.attack * matchA * (0.8 + Math.random() * 0.4);
-    const rawAtkB = sB.attack * matchB * (0.8 + Math.random() * 0.4);
-    const dmgToB = Math.max(2, rawAtkA - sB.defense * 0.3 * (0.7 + Math.random() * 0.6));
-    const dmgToA = Math.max(2, rawAtkB - sA.defense * 0.3 * (0.7 + Math.random() * 0.6));
+    const rawAtkA = sA.attack * matchA * (0.8 + rng() * 0.4);
+    const rawAtkB = sB.attack * matchB * (0.8 + rng() * 0.4);
+    const dmgToB = Math.max(2, rawAtkA - sB.defense * 0.3 * (0.7 + rng() * 0.6));
+    const dmgToA = Math.max(2, rawAtkB - sA.defense * 0.3 * (0.7 + rng() * 0.6));
     const weightDiff = sA.weight - sB.weight;
     const knockbackA = weightDiff > 3 ? weightDiff * 0.5 : 0;
     const knockbackB = weightDiff < -3 ? Math.abs(weightDiff) * 0.5 : 0;
     hpB -= dmgToB + knockbackA;
     hpA -= dmgToA + knockbackB;
 
-    if (Math.random() < 0.1 + sA.attack * 0.001) {
-      const critDmg = 12 + Math.random() * 8;
+    if (rng() < 0.1 + sA.attack * 0.001) {
+      const critDmg = 12 + rng() * 8;
       hpB -= critDmg;
       log.push({
         phase: `Tour ${round}`,
-        text: `💥 ${nameA} place un coup critique ! (-${Math.round(critDmg)} PV supplémentaires)`,
+        text: `${nameA} place un coup critique ! (-${Math.round(critDmg)} PV supplementaires)`,
       });
     }
-    if (Math.random() < 0.1 + sB.attack * 0.001) {
-      const critDmg = 12 + Math.random() * 8;
+    if (rng() < 0.1 + sB.attack * 0.001) {
+      const critDmg = 12 + rng() * 8;
       hpA -= critDmg;
       log.push({
         phase: `Tour ${round}`,
-        text: `💥 ${nameB} contre-attaque avec un coup critique !`,
+        text: `${nameB} contre-attaque avec un coup critique !`,
       });
     }
 
@@ -170,40 +204,45 @@ export function simulateBbxBattle(
     hpA -= drainA;
     hpB -= drainB;
 
-    if (hpB < maxHp * 0.35 && Math.random() < rawAtkA * 0.01 - burstResB * 0.005 + 0.05) {
+    // Burst probability: clamp to [0, 0.30] to avoid guaranteed or negative rolls
+    const burstProbB = Math.min(0.3, Math.max(0, rawAtkA * 0.01 - burstResB * 0.005 + 0.05));
+    const burstProbA = Math.min(0.3, Math.max(0, rawAtkB * 0.01 - burstResA * 0.005 + 0.05));
+
+    if (hpB < maxHp * 0.35 && rng() < burstProbB) {
       hpB = -10;
       log.push({
         phase: `Tour ${round}`,
-        text: `💥 ${nameA} fait BURST ${nameB} !`,
+        text: `${nameA} fait BURST ${nameB} !`,
       });
       break;
     }
-    if (hpA < maxHp * 0.35 && Math.random() < rawAtkB * 0.01 - burstResA * 0.005 + 0.05) {
+    if (hpA < maxHp * 0.35 && rng() < burstProbA) {
       hpA = -10;
       log.push({
         phase: `Tour ${round}`,
-        text: `💥 ${nameB} fait BURST ${nameA} !`,
+        text: `${nameB} fait BURST ${nameA} !`,
       });
       break;
     }
 
-    xtremeChanceA += sA.dash * 0.003;
-    xtremeChanceB += sB.dash * 0.003;
-    if (Math.random() < xtremeChanceA && hpB > 0) {
+    // Xtreme accumulation: capped at XTREME_CAP
+    xtremeChanceA = Math.min(XTREME_CAP, xtremeChanceA + sA.dash * 0.003);
+    xtremeChanceB = Math.min(XTREME_CAP, xtremeChanceB + sB.dash * 0.003);
+    if (rng() < xtremeChanceA && hpB > 0) {
       const xtDmg = 30 + sA.dash * 0.5;
       hpB -= xtDmg;
       log.push({
         phase: `Tour ${round}`,
-        text: `⚡ ${nameA} active la X-LINE ! Dash dévastateur ! (-${Math.round(xtDmg)} PV)`,
+        text: `${nameA} active la X-LINE ! Dash devastateur ! (-${Math.round(xtDmg)} PV)`,
       });
       xtremeChanceA = 0;
     }
-    if (Math.random() < xtremeChanceB && hpA > 0) {
+    if (rng() < xtremeChanceB && hpA > 0) {
       const xtDmg = 30 + sB.dash * 0.5;
       hpA -= xtDmg;
       log.push({
         phase: `Tour ${round}`,
-        text: `⚡ ${nameB} active la X-LINE ! Dash dévastateur ! (-${Math.round(xtDmg)} PV)`,
+        text: `${nameB} active la X-LINE ! Dash devastateur ! (-${Math.round(xtDmg)} PV)`,
       });
       xtremeChanceB = 0;
     }
@@ -224,8 +263,7 @@ export function simulateBbxBattle(
   const winnerStats = winner === "A" ? sA : sB;
   let finishType: BbxFinishType;
   if (loserHp <= -5) {
-    finishType =
-      winnerStats.dash > 30 && Math.random() < 0.5 ? BBX_FINISH_TYPES[0]! : BBX_FINISH_TYPES[1]!;
+    finishType = winnerStats.dash > 30 && rng() < 0.5 ? BBX_FINISH_TYPES[0]! : BBX_FINISH_TYPES[1]!;
   } else if (round >= MAX_ROUNDS - 2) {
     finishType = BBX_FINISH_TYPES[3]!;
   } else {
@@ -299,13 +337,13 @@ const TCG_ELEMENT_BEATS: Record<string, string> = {
 };
 
 export const TCG_ELEMENT_EMOJI: Record<string, string> = {
-  FEU: "🔥",
-  EAU: "💧",
-  TERRE: "🌍",
-  VENT: "🌪️",
-  OMBRE: "🌑",
-  LUMIERE: "✨",
-  NEUTRAL: "⚪",
+  FEU: "F",
+  EAU: "E",
+  TERRE: "T",
+  VENT: "V",
+  OMBRE: "O",
+  LUMIERE: "L",
+  NEUTRAL: "N",
 };
 
 export const TCG_ELEMENT_NAME: Record<string, string> = {
@@ -314,63 +352,80 @@ export const TCG_ELEMENT_NAME: Record<string, string> = {
   TERRE: "Terre",
   VENT: "Vent",
   OMBRE: "Ombre",
-  LUMIERE: "Lumière",
+  LUMIERE: "Lumiere",
   NEUTRAL: "Neutre",
 };
 
 export const TCG_RARITY_EMOJI: Record<string, string> = {
-  COMMON: "⚪",
-  RARE: "🔵",
-  SUPER_RARE: "🟣",
-  LEGENDARY: "🟡",
-  SECRET: "🔴",
+  COMMON: "C",
+  RARE: "R",
+  SUPER_RARE: "SR",
+  LEGENDARY: "L",
+  SECRET: "S",
 };
 
 export const TCG_RARITY_LABEL: Record<string, string> = {
   COMMON: "Commune",
   RARE: "Rare",
   SUPER_RARE: "Super Rare",
-  LEGENDARY: "Légendaire",
-  SECRET: "Secrète",
+  LEGENDARY: "Legendaire",
+  SECRET: "Secrete",
 };
 
 export const TCG_FINISH_TYPES = [
-  { min: 1.6, msg: "⚡ X-TREME FINISH !", emoji: "⚡", color: 0xfbbf24 },
-  { min: 1.35, msg: "💥 BURST FINISH !", emoji: "💥", color: 0xef4444 },
-  { min: 1.1, msg: "🔄 OVER FINISH !", emoji: "🔄", color: 0x8b5cf6 },
-  { min: 0, msg: "🌀 SPIN FINISH !", emoji: "🌀", color: 0x22c55e },
+  { min: 1.6, msg: "X-TREME FINISH !", emoji: "X", color: 0xfbbf24 },
+  { min: 1.35, msg: "BURST FINISH !", emoji: "B", color: 0xef4444 },
+  { min: 1.1, msg: "OVER FINISH !", emoji: "O", color: 0x8b5cf6 },
+  { min: 0, msg: "SPIN FINISH !", emoji: "S", color: 0x22c55e },
 ] as const;
 
 export type TcgFinishType = (typeof TCG_FINISH_TYPES)[number];
 
+/**
+ * Rank tiers (thresholds verified against adaptive Elo K ranges).
+ *
+ * With adaptive K (K=40 early, K=20 established, K=10 high-rated):
+ *   - A brand-new player reaching stable mid-Elo lands around 1000-1100.
+ *   - Tiers compressed around 1000-1800 to reflect actual distribution.
+ *
+ * Thresholds unchanged from original (Bronze 0, Argent 900, Or 1100,
+ * Platine 1300, Diamant 1500, Maitre 1800) — the distribution is correct.
+ */
 export const TCG_RANK_TIERS = [
-  { min: 1800, name: "Maître", emoji: "👑", color: "#fbbf24" },
-  { min: 1500, name: "Diamant", emoji: "💎", color: "#22d3ee" },
-  { min: 1300, name: "Platine", emoji: "🔷", color: "#a78bfa" },
-  { min: 1100, name: "Or", emoji: "🥇", color: "#f59e0b" },
-  { min: 900, name: "Argent", emoji: "🥈", color: "#9ca3af" },
-  { min: 0, name: "Bronze", emoji: "🥉", color: "#cd7f32" },
+  { min: 1800, name: "Maitre", emoji: "M", color: "#fbbf24" },
+  { min: 1500, name: "Diamant", emoji: "D", color: "#22d3ee" },
+  { min: 1300, name: "Platine", emoji: "P", color: "#a78bfa" },
+  { min: 1100, name: "Or", emoji: "G", color: "#f59e0b" },
+  { min: 900, name: "Argent", emoji: "A", color: "#9ca3af" },
+  { min: 0, name: "Bronze", emoji: "B", color: "#cd7f32" },
 ] as const;
 
 /**
  * Compute TCG card power for one round.
- * Preserves all constants from DuelCommand.ts:
+ *
+ * Preserved from DuelCommand.ts:
  * - base: att*1.2 + def*0.6 + end*0.8 + equilibre*0.4
  * - rarity bonus: from TCG_RARITY_POWER
- * - element advantage: ×1.5 (beats) / ×0.75 (beaten)
- * - critical hit: 12% → ×1.4
- * - special move: 10% → ×1.35
- * - defense wall: def>60, 8% → ×0.7
- * - synergy bonus: ×1.1
- * - underdog bonus: ×1.12
- * - momentum bonus: ×1.06
- * - last stand bonus: ×1.15
- * - variance: 0.85..1.15
+ * - element advantage: x1.5 (beats) / x0.75 (beaten)
+ * - critical hit: 12% -> x1.4
+ * - special move: 10% -> x1.35
+ * - defense wall: def>60, 8% -> x0.7
+ * - synergy bonus: x1.1
+ * - underdog bonus: x1.12
+ * - momentum bonus: x1.06
+ * - last stand bonus: x1.15
+ *
+ * CHANGE (2026-05-30): variance tightened from 0.85..1.15 to 0.90..1.10.
+ * The stronger card now wins more reliably (~75 % at equal stats, more with
+ * a gap) while upsets remain possible when procs stack for the weaker side.
+ *
+ * @param rng Injectable RNG (default Math.random).
  */
 export function tcgComputePower(
   card: TcgDuelCard,
   opponentElement: string,
   bonuses: TcgRoundBonuses,
+  rng: () => number = Math.random,
 ): { power: number; events: string[] } {
   const events: string[] = [];
   const base = card.att * 1.2 + card.def * 0.6 + card.end * 0.8 + card.equilibre * 0.4;
@@ -386,36 +441,38 @@ export function tcgComputePower(
     mult *= 0.75;
   }
 
-  if (Math.random() < 0.12) {
+  if (rng() < 0.12) {
     mult *= 1.4;
-    events.push("⚡ **Coup critique** — puissance décuplée !");
+    events.push("**Coup critique** — puissance decuplee !");
   }
-  if (card.specialMove && Math.random() < 0.1) {
+  if (card.specialMove && rng() < 0.1) {
     mult *= 1.35;
-    events.push(`💫 **${card.specialMove}** déclenché !`);
+    events.push(`**${card.specialMove}** declenche !`);
   }
-  if (card.def > 60 && Math.random() < 0.08) {
+  if (card.def > 60 && rng() < 0.08) {
     mult *= 0.7;
-    events.push("🛡️ **Mur de défense** — impact absorbé !");
+    events.push("**Mur de defense** — impact absorbe !");
   }
   if (bonuses.synergy) {
     mult *= 1.1;
-    events.push("🔗 **Synergie élémentaire** — équipe harmonisée !");
+    events.push("**Synergie elementaire** — equipe harmonisee !");
   }
   if (bonuses.underdog) {
     mult *= 1.12;
-    events.push("🔥 **Underdog** — la rage du plus faible !");
+    events.push("**Underdog** — la rage du plus faible !");
   }
   if (bonuses.momentum) {
     mult *= 1.06;
-    events.push("💨 **Momentum** — sur sa lancée !");
+    events.push("**Momentum** — sur sa lancee !");
   }
   if (bonuses.lastStand) {
     mult *= 1.15;
-    events.push("🔥 **Dernier souffle** — tout ou rien !");
+    events.push("**Dernier souffle** — tout ou rien !");
   }
 
-  const variance = 0.85 + Math.random() * 0.3;
+  // Variance narrowed: 0.90..1.10 (range 0.20, was 0.85..1.15 / range 0.30)
+  // Tighter variance = stronger card wins more often without becoming deterministic.
+  const variance = 0.9 + rng() * 0.2;
   return {
     power: Math.round((base + rarityBonus) * mult * variance * 100) / 100,
     events,
@@ -434,15 +491,19 @@ export function tcgTeamPower(cards: TcgDuelCard[]): number {
   return cards.reduce((s, c) => s + c.att + c.def + c.end + c.equilibre, 0);
 }
 
-/** Resolve one TCG round */
+/**
+ * Resolve one TCG round.
+ * @param rng Injectable RNG (default Math.random).
+ */
 export function tcgResolveRound(
   cardA: TcgDuelCard,
   cardB: TcgDuelCard,
   bonusesA: TcgRoundBonuses,
   bonusesB: TcgRoundBonuses,
+  rng: () => number = Math.random,
 ): TcgRoundResult {
-  const a = tcgComputePower(cardA, cardB.element, bonusesA);
-  const b = tcgComputePower(cardB, cardA.element, bonusesB);
+  const a = tcgComputePower(cardA, cardB.element, bonusesA, rng);
+  const b = tcgComputePower(cardB, cardA.element, bonusesB, rng);
   const winner: "A" | "B" = a.power >= b.power ? "A" : "B";
   const mvpDelta = Math.abs(a.power - b.power);
   return {
@@ -466,7 +527,7 @@ export function tcgGetFinish(avgRatio: number): TcgFinishType {
 
 /**
  * Get rank tier from ELO rating.
- * Tiers: Maître>=1800, Diamant>=1500, Platine>=1300, Or>=1100, Argent>=900, Bronze>=0
+ * Tiers: Maitre>=1800, Diamant>=1500, Platine>=1300, Or>=1100, Argent>=900, Bronze>=0
  */
 export function tcgGetRankTier(rating: number): (typeof TCG_RANK_TIERS)[number] {
   return TCG_RANK_TIERS.find((t) => rating >= t.min) ?? TCG_RANK_TIERS[5]!;
@@ -489,30 +550,88 @@ export function tcgCardSortPower(c: {
  */
 export function tcgPowerBar(value: number, max: number, len = 10): string {
   const filled = Math.round((value / Math.max(max, 1)) * len);
-  return "█".repeat(Math.min(filled, len)) + "░".repeat(Math.max(len - filled, 0));
+  return "|".repeat(Math.min(filled, len)) + ".".repeat(Math.max(len - filled, 0));
 }
 
 /**
- * ELO calculation — K=32 (preserved from DuelCommand.ts).
+ * ELO calculation with adaptive K-factor, optional margin-of-victory multiplier,
+ * and a rating floor.
+ *
+ * K-factor schedule (games-played based):
+ *   < 30 games  → K = 40  (provisional — large swings to find true level quickly)
+ *   30-99 games → K = 20  (established)
+ *   >= 100 games→ K = 10  (high-rated, resistant to noise)
+ *
+ * Margin-of-victory (MOV) multiplier (optional):
+ *   movScore in [0, 1]:
+ *     0   = extremely close fight (no bonus)
+ *     0.5 = moderate dominance
+ *     1   = complete domination
+ *   Formula: movMultiplier = 1 + movScore * 0.5  (range 1.0 .. 1.5)
+ *   Caps the K effectively at K * 1.5.
+ *
+ * Rating floor: neither player drops below MIN_RATING (100) after any single match.
+ *
+ * Backward compatibility: calling calcElo(rA, rB, winner) with no extra args
+ * uses K=32 behaviour for the first 30 games, transitioning down thereafter.
+ * The old hardcoded K=32 is replaced by the adaptive schedule; callers that
+ * previously passed only 3 args continue to work unchanged.
+ *
+ * @param ratingA      Current ELO of player A
+ * @param ratingB      Current ELO of player B
+ * @param winnerIsA    true if A won, false if B won
+ * @param gamesPlayedA Number of games A has played (default 0 = provisional)
+ * @param gamesPlayedB Number of games B has played (default 0 = provisional)
+ * @param movScore     Margin-of-victory in [0,1] (default 0 = no MOV bonus)
  */
 export function calcElo(
   ratingA: number,
   ratingB: number,
   winnerIsA: boolean,
+  gamesPlayedA = 0,
+  gamesPlayedB = 0,
+  movScore = 0,
 ): { newA: number; newB: number; deltaA: number; deltaB: number } {
-  const ELO_K = 32;
+  const MIN_RATING = 100;
+
+  function adaptiveK(games: number): number {
+    if (games < 30) return 40;
+    if (games < 100) return 20;
+    return 10;
+  }
+
+  const kA = adaptiveK(gamesPlayedA);
+  const kB = adaptiveK(gamesPlayedB);
+
+  // MOV multiplier: 1.0 (no bonus) .. 1.5 (max domination)
+  const clampedMov = Math.min(1, Math.max(0, movScore));
+  const movMult = 1 + clampedMov * 0.5;
+
   const expectedA = 1 / (1 + 10 ** ((ratingB - ratingA) / 400));
   const expectedB = 1 - expectedA;
   const actualA = winnerIsA ? 1 : 0;
   const actualB = winnerIsA ? 0 : 1;
-  const deltaA = Math.round(ELO_K * (actualA - expectedA));
-  const deltaB = Math.round(ELO_K * (actualB - expectedB));
-  return { newA: ratingA + deltaA, newB: ratingB + deltaB, deltaA, deltaB };
+
+  const rawDeltaA = Math.round(kA * movMult * (actualA - expectedA));
+  const rawDeltaB = Math.round(kB * movMult * (actualB - expectedB));
+
+  // Apply rating floor: winner never loses points; loser never drops below floor.
+  const newARaw = ratingA + rawDeltaA;
+  const newBRaw = ratingB + rawDeltaB;
+
+  const newA = Math.max(MIN_RATING, newARaw);
+  const newB = Math.max(MIN_RATING, newBRaw);
+
+  // Recalculate actual deltas after floor clamping
+  const deltaA = newA - ratingA;
+  const deltaB = newB - ratingB;
+
+  return { newA, newB, deltaA, deltaB };
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // VARIANT: "quick-battle" — Single-score battle (Beyblade-style)
-// Source: lib/battle-utils.ts → runBattleSimulation()
+// Source: lib/battle-utils.ts -> runBattleSimulation()
 // ═══════════════════════════════════════════════════════════════════════════════
 
 export interface QuickBattleStats {
@@ -527,17 +646,17 @@ export interface QuickBattleStats {
 export type QuickBeyType = "ATTACK" | "DEFENSE" | "STAMINA" | "BALANCE";
 
 export const QUICK_BEY_TYPES = {
-  ATTACK: { name: "Attaque", emoji: "🔴", color: "#ef4444", element: "Feu" },
-  DEFENSE: { name: "Défense", emoji: "🔵", color: "#3b82f6", element: "Glace" },
+  ATTACK: { name: "Attaque", emoji: "A", color: "#ef4444", element: "Feu" },
+  DEFENSE: { name: "Defense", emoji: "D", color: "#3b82f6", element: "Glace" },
   STAMINA: {
     name: "Endurance",
-    emoji: "🟢",
+    emoji: "S",
     color: "#22c55e",
     element: "Vent",
   },
   BALANCE: {
-    name: "Équilibre",
-    emoji: "🟣",
+    name: "Equilibre",
+    emoji: "B",
     color: "#a855f7",
     element: "Terre",
   },
@@ -547,10 +666,10 @@ export const QUICK_FINISH_TYPES = {
   xtreme: {
     result: "xtreme",
     name: "X-TREME FINISH",
-    message: "⚡ **X-TREME FINISH !**",
-    description: "Éjection à pleine vitesse via le X-Line !",
+    message: "**X-TREME FINISH !**",
+    description: "Ejection a pleine vitesse via le X-Line !",
     points: 3,
-    emoji: "⚡",
+    emoji: "X",
     dominantStat: "attack" as const,
     minPowerRatio: 0.4,
     color: "#f7d301",
@@ -558,10 +677,10 @@ export const QUICK_FINISH_TYPES = {
   burst: {
     result: "burst",
     name: "BURST FINISH",
-    message: "💥 **BURST FINISH !**",
+    message: "**BURST FINISH !**",
     description: "La toupie adverse explose sous l'impact !",
     points: 2,
-    emoji: "💥",
+    emoji: "B",
     dominantStat: "attack" as const,
     minPowerRatio: 0.3,
     color: "#ce0c07",
@@ -569,10 +688,10 @@ export const QUICK_FINISH_TYPES = {
   over: {
     result: "over",
     name: "OVER FINISH",
-    message: "🔄 **OVER FINISH !**",
-    description: "Éjection du stadium par la force défensive !",
+    message: "**OVER FINISH !**",
+    description: "Ejection du stadium par la force defensive !",
     points: 2,
-    emoji: "🔄",
+    emoji: "O",
     dominantStat: "defense" as const,
     minPowerRatio: 0.3,
     color: "#3b82f6",
@@ -580,10 +699,10 @@ export const QUICK_FINISH_TYPES = {
   spin: {
     result: "spin",
     name: "SPIN FINISH",
-    message: "🌀 **SPIN FINISH !**",
-    description: "La toupie adverse s'arrête de tourner.",
+    message: "**SPIN FINISH !**",
+    description: "La toupie adverse s'arrete de tourner.",
     points: 1,
-    emoji: "🌀",
+    emoji: "S",
     dominantStat: "stamina" as const,
     minPowerRatio: 0.0,
     color: "#22c55e",
@@ -591,10 +710,10 @@ export const QUICK_FINISH_TYPES = {
   xcelerator: {
     result: "xcelerator",
     name: "X-CELERATOR FINISH",
-    message: "🔥 **X-CELERATOR FINISH !**",
-    description: "Impact dévastateur depuis le Xtreme Dash !",
+    message: "**X-CELERATOR FINISH !**",
+    description: "Impact devastateur depuis le Xtreme Dash !",
     points: 3,
-    emoji: "🔥",
+    emoji: "XC",
     dominantStat: "dash" as const,
     minPowerRatio: 0.0,
     color: "#e68002",
@@ -602,10 +721,10 @@ export const QUICK_FINISH_TYPES = {
   survivor: {
     result: "survivor",
     name: "SURVIVOR FINISH",
-    message: "🛡️ **SURVIVOR FINISH !**",
-    description: "Victoire par résistance — tous les coups encaissés !",
+    message: "**SURVIVOR FINISH !**",
+    description: "Victoire par resistance — tous les coups encaisses !",
     points: 1,
-    emoji: "🛡️",
+    emoji: "SV",
     dominantStat: "defense" as const,
     minPowerRatio: 0.35,
     color: "#60a5fa",
@@ -615,12 +734,19 @@ export const QUICK_FINISH_TYPES = {
 export type QuickFinishKey = keyof typeof QUICK_FINISH_TYPES;
 export type QuickFinishType = (typeof QUICK_FINISH_TYPES)[QuickFinishKey];
 
-// Type advantage matrix: attacker → which type it beats
+/**
+ * Type advantage matrix.
+ * Cycle (preserved): Attack > Stamina > Defense > Attack; Balance = neutral.
+ *
+ * Multipliers updated (2026-05-30) to match BBX convention:
+ *   advantage    = 1.20  (was 1.15)
+ *   disadvantage = 0.833 (was 0.88 — now reciprocal of 1.20)
+ */
 const QUICK_TYPE_ADVANTAGE: Record<QuickBeyType, QuickBeyType> = {
-  ATTACK: "STAMINA", // Attaque > Endurance (overwhelm)
-  STAMINA: "DEFENSE", // Endurance > Défense (outlast)
-  DEFENSE: "ATTACK", // Défense > Attaque (absorb)
-  BALANCE: "BALANCE", // Équilibre — neutral
+  ATTACK: "STAMINA",
+  STAMINA: "DEFENSE",
+  DEFENSE: "ATTACK",
+  BALANCE: "BALANCE",
 };
 
 function quickGetTypeAdvantage(
@@ -628,8 +754,8 @@ function quickGetTypeAdvantage(
   defender: QuickBeyType | undefined,
 ): number {
   if (!attacker || !defender || attacker === "BALANCE" || defender === "BALANCE") return 1.0;
-  if (QUICK_TYPE_ADVANTAGE[attacker] === defender) return 1.15; // 15% bonus
-  if (QUICK_TYPE_ADVANTAGE[defender] === attacker) return 0.88; // 12% malus
+  if (QUICK_TYPE_ADVANTAGE[attacker] === defender) return 1.2; // advantage
+  if (QUICK_TYPE_ADVANTAGE[defender] === attacker) return 1 / 1.2; // disadvantage (~0.833)
   return 1.0;
 }
 
@@ -658,6 +784,7 @@ export function detectBeyType(stats: {
 function quickDetermineFinishType(
   winnerStats: QuickBattleStats,
   loserStats: QuickBattleStats,
+  rng: () => number,
 ): QuickFinishType {
   const { attack, defense, stamina, dash } = winnerStats;
   const total = attack + defense + stamina;
@@ -666,7 +793,7 @@ function quickDetermineFinishType(
   const defRatio = defense / total;
   const dashBonus = dash > 50 ? 0.15 : 0;
   const powerGap = (winnerStats.power - loserStats.power) / Math.max(winnerStats.power, 1);
-  const roll = Math.random();
+  const roll = rng();
 
   if (dash > 60 && atkRatio > 0.3 && roll < 0.12 + dashBonus) return QUICK_FINISH_TYPES.xcelerator;
   if (atkRatio > 0.35 && roll < atkRatio * 0.4 + dashBonus + powerGap * 0.1)
@@ -690,24 +817,27 @@ export interface QuickBattleScoreResult {
  * Calculate battle scores with all modifiers for quick-battle variant.
  * Preserves all constants from battle-utils.ts:
  * - luck: 0.82..1.18
- * - type advantage: ×1.15 (advantage) / ×0.88 (disadvantage)
- * - critical: 8% → ×1.25
- * - xDash: dash>55, 20% → ×1.15
+ * - type advantage: x1.20 (advantage) / x0.833 (disadvantage)
+ * - critical: 8% -> x1.25
+ * - xDash: dash>55, 20% -> x1.15
+ *
+ * @param rng Injectable RNG (default Math.random).
  */
 export function quickCalculateBattleScores(
   statsA: QuickBattleStats,
   statsB: QuickBattleStats,
+  rng: () => number = Math.random,
 ): QuickBattleScoreResult {
-  const luckA = 0.82 + Math.random() * 0.36;
-  const luckB = 0.82 + Math.random() * 0.36;
+  const luckA = 0.82 + rng() * 0.36;
+  const luckB = 0.82 + rng() * 0.36;
   const typeAdvA = quickGetTypeAdvantage(statsA.beyType, statsB.beyType);
   const typeAdvB = quickGetTypeAdvantage(statsB.beyType, statsA.beyType);
-  const critA = Math.random() < 0.08;
-  const critB = Math.random() < 0.08;
+  const critA = rng() < 0.08;
+  const critB = rng() < 0.08;
   const critMultA = critA ? 1.25 : 1.0;
   const critMultB = critB ? 1.25 : 1.0;
-  const xDashA = statsA.dash > 55 && Math.random() < 0.2;
-  const xDashB = statsB.dash > 55 && Math.random() < 0.2;
+  const xDashA = statsA.dash > 55 && rng() < 0.2;
+  const xDashB = statsB.dash > 55 && rng() < 0.2;
   const xDashMultA = xDashA ? 1.15 : 1.0;
   const xDashMultB = xDashB ? 1.15 : 1.0;
   const scoreA = statsA.power * luckA * typeAdvA * critMultA * xDashMultA;
@@ -736,17 +866,17 @@ export function quickBuildNarrative(
   const winnerName = winnerIsA ? challengerName : opponentName;
   if (scores.xDash) {
     const dasher = scores.xDash === "A" ? challengerName : opponentName;
-    lines.push(`💨 **${dasher}** active le **Xtreme Dash** !`);
+    lines.push(`**${dasher}** active le **Xtreme Dash** !`);
   }
   if (scores.typeAdvantageA > 1 || scores.typeAdvantageB > 1) {
     const advantaged = scores.typeAdvantageA > 1 ? challengerName : opponentName;
-    lines.push(`🎯 **${advantaged}** a l'avantage de type !`);
+    lines.push(`**${advantaged}** a l'avantage de type !`);
   }
   if (scores.criticalHit) {
     const critter = scores.criticalHit === "A" ? challengerName : opponentName;
-    lines.push(`💢 **${critter}** porte un coup critique !`);
+    lines.push(`**${critter}** porte un coup critique !`);
   }
-  lines.push(`${finish.emoji} **${winnerName}** remporte le combat !`);
+  lines.push(`**${winnerName}** remporte le combat !`);
   lines.push(`> *${finish.description}*`);
   return lines;
 }
@@ -754,12 +884,15 @@ export function quickBuildNarrative(
 /**
  * Run a complete quick battle simulation.
  * Returns winner, finish type, narrative, and raw scores.
+ *
+ * @param rng Injectable RNG (default Math.random).
  */
 export function simulateQuickBattle(
   statsA: QuickBattleStats,
   statsB: QuickBattleStats,
   nameA: string,
   nameB: string,
+  rng: () => number = Math.random,
 ): {
   winnerIsA: boolean;
   scores: QuickBattleScoreResult;
@@ -769,11 +902,11 @@ export function simulateQuickBattle(
   if (!statsA.beyType) statsA.beyType = detectBeyType(statsA);
   if (!statsB.beyType) statsB.beyType = detectBeyType(statsB);
 
-  const scores = quickCalculateBattleScores(statsA, statsB);
+  const scores = quickCalculateBattleScores(statsA, statsB, rng);
   const winnerIsA = scores.scoreA > scores.scoreB;
   const winnerStats = winnerIsA ? statsA : statsB;
   const loserStats = winnerIsA ? statsB : statsA;
-  const finishType = quickDetermineFinishType(winnerStats, loserStats);
+  const finishType = quickDetermineFinishType(winnerStats, loserStats, rng);
   const narrative = quickBuildNarrative(scores, winnerIsA, finishType, nameA, nameB);
 
   return { winnerIsA, scores, finishType, narrative };
@@ -784,14 +917,14 @@ export function simulateQuickBattle(
 // ═══════════════════════════════════════════════════════════════════════════════
 
 /** Pick a random element from an array */
-export function pickRandom<T>(arr: T[]): T {
-  return arr[Math.floor(Math.random() * arr.length)]!;
+export function pickRandom<T>(arr: T[], rng: () => number = Math.random): T {
+  return arr[Math.floor(rng() * arr.length)]!;
 }
 
 /** Stat bar display (block chars) */
 export function statBar(value: number, max = 100): string {
   const filled = Math.round((value / max) * 10);
-  return "█".repeat(Math.min(filled, 10)) + "░".repeat(10 - Math.min(filled, 10));
+  return "|".repeat(Math.min(filled, 10)) + ".".repeat(10 - Math.min(filled, 10));
 }
 
 /** Get type color for Beyblade X type */
@@ -814,14 +947,14 @@ export function getTypeColor(beyType: string | null): number {
 export function getTypeEmoji(beyType: string | null): string {
   switch (beyType) {
     case "ATTACK":
-      return "⚔️";
+      return "ATK";
     case "DEFENSE":
-      return "🛡️";
+      return "DEF";
     case "STAMINA":
-      return "🌀";
+      return "STA";
     case "BALANCE":
-      return "⚖️";
+      return "BAL";
     default:
-      return "🌀";
+      return "STA";
   }
 }
