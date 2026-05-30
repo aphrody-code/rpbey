@@ -178,6 +178,22 @@ function deriveSummary(wt: string): string {
 
 // ── Classification (catégories + infobox) ────────────────────────────────────
 
+/**
+ * Sous-pages NON entités à écarter (elles héritent les catégories de la page
+ * parente → faux positifs de classification, ex. « Aiger Akabane/Gallery » classé
+ * personnage). Couvre : galeries/médias/sous-articles + sous-pages de TRADUCTION
+ * (codes langue ISO, ex. `/it`, `/fr`, `/tr`) qui dupliquent l'article anglais.
+ */
+const SUBPAGE_SUBARTICLE =
+  /\/(?:gallery|image\s*gallery|galleries|images?|videos?|quotes?|appearances?|relationships?|merchandise|history|trivia|sandbox|references?|\d{4}\s*archive)$/i;
+const SUBPAGE_LANG =
+  /\/(?:it|fr|tr|es|de|pt|pt-br|ru|pl|ja|zh|zh-tw|ko|nl|ar|id|vi|th|uk|cs|ro|hu|sv|fi|da|no|nb|he|fa|el|hi|ms|tl|ca|sr|hr|bg|sk|sl|lt|lv|et)$/i;
+
+/** Titre de sous-page à ne pas indexer (galerie / média / traduction). */
+function isJunkTitle(title: string): boolean {
+  return SUBPAGE_SUBARTICLE.test(title) || SUBPAGE_LANG.test(title);
+}
+
 function classifyGeneration(cats: string[]): WikiEntity["generation"] {
   const c = cats.join(" | ").toLowerCase();
   if (/beyblade x\b|beyblade-x|\bx beyblades|x system/.test(c)) return "X";
@@ -205,7 +221,14 @@ function classifyType(cats: string[], tplName: string): WikiEntity["type"] {
     !/\bbeyblades\b/.test(c)
   )
     return "part";
-  if (/\bcharacters?\b|\bantagonists?\b|protagonists?|bladers\b/.test(c) || t.includes("character"))
+  // Personnage : signal catégorie fiable (les infobox perso Fandom sont minimales :
+  // color/quote/speaker). On EXCLUT les pages galerie qui héritent « Character Gallery »
+  // / « Image Galleries » de la page parente (sinon ~120 galeries passent personnage).
+  if (
+    (/\bcharacters?\b|\bantagonists?\b|\bprotagonists?\b|\bbladers?\b/.test(c) ||
+      t.includes("character")) &&
+    !/\bgalleries\b|\bgallery\b/.test(c)
+  )
     return "character";
   if (/\bepisodes?\b/.test(c) || t.includes("episode")) return "episode";
   if (/\b(anime|seasons?|series|manga)\b/.test(c) && !/beyblades\b/.test(c)) return "anime";
@@ -278,10 +301,11 @@ async function enumeratePageIds(state: CrawlState): Promise<void> {
     if (cont) params.apcontinue = cont;
     const j = await api(params);
     for (const p of j?.query?.allpages ?? []) {
-      if (!seen.has(p.pageid)) {
-        seen.add(p.pageid);
-        state.pageids.push(p.pageid);
-      }
+      if (seen.has(p.pageid)) continue;
+      seen.add(p.pageid);
+      // Sous-pages galerie/média/traduction : ni fetchées ni indexées (bruit + doublons).
+      if (isJunkTitle(p.title ?? "")) continue;
+      state.pageids.push(p.pageid);
     }
     cont = j?.continue?.apcontinue;
     state.apcontinue = cont ?? null;
@@ -299,6 +323,8 @@ async function enumeratePageIds(state: CrawlState): Promise<void> {
 function buildEntity(p: any): WikiEntity | null {
   const title = (p.title ?? "").trim();
   if (!title) return null;
+  // Sous-page galerie/média/traduction (défensif : checkpoint d'avant le filtre d'énum).
+  if (isJunkTitle(title)) return null;
   const cats = (p.categories ?? []).map((c: any) => String(c.title).replace(/^Category:/, ""));
   // Ignore les pages de maintenance / désambiguïsation pures.
   const catL = cats.join(" | ").toLowerCase();
@@ -307,7 +333,10 @@ function buildEntity(p: any): WikiEntity | null {
   const wt = p?.revisions?.[0]?.slots?.main?.["*"] ?? p?.revisions?.[0]?.["*"] ?? "";
   const tpl = firstTemplate(wt);
   const info = tpl ? parseInfobox(tpl.body) : {};
-  const type = classifyType(cats, tpl?.name ?? "");
+  // Les pages « List of … » sont des index de référence, pas une entité unique :
+  // on les reclasse en `lore` pour ne pas polluer les facettes bey/personnage/pièce
+  // (ex. « List of … Characters » ne doit pas compter comme un personnage).
+  const type = /^list of /i.test(title) ? "lore" : classifyType(cats, tpl?.name ?? "");
   return WikiEntitySchema.parse({
     id: p.pageid,
     title,

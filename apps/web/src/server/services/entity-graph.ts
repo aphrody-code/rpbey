@@ -326,33 +326,66 @@ export async function getGenerationShowcase(
   };
 }
 
+/** Plancher de similarité dense (VSIM ∈ [0,1]) : sous ce seuil = bruit, pas un « lien ». */
+const RELATED_SIM_FLOOR = 0.35;
+
+function toRelated(g: BxProductGroup, similarity: number): RelatedProduct {
+  return {
+    slug: groupSlug(g),
+    name: g.name,
+    code: g.code,
+    cheapestEur: g.cheapestEur,
+    imageUrl: g.cheapest?.image ?? null,
+    similarity,
+  };
+}
+
 /**
- * Produits sémantiquement proches via les voisins du vecteur dense de ce groupe
- * (`group-<key>`), résolus en groupes catalogue (mêmes id) et dédupliqués.
+ * Produits proches pour le pointeur « analyse en profondeur » de la fiche.
+ *
+ * 1. **Voisins denses** (sémantique) — précis quand l'index vectoriel est frais ;
+ *    on élague sous `RELATED_SIM_FLOOR` (bruit) et on ignore les voisins obsolètes
+ *    (catalogue/vecteurs désynchronisés : `group-…` qui ne résout plus).
+ * 2. **Fallback déterministe même-blade** — si le dense rend trop peu de liens
+ *    (Redis absent, index périmé, produit récemment scrapé), on complète avec les
+ *    AUTRES produits de la même blade (variantes/couleurs/éditions), classés par prix.
+ *    Garantit un bloc jamais vide quand des liens existent, sans dépendre de Redis.
  */
 export async function getRelatedProducts(
   group: BxProductGroup,
   limit = 6,
 ): Promise<RelatedProduct[]> {
-  const neighbors = await vectorNeighborsById(`group-${group.key}`, limit * 3);
-  if (neighbors.length === 0) return [];
   const byId = await groupsById();
   const out: RelatedProduct[] = [];
+  const seen = new Set<string>([group.key]);
+
+  // 1. Voisins denses (sémantique).
+  const neighbors = await vectorNeighborsById(`group-${group.key}`, limit * 4);
   for (const n of neighbors) {
-    if (!n.id.startsWith("group-")) continue; // on ne lie que des produits
-    const key = n.id.slice("group-".length);
-    if (key === group.key) continue;
-    const g = byId.get(key);
-    if (!g) continue;
-    out.push({
-      slug: groupSlug(g),
-      name: g.name,
-      code: g.code,
-      cheapestEur: g.cheapestEur,
-      imageUrl: g.cheapest?.image ?? null,
-      similarity: n.sim,
-    });
     if (out.length >= limit) break;
+    if (!n.id.startsWith("group-")) continue; // on ne lie que des produits
+    if (n.sim < RELATED_SIM_FLOOR) continue; // élague le bruit dense
+    const key = n.id.slice("group-".length);
+    if (seen.has(key)) continue;
+    const g = byId.get(key);
+    if (!g) continue; // voisin obsolète (désync catalogue/vecteurs) → ignoré
+    seen.add(key);
+    out.push(toRelated(g, n.sim));
+  }
+  if (out.length >= limit) return out;
+
+  // 2. Fallback déterministe : autres produits de la même blade détectée.
+  const detected = await detectBlade(group);
+  if (detected) {
+    const fam = detected.key;
+    const sameBlade = [...byId.values()]
+      .filter((g) => !seen.has(g.key) && canonicalKey(g.name).includes(fam))
+      .sort((a, b) => (a.cheapestEur ?? Infinity) - (b.cheapestEur ?? Infinity));
+    for (const g of sameBlade) {
+      if (out.length >= limit) break;
+      seen.add(g.key);
+      out.push(toRelated(g, 0)); // 0 = lien structurel (même blade), pas dense
+    }
   }
   return out;
 }

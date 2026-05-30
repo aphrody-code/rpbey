@@ -451,15 +451,24 @@ export function fuseHybrid(
   const k = opts.rrfK ?? 60;
   const lw = opts.lexWeight ?? 1.0;
   const vw = opts.vecWeight ?? 0.9;
+  const cat = opts.category && opts.category !== "all" ? opts.category : null;
   const idToItem = new Map(items.map((it) => [it.id, it]));
-  const acc = new Map<string, { item: GlobalSearchItem; rrf: number; lex: number }>();
 
-  lexRanked.forEach((it, rank) => {
+  // Filtre de catégorie appliqué AVANT le calcul des rangs RRF, sur les DEUX listes :
+  // sinon les rangs sont globaux (toutes catégories) et le filtre post-fusion fausse la
+  // fusion — un voisin dense in-catégorie au rang global 80 (RRF ≈ vw/140, négligeable)
+  // alors qu'il est #2 de SA catégorie. En reclassant within-category, le signal dense
+  // est restitué à sa juste place et le compteur d'onglet reflète des rangs cohérents.
+  const lex = cat ? lexRanked.filter((it) => it.category === cat) : lexRanked;
+  const vec = cat ? vecRanked.filter((v) => idToItem.get(v.id)?.category === cat) : vecRanked;
+
+  const acc = new Map<string, { item: GlobalSearchItem; rrf: number; lex: number }>();
+  lex.forEach((it, rank) => {
     const cur = acc.get(it.id) ?? { item: it, rrf: 0, lex: it.score };
     cur.rrf += lw / (k + rank + 1);
     acc.set(it.id, cur);
   });
-  vecRanked.forEach((v, rank) => {
+  vec.forEach((v, rank) => {
     const item = idToItem.get(v.id);
     if (!item) return;
     const cur = acc.get(v.id) ?? { item, rrf: 0, lex: 0 };
@@ -467,9 +476,7 @@ export function fuseHybrid(
     acc.set(v.id, cur);
   });
 
-  const cat = opts.category && opts.category !== "all" ? opts.category : null;
-  let fused = [...acc.values()];
-  if (cat) fused = fused.filter((e) => e.item.category === cat);
+  const fused = [...acc.values()];
   fused.sort((a, b) => b.rrf - a.rrf || b.lex - a.lex || a.item.title.localeCompare(b.item.title));
   const sliced = typeof opts.limit === "number" ? fused.slice(0, opts.limit) : fused;
   return sliced.map((e) => ({ ...e.item, score: e.rrf }));
