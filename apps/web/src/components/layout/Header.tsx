@@ -25,6 +25,8 @@ const pages = [
   { label: "Tableau de bord", href: "/dashboard" },
   { label: "Tournois", href: "/tournaments" },
   { label: "Classements", href: "/rankings" },
+  { label: "Équipes", href: "/equipes" },
+  { label: "Sondages", href: "/sondages" },
 ];
 
 export function Header() {

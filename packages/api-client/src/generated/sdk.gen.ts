@@ -4,8 +4,8 @@ import * as z from 'zod';
 
 import type { Client, Options as Options2, TDataShape } from './client';
 import { client } from './client.gen';
-import type { BotCommandsData, BotCommandsErrors, BotCommandsResponses, BotLogsData, BotLogsErrors, BotLogsResponses, BotStatusData, BotStatusErrors, BotStatusResponses, GachaCardsData, GachaCardsErrors, GachaCardsResponses, GachaDropsData, GachaDropsErrors, GachaDropsResponses, GachaLeaderboardData, GachaLeaderboardErrors, GachaLeaderboardResponses, GetAnimeSeriesData, GetAnimeSeriesErrors, GetAnimeSeriesResponses, GetMetaData, GetMetaErrors, GetMetaResponses, GetPublicUserData, GetPublicUserErrors, GetPublicUserResponses, GetRankingsData, GetRankingsErrors, GetRankingsResponses, GetRecommendationsData, GetRecommendationsErrors, GetRecommendationsResponses, GetSharedDeckData, GetSharedDeckErrors, GetSharedDeckResponses, GetTournamentData, GetTournamentErrors, GetTournamentResponses, GetUserMatchesData, GetUserMatchesErrors, GetUserMatchesResponses, GlobalSearchData, GlobalSearchErrors, GlobalSearchResponses, ListAnimeFramesData, ListAnimeFramesErrors, ListAnimeFramesResponses, ListAnimeSeriesByGenerationData, ListAnimeSeriesByGenerationErrors, ListAnimeSeriesByGenerationResponses, ListAnimeSeriesData, ListAnimeSeriesErrors, ListAnimeSeriesResponses, ListContentBlocksData, ListContentBlocksErrors, ListContentBlocksResponses, ListPartsData, ListPartsErrors, ListPartsResponses, ListStaffMembersData, ListStaffMembersErrors, ListStaffMembersResponses, ListStreamVideosData, ListStreamVideosErrors, ListStreamVideosResponses, ListTournamentsData, ListTournamentsErrors, ListTournamentsResponses, ModerationSummaryData, ModerationSummaryErrors, ModerationSummaryResponses, ModerationWarningCountData, ModerationWarningCountErrors, ModerationWarningCountResponses, SearchAnimeData, SearchAnimeErrors, SearchAnimeResponses, TrackAnalyticsEventData, TrackAnalyticsEventErrors, TrackAnalyticsEventResponses } from './types.gen';
-import { zBotCommandsResponse, zBotLogsQuery, zBotLogsResponse, zBotStatusResponse, zGachaCardsQuery, zGachaCardsResponse, zGachaDropsResponse, zGachaLeaderboardQuery, zGachaLeaderboardResponse, zGetAnimeSeriesPath, zGetAnimeSeriesResponse, zGetMetaResponse, zGetPublicUserPath, zGetPublicUserResponse, zGetRankingsQuery, zGetRankingsResponse, zGetRecommendationsQuery, zGetRecommendationsResponse, zGetSharedDeckQuery, zGetSharedDeckResponse, zGetTournamentPath, zGetTournamentResponse, zGetUserMatchesPath, zGetUserMatchesQuery, zGetUserMatchesResponse, zGlobalSearchQuery, zGlobalSearchResponse, zListAnimeFramesQuery, zListAnimeFramesResponse, zListAnimeSeriesByGenerationResponse, zListAnimeSeriesQuery, zListAnimeSeriesResponse, zListContentBlocksQuery, zListContentBlocksResponse, zListPartsQuery, zListPartsResponse, zListStaffMembersResponse, zListStreamVideosQuery, zListStreamVideosResponse, zListTournamentsQuery, zListTournamentsResponse, zModerationSummaryResponse, zModerationWarningCountQuery, zModerationWarningCountResponse, zSearchAnimeQuery, zSearchAnimeResponse, zTrackAnalyticsEventBody, zTrackAnalyticsEventResponse } from './zod.gen';
+import type { BotCommandsData, BotCommandsErrors, BotCommandsResponses, BotLogsData, BotLogsErrors, BotLogsResponses, BotStatusData, BotStatusErrors, BotStatusResponses, GachaCardsData, GachaCardsErrors, GachaCardsResponses, GachaDropsData, GachaDropsErrors, GachaDropsResponses, GachaLeaderboardData, GachaLeaderboardErrors, GachaLeaderboardResponses, GetAnimeSeriesData, GetAnimeSeriesErrors, GetAnimeSeriesResponses, GetMetaData, GetMetaErrors, GetMetaResponses, GetPollData, GetPollErrors, GetPollResponses, GetPublicUserData, GetPublicUserErrors, GetPublicUserResponses, GetRankingsData, GetRankingsErrors, GetRankingsResponses, GetRecommendationsData, GetRecommendationsErrors, GetRecommendationsResponses, GetSharedDeckData, GetSharedDeckErrors, GetSharedDeckResponses, GetTeamData, GetTeamErrors, GetTeamMembersData, GetTeamMembersErrors, GetTeamMembersResponses, GetTeamResponses, GetTierListData, GetTierListErrors, GetTierListResponses, GetTournamentData, GetTournamentErrors, GetTournamentResponses, GetUserMatchesData, GetUserMatchesErrors, GetUserMatchesResponses, GlobalSearchData, GlobalSearchErrors, GlobalSearchResponses, ListAnimeFramesData, ListAnimeFramesErrors, ListAnimeFramesResponses, ListAnimeSeriesByGenerationData, ListAnimeSeriesByGenerationErrors, ListAnimeSeriesByGenerationResponses, ListAnimeSeriesData, ListAnimeSeriesErrors, ListAnimeSeriesResponses, ListAwardsEditionsData, ListAwardsEditionsErrors, ListAwardsEditionsResponses, ListContentBlocksData, ListContentBlocksErrors, ListContentBlocksResponses, ListPartsData, ListPartsErrors, ListPartsResponses, ListPollsData, ListPollsErrors, ListPollsResponses, ListStaffMembersData, ListStaffMembersErrors, ListStaffMembersResponses, ListStreamVideosData, ListStreamVideosErrors, ListStreamVideosResponses, ListTeamsData, ListTeamsErrors, ListTeamsResponses, ListTierListsData, ListTierListsErrors, ListTierListsResponses, ListTournamentsData, ListTournamentsErrors, ListTournamentsResponses, ModerationSummaryData, ModerationSummaryErrors, ModerationSummaryResponses, ModerationWarningCountData, ModerationWarningCountErrors, ModerationWarningCountResponses, SearchAnimeData, SearchAnimeErrors, SearchAnimeResponses, TeamsLeaderboardData, TeamsLeaderboardErrors, TeamsLeaderboardResponses, TrackAnalyticsEventData, TrackAnalyticsEventErrors, TrackAnalyticsEventResponses } from './types.gen';
+import { zBotCommandsResponse, zBotLogsQuery, zBotLogsResponse, zBotStatusResponse, zGachaCardsQuery, zGachaCardsResponse, zGachaDropsResponse, zGachaLeaderboardQuery, zGachaLeaderboardResponse, zGetAnimeSeriesPath, zGetAnimeSeriesResponse, zGetMetaResponse, zGetPollPath, zGetPollResponse, zGetPublicUserPath, zGetPublicUserResponse, zGetRankingsQuery, zGetRankingsResponse, zGetRecommendationsQuery, zGetRecommendationsResponse, zGetSharedDeckQuery, zGetSharedDeckResponse, zGetTeamMembersPath, zGetTeamMembersResponse, zGetTeamPath, zGetTeamResponse, zGetTierListPath, zGetTierListResponse, zGetTournamentPath, zGetTournamentResponse, zGetUserMatchesPath, zGetUserMatchesQuery, zGetUserMatchesResponse, zGlobalSearchQuery, zGlobalSearchResponse, zListAnimeFramesQuery, zListAnimeFramesResponse, zListAnimeSeriesByGenerationResponse, zListAnimeSeriesQuery, zListAnimeSeriesResponse, zListAwardsEditionsResponse, zListContentBlocksQuery, zListContentBlocksResponse, zListPartsQuery, zListPartsResponse, zListPollsQuery, zListPollsResponse, zListStaffMembersResponse, zListStreamVideosQuery, zListStreamVideosResponse, zListTeamsQuery, zListTeamsResponse, zListTierListsQuery, zListTierListsResponse, zListTournamentsQuery, zListTournamentsResponse, zModerationSummaryResponse, zModerationWarningCountQuery, zModerationWarningCountResponse, zSearchAnimeQuery, zSearchAnimeResponse, zTeamsLeaderboardQuery, zTeamsLeaderboardResponse, zTrackAnalyticsEventBody, zTrackAnalyticsEventResponse } from './zod.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean, TResponse = unknown> = Options2<TData, ThrowOnError, TResponse> & {
     /**
@@ -400,5 +400,131 @@ export const moderationWarningCount = <ThrowOnError extends boolean = false>(opt
     }).parseAsync(data),
     responseValidator: async (data) => await zModerationWarningCountResponse.parseAsync(data),
     url: '/api/v1/moderation/warnings/count',
+    ...options
+});
+
+/**
+ * Annuaire public des équipes communautaires (clans) — recherche, filtre région/recrutement, tri (points/membres/récent/victoires), paginé.
+ */
+export const listTeams = <ThrowOnError extends boolean = false>(options?: Options<ListTeamsData, ThrowOnError>) => (options?.client ?? client).get<ListTeamsResponses, ListTeamsErrors, ThrowOnError>({
+    requestValidator: async (data) => await z.object({
+        body: z.never().optional(),
+        path: z.never().optional(),
+        query: zListTeamsQuery.optional()
+    }).parseAsync(data),
+    responseValidator: async (data) => await zListTeamsResponse.parseAsync(data),
+    url: '/api/v1/teams',
+    ...options
+});
+
+/**
+ * Classement des équipes par points cumulés (membres agrégés).
+ */
+export const teamsLeaderboard = <ThrowOnError extends boolean = false>(options?: Options<TeamsLeaderboardData, ThrowOnError>) => (options?.client ?? client).get<TeamsLeaderboardResponses, TeamsLeaderboardErrors, ThrowOnError>({
+    requestValidator: async (data) => await z.object({
+        body: z.never().optional(),
+        path: z.never().optional(),
+        query: zTeamsLeaderboardQuery.optional()
+    }).parseAsync(data),
+    responseValidator: async (data) => await zTeamsLeaderboardResponse.parseAsync(data),
+    url: '/api/v1/teams/leaderboard',
+    ...options
+});
+
+/**
+ * Détail public d'une équipe par slug (profil + membres + stats agrégées).
+ */
+export const getTeam = <ThrowOnError extends boolean = false>(options: Options<GetTeamData, ThrowOnError>) => (options.client ?? client).get<GetTeamResponses, GetTeamErrors, ThrowOnError>({
+    requestValidator: async (data) => await z.object({
+        body: z.never().optional(),
+        path: zGetTeamPath,
+        query: z.never().optional()
+    }).parseAsync(data),
+    responseValidator: async (data) => await zGetTeamResponse.parseAsync(data),
+    url: '/api/v1/teams/{slug}',
+    ...options
+});
+
+/**
+ * Roster d'une équipe (membres + rôles + stats compétitives).
+ */
+export const getTeamMembers = <ThrowOnError extends boolean = false>(options: Options<GetTeamMembersData, ThrowOnError>) => (options.client ?? client).get<GetTeamMembersResponses, GetTeamMembersErrors, ThrowOnError>({
+    requestValidator: async (data) => await z.object({
+        body: z.never().optional(),
+        path: zGetTeamMembersPath,
+        query: z.never().optional()
+    }).parseAsync(data),
+    responseValidator: async (data) => await zGetTeamMembersResponse.parseAsync(data),
+    url: '/api/v1/teams/{slug}/members',
+    ...options
+});
+
+/**
+ * Sondages communautaires publics (filtres catégorie/saison/featured, paginé).
+ */
+export const listPolls = <ThrowOnError extends boolean = false>(options?: Options<ListPollsData, ThrowOnError>) => (options?.client ?? client).get<ListPollsResponses, ListPollsErrors, ThrowOnError>({
+    requestValidator: async (data) => await z.object({
+        body: z.never().optional(),
+        path: z.never().optional(),
+        query: zListPollsQuery.optional()
+    }).parseAsync(data),
+    responseValidator: async (data) => await zListPollsResponse.parseAsync(data),
+    url: '/api/v1/polls',
+    ...options
+});
+
+/**
+ * Détail d'un sondage par slug (options + résultats agrégés + votes du visiteur).
+ */
+export const getPoll = <ThrowOnError extends boolean = false>(options: Options<GetPollData, ThrowOnError>) => (options.client ?? client).get<GetPollResponses, GetPollErrors, ThrowOnError>({
+    requestValidator: async (data) => await z.object({
+        body: z.never().optional(),
+        path: zGetPollPath,
+        query: z.never().optional()
+    }).parseAsync(data),
+    responseValidator: async (data) => await zGetPollResponse.parseAsync(data),
+    url: '/api/v1/polls/{slug}',
+    ...options
+});
+
+/**
+ * Tier lists communautaires publiques (filtres type/saison/featured, paginé).
+ */
+export const listTierLists = <ThrowOnError extends boolean = false>(options?: Options<ListTierListsData, ThrowOnError>) => (options?.client ?? client).get<ListTierListsResponses, ListTierListsErrors, ThrowOnError>({
+    requestValidator: async (data) => await z.object({
+        body: z.never().optional(),
+        path: z.never().optional(),
+        query: zListTierListsQuery.optional()
+    }).parseAsync(data),
+    responseValidator: async (data) => await zListTierListsResponse.parseAsync(data),
+    url: '/api/v1/tier-lists',
+    ...options
+});
+
+/**
+ * Détail d'une tier list (sujets + tier communautaire agrégé + placement du visiteur).
+ */
+export const getTierList = <ThrowOnError extends boolean = false>(options: Options<GetTierListData, ThrowOnError>) => (options.client ?? client).get<GetTierListResponses, GetTierListErrors, ThrowOnError>({
+    requestValidator: async (data) => await z.object({
+        body: z.never().optional(),
+        path: zGetTierListPath,
+        query: z.never().optional()
+    }).parseAsync(data),
+    responseValidator: async (data) => await zGetTierListResponse.parseAsync(data),
+    url: '/api/v1/tier-lists/{slug}',
+    ...options
+});
+
+/**
+ * Éditions publiées des Beyblade Awards (vidéo de résultats + catégories).
+ */
+export const listAwardsEditions = <ThrowOnError extends boolean = false>(options?: Options<ListAwardsEditionsData, ThrowOnError>) => (options?.client ?? client).get<ListAwardsEditionsResponses, ListAwardsEditionsErrors, ThrowOnError>({
+    requestValidator: async (data) => await z.object({
+        body: z.never().optional(),
+        path: z.never().optional(),
+        query: z.never().optional()
+    }).parseAsync(data),
+    responseValidator: async (data) => await zListAwardsEditionsResponse.parseAsync(data),
+    url: '/api/v1/awards',
     ...options
 });

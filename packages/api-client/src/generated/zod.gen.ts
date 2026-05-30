@@ -355,16 +355,47 @@ export const zGetPublicUserResponse = z.object({
             roles: z.array(z.string()).nullish(),
             profile: z.object({
                 bladerName: z.string().nullish(),
+                displayName: z.string().nullish(),
+                pronouns: z.string().nullish(),
                 favoriteType: z.string().nullish(),
+                favoriteSeason: z.string().nullish(),
                 experience: z.string().nullish(),
                 bio: z.string().nullish(),
+                bannerImage: z.string().nullish(),
+                accentColor: z.string().nullish(),
                 wins: z.int().gte(-9007199254740991).lte(9007199254740991),
                 losses: z.int().gte(-9007199254740991).lte(9007199254740991),
                 tournamentWins: z.int().gte(-9007199254740991).lte(9007199254740991),
                 rankingPoints: z.int().gte(-9007199254740991).lte(9007199254740991),
+                duelRating: z.int().gte(-9007199254740991).lte(9007199254740991),
                 challongeUsername: z.string().nullish(),
+                country: z.string().nullish(),
+                region: z.string().nullish(),
+                city: z.string().nullish(),
                 twitterHandle: z.string().nullish(),
-                tiktokHandle: z.string().nullish()
+                tiktokHandle: z.string().nullish(),
+                instagramHandle: z.string().nullish(),
+                youtubeHandle: z.string().nullish(),
+                twitchHandle: z.string().nullish(),
+                discordHandle: z.string().nullish(),
+                websiteUrl: z.string().nullish(),
+                favoriteBeyblade: z.object({
+                    id: z.string(),
+                    name: z.string(),
+                    imageUrl: z.string().nullish(),
+                    beyType: z.string().nullish()
+                }).nullish(),
+                favoriteDeck: z.object({
+                    id: z.string(),
+                    name: z.string()
+                }).nullish(),
+                team: z.object({
+                    slug: z.string(),
+                    tag: z.string(),
+                    name: z.string(),
+                    logoUrl: z.string().nullish(),
+                    role: z.string()
+                }).nullish()
             }).nullable(),
             counts: z.object({
                 tournaments: z.int().gte(0).lte(9007199254740991),
@@ -1284,5 +1315,397 @@ export const zModerationWarningCountResponse = z.object({
         discordId: z.string(),
         count: z.int().gte(0).lte(9007199254740991),
         lastWarningAt: z.string().nullable()
+    })
+});
+
+export const zListTeamsQuery = z.object({
+    page: z.int().gt(0).lte(9007199254740991).optional().default(1),
+    pageSize: z.int().gt(0).lte(100).optional().default(24),
+    q: z.string().min(1).max(80).optional(),
+    region: z.string().min(1).max(80).optional(),
+    recruiting: z.boolean().optional(),
+    sort: z.enum([
+        'points',
+        'members',
+        'recent',
+        'wins'
+    ]).optional().default('points')
+});
+
+/**
+ * OK
+ */
+export const zListTeamsResponse = z.object({
+    ok: z.literal(true),
+    data: z.object({
+        items: z.array(z.object({
+            id: z.string(),
+            slug: z.string(),
+            tag: z.string(),
+            name: z.string(),
+            logoUrl: z.string().nullish(),
+            bannerUrl: z.string().nullish(),
+            accentColor: z.string().nullish(),
+            region: z.string().nullish(),
+            isVerified: z.boolean(),
+            isRecruiting: z.boolean(),
+            isPublic: z.boolean(),
+            memberCount: z.int().gte(0).lte(9007199254740991),
+            totalPoints: z.int().gte(-9007199254740991).lte(9007199254740991),
+            totalWins: z.int().gte(-9007199254740991).lte(9007199254740991),
+            totalLosses: z.int().gte(-9007199254740991).lte(9007199254740991),
+            totalTournamentWins: z.int().gte(-9007199254740991).lte(9007199254740991),
+            captainId: z.string(),
+            createdAt: z.string().nullish()
+        })),
+        pagination: z.object({
+            total: z.int().gte(0).lte(9007199254740991),
+            page: z.int().gt(0).lte(9007199254740991),
+            pageSize: z.int().gt(0).lte(9007199254740991),
+            pageCount: z.int().gte(0).lte(9007199254740991)
+        })
+    })
+});
+
+export const zTeamsLeaderboardQuery = z.object({
+    limit: z.int().gte(1).lte(100).optional().default(20)
+});
+
+/**
+ * OK
+ */
+export const zTeamsLeaderboardResponse = z.object({
+    ok: z.literal(true),
+    data: z.object({
+        teams: z.array(z.object({
+            id: z.string(),
+            slug: z.string(),
+            tag: z.string(),
+            name: z.string(),
+            logoUrl: z.string().nullish(),
+            bannerUrl: z.string().nullish(),
+            accentColor: z.string().nullish(),
+            region: z.string().nullish(),
+            isVerified: z.boolean(),
+            isRecruiting: z.boolean(),
+            isPublic: z.boolean(),
+            memberCount: z.int().gte(0).lte(9007199254740991),
+            totalPoints: z.int().gte(-9007199254740991).lte(9007199254740991),
+            totalWins: z.int().gte(-9007199254740991).lte(9007199254740991),
+            totalLosses: z.int().gte(-9007199254740991).lte(9007199254740991),
+            totalTournamentWins: z.int().gte(-9007199254740991).lte(9007199254740991),
+            captainId: z.string(),
+            createdAt: z.string().nullish()
+        }))
+    })
+});
+
+export const zGetTeamPath = z.object({
+    slug: z.string()
+});
+
+/**
+ * OK
+ */
+export const zGetTeamResponse = z.object({
+    ok: z.literal(true),
+    data: z.object({
+        team: z.object({
+            id: z.string(),
+            slug: z.string(),
+            tag: z.string(),
+            name: z.string(),
+            logoUrl: z.string().nullish(),
+            bannerUrl: z.string().nullish(),
+            accentColor: z.string().nullish(),
+            region: z.string().nullish(),
+            isVerified: z.boolean(),
+            isRecruiting: z.boolean(),
+            isPublic: z.boolean(),
+            memberCount: z.int().gte(0).lte(9007199254740991),
+            totalPoints: z.int().gte(-9007199254740991).lte(9007199254740991),
+            totalWins: z.int().gte(-9007199254740991).lte(9007199254740991),
+            totalLosses: z.int().gte(-9007199254740991).lte(9007199254740991),
+            totalTournamentWins: z.int().gte(-9007199254740991).lte(9007199254740991),
+            captainId: z.string(),
+            createdAt: z.string().nullish(),
+            description: z.string().nullish(),
+            socials: z.object({
+                twitterHandle: z.string().nullish(),
+                instagramHandle: z.string().nullish(),
+                youtubeHandle: z.string().nullish(),
+                twitchHandle: z.string().nullish(),
+                discordInvite: z.string().nullish(),
+                websiteUrl: z.string().nullish()
+            }),
+            foundedAt: z.string().nullish(),
+            members: z.array(z.object({
+                userId: z.string(),
+                name: z.string().nullish(),
+                image: z.string().nullish(),
+                bladerName: z.string().nullish(),
+                role: z.enum([
+                    'CAPTAIN',
+                    'CO_CAPTAIN',
+                    'MEMBER'
+                ]),
+                jerseyNumber: z.int().gte(-9007199254740991).lte(9007199254740991).nullish(),
+                position: z.string().nullish(),
+                joinedAt: z.string().nullish(),
+                rankingPoints: z.int().gte(-9007199254740991).lte(9007199254740991),
+                wins: z.int().gte(-9007199254740991).lte(9007199254740991),
+                losses: z.int().gte(-9007199254740991).lte(9007199254740991),
+                tournamentWins: z.int().gte(-9007199254740991).lte(9007199254740991),
+                duelRating: z.int().gte(-9007199254740991).lte(9007199254740991)
+            }))
+        }).nullable()
+    })
+});
+
+export const zGetTeamMembersPath = z.object({
+    slug: z.string()
+});
+
+/**
+ * OK
+ */
+export const zGetTeamMembersResponse = z.object({
+    ok: z.literal(true),
+    data: z.object({
+        members: z.array(z.object({
+            userId: z.string(),
+            name: z.string().nullish(),
+            image: z.string().nullish(),
+            bladerName: z.string().nullish(),
+            role: z.enum([
+                'CAPTAIN',
+                'CO_CAPTAIN',
+                'MEMBER'
+            ]),
+            jerseyNumber: z.int().gte(-9007199254740991).lte(9007199254740991).nullish(),
+            position: z.string().nullish(),
+            joinedAt: z.string().nullish(),
+            rankingPoints: z.int().gte(-9007199254740991).lte(9007199254740991),
+            wins: z.int().gte(-9007199254740991).lte(9007199254740991),
+            losses: z.int().gte(-9007199254740991).lte(9007199254740991),
+            tournamentWins: z.int().gte(-9007199254740991).lte(9007199254740991),
+            duelRating: z.int().gte(-9007199254740991).lte(9007199254740991)
+        }))
+    })
+});
+
+export const zListPollsQuery = z.object({
+    page: z.int().gt(0).lte(9007199254740991).optional().default(1),
+    pageSize: z.int().gt(0).lte(100).optional().default(24),
+    category: z.string().min(1).max(60).optional(),
+    season: z.enum([
+        'ORIGINAL',
+        'METAL',
+        'BURST',
+        'X'
+    ]).optional(),
+    featured: z.boolean().optional()
+});
+
+/**
+ * OK
+ */
+export const zListPollsResponse = z.object({
+    ok: z.literal(true),
+    data: z.object({
+        items: z.array(z.object({
+            id: z.string(),
+            slug: z.string(),
+            question: z.string(),
+            description: z.string().nullish(),
+            kind: z.enum([
+                'SINGLE',
+                'MULTIPLE',
+                'RATING'
+            ]),
+            category: z.string().nullish(),
+            season: z.string().nullish(),
+            imageUrl: z.string().nullish(),
+            isFeatured: z.boolean(),
+            isClosed: z.boolean(),
+            totalVotes: z.int().gte(0).lte(9007199254740991),
+            optionCount: z.int().gte(0).lte(9007199254740991),
+            createdAt: z.string().nullish()
+        })),
+        pagination: z.object({
+            total: z.int().gte(0).lte(9007199254740991),
+            page: z.int().gt(0).lte(9007199254740991),
+            pageSize: z.int().gt(0).lte(9007199254740991),
+            pageCount: z.int().gte(0).lte(9007199254740991)
+        })
+    })
+});
+
+export const zGetPollPath = z.object({
+    slug: z.string()
+});
+
+/**
+ * OK
+ */
+export const zGetPollResponse = z.object({
+    ok: z.literal(true),
+    data: z.object({
+        poll: z.object({
+            id: z.string(),
+            slug: z.string(),
+            question: z.string(),
+            description: z.string().nullish(),
+            kind: z.enum([
+                'SINGLE',
+                'MULTIPLE',
+                'RATING'
+            ]),
+            category: z.string().nullish(),
+            season: z.string().nullish(),
+            imageUrl: z.string().nullish(),
+            isFeatured: z.boolean(),
+            isClosed: z.boolean(),
+            totalVotes: z.int().gte(0).lte(9007199254740991),
+            optionCount: z.int().gte(0).lte(9007199254740991),
+            createdAt: z.string().nullish(),
+            options: z.array(z.object({
+                id: z.string(),
+                label: z.string(),
+                imageUrl: z.string().nullish(),
+                voteCount: z.int().gte(0).lte(9007199254740991),
+                percent: z.number().gte(0).lte(100)
+            })),
+            votedOptionIds: z.array(z.string())
+        }).nullable()
+    })
+});
+
+export const zListTierListsQuery = z.object({
+    page: z.int().gt(0).lte(9007199254740991).optional().default(1),
+    pageSize: z.int().gt(0).lte(100).optional().default(24),
+    kind: z.enum([
+        'BEY',
+        'CHARACTER',
+        'SEASON'
+    ]).optional(),
+    season: z.enum([
+        'ORIGINAL',
+        'METAL',
+        'BURST',
+        'X'
+    ]).optional(),
+    featured: z.boolean().optional()
+});
+
+/**
+ * OK
+ */
+export const zListTierListsResponse = z.object({
+    ok: z.literal(true),
+    data: z.object({
+        items: z.array(z.object({
+            id: z.string(),
+            slug: z.string(),
+            title: z.string(),
+            description: z.string().nullish(),
+            kind: z.enum([
+                'BEY',
+                'CHARACTER',
+                'SEASON'
+            ]),
+            season: z.string().nullish(),
+            imageUrl: z.string().nullish(),
+            isFeatured: z.boolean(),
+            totalSubmissions: z.int().gte(0).lte(9007199254740991),
+            subjectCount: z.int().gte(0).lte(9007199254740991),
+            createdAt: z.string().nullish()
+        })),
+        pagination: z.object({
+            total: z.int().gte(0).lte(9007199254740991),
+            page: z.int().gt(0).lte(9007199254740991),
+            pageSize: z.int().gt(0).lte(9007199254740991),
+            pageCount: z.int().gte(0).lte(9007199254740991)
+        })
+    })
+});
+
+export const zGetTierListPath = z.object({
+    slug: z.string()
+});
+
+/**
+ * OK
+ */
+export const zGetTierListResponse = z.object({
+    ok: z.literal(true),
+    data: z.object({
+        tierList: z.object({
+            id: z.string(),
+            slug: z.string(),
+            title: z.string(),
+            description: z.string().nullish(),
+            kind: z.enum([
+                'BEY',
+                'CHARACTER',
+                'SEASON'
+            ]),
+            season: z.string().nullish(),
+            imageUrl: z.string().nullish(),
+            isFeatured: z.boolean(),
+            totalSubmissions: z.int().gte(0).lte(9007199254740991),
+            subjectCount: z.int().gte(0).lte(9007199254740991),
+            createdAt: z.string().nullish(),
+            subjects: z.array(z.object({
+                id: z.string(),
+                label: z.string(),
+                imageUrl: z.string().nullish(),
+                refType: z.string().nullish(),
+                refId: z.string().nullish()
+            })),
+            community: z.array(z.object({
+                subjectId: z.string(),
+                communityTier: z.enum([
+                    'S',
+                    'A',
+                    'B',
+                    'C',
+                    'D',
+                    'F'
+                ]),
+                averageScore: z.number(),
+                placements: z.int().gte(0).lte(9007199254740991)
+            })),
+            myPlacements: z.record(z.string(), z.enum([
+                'S',
+                'A',
+                'B',
+                'C',
+                'D',
+                'F'
+            ]))
+        }).nullable()
+    })
+});
+
+/**
+ * OK
+ */
+export const zListAwardsEditionsResponse = z.object({
+    ok: z.literal(true),
+    data: z.object({
+        editions: z.array(z.object({
+            year: z.int().gte(-9007199254740991).lte(9007199254740991),
+            slug: z.string(),
+            title: z.string(),
+            description: z.string().nullish(),
+            videoUrl: z.string().nullish(),
+            videoId: z.string().nullish(),
+            pollCategory: z.string(),
+            isPublished: z.boolean(),
+            isVotingOpen: z.boolean(),
+            categoryCount: z.int().gte(0).lte(9007199254740991),
+            createdAt: z.string().nullish()
+        }))
     })
 });

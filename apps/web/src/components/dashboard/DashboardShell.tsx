@@ -5,6 +5,7 @@ import {
   ArrowBack,
   Build,
   Casino,
+  Groups,
   Launch,
   Logout,
   MoreHoriz,
@@ -62,6 +63,11 @@ const NAV_ITEMS: NavItem[] = [
     label: "Mes Decks",
     icon: Build,
     path: "/builder",
+  },
+  {
+    label: "Mon équipe",
+    icon: Groups,
+    path: "/dashboard/team",
   },
   {
     label: "Gacha",

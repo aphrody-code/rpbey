@@ -4,7 +4,7 @@ description: "Documentation vendorée de Drizzle ORM 0.45.2 et drizzle-kit 0.31.
 scope:
   - packages/db
 status: "stable"
-last_updated: "2026-05-29"
+last_updated: "2026-05-30"
 related_symbols:
   - drizzle()
   - pgEnum

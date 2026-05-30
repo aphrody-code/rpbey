@@ -31,6 +31,9 @@ interface BladerProfileHeaderProps {
   avatarUrl?: string;
   joinDate?: string;
   bio?: string;
+  displayName?: string | null;
+  pronouns?: string | null;
+  accentColor?: string | null;
   challongeUsername?: string | null;
   onDownloadCard?: () => void;
   isOwnProfile?: boolean;
@@ -64,6 +67,9 @@ export function BladerProfileHeader({
   avatarUrl,
   joinDate,
   bio,
+  displayName,
+  pronouns,
+  accentColor,
   challongeUsername,
   onDownloadCard,
   isOwnProfile = false,
@@ -73,6 +79,7 @@ export function BladerProfileHeader({
 }: BladerProfileHeaderProps) {
   const theme = useTheme();
   const [isSyncing, setIsSyncing] = useState(false);
+  const titleColor = accentColor ?? undefined;
 
   const handleShare = async () => {
     if (navigator.share) {
@@ -183,10 +190,19 @@ export function BladerProfileHeader({
                 sx={{
                   fontWeight: "900",
                   letterSpacing: "-0.03em",
+                  ...(titleColor ? { color: titleColor } : {}),
                 }}
               >
-                {stats.bladerName}
+                {displayName?.trim() || stats.bladerName}
               </Typography>
+              {pronouns?.trim() && (
+                <Chip
+                  label={pronouns.trim()}
+                  size="small"
+                  variant="outlined"
+                  sx={{ fontWeight: 600, borderColor: "divider" }}
+                />
+              )}
               {isOwnProfile && (
                 <IconButton
                   component={Link}

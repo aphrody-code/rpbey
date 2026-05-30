@@ -29,6 +29,27 @@
       "when": 1780488000000,
       "tag": "0003_bot_config",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1780574400000,
+      "tag": "0004_community",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1780660800000,
+      "tag": "0005_polls",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1780747200000,
+      "tag": "0006_awards_editions",
+      "breakpoints": true
     }
   ]
 }

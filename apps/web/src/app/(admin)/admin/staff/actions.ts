@@ -67,7 +67,13 @@ export async function syncStaffFromDiscord() {
   console.warn("[SyncStaff] Triggering sync script...");
 
   try {
-    const proc = Bun.spawn(["bun", "scripts/sync-staff-db.ts"], {
+    // Chemin ABSOLU + cwd repo : le serveur prod tourne depuis `.next/standalone`,
+    // donc un chemin relatif ne résoudrait ni le script ni `@rpbey/db`. Le token
+    // Discord (DISCORD_TOKEN/GUILD_ID) est hérité de l'environnement du service web.
+    const repoRoot = process.env.RPBEY_REPO_ROOT || "/home/ubuntu/rpbey";
+    const proc = Bun.spawn(["bun", `${repoRoot}/scripts/sync-staff-db.ts`], {
+      cwd: repoRoot,
+      env: { ...process.env },
       stdout: "pipe",
       stderr: "pipe",
     });

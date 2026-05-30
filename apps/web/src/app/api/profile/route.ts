@@ -1,3 +1,4 @@
+import { ProfileUpdateInputSchema } from "@rpbey/api-contract";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
@@ -36,23 +37,16 @@ export async function PATCH(request: Request) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const body = await request.json();
-    const { bladerName, favoriteType, experience, bio, challongeUsername, deckBoxImage, image } =
-      body;
+    const raw = await request.json().catch(() => ({}));
+    const parsed = ProfileUpdateInputSchema.safeParse(raw);
+    if (!parsed.success) {
+      return NextResponse.json(
+        { error: "Invalid profile data", issues: parsed.error.issues },
+        { status: 422 },
+      );
+    }
 
-    const profile = await upsertOwnProfile(
-      session.user.id,
-      {
-        bladerName,
-        favoriteType,
-        experience,
-        bio,
-        challongeUsername,
-        deckBoxImage,
-        image,
-      },
-      session.user.name,
-    );
+    const profile = await upsertOwnProfile(session.user.id, parsed.data, session.user.name);
 
     return NextResponse.json(profile);
   } catch (error) {

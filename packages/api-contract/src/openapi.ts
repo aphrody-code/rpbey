@@ -50,6 +50,23 @@ import {
   WarningCountQuerySchema,
   WarningCountResponseSchema,
 } from "./moderation";
+import {
+  TeamsListQuerySchema,
+  TeamsListResponseSchema,
+  TeamDetailResponseSchema,
+  TeamMembersResponseSchema,
+  TeamLeaderboardQuerySchema,
+  TeamLeaderboardResponseSchema,
+} from "./teams";
+import {
+  PollsListQuerySchema,
+  PollsListResponseSchema,
+  PollDetailResponseSchema,
+  TierListsListQuerySchema,
+  TierListsListResponseSchema,
+  TierListDetailResponseSchema,
+  AwardsEditionsResponseSchema,
+} from "./polls";
 import { ErrorEnvelopeSchema, okEnvelope } from "./envelope";
 
 /**
@@ -344,6 +361,87 @@ const ROUTES: RouteDef[] = [
     tags: ["moderation"],
     query: WarningCountQuerySchema,
     response: WarningCountResponseSchema,
+  },
+  {
+    method: "get",
+    path: "/teams",
+    operationId: "listTeams",
+    summary:
+      "Annuaire public des équipes communautaires (clans) — recherche, filtre région/recrutement, tri (points/membres/récent/victoires), paginé.",
+    tags: ["teams"],
+    query: TeamsListQuerySchema,
+    response: TeamsListResponseSchema,
+  },
+  {
+    method: "get",
+    path: "/teams/leaderboard",
+    operationId: "teamsLeaderboard",
+    summary: "Classement des équipes par points cumulés (membres agrégés).",
+    tags: ["teams"],
+    query: TeamLeaderboardQuerySchema,
+    response: TeamLeaderboardResponseSchema,
+  },
+  {
+    method: "get",
+    path: "/teams/{slug}",
+    operationId: "getTeam",
+    summary: "Détail public d'une équipe par slug (profil + membres + stats agrégées).",
+    tags: ["teams"],
+    pathParams: ["slug"],
+    response: TeamDetailResponseSchema,
+  },
+  {
+    method: "get",
+    path: "/teams/{slug}/members",
+    operationId: "getTeamMembers",
+    summary: "Roster d'une équipe (membres + rôles + stats compétitives).",
+    tags: ["teams"],
+    pathParams: ["slug"],
+    response: TeamMembersResponseSchema,
+  },
+  {
+    method: "get",
+    path: "/polls",
+    operationId: "listPolls",
+    summary: "Sondages communautaires publics (filtres catégorie/saison/featured, paginé).",
+    tags: ["polls"],
+    query: PollsListQuerySchema,
+    response: PollsListResponseSchema,
+  },
+  {
+    method: "get",
+    path: "/polls/{slug}",
+    operationId: "getPoll",
+    summary: "Détail d'un sondage par slug (options + résultats agrégés + votes du visiteur).",
+    tags: ["polls"],
+    pathParams: ["slug"],
+    response: PollDetailResponseSchema,
+  },
+  {
+    method: "get",
+    path: "/tier-lists",
+    operationId: "listTierLists",
+    summary: "Tier lists communautaires publiques (filtres type/saison/featured, paginé).",
+    tags: ["polls"],
+    query: TierListsListQuerySchema,
+    response: TierListsListResponseSchema,
+  },
+  {
+    method: "get",
+    path: "/tier-lists/{slug}",
+    operationId: "getTierList",
+    summary: "Détail d'une tier list (sujets + tier communautaire agrégé + placement du visiteur).",
+    tags: ["polls"],
+    pathParams: ["slug"],
+    response: TierListDetailResponseSchema,
+  },
+  {
+    method: "get",
+    path: "/awards",
+    operationId: "listAwardsEditions",
+    summary: "Éditions publiées des Beyblade Awards (vidéo de résultats + catégories).",
+    tags: ["polls"],
+    response: AwardsEditionsResponseSchema,
   },
 ];
 

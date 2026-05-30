@@ -31,6 +31,17 @@ import {
   animeSeries,
   animeWatchProgress,
   animeFrames,
+  teams,
+  teamMembers,
+  teamInvites,
+  teamMessages,
+  polls,
+  pollOptions,
+  pollVotes,
+  tierLists,
+  tierListSubjects,
+  tierListVotes,
+  tierListPlacements,
 } from "./schema";
 
 export const beybladesRelations = relations(beyblades, ({ one, many }) => ({
@@ -146,6 +157,15 @@ export const usersRelations = relations(users, ({ many }) => ({
   twoFactors: many(twoFactors),
   globalRankings: many(globalRankings),
   animeWatchProgresses: many(animeWatchProgress),
+  teamsCaptained: many(teams),
+  teamMembership: many(teamMembers),
+  teamInvites_userId: many(teamInvites, {
+    relationName: "teamInvites_userId_users_id",
+  }),
+  teamInvites_invitedById: many(teamInvites, {
+    relationName: "teamInvites_invitedById_users_id",
+  }),
+  teamMessages: many(teamMessages),
 }));
 
 export const cardWishlistsRelations = relations(cardWishlists, ({ one }) => ({
@@ -163,6 +183,63 @@ export const profilesRelations = relations(profiles, ({ one, many }) => ({
   cardWishlists: many(cardWishlists),
   user: one(users, {
     fields: [profiles.userId],
+    references: [users.id],
+  }),
+  favoriteBeyblade: one(beyblades, {
+    fields: [profiles.favoriteBeybladeId],
+    references: [beyblades.id],
+  }),
+  favoriteDeck: one(decks, {
+    fields: [profiles.favoriteDeckId],
+    references: [decks.id],
+  }),
+}));
+
+export const teamsRelations = relations(teams, ({ one, many }) => ({
+  captain: one(users, {
+    fields: [teams.captainId],
+    references: [users.id],
+  }),
+  members: many(teamMembers),
+  invites: many(teamInvites),
+  messages: many(teamMessages),
+}));
+
+export const teamMembersRelations = relations(teamMembers, ({ one }) => ({
+  team: one(teams, {
+    fields: [teamMembers.teamId],
+    references: [teams.id],
+  }),
+  user: one(users, {
+    fields: [teamMembers.userId],
+    references: [users.id],
+  }),
+}));
+
+export const teamInvitesRelations = relations(teamInvites, ({ one }) => ({
+  team: one(teams, {
+    fields: [teamInvites.teamId],
+    references: [teams.id],
+  }),
+  user: one(users, {
+    fields: [teamInvites.userId],
+    references: [users.id],
+    relationName: "teamInvites_userId_users_id",
+  }),
+  invitedBy: one(users, {
+    fields: [teamInvites.invitedById],
+    references: [users.id],
+    relationName: "teamInvites_invitedById_users_id",
+  }),
+}));
+
+export const teamMessagesRelations = relations(teamMessages, ({ one }) => ({
+  team: one(teams, {
+    fields: [teamMessages.teamId],
+    references: [teams.id],
+  }),
+  user: one(users, {
+    fields: [teamMessages.userId],
     references: [users.id],
   }),
 }));
@@ -406,5 +483,73 @@ export const animeWatchProgressRelations = relations(animeWatchProgress, ({ one 
   user: one(users, {
     fields: [animeWatchProgress.userId],
     references: [users.id],
+  }),
+}));
+
+export const pollsRelations = relations(polls, ({ one, many }) => ({
+  options: many(pollOptions),
+  votes: many(pollVotes),
+  creator: one(users, {
+    fields: [polls.createdById],
+    references: [users.id],
+  }),
+}));
+
+export const pollOptionsRelations = relations(pollOptions, ({ one, many }) => ({
+  poll: one(polls, {
+    fields: [pollOptions.pollId],
+    references: [polls.id],
+  }),
+  votes: many(pollVotes),
+}));
+
+export const pollVotesRelations = relations(pollVotes, ({ one }) => ({
+  poll: one(polls, {
+    fields: [pollVotes.pollId],
+    references: [polls.id],
+  }),
+  option: one(pollOptions, {
+    fields: [pollVotes.optionId],
+    references: [pollOptions.id],
+  }),
+  user: one(users, {
+    fields: [pollVotes.userId],
+    references: [users.id],
+  }),
+}));
+
+export const tierListsRelations = relations(tierLists, ({ many }) => ({
+  subjects: many(tierListSubjects),
+  votes: many(tierListVotes),
+}));
+
+export const tierListSubjectsRelations = relations(tierListSubjects, ({ one, many }) => ({
+  tierList: one(tierLists, {
+    fields: [tierListSubjects.tierListId],
+    references: [tierLists.id],
+  }),
+  placements: many(tierListPlacements),
+}));
+
+export const tierListVotesRelations = relations(tierListVotes, ({ one, many }) => ({
+  tierList: one(tierLists, {
+    fields: [tierListVotes.tierListId],
+    references: [tierLists.id],
+  }),
+  user: one(users, {
+    fields: [tierListVotes.userId],
+    references: [users.id],
+  }),
+  placements: many(tierListPlacements),
+}));
+
+export const tierListPlacementsRelations = relations(tierListPlacements, ({ one }) => ({
+  vote: one(tierListVotes, {
+    fields: [tierListPlacements.voteId],
+    references: [tierListVotes.id],
+  }),
+  subject: one(tierListSubjects, {
+    fields: [tierListPlacements.subjectId],
+    references: [tierListSubjects.id],
   }),
 }));

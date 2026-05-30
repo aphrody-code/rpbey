@@ -511,16 +511,47 @@ export type GetPublicUserResponses = {
                 roles?: Array<string> | null;
                 profile: {
                     bladerName?: string | null;
+                    displayName?: string | null;
+                    pronouns?: string | null;
                     favoriteType?: string | null;
+                    favoriteSeason?: string | null;
                     experience?: string | null;
                     bio?: string | null;
+                    bannerImage?: string | null;
+                    accentColor?: string | null;
                     wins: number;
                     losses: number;
                     tournamentWins: number;
                     rankingPoints: number;
+                    duelRating: number;
                     challongeUsername?: string | null;
+                    country?: string | null;
+                    region?: string | null;
+                    city?: string | null;
                     twitterHandle?: string | null;
                     tiktokHandle?: string | null;
+                    instagramHandle?: string | null;
+                    youtubeHandle?: string | null;
+                    twitchHandle?: string | null;
+                    discordHandle?: string | null;
+                    websiteUrl?: string | null;
+                    favoriteBeyblade?: {
+                        id: string;
+                        name: string;
+                        imageUrl?: string | null;
+                        beyType?: string | null;
+                    } | null;
+                    favoriteDeck?: {
+                        id: string;
+                        name: string;
+                    } | null;
+                    team?: {
+                        slug: string;
+                        tag: string;
+                        name: string;
+                        logoUrl?: string | null;
+                        role: string;
+                    } | null;
                 } | null;
                 counts: {
                     tournaments: number;
@@ -2159,3 +2190,648 @@ export type ModerationWarningCountResponses = {
 };
 
 export type ModerationWarningCountResponse = ModerationWarningCountResponses[keyof ModerationWarningCountResponses];
+
+export type ListTeamsData = {
+    body?: never;
+    path?: never;
+    query?: {
+        page?: number;
+        pageSize?: number;
+        q?: string;
+        region?: string;
+        recruiting?: boolean;
+        sort?: 'points' | 'members' | 'recent' | 'wins';
+    };
+    url: '/api/v1/teams';
+};
+
+export type ListTeamsErrors = {
+    /**
+     * Erreur de requête ou de validation
+     */
+    '4XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+    /**
+     * Erreur serveur
+     */
+    '5XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+};
+
+export type ListTeamsError = ListTeamsErrors[keyof ListTeamsErrors];
+
+export type ListTeamsResponses = {
+    /**
+     * OK
+     */
+    200: {
+        ok: true;
+        data: {
+            items: Array<{
+                id: string;
+                slug: string;
+                tag: string;
+                name: string;
+                logoUrl?: string | null;
+                bannerUrl?: string | null;
+                accentColor?: string | null;
+                region?: string | null;
+                isVerified: boolean;
+                isRecruiting: boolean;
+                isPublic: boolean;
+                memberCount: number;
+                totalPoints: number;
+                totalWins: number;
+                totalLosses: number;
+                totalTournamentWins: number;
+                captainId: string;
+                createdAt?: string | null;
+            }>;
+            pagination: {
+                total: number;
+                page: number;
+                pageSize: number;
+                pageCount: number;
+            };
+        };
+    };
+};
+
+export type ListTeamsResponse = ListTeamsResponses[keyof ListTeamsResponses];
+
+export type TeamsLeaderboardData = {
+    body?: never;
+    path?: never;
+    query?: {
+        limit?: number;
+    };
+    url: '/api/v1/teams/leaderboard';
+};
+
+export type TeamsLeaderboardErrors = {
+    /**
+     * Erreur de requête ou de validation
+     */
+    '4XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+    /**
+     * Erreur serveur
+     */
+    '5XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+};
+
+export type TeamsLeaderboardError = TeamsLeaderboardErrors[keyof TeamsLeaderboardErrors];
+
+export type TeamsLeaderboardResponses = {
+    /**
+     * OK
+     */
+    200: {
+        ok: true;
+        data: {
+            teams: Array<{
+                id: string;
+                slug: string;
+                tag: string;
+                name: string;
+                logoUrl?: string | null;
+                bannerUrl?: string | null;
+                accentColor?: string | null;
+                region?: string | null;
+                isVerified: boolean;
+                isRecruiting: boolean;
+                isPublic: boolean;
+                memberCount: number;
+                totalPoints: number;
+                totalWins: number;
+                totalLosses: number;
+                totalTournamentWins: number;
+                captainId: string;
+                createdAt?: string | null;
+            }>;
+        };
+    };
+};
+
+export type TeamsLeaderboardResponse = TeamsLeaderboardResponses[keyof TeamsLeaderboardResponses];
+
+export type GetTeamData = {
+    body?: never;
+    path: {
+        slug: string;
+    };
+    query?: never;
+    url: '/api/v1/teams/{slug}';
+};
+
+export type GetTeamErrors = {
+    /**
+     * Erreur de requête ou de validation
+     */
+    '4XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+    /**
+     * Erreur serveur
+     */
+    '5XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+};
+
+export type GetTeamError = GetTeamErrors[keyof GetTeamErrors];
+
+export type GetTeamResponses = {
+    /**
+     * OK
+     */
+    200: {
+        ok: true;
+        data: {
+            team: {
+                id: string;
+                slug: string;
+                tag: string;
+                name: string;
+                logoUrl?: string | null;
+                bannerUrl?: string | null;
+                accentColor?: string | null;
+                region?: string | null;
+                isVerified: boolean;
+                isRecruiting: boolean;
+                isPublic: boolean;
+                memberCount: number;
+                totalPoints: number;
+                totalWins: number;
+                totalLosses: number;
+                totalTournamentWins: number;
+                captainId: string;
+                createdAt?: string | null;
+                description?: string | null;
+                socials: {
+                    twitterHandle?: string | null;
+                    instagramHandle?: string | null;
+                    youtubeHandle?: string | null;
+                    twitchHandle?: string | null;
+                    discordInvite?: string | null;
+                    websiteUrl?: string | null;
+                };
+                foundedAt?: string | null;
+                members: Array<{
+                    userId: string;
+                    name?: string | null;
+                    image?: string | null;
+                    bladerName?: string | null;
+                    role: 'CAPTAIN' | 'CO_CAPTAIN' | 'MEMBER';
+                    jerseyNumber?: number | null;
+                    position?: string | null;
+                    joinedAt?: string | null;
+                    rankingPoints: number;
+                    wins: number;
+                    losses: number;
+                    tournamentWins: number;
+                    duelRating: number;
+                }>;
+            } | null;
+        };
+    };
+};
+
+export type GetTeamResponse = GetTeamResponses[keyof GetTeamResponses];
+
+export type GetTeamMembersData = {
+    body?: never;
+    path: {
+        slug: string;
+    };
+    query?: never;
+    url: '/api/v1/teams/{slug}/members';
+};
+
+export type GetTeamMembersErrors = {
+    /**
+     * Erreur de requête ou de validation
+     */
+    '4XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+    /**
+     * Erreur serveur
+     */
+    '5XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+};
+
+export type GetTeamMembersError = GetTeamMembersErrors[keyof GetTeamMembersErrors];
+
+export type GetTeamMembersResponses = {
+    /**
+     * OK
+     */
+    200: {
+        ok: true;
+        data: {
+            members: Array<{
+                userId: string;
+                name?: string | null;
+                image?: string | null;
+                bladerName?: string | null;
+                role: 'CAPTAIN' | 'CO_CAPTAIN' | 'MEMBER';
+                jerseyNumber?: number | null;
+                position?: string | null;
+                joinedAt?: string | null;
+                rankingPoints: number;
+                wins: number;
+                losses: number;
+                tournamentWins: number;
+                duelRating: number;
+            }>;
+        };
+    };
+};
+
+export type GetTeamMembersResponse = GetTeamMembersResponses[keyof GetTeamMembersResponses];
+
+export type ListPollsData = {
+    body?: never;
+    path?: never;
+    query?: {
+        page?: number;
+        pageSize?: number;
+        category?: string;
+        season?: 'ORIGINAL' | 'METAL' | 'BURST' | 'X';
+        featured?: boolean;
+    };
+    url: '/api/v1/polls';
+};
+
+export type ListPollsErrors = {
+    /**
+     * Erreur de requête ou de validation
+     */
+    '4XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+    /**
+     * Erreur serveur
+     */
+    '5XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+};
+
+export type ListPollsError = ListPollsErrors[keyof ListPollsErrors];
+
+export type ListPollsResponses = {
+    /**
+     * OK
+     */
+    200: {
+        ok: true;
+        data: {
+            items: Array<{
+                id: string;
+                slug: string;
+                question: string;
+                description?: string | null;
+                kind: 'SINGLE' | 'MULTIPLE' | 'RATING';
+                category?: string | null;
+                season?: string | null;
+                imageUrl?: string | null;
+                isFeatured: boolean;
+                isClosed: boolean;
+                totalVotes: number;
+                optionCount: number;
+                createdAt?: string | null;
+            }>;
+            pagination: {
+                total: number;
+                page: number;
+                pageSize: number;
+                pageCount: number;
+            };
+        };
+    };
+};
+
+export type ListPollsResponse = ListPollsResponses[keyof ListPollsResponses];
+
+export type GetPollData = {
+    body?: never;
+    path: {
+        slug: string;
+    };
+    query?: never;
+    url: '/api/v1/polls/{slug}';
+};
+
+export type GetPollErrors = {
+    /**
+     * Erreur de requête ou de validation
+     */
+    '4XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+    /**
+     * Erreur serveur
+     */
+    '5XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+};
+
+export type GetPollError = GetPollErrors[keyof GetPollErrors];
+
+export type GetPollResponses = {
+    /**
+     * OK
+     */
+    200: {
+        ok: true;
+        data: {
+            poll: {
+                id: string;
+                slug: string;
+                question: string;
+                description?: string | null;
+                kind: 'SINGLE' | 'MULTIPLE' | 'RATING';
+                category?: string | null;
+                season?: string | null;
+                imageUrl?: string | null;
+                isFeatured: boolean;
+                isClosed: boolean;
+                totalVotes: number;
+                optionCount: number;
+                createdAt?: string | null;
+                options: Array<{
+                    id: string;
+                    label: string;
+                    imageUrl?: string | null;
+                    voteCount: number;
+                    percent: number;
+                }>;
+                votedOptionIds: Array<string>;
+            } | null;
+        };
+    };
+};
+
+export type GetPollResponse = GetPollResponses[keyof GetPollResponses];
+
+export type ListTierListsData = {
+    body?: never;
+    path?: never;
+    query?: {
+        page?: number;
+        pageSize?: number;
+        kind?: 'BEY' | 'CHARACTER' | 'SEASON';
+        season?: 'ORIGINAL' | 'METAL' | 'BURST' | 'X';
+        featured?: boolean;
+    };
+    url: '/api/v1/tier-lists';
+};
+
+export type ListTierListsErrors = {
+    /**
+     * Erreur de requête ou de validation
+     */
+    '4XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+    /**
+     * Erreur serveur
+     */
+    '5XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+};
+
+export type ListTierListsError = ListTierListsErrors[keyof ListTierListsErrors];
+
+export type ListTierListsResponses = {
+    /**
+     * OK
+     */
+    200: {
+        ok: true;
+        data: {
+            items: Array<{
+                id: string;
+                slug: string;
+                title: string;
+                description?: string | null;
+                kind: 'BEY' | 'CHARACTER' | 'SEASON';
+                season?: string | null;
+                imageUrl?: string | null;
+                isFeatured: boolean;
+                totalSubmissions: number;
+                subjectCount: number;
+                createdAt?: string | null;
+            }>;
+            pagination: {
+                total: number;
+                page: number;
+                pageSize: number;
+                pageCount: number;
+            };
+        };
+    };
+};
+
+export type ListTierListsResponse = ListTierListsResponses[keyof ListTierListsResponses];
+
+export type GetTierListData = {
+    body?: never;
+    path: {
+        slug: string;
+    };
+    query?: never;
+    url: '/api/v1/tier-lists/{slug}';
+};
+
+export type GetTierListErrors = {
+    /**
+     * Erreur de requête ou de validation
+     */
+    '4XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+    /**
+     * Erreur serveur
+     */
+    '5XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+};
+
+export type GetTierListError = GetTierListErrors[keyof GetTierListErrors];
+
+export type GetTierListResponses = {
+    /**
+     * OK
+     */
+    200: {
+        ok: true;
+        data: {
+            tierList: {
+                id: string;
+                slug: string;
+                title: string;
+                description?: string | null;
+                kind: 'BEY' | 'CHARACTER' | 'SEASON';
+                season?: string | null;
+                imageUrl?: string | null;
+                isFeatured: boolean;
+                totalSubmissions: number;
+                subjectCount: number;
+                createdAt?: string | null;
+                subjects: Array<{
+                    id: string;
+                    label: string;
+                    imageUrl?: string | null;
+                    refType?: string | null;
+                    refId?: string | null;
+                }>;
+                community: Array<{
+                    subjectId: string;
+                    communityTier: 'S' | 'A' | 'B' | 'C' | 'D' | 'F';
+                    averageScore: number;
+                    placements: number;
+                }>;
+                myPlacements: {
+                    [key: string]: 'S' | 'A' | 'B' | 'C' | 'D' | 'F';
+                };
+            } | null;
+        };
+    };
+};
+
+export type GetTierListResponse = GetTierListResponses[keyof GetTierListResponses];
+
+export type ListAwardsEditionsData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/api/v1/awards';
+};
+
+export type ListAwardsEditionsErrors = {
+    /**
+     * Erreur de requête ou de validation
+     */
+    '4XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+    /**
+     * Erreur serveur
+     */
+    '5XX': {
+        ok: false;
+        error: {
+            code: string;
+            message: string;
+        };
+    };
+};
+
+export type ListAwardsEditionsError = ListAwardsEditionsErrors[keyof ListAwardsEditionsErrors];
+
+export type ListAwardsEditionsResponses = {
+    /**
+     * OK
+     */
+    200: {
+        ok: true;
+        data: {
+            editions: Array<{
+                year: number;
+                slug: string;
+                title: string;
+                description?: string | null;
+                videoUrl?: string | null;
+                videoId?: string | null;
+                pollCategory: string;
+                isPublished: boolean;
+                isVotingOpen: boolean;
+                categoryCount: number;
+                createdAt?: string | null;
+            }>;
+        };
+    };
+};
+
+export type ListAwardsEditionsResponse = ListAwardsEditionsResponses[keyof ListAwardsEditionsResponses];

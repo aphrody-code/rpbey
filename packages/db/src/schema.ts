@@ -856,6 +856,29 @@ export const profiles = pgTable(
     duelRating: integer().default(1000).notNull(),
     duelStreak: integer().default(0).notNull(),
     duelWins: integer().default(0).notNull(),
+    // Personnalisation étendue (migration 0004) — identité, localisation, social, préférences.
+    displayName: text(),
+    pronouns: text(),
+    bannerImage: text(),
+    country: text(),
+    region: text(),
+    city: text(),
+    postalCode: text(),
+    addressLine: text(),
+    favoriteSeason: animeGeneration(),
+    favoriteBeybladeId: text(),
+    favoriteDeckId: text(),
+    instagramHandle: text(),
+    youtubeHandle: text(),
+    twitchHandle: text(),
+    discordHandle: text(),
+    websiteUrl: text(),
+    accentColor: text(),
+    themePreference: text().default("system").notNull(),
+    profileVisibility: text().default("PUBLIC").notNull(),
+    showLocation: boolean().default(false).notNull(),
+    showSocials: boolean().default(true).notNull(),
+    onboardedAt: timestamp({ precision: 3, mode: "string" }),
   },
   (table) => [
     index("profiles_duelRating_idx").using(
@@ -874,6 +897,222 @@ export const profiles = pgTable(
       columns: [table.userId],
       foreignColumns: [users.id],
       name: "profiles_userId_fkey",
+    })
+      .onUpdate("cascade")
+      .onDelete("cascade"),
+    foreignKey({
+      columns: [table.favoriteBeybladeId],
+      foreignColumns: [beyblades.id],
+      name: "profiles_favoriteBeybladeId_fkey",
+    })
+      .onUpdate("cascade")
+      .onDelete("set null"),
+    foreignKey({
+      columns: [table.favoriteDeckId],
+      foreignColumns: [decks.id],
+      name: "profiles_favoriteDeckId_fkey",
+    })
+      .onUpdate("cascade")
+      .onDelete("set null"),
+  ],
+);
+
+/**
+ * Équipes communautaires (clans). Un blader = au plus une équipe (unique sur
+ * `team_members.userId`). `captainId` → capitaine fondateur. Stats agrégées
+ * (totalPoints/Wins/Losses) recalculées par la DAL. Migration 0004.
+ */
+export const teams = pgTable(
+  "teams",
+  {
+    id: text()
+      .primaryKey()
+      .notNull()
+      .$defaultFn(() => createId()),
+    slug: text().notNull(),
+    tag: text().notNull(),
+    name: text().notNull(),
+    logoUrl: text(),
+    bannerUrl: text(),
+    description: text(),
+    accentColor: text(),
+    region: text(),
+    captainId: text().notNull(),
+    twitterHandle: text(),
+    instagramHandle: text(),
+    youtubeHandle: text(),
+    twitchHandle: text(),
+    discordInvite: text(),
+    websiteUrl: text(),
+    isPublic: boolean().default(false).notNull(),
+    isVerified: boolean().default(false).notNull(),
+    isRecruiting: boolean().default(true).notNull(),
+    memberCount: integer().default(1).notNull(),
+    totalPoints: integer().default(0).notNull(),
+    totalWins: integer().default(0).notNull(),
+    totalLosses: integer().default(0).notNull(),
+    totalTournamentWins: integer().default(0).notNull(),
+    foundedAt: timestamp({ precision: 3, mode: "string" })
+      .default(sql`CURRENT_TIMESTAMP`)
+      .notNull(),
+    createdAt: timestamp({ precision: 3, mode: "string" })
+      .default(sql`CURRENT_TIMESTAMP`)
+      .notNull(),
+    updatedAt: timestamp({ precision: 3, mode: "string" })
+      .notNull()
+      .$onUpdate(() => new Date().toISOString()),
+  },
+  (table) => [
+    uniqueIndex("teams_slug_key").using("btree", table.slug.asc().nullsLast().op("text_ops")),
+    uniqueIndex("teams_tag_key").using("btree", table.tag.asc().nullsLast().op("text_ops")),
+    index("teams_captainId_idx").using("btree", table.captainId.asc().nullsLast().op("text_ops")),
+    index("teams_isPublic_idx").using("btree", table.isPublic.asc().nullsLast().op("bool_ops")),
+    index("teams_totalPoints_idx").using(
+      "btree",
+      table.totalPoints.asc().nullsLast().op("int4_ops"),
+    ),
+    foreignKey({
+      columns: [table.captainId],
+      foreignColumns: [users.id],
+      name: "teams_captainId_fkey",
+    })
+      .onUpdate("cascade")
+      .onDelete("cascade"),
+  ],
+);
+
+/** Appartenance d'un blader à une équipe (rôle CAPTAIN/CO_CAPTAIN/MEMBER). */
+export const teamMembers = pgTable(
+  "team_members",
+  {
+    id: text()
+      .primaryKey()
+      .notNull()
+      .$defaultFn(() => createId()),
+    teamId: text().notNull(),
+    userId: text().notNull(),
+    role: text().default("MEMBER").notNull(),
+    jerseyNumber: integer(),
+    position: text(),
+    joinedAt: timestamp({ precision: 3, mode: "string" })
+      .default(sql`CURRENT_TIMESTAMP`)
+      .notNull(),
+  },
+  (table) => [
+    uniqueIndex("team_members_userId_key").using(
+      "btree",
+      table.userId.asc().nullsLast().op("text_ops"),
+    ),
+    uniqueIndex("team_members_teamId_userId_key").using(
+      "btree",
+      table.teamId.asc().nullsLast().op("text_ops"),
+      table.userId.asc().nullsLast().op("text_ops"),
+    ),
+    index("team_members_teamId_idx").using("btree", table.teamId.asc().nullsLast().op("text_ops")),
+    foreignKey({
+      columns: [table.teamId],
+      foreignColumns: [teams.id],
+      name: "team_members_teamId_fkey",
+    })
+      .onUpdate("cascade")
+      .onDelete("cascade"),
+    foreignKey({
+      columns: [table.userId],
+      foreignColumns: [users.id],
+      name: "team_members_userId_fkey",
+    })
+      .onUpdate("cascade")
+      .onDelete("cascade"),
+  ],
+);
+
+/** Invitation à rejoindre une équipe (PENDING/ACCEPTED/DECLINED/CANCELLED). */
+export const teamInvites = pgTable(
+  "team_invites",
+  {
+    id: text()
+      .primaryKey()
+      .notNull()
+      .$defaultFn(() => createId()),
+    teamId: text().notNull(),
+    userId: text().notNull(),
+    invitedById: text(),
+    status: text().default("PENDING").notNull(),
+    message: text(),
+    createdAt: timestamp({ precision: 3, mode: "string" })
+      .default(sql`CURRENT_TIMESTAMP`)
+      .notNull(),
+    respondedAt: timestamp({ precision: 3, mode: "string" }),
+  },
+  (table) => [
+    uniqueIndex("team_invites_teamId_userId_key").using(
+      "btree",
+      table.teamId.asc().nullsLast().op("text_ops"),
+      table.userId.asc().nullsLast().op("text_ops"),
+    ),
+    index("team_invites_userId_idx").using("btree", table.userId.asc().nullsLast().op("text_ops")),
+    index("team_invites_status_idx").using("btree", table.status.asc().nullsLast().op("text_ops")),
+    foreignKey({
+      columns: [table.teamId],
+      foreignColumns: [teams.id],
+      name: "team_invites_teamId_fkey",
+    })
+      .onUpdate("cascade")
+      .onDelete("cascade"),
+    foreignKey({
+      columns: [table.userId],
+      foreignColumns: [users.id],
+      name: "team_invites_userId_fkey",
+    })
+      .onUpdate("cascade")
+      .onDelete("cascade"),
+    foreignKey({
+      columns: [table.invitedById],
+      foreignColumns: [users.id],
+      name: "team_invites_invitedById_fkey",
+    })
+      .onUpdate("cascade")
+      .onDelete("set null"),
+  ],
+);
+
+/** Messages du chat / partage d'équipe (kind TEXT/SHARE_DECK/SHARE_BEY/SYSTEM). */
+export const teamMessages = pgTable(
+  "team_messages",
+  {
+    id: text()
+      .primaryKey()
+      .notNull()
+      .$defaultFn(() => createId()),
+    teamId: text().notNull(),
+    userId: text().notNull(),
+    content: text().notNull(),
+    kind: text().default("TEXT").notNull(),
+    refId: text(),
+    attachments: jsonb().$type<unknown[]>().default([]).notNull(),
+    createdAt: timestamp({ precision: 3, mode: "string" })
+      .default(sql`CURRENT_TIMESTAMP`)
+      .notNull(),
+    editedAt: timestamp({ precision: 3, mode: "string" }),
+    deletedAt: timestamp({ precision: 3, mode: "string" }),
+  },
+  (table) => [
+    index("team_messages_teamId_createdAt_idx").using(
+      "btree",
+      table.teamId.asc().nullsLast().op("text_ops"),
+      table.createdAt.asc().nullsLast().op("timestamp_ops"),
+    ),
+    foreignKey({
+      columns: [table.teamId],
+      foreignColumns: [teams.id],
+      name: "team_messages_teamId_fkey",
+    })
+      .onUpdate("cascade")
+      .onDelete("cascade"),
+    foreignKey({
+      columns: [table.userId],
+      foreignColumns: [users.id],
+      name: "team_messages_userId_fkey",
     })
       .onUpdate("cascade")
       .onDelete("cascade"),
@@ -2058,3 +2297,293 @@ export const botConfig = pgTable("bot_config", {
 });
 
 export type BotConfigRow = typeof botConfig.$inferSelect;
+
+/* -------------------------------------------------------------------------- */
+/* Sondages (vote type Google Forms) + tier lists communautaires (migration 0005) */
+/* -------------------------------------------------------------------------- */
+
+/** Sondage communautaire (kind SINGLE/MULTIPLE/RATING). */
+export const polls = pgTable(
+  "polls",
+  {
+    id: text()
+      .primaryKey()
+      .notNull()
+      .$defaultFn(() => createId()),
+    slug: text().notNull(),
+    question: text().notNull(),
+    description: text(),
+    kind: text().default("SINGLE").notNull(),
+    category: text(),
+    season: animeGeneration(),
+    imageUrl: text(),
+    isFeatured: boolean().default(false).notNull(),
+    isClosed: boolean().default(false).notNull(),
+    isPublished: boolean().default(true).notNull(),
+    totalVotes: integer().default(0).notNull(),
+    createdById: text(),
+    createdAt: timestamp({ precision: 3, mode: "string" })
+      .default(sql`CURRENT_TIMESTAMP`)
+      .notNull(),
+    updatedAt: timestamp({ precision: 3, mode: "string" })
+      .notNull()
+      .$onUpdate(() => new Date().toISOString()),
+  },
+  (table) => [
+    uniqueIndex("polls_slug_key").using("btree", table.slug.asc().nullsLast().op("text_ops")),
+    index("polls_isFeatured_idx").using("btree", table.isFeatured.asc().nullsLast().op("bool_ops")),
+    foreignKey({
+      columns: [table.createdById],
+      foreignColumns: [users.id],
+      name: "polls_createdById_fkey",
+    })
+      .onUpdate("cascade")
+      .onDelete("set null"),
+  ],
+);
+
+export const pollOptions = pgTable(
+  "poll_options",
+  {
+    id: text()
+      .primaryKey()
+      .notNull()
+      .$defaultFn(() => createId()),
+    pollId: text().notNull(),
+    label: text().notNull(),
+    imageUrl: text(),
+    displayOrder: integer().default(0).notNull(),
+    voteCount: integer().default(0).notNull(),
+  },
+  (table) => [
+    index("poll_options_pollId_idx").using("btree", table.pollId.asc().nullsLast().op("text_ops")),
+    foreignKey({
+      columns: [table.pollId],
+      foreignColumns: [polls.id],
+      name: "poll_options_pollId_fkey",
+    })
+      .onUpdate("cascade")
+      .onDelete("cascade"),
+  ],
+);
+
+export const pollVotes = pgTable(
+  "poll_votes",
+  {
+    id: text()
+      .primaryKey()
+      .notNull()
+      .$defaultFn(() => createId()),
+    pollId: text().notNull(),
+    optionId: text().notNull(),
+    userId: text(),
+    anonId: text(),
+    rating: integer(),
+    createdAt: timestamp({ precision: 3, mode: "string" })
+      .default(sql`CURRENT_TIMESTAMP`)
+      .notNull(),
+  },
+  (table) => [
+    index("poll_votes_pollId_idx").using("btree", table.pollId.asc().nullsLast().op("text_ops")),
+    foreignKey({
+      columns: [table.pollId],
+      foreignColumns: [polls.id],
+      name: "poll_votes_pollId_fkey",
+    })
+      .onUpdate("cascade")
+      .onDelete("cascade"),
+    foreignKey({
+      columns: [table.optionId],
+      foreignColumns: [pollOptions.id],
+      name: "poll_votes_optionId_fkey",
+    })
+      .onUpdate("cascade")
+      .onDelete("cascade"),
+    foreignKey({
+      columns: [table.userId],
+      foreignColumns: [users.id],
+      name: "poll_votes_userId_fkey",
+    })
+      .onUpdate("cascade")
+      .onDelete("cascade"),
+  ],
+);
+
+/** Tier list communautaire (kind BEY/CHARACTER/SEASON). */
+export const tierLists = pgTable(
+  "tier_lists",
+  {
+    id: text()
+      .primaryKey()
+      .notNull()
+      .$defaultFn(() => createId()),
+    slug: text().notNull(),
+    title: text().notNull(),
+    description: text(),
+    kind: text().default("BEY").notNull(),
+    season: animeGeneration(),
+    imageUrl: text(),
+    isFeatured: boolean().default(false).notNull(),
+    isPublished: boolean().default(true).notNull(),
+    totalSubmissions: integer().default(0).notNull(),
+    createdById: text(),
+    createdAt: timestamp({ precision: 3, mode: "string" })
+      .default(sql`CURRENT_TIMESTAMP`)
+      .notNull(),
+    updatedAt: timestamp({ precision: 3, mode: "string" })
+      .notNull()
+      .$onUpdate(() => new Date().toISOString()),
+  },
+  (table) => [
+    uniqueIndex("tier_lists_slug_key").using("btree", table.slug.asc().nullsLast().op("text_ops")),
+    index("tier_lists_kind_idx").using("btree", table.kind.asc().nullsLast().op("text_ops")),
+    foreignKey({
+      columns: [table.createdById],
+      foreignColumns: [users.id],
+      name: "tier_lists_createdById_fkey",
+    })
+      .onUpdate("cascade")
+      .onDelete("set null"),
+  ],
+);
+
+export const tierListSubjects = pgTable(
+  "tier_list_subjects",
+  {
+    id: text()
+      .primaryKey()
+      .notNull()
+      .$defaultFn(() => createId()),
+    tierListId: text().notNull(),
+    label: text().notNull(),
+    imageUrl: text(),
+    refType: text(),
+    refId: text(),
+    displayOrder: integer().default(0).notNull(),
+  },
+  (table) => [
+    index("tier_list_subjects_tierListId_idx").using(
+      "btree",
+      table.tierListId.asc().nullsLast().op("text_ops"),
+    ),
+    foreignKey({
+      columns: [table.tierListId],
+      foreignColumns: [tierLists.id],
+      name: "tier_list_subjects_tierListId_fkey",
+    })
+      .onUpdate("cascade")
+      .onDelete("cascade"),
+  ],
+);
+
+export const tierListVotes = pgTable(
+  "tier_list_votes",
+  {
+    id: text()
+      .primaryKey()
+      .notNull()
+      .$defaultFn(() => createId()),
+    tierListId: text().notNull(),
+    userId: text(),
+    anonId: text(),
+    createdAt: timestamp({ precision: 3, mode: "string" })
+      .default(sql`CURRENT_TIMESTAMP`)
+      .notNull(),
+    updatedAt: timestamp({ precision: 3, mode: "string" })
+      .notNull()
+      .$onUpdate(() => new Date().toISOString()),
+  },
+  (table) => [
+    index("tier_list_votes_tierListId_idx").using(
+      "btree",
+      table.tierListId.asc().nullsLast().op("text_ops"),
+    ),
+    foreignKey({
+      columns: [table.tierListId],
+      foreignColumns: [tierLists.id],
+      name: "tier_list_votes_tierListId_fkey",
+    })
+      .onUpdate("cascade")
+      .onDelete("cascade"),
+    foreignKey({
+      columns: [table.userId],
+      foreignColumns: [users.id],
+      name: "tier_list_votes_userId_fkey",
+    })
+      .onUpdate("cascade")
+      .onDelete("cascade"),
+  ],
+);
+
+export const tierListPlacements = pgTable(
+  "tier_list_placements",
+  {
+    id: text()
+      .primaryKey()
+      .notNull()
+      .$defaultFn(() => createId()),
+    voteId: text().notNull(),
+    subjectId: text().notNull(),
+    tier: text().notNull(),
+  },
+  (table) => [
+    index("tier_list_placements_voteId_idx").using(
+      "btree",
+      table.voteId.asc().nullsLast().op("text_ops"),
+    ),
+    index("tier_list_placements_subjectId_idx").using(
+      "btree",
+      table.subjectId.asc().nullsLast().op("text_ops"),
+    ),
+    foreignKey({
+      columns: [table.voteId],
+      foreignColumns: [tierListVotes.id],
+      name: "tier_list_placements_voteId_fkey",
+    })
+      .onUpdate("cascade")
+      .onDelete("cascade"),
+    foreignKey({
+      columns: [table.subjectId],
+      foreignColumns: [tierListSubjects.id],
+      name: "tier_list_placements_subjectId_fkey",
+    })
+      .onUpdate("cascade")
+      .onDelete("cascade"),
+  ],
+);
+
+/** Éditions des Beyblade Awards (vidéo de résultats + visibilité). Migration 0006. */
+export const awardsEditions = pgTable(
+  "awards_editions",
+  {
+    id: text()
+      .primaryKey()
+      .notNull()
+      .$defaultFn(() => createId()),
+    year: integer().notNull(),
+    slug: text().notNull(),
+    title: text().notNull(),
+    description: text(),
+    videoUrl: text(),
+    videoId: text(),
+    pollCategory: text().notNull(),
+    isPublished: boolean().default(false).notNull(),
+    isVotingOpen: boolean().default(false).notNull(),
+    createdAt: timestamp({ precision: 3, mode: "string" })
+      .default(sql`CURRENT_TIMESTAMP`)
+      .notNull(),
+    updatedAt: timestamp({ precision: 3, mode: "string" })
+      .notNull()
+      .$onUpdate(() => new Date().toISOString()),
+  },
+  (table) => [
+    uniqueIndex("awards_editions_year_key").using(
+      "btree",
+      table.year.asc().nullsLast().op("int4_ops"),
+    ),
+    uniqueIndex("awards_editions_slug_key").using(
+      "btree",
+      table.slug.asc().nullsLast().op("text_ops"),
+    ),
+  ],
+);
