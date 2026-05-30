@@ -60,7 +60,8 @@ export function SerpTabs({ active, onChange, facets }: SerpTabsProps) {
                     <IconSparkle />
                   </span>
                 )}
-                {showCount ? `${t.label} (${count})` : t.label}
+                <span className={styles.tabLabel}>{t.label}</span>
+                {showCount && <span className={styles.count}>{count}</span>}
               </button>
             </li>
           );

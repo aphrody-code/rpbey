@@ -91,34 +91,25 @@ export function SearchClient({ groups, recommendations }: SearchClientProps) {
   }, []);
 
   // ── Recherche live : debounce 150ms, déclenché à chaque frappe ───────────────
+  // Pertinence globale de la vue « Tous » (ranking serveur BM25F sur l'index complet).
   const [liveResults, setLiveResults] = React.useState<GlobalSearchItem[]>([]);
-  const [liveFacets, setLiveFacets] = React.useState<Record<string, number>>({});
 
   React.useEffect(() => {
     if (!query.trim()) {
       setLiveResults([]);
-      setLiveFacets({});
       return;
     }
     const tid = setTimeout(async () => {
       try {
-        // Appel API live avec q (BM25F + facettes côté serveur)
-        const res = await globalSearch({ query: { q: query, limit: 50 } });
+        const res = await globalSearch({ query: { q: query, limit: 60 } });
         const payload = res.data?.data;
         if (res.data?.ok && payload) {
-          const items = payload.data ?? [];
-          setLiveResults(items as GlobalSearchItem[]);
-          setLiveFacets(payload.facets ?? facetCounts(items as GlobalSearchItem[], query));
+          setLiveResults((payload.data ?? []) as GlobalSearchItem[]);
         } else {
-          // Fallback : ranking client-side sur l'index complet
-          const ranked = rankSearch(searchIndex, query, { limit: 50 });
-          setLiveResults(ranked);
-          setLiveFacets(facetCounts(searchIndex, query));
+          setLiveResults(rankSearch(searchIndex, query, { limit: 60 }));
         }
       } catch {
-        const ranked = rankSearch(searchIndex, query, { limit: 50 });
-        setLiveResults(ranked);
-        setLiveFacets(facetCounts(searchIndex, query));
+        setLiveResults(rankSearch(searchIndex, query, { limit: 60 }));
       }
     }, 150);
     return () => clearTimeout(tid);
@@ -131,11 +122,27 @@ export function SearchClient({ groups, recommendations }: SearchClientProps) {
   );
 
   // ── Résultats filtrés par catégorie active ────────────────────────────────
+  // « Tous » → ranking API (pertinence globale). Catégorie → re-rank de l'INDEX
+  // COMPLET filtré : on montre TOUS les items de la catégorie (pas seulement ceux
+  // tombés dans le top-N global), donc le compteur de l'onglet ⇔ les résultats.
   const results = React.useMemo((): GlobalSearchItem[] => {
-    const base = liveResults.length > 0 ? liveResults : rankSearch(searchIndex, query);
-    if (category === "all" || category === "ai") return base;
-    return base.filter((i) => i.category === category);
+    if (!query.trim()) return [];
+    if (category === "all" || category === "ai") {
+      return liveResults.length > 0 ? liveResults : rankSearch(searchIndex, query, { limit: 60 });
+    }
+    const pool = searchIndex.length > 0 ? searchIndex : liveResults;
+    // Limite haute (couvre le max de facette observé, ex. combos) → le compteur
+    // de l'onglet correspond aux résultats affichés.
+    return rankSearch(pool, query, { category, limit: 300 });
   }, [liveResults, searchIndex, query, category]);
+
+  // ── Compteurs de facette = MÊME source que les vues catégorie (index complet) ──
+  // → le nombre affiché sur chaque onglet == le nombre de résultats au clic.
+  const facets = React.useMemo((): Record<string, number> => {
+    if (!query.trim()) return {};
+    const pool = searchIndex.length > 0 ? searchIndex : liveResults;
+    return facetCounts(pool, query);
+  }, [searchIndex, liveResults, query]);
 
   // ── Knowledge Panel : entité produit matchée ──────────────────────────────
   const matchedGroup = React.useMemo((): BxProductGroup | null => {
@@ -294,7 +301,7 @@ export function SearchClient({ groups, recommendations }: SearchClientProps) {
           </div>
 
           {/* Onglets facettes */}
-          <SerpTabs active={category} onChange={handleTabChange} facets={liveFacets} />
+          <SerpTabs active={category} onChange={handleTabChange} facets={facets} />
         </div>
 
         {/* Corps */}

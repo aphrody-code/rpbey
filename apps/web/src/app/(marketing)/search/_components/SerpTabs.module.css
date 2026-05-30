@@ -104,6 +104,35 @@
   transform: scaleX(1);
 }
 
+.tabLabel {
+  position: relative;
+  z-index: 1;
+}
+
+/* Compteur de facette = chip M3 ; teinte marque sur l'onglet actif */
+.count {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 6px;
+  border-radius: var(--md-sys-shape-corner-full, 9999px);
+  font: var(--md-sys-typescale-label-small, 500 0.6875rem/1rem system-ui);
+  background: var(--md-sys-color-surface-container-highest, #42302e);
+  color: var(--md-sys-color-on-surface-variant, #dfbfbb);
+  transition:
+    background-color 0.2s var(--md-sys-motion-standard, cubic-bezier(0.2, 0, 0, 1)),
+    color 0.2s var(--md-sys-motion-standard, cubic-bezier(0.2, 0, 0, 1));
+}
+
+.tabActive .count {
+  background: color-mix(in srgb, var(--rpb-primary, #dc2626) 22%, transparent);
+  color: var(--md-sys-color-primary, #ffb4ab);
+}
+
 /* Cercle sparkle IA dans l'onglet Mode IA */
 .aiSparkle {
   width: 18px;
