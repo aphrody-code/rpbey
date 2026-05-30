@@ -1,5 +1,7 @@
 import "server-only";
-import { and, count, db, desc, eq, inArray, isNotNull, schema, sql } from "@/lib/db";
+import { and, count, db, desc, eq, inArray, isNotNull, or, schema, sql } from "@/lib/db";
+import { SUPERADMIN_DISCORD_IDS } from "@/lib/constants";
+import type { AwardLeader } from "@/components/polls/shared";
 import type {
   AdminContentResponse,
   AwardsEdition,
@@ -92,7 +94,21 @@ export async function listPolls(
 ): Promise<PollsListResponse> {
   const { page, pageSize, category, season, featured } = query;
   const filters = [];
-  if (!opts.includeUnpublished) filters.push(eq(schema.polls.isPublished, true));
+  if (!opts.includeUnpublished) {
+    filters.push(eq(schema.polls.isPublished, true));
+    // Public : on ne montre QUE les sondages créés par un admin/superadmin
+    // (les sondages d'origine non-admin / seed / null sont masqués).
+    const adminUsers = db
+      .select({ id: schema.users.id })
+      .from(schema.users)
+      .where(
+        or(
+          inArray(schema.users.role, ["admin", "superadmin"]),
+          inArray(schema.users.discordId, [...SUPERADMIN_DISCORD_IDS]),
+        ),
+      );
+    filters.push(inArray(schema.polls.createdById, adminUsers));
+  }
   if (category) filters.push(eq(schema.polls.category, category));
   if (season) filters.push(eq(schema.polls.season, season as never));
   if (featured !== undefined) filters.push(eq(schema.polls.isFeatured, featured));
@@ -572,6 +588,66 @@ export async function listPublishedEditions(): Promise<AwardsEdition[]> {
     .orderBy(desc(schema.awardsEditions.year));
   const counts = await countByCategory(rows.map((r) => r.pollCategory));
   return rows.map((r) => editionToContract(r, counts.get(r.pollCategory) ?? 0));
+}
+
+/**
+ * Palmarès EN TÊTE des Beyblade Awards : pour chaque sondage-award publié de la
+ * `category`, l'option (nominé) la plus votée + son pourcentage. Sert la
+ * prévisualisation des gagnants sur la page publique des sondages.
+ */
+export async function getAwardsLeaders(category: string): Promise<AwardLeader[]> {
+  const pollsRows = await db
+    .select({
+      id: schema.polls.id,
+      slug: schema.polls.slug,
+      title: schema.polls.question,
+      totalVotes: schema.polls.totalVotes,
+    })
+    .from(schema.polls)
+    .where(and(eq(schema.polls.category, category), eq(schema.polls.isPublished, true)))
+    .orderBy(desc(schema.polls.totalVotes), desc(schema.polls.createdAt));
+  if (pollsRows.length === 0) return [];
+
+  const opts = await db
+    .select({
+      pollId: schema.pollOptions.pollId,
+      label: schema.pollOptions.label,
+      imageUrl: schema.pollOptions.imageUrl,
+      voteCount: schema.pollOptions.voteCount,
+    })
+    .from(schema.pollOptions)
+    .where(
+      inArray(
+        schema.pollOptions.pollId,
+        pollsRows.map((p) => p.id),
+      ),
+    );
+
+  // Option la plus votée par sondage.
+  const top = new Map<string, { label: string; imageUrl: string | null; voteCount: number }>();
+  for (const o of opts) {
+    const cur = top.get(o.pollId);
+    if (!cur || o.voteCount > cur.voteCount) {
+      top.set(o.pollId, { label: o.label, imageUrl: o.imageUrl, voteCount: o.voteCount });
+    }
+  }
+
+  return pollsRows.map((p) => {
+    const t = top.get(p.id);
+    return {
+      pollSlug: p.slug,
+      pollTitle: p.title,
+      totalVotes: p.totalVotes,
+      leader: t
+        ? {
+            label: t.label,
+            imageUrl: t.imageUrl,
+            voteCount: t.voteCount,
+            percent: p.totalVotes > 0 ? Math.round((t.voteCount / p.totalVotes) * 100) : 0,
+          }
+        : null,
+    };
+  });
 }
 
 /** Toutes les éditions (admin). */

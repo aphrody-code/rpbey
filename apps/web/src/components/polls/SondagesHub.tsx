@@ -22,9 +22,12 @@ import { AwardCard } from "./AwardCard";
 import { AwardsEditionBanner } from "./AwardsEditionBanner";
 import { PollCard } from "./PollCard";
 import { TierListCard } from "./TierListCard";
+import { AwardsWinnersPreview } from "./AwardsWinnersPreview";
+import type { AwardLeader } from "./shared";
 
 interface Props {
   awards: PollSummary[];
+  awardsLeaders: AwardLeader[];
   polls: PollSummary[];
   tierLists: TierListSummary[];
 }
@@ -71,7 +74,7 @@ function SectionTitle({
   );
 }
 
-export function SondagesHub({ awards, polls, tierLists }: Props) {
+export function SondagesHub({ awards, awardsLeaders, polls, tierLists }: Props) {
   const theme = useTheme();
   const [tab, setTab] = useState(0);
   const gold = "#ffca28";
@@ -132,6 +135,9 @@ export function SondagesHub({ awards, polls, tierLists }: Props) {
               sx={{ fontWeight: 800, bgcolor: alpha(gold, 0.2) }}
             />
           </Stack>
+
+          {/* Prévisualisation des gagnants en tête (vote live) */}
+          <AwardsWinnersPreview leaders={awardsLeaders} />
 
           <Grid container spacing={2}>
             {awards.map((poll) => (

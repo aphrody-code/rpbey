@@ -13,6 +13,14 @@ export const AWARDS_CATEGORY = "Beyblade Awards France 2025";
 export const AWARDS_GOOGLE_FORM_URL =
   "https://docs.google.com/forms/d/e/1FAIpQLSeaemH2jJkqSXR8G6Lm_JDtXI3gs3bytOfFEvXC5nOunbUauw/viewform";
 
+/** Gagnant EN TÊTE d'une catégorie d'award (option la plus votée) — preview palmarès. */
+export interface AwardLeader {
+  pollSlug: string;
+  pollTitle: string;
+  totalVotes: number;
+  leader: { label: string; imageUrl: string | null; voteCount: number; percent: number } | null;
+}
+
 /** Réponse standard des routes : `{ ok, data }` ou `{ ok:false, error }`. */
 export interface ApiEnvelope<T> {
   ok: boolean;
