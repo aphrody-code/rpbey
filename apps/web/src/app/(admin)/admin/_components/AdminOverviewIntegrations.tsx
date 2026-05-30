@@ -14,7 +14,8 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 
-export default function AdminOverviewIntegrations(_props: { env: Record<string, string> }) {
+export default function AdminOverviewIntegrations({ env }: { env: Record<string, string> }) {
+  const twitchConfigured = env.TWITCH_CLIENT_ID === "set";
   const [challongeStatus, setChallongeStatus] = useState<"idle" | "loading" | "success" | "error">(
     "idle",
   );
@@ -121,7 +122,12 @@ export default function AdminOverviewIntegrations(_props: { env: Record<string, 
               >
                 Twitch
               </Typography>
-              <Chip label="Actif" color="success" size="small" variant="outlined" />
+              <Chip
+                label={twitchConfigured ? "Actif" : "Non configuré"}
+                color={twitchConfigured ? "success" : "default"}
+                size="small"
+                variant="outlined"
+              />
             </Stack>
             <Typography
               variant="caption"
@@ -129,43 +135,7 @@ export default function AdminOverviewIntegrations(_props: { env: Record<string, 
                 color: "text.secondary",
               }}
             >
-              Surveillance du stream tv_rpb
-            </Typography>
-          </Box>
-
-          <Box
-            sx={{
-              flex: 1,
-              p: 2,
-              borderRadius: 2,
-              bgcolor: "background.default",
-              border: "1px solid",
-              borderColor: "divider",
-            }}
-          >
-            <Stack
-              direction="row"
-              sx={{
-                justifyContent: "space-between",
-                mb: 2,
-              }}
-            >
-              <Typography
-                sx={{
-                  fontWeight: "bold",
-                }}
-              >
-                Cloud
-              </Typography>
-              <Chip label="Configuré" color="info" size="small" variant="outlined" />
-            </Stack>
-            <Typography
-              variant="caption"
-              sx={{
-                color: "text.secondary",
-              }}
-            >
-              Google Drive & Sheets
+              {twitchConfigured ? "Surveillance du stream tv_rpb" : "TWITCH_CLIENT_ID absent"}
             </Typography>
           </Box>
         </Stack>

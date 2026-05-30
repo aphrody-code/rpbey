@@ -60,25 +60,10 @@ async function fetchTikTokVideos(username: string): Promise<TikTokVideo[]> {
   }
 }
 
-function getFallbackVideos(username: string): TikTokVideo[] {
-  if (username === "rpbeyblade1") {
-    return [
-      {
-        id: "fallback-1",
-        desc: "Bienvenue sur le TikTok de la RPB ! 🐉",
-        createTime: Math.floor(Date.now() / 1000),
-        cover: "/banner.webp",
-        playUrl: "",
-        author: {
-          username: "rpbeyblade1",
-          nickname: "RPB",
-          avatarThumb: "/logo.webp",
-        },
-        stats: { playCount: 1500, diggCount: 120 },
-        url: "https://www.tiktok.com/@rpbeyblade1",
-      },
-    ];
-  }
+// Aucun fallback fabriqué : si l'API TikTok échoue (les IP cloud sont souvent
+// bloquées), on renvoie une liste vide et la section TikTok se masque d'elle-même
+// (TvFeed : `if (videos.length === 0) return null`). Jamais de fausses métriques.
+function getFallbackVideos(_username: string): TikTokVideo[] {
   return [];
 }
 
