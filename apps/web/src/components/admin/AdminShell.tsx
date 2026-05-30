@@ -2,13 +2,17 @@
 
 import {
   Article,
+  CompareArrows,
   Dashboard,
+  Diversity3,
   Groups,
+  Home,
   Hub,
   Insights,
   Launch,
   Leaderboard,
   Link as LinkIcon,
+  LiveTv,
   Logout,
   Menu as MenuIcon,
   People,
@@ -17,6 +21,7 @@ import {
   Terminal,
   Theaters,
   Videocam,
+  Whatshot,
   WorkspacePremium,
 } from "@mui/icons-material";
 import {
@@ -67,6 +72,19 @@ const ADMIN_NAV_ITEMS = [
   { label: "Équipe", path: "/admin/staff", icon: People },
   { label: "Utilisateurs", path: "/admin/users", icon: People },
   { label: "Configuration", path: "/admin/config", icon: Settings },
+];
+
+// Accès rapide aux pages publiques du site (preview front depuis la console admin).
+const SITE_LINKS = [
+  { label: "Accueil", path: "/", icon: Home },
+  { label: "Tournois", path: "/tournaments", icon: TrophyIcon },
+  { label: "Classements", path: "/rankings", icon: Leaderboard },
+  { label: "Équipes", path: "/equipes", icon: Diversity3 },
+  { label: "Sondages", path: "/sondages", icon: Poll },
+  { label: "Anime", path: "/anime", icon: Theaters },
+  { label: "Meta", path: "/meta", icon: Whatshot },
+  { label: "TV", path: "/tv", icon: LiveTv },
+  { label: "Comparateur", path: "/comparateur", icon: CompareArrows },
 ];
 
 export function AdminShell({ children }: { children: React.ReactNode }) {
@@ -222,6 +240,61 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
                           fontWeight: isActive ? 700 : 500,
                         },
                       },
+                    }}
+                  />
+                </ListItemButton>
+              </ListItem>
+            );
+          })}
+        </List>
+
+        {/* Accès rapide au site public */}
+        <Typography
+          variant="caption"
+          sx={{
+            fontWeight: "bold",
+            color: "text.secondary",
+            px: 3,
+            mt: 2,
+            mb: 1,
+            display: "block",
+            textTransform: "uppercase",
+            letterSpacing: "0.1em",
+          }}
+        >
+          Site public
+        </Typography>
+        <List disablePadding>
+          {SITE_LINKS.map((item) => {
+            const Icon = item.icon;
+            return (
+              <ListItem key={item.path} disablePadding>
+                <ListItemButton
+                  component={Link}
+                  href={item.path}
+                  onClick={() => setMobileOpen(false)}
+                  sx={{
+                    mx: 1.5,
+                    mb: 0.5,
+                    px: 3,
+                    py: 1.25,
+                    minHeight: 44,
+                    borderRadius: 0,
+                    gap: 1.5,
+                    color: "var(--md-sys-color-on-surface-variant)",
+                    "&:hover": {
+                      bgcolor: "var(--md-sys-color-surface-variant)",
+                      color: "var(--md-sys-color-on-surface)",
+                    },
+                  }}
+                >
+                  <ListItemIcon sx={{ minWidth: "auto", color: "inherit" }}>
+                    <Icon sx={{ fontSize: 20 }} />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={item.label}
+                    slotProps={{
+                      primary: { sx: { fontSize: "0.85rem", fontWeight: 500 } },
                     }}
                   />
                 </ListItemButton>

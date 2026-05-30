@@ -5,13 +5,22 @@ import {
   ArrowBack,
   Build,
   Casino,
+  CompareArrows,
+  Diversity3,
+  EmojiEvents,
   Groups,
   Launch,
+  Leaderboard,
+  LiveTv,
   Logout,
   MoreHoriz,
   Person,
+  Poll,
+  Search,
   Settings,
   Style,
+  Theaters,
+  Whatshot,
 } from "@mui/icons-material";
 import {
   AppBar,
@@ -84,6 +93,20 @@ const NAV_ITEMS: NavItem[] = [
     icon: Settings,
     path: "/dashboard/settings",
   },
+];
+
+// Sections publiques du site — accessibles depuis le dashboard (sinon cul-de-sac).
+// Miroir du rail principal (IconNav) ; "Builder" est déjà couvert par "Mes Decks".
+const SITE_ITEMS: NavItem[] = [
+  { label: "Recherche", icon: Search, path: "/search" },
+  { label: "Tournois", icon: EmojiEvents, path: "/tournaments" },
+  { label: "Classements", icon: Leaderboard, path: "/rankings" },
+  { label: "Équipes", icon: Diversity3, path: "/equipes" },
+  { label: "Sondages", icon: Poll, path: "/sondages" },
+  { label: "Meta", icon: Whatshot, path: "/meta" },
+  { label: "Anime", icon: Theaters, path: "/anime" },
+  { label: "TV", icon: LiveTv, path: "/tv" },
+  { label: "Comparateur", icon: CompareArrows, path: "/comparateur" },
 ];
 
 const ADMIN_ITEMS: NavItem[] = [
@@ -276,6 +299,73 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
                         sx: {
                           fontSize: "0.9rem",
                           fontWeight: isActive ? 700 : 500,
+                        },
+                      },
+                    }}
+                  />
+                </ListItemButton>
+              </ListItem>
+            );
+          })}
+        </List>
+
+        <List
+          disablePadding
+          sx={{ mt: 2 }}
+          subheader={
+            <Typography
+              variant="caption"
+              sx={{
+                fontWeight: "bold",
+                color: "text.secondary",
+                px: 3,
+                mb: 1,
+                display: "block",
+                textTransform: "uppercase",
+                letterSpacing: "0.1em",
+              }}
+            >
+              Communauté & Site
+            </Typography>
+          }
+        >
+          {SITE_ITEMS.map((item) => {
+            const Icon = item.icon;
+            return (
+              <ListItem key={item.path} disablePadding>
+                <ListItemButton
+                  component={Link}
+                  href={item.path}
+                  onClick={() => setMobileOpen(false)}
+                  sx={{
+                    mx: 1.5,
+                    mb: 0.5,
+                    px: 3,
+                    py: 1.5,
+                    minHeight: 56,
+                    borderRadius: 0,
+                    gap: 1.5,
+                    color: "text.primary",
+                    "&:hover": {
+                      bgcolor: alpha(theme.palette.primary.main, 0.08),
+                    },
+                  }}
+                >
+                  <ListItemIcon
+                    sx={{
+                      minWidth: "auto",
+                      color: "text.secondary",
+                    }}
+                  >
+                    <Icon sx={{ fontSize: 24 }} />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={item.label}
+                    slotProps={{
+                      primary: {
+                        sx: {
+                          fontSize: "0.9rem",
+                          fontWeight: 500,
                         },
                       },
                     }}
