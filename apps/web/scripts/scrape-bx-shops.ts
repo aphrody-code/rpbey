@@ -283,6 +283,23 @@ interface ShopifyRaw {
   images?: { src: string }[];
   featured_image?: string;
 }
+const SHOPIFY_WHOLE_MAX_PAGES = 5; // 5 × 250 = 1250 produits scannés max (catalogue complet)
+
+function mapShopify(shop: Shop, currency: string, prods: ShopifyRaw[]): Product[] {
+  const root = `https://${shop.domain}`;
+  return prods.map((p) => {
+    const prices = (p.variants ?? []).map((v) => parseFloat(v.price)).filter((n) => n > 0);
+    return mkProduct(shop, currency, {
+      title: p.title,
+      price: prices.length ? Math.min(...prices) : null,
+      priceMax: prices.length ? Math.max(...prices) : null,
+      available: (p.variants ?? []).some((v) => v.available),
+      url: `${root}/products/${p.handle}`,
+      image: p.images?.[0]?.src ?? p.featured_image ?? null,
+    });
+  });
+}
+
 async function scrapeShopify(shop: Shop, currency: string): Promise<Product[] | null> {
   const root = `https://${shop.domain}`;
   const cands: { url: string; whole: boolean }[] = [];
@@ -302,23 +319,30 @@ async function scrapeShopify(shop: Shop, currency: string): Promise<Product[] | 
     let j = (await fetchJsonFast(url)) as { products?: ShopifyRaw[] } | null;
     if ((!j?.products || j.products.length === 0) && ci === 0)
       j = (await fetchJson(url)) as { products?: ShopifyRaw[] } | null;
-    const prods = j?.products;
+    let prods = j?.products;
     if (!Array.isArray(prods) || prods.length === 0) continue;
+    // Pagination : catalogue complet (whole) ou collection au plafond 250 → on
+    // continue à paginer tant qu'une page est pleine (catalogues > 250 produits).
+    if (prods.length >= 250) {
+      const accum = [...prods];
+      const maxPages = whole ? SHOPIFY_WHOLE_MAX_PAGES : 3;
+      for (let page = 2; page <= maxPages; page++) {
+        const sep = url.includes("?") ? "&" : "?";
+        const more = (await fetchJsonFast(`${url}${sep}page=${page}`)) as {
+          products?: ShopifyRaw[];
+        } | null;
+        const mp = more?.products;
+        if (!Array.isArray(mp) || mp.length === 0) break;
+        accum.push(...mp);
+        if (mp.length < 250) break;
+      }
+      prods = accum;
+    }
     const list = whole
       ? prods.filter((p) => BX_RE.test(`${p.title} ${p.product_type} ${p.tags}`))
       : prods;
     if (list.length === 0) continue;
-    return list.map((p) => {
-      const prices = (p.variants ?? []).map((v) => parseFloat(v.price)).filter((n) => n > 0);
-      return mkProduct(shop, currency, {
-        title: p.title,
-        price: prices.length ? Math.min(...prices) : null,
-        priceMax: prices.length ? Math.max(...prices) : null,
-        available: (p.variants ?? []).some((v) => v.available),
-        url: `${root}/products/${p.handle}`,
-        image: p.images?.[0]?.src ?? p.featured_image ?? null,
-      });
-    });
+    return mapShopify(shop, currency, list);
   }
   return null;
 }
@@ -434,7 +458,50 @@ async function scrapeJsonLd(shop: Shop, currency: string): Promise<Product[] | n
       /* skip malformed */
     }
   }
+  // Fallback microdata (Presta/custom : prix dans itemprop, pas en JSON-LD).
+  if (out.length === 0) {
+    const md = extractMicrodata(shop, currency, html);
+    if (md.length) out.push(...md);
+  }
   return out.length ? out : null;
+}
+
+// Extraction microdata schema.org (itemprop) + og:title — typique PrestaShop /
+// pages produit custom où le prix n'est pas exposé en JSON-LD.
+function extractMicrodata(shop: Shop, currency: string, html: string): Product[] {
+  const title =
+    html.match(/<meta[^>]+property=["']og:title["'][^>]+content=["']([^"']+)["']/i)?.[1] ??
+    html.match(/<title[^>]*>([^<]+)<\/title>/i)?.[1] ??
+    "";
+  if (!title || !BX_RE.test(title)) return [];
+  // Les attributs microdata/og:price sont en format machine (point décimal,
+  // jamais de séparateur de milliers) → parseFloat direct, PAS parsePrice (qui
+  // traiterait "12.99" comme "1299" pour les locales EUR).
+  const prices = [
+    ...html.matchAll(/itemprop=["']price["'][^>]*content=["']([\d.,]+)["']/gi),
+    ...html.matchAll(
+      /<meta[^>]+property=["']product:price:amount["'][^>]+content=["']([\d.,]+)["']/gi,
+    ),
+  ]
+    .map((m) => parseFloat((m[1] ?? "").replace(",", ".")))
+    .filter((n) => Number.isFinite(n) && n > 0);
+  if (prices.length === 0) return [];
+  const cur =
+    html.match(
+      /<meta[^>]+property=["']product:price:currency["'][^>]+content=["']([A-Z]{3})["']/i,
+    )?.[1] ?? currency;
+  const image =
+    html.match(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i)?.[1] ?? null;
+  return [
+    mkProduct(shop, cur, {
+      title: title.trim().slice(0, 150),
+      price: Math.min(...prices),
+      priceMax: Math.max(...prices),
+      available: !/out.?of.?stock|rupture|épuisé|sold.?out/i.test(html.slice(0, 4000)),
+      url: shop.url,
+      image,
+    }),
+  ];
 }
 
 function parsePrice(raw: string, currency: string): number | null {
@@ -534,6 +601,114 @@ async function scrapeBxc(shop: Shop, currency: string): Promise<Product[] | null
   }
 }
 
+// ── 5. bxc-engine via Tor (navigateur + exit non-datacenter) ──────
+// Pour les boutiques dont l'IP datacenter du VPS est bannie (301/403 direct
+// mais joignables via exit résidentiel/Tor). Lent — dernier recours, borné.
+const BXC_ENGINE = "/home/ubuntu/bxc/rust-bridge/target/release/bxc-engine";
+const TOR_PROXY = "socks5://127.0.0.1:9050";
+
+async function engineFetchHtml(url: string, timeoutMs: number): Promise<string | null> {
+  try {
+    const waitS = Math.max(6, Math.min(12, Math.round(timeoutMs / 4000)));
+    const proc = Bun.spawn(
+      [
+        BXC_ENGINE,
+        "--proxy",
+        TOR_PROXY,
+        "fetch",
+        url,
+        "--dump",
+        "html",
+        "--wait",
+        String(waitS),
+        "--timeout",
+        String(Math.round(timeoutMs / 1000)),
+      ],
+      { stdout: "pipe", stderr: "ignore" },
+    );
+    const timer = setTimeout(() => {
+      try {
+        proc.kill(9);
+      } catch {}
+    }, timeoutMs + 4000);
+    const html = await new Response(proc.stdout).text();
+    await proc.exited;
+    clearTimeout(timer);
+    if (!html || html.length < 300) return null;
+    if (
+      /just a moment|enable js and disable|datadome|px-captcha|access (denied|bloqu)/i.test(
+        html.slice(0, 1200),
+      )
+    )
+      return null;
+    return html;
+  } catch {
+    return null;
+  }
+}
+
+function extractLdAndMicrodata(shop: Shop, currency: string, html: string): Product[] {
+  const out: Product[] = [];
+  const blocks: string[] = [];
+  for (const m of html.matchAll(/<script[^>]+application\/ld\+json[^>]*>([\s\S]*?)<\/script>/gi))
+    if (m[1]) blocks.push(m[1].trim());
+  const visit = (node: unknown) => {
+    if (!node || typeof node !== "object") return;
+    const n = node as Record<string, unknown>;
+    const type = n["@type"];
+    const isProduct = type === "Product" || (Array.isArray(type) && type.includes("Product"));
+    if (isProduct && typeof n.name === "string" && BX_RE.test(n.name)) {
+      const offers = (Array.isArray(n.offers) ? n.offers : n.offers ? [n.offers] : []) as Record<
+        string,
+        unknown
+      >[];
+      const prices = offers
+        .map((o) =>
+          parseFloat(
+            String(o.price ?? (o.priceSpecification as Record<string, unknown>)?.price ?? ""),
+          ),
+        )
+        .filter((x) => Number.isFinite(x) && x > 0);
+      const cur = String(offers[0]?.priceCurrency ?? currency);
+      out.push(
+        mkProduct(shop, cur || currency, {
+          title: n.name,
+          price: prices.length ? Math.min(...prices) : null,
+          priceMax: prices.length ? Math.max(...prices) : null,
+          available: true,
+          url: typeof n.url === "string" ? n.url : shop.url,
+          image:
+            typeof n.image === "string"
+              ? n.image
+              : Array.isArray(n.image)
+                ? String(n.image[0])
+                : null,
+        }),
+      );
+    }
+    const items = n.itemListElement;
+    if (Array.isArray(items))
+      for (const it of items) visit((it as Record<string, unknown>).item ?? it);
+    if (Array.isArray(n["@graph"])) for (const g of n["@graph"]) visit(g);
+  };
+  for (const b of blocks) {
+    try {
+      visit(JSON.parse(b));
+    } catch {
+      /* skip */
+    }
+  }
+  if (out.length === 0) out.push(...extractMicrodata(shop, currency, html));
+  return out;
+}
+
+async function scrapeEngineTor(shop: Shop, currency: string): Promise<Product[] | null> {
+  const html = await engineFetchHtml(shop.url, 60000);
+  if (!html) return null;
+  const out = extractLdAndMicrodata(shop, currency, html);
+  return out.length ? dedup(out) : null;
+}
+
 const SHOP_CURRENCY_OVERRIDES: Record<string, string> = {
   "beyblade-kingdom.com": "USD",
   "itsukijapan.com": "USD",
@@ -565,6 +740,11 @@ const MARKETPLACES = [
   "kaufland.de",
 ];
 
+// Boutiques (non-marketplaces) dont l'IP datacenter du VPS est bannie mais
+// joignables via un exit résidentiel : on tente bxc-engine + Tor en bout de
+// chaîne. L'engine étant lent (~30-60 s/site), on le réserve à cette allowlist.
+const ENGINE_TOR_DOMAINS = new Set(["depoort.com"]);
+
 // ── orchestration ─────────────────────────────────────────────────
 async function scrapeShop(shop: Shop): Promise<{ products: Product[]; platform: string }> {
   if (MARKETPLACES.includes(shop.domain)) {
@@ -585,6 +765,10 @@ async function scrapeShop(shop: Shop): Promise<{ products: Product[]; platform: 
     ["jsonld", scrapeJsonLd],
     // bxc (process spawn, plus lent) réservé aux boutiques à vrai catalogue BX
     ...(deepShop ? ([["bxc", scrapeBxc]] as [string, typeof scrapeBxc][]) : []),
+    // bxc-engine + Tor : dernier recours pour les sites bannis sur datacenter
+    ...(ENGINE_TOR_DOMAINS.has(shop.domain)
+      ? ([["engine-tor", scrapeEngineTor]] as [string, typeof scrapeEngineTor][])
+      : []),
   ];
   for (const [platform, fn] of chain) {
     const r = await fn(shop, currency);
