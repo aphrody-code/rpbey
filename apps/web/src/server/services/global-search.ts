@@ -1,7 +1,8 @@
 import "server-only";
 import { globalSearch } from "@rpbey/api-client";
-import type { GlobalSearchItem } from "@rpbey/api-contract";
+import type { EnrichedCombo, GlobalSearchItem } from "@rpbey/api-contract";
 import { loadCatalog, computeGroups, groupSlug } from "@/lib/bx-catalog";
+import { canonicalKey, lookupTier, type PartType } from "@/lib/beyblade-entity";
 import { loadJsonSafe } from "@/lib/data-cache";
 import { isRemote, unwrap } from "@/server/data-source";
 import { listAnimeSeries, listParts, listRankings, listTournaments } from "@/server/dal/search";
@@ -86,24 +87,8 @@ const SITE_PAGES: Array<{ title: string; url: string; desc: string }> = [
   },
 ];
 
-const BLADE_TIERS: Record<string, string> = {
-  "wizard rod": "S",
-  "phoenix wing": "S",
-  "cobalt dragoon": "S",
-  "shark edge": "A",
-  "shark scale": "A",
-  "dran buster": "A",
-  "tyranno beat": "A",
-  "hells chain": "A",
-  "hells scythe": "B",
-  "unicorn sting": "B",
-  "weiss tiger": "B",
-  "knight shield": "B",
-  "dran sword": "B",
-  "knight lance": "B",
-  "leon claw": "B",
-  "viper tail": "B",
-};
+// Les tables de tier (blade/ratchet/bit) vivent désormais dans le module canonique
+// `@/lib/beyblade-entity` (source unique, ex-dupliquée ici et dans recommendation-engine).
 
 export async function buildGlobalSearchIndex(): Promise<GlobalSearchItem[]> {
   // Standalone (Vercel) : l'index complet est servi par l'API distante (q absent).
@@ -136,14 +121,12 @@ export async function buildGlobalSearchIndex(): Promise<GlobalSearchItem[]> {
   // 2. Pièces (DB).
   const dbParts = await listParts();
   for (const part of dbParts) {
-    const nameLower = part.name.toLowerCase();
-    let tier = "C";
-    for (const [key, value] of Object.entries(BLADE_TIERS)) {
-      if (nameLower.includes(key) || key.includes(nameLower)) {
-        tier = value;
-        break;
-      }
-    }
+    // Tier via la table canonique partagée (blade/ratchet/bit selon le type).
+    const partType =
+      part.type === "BLADE" || part.type === "RATCHET" || part.type === "BIT"
+        ? (part.type as PartType)
+        : undefined;
+    const tier = lookupTier(part.name, partType) ?? "C";
     items.push({
       id: `part-${part.id}`,
       title: part.name,
@@ -365,24 +348,78 @@ export async function buildGlobalSearchIndex(): Promise<GlobalSearchItem[]> {
       }
     }
   }
+  // Décoration méta : `wbo-combos-enriched.json` (produit par enrich-combos.ts) joint
+  // les combos aux scores méta WBO + au buzz communauté. On indexe TOUS les combos
+  // agrégés (couverture maximale) mais on enrichit le top par qualité (tier, score
+  // méta, taux de victoire, buzz) — la couverture ne régresse pas, seul le contexte
+  // s'ajoute. Fichier optionnel : sans lui, fallback sur l'agrégat brut (Map vide).
+  const enrichedCombos = await loadJsonSafe<{ combos?: EnrichedCombo[] }>(
+    "data/wbo-combos-enriched.json",
+  );
+  const enrichedByLabel = new Map<string, EnrichedCombo>();
+  for (const e of enrichedCombos?.combos ?? []) enrichedByLabel.set(e.label.toLowerCase(), e);
+
   for (const [key, c] of comboMap) {
-    items.push({
-      id: `combo-${key}`,
-      title: c.label,
-      subtitle: `Combo méta · vu ${c.count}×${c.best === 1 ? " · gagnant" : ""}`,
-      category: "combo",
-      url: `/search?q=${encodeURIComponent(c.blade)}`,
-      details: c.player
-        ? `Top: ${c.player}${c.event ? ` (${c.event})` : ""}`
-        : "Combinaison vue en tournoi WBO",
-      badge: c.best === 1 ? "Combo gagnant" : "Combo",
-      source: "wbo",
-      popularity: c.count,
-    });
+    const e = enrichedByLabel.get(key);
+    if (e) {
+      // Combo enrichi : tier + score méta + stats de victoire + buzz dans le rendu,
+      // popularité pondérée (fréquence + victoires + score méta) plutôt que fréquence seule.
+      const tierTxt = e.tier ? `tier ${e.tier} · ` : "";
+      const winTxt = e.winCount > 0 ? ` · ${e.winCount} victoire${e.winCount > 1 ? "s" : ""}` : "";
+      const buzzTxt =
+        typeof e.bladeCommunityScore === "number" && e.bladeCommunityScore > 0
+          ? ` · buzz ${Math.round(e.bladeCommunityScore)}/100`
+          : "";
+      const metaParts = [
+        typeof e.bladeMetaScore === "number" ? `Blade ${e.bladeMetaScore}` : null,
+        typeof e.ratchetMetaScore === "number" ? `Ratchet ${e.ratchetMetaScore}` : null,
+        typeof e.bitMetaScore === "number" ? `Bit ${e.bitMetaScore}` : null,
+      ]
+        .filter(Boolean)
+        .join(" / ");
+      items.push({
+        id: `combo-${key}`,
+        title: e.label,
+        subtitle: `Combo ${tierTxt}score ${e.combinedMetaScore}/100 · vu ${e.count}×${winTxt}`,
+        category: "combo",
+        url: `/search?q=${encodeURIComponent(e.blade)}`,
+        details:
+          [
+            metaParts ? `Méta ${metaParts}` : "",
+            e.topPlayer ? `Top: ${e.topPlayer}${e.topEvent ? ` (${e.topEvent})` : ""}` : "",
+            buzzTxt ? `Buzz communauté ${Math.round(e.bladeCommunityScore ?? 0)}/100` : "",
+          ]
+            .filter(Boolean)
+            .join(" — ") || "Combinaison vue en tournoi WBO",
+        // "tier S" en badge → bonus de tier capté par le ranker (TIER_BONUS).
+        badge: e.tier ? `Combo tier ${e.tier}` : c.best === 1 ? "Combo gagnant" : "Combo",
+        source: "wbo",
+        popularity: e.count + e.winCount * 4 + Math.round(e.combinedMetaScore / 10),
+      });
+    } else {
+      items.push({
+        id: `combo-${key}`,
+        title: c.label,
+        subtitle: `Combo méta · vu ${c.count}×${c.best === 1 ? " · gagnant" : ""}`,
+        category: "combo",
+        url: `/search?q=${encodeURIComponent(c.blade)}`,
+        details: c.player
+          ? `Top: ${c.player}${c.event ? ` (${c.event})` : ""}`
+          : "Combinaison vue en tournoi WBO",
+        badge: c.best === 1 ? "Combo gagnant" : "Combo",
+        source: "wbo",
+        popularity: c.count,
+      });
+    }
   }
 
   // Titres déjà indexés (dédup des beys encyclopédiques vs catalogue/pièces).
   const seenTitles = new Set(items.map((i) => i.title.toLowerCase().trim()));
+  // Clés canoniques déjà indexées : permet de fusionner un bey encyclopédique avec
+  // une pièce DB du même nom écrit différemment (« Dran Sword » ⇔ « dran-sword »).
+  // Les titres produits bruités (« Beyblade X BX-34 … ») ont une clé longue qui ne
+  // collisionne pas avec un nom de blade propre → dédup conservatrice, sans faux positif.
+  const seenKeys = new Set(items.map((i) => canonicalKey(i.title)).filter(Boolean));
 
   // 10. Beys encyclopédiques — TOUTES générations (Bakuten, Metal, Burst, X).
   const universeBeys = await loadJsonSafe<
@@ -396,7 +433,10 @@ export async function buildGlobalSearchIndex(): Promise<GlobalSearchItem[]> {
   for (const bey of universeBeys ?? []) {
     const title = (bey.title ?? "").trim();
     if (!title || seenTitles.has(title.toLowerCase())) continue;
+    const bk = canonicalKey(title);
+    if (bk && seenKeys.has(bk)) continue;
     seenTitles.add(title.toLowerCase());
+    if (bk) seenKeys.add(bk);
     const jp = bey.metadata?.JPName
       ? ` · ${bey.metadata.JPName.replace(/\{\{[^}]*\}\}/g, "")}`
       : "";

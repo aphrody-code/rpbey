@@ -87,6 +87,33 @@ export async function searchVectorIds(query: string, count = 120): Promise<Vecto
   }
 }
 
+/**
+ * Voisins sémantiques d'un **élément déjà indexé** (par son id de corpus), via
+ * `VSIM … ELE`. Contrairement à `searchVectorIds`, aucun embedding de requête
+ * n'est calculé (le vecteur est déjà stocké) → **aucune dépendance au sidecar**,
+ * utilisable au build SSG. Sert le « produits liés / vous aimerez aussi ».
+ * L'élément lui-même est exclu du résultat. `[]` si Redis/vector set absent.
+ */
+export async function vectorNeighborsById(elementId: string, count = 12): Promise<VectorHit[]> {
+  const id = elementId.trim();
+  if (!id) return [];
+  const r = redis();
+  if (!r) return [];
+  try {
+    const reply = (await r.send("VSIM", [
+      VEC_KEY,
+      "ELE",
+      id,
+      "WITHSCORES",
+      "COUNT",
+      String(count + 1), // +1 car l'élément lui-même revient en tête
+    ])) as unknown;
+    return parseVsim(reply).filter((h) => h.id !== id);
+  } catch {
+    return [];
+  }
+}
+
 /** Parse une réponse `VSIM ... WITHSCORES` (flat, paires, ou map selon RESP2/3). */
 function parseVsim(reply: unknown): VectorHit[] {
   const hits: VectorHit[] = [];

@@ -1,5 +1,12 @@
 import { getPartUsageStats, getPartsAndProducts } from "@/server/dal/recommendations";
 import { loadCatalog, computeGroups, groupSlug } from "@/lib/bx-catalog";
+import {
+  BIT_ABBREVIATIONS,
+  canonicalKey,
+  lookupTier,
+  type PartType,
+  type Tier,
+} from "@/lib/beyblade-entity";
 import { loadJsonSafe } from "@/lib/data-cache";
 import type { BxOffer, BxProductGroup } from "@/lib/bx-catalog";
 
@@ -63,114 +70,21 @@ export interface RecommendedProduct {
 // Constants and WBO Meta Mappings
 // -------------------------------------------------------------
 
-const WBO_BLADE_TIERS: Record<string, "S" | "A" | "B" | "C"> = {
-  "wizard rod": "S",
-  "phoenix wing": "S",
-  "cobalt dragoon": "S",
-  "shark edge": "A",
-  "shark scale": "A",
-  "dran buster": "A",
-  "tyranno beat": "A",
-  "hells chain": "A",
-  "hells scythe": "B",
-  "unicorn sting": "B",
-  "weiss tiger": "B",
-  "knight shield": "B",
-  "dran sword": "B",
-  "knight lance": "B",
-  "leon claw": "B",
-  "viper tail": "B",
-};
-
-const WBO_RATCHET_TIERS: Record<string, "S" | "A" | "B" | "C"> = {
-  "9-60": "S",
-  "5-60": "S",
-  "3-60": "A",
-  "1-60": "A",
-  "7-60": "A",
-  "4-60": "B",
-  "0-60": "B",
-  "3-80": "B",
-  "5-80": "B",
-};
-
-const WBO_BIT_TIERS: Record<string, "S" | "A" | "B" | "C"> = {
-  ball: "S",
-  "b (ball)": "S",
-  orb: "S",
-  "o (orb)": "S",
-  hexa: "S",
-  "h (hexa)": "S",
-  "l (level)": "S",
-  level: "S",
-  "low rush": "S",
-  "lr (low rush)": "S",
-  rush: "A",
-  "r (rush)": "A",
-  flat: "A",
-  "f (flat)": "A",
-  point: "A",
-  "p (point)": "A",
-  "gear point": "A",
-  "gp (gear point)": "A",
-  elevate: "B",
-  "e (elevate)": "B",
-  needle: "B",
-  "n (needle)": "B",
-};
-
-const BIT_ABBREVIATIONS: Record<string, string> = {
-  F: "Flat",
-  LF: "Low Flat",
-  B: "Ball",
-  O: "Orb",
-  HN: "High Needle",
-  GP: "Gear Point",
-  GF: "Gear Flat",
-  DB: "Disc Ball",
-  T: "Taper",
-  N: "Needle",
-  H: "Hexa",
-  L: "Level",
-  LR: "Low Rush",
-  R: "Rush",
-  E: "Elevate",
-  K: "Kick",
-  P: "Point",
-  U: "Unite",
-  M: "Metal",
-  Q: "Quake",
-  S: "Savage",
-  C: "Charge",
-  A: "Assault",
-  D: "Dual",
-  G: "Guard",
-};
+// Les tables de tier (blade/ratchet/bit) + les abréviations de bit vivent dans le
+// module canonique `@/lib/beyblade-entity` (source unique, ex-dupliquée ici, dans
+// global-search et meta) ; `lookupTier` y fait le matching par clé canonique.
 
 // -------------------------------------------------------------
 // Helper Functions
 // -------------------------------------------------------------
 
-type Tier = "S" | "A" | "B" | "C";
-
 /** Tier WBO du composant, ou `null` si non répertorié (→ scoring piloté par l'usage). */
 function getWboTierMatch(partName: string, partType: string): Tier | null {
-  const nameLower = partName.toLowerCase();
-  const tiersMap =
-    partType === "BLADE"
-      ? WBO_BLADE_TIERS
-      : partType === "RATCHET"
-        ? WBO_RATCHET_TIERS
-        : partType === "BIT"
-          ? WBO_BIT_TIERS
-          : {};
-
-  for (const [key, tier] of Object.entries(tiersMap)) {
-    if (nameLower.includes(key) || key.includes(nameLower)) {
-      return tier;
-    }
-  }
-  return null;
+  const t =
+    partType === "BLADE" || partType === "RATCHET" || partType === "BIT"
+      ? (partType as PartType)
+      : undefined;
+  return lookupTier(partName, t);
 }
 
 function getTierScore(tier: Tier): number {
@@ -301,6 +215,20 @@ export async function getRecommendations(
   if (hypeReport?.hypeScores) {
     redditHypeScores = hypeReport.hypeScores;
   }
+
+  // Buzz communautaire réel par blade (X + Reddit + web) — `meta-enrichment.json`.
+  // C'est le signal social VIVANT : `reddit-hype.json` est plat (toutes valeurs à
+  // 0.5, donc inerte). On l'indexe par clé canonique de blade pour l'injecter dans
+  // la hype des produits qui contiennent cette blade.
+  const communityByBlade = new Map<string, number>();
+  const enrichReport = await loadJsonSafe<{
+    blades?: Array<{ name?: string; communityScore?: number }>;
+  }>("data/meta-enrichment.json");
+  for (const b of enrichReport?.blades ?? []) {
+    const k = canonicalKey(b.name);
+    if (k && typeof b.communityScore === "number") communityByBlade.set(k, b.communityScore);
+  }
+  const communityActive = communityByBlade.size > 0;
 
   // 4. Calculate Scores for Each Product Group
   const now = Date.now();
@@ -467,12 +395,29 @@ export async function getRecommendations(
       redditScore = redditHypeScores[hypeCode];
     }
 
-    // Hype adaptatif : si la hype Reddit est plate (toutes à 0.5), redistribuer
-    // son poids vers nouveauté + popularité plutôt qu'injecter un 0.5 inerte.
+    // Buzz communautaire du produit = meilleur communityScore parmi ses blades (/100).
+    // Signal social VIVANT (X + Reddit + web) vs reddit-hype.json plat.
+    let community = 0;
+    let hasCommunity = false;
+    if (communityActive) {
+      for (const pa of analyzedParts) {
+        if (pa.type !== "BLADE") continue;
+        const cs = communityByBlade.get(canonicalKey(pa.name));
+        if (typeof cs === "number") {
+          hasCommunity = true;
+          community = Math.max(community, cs / 100);
+        }
+      }
+    }
+
+    // Hype adaptatif : buzz communautaire réel prioritaire ; sinon hype Reddit si
+    // exploitable ; sinon (signal social mort) repli nouveauté + popularité.
     const hypeScore = clamp01(
-      redditActive
-        ? 0.25 * newness + 0.3 * popularity + 0.15 * demand + 0.3 * redditScore
-        : 0.38 * newness + 0.42 * popularity + 0.2 * demand,
+      hasCommunity
+        ? 0.22 * newness + 0.3 * popularity + 0.15 * demand + 0.33 * community
+        : redditActive
+          ? 0.25 * newness + 0.3 * popularity + 0.15 * demand + 0.3 * redditScore
+          : 0.38 * newness + 0.42 * popularity + 0.2 * demand,
     );
 
     // E. Ratio brut d'efficacité-prix (performance par euro).

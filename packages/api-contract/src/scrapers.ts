@@ -145,3 +145,30 @@ export const XDiscussionSchema = z.object({
   relevance: z.number().min(0).max(1),
 });
 export type XDiscussion = z.infer<typeof XDiscussionSchema>;
+
+// ── Combo WBO enrichi (→ data/wbo-combos-enriched.json, produit par enrich-combos.ts). ──
+// Joint un combo gagnant à la méta (bbx-weekly) + au buzz communauté (meta-enrichment).
+// `bladeKey` = clé canonique (cf. lib/beyblade-entity) pour la jointure catalogue côté
+// serveur. La jointure prix/lien d'achat se fait au runtime (bx-catalog), pas ici.
+export const EnrichedComboSchema = z.object({
+  label: z.string().min(1),
+  blade: z.string().min(1),
+  ratchet: z.string().nullable(),
+  bit: z.string().nullable(),
+  bladeKey: z.string().min(1),
+  count: z.number().int().nonnegative(),
+  winCount: z.number().int().nonnegative(),
+  top3Count: z.number().int().nonnegative(),
+  bestPlacement: z.number().int().positive().nullable(),
+  avgPlacement: z.number().nonnegative(),
+  topPlayer: z.string().nullable(),
+  topEvent: z.string().nullable(),
+  bladeMetaScore: z.number().nullable(),
+  ratchetMetaScore: z.number().nullable(),
+  bitMetaScore: z.number().nullable(),
+  combinedMetaScore: z.number().nonnegative(),
+  bladeCommunityScore: z.number().nullable(),
+  tier: z.enum(["S", "A", "B", "C"]).nullable(),
+  qualityScore: z.number(),
+});
+export type EnrichedCombo = z.infer<typeof EnrichedComboSchema>;
