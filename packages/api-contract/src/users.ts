@@ -78,6 +78,18 @@ export type PublicProfile = z.infer<typeof PublicProfileSchema>;
  * Corps de mise à jour du profil de l'utilisateur connecté (`PATCH /api/profile`).
  * Tous les champs optionnels — patch partiel. Validé avant écriture par la DAL.
  */
+/**
+ * URL d'image stockée : URL absolue (CDN `https://cdn.rpbey.fr/...`) OU chemin
+ * root-relatif legacy (`/uploads/...`). Tolérer le relatif évite un 422 quand un
+ * profil pré-CDN est re-sauvegardé sans changer son avatar/bannière.
+ */
+const StoredImageUrlSchema = z
+  .string()
+  .max(500)
+  .refine((v) => v.startsWith("/") || /^https?:\/\//.test(v), {
+    message: "URL d'image invalide",
+  });
+
 export const ProfileUpdateInputSchema = z.object({
   bladerName: z.string().trim().max(60).nullish(),
   displayName: z.string().trim().max(60).nullish(),
@@ -86,8 +98,8 @@ export const ProfileUpdateInputSchema = z.object({
   favoriteSeason: z.enum(["ORIGINAL", "METAL", "BURST", "X"]).nullish(),
   experience: z.enum(["BEGINNER", "INTERMEDIATE", "ADVANCED", "EXPERT", "LEGEND"]).nullish(),
   bio: z.string().trim().max(4000).nullish(),
-  image: z.url().nullish(),
-  bannerImage: z.url().nullish(),
+  image: StoredImageUrlSchema.nullish(),
+  bannerImage: StoredImageUrlSchema.nullish(),
   deckBoxImage: z.string().max(500).nullish(),
   accentColor: z
     .string()

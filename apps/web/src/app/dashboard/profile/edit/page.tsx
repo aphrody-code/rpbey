@@ -7,6 +7,7 @@ import PlaceIcon from "@mui/icons-material/Place";
 import ShareIcon from "@mui/icons-material/Share";
 import SportsKabaddiIcon from "@mui/icons-material/SportsKabaddi";
 import StarIcon from "@mui/icons-material/Star";
+import SyncIcon from "@mui/icons-material/Sync";
 import {
   Alert,
   alpha,
@@ -116,6 +117,7 @@ export default function EditProfilePage() {
   const { showToast } = useToast();
   const theme = useTheme();
   const [isSaving, setIsSaving] = useState(false);
+  const [isSyncingDiscord, setIsSyncingDiscord] = useState(false);
 
   // Handle OAuth results
   useEffect(() => {
@@ -347,11 +349,50 @@ export default function EditProfilePage() {
                   title="Identité Blader"
                 />
                 <Grid container spacing={3}>
-                  <Grid size={{ xs: 12 }} sx={{ display: "flex", justifyContent: "center", mb: 1 }}>
+                  <Grid
+                    size={{ xs: 12 }}
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      gap: 1,
+                      mb: 1,
+                    }}
+                  >
                     <AvatarUpload
                       currentImage={watchedImage}
                       onUpload={(url) => setValue("image", url, { shouldDirty: true })}
                     />
+                    <Button
+                      variant="text"
+                      size="small"
+                      startIcon={<SyncIcon fontSize="small" />}
+                      disabled={isSyncingDiscord}
+                      onClick={async () => {
+                        setIsSyncingDiscord(true);
+                        try {
+                          const res = await fetch("/api/profile/sync-discord-avatar", {
+                            method: "POST",
+                          });
+                          const body = await res.json().catch(() => null);
+                          if (!res.ok) throw new Error(body?.error || "Synchronisation échouée");
+                          setValue("image", body.url, { shouldDirty: true });
+                          showToast(
+                            "Avatar Discord synchronisé. Sauvegarde pour confirmer.",
+                            "success",
+                          );
+                        } catch (error) {
+                          showToast(
+                            error instanceof Error ? error.message : "Erreur de synchronisation",
+                            "error",
+                          );
+                        } finally {
+                          setIsSyncingDiscord(false);
+                        }
+                      }}
+                    >
+                      {isSyncingDiscord ? "Synchronisation..." : "Synchroniser l'avatar Discord"}
+                    </Button>
                   </Grid>
 
                   <Grid size={{ xs: 12 }}>

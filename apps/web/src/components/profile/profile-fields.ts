@@ -18,13 +18,16 @@ export const BEYBLADE_TYPES = [
   { value: "BALANCE", label: "Équilibre" },
 ] as const;
 
+// ⚠️ Aligné sur l'enum DB `ExperienceLevel` (@rpbey/db) + le contrat
+// `ProfileUpdateInputSchema.experience`. Ne PAS ajouter de valeur hors enum
+// (ex. "COMPETITIVE") : le PATCH /api/profile renverrait 422 (Zod) et un write
+// direct casserait l'enum Postgres.
 export const EXPERIENCE_LEVELS = [
   { value: "BEGINNER", label: "Débutant (0-1 ans)" },
   { value: "INTERMEDIATE", label: "Intermédiaire (1-3 ans)" },
   { value: "ADVANCED", label: "Avancé (3+ ans)" },
   { value: "EXPERT", label: "Expert" },
   { value: "LEGEND", label: "Légende" },
-  { value: "COMPETITIVE", label: "Compétiteur" },
 ] as const;
 
 export const THEME_PREFERENCES = [
