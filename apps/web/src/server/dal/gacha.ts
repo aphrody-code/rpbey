@@ -1061,3 +1061,179 @@ export async function persistStardustRankings(
     }
   });
 }
+
+// ─── Admin : CRUD cartes & drops ─────────────────────────────────────────────
+
+export interface GachaCardInput {
+  slug: string;
+  name: string;
+  nameJp?: string | null;
+  series: string;
+  rarity: CardRarity;
+  imageUrl?: string | null;
+  beyblade?: string | null;
+  description?: string | null;
+  dropRate?: number;
+  isActive?: boolean;
+  dropId?: string | null;
+  att?: number;
+  def?: number;
+  end?: number;
+  element?: string;
+  specialMove?: string | null;
+  artistName?: string | null;
+  cardType?: "PNG" | "ARTIST";
+}
+
+export interface GachaDropInput {
+  slug: string;
+  name: string;
+  theme: string;
+  season?: number;
+  maxCards?: number;
+  startDate: string;
+  endDate: string;
+  isActive?: boolean;
+  imageUrl?: string | null;
+}
+
+/** Crée une carte gacha. */
+export async function createGachaCard(input: GachaCardInput) {
+  const [card] = await db
+    .insert(schema.gachaCards)
+    .values({
+      slug: input.slug,
+      name: input.name,
+      nameJp: input.nameJp ?? null,
+      series: input.series,
+      rarity: input.rarity,
+      imageUrl: input.imageUrl ?? null,
+      beyblade: input.beyblade ?? null,
+      description: input.description ?? null,
+      dropRate: input.dropRate ?? 0,
+      isActive: input.isActive ?? true,
+      dropId: input.dropId ?? null,
+      att: input.att ?? 0,
+      def: input.def ?? 0,
+      end: input.end ?? 0,
+      element: input.element ?? "NEUTRAL",
+      specialMove: input.specialMove ?? null,
+      artistName: input.artistName ?? null,
+      cardType: input.cardType ?? "PNG",
+    })
+    .returning();
+  return card;
+}
+
+/** Met à jour une carte gacha. */
+export async function updateGachaCard(id: string, input: Partial<GachaCardInput>) {
+  const [card] = await db
+    .update(schema.gachaCards)
+    .set({
+      ...(input.slug !== undefined && { slug: input.slug }),
+      ...(input.name !== undefined && { name: input.name }),
+      ...(input.nameJp !== undefined && { nameJp: input.nameJp }),
+      ...(input.series !== undefined && { series: input.series }),
+      ...(input.rarity !== undefined && { rarity: input.rarity }),
+      ...(input.imageUrl !== undefined && { imageUrl: input.imageUrl }),
+      ...(input.beyblade !== undefined && { beyblade: input.beyblade }),
+      ...(input.description !== undefined && { description: input.description }),
+      ...(input.dropRate !== undefined && { dropRate: input.dropRate }),
+      ...(input.isActive !== undefined && { isActive: input.isActive }),
+      ...(input.dropId !== undefined && { dropId: input.dropId }),
+      ...(input.att !== undefined && { att: input.att }),
+      ...(input.def !== undefined && { def: input.def }),
+      ...(input.end !== undefined && { end: input.end }),
+      ...(input.element !== undefined && { element: input.element }),
+      ...(input.specialMove !== undefined && { specialMove: input.specialMove }),
+      ...(input.artistName !== undefined && { artistName: input.artistName }),
+      ...(input.cardType !== undefined && { cardType: input.cardType }),
+    })
+    .where(eq(schema.gachaCards.id, id))
+    .returning();
+  return card;
+}
+
+/** Supprime une carte gacha. */
+export async function deleteGachaCard(id: string) {
+  await db.delete(schema.gachaCards).where(eq(schema.gachaCards.id, id));
+}
+
+/** Crée un drop gacha. */
+export async function createGachaDrop(input: GachaDropInput) {
+  const [drop] = await db
+    .insert(schema.gachaDrops)
+    .values({
+      slug: input.slug,
+      name: input.name,
+      theme: input.theme,
+      season: input.season ?? 1,
+      maxCards: input.maxCards ?? 32,
+      startDate: input.startDate,
+      endDate: input.endDate,
+      isActive: input.isActive ?? false,
+      imageUrl: input.imageUrl ?? null,
+    })
+    .returning();
+  return drop;
+}
+
+/** Met à jour un drop gacha. */
+export async function updateGachaDrop(id: string, input: Partial<GachaDropInput>) {
+  const [drop] = await db
+    .update(schema.gachaDrops)
+    .set({
+      ...(input.slug !== undefined && { slug: input.slug }),
+      ...(input.name !== undefined && { name: input.name }),
+      ...(input.theme !== undefined && { theme: input.theme }),
+      ...(input.season !== undefined && { season: input.season }),
+      ...(input.maxCards !== undefined && { maxCards: input.maxCards }),
+      ...(input.startDate !== undefined && { startDate: input.startDate }),
+      ...(input.endDate !== undefined && { endDate: input.endDate }),
+      ...(input.isActive !== undefined && { isActive: input.isActive }),
+      ...(input.imageUrl !== undefined && { imageUrl: input.imageUrl }),
+    })
+    .where(eq(schema.gachaDrops.id, id))
+    .returning();
+  return drop;
+}
+
+/** Supprime un drop gacha. */
+export async function deleteGachaDrop(id: string) {
+  await db.delete(schema.gachaDrops).where(eq(schema.gachaDrops.id, id));
+}
+
+/** Ajuste la currency d'un profil utilisateur (ADMIN_GIVE / ADMIN_TAKE). */
+export async function adminAdjustCurrency(opts: {
+  userId: string;
+  amount: number;
+  note: string;
+}): Promise<{ newBalance: number }> {
+  const { userId, amount, note } = opts;
+  return db.transaction(async (tx) => {
+    const [updated] = await tx
+      .update(schema.profiles)
+      .set({ currency: sql`${schema.profiles.currency} + ${amount}` })
+      .where(eq(schema.profiles.userId, userId))
+      .returning({ currency: schema.profiles.currency });
+    if (!updated) throw new Error("NO_PROFILE");
+    await tx.insert(schema.currencyTransactions).values({
+      userId,
+      amount,
+      type: amount >= 0 ? "ADMIN_GIVE" : "ADMIN_TAKE",
+      note,
+    });
+    return { newBalance: updated.currency };
+  });
+}
+
+/** Liste des transactions de currency admin (résumé). */
+export async function listAdminCurrencyTransactions(opts: { limit?: number; userId?: string }) {
+  const { limit = 50, userId } = opts;
+  return db.query.currencyTransactions.findMany({
+    where: userId ? eq(schema.currencyTransactions.userId, userId) : undefined,
+    orderBy: desc(schema.currencyTransactions.createdAt),
+    limit,
+    columns: { id: true, userId: true, amount: true, type: true, note: true, createdAt: true },
+  });
+}

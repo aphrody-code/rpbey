@@ -711,3 +711,77 @@ export async function searchInvitableUsers(
     bladerName: r.profiles[0]?.bladerName ?? null,
   }));
 }
+
+// ─── Admin : gestion des équipes (sans contrainte isPublic) ──────────────────
+
+export interface AdminTeamRow {
+  id: string;
+  slug: string;
+  tag: string;
+  name: string;
+  logoUrl: string | null;
+  captainId: string;
+  region: string | null;
+  isPublic: boolean;
+  isVerified: boolean;
+  isRecruiting: boolean;
+  memberCount: number;
+  totalPoints: number;
+  totalWins: number;
+  totalLosses: number;
+  createdAt: string;
+}
+
+/** Liste toutes les équipes (admin — sans filtre isPublic). */
+export async function listAdminTeams(opts: {
+  page?: number;
+  pageSize?: number;
+  search?: string;
+}): Promise<{ teams: AdminTeamRow[]; total: number }> {
+  const { page = 1, pageSize = 25, search = "" } = opts;
+  const offset = (page - 1) * pageSize;
+  const where = search
+    ? or(ilike(schema.teams.name, `%${search}%`), ilike(schema.teams.tag, `%${search}%`))
+    : undefined;
+
+  const [rows, totalRows] = await Promise.all([
+    db.query.teams.findMany({
+      where,
+      orderBy: [desc(schema.teams.totalPoints), desc(schema.teams.createdAt)],
+      limit: pageSize,
+      offset,
+    }),
+    db.select({ value: count() }).from(schema.teams).where(where),
+  ]);
+
+  return {
+    teams: rows.map((t) => ({
+      id: t.id,
+      slug: t.slug,
+      tag: t.tag,
+      name: t.name,
+      logoUrl: t.logoUrl,
+      captainId: t.captainId,
+      region: t.region,
+      isPublic: t.isPublic,
+      isVerified: t.isVerified,
+      isRecruiting: t.isRecruiting,
+      memberCount: t.memberCount,
+      totalPoints: t.totalPoints,
+      totalWins: t.totalWins,
+      totalLosses: t.totalLosses,
+      createdAt: t.createdAt,
+    })),
+    total: totalRows[0]?.value ?? 0,
+  };
+}
+
+/** Verrifie / déverifie une équipe. */
+export async function setTeamVerified(id: string, isVerified: boolean): Promise<void> {
+  await db.update(schema.teams).set({ isVerified }).where(eq(schema.teams.id, id));
+}
+
+/** Supprime une équipe (admin, sans contrôle du capitaine). */
+export async function adminDeleteTeam(id: string): Promise<void> {
+  await db.delete(schema.teams).where(eq(schema.teams.id, id));
+}
