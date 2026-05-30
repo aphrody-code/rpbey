@@ -2,6 +2,7 @@ import { type Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getSeriesDetail } from "@/server/services/anime";
 import { SeriesDetail } from "../_components/SeriesDetail";
+import SeriesCrosslinks from "../_components/SeriesCrosslinks";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -25,5 +26,11 @@ export default async function SeriesPage({ params }: Props) {
 
   if (!series) notFound();
 
-  return <SeriesDetail series={series} />;
+  return (
+    <>
+      <SeriesDetail series={series} />
+      {/* Cross-links wiki : toupies, personnages, jeux de cette génération. */}
+      {series.generation && <SeriesCrosslinks generation={series.generation} />}
+    </>
+  );
 }

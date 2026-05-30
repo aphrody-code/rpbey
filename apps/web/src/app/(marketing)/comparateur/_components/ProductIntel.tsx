@@ -1,4 +1,4 @@
-import { AutoAwesome, EmojiEvents, Forum, Whatshot } from "@mui/icons-material";
+import { AutoAwesome, EmojiEvents, Forum, MenuBook, Whatshot } from "@mui/icons-material";
 import { Box, Chip, Stack, Typography } from "@mui/material";
 import { TIER_COLOR, type Tier } from "@/lib/beyblade-entity";
 import type { BxProductGroup } from "@/lib/bx-catalog";
@@ -57,13 +57,101 @@ const sectionTitleSx = {
 export default async function ProductIntel({ group }: { group: BxProductGroup }) {
   const intel = await getProductIntel(group);
   const hasMeta = intel.tier != null || intel.metaScore != null || intel.community != null;
-  if (!hasMeta && intel.topCombos.length === 0 && intel.related.length === 0) return null;
+  if (!hasMeta && intel.topCombos.length === 0 && intel.related.length === 0 && !intel.wiki)
+    return null;
 
   const accent = "var(--rpb-primary)";
   const accent2 = "var(--rpb-secondary)";
+  const GEN_LABEL: Record<string, string> = {
+    ORIGINAL: "Original",
+    HMS: "HMS",
+    METAL: "Metal",
+    BURST: "Burst",
+    X: "Beyblade X",
+  };
 
   return (
     <>
+      {/* ── Fiche encyclopédique (Beyblade Wiki) ──────────────────────── */}
+      {intel.wiki && (intel.wiki.summary || intel.wiki.generation || intel.wiki.jpName) && (
+        <>
+          <Typography variant="h6" sx={sectionTitleSx}>
+            <MenuBook sx={{ fontSize: 22, color: accent2 }} />
+            Fiche encyclopédique
+          </Typography>
+          <Box
+            sx={{
+              p: { xs: 2, md: 2.5 },
+              borderRadius: 3,
+              border: "1px solid",
+              borderColor: "divider",
+              bgcolor: "var(--mui-palette-surface-high, rgba(255,255,255,0.02))",
+            }}
+          >
+            <Stack direction="row" sx={{ flexWrap: "wrap", gap: 0.75, mb: 1 }}>
+              {intel.wiki.generation && (
+                <Chip
+                  size="small"
+                  label={GEN_LABEL[intel.wiki.generation] ?? intel.wiki.generation}
+                  sx={{
+                    fontWeight: 800,
+                    fontSize: "0.65rem",
+                    bgcolor: "color-mix(in srgb, var(--rpb-secondary) 16%, transparent)",
+                    color: accent2,
+                  }}
+                />
+              )}
+              {intel.wiki.beyType && (
+                <Chip
+                  size="small"
+                  label={intel.wiki.beyType}
+                  variant="outlined"
+                  sx={{ fontWeight: 700, fontSize: "0.65rem" }}
+                />
+              )}
+              {intel.wiki.system && (
+                <Chip
+                  size="small"
+                  label={intel.wiki.system}
+                  variant="outlined"
+                  sx={{ fontWeight: 700, fontSize: "0.65rem" }}
+                />
+              )}
+              {intel.wiki.jpName && (
+                <Chip
+                  size="small"
+                  label={intel.wiki.jpName}
+                  variant="outlined"
+                  sx={{ fontWeight: 700, fontSize: "0.65rem", opacity: 0.85 }}
+                />
+              )}
+            </Stack>
+            {intel.wiki.summary && (
+              <Typography sx={{ fontSize: "0.88rem", lineHeight: 1.55, color: "text.secondary" }}>
+                {intel.wiki.summary}
+              </Typography>
+            )}
+            <Typography
+              component="a"
+              href={intel.wiki.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              sx={{
+                display: "inline-block",
+                mt: 1,
+                fontSize: "0.72rem",
+                fontWeight: 700,
+                color: accent2,
+                textDecoration: "none",
+                "&:hover": { textDecoration: "underline" },
+              }}
+            >
+              Lire sur le Beyblade Wiki →
+            </Typography>
+          </Box>
+        </>
+      )}
+
       {/* ── Carte compétitif & méta ───────────────────────────────────── */}
       {hasMeta && (
         <>

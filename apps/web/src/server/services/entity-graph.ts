@@ -1,5 +1,5 @@
 import "server-only";
-import type { EnrichedCombo } from "@rpbey/api-contract";
+import type { EnrichedCombo, WikiEntity } from "@rpbey/api-contract";
 import { canonicalKey, lookupTier, type Tier } from "@/lib/beyblade-entity";
 import { type BxProductGroup, computeGroups, groupSlug, loadCatalog } from "@/lib/bx-catalog";
 import { loadJsonSafe } from "@/lib/data-cache";
@@ -37,6 +37,18 @@ export interface RelatedProduct {
   similarity: number;
 }
 
+/** Contexte encyclopédique d'une entité (depuis le Beyblade Wiki). */
+export interface WikiIntel {
+  title: string;
+  generation: WikiEntity["generation"];
+  beyType: string | null;
+  system: string | null;
+  jpName: string | null;
+  summary: string;
+  imageUrl: string | null;
+  url: string;
+}
+
 export interface ProductIntel {
   /** Nom de la blade détectée dans le titre du produit (ou `null`). */
   blade: string | null;
@@ -48,6 +60,15 @@ export interface ProductIntel {
   topCombos: EnrichedCombo[];
   /** Produits proches (voisins denses), résolus en groupes catalogue. */
   related: RelatedProduct[];
+  /** Fiche encyclopédique wiki de la blade (génération, description, JP…). */
+  wiki: WikiIntel | null;
+}
+
+/** Vitrine d'une génération pour la page anime : entités wiki cross-linkées. */
+export interface GenerationShowcase {
+  beys: WikiIntel[];
+  characters: WikiIntel[];
+  games: WikiIntel[];
 }
 
 // ── Index mémoïsés (combos enrichis, méta, communauté) ──────────────────────────
@@ -128,6 +149,57 @@ function communityIndex(): Promise<Map<string, CommunityIntel>> {
   return _communityIdx;
 }
 
+// ── Index connaissance wiki (Beyblade Fandom) ───────────────────────────────────
+
+let _wikiByKey: Promise<Map<string, WikiEntity>> | null = null;
+let _wikiByGen: Promise<Map<string, WikiEntity[]>> | null = null;
+
+function toWikiIntel(e: WikiEntity): WikiIntel {
+  return {
+    title: e.title,
+    generation: e.generation,
+    beyType: e.beyType,
+    system: e.system,
+    jpName: e.jpName,
+    summary: e.summary,
+    imageUrl: e.imageUrl,
+    url: e.url,
+  };
+}
+
+/** Entité wiki par clé canonique de titre (priorité bey > part > autre si collision). */
+function wikiByKey(): Promise<Map<string, WikiEntity>> {
+  _wikiByKey ??= (async () => {
+    const data = await loadJsonSafe<{ entities?: WikiEntity[] }>("data/beyblade-knowledge.json");
+    const map = new Map<string, WikiEntity>();
+    const rank: Record<string, number> = { bey: 3, part: 2 };
+    for (const e of data?.entities ?? []) {
+      const k = canonicalKey(e.title);
+      if (!k) continue;
+      const prev = map.get(k);
+      if (!prev || (rank[e.type] ?? 0) > (rank[prev.type] ?? 0)) map.set(k, e);
+    }
+    return map;
+  })();
+  return _wikiByKey;
+}
+
+/** Entités wiki groupées par génération (pour la vitrine de la page anime). */
+function wikiByGeneration(): Promise<Map<string, WikiEntity[]>> {
+  _wikiByGen ??= (async () => {
+    const data = await loadJsonSafe<{ entities?: WikiEntity[] }>("data/beyblade-knowledge.json");
+    const map = new Map<string, WikiEntity[]>();
+    for (const e of data?.entities ?? []) {
+      if (!e.generation) continue;
+      const arr = map.get(e.generation);
+      if (arr) arr.push(e);
+      else map.set(e.generation, [e]);
+    }
+    return map;
+  })();
+  return _wikiByGen;
+}
+
 // ── Détection de la blade d'un produit + résolution des voisins ─────────────────
 
 let _groupsById: Promise<Map<string, BxProductGroup>> | null = null;
@@ -169,10 +241,11 @@ async function detectBlade(group: BxProductGroup): Promise<{ key: string; name: 
  * proches. Best-effort — chaque branche peut être vide sans casser les autres.
  */
 export async function getProductIntel(group: BxProductGroup): Promise<ProductIntel> {
-  const [combos, meta, community] = await Promise.all([
+  const [combos, meta, community, wiki] = await Promise.all([
     comboIndex(),
     metaIndex(),
     communityIndex(),
+    wikiByKey(),
   ]);
 
   const detected = await detectBlade(group);
@@ -194,6 +267,9 @@ export async function getProductIntel(group: BxProductGroup): Promise<ProductInt
             : "C"
       : null);
 
+  // Fiche wiki : la blade détectée, sinon une correspondance directe sur le titre.
+  const wikiEntity = wiki.get(bladeKey) ?? wiki.get(canonicalKey(group.name));
+
   const related = await getRelatedProducts(group);
 
   return {
@@ -203,6 +279,50 @@ export async function getProductIntel(group: BxProductGroup): Promise<ProductInt
     community: communityIntel,
     topCombos,
     related,
+    wiki: wikiEntity ? toWikiIntel(wikiEntity) : null,
+  };
+}
+
+/** Aliases de génération côté DB anime → enum wiki (`WikiGeneration`). */
+const GEN_ALIASES: Record<string, WikiEntity["generation"]> = {
+  ORIGINAL: "ORIGINAL",
+  PLASTIC: "ORIGINAL",
+  HMS: "HMS",
+  METAL: "METAL",
+  METAL_SAGA: "METAL",
+  METAL_FUSION: "METAL",
+  BURST: "BURST",
+  X: "X",
+  BEYBLADE_X: "X",
+};
+
+/**
+ * Vitrine cross-linkée d'une génération (page anime) : meilleures toupies +
+ * personnages + jeux de cette génération, depuis la connaissance wiki. Priorise
+ * les entités avec image + résumé (les plus riches). `generation` = valeur DB
+ * (mappée vers l'enum wiki).
+ */
+export async function getGenerationShowcase(
+  generation: string,
+  limits: { beys?: number; characters?: number; games?: number } = {},
+): Promise<GenerationShowcase> {
+  const gen = GEN_ALIASES[generation?.toUpperCase()] ?? null;
+  const empty: GenerationShowcase = { beys: [], characters: [], games: [] };
+  if (!gen) return empty;
+  const byGen = await wikiByGeneration();
+  const pool = byGen.get(gen) ?? [];
+  // Tri : image + résumé d'abord (plus présentable), puis résumé le plus long.
+  const score = (e: WikiEntity) => (e.imageUrl ? 2 : 0) + (e.summary.length > 60 ? 1 : 0);
+  const pick = (type: WikiEntity["type"], n: number) =>
+    pool
+      .filter((e) => e.type === type)
+      .sort((a, b) => score(b) - score(a) || b.summary.length - a.summary.length)
+      .slice(0, n)
+      .map(toWikiIntel);
+  return {
+    beys: pick("bey", limits.beys ?? 12),
+    characters: pick("character", limits.characters ?? 12),
+    games: pick("game", limits.games ?? 6),
   };
 }
 
