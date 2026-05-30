@@ -1,24 +1,26 @@
-/* KnowledgePanel — carte entité latérale, CSS Modules, 0 @mui */
+/* KnowledgePanel — carte entité Material 3 (corner-extra-large, surface tonale,
+ * elevation, typescale). Couleurs = rôles --md-sys-color-* (via .m3-search). */
 
 .panel {
-  background: var(--rpb-surface-main, #303134);
-  border-radius: 12px;
-  padding: 20px;
-  border: 1px solid var(--rpb-border, #3c4043);
+  background: var(--md-sys-color-surface-container, #2b1c1a);
+  border-radius: var(--md-sys-shape-corner-extra-large, 28px);
+  padding: 24px;
+  border: 1px solid var(--md-sys-color-outline-variant, #58413f);
+  box-shadow: var(--md-sys-elevation-2, 0 2px 6px rgba(0, 0, 0, 0.3));
   position: sticky;
   top: 80px;
   max-height: calc(100vh - 100px);
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: var(--rpb-border, #3c4043) transparent;
-  /* Shared-axis entrance */
-  animation: slideIn 0.25s cubic-bezier(0.05, 0.7, 0.1, 1) both;
+  scrollbar-color: var(--md-sys-color-outline-variant, #58413f) transparent;
+  animation: slideIn 0.4s var(--md-sys-motion-emphasized-decelerate, cubic-bezier(0.05, 0.7, 0.1, 1))
+    both;
 }
 
 @keyframes slideIn {
   from {
     opacity: 0;
-    transform: translateX(16px);
+    transform: translateX(20px);
   }
   to {
     opacity: 1;
@@ -26,43 +28,36 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .panel {
-    animation: none;
-  }
-}
-
 .title {
-  font-size: 1.35rem;
-  font-weight: 700;
-  color: var(--rpb-text, #e8eaed);
-  margin: 0 0 12px;
-  line-height: 1.2;
+  font: var(--md-sys-typescale-headline-small, 400 1.5rem/2rem system-ui);
+  font-weight: 600;
+  color: var(--md-sys-color-on-surface, #f9dcd9);
+  margin: 0 0 16px;
 }
 
-/* Image produit */
+/* Image héro */
 .imageWrap {
-  border-radius: 8px;
+  border-radius: var(--md-sys-shape-corner-large, 16px);
   overflow: hidden;
   margin-bottom: 16px;
-  background: var(--rpb-surface-scrim, color-mix(in srgb, var(--rpb-bg, #202124) 60%, transparent));
+  background: var(--md-sys-color-surface-container-high, #372624);
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 180px;
+  height: 200px;
 }
 
 .productImage {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
-  padding: 8px;
+  padding: 12px;
 }
 
 .imagePlaceholder {
-  border-radius: 8px;
-  background: var(--rpb-surface-scrim, color-mix(in srgb, var(--rpb-bg, #202124) 60%, transparent));
-  height: 100px;
+  border-radius: var(--md-sys-shape-corner-large, 16px);
+  background: var(--md-sys-color-surface-container-high, #372624);
+  height: 120px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -70,9 +65,9 @@
 }
 
 .imagePlaceholder svg {
-  width: 40px;
-  height: 40px;
-  fill: var(--rpb-text-tertiary, #9aa0a6);
+  width: 44px;
+  height: 44px;
+  fill: var(--md-sys-color-on-surface-variant, #dfbfbb);
 }
 
 /* Prix */
@@ -80,18 +75,18 @@
   display: flex;
   align-items: baseline;
   gap: 8px;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
 .priceMin {
-  font-weight: 800;
-  font-size: 1.2rem;
-  color: var(--rpb-price-good, #22c55e);
+  font: var(--md-sys-typescale-title-large, 400 1.375rem/1.75rem system-ui);
+  font-weight: 700;
+  color: var(--rpb-price-good, #5fd068);
 }
 
 .priceMax {
-  font-size: 0.85rem;
-  color: var(--rpb-text-secondary, #bdc1c6);
+  font: var(--md-sys-typescale-body-medium, 400 0.875rem/1.25rem system-ui);
+  color: var(--md-sys-color-on-surface-variant, #dfbfbb);
 }
 
 /* Boutiques */
@@ -99,19 +94,19 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
 .shopRow svg {
-  width: 15px;
-  height: 15px;
-  fill: var(--rpb-text-tertiary, #9aa0a6);
+  width: 16px;
+  height: 16px;
+  fill: var(--md-sys-color-on-surface-variant, #dfbfbb);
   flex-shrink: 0;
 }
 
 .shopCount {
-  font-size: 0.82rem;
-  color: var(--rpb-text-secondary, #bdc1c6);
+  font: var(--md-sys-typescale-body-medium, 400 0.875rem/1.25rem system-ui);
+  color: var(--md-sys-color-on-surface-variant, #dfbfbb);
 }
 
 /* Tier */
@@ -119,81 +114,87 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
 .tierBadge {
   display: inline-flex;
   align-items: center;
-  padding: 2px 8px;
-  border-radius: 12px;
-  font-size: 0.72rem;
-  font-weight: 800;
-  border: 1px solid transparent;
+  padding: 4px 12px;
+  border-radius: var(--md-sys-shape-corner-full, 9999px);
+  font: var(--md-sys-typescale-label-large, 500 0.875rem/1.25rem system-ui);
+  font-weight: 700;
 }
 
 .tierScore {
-  font-size: 0.72rem;
-  color: var(--rpb-text-tertiary, #9aa0a6);
+  font: var(--md-sys-typescale-label-medium, 500 0.75rem/1rem system-ui);
+  color: var(--md-sys-color-on-surface-variant, #dfbfbb);
 }
 
 /* Pièces incluses */
 .sectionLabel {
-  font-size: 0.78rem;
+  font: var(--md-sys-typescale-label-medium, 500 0.75rem/1rem system-ui);
   font-weight: 700;
-  color: var(--rpb-text-tertiary, #9aa0a6);
+  color: var(--md-sys-color-on-surface-variant, #dfbfbb);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin: 0 0 6px;
+  letter-spacing: 0.06em;
+  margin: 0 0 8px;
 }
 
 .chipsWrap {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 
 .chip {
   display: inline-flex;
   align-items: center;
-  padding: 2px 8px;
-  height: 20px;
-  font-size: 0.68rem;
-  color: var(--rpb-text-secondary, #bdc1c6);
-  background: color-mix(in srgb, var(--rpb-text, #e8eaed) 5%, transparent);
-  border: 1px solid var(--rpb-border, #3c4043);
-  border-radius: 12px;
+  padding: 4px 12px;
+  font: var(--md-sys-typescale-label-medium, 500 0.75rem/1rem system-ui);
+  color: var(--md-sys-color-on-secondary-container, #ffdbcd);
+  background: var(--md-sys-color-secondary-container, #653c2a);
+  border-radius: var(--md-sys-shape-corner-full, 9999px);
 }
 
-/* CTA */
+/* CTA — bouton filled marque (rouge), coin full, touch target 48 dp */
 .cta {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   width: 100%;
-  padding: 10px 16px;
-  border-radius: 8px;
-  background: var(--rpb-primary);
-  color: var(--rpb-primary-on-container, #fff);
+  padding: 12px 20px;
+  border-radius: var(--md-sys-shape-corner-full, 9999px);
+  background: var(--rpb-primary, #dc2626);
+  color: #fff;
+  font: var(--md-sys-typescale-label-large, 500 0.875rem/1.25rem system-ui);
   font-weight: 700;
-  font-size: 0.875rem;
   text-decoration: none;
   border: none;
   cursor: pointer;
-  margin-bottom: 16px;
-  transition: background 0.15s;
+  margin-bottom: 18px;
   min-height: 48px;
+  box-shadow: var(--md-sys-elevation-1, 0 1px 3px rgba(0, 0, 0, 0.3));
+  transition:
+    box-shadow 0.15s var(--md-sys-motion-standard, cubic-bezier(0.2, 0, 0, 1)),
+    background-color 0.15s var(--md-sys-motion-standard, cubic-bezier(0.2, 0, 0, 1)),
+    transform 0.15s var(--md-sys-motion-standard, cubic-bezier(0.2, 0, 0, 1));
 }
 
 .cta:hover {
-  background: color-mix(in srgb, var(--rpb-primary) 85%, #000);
+  background: var(--rpb-brand-hover, #ef4444);
+  box-shadow: var(--md-sys-elevation-2, 0 2px 6px rgba(0, 0, 0, 0.3));
+}
+
+.cta:active {
+  transform: scale(0.98);
 }
 
 .cta svg {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   fill: currentColor;
   flex-shrink: 0;
 }
@@ -201,7 +202,7 @@
 /* Divider */
 .divider {
   height: 1px;
-  background: var(--rpb-border, #3c4043);
+  background: var(--md-sys-color-outline-variant, #58413f);
   margin: 0 0 16px;
 }
 
@@ -209,7 +210,7 @@
 .relatedList {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -218,21 +219,27 @@
 .relatedLink {
   display: flex;
   align-items: center;
-  gap: 4px;
-  font-size: 0.82rem;
-  color: var(--rpb-link, #8ab4f8);
+  gap: 8px;
+  padding: 0 8px;
+  border-radius: var(--md-sys-shape-corner-small, 8px);
+  font: var(--md-sys-typescale-body-medium, 400 0.875rem/1.25rem system-ui);
+  color: var(--md-sys-color-on-surface, #f9dcd9);
   text-decoration: none;
   min-height: 40px;
+  transition:
+    background-color 0.15s var(--md-sys-motion-standard, cubic-bezier(0.2, 0, 0, 1)),
+    color 0.15s var(--md-sys-motion-standard, cubic-bezier(0.2, 0, 0, 1));
 }
 
 .relatedLink:hover {
-  text-decoration: underline;
+  background: var(--md-sys-color-surface-container-high, #372624);
+  color: var(--md-sys-color-primary, #ffb4ab);
 }
 
 .relatedLink svg {
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
   fill: currentColor;
-  opacity: 0.6;
+  opacity: 0.7;
   flex-shrink: 0;
 }

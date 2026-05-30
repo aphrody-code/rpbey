@@ -4,7 +4,7 @@ description: "Index arborescent généré de toute la doc sous docs/."
 scope:
   - docs
 status: "generated"
-last_updated: "2026-05-29"
+last_updated: "2026-05-30"
 ---
 # Documentation — index
 
@@ -65,6 +65,7 @@ Cartographie du repo (apps/packages) : [REPO_MAP.md](REPO_MAP.md).
 - [Mapping composants MUI → Material Design 3 (web)](m3/component-mapping.md) `draft` — Table de correspondance MUI v9 → composants M3 (md-* @material/web + Md* @aphrody-code/m3-react), disponibilité web, gaps et composants sans équivalent.
 - [Plan de migration MUI → Material Design 3 (apps/web)](m3/migration-plan.md) `draft` — Stratégie, véhicule, phasage en vagues, gates et risques pour migrer le dashboard Next.js de MUI v9 + Emotion vers Material Design 3 sur le web.
 - [Inventaire MUI — surface actuelle (apps/web)](m3/mui-inventory.md) `draft` — Volume, composants, idiomes de style, système de thème et surface MUI X du dashboard, snapshot pré-migration M3.
+- [Plan de refonte /search & /comparateur — vraiment Material 3, vivant, moderne](m3/search-redesign-plan.md) `draft` — Diagnostic visuel (captures prod), écart vs M3, et plan d'exécution pour transformer la page search (gabarit MUI-free) et le comparateur d'un clone Google Search plat en une UI Material You / M3 Expressive : profondeur tonale, couleur générée, imagerie, motion chorégraphiée.
 - [Stratégie tokens, thème, typo & motion (MUI → M3)](m3/theme-tokens.md) `draft` — Mapping palette/typo/forme MUI → tokens M3 (--md-sys-*), dynamic color HCT, comparatif des véhicules web, échelle typographique et tokens de motion.
 
 ## nextjs

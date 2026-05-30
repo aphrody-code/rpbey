@@ -31,6 +31,14 @@ const fadeThrough = {
   exit: { opacity: 0, scale: 0.96, transition: { duration: 0.09, ease: EASING_EXIT } },
 };
 
+// Shared-axis X (M3) : changement d'onglet = navigation latérale entre catégories.
+// Sortant translate -X (accelerate), entrant +X → 0 (decelerate).
+const sharedAxisX = {
+  initial: { opacity: 0, x: 28 },
+  animate: { opacity: 1, x: 0, transition: { duration: 0.3, ease: EASING_ENTER } },
+  exit: { opacity: 0, x: -28, transition: { duration: 0.09, ease: EASING_EXIT } },
+};
+
 // Logo animé RPB — hero unique de la home + retour accueil en SERP.
 const LOGO_GIF = "/rpb-3d.gif";
 
@@ -210,7 +218,7 @@ export function SearchClient({ groups, recommendations }: SearchClientProps) {
   if (view === "home") {
     return (
       <MotionConfig reducedMotion="user">
-        <div className={styles.root}>
+        <div className={`${styles.root} m3-search`}>
           <motion.div className={styles.homeWrap} key="home" {...fadeThrough}>
             {/* Zone centrale */}
             <div className={styles.homeCenter}>
@@ -238,14 +246,14 @@ export function SearchClient({ groups, recommendations }: SearchClientProps) {
               <div className={styles.homeActions}>
                 <button
                   type="button"
-                  className={styles.homeBtn}
+                  className={`${styles.homeBtn} ${styles.homeBtnFilled}`}
                   onClick={() => handleSubmit(query)}
                 >
                   Rechercher
                 </button>
                 <button
                   type="button"
-                  className={styles.homeBtn}
+                  className={`${styles.homeBtn} ${styles.homeBtnTonal}`}
                   onClick={handleLucky}
                   disabled={!topReco}
                   title={topReco ? `Meilleure reco : ${topReco.name}` : "Calcul en cours…"}
@@ -265,7 +273,7 @@ export function SearchClient({ groups, recommendations }: SearchClientProps) {
   // ─────────────────────────────────────────────────────────────────────────────
   return (
     <MotionConfig reducedMotion="user">
-      <div className={styles.root}>
+      <div className={`${styles.root} m3-search`}>
         {/* Header SERP sticky */}
         <div className={styles.serpHeader}>
           <div className={styles.serpHeaderInner}>
@@ -325,7 +333,7 @@ export function SearchClient({ groups, recommendations }: SearchClientProps) {
                     />
                   </motion.div>
                 ) : (
-                  <motion.div key="serp" {...fadeThrough}>
+                  <motion.div key={`serp-${category}`} {...sharedAxisX}>
                     {showShimmer ? (
                       <SearchShimmer />
                     ) : (
@@ -361,21 +369,40 @@ export function SearchClient({ groups, recommendations }: SearchClientProps) {
 function SearchShimmer() {
   const reduce = useReducedMotion();
   return (
-    <div aria-busy="true" aria-label="Chargement des résultats">
-      {[1, 2, 3, 4].map((i) => (
+    <div
+      aria-busy="true"
+      aria-label="Chargement des résultats"
+      style={{ display: "flex", flexDirection: "column", gap: 8 }}
+    >
+      {[1, 2, 3, 4, 5].map((i) => (
         <div
           key={i}
           style={{
-            padding: "20px 0",
-            borderBottom: "1px solid var(--rpb-border, #3c4043)",
             display: "flex",
-            flexDirection: "column",
-            gap: 8,
+            gap: 16,
+            padding: "14px 16px",
+            borderRadius: "var(--md-sys-shape-corner-large, 16px)",
+            background: "var(--md-sys-color-surface-container-low, #271816)",
           }}
         >
-          <div style={shimmerBar(140, 12, reduce)} />
-          <div style={shimmerBar(320, 18, reduce)} />
-          <div style={shimmerBar(480, 13, reduce)} />
+          {/* Thumbnail squelette (pulse tonal) */}
+          <div
+            style={{
+              flexShrink: 0,
+              width: 72,
+              height: 72,
+              borderRadius: "var(--md-sys-shape-corner-medium, 12px)",
+              animation: reduce ? undefined : "m3pulse 1.4s ease-in-out infinite",
+              background: "var(--md-sys-color-surface-container, #2b1c1a)",
+            }}
+          />
+          {/* Lignes squelette */}
+          <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 8, paddingTop: 4 }}>
+            <div style={shimmerBar("38%", 11, reduce)} />
+            <div style={shimmerBar("70%", 16, reduce)} />
+            <div style={shimmerBar("92%", 12, reduce)} />
+            <div style={shimmerBar("60%", 12, reduce)} />
+          </div>
         </div>
       ))}
     </div>
@@ -383,13 +410,17 @@ function SearchShimmer() {
 }
 
 // reduce === true → pas d'animation (respecte prefers-reduced-motion).
-function shimmerBar(width: number, height: number, reduce: boolean | null): React.CSSProperties {
+function shimmerBar(
+  width: number | string,
+  height: number,
+  reduce: boolean | null,
+): React.CSSProperties {
   return {
     width,
     height,
-    borderRadius: 4,
+    borderRadius: 6,
     background:
-      "linear-gradient(90deg, var(--rpb-surface-main,#303134) 25%, var(--rpb-surface-high,#3c4043) 50%, var(--rpb-surface-main,#303134) 75%)",
+      "linear-gradient(90deg, var(--md-sys-color-surface-container,#2b1c1a) 25%, var(--md-sys-color-surface-container-high,#372624) 50%, var(--md-sys-color-surface-container,#2b1c1a) 75%)",
     backgroundSize: "200% 100%",
     animation: reduce ? undefined : "shimmer 1.4s infinite linear",
   };

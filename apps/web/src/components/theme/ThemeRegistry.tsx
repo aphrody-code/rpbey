@@ -63,6 +63,8 @@ export default function ThemeRegistry({ children }: { children: React.ReactNode 
   React.useEffect(() => {
     const p = activeTheme.palette;
     const root = document.documentElement;
+    // Bascule les rôles statiques --md-sys-color-* (m3.css) entre rouge et bleu.
+    root.setAttribute("data-theme", mode);
     document.body.style.backgroundColor = p.background.default;
     document.body.style.color = p.text.primary;
     document.body.style.transition = "background-color 0.3s ease, color 0.3s ease";
@@ -92,7 +94,7 @@ export default function ThemeRegistry({ children }: { children: React.ReactNode 
     // Container colors
     root.style.setProperty("--rpb-primary-container", p.primary.container ?? p.primary.dark);
     root.style.setProperty("--rpb-primary-on-container", p.primary.onContainer ?? p.primary.light);
-  }, [activeTheme]);
+  }, [activeTheme, mode]);
 
   const value = React.useMemo(
     () => ({

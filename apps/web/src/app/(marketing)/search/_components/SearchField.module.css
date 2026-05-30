@@ -21,27 +21,34 @@
   display: flex;
   align-items: center;
   height: 52px;
-  border-radius: 24px;
-  background: var(--rpb-surface-main, #303134);
-  border: 1px solid transparent;
+  border-radius: var(--md-sys-shape-corner-full, 28px);
+  background: var(--md-sys-color-surface-container-high, #372624);
+  border: 1px solid var(--md-sys-color-outline-variant, #58413f);
+  box-shadow: var(--md-sys-elevation-1, 0 1px 3px rgba(0, 0, 0, 0.3));
   padding: 0 8px;
   gap: 4px;
   transition:
-    border-color 0.2s,
+    border-color 0.2s var(--md-sys-motion-standard, cubic-bezier(0.2, 0, 0, 1)),
     border-radius 0.15s,
+    box-shadow 0.2s var(--md-sys-motion-standard, cubic-bezier(0.2, 0, 0, 1)),
     background 0.15s;
 }
 
 .bar:hover {
-  background: var(--rpb-surface-high, #3c4043);
+  background: var(--md-sys-color-surface-container-highest, #42302e);
+  box-shadow: var(--md-sys-elevation-2, 0 2px 6px rgba(0, 0, 0, 0.3));
 }
 
+/* Focus : le champ s'éveille — elevation 3 + halo accent marque */
 .barFocused {
-  border-color: var(--rpb-outline, #5f6368);
+  border-color: var(--rpb-primary, #dc2626);
+  box-shadow:
+    var(--md-sys-elevation-3, 0 4px 8px rgba(0, 0, 0, 0.3)),
+    0 0 0 3px color-mix(in srgb, var(--rpb-primary, #dc2626) 22%, transparent);
 }
 
 .barDropdownOpen {
-  border-radius: 24px 24px 0 0;
+  border-radius: var(--md-sys-shape-corner-large, 16px) var(--md-sys-shape-corner-large, 16px) 0 0;
   border-bottom-color: transparent;
 }
 
@@ -164,10 +171,11 @@
   top: 100%;
   left: 0;
   right: 0;
-  background: var(--rpb-surface-main, #303134);
-  border: 1px solid var(--rpb-outline, #5f6368);
+  background: var(--md-sys-color-surface-container-high, #372624);
+  border: 1px solid var(--rpb-primary, #dc2626);
   border-top: none;
-  border-radius: 0 0 24px 24px;
+  border-radius: 0 0 var(--md-sys-shape-corner-large, 16px) var(--md-sys-shape-corner-large, 16px);
+  box-shadow: var(--md-sys-elevation-2, 0 2px 6px rgba(0, 0, 0, 0.3));
   z-index: 1300;
   overflow: hidden;
 }

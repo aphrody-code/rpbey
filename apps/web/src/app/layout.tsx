@@ -8,6 +8,7 @@ import { Toaster } from "@/components/ui/Toaster";
 import { googleSansFlex } from "@/lib/fonts";
 import { generateOrganizationJsonLd, generateWebsiteJsonLd } from "@/lib/seo-utils";
 import "./globals.css";
+import "./m3.css";
 
 export const viewport: Viewport = {
   themeColor: "#dc2626",

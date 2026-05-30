@@ -1,7 +1,7 @@
 /* SearchClient — layout racine, CSS Modules, aucun @mui */
 
 .root {
-  background: var(--rpb-bg, #202124);
+  background: var(--md-sys-color-surface, #1e100e);
   min-height: 100vh;
 }
 
@@ -19,6 +19,31 @@
   align-items: center;
   justify-content: center;
   padding: 0 16px 96px;
+  position: relative;
+}
+
+/* Halo marque diffus derrière le hero (M3 Expressive, signature RPB) */
+.homeCenter::before {
+  content: "";
+  position: absolute;
+  top: 28%;
+  left: 50%;
+  width: min(560px, 80vw);
+  height: min(560px, 80vw);
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--rpb-primary, #dc2626) 18%, transparent) 0%,
+    transparent 62%
+  );
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(8px);
+}
+
+.homeCenter > * {
+  position: relative;
+  z-index: 1;
 }
 
 .homeLogo {
@@ -27,6 +52,31 @@
   margin-bottom: 28px;
   user-select: none;
   -webkit-user-drag: none;
+  animation:
+    logoIn 0.6s var(--md-sys-motion-emphasized-decelerate, cubic-bezier(0.05, 0.7, 0.1, 1)) both,
+    logoFloat 6s ease-in-out 0.6s infinite;
+  filter: drop-shadow(0 8px 24px color-mix(in srgb, var(--rpb-primary, #dc2626) 35%, transparent));
+}
+
+@keyframes logoIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes logoFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 .homeActions {
@@ -38,31 +88,61 @@
 }
 
 .homeBtn {
-  background: var(--rpb-surface-high, #3c4043);
-  color: var(--rpb-text, #e8eaed);
-  font-weight: 500;
-  font-size: 0.875rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font: var(--md-sys-typescale-label-large, 500 0.875rem/1.25rem system-ui);
   border: none;
-  border-radius: 4px;
-  padding: 8px 16px;
+  border-radius: var(--md-sys-shape-corner-full, 9999px);
+  padding: 10px 24px;
   cursor: pointer;
-  min-height: 48px;
-  transition: background 0.15s;
+  min-height: 44px;
+  transition:
+    background-color 0.15s var(--md-sys-motion-standard, cubic-bezier(0.2, 0, 0, 1)),
+    box-shadow 0.15s var(--md-sys-motion-standard, cubic-bezier(0.2, 0, 0, 1)),
+    transform 0.12s var(--md-sys-motion-standard, cubic-bezier(0.2, 0, 0, 1));
 }
 
-.homeBtn:hover {
-  background: var(--rpb-surface-highest, #4a4d51);
+.homeBtn:active {
+  transform: scale(0.97);
 }
 
 .homeBtn:disabled {
-  opacity: 0.5;
+  opacity: 0.38;
   cursor: not-allowed;
+}
+
+/* Filled marque (rouge) */
+.homeBtnFilled {
+  background: var(--rpb-primary, #dc2626);
+  color: #fff;
+  box-shadow: var(--md-sys-elevation-1, 0 1px 3px rgba(0, 0, 0, 0.3));
+}
+
+.homeBtnFilled:hover:not(:disabled) {
+  background: var(--rpb-brand-hover, #ef4444);
+  box-shadow: var(--md-sys-elevation-2, 0 2px 6px rgba(0, 0, 0, 0.3));
+}
+
+/* Tonal (secondary-container) */
+.homeBtnTonal {
+  background: var(--md-sys-color-secondary-container, #653c2a);
+  color: var(--md-sys-color-on-secondary-container, #ffdbcd);
+}
+
+.homeBtnTonal:hover:not(:disabled) {
+  background: color-mix(
+    in srgb,
+    var(--md-sys-color-on-secondary-container, #ffdbcd) 8%,
+    var(--md-sys-color-secondary-container, #653c2a)
+  );
 }
 
 /* ── SERP ── */
 .serpHeader {
-  background: var(--rpb-bg-deep, #161719);
-  border-bottom: 1px solid var(--rpb-border, #3c4043);
+  background: var(--md-sys-color-surface-container-low, #271816);
+  border-bottom: 1px solid var(--md-sys-color-outline-variant, #58413f);
+  box-shadow: var(--md-sys-elevation-1, 0 1px 3px rgba(0, 0, 0, 0.3));
   position: sticky;
   top: 0;
   z-index: 100;

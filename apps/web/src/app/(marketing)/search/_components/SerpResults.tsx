@@ -66,17 +66,19 @@ function domainFrom(url: string): string {
   }
 }
 
+// Chips tiers solides sur rôles M3 (échelle de chaleur S→C : sang/or/terracotta/neutre)
 function badgeStyle(badge: string): React.CSSProperties {
-  let color = "var(--rpb-primary)";
-  if (badge === "S") color = "var(--rpb-tier-s, #f59e0b)";
-  else if (badge === "A") color = "var(--rpb-price-good, #22c55e)";
-  else if (badge === "B") color = "var(--rpb-tier-b, #3b82f6)";
-  else if (badge === "C") color = "var(--rpb-tier-c, #6b7280)";
-  return {
-    color,
-    backgroundColor: `color-mix(in srgb, ${color} 12%, transparent)`,
-    borderColor: `color-mix(in srgb, ${color} 25%, transparent)`,
+  const map: Record<string, [string, string]> = {
+    S: ["var(--rpb-tier-s)", "var(--rpb-tier-s-on)"],
+    A: ["var(--rpb-tier-a)", "var(--rpb-tier-a-on)"],
+    B: ["var(--rpb-tier-b)", "var(--rpb-tier-b-on)"],
+    C: ["var(--rpb-tier-c)", "var(--rpb-tier-c-on)"],
   };
+  const [bg, on] = map[badge] ?? [
+    "var(--md-sys-color-primary-container)",
+    "var(--md-sys-color-on-primary-container)",
+  ];
+  return { backgroundColor: bg, color: on };
 }
 
 // Catégories rendues en grille d'images
@@ -110,52 +112,58 @@ function ImageGrid({ items }: { items: GlobalSearchItem[] }) {
 // ── TextResult ────────────────────────────────────────────────────────────────
 
 function TextResult({ item, index }: { item: GlobalSearchItem; index: number }) {
-  const hasDomain = item.url.startsWith("http");
-  const domain = hasDomain ? domainFrom(item.url) : null;
-  const faviconSrc = domain ? `https://www.google.com/s2/favicons?domain=${domain}&sz=64` : null;
   const isExternal = item.url.startsWith("http");
+  const domain = isExternal ? domainFrom(item.url) : null;
+  const faviconSrc = domain ? `https://www.google.com/s2/favicons?domain=${domain}&sz=64` : null;
+  const hasThumb = Boolean(item.thumbnail);
 
   return (
-    <li className={styles.item} style={{ animationDelay: `${index * 40}ms` }}>
-      {/* Ligne site */}
-      <div className={styles.siteLine}>
-        <div className={styles.favicon} aria-hidden="true">
-          {faviconSrc ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={faviconSrc} alt="" width={16} height={16} />
-          ) : (
-            <CategoryIcon category={item.category} />
-          )}
-        </div>
-        <div>
-          <span className={styles.siteName}>{domain ?? item.subtitle}</span>
-          {domain && (
-            <span className={styles.siteUrl}>
-              {item.url.length > 60 ? `${item.url.slice(0, 60)}…` : item.url}
-            </span>
-          )}
-        </div>
-      </div>
-
-      {/* Titre lien bleu */}
+    <li className={styles.item} style={{ animationDelay: `${index * 45}ms` }}>
       <a
+        className={styles.itemLink}
         href={item.url || "#"}
-        className={styles.titleLink}
         target={isExternal ? "_blank" : undefined}
         rel={isExternal ? "noopener noreferrer" : undefined}
       >
-        {item.title}
+        {/* Leading : thumbnail produit OU avatar tonal (favicon / icône type) */}
+        {hasThumb ? (
+          <div className={styles.thumb}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={item.thumbnail} alt="" className={styles.thumbImg} loading="lazy" />
+          </div>
+        ) : (
+          <div className={styles.avatar} data-cat={item.category} aria-hidden="true">
+            {faviconSrc ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={faviconSrc} alt="" width={20} height={20} className={styles.faviconImg} />
+            ) : (
+              <CategoryIcon category={item.category} />
+            )}
+          </div>
+        )}
+
+        {/* Corps */}
+        <div className={styles.itemBody}>
+          <div className={styles.siteLine}>
+            <span className={styles.siteName}>{domain ?? item.subtitle}</span>
+            {domain && (
+              <span className={styles.siteUrl}>
+                {item.url.length > 56 ? `${item.url.slice(0, 56)}…` : item.url}
+              </span>
+            )}
+          </div>
+
+          <span className={styles.titleLink}>{item.title}</span>
+
+          <p className={styles.snippet}>{item.details ?? item.subtitle}</p>
+
+          {item.badge && (
+            <span className={styles.badge} style={badgeStyle(item.badge)}>
+              {item.price != null ? `${item.price.toFixed(2)} €` : item.badge}
+            </span>
+          )}
+        </div>
       </a>
-
-      {/* Snippet */}
-      <p className={styles.snippet}>{item.details ?? item.subtitle}</p>
-
-      {/* Badge */}
-      {item.badge && (
-        <span className={styles.badge} style={badgeStyle(item.badge)}>
-          {item.price != null ? `${item.price.toFixed(2)} EUR` : item.badge}
-        </span>
-      )}
     </li>
   );
 }

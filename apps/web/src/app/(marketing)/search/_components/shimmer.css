@@ -7,3 +7,21 @@
     background-position: -200% 0;
   }
 }
+
+/* Pulse tonal M3 : surface-container ↔ surface-container-high (skeleton cohérent) */
+@keyframes m3pulse {
+  0%,
+  100% {
+    background-color: var(--md-sys-color-surface-container, #2b1c1a);
+  }
+  50% {
+    background-color: var(--md-sys-color-surface-container-high, #372624);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .m3-search [style*="m3pulse"],
+  .m3-search [style*="shimmer"] {
+    animation: none !important;
+  }
+}

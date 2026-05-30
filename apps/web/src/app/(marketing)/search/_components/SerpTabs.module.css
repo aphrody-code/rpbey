@@ -1,8 +1,10 @@
-/* SerpTabs — onglets SERP, scrollable, CSS Modules, 0 @mui */
+/* SerpTabs — Primary Tabs Material 3 (indicateur barre marque, typescale,
+ * state-layer). Couleurs = rôles --md-sys-color-* ; l'indicateur garde le rouge
+ * de marque (--rpb-primary). */
 
 .tabsWrap {
-  background: var(--rpb-bg-deep, #161719);
-  border-bottom: 1px solid var(--rpb-border, #3c4043);
+  background: var(--md-sys-color-surface-container-lowest, #180b09);
+  border-bottom: 1px solid var(--md-sys-color-outline-variant, #58413f);
   padding: 0 8px;
 }
 
@@ -30,64 +32,72 @@
 .tab {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   min-height: 48px;
-  padding: 0 12px;
-  font-size: 0.875rem;
-  font-weight: 400;
-  color: var(--rpb-text-secondary, #bdc1c6);
+  min-width: 48px;
+  padding: 0 16px;
+  font: var(--md-sys-typescale-title-small, 500 0.875rem/1.25rem system-ui);
+  color: var(--md-sys-color-on-surface-variant, #dfbfbb);
   background: transparent;
   border: none;
-  border-bottom: 3px solid transparent;
   cursor: pointer;
   white-space: nowrap;
   flex-shrink: 0;
-  transition:
-    color 0.15s,
-    border-color 0.15s;
-  min-width: 48px;
-  /* touch target */
   position: relative;
+  transition: color 0.15s var(--md-sys-motion-standard, cubic-bezier(0.2, 0, 0, 1));
+}
+
+/* State-layer M3 (hover/press) */
+.tab::before {
+  content: "";
+  position: absolute;
+  inset: 4px 4px 0;
+  border-radius: var(--md-sys-shape-corner-small, 8px) var(--md-sys-shape-corner-small, 8px) 0 0;
+  background: var(--md-sys-color-on-surface, #f9dcd9);
+  opacity: 0;
+  transition: opacity 0.15s var(--md-sys-motion-standard, cubic-bezier(0.2, 0, 0, 1));
+  pointer-events: none;
 }
 
 .tab:hover {
-  color: var(--rpb-text, #e8eaed);
+  color: var(--md-sys-color-on-surface, #f9dcd9);
+}
+
+.tab:hover::before {
+  opacity: 0.06;
+}
+
+.tab:active::before {
+  opacity: 0.1;
 }
 
 .tabActive {
-  color: var(--rpb-text, #e8eaed);
-  font-weight: 500;
-  border-bottom-color: var(--rpb-primary);
+  color: var(--md-sys-color-on-surface, #f9dcd9);
+  font-weight: 700;
 }
 
-/* Underline animée via pseudo-element pour garder le contrôle */
+/* Indicateur actif : barre marque 3 dp, coin haut arrondi, scale-in animé */
 .tab::after {
   content: "";
   position: absolute;
-  bottom: -1px;
-  left: 0;
-  right: 0;
+  bottom: 0;
+  left: 12px;
+  right: 12px;
   height: 3px;
   border-radius: 3px 3px 0 0;
-  background: var(--rpb-primary);
+  background: var(--rpb-primary, #dc2626);
   transform: scaleX(0);
-  transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1);
+  transition: transform 0.25s var(--md-sys-motion-emphasized-decelerate, cubic-bezier(0.05, 0.7, 0.1, 1));
 }
 
 .tabActive::after {
   transform: scaleX(1);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .tab::after {
-    transition: none;
-  }
-}
-
 /* Cercle sparkle IA dans l'onglet Mode IA */
 .aiSparkle {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   background: var(--rpb-gradient-ai);
   display: flex;
@@ -97,7 +107,7 @@
 }
 
 .aiSparkle svg {
-  width: 10px;
-  height: 10px;
-  fill: var(--rpb-primary-on-container, #fff);
+  width: 11px;
+  height: 11px;
+  fill: #fff;
 }

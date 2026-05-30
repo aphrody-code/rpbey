@@ -1,0 +1,297 @@
+/* =============================================================================
+ * m3.css — Material 3 design tokens for RPB (dark-first)
+ * -----------------------------------------------------------------------------
+ * Système de tokens M3 généré depuis le seed de marque RPB (rouge #dc2626) via
+ * `@aphrody-code/m3-tokens` (schemeFromSeed, variant "vibrant", dark). Le bleu
+ * tournoi est dérivé du seed #60a5fa. Vibrant maximise la chroma → rouge sang
+ * (`primary-container #93000b`) + or-ambre (`tertiary-container #683c10`) :
+ * rupture nette vs le gris froid Google de l'ancienne palette.
+ *
+ * - `:root`                  → thème rouge (défaut).
+ * - `:root[data-theme=blue]` → thème bleu (mode tournoi), posé par ThemeRegistry.
+ * - tokens système (shape / elevation / motion / typescale / state-layer).
+ * - tokens marque & sémantique (brand, gold, success, tiers, gradient IA).
+ * - `.m3-search`             → scope qui ré-alias les `--rpb-*` consommés par
+ *                              /search vers les rôles M3 (profondeur tonale),
+ *                              SANS toucher les `--rpb-primary/secondary` de
+ *                              marque injectés au runtime par ThemeRegistry.
+ *
+ * Split d'accent M3-correct : les ACCENTS TEXTE/ICÔNE utilisent
+ * `--md-sys-color-primary` (ton clair, AA sur fond sombre) ; les REMPLISSAGES
+ * (barre d'onglet active, CTA, FAB) utilisent le rouge de marque `--rpb-brand`.
+ * ========================================================================== */
+
+:root {
+  /* ---- M3 color roles — RED (seed #dc2626, vibrant, dark) ---------------- */
+  --md-sys-color-background: #1e100e;
+  --md-sys-color-on-background: #f9dcd9;
+  --md-sys-color-surface: #1e100e;
+  --md-sys-color-surface-dim: #1e100e;
+  --md-sys-color-surface-bright: #473533;
+  --md-sys-color-surface-container-lowest: #180b09;
+  --md-sys-color-surface-container-low: #271816;
+  --md-sys-color-surface-container: #2b1c1a;
+  --md-sys-color-surface-container-high: #372624;
+  --md-sys-color-surface-container-highest: #42302e;
+  --md-sys-color-on-surface: #f9dcd9;
+  --md-sys-color-surface-variant: #58413f;
+  --md-sys-color-on-surface-variant: #dfbfbb;
+  --md-sys-color-inverse-surface: #f9dcd9;
+  --md-sys-color-inverse-on-surface: #3d2c2a;
+  --md-sys-color-outline: #a78a87;
+  --md-sys-color-outline-variant: #58413f;
+  --md-sys-color-shadow: #000000;
+  --md-sys-color-scrim: #000000;
+  --md-sys-color-surface-tint: #ffb4ab;
+
+  --md-sys-color-primary: #ffb4ab;
+  --md-sys-color-on-primary: #690005;
+  --md-sys-color-primary-container: #93000b;
+  --md-sys-color-on-primary-container: #ffdad6;
+  --md-sys-color-inverse-primary: #c00013;
+  --md-sys-color-primary-fixed: #ffdad6;
+  --md-sys-color-primary-fixed-dim: #ffb4ab;
+  --md-sys-color-on-primary-fixed: #410002;
+  --md-sys-color-on-primary-fixed-variant: #93000b;
+
+  --md-sys-color-secondary: #f4b9a0;
+  --md-sys-color-on-secondary: #4b2716;
+  --md-sys-color-secondary-container: #653c2a;
+  --md-sys-color-on-secondary-container: #ffdbcd;
+  --md-sys-color-secondary-fixed: #ffdbcd;
+  --md-sys-color-secondary-fixed-dim: #f4b9a0;
+  --md-sys-color-on-secondary-fixed: #321304;
+  --md-sys-color-on-secondary-fixed-variant: #653c2a;
+
+  --md-sys-color-tertiary: #fab982;
+  --md-sys-color-on-tertiary: #4c2700;
+  --md-sys-color-tertiary-container: #683c10;
+  --md-sys-color-on-tertiary-container: #ffdcc2;
+  --md-sys-color-tertiary-fixed: #ffdcc2;
+  --md-sys-color-tertiary-fixed-dim: #fab982;
+  --md-sys-color-on-tertiary-fixed: #2e1500;
+  --md-sys-color-on-tertiary-fixed-variant: #683c10;
+
+  --md-sys-color-error: #ffb4ab;
+  --md-sys-color-on-error: #690005;
+  --md-sys-color-error-container: #93000a;
+  --md-sys-color-on-error-container: #ffdad6;
+
+  /* ---- Shape scale ------------------------------------------------------- */
+  --md-sys-shape-corner-none: 0;
+  --md-sys-shape-corner-extra-small: 4px;
+  --md-sys-shape-corner-small: 8px;
+  --md-sys-shape-corner-medium: 12px;
+  --md-sys-shape-corner-large: 16px;
+  --md-sys-shape-corner-large-increased: 20px; /* Expressive */
+  --md-sys-shape-corner-extra-large: 28px;
+  --md-sys-shape-corner-extra-large-increased: 32px; /* Expressive */
+  --md-sys-shape-corner-full: 9999px;
+
+  /* ---- Elevation (dark tonal shadows) ----------------------------------- */
+  --md-sys-elevation-0: none;
+  --md-sys-elevation-1: 0 1px 2px rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.15);
+  --md-sys-elevation-2: 0 1px 2px rgba(0, 0, 0, 0.3), 0 2px 6px 2px rgba(0, 0, 0, 0.15);
+  --md-sys-elevation-3: 0 1px 3px rgba(0, 0, 0, 0.3), 0 4px 8px 3px rgba(0, 0, 0, 0.15);
+  --md-sys-elevation-4: 0 2px 3px rgba(0, 0, 0, 0.3), 0 6px 10px 4px rgba(0, 0, 0, 0.15);
+  --md-sys-elevation-5: 0 4px 4px rgba(0, 0, 0, 0.3), 0 8px 12px 6px rgba(0, 0, 0, 0.15);
+
+  /* ---- Motion : easing --------------------------------------------------- */
+  --md-sys-motion-standard: cubic-bezier(0.2, 0, 0, 1);
+  --md-sys-motion-standard-accelerate: cubic-bezier(0.3, 0, 1, 1);
+  --md-sys-motion-standard-decelerate: cubic-bezier(0, 0, 0, 1);
+  --md-sys-motion-emphasized: cubic-bezier(0.2, 0, 0, 1);
+  --md-sys-motion-emphasized-decelerate: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --md-sys-motion-emphasized-accelerate: cubic-bezier(0.3, 0, 0.8, 0.15);
+  /* ---- Motion : duration ------------------------------------------------- */
+  --md-sys-motion-duration-short1: 50ms;
+  --md-sys-motion-duration-short2: 100ms;
+  --md-sys-motion-duration-short3: 150ms;
+  --md-sys-motion-duration-short4: 200ms;
+  --md-sys-motion-duration-medium1: 250ms;
+  --md-sys-motion-duration-medium2: 300ms;
+  --md-sys-motion-duration-medium3: 350ms;
+  --md-sys-motion-duration-medium4: 400ms;
+  --md-sys-motion-duration-long1: 450ms;
+  --md-sys-motion-duration-long2: 500ms;
+  --md-sys-motion-duration-long3: 550ms;
+  --md-sys-motion-duration-long4: 600ms;
+
+  /* ---- State-layer opacities -------------------------------------------- */
+  --md-sys-state-hover-opacity: 0.08;
+  --md-sys-state-focus-opacity: 0.1;
+  --md-sys-state-pressed-opacity: 0.1;
+  --md-sys-state-dragged-opacity: 0.16;
+
+  /* ---- Typescale (size / line-height / weight / tracking) --------------- */
+  --md-sys-typescale-display-small: 400 2.25rem/2.75rem var(--font-google-sans-flex, system-ui);
+  --md-sys-typescale-headline-medium: 400 1.75rem/2.25rem var(--font-google-sans-flex, system-ui);
+  --md-sys-typescale-headline-small: 400 1.5rem/2rem var(--font-google-sans-flex, system-ui);
+  --md-sys-typescale-title-large: 400 1.375rem/1.75rem var(--font-google-sans-flex, system-ui);
+  --md-sys-typescale-title-medium: 500 1rem/1.5rem var(--font-google-sans-flex, system-ui);
+  --md-sys-typescale-title-small: 500 0.875rem/1.25rem var(--font-google-sans-flex, system-ui);
+  --md-sys-typescale-body-large: 400 1rem/1.5rem var(--font-google-sans-flex, system-ui);
+  --md-sys-typescale-body-medium: 400 0.875rem/1.25rem var(--font-google-sans-flex, system-ui);
+  --md-sys-typescale-body-small: 400 0.75rem/1rem var(--font-google-sans-flex, system-ui);
+  --md-sys-typescale-label-large: 500 0.875rem/1.25rem var(--font-google-sans-flex, system-ui);
+  --md-sys-typescale-label-medium: 500 0.75rem/1rem var(--font-google-sans-flex, system-ui);
+  --md-sys-typescale-label-small: 500 0.6875rem/1rem var(--font-google-sans-flex, system-ui);
+  --md-sys-typescale-title-medium-tracking: 0.009375em;
+  --md-sys-typescale-label-large-tracking: 0.00625em;
+  --md-sys-typescale-body-medium-tracking: 0.015625em;
+
+  /* ---- Brand & semantic tokens (RPB DA) --------------------------------- */
+  /* Rouge de marque pour REMPLISSAGES (CTA / indicateur / FAB). Statique :
+     ThemeRegistry surcharge --rpb-primary au runtime (rouge ou bleu tournoi),
+     mais --rpb-brand reste l'ancre rouge ; le SSR a déjà la bonne valeur. */
+  --rpb-brand: #dc2626;
+  --rpb-brand-rgb: 220, 38, 38;
+  --rpb-brand-hover: #ef4444;
+  --rpb-gold: #fbbf24;
+  --rpb-gold-rgb: 251, 191, 36;
+  --rpb-success: #5fd068; /* prix favorable / éco */
+  --rpb-success-dim: #2f6f35;
+
+  /* Défauts SSR pour les vars injectées par ThemeRegistry (évite le flash). */
+  --rpb-primary: #dc2626;
+  --rpb-primary-rgb: 220, 38, 38;
+  --rpb-secondary: #fbbf24;
+
+  /* Tiers compétitifs S/A/B/C — échelle de chaleur (chaud = haut). */
+  --rpb-tier-s: var(--md-sys-color-error-container); /* rouge sang */
+  --rpb-tier-s-on: var(--md-sys-color-on-error-container);
+  --rpb-tier-a: var(--md-sys-color-tertiary-container); /* or-ambre */
+  --rpb-tier-a-on: var(--md-sys-color-on-tertiary-container);
+  --rpb-tier-b: var(--md-sys-color-secondary-container); /* terracotta */
+  --rpb-tier-b-on: var(--md-sys-color-on-secondary-container);
+  --rpb-tier-c: var(--md-sys-color-surface-container-highest); /* neutre */
+  --rpb-tier-c-on: var(--md-sys-color-on-surface-variant);
+
+  /* Affordance IA (Gemini) — signature, conservée telle quelle. */
+  --rpb-ai-start: #4285f4;
+  --rpb-ai-mid: #9b72cb;
+  --rpb-ai-end: #d96570;
+  --rpb-gradient-ai: linear-gradient(
+    90deg,
+    var(--rpb-ai-start),
+    var(--rpb-ai-mid),
+    var(--rpb-ai-end)
+  );
+}
+
+/* ---- M3 color roles — BLUE (seed #60a5fa, vibrant, dark), mode tournoi --- */
+:root[data-theme="blue"] {
+  --md-sys-color-background: #0e141c;
+  --md-sys-color-on-background: #dee2ee;
+  --md-sys-color-surface: #0e141c;
+  --md-sys-color-surface-dim: #0e141c;
+  --md-sys-color-surface-bright: #343943;
+  --md-sys-color-surface-container-lowest: #090e16;
+  --md-sys-color-surface-container-low: #161c24;
+  --md-sys-color-surface-container: #1a2028;
+  --md-sys-color-surface-container-high: #252a33;
+  --md-sys-color-surface-container-highest: #30353e;
+  --md-sys-color-on-surface: #dee2ee;
+  --md-sys-color-surface-variant: #404753;
+  --md-sys-color-on-surface-variant: #c0c7d5;
+  --md-sys-color-inverse-surface: #dee2ee;
+  --md-sys-color-inverse-on-surface: #2b313a;
+  --md-sys-color-outline: #8a919f;
+  --md-sys-color-outline-variant: #404753;
+  --md-sys-color-surface-tint: #a4c9ff;
+
+  --md-sys-color-primary: #a4c9ff;
+  --md-sys-color-on-primary: #00315d;
+  --md-sys-color-primary-container: #004883;
+  --md-sys-color-on-primary-container: #d4e3ff;
+  --md-sys-color-inverse-primary: #0060ac;
+  --md-sys-color-primary-fixed: #d4e3ff;
+  --md-sys-color-primary-fixed-dim: #a4c9ff;
+  --md-sys-color-on-primary-fixed: #001c39;
+  --md-sys-color-on-primary-fixed-variant: #004883;
+
+  --md-sys-color-secondary: #bcc5eb;
+  --md-sys-color-on-secondary: #262f4d;
+  --md-sys-color-secondary-container: #3c4665;
+  --md-sys-color-on-secondary-container: #dbe1ff;
+  --md-sys-color-secondary-fixed: #dbe1ff;
+  --md-sys-color-secondary-fixed-dim: #bcc5eb;
+  --md-sys-color-on-secondary-fixed: #101a37;
+  --md-sys-color-on-secondary-fixed-variant: #3c4665;
+
+  --md-sys-color-tertiary: #c4c1f9;
+  --md-sys-color-on-tertiary: #2d2b59;
+  --md-sys-color-tertiary-container: #434171;
+  --md-sys-color-on-tertiary-container: #e3dfff;
+  --md-sys-color-tertiary-fixed: #e3dfff;
+  --md-sys-color-tertiary-fixed-dim: #c4c1f9;
+  --md-sys-color-on-tertiary-fixed: #181543;
+  --md-sys-color-on-tertiary-fixed-variant: #434171;
+
+  --md-sys-color-error: #ffb4ab;
+  --md-sys-color-on-error: #690005;
+  --md-sys-color-error-container: #93000a;
+  --md-sys-color-on-error-container: #ffdad6;
+
+  /* Marque tournoi = bleu ciel ; SSR fallback. */
+  --rpb-brand: #60a5fa;
+  --rpb-brand-rgb: 96, 165, 250;
+  --rpb-brand-hover: #93c5fd;
+  --rpb-primary: #60a5fa;
+  --rpb-primary-rgb: 96, 165, 250;
+}
+
+/* =============================================================================
+ * .m3-search — scope /search : ré-alias les --rpb-* surfaces/texte/outline vers
+ * les rôles M3 (profondeur tonale générée). Posé sur un ancêtre plus proche que
+ * :root → écrase les valeurs runtime de ThemeRegistry DANS /search uniquement,
+ * sans régresser le reste du dashboard. Les --rpb-primary/secondary de marque
+ * ne sont PAS surchargés (accents rouges/bleus conservés).
+ * ========================================================================== */
+.m3-search {
+  /* Surfaces → échelle tonale M3 */
+  --rpb-bg: var(--md-sys-color-surface);
+  --rpb-bg-deep: var(--md-sys-color-surface-container-lowest);
+  --rpb-paper: var(--md-sys-color-surface-container);
+  --rpb-surface-lowest: var(--md-sys-color-surface-container-lowest);
+  --rpb-surface-low: var(--md-sys-color-surface-container-low);
+  --rpb-surface-main: var(--md-sys-color-surface-container);
+  --rpb-surface-high: var(--md-sys-color-surface-container-high);
+  --rpb-surface-highest: var(--md-sys-color-surface-container-highest);
+
+  /* Texte → rôles on-surface */
+  --rpb-text: var(--md-sys-color-on-surface);
+  --rpb-text-secondary: var(--md-sys-color-on-surface-variant);
+  --rpb-text-tertiary: var(--md-sys-color-outline);
+
+  /* Contours */
+  --rpb-border: var(--md-sys-color-outline-variant);
+  --rpb-outline: var(--md-sys-color-outline);
+  --rpb-divider: var(--md-sys-color-outline-variant);
+
+  /* Liens — identité A : titre neutre (on-surface), survol = accent (géré CSS) */
+  --rpb-link: var(--md-sys-color-on-surface);
+  --rpb-link-visited: var(--md-sys-color-on-surface-variant);
+
+  /* Accent texte/icône M3-safe (salmon sur fond sombre, AA) */
+  --rpb-accent-text: var(--md-sys-color-primary);
+  --rpb-primary-on-container: var(--md-sys-color-on-primary-container);
+
+  /* Prix favorable → success de marque */
+  --rpb-price-good: var(--rpb-success);
+
+  /* Scrim image */
+  --rpb-surface-scrim: color-mix(in srgb, var(--md-sys-color-scrim) 55%, transparent);
+}
+
+/* Neutralisation complète de la motion si l'utilisateur le demande. */
+@media (prefers-reduced-motion: reduce) {
+  .m3-search *,
+  .m3-search *::before,
+  .m3-search *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

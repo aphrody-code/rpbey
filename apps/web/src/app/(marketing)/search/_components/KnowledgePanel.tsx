@@ -32,11 +32,19 @@ function IconOpenInNew() {
 
 // ── Tier helpers ──────────────────────────────────────────────────────────────
 
-function tierColor(tier: "S" | "A" | "B" | "C"): string {
-  if (tier === "S") return "var(--rpb-tier-s, #f59e0b)";
-  if (tier === "A") return "var(--rpb-price-good, #22c55e)";
-  if (tier === "B") return "var(--rpb-tier-b, #3b82f6)";
-  return "var(--rpb-tier-c, #6b7280)";
+// Chip tier solide sur rôles M3 (cohérent avec SerpResults).
+function tierChip(tier: "S" | "A" | "B" | "C"): React.CSSProperties {
+  const map: Record<string, [string, string]> = {
+    S: ["var(--rpb-tier-s)", "var(--rpb-tier-s-on)"],
+    A: ["var(--rpb-tier-a)", "var(--rpb-tier-a-on)"],
+    B: ["var(--rpb-tier-b)", "var(--rpb-tier-b-on)"],
+    C: ["var(--rpb-tier-c)", "var(--rpb-tier-c-on)"],
+  };
+  const [bg, on] = map[tier] ?? [
+    "var(--md-sys-color-primary-container)",
+    "var(--md-sys-color-on-primary-container)",
+  ];
+  return { backgroundColor: bg, color: on };
 }
 
 const EUR = new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" });
@@ -53,7 +61,9 @@ interface KnowledgePanelProps {
 
 export function KnowledgePanel({ group, reco, related }: KnowledgePanelProps) {
   const slug = group.slug ?? group.key;
-  const minPrice = group.cheapestEur;
+  // cheapestEur peut valoir 0 (aucune donnée prix) → ne pas afficher « 0,00 € ».
+  const rawMin = group.cheapestEur;
+  const minPrice = rawMin != null && rawMin > 0 ? rawMin : null;
   const maxPrice =
     group.offers.reduce((m, o) => (o.priceEur != null && o.priceEur > m ? o.priceEur : m), 0) ||
     null;
@@ -96,14 +106,7 @@ export function KnowledgePanel({ group, reco, related }: KnowledgePanelProps) {
       {/* Tier meta */}
       {tier && (
         <div className={styles.tierRow}>
-          <span
-            className={styles.tierBadge}
-            style={{
-              color: tierColor(tier),
-              backgroundColor: `color-mix(in srgb, ${tierColor(tier)} 15%, transparent)`,
-              borderColor: `color-mix(in srgb, ${tierColor(tier)} 30%, transparent)`,
-            }}
-          >
+          <span className={styles.tierBadge} style={tierChip(tier)}>
             Tier {tier}
           </span>
           {reco?.metaRelevanceScore != null && (
