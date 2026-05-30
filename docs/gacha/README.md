@@ -96,6 +96,6 @@ Ce sont des chemins identiques sur des services distincts. Les deux écrivent `p
 - **`gacha_audit_log` jamais écrite** par la DAL web (table morte côté web).
 - **`gacha_friendships`** : table présente, aucune route web (réservée / gérée côté `:5050`).
 - **Validation Zod absente** sur les routes web legacy `/api/gacha/{pull,multi,duel,wishlist}` (entrées non validées).
-- **`apps/gacha-server` — `/api/trade/*` en 501** : `/gacha echange` (bot) appelle `tradePropose()` → l'échange async n'est pas (encore) réimplémenté. Les `/api/duel/*` (501 aussi) sont sans impact : le bot fait ses duels en DB directe (`duel_matches`). Cf. [server.md](./server.md).
+- **Échange async retiré** (commit `984b8e0`, 2026-05-30) : `/api/trade/*` + `/api/duel/*` étaient des stubs **501**, et `/gacha echange` (qui appelait `tradePropose()`) échouait donc à 100 %. Routes REST, commande `echange` et méthodes client `trade*`/`duel*` (gacha-api.ts) supprimées. Les duels restent intacts (commande `/duel`, **DB directe** `duel_matches`, jamais le serveur `:5050`). Réimplémentation DB-backed (table `trade_proposals` + UI web accept/refuse) à faire post-teams. Cf. [server.md](./server.md).
 
 Pistes de refonte : centraliser les constantes (`lib/gacha-config.ts`), lire la pity dans la tx, wrapper le duel dans une tx, brancher l'audit log. (Non fait — touche l'économie prod.)

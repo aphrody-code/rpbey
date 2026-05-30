@@ -47,8 +47,6 @@ Le bot crée/réutilise une session Bearer par utilisateur Discord et la passe a
 | `badges()` / `claimBadge()` | GET/POST `/api/gacha/badges[/claim]` | — | paliers collection |
 | `fusionPreview()` / `fuse(id)` | GET/POST `/api/gacha/fusion[…]` | — | fusion de doublons |
 | `leaderboard(cat, limit)` | GET `/api/leaderboard/{cat}` | — | cat ∈ currency/wins/mmr/collection |
-| `duelPropose/Accept/Decline/Play/Forfeit/Active/History` | `/api/duel/*` | — | **501** (duels bot = DB directe `duel_matches`) |
-| `tradePropose/Accept/Decline/Pending` | `/api/trade/*` | — | ⚠️ **501** — appelé par `/gacha echange` (gap, cf. server.md) |
 | `adminGrant(userId, amount, note)` | POST `/api/admin/currency/grant` | — | admin |
 
 Robustesse : timeout 15 s → `GachaApiError("TIMEOUT")` ; 502/503/504 → `SERVICE_UNAVAILABLE` ; `tryGachaClient()` renvoie `null` si down (dégradation gracieuse, le bot affiche un embed « service indispo »). Normalisation `balanceAfter` → `newBalance` (`normalizeBalanceFields`, `:446-458`).
@@ -74,7 +72,7 @@ Groupe injectable (tsyringe), helper `api(interaction)` → client gacha. Consta
 - `RARITY_CONFIG.sellPrice` : COMMON 5 · RARE 15 · SUPER_RARE 50 · LEGENDARY 150 · SECRET 500.
 - `GIFT_COOLDOWN_MS = 12 h` ; dette : intérêts **15 %/jour** (`:102`).
 
-Sous-commandes (FR) : `gacha` (×1), `multi` (×10), `daily`, `solde`, `collection`, `catalogue`, `voir`, `vendre`, `vendre-tout`, `wish`, `wishlist`, `echange`, `donner` (Prisma direct, cooldown 12 h), `duel` (1v1 rapide — Prisma direct, pick cartes aléatoire), `parier` (quitte-ou-double — Prisma direct RNG), `dette`, `drop`, `aide`, `taux`, `classement`, `admin-give` (admin, ±1 M max). La plupart passent par `gacha-api` + `gacha-images` ; `donner`/`parier`/`duel`/`dette` tapent la DB en direct.
+Sous-commandes (FR) : `gacha` (×1), `multi` (×10), `daily`, `solde`, `collection`, `catalogue`, `voir`, `vendre`, `vendre-tout`, `wish`, `wishlist`, `donner` (Prisma direct, cooldown 12 h), `duel` (1v1 rapide — Prisma direct, pick cartes aléatoire), `parier` (quitte-ou-double — Prisma direct RNG), `dette`, `drop`, `aide`, `taux`, `classement`, `admin-give` (admin, ±1 M max). La plupart passent par `gacha-api` + `gacha-images` ; `donner`/`parier`/`duel`/`dette` tapent la DB en direct.
 
 ### `/duel *` — `commands/General/DuelCommand.ts` — TCG best-of-3 (async)
 

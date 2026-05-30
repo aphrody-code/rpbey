@@ -66,10 +66,13 @@ Auth = **Bearer** (table `sessions` partagée, mintée par le bot). Enveloppes e
 | `GET /api/cards/:id/image.png` | redirect 302 | → rendu OG du web (`WEB_BASE/api/gacha/card?id=`) |
 | `POST /discord_token` | `mintGachaSession` | OAuth Discord → session + JWT |
 
+### Échange / duel async — RETIRÉS (commit `984b8e0`, 2026-05-30)
+
+- `/api/trade/*` et `/api/duel/*` étaient des stubs **501** (`notImplemented`). `/gacha echange` appelait `tradePropose()` → échec systématique. Routes, helper `notImplemented` local, commande `echange` et méthodes client `trade*`/`duel*` supprimés. Réimplémentation DB-backed à faire post-teams (table `trade_proposals` + UI web).
+- Les **duels fonctionnent** via la commande `/duel` (bot) en **DB directe** (`duel_matches`, façade Prisma) — n'ont jamais transité par ce serveur.
+
 ### Gaps connus (501 NOT_IMPLEMENTED)
 
-- `POST /api/trade/propose`, `GET /api/trade/pending`, `/api/trade/:id/:action` — **échange async**. ⚠️ `tradePropose()` EST appelé par `/gacha echange` (EconomyGroup) → renvoie 501 pour l'instant.
-- `/api/duel/*` — duel async. Côté bot, les duels passent par la DB en direct (`duel_matches`, façade Prisma), pas par ce serveur — 501 attendu/sans impact.
 - Rendus Skia (`/api/profile/:id/card.png`, `/api/inventory/:id/mosaic.png`, etc., consommés par `gacha-images.ts`) : non réimplémentés (le bot a un fallback embed-only). L'image carte redirige vers l'OG web.
 
 ## CORS

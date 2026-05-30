@@ -60,10 +60,18 @@ thème actif.
 | --- | --- | --- |
 | Route ambient | `apps/web/src/app/api/v1/anime/frames/ambient/route.ts` | `GET …?series=&count=` — sert un échantillon léger d'URLs **lu directement des JSON** (échantillon stridé, repli diversifié). Indépendant de l'import DB lourd `anime_frames` (re-hébergement CDN, souvent non exécuté). |
 | Fond de page | `apps/web/src/components/ui/FrameBackdrop.tsx` | Fond fixe `z-index:-1` derrière le contenu : frame keyée par série + **teinte thème** (`--rpb-primary-rgb`), Ken Burns, scrim `color-mix` (contraste AA), `prefers-reduced-motion`. Câblé sur `anime`, `anime/[slug]`, `meta`, `builder`, `comparateur`. |
-| Hero vivant | `apps/web/src/components/ui/LivingBackdrop.tsx` | Fond du hero home : frame en Ken Burns CSS (zéro CORS) + calque **PixiJS v8** de braises **procédurales** (texture canvas runtime). Perf mobile : DPR capé 2, `maxFPS=30`, pause `visibilitychange`, désactivé en reduced-motion, `app.destroy()` au démontage, fallback si WebGL absent. `import("pixi.js")` dynamique (hors bundle initial). |
+| Hero vivant | `apps/web/src/components/ui/LivingBackdrop.tsx` | Fond du hero home : frame en Ken Burns CSS + calque **PixiJS v8** de braises **procédurales** (texture canvas runtime). Hero **épuré** (commit `7a501b4`) : gros titre + tagline + 2 CTAs retirés, ne reste que la puce « EN DIRECT » + le fond ; `minHeight` 44/52vh, frame **prominente** (`intensity` 0.82, voile léger 26/8/92 %). Perf mobile : DPR capé 2, `maxFPS=30`, pause `visibilitychange`, désactivé en reduced-motion, `app.destroy()` au démontage, fallback si WebGL absent. `import("pixi.js")` dynamique (hors bundle initial). |
 
 > `pixi.js` est dep de `apps/web` (et `apps/gacha-client`). Toujours via import
 > dynamique dans un `useEffect` — Pixi est WebGL/browser-only, jamais en SSR.
+
+> ⚠️ **Frames chargées en direct depuis le CDN**, jamais via le proxy `/api/img`
+> (commit `7a501b4`). Une frame est un `background-image` CSS décoratif → **aucun
+> CORS requis**. Le proxy ferait deux dégâts : (1) `cdn.rpbey.fr` **n'est pas dans
+> `ALLOWED_IMAGE_HOSTS`** (`lib/img-proxy.ts`) → **403** → fond invisible ; (2) il
+> applique `removeUniformLightBackground` (détourage produit) → troue les ciels /
+> aplats clairs des frames. Régression vécue : avant le fix, seul le dégradé de
+> marque s'affichait.
 
 ## Invariants
 
