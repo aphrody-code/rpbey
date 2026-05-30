@@ -101,3 +101,20 @@ export const CharacterEpisodeMapSchema = z.object({
   role: z.string().nullish(),
 });
 export type CharacterEpisodeMap = z.infer<typeof CharacterEpisodeMapSchema>;
+
+// ── Discussion Reddit (→ data/reddit-discussions.json, indexée par global-search). ──
+// Shape aligné sur x-discussions.json pour une indexation identique : `text` =
+// selftext du post (ou meilleur commentaire), `score`/`comments` = popularité.
+// `id` = fullname Reddit (ex. "t3_abc123"), `subreddit` sans préfixe r/.
+export const RedditDiscussionSchema = z.object({
+  id: z.string().min(1),
+  subreddit: z.string().min(1),
+  author: z.string().min(1),
+  title: z.string(),
+  text: z.string(),
+  score: z.number().int(),
+  comments: z.number().int().nonnegative(),
+  url: z.url(),
+  createdAt: z.string().min(1),
+});
+export type RedditDiscussion = z.infer<typeof RedditDiscussionSchema>;
