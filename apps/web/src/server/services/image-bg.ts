@@ -12,15 +12,28 @@ import sharp from "sharp";
  * touche pas une image déjà détourée, un fond non uniforme (photo lifestyle) ou
  * un fond sombre/coloré (cible = fond clair uniquement).
  *
+ * Qualité (v2) : alpha en **rampe douce** entre `FUZZ_INNER` (→ transparent) et
+ * `FUZZ_OUTER` (→ opaque) au lieu d'un seuil binaire — ça **anti-alias** le bord
+ * et écrase le **halo blanc** du contour. Puis **feather** du canal alpha (léger
+ * flou) pour des bords nets et lisses, et **despill** (on retire la dominante de
+ * fond résiduelle sur les pixels semi-transparents du contour).
+ *
  * Renvoie un WebP RGBA détouré, ou `null` si l'image doit rester telle quelle.
  * Best-effort total : toute exception → `null` (l'appelant sert l'original).
+ *
+ * ⚠️ `ALGO_VERSION` est inclus dans la clé de cache disque côté route `/api/img`
+ *    → tout changement d'algo invalide automatiquement le cache.
  */
 
+export const ALGO_VERSION = 2;
+
 const MAX_DIM = 768; // borne le coût CPU + la taille de sortie
-const FUZZ = 38; // distance euclidienne RGB tolérée autour de la couleur de fond
+const FUZZ_INNER = 30; // distance RGB en-deçà de laquelle le pixel est PLEINEMENT effacé
+const FUZZ_OUTER = 60; // distance au-delà de laquelle on garde le pixel (frontière du produit)
 const STD_MAX = 26; // écart-type des coins au-delà duquel le fond n'est pas uniforme
 const LUM_MIN = 176; // luminance min du fond (cible = clair ; évite de trouer un fond sombre)
 const MIN_CLEARED_PCT = 3; // sous ce taux d'effacement, on considère qu'il n'y avait pas de fond
+const DESPILL = 0.6; // force du retrait de dominante de fond sur le contour semi-transparent (0..1)
 
 export async function removeUniformLightBackground(input: Buffer): Promise<Buffer | null> {
   try {
@@ -69,15 +82,20 @@ export async function removeUniformLightBackground(input: Buffer): Promise<Buffe
     const lum = 0.299 * mr + 0.587 * mg + 0.114 * mb;
     if (std > STD_MAX || lum < LUM_MIN) return null; // fond non uniforme ou sombre
 
-    const fuzz2 = FUZZ * FUZZ;
-    const near = (i: number): boolean => {
+    const inner2 = FUZZ_INNER * FUZZ_INNER;
+    const outer2 = FUZZ_OUTER * FUZZ_OUTER;
+    const band = FUZZ_OUTER - FUZZ_INNER;
+    // distance² du pixel i à la couleur de fond.
+    const dist2 = (i: number): number => {
       const dr = val(i) - mr;
       const dg = val(i + 1) - mg;
       const db = val(i + 2) - mb;
-      return dr * dr + dg * dg + db * db <= fuzz2;
+      return dr * dr + dg * dg + db * db;
     };
 
     // Flood-fill itératif (pile explicite) depuis tous les pixels de bord.
+    // On propage tant que d < FUZZ_OUTER (fond + contour anti-aliasé), et on pose
+    // un alpha en RAMPE : 0 sous FUZZ_INNER, 255 au-delà de FUZZ_OUTER, linéaire entre.
     const visited = new Uint8Array(W * H);
     const stack: number[] = [];
     for (let x = 0; x < W; x++) {
@@ -92,9 +110,31 @@ export async function removeUniformLightBackground(input: Buffer): Promise<Buffe
       if (p === undefined || visited[p]) continue;
       visited[p] = 1;
       const i = p * 4;
-      if (!near(i)) continue;
-      px[i + 3] = 0;
-      cleared++;
+      const d2 = dist2(i);
+      if (d2 >= outer2) continue; // produit : on garde, on n'étend pas
+      // Rampe d'alpha (anti-aliasing du bord).
+      let a = 0;
+      if (d2 > inner2) {
+        const d = Math.sqrt(d2);
+        a = Math.round((255 * (d - FUZZ_INNER)) / band);
+      }
+      if (a < px[i + 3]!) {
+        // Despill : sur le contour semi-transparent, « un-premultiply » contre le
+        // fond → on retire sa contribution (C = af·F + (1-af)·B ⇒ F = (C-(1-af)·B)/af),
+        // blendé à DESPILL. Supprime la frange claire du contour.
+        if (a > 0 && a < 255) {
+          const af = a / 255;
+          const unb = (c: number, m: number): number => {
+            const f = (c - (1 - af) * m) / af;
+            return Math.max(0, Math.min(255, Math.round(c + DESPILL * (f - c))));
+          };
+          px[i] = unb(val(i), mr);
+          px[i + 1] = unb(val(i + 1), mg);
+          px[i + 2] = unb(val(i + 2), mb);
+        }
+        px[i + 3] = a;
+        cleared++;
+      }
       const x = p % W;
       const y = (p - x) / W;
       if (x > 0 && !visited[p - 1]) stack.push(p - 1);
@@ -104,8 +144,22 @@ export async function removeUniformLightBackground(input: Buffer): Promise<Buffe
     }
     if ((100 * cleared) / (W * H) < MIN_CLEARED_PCT) return null;
 
-    return await sharp(px, { raw: { width: W, height: H, channels: 4 } })
-      .webp({ quality: 86, alphaQuality: 90 })
+    // Feather : léger flou du SEUL canal alpha → bords lisses, anti-jaggies +
+    // atténue le halo résiduel. Les canaux RGB restent intacts (pas de bavure).
+    const featheredAlpha = await sharp(px, { raw: { width: W, height: H, channels: 4 } })
+      .extractChannel(3)
+      .blur(0.7)
+      .raw()
+      .toBuffer();
+    const rgb = Buffer.allocUnsafe(W * H * 3);
+    for (let p = 0; p < W * H; p++) {
+      rgb[p * 3] = px[p * 4]!;
+      rgb[p * 3 + 1] = px[p * 4 + 1]!;
+      rgb[p * 3 + 2] = px[p * 4 + 2]!;
+    }
+    return await sharp(rgb, { raw: { width: W, height: H, channels: 3 } })
+      .joinChannel(featheredAlpha, { raw: { width: W, height: H, channels: 1 } })
+      .webp({ quality: 88, alphaQuality: 92, effort: 4 })
       .toBuffer();
   } catch {
     return null;

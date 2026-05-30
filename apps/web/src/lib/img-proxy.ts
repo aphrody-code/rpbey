@@ -24,6 +24,7 @@ export const ALLOWED_IMAGE_HOSTS: readonly string[] = [
   "beyblade-legend.fr",
   "beyblade-store.fr",
   "zatu.com",
+  "wikia.nocookie.net", // visuels cartes gacha (renders perso/bey) souvent sur fond clair
 ];
 
 /** `true` si `host` est un domaine autorisé (égal ou sous-domaine). */

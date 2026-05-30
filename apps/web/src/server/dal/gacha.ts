@@ -17,7 +17,13 @@ import {
   sql,
   type SQL,
 } from "@/lib/db";
+import { proxyImage } from "@/lib/img-proxy";
 import type { CardRarity, TransactionType } from "@/lib/types";
+
+/** Détourage du fond clair (parts/cartes) via le proxy `/api/img` — no-op hors allowlist. */
+function pImg<T extends { imageUrl: string | null }>(o: T): T {
+  return { ...o, imageUrl: proxyImage(o.imageUrl) ?? o.imageUrl };
+}
 
 /**
  * Data Access Layer — Gacha TCG + économie (cartes, drops, inventaire, wishlist,
@@ -251,7 +257,7 @@ export async function getPartInventory(userId: string): Promise<PartInventoryIte
     partId: item.partId,
     count: item.count,
     obtainedAt: item.obtainedAt,
-    part: item.part,
+    part: pImg(item.part),
   }));
 }
 
@@ -262,7 +268,7 @@ export async function getCardInventory(userId: string) {
     with: { gachaCard: true },
     orderBy: desc(schema.cardInventory.obtainedAt),
   });
-  return rows.map((i) => ({ ...i, card: i.gachaCard }));
+  return rows.map((i) => ({ ...i, card: pImg(i.gachaCard) }));
 }
 
 export interface DashboardInventoryFilter {
@@ -324,7 +330,7 @@ export async function getDashboardCardInventory(params: DashboardInventoryFilter
 
   return rawItems.map((it) => ({
     ...it,
-    card: { ...it.gachaCard, drop: it.gachaCard.gachaDrop ?? null },
+    card: { ...pImg(it.gachaCard), drop: it.gachaCard.gachaDrop ?? null },
   }));
 }
 
@@ -346,7 +352,7 @@ export async function getWishlistCards(profileId: string) {
     with: { gachaCard: true },
     orderBy: desc(schema.cardWishlists.createdAt),
   });
-  return wishlist.map((w) => w.gachaCard);
+  return wishlist.map((w) => pImg(w.gachaCard));
 }
 
 export async function getProfileIdByUser(userId: string): Promise<string | null> {

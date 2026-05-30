@@ -9,6 +9,7 @@ import type {
 import { loadCatalog, computeGroups, groupSlug } from "@/lib/bx-catalog";
 import { canonicalKey, lookupTier, type PartType } from "@/lib/beyblade-entity";
 import { loadJsonSafe } from "@/lib/data-cache";
+import { proxyImage } from "@/lib/img-proxy";
 import { isRemote, unwrap } from "@/server/data-source";
 import { listAnimeSeries, listParts, listRankings, listTournaments } from "@/server/dal/search";
 import { listAnimeFramesForIndex } from "@/server/dal/anime";
@@ -117,7 +118,7 @@ export async function buildGlobalSearchIndex(): Promise<GlobalSearchItem[]> {
           : "Prix non dispo",
         badge: group.code || undefined,
         price: group.cheapestEur,
-        thumbnail: group.cheapest?.image ?? undefined,
+        thumbnail: proxyImage(group.cheapest?.image),
         source: "catalog",
       });
     }
@@ -140,7 +141,7 @@ export async function buildGlobalSearchIndex(): Promise<GlobalSearchItem[]> {
       url: `/parts`,
       details: `Type: ${part.type} | Poids: ${part.weight ? part.weight + "g" : "non dispo"}`,
       badge: `Tier ${tier}`,
-      thumbnail: part.imageUrl ?? undefined,
+      thumbnail: proxyImage(part.imageUrl),
       source: "db",
     });
   }

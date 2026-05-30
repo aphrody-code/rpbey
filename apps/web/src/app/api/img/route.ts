@@ -4,7 +4,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { homedir } from "node:os";
 import { join } from "node:path";
 import { isAllowedImageHost } from "@/lib/img-proxy";
-import { removeUniformLightBackground } from "@/server/services/image-bg";
+import { ALGO_VERSION, removeUniformLightBackground } from "@/server/services/image-bg";
 
 /**
  * `GET /api/img?u=<url>` — proxy de détourage d'images produits scrappées.
@@ -64,7 +64,8 @@ export async function GET(req: Request): Promise<Response> {
     return new Response("host not allowed", { status: 403 });
   }
 
-  const key = createHash("sha256").update(u).digest("hex").slice(0, 32);
+  // ALGO_VERSION dans la clé → un changement d'algo de détourage invalide le cache.
+  const key = createHash("sha256").update(`v${ALGO_VERSION}:${u}`).digest("hex").slice(0, 32);
   const file = join(CACHE_DIR, `${key}.webp`);
   const skipMarker = join(CACHE_DIR, `${key}.skip`);
 
