@@ -5,12 +5,15 @@ import { searchVectorIds } from "@/server/services/embeddings";
 import { getSearchCorpus } from "@/server/services/search-corpus";
 import { fuseHybrid, rankSearch } from "@/lib/search-rank";
 import { detectIntent, INTENT_CATEGORY, type Intent, searchTerms } from "@/lib/chat-nlp";
+import { generate, isLlmEnabled } from "@/server/services/llm";
 
 /**
- * Cerveau du chat RAG web (ZÉRO LLM) — équivalent in-process de `apps/bot/src/lib/rpbey/
- * answer.ts`. Retrieval HYBRIDE BM25F ⊕ dense (RRF) sur le corpus unifié (wiki toutes
- * saisons, combos WBO, méta, produits, pièces DB, tournois), puis synthèse 100 %
- * EXTRACTIVE par intention (faits intacts, jamais inventés). Appelé par `POST /api/chat`.
+ * Cerveau du chat RAG web — équivalent in-process de `apps/bot/src/lib/rpbey/answer.ts`.
+ * Retrieval HYBRIDE BM25F ⊕ dense (RRF) sur le corpus unifié (wiki toutes saisons, combos
+ * WBO, méta, produits, pièces DB, tournois), puis SYNTHÈSE LLM en français (Gemini/Vertex,
+ * cf. `services/llm.ts`) GROUNDÉE sur les seuls faits récupérés — le corpus wiki est en
+ * anglais, le modèle traduit + reformule sans rien inventer. Repli déterministe EXTRACTIF
+ * (brouillon Markdown) si le LLM est inactif/indisponible. Appelé par `POST /api/chat`.
  * Pas d'aller-retour HTTP : on tape directement les services de recherche.
  *
  * Confidentialité : le salon Discord « Beyblade X » est EXCLU du corpus (cf.
@@ -202,10 +205,12 @@ async function answerCompare(message: string, intent: Intent): Promise<ChatAnswe
     const win = na > nb ? ea : eb;
     verdict = `\n\n**Verdict méta :** \`${na > nb ? sa : sb}\` donne l'avantage à **${win.title}**.`;
   }
+  const draft = `${side(ea.title, ea)}\n\n${side(eb.title, eb)}${verdict}`;
+  const answerMd = await synthesize(message, intent, [ea, eb], draft);
   return {
     found: true,
     intent,
-    answerMd: `${side(ea.title, ea)}\n\n${side(eb.title, eb)}${verdict}`,
+    answerMd,
     sources: [ea, eb].map(toSource),
     followups: ["Lequel en tournoi ?", "Un combo avec le gagnant ?", "Le contre des deux ?"],
   };
@@ -236,6 +241,66 @@ const GREETINGS = [
   "Salut, blader. Je suis Rpbey — je connais TOUT le Beyblade : combos, méta, toupies, perso, tournois, prix. Pose ta question.",
   "Yo. Rpbey à l'écoute. Demande-moi un combo, une pièce, un perso, la méta du moment…",
 ];
+
+// --- Couche LLM (synthèse française groundée sur le retrieval) -----------------------
+
+const LLM_SYSTEM = `Tu es Rpbey, l'assistant Beyblade de la communauté « République Populaire du Beyblade ».
+Tu réponds TOUJOURS en français, dans un texte clair, naturel et vivant — comme un passionné qui explique à un autre joueur.
+
+Règles ABSOLUES :
+- N'utilise QUE les faits du CONTEXTE fourni. N'invente JAMAIS une donnée absente (chiffre, nom, date, prix, tier).
+- Le contexte est souvent en anglais (wiki Fandom) : traduis-le et reformule-le en français correct.
+- Réponds DIRECTEMENT à la question, 2 à 5 phrases (ou une courte liste si on demande un classement / des combos).
+- Texte pur : pas d'emoji, pas de titre markdown (#), pas de métadonnée brute recopiée (ex. « Personnage — Personnage »). Tu peux mettre en **gras** les noms d'entités clés.
+- N'écris pas d'URL : les sources sont affichées séparément sous ta réponse.
+- Si le contexte ne permet pas de répondre, dis-le honnêtement en une phrase et invite à préciser.`;
+
+// Indice par intention pour cadrer la forme de la réponse (le fond reste le contexte).
+const LLM_INTENT_HINT: Partial<Record<Intent, string>> = {
+  combo:
+    "On te demande des combos forts : présente-les en courte liste, avec ce qui les rend bons.",
+  best: "On te demande un classement / le meilleur : hiérarchise brièvement les options du contexte.",
+  meta: "On te demande la méta : explique ce qui domine et pourquoi, d'après le contexte.",
+  buy: "On te demande où/combien acheter : donne le meilleur prix et les alternatives du contexte.",
+  tournament: "On te demande les tournois : résume les événements/résultats du contexte.",
+  character: "On te demande qui est un personnage : fais une bio fluide à partir du contexte.",
+  rules: "On te demande une règle/un terme : explique-le simplement à partir du contexte.",
+  define: "On te demande une explication : définis l'entité clairement à partir du contexte.",
+  compare:
+    "On compare deux entités : oppose-les en français (forces, méta), puis tranche si le contexte le permet.",
+};
+
+/** Construit le bloc de faits (corpus) passé au LLM — concis, sans bruit de balisage. */
+function factsBlock(items: Item[], n: number): string {
+  return items
+    .slice(0, n)
+    .map((it) => {
+      const meta = [it.badge, it.subtitle].filter(Boolean).join(" · ");
+      const desc = it.details ? clip(it.details, 360) : "";
+      return `- ${it.title}${meta ? ` (${meta})` : ""}${desc ? ` : ${desc}` : ""}`;
+    })
+    .join("\n");
+}
+
+/**
+ * Réécrit la réponse en français naturel via Gemini, groundée sur les faits récupérés.
+ * Renvoie le brouillon extractif (`fallback`) tel quel si le LLM est inactif ou échoue.
+ */
+async function synthesize(
+  message: string,
+  intent: Intent,
+  items: Item[],
+  fallback: string,
+): Promise<string> {
+  if (!isLlmEnabled() || items.length === 0) return fallback;
+  const hint = LLM_INTENT_HINT[intent] ?? "";
+  const user = `Question du joueur : « ${message} »
+${hint ? `\n${hint}\n` : ""}
+CONTEXTE (faits du corpus Beyblade, à traduire/reformuler en français — n'utilise rien d'autre) :
+${factsBlock(items, 6)}`;
+  const out = await generate({ system: LLM_SYSTEM, user, maxOutputTokens: 700, temperature: 0.4 });
+  return out ?? fallback;
+}
 
 /** Compose la réponse factuelle (Markdown) à une question Beyblade. */
 export async function answerQuestion(message: string): Promise<ChatAnswer> {
@@ -299,56 +364,37 @@ export async function answerQuestion(message: string): Promise<ChatAnswer> {
   const sources = items.slice(0, 4).map(toSource);
   const followups = followupsFor(intent);
 
+  // Brouillon EXTRACTIF déterministe par intention. Sert de repli si le LLM est inactif
+  // ou échoue ; sinon il est reformulé en français naturel par `synthesize` (RAG).
+  let draft: string;
+
   if (intent === "combo") {
     const lines = items.slice(0, 5).map((it, i) => `**${i + 1}.** ${bullet(it)}`);
-    return {
-      found: true,
-      intent,
-      answerMd: `Les combos qui dominent les tournois :\n\n${lines.join("\n")}`,
-      sources,
-      followups,
-    };
-  }
-
-  if (intent === "best" || intent === "meta") {
+    draft = `Les combos qui dominent les tournois :\n\n${lines.join("\n")}`;
+  } else if (intent === "best" || intent === "meta") {
     const lines = items.slice(0, 6).map((it, i) => `**${i + 1}.** ${bullet(it)}`);
-    return {
-      found: true,
-      intent,
-      answerMd: `Le classement méta du moment :\n\n${lines.join("\n")}`,
-      sources,
-      followups,
-    };
-  }
-
-  if (intent === "buy") {
+    draft = `Le classement méta du moment :\n\n${lines.join("\n")}`;
+  } else if (intent === "buy") {
     const lead = items[0]!;
     const rest = items.slice(1, 4).map(bullet);
-    let body = `Le meilleur prix que j'ai déniché :\n\n${bullet(lead)}`;
-    if (rest.length) body += `\n\nAutres pistes :\n${rest.join("\n")}`;
-    return { found: true, intent, answerMd: body, sources, followups };
-  }
-
-  if (intent === "tournament") {
+    draft = `Le meilleur prix que j'ai déniché :\n\n${bullet(lead)}`;
+    if (rest.length) draft += `\n\nAutres pistes :\n${rest.join("\n")}`;
+  } else if (intent === "tournament") {
     const lines = items.slice(0, 6).map(bullet);
-    return {
-      found: true,
-      intent,
-      answerMd: `Du côté des arènes :\n\n${lines.join("\n")}`,
-      sources,
-      followups,
-    };
+    draft = `Du côté des arènes :\n\n${lines.join("\n")}`;
+  } else {
+    // define / character / rules : on mène par une entrée faisant AUTORITÉ, enrichie de sa
+    // ligne de stat (tier / score méta / buzz) quand elle existe.
+    const lead = items.find((it) => AUTH.has(it.category)) ?? items[0]!;
+    const others = items.filter((it) => it.id !== lead.id);
+    draft = bullet(lead);
+    const stat = statLine(lead);
+    if (stat) draft += `\n\n\`${stat}\``;
+    if (lead.details) draft += `\n\n${clip(lead.details, 480)}`;
+    const more = others.slice(0, 3).map(bullet);
+    if (more.length) draft += `\n\n**À explorer aussi :**\n${more.join("\n")}`;
   }
 
-  // define / character / rules : on mène par une entrée faisant AUTORITÉ, enrichie de sa
-  // ligne de stat (tier / score méta / buzz) quand elle existe.
-  const lead = items.find((it) => AUTH.has(it.category)) ?? items[0]!;
-  const others = items.filter((it) => it.id !== lead.id);
-  let body = bullet(lead);
-  const stat = statLine(lead);
-  if (stat) body += `\n\n\`${stat}\``;
-  if (lead.details) body += `\n\n${clip(lead.details, 480)}`;
-  const more = others.slice(0, 3).map(bullet);
-  if (more.length) body += `\n\n**À explorer aussi :**\n${more.join("\n")}`;
-  return { found: true, intent, answerMd: body, sources, followups };
+  const answerMd = await synthesize(message, intent, items, draft);
+  return { found: true, intent, answerMd, sources, followups };
 }
