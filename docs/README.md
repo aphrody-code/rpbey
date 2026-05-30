@@ -19,6 +19,7 @@ Cartographie du repo (apps/packages) : [REPO_MAP.md](REPO_MAP.md).
 - [Best practices du pipeline de données rpbey](data-pipeline-best-practices.md) `stable` — Référentiel opinioné — scraping → validation → consolidation → recherche hybride/RAG → observabilité — confronté à l'état réel du pipeline rpbey, avec backlog d'actions priorisé.
 - [Système de documentation (structuré, automatisé, sync)](documentation-system.md) `stable` — Convention frontmatter, commandes docs.ts et hook git qui gardent la doc typée et synchronisée avec le code.
 - [Métagame WBO — extraction & données consommées par rpbey](metagame-wbo.md) `stable` — Pipeline d'extraction des classements et du métagame WBO (Wayback Machine) consommé par le dashboard rpbey.
+- [Assistant RAG conversationnel & UI d'ambiance](rag-assistant-ui.md) `stable` — Couche de consommation du RAG rpbey : chat « Rpbey » style Gemini branché au NLP algorithmique (zéro LLM) sur la recherche hybride, et fonds d'ambiance par page (frames d'animé, PixiJS) tirés du corpus.
 - [Stratégie SEO — devenir le site Beyblade n°1 en France](seo-strategy.md) `draft` — Plan SEO actionnable pour rpbey.fr, fondé sur la veille concurrentielle de x-rank.fr et beyblade-espace.fr (2026-05-30) : forces, failles exploitables, et feuille de route technique + contenu pour dominer le référencement Beyblade FR.
 
 ## audit

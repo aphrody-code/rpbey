@@ -28,6 +28,9 @@ Deux cadres de référence structurent ce doc :
 - **5 piliers d'observabilité data** — fraîcheur, volume, schéma, distribution,
   lignage. « La table a chargé » ≠ « les chiffres sont justes ».
 
+> La **consommation** du RAG (chat conversationnel « Rpbey », fonds d'ambiance par
+> page) est documentée à part : **[Assistant RAG conversationnel & UI d'ambiance](rag-assistant-ui.md)**.
+
 Légende priorité : **P0** = à faire (impact fort / dette réelle), **P1** =
 prochaine vague, **P2** = nice-to-have.
 
