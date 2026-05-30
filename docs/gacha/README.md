@@ -5,7 +5,7 @@ scope:
   - apps/gacha-server
   - apps/web
 status: "stable"
-last_updated: "2026-05-29"
+last_updated: "2026-05-30"
 related_symbols:
   - gacha_cards
   - card_inventory

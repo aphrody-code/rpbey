@@ -5,7 +5,7 @@ scope:
   - apps/bot
   - apps/web
 status: "stable"
-last_updated: "2026-05-29"
+last_updated: "2026-05-30"
 related_symbols:
   - scrape-channel.ts
   - build-gacha-json.ts

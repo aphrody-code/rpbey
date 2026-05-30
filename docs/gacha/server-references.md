@@ -4,7 +4,7 @@ description: "Liens de référence Colyseus 0.17, Discord Activity template, Pix
 scope:
   - apps/gacha-server
 status: "stable"
-last_updated: "2026-05-29"
+last_updated: "2026-05-30"
 related_symbols:
   - GachaRoom
   - BunWebSockets

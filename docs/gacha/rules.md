@@ -5,12 +5,15 @@ scope:
   - apps/gacha-server
   - apps/web
 status: "stable"
-last_updated: "2026-05-29"
+last_updated: "2026-05-30"
 related_symbols:
   - cardRarity
   - PULL_COST
   - pityCount
   - duelRating
+  - rollRarity
+  - getTier
+  - DUPE_CAP
 ---
 
 # Gacha — Règles & mécaniques
@@ -31,8 +34,10 @@ Mécaniques de jeu, valeurs d'équilibre, et roster de la bannière 1. Les valeu
 
 Le projet communautaire prévoit en plus une répartition cible par bannière : **Commun ×16, Rare ×10, Super Rare ×4, Légendaire ×2**.
 
-> **Attention** : le serveur `:5050` utilise une **table de tirage DISTINCTE et rééquilibrée**, avec un slot **MISS** (tirage raté, aucune carte) — ce n'est **PAS** aligné sur le 60/25/10/4/1 du web (`apps/gacha-server/src/config.ts:78-93`) :
+> **Attention** : le serveur `:5050` utilise une **table de tirage DISTINCTE et rééquilibrée**, avec un slot **MISS** (tirage raté, aucune carte) — ce n'est **PAS** aligné sur le 60/25/10/4/1 du web (`apps/gacha-server/src/config.ts`) :
 > **MISS 30 % · COMMON 39 % · RARE 18 % · SUPER_RARE 9 % · LEGENDARY 3 % · SECRET 1 %** (somme = 100).
+>
+> Ces taux sont les taux **de base**. Les taux effectifs sont modulés par le soft-pity (voir §Pity ci-dessous).
 
 ### Niveaux d'effort (convention artistes)
 - **R** = dessin propre · **SR** = plus poussé · **LR/Légendaire** = boosté + légèrement animé (seules les LR sont animées ; si l'artiste ne sait pas animer, c'est pris en charge).
@@ -43,9 +48,22 @@ Le projet communautaire prévoit en plus une répartition cible par bannière : 
 | --- | --- | --- |
 | Pull ×1 | **100** 🪙 | **50** 🪙 |
 | Pull ×5/×10 | 450 🪙 (×5) | 450 🪙 (×10) |
-| Pity | 3 tirages sans SR+ → SUPER_RARE garanti, reset sur SR+ | géré côté serveur (« 3 ratés → garanti ») |
+| Hard pity SR+ | 3 tirages sans SR+ → SUPER_RARE garanti | **10** tirages — hard pity SUPER_RARE garanti |
+| Soft pity SR+ | — | ramp linéaire rangs **6–9** : taux SR+ monte de ~13 % à 100 % |
+| Hard pity LEGENDARY | — | **80** tirages sans LEGENDARY/SECRET → LEGENDARY garanti |
+| Soft pity LEGENDARY | — | ramp linéaire rangs **60–79** : part LEGENDARY dans les SR+ monte vers 100 % |
 
 Pity web : `pityCount` sur `profiles`, incrémenté à chaque pull, reset à 0 dès qu'un SR+ sort ou que le seuil force un SUPER_RARE. Le **multi reset** la pity à 0.
+
+### Pity `:5050` — détail
+
+**`pityCount`** (colonne `profiles`) : compteur SR+, persisté en DB.
+
+**Pity LEGENDARY** : dérivé de l'historique `currency_transactions` (200 dernières lignes GACHA_PULL/MULTI_PULL, en remontant jusqu'à la note contenant `LEGENDARY` ou `SECRET`). Non persisté en colonne séparée — reconstruit à chaque pull depuis le journal.
+
+Invariant de reset : la pity (SR+ ou LEGENDARY) n'est remise à 0 **que si la carte réellement servie** est de la rareté cible. Si `pickCard` retombe sur une rareté inférieure (stock vide), la garantie reste due au tirage suivant.
+
+Le **multi** (×10) remet `pityCount` à 0 après la série, garantit au moins 1 SR+.
 
 ## Daily & streak
 
@@ -66,6 +84,27 @@ Best-of-3, sélection de 3 cartes, ELO (`duelRating`, départ 1000), mise 0-5000
 ### Bot — duel rapide (`/gacha duel`)
 1v1 immédiat, cartes tirées au hasard de l'inventaire (Prisma direct), récompense en 🪙.
 
+## Ranking MMR & tiers (`:5050`)
+
+Le leaderboard `mmr` (`GET /api/leaderboard/mmr`) expose des champs additifs :
+
+| Tier | Rating min | Rating max |
+| --- | --- | --- |
+| Bronze | 0 | 1099 |
+| Argent | 1100 | 1249 |
+| Or | 1250 | 1399 |
+| Platine | 1400 | 1599 |
+| Diamant | 1600 | 1799 |
+| Maître | 1800 | +inf |
+
+Logique dans `src/ranking.ts` (module pur, sans DB) :
+- `getTier(rating)` — tier courant.
+- `percentile(rank, total)` — 0–100, 100 = premier.
+- `applyDecay(rating, daysInactive)` — decay douce 5 %/30 jours, plancher 1000, plafond −200 pts/appel (decay saisonnière, non appliquée automatiquement, à appeler depuis un cron si souhaité).
+- `tierProgress(rating)` — progression 0–100 % dans le tier courant.
+
+ELO de départ : **1000** (Bronze haut). Les seuils sont cohérents avec `duelRating` initial.
+
 ## Économie / dette
 
 - Monnaie = `profiles.currency` (**peut être négative** = dette).
@@ -75,6 +114,21 @@ Best-of-3, sélection de 3 cartes, ELO (`duelRating`, départ 1000), mise 0-5000
 
 ## Badges de collection (bot, `:5050`)
 Paliers : 5 → 200 · 10 → 500 · 15 → 750 · 20 → 1000 · 25 → 1500 · 31 → 3000 🪙.
+
+## Biais de sélection de carte (`:5050`)
+
+Lors du `pickCard` (choix de la carte dans sa rareté), un **Weighted Reservoir Sampling** applique deux biais configurables :
+
+| Biais | Constante | Valeur | Effet |
+| --- | --- | --- | --- |
+| Wishlist | `WISHLIST_BIAS_WEIGHT` | ×3.0 | Cartes dans la wishlist du joueur favorisées |
+| Nouvelle carte | `NEW_CARD_BIAS_WEIGHT` | ×2.0 | Cartes non encore possédées favorisées |
+
+Les deux biais se multiplient (`×6.0` pour une carte wishlistée non possédée). Aucun biais n'est absolu : les cartes hors wishlist restent tirables. Fallback déterministe si aucun contexte joueur passé.
+
+## Anti-doublon automatique (`:5050`)
+
+Si un joueur possède déjà **`DUPE_CAP` = 5** exemplaires d'une carte, tout doublon supplémentaire est **converti automatiquement** en monnaie au prix de vente (`SELL_PRICE[rarity]`) via une transaction `SELL_CARD`. Aucune carte n'est perdue, pas d'intervention manuelle requise. Compatible avec la fusion (qui reste manuelle via `/api/gacha/fusion`).
 
 ## Fusion (bot, `:5050`)
 `fusionPreview()` / `fuse(cardId)` — combine des doublons (logique côté serveur `:5050`).

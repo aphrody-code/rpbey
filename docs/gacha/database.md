@@ -5,7 +5,7 @@ scope:
   - packages/db
   - apps/gacha-server
 status: "stable"
-last_updated: "2026-05-29"
+last_updated: "2026-05-30"
 related_symbols:
   - gacha_cards
   - card_inventory
@@ -124,6 +124,8 @@ PK composite `(userId, friendId)`, les deux **FK → users.id**. `status` text (
 
 Index : `userId`, `createdAt`, + unique partiel `currency_transactions_iap_note_uniq` (`where note like 'iap:%'`) → idempotence des achats in-app.
 
+> **Convention de note tirage (`:5050`)** : les transactions `GACHA_PULL` et `MULTI_PULL` incluent la rareté servie dans leur note (`"Tirage simple:SUPER_RARE"`, `"Tirage simple:LEGENDARY"`, etc.). Cette convention est exploitée par `getLegendaryPityCount()` pour reconstruire le compteur de pity LEGENDARY depuis l'historique, sans colonne dédiée en DB.
+
 ### `profiles` — colonnes économie/gacha — `schema.ts:823-881`
 
 | Colonne | Type | Default | Rôle |
@@ -132,7 +134,7 @@ Index : `userId`, `createdAt`, + unique partiel `currency_transactions_iap_note_
 | `lastDaily` | timestamp `string` | nullable | dernier claim quotidien |
 | `dailyStreak` | integer | `0` | jours consécutifs |
 | `lastGiftSent` | timestamp `string` | nullable | cooldown don |
-| `pityCount` | integer | `0` | compteur pity gacha |
+| `pityCount` | integer | `0` | compteur pity SR+ (`:5050` : hard pity à 10, soft à 6) — pity LEGENDARY dérivée du journal |
 | `duelWins` / `duelLosses` | integer | `0` | duels |
 | `duelStreak` / `duelBestStreak` | integer | `0` | séries |
 | `duelRating` | integer | `1000` | ELO duel, **index** (`profiles_duelRating_idx`) |
