@@ -1732,6 +1732,9 @@ export const twoFactors = pgTable(
     secret: text().notNull(),
     backupCodes: text().notNull(),
     userId: text().notNull(),
+    // better-auth ≥1.6 : marque un secret TOTP comme vérifié (drift 1.5→1.6, sinon
+    // « field "verified" does not exist » au moment du two-factor/enable). defaultValue true.
+    verified: boolean().default(true).notNull(),
   },
   (table) => [
     index("two_factors_userId_idx").using("btree", table.userId.asc().nullsLast().op("text_ops")),
