@@ -1,5 +1,6 @@
 import { Alert, Box, Container, Typography } from "@mui/material";
 import { type Metadata } from "next";
+import { FrameBackdrop } from "@/components/ui/FrameBackdrop";
 import { createPageMetadata } from "@/lib/seo-utils";
 import { getEnrichedMeta } from "@/server/services/meta";
 
@@ -30,6 +31,8 @@ export default async function MetaPage() {
           "radial-gradient(ellipse at 50% 0%, rgba(var(--rpb-primary-rgb),0.08) 0%, transparent 60%)",
       }}
     >
+      {/* Ambiance : combats Beyblade X en fond (subtil — page data-dense). */}
+      <FrameBackdrop series="beyblade-x" intensity={0.16} />
       <Container maxWidth="lg" sx={{ py: { xs: 2, md: 4 } }}>
         {isEmpty ? (
           <Box sx={{ mt: 8, textAlign: "center" }}>

@@ -1,4 +1,5 @@
 import { type Metadata } from "next";
+import { FrameBackdrop } from "@/components/ui/FrameBackdrop";
 import { createPageMetadata } from "@/lib/seo-utils";
 import { getFeaturedSeries, getSeriesByGeneration } from "@/server/services/anime";
 import { AnimeCarousel } from "./_components/AnimeCarousel";
@@ -22,12 +23,15 @@ export default async function AnimePage() {
   const generationOrder = ["ORIGINAL", "METAL", "BURST", "X"];
 
   return (
-    <AnimeLanding featured={featured}>
-      {generationOrder.map((gen) => {
-        const series = seriesByGeneration[gen];
-        if (!series || series.length === 0) return null;
-        return <AnimeCarousel key={gen} generation={gen} series={series} />;
-      })}
-    </AnimeLanding>
+    <>
+      <FrameBackdrop intensity={0.26} />
+      <AnimeLanding featured={featured}>
+        {generationOrder.map((gen) => {
+          const series = seriesByGeneration[gen];
+          if (!series || series.length === 0) return null;
+          return <AnimeCarousel key={gen} generation={gen} series={series} />;
+        })}
+      </AnimeLanding>
+    </>
   );
 }

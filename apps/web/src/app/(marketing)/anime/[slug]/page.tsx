@@ -1,5 +1,6 @@
 import { type Metadata } from "next";
 import { notFound } from "next/navigation";
+import { FrameBackdrop } from "@/components/ui/FrameBackdrop";
 import { getSeriesDetail } from "@/server/services/anime";
 import { SeriesDetail } from "../_components/SeriesDetail";
 import SeriesCrosslinks from "../_components/SeriesCrosslinks";
@@ -28,6 +29,8 @@ export default async function SeriesPage({ params }: Props) {
 
   return (
     <>
+      {/* Ambiance : frames de CETTE série en fond. */}
+      <FrameBackdrop series={slug} intensity={0.28} />
       <SeriesDetail series={series} />
       {/* Cross-links wiki : toupies, personnages, jeux de cette génération. */}
       {series.generation && <SeriesCrosslinks generation={series.generation} />}

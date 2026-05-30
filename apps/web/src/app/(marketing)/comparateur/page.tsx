@@ -2,6 +2,7 @@ import { Box, Container, Typography } from "@mui/material";
 import { type Metadata } from "next";
 import { type ItemList, type WithContext } from "schema-dts";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { FrameBackdrop } from "@/components/ui/FrameBackdrop";
 import { type BxProductGroup, computeGroups, groupSlug, loadCatalog } from "@/lib/bx-catalog";
 import { getRecommendations } from "@/server/services/recommend";
 import {
@@ -46,7 +47,9 @@ export default async function ComparateurPage() {
       : null;
 
   return (
-    <Box sx={{ minHeight: "100vh", bgcolor: "background.default" }}>
+    <Box sx={{ minHeight: "100vh", bgcolor: "transparent" }}>
+      {/* Ambiance : toupies Beyblade X en fond (subtil — page data-dense). */}
+      <FrameBackdrop series="beyblade-x" intensity={0.15} />
       <JsonLd
         data={generateBreadcrumbJsonLd([
           { name: "Accueil", item: "/" },

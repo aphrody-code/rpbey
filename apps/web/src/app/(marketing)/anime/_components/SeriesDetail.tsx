@@ -117,7 +117,7 @@ export function SeriesDetail({ series }: { series: SeriesData }) {
   }, [search, series.episodes]);
 
   return (
-    <Box sx={{ minHeight: "100vh", bgcolor: "#0a0a0a", pb: { xs: 4, md: 8 } }}>
+    <Box sx={{ minHeight: "100vh", bgcolor: "transparent", pb: { xs: 4, md: 8 } }}>
       {/* Hero banner */}
       <Box
         sx={{

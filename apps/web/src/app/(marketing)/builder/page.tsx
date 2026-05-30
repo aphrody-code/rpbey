@@ -1,4 +1,5 @@
 import { type Metadata } from "next";
+import { FrameBackdrop } from "@/components/ui/FrameBackdrop";
 import { BuilderClient } from "./_components/BuilderClient";
 
 export const metadata: Metadata = {
@@ -13,5 +14,10 @@ export const metadata: Metadata = {
 };
 
 export default function BuilderPage() {
-  return <BuilderClient />;
+  return (
+    <>
+      <FrameBackdrop series="beyblade-x" intensity={0.18} />
+      <BuilderClient />
+    </>
+  );
 }
