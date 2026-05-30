@@ -415,6 +415,66 @@ export function rankSearch(
   return typeof opts.limit === "number" ? ranked.slice(0, opts.limit) : ranked;
 }
 
+/** Voisin sémantique renvoyé par la couche dense (id corpus + similarité). */
+export interface VectorRank {
+  id: string;
+  sim: number;
+}
+
+export interface FuseOptions extends RankOptions {
+  /** Constante RRF (amortit l'effet des tout premiers rangs). Défaut 60 (standard). */
+  rrfK?: number;
+  /** Poids de la liste lexicale BM25F. Défaut 1.0. */
+  lexWeight?: number;
+  /** Poids de la liste dense (vecteurs). Défaut 0.9 (légèrement sous le lexical). */
+  vecWeight?: number;
+}
+
+/**
+ * **Recherche hybride par Reciprocal Rank Fusion** — fusionne le classement
+ * lexical BM25F (`lexRanked`, trié décroissant) et le classement dense
+ * (`vecRanked`, voisins sémantiques triés décroissant) sans avoir à réconcilier
+ * des échelles de score incompatibles : chaque liste contribue `poids / (k + rang)`.
+ *
+ * Un item présent dans les DEUX listes remonte (le gain de l'hybride) ; un item
+ * uniquement dense élargit le recall (paraphrase, cross-lingue) ; un item
+ * uniquement lexical garde sa précision sur les littéraux (codes, SKU). Avec
+ * `vecRanked` vide, la fusion préserve exactement l'ordre BM25F (dégradation
+ * gracieuse quand le sidecar/Redis est absent).
+ */
+export function fuseHybrid(
+  items: GlobalSearchItem[],
+  lexRanked: RankedItem[],
+  vecRanked: VectorRank[],
+  opts: FuseOptions = {},
+): RankedItem[] {
+  const k = opts.rrfK ?? 60;
+  const lw = opts.lexWeight ?? 1.0;
+  const vw = opts.vecWeight ?? 0.9;
+  const idToItem = new Map(items.map((it) => [it.id, it]));
+  const acc = new Map<string, { item: GlobalSearchItem; rrf: number; lex: number }>();
+
+  lexRanked.forEach((it, rank) => {
+    const cur = acc.get(it.id) ?? { item: it, rrf: 0, lex: it.score };
+    cur.rrf += lw / (k + rank + 1);
+    acc.set(it.id, cur);
+  });
+  vecRanked.forEach((v, rank) => {
+    const item = idToItem.get(v.id);
+    if (!item) return;
+    const cur = acc.get(v.id) ?? { item, rrf: 0, lex: 0 };
+    cur.rrf += vw / (k + rank + 1);
+    acc.set(v.id, cur);
+  });
+
+  const cat = opts.category && opts.category !== "all" ? opts.category : null;
+  let fused = [...acc.values()];
+  if (cat) fused = fused.filter((e) => e.item.category === cat);
+  fused.sort((a, b) => b.rrf - a.rrf || b.lex - a.lex || a.item.title.localeCompare(b.item.title));
+  const sliced = typeof opts.limit === "number" ? fused.slice(0, opts.limit) : fused;
+  return sliced.map((e) => ({ ...e.item, score: e.rrf }));
+}
+
 /** Score brut d'un item isolé (utilitaire ; reconstruit un mini-corpus). */
 export function scoreItem(item: GlobalSearchItem, query: string): number {
   return rankSearch([item], query, { limit: 1 })[0]?.score ?? 0;

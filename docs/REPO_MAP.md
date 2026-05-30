@@ -12,7 +12,7 @@ last_updated: "2026-05-30"
 > Généré par `bun scripts/docs.ts map --write`. Ne pas éditer à la main : régénéré par le script ci-dessous.
 > Source de vérité : les `package.json` de `apps/*` et `packages/*`.
 
-Index de la doc : [README.md](README.md). Total : 4 apps, 6 packages.
+Index de la doc : [README.md](README.md). Total : 5 apps, 6 packages.
 
 ## Apps
 
@@ -20,6 +20,7 @@ Index de la doc : [README.md](README.md). Total : 4 apps, 6 packages.
 | --- | --- | --- | --- | --- |
 | `@rose-griffon/bot`<br/>`apps/bot` | Discord bot for RPB community | src/index.ts | discord.js, Drizzle, tsyringe | `@rose-griffon/challonge` `@rpbey/api-contract` `@rpbey/db` `@rpbey/di` `@rpbey/discordx` `@rpbey/pagination` `@rpbey/types` |
 | `cdn`<br/>`apps/cdn` | — | server.ts | — | — |
+| `@rose-griffon/embed-sidecar`<br/>`apps/embed-sidecar` | — | server.ts | — | — |
 | `@rose-griffon/gacha-server`<br/>`apps/gacha-server` | Serveur de jeu gacha (REST :5050) — recréé depuis le contrat client apps/bot/src/lib/gacha-api.ts. Backé par la DB partagée @rpbey/db. | — | Colyseus, Drizzle | `@rpbey/api-contract` `@rpbey/db` |
 | `@rose-griffon/dashboard`<br/>`apps/web` | Dashboard officiel de la République Populaire du Beyblade | — | Next.js, React, Drizzle, better-auth, MUI, postgres-js, Zod | `@rose-griffon/challonge-core` `@rpbey/api-client` `@rpbey/api-contract` `@rpbey/db` `@rpbey/types` |
 

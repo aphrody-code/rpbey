@@ -1,0 +1,14 @@
+{
+  "name": "@rose-griffon/embed-sidecar",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "module": "server.ts",
+  "scripts": {
+    "start": "bun server.ts",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@huggingface/transformers": "^3.7.6"
+  }
+}
