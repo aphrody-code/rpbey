@@ -172,3 +172,40 @@ export const EnrichedComboSchema = z.object({
   qualityScore: z.number(),
 });
 export type EnrichedCombo = z.infer<typeof EnrichedComboSchema>;
+
+// ── Entité de connaissance wiki (→ data/beyblade-knowledge.json, crawl-fandom.ts). ──
+// Une page du Beyblade Wiki (Fandom) classée et structurée : toupie, pièce, personnage,
+// anime, épisode, jeu, accessoire ou lore — toutes générations (Original→X). Consommé
+// par l'index de recherche + le graphe d'entités.
+export const WikiEntityTypeSchema = z.enum([
+  "bey",
+  "character",
+  "part",
+  "anime",
+  "episode",
+  "game",
+  "accessory",
+  "lore",
+]);
+export type WikiEntityType = z.infer<typeof WikiEntityTypeSchema>;
+
+export const WikiGenerationSchema = z.enum(["ORIGINAL", "HMS", "METAL", "BURST", "X"]);
+export type WikiGeneration = z.infer<typeof WikiGenerationSchema>;
+
+export const WikiEntitySchema = z.object({
+  id: z.number().int(), // pageid MediaWiki
+  title: z.string().min(1),
+  slug: z.string().min(1),
+  url: z.url(),
+  type: WikiEntityTypeSchema,
+  generation: WikiGenerationSchema.nullable(),
+  system: z.string().nullable(),
+  spin: z.enum(["RIGHT", "LEFT", "DUAL"]).nullable(),
+  beyType: z.string().nullable(),
+  jpName: z.string().nullable(),
+  summary: z.string(),
+  imageUrl: z.string().nullable(),
+  categories: z.array(z.string()),
+  infobox: z.record(z.string(), z.string()),
+});
+export type WikiEntity = z.infer<typeof WikiEntitySchema>;

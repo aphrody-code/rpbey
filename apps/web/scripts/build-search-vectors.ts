@@ -64,20 +64,28 @@ async function loadCorpus(redis: RedisClient): Promise<Item[]> {
   throw new Error("corpus introuvable (API + Redis indisponibles)");
 }
 
-/** Embeddings d'un lot de textes via le sidecar. */
-async function embedBatch(texts: string[]): Promise<number[][]> {
-  const res = await fetch(`${SIDECAR_URL}/embed`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ texts, kind: "passage" }),
-    signal: AbortSignal.timeout(60_000),
-  });
-  if (!res.ok) throw new Error(`sidecar /embed HTTP ${res.status}: ${await res.text()}`);
-  const json = (await res.json()) as { vectors?: number[][] };
-  if (!json.vectors || json.vectors.length !== texts.length) {
-    throw new Error("réponse /embed incohérente");
+/** Embeddings d'un lot de textes via le sidecar, avec retry/backoff. Le sidecar
+ * peut couper la connexion sur un pic mémoire (ECONNRESET) ; un reset transitoire
+ * ne doit pas avorter l'indexation entière de ~9000 items. */
+async function embedBatch(texts: string[], attempt = 0): Promise<number[][]> {
+  try {
+    const res = await fetch(`${SIDECAR_URL}/embed`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ texts, kind: "passage" }),
+      signal: AbortSignal.timeout(60_000),
+    });
+    if (!res.ok) throw new Error(`sidecar /embed HTTP ${res.status}: ${await res.text()}`);
+    const json = (await res.json()) as { vectors?: number[][] };
+    if (!json.vectors || json.vectors.length !== texts.length) {
+      throw new Error("réponse /embed incohérente");
+    }
+    return json.vectors;
+  } catch (e) {
+    if (attempt >= 5) throw e;
+    await new Promise((r) => setTimeout(r, Math.min(15_000, 1000 * 2 ** attempt)));
+    return embedBatch(texts, attempt + 1);
   }
-  return json.vectors;
 }
 
 function toBlob(vec: number[]): Buffer {

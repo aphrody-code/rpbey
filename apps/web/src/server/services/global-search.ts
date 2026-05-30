@@ -1,6 +1,11 @@
 import "server-only";
 import { globalSearch } from "@rpbey/api-client";
-import type { EnrichedCombo, GlobalSearchItem } from "@rpbey/api-contract";
+import type {
+  EnrichedCombo,
+  GlobalSearchItem,
+  SearchCategory,
+  WikiEntity,
+} from "@rpbey/api-contract";
 import { loadCatalog, computeGroups, groupSlug } from "@/lib/bx-catalog";
 import { canonicalKey, lookupTier, type PartType } from "@/lib/beyblade-entity";
 import { loadJsonSafe } from "@/lib/data-cache";
@@ -421,60 +426,12 @@ export async function buildGlobalSearchIndex(): Promise<GlobalSearchItem[]> {
   // collisionne pas avec un nom de blade propre → dédup conservatrice, sans faux positif.
   const seenKeys = new Set(items.map((i) => canonicalKey(i.title)).filter(Boolean));
 
-  // 10. Beys encyclopédiques — TOUTES générations (Bakuten, Metal, Burst, X).
-  const universeBeys = await loadJsonSafe<
-    Array<{
-      title?: string;
-      url?: string;
-      summary?: string;
-      metadata?: { JPName?: string };
-    }>
-  >("data/universe_beys.json");
-  for (const bey of universeBeys ?? []) {
-    const title = (bey.title ?? "").trim();
-    if (!title || seenTitles.has(title.toLowerCase())) continue;
-    const bk = canonicalKey(title);
-    if (bk && seenKeys.has(bk)) continue;
-    seenTitles.add(title.toLowerCase());
-    if (bk) seenKeys.add(bk);
-    const jp = bey.metadata?.JPName
-      ? ` · ${bey.metadata.JPName.replace(/\{\{[^}]*\}\}/g, "")}`
-      : "";
-    items.push({
-      id: `bey-${title}`,
-      title,
-      subtitle: `Beyblade${jp}`,
-      category: "product",
-      url: bey.url || `/search?q=${encodeURIComponent(title)}`,
-      details: bey.summary?.trim() || "Toupie Beyblade (encyclopédie, toutes générations)",
-      badge: "Bey",
-      source: "wiki",
-    });
-  }
-
-  // 11. Personnages d'anime/manga Beyblade (toutes séries).
-  const universeChars = await loadJsonSafe<
-    Array<{
-      title?: string;
-      url?: string;
-      summary?: string;
-      metadata?: { JPName?: string; Occupation?: string };
-    }>
-  >("data/universe_characters.json");
-  for (const ch of universeChars ?? []) {
-    const title = (ch.title ?? "").trim();
-    if (!title) continue;
-    items.push({
-      id: `char-${title}`,
-      title,
-      subtitle: `Personnage${ch.metadata?.Occupation ? ` · ${ch.metadata.Occupation}` : ""}`,
-      category: "anime",
-      url: ch.url || `/search?q=${encodeURIComponent(title)}`,
-      details: ch.summary?.trim() || "Personnage de l'univers Beyblade",
-      badge: "Personnage",
-      source: "wiki",
-    });
-  }
+  // 10+11. Connaissance wiki (Beyblade Fandom, `crawl-fandom.ts`) — TOUTES générations
+  // (Original/Plastic, HMS, Metal, Burst, X) : toupies, pièces, personnages, anime,
+  // épisodes, jeux vidéo, accessoires, lore. Ce corpus (~8500 entités classées,
+  // image + résumé) SUBSUME les ex-streams universe_beys/characters. Dédup canonique
+  // des beys/pièces vs catalogue/DB ; le reste par titre exact.
+  for (const it of await loadWikiKnowledge(seenTitles, seenKeys)) items.push(it);
 
   // 12. Frames d'anime (galerie « Google Images ») — moments marquants taggés perso/épisode/saison.
   const frames = await listAnimeFramesForIndex(3000);
@@ -702,6 +659,104 @@ function lead(text: string, max = 120): string {
   const cut = t.slice(0, max);
   const sp = cut.lastIndexOf(" ");
   return `${(sp > max * 0.6 ? cut.slice(0, sp) : cut).trimEnd()}…`;
+}
+
+const WIKI_GEN_LABEL: Record<string, string> = {
+  ORIGINAL: "Original",
+  HMS: "HMS",
+  METAL: "Metal",
+  BURST: "Burst",
+  X: "Beyblade X",
+};
+
+/**
+ * Connaissance wiki (Beyblade Fandom) → items de recherche uniformes, classés par
+ * type. Beys/pièces dédupliqués par clé canonique vs catalogue/DB (mute les doublons) ;
+ * le reste par titre exact. Mappe le type wiki vers les catégories EXISTANTES du
+ * contrat (aucune nouvelle catégorie → onglets de recherche inchangés) : bey/jeu/
+ * accessoire → product, personnage/anime/épisode → anime, pièce → part, lore → lexicon.
+ */
+async function loadWikiKnowledge(
+  seenTitles: Set<string>,
+  seenKeys: Set<string>,
+): Promise<GlobalSearchItem[]> {
+  const data = await loadJsonSafe<{ entities?: WikiEntity[] }>("data/beyblade-knowledge.json");
+  const out: GlobalSearchItem[] = [];
+  for (const e of data?.entities ?? []) {
+    const title = e.title.trim();
+    if (!title) continue;
+    const titleLower = title.toLowerCase();
+    if (seenTitles.has(titleLower)) continue;
+    const ck = canonicalKey(title);
+    // Beys & pièces : fusion canonique avec catalogue/DB (mute le doublon).
+    if ((e.type === "bey" || e.type === "part") && ck && seenKeys.has(ck)) continue;
+
+    let category: SearchCategory;
+    let badge: string;
+    const gen = e.generation ? (WIKI_GEN_LABEL[e.generation] ?? "") : "";
+    switch (e.type) {
+      case "bey":
+        category = "product";
+        badge = gen ? `Bey · ${gen}` : "Bey";
+        break;
+      case "part":
+        category = "part";
+        badge = gen ? `Pièce · ${gen}` : "Pièce";
+        break;
+      case "character":
+        category = "anime";
+        badge = "Personnage";
+        break;
+      case "anime":
+        category = "anime";
+        badge = "Anime";
+        break;
+      case "episode":
+        category = "anime";
+        badge = "Épisode";
+        break;
+      case "game":
+        category = "product";
+        badge = "Jeu vidéo";
+        break;
+      case "accessory":
+        category = "product";
+        badge = "Accessoire";
+        break;
+      default:
+        category = "lexicon";
+        badge = "Lore";
+        break;
+    }
+
+    const sub: string[] = [];
+    if (e.type === "bey" || e.type === "part") {
+      sub.push(gen || "Beyblade");
+      if (e.beyType) sub.push(e.beyType);
+      else if (e.system) sub.push(e.system);
+    } else {
+      sub.push(badge);
+    }
+    if (e.jpName) sub.push(e.jpName);
+
+    seenTitles.add(titleLower);
+    if (ck) seenKeys.add(ck);
+    out.push({
+      id: `wiki-${e.id}`,
+      title,
+      subtitle: sub.join(" · "),
+      category,
+      url: e.url,
+      // Résumé tronqué (au mot) : l'index complet est fetché côté client par /search —
+      // ~8400 entités wiki, donc on borne la charge utile. Le résumé intégral reste
+      // dans `beyblade-knowledge.json` (consommé par le graphe d'entités / pages détail).
+      details: (e.summary ? lead(e.summary, 220) : "") || `${badge} Beyblade (wiki)`,
+      badge,
+      thumbnail: e.imageUrl ?? undefined,
+      source: "wiki",
+    });
+  }
+  return out;
 }
 
 /** Discussions X.com (tweets Beyblade nettoyés/classés) → items uniformes. */
