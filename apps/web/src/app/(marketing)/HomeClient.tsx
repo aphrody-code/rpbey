@@ -8,7 +8,7 @@ import Chip from "@mui/material/Chip";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
-import { alpha } from "@mui/material/styles";
+import { alpha, type Theme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { domAnimation, LazyMotion, m } from "framer-motion";
 import Link from "next/link";
@@ -25,28 +25,14 @@ import {
 } from "@/components/marketing/TournamentShowcase";
 import { VideoCarousel } from "@/components/marketing/VideoCarousel";
 import { SectionFrameBg } from "@/components/ui/SectionFrameBg";
+import { UniverseDivider } from "@/components/ui/UniverseDivider";
 
-// MD3 Expressive 2026 — easing organique.
-const EASE = {
-  EMPHASIZED: [0.2, 0.0, 0.0, 1.0] as const,
-  EMPHASIZED_DECELERATE: [0.05, 0.7, 0.1, 1.0] as const,
-};
-
-// Entrée de contenu au scroll (le fond de section gère sa propre parallaxe).
-const contentVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: EASE.EMPHASIZED_DECELERATE },
-  },
-};
+const EMPH_DECEL = [0.05, 0.7, 0.1, 1.0] as const;
 
 const staggerContainerVariants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { delayChildren: 0.12, staggerChildren: 0.12 } },
 };
-
 const staggerItemVariants = {
   hidden: { y: 30, opacity: 0 },
   visible: {
@@ -56,21 +42,19 @@ const staggerItemVariants = {
   },
 };
 
-// Carte sur fond de frame : surface translucide + flou → la frame respire derrière.
+// Carte « glass » : translucide + flou léger → la frame d'animé respire derrière.
 const CARD_SX = {
-  bgcolor: (t: { palette: { background: { paper: string } } }) =>
-    alpha(t.palette.background.paper, 0.72),
-  backdropFilter: "blur(12px)",
+  bgcolor: (t: Theme) => alpha(t.palette.background.paper, 0.5),
+  backdropFilter: "blur(8px)",
   borderRadius: 3,
   p: 1,
   overflow: "hidden",
   border: "1px solid",
-  borderColor: "divider",
-} as const;
+  borderColor: (t: Theme) => alpha(t.palette.common.white, 0.12),
+  boxShadow: "0 18px 50px rgba(0,0,0,0.45)",
+};
 
-const SECTION_PY = { xs: 6, md: 9 } as const;
-
-// Une « saison » d'animé par section → le scroll fait défiler les générations.
+// Une « saison » d'animé par section ; les dividers annoncent le monde suivant.
 const SERIES = {
   tournaments: "beyblade-x",
   videos: "metal-fight-beyblade",
@@ -98,18 +82,16 @@ interface HomeClientProps {
   tournaments?: TournamentShowcaseItem[];
 }
 
-/** Section plein-cadre : fond de frame d'animé (parallaxe) + contenu lisible au-dessus. */
+/** Section plein-cadre cinématique : frame nette derrière, contenu lisible composé dessus. */
 function FrameSection({
   series,
-  scrim,
-  focus,
-  py,
+  focus = "center",
+  contentVeil,
   children,
 }: {
   series: string;
-  scrim?: number;
   focus?: "top" | "center" | "bottom";
-  py?: boolean;
+  contentVeil?: number;
   children: React.ReactNode;
 }) {
   return (
@@ -118,17 +100,21 @@ function FrameSection({
       sx={{
         position: "relative",
         overflow: "hidden",
-        ...(py ? { py: SECTION_PY } : null),
+        minHeight: { xs: "auto", md: "60vh" },
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        py: { xs: 6, md: 8 },
       }}
     >
-      <SectionFrameBg series={series} scrim={scrim} focus={focus} />
+      <SectionFrameBg series={series} focus={focus} contentVeil={contentVeil} />
       <Box
         component={m.div}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.15 }}
-        variants={contentVariants}
-        sx={{ position: "relative", zIndex: 1 }}
+        initial={{ opacity: 0, y: 36 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.7, ease: EMPH_DECEL }}
+        sx={{ position: "relative", zIndex: 1, width: "100%" }}
       >
         {children}
       </Box>
@@ -145,10 +131,10 @@ export default function HomeClient({
 }: HomeClientProps) {
   return (
     <LazyMotion features={domAnimation}>
-      {/* Tournois — saison Beyblade X. Puce « EN DIRECT » en tête si un tournoi tourne. */}
-      <FrameSection series={SERIES.tournaments} scrim={0.62} focus="center">
+      {/* ── Univers 1 : Beyblade X — Tournois ── */}
+      <FrameSection series={SERIES.tournaments} focus="center">
         {activeTournament && (
-          <Container maxWidth="lg" sx={{ pt: { xs: 4, md: 6 }, pb: 0 }}>
+          <Container maxWidth="lg" sx={{ mb: { xs: 3, md: 4 } }}>
             <Chip
               icon={<FiberManualRecord sx={{ fontSize: 12, animation: "pulse 1.5s infinite" }} />}
               label={`EN DIRECT : ${activeTournament.name}`}
@@ -158,14 +144,14 @@ export default function HomeClient({
                 px: 1,
                 py: 2.5,
                 borderRadius: 3,
-                bgcolor: (t) => alpha(t.palette.primary.main, 0.16),
+                bgcolor: (t) => alpha(t.palette.primary.main, 0.18),
                 color: "primary.main",
                 fontWeight: 800,
-                border: (t) => `1px solid ${alpha(t.palette.primary.main, 0.4)}`,
+                border: (t) => `1px solid ${alpha(t.palette.primary.main, 0.45)}`,
                 backdropFilter: "blur(8px)",
                 cursor: "pointer",
                 "&:hover": {
-                  bgcolor: (t) => alpha(t.palette.primary.main, 0.26),
+                  bgcolor: (t) => alpha(t.palette.primary.main, 0.28),
                   borderColor: "primary.main",
                 },
                 "@keyframes pulse": {
@@ -180,15 +166,19 @@ export default function HomeClient({
         <TournamentShowcase tournaments={tournaments} />
       </FrameSection>
 
-      {/* Vidéos — saison Metal Fight. */}
+      {/* ── Univers 2 : Metal Fight — Vidéos ── */}
       {recentVideos.length > 0 && (
-        <FrameSection series={SERIES.videos} scrim={0.66} focus="center">
-          <VideoCarousel videos={recentVideos} />
-        </FrameSection>
+        <>
+          <UniverseDivider label="Metal Fight" sub="Saga Metal · 2009" />
+          <FrameSection series={SERIES.videos} focus="center">
+            <VideoCarousel videos={recentVideos} />
+          </FrameSection>
+        </>
       )}
 
-      {/* Classements + Meta — saison Burst. */}
-      <FrameSection series={SERIES.rankings} scrim={0.74} focus="top" py>
+      {/* ── Univers 3 : Burst — Classements & Méta ── */}
+      <UniverseDivider label="Burst" sub="Génération Burst" />
+      <FrameSection series={SERIES.rankings} focus="top" contentVeil={0.9}>
         <Container maxWidth="lg">
           <Box
             component={m.div}
@@ -292,8 +282,9 @@ export default function HomeClient({
         </Container>
       </FrameSection>
 
-      {/* Partenariat — saison classique (Bakuten Shoot). */}
-      <FrameSection series={SERIES.partnership} scrim={0.7} focus="center" py>
+      {/* ── Univers 4 : Bakuten Shoot — Partenariat ── */}
+      <UniverseDivider label="Bakuten Shoot" sub="L'origine · 2001" />
+      <FrameSection series={SERIES.partnership} focus="center" contentVeil={0.9}>
         <Container maxWidth="lg">
           <FeedMyPartnership />
         </Container>
