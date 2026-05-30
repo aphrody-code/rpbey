@@ -85,7 +85,7 @@ async function embedBatch(texts: string[], attempt = 0): Promise<number[][]> {
     }
     return json.vectors;
   } catch (e) {
-    if (attempt >= 5) throw e;
+    if (attempt >= 8) throw e;
     await new Promise((r) => setTimeout(r, Math.min(15_000, 1000 * 2 ** attempt)));
     return embedBatch(texts, attempt + 1);
   }
