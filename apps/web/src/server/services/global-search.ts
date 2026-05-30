@@ -6,6 +6,7 @@ import { loadJsonSafe } from "@/lib/data-cache";
 import { isRemote, unwrap } from "@/server/data-source";
 import { listAnimeSeries, listParts, listRankings, listTournaments } from "@/server/dal/search";
 import { listAnimeFramesForIndex } from "@/server/dal/anime";
+import { listActiveStaffMembers } from "@/server/dal/cms";
 
 /**
  * Service de recherche globale — assemble l'index `GlobalSearchItem[]`
@@ -42,6 +43,21 @@ const SITE_PAGES: Array<{ title: string; url: string; desc: string }> = [
     desc: "SATR, Stardust, World Beyblade",
   },
   {
+    title: "Classement SAtR — Sun After The Reign",
+    url: "/tournaments/satr",
+    desc: "Classement officiel des Beyblade Battle Tournaments de Sun After the Reign",
+  },
+  {
+    title: "Stardust Séries — Classement RPB Nord",
+    url: "/tournaments/stardust",
+    desc: "Classement officiel des Stardust Séries, compétition régionale RPB Nord",
+  },
+  {
+    title: "Ultim Bataille — Wild Breakers",
+    url: "/tournaments/wb",
+    desc: "Classement officiel des Ultim Batailles de Wild Breakers",
+  },
+  {
     title: "Pièces Beyblade X",
     url: "/parts",
     desc: "Base de données des pièces et tiers",
@@ -62,6 +78,11 @@ const SITE_PAGES: Array<{ title: string; url: string; desc: string }> = [
     title: "Règlement",
     url: "/reglement",
     desc: "Règles des tournois et de la communauté",
+  },
+  {
+    title: "Politique de confidentialité",
+    url: "/privacy",
+    desc: "Confidentialité et conditions d'utilisation de la RPB",
   },
 ];
 
@@ -426,11 +447,29 @@ export async function buildGlobalSearchIndex(): Promise<GlobalSearchItem[]> {
       title: `${f.seriesTitle}${epLabel}`,
       subtitle: `Frame anime${f.generation ? ` · ${f.generation}` : ""}`,
       category: "frame",
-      url: f.imageUrl,
+      // Lien vers la galerie on-site de la série (recherche par perso/épisode)
+      // plutôt que l'URL CDN brute de l'image — garde l'utilisateur sur le site.
+      url: f.seriesSlug ? `/anime/${f.seriesSlug}/galerie` : f.imageUrl,
       thumbnail: f.thumbUrl ?? f.imageUrl,
       details: [f.caption?.trim(), chars].filter(Boolean).join(" · ") || undefined,
       badge: "Frame",
       source: "wiki",
+    });
+  }
+
+  // 12b. Staff RPB (page « Notre équipe ») — membres actifs, cherchables par nom/rôle.
+  const staff = await listActiveStaffMembers();
+  for (const m of staff) {
+    items.push({
+      id: `staff-${m.id}`,
+      title: m.name,
+      subtitle: `Staff RPB${m.role ? ` · ${m.role}` : ""}`,
+      category: "blader",
+      url: "/notre-equipe",
+      details: m.role ? `Membre du staff RPB — ${m.role}` : "Membre du staff RPB",
+      badge: "Staff",
+      source: "db",
+      thumbnail: m.imageUrl ?? undefined,
     });
   }
 
