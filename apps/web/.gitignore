@@ -95,3 +95,6 @@ data/.fandom-crawl-state.json
 
 # Discord scraper checkpoint (résumable)
 data/.discord-crawl-state.json
+
+# audit lexique Discord (régénérable, non servi)
+data/discord-lexicon.json

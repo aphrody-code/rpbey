@@ -9,6 +9,7 @@
  * référence de tableau (l'index client est stable → recalcul O(1) entre frappes).
  */
 import type { GlobalSearchItem, SearchCategory } from "@rpbey/api-contract";
+import { COMMUNITY_ALIASES } from "./discord-lexicon.generated";
 
 /** Normalise : minuscules, sans accents (NFD), espaces compactés. */
 export function normalize(s: string): string {
@@ -100,10 +101,16 @@ const SYNONYM_GROUPS: string[][] = [
   ["anime", "アニメ", "épisode", "episode", "saison", "season"],
 ];
 
+// Synonymes curés + alias communautaires CONFIRMÉS (initialismes/contractions minés
+// dans le salon Discord Beyblade X, cf. discord-lexicon.generated.ts). Le contenu
+// Discord lui-même n'entre jamais dans le corpus ni les réponses — seul ce vocabulaire
+// d'alias informe l'expansion de requête (recall sur l'argot communautaire).
+const ALL_SYNONYM_GROUPS: string[][] = [...SYNONYM_GROUPS, ...COMMUNITY_ALIASES];
+
 // Index inversé : terme normalisé -> set d'ID de groupes contenant ce terme.
 const TERM_TO_GROUPS = new Map<string, Set<number>>();
-for (let g = 0; g < SYNONYM_GROUPS.length; g++) {
-  const group = SYNONYM_GROUPS[g];
+for (let g = 0; g < ALL_SYNONYM_GROUPS.length; g++) {
+  const group = ALL_SYNONYM_GROUPS[g];
   if (!group) continue;
   for (const term of group) {
     const key = normalize(term);
@@ -126,7 +133,7 @@ export function expandSynonyms(normQuery: string): string[] {
   }
   const expanded = new Set<string>();
   for (const g of hits) {
-    const group = SYNONYM_GROUPS[g];
+    const group = ALL_SYNONYM_GROUPS[g];
     if (!group) continue;
     for (const t of group) expanded.add(normalize(t));
   }
