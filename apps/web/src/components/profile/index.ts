@@ -5,6 +5,7 @@
 export { AvatarUpload } from "./AvatarUpload";
 export { BannerUpload } from "./BannerUpload";
 export { BladerProfileHeader } from "./BladerProfileHeader";
+export { DeckBoxPhotoCard } from "./DeckBoxPhotoCard";
 export { DeckBoxUpload } from "./DeckBoxUpload";
 export { FavoritePartsCard } from "./FavoritePartsCard";
 export { MatchHistory } from "./MatchHistory";

@@ -49,6 +49,7 @@ export const PublicProfileSchema = z.object({
   experience: z.string().nullish(),
   bio: z.string().nullish(),
   bannerImage: z.string().nullish(),
+  deckBoxImage: z.string().nullish(),
   accentColor: z.string().nullish(),
   wins: z.number().int(),
   losses: z.number().int(),

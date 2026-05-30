@@ -10,6 +10,7 @@ import { type ReactNode } from "react";
 import useSWR from "swr";
 import { type UserStats } from "@/lib/stats-types";
 import { BladerProfileHeader } from "./BladerProfileHeader";
+import { DeckBoxPhotoCard } from "./DeckBoxPhotoCard";
 import { FavoritePartsCard } from "./FavoritePartsCard";
 import { MatchHistory } from "./MatchHistory";
 import { ProfileBanner } from "./ProfileBanner";
@@ -148,6 +149,7 @@ export function ProfileView({
           <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
             <UserProfileStatsCard stats={stats} />
             {userId && <ProfileDecksSection userId={userId} isOwnProfile={isOwnProfile} />}
+            {profile?.deckBoxImage && <DeckBoxPhotoCard imageUrl={profile.deckBoxImage} />}
             <MatchHistory userId={stats.userId} />
           </Box>
         </Grid>

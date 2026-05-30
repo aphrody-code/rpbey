@@ -30,12 +30,6 @@ export const EXPERIENCE_LEVELS = [
   { value: "LEGEND", label: "Légende" },
 ] as const;
 
-export const THEME_PREFERENCES = [
-  { value: "system", label: "Système (automatique)" },
-  { value: "light", label: "Clair" },
-  { value: "dark", label: "Sombre" },
-] as const;
-
 export const PROFILE_VISIBILITIES = [
   {
     value: "PUBLIC",

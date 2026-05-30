@@ -518,6 +518,7 @@ export type GetPublicUserResponses = {
                     experience?: string | null;
                     bio?: string | null;
                     bannerImage?: string | null;
+                    deckBoxImage?: string | null;
                     accentColor?: string | null;
                     wins: number;
                     losses: number;

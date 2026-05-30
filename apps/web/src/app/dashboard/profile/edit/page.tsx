@@ -34,7 +34,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { type ReactNode, useEffect, useMemo, useState } from "react";
 import { Controller, useForm, useWatch } from "react-hook-form";
 import useSWR, { mutate } from "swr";
-import { SecuritySettings } from "@/components/profile";
 import { AvatarUpload } from "@/components/profile/AvatarUpload";
 import { BannerUpload } from "@/components/profile/BannerUpload";
 import { DeckBoxUpload } from "@/components/profile/DeckBoxUpload";
@@ -44,7 +43,6 @@ import {
   FAVORITE_SEASONS,
   FRENCH_REGIONS,
   PROFILE_VISIBILITIES,
-  THEME_PREFERENCES,
 } from "@/components/profile/profile-fields";
 import { type BeybladeOption, useBeybladeOptions } from "@/components/profile/useBeybladeOptions";
 import { useToast } from "@/components/ui";
@@ -83,7 +81,6 @@ interface ProfileFormData {
   websiteUrl: string;
   showSocials: boolean;
   // Préférences & confidentialité
-  themePreference: string;
   accentColor: string;
   profileVisibility: string;
   // Challonge (existant)
@@ -193,7 +190,6 @@ export default function EditProfilePage() {
       discordHandle: "",
       websiteUrl: "",
       showSocials: true,
-      themePreference: "system",
       accentColor: "",
       profileVisibility: "PUBLIC",
       challongeUsername: "",
@@ -240,7 +236,6 @@ export default function EditProfilePage() {
         discordHandle: profileData.discordHandle ?? "",
         websiteUrl: profileData.websiteUrl ?? "",
         showSocials: profileData.showSocials ?? true,
-        themePreference: profileData.themePreference ?? "system",
         accentColor: profileData.accentColor ?? "",
         profileVisibility: profileData.profileVisibility ?? "PUBLIC",
         challongeUsername: profileData.challongeUsername ?? "",
@@ -284,7 +279,6 @@ export default function EditProfilePage() {
         discordHandle: orNull(data.discordHandle),
         websiteUrl: orNull(data.websiteUrl),
         showSocials: data.showSocials,
-        themePreference: data.themePreference ? data.themePreference : null,
         accentColor: orNull(data.accentColor),
         profileVisibility: data.profileVisibility ? data.profileVisibility : null,
         challongeUsername: orNull(data.challongeUsername),
@@ -841,22 +835,6 @@ export default function EditProfilePage() {
                 />
                 <Grid container spacing={3}>
                   <Grid size={{ xs: 12, sm: 6 }}>
-                    <Controller
-                      name="themePreference"
-                      control={control}
-                      render={({ field }) => (
-                        <TextField {...field} select fullWidth label="Thème" sx={inputSx}>
-                          {THEME_PREFERENCES.map((o) => (
-                            <MenuItem key={o.value} value={o.value}>
-                              {o.label}
-                            </MenuItem>
-                          ))}
-                        </TextField>
-                      )}
-                    />
-                  </Grid>
-
-                  <Grid size={{ xs: 12, sm: 6 }}>
                     <TextField
                       fullWidth
                       label="Couleur d'accent"
@@ -958,9 +936,6 @@ export default function EditProfilePage() {
               </CardContent>
             </Card>
           </form>
-
-          {/* Section Sécurité (inchangée) */}
-          <SecuritySettings />
         </Grid>
 
         {/* Sidebar info + Challonge */}
@@ -1048,15 +1023,30 @@ export default function EditProfilePage() {
               <Stack direction="row" spacing={1} sx={{ alignItems: "center", mb: 1 }}>
                 <LockIcon fontSize="small" sx={{ color: "text.secondary" }} />
                 <Typography variant="subtitle2" sx={{ fontWeight: "bold" }}>
-                  Compte
+                  Compte & sécurité
                 </Typography>
               </Stack>
               <Typography variant="caption" sx={{ color: "text.secondary", display: "block" }}>
                 Inscrit le {user ? new Date(user.createdAt).toLocaleDateString("fr-FR") : "-"}
               </Typography>
-              <Typography variant="caption" sx={{ color: "text.secondary", display: "block" }}>
+              <Typography
+                variant="caption"
+                sx={{ color: "text.secondary", display: "block", mb: 1.5 }}
+              >
                 ID : {user?.id}
               </Typography>
+              <Typography
+                variant="caption"
+                sx={{ color: "text.secondary", display: "block", mb: 1 }}
+              >
+                Adresse e-mail, mot de passe et authentification à deux facteurs se gèrent dans les
+                paramètres du compte.
+              </Typography>
+              <Link href="/dashboard/settings" passHref style={{ textDecoration: "none" }}>
+                <Button variant="outlined" size="small" fullWidth sx={{ borderRadius: 2 }}>
+                  Paramètres du compte
+                </Button>
+              </Link>
             </Box>
           </Stack>
         </Grid>

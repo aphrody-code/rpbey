@@ -1,15 +1,15 @@
-import { Container } from "@mui/material";
-import { ProfileSettingsForm } from "@/components/dashboard/settings/ProfileSettingsForm";
+import { Box } from "@mui/material";
+import { AccountSettings } from "@/components/dashboard/settings/AccountSettings";
 
 export const metadata = {
-  title: "Paramètres | Dashboard",
-  description: "Gérez votre profil RPB.",
+  title: "Paramètres du compte | Dashboard",
+  description: "Gère ton e-mail, ton mot de passe, l'A2F et tes appareils connectés.",
 };
 
 export default function SettingsPage() {
   return (
-    <Container maxWidth="lg" sx={{ py: 4 }}>
-      <ProfileSettingsForm />
-    </Container>
+    <Box sx={{ py: 2 }}>
+      <AccountSettings />
+    </Box>
   );
 }
