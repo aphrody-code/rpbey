@@ -167,16 +167,14 @@
   --rpb-tier-c: var(--md-sys-color-surface-container-highest); /* neutre */
   --rpb-tier-c-on: var(--md-sys-color-on-surface-variant);
 
-  /* Affordance IA (Gemini) — signature, conservée telle quelle. */
+  /* Affordance IA (Gemini) — la SEULE valeur couleur en dur du système, exposée
+     une fois (grammaire Google : tout le reste passe par --md-sys-color-*).
+     Réservée aux affordances IA : pilule « Mode IA », sparkle, citations. */
+  --gemini-sparkle: linear-gradient(90deg, #4285f4 0%, #9b72cb 50%, #d96570 100%);
   --rpb-ai-start: #4285f4;
   --rpb-ai-mid: #9b72cb;
   --rpb-ai-end: #d96570;
-  --rpb-gradient-ai: linear-gradient(
-    90deg,
-    var(--rpb-ai-start),
-    var(--rpb-ai-mid),
-    var(--rpb-ai-end)
-  );
+  --rpb-gradient-ai: var(--gemini-sparkle);
 }
 
 /* ---- M3 color roles — BLUE (seed #60a5fa, vibrant, dark), mode tournoi --- */
