@@ -198,6 +198,12 @@ async function run() {
       // Start scheduled tasks
       const { setupCronJobs } = await import("./cron/index.js");
       setupCronJobs();
+
+      // Seed la config DB depuis les constantes si absente : le dashboard reflète
+      // l'état réel (canaux/rôles/économie) dès le boot, sans attendre un event.
+      if (guildId) {
+        await container.resolve(ConfigService).ensureSeed(guildId);
+      }
     } catch (e) {
       logger.error("[Bot] Failed to init application commands:", e);
     }

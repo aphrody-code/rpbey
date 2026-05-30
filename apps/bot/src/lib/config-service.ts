@@ -130,8 +130,10 @@ const DEFAULT_COOLDOWNS: Partial<CooldownsConfig> = {
 /** Constantes modération (valeurs actuelles — @SlashChoice statiques inchangées). */
 const DEFAULT_MODERATION: Partial<ModerationConfig> = {
   muteDurationsMs: [60_000, 5 * 60_000, 10 * 60_000, 60 * 60_000, 24 * 60 * 60_000],
-  maxWarnings: 0,
-  autoActionAtWarns: 0,
+  // Seuils positifs (contrat exige >0) ; autoActionType "none" = aucune sanction
+  // automatique → comportement actuel préservé (le bot n'a pas d'auto-action).
+  maxWarnings: 3,
+  autoActionAtWarns: 3,
   autoActionType: "none",
   defaultBanReason: "Comportement contraire au règlement",
 };
