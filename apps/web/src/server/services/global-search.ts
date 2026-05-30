@@ -414,17 +414,21 @@ export async function buildGlobalSearchIndex(): Promise<GlobalSearchItem[]> {
   }
 
   // 12. Frames d'anime (galerie « Google Images ») — moments marquants taggés perso/épisode/saison.
-  const frames = await listAnimeFramesForIndex(2000);
+  const frames = await listAnimeFramesForIndex(3000);
   for (const f of frames) {
     const chars = f.characterNames.join(", ");
+    const epLabel = f.episodeNumber ? ` · Ép. ${f.episodeNumber}` : "";
     items.push({
       id: `frame-${f.id}`,
-      title: chars || `${f.seriesTitle} — Ép. ${f.episodeNumber ?? "?"}`,
-      subtitle: `${f.seriesTitle}${f.episodeNumber ? ` · Épisode ${f.episodeNumber}` : ""}`,
+      // Titre propre (série + épisode) — le cast complet (`characterNames` = tag de
+      // l'épisode, pas du plan) va dans `details` pour rester cherchable sans polluer
+      // le titre de 10 noms identiques sur toutes les frames de l'épisode.
+      title: `${f.seriesTitle}${epLabel}`,
+      subtitle: `Frame anime${f.generation ? ` · ${f.generation}` : ""}`,
       category: "frame",
       url: f.imageUrl,
       thumbnail: f.thumbUrl ?? f.imageUrl,
-      details: [f.caption?.trim(), chars, f.generation].filter(Boolean).join(" · ") || undefined,
+      details: [f.caption?.trim(), chars].filter(Boolean).join(" · ") || undefined,
       badge: "Frame",
       source: "wiki",
     });

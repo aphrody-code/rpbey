@@ -536,23 +536,56 @@ export async function listAnimeFrames(params: AnimeFramesFilter) {
   };
 }
 
-/** Frames marquantes + métadonnées série, pour l'index de recherche « Google Images ». */
-export async function listAnimeFramesForIndex(max = 2000) {
-  return db
-    .select({
-      id: schema.animeFrames.id,
-      thumbUrl: schema.animeFrames.thumbUrl,
-      imageUrl: schema.animeFrames.imageUrl,
-      episodeNumber: schema.animeFrames.episodeNumber,
-      characterNames: schema.animeFrames.characterNames,
-      caption: schema.animeFrames.caption,
-      seriesSlug: schema.animeSeries.slug,
-      seriesTitle: schema.animeSeries.title,
-      generation: schema.animeSeries.generation,
-    })
-    .from(schema.animeFrames)
-    .innerJoin(schema.animeSeries, eq(schema.animeFrames.seriesId, schema.animeSeries.id))
-    .where(eq(schema.animeFrames.isNotable, true))
-    .orderBy(desc(schema.animeFrames.createdAt))
-    .limit(max);
+interface FrameIndexRow {
+  id: string;
+  thumbUrl: string | null;
+  imageUrl: string;
+  episodeNumber: number | null;
+  characterNames: string[];
+  caption: string | null;
+  seriesSlug: string;
+  seriesTitle: string;
+  generation: string;
+}
+
+/**
+ * Frames marquantes pour l'index de recherche « Google Images ».
+ *
+ * Sélection DIVERSE : plafonnée à `perEpisode` frames par (série, épisode) via
+ * `row_number()`, pour couvrir les 244 épisodes / toutes les générations plutôt
+ * que de gaver l'index des frames d'une seule série (Beyblade X = 63 % du total)
+ * avec un simple `LIMIT … ORDER BY createdAt`. `characterNames` est le cast de
+ * l'épisode (même tag-set pour toutes les frames d'un épisode) — on en garde
+ * quelques-unes par épisode pour la galerie sans inonder la recherche texte.
+ */
+export async function listAnimeFramesForIndex(max = 3000, perEpisode = 12) {
+  const rows = await db.execute(sql`
+    SELECT sub.id,
+           sub."thumbUrl"        AS "thumbUrl",
+           sub."imageUrl"        AS "imageUrl",
+           sub."episodeNumber"   AS "episodeNumber",
+           sub."characterNames"  AS "characterNames",
+           sub.caption           AS caption,
+           s.slug                AS "seriesSlug",
+           s.title               AS "seriesTitle",
+           s.generation          AS generation
+      FROM (
+        SELECT f.*,
+               row_number() OVER (
+                 PARTITION BY f."seriesId", f."episodeNumber"
+                 ORDER BY f."sortOrder", f.id
+               ) AS rn
+          FROM ${schema.animeFrames} f
+         WHERE f."isNotable" = true
+      ) sub
+      JOIN ${schema.animeSeries} s ON s.id = sub."seriesId"
+     WHERE sub.rn <= ${perEpisode}
+     ORDER BY s.title, sub."episodeNumber", sub.rn
+     LIMIT ${max}
+  `);
+  // postgres-js renvoie les lignes brutes ; `characterNames` (jsonb) est déjà parsé.
+  return (rows as unknown as FrameIndexRow[]).map((r) => ({
+    ...r,
+    characterNames: Array.isArray(r.characterNames) ? r.characterNames : [],
+  }));
 }
