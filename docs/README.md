@@ -14,8 +14,9 @@ Cartographie du repo (apps/packages) : [REPO_MAP.md](REPO_MAP.md).
 
 ## Général
 
+- [Connaissance Beyblade — crawler wiki, entité canonique & graphe de liens](beyblade-knowledge.md) `stable` — Le pipeline de connaissance rpbey : crawler MediaWiki exhaustif (toutes saisons), module d'entité canonique, combos enrichis, graphe d'entités cross-linké et son câblage dans la recherche + les pages produit/anime/builder.
 - [Guide de Crawling & RAG X.com (Twitter)](crawling-rag-x.md) `draft` — Système de crawling autonome et RAG Gemini sur les discussions métagame Beyblade X depuis x.com.
-- [Best practices du pipeline de données rpbey](data-pipeline-best-practices.md) `draft` — Référentiel opinioné — scraping → validation → consolidation → recherche hybride/RAG → observabilité — confronté à l'état réel du pipeline rpbey, avec backlog d'actions priorisé.
+- [Best practices du pipeline de données rpbey](data-pipeline-best-practices.md) `stable` — Référentiel opinioné — scraping → validation → consolidation → recherche hybride/RAG → observabilité — confronté à l'état réel du pipeline rpbey, avec backlog d'actions priorisé.
 - [Système de documentation (structuré, automatisé, sync)](documentation-system.md) `stable` — Convention frontmatter, commandes docs.ts et hook git qui gardent la doc typée et synchronisée avec le code.
 - [Métagame WBO — extraction & données consommées par rpbey](metagame-wbo.md) `stable` — Pipeline d'extraction des classements et du métagame WBO (Wayback Machine) consommé par le dashboard rpbey.
 

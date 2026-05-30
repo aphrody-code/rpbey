@@ -5,7 +5,7 @@ scope:
   - apps/web/src/server/services
   - apps/web/scripts
   - apps/web/src/lib/search-rank.ts
-status: "draft"
+status: "stable"
 last_updated: "2026-05-30"
 related_symbols:
   - buildGlobalSearchIndex
@@ -182,6 +182,35 @@ versionnés, compat ascendante). Logs structurés (JSON). Retries + circuit brea
 - **P1** — **Timestamps de génération partout** : `generatedAt` + `count` en tête
   de chaque `data/*.json` (déjà sur Reddit/X — à généraliser).
 - **P2** — Alerte Discord (le bot a déjà un webhook) sur source stale > seuil.
+
+---
+
+## État appliqué (2026-05-30)
+
+Le backlog **P0 + P1 est livré et déployé**, et le pipeline a été étendu d'un étage
+**connaissance / graphe d'entités** (cf. [beyblade-knowledge](beyblade-knowledge.md)) :
+
+- **Hybride live** : sidecar `apps/embed-sidecar/` + index vectoriel `rpbey:search:vec`
+  (multilingual-e5-small 384d) + fusion RRF k=60 ; éval adverse `eval-search.ts`
+  (+11.9 % MRR@10, +64 % conceptuel vs BM25F seul). Indexeur `build-search-vectors.ts`
+  **durci** (retry/backoff sur ECONNRESET sidecar).
+- **Durcissement scrapers** : validation Zod ingestion, `fetchRetry` backoff, rate-limit
+  par domaine, dédup fingerprint (`scripts/lib/scrape-utils.ts`).
+- **Observabilité** : `scripts/data-doctor.ts` (fraîcheur/volume/schéma, baseline) +
+  `generatedAt`/`count` en tête de tous les exports.
+- **Entité canonique** : `lib/beyblade-entity.ts` — clé canonique + tables de tier uniques
+  (ex-triplicées), consommé par index/ranker/reco. Dédup canonique bey/produit dans le corpus.
+- **Combos enrichis** : `enrich-combos.ts` joint combos↔méta↔communauté (`wbo-combos-enriched.json`).
+- **Connaissance wiki exhaustive** : crawler MediaWiki `crawl-fandom.ts` →
+  `beyblade-knowledge.json` (8 459 entités, toutes saisons) câblé dans la recherche
+  (**corpus 9 018 → 17 082**).
+- **Graphe de liens** : `entity-graph.ts` (`getProductIntel`, `getGenerationShowcase`) relie
+  produit↔blade↔tier↔combos↔buzz↔wiki↔voisins denses, et série anime↔génération↔beys/
+  personnages/jeux. Surfacé sur les pages comparateur (`ProductIntel`), anime
+  (`SeriesCrosslinks`) et builder (`DeckSynergy`).
+
+Restant : **P2** uniquement (rerank cross-encoder — différé, aucun trou de précision mesuré ;
+quarantine/profilage ; versionnement de clé au changement de shape ; alerte Discord stale).
 
 ---
 
