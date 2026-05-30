@@ -159,6 +159,7 @@
         "matter-js": "^0.20.0",
         "next": "catalog:",
         "nuqs": "^2.8.9",
+        "pixi.js": "^8.18.1",
         "postgres": "^3.4.9",
         "puppeteer": "^24.36.0",
         "puppeteer-extra": "^3.3.6",

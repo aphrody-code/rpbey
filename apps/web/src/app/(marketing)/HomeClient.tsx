@@ -11,14 +11,7 @@ import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import { alpha } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
-import {
-  domAnimation,
-  LazyMotion,
-  type MotionStyle,
-  m,
-  useScroll,
-  useTransform,
-} from "framer-motion";
+import { domAnimation, LazyMotion, m, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
 import { useRef } from "react";
 import { DynamicBlock } from "@/components/cms/DynamicBlock";
@@ -34,7 +27,7 @@ import {
   type TournamentShowcaseItem,
 } from "@/components/marketing/TournamentShowcase";
 import { VideoCarousel } from "@/components/marketing/VideoCarousel";
-import { useThemeMode } from "@/components/theme/ThemeRegistry";
+import { LivingBackdrop } from "@/components/ui/LivingBackdrop";
 
 // Dynamic imports for heavy components below the fold
 
@@ -128,15 +121,12 @@ export default function HomeClient({
   recentVideos = [],
   tournaments = [],
 }: HomeClientProps) {
-  const { backgroundImage, mode } = useThemeMode();
-
-  // Hero parallax
+  // Hero : fondu du contenu au scroll (le fond vivant gère son propre mouvement).
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress: heroScrollProgress } = useScroll({
     target: heroRef,
     offset: ["start start", "end start"],
   });
-  const heroBgY = useTransform(heroScrollProgress, [0, 1], ["0%", "30%"]);
   const heroContentOpacity = useTransform(heroScrollProgress, [0, 0.6], [1, 0]);
 
   return (
@@ -146,48 +136,17 @@ export default function HomeClient({
         ref={heroRef}
         sx={{
           position: "relative",
-          minHeight: { xs: "auto", md: "95vh" },
+          minHeight: { xs: "68vh", md: "62vh" },
           display: "flex",
-          alignItems: { xs: "flex-start", md: "center" },
+          alignItems: "center",
           overflow: "hidden",
-          pt: { xs: 1, md: 0 },
+          pt: { xs: 2, md: 0 },
+          pb: { xs: 4, md: 0 },
           bgcolor: "black",
         }}
       >
-        {/* Background Layer with parallax */}
-        <Box
-          component={m.div}
-          style={{ y: heroBgY } as MotionStyle}
-          sx={{
-            position: "absolute",
-            inset: 0,
-            zIndex: 0,
-            "&::after": {
-              content: '""',
-              position: "absolute",
-              inset: 0,
-              background:
-                mode === "blue"
-                  ? "linear-gradient(to bottom, rgba(15,23,42,0.4) 0%, rgba(15,23,42,0.9) 50%, #020617 100%)"
-                  : `linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 50%, var(--rpb-bg, #0F0F0F) 100%)`,
-              zIndex: 2,
-            },
-          }}
-        >
-          {/* Static Background Image */}
-          <Box
-            sx={{
-              position: "absolute",
-              inset: 0,
-              backgroundImage: `url(${backgroundImage})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              zIndex: 0,
-              opacity: 0.4,
-              filter: "blur(2px)",
-            }}
-          />
-        </Box>
+        {/* Fond vivant : frames d'animé (corpus RAG) + braises Pixi, adaptatif/mobile */}
+        <LivingBackdrop intensity={0.42} />
 
         <m.div style={{ opacity: heroContentOpacity }}>
           <Container
@@ -256,42 +215,6 @@ export default function HomeClient({
                       />
                     </Box>
                   )}
-
-                  <Typography
-                    variant="h1"
-                    sx={{
-                      fontSize: {
-                        xs: "clamp(2rem, 9vw, 3rem)",
-                        sm: "4.5rem",
-                        md: "5.5rem",
-                        lg: "6.5rem",
-                      },
-                      fontWeight: 900,
-                      lineHeight: { xs: 1.05, md: 0.95 },
-                      letterSpacing: "-0.05em",
-                      mb: { xs: 2, md: 3 },
-                      textTransform: "uppercase",
-                      textAlign: { xs: "center", md: "left" },
-                      fontVariationSettings: '"wght" 900, "opsz" 100',
-                    }}
-                  >
-                    République
-                    <br />
-                    Populaire
-                    <br />
-                    <Box
-                      component="span"
-                      sx={{
-                        background: (t) =>
-                          `linear-gradient(135deg, ${t.palette.primary.main} 0%, ${t.palette.secondary.main} 100%)`,
-                        WebkitBackgroundClip: "text",
-                        WebkitTextFillColor: "transparent",
-                        filter: (t) => `drop-shadow(0 10px 20px ${t.palette.primary.main}4D)`,
-                      }}
-                    >
-                      Beyblade
-                    </Box>
-                  </Typography>
 
                   <Box
                     sx={{
