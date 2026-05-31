@@ -5,8 +5,8 @@ import { injectable } from "tsyringe";
 import { Colors } from "../../lib/constants.js";
 import { logger } from "../../lib/logger.js";
 
-const RAG_SCRIPT = "/home/ubuntu/aphrody/packages/x/src/bin/run-rag.ts";
-const RAG_CWD = "/home/ubuntu/aphrody/packages/x";
+const RAG_SCRIPT = "/home/ubuntu/x-client/ts/src/bin/run-rag.ts";
+const RAG_CWD = "/home/ubuntu/x-client/ts";
 const RAG_TIMEOUT_MS = 30_000;
 
 // Parse the human-readable stdout of run-rag.ts

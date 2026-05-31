@@ -18,7 +18,7 @@
 //   ENRICH_X_PER_BLADE=N   nb de tweets visés par blade (def 20)
 //   ENRICH_DELAY_MS=N      délai inter-blade (def 4000) — borne le rate-limit X (~50 req/15min)
 
-import { XSession, XClient } from "/home/ubuntu/aphrody/packages/x/dist/index.js";
+import { XSession, XClient } from "/home/ubuntu/x-client/ts/src/index.ts";
 import { homedir } from "node:os";
 import { join } from "node:path";
 

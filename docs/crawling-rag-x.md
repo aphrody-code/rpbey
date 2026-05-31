@@ -17,7 +17,7 @@ Ce document décrit le fonctionnement et la structure du système de crawling au
 
 > **Où vit le code et les données** (le repo `rpbey` ne contient QUE cette doc) :
 >
-> - Package : `/home/ubuntu/aphrody/packages/x/` (`@aphrody-code/x`). Bins dans `src/bin/`.
+> - Package : `/home/ubuntu/x-client/ts/` (`@aphrody-code/x`). Bins dans `src/bin/`.
 > - Store SQLite : `/home/ubuntu/.aphrody/x-store.sqlite` (tables `tweets`, `users`, FTS5 `tweets_fts`, `tweet_embeddings`).
 > - Session (cookies, SECRET) : `/home/ubuntu/.aphrody/x-session.json`.
 > - Clé Gemini : `GEMINI_API_KEY` (fallback `GOOGLE_API_KEY`) — vit dans `/home/ubuntu/aphrody/.env`.
@@ -39,7 +39,7 @@ Le crawler autonome effectue des requêtes structurées en mimant un navigateur 
 ### B. Algorithme de Crawling Ciblée (`run-targeted-crawler.ts`)
 
 - **Localisation** : `packages/x/src/bin/run-targeted-crawler.ts` (le bin opérationnel ; `services/crawler.ts` reste un service générique).
-- **Commande exacte** (depuis `/home/ubuntu/aphrody/packages/x`, env sourcé) :
+- **Commande exacte** (depuis `/home/ubuntu/x-client/ts`, env sourcé) :
   ```bash
   set -a; . /home/ubuntu/aphrody/.env; set +a
   bun run src/bin/run-targeted-crawler.ts
@@ -93,7 +93,7 @@ Le RAG permet de répondre à des questions complexes sur le métagame Beyblade 
 ## 3. Opérer le pipeline (runbook)
 
 ```bash
-cd /home/ubuntu/aphrody/packages/x
+cd /home/ubuntu/x-client/ts
 set -a; . /home/ubuntu/aphrody/.env; set +a   # charge GEMINI_API_KEY (secret, ne jamais l'afficher)
 
 # 1. État du store
@@ -117,11 +117,11 @@ bun run src/bin/run-rag.ts --query "Quels sont les top tier blades actuels en Be
 
 ## 4. Écosystème X complet (au-delà du module Bun)
 
-Le pipeline crawl→RAG décrit ci-dessus (§1–3) n'est qu'**une** des couches. Tout l'écosystème X vit dans le **monorepo aphrody** (`github.com/aphrody-code/aphrody`, remote `origin = /home/ubuntu/aphrody.git`) et **partage le même store** `~/.aphrody/x-store.sqlite` + la même session `x-session.json` + le même vector set Redis `tweet_embeddings`.
+Le pipeline crawl→RAG décrit ci-dessus (§1–3) n'est qu'**une** des couches. Tout l'écosystème X partagé vit dans le dépôt indépendant **x-client** (`github.com/aphrody-code/x-client`) pour le module Bun, et dans le **monorepo aphrody** (`github.com/aphrody-code/aphrody`, remote `origin = /home/ubuntu/aphrody.git`) pour le reste, et **partage le même store** `~/.aphrody/x-store.sqlite` + la même session `x-session.json` + le même vector set Redis `tweet_embeddings`.
 
 | Couche                    | Emplacement                                              | Rôle                                                                                                                                                        |
 | ------------------------- | -------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Crawl/RAG Bun**         | `aphrody/packages/x/` (`@aphrody-code/x`)                | la couche opérationnelle de ce guide : crawl ciblé, embeddings Gemini 768d, RAG hybride VSIM+FTS5. C'est ce que pilote ce document.                         |
+| **Crawl/RAG Bun**         | `x-client/ts/` (`@aphrody-code/x`)                        | la couche opérationnelle de ce guide : crawl ciblé, embeddings Gemini 768d, RAG hybride VSIM+FTS5. C'est ce que pilote ce document.                         |
 | **Client natif Rust**     | `crates/aphrody-x-client` (bin `aphrody-x`)              | framework de contrôle de compte headless complet (lib + CLI).                                                                                               |
 | **Canal messaging Rust**  | `crates/aphrody-messaging/src/channels/x.rs`             | adaptateur `MessagingChannel` qui **shell-out** le binaire `aphrody-x` (post/timeline) ; ne relie pas la lib (bug CSRF `ct0` des libs upstream non résolu). |
 | **Classification Python** | `aphrody/scripts/classify_tweets.py`                     | analytique post-hoc (pas dans le chemin RAG).                                                                                                               |
