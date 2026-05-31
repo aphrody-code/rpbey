@@ -67,6 +67,14 @@ Raison : better-auth écrit des `Date`. Conséquences : écrire une colonne **au
 
 Pour comprendre le fonctionnement de la session de crawling, l'indexation Redis et la recherche RAG Gemini sur le métagame, se référer à **`docs/crawling-rag-x.md`**.
 
+### Chat IA « Rpbey » (apps/web) — LLM LOCAL + mémoire + streaming
+
+`POST /api/chat` n'est PLUS « zéro LLM ». Pipeline : retrieval hybride Beyblade (`server/services/chat.ts`, `prepareTurn`) → **synthèse par un LLM LOCAL** en français, **streamée en SSE**, avec **mémoire conversationnelle** (l'historique transite client→API→modèle ; `RpbeyChat.tsx` envoie `history`, le backend reste stateless).
+
+- **Modèle local gratuit** : `llama.cpp` (`/home/ubuntu/llm/llama-server`, Llama-3.2-3B Q4) via **systemd `rpbey-llm.service`** loopback `127.0.0.1:8080` (OpenAI-compatible). CPU-only → **streaming obligatoire** (~6 s avant 1er token, ~11 tok/s). Hors-repo (modèles `/home/ubuntu/llm/models/`).
+- **`server/services/llm.ts`** : client OpenAI-compatible, `RPBEY_LLM_URL` (défaut `http://127.0.0.1:8080/v1/chat/completions`), `generate()` + `generateStream()`. Kill switch `RPBEY_CHAT_LLM=0` → repli synthèse extractive déterministe (jamais d'écran vide). Vertex/Gemini RETIRÉ (payant, abandonné).
+- **Cible long terme** : ce seam OpenAI-compat pointera vers le **daemon aphrody** (backend AI souverain du VPS : inference candle + mémoire `aphrody-memory` + multi-persona `aphrody-agent-home`). Plan : `aphrody/docs/plans/aphrody-ai-backend.md`. Persona Beyblade = profil agent-home `rpbey` (`~/.aphrody/workspace-rpbey`). Repointer = changer `RPBEY_LLM_URL`.
+
 ### Bot — invariants runtime (compile mais casse au runtime si violés)
 
 - **`import type` casse la DI tsyringe** : efface `design:paramtypes` → injection `undefined`. Toute classe injectée = `import { Class }`.

@@ -4,7 +4,7 @@ description: "Index arborescent généré de toute la doc sous docs/."
 scope:
   - docs
 status: "generated"
-last_updated: "2026-05-30"
+last_updated: "2026-05-31"
 ---
 # Documentation — index
 

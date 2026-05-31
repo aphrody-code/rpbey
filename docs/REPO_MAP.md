@@ -5,7 +5,7 @@ scope:
   - apps
   - packages
 status: "generated"
-last_updated: "2026-05-30"
+last_updated: "2026-05-31"
 ---
 # Cartographie du monorepo (REPO_MAP)
 
