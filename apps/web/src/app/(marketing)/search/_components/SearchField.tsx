@@ -30,14 +30,6 @@ function IconHistory() {
   );
 }
 
-function IconSparkle() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M12 2 9.5 9.5 2 12l7.5 2.5L12 22l2.5-7.5L22 12l-7.5-2.5z" />
-    </svg>
-  );
-}
-
 // ── Historique localStorage ───────────────────────────────────────────────────
 
 const HISTORY_KEY = "rpb-search-history";
@@ -71,15 +63,9 @@ function SuggestionRow({
 
   return (
     <button className={styles.suggRow} onClick={() => onSelect(label)} type="button">
-      {fromHistory ? (
-        <span className={styles.suggIcon}>
-          <IconHistory />
-        </span>
-      ) : (
-        <span className={styles.sparkleSmall} aria-hidden="true">
-          <IconSparkle />
-        </span>
-      )}
+      <span className={styles.suggIcon} aria-hidden="true">
+        {fromHistory ? <IconHistory /> : <IconSearch />}
+      </span>
       <span className={styles.suggLabel}>{label}</span>
       {badge && <span className={styles.suggBadge}>{badge}</span>}
     </button>
@@ -91,7 +77,6 @@ function SuggestionRow({
 interface SearchFieldProps {
   value: string;
   suggestions: GlobalSearchItem[];
-  aiMode: boolean;
   placeholder?: string;
   maxWidth?: string;
   onChange: (v: string) => void;
@@ -104,7 +89,6 @@ interface SearchFieldProps {
 export function SearchField({
   value,
   suggestions,
-  aiMode,
   placeholder = "Rechercher une toupie, pièce, blader…",
   maxWidth,
   onChange,
@@ -134,7 +118,7 @@ export function SearchField({
   const showDropdown =
     focused && (value.length === 0 ? history.length > 0 : suggestions.length > 0);
 
-  const resolvedMaxWidth = maxWidth ?? (aiMode ? "760px" : "584px");
+  const resolvedMaxWidth = maxWidth ?? "584px";
 
   function handleSelect(label: string) {
     onChange(label);

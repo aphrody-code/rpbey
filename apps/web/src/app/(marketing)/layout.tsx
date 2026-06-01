@@ -2,7 +2,6 @@ import Box from "@mui/material/Box";
 import { type Metadata } from "next";
 import { IconFooter, IconNav, MarketingHeader, MobileNav } from "@/components/layout";
 import { ICON_NAV_WIDTH } from "@/components/layout/constants";
-import { RpbeyChatLauncher } from "@/components/chat/RpbeyChatLauncher";
 import { AnalyticsTracker } from "@/components/system/AnalyticsTracker";
 import { DiscordFloatingCTA } from "@/components/ui/DiscordFloatingCTA";
 import { SmoothScroll } from "@/components/ui/SmoothScroll";
@@ -48,9 +47,6 @@ export default function MarketingLayout({ children }: { children: React.ReactNod
 
       {/* Discord join CTA */}
       <DiscordFloatingCTA />
-
-      {/* Chat RAG « Rpbey » (style Gemini) — dispo sur toutes les pages, dont /search */}
-      <RpbeyChatLauncher />
     </Box>
   );
 }

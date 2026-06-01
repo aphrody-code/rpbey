@@ -8,7 +8,6 @@ import { globalSearch } from "@rpbey/api-client";
 import type { GlobalSearchItem, SearchCategory } from "@rpbey/api-contract";
 import { facetCounts, normalize, rankSearch, suggest } from "@/lib/search-rank";
 import type { BxProductGroup, RecommendedProduct } from "../../comparateur/_components/types";
-import { AiSynthesis } from "./AiSynthesis";
 import { KnowledgePanel } from "./KnowledgePanel";
 import { SearchField } from "./SearchField";
 import { SerpResults } from "./SerpResults";
@@ -44,7 +43,7 @@ const LOGO_GIF = "/rpb-3d.gif";
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
-type ViewState = "home" | "serp" | "synthesis";
+type ViewState = "home" | "serp";
 
 function matchesGroup(g: BxProductGroup, q: string): boolean {
   const nq = normalize(q);
@@ -65,14 +64,10 @@ export function SearchClient({ groups, recommendations }: SearchClientProps) {
   const searchParams = useSearchParams();
 
   const initialQ = searchParams.get("q") ?? "";
-  const initialMode = searchParams.get("mode") === "ai";
 
   const [view, setView] = React.useState<ViewState>(initialQ ? "serp" : "home");
   const [query, setQuery] = React.useState(initialQ);
-  const [aiMode, setAiMode] = React.useState(initialMode);
-  const [category, setCategory] = React.useState<SearchCategory | "all" | "ai">(
-    initialMode ? "ai" : "all",
-  );
+  const [category, setCategory] = React.useState<SearchCategory | "all">("all");
 
   // ── Index de recherche via le SDK (GET /api/v1/search, sans q = index complet) ──
   const [searchIndex, setSearchIndex] = React.useState<GlobalSearchItem[]>([]);
@@ -127,7 +122,7 @@ export function SearchClient({ groups, recommendations }: SearchClientProps) {
   // tombés dans le top-N global), donc le compteur de l'onglet ⇔ les résultats.
   const results = React.useMemo((): GlobalSearchItem[] => {
     if (!query.trim()) return [];
-    if (category === "all" || category === "ai") {
+    if (category === "all") {
       return liveResults.length > 0 ? liveResults : rankSearch(searchIndex, query, { limit: 60 });
     }
     const pool = searchIndex.length > 0 ? searchIndex : liveResults;
@@ -164,41 +159,32 @@ export function SearchClient({ groups, recommendations }: SearchClientProps) {
   }, [matchedGroup, groups]);
 
   // ── Sync URL ──────────────────────────────────────────────────────────────
-  function syncUrl(q: string, mode: boolean) {
+  function syncUrl(q: string) {
     const params = new URLSearchParams();
     if (q) params.set("q", q);
-    if (mode) params.set("mode", "ai");
     router.replace(params.toString() ? `/search?${params}` : "/search", { scroll: false });
   }
 
   function handleSubmit(q: string) {
     if (!q.trim()) return;
     setQuery(q);
-    const newMode = aiMode;
-    setView(newMode ? "synthesis" : "serp");
-    setCategory(newMode ? "ai" : "all");
-    syncUrl(q, newMode);
+    setView("serp");
+    setCategory("all");
+    syncUrl(q);
   }
 
   function handleChange(v: string) {
     setQuery(v);
     if (!v.trim() && view !== "home") {
       setView("home");
-      syncUrl("", aiMode);
+      syncUrl("");
     }
   }
 
-  function handleTabChange(v: SearchCategory | "all" | "ai") {
+  function handleTabChange(v: SearchCategory | "all") {
     setCategory(v);
-    if (v === "ai") {
-      setAiMode(true);
-      setView("synthesis");
-      syncUrl(query, true);
-    } else {
-      setAiMode(false);
-      setView("serp");
-      syncUrl(query, false);
-    }
+    setView("serp");
+    syncUrl(query);
   }
 
   // ── Shimmer de chargement (feedback vrai fetch) ────────────────────────────
@@ -246,7 +232,6 @@ export function SearchClient({ groups, recommendations }: SearchClientProps) {
               <SearchField
                 value={query}
                 suggestions={suggestions}
-                aiMode={aiMode}
                 onChange={handleChange}
                 onSubmit={handleSubmit}
               />
@@ -258,7 +243,7 @@ export function SearchClient({ groups, recommendations }: SearchClientProps) {
   }
 
   // ─────────────────────────────────────────────────────────────────────────────
-  // VUE SERP / SYNTHESIS
+  // VUE SERP
   // ─────────────────────────────────────────────────────────────────────────────
   return (
     <MotionConfig reducedMotion="user">
@@ -273,7 +258,7 @@ export function SearchClient({ groups, recommendations }: SearchClientProps) {
               onClick={() => {
                 setView("home");
                 setQuery("");
-                syncUrl("", aiMode);
+                syncUrl("");
               }}
               aria-label="Retour à l'accueil de la recherche"
             >
@@ -292,7 +277,6 @@ export function SearchClient({ groups, recommendations }: SearchClientProps) {
               <SearchField
                 value={query}
                 suggestions={suggestions}
-                aiMode={aiMode}
                 maxWidth="100%"
                 onChange={handleChange}
                 onSubmit={handleSubmit}
@@ -307,33 +291,17 @@ export function SearchClient({ groups, recommendations }: SearchClientProps) {
         {/* Corps */}
         <div className={styles.serpBody}>
           <div className={`${styles.serpGrid} ${matchedGroup ? styles.hasPanel : ""}`}>
-            {/* Colonne résultats / synthèse */}
+            {/* Colonne résultats */}
             <div>
               <AnimatePresence mode="wait">
-                {view === "synthesis" ? (
-                  <motion.div key="synthesis" {...fadeThrough}>
-                    <AiSynthesis
-                      query={query}
-                      group={matchedGroup}
-                      reco={matchedReco}
-                      suggestions={suggestions}
-                      onNewSearch={handleSubmit}
-                    />
-                  </motion.div>
-                ) : (
-                  <motion.div key={`serp-${category}`} {...sharedAxisX}>
-                    {showShimmer ? (
-                      <SearchShimmer />
-                    ) : (
-                      <SerpResults items={results} query={query} />
-                    )}
-                  </motion.div>
-                )}
+                <motion.div key={`serp-${category}`} {...sharedAxisX}>
+                  {showShimmer ? <SearchShimmer /> : <SerpResults items={results} query={query} />}
+                </motion.div>
               </AnimatePresence>
             </div>
 
             {/* Knowledge Panel (colonne droite) */}
-            {matchedGroup && view !== "synthesis" && (
+            {matchedGroup && (
               <AnimatePresence>
                 <motion.div
                   key="panel"

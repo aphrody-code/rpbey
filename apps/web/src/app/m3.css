@@ -153,8 +153,7 @@
   --rpb-success-dim: #2f6f35;
 
   /* Gradient de marque ADAPTATIF (rouge→or en thème rouge ; bleu→cyan en bleu) —
-     « context builder » Gemini-style pour les halos ambiants et les focus.
-     Distinct du --gemini-sparkle (réservé aux affordances IA). */
+     halos ambiants et focus. */
   --rpb-gradient-brand: linear-gradient(135deg, #dc2626 0%, #fb7185 45%, #fbbf24 100%);
   --rpb-glow-1: #dc2626; /* teinte chaude du halo */
   --rpb-glow-2: #fbbf24; /* teinte d'appoint (or) */
@@ -173,15 +172,6 @@
   --rpb-tier-b-on: var(--md-sys-color-on-secondary-container);
   --rpb-tier-c: var(--md-sys-color-surface-container-highest); /* neutre */
   --rpb-tier-c-on: var(--md-sys-color-on-surface-variant);
-
-  /* Affordance IA (Gemini) — la SEULE valeur couleur en dur du système, exposée
-     une fois (grammaire Google : tout le reste passe par --md-sys-color-*).
-     Réservée aux affordances IA : pilule « Mode IA », sparkle, citations. */
-  --gemini-sparkle: linear-gradient(90deg, #4285f4 0%, #9b72cb 50%, #d96570 100%);
-  --rpb-ai-start: #4285f4;
-  --rpb-ai-mid: #9b72cb;
-  --rpb-ai-end: #d96570;
-  --rpb-gradient-ai: var(--gemini-sparkle);
 }
 
 /* ---- M3 color roles — BLUE (seed #60a5fa, vibrant, dark), mode tournoi --- */

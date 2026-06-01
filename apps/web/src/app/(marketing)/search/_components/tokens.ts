@@ -22,15 +22,11 @@ export const LINK_VISITED = "var(--md-sys-color-on-surface-variant)";
 // Accents marque (rouge RPB conservé via --rpb-primary runtime)
 export const ACCENT = "var(--rpb-primary)";
 export const ACCENT2 = "var(--md-sys-color-secondary)";
-// Gradient sparkle IA (Gemini) — STRICTEMENT réservé à l'affordance IA
-export const GRADIENT_AI = "var(--rpb-gradient-ai)";
 // Gradient wordmark RPB
 export const GRADIENT_WORDMARK =
   "linear-gradient(135deg, var(--rpb-primary), var(--md-sys-color-tertiary))";
 // Survol icones (state layer hover MD3)
 export const ICON_HOVER_BG = "color-mix(in srgb, var(--md-sys-color-on-surface) 8%, transparent)";
-// Couleur on-gradient (icone sur fond sparkle)
-export const ON_GRADIENT = "var(--md-sys-color-on-primary-container)";
 // Prix favorable
 export const PRICE_GOOD = "var(--rpb-price-good)";
 // Overlay sombre (scrim image MD3)
@@ -42,4 +38,3 @@ export const CHIP_BG = "color-mix(in srgb, var(--md-sys-color-on-surface) 5%, tr
 export const FIELD_BORDER_RADIUS = "var(--md-sys-shape-corner-full, 28px)";
 export const FIELD_HEIGHT = "52px";
 export const FIELD_MAX_WIDTH = "584px";
-export const FIELD_MAX_WIDTH_AI = "760px";

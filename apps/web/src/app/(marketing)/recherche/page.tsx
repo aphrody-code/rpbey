@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
 
 export const dynamic = "force-dynamic";
 
-/** Alias FR → route canonique `/search` (préserve `?q=`, `?mode=ai`). */
+/** Alias FR → route canonique `/search` (préserve `?q=`). */
 export default async function RechercheAlias({
   searchParams,
 }: {
@@ -11,7 +11,6 @@ export default async function RechercheAlias({
   const sp = await searchParams;
   const params = new URLSearchParams();
   if (typeof sp.q === "string" && sp.q) params.set("q", sp.q);
-  if (typeof sp.mode === "string" && sp.mode) params.set("mode", sp.mode);
   const qs = params.toString();
   redirect(qs ? `/search?${qs}` : "/search");
 }

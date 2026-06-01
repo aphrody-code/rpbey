@@ -1,14 +1,4 @@
 /* SearchField — barre de recherche RPB Google-style, CSS Modules, 0 @mui */
-/* Gradient Gemini (brand IA) : défini une seule fois comme var locale,
-   consommé par .sparkle et .sparkleSmall. */
-:root {
-  --rpb-gradient-ai: linear-gradient(
-    90deg,
-    var(--rpb-ai-start, #4285f4),
-    var(--rpb-ai-mid, #9b72cb),
-    var(--rpb-ai-end, #d96570)
-  );
-}
 
 .wrap {
   width: 100%;
@@ -168,62 +158,6 @@
   margin: 0 4px;
 }
 
-/* Pilule Mode IA */
-.aiPill {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 4px 12px;
-  border-radius: 20px;
-  border: 1px solid transparent;
-  background: var(--rpb-surface-high, #3c4043);
-  cursor: pointer;
-  flex-shrink: 0;
-  white-space: nowrap;
-  transition:
-    background 0.2s,
-    border-color 0.2s;
-  min-height: 40px;
-}
-
-.aiPill:hover {
-  background: color-mix(in srgb, var(--rpb-primary) 22%, var(--rpb-surface-high, #3c4043));
-}
-
-.aiPillActive {
-  background: color-mix(in srgb, var(--rpb-primary) 18%, var(--rpb-surface-high, #3c4043));
-  border-color: color-mix(in srgb, var(--rpb-primary) 40%, transparent);
-}
-
-.aiPillLabel {
-  font: var(--md-sys-typescale-label-large, 500 0.875rem/1.25rem system-ui);
-  color: var(--rpb-text-secondary, #bdc1c6);
-}
-
-.aiPillLabelActive {
-  color: var(--rpb-primary);
-}
-
-/* Cercle sparkle gradient — affordance IA uniquement.
-   Hex Gemini brand intentionnels (spec design : seul usage autorisé hors vars RPB). */
-.sparkle {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  /* stylelint-disable-next-line color-no-invalid-hex -- brand Gemini intentionnel */
-  background: var(--rpb-gradient-ai);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.sparkle svg {
-  width: 10px;
-  height: 10px;
-  fill: var(--rpb-primary-on-container, #fff);
-}
-
 /* Dropdown autocomplétion */
 .dropdown {
   position: absolute;
@@ -275,23 +209,6 @@
   width: 18px;
   height: 18px;
   fill: currentColor;
-}
-
-.sparkleSmall {
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: var(--rpb-gradient-ai);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.sparkleSmall svg {
-  width: 11px;
-  height: 11px;
-  fill: var(--rpb-primary-on-container, #fff);
 }
 
 .suggLabel {

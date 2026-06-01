@@ -132,21 +132,3 @@
   background: color-mix(in srgb, var(--rpb-primary, #dc2626) 22%, transparent);
   color: var(--md-sys-color-primary, #ffb4ab);
 }
-
-/* Cercle sparkle IA dans l'onglet Mode IA */
-.aiSparkle {
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: var(--rpb-gradient-ai);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.aiSparkle svg {
-  width: 11px;
-  height: 11px;
-  fill: #fff;
-}
