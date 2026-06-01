@@ -1,21 +1,21 @@
 ---
 title: "Assistant RAG conversationnel & UI d'ambiance"
-description: "Couche de consommation du RAG rpbey : chat « Rpbey » style Gemini branché au NLP algorithmique (zéro LLM) sur la recherche hybride, et fonds d'ambiance par page/section (frames d'animé, parallaxe au scroll) tirés du corpus."
+description: "Couche de consommation du RAG rpbey : backend de chat « Rpbey » (retrieval hybride + LLM local + streaming SSE + mémoire) — UI retirée du site, conservé en background — et fonds d'ambiance par page/section (frames d'animé, parallaxe au scroll) tirés du corpus."
 scope:
   - apps/web/src/server/services/chat.ts
+  - apps/web/src/server/services/llm.ts
   - apps/web/src/lib/chat-nlp.ts
   - apps/web/src/app/api/chat
-  - apps/web/src/components/chat
   - apps/web/src/components/ui/FrameBackdrop.tsx
   - apps/web/src/components/ui/SectionFrameBg.tsx
   - apps/web/src/app/api/v1/anime/frames/ambient
 status: "stable"
-last_updated: "2026-05-30"
+last_updated: "2026-06-01"
 related_symbols:
+  - prepareTurn
   - answerQuestion
+  - generateStream
   - detectIntent
-  - RpbeyChat
-  - RpbeyChatLauncher
   - FrameBackdrop
   - SectionFrameBg
 ---
@@ -28,27 +28,36 @@ données](data-pipeline-best-practices.md)** et **[Crawling & RAG X.com](crawlin
 Ce doc couvre ce qui se branche dessus côté produit : un **chat conversationnel**
 et des **fonds d'ambiance** issus du même corpus.
 
-Principe transverse : **ZÉRO LLM**. Tout est algorithmique (NLP à règles +
-retrieval + synthèse extractive). Aucune réponse n'est inventée ; les faits
-viennent du corpus, la « voix » et la mise en forme sont des templates.
+Principe transverse : **aucune hallucination**. Le retrieval et le NLP à règles
+sont algorithmiques ; les faits viennent **toujours** du corpus. Un **LLM local**
+(llama.cpp, `rpbey-llm.service`, voir `aphrody/docs/rpbey-rag/llm.md`) ne sert qu'à
+**reformuler en français** le contexte récupéré (grounding strict) — il n'invente
+pas les faits, il met en forme. Kill switch `RPBEY_CHAT_LLM=0` → repli synthèse
+extractive déterministe.
 
-## A. Chat « Rpbey » (conversationnel)
+## A. Chat « Rpbey » (backend uniquement)
 
-Assistant Beyblade omniscient, présenté en **style Gemini app** (gradient
-signature, sparkle, bulles), mais 100 % algorithmique.
+> ⚠️ **UI RETIRÉE DU SITE le 2026-06-01** (commit `fd03ba8`) : les composants
+> `components/chat/RpbeyChat.tsx` + `RpbeyChatLauncher.tsx` ont été supprimés et
+> démontés de `app/(marketing)/layout.tsx`. L'utilisateur ne voit plus de chat.
+> **Le backend reste en place, inerte sans UI** (route + services conservés en
+> background — repointables sur le daemon aphrody, cf. `RPBEY_LLM_URL`). Le « Mode
+> IA » de `/search` (synthèse + onglet) a aussi été retiré.
+
+Pipeline backend conservé (retrieval hybride → LLM local streamé, avec mémoire
+conversationnelle) :
 
 | Couche | Fichier | Rôle |
 | --- | --- | --- |
-| NLP | `apps/web/src/lib/chat-nlp.ts` | `detectIntent` (12 intentions, règles regex priorisées), `searchTerms` (retire l'échafaudage interrogatif pour focaliser sur l'entité), `INTENT_CATEGORY` (biais de catégorie), types partagés `ChatAnswer`/`ChatSource`, `STARTER_PROMPTS`. Pur, client+serveur. Miroir de `apps/bot/src/lib/rpbey/nlp.ts`. |
-| Cerveau | `apps/web/src/server/services/chat.ts` (`server-only`) | `answerQuestion()` : retrieval **in-process** (`getSearchCorpus` + `rankSearch` + `searchVectorIds` + `fuseHybrid`, pas d'aller-retour HTTP) puis **synthèse extractive par intention** (combo/best/meta/buy/tournament en listes ; define/character/compare en lead faisant autorité + détails). Miroir de `apps/bot/src/lib/rpbey/answer.ts`. |
-| API | `apps/web/src/app/api/chat/route.ts` | `POST /api/chat` `{ message }` → `{ ok, data: ChatAnswer }`. Self-contained (validation inline, **pas** de contrat partagé) pour rester découplé. |
-| UI | `apps/web/src/components/chat/RpbeyChat.tsx` | Panneau Gemini : sparkle gradient 4-couleurs, bulles 22px, prompt-bar pill à **bordure gradient au focus**, thinking-dots, cartes de sources, chips de suggestions/relances. Markdown via `react-markdown`. Motion M3 (emphasized-decelerate). Tokens `--rpb-gradient-ai` / `--rpb-surface-*` (cf. `m3.css`). |
-| Launcher | `apps/web/src/components/chat/RpbeyChatLauncher.tsx` | FAB flottant (sparkle) → `Drawer` ; `RpbeyChat` chargé en `next/dynamic` `ssr:false` (lazy, hors bundle initial). Monté dans `app/(marketing)/layout.tsx` → présent sur toutes les pages marketing, dont `/search`. |
+| NLP | `apps/web/src/lib/chat-nlp.ts` | `detectIntent` (12 intentions, règles regex priorisées), `searchTerms`, `INTENT_CATEGORY`, types `ChatAnswer`/`ChatSource`, `STARTER_PROMPTS`. Pur, importé par le backend (et anciennement par l'UI). Miroir de `apps/bot/src/lib/rpbey/nlp.ts`. |
+| Cerveau | `apps/web/src/server/services/chat.ts` (`server-only`) | `prepareTurn(message, history)` : retrieval **in-process** (`getSearchCorpus` + `rankSearch` + `searchVectorIds` + `fuseHybrid`) + brouillon extractif + `buildMessages` (système + historique capé + contexte RAG). `answerQuestion()` = wrapper non-stream / repli. |
+| LLM | `apps/web/src/server/services/llm.ts` | Client **OpenAI-compatible** (`RPBEY_LLM_URL`, défaut `http://127.0.0.1:8080/v1/chat/completions`). `generate()` + `generateStream()` (SSE). Kill switch `RPBEY_CHAT_LLM=0`. |
+| API | `apps/web/src/app/api/chat/route.ts` | `POST /api/chat` `{ message, history }` → **flux SSE** (`meta`/`delta`/`done`). Self-contained (validation inline, **pas** de contrat partagé). |
 
-La cohérence avec le bot Discord (`/rpbey`, mentions) est volontaire : même
-NLP, même corpus, même synthèse — deux surfaces (web + Discord) d'un seul
-cerveau. Garde-fou : aucun loader vide — l'état initial est un sparkle + des
-chips de départ, l'attente est un thinking-dots animé (indicateur réel).
+La cohérence avec le bot Discord (`/rpbey`, mentions) reste volontaire : même
+NLP, même corpus, même retrieval — un seul cerveau, désormais sans surface web
+visible. La doc exhaustive de l'environnement RAG vit dans
+`aphrody/docs/rpbey-rag/` (chat, llm, search, crawling-x, knowledge, infra).
 
 ## B. Fonds d'ambiance (frames d'animé)
 
@@ -72,13 +81,14 @@ thème actif.
 
 ## Invariants
 
-- **Zéro LLM, zéro hallucination** : `answerQuestion` n'émet que des items du
-  corpus + templates ; si rien n'est trouvé, le dire (repli in-character).
+- **Grounding strict, zéro hallucination** : le LLM local ne **reformule** que le
+  contexte récupéré ; les faits viennent du corpus. `RPBEY_CHAT_LLM=0` → repli
+  synthèse extractive déterministe (jamais d'écran vide).
 - **Découplage API** : `/api/chat` ne dépend pas de `@rpbey/api-contract`
   (validation inline) — évolue sans toucher le contrat partagé.
 - **Dégradation gracieuse** : sidecar embeddings / Redis absent → `fuseHybrid`
   préserve l'ordre BM25F ; frames indisponibles / lentes → dégradé de marque visible
   d'emblée (jamais d'état vide) ; `prefers-reduced-motion` → parallaxe coupée.
-- **Hands-off** : le chat est monté via le layout marketing, sans toucher
-  `app/(marketing)/search/_components/*` (refonte M3 en cours, cf.
-  [plan de refonte search](m3/search-redesign-plan.md)).
+- **Backend en background** : depuis le 2026-06-01 le chat n'a **plus de surface
+  web** (UI retirée). La route `/api/chat` + les services restent déployés, inertes
+  sans appelant, prêts à être repointés sur le daemon aphrody (`RPBEY_LLM_URL`).
