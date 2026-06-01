@@ -4,7 +4,7 @@ description: "Documentation vendorée du runtime Bun 1.3.x utilisé par tout le 
 scope:
   - bunfig.toml
 status: "stable"
-last_updated: "2026-05-29"
+last_updated: "2026-06-01"
 related_symbols:
   - Bun.serve
   - Bun.RedisClient
@@ -14,11 +14,11 @@ related_symbols:
 
 # Bun — doc vendorée (knowledge base monorepo rpbey)
 
-Doc complète Bun récupérée le **2026-05-26**. Cible runtime : **Bun 1.3.x** (upgrade depuis 1.2.20).
+Doc complète Bun récupérée le **2026-06-01**. Cible runtime : **Bun 1.3.x** (upgrade depuis 1.2.20).
 
 ## Fichiers
 
-- `llms-full.txt` — doc complète (2,0 Mo / 54 471 lignes). **Ne pas lire en entier** : `grep -n`/`sed -n`.
+- `llms-full.txt` — doc complète (2,0 Mo / 54 473 lignes). **Ne pas lire en entier** : `grep -n`/`sed -n`.
 - `llms-bun.txt` — index officiel (324 entrées, liens `bun.com/docs/*`).
 
 ## Watchlist upgrade 1.2.20 → 1.3.x (à vérifier après bump)
