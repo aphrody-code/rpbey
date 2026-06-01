@@ -28,7 +28,7 @@
     "clean": "rm -rf .next dist node_modules/.cache .turbo tsconfig.tsbuildinfo"
   },
   "dependencies": {
-    "@aphrody-code/bxc": "^0.5.2",
+    "@aphrody-code/bxc": "^0.5.7",
     "@aphrody-code/eslint-plugin-m3": "3.2.0",
     "@aphrody-code/m3-react": "3.2.0",
     "@aphrody-code/m3-tokens": "3.2.0",

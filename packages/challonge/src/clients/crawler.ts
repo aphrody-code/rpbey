@@ -39,7 +39,7 @@
 import {
   extractChallongeTournament,
   type ChallongeTournamentSnapshot,
-} from "@aphrody-code/bxc/scrapers/challonge";
+} from "@aphrody-code/challonge";
 import { type ChallongeSnapshotLike, snapshotToScrapedTournament } from "../mappers/snapshot";
 import { parseInitialStoreState } from "../extractors/store-state";
 import { parseStandingsTable, storeToStandings } from "../extractors/stores/standings";
