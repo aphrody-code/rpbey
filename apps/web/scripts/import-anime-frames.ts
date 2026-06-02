@@ -1,31 +1,24 @@
 #!/usr/bin/env bun
 /**
  * import-anime-frames.ts — ingère `data/anime-frames/<slug>.json` (produit par
- * scrape-anime-frames.ts) dans la table `anime_frames` + re-héberge chaque frame
- * en **PNG lossless** sur le CDN rpbey avec un filename préfixé.
+ * scrape-anime-frames.ts / scrape-fandom-frames.ts) dans la table `anime_frames`.
  *
- * Pipeline par frame (Bun-natif, concurrence bornée) :
- *   fetch(imageUrl HD proxifié) → sharp JPEG→PNG → oxipng (lossless) →
- *   écrit  <CDN_DIR>/<slug>/ep<NN>/frame-<sourceId>.png →
- *   upsert anime_frames (dédup sur (source, sourceId)) avec imageUrl = URL CDN re-hébergée.
+ * ⚠️ Plus de ré-hébergement disque. Les `imageUrl`/`thumbUrl` du JSON sont déjà
+ * des **URLs distantes durables** — on les stocke telles quelles :
+ *   - fandom  → static.wikia.nocookie.net (hotlink direct)
+ *   - fancaps → cdn.rpbey.fr/fancaps-anime{,-full}/<id>.jpg (proxy_cache nginx → fancaps)
+ * L'ancien pipeline re-téléchargeait chaque frame en PNG lossless sur le CDN
+ * (~3.8 GB pour ~10k frames) : inutile, retiré le 2026-06-02.
  *
- *   bun scripts/import-anime-frames.ts <slug> [--limit N] [--notable-only] [--concurrency K]
+ *   bun scripts/import-anime-frames.ts <slug> [--limit N] [--notable-only]
  *
- * Idempotent / resumable : une frame déjà sur disque + en DB est sautée.
+ * Idempotent : upsert sur (source, sourceId).
  * Sert : gacha (cartes persos non dessinés), backgrounds, recherche « Google Images ».
  */
-import { mkdir, stat } from "node:fs/promises";
-import { dirname } from "node:path";
 import { AnimeFrameImportSchema } from "@rpbey/api-contract";
 import { db, schema } from "@rpbey/db";
-import { and, eq } from "drizzle-orm";
-import sharp from "sharp";
+import { eq } from "drizzle-orm";
 import { z } from "zod";
-
-const CDN_DIR = process.env.ANIME_FRAMES_CDN_DIR ?? "/var/www/cdn/static/rpb-dashboard/anime";
-const CDN_BASE = (
-  process.env.ANIME_FRAMES_CDN_BASE ?? "https://cdn.rpbey.fr/static/rpb-dashboard/anime"
-).replace(/\/+$/, "");
 
 const FileSchema = z.object({
   seriesSlug: z.string().min(1),
@@ -78,23 +71,14 @@ async function episodeIdMap(seriesId: string) {
   return new Map(rows.map((r) => [r.number, r.id]));
 }
 
-const exists = (p: string) =>
-  stat(p).then(
-    () => true,
-    () => false,
-  );
-
 async function main() {
   const slug = process.argv[2];
   if (!slug || slug.startsWith("--")) {
-    log(
-      "Usage: bun scripts/import-anime-frames.ts <slug> [--limit N] [--notable-only] [--concurrency K]",
-    );
+    log("Usage: bun scripts/import-anime-frames.ts <slug> [--limit N] [--notable-only]");
     process.exit(1);
   }
   const limit = arg("limit") ? Number(arg("limit")) : Infinity;
   const notableOnly = hasFlag("notable-only");
-  const concurrency = Math.max(1, Number(arg("concurrency") ?? "6") || 6);
 
   const raw = await Bun.file(`${import.meta.dir}/../data/anime-frames/${slug}.json`).json();
   const parsed = FileSchema.safeParse(raw);
@@ -109,113 +93,61 @@ async function main() {
   let frames = data.frames;
   if (notableOnly) frames = frames.filter((f) => f.isNotable);
   if (Number.isFinite(limit)) frames = frames.slice(0, limit);
-  log(
-    `[import] ${data.seriesSlug} — ${frames.length} frames (concurrence ${concurrency}) → ${CDN_DIR}`,
-  );
+  log(`[import] ${data.seriesSlug} — ${frames.length} frames (URLs distantes, zéro disque)`);
 
   let done = 0;
-  let skipped = 0;
   let failed = 0;
 
-  async function importOne(f: (typeof frames)[number]) {
-    const ep = f.episodeNumber ?? 0;
-    const epDir = `ep${String(ep).padStart(2, "0")}`;
-    const relPath = `${data.seriesSlug}/${epDir}/frame-${f.sourceId}.png`;
-    const diskPath = `${CDN_DIR}/${relPath}`;
-    const finalUrl = `${CDN_BASE}/${relPath}`;
-
+  for (const f of frames) {
     try {
-      // Resumable : fichier présent + ligne en DB → skip.
-      if (await exists(diskPath)) {
-        const row = await db
-          .select({ id: schema.animeFrames.id })
-          .from(schema.animeFrames)
-          .where(
-            and(
-              eq(schema.animeFrames.source, f.source),
-              eq(schema.animeFrames.sourceId, f.sourceId),
-            ),
-          )
-          .limit(1);
-        if (row[0]) {
-          skipped++;
-          return;
-        }
-      } else {
-        // Télécharge le HD proxifié → PNG lossless (sharp) → oxipng.
-        const res = await fetch(f.imageUrl, {
-          signal: AbortSignal.timeout(30_000),
-        });
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const jpg = Buffer.from(await res.arrayBuffer());
-        const meta = await sharp(jpg).metadata();
-        const png = await sharp(jpg).png({ compressionLevel: 9, effort: 10 }).toBuffer();
-        await mkdir(dirname(diskPath), { recursive: true });
-        await Bun.write(diskPath, png);
-        // oxipng en place (lossless, strip safe) — best-effort.
-        await Bun.spawn(["oxipng", "-o", "4", "--strip", "safe", "-q", diskPath]).exited;
-        f.width = f.width ?? meta.width ?? null;
-        f.height = f.height ?? meta.height ?? null;
-      }
-
+      const values = {
+        seriesId,
+        episodeId: f.episodeNumber ? (epMap.get(f.episodeNumber) ?? null) : null,
+        episodeNumber: f.episodeNumber ?? null,
+        source: f.source,
+        sourceId: f.sourceId,
+        sourceUrl: f.sourceUrl ?? null,
+        imageUrl: f.imageUrl,
+        thumbUrl: f.thumbUrl ?? null,
+        width: f.width ?? null,
+        height: f.height ?? null,
+        characterNames: f.characterNames,
+        tags: f.tags,
+        caption: f.caption ?? null,
+        isNotable: f.isNotable,
+        sortOrder: f.sortOrder,
+        updatedAt: new Date().toISOString(),
+      };
       await db
         .insert(schema.animeFrames)
-        .values({
-          seriesId,
-          episodeId: f.episodeNumber ? (epMap.get(f.episodeNumber) ?? null) : null,
-          episodeNumber: f.episodeNumber ?? null,
-          source: f.source,
-          sourceId: f.sourceId,
-          sourceUrl: f.sourceUrl ?? null,
-          imageUrl: finalUrl,
-          thumbUrl: f.thumbUrl ?? null,
-          width: f.width ?? null,
-          height: f.height ?? null,
-          characterNames: f.characterNames,
-          tags: f.tags,
-          caption: f.caption ?? null,
-          isNotable: f.isNotable,
-          sortOrder: f.sortOrder,
-          updatedAt: new Date().toISOString(),
-        })
+        .values(values)
         .onConflictDoUpdate({
           target: [schema.animeFrames.source, schema.animeFrames.sourceId],
           set: {
-            seriesId,
-            episodeId: f.episodeNumber ? (epMap.get(f.episodeNumber) ?? null) : null,
-            episodeNumber: f.episodeNumber ?? null,
-            imageUrl: finalUrl,
-            thumbUrl: f.thumbUrl ?? null,
-            width: f.width ?? null,
-            height: f.height ?? null,
-            characterNames: f.characterNames,
-            tags: f.tags,
-            caption: f.caption ?? null,
-            isNotable: f.isNotable,
-            sortOrder: f.sortOrder,
-            updatedAt: new Date().toISOString(),
+            seriesId: values.seriesId,
+            episodeId: values.episodeId,
+            episodeNumber: values.episodeNumber,
+            imageUrl: values.imageUrl,
+            thumbUrl: values.thumbUrl,
+            width: values.width,
+            height: values.height,
+            characterNames: values.characterNames,
+            tags: values.tags,
+            caption: values.caption,
+            isNotable: values.isNotable,
+            sortOrder: values.sortOrder,
+            updatedAt: values.updatedAt,
           },
         });
       done++;
-      if ((done + skipped) % 100 === 0)
-        log(`  … ${done} importées, ${skipped} sautées, ${failed} échecs`);
+      if (done % 500 === 0) log(`  … ${done} importées`);
     } catch (e) {
       failed++;
       if (failed <= 10) log(`  ✗ ${f.sourceId}: ${(e as Error).message}`);
     }
   }
 
-  // Pool à concurrence bornée (Bun-natif, perf — pas de lib externe).
-  let idx = 0;
-  async function worker() {
-    while (idx < frames.length) {
-      const f = frames[idx++];
-      if (f) await importOne(f);
-    }
-  }
-  await Promise.all(Array.from({ length: concurrency }, () => worker()));
-
-  log(`\n[import] OK — ${done} importées, ${skipped} sautées, ${failed} échecs / ${frames.length}`);
+  log(`\n[import] OK — ${done} importées, ${failed} échecs / ${frames.length}`);
   process.exit(failed > frames.length / 2 ? 1 : 0);
 }
 
