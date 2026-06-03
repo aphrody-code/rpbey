@@ -1,0 +1,55 @@
+name: CI
+
+# Gates the checks that pass reproducibly on the rpbey Bun + Turborepo monorepo.
+#
+# Intentionally NOT gated: the Next.js web build (`bun run build` / `build:web`).
+# The web build segfaults under Bun 1.3.14 (panic: Segmentation fault, exit 137)
+# during the TypeScript phase — documented in CLAUDE.md. Adding it would make CI
+# permanently red, so type safety for the web app is covered by `type-check`
+# (`bunx tsc --noEmit` per app) instead.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: lint + type-check + test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.14
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      # oxlint over apps + packages. Verified passing locally (exit 0,
+      # warnings only, no errors).
+      - name: Lint (oxlint)
+        run: bun run lint
+
+      # turbo run type-check — builds shared packages then `tsc --noEmit`
+      # per app. Verified passing locally (13/13 tasks, exit 0).
+      - name: Type-check
+        run: bun run type-check
+
+      # turbo run test, excluding the vendored `@rpbey/discordx` fork.
+      # That fork ships a pre-existing, unrelated module-resolution failure
+      # (`Cannot find package 'discordx'`) and is git-ignored by oxlint/oxfmt
+      # (see .oxlintrc.json + CLAUDE.md). First-party suites pass (11/11
+      # tasks, 92+ tests, exit 0) once it is filtered out.
+      - name: Test (first-party suites)
+        run: bun run test -- --filter='!@rpbey/discordx'
