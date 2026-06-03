@@ -1,0 +1,52 @@
+name: Cron — profile sync (Discord enrich + global rankings)
+
+# Remplace le timer systemd `rpbey-profile-sync.timer` (05:00 UTC).
+# Deux temps (cf. scripts/sync-profiles.sh) :
+#   1. Enrichissement Discord REST des comptes liés
+#      (apps/web/scripts/sync-discord-members.ts).
+#   2. Recalcul du classement global tous tournois
+#      (apps/web/scripts/recompute-rankings.ts).
+# REST pur côté Discord (pas de gateway) → exécutable en GitHub Actions.
+# Idempotent. Écrit dans Neon via @rpbey/db (DATABASE_URL).
+
+on:
+  schedule:
+    - cron: "0 5 * * *" # 05:00 UTC, quotidien (= ancien timer systemd)
+  workflow_dispatch: {}
+
+concurrency:
+  group: cron-profile-sync
+  cancel-in-progress: false
+
+jobs:
+  profile-sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+      GUILD_ID: ${{ secrets.GUILD_ID }}
+      DISCORD_GUILD_ID: ${{ secrets.DISCORD_GUILD_ID }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: canary
+
+      - name: Auth GitHub Packages (@aphrody-code/*, @rpbey/*)
+        env:
+          GH_PKG: ${{ secrets.GH_PACKAGES_TOKEN || secrets.GITHUB_TOKEN }}
+        run: |
+          printf "@rpbey:registry=https://npm.pkg.github.com\n@aphrody-code:registry=https://npm.pkg.github.com\n//npm.pkg.github.com/:_authToken=%s\n" "$GH_PKG" > ~/.npmrc
+
+      - name: Install
+        run: bun install --frozen-lockfile
+
+      - name: 1/2 — Discord member enrichment (REST)
+        working-directory: apps/web
+        run: bun scripts/sync-discord-members.ts
+
+      - name: 2/2 — Recompute global rankings
+        working-directory: apps/web
+        run: bun scripts/recompute-rankings.ts

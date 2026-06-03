@@ -1,0 +1,43 @@
+name: Cron — staff sync (Discord → Neon)
+
+# Remplace le timer systemd `rpbey-staff-sync.timer` (04:30 UTC).
+# Re-fetch avatars/pseudos/noms du staff depuis Discord (REST) vers la table
+# `staff_members` (Neon). 100 % REST Discord — pas de gateway/intent, donc
+# exécutable en GitHub Actions. Idempotent.
+
+on:
+  schedule:
+    - cron: "30 4 * * *" # 04:30 UTC, quotidien (= ancien timer systemd)
+  workflow_dispatch: {}
+
+concurrency:
+  group: cron-staff-sync
+  cancel-in-progress: false
+
+jobs:
+  staff-sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+      GUILD_ID: ${{ secrets.GUILD_ID }}
+      DISCORD_GUILD_ID: ${{ secrets.DISCORD_GUILD_ID }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: canary
+
+      - name: Auth GitHub Packages (@aphrody-code/*, @rpbey/*)
+        env:
+          GH_PKG: ${{ secrets.GH_PACKAGES_TOKEN || secrets.GITHUB_TOKEN }}
+        run: |
+          printf "@rpbey:registry=https://npm.pkg.github.com\n@aphrody-code:registry=https://npm.pkg.github.com\n//npm.pkg.github.com/:_authToken=%s\n" "$GH_PKG" > ~/.npmrc
+
+      - name: Install
+        run: bun install --frozen-lockfile
+
+      - name: Sync staff from Discord
+        run: bun scripts/sync-staff-db.ts
