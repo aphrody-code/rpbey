@@ -285,3 +285,6 @@ monorepo-map.json
 
 # --- coordination multi-agents : mailbox transient (agents.json/task.md tracked) ---
 .agents/mailbox/*.jsonl
+
+# Vercel
+.vercel

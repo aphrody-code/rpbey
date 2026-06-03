@@ -10,6 +10,7 @@
     "dev": "bun --bun next dev",
     "dev:all": "bun run bot:dev & bun --bun next dev",
     "build": "bun --env-file=../../.env next build --turbopack",
+    "build:vercel": "next build --turbopack",
     "start": "bun --bun next start",
     "lint": "oxlint . && bun scripts/check-dal-boundary.ts",
     "lint:fix": "oxlint --fix .",

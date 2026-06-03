@@ -1,0 +1,43 @@
+# Limite l'upload `vercel deploy` (lancé depuis la racine du monorepo, root dir
+# projet = apps/web). Les données statiques sont servies par cdn.rpbey.fr
+# (data-cache.ts fetch quand VERCEL=1) → inutile de les uploader.
+.git/
+node_modules/
+**/node_modules/
+**/.next/
+**/.turbo/
+.turbo/
+**/dist/
+# Exception : challonge-core/dist est requis (export ./viewer prebuilt).
+!packages/challonge-core/dist/
+**/.bun-cache/
+**/coverage/
+
+# Gros sous-dossiers data — fetchés depuis le CDN à l'exécution.
+apps/web/data/bey-library/
+apps/web/data/exports/
+apps/web/data/satr_history/
+apps/web/data/wb_history/
+apps/web/data/scrapes/
+apps/web/data/cleaned/
+apps/web/data/backups/
+apps/web/data/pools/
+apps/web/data/planner/
+apps/web/data/anime-frames/
+apps/web/data/discord-*.json
+apps/web/data/*.json.br
+apps/web/data/*.json.gz
+apps/web/data/all_image_assets.json
+apps/web/data/lighthouse-trends.db
+apps/web/data/.fandom-crawl-state.json
+
+# Gros assets d'apps non-web (les package.json restent requis pour que
+# `bun install --frozen-lockfile` résolve les workspaces — on n'exclut QUE les
+# assets lourds, pas les dossiers entiers).
+apps/cdn/assets/
+data/
+
+*.bak
+*.bak-*
+*.swp
+lint_output.txt

@@ -1,0 +1,604 @@
+// Material Design 3 theme for brackets-viewer.
+// Tokens, typography, elevation, motion, state layers — drop-in replacement
+// for the legacy theme. The original CSS class names are preserved so the
+// public DOM API stays compatible.
+
+// ---------------------------------------------------------------------------
+// Design tokens (Material Design 3)
+// Reference: https://m3.material.io/styles
+// ---------------------------------------------------------------------------
+
+.brackets-viewer {
+  // ---- Color (light scheme, primary = M3 baseline blue 40)
+  --md-sys-color-primary: #1976d2;
+  --md-sys-color-on-primary: #ffffff;
+  --md-sys-color-primary-container: #d3e4fd;
+  --md-sys-color-on-primary-container: #001c38;
+
+  --md-sys-color-secondary: #535f70;
+  --md-sys-color-on-secondary: #ffffff;
+  --md-sys-color-secondary-container: #d7e3f7;
+  --md-sys-color-on-secondary-container: #101c2b;
+
+  --md-sys-color-tertiary: #6b5778;
+  --md-sys-color-on-tertiary: #ffffff;
+  --md-sys-color-tertiary-container: #f3daff;
+  --md-sys-color-on-tertiary-container: #251431;
+
+  --md-sys-color-success: #2e7d32;
+  --md-sys-color-on-success: #ffffff;
+  --md-sys-color-success-container: #b9f6ca;
+  --md-sys-color-on-success-container: #002106;
+
+  --md-sys-color-error: #c62828;
+  --md-sys-color-on-error: #ffffff;
+  --md-sys-color-error-container: #ffdad6;
+  --md-sys-color-on-error-container: #410002;
+
+  --md-sys-color-surface: #fdfcff;
+  --md-sys-color-on-surface: #1a1c1e;
+  --md-sys-color-surface-dim: #dadbdd;
+  --md-sys-color-surface-bright: #fdfcff;
+  --md-sys-color-surface-container-lowest: #ffffff;
+  --md-sys-color-surface-container-low: #f3f3f6;
+  --md-sys-color-surface-container: #eef0f4;
+  --md-sys-color-surface-container-high: #e7eaee;
+  --md-sys-color-surface-container-highest: #e1e3e8;
+  --md-sys-color-on-surface-variant: #43474e;
+
+  --md-sys-color-outline: #74777f;
+  --md-sys-color-outline-variant: #c4c6cf;
+  --md-sys-color-scrim: rgba(0, 0, 0, 0.32);
+
+  // ---- Compatibility aliases (legacy variables read by demos / consumers)
+  --primary-background: var(--md-sys-color-surface);
+  --secondary-background: var(--md-sys-color-surface-container);
+  --match-background: var(--md-sys-color-surface-container-low);
+  --font-color: var(--md-sys-color-on-surface);
+  --win-color: var(--md-sys-color-success);
+  --loss-color: var(--md-sys-color-error);
+  --label-color: var(--md-sys-color-on-surface-variant);
+  --hint-color: var(--md-sys-color-outline);
+  --connector-color: var(--md-sys-color-outline-variant);
+  --border-color: var(--md-sys-color-outline-variant);
+  --border-hover-color: var(--md-sys-color-outline);
+  --border-selected-color: var(--md-sys-color-primary);
+
+  // ---- Shape (M3 corner family)
+  --md-sys-shape-corner-none: 0;
+  --md-sys-shape-corner-extra-small: 4px;
+  --md-sys-shape-corner-small: 8px;
+  --md-sys-shape-corner-medium: 12px;
+  --md-sys-shape-corner-large: 16px;
+  --md-sys-shape-corner-extra-large: 28px;
+  --md-sys-shape-corner-full: 9999px;
+
+  --match-border-radius: var(--md-sys-shape-corner-medium);
+
+  // ---- Elevation (M3 surface tint + shadow)
+  --md-sys-elevation-1: 0 1px 2px 0 rgba(0, 0, 0, 0.30),
+                       0 1px 3px 1px rgba(0, 0, 0, 0.15);
+  --md-sys-elevation-2: 0 1px 2px 0 rgba(0, 0, 0, 0.30),
+                       0 2px 6px 2px rgba(0, 0, 0, 0.15);
+  --md-sys-elevation-3: 0 4px 8px 3px rgba(0, 0, 0, 0.15),
+                       0 1px 3px 0 rgba(0, 0, 0, 0.30);
+  --md-sys-elevation-4: 0 6px 10px 4px rgba(0, 0, 0, 0.15),
+                       0 2px 3px 0 rgba(0, 0, 0, 0.30);
+
+  // ---- Motion
+  --md-sys-motion-easing-standard: cubic-bezier(0.2, 0, 0, 1);
+  --md-sys-motion-easing-emphasized: cubic-bezier(0.2, 0, 0, 1);
+  --md-sys-motion-easing-decel: cubic-bezier(0, 0, 0, 1);
+  --md-sys-motion-duration-short: 150ms;
+  --md-sys-motion-duration-medium: 250ms;
+  --md-sys-motion-duration-long: 400ms;
+
+  // ---- Typography (M3 type scale, simplified)
+  --md-sys-typescale-headline-large: 600 32px/40px "Roboto", system-ui, sans-serif;
+  --md-sys-typescale-headline-medium: 500 28px/36px "Roboto", system-ui, sans-serif;
+  --md-sys-typescale-headline-small: 500 24px/32px "Roboto", system-ui, sans-serif;
+  --md-sys-typescale-title-large: 500 18px/24px "Roboto", system-ui, sans-serif;
+  --md-sys-typescale-title-medium: 500 16px/24px "Roboto", system-ui, sans-serif;
+  --md-sys-typescale-title-small: 500 14px/20px "Roboto", system-ui, sans-serif;
+  --md-sys-typescale-body-large: 400 14px/20px "Roboto", system-ui, sans-serif;
+  --md-sys-typescale-body-medium: 400 13px/18px "Roboto", system-ui, sans-serif;
+  --md-sys-typescale-label-large: 500 14px/20px "Roboto", system-ui, sans-serif;
+  --md-sys-typescale-label-small: 500 11px/16px "Roboto", system-ui, sans-serif;
+
+  // ---- Layout
+  --text-size: 13px;
+  --round-margin: 48px;
+  --match-width: 168px;
+  --match-horizontal-padding: 12px;
+  --match-vertical-padding: 8px;
+  --connector-border-width: 2px;
+  --match-border-width: 1px;
+  --participant-image-size: 1.4em;
+}
+
+// ---------------------------------------------------------------------------
+// Dark scheme (auto-applied via OS preference, opt-in via .dark or [data-theme=dark])
+// ---------------------------------------------------------------------------
+@mixin md3-dark-scheme {
+  --md-sys-color-primary: #a4c8ff;
+  --md-sys-color-on-primary: #003063;
+  --md-sys-color-primary-container: #00468c;
+  --md-sys-color-on-primary-container: #d3e4fd;
+
+  --md-sys-color-secondary: #bbc7db;
+  --md-sys-color-on-secondary: #253141;
+  --md-sys-color-secondary-container: #3b4858;
+  --md-sys-color-on-secondary-container: #d7e3f7;
+
+  --md-sys-color-tertiary: #d6bee4;
+  --md-sys-color-on-tertiary: #3b2948;
+  --md-sys-color-tertiary-container: #523f5f;
+  --md-sys-color-on-tertiary-container: #f3daff;
+
+  --md-sys-color-success: #7bd87f;
+  --md-sys-color-on-success: #003910;
+  --md-sys-color-success-container: #00531b;
+  --md-sys-color-on-success-container: #b9f6ca;
+
+  --md-sys-color-error: #ffb4ab;
+  --md-sys-color-on-error: #690005;
+  --md-sys-color-error-container: #93000a;
+  --md-sys-color-on-error-container: #ffdad6;
+
+  --md-sys-color-surface: #111315;
+  --md-sys-color-on-surface: #e1e3e8;
+  --md-sys-color-surface-dim: #111315;
+  --md-sys-color-surface-bright: #36383b;
+  --md-sys-color-surface-container-lowest: #0c0e10;
+  --md-sys-color-surface-container-low: #1a1c1e;
+  --md-sys-color-surface-container: #1e2022;
+  --md-sys-color-surface-container-high: #292b2d;
+  --md-sys-color-surface-container-highest: #343638;
+  --md-sys-color-on-surface-variant: #c4c6cf;
+
+  --md-sys-color-outline: #8e9099;
+  --md-sys-color-outline-variant: #43474e;
+  --md-sys-color-scrim: rgba(0, 0, 0, 0.6);
+
+  --md-sys-elevation-1: 0 1px 2px 0 rgba(0, 0, 0, 0.45),
+                       0 1px 3px 1px rgba(0, 0, 0, 0.30);
+  --md-sys-elevation-2: 0 1px 2px 0 rgba(0, 0, 0, 0.45),
+                       0 2px 6px 2px rgba(0, 0, 0, 0.30);
+}
+
+@media (prefers-color-scheme: dark) {
+  .brackets-viewer:not([data-theme="light"]) { @include md3-dark-scheme; }
+}
+
+.brackets-viewer.dark,
+.brackets-viewer[data-theme="dark"] {
+  @include md3-dark-scheme;
+}
+
+// ---------------------------------------------------------------------------
+// Root container
+// ---------------------------------------------------------------------------
+
+.brackets-viewer {
+  $connector-width: calc(var(--round-margin) / 2);
+  $connector-border: var(--connector-border-width) solid var(--connector-color);
+  $match-border: var(--match-border-width) solid var(--border-color);
+
+  font-family: "Roboto", "Roboto Flex", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-feature-settings: "liga" 1, "kern" 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  background: var(--md-sys-color-surface);
+  color: var(--md-sys-color-on-surface);
+  font-size: var(--text-size);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  overflow: auto;
+  user-select: none;
+  margin: 0 auto;
+  padding: 16px 32px 32px;
+  border-radius: var(--md-sys-shape-corner-large);
+
+  &:empty { display: none; }
+
+  *, ::after, ::before { box-sizing: border-box; }
+
+  // ---- Typography scale
+  h1 {
+    font: var(--md-sys-typescale-headline-large);
+    color: var(--md-sys-color-on-surface);
+    margin: 24px 0 16px;
+    letter-spacing: -0.01em;
+  }
+
+  h2 {
+    font: var(--md-sys-typescale-title-large);
+    color: var(--md-sys-color-on-surface);
+    margin: 0 0 12px;
+    letter-spacing: 0;
+  }
+
+  h3 {
+    font: var(--md-sys-typescale-label-large);
+    color: var(--md-sys-color-on-surface-variant);
+    text-align: center;
+    background: transparent;
+    border-radius: var(--md-sys-shape-corner-small);
+    padding: 8px 12px;
+    margin: 0 0 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: var(--match-width);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: 1px solid var(--md-sys-color-outline-variant);
+  }
+
+  h4 {
+    font: var(--md-sys-typescale-title-medium);
+    color: var(--md-sys-color-on-surface);
+    margin: 0 0 16px;
+  }
+
+  // -------------------------------------------------------------------------
+  // Round-robin layout
+  // -------------------------------------------------------------------------
+  .round-robin {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 24px;
+
+    h1 { flex-basis: 100%; }
+    h2 { text-align: center; }
+
+    .group {
+      background: var(--md-sys-color-surface-container-low);
+      border-radius: var(--md-sys-shape-corner-large);
+      padding: 16px 20px 20px;
+      box-shadow: var(--md-sys-elevation-1);
+
+      &:not(:last-of-type) { margin-right: 0; }
+
+      h2 { margin: 0 0 16px; }
+
+      table {
+        font: var(--md-sys-typescale-body-medium);
+        margin: 16px 0 4px;
+        color: var(--md-sys-color-on-surface-variant);
+        border-collapse: separate;
+        border-spacing: 0;
+        width: 100%;
+      }
+
+      th {
+        font: var(--md-sys-typescale-label-small);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: var(--md-sys-color-on-surface-variant);
+        text-align: start;
+        cursor: help;
+        border-bottom: 1px solid var(--md-sys-color-outline-variant);
+        padding: 8px 12px;
+      }
+
+      td.hover {
+        background: color-mix(in srgb, var(--md-sys-color-on-surface) 8%, transparent);
+      }
+
+      th, td { padding: 10px 12px; }
+
+      td {
+        border-bottom: 1px solid color-mix(in srgb, var(--md-sys-color-outline-variant) 50%, transparent);
+
+        &:nth-of-type(2),
+        &:last-of-type {
+          color: var(--md-sys-color-on-surface);
+          font-weight: 500;
+        }
+      }
+
+      tr:last-child td { border-bottom: none; }
+    }
+
+    .round { width: fit-content; margin: 0 auto; }
+  }
+
+  // -------------------------------------------------------------------------
+  // Bracket layout
+  // -------------------------------------------------------------------------
+  .bracket {
+    h2 {
+      font: var(--md-sys-typescale-title-medium);
+      color: var(--md-sys-color-on-surface-variant);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .rounds {
+      display: flex;
+
+      &:not(:last-of-type) { margin-bottom: 16px; }
+
+      .round {
+        display: flex;
+        flex-direction: column;
+
+        &:not(:last-of-type) { margin-right: var(--round-margin); }
+      }
+    }
+  }
+
+  // -------------------------------------------------------------------------
+  // Match (M3 elevated card)
+  // -------------------------------------------------------------------------
+  .match {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    margin: 12px 0;
+    width: var(--match-width);
+    position: relative;
+    transition:
+      transform var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard),
+      filter var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);
+
+    &.connect-next {
+      &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        right: calc(-1 * #{$connector-width});
+        width: $connector-width;
+        height: 50%;
+        border-right: $connector-border;
+        transition: border-color var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);
+      }
+
+      &:nth-of-type(odd)::after {
+        top: 50%;
+        border-top: $connector-border;
+      }
+
+      &:nth-of-type(even)::after {
+        top: 0;
+        border-bottom: $connector-border;
+      }
+
+      &.straight::after {
+        width: var(--round-margin);
+        right: calc(-1 * var(--round-margin));
+        top: 0;
+        border-bottom: $connector-border;
+        border-top: unset;
+        border-right: unset;
+      }
+    }
+  }
+
+  // -------------------------------------------------------------------------
+  // Opponents container = the "card" surface
+  // -------------------------------------------------------------------------
+  .opponents {
+    width: 100%;
+    position: relative;
+    background: var(--md-sys-color-surface-container-high);
+    border: $match-border;
+    border-radius: var(--match-border-radius);
+    box-shadow: var(--md-sys-elevation-1);
+    overflow: hidden;
+    cursor: pointer;
+    isolation: isolate;
+    transition:
+      box-shadow var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard),
+      border-color var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard),
+      transform var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);
+
+    // M3 state-layer overlay
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: var(--md-sys-color-on-surface);
+      opacity: 0;
+      transition: opacity var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);
+    }
+
+    &:hover {
+      box-shadow: var(--md-sys-elevation-2);
+      border-color: var(--md-sys-color-outline);
+      &::before { opacity: 0.08; }
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--md-sys-color-primary);
+      outline-offset: 2px;
+      &::before { opacity: 0.10; }
+    }
+
+    &:active {
+      transform: scale(0.98);
+      &::before { opacity: 0.12; }
+    }
+
+    &.popover-selected {
+      border-color: var(--md-sys-color-primary);
+      box-shadow:
+        0 0 0 2px color-mix(in srgb, var(--md-sys-color-primary) 25%, transparent),
+        var(--md-sys-elevation-2);
+    }
+
+    & > span {
+      position: absolute;
+      top: -9px;
+      font: var(--md-sys-typescale-label-small);
+      padding: 2px 8px;
+      color: var(--md-sys-color-on-secondary-container);
+      background: var(--md-sys-color-secondary-container);
+      border-radius: var(--md-sys-shape-corner-full);
+      z-index: 2;
+      box-shadow: var(--md-sys-elevation-1);
+    }
+
+    & > span:nth-of-type(1) { left: 8px; }
+    & > span:nth-of-type(2) { right: 8px; }
+
+    &.connect-previous {
+      &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        left: calc(-1 * #{$connector-width});
+        width: $connector-width;
+        height: 50%;
+        border-bottom: $connector-border;
+        z-index: 0;
+      }
+
+      %straight {
+        border-left: unset;
+        left: var(--round-margin);
+        width: var(--round-margin);
+      }
+
+      .bracket:nth-of-type(1) &.straight::before { content: unset; }
+      .bracket:nth-of-type(1) &.straight::after { @extend %straight; }
+      .bracket:nth-of-type(2) &.straight::before { @extend %straight; }
+      .bracket:nth-of-type(2) &.straight::after { content: unset; }
+    }
+  }
+
+  // -------------------------------------------------------------------------
+  // Participant rows
+  // -------------------------------------------------------------------------
+  .participant {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--match-vertical-padding) var(--match-horizontal-padding);
+    background: transparent;
+    position: relative;
+    z-index: 1;
+    min-height: 32px;
+    transition: background-color var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);
+
+    &.hover {
+      background: color-mix(in srgb, var(--md-sys-color-primary) 12%, transparent) !important;
+    }
+
+    &:nth-of-type(1) {
+      border-bottom: 1px solid var(--md-sys-color-outline-variant);
+    }
+
+    .name {
+      font: var(--md-sys-typescale-body-large);
+      color: var(--md-sys-color-on-surface);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 80%;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      &.hint { color: var(--md-sys-color-outline); font-style: italic; }
+
+      & > img {
+        width: var(--participant-image-size);
+        height: var(--participant-image-size);
+        margin-right: 4px;
+        object-fit: cover;
+        border-radius: var(--md-sys-shape-corner-full);
+        vertical-align: middle;
+        position: static;
+        bottom: auto;
+        box-shadow: var(--md-sys-elevation-1);
+      }
+
+      & > span {
+        color: var(--md-sys-color-outline);
+        font: var(--md-sys-typescale-label-small);
+        font-weight: 400;
+      }
+    }
+
+    .result {
+      font: var(--md-sys-typescale-title-small);
+      color: var(--md-sys-color-on-surface-variant);
+      margin-left: 12px;
+      min-width: 32px;
+      padding: 2px 8px;
+      text-align: center;
+      border-radius: var(--md-sys-shape-corner-small);
+      background: color-mix(in srgb, var(--md-sys-color-on-surface) 5%, transparent);
+      transition:
+        color var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard),
+        background-color var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);
+    }
+
+    &.win .name {
+      font-weight: 600;
+      color: var(--md-sys-color-on-surface);
+    }
+
+    &.win .result {
+      color: var(--md-sys-color-on-success);
+      background: var(--md-sys-color-success);
+      font-weight: 600;
+    }
+
+    &.loss .name {
+      color: var(--md-sys-color-on-surface-variant);
+    }
+
+    &.loss .result {
+      color: var(--md-sys-color-on-error-container);
+      background: var(--md-sys-color-error-container);
+    }
+  }
+
+  // -------------------------------------------------------------------------
+  // Popover (M3 dialog surface)
+  // -------------------------------------------------------------------------
+  [popover] {
+    background: var(--md-sys-color-surface-container-high);
+    color: var(--md-sys-color-on-surface);
+    border: none;
+    border-radius: var(--md-sys-shape-corner-extra-large);
+    box-shadow: var(--md-sys-elevation-3);
+    padding: 24px;
+    min-width: 280px;
+    max-width: min(560px, 90vw);
+
+    &::backdrop {
+      background: var(--md-sys-color-scrim);
+      backdrop-filter: blur(4px);
+    }
+
+    h4 {
+      font: var(--md-sys-typescale-headline-small);
+      margin: 0 0 16px;
+      color: var(--md-sys-color-on-surface);
+    }
+
+    .match:not(:last-of-type) { margin-bottom: 16px; }
+  }
+
+  // -------------------------------------------------------------------------
+  // Reduced motion
+  // -------------------------------------------------------------------------
+  @media (prefers-reduced-motion: reduce) {
+    *, ::before, ::after {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+    }
+  }
+}

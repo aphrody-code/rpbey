@@ -57,6 +57,30 @@ Blob au lieu de `/var/www`. Les lectures de rankings passent déjà par Neon.
 - Une page data-driven (`/tournaments`, `/classement`) rend sans 500 (DB Neon
   joignable depuis Vercel).
 
+## État (Phase 2 — exécutée 2026-06-04)
+
+- Projet Vercel **`rpbey`** créé/lié (team `aphrody`), `project_id =
+  prj_1cPVtLnfepBeZSej76QkslROYnSP`, **Root Directory = `apps/web`**, framework
+  Next.js, région `cdg1` (Paris).
+- `apps/web/vercel.json` : `bunVersion: 1.x`, `installCommand` = install monorepo
+  depuis la racine, `buildCommand` = `bun run build:vercel`
+  (`next build --turbopack`, **sans** `--env-file=../../.env` qui n'existe pas
+  sur Vercel — un script `build:vercel` dédié a été ajouté à `apps/web`).
+- **36 env** poussées en production + preview via l'API REST Vercel (le CLI
+  54.7.1 stocke des valeurs vides en pipe stdin — bug contourné).
+  `DATABASE_URL` = Neon pooled, `DIRECT_DATABASE_URL` = Neon direct. Skips :
+  `GOOGLE_APPLICATION_CREDENTIALS`/`REDIS_*`/`BOT_API_PORT` (local-only).
+- Secrets GitHub repo : `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`.
+- Workflow `.github/workflows/deploy-vercel.yml` (setup-bun canary + `vercel
+  pull/build/deploy --prebuilt --prod`, migrate Drizzle conditionnel sur Neon).
+- **Découplage data** : déjà en place — `apps/web/src/lib/data-cache.ts` fetch
+  `cdn.rpbey.fr/static/rpb-dashboard/data/*` (ISR 1h) quand `VERCEL === "1"`,
+  lecture FS sinon. `B_TS*.json` & co servis par le CDN, pas le FS Vercel.
+  `next.config.ts` exclut déjà `data/*` du tracing (branche `IS_VERCEL`).
+- **`@rose-griffon/challonge-core/dist`** (gitignored, pas de build script) :
+  prebuilt force-commité (`index.js`/`viewer.js`/scss) pour que le checkout
+  Vercel résolve l'export `./viewer` (sinon MODULE_NOT_FOUND au build).
+
 ## Reste human-gated
 
 - **Domaine `rpbey.fr`** : ajout du domaine + bascule DNS vers Vercel = étape

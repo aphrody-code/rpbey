@@ -1,0 +1,110 @@
+name: Deploy site to Vercel (production)
+
+# Le projet Vercel `rpbey` (team aphrody, root dir apps/web) n'est pas connecté
+# nativement au repo → on déclenche le déploiement prod ici sur chaque push main
+# touchant le web ou ses deps. `vercel deploy --prod --prebuilt` upload le build
+# pré-généré (vercel build) et laisse Vercel le promouvoir.
+#
+# Pipeline : push main -> (migrate-prod, conditionnel) -> build+deploy.
+# Les migrations Drizzle de prod (Neon) sont appliquées AVANT le déploiement,
+# seulement si le schéma / les migrations ont changé. `drizzle-kit migrate` est
+# idempotent (table drizzle.__drizzle_migrations). Connexion = DIRECT_DATABASE_URL
+# (endpoint Neon direct, jamais le pooler), passée par env, jamais loggée.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "apps/web/**"
+      - "packages/**"
+      - "package.json"
+      - "bun.lock"
+      - "turbo.json"
+      - ".github/workflows/deploy-vercel.yml"
+  workflow_dispatch: {}
+
+concurrency:
+  group: vercel-prod
+  cancel-in-progress: false
+
+jobs:
+  # ----------------------------------------------------------------------------
+  # Migrations prod : uniquement si le schéma / les migrations Drizzle ont changé
+  # ----------------------------------------------------------------------------
+  migrate-prod:
+    name: Migrate production Neon branch
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.filter.outputs.schema }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Detect schema / migration changes
+        id: filter
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            schema:
+              - "packages/db/src/schema.ts"
+              - "packages/db/src/relations.ts"
+              - "packages/db/drizzle/**"
+              - "packages/db/drizzle.config.ts"
+
+      - uses: oven-sh/setup-bun@v2
+        if: steps.filter.outputs.schema == 'true'
+        with:
+          bun-version: canary
+
+      - name: Auth GitHub Packages (@aphrody-code/*, @rpbey/*)
+        if: steps.filter.outputs.schema == 'true'
+        env:
+          GH_PKG: ${{ secrets.GH_PACKAGES_TOKEN || secrets.GITHUB_TOKEN }}
+        run: |
+          printf "@rpbey:registry=https://npm.pkg.github.com\n@aphrody-code:registry=https://npm.pkg.github.com\n//npm.pkg.github.com/:_authToken=%s\n" "$GH_PKG" > .npmrc
+          printf "@rpbey:registry=https://npm.pkg.github.com\n@aphrody-code:registry=https://npm.pkg.github.com\n//npm.pkg.github.com/:_authToken=%s\n" "$GH_PKG" > ~/.npmrc
+
+      - name: Install
+        if: steps.filter.outputs.schema == 'true'
+        run: bun install --frozen-lockfile
+
+      - name: Apply Drizzle migrations to production (Neon direct)
+        if: steps.filter.outputs.schema == 'true'
+        working-directory: packages/db
+        env:
+          DIRECT_DATABASE_URL: ${{ secrets.DIRECT_DATABASE_URL }}
+        run: bunx drizzle-kit migrate
+
+  # ----------------------------------------------------------------------------
+  # Build + déploiement prod (Vercel prebuilt). Attend la migration.
+  # ----------------------------------------------------------------------------
+  deploy:
+    needs: migrate-prod
+    runs-on: ubuntu-latest
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: canary
+
+      - name: Auth GitHub Packages (@aphrody-code/*, @rpbey/*)
+        env:
+          GH_PKG: ${{ secrets.GH_PACKAGES_TOKEN || secrets.GITHUB_TOKEN }}
+        run: |
+          printf "@rpbey:registry=https://npm.pkg.github.com\n@aphrody-code:registry=https://npm.pkg.github.com\n//npm.pkg.github.com/:_authToken=%s\n" "$GH_PKG" > ~/.npmrc
+
+      - name: Install Vercel CLI
+        run: bun install -g vercel@latest
+
+      - name: Pull Vercel env (production)
+        run: vercel pull --yes --environment=production --token="$VERCEL_TOKEN"
+
+      - name: Build (Vercel)
+        run: vercel build --prod --token="$VERCEL_TOKEN"
+
+      - name: Deploy (production, prebuilt)
+        run: vercel deploy --prebuilt --prod --yes --token="$VERCEL_TOKEN"
