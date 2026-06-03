@@ -1,5 +1,9 @@
 "use server";
 
+import fs from "node:fs";
+import path from "node:path";
+import os from "node:os";
+
 import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
 import { auth } from "@/lib/auth";
@@ -61,6 +65,33 @@ export async function deleteStaffMember(id: string) {
   return { success: true };
 }
 
+function findRepoRoot(): string {
+  if (process.env.RPBEY_REPO_ROOT) {
+    return process.env.RPBEY_REPO_ROOT;
+  }
+  let current = process.cwd();
+  for (let i = 0; i < 6; i++) {
+    const pkgPath = path.join(current, "package.json");
+    if (fs.existsSync(pkgPath)) {
+      try {
+        const pkg = JSON.parse(fs.readFileSync(pkgPath, "utf-8"));
+        if (pkg.name === "rpbey") {
+          return current;
+        }
+      } catch (e) {}
+    }
+    const parent = path.dirname(current);
+    if (parent === current) break;
+    current = parent;
+  }
+  const home = process.env.HOME || os.homedir();
+  const homeFallback = path.join(home, "rpbey");
+  if (fs.existsSync(homeFallback)) {
+    return homeFallback;
+  }
+  return "/home/ubuntu/rpbey";
+}
+
 export async function syncStaffFromDiscord() {
   await checkAdmin();
 
@@ -70,7 +101,7 @@ export async function syncStaffFromDiscord() {
     // Chemin ABSOLU + cwd repo : le serveur prod tourne depuis `.next/standalone`,
     // donc un chemin relatif ne résoudrait ni le script ni `@rpbey/db`. Le token
     // Discord (DISCORD_TOKEN/GUILD_ID) est hérité de l'environnement du service web.
-    const repoRoot = process.env.RPBEY_REPO_ROOT || "/home/ubuntu/rpbey";
+    const repoRoot = findRepoRoot();
     const proc = Bun.spawn(["bun", `${repoRoot}/scripts/sync-staff-db.ts`], {
       cwd: repoRoot,
       env: { ...process.env },

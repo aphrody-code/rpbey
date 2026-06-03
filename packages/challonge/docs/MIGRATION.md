@@ -52,7 +52,7 @@ Pour les tournois two-stage (round-robin pools + bracket), le `groupId` n'est pl
 
 ## Cookie jar
 
-Path inchangé : `/home/ubuntu/vps/storage/cookies/challonge_cookie.json`. Format Puppeteer JSON conservé. Le `loadCookieJar()` lit toujours `forFetch` / `forPuppeteer` / `raw`.
+Path inchangé : `/home/ubuntu/rpbey/storage/cookies/challonge_cookie.json`. Format Puppeteer JSON conservé. Le `loadCookieJar()` lit toujours `forFetch` / `forPuppeteer` / `raw`.
 
 ## Rollout progressif (production)
 
@@ -86,7 +86,7 @@ Note : nécessite que les deps puppeteer soient encore présentes dans rpb-bot/n
 ### Rollback level 2 (git revert, ~5min)
 
 ```bash
-cd /home/ubuntu/vps
+cd /home/ubuntu/rpbey
 git revert 44b99fe50 # phase 4
 git revert de06572b7 # phase 3
 git revert f1907d238 # phase 2
@@ -98,7 +98,7 @@ sudo systemctl restart rpb-bot
 ### Rollback level 3 (full reset)
 
 ```bash
-cd /home/ubuntu/vps
+cd /home/ubuntu/rpbey
 git reset --hard 86361f2ad # commit avant Phase 1 migration
 bun install
 sudo systemctl restart rpb-bot
@@ -135,11 +135,11 @@ Mesures estimatives, à confirmer avec benchmark prod réel.
 ## Versions de référence
 
 - `@aphrody-code/bxc: workspace:*` (commit `2bad4ab73` au 2026-05-10)
-- `libcurl-impersonate v1.5.6` (lexiforest, vendored at `~/vps/packages/bxc/vendor/curl-impersonate/`)
+- `libcurl-impersonate v1.5.6` (lexiforest, vendored at `~/rpbey/packages/bxc/vendor/curl-impersonate/`)
 - Profile TLS : `chrome131` (à bumper ~Apr 2026 avec libcurl-impersonate v1.6+)
 
 ## Support
 
 - Issues : marquer `area:rpb-challonge` + `migration:v3`
 - Slack : `#dev-bot`
-- Docs : `/home/ubuntu/vps/packages/rpb-challonge/docs/{CHANGELOG,MIGRATION,ADR-001-bxc-migration}.md`
+- Docs : `/home/ubuntu/rpbey/packages/rpb-challonge/docs/{CHANGELOG,MIGRATION,ADR-001-bxc-migration}.md`

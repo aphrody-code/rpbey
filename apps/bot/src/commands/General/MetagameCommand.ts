@@ -2,33 +2,13 @@ import { Discord, Slash, SlashGroup, SlashOption } from "@rpbey/discordx";
 import { ApplicationCommandOptionType, EmbedBuilder, type CommandInteraction } from "discord.js";
 import { injectable } from "tsyringe";
 
+import { existsSync } from "node:fs";
+import { Store, BeybladeXRag } from "@aphrody-code/x";
+
 import { Colors } from "../../lib/constants.js";
 import { logger } from "../../lib/logger.js";
 
-const RAG_SCRIPT = "/home/ubuntu/x-client/ts/src/bin/run-rag.ts";
-const RAG_CWD = "/home/ubuntu/x-client/ts";
 const RAG_TIMEOUT_MS = 30_000;
-
-// Parse the human-readable stdout of run-rag.ts
-// Output format:
-//   \n🔍 Querying RAG System for: "..."\n
-//   \n=================== RAG ANSWER ===================\n
-//   <answer lines>
-//   \n==================================================\n
-//   \n📚 Cited Sources (N total):\n
-//   - [@username] (Likes: N): "text..."
-function parseRagOutput(stdout: string): { answer: string; sources: string[] } {
-  const answerMatch = stdout.match(/={10,}\s*RAG ANSWER\s*={10,}\n([\s\S]*?)\n={10,}/);
-  const answer = answerMatch?.[1]?.trim() ?? "";
-
-  const sources: string[] = [];
-  const sourceSection = stdout.split("📚 Cited Sources")[1] ?? "";
-  for (const line of sourceSection.split("\n")) {
-    const m = line.match(/^-\s*\[@([^\]]+)\].*?"(.{1,80})"/);
-    if (m) sources.push(`@${m[1]}: "${m[2]}"`);
-  }
-  return { answer, sources };
-}
 
 @Discord()
 @SlashGroup({ name: "metagame", description: "Analyse métagame via les discussions X.com RPB" })
@@ -54,9 +34,9 @@ export class MetagameCommand {
   ) {
     await interaction.deferReply();
 
-    // Graceful fallback if the RAG environment is missing
-    const scriptFile = Bun.file(RAG_SCRIPT);
-    if (!(await scriptFile.exists())) {
+    // Check if the SQLite store exists
+    const storePath = Store.defaultPath();
+    if (!existsSync(storePath)) {
       return interaction.editReply({
         embeds: [
           new EmbedBuilder()
@@ -72,37 +52,35 @@ export class MetagameCommand {
     }
 
     try {
-      const proc = Bun.spawn(["bun", "run", RAG_SCRIPT, "--query", question], {
-        cwd: RAG_CWD,
-        stdout: "pipe",
-        stderr: "pipe",
+      const apiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
+      if (!apiKey) {
+        throw new Error("Missing GEMINI_API_KEY / GOOGLE_API_KEY");
+      }
+
+      // Run RAG query directly in-process
+      const store = new Store();
+      const rag = new BeybladeXRag({
+        apiKey,
+        model: "gemini-2.5-flash",
       });
 
-      // Race between process completion and timeout
-      const exitCode = await Promise.race([
-        proc.exited,
-        new Promise<number>((_, reject) =>
-          setTimeout(() => {
-            proc.kill();
-            reject(new Error("timeout"));
-          }, RAG_TIMEOUT_MS),
+      // Use a race to enforce the 30s timeout on the API query
+      const result = await Promise.race([
+        rag.query(question, store),
+        new Promise<never>((_, reject) =>
+          setTimeout(() => reject(new Error("timeout")), RAG_TIMEOUT_MS),
         ),
       ]);
 
-      if (exitCode !== 0) {
-        const stderr = await new Response(proc.stderr).text().catch(() => "");
-        logger.warn("[metagame] RAG exit code:", exitCode, stderr.slice(0, 200));
-        return interaction.editReply({ embeds: [buildFallbackEmbed(question)] });
-      }
+      store.close();
 
-      const stdout = await new Response(proc.stdout).text().catch(() => "");
-      const { answer, sources } = parseRagOutput(stdout);
+      const answer = result.answer;
+      const sources = result.sources;
 
       if (!answer) {
         return interaction.editReply({ embeds: [buildFallbackEmbed(question)] });
       }
 
-      // Trim answer to Discord embed description limit (4096 chars)
       const trimmedAnswer = answer.length > 3800 ? answer.slice(0, 3800) + "…" : answer;
 
       const embed = new EmbedBuilder()
@@ -115,7 +93,14 @@ export class MetagameCommand {
         .setTimestamp();
 
       if (sources.length > 0) {
-        const sourceLines = sources.slice(0, 3).join("\n");
+        const sourceLines = sources
+          .slice(0, 3)
+          .map(
+            (s) =>
+              `@${s.author_username} (Likes: ${s.like_count}): "${s.text.replace(/\n/g, " ").slice(0, 80)}..."`,
+          )
+          .join("\n");
+
         embed.addFields({
           name: `Sources (${sources.length})`,
           value: sourceLines.length > 1024 ? sourceLines.slice(0, 1021) + "…" : sourceLines,

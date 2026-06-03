@@ -20,8 +20,13 @@ import { Browser } from "@aphrody-code/bxc/browser";
 import * as cheerio from "cheerio";
 import { z } from "zod";
 
+import { homedir } from "node:os";
+import { join } from "node:path";
+
 // Moteur natif compilé (profils fast/stealth) — pointé via spawnOpts.binaryPath.
-const ENGINE_BIN = "/home/ubuntu/bxc/rust-bridge/target/release/bxc-engine";
+const home = process.env.HOME || homedir();
+const ENGINE_BIN =
+  process.env.BXC_ENGINE_BIN ?? join(home, "bxc/rust-bridge/target/release/bxc-engine");
 if (!process.env.BXC_CHROME_BIN) process.env.BXC_CHROME_BIN = "/usr/local/bin/chromium";
 
 export type Profile = "static" | "http" | "fast" | "stealth";

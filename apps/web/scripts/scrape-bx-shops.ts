@@ -1,4 +1,7 @@
 #!/usr/bin/env bun
+import { homedir } from "node:os";
+import { join } from "node:path";
+
 /**
  * Comparateur Beyblade X — scraper multi-stratégie des catalogues boutiques.
  *
@@ -58,9 +61,11 @@ const FX_TO_EUR: Record<string, number> = {
   CHF: 1.09,
   JPY: 0.0054,
 };
+const home = process.env.HOME || homedir();
+
 const UA =
   "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36";
-const BXC_BIN = "/home/ubuntu/.local/bin/bxc";
+const BXC_BIN = process.env.BXC_BIN ?? join(home, ".local/bin/bxc");
 const BX_RE = /beyblade ?x|\bbx-?\d|\bux-?\d|\bcx-?\d|\d-\d{2}[a-z]{1,3}\b/i;
 
 const normDomain = (d: string) => d.toLowerCase().replace(/^www\./, "");
@@ -94,7 +99,8 @@ async function mergeSources(): Promise<{ shops: Shop[]; sourceCount: number }> {
 function collectionBase(url: string): string | null {
   return url.match(/^(https?:\/\/[^/]+\/collections\/[^/?#]+)/i)?.[1] ?? null;
 }
-const CURL_IMPERSONATE_BIN = "/home/ubuntu/.local/bin/curl-impersonate";
+const CURL_IMPERSONATE_BIN =
+  process.env.CURL_IMPERSONATE_BIN ?? join(home, ".local/bin/curl-impersonate");
 const IMP_ARGS = [
   "--ciphers",
   "TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-RSA-AES128-SHA:ECDHE-RSA-AES256-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA:AES256-SHA",
@@ -604,7 +610,8 @@ async function scrapeBxc(shop: Shop, currency: string): Promise<Product[] | null
 // ── 5. bxc-engine via Tor (navigateur + exit non-datacenter) ──────
 // Pour les boutiques dont l'IP datacenter du VPS est bannie (301/403 direct
 // mais joignables via exit résidentiel/Tor). Lent — dernier recours, borné.
-const BXC_ENGINE = "/home/ubuntu/bxc/rust-bridge/target/release/bxc-engine";
+const BXC_ENGINE =
+  process.env.BXC_ENGINE ?? join(home, "bxc/rust-bridge/target/release/bxc-engine");
 const TOR_PROXY = "socks5://127.0.0.1:9050";
 
 async function engineFetchHtml(url: string, timeoutMs: number): Promise<string | null> {

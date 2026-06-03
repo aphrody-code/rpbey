@@ -4,7 +4,7 @@
   "updated": "2026-05-29",
   "mission": "Exécuter la migration API-first de apps/web (dette DAL transitive 157 -> 0) en parallèle, plusieurs sub-agents sur la MÊME branche, ZÉRO collision de fichier. Chaque lane possède un ensemble de chemins DISJOINT (garantie dure). Les fichiers d'agrégation partagés sont mono-propriété de la lane `integration` ; les autres lanes demandent le câblage via la mailbox.",
   "branch": "main",
-  "plan": "/home/ubuntu/.claude/plans/tingly-wondering-river.md",
+  "plan": "~/.claude/plans/tingly-wondering-river.md",
   "board": "task.md",
   "verifier": "bun .agents/verify-ownership.ts",
 

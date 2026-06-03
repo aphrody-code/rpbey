@@ -1,6 +1,5 @@
 import { type NextRequest } from "next/server";
-import { prepareTurn } from "@/server/services/chat";
-import { type ChatTurn, generateStream } from "@/server/services/llm";
+import { type ChatTurn, prepareTurn } from "@/server/services/chat";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -47,14 +46,6 @@ export async function POST(req: NextRequest) {
 
         if (p.fixed != null) {
           send({ type: "delta", text: p.fixed });
-        } else if (p.messages) {
-          let got = false;
-          for await (const chunk of generateStream(p.messages)) {
-            got = true;
-            send({ type: "delta", text: chunk });
-          }
-          // LLM indisponible / vide → repli sur le brouillon extractif (jamais vide).
-          if (!got) send({ type: "delta", text: p.draft ?? "Le savoir vacille, réessaie." });
         } else {
           send({ type: "delta", text: p.draft ?? "Le savoir vacille, réessaie." });
         }

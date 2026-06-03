@@ -5,12 +5,14 @@
 # tracing (cf. outputFileTracingExcludes). Sans ce script → JS chunks 404,
 # images 404, rankings/tournois vides.
 set -eo pipefail
-cd /home/ubuntu/rpbey/apps/web
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ROOT="$(dirname "$SCRIPT_DIR")"
+cd "$ROOT/apps/web"
 
-ASSETS=/home/ubuntu/rpbey/apps/cdn/assets/rpb-dashboard   # public/ (logos, parts, partners…)
-DATA_SRC=/home/ubuntu/rpbey/apps/web/data                 # data/* (a exports→CDN, satr/wb history, pools…)
+ASSETS="$ROOT/apps/cdn/assets/rpb-dashboard"   # public/ (logos, parts, partners…)
+DATA_SRC="$ROOT/apps/web/data"                 # data/* (a exports→CDN, satr/wb history, pools...)
 EXPORTS_CDN=/var/www/cdn/static/rpb-dashboard/data/exports # B_TS*.json + participants_map.json
-BEYLIB_CDN=/home/ubuntu/rpbey/apps/cdn/assets/rpb-bey-library/bey-library-complete.json # /api/bey-library
+BEYLIB_CDN="$ROOT/apps/cdn/assets/rpb-bey-library/bey-library-complete.json" # /api/bey-library
 SA=.next/standalone/apps/web
 
 echo "[deploy] build present ?"; test -f .next/BUILD_ID || { echo "ERREUR: lance d'abord 'next build'"; exit 1; }
@@ -44,7 +46,7 @@ ln -sfn "$DATA_SRC" "$SA/data"
 # @tobyg74/tiktok-api-dl : Next trace le package dans standalone mais PAS son
 # sous-dossier helper/ (chargé via __dirname au runtime → ENOENT signature.js).
 # On le copie (feature TikTok du /tv, sinon unhandledRejection en boucle).
-TT_PKG_SRC=/home/ubuntu/rpbey/node_modules/@tobyg74/tiktok-api-dl
+TT_PKG_SRC="$ROOT/node_modules/@tobyg74/tiktok-api-dl"
 TT_HELPER_SRC="$TT_PKG_SRC/helper"
 if [ -d "$TT_PKG_SRC" ]; then
 	# Next trace @tobyg74/tiktok-api-dl de façon INCOMPLÈTE : helper/ est chargé via

@@ -1,4 +1,4 @@
-import i18next, { type StringMap, type TOptions, type TFunction } from "i18next";
+import i18next, { type TOptions } from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 
 import { Status } from "../brackets-model/index";
@@ -15,6 +15,12 @@ import en from "./i18n/en/translation.json";
 import fr from "./i18n/fr/translation.json";
 
 export type { TFunction } from "i18next";
+
+// i18next >= 24 a retiré l'export `StringMap`. On le redéfinit localement avec
+// la même forme que la définition historique d'i18next (objet indexé `any`)
+// pour le retour `returnObjects: true` — préserve les casts existants.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type StringMap = { [key: string]: any };
 
 export const locales = {
   en,
@@ -58,8 +64,15 @@ export function t<
   SubKey extends string & keyof Locale[Scope],
   T extends TOptions,
 >(key: `${Scope}.${SubKey}`, options?: T): T["returnObjects"] extends true ? StringMap : string {
-  return i18next.t(key, options);
+  // i18next >= 24 a durci les overloads de `t` (sélecteurs typés). On passe par
+  // `i18next.t(key, options)` via une signature simple : la sécurité de type est
+  // déjà fournie par les génériques de cette fonction wrapper.
+  const translate = i18next.t as (k: string, o?: TOptions) => unknown;
+  return translate(key, options) as T["returnObjects"] extends true ? StringMap : string;
 }
+
+/** Type de la fonction de traduction wrapper (compatible `lang.t`). */
+export type TranslateFn = typeof t;
 
 export type ToI18nKey<S extends string> = S extends `${infer A}_${infer B}` ? `${A}-${B}` : never;
 
@@ -267,7 +280,7 @@ export function getBracketName(stage: Stage, type: GroupType): string | undefine
 /**
  * Returns the name of a round.
  */
-export function getRoundName({ roundNumber, roundCount }: RoundNameInfo, t: TFunction): string {
+export function getRoundName({ roundNumber, roundCount }: RoundNameInfo, t: TranslateFn): string {
   return roundNumber === roundCount
     ? t("common.round-name-final")
     : t("common.round-name", { roundNumber });
@@ -279,7 +292,7 @@ export function getRoundName({ roundNumber, roundCount }: RoundNameInfo, t: TFun
  */
 export function getWinnerBracketRoundName(
   { roundNumber, roundCount }: RoundNameInfo,
-  t: TFunction,
+  t: TranslateFn,
 ): string {
   return roundNumber === roundCount
     ? t("common.round-name-winner-bracket-final")
@@ -292,7 +305,7 @@ export function getWinnerBracketRoundName(
  */
 export function getLoserBracketRoundName(
   { roundNumber, roundCount }: RoundNameInfo,
-  t: TFunction,
+  t: TranslateFn,
 ): string {
   return roundNumber === roundCount
     ? t("common.round-name-loser-bracket-final")

@@ -4,7 +4,7 @@ description: "Inventaire de chaque store Flux Challonge : clé, shape, sérialis
 scope:
   - packages/challonge
 status: "stable"
-last_updated: "2026-05-29"
+last_updated: "2026-06-02"
 related_symbols:
   - _initialStoreState
   - parseStoreState

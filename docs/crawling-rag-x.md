@@ -4,7 +4,7 @@ description: "Syst√®me de crawling autonome et RAG Gemini sur les discussions m√
 scope:
   - scripts
 status: "draft"
-last_updated: "2026-05-29"
+last_updated: "2026-06-02"
 related_symbols:
   - BeybladeXRag
   - XSession

@@ -1,10 +1,10 @@
 ---
-title: "Plan de refonte /search & /comparateur — vraiment Material 3, vivant, moderne"
+title: "Refonte /search & /comparateur — Material 3 vivant et moderne"
 description: "Diagnostic visuel (captures prod), écart vs M3, et plan d'exécution pour transformer la page search (gabarit MUI-free) et le comparateur d'un clone Google Search plat en une UI Material You / M3 Expressive : profondeur tonale, couleur générée, imagerie, motion chorégraphiée."
 scope:
   - apps/web
 status: "draft"
-last_updated: "2026-05-29"
+last_updated: "2026-06-02"
 related_symbols:
   - SearchClient
   - SerpResults

@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": false,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "types": ["bun"],
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "noEmitOnError": false,
+    "outDir": "./types/aphrody-x",
+    "rootDir": "../../node_modules/@aphrody-code/x/src"
+  },
+  "include": ["../../node_modules/@aphrody-code/x/src/**/*.ts"],
+  "exclude": ["../../node_modules/@aphrody-code/x/src/**/*.test.ts"]
+}

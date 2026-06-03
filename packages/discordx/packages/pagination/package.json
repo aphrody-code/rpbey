@@ -47,7 +47,7 @@
     "build:typedoc": "bunx typedoc src/index.ts --out ../../docs/static/api/pagination"
   },
   "devDependencies": {
-    "discord.js": "^14.26.3",
+    "discord.js": "^14.26.4",
     "typescript": "catalog:"
   },
   "peerDependencies": {

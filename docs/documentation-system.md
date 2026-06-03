@@ -4,7 +4,7 @@ description: "Convention frontmatter, commandes docs.ts et hook git qui gardent 
 scope:
   - scripts
 status: "stable"
-last_updated: "2026-05-29"
+last_updated: "2026-06-02"
 related_symbols:
   - FrontmatterSchema
   - buildMap

@@ -13,8 +13,8 @@
 
 /* ── Carte résultat ── */
 .item {
-  animation: fadeIn 0.32s var(--md-sys-motion-emphasized-decelerate, cubic-bezier(0.05, 0.7, 0.1, 1))
-    both;
+  animation: fadeIn 0.32s
+    var(--md-sys-motion-emphasized-decelerate, cubic-bezier(0.05, 0.7, 0.1, 1)) both;
 }
 
 .itemLink {
@@ -83,7 +83,8 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.3s var(--md-sys-motion-emphasized-decelerate, cubic-bezier(0.05, 0.7, 0.1, 1));
+  transition: transform 0.3s
+    var(--md-sys-motion-emphasized-decelerate, cubic-bezier(0.05, 0.7, 0.1, 1));
 }
 
 .itemLink:hover .thumbImg {
@@ -235,8 +236,8 @@
     border-color 0.2s var(--md-sys-motion-standard, cubic-bezier(0.2, 0, 0, 1)),
     box-shadow 0.2s var(--md-sys-motion-standard, cubic-bezier(0.2, 0, 0, 1)),
     transform 0.2s var(--md-sys-motion-emphasized-decelerate, cubic-bezier(0.05, 0.7, 0.1, 1));
-  animation: fadeIn 0.32s var(--md-sys-motion-emphasized-decelerate, cubic-bezier(0.05, 0.7, 0.1, 1))
-    both;
+  animation: fadeIn 0.32s
+    var(--md-sys-motion-emphasized-decelerate, cubic-bezier(0.05, 0.7, 0.1, 1)) both;
 }
 
 .imageCard:hover {

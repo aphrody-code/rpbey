@@ -46,12 +46,12 @@
     "build:typedoc": "bunx typedoc src/index.ts --out ../../docs/static/api/utilities"
   },
   "dependencies": {
-    "dayjs": "^1.11.20"
+    "dayjs": "^1.11.21"
   },
   "devDependencies": {
     "@rpbey/importer": "workspace:^",
     "@rpbey/pagination": "workspace:^",
-    "discord.js": "^14.26.3",
+    "discord.js": "^14.26.4",
     "@rpbey/discordx": "workspace:^",
     "typescript": "catalog:"
   },

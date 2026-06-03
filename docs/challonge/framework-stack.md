@@ -4,7 +4,7 @@ description: "Ruby on Rails, react-rails, asset pipeline dual, Faye, analytics e
 scope:
   - packages/challonge
 status: "stable"
-last_updated: "2026-05-29"
+last_updated: "2026-06-02"
 related_symbols:
   - _initialStoreState
   - parseInitialStoreState

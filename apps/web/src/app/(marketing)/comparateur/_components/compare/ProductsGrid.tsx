@@ -5,10 +5,9 @@ import { DataGrid, type GridColDef, type GridColumnVisibilityModel } from "@mui/
 import { useMemo } from "react";
 import Fuse from "fuse.js";
 import type { BxProduct } from "../types";
-import { fmtEur, fmtNative, normalizeText } from "./fmt";
+import { fmtEur, fmtNative, inferProductType, normalizeText } from "./fmt";
 import { REGION_LABEL } from "./constants";
 import type { FilterState } from "./FilterBar";
-import { inferProductType } from "./fmt";
 
 interface ProductsGridProps {
   products: BxProduct[];

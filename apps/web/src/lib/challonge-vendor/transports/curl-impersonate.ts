@@ -28,6 +28,7 @@
 
 import { existsSync } from "node:fs";
 import { join } from "node:path";
+import { homedir } from "node:os";
 
 import { LRUCache } from "lru-cache";
 
@@ -142,7 +143,7 @@ const CACHE_TTL_MS = 15 * 60 * 1000;
 const CACHE_MAX_BYTES = 50 * 1024 * 1024;
 
 const DEFAULT_BIN_DIR =
-  process.env.CHALLONGE_CURL_IMPERSONATE_DIR ?? "/home/ubuntu/vps/storage/bin/curl-impersonate";
+  process.env.CHALLONGE_CURL_IMPERSONATE_DIR ?? join(homedir(), ".local", "bin");
 
 // ─── LRU response cache ────────────────────────────────────────────────────
 

@@ -4,7 +4,7 @@ description: "Présentation du toolchain bxc : profils, CLI, pièges bxc-engine 
 scope:
   - packages/challonge
 status: "stable"
-last_updated: "2026-05-29"
+last_updated: "2026-06-02"
 related_symbols:
   - Browser.newPage
   - ImpersonatedClient

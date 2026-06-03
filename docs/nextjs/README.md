@@ -4,7 +4,7 @@ description: "Documentation vendorée de Next.js 16.2.6 App Router pour le dashb
 scope:
   - apps/web
 status: "stable"
-last_updated: "2026-05-29"
+last_updated: "2026-06-02"
 related_symbols:
   - next/config
   - transpilePackages

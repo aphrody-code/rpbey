@@ -14,9 +14,8 @@ import { DataGrid, type GridColDef, type GridColumnVisibilityModel } from "@mui/
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import type { BxProductGroup, RecommendedProduct } from "../types";
-import { fmtEur, normalizeText } from "./fmt";
+import { fmtEur, inferProductType, normalizeText } from "./fmt";
 import type { FilterState } from "./FilterBar";
-import { inferProductType } from "./fmt";
 
 interface RecoPanelProps {
   recommendations: RecommendedProduct[];

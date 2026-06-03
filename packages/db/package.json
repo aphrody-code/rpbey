@@ -14,12 +14,12 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@paralleldrive/cuid2": "^3.3.0",
-    "drizzle-orm": "^0.45.2",
-    "postgres": "^3.4.9"
+    "@paralleldrive/cuid2": "catalog:",
+    "drizzle-orm": "catalog:",
+    "postgres": "catalog:"
   },
   "devDependencies": {
     "drizzle-kit": "^0.31.10",
-    "typescript": "^6.0.3"
+    "typescript": "catalog:"
   }
 }

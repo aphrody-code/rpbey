@@ -1,9 +1,8 @@
 ---
 title: "Assistant RAG conversationnel & UI d'ambiance"
-description: "Couche de consommation du RAG rpbey : backend de chat « Rpbey » (retrieval hybride + LLM local + streaming SSE + mémoire) — UI retirée du site, conservé en background — et fonds d'ambiance par page/section (frames d'animé, parallaxe au scroll) tirés du corpus."
+description: "Couche de consommation du RAG rpbey : backend de chat « Rpbey » (retrieval hybride déterministe) — UI retirée du site, conservé en background — et fonds d'ambiance par page/section (frames d'animé, parallaxe au scroll) tirés du corpus."
 scope:
   - apps/web/src/server/services/chat.ts
-  - apps/web/src/server/services/llm.ts
   - apps/web/src/lib/chat-nlp.ts
   - apps/web/src/app/api/chat
   - apps/web/src/components/ui/FrameBackdrop.tsx
@@ -14,7 +13,6 @@ last_updated: "2026-06-01"
 related_symbols:
   - prepareTurn
   - answerQuestion
-  - generateStream
   - detectIntent
   - FrameBackdrop
   - SectionFrameBg
@@ -29,11 +27,9 @@ Ce doc couvre ce qui se branche dessus côté produit : un **chat conversationne
 et des **fonds d'ambiance** issus du même corpus.
 
 Principe transverse : **aucune hallucination**. Le retrieval et le NLP à règles
-sont algorithmiques ; les faits viennent **toujours** du corpus. Un **LLM local**
-(llama.cpp, `rpbey-llm.service`, voir `aphrody/docs/rpbey-rag/llm.md`) ne sert qu'à
-**reformuler en français** le contexte récupéré (grounding strict) — il n'invente
-pas les faits, il met en forme. Kill switch `RPBEY_CHAT_LLM=0` → repli synthèse
-extractive déterministe.
+sont algorithmiques ; les faits viennent **toujours** du corpus. Le LLM local
+(llama.cpp, `rpbey-llm.service`, etc.) a été retiré pour alléger l'infrastructure,
+le pipeline fonctionnant entièrement en mode synthèse extractive déterministe.
 
 ## A. Chat « Rpbey » (backend uniquement)
 
@@ -44,15 +40,13 @@ extractive déterministe.
 > background — repointables sur le daemon aphrody, cf. `RPBEY_LLM_URL`). Le « Mode
 > IA » de `/search` (synthèse + onglet) a aussi été retiré.
 
-Pipeline backend conservé (retrieval hybride → LLM local streamé, avec mémoire
-conversationnelle) :
+Pipeline backend conservé (retrieval hybride déterministe) :
 
 | Couche | Fichier | Rôle |
 | --- | --- | --- |
 | NLP | `apps/web/src/lib/chat-nlp.ts` | `detectIntent` (12 intentions, règles regex priorisées), `searchTerms`, `INTENT_CATEGORY`, types `ChatAnswer`/`ChatSource`, `STARTER_PROMPTS`. Pur, importé par le backend (et anciennement par l'UI). Miroir de `apps/bot/src/lib/rpbey/nlp.ts`. |
 | Cerveau | `apps/web/src/server/services/chat.ts` (`server-only`) | `prepareTurn(message, history)` : retrieval **in-process** (`getSearchCorpus` + `rankSearch` + `searchVectorIds` + `fuseHybrid`) + brouillon extractif + `buildMessages` (système + historique capé + contexte RAG). `answerQuestion()` = wrapper non-stream / repli. |
-| LLM | `apps/web/src/server/services/llm.ts` | Client **OpenAI-compatible** (`RPBEY_LLM_URL`, défaut `http://127.0.0.1:8080/v1/chat/completions`). `generate()` + `generateStream()` (SSE). Kill switch `RPBEY_CHAT_LLM=0`. |
-| API | `apps/web/src/app/api/chat/route.ts` | `POST /api/chat` `{ message, history }` → **flux SSE** (`meta`/`delta`/`done`). Self-contained (validation inline, **pas** de contrat partagé). |
+| API | `apps/web/src/app/api/chat/route.ts` | `POST /api/chat` `{ message, history }` → **flux SSE** (`meta`/`delta`/`done`) renvoyant le brouillon extractif directement. Self-contained (validation inline, **pas** de contrat partagé). |
 
 La cohérence avec le bot Discord (`/rpbey`, mentions) reste volontaire : même
 NLP, même corpus, même retrieval — un seul cerveau, désormais sans surface web
@@ -81,9 +75,7 @@ thème actif.
 
 ## Invariants
 
-- **Grounding strict, zéro hallucination** : le LLM local ne **reformule** que le
-  contexte récupéré ; les faits viennent du corpus. `RPBEY_CHAT_LLM=0` → repli
-  synthèse extractive déterministe (jamais d'écran vide).
+- **Grounding strict, zéro hallucination** : synthèse extractive déterministe pure. Les faits viennent directement du corpus indexé.
 - **Découplage API** : `/api/chat` ne dépend pas de `@rpbey/api-contract`
   (validation inline) — évolue sans toucher le contrat partagé.
 - **Dégradation gracieuse** : sidecar embeddings / Redis absent → `fuseHybrid`

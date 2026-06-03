@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import Container from "@mui/material/Container";
 import { RandomCombo } from "@/components/deck/RandomCombo";
 import { PageHeader } from "@/components/ui";

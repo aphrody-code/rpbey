@@ -4,7 +4,7 @@ description: "Routes API gacha Next.js (legacy + v1), DAL Drizzle, service, serv
 scope:
   - apps/web
 status: "stable"
-last_updated: "2026-05-30"
+last_updated: "2026-06-02"
 related_symbols:
   - executeCardPullTx
   - claimDailyTx

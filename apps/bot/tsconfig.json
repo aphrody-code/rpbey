@@ -17,7 +17,10 @@
     "emitDecoratorMetadata": true,
     "moduleDetection": "force",
     "types": ["bun-types"],
-    "noEmit": true
+    "noEmit": true,
+    "paths": {
+      "@aphrody-code/x": ["./types/aphrody-x/index.d.ts"]
+    }
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules", "dist"]

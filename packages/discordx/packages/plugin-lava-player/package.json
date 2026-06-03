@@ -113,7 +113,7 @@
     "@rpbey/pagination": "workspace:^"
   },
   "devDependencies": {
-    "discord.js": "^14.26.3",
+    "discord.js": "^14.26.4",
     "@rpbey/discordx": "workspace:^"
   },
   "peerDependencies": {

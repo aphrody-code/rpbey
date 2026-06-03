@@ -2,7 +2,7 @@
 
 > **État terminal** : la migration 157 → 0 est **faite**. `ENFORCED = ["src/"]` (flip global commité, wave-6-final `777df53`), gate transitif vert (`bun scripts/check-dal-boundary.ts` → « dette transitive : 0 » + exit 0). Ce document est conservé comme **archive d'exécution** — les seuls reliquats ouverts sont cosmétiques/outillage (codegen GraphQL, contract-smoke, recâblage SDK-client), pas de la dette DAL.
 > Tableau de bord d'exécution **multi-agents parallèle**. Pilotage : [`agents.json`](./agents.json).
-> Protocole de collaboration + mailbox : [`.agents/README.md`](./.agents/README.md).
+> Protocole de collaboration + mailbox : .agents/README.md (supprimé).
 > Plan de référence : `/home/ubuntu/.claude/plans/tingly-wondering-river.md`.
 > Garde-fou ownership : `bun .agents/verify-ownership.ts` (disjonction + couverture).
 > Dernière maj : **2026-05-29**.

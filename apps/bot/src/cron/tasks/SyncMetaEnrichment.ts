@@ -1,3 +1,6 @@
+import { homedir } from "node:os";
+import { join } from "node:path";
+
 import { logger } from "../../lib/logger.js";
 import { resolveRootPath } from "../../lib/paths.js";
 
@@ -7,7 +10,8 @@ const SCRIPT = "apps/web/scripts/enrich-meta.ts";
 
 // Env aphrody à sourcer : contient les tokens X, Gemini, cookies Reddit.
 // Ce chemin est hors-repo (/home/ubuntu/aphrody/.env) — si absent, skip gracieux.
-const APHRODY_ENV_PATH = "/home/ubuntu/aphrody/.env";
+const home = process.env.HOME || homedir();
+const APHRODY_ENV_PATH = process.env.APHRODY_ENV_PATH ?? join(home, "aphrody/.env");
 
 // Budget temps généreux : ~60 blades × 4s de délai inter-blade + overhead réseau.
 const TIMEOUT_MS = 300_000; // 5 min

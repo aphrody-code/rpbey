@@ -4,7 +4,7 @@ description: "Table de correspondance MUI v9 → composants M3 (md-* @material/w
 scope:
   - apps/web
 status: "draft"
-last_updated: "2026-05-29"
+last_updated: "2026-06-02"
 ---
 
 # Mapping composants MUI → Material Design 3 (web)

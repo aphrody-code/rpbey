@@ -1,11 +1,16 @@
-import { type Metadata } from "next";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Connexion | RPB",
-  description:
-    "Connectez-vous à la République Populaire du Beyblade pour accéder à votre profil, vos decks et les tournois.",
+  description: "Se connecter à la République Populaire du Beyblade",
 };
 
-export default function SignInLayout({ children }: { children: React.ReactNode }) {
-  return children;
+export const dynamic = "force-dynamic";
+
+export default function SignInLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return <>{children}</>;
 }

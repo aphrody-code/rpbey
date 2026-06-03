@@ -4,7 +4,7 @@ description: "Mapping palette/typo/forme MUI → tokens M3 (--md-sys-*), dynamic
 scope:
   - apps/web
 status: draft
-last_updated: "2026-05-30"
+last_updated: "2026-06-02"
 related_symbols:
   - createTheme
   - muiThemeToTokens

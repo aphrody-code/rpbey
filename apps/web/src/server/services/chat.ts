@@ -5,7 +5,10 @@ import { searchVectorIds } from "@/server/services/embeddings";
 import { getSearchCorpus } from "@/server/services/search-corpus";
 import { fuseHybrid, rankSearch } from "@/lib/search-rank";
 import { detectIntent, INTENT_CATEGORY, type Intent, searchTerms } from "@/lib/chat-nlp";
-import { type ChatTurn, generate, isLlmEnabled } from "@/server/services/llm";
+export interface ChatTurn {
+  role: "system" | "user" | "assistant";
+  content: string;
+}
 
 /**
  * Cerveau du chat RAG web — équivalent in-process de `apps/bot/src/lib/rpbey/answer.ts`.
@@ -471,8 +474,6 @@ export async function answerQuestion(
   let answerMd: string;
   if (p.fixed != null) {
     answerMd = p.fixed;
-  } else if (p.messages && isLlmEnabled()) {
-    answerMd = (await generate(p.messages)) ?? p.draft ?? "";
   } else {
     answerMd = p.draft ?? "";
   }

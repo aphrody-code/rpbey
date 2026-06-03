@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { Box, Typography } from "@mui/material";
 import SeasonManager from "@/components/admin/rankings/SeasonManager";
 import { getRankingConfig, getTournamentCategories } from "@/server/actions/ranking";

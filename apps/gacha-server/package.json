@@ -16,13 +16,13 @@
     "@colyseus/bun-websockets": "^0.17.13",
     "@colyseus/monitor": "^0.17.8",
     "@colyseus/playground": "^0.17.12",
-    "@colyseus/schema": "^4.0.25",
+    "@colyseus/schema": "^4.0.26",
     "@colyseus/tools": "^0.17.19",
     "@rpbey/api-contract": "workspace:*",
     "@rpbey/db": "workspace:*",
     "colyseus": "^0.17.10",
-    "drizzle-orm": "^0.45.2",
-    "express": "^5.2.1"
+    "drizzle-orm": "catalog:",
+    "express": "catalog:"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",

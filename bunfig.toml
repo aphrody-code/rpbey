@@ -32,9 +32,9 @@ linker = "hoisted"
 "@rpbey" = { url = "https://npm.pkg.github.com/", token = "$GITHUB_TOKEN" }
 
 [install.cache]
-# Bun n'expand PAS le tilde — un literal "~" crée un dir cwd/~/.bun/install/cache
-# (4 GB de cache dupliqué constatés 2026-04-25). Chemin absolu obligatoire.
-dir = "/home/ubuntu/.bun/install/cache"
+# Bun n'expand PAS le tilde — un literal "~" crée un dir cwd/~/.bun/install/cache.
+# Commenter pour laisser Bun utiliser sa valeur par défaut dynamique (~/.bun/install/cache) pour chaque utilisateur.
+# dir = "/home/ubuntu/.bun/install/cache"
 
 [install.lockfile]
 save = true

@@ -51,7 +51,7 @@
   },
   "devDependencies": {
     "@rpbey/lava-player": "workspace:^",
-    "discord.js": "^14.26.3",
+    "discord.js": "^14.26.4",
     "typescript": "catalog:"
   },
   "peerDependencies": {

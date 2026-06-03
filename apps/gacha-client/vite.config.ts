@@ -17,10 +17,16 @@ export default defineConfig({
     assetsInlineLimit: 0,
     rollupOptions: {
       output: {
-        manualChunks: {
-          pixi: ["pixi.js"],
-          colyseus: ["colyseus.js"],
-          discord: ["@discord/embedded-app-sdk"],
+        // Vite 8 (moteur rolldown) exige `manualChunks` sous forme de fonction :
+        // la forme objet `{ chunk: [modules] }` n'est plus supportée
+        // (« manualChunks is not a function »). On route chaque module vers son
+        // chunk par correspondance sur son id.
+        manualChunks(id: string): string | undefined {
+          if (id.includes("node_modules/pixi.js") || id.includes("node_modules/@pixi/"))
+            return "pixi";
+          if (id.includes("node_modules/colyseus.js")) return "colyseus";
+          if (id.includes("node_modules/@discord/embedded-app-sdk")) return "discord";
+          return undefined;
         },
       },
     },

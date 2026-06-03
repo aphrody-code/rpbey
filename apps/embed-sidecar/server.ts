@@ -15,6 +15,8 @@
  *   POST /embed {texts,kind} -> { dim, vectors: number[][] }   (kind: "query"|"passage")
  */
 
+import { homedir } from "node:os";
+import { join } from "node:path";
 import { env, pipeline } from "@huggingface/transformers";
 
 const MODEL = process.env.EMBED_MODEL ?? "Xenova/multilingual-e5-small";
@@ -23,7 +25,8 @@ const PORT = Number(process.env.EMBED_PORT ?? 7077);
 const MAX_TEXTS = 256;
 const MAX_CHARS = 1200; // ~ borne tokens e5 (512) avec marge
 
-env.cacheDir = process.env.EMBED_CACHE_DIR ?? "/home/ubuntu/.cache/rpbey-embed-models";
+env.cacheDir =
+  process.env.EMBED_CACHE_DIR ?? join(process.env.HOME || homedir(), ".cache/rpbey-embed-models");
 env.allowRemoteModels = true;
 
 let extractor: ((input: string[], opts: unknown) => Promise<{ tolist(): number[][] }>) | null =

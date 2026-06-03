@@ -18,9 +18,7 @@
 //   ENRICH_X_PER_BLADE=N   nb de tweets visés par blade (def 20)
 //   ENRICH_DELAY_MS=N      délai inter-blade (def 4000) — borne le rate-limit X (~50 req/15min)
 
-import { XSession, XClient } from "/home/ubuntu/x-client/ts/src/index.ts";
-import { homedir } from "node:os";
-import { join } from "node:path";
+import { XSession, XClient } from "@aphrody-code/x";
 
 // -----------------------------------------------------------------------------
 // 1. Liste canonique des blades compétitifs Beyblade X (fusion de 3 sources repo)
@@ -236,7 +234,7 @@ async function searchReddit(
 // hors de ce process. L'IP du VPS est bot-wallée par Google/DDG → Bing est la source fiable.
 const LIBCURL_PATH =
   process.env.LIBCURL_IMPERSONATE_PATH ||
-  "/home/ubuntu/bxc/vendor/curl-impersonate/libcurl-impersonate.so";
+  join(home, "bxc/vendor/curl-impersonate/libcurl-impersonate.so");
 async function searchWeb(
   blade: string,
 ): Promise<{ hits: number; snippets: string[]; ok: boolean }> {

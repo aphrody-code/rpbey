@@ -4,7 +4,7 @@ description: "Table exhaustive des endpoints Challonge : REST v1, v2.1 OAuth JSO
 scope:
   - packages/challonge
 status: "stable"
-last_updated: "2026-05-29"
+last_updated: "2026-06-02"
 related_symbols:
   - ChallongeApi
   - ChallongeApiTournament

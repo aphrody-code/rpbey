@@ -4,7 +4,7 @@ description: "Index arborescent généré de toute la doc sous docs/."
 scope:
   - docs
 status: "generated"
-last_updated: "2026-06-01"
+last_updated: "2026-06-03"
 ---
 # Documentation — index
 
@@ -21,7 +21,7 @@ Cartographie du repo (apps/packages) : [REPO_MAP.md](REPO_MAP.md).
 - [Système de documentation (structuré, automatisé, sync)](documentation-system.md) `stable` — Convention frontmatter, commandes docs.ts et hook git qui gardent la doc typée et synchronisée avec le code.
 - [Métagame WBO — extraction & données consommées par rpbey](metagame-wbo.md) `stable` — Pipeline d'extraction des classements et du métagame WBO (Wayback Machine) consommé par le dashboard rpbey.
 - [Sondages, Tier Lists & Beyblade Awards](polls-awards.md) `draft` — Système de vote communautaire de rpbey : sondages (choix unique/multiple/notation), tier lists S→F, et le concept phare Beyblade Awards France (éditions, nominés Discord/X, résultats réels 2025 importés du Google Form). Schéma DB, API, DAL, UI et invariants (enveloppe SWR, vote anonyme).
-- [Assistant RAG conversationnel & UI d'ambiance](rag-assistant-ui.md) `stable` — Couche de consommation du RAG rpbey : backend de chat « Rpbey » (retrieval hybride + LLM local + streaming SSE + mémoire) — UI retirée du site, conservé en background — et fonds d'ambiance par page/section (frames d'animé, parallaxe au scroll) tirés du corpus.
+- [Assistant RAG conversationnel & UI d'ambiance](rag-assistant-ui.md) `stable` — Couche de consommation du RAG rpbey : backend de chat « Rpbey » (retrieval hybride déterministe) — UI retirée du site, conservé en background — et fonds d'ambiance par page/section (frames d'animé, parallaxe au scroll) tirés du corpus.
 - [Stratégie SEO — devenir le site Beyblade n°1 en France](seo-strategy.md) `draft` — Plan SEO actionnable pour rpbey.fr, fondé sur la veille concurrentielle de x-rank.fr et beyblade-espace.fr (2026-05-30) : forces, failles exploitables, et feuille de route technique + contenu pour dominer le référencement Beyblade FR.
 
 ## audit
@@ -72,7 +72,7 @@ Cartographie du repo (apps/packages) : [REPO_MAP.md](REPO_MAP.md).
 - [Mapping composants MUI → Material Design 3 (web)](m3/component-mapping.md) `draft` — Table de correspondance MUI v9 → composants M3 (md-* @material/web + Md* @aphrody-code/m3-react), disponibilité web, gaps et composants sans équivalent.
 - [Plan de migration MUI → Material Design 3 (apps/web)](m3/migration-plan.md) `draft` — Stratégie, véhicule, phasage en vagues, gates et risques pour migrer le dashboard Next.js de MUI v9 + Emotion vers Material Design 3 sur le web.
 - [Inventaire MUI — surface actuelle (apps/web)](m3/mui-inventory.md) `draft` — Volume, composants, idiomes de style, système de thème et surface MUI X du dashboard, snapshot pré-migration M3.
-- [Plan de refonte /search & /comparateur — vraiment Material 3, vivant, moderne](m3/search-redesign-plan.md) `draft` — Diagnostic visuel (captures prod), écart vs M3, et plan d'exécution pour transformer la page search (gabarit MUI-free) et le comparateur d'un clone Google Search plat en une UI Material You / M3 Expressive : profondeur tonale, couleur générée, imagerie, motion chorégraphiée.
+- [Refonte /search & /comparateur — Material 3 vivant et moderne](m3/search-redesign-plan.md) `draft` — Diagnostic visuel (captures prod), écart vs M3, et plan d'exécution pour transformer la page search (gabarit MUI-free) et le comparateur d'un clone Google Search plat en une UI Material You / M3 Expressive : profondeur tonale, couleur générée, imagerie, motion chorégraphiée.
 - [Stratégie tokens, thème, typo & motion (MUI → M3)](m3/theme-tokens.md) `draft` — Mapping palette/typo/forme MUI → tokens M3 (--md-sys-*), dynamic color HCT, comparatif des véhicules web, échelle typographique et tokens de motion.
 
 ## nextjs

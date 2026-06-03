@@ -27,6 +27,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 | Test                   | `bun run test` (turbo)                                                        |
 | E2E (chromium réel)    | `bun run e2e` (== `CHROME=/usr/local/bin/chromium bun scripts/e2e.ts`)        |
 | Docs (sync/format)     | `bun run docs` (umbrella : map+index+fmt+check) · `docs:check` · `docs:map` · `docs:index` · `docs:fmt` (outil Bun-natif `scripts/docs.ts`) |
+| Réactivation complète  | `bash scripts/reactivate.sh` (Nettoyage caches, bun install, build bot/web et restart systemd) |
+
 
 > Doc structurée : tout fichier sous `docs/` porte un **frontmatter Zod-typé obligatoire** (`title/description/scope/status/last_updated`) ; `docs/README.md` (index) et `docs/REPO_MAP.md` (cartographie) sont **générés**, ne pas les éditer. Le hook `.githooks/pre-commit` régénère + vérifie à chaque commit. Convention complète → **`docs/documentation-system.md`**.
 
@@ -67,13 +69,9 @@ Raison : better-auth écrit des `Date`. Conséquences : écrire une colonne **au
 
 Pour comprendre le fonctionnement de la session de crawling, l'indexation Redis et la recherche RAG Gemini sur le métagame, se référer à **`docs/crawling-rag-x.md`**.
 
-### Chat IA « Rpbey » (apps/web) — LLM LOCAL + mémoire + streaming
+### Chat IA « Rpbey » (apps/web) — Mode extractif déterministe (LLM retiré)
 
-`POST /api/chat` n'est PLUS « zéro LLM ». Pipeline : retrieval hybride Beyblade (`server/services/chat.ts`, `prepareTurn`) → **synthèse par un LLM LOCAL** en français, **streamée en SSE**, avec **mémoire conversationnelle** (l'historique transite client→API→modèle ; `RpbeyChat.tsx` envoie `history`, le backend reste stateless).
-
-- **Modèle local gratuit** : `llama.cpp` (`/home/ubuntu/llm/llama-server`, Llama-3.2-3B Q4) via **systemd `rpbey-llm.service`** loopback `127.0.0.1:8080` (OpenAI-compatible). CPU-only → **streaming obligatoire** (~6 s avant 1er token, ~11 tok/s). Hors-repo (modèles `/home/ubuntu/llm/models/`).
-- **`server/services/llm.ts`** : client OpenAI-compatible, `RPBEY_LLM_URL` (défaut `http://127.0.0.1:8080/v1/chat/completions`), `generate()` + `generateStream()`. Kill switch `RPBEY_CHAT_LLM=0` → repli synthèse extractive déterministe (jamais d'écran vide). Vertex/Gemini RETIRÉ (payant, abandonné).
-- **Cible long terme** : ce seam OpenAI-compat pointera vers le **daemon aphrody** (backend AI souverain du VPS : inference candle + mémoire `aphrody-memory` + multi-persona `aphrody-agent-home`). Plan : `aphrody/docs/plans/aphrody-ai-backend.md`. Persona Beyblade = profil agent-home `rpbey` (`~/.aphrody/workspace-rpbey`). Repointer = changer `RPBEY_LLM_URL`.
+Le pipeline de chat utilise un retrieval hybride Beyblade (`server/services/chat.ts`, `prepareTurn`) pour extraire les faits du corpus unifié (wiki, combos, etc.) et générer des réponses extractives déterministes. Tout ce qui est lié à `llama.cpp` / local LLMs a été retiré pour alléger l'infrastructure.
 
 ### Bot — invariants runtime (compile mais casse au runtime si violés)
 

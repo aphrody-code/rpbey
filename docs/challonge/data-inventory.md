@@ -4,7 +4,7 @@ description: "Mapping fixtures vs données déjà extraites par ScrapedTournamen
 scope:
   - packages/challonge
 status: "stable"
-last_updated: "2026-05-29"
+last_updated: "2026-06-02"
 related_symbols:
   - ScrapedTournament
   - ChallongeScraper

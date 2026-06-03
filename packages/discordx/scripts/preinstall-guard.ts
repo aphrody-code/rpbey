@@ -28,7 +28,7 @@ if (await outerLock.exists() || await outerLockB.exists()) {
   if (Bun.env.INIT_CWD === process.cwd()) {
     console.log(`DEBUG: INIT_CWD=${Bun.env.INIT_CWD}, cwd=${process.cwd()}`);
     // Temporarily bypass to allow trust --all
-    if (Bun.env.BUN_PM_TRUST) return; 
+    if (Bun.env.BUN_PM_TRUST) process.exit(0); 
 
     const content = await (await outerLock.exists() ? outerLock.text() : Promise.resolve(""));
   if (
@@ -56,4 +56,5 @@ if (await outerLock.exists() || await outerLockB.exists()) {
     if (!Bun.env.DISCORDY_STANDALONE) process.exit(1);
     console.warn("⚠ DISCORDY_STANDALONE=1 set — bypassing guard.");
   }
+}
 }

@@ -13,9 +13,9 @@ import { type CallbackFunction, type FormConfiguration } from "./form";
 import type { InMemoryDatabase } from "brackets-memory-db";
 import type { BracketsViewer } from "./main";
 import type { BracketsManager } from "../brackets-manager/index";
-import { type ToI18nKey, type TFunction } from "./lang";
+import { type ToI18nKey, type TFunction, type TranslateFn } from "./lang";
 
-export type { ToI18nKey, TFunction };
+export type { ToI18nKey, TFunction, TranslateFn };
 
 declare global {
   interface Window {
@@ -257,7 +257,7 @@ export type RoundNameInfo =
 /**
  * A function returning a round name based on its number and the count of rounds.
  */
-export type RoundNameGetter = (info: RoundNameInfo, t: TFunction) => string;
+export type RoundNameGetter = (info: RoundNameInfo, t: TranslateFn) => string;
 
 /**
  * A function called when a match is clicked.

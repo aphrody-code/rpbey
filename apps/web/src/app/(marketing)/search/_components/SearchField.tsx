@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Link from "next/link";
 import type { GlobalSearchItem } from "@rpbey/api-contract";
 import styles from "./SearchField.module.css";
 
@@ -216,9 +217,9 @@ export function SearchField({
                   <SuggestionRow key={s.id} item={s} fromHistory={false} onSelect={handleSelect} />
                 ))}
           <div className={styles.dropdownFooter}>
-            <a className={styles.dropdownFooterBtn} href="/comparateur">
+            <Link className={styles.dropdownFooterBtn} href="/comparateur">
               En savoir plus
-            </a>
+            </Link>
           </div>
         </div>
       )}

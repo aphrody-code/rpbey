@@ -4,6 +4,7 @@
 
 import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
+import { homedir } from "node:os";
 
 export interface RawCookie {
   name: string;
@@ -33,7 +34,10 @@ const COOKIE_CANDIDATES_FACTORY = (extra?: string): string[] =>
     process.env.CHALLONGE_COOKIE_PATH,
     resolve(process.cwd(), "storage/cookies/challonge_cookie.json"),
     resolve(process.cwd(), "../../storage/cookies/challonge_cookie.json"),
-    "/home/ubuntu/vps/storage/cookies/challonge_cookie.json",
+    process.env.RPBEY_REPO_ROOT
+      ? resolve(process.env.RPBEY_REPO_ROOT, "storage/cookies/challonge_cookie.json")
+      : null,
+    resolve(homedir(), "rpbey/storage/cookies/challonge_cookie.json"),
   ].filter((p): p is string => Boolean(p));
 
 export function resolveDefaultCookiePath(extra?: string): string | null {

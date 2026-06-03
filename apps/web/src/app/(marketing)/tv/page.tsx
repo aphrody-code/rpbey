@@ -16,6 +16,8 @@ export const metadata = createPageMetadata({
   path: "/tv",
 });
 
+export const dynamic = "force-dynamic";
+
 export default async function TVPage() {
   await connection();
   const domain = process.env.NEXT_PUBLIC_DOMAIN || "rpbey.fr";

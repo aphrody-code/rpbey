@@ -7,6 +7,13 @@ const nextConfig: NextConfig = {
   // Enable React strict mode
   reactStrictMode: true,
 
+  turbopack: {
+    resolveAlias: {
+      react: "../../node_modules/react",
+      "react-dom": "../../node_modules/react-dom",
+    },
+  },
+
   // Output standalone pour systemd VPS — Vercel package son runtime, pas de standalone.
   ...(IS_VERCEL
     ? {}
@@ -95,6 +102,7 @@ const nextConfig: NextConfig = {
 
   // Experimental features
   experimental: {
+    cpus: 12,
     // Cache Turbopack persistant entre builds (gain 2-5x sur incremental).
     // Réactivé sur Next 16.3 canary (le panic JSX radix <SlotClone> de 16.2.6
     // est corrigé upstream). Combiné à `next build --turbopack`.

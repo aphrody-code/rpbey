@@ -5,7 +5,7 @@ scope:
   - apps/web/data
   - apps/web/src/server/services/global-search.ts
 status: "stable"
-last_updated: "2026-05-29"
+last_updated: "2026-06-02"
 related_symbols:
   - wbo-combos.json
   - wbo-meta.json

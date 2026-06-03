@@ -12,6 +12,8 @@ export const metadata: Metadata = {
   description: "Panel d'administration RPB - Gestion des bots, tournois et utilisateurs.",
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   await connection();
 

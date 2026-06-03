@@ -16,7 +16,7 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-BUN="${BUN:-/home/ubuntu/.bun/bin/bun}"
+BUN="${BUN:-$(command -v bun || echo "$HOME/.bun/bin/bun")}"
 
 cd "$ROOT/apps/web"
 

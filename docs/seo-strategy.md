@@ -4,7 +4,7 @@ description: "Plan SEO actionnable pour rpbey.fr, fondé sur la veille concurren
 scope:
   - apps/web
 status: "draft"
-last_updated: "2026-05-30"
+last_updated: "2026-06-02"
 ---
 
 # Stratégie SEO — devenir le site Beyblade n°1 en France

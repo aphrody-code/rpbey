@@ -725,7 +725,8 @@ const X_COMMUNITY_ID = "1809671339109658814";
 export async function listXMembers(q: string, limit = 60): Promise<XMember[]> {
   try {
     const { Database } = await import("bun:sqlite");
-    const path = `${process.env.HOME ?? "/home/ubuntu"}/.aphrody/x-store.sqlite`;
+    const os = await import("node:os");
+    const path = `${process.env.HOME ?? os.homedir()}/.aphrody/x-store.sqlite`;
     const dbx = new Database(path, { readonly: true });
     const needle = `%${q.trim()}%`;
 

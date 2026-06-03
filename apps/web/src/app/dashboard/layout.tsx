@@ -8,6 +8,8 @@ export const metadata: Metadata = {
   description: "Gérez votre profil, vos decks et suivez vos performances sur la plateforme RPB.",
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
   await connection();
   return (

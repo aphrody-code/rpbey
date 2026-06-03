@@ -9,10 +9,13 @@
 // Validation Zod a l'ingestion (CatalogProductSchema) + dedup par fingerprint de
 // contenu, en plus de la dedup par ASIN. Rate-limiting par domaine.
 
+import os from "node:os";
+import path from "node:path";
 import { CatalogProductSchema, type CatalogProduct } from "@rpbey/api-contract";
 import { contentFingerprint, curlGet, RateLimiter } from "./lib/scrape-utils";
 
-const JAR = "/home/ubuntu/.aphrody/amazon-fr-cookies.txt";
+const JAR =
+  process.env.AMAZON_COOKIE_JAR || path.join(os.homedir(), ".aphrody", "amazon-fr-cookies.txt");
 
 type RawItem = { asin: string; title?: string; price?: string; img?: string };
 

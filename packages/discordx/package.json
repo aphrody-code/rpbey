@@ -39,16 +39,16 @@
     "test": "echo 'Subpackages tested by root'"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.4.9",
-    "@changesets/changelog-github": "^0.6.0",
-    "@changesets/cli": "^2.30.0",
-    "@commitlint/cli": "^20.5.0",
-    "@commitlint/config-angular": "^20.5.0",
-    "@types/bun": "^1.3.12",
+    "@biomejs/biome": "2.4.16",
+    "@changesets/changelog-github": "^0.7.0",
+    "@changesets/cli": "^2.31.0",
+    "@commitlint/cli": "^21.0.2",
+    "@commitlint/config-angular": "^21.0.2",
+    "@types/bun": "^1.3.14",
     "husky": "^9.1.7",
     "tsup": "^8.5.1",
-    "turbo": "^2.8.20",
-    "typedoc": "^0.28.18",
+    "turbo": "^2.9.16",
+    "typedoc": "^0.28.19",
     "typescript": "catalog:"
   },
   "publishConfig": {
@@ -59,7 +59,7 @@
     "packages/*/examples/**",
     "docs"
   ],
-  "packageManager": "bun@1.3.12",
+  "packageManager": "bun@1.3.14",
   "trustedDependencies": [
     "core-js",
     "core-js-pure",
