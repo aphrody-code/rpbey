@@ -85,6 +85,22 @@ export const client = url
   Manager** (bot Cloud Run), **GitHub Actions secrets** (crons). Jamais commités.
 - Le secret repo GitHub `DATABASE_URL` alimente les workflows cron (Phase 3).
 
+## État (Phase 1 — exécutée 2026-06-04)
+
+- Projet Neon **`rpbey`** créé : `project_id = super-term-89085305`, branche
+  `main` (`br-damp-hat-a6hkjy66`), base `neondb`, Postgres 17, région
+  `aws-us-west-2`, org `aphrody`.
+- Endpoints (credentials **non** commités — dans GH secrets / Vercel / Secret Manager) :
+  - pooled : `ep-calm-king-a64xy09c-pooler.us-west-2.aws.neon.tech` → `DATABASE_URL`
+  - direct : `ep-calm-king-a64xy09c.us-west-2.aws.neon.tech` → `DIRECT_DATABASE_URL`
+- Dump/restore OK : **73 tables**, row-counts identiques source↔Neon
+  (`users`=104, `profiles`=103, `tournament_matches`=681, `anime_frames`=10738,
+  `gacha_cards`=126, `anime_episode_sources`=1964, …).
+- `packages/db/src/client.ts` + `drizzle.config.ts` rewirés sur `DATABASE_URL` /
+  `DIRECT_DATABASE_URL` avec fallback socket. Vérifié : lecture Neon OK, fallback
+  socket OK, `tsc --noEmit` = 0.
+- Secrets GitHub repo `DATABASE_URL` (pooled) + `DIRECT_DATABASE_URL` (direct) posés.
+
 ## Reste human-gated
 
 - **Basculer le DNS / désactiver le Postgres local** : ne PAS supprimer la base
