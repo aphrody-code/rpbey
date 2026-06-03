@@ -26,7 +26,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 | Type-check             | `bun run type-check` (turbo) — le vrai gate par appli est `bunx tsc --noEmit` |
 | Lint / fix             | `bun run lint` (oxlint) · `bun run lint:fix`                                  |
 | Format / check         | `bun run format` (oxfmt) · `bun run format:check`                             |
-| Test                   | `bun run test` (turbo)                                                        |
+| Test                   | `bun run test:all` (custom runner, **every** scope) · `bun run test:ci` (--strict, CI) · `bun run test` (turbo, fast/cached) |
+| Test (flake / scope)   | `bun run test:flake` (--randomize --rerun-each=3) · `bun run test:vendored` (discordx fork) · `bun run test:cov` (lcov+junit) |
 | E2E (chromium réel)    | `bun run e2e` (== `CHROME=/usr/local/bin/chromium bun scripts/e2e.ts`)        |
 | Docs (sync/format)     | `bun run docs` (umbrella : map+index+fmt+check) · `docs:check` · `docs:map` · `docs:index` · `docs:fmt` (outil Bun-natif `scripts/docs.ts`) |
 | Réactivation complète  | `bash scripts/reactivate.sh` (Nettoyage caches, bun install, build bot/web et restart systemd) |
@@ -39,7 +40,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### Par appli
 
 - **web** : `bunx tsc --noEmit` (le gate type principal). Le build type-check aussi désormais (`next.config.ts` `ignoreBuildErrors: false` depuis 2026-05-29). Build prod + déploiement → §Déploiement. QA visuel : `CHROME=/usr/local/bin/chromium bun scripts/shoot.ts`.
-- **bot** : `bunx tsc --noEmit`, puis `bun run build` (**SWC**, pas `bun build`) → `dist/`. `bun run start`. Tests : `bun test`, bridge Activity `bun run test:bridge`, ciblé `bun test test/<file>.test.ts` ou `bun test -t "<pattern>"`.
+- **bot** : `bunx tsc --noEmit`, puis `bun run build` (**SWC**, pas `bun build`) → `dist/`. `bun run start`. Tests : `bun test`, bridge Activity `bun run test:bridge`, ciblé `bun test test/<file>.test.ts` ou `bun test -t "<pattern>"`. ⚠️ Les 6 suites bot utilisent `mock.module` **process-global** + dynamic-import top-level → lancer les 6 fichiers dans un **seul** process fuit les mocks (échec dépendant de l'ordre). Le runner `scripts/test-all.ts` les **isole par fichier** (`perFile`) ; un `bun test` global sur le bot peut diverger selon l'ordre de découverte.
+
+> **Test runner sur-mesure — `scripts/test-all.ts`** (couvre **TOUS** les 25 scopes). Pourquoi : `turbo run test` ne lance que les scopes ayant un script `test` → `gacha-server` + `dashboard` (qui **ont** des tests) étaient **silencieusement skippés**. Le runner énumère chaque membre des globs `workspaces`, découvre les fichiers via git (prune `.gitignore` → pas de double-run de la copie `.next/standalone/…utils.test.ts`), lance `bun test` par scope dans son cwd (preload bunfig par scope : reflect-metadata bot, happy-dom dashboard), classe explicitement le fork vendored discordx + le SDK généré (`@rpbey/api-client`) + le leaf cassé (`@rpbey/discordx`, self-dep `discordx` absente), affiche une matrice et échoue sur tout gap (`--strict`). Tiers : unit (défaut) / live (`--live`, challonge self-skip) / vendored (`--vendored`) / skip. CI = `bun run test:ci`.
 
 ## Architecture — la vue d'ensemble
 
