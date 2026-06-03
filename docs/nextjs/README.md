@@ -1,32 +1,27 @@
 ---
-title: "Next.js — doc vendorée (knowledge base monorepo rpbey)"
-description: "Documentation vendorée de Next.js 16.2.6 App Router pour le dashboard rpbey déployé en standalone VPS."
+title: "Next.js — notes build rpbey (apps/web)"
+description: "Pièges de build Next.js App Router pour le dashboard rpbey (VPS standalone). La doc Next.js complète est bundlée et version-matchée — voir ci-dessous."
 scope:
   - apps/web
 status: "stable"
-last_updated: "2026-06-02"
+last_updated: "2026-06-04"
 related_symbols:
   - next/config
   - transpilePackages
   - serverExternalPackages
 ---
 
-# Next.js — doc vendorée (knowledge base monorepo rpbey)
+# Next.js — notes build rpbey (apps/web)
 
-Doc complète Next.js récupérée le **2026-05-27** depuis `nextjs.org/docs/llms-full.txt`.
+> **Doc Next.js complète** : version-matchée et bundlée dans
+> `node_modules/next/dist/docs/` (cf. `apps/web/AGENTS.md`). On ne vendore plus de
+> dump `llms-full.txt` (3,4 Mo) — il dérivait de la version installée et faisait
+> doublon avec la doc bundlée. `grep`/`Read` la doc bundlée à la place.
 
 ## Version
 
-- **Cible runtime : Next.js `16.2.6`** = dernière version **stable** (`dist-tag latest`) au 2026-05-27.
-  Le monorepo est **déjà à jour** — il n'existe pas de stable plus récente.
-- Au-dessus de 16.2.6 il n'y a que `16.3.0-canary.x` (pré-release, **pas pour la prod**).
-  Réévaluer quand 16.3.0 passe `latest`.
-- React stable = `19.2.6` (catalog `^19.2.5` y flotte). Runtime Bun (`bun --bun`), pas Node.
-
-## Fichiers
-
-- `llms-full.txt` — doc complète (3,4 Mo / 88 661 lignes). **Ne pas lire en entier** : `grep -n`/`sed -n`.
-- `llms-index.txt` — index officiel (liens `nextjs.org/docs/*`).
+- Runtime : Next.js `16.3.0-canary.x` (catalog), React `19.x`, Bun (`bun --bun`), pas Node.
+- Réévaluer le pin canary quand `16.3.0` passe `latest`.
 
 ## Pièges build rpbey (découverts au cutover, 2026-05-27)
 
