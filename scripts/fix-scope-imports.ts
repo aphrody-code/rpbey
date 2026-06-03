@@ -76,8 +76,17 @@ interface Hit {
   after: string;
 }
 
+/**
+ * Specifiers to NEVER rename. `@aphrody-code/canvas` is an external node-canvas
+ * fork published only under that scope (no `@aphrody/canvas` exists / no source
+ * repo on the VPS), so consumers keep depending on it as-is.
+ */
+const SKIP = new Set<string>(["@aphrody-code/canvas"]);
+
 /** Quote-aware matcher: only touches specifiers inside ' " or ` quotes. */
 function rename(spec: string): string | null {
+  // Honour SKIP for the package root and any subpath of a skipped package.
+  for (const s of SKIP) if (spec === s || spec.startsWith(s + "/")) return null;
   if (EXACT[spec] !== undefined) return EXACT[spec];
   for (const k of Object.keys(EXACT)) {
     // EXACT applies to subpaths too: "@n2b/core/x" → "@aphrody/n2b-core/x"
