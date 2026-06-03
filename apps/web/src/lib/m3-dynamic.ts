@@ -1,9 +1,9 @@
 "use client";
 
 // Material You runtime — dérive et applique un thème M3 depuis une couleur seed,
-// via @aphrody-code/m3-tokens. Utilisé pour reteinter le knowledge panel autour
+// via @aphrody/m3-tokens. Utilisé pour reteinter le knowledge panel autour
 // de la couleur dominante du produit affiché (effet « Material You » signature).
-import { applyDynamicColor, schemeFromSeed } from "@aphrody-code/m3-tokens/dynamic-color";
+import { applyDynamicColor, schemeFromSeed } from "@aphrody/m3-tokens/dynamic-color";
 
 export { applyDynamicColor };
 

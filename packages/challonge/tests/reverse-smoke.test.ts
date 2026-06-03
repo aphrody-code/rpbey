@@ -16,7 +16,7 @@ import { describe, test, expect, beforeAll } from "bun:test";
 import os from "node:os";
 import { join } from "node:path";
 import { ChallongeReverse, ChallongeReverseError, type LogPageResult } from "../src/reverse";
-import { isLibAvailable } from "@aphrody-code/bxc/ffi/curl-impersonate";
+import { isLibAvailable } from "@aphrody/bxc/ffi/curl-impersonate";
 
 // ---------------------------------------------------------------------------
 // Skip logic

@@ -8,7 +8,7 @@
 import { describe, test, expect, beforeEach, mock } from "bun:test";
 import { ChallongeScraper, dumpChallongeRaw, type FakePage } from "../src/scraper.ts";
 import { CurlImpersonateError } from "../src/transports/curl-impersonate-types.ts";
-import { isLibAvailable } from "@aphrody-code/bxc/ffi/curl-impersonate";
+import { isLibAvailable } from "@aphrody/bxc/ffi/curl-impersonate";
 
 // ---------------------------------------------------------------------------
 // Skip helper

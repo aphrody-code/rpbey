@@ -2,7 +2,7 @@
  * m3.css — Material 3 design tokens for RPB (dark-first)
  * -----------------------------------------------------------------------------
  * Système de tokens M3 généré depuis le seed de marque RPB (rouge #dc2626) via
- * `@aphrody-code/m3-tokens` (schemeFromSeed, variant "vibrant", dark). Le bleu
+ * `@aphrody/m3-tokens` (schemeFromSeed, variant "vibrant", dark). Le bleu
  * tournoi est dérivé du seed #60a5fa. Vibrant maximise la chroma → rouge sang
  * (`primary-container #93000b`) + or-ambre (`tertiary-container #683c10`) :
  * rupture nette vs le gris froid Google de l'ancienne palette.

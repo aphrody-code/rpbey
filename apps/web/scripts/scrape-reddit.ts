@@ -3,7 +3,7 @@
  * Reddit r/BeybladeX scraper + Hype/Lexicon analyzer.
  *
  * Acquisition : API JSON publique de Reddit (`/r/BeybladeX/{hot,top}.json`) via
- * curl-impersonate (`@aphrody-code/bxc`, profil chrome — même moteur TLS-fingerprint
+ * curl-impersonate (`@aphrody/bxc`, profil chrome — même moteur TLS-fingerprint
  * que le scraper Challonge). Pas de navigateur headless, pas de bxc-engine à compiler.
  *
  * Corrèle les mentions avec le catalogue produits + master-parts, calcule des scores
@@ -20,7 +20,7 @@
  * Usage : bun apps/web/scripts/scrape-reddit.ts
  */
 
-import { ImpersonatedClient } from "@aphrody-code/bxc/ffi/curl-impersonate";
+import { ImpersonatedClient } from "@aphrody/bxc/ffi/curl-impersonate";
 
 const DATA_DIR = new URL("../data/", import.meta.url).pathname;
 const TT_PRODUCTS_PATH = `${DATA_DIR}takaratomy-products.json`;

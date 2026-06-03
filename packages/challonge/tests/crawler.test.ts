@@ -20,7 +20,7 @@ import type {
   TransportRequest,
   TransportResponse,
 } from "../src/transports/transport.ts";
-import { isLibAvailable } from "@aphrody-code/bxc/ffi/curl-impersonate";
+import { isLibAvailable } from "@aphrody/bxc/ffi/curl-impersonate";
 
 // ---------------------------------------------------------------------------
 // Fixtures

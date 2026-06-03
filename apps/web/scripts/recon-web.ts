@@ -11,7 +11,7 @@
 // Usage : bun recon-web.ts "<blade>" "<query>"
 //   argv[2] = nom du blade (terme distinctif pour la densité topicale)
 //   argv[3] = requête complète
-import { ImpersonatedClient } from "@aphrody-code/bxc/ffi/curl-impersonate";
+import { ImpersonatedClient } from "@aphrody/bxc/ffi/curl-impersonate";
 
 function emit(o: { hits: number; snippets: string[]; ok: boolean }) {
   process.stdout.write(JSON.stringify(o));

@@ -5,7 +5,7 @@ import {
   type Canvas,
   type Image as CanvasImageType,
   type SKRSContext2D,
-} from "@aphrody-code/canvas";
+} from "@aphrody/canvas";
 
 import { resolveRootPath } from "../paths.js";
 

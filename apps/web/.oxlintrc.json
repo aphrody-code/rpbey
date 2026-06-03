@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
   "plugins": ["import", "typescript", "react", "jsx-a11y", "nextjs", "unicorn"],
-  "jsPlugins": ["../../node_modules/@aphrody-code/eslint-plugin-m3/index.js"],
+  "jsPlugins": ["../../node_modules/@aphrody/eslint-plugin-m3/index.js"],
   "env": {
     "browser": true,
     "node": true

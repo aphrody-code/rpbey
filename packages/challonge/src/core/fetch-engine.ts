@@ -14,7 +14,7 @@
  *   - `NativeFetchEngine` — `globalThis.fetch`. Pour les tests / environnements
  *     sans FFI (CI sans .so, bundle Edge). Aucune impersonation TLS.
  *   - `CdpEngine` — chemin de SECOURS Cloudflare. LAZY : `request()` fait un
- *     `import()` DYNAMIQUE de `@aphrody-code/bxc` (Browser CDP, profil `stealth`)
+ *     `import()` DYNAMIQUE de `@aphrody/bxc` (Browser CDP, profil `stealth`)
  *     pour minter un `cf_clearance` puis lire le HTML rendu. Jamais importé en
  *     top-level pour ne pas charger le CDP (Chrome/bxc-engine) sauf besoin réel.
  */
@@ -23,7 +23,7 @@ import {
   ImpersonatedClient,
   type ImpersonateProfile,
   type ImpersonatedResponse,
-} from "@aphrody-code/bxc/ffi/curl-impersonate";
+} from "@aphrody/bxc/ffi/curl-impersonate";
 
 // ---------------------------------------------------------------------------
 // Types bas-niveau
@@ -204,11 +204,11 @@ export interface CdpEngineOptions {
 
 /**
  * Engine de SECOURS Cloudflare. Quand l'impersonation HTTP échoue (challenge JS
- * non franchi), `CdpEngine` lance un vrai navigateur via `@aphrody-code/bxc`
+ * non franchi), `CdpEngine` lance un vrai navigateur via `@aphrody/bxc`
  * (`Browser.newPage({ profile: "stealth" })`), navigue vers l'URL pour laisser
  * Cloudflare émettre un `cf_clearance`, puis renvoie le HTML rendu.
  *
- * IMPORTANT — l'import de `@aphrody-code/bxc` (qui tire le CDP / bxc-engine) est
+ * IMPORTANT — l'import de `@aphrody/bxc` (qui tire le CDP / bxc-engine) est
  * DYNAMIQUE et déclenché uniquement au premier `request()`. Aucune dépendance
  * top-level : un consommateur qui n'emprunte jamais ce chemin ne charge jamais
  * le navigateur.
@@ -219,7 +219,7 @@ export interface CdpEngineOptions {
  * nôtre. On type donc le module via une interface locale minimale.
  */
 
-/** Forme minimale du module `@aphrody-code/bxc` consommée par `CdpEngine`. */
+/** Forme minimale du module `@aphrody/bxc` consommée par `CdpEngine`. */
 interface BxcBrowserModule {
   Browser: {
     newPage(opts: { profile: string }): Promise<{
@@ -242,7 +242,7 @@ export class CdpEngine implements FetchEngine {
   async request(url: string, opts: FetchEngineRequest = {}): Promise<RawHttpResponse> {
     // Import dynamique, spécifieur non littéral : ne charge le CDP qu'au besoin
     // ET empêche `tsc` de suivre la source `.ts` brute de bxc.
-    const specifier = "@aphrody-code/bxc";
+    const specifier = "@aphrody/bxc";
     const mod = (await import(/* @vite-ignore */ specifier)) as BxcBrowserModule;
 
     const page = await mod.Browser.newPage({ profile: this.#profile });

@@ -19,7 +19,7 @@
     "types": ["bun-types"],
     "noEmit": true,
     "paths": {
-      "@aphrody-code/x": ["./types/aphrody-x/index.d.ts"]
+      "@aphrody/x": ["./types/aphrody-x/index.d.ts"]
     }
   },
   "include": ["src/**/*.ts"],

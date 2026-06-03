@@ -30,7 +30,7 @@
 import {
   extractChallongeTournament,
   type ChallongeTournamentSnapshot,
-} from "@aphrody-code/challonge";
+} from "@aphrody/challonge";
 import { parseBracketSvg, type BracketMatch } from "../scrapers/bracket-svg";
 import {
   type ScrapedMatch,

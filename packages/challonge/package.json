@@ -49,8 +49,8 @@
     "lint:fix": "oxlint --config .oxlintrc.json --fix src tests"
   },
   "dependencies": {
-    "@aphrody-code/bxc": "catalog:",
-    "@aphrody-code/challonge": "^0.1.2",
+    "@aphrody/bxc": "catalog:",
+    "@aphrody/challonge": "^0.1.2",
     "lru-cache": "catalog:",
     "zod": "catalog:"
   },

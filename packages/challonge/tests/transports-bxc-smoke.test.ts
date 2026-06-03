@@ -12,7 +12,7 @@ import { describe, test, expect, beforeAll } from "bun:test";
 import os from "node:os";
 import { join } from "node:path";
 import { BxcTransport } from "../src/transports/bxc";
-import { isLibAvailable } from "@aphrody-code/bxc/ffi/curl-impersonate";
+import { isLibAvailable } from "@aphrody/bxc/ffi/curl-impersonate";
 import {
   validateURL,
   upgradeToHttps,

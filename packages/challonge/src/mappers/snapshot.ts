@@ -43,7 +43,7 @@ import {
 
 /**
  * Structural shape of `ChallongeTournamentSnapshot` (from
- * `@aphrody-code/bxc/scrapers/challonge`), re-declared locally so this module
+ * `@aphrody/bxc/scrapers/challonge`), re-declared locally so this module
  * carries ZERO bxc import and stays bundlable everywhere.
  *
  * Only the fields read by the two mappers are typed; everything else is left

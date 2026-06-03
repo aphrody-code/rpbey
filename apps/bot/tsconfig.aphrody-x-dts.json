@@ -13,8 +13,8 @@
     "emitDeclarationOnly": true,
     "noEmitOnError": false,
     "outDir": "./types/aphrody-x",
-    "rootDir": "../../node_modules/@aphrody-code/x/src"
+    "rootDir": "../../node_modules/@aphrody/x/src"
   },
-  "include": ["../../node_modules/@aphrody-code/x/src/**/*.ts"],
-  "exclude": ["../../node_modules/@aphrody-code/x/src/**/*.test.ts"]
+  "include": ["../../node_modules/@aphrody/x/src/**/*.ts"],
+  "exclude": ["../../node_modules/@aphrody/x/src/**/*.test.ts"]
 }

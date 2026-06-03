@@ -21,8 +21,8 @@
     "test:bridge": "bun test test/discord-activity.test.ts && bun test test/gacha-api.test.ts && bun test test/api-server.test.ts && bun test test/play-command.test.ts"
   },
   "dependencies": {
-    "@aphrody-code/canvas": "0.1.99-fork.4",
-    "@aphrody-code/x": "catalog:",
+    "@aphrody/canvas": "^0.1.99",
+    "@aphrody/x": "catalog:",
     "@paralleldrive/cuid2": "catalog:",
     "@rose-griffon/challonge": "workspace:*",
     "@rpbey/api-contract": "workspace:*",

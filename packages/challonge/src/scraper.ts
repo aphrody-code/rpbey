@@ -22,7 +22,7 @@ import { CurlImpersonateError, isRedirectInfo } from "./transports/curl-imperson
 import {
   extractChallongeTournament,
   type ChallongeTournamentSnapshot,
-} from "@aphrody-code/challonge";
+} from "@aphrody/challonge";
 import { resolveDefaultCookiePath } from "./utils/cookies";
 import { parseInitialStoreState } from "./extractors/store-state";
 import { type ChallongeSnapshotLike, snapshotToScrapedTournament } from "./mappers/snapshot";

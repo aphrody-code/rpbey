@@ -1,4 +1,4 @@
-import { createCanvas, GlobalFonts, loadImage } from "@aphrody-code/canvas";
+import { createCanvas, GlobalFonts, loadImage } from "@aphrody/canvas";
 import sharp from "sharp";
 
 import { resolveRootPath } from "./paths.js";

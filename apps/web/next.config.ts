@@ -97,7 +97,7 @@ const nextConfig: NextConfig = {
     // Turbopack le require() nativement (sinon crash eval `utils.isObject`).
     "@rose-griffon/challonge",
     "@rose-griffon/challonge-core",
-    "@aphrody-code/bxc",
+    "@aphrody/bxc",
   ],
 
   // Experimental features

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Link from "next/link";
-import { MdFilledButton } from "@aphrody-code/m3-react";
+import { MdFilledButton } from "@aphrody/m3-react";
 import { applyDynamicColor, clearDynamicColor, dominantColorFromImage } from "@/lib/m3-dynamic";
 import type { BxProductGroup, RecommendedProduct } from "../../comparateur/_components/types";
 import styles from "./KnowledgePanel.module.css";

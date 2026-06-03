@@ -3,7 +3,7 @@ import { ApplicationCommandOptionType, EmbedBuilder, type CommandInteraction } f
 import { injectable } from "tsyringe";
 
 import { existsSync } from "node:fs";
-import { Store, BeybladeXRag } from "@aphrody-code/x";
+import { Store, BeybladeXRag } from "@aphrody/x";
 
 import { Colors } from "../../lib/constants.js";
 import { logger } from "../../lib/logger.js";

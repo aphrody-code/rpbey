@@ -17,7 +17,7 @@
 import {
   type isLibAvailable,
   type ImpersonateProfile,
-} from "@aphrody-code/bxc/ffi/curl-impersonate";
+} from "@aphrody/bxc/ffi/curl-impersonate";
 import { loadCookieJar, resolveDefaultCookiePath } from "../utils/cookies";
 import { LruCache } from "../core/cache";
 import {

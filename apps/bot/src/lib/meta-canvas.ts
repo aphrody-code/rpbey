@@ -1,4 +1,4 @@
-import { createCanvas, GlobalFonts, loadImage, type SKRSContext2D } from "@aphrody-code/canvas";
+import { createCanvas, GlobalFonts, loadImage, type SKRSContext2D } from "@aphrody/canvas";
 
 import { resolveRootPath } from "./paths.js";
 import prisma from "./prisma.js";

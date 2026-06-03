@@ -2,7 +2,7 @@
 /**
  * Fondation de scraping bxc — sur mesure pour les sources rpbey.
  *
- * Bâtie sur l'API unifiée du package **`@aphrody-code/bxc`** (`Browser.newPage`),
+ * Bâtie sur l'API unifiée du package **`@aphrody/bxc`** (`Browser.newPage`),
  * pas sur des chemins de source absolus. Un seul point d'entrée `fetchSource`
  * choisit le profil bxc adapté :
  *   - `static`  : DOM zigquery (SSR/HTML statique, 0 JS) — le plus rapide
@@ -16,7 +16,7 @@
  * curl-impersonate (`http`) n'a PAS de proxy ; pour contourner un blocage IP,
  * utiliser `fast`/`stealth` (le moteur accepte un proxy) ou un jar de clearance. Bun only.
  */
-import { Browser } from "@aphrody-code/bxc/browser";
+import { Browser } from "@aphrody/bxc/browser";
 import * as cheerio from "cheerio";
 import { z } from "zod";
 

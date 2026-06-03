@@ -28,11 +28,11 @@
     "clean": "rm -rf .next dist node_modules/.cache .turbo tsconfig.tsbuildinfo"
   },
   "dependencies": {
-    "@aphrody-code/bxc": "catalog:",
-    "@aphrody-code/eslint-plugin-m3": "3.2.0",
-    "@aphrody-code/m3-react": "3.2.0",
-    "@aphrody-code/m3-tokens": "3.2.0",
-    "@aphrody-code/x": "catalog:",
+    "@aphrody/bxc": "catalog:",
+    "@aphrody/eslint-plugin-m3": "^3.2.1",
+    "@aphrody/m3-react": "^3.2.3",
+    "@aphrody/m3-tokens": "^3.2.1",
+    "@aphrody/x": "catalog:",
     "@better-auth/agent-auth": "^0.5.1",
     "@better-fetch/fetch": "^1.1.21",
     "@discord/embedded-app-sdk": "catalog:",

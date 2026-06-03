@@ -1,6 +1,6 @@
 /**
  * X.com private web API surface map (bxc recon + bundle extraction, 2026-06).
- * Shared by @aphrody-code/x and aphrody-x-client.
+ * Shared by @aphrody/x and aphrody-x-client.
  */
 export declare const X_DISCOVERY_UA =
   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36";

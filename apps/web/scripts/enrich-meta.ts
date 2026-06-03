@@ -1,7 +1,7 @@
 // enrich-meta.ts — enrichit l'algo MÉTA Beyblade X avec des signaux communautaires/sociaux.
 //
 // Pour chaque blade compétitif de NOTRE base, agrège 3 sources :
-//   1. X (Twitter)  — via @aphrody-code/x (SearchTimeline), engagement = likes + RT + quote.
+//   1. X (Twitter)  — via @aphrody/x (SearchTimeline), engagement = likes + RT + quote.
 //   2. Reddit       — session authentifiée (cookie jar), r/BeybladeX + r/Beyblade, score posts.
 //   3. Web          — via bxc (Google Web Search), nb de hits + snippets de tier/usage.
 //
@@ -18,7 +18,7 @@
 //   ENRICH_X_PER_BLADE=N   nb de tweets visés par blade (def 20)
 //   ENRICH_DELAY_MS=N      délai inter-blade (def 4000) — borne le rate-limit X (~50 req/15min)
 
-import { XSession, XClient } from "@aphrody-code/x";
+import { XSession, XClient } from "@aphrody/x";
 
 // -----------------------------------------------------------------------------
 // 1. Liste canonique des blades compétitifs Beyblade X (fusion de 3 sources repo)

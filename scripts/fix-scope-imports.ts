@@ -77,11 +77,11 @@ interface Hit {
 }
 
 /**
- * Specifiers to NEVER rename. `@aphrody-code/canvas` is an external node-canvas
+ * Specifiers to NEVER rename. `@aphrody/canvas` is an external node-canvas
  * fork published only under that scope (no `@aphrody/canvas` exists / no source
  * repo on the VPS), so consumers keep depending on it as-is.
  */
-const SKIP = new Set<string>(["@aphrody-code/canvas"]);
+const SKIP = new Set<string>([]);
 
 /** Quote-aware matcher: only touches specifiers inside ' " or ` quotes. */
 function rename(spec: string): string | null {
