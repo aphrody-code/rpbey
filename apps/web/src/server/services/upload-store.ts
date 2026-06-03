@@ -78,8 +78,14 @@ function assertImage(file: File, maxBytes: number) {
 }
 
 /**
- * Traite un buffer image en WebP selon le scope, l'écrit sur le CDN et renvoie
- * l'URL publique absolue. Strip metadata (pas de `.withMetadata()`).
+ * Traite un buffer image en WebP selon le scope, le stocke et renvoie l'URL
+ * publique absolue. Strip metadata (pas de `.withMetadata()`).
+ *
+ * Backend de stockage :
+ * - **Vercel** (`BLOB_READ_WRITE_TOKEN` présent) : **Vercel Blob** — pas de FS
+ *   writable sur Vercel, l'URL Blob CDN est renvoyée telle quelle.
+ * - **VPS / dev** : écriture FS directe sous `/var/www/cdn/...`, URL nginx
+ *   `cdn.rpbey.fr/...`.
  */
 async function processAndStore(
   scope: UploadScope,
@@ -93,13 +99,24 @@ async function processAndStore(
     .webp({ quality: 82, effort: 4 })
     .toBuffer();
 
-  const dir = path.join(CDN_UPLOAD_ROOT, scope);
-  await mkdir(dir, { recursive: true });
-
   const safeUser = userId.replace(/[^a-zA-Z0-9_-]/g, "");
   const filename = `${safeUser}-${crypto.randomUUID()}.webp`;
-  const filepath = path.join(dir, filename);
 
+  // Vercel : pas de FS writable → Vercel Blob (import dynamique pour ne pas
+  // peser sur les builds VPS et rester tree-shakeable).
+  if (process.env.BLOB_READ_WRITE_TOKEN) {
+    const { put } = await import("@vercel/blob");
+    const { url } = await put(`uploads/${scope}/${filename}`, webp, {
+      access: "public",
+      contentType: "image/webp",
+      token: process.env.BLOB_READ_WRITE_TOKEN,
+    });
+    return url;
+  }
+
+  const dir = path.join(CDN_UPLOAD_ROOT, scope);
+  await mkdir(dir, { recursive: true });
+  const filepath = path.join(dir, filename);
   await writeFile(filepath, webp, { mode: 0o644 });
 
   return `${CDN_UPLOAD_BASE_URL}/${scope}/${filename}`;

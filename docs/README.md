@@ -77,6 +77,7 @@ Cartographie du repo (apps/packages) : [REPO_MAP.md](REPO_MAP.md).
 
 ## migration
 
+- [Migration CDN — cdn.service (Bun) → Vercel Blob + reads CDN](migration/cdn.md) `stable` — Plan + état de la migration du serveur d'images Bun (apps/cdn, cdn.service) : les uploads écrivant sur /var/www passent à Vercel Blob (upload-store.ts), les lectures d'assets statiques restent servies par cdn.rpbey.fr (HTTP, joignable depuis Vercel). Le serveur Bun reste l'autorité VPS jusqu'au cutover.
 - [Migration Bot — apps/bot → Google Cloud Run](migration/cloud-run-bot.md) `stable` — Plan + procédure pour héberger le bot Discord @rose-griffon/bot (discordx + discord.js gateway, build SWC) sur Google Cloud Run (projet rgfr-8927d, région EU) : Dockerfile Bun, min-instances=1 + no-cpu-throttling pour la gateway persistante, secrets via Secret Manager, et caveat voix/lavalink (UDP).
 - [Migration DB — Postgres local → Neon (managed)](migration/neon.md) `stable` — Plan + procédure de migration de la base rpb_neon (socket local /var/run/postgresql) vers Neon Postgres managé (projet rpbey, org aphrody) : dump/restore, rewiring du client Drizzle sur DATABASE_URL, vérification par row-counts, secrets CI.
 - [Migration Site — apps/web (Next.js 16) → Vercel](migration/vercel.md) `stable` — Plan + procédure pour héberger le dashboard @rose-griffon/dashboard sur Vercel (team aphrody) : projet lié à apps/web, env (DATABASE_URL Neon + auth/discord/twitch), workflow deploy-vercel.yml (setup-bun canary), et découplage des exports JSON locaux (B_TS*.json, /var/www, data/).

@@ -1,0 +1,14 @@
+diff --git a/dist/index.js b/dist/index.js
+index 702f0e272d665fdc6cd1dd2c98f4c06cf9506f76..b6200b4da370a92546809203c6eb0c83ff57925c 100644
+--- a/dist/index.js
++++ b/dist/index.js
+@@ -198,3 +198,9 @@ export * from './util/compilable.js';
+ export * from './util/log.js';
+ export { logOnce } from './util/log-once.js';
+ export { createQueryId } from './util/query-id.js';
++// PATCH (rpbey): kysely@0.29.2 dist/index.js omits the migrator barrel re-export,
++// so DEFAULT_MIGRATION_LOCK_TABLE / DEFAULT_MIGRATION_TABLE / Migrator are absent
++// at runtime while index.d.ts still declares them. @better-auth/kysely-adapter
++// imports these named exports → Turbopack rejects the build statically. Re-export
++// the migrator module to restore the documented surface.
++export * from './migration/migrator.js';

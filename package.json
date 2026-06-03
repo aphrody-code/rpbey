@@ -113,5 +113,8 @@
     "prisma",
     "@prisma/engines",
     "@tsparticles/engine"
-  ]
+  ],
+  "patchedDependencies": {
+    "kysely@0.29.2": "patches/kysely@0.29.2.patch"
+  }
 }

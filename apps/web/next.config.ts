@@ -241,6 +241,11 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "cdn.rosegriffon.fr",
       },
+      {
+        // Vercel Blob (uploads avatars/bannières/deckboxes/contenu en prod Vercel).
+        protocol: "https",
+        hostname: "*.public.blob.vercel-storage.com",
+      },
     ],
   },
 
