@@ -43,7 +43,8 @@ const flag = (n: string) => argv.has(n);
 const opt = (n: string): string | undefined => {
   for (let i = 0; i < argvList.length; i++) {
     if (argvList[i].startsWith(`${n}=`)) return argvList[i].slice(n.length + 1);
-    if (argvList[i] === n && i + 1 < argvList.length && !argvList[i + 1].startsWith("--")) return argvList[i + 1];
+    if (argvList[i] === n && i + 1 < argvList.length && !argvList[i + 1].startsWith("--"))
+      return argvList[i + 1];
   }
   return undefined;
 };
@@ -63,7 +64,14 @@ const FILTER = opt("--filter");
 const PASSTHROUGH: string[] = (() => {
   const out: string[] = [];
   for (const b of ["--randomize", "--concurrent"]) if (flag(b)) out.push(b);
-  for (const v of ["--seed", "--rerun-each", "--retry", "--max-concurrency", "--test-name-pattern", "-t"]) {
+  for (const v of [
+    "--seed",
+    "--rerun-each",
+    "--retry",
+    "--max-concurrency",
+    "--test-name-pattern",
+    "-t",
+  ]) {
     const val = opt(v);
     if (val !== undefined) out.push(v, val);
   }
@@ -93,10 +101,17 @@ const POLICY: Record<string, Policy> = {
   // Generated OpenAPI SDK — its surface is exercised by @rpbey/api-contract's
   // own suite (the schemas it is generated from), so a separate suite would be
   // redundant. Skipped with a reason rather than reported as a gap.
-  "@rpbey/api-client": { mode: "skip", reason: "generated SDK (@hey-api) from @rpbey/api-contract — covered by that scope's tests" },
+  "@rpbey/api-client": {
+    mode: "skip",
+    reason: "generated SDK (@hey-api) from @rpbey/api-contract — covered by that scope's tests",
+  },
   // The vendored fork's broken leaf: its self-import `discordx` is absent from
   // node_modules (Cannot find package 'discordx'); excluded in CI upstream.
-  "@rpbey/discordx": { mode: "skip", reason: "vendored discordx fork: missing self-dep 'discordx' (Cannot find package) — excluded in CI" },
+  "@rpbey/discordx": {
+    mode: "skip",
+    reason:
+      "vendored discordx fork: missing self-dep 'discordx' (Cannot find package) — excluded in CI",
+  },
 };
 
 // Path-based classification for the nested vendored fork subtree.
@@ -120,7 +135,9 @@ interface Member {
 }
 
 async function discoverMembers(): Promise<Member[]> {
-  const rootPkg = (await Bun.file(join(ROOT, "package.json")).json()) as { workspaces?: string[] | { packages?: string[] } };
+  const rootPkg = (await Bun.file(join(ROOT, "package.json")).json()) as {
+    workspaces?: string[] | { packages?: string[] };
+  };
   const ws = rootPkg.workspaces;
   const globs = Array.isArray(ws) ? ws : (ws?.packages ?? []);
   const seen = new Set<string>();
@@ -149,9 +166,21 @@ async function discoverMembers(): Promise<Member[]> {
 // All non-ignored test files repo-wide, via git (auto-prunes .gitignore trees,
 // includes fresh untracked files). Falls back to a Glob walk if git is absent.
 async function discoverTestFiles(): Promise<string[]> {
-  const pats = ["*.test.ts", "*.test.tsx", "*.test.js", "*.test.jsx", "*.spec.ts", "*.spec.tsx", "*_test.ts", "*_spec.ts"];
+  const pats = [
+    "*.test.ts",
+    "*.test.tsx",
+    "*.test.js",
+    "*.test.jsx",
+    "*.spec.ts",
+    "*.spec.tsx",
+    "*_test.ts",
+    "*_spec.ts",
+  ];
   const gitList = async (extra: string[]): Promise<string[]> => {
-    const proc = Bun.spawn(["git", "-C", ROOT, "ls-files", ...extra, "--", ...pats], { stdout: "pipe", stderr: "ignore" });
+    const proc = Bun.spawn(["git", "-C", ROOT, "ls-files", ...extra, "--", ...pats], {
+      stdout: "pipe",
+      stderr: "ignore",
+    });
     const text = await new Response(proc.stdout).text();
     const code = await proc.exited;
     if (code !== 0) throw new Error("git ls-files failed");
@@ -196,17 +225,32 @@ interface Result {
 const safeName = (name: string) => name.replace(/[@/]/g, "_").replace(/^_+/, "");
 
 async function runCmd(cmd: string[], cwd: string, env: Record<string, string>): Promise<number> {
-  const proc = Bun.spawn(cmd, { cwd, env: { ...process.env, ...env }, stdout: "inherit", stderr: "inherit" });
+  const proc = Bun.spawn(cmd, {
+    cwd,
+    env: { ...process.env, ...env },
+    stdout: "inherit",
+    stderr: "inherit",
+  });
   return await proc.exited;
 }
 
 async function runScope(m: Member): Promise<Result> {
   const t0 = Bun.nanoseconds();
-  const env: Record<string, string> = { NODE_ENV: "test", FORCE_COLOR: "1", ...(m.policy.env ?? {}) };
+  const env: Record<string, string> = {
+    NODE_ENV: "test",
+    FORCE_COLOR: "1",
+    ...(m.policy.env ?? {}),
+  };
 
   for (const cmd of m.policy.prep ?? []) {
     if ((await runCmd(cmd, m.dir, env)) !== 0) {
-      return { member: m, status: "PREP-FAIL", tests: m.files.length, durationMs: (Bun.nanoseconds() - t0) / 1e6, note: `prep failed: ${cmd.join(" ")}` };
+      return {
+        member: m,
+        status: "PREP-FAIL",
+        tests: m.files.length,
+        durationMs: (Bun.nanoseconds() - t0) / 1e6,
+        note: `prep failed: ${cmd.join(" ")}`,
+      };
     }
   }
 
@@ -214,8 +258,18 @@ async function runScope(m: Member): Promise<Result> {
   for (const p of m.policy.preload ?? []) extra.push("--preload", p);
   if (m.policy.timeoutMs) extra.push("--timeout", String(m.policy.timeoutMs));
   if (BAIL) extra.push("--bail");
-  if (COVERAGE) extra.push("--coverage", "--coverage-reporter=lcov", `--coverage-dir=${join(ROOT, "coverage", safeName(m.name))}`);
-  if (JUNIT) extra.push("--reporter=junit", "--reporter-outfile", join(ROOT, "test-results", `${safeName(m.name)}.xml`));
+  if (COVERAGE)
+    extra.push(
+      "--coverage",
+      "--coverage-reporter=lcov",
+      `--coverage-dir=${join(ROOT, "coverage", safeName(m.name))}`,
+    );
+  if (JUNIT)
+    extra.push(
+      "--reporter=junit",
+      "--reporter-outfile",
+      join(ROOT, "test-results", `${safeName(m.name)}.xml`),
+    );
   extra.push(...PASSTHROUGH);
 
   let failed = false;
@@ -228,34 +282,70 @@ async function runScope(m: Member): Promise<Result> {
     // never re-discovers artifact copies under .next/dist.
     if ((await runCmd(["bun", "test", ...m.files, ...extra], m.dir, env)) !== 0) failed = true;
   }
-  return { member: m, status: failed ? "FAIL" : "PASS", tests: m.files.length, durationMs: (Bun.nanoseconds() - t0) / 1e6 };
+  return {
+    member: m,
+    status: failed ? "FAIL" : "PASS",
+    tests: m.files.length,
+    durationMs: (Bun.nanoseconds() - t0) / 1e6,
+  };
 }
 
 // ── Main ──────────────────────────────────────────────────────────────────────
 const members = await discoverMembers();
 assignFiles(members, await discoverTestFiles());
-const selected = members.filter((m) => !FILTER || m.name.includes(FILTER) || m.rel.includes(FILTER));
+const selected = members.filter(
+  (m) => !FILTER || m.name.includes(FILTER) || m.rel.includes(FILTER),
+);
 
-console.log(`\x1b[1mtest-all\x1b[0m — ${selected.length}/${members.length} scopes selected` + (FILTER ? ` (filter: ${FILTER})` : ""));
-console.log(`tiers: unit=on  live=${RUN_LIVE ? "on" : "off"}  vendored=${RUN_VENDORED ? "on" : "off"}  strict=${STRICT ? "on" : "off"}  coverage=${COVERAGE ? "on" : "off"}\n`);
+console.log(
+  `\x1b[1mtest-all\x1b[0m — ${selected.length}/${members.length} scopes selected` +
+    (FILTER ? ` (filter: ${FILTER})` : ""),
+);
+console.log(
+  `tiers: unit=on  live=${RUN_LIVE ? "on" : "off"}  vendored=${RUN_VENDORED ? "on" : "off"}  strict=${STRICT ? "on" : "off"}  coverage=${COVERAGE ? "on" : "off"}\n`,
+);
 
 const results: Result[] = [];
 for (const m of selected) {
   const mode = m.policy.mode ?? "unit";
   if (mode === "skip") {
-    results.push({ member: m, status: "SKIP", tests: m.files.length, durationMs: 0, note: m.policy.reason ?? "policy: skip" });
+    results.push({
+      member: m,
+      status: "SKIP",
+      tests: m.files.length,
+      durationMs: 0,
+      note: m.policy.reason ?? "policy: skip",
+    });
     continue;
   }
   if (mode === "live" && !RUN_LIVE) {
-    results.push({ member: m, status: "SKIP", tests: m.files.length, durationMs: 0, note: m.policy.reason ?? "live tier (use --live)" });
+    results.push({
+      member: m,
+      status: "SKIP",
+      tests: m.files.length,
+      durationMs: 0,
+      note: m.policy.reason ?? "live tier (use --live)",
+    });
     continue;
   }
   if (mode === "vendored" && !RUN_VENDORED) {
-    results.push({ member: m, status: "SKIP", tests: m.files.length, durationMs: 0, note: m.policy.reason ?? "vendored (use --vendored)" });
+    results.push({
+      member: m,
+      status: "SKIP",
+      tests: m.files.length,
+      durationMs: 0,
+      note: m.policy.reason ?? "vendored (use --vendored)",
+    });
     continue;
   }
   if (m.files.length === 0) {
-    results.push({ member: m, status: "NO-TESTS", tests: 0, durationMs: 0, note: "scope has zero test files" });
+    results.push({
+      member: m,
+      status: "NO-TESTS",
+      tests: 0,
+      durationMs: 0,
+      note: "scope has zero test files",
+    });
     continue;
   }
   console.log(`\x1b[36m▶ ${m.name}\x1b[0m (${m.rel}) — ${m.files.length} file(s)`);
@@ -277,14 +367,19 @@ const nameW = Math.max(...results.map((r) => r.member.name.length), 12);
 console.log("\x1b[1m── scope matrix ───────────────────────────────────────────────\x1b[0m");
 for (const r of results) {
   const dur = r.durationMs ? `${(r.durationMs / 1000).toFixed(2)}s` : "";
-  console.log(`  ${colour[r.status]}  ${pad(r.member.name, nameW)}  ${pad(String(r.tests) + "f", 5)} ${pad(dur, 8)} ${r.note ?? ""}`);
+  console.log(
+    `  ${colour[r.status]}  ${pad(r.member.name, nameW)}  ${pad(String(r.tests) + "f", 5)} ${pad(dur, 8)} ${r.note ?? ""}`,
+  );
 }
 
 const pass = results.filter((r) => r.status === "PASS");
 const fail = results.filter((r) => r.status === "FAIL" || r.status === "PREP-FAIL");
 const gaps = results.filter((r) => r.status === "NO-TESTS");
 const skipped = results.filter((r) => r.status === "SKIP");
-const totalFiles = results.reduce((n, r) => n + (r.status === "PASS" || r.status === "FAIL" ? r.tests : 0), 0);
+const totalFiles = results.reduce(
+  (n, r) => n + (r.status === "PASS" || r.status === "FAIL" ? r.tests : 0),
+  0,
+);
 
 console.log("\x1b[1m───────────────────────────────────────────────────────────────\x1b[0m");
 console.log(
@@ -294,9 +389,25 @@ console.log(
 if (gaps.length) console.log(`gaps (no tests): ${gaps.map((g) => g.member.name).join(", ")}`);
 
 if (JSON_OUT) {
-  console.log(JSON.stringify({ scopes: results.map((r) => ({ name: r.member.name, rel: r.member.rel, status: r.status, tests: r.tests, ms: Math.round(r.durationMs), note: r.note })) }, null, 2));
+  console.log(
+    JSON.stringify(
+      {
+        scopes: results.map((r) => ({
+          name: r.member.name,
+          rel: r.member.rel,
+          status: r.status,
+          tests: r.tests,
+          ms: Math.round(r.durationMs),
+          note: r.note,
+        })),
+      },
+      null,
+      2,
+    ),
+  );
 }
 
 const failed = fail.length > 0 || (STRICT && gaps.length > 0);
-if (STRICT && gaps.length) console.log("\x1b[31m✗ strict mode: zero-test scopes are failures\x1b[0m");
+if (STRICT && gaps.length)
+  console.log("\x1b[31m✗ strict mode: zero-test scopes are failures\x1b[0m");
 process.exit(failed ? 1 : 0);

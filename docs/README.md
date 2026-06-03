@@ -77,4 +77,4 @@ Cartographie du repo (apps/packages) : [REPO_MAP.md](REPO_MAP.md).
 
 ## nextjs
 
-- [Next.js — doc vendorée (knowledge base monorepo rpbey)](nextjs/README.md) `stable` — Documentation vendorée de Next.js 16.2.6 App Router pour le dashboard rpbey déployé en standalone VPS.
+- [Next.js — notes build rpbey (apps/web)](nextjs/README.md) `stable` — Pièges de build Next.js App Router pour le dashboard rpbey (VPS standalone). La doc Next.js complète est bundlée et version-matchée — voir ci-dessous.

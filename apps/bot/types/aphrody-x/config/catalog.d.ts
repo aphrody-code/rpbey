@@ -1,8 +1,8 @@
 export interface Operation {
-    name: string;
-    queryId: string;
-    operationType: "query" | "mutation" | "subscription";
-    featureSwitches: string[];
+  name: string;
+  queryId: string;
+  operationType: "query" | "mutation" | "subscription";
+  featureSwitches: string[];
 }
 /** Look up a single operation by its exact case-sensitive name. */
 export declare function getOperation(name: string): Operation | undefined;

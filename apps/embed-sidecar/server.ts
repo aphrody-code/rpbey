@@ -101,7 +101,9 @@ async function rerankTexts(query: string, passages: string[]): Promise<number[]>
   if (passages.length === 0) return [];
   const { tokenizer, model } = await getReranker();
   const q = (query ?? "").replace(/\s+/g, " ").trim();
-  const docs = passages.map((p) => (p ?? "").replace(/\s+/g, " ").trim().slice(0, RERANK_MAX_CHARS));
+  const docs = passages.map((p) =>
+    (p ?? "").replace(/\s+/g, " ").trim().slice(0, RERANK_MAX_CHARS),
+  );
   const inputs = tokenizer(
     Array.from({ length: docs.length }, () => q),
     { text_pair: docs, padding: true, truncation: true },

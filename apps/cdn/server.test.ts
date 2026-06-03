@@ -78,10 +78,7 @@ beforeAll(async () => {
     },
   });
 
-  const port = await Promise.race([
-    waitForPort(proc.stdout),
-    waitForPort(proc.stderr),
-  ]);
+  const port = await Promise.race([waitForPort(proc.stdout), waitForPort(proc.stderr)]);
   base = `http://127.0.0.1:${port}`;
 });
 

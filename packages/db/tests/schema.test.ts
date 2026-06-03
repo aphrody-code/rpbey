@@ -23,11 +23,7 @@ describe("pgEnum definitions", () => {
   });
 
   test("watchStatus == NOT_STARTED/IN_PROGRESS/COMPLETED", () => {
-    expect(schema.watchStatus.enumValues).toEqual([
-      "NOT_STARTED",
-      "IN_PROGRESS",
-      "COMPLETED",
-    ]);
+    expect(schema.watchStatus.enumValues).toEqual(["NOT_STARTED", "IN_PROGRESS", "COMPLETED"]);
   });
 });
 

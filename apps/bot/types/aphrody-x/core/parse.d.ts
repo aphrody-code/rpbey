@@ -1,17 +1,17 @@
 import { type Author, type Tweet, type User } from "./schemas";
 export { type Author, type Tweet, type User };
 export interface TweetPage {
-    tweets: Tweet[];
-    next_cursor?: string;
+  tweets: Tweet[];
+  next_cursor?: string;
 }
 export interface UserPage {
-    users: User[];
-    next_cursor?: string;
+  users: User[];
+  next_cursor?: string;
 }
 export declare class XError extends Error {
-    code: number;
-    status?: number;
-    constructor(message: string, code: number, status?: number);
+  code: number;
+  status?: number;
+  constructor(message: string, code: number, status?: number);
 }
 /** Extract structured X API errors from a response body and throw if present. */
 export declare function checkApiErrors(body: any): void;

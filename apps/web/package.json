@@ -138,11 +138,11 @@
     "unfetch": "^5.0.0",
     "vitest": "catalog:testing"
   },
-  "trustedDependencies": [
-    "sharp"
-  ],
   "overrides": {
     "@types/react": "19.2.16",
     "@types/react-dom": "19.2.3"
-  }
+  },
+  "trustedDependencies": [
+    "sharp"
+  ]
 }

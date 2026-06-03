@@ -1,8 +1,8 @@
 import type { Store } from "./store";
 export interface IngestStats {
-    tweetsIngested: number;
-    usersIngested: number;
-    communitiesIngested: number;
+  tweetsIngested: number;
+  usersIngested: number;
+  communitiesIngested: number;
 }
 /**
  * Recursively find and upsert all users in any JSON structure.

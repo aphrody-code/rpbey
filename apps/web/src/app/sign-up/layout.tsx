@@ -7,10 +7,6 @@ export const metadata: Metadata = {
 
 export const dynamic = "force-dynamic";
 
-export default function SignUpLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function SignUpLayout({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }

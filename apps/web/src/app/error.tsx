@@ -67,14 +67,8 @@ export default function ErrorPage({
       `}</style>
       <h1>Une erreur est survenue</h1>
       <p>Désolé, impossible d'afficher cette page pour le moment.</p>
-      {error.digest && (
-        <div className="digest">
-          ID: {error.digest}
-        </div>
-      )}
-      <button onClick={reset}>
-        Réessayer
-      </button>
+      {error.digest && <div className="digest">ID: {error.digest}</div>}
+      <button onClick={reset}>Réessayer</button>
     </div>
   );
 }

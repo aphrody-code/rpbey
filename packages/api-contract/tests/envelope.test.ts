@@ -47,9 +47,9 @@ describe("ErrorEnvelopeSchema", () => {
   });
 
   test("rejette un error sans code", () => {
-    expect(
-      ErrorEnvelopeSchema.safeParse({ ok: false, error: { message: "oups" } }).success,
-    ).toBe(false);
+    expect(ErrorEnvelopeSchema.safeParse({ ok: false, error: { message: "oups" } }).success).toBe(
+      false,
+    );
   });
 
   test("rejette ok:true", () => {

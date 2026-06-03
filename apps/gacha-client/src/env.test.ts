@@ -5,13 +5,7 @@
  * et les défauts prod sûrs. Aucune dépendance DOM/réseau.
  */
 import { describe, expect, test } from "bun:test";
-import {
-  GACHA_REST_URL,
-  GACHA_WS_URL,
-  IS_DISCORD,
-  proxifyUrl,
-  WEB_BASE,
-} from "./env";
+import { GACHA_REST_URL, GACHA_WS_URL, IS_DISCORD, proxifyUrl, WEB_BASE } from "./env";
 
 describe("contexte Bun (pas de window)", () => {
   test("IS_DISCORD est false hors navigateur", () => {

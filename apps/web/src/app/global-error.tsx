@@ -72,14 +72,8 @@ export default function GlobalError({
         <div className="container">
           <h1>Une erreur critique est survenue</h1>
           <p>Désolé, l'application a rencontré un problème inattendu.</p>
-          {error && error.digest && (
-            <div className="digest">
-              ID: {error.digest}
-            </div>
-          )}
-          <button onClick={reset}>
-            Recharger la page
-          </button>
+          {error && error.digest && <div className="digest">ID: {error.digest}</div>}
+          <button onClick={reset}>Recharger la page</button>
         </div>
       </body>
     </html>
