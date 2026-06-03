@@ -46,10 +46,11 @@ jobs:
       - name: Type-check
         run: bun run type-check
 
-      # turbo run test, excluding the vendored `@rpbey/discordx` fork.
-      # That fork ships a pre-existing, unrelated module-resolution failure
-      # (`Cannot find package 'discordx'`) and is git-ignored by oxlint/oxfmt
-      # (see .oxlintrc.json + CLAUDE.md). First-party suites pass (11/11
-      # tasks, 92+ tests, exit 0) once it is filtered out.
-      - name: Test (first-party suites)
-        run: bun run test -- --filter='!@rpbey/discordx'
+      # Custom runner covers EVERY workspace scope (turbo silently skips the
+      # script-less ones — gacha-server + dashboard HAVE test files but no
+      # `test` script). --strict fails on any zero-test scope. The vendored
+      # discordx fork (incl. the broken `@rpbey/discordx` leaf with its missing
+      # self-dep) is classified + skipped with a reason, not run, so no manual
+      # --filter is needed. Live/opt-in suites (challonge live paths) self-skip.
+      - name: Test (every scope, strict)
+        run: bun run test:ci
