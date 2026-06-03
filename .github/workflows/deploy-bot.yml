@@ -1,0 +1,76 @@
+name: Deploy bot to Cloud Run
+
+# Bot Discord @rose-griffon/bot → Google Cloud Run (projet rgfr-8927d, EU).
+# Container persistant (gateway Discord 24/7) : min-instances=1, max=1 (singleton,
+# lock PID), no-cpu-throttling. Build = Cloud Build avec le CONTEXTE racine du
+# monorepo + apps/bot/Dockerfile. Secrets injectés depuis GCP Secret Manager.
+#
+# Voir docs/migration/cloud-run-bot.md (caveat voix/UDP, Redis managé requis).
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "apps/bot/**"
+      - "packages/**"
+      - "package.json"
+      - "bun.lock"
+      - ".github/workflows/deploy-bot.yml"
+  workflow_dispatch: {}
+
+concurrency:
+  group: cloud-run-bot
+  cancel-in-progress: false
+
+env:
+  GCP_PROJECT: rgfr-8927d
+  REGION: europe-west1
+  SERVICE: rpbey-bot
+  IMAGE: europe-west1-docker.pkg.dev/rgfr-8927d/rpbey/rpbey-bot
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+
+      - id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - uses: google-github-actions/setup-gcloud@v2
+
+      - name: Ensure Artifact Registry repo exists
+        run: |
+          gcloud artifacts repositories describe rpbey \
+            --project="$GCP_PROJECT" --location="$REGION" >/dev/null 2>&1 \
+          || gcloud artifacts repositories create rpbey \
+            --project="$GCP_PROJECT" --location="$REGION" \
+            --repository-format=docker
+
+      - name: Build image (Cloud Build, monorepo root context)
+        run: |
+          gcloud builds submit \
+            --project="$GCP_PROJECT" \
+            --region="$REGION" \
+            --config=apps/bot/cloudbuild.yaml \
+            --substitutions="_IMAGE=$IMAGE:${GITHUB_SHA::8},_GH_PACKAGES_TOKEN=${{ secrets.GH_PACKAGES_TOKEN }}" \
+            .
+
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy "$SERVICE" \
+            --project="$GCP_PROJECT" \
+            --region="$REGION" \
+            --image="$IMAGE:${GITHUB_SHA::8}" \
+            --min-instances=1 --max-instances=1 \
+            --no-cpu-throttling \
+            --cpu=1 --memory=1Gi \
+            --port=8080 \
+            --no-allow-unauthenticated \
+            --set-secrets="DISCORD_TOKEN=DISCORD_TOKEN:latest,DATABASE_URL=DATABASE_URL:latest,BETTER_AUTH_SECRET=BETTER_AUTH_SECRET:latest,CHALLONGE_API_KEY=CHALLONGE_API_KEY:latest,BOT_API_KEY=BOT_API_KEY:latest"
+
+      - name: Describe
+        run: gcloud run services describe "$SERVICE" --project="$GCP_PROJECT" --region="$REGION" --format='value(status.url,status.conditions[0].status)'

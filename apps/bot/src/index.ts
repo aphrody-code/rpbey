@@ -99,8 +99,10 @@ async function gracefulShutdown(signal: "SIGTERM" | "SIGINT" | "SIGHUP"): Promis
   process.exit(exitCode);
 }
 
-// Start the bot HTTP API server
-startApiServer(parseInt(process.env.BOT_API_PORT ?? "3001", 10));
+// Start the bot HTTP API server.
+// Sur Cloud Run, écouter sur le port imposé par la plateforme (`$PORT`) ;
+// sinon le port API local (`BOT_API_PORT`, défaut 3001).
+startApiServer(parseInt(process.env.PORT ?? process.env.BOT_API_PORT ?? "3001", 10));
 
 // Wire Discord events to WebSocket pub/sub topics
 setupEventBridge();

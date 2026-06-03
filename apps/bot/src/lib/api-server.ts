@@ -320,14 +320,21 @@ export function startApiServer(port = 3001) {
     throw e;
   }
   serverRef = server;
-  logger.info(`Bot API server listening on http://127.0.0.1:${port} (ws: /ws)`);
+  const host = process.env.K_SERVICE ? "0.0.0.0" : "127.0.0.1";
+  logger.info(`Bot API server listening on http://${host}:${port} (ws: /ws)`);
   return server;
 }
 
 function buildServer(port: number): Server<WsData> {
+  // Sur Cloud Run (`K_SERVICE` injecté par la plateforme) il faut écouter sur
+  // `0.0.0.0:$PORT` pour passer le health check « container listening on PORT »,
+  // sinon le déploiement échoue. Sur le VPS on garde le loopback (`127.0.0.1`),
+  // l'exposition publique passant par nginx.
+  const onCloudRun = !!process.env.K_SERVICE;
+  const hostname = onCloudRun ? "0.0.0.0" : "127.0.0.1";
   return Bun.serve<WsData>({
     port,
-    hostname: "127.0.0.1",
+    hostname,
 
     routes: {
       // WebSocket upgrade — auth via `?key=<BOT_API_KEY>` (browser clients can't set headers).
