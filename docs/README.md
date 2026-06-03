@@ -75,6 +75,12 @@ Cartographie du repo (apps/packages) : [REPO_MAP.md](REPO_MAP.md).
 - [Refonte /search & /comparateur — Material 3 vivant et moderne](m3/search-redesign-plan.md) `draft` — Diagnostic visuel (captures prod), écart vs M3, et plan d'exécution pour transformer la page search (gabarit MUI-free) et le comparateur d'un clone Google Search plat en une UI Material You / M3 Expressive : profondeur tonale, couleur générée, imagerie, motion chorégraphiée.
 - [Stratégie tokens, thème, typo & motion (MUI → M3)](m3/theme-tokens.md) `draft` — Mapping palette/typo/forme MUI → tokens M3 (--md-sys-*), dynamic color HCT, comparatif des véhicules web, échelle typographique et tokens de motion.
 
+## migration
+
+- [Migration Bot — apps/bot → Google Cloud Run](migration/cloud-run-bot.md) `stable` — Plan + procédure pour héberger le bot Discord @rose-griffon/bot (discordx + discord.js gateway, build SWC) sur Google Cloud Run (projet rgfr-8927d, région EU) : Dockerfile Bun, min-instances=1 + no-cpu-throttling pour la gateway persistante, secrets via Secret Manager, et caveat voix/lavalink (UDP).
+- [Migration DB — Postgres local → Neon (managed)](migration/neon.md) `stable` — Plan + procédure de migration de la base rpb_neon (socket local /var/run/postgresql) vers Neon Postgres managé (projet rpbey, org aphrody) : dump/restore, rewiring du client Drizzle sur DATABASE_URL, vérification par row-counts, secrets CI.
+- [Migration Site — apps/web (Next.js 16) → Vercel](migration/vercel.md) `stable` — Plan + procédure pour héberger le dashboard @rose-griffon/dashboard sur Vercel (team aphrody) : projet lié à apps/web, env (DATABASE_URL Neon + auth/discord/twitch), workflow deploy-vercel.yml (setup-bun canary), et découplage des exports JSON locaux (B_TS*.json, /var/www, data/).
+
 ## nextjs
 
 - [Next.js — notes build rpbey (apps/web)](nextjs/README.md) `stable` — Pièges de build Next.js App Router pour le dashboard rpbey (VPS standalone). La doc Next.js complète est bundlée et version-matchée — voir ci-dessous.
