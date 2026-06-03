@@ -161,3 +161,7 @@ Captures HQ frame-par-frame réutilisées par le **gacha** (cartes des persos no
 
 This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
 <!-- END:nextjs-agent-rules -->
+
+<!-- Monorepo note: `next` is hoisted to the repo root, so from this app dir the
+     bundled docs are at `../../node_modules/next/dist/docs/` (the root
+     `AGENTS.md` references them with the resolved `node_modules/...` path). -->
