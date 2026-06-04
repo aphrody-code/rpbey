@@ -1,9 +1,10 @@
 import type { NextConfig } from "next";
 import path from "node:path";
+import fs from "node:fs";
 
 const IS_VERCEL = process.env.VERCEL === "1";
 
-const tracedDataFiles = [
+const rawTracedDataFiles = [
   "./node_modules/@tobyg74/tiktok-api-dl/helper/**",
   "./data/bbx-weekly.json",
   "./data/beyblade-knowledge.json",
@@ -17,6 +18,87 @@ const tracedDataFiles = [
   "./data/wb_champions.json",
   "./data/satr_champions.json",
 ];
+
+function expandPattern(pattern: string): string[] {
+  if (!pattern.includes("*")) {
+    return [pattern];
+  }
+
+  const candidateDirs: string[] = [__dirname];
+  if (pattern.startsWith("./node_modules/")) {
+    candidateDirs.push(path.resolve(__dirname, "../.."));
+  }
+
+  const results: string[] = [];
+
+  for (const baseSearchDir of candidateDirs) {
+    const parts = pattern.split("/");
+    let baseDir = ".";
+    let startIndex = 0;
+    
+    if (parts[0] === "." || parts[0] === "..") {
+      baseDir = parts[0];
+      startIndex = 1;
+    } else if (parts[0] === "") {
+      baseDir = "/";
+      startIndex = 1;
+    }
+    
+    while (startIndex < parts.length) {
+      const part = parts[startIndex];
+      if (part !== undefined && !part.includes("*")) {
+        baseDir = path.join(baseDir, part);
+        startIndex++;
+      } else {
+        break;
+      }
+    }
+    
+    const remainingPattern = parts.slice(startIndex).join("/");
+    const searchPath = path.resolve(baseSearchDir, baseDir);
+    
+    if (!fs.existsSync(searchPath)) {
+      continue;
+    }
+
+    const currentResults: string[] = [];
+
+    function scan(dir: string) {
+      const entries = fs.readdirSync(dir, { withFileTypes: true });
+      for (const entry of entries) {
+        const fullPath = path.join(dir, entry.name);
+        
+        if (entry.isDirectory()) {
+          scan(fullPath);
+        } else if (entry.isFile()) {
+          const pathSuffix = path.relative(searchPath, fullPath);
+          const normalizedSuffix = pathSuffix.replace(/\\/g, "/");
+          
+          const regexStr = "^" + remainingPattern
+            .replace(/\./g, "\\.")
+            .replace(/\*\*/g, ".*")
+            .replace(/(?<!\.)\*/g, "[^/]*") + "$";
+          const regex = new RegExp(regexStr);
+          
+          if (regex.test(normalizedSuffix)) {
+            const relativeToConfig = "./" + path.relative(__dirname, fullPath);
+            currentResults.push(relativeToConfig);
+          }
+        }
+      }
+    }
+
+    scan(searchPath);
+    if (currentResults.length > 0) {
+      results.push(...currentResults);
+      break;
+    }
+  }
+
+  return results;
+}
+
+const tracedDataFiles = rawTracedDataFiles.flatMap(expandPattern);
 
 const nextConfig: NextConfig = {
   // Enable React strict mode
