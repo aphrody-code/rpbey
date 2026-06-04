@@ -26,7 +26,6 @@ export async function GET() {
     }
   }
 
-  // Also inspect directory contents of CWD and potential parent directories to see where we are
   let dirContents: any = {};
   try {
     dirContents.cwd = await readdir(cwd);
@@ -35,9 +34,15 @@ export async function GET() {
   }
 
   try {
-    dirContents.cwd_parent = await readdir(join(cwd, ".."));
+    dirContents.data = await readdir(join(cwd, "data"));
   } catch (e: any) {
-    dirContents.cwd_parent_error = e.message;
+    dirContents.data_error = e.message;
+  }
+
+  try {
+    dirContents.data_exports = await readdir(join(cwd, "data", "exports"));
+  } catch (e: any) {
+    dirContents.data_exports_error = e.message;
   }
 
   return NextResponse.json({
