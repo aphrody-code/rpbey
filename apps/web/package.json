@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "bun --bun next dev",
     "dev:all": "bun run bot:dev & bun --bun next dev",
-    "build": "bun --env-file=../../.env next build --turbopack",
+    "build": "env -u NODE -u npm_node_execpath -u VERCEL NODE_ENV=production /usr/bin/node ../../node_modules/next/dist/bin/next build",
     "build:vercel": "next build --turbopack",
     "start": "bun --bun next start",
     "lint": "oxlint . && bun scripts/check-dal-boundary.ts",
@@ -49,6 +49,7 @@
     "@mui/x-data-grid": "^9.3.0",
     "@mui/x-date-pickers": "^9.3.0",
     "@next/third-parties": "16.3.0-canary.39",
+    "@rose-griffon/challonge": "workspace:*",
     "@rose-griffon/challonge-core": "workspace:*",
     "@rpbey/api-client": "workspace:*",
     "@rpbey/api-contract": "workspace:*",
