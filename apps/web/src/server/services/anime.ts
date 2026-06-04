@@ -4,6 +4,7 @@ import {
   listAnimeSeries as sdkListAnimeSeries,
   listAnimeSeriesByGeneration as sdkListAnimeSeriesByGeneration,
 } from "@rpbey/api-client";
+import { rewriteAssetUrl } from "@/lib/asset-url";
 import { isRemote, unwrap } from "@/server/data-source";
 import {
   type AnimeFramesFilter,
@@ -77,7 +78,19 @@ export async function getSeriesDetail(slug: string): Promise<SeriesDetail> {
  * filtrable série/épisode/personnage/marquant. Sert la galerie « Google Images »
  * + le gacha. Co-localisé : DAL `listAnimeFrames`. La branche SDK
  * (`/api/v1/anime/frames`) sera branchée après `bun run gen:api`.
+ *
+ * Self-contained : les `imageUrl`/`thumbUrl` stockés en base pointent
+ * historiquement `cdn.rpbey.fr` → réécrits vers l'origine Vercel (`/api/assets/...`)
+ * pour que le navigateur ne dépende QUE de `rpbey.fr`.
  */
 export async function getAnimeFrames(filter: AnimeFramesFilter) {
-  return listAnimeFrames(filter);
+  const result = await listAnimeFrames(filter);
+  return {
+    ...result,
+    frames: result.frames.map((f) => ({
+      ...f,
+      imageUrl: rewriteAssetUrl(f.imageUrl),
+      thumbUrl: f.thumbUrl ? rewriteAssetUrl(f.thumbUrl) : f.thumbUrl,
+    })),
+  };
 }

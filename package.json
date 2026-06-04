@@ -115,6 +115,7 @@
     "@tsparticles/engine"
   ],
   "patchedDependencies": {
-    "kysely@0.29.2": "patches/kysely@0.29.2.patch"
+    "kysely@0.29.2": "patches/kysely@0.29.2.patch",
+    "@aphrody/bxc-test@0.1.1": "patches/@aphrody%2Fbxc-test@0.1.1.patch"
   }
 }

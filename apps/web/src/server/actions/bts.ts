@@ -548,24 +548,24 @@ export async function getBtsSeasonTournaments(season: BtsSeason): Promise<BtsSea
   const dbByChallongeId = new Map(dbTournaments.map((t) => [t.challongeId ?? "", t]));
 
   // Pool data: presence of `data/pools/B_TS{n}.json` indicates a pool stage.
-  // Sur Vercel : fetch HEAD via CDN. Sur VPS / dev : test FS local.
+  // Self-contained : test FS bundlé (les fichiers commités sont tracés dans la
+  // lambda Vercel) — plus aucun fetch `cdn.rpbey.fr`.
   const poolFiles = await Promise.all(
     slugs.map(async (n) => {
-      try {
-        if (process.env.VERCEL === "1") {
-          const url = `${process.env.NEXT_PUBLIC_CDN_DATA_URL ?? "https://cdn.rpbey.fr/static/rpb-dashboard"}/data/pools/B_TS${n}.json`;
-          const res = await fetch(url, {
-            method: "HEAD",
-            next: { revalidate: 3600 },
-          });
-          return { n, exists: res.ok };
+      const { access } = await import("node:fs/promises");
+      const candidates = [
+        join(process.cwd(), "data", "pools", `B_TS${n}.json`),
+        join(process.cwd(), "apps", "web", "data", "pools", `B_TS${n}.json`),
+      ];
+      for (const filePath of candidates) {
+        try {
+          await access(filePath);
+          return { n, exists: true };
+        } catch {
+          /* try next candidate */
         }
-        const { access } = await import("node:fs/promises");
-        await access(join(process.cwd(), "data", "pools", `B_TS${n}.json`));
-        return { n, exists: true };
-      } catch {
-        return { n, exists: false };
       }
+      return { n, exists: false };
     }),
   );
   const hasPoolsBySlug = new Map(poolFiles.map((p) => [`BTS${p.n}`, p.exists]));

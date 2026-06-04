@@ -26,6 +26,7 @@
     "scrape:products": "bun scripts/sync-products.ts",
     "youtube:subscribe": "bun scripts/subscribe-youtube.ts",
     "scrape:anime": "bun scripts/scrape-anime.ts",
+    "test:404": "bun scripts/run-404-test.ts",
     "clean": "rm -rf .next dist node_modules/.cache .turbo tsconfig.tsbuildinfo"
   },
   "dependencies": {
@@ -119,6 +120,8 @@
     "zod": "catalog:"
   },
   "devDependencies": {
+    "@aphrody/bxc-test": "^0.1.1",
+    "@aphrody/next-playwright": "^0.1.1",
     "@swc/cli": "^0.8.1",
     "@swc/core": "^1.15.40",
     "@types/matter-js": "^0.20.2",

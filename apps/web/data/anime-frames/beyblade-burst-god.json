@@ -1,0 +1,2448 @@
+{
+  "seriesSlug": "beyblade-burst-god",
+  "generation": "BURST",
+  "fancaps": {
+    "seriesUrl": "https://beyblade.fandom.com/wiki/Beyblade Burst Evolution episodes",
+    "label": "Beyblade Burst God"
+  },
+  "scrapedAt": "2026-05-29T19:55:42.089Z",
+  "episodes": [
+    {
+      "number": 1,
+      "title": "Beyblade Burst Evolution - Episode 01"
+    },
+    {
+      "number": 2,
+      "title": "Beyblade Burst Evolution - Episode 02"
+    },
+    {
+      "number": 3,
+      "title": "Beyblade Burst Evolution - Episode 03"
+    },
+    {
+      "number": 4,
+      "title": "Beyblade Burst Evolution - Episode 04"
+    },
+    {
+      "number": 5,
+      "title": "Beyblade Burst Evolution - Episode 05"
+    },
+    {
+      "number": 6,
+      "title": "Beyblade Burst Evolution - Episode 06"
+    },
+    {
+      "number": 7,
+      "title": "Beyblade Burst Evolution - Episode 07"
+    },
+    {
+      "number": 8,
+      "title": "Beyblade Burst Evolution - Episode 08"
+    },
+    {
+      "number": 9,
+      "title": "Beyblade Burst Evolution - Episode 09"
+    },
+    {
+      "number": 10,
+      "title": "Beyblade Burst Evolution - Episode 10"
+    },
+    {
+      "number": 11,
+      "title": "Beyblade Burst Evolution - Episode 11"
+    },
+    {
+      "number": 12,
+      "title": "Beyblade Burst Evolution - Episode 12"
+    },
+    {
+      "number": 13,
+      "title": "Beyblade Burst Evolution - Episode 13"
+    },
+    {
+      "number": 14,
+      "title": "Beyblade Burst Evolution - Episode 14"
+    },
+    {
+      "number": 15,
+      "title": "Beyblade Burst Evolution - Episode 15"
+    },
+    {
+      "number": 16,
+      "title": "Beyblade Burst Evolution - Episode 16"
+    },
+    {
+      "number": 17,
+      "title": "Beyblade Burst Evolution - Episode 17"
+    },
+    {
+      "number": 18,
+      "title": "Beyblade Burst Evolution - Episode 18"
+    },
+    {
+      "number": 19,
+      "title": "Beyblade Burst Evolution - Episode 19"
+    },
+    {
+      "number": 20,
+      "title": "Beyblade Burst Evolution - Episode 20"
+    },
+    {
+      "number": 21,
+      "title": "Beyblade Burst Evolution - Episode 21"
+    },
+    {
+      "number": 22,
+      "title": "Beyblade Burst Evolution - Episode 22"
+    },
+    {
+      "number": 23,
+      "title": "Beyblade Burst Evolution - Episode 23"
+    },
+    {
+      "number": 24,
+      "title": "Beyblade Burst Evolution - Episode 24"
+    },
+    {
+      "number": 25,
+      "title": "Beyblade Burst Evolution - Episode 25"
+    },
+    {
+      "number": 26,
+      "title": "Beyblade Burst Evolution - Episode 26"
+    },
+    {
+      "number": 27,
+      "title": "Beyblade Burst Evolution - Episode 27"
+    },
+    {
+      "number": 28,
+      "title": "Beyblade Burst Evolution - Episode 28"
+    },
+    {
+      "number": 29,
+      "title": "Beyblade Burst Evolution - Episode 29"
+    },
+    {
+      "number": 30,
+      "title": "Beyblade Burst Evolution - Episode 30"
+    },
+    {
+      "number": 31,
+      "title": "Beyblade Burst Evolution - Episode 31"
+    },
+    {
+      "number": 32,
+      "title": "Beyblade Burst Evolution - Episode 32"
+    },
+    {
+      "number": 33,
+      "title": "Beyblade Burst Evolution - Episode 33"
+    },
+    {
+      "number": 34,
+      "title": "Beyblade Burst Evolution - Episode 34"
+    },
+    {
+      "number": 35,
+      "title": "Beyblade Burst Evolution - Episode 35"
+    },
+    {
+      "number": 36,
+      "title": "Beyblade Burst Evolution - Episode 36"
+    },
+    {
+      "number": 37,
+      "title": "Beyblade Burst Evolution - Episode 37"
+    },
+    {
+      "number": 38,
+      "title": "Beyblade Burst Evolution - Episode 38"
+    },
+    {
+      "number": 39,
+      "title": "Beyblade Burst Evolution - Episode 39"
+    },
+    {
+      "number": 40,
+      "title": "Beyblade Burst Evolution - Episode 40"
+    },
+    {
+      "number": 41,
+      "title": "Beyblade Burst Evolution - Episode 41"
+    },
+    {
+      "number": 42,
+      "title": "Beyblade Burst Evolution - Episode 42"
+    },
+    {
+      "number": 43,
+      "title": "Beyblade Burst Evolution - Episode 43"
+    },
+    {
+      "number": 44,
+      "title": "Beyblade Burst Evolution - Episode 44"
+    },
+    {
+      "number": 45,
+      "title": "Beyblade Burst Evolution - Episode 45"
+    },
+    {
+      "number": 46,
+      "title": "Beyblade Burst Evolution - Episode 46"
+    },
+    {
+      "number": 47,
+      "title": "Beyblade Burst Evolution - Episode 47"
+    },
+    {
+      "number": 48,
+      "title": "Beyblade Burst Evolution - Episode 48"
+    },
+    {
+      "number": 49,
+      "title": "Beyblade Burst Evolution - Episode 49"
+    },
+    {
+      "number": 50,
+      "title": "Beyblade Burst Evolution - Episode 50"
+    },
+    {
+      "number": 51,
+      "title": "Beyblade Burst Evolution - Episode 51"
+    }
+  ],
+  "frames": [
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:127417",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Free%20observing%20Valtryek.jpg",
+      "episodeNumber": 2,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/d/d4/Free_observing_Valtryek.jpg/revision/latest?cb=20180906232908",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/d/d4/Free_observing_Valtryek.jpg/revision/latest/scale-to-width-down/360?cb=20180906232908",
+      "width": 1024,
+      "height": 575,
+      "characterNames": [
+        "Free De La Hoya",
+        "Kristina Kuroda",
+        "Mark Strong",
+        "Muraki",
+        "Paul Orlando",
+        "Rantaro Kiyama",
+        "Trad Vasquez",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 0
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:110248",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:C9umYfGV0AAXCOF.jpg",
+      "episodeNumber": 3,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/8/82/C9umYfGV0AAXCOF.jpg/revision/latest?cb=20170525192948",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/8/82/C9umYfGV0AAXCOF.jpg/revision/latest/scale-to-width-down/360?cb=20170525192948",
+      "width": 1200,
+      "height": 675,
+      "characterNames": [
+        "Ange Lopez",
+        "Ataru Okinaka",
+        "Django Del Toro",
+        "Free De La Hoya",
+        "Honey Guten",
+        "Ivan",
+        "Melos Nekota",
+        "Rantaro Kiyama",
+        "Rickson Clay",
+        "Señor Hanami",
+        "Shasa Guten",
+        "Stan Hamburg",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 1
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:193756",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Burst%20Evolution%20Ep%206-1.jpg",
+      "episodeNumber": 6,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/d/d6/Burst_Evolution_Ep_6-1.jpg/revision/latest?cb=20250323084617",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/d/d6/Burst_Evolution_Ep_6-1.jpg/revision/latest/scale-to-width-down/360?cb=20250323084617",
+      "width": 1179,
+      "height": 659,
+      "characterNames": [
+        "Django Del Toro",
+        "Hoji Konda",
+        "Ivan",
+        "Rantaro Kiyama",
+        "Rickson Clay",
+        "Shasa Guten",
+        "Silas Karlisle",
+        "Stan Hamburg",
+        "Valt Aoi",
+        "Wakiya Murasaki"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 2
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:193757",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Burst%20Evolution%20Ep%206-2.jpg",
+      "episodeNumber": 6,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/8/8d/Burst_Evolution_Ep_6-2.jpg/revision/latest?cb=20250323084638",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/8/8d/Burst_Evolution_Ep_6-2.jpg/revision/latest/scale-to-width-down/360?cb=20250323084638",
+      "width": 1179,
+      "height": 660,
+      "characterNames": [
+        "Django Del Toro",
+        "Hoji Konda",
+        "Ivan",
+        "Rantaro Kiyama",
+        "Rickson Clay",
+        "Shasa Guten",
+        "Silas Karlisle",
+        "Stan Hamburg",
+        "Valt Aoi",
+        "Wakiya Murasaki"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 3
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:110374",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:DAikDSBXoAIMOAl.jpg",
+      "episodeNumber": 8,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/f/fc/DAikDSBXoAIMOAl.jpg/revision/latest?cb=20170531014757",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/f/fc/DAikDSBXoAIMOAl.jpg/revision/latest/scale-to-width-down/360?cb=20170531014757",
+      "width": 1200,
+      "height": 675,
+      "characterNames": [
+        "Carl",
+        "Cuza Ackermann",
+        "Free De La Hoya",
+        "Heinrich",
+        "Rodrick",
+        "Top Wand",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 4
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:110375",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:DAikF1jXoAUMH0-.jpg",
+      "episodeNumber": 8,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/a/ac/DAikF1jXoAUMH0-.jpg/revision/latest?cb=20170531014803",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/a/ac/DAikF1jXoAUMH0-.jpg/revision/latest/scale-to-width-down/360?cb=20170531014803",
+      "width": 1200,
+      "height": 675,
+      "characterNames": [
+        "Carl",
+        "Cuza Ackermann",
+        "Free De La Hoya",
+        "Heinrich",
+        "Rodrick",
+        "Top Wand",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 5
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:193706",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Burst%20Evolution%20E10-1.jpeg",
+      "episodeNumber": 10,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/4/4b/Burst_Evolution_E10-1.jpeg/revision/latest?cb=20250321211039",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/4/4b/Burst_Evolution_E10-1.jpeg/revision/latest/scale-to-width-down/360?cb=20250321211039",
+      "width": 1179,
+      "height": 660,
+      "characterNames": [
+        "Free De La Hoya",
+        "Ivan",
+        "Rantaro Kiyama",
+        "Rickson Clay",
+        "Shasa Guten",
+        "Stan Hamburg",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 6
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:193728",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Burst%20Evolution%2012-Bey%20Bread.jpeg",
+      "episodeNumber": 12,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/6/69/Burst_Evolution_12-Bey_Bread.jpeg/revision/latest?cb=20250322081849",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/6/69/Burst_Evolution_12-Bey_Bread.jpeg/revision/latest/scale-to-width-down/360?cb=20250322081849",
+      "width": 1179,
+      "height": 663,
+      "characterNames": [
+        "Allan Renoir",
+        "Daigo Kurogami",
+        "Rantaro Kiyama",
+        "Rickson Clay",
+        "Ruck Mar",
+        "Shasa Guten",
+        "Silas Karlisle",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 7
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:193729",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Burst%20Evolution%2014-1.jpeg",
+      "episodeNumber": 14,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/8/80/Burst_Evolution_14-1.jpeg/revision/latest?cb=20250322082528",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/8/80/Burst_Evolution_14-1.jpeg/revision/latest/scale-to-width-down/360?cb=20250322082528",
+      "width": 1179,
+      "height": 655,
+      "characterNames": [
+        "George Star",
+        "Ghasem Madal",
+        "Silas Karlisle",
+        "Xander Shakadera"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 8
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:193758",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Burst%20Evolution%20Ep%2020-1.jpg",
+      "episodeNumber": 20,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/2/25/Burst_Evolution_Ep_20-1.jpg/revision/latest?cb=20250323084830",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/2/25/Burst_Evolution_Ep_20-1.jpg/revision/latest/scale-to-width-down/360?cb=20250323084830",
+      "width": 1179,
+      "height": 655,
+      "characterNames": [
+        "Cuza Ackermann",
+        "Free De La Hoya",
+        "Jinbei Kuroda",
+        "Kristina Kuroda",
+        "Silas Karlisle",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 9
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:193759",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Burst%20Evolution%20Ep%2020-2.jpg",
+      "episodeNumber": 20,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/7/79/Burst_Evolution_Ep_20-2.jpg/revision/latest?cb=20250323084911",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/7/79/Burst_Evolution_Ep_20-2.jpg/revision/latest/scale-to-width-down/360?cb=20250323084911",
+      "width": 1179,
+      "height": 657,
+      "characterNames": [
+        "Cuza Ackermann",
+        "Free De La Hoya",
+        "Jinbei Kuroda",
+        "Kristina Kuroda",
+        "Silas Karlisle",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 10
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:193760",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Burst%20Evolution%20Ep%2020-3.jpg",
+      "episodeNumber": 20,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/4/4e/Burst_Evolution_Ep_20-3.jpg/revision/latest?cb=20250323084940",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/4/4e/Burst_Evolution_Ep_20-3.jpg/revision/latest/scale-to-width-down/360?cb=20250323084940",
+      "width": 1179,
+      "height": 660,
+      "characterNames": [
+        "Cuza Ackermann",
+        "Free De La Hoya",
+        "Jinbei Kuroda",
+        "Kristina Kuroda",
+        "Silas Karlisle",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 11
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:193761",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Burst%20Evolution%20Ep%2020-4.jpg",
+      "episodeNumber": 20,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/c/c3/Burst_Evolution_Ep_20-4.jpg/revision/latest?cb=20250323085000",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/c/c3/Burst_Evolution_Ep_20-4.jpg/revision/latest/scale-to-width-down/360?cb=20250323085000",
+      "width": 1179,
+      "height": 660,
+      "characterNames": [
+        "Cuza Ackermann",
+        "Free De La Hoya",
+        "Jinbei Kuroda",
+        "Kristina Kuroda",
+        "Silas Karlisle",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 12
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:193762",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Burst%20Evolution%20Ep%2020-5.jpg",
+      "episodeNumber": 20,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/5/5f/Burst_Evolution_Ep_20-5.jpg/revision/latest?cb=20250323085023",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/5/5f/Burst_Evolution_Ep_20-5.jpg/revision/latest/scale-to-width-down/360?cb=20250323085023",
+      "width": 1179,
+      "height": 655,
+      "characterNames": [
+        "Cuza Ackermann",
+        "Free De La Hoya",
+        "Jinbei Kuroda",
+        "Kristina Kuroda",
+        "Silas Karlisle",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 13
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:193730",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Burst%20Evolution%2022-1.jpeg",
+      "episodeNumber": 22,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/f/f2/Burst_Evolution_22-1.jpeg/revision/latest?cb=20250322083234",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/f/f2/Burst_Evolution_22-1.jpeg/revision/latest/scale-to-width-down/360?cb=20250322083234",
+      "width": 1179,
+      "height": 657,
+      "characterNames": [
+        "Joshua Burns",
+        "Rantaro Kiyama",
+        "Wakiya Murasaki"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 14
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:197548",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:BEYBLADE%20BURST%20EVOLUTION%20Episode%2026%20Genesis%20Reboot!%2010-9%20screenshot.png",
+      "episodeNumber": 26,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/3/37/BEYBLADE_BURST_EVOLUTION_Episode_26_Genesis_Reboot%21_10-9_screenshot.png/revision/latest?cb=20251008033854",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/3/37/BEYBLADE_BURST_EVOLUTION_Episode_26_Genesis_Reboot%21_10-9_screenshot.png/revision/latest/scale-to-width-down/360?cb=20251008033854",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Anton (Burst)",
+        "Arthur Lawrence",
+        "Cuza Ackermann",
+        "Ghasem Madal",
+        "Jeff Peterson",
+        "Rantaro Kiyama",
+        "Rickson Clay",
+        "Shasa Guten",
+        "Silas Karlisle",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 15
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:193734",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Burst%20Evolution%2027-1.jpeg",
+      "episodeNumber": 27,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/4/4a/Burst_Evolution_27-1.jpeg/revision/latest?cb=20250322130637",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/4/4a/Burst_Evolution_27-1.jpeg/revision/latest/scale-to-width-down/360?cb=20250322130637",
+      "width": 1179,
+      "height": 660,
+      "characterNames": [
+        "Ataru Okinaka",
+        "Carlos Thunder",
+        "Django Del Toro",
+        "Nika Aoi",
+        "Rantaro Kiyama",
+        "Stan Hamburg",
+        "Toko Aoi",
+        "Valt Aoi",
+        "Wakiya Murasaki",
+        "Xander Shakadera"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 16
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:193735",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Burst%20Evolution%2033-1.jpg",
+      "episodeNumber": 33,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/1/1b/Burst_Evolution_33-1.jpg/revision/latest?cb=20250322131030",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/1/1b/Burst_Evolution_33-1.jpg/revision/latest/scale-to-width-down/360?cb=20250322131030",
+      "width": 1179,
+      "height": 664,
+      "characterNames": [
+        "Boa Alcazaba",
+        "Cuza Ackermann",
+        "Free De La Hoya",
+        "Joshua Burns",
+        "Lui Shirosagi",
+        "Rantaro Kiyama",
+        "Ren Wu Sun",
+        "Richard Yello",
+        "Valt Aoi",
+        "Xander Shakadera"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 17
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:193736",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Burst%20Evolution%20E34-1.jpg",
+      "episodeNumber": 34,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/7/7c/Burst_Evolution_E34-1.jpg/revision/latest?cb=20250322131543",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/7/7c/Burst_Evolution_E34-1.jpg/revision/latest/scale-to-width-down/360?cb=20250322131543",
+      "width": 1179,
+      "height": 664,
+      "characterNames": [
+        "Free De La Hoya",
+        "Joshua Burns",
+        "Lui Shirosagi",
+        "Silas Karlisle",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 18
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:193737",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Burst%20Evolution%20E37-1.jpg",
+      "episodeNumber": 37,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/5/5d/Burst_Evolution_E37-1.jpg/revision/latest?cb=20250322132026",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/5/5d/Burst_Evolution_E37-1.jpg/revision/latest/scale-to-width-down/360?cb=20250322132026",
+      "width": 1179,
+      "height": 659,
+      "characterNames": [
+        "Free De La Hoya",
+        "Lui Shirosagi",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 19
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:193738",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Burst%20Evolution%20E37-2.jpg",
+      "episodeNumber": 37,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/e/e9/Burst_Evolution_E37-2.jpg/revision/latest?cb=20250322132048",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/e/e9/Burst_Evolution_E37-2.jpg/revision/latest/scale-to-width-down/360?cb=20250322132048",
+      "width": 1179,
+      "height": 662,
+      "characterNames": [
+        "Free De La Hoya",
+        "Lui Shirosagi",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 20
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:193739",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Burst%20Evolution%20E37-3.jpg",
+      "episodeNumber": 37,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/8/8c/Burst_Evolution_E37-3.jpg/revision/latest?cb=20250322132112",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/8/8c/Burst_Evolution_E37-3.jpg/revision/latest/scale-to-width-down/360?cb=20250322132112",
+      "width": 1179,
+      "height": 661,
+      "characterNames": [
+        "Free De La Hoya",
+        "Lui Shirosagi",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 21
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:193740",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Burst%20Evolution%20E38-2.jpg",
+      "episodeNumber": 38,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/5/5b/Burst_Evolution_E38-2.jpg/revision/latest?cb=20250322132546",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/5/5b/Burst_Evolution_E38-2.jpg/revision/latest/scale-to-width-down/360?cb=20250322132546",
+      "width": 1179,
+      "height": 663,
+      "characterNames": [
+        "Free De La Hoya",
+        "Jeff Peterson",
+        "Joshua Burns",
+        "Lui Shirosagi",
+        "Shasa Guten",
+        "Shu Kurenai",
+        "Valt Aoi",
+        "Xander Shakadera"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 22
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:193741",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Burst%20Evolution%20E38-1.jpg",
+      "episodeNumber": 38,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/d/db/Burst_Evolution_E38-1.jpg/revision/latest?cb=20250322132749",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/d/db/Burst_Evolution_E38-1.jpg/revision/latest/scale-to-width-down/360?cb=20250322132749",
+      "width": 1179,
+      "height": 663,
+      "characterNames": [
+        "Free De La Hoya",
+        "Jeff Peterson",
+        "Joshua Burns",
+        "Lui Shirosagi",
+        "Shasa Guten",
+        "Shu Kurenai",
+        "Valt Aoi",
+        "Xander Shakadera"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 23
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:117100",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Group%20A's%20eyes.jpg",
+      "episodeNumber": 40,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/c/cf/Group_A%27s_eyes.jpg/revision/latest?cb=20180202051157",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/c/cf/Group_A%27s_eyes.jpg/revision/latest/scale-to-width-down/360?cb=20180202051157",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Clio Delon",
+        "Cuza Ackermann",
+        "Jin Aizawa",
+        "Kurt Baratier",
+        "Rantaro Kiyama",
+        "Rickson Clay",
+        "Shasa Guten",
+        "Shu Kurenai",
+        "Silas Karlisle",
+        "Valt Aoi",
+        "Xander Shakadera"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 24
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:126986",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Shasa%20and%20Carl.jpg",
+      "episodeNumber": 40,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/7/7e/Shasa_and_Carl.jpg/revision/latest?cb=20180828171446",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/7/7e/Shasa_and_Carl.jpg/revision/latest/scale-to-width-down/360?cb=20180828171446",
+      "width": 1024,
+      "height": 576,
+      "characterNames": [
+        "Clio Delon",
+        "Cuza Ackermann",
+        "Jin Aizawa",
+        "Kurt Baratier",
+        "Rantaro Kiyama",
+        "Rickson Clay",
+        "Shasa Guten",
+        "Shu Kurenai",
+        "Silas Karlisle",
+        "Valt Aoi",
+        "Xander Shakadera"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 25
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:117101",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Groups%20A%20and%20B%20matches.jpg",
+      "episodeNumber": 42,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/0/04/Groups_A_and_B_matches.jpg/revision/latest?cb=20180202051207",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/0/04/Groups_A_and_B_matches.jpg/revision/latest/scale-to-width-down/360?cb=20180202051207",
+      "width": 1024,
+      "height": 576,
+      "characterNames": [
+        "Cuza Ackermann",
+        "Free De La Hoya",
+        "Joshua Burns",
+        "Lui Shirosagi",
+        "Ren Wu Sun",
+        "Silas Karlisle",
+        "Valt Aoi",
+        "Wakiya Murasaki",
+        "Xander Shakadera"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 26
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:197167",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:BEYBLADE%20BURST%20EVOLUTION%20Episode%2043%20White%20Hot%20Rivals!%20Anime%20Animation%2012-9%20screenshot.png",
+      "episodeNumber": 43,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/9/97/BEYBLADE_BURST_EVOLUTION_Episode_43_White_Hot_Rivals%21_Anime_Animation_12-9_screenshot.png/revision/latest?cb=20250914133524",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/9/97/BEYBLADE_BURST_EVOLUTION_Episode_43_White_Hot_Rivals%21_Anime_Animation_12-9_screenshot.png/revision/latest/scale-to-width-down/360?cb=20250914133524",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Akira Yamatoga",
+        "Boa Alcazaba",
+        "Free De La Hoya",
+        "Joshua Burns",
+        "Kurt Baratier",
+        "Lui Shirosagi",
+        "Norman Tarver",
+        "Ren Wu Sun",
+        "Shu Kurenai",
+        "Silas Karlisle",
+        "Valt Aoi",
+        "Xander Shakadera"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 27
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:197168",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:BEYBLADE%20BURST%20EVOLUTION%20Episode%2043%20White%20Hot%20Rivals!%20Anime%20Animation%2012-53%20screenshot.png",
+      "episodeNumber": 43,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/4/44/BEYBLADE_BURST_EVOLUTION_Episode_43_White_Hot_Rivals%21_Anime_Animation_12-53_screenshot.png/revision/latest?cb=20250914133526",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/4/44/BEYBLADE_BURST_EVOLUTION_Episode_43_White_Hot_Rivals%21_Anime_Animation_12-53_screenshot.png/revision/latest/scale-to-width-down/360?cb=20250914133526",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Akira Yamatoga",
+        "Boa Alcazaba",
+        "Free De La Hoya",
+        "Joshua Burns",
+        "Kurt Baratier",
+        "Lui Shirosagi",
+        "Norman Tarver",
+        "Ren Wu Sun",
+        "Shu Kurenai",
+        "Silas Karlisle",
+        "Valt Aoi",
+        "Xander Shakadera"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 28
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:197169",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:BEYBLADE%20BURST%20EVOLUTION%20Episode%2043%20White%20Hot%20Rivals!%20Anime%20Animation%2012-56%20screenshot.png",
+      "episodeNumber": 43,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/4/46/BEYBLADE_BURST_EVOLUTION_Episode_43_White_Hot_Rivals%21_Anime_Animation_12-56_screenshot.png/revision/latest?cb=20250914133526",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/4/46/BEYBLADE_BURST_EVOLUTION_Episode_43_White_Hot_Rivals%21_Anime_Animation_12-56_screenshot.png/revision/latest/scale-to-width-down/360?cb=20250914133526",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Akira Yamatoga",
+        "Boa Alcazaba",
+        "Free De La Hoya",
+        "Joshua Burns",
+        "Kurt Baratier",
+        "Lui Shirosagi",
+        "Norman Tarver",
+        "Ren Wu Sun",
+        "Shu Kurenai",
+        "Silas Karlisle",
+        "Valt Aoi",
+        "Xander Shakadera"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 29
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:197170",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:BEYBLADE%20BURST%20EVOLUTION%20Episode%2043%20White%20Hot%20Rivals!%20Anime%20Animation%2012-48%20screenshot.png",
+      "episodeNumber": 43,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/2/22/BEYBLADE_BURST_EVOLUTION_Episode_43_White_Hot_Rivals%21_Anime_Animation_12-48_screenshot.png/revision/latest?cb=20250914133526",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/2/22/BEYBLADE_BURST_EVOLUTION_Episode_43_White_Hot_Rivals%21_Anime_Animation_12-48_screenshot.png/revision/latest/scale-to-width-down/360?cb=20250914133526",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Akira Yamatoga",
+        "Boa Alcazaba",
+        "Free De La Hoya",
+        "Joshua Burns",
+        "Kurt Baratier",
+        "Lui Shirosagi",
+        "Norman Tarver",
+        "Ren Wu Sun",
+        "Shu Kurenai",
+        "Silas Karlisle",
+        "Valt Aoi",
+        "Xander Shakadera"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 30
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:197171",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:BEYBLADE%20BURST%20EVOLUTION%20Episode%2043%20White%20Hot%20Rivals!%20Anime%20Animation%2012-11%20screenshot.png",
+      "episodeNumber": 43,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/7/7d/BEYBLADE_BURST_EVOLUTION_Episode_43_White_Hot_Rivals%21_Anime_Animation_12-11_screenshot.png/revision/latest?cb=20250914133526",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/7/7d/BEYBLADE_BURST_EVOLUTION_Episode_43_White_Hot_Rivals%21_Anime_Animation_12-11_screenshot.png/revision/latest/scale-to-width-down/360?cb=20250914133526",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Akira Yamatoga",
+        "Boa Alcazaba",
+        "Free De La Hoya",
+        "Joshua Burns",
+        "Kurt Baratier",
+        "Lui Shirosagi",
+        "Norman Tarver",
+        "Ren Wu Sun",
+        "Shu Kurenai",
+        "Silas Karlisle",
+        "Valt Aoi",
+        "Xander Shakadera"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 31
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:197172",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:BEYBLADE%20BURST%20EVOLUTION%20Episode%2043%20White%20Hot%20Rivals!%20Anime%20Animation%2012-42%20screenshot.png",
+      "episodeNumber": 43,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/7/72/BEYBLADE_BURST_EVOLUTION_Episode_43_White_Hot_Rivals%21_Anime_Animation_12-42_screenshot.png/revision/latest?cb=20250914133526",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/7/72/BEYBLADE_BURST_EVOLUTION_Episode_43_White_Hot_Rivals%21_Anime_Animation_12-42_screenshot.png/revision/latest/scale-to-width-down/360?cb=20250914133526",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Akira Yamatoga",
+        "Boa Alcazaba",
+        "Free De La Hoya",
+        "Joshua Burns",
+        "Kurt Baratier",
+        "Lui Shirosagi",
+        "Norman Tarver",
+        "Ren Wu Sun",
+        "Shu Kurenai",
+        "Silas Karlisle",
+        "Valt Aoi",
+        "Xander Shakadera"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 32
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:197173",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:BEYBLADE%20BURST%20EVOLUTION%20Episode%2043%20White%20Hot%20Rivals!%20Anime%20Animation%2014-1%20screenshot.png",
+      "episodeNumber": 43,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/9/96/BEYBLADE_BURST_EVOLUTION_Episode_43_White_Hot_Rivals%21_Anime_Animation_14-1_screenshot.png/revision/latest?cb=20250914133526",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/9/96/BEYBLADE_BURST_EVOLUTION_Episode_43_White_Hot_Rivals%21_Anime_Animation_14-1_screenshot.png/revision/latest/scale-to-width-down/360?cb=20250914133526",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Akira Yamatoga",
+        "Boa Alcazaba",
+        "Free De La Hoya",
+        "Joshua Burns",
+        "Kurt Baratier",
+        "Lui Shirosagi",
+        "Norman Tarver",
+        "Ren Wu Sun",
+        "Shu Kurenai",
+        "Silas Karlisle",
+        "Valt Aoi",
+        "Xander Shakadera"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 33
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:197174",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:BEYBLADE%20BURST%20EVOLUTION%20Episode%2043%20White%20Hot%20Rivals!%20Anime%20Animation%2014-5%20screenshot.png",
+      "episodeNumber": 43,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/6/64/BEYBLADE_BURST_EVOLUTION_Episode_43_White_Hot_Rivals%21_Anime_Animation_14-5_screenshot.png/revision/latest?cb=20250914133531",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/6/64/BEYBLADE_BURST_EVOLUTION_Episode_43_White_Hot_Rivals%21_Anime_Animation_14-5_screenshot.png/revision/latest/scale-to-width-down/360?cb=20250914133531",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Akira Yamatoga",
+        "Boa Alcazaba",
+        "Free De La Hoya",
+        "Joshua Burns",
+        "Kurt Baratier",
+        "Lui Shirosagi",
+        "Norman Tarver",
+        "Ren Wu Sun",
+        "Shu Kurenai",
+        "Silas Karlisle",
+        "Valt Aoi",
+        "Xander Shakadera"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 34
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:197175",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:BEYBLADE%20BURST%20EVOLUTION%20Episode%2043%20White%20Hot%20Rivals!%20Anime%20Animation%2014-6%20screenshot.png",
+      "episodeNumber": 43,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/a/a0/BEYBLADE_BURST_EVOLUTION_Episode_43_White_Hot_Rivals%21_Anime_Animation_14-6_screenshot.png/revision/latest?cb=20250914133536",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/a/a0/BEYBLADE_BURST_EVOLUTION_Episode_43_White_Hot_Rivals%21_Anime_Animation_14-6_screenshot.png/revision/latest/scale-to-width-down/360?cb=20250914133536",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Akira Yamatoga",
+        "Boa Alcazaba",
+        "Free De La Hoya",
+        "Joshua Burns",
+        "Kurt Baratier",
+        "Lui Shirosagi",
+        "Norman Tarver",
+        "Ren Wu Sun",
+        "Shu Kurenai",
+        "Silas Karlisle",
+        "Valt Aoi",
+        "Xander Shakadera"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 35
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:197176",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:BEYBLADE%20BURST%20EVOLUTION%20Episode%2043%20White%20Hot%20Rivals!%20Anime%20Animation%2014-7%20screenshot.png",
+      "episodeNumber": 43,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/8/8b/BEYBLADE_BURST_EVOLUTION_Episode_43_White_Hot_Rivals%21_Anime_Animation_14-7_screenshot.png/revision/latest?cb=20250914133536",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/8/8b/BEYBLADE_BURST_EVOLUTION_Episode_43_White_Hot_Rivals%21_Anime_Animation_14-7_screenshot.png/revision/latest/scale-to-width-down/360?cb=20250914133536",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Akira Yamatoga",
+        "Boa Alcazaba",
+        "Free De La Hoya",
+        "Joshua Burns",
+        "Kurt Baratier",
+        "Lui Shirosagi",
+        "Norman Tarver",
+        "Ren Wu Sun",
+        "Shu Kurenai",
+        "Silas Karlisle",
+        "Valt Aoi",
+        "Xander Shakadera"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 36
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:197177",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:BEYBLADE%20BURST%20EVOLUTION%20Episode%2043%20White%20Hot%20Rivals!%20Anime%20Animation%2014-7%20screenshot%20(1).png",
+      "episodeNumber": 43,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/4/44/BEYBLADE_BURST_EVOLUTION_Episode_43_White_Hot_Rivals%21_Anime_Animation_14-7_screenshot_%281%29.png/revision/latest?cb=20250914133537",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/4/44/BEYBLADE_BURST_EVOLUTION_Episode_43_White_Hot_Rivals%21_Anime_Animation_14-7_screenshot_%281%29.png/revision/latest/scale-to-width-down/360?cb=20250914133537",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Akira Yamatoga",
+        "Boa Alcazaba",
+        "Free De La Hoya",
+        "Joshua Burns",
+        "Kurt Baratier",
+        "Lui Shirosagi",
+        "Norman Tarver",
+        "Ren Wu Sun",
+        "Shu Kurenai",
+        "Silas Karlisle",
+        "Valt Aoi",
+        "Xander Shakadera"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 37
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:197178",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:BEYBLADE%20BURST%20EVOLUTION%20Episode%2043%20White%20Hot%20Rivals!%20Anime%20Animation%2014-3%20screenshot.png",
+      "episodeNumber": 43,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/c/c6/BEYBLADE_BURST_EVOLUTION_Episode_43_White_Hot_Rivals%21_Anime_Animation_14-3_screenshot.png/revision/latest?cb=20250914133537",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/c/c6/BEYBLADE_BURST_EVOLUTION_Episode_43_White_Hot_Rivals%21_Anime_Animation_14-3_screenshot.png/revision/latest/scale-to-width-down/360?cb=20250914133537",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Akira Yamatoga",
+        "Boa Alcazaba",
+        "Free De La Hoya",
+        "Joshua Burns",
+        "Kurt Baratier",
+        "Lui Shirosagi",
+        "Norman Tarver",
+        "Ren Wu Sun",
+        "Shu Kurenai",
+        "Silas Karlisle",
+        "Valt Aoi",
+        "Xander Shakadera"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 38
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:110385",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Free's%20eyes.jpg",
+      "episodeNumber": 47,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/7/74/Free%27s_eyes.jpg/revision/latest?cb=20170531232855",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/7/74/Free%27s_eyes.jpg/revision/latest/scale-to-width-down/360?cb=20170531232855",
+      "width": 1024,
+      "height": 576,
+      "characterNames": [
+        "Boa Alcazaba",
+        "Free De La Hoya",
+        "Lui Shirosagi",
+        "Norman Tarver",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 39
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:118914",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Free%20uses%20full%20power.jpg",
+      "episodeNumber": 47,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/e/e6/Free_uses_full_power.jpg/revision/latest?cb=20180302123853",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/e/e6/Free_uses_full_power.jpg/revision/latest/scale-to-width-down/360?cb=20180302123853",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Boa Alcazaba",
+        "Free De La Hoya",
+        "Lui Shirosagi",
+        "Norman Tarver",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 40
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:146866",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Free%20and%20Lui%20face-off.jpg",
+      "episodeNumber": 47,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/a/aa/Free_and_Lui_face-off.jpg/revision/latest?cb=20200122202203",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/a/aa/Free_and_Lui_face-off.jpg/revision/latest/scale-to-width-down/360?cb=20200122202203",
+      "width": 1200,
+      "height": 678,
+      "characterNames": [
+        "Boa Alcazaba",
+        "Free De La Hoya",
+        "Lui Shirosagi",
+        "Norman Tarver",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 41
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:147324",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Free%20vs.%20Lui.jpg",
+      "episodeNumber": 47,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/f/f2/Free_vs._Lui.jpg/revision/latest?cb=20200126055426",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/f/f2/Free_vs._Lui.jpg/revision/latest/scale-to-width-down/360?cb=20200126055426",
+      "width": 1200,
+      "height": 675,
+      "characterNames": [
+        "Boa Alcazaba",
+        "Free De La Hoya",
+        "Lui Shirosagi",
+        "Norman Tarver",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 42
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:158844",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Lui%20defeated.jpg",
+      "episodeNumber": 47,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/7/72/Lui_defeated.jpg/revision/latest?cb=20200920190114",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/7/72/Lui_defeated.jpg/revision/latest/scale-to-width-down/360?cb=20200920190114",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Boa Alcazaba",
+        "Free De La Hoya",
+        "Lui Shirosagi",
+        "Norman Tarver",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 43
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:133176",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20God%20Drain%20Fafnir%208%20Nothing%20vs%20Strike%20God%20Valkyrie%206Vortex%20Ultimate%20Reboot.png",
+      "episodeNumber": 50,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/d/d0/Beyblade_Burst_God_Drain_Fafnir_8_Nothing_vs_Strike_God_Valkyrie_6Vortex_Ultimate_Reboot.png/revision/latest?cb=20190115235259",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/d/d0/Beyblade_Burst_God_Drain_Fafnir_8_Nothing_vs_Strike_God_Valkyrie_6Vortex_Ultimate_Reboot.png/revision/latest/scale-to-width-down/360?cb=20190115235259",
+      "width": 1366,
+      "height": 768,
+      "characterNames": [
+        "Free De La Hoya",
+        "Lui Shirosagi",
+        "Norman Tarver",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 44
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:133177",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20God%20Drain%20Fafnir%208%20Nothing%20vs%20Strike%20God%20Valkyrie%206Vortex%20Ultimate%20Reboot%202.png",
+      "episodeNumber": 50,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/9/9d/Beyblade_Burst_God_Drain_Fafnir_8_Nothing_vs_Strike_God_Valkyrie_6Vortex_Ultimate_Reboot_2.png/revision/latest?cb=20190115235409",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/9/9d/Beyblade_Burst_God_Drain_Fafnir_8_Nothing_vs_Strike_God_Valkyrie_6Vortex_Ultimate_Reboot_2.png/revision/latest/scale-to-width-down/360?cb=20190115235409",
+      "width": 1366,
+      "height": 768,
+      "characterNames": [
+        "Free De La Hoya",
+        "Lui Shirosagi",
+        "Norman Tarver",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 45
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:162931",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20Evolution%20Episode%2050%20-%20Beigoma%20Academy%20watching%20International%20Bladers%20Cup%20final%20(1).png",
+      "episodeNumber": 50,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/1/11/Beyblade_Burst_Evolution_Episode_50_-_Beigoma_Academy_watching_International_Bladers_Cup_final_%281%29.png/revision/latest?cb=20201128155642",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/1/11/Beyblade_Burst_Evolution_Episode_50_-_Beigoma_Academy_watching_International_Bladers_Cup_final_%281%29.png/revision/latest/scale-to-width-down/360?cb=20201128155642",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Free De La Hoya",
+        "Lui Shirosagi",
+        "Norman Tarver",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 46
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:162933",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20Evolution%20Episode%2050%20-%20Beigoma%20Academy%20watching%20International%20Bladers%20Cup%20final%20(2).png",
+      "episodeNumber": 50,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/2/28/Beyblade_Burst_Evolution_Episode_50_-_Beigoma_Academy_watching_International_Bladers_Cup_final_%282%29.png/revision/latest?cb=20201128155647",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/2/28/Beyblade_Burst_Evolution_Episode_50_-_Beigoma_Academy_watching_International_Bladers_Cup_final_%282%29.png/revision/latest/scale-to-width-down/360?cb=20201128155647",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Free De La Hoya",
+        "Lui Shirosagi",
+        "Norman Tarver",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 47
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:162935",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20Evolution%20Episode%2050%20-%20Kento%20Aoi%20watching%20the%20final%20of%20International%20Bladers%20Cup%20(2).png",
+      "episodeNumber": 50,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/a/a6/Beyblade_Burst_Evolution_Episode_50_-_Kento_Aoi_watching_the_final_of_International_Bladers_Cup_%282%29.png/revision/latest?cb=20201128155651",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/a/a6/Beyblade_Burst_Evolution_Episode_50_-_Kento_Aoi_watching_the_final_of_International_Bladers_Cup_%282%29.png/revision/latest/scale-to-width-down/360?cb=20201128155651",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Free De La Hoya",
+        "Lui Shirosagi",
+        "Norman Tarver",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 48
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:162937",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20Evolution%20Episode%2050%20-%20Kento%20Aoi%20watching%20the%20final%20of%20Internatonal%20Bladers%20Cup%20(1).png",
+      "episodeNumber": 50,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/b/b6/Beyblade_Burst_Evolution_Episode_50_-_Kento_Aoi_watching_the_final_of_Internatonal_Bladers_Cup_%281%29.png/revision/latest?cb=20201128155652",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/b/b6/Beyblade_Burst_Evolution_Episode_50_-_Kento_Aoi_watching_the_final_of_Internatonal_Bladers_Cup_%281%29.png/revision/latest/scale-to-width-down/360?cb=20201128155652",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Free De La Hoya",
+        "Lui Shirosagi",
+        "Norman Tarver",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 49
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:162938",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20Evolution%20Episode%2050%20-%20Raging%20Bulls%20watching%20International%20Bladers%20Cup%20finals%20(1).png",
+      "episodeNumber": 50,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/2/2a/Beyblade_Burst_Evolution_Episode_50_-_Raging_Bulls_watching_International_Bladers_Cup_finals_%281%29.png/revision/latest?cb=20201128155653",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/2/2a/Beyblade_Burst_Evolution_Episode_50_-_Raging_Bulls_watching_International_Bladers_Cup_finals_%281%29.png/revision/latest/scale-to-width-down/360?cb=20201128155653",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Free De La Hoya",
+        "Lui Shirosagi",
+        "Norman Tarver",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 50
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:162939",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20Evolution%20Episode%2050%20-%20Raging%20Bulls%20watching%20International%20Bladers%20Cup%20finals%20(2).png",
+      "episodeNumber": 50,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/5/50/Beyblade_Burst_Evolution_Episode_50_-_Raging_Bulls_watching_International_Bladers_Cup_finals_%282%29.png/revision/latest?cb=20201128155654",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/5/50/Beyblade_Burst_Evolution_Episode_50_-_Raging_Bulls_watching_International_Bladers_Cup_finals_%282%29.png/revision/latest/scale-to-width-down/360?cb=20201128155654",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Free De La Hoya",
+        "Lui Shirosagi",
+        "Norman Tarver",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 51
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:162940",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20Evolution%20Episode%2050%20-%20Royals%20watching%20International%20Bladers%20Cup%20finals%20(2).png",
+      "episodeNumber": 50,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/2/2a/Beyblade_Burst_Evolution_Episode_50_-_Royals_watching_International_Bladers_Cup_finals_%282%29.png/revision/latest?cb=20201128155654",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/2/2a/Beyblade_Burst_Evolution_Episode_50_-_Royals_watching_International_Bladers_Cup_finals_%282%29.png/revision/latest/scale-to-width-down/360?cb=20201128155654",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Free De La Hoya",
+        "Lui Shirosagi",
+        "Norman Tarver",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 52
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:162941",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20Evolution%20Episode%2050%20-%20Royals%20watching%20International%20Bladers%20Cup%20finals%20(1).png",
+      "episodeNumber": 50,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/4/46/Beyblade_Burst_Evolution_Episode_50_-_Royals_watching_International_Bladers_Cup_finals_%281%29.png/revision/latest?cb=20201128155655",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/4/46/Beyblade_Burst_Evolution_Episode_50_-_Royals_watching_International_Bladers_Cup_finals_%281%29.png/revision/latest/scale-to-width-down/360?cb=20201128155655",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Free De La Hoya",
+        "Lui Shirosagi",
+        "Norman Tarver",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 53
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:162942",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20Evolution%20Episode%2050%20-%20SB%20Rios%20watching%20International%20Bladers%20Cup%20finals%20(1).png",
+      "episodeNumber": 50,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/5/53/Beyblade_Burst_Evolution_Episode_50_-_SB_Rios_watching_International_Bladers_Cup_finals_%281%29.png/revision/latest?cb=20201128155656",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/5/53/Beyblade_Burst_Evolution_Episode_50_-_SB_Rios_watching_International_Bladers_Cup_finals_%281%29.png/revision/latest/scale-to-width-down/360?cb=20201128155656",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Free De La Hoya",
+        "Lui Shirosagi",
+        "Norman Tarver",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 54
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:162943",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20Evolution%20Episode%2050%20-%20SunBat%20United%20watching%20International%20Blader's%20Cup%20finals%20(1).png",
+      "episodeNumber": 50,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/7/73/Beyblade_Burst_Evolution_Episode_50_-_SunBat_United_watching_International_Blader%27s_Cup_finals_%281%29.png/revision/latest?cb=20201128155656",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/7/73/Beyblade_Burst_Evolution_Episode_50_-_SunBat_United_watching_International_Blader%27s_Cup_finals_%281%29.png/revision/latest/scale-to-width-down/360?cb=20201128155656",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Free De La Hoya",
+        "Lui Shirosagi",
+        "Norman Tarver",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 55
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:162944",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20Evolution%20Episode%2050%20-%20SB%20Rios%20watching%20International%20Bladers%20Cup%20finals%20(2).png",
+      "episodeNumber": 50,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/6/65/Beyblade_Burst_Evolution_Episode_50_-_SB_Rios_watching_International_Bladers_Cup_finals_%282%29.png/revision/latest?cb=20201128155657",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/6/65/Beyblade_Burst_Evolution_Episode_50_-_SB_Rios_watching_International_Bladers_Cup_finals_%282%29.png/revision/latest/scale-to-width-down/360?cb=20201128155657",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Free De La Hoya",
+        "Lui Shirosagi",
+        "Norman Tarver",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 56
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:162945",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20Evolution%20Episode%2050%20-%20SunBat%20United%20watching%20International%20Blader's%20Cup%20finals%20(2).png",
+      "episodeNumber": 50,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/0/0d/Beyblade_Burst_Evolution_Episode_50_-_SunBat_United_watching_International_Blader%27s_Cup_finals_%282%29.png/revision/latest?cb=20201128155658",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/0/0d/Beyblade_Burst_Evolution_Episode_50_-_SunBat_United_watching_International_Blader%27s_Cup_finals_%282%29.png/revision/latest/scale-to-width-down/360?cb=20201128155658",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Free De La Hoya",
+        "Lui Shirosagi",
+        "Norman Tarver",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 57
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:162946",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20Evolution%20Episode%2050%20-%20Teodor%20Glass%20watching%20International%20Bladers%20Cup%20finals.png",
+      "episodeNumber": 50,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/a/a0/Beyblade_Burst_Evolution_Episode_50_-_Teodor_Glass_watching_International_Bladers_Cup_finals.png/revision/latest?cb=20201128155659",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/a/a0/Beyblade_Burst_Evolution_Episode_50_-_Teodor_Glass_watching_International_Bladers_Cup_finals.png/revision/latest/scale-to-width-down/360?cb=20201128155659",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Free De La Hoya",
+        "Lui Shirosagi",
+        "Norman Tarver",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 58
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:121085",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beigoma%20boys%20excited.jpg",
+      "episodeNumber": 51,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/7/74/Beigoma_boys_excited.jpg/revision/latest?cb=20180412023452",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/7/74/Beigoma_boys_excited.jpg/revision/latest/scale-to-width-down/360?cb=20180412023452",
+      "width": 1200,
+      "height": 675,
+      "characterNames": [
+        "Fubuki Sumiye",
+        "Lui Shirosagi",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 59
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:121086",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beigoma%20smiles.jpg",
+      "episodeNumber": 51,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/0/02/Beigoma_smiles.jpg/revision/latest?cb=20180412023500",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/0/02/Beigoma_smiles.jpg/revision/latest/scale-to-width-down/360?cb=20180412023500",
+      "width": 1200,
+      "height": 675,
+      "characterNames": [
+        "Fubuki Sumiye",
+        "Lui Shirosagi",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 60
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:121089",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beigoma%20and%20BC%20Sol%20all%20together.jpg",
+      "episodeNumber": 51,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/2/26/Beigoma_and_BC_Sol_all_together.jpg/revision/latest?cb=20180412023622",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/2/26/Beigoma_and_BC_Sol_all_together.jpg/revision/latest/scale-to-width-down/360?cb=20180412023622",
+      "width": 1200,
+      "height": 675,
+      "characterNames": [
+        "Fubuki Sumiye",
+        "Lui Shirosagi",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 61
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:133507",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Daigo%20and%20Ken.png",
+      "episodeNumber": 51,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/5/57/Daigo_and_Ken.png/revision/latest?cb=20190125050757",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/5/57/Daigo_and_Ken.png/revision/latest/scale-to-width-down/360?cb=20190125050757",
+      "width": 867,
+      "height": 487,
+      "characterNames": [
+        "Fubuki Sumiye",
+        "Lui Shirosagi",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 62
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:133508",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Daigo%2C%20Wakiya%2C%20and%20Ken.png",
+      "episodeNumber": 51,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/0/08/Daigo%2C_Wakiya%2C_and_Ken.png/revision/latest?cb=20190125050808",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/0/08/Daigo%2C_Wakiya%2C_and_Ken.png/revision/latest/scale-to-width-down/360?cb=20190125050808",
+      "width": 866,
+      "height": 490,
+      "characterNames": [
+        "Fubuki Sumiye",
+        "Lui Shirosagi",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 63
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:133509",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Ken%2C%20Daigo%2C%20and%20Wakiya%20cheering.png",
+      "episodeNumber": 51,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/4/4d/Ken%2C_Daigo%2C_and_Wakiya_cheering.png/revision/latest?cb=20190125050832",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/4/4d/Ken%2C_Daigo%2C_and_Wakiya_cheering.png/revision/latest/scale-to-width-down/360?cb=20190125050832",
+      "width": 869,
+      "height": 489,
+      "characterNames": [
+        "Fubuki Sumiye",
+        "Lui Shirosagi",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 64
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:162890",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20Evolution%20Episode%2051%20-%20BC%20Sol%20back%20to%20El%20Astro.png",
+      "episodeNumber": 51,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/3/33/Beyblade_Burst_Evolution_Episode_51_-_BC_Sol_back_to_El_Astro.png/revision/latest?cb=20201128135028",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/3/33/Beyblade_Burst_Evolution_Episode_51_-_BC_Sol_back_to_El_Astro.png/revision/latest/scale-to-width-down/360?cb=20201128135028",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Fubuki Sumiye",
+        "Lui Shirosagi",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 65
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:162891",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20Evolution%20Episode%2051%20-%20BC%20Sol%20says%20Valt's%20dishes%20were%20terrible.png",
+      "episodeNumber": 51,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/1/16/Beyblade_Burst_Evolution_Episode_51_-_BC_Sol_says_Valt%27s_dishes_were_terrible.png/revision/latest?cb=20201128135030",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/1/16/Beyblade_Burst_Evolution_Episode_51_-_BC_Sol_says_Valt%27s_dishes_were_terrible.png/revision/latest/scale-to-width-down/360?cb=20201128135030",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Fubuki Sumiye",
+        "Lui Shirosagi",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 66
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:162892",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20Evolution%20Episode%2051%20-%20BC%20Sol%20main%20cast%20happy%20Valt%20won%20second%20battle.png",
+      "episodeNumber": 51,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/6/6d/Beyblade_Burst_Evolution_Episode_51_-_BC_Sol_main_cast_happy_Valt_won_second_battle.png/revision/latest?cb=20201128135031",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/6/6d/Beyblade_Burst_Evolution_Episode_51_-_BC_Sol_main_cast_happy_Valt_won_second_battle.png/revision/latest/scale-to-width-down/360?cb=20201128135031",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Fubuki Sumiye",
+        "Lui Shirosagi",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 67
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:162893",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20Evolution%20Episode%2051%20-%20Chiharu%20and%20Ange.png",
+      "episodeNumber": 51,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/6/6a/Beyblade_Burst_Evolution_Episode_51_-_Chiharu_and_Ange.png/revision/latest?cb=20201128135031",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/6/6a/Beyblade_Burst_Evolution_Episode_51_-_Chiharu_and_Ange.png/revision/latest/scale-to-width-down/360?cb=20201128135031",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Fubuki Sumiye",
+        "Lui Shirosagi",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 68
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:162894",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20Evolution%20Episode%2051%20-%20Big%20Five%2C%20Trad%20and%20Karina%20happy%20Valt%20won.png",
+      "episodeNumber": 51,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/3/3e/Beyblade_Burst_Evolution_Episode_51_-_Big_Five%2C_Trad_and_Karina_happy_Valt_won.png/revision/latest?cb=20201128135032",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/3/3e/Beyblade_Burst_Evolution_Episode_51_-_Big_Five%2C_Trad_and_Karina_happy_Valt_won.png/revision/latest/scale-to-width-down/360?cb=20201128135032",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Fubuki Sumiye",
+        "Lui Shirosagi",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 69
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:162895",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20Evolution%20Episode%2051%20-%20Final%20score.png",
+      "episodeNumber": 51,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/d/dc/Beyblade_Burst_Evolution_Episode_51_-_Final_score.png/revision/latest?cb=20201128135033",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/d/dc/Beyblade_Burst_Evolution_Episode_51_-_Final_score.png/revision/latest/scale-to-width-down/360?cb=20201128135033",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Fubuki Sumiye",
+        "Lui Shirosagi",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 70
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:162896",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20Evolution%20Episode%2051%20-%20Friends%20foung%20Valt%20and%20Shu.png",
+      "episodeNumber": 51,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/f/f7/Beyblade_Burst_Evolution_Episode_51_-_Friends_foung_Valt_and_Shu.png/revision/latest?cb=20201128135035",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/f/f7/Beyblade_Burst_Evolution_Episode_51_-_Friends_foung_Valt_and_Shu.png/revision/latest/scale-to-width-down/360?cb=20201128135035",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Fubuki Sumiye",
+        "Lui Shirosagi",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 71
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:162897",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20Evolution%20Episode%2051%20-%20Fubuki%20meets%20Shu.png",
+      "episodeNumber": 51,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/a/ac/Beyblade_Burst_Evolution_Episode_51_-_Fubuki_meets_Shu.png/revision/latest?cb=20201128135037",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/a/ac/Beyblade_Burst_Evolution_Episode_51_-_Fubuki_meets_Shu.png/revision/latest/scale-to-width-down/360?cb=20201128135037",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Fubuki Sumiye",
+        "Lui Shirosagi",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 72
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:162898",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20Evolution%20Episode%2051%20-%20Honcho%20crying.png",
+      "episodeNumber": 51,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/b/b0/Beyblade_Burst_Evolution_Episode_51_-_Honcho_crying.png/revision/latest?cb=20201128135038",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/b/b0/Beyblade_Burst_Evolution_Episode_51_-_Honcho_crying.png/revision/latest/scale-to-width-down/360?cb=20201128135038",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Fubuki Sumiye",
+        "Lui Shirosagi",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 73
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:162900",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20Evolution%20Episode%2051%20-%20Kento%20happy%20Valt%20won%20International%20Bladers%20Cup.png",
+      "episodeNumber": 51,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/c/c5/Beyblade_Burst_Evolution_Episode_51_-_Kento_happy_Valt_won_International_Bladers_Cup.png/revision/latest?cb=20201128135042",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/c/c5/Beyblade_Burst_Evolution_Episode_51_-_Kento_happy_Valt_won_International_Bladers_Cup.png/revision/latest/scale-to-width-down/360?cb=20201128135042",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Fubuki Sumiye",
+        "Lui Shirosagi",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 74
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:162901",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20Evolution%20Episode%2051%20-%20Kristina%20believes%20she%20can%20stop%20Teodore.png",
+      "episodeNumber": 51,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/e/e2/Beyblade_Burst_Evolution_Episode_51_-_Kristina_believes_she_can_stop_Teodore.png/revision/latest?cb=20201128135043",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/e/e2/Beyblade_Burst_Evolution_Episode_51_-_Kristina_believes_she_can_stop_Teodore.png/revision/latest/scale-to-width-down/360?cb=20201128135043",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Fubuki Sumiye",
+        "Lui Shirosagi",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 75
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:162902",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20Evolution%20Episode%2051%20-%20Kristina%20vs.%20Mr.%20Glass.png",
+      "episodeNumber": 51,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/f/f5/Beyblade_Burst_Evolution_Episode_51_-_Kristina_vs._Mr._Glass.png/revision/latest?cb=20201128135045",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/f/f5/Beyblade_Burst_Evolution_Episode_51_-_Kristina_vs._Mr._Glass.png/revision/latest/scale-to-width-down/360?cb=20201128135045",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Fubuki Sumiye",
+        "Lui Shirosagi",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 76
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:162903",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20Evolution%20Episode%2051%20-%20Kristina%20won.png",
+      "episodeNumber": 51,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/3/3f/Beyblade_Burst_Evolution_Episode_51_-_Kristina_won.png/revision/latest?cb=20201128135047",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/3/3f/Beyblade_Burst_Evolution_Episode_51_-_Kristina_won.png/revision/latest/scale-to-width-down/360?cb=20201128135047",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Fubuki Sumiye",
+        "Lui Shirosagi",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 77
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:162904",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20Evolution%20Episode%2051%20-%20Meet%20the%20Wonder%20Boy.png",
+      "episodeNumber": 51,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/8/88/Beyblade_Burst_Evolution_Episode_51_-_Meet_the_Wonder_Boy.png/revision/latest?cb=20201128135048",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/8/88/Beyblade_Burst_Evolution_Episode_51_-_Meet_the_Wonder_Boy.png/revision/latest/scale-to-width-down/360?cb=20201128135048",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Fubuki Sumiye",
+        "Lui Shirosagi",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 78
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:162905",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20Evolution%20Episode%2051%20-%20Memories.png",
+      "episodeNumber": 51,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/d/d1/Beyblade_Burst_Evolution_Episode_51_-_Memories.png/revision/latest?cb=20201128135050",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/d/d1/Beyblade_Burst_Evolution_Episode_51_-_Memories.png/revision/latest/scale-to-width-down/360?cb=20201128135050",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Fubuki Sumiye",
+        "Lui Shirosagi",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 79
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:162906",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20Evolution%20Episode%2051%20-%20Not%20a%20delicious.png",
+      "episodeNumber": 51,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/c/cd/Beyblade_Burst_Evolution_Episode_51_-_Not_a_delicious.png/revision/latest?cb=20201128135051",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/c/cd/Beyblade_Burst_Evolution_Episode_51_-_Not_a_delicious.png/revision/latest/scale-to-width-down/360?cb=20201128135051",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Fubuki Sumiye",
+        "Lui Shirosagi",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 80
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:162908",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20Evolution%20Episode%2051%20-%20Raul%20laughing.png",
+      "episodeNumber": 51,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/7/71/Beyblade_Burst_Evolution_Episode_51_-_Raul_laughing.png/revision/latest?cb=20201128135055",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/7/71/Beyblade_Burst_Evolution_Episode_51_-_Raul_laughing.png/revision/latest/scale-to-width-down/360?cb=20201128135055",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Fubuki Sumiye",
+        "Lui Shirosagi",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 81
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:162909",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20Evolution%20Episode%2051%20-%20Shu%20loss.png",
+      "episodeNumber": 51,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/6/6e/Beyblade_Burst_Evolution_Episode_51_-_Shu_loss.png/revision/latest?cb=20201128135056",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/6/6e/Beyblade_Burst_Evolution_Episode_51_-_Shu_loss.png/revision/latest/scale-to-width-down/360?cb=20201128135056",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Fubuki Sumiye",
+        "Lui Shirosagi",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 82
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:162910",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20Evolution%20Episode%2051%20-%20Shu%20reaised%20who%20is%20he.png",
+      "episodeNumber": 51,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/2/29/Beyblade_Burst_Evolution_Episode_51_-_Shu_reaised_who_is_he.png/revision/latest?cb=20201128135057",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/2/29/Beyblade_Burst_Evolution_Episode_51_-_Shu_reaised_who_is_he.png/revision/latest/scale-to-width-down/360?cb=20201128135057",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Fubuki Sumiye",
+        "Lui Shirosagi",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 83
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:162911",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20Evolution%20Episode%2051%20-%20Shu's%20full%20power.png",
+      "episodeNumber": 51,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/9/9e/Beyblade_Burst_Evolution_Episode_51_-_Shu%27s_full_power.png/revision/latest?cb=20201128135102",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/9/9e/Beyblade_Burst_Evolution_Episode_51_-_Shu%27s_full_power.png/revision/latest/scale-to-width-down/360?cb=20201128135102",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Fubuki Sumiye",
+        "Lui Shirosagi",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 84
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:162912",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20Evolution%20Episode%2051%20-%20Shu's%20resistance.png",
+      "episodeNumber": 51,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/4/4b/Beyblade_Burst_Evolution_Episode_51_-_Shu%27s_resistance.png/revision/latest?cb=20201128135104",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/4/4b/Beyblade_Burst_Evolution_Episode_51_-_Shu%27s_resistance.png/revision/latest/scale-to-width-down/360?cb=20201128135104",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Fubuki Sumiye",
+        "Lui Shirosagi",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 85
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:162913",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20Evolution%20Episode%2051%20-%20Shu's%20line.png",
+      "episodeNumber": 51,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/b/be/Beyblade_Burst_Evolution_Episode_51_-_Shu%27s_line.png/revision/latest?cb=20201128135106",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/b/be/Beyblade_Burst_Evolution_Episode_51_-_Shu%27s_line.png/revision/latest/scale-to-width-down/360?cb=20201128135106",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Fubuki Sumiye",
+        "Lui Shirosagi",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 86
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:162914",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20Evolution%20Episode%2051%20-%20spoiled%20talant.png",
+      "episodeNumber": 51,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/f/ff/Beyblade_Burst_Evolution_Episode_51_-_spoiled_talant.png/revision/latest?cb=20201128135107",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/f/ff/Beyblade_Burst_Evolution_Episode_51_-_spoiled_talant.png/revision/latest/scale-to-width-down/360?cb=20201128135107",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Fubuki Sumiye",
+        "Lui Shirosagi",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 87
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:162915",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20Evolution%20Episode%2051%20-%20Spryzen%20changing%20his%20mode.png",
+      "episodeNumber": 51,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/0/0f/Beyblade_Burst_Evolution_Episode_51_-_Spryzen_changing_his_mode.png/revision/latest?cb=20201128135110",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/0/0f/Beyblade_Burst_Evolution_Episode_51_-_Spryzen_changing_his_mode.png/revision/latest/scale-to-width-down/360?cb=20201128135110",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Fubuki Sumiye",
+        "Lui Shirosagi",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 88
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:162916",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20Evolution%20Episode%2051%20-%20They're%20still%20lying%20on%20the%20stage.png",
+      "episodeNumber": 51,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/a/a0/Beyblade_Burst_Evolution_Episode_51_-_They%27re_still_lying_on_the_stage.png/revision/latest?cb=20201128135111",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/a/a0/Beyblade_Burst_Evolution_Episode_51_-_They%27re_still_lying_on_the_stage.png/revision/latest/scale-to-width-down/360?cb=20201128135111",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Fubuki Sumiye",
+        "Lui Shirosagi",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 89
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:162917",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20Evolution%20Episode%2051%20-%20Ultimate%20Strike%20Valtryek%20burst.png",
+      "episodeNumber": 51,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/f/f7/Beyblade_Burst_Evolution_Episode_51_-_Ultimate_Strike_Valtryek_burst.png/revision/latest?cb=20201128135113",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/f/f7/Beyblade_Burst_Evolution_Episode_51_-_Ultimate_Strike_Valtryek_burst.png/revision/latest/scale-to-width-down/360?cb=20201128135113",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Fubuki Sumiye",
+        "Lui Shirosagi",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 90
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:162918",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20Evolution%20Episode%2051%20-%20Spryzen%20killed.png",
+      "episodeNumber": 51,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/0/00/Beyblade_Burst_Evolution_Episode_51_-_Spryzen_killed.png/revision/latest?cb=20201128135115",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/0/00/Beyblade_Burst_Evolution_Episode_51_-_Spryzen_killed.png/revision/latest/scale-to-width-down/360?cb=20201128135115",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Fubuki Sumiye",
+        "Lui Shirosagi",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 91
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:162919",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20Evolution%20Episode%2051%20-%20Valt%20and%20Shu%20having%20a%20break%20after%20battle.png",
+      "episodeNumber": 51,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/8/82/Beyblade_Burst_Evolution_Episode_51_-_Valt_and_Shu_having_a_break_after_battle.png/revision/latest?cb=20201128135117",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/8/82/Beyblade_Burst_Evolution_Episode_51_-_Valt_and_Shu_having_a_break_after_battle.png/revision/latest/scale-to-width-down/360?cb=20201128135117",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Fubuki Sumiye",
+        "Lui Shirosagi",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 92
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:162920",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20Evolution%20Episode%2051%20-%20Valt%20giving%20hand%20to%20Shu.png",
+      "episodeNumber": 51,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/1/1b/Beyblade_Burst_Evolution_Episode_51_-_Valt_giving_hand_to_Shu.png/revision/latest?cb=20201128135118",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/1/1b/Beyblade_Burst_Evolution_Episode_51_-_Valt_giving_hand_to_Shu.png/revision/latest/scale-to-width-down/360?cb=20201128135118",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Fubuki Sumiye",
+        "Lui Shirosagi",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 93
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:162921",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20Evolution%20Episode%2051%20-%20Valt%20champion.png",
+      "episodeNumber": 51,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/8/82/Beyblade_Burst_Evolution_Episode_51_-_Valt_champion.png/revision/latest?cb=20201128135120",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/8/82/Beyblade_Burst_Evolution_Episode_51_-_Valt_champion.png/revision/latest/scale-to-width-down/360?cb=20201128135120",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Fubuki Sumiye",
+        "Lui Shirosagi",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 94
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:162922",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20Evolution%20Episode%2051%20-%20Valt%20is%20not%20end%20yet.png",
+      "episodeNumber": 51,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/4/42/Beyblade_Burst_Evolution_Episode_51_-_Valt_is_not_end_yet.png/revision/latest?cb=20201128135122",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/4/42/Beyblade_Burst_Evolution_Episode_51_-_Valt_is_not_end_yet.png/revision/latest/scale-to-width-down/360?cb=20201128135122",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Fubuki Sumiye",
+        "Lui Shirosagi",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 95
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:162924",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20Evolution%20Episode%2051%20-%20Valt's%20full%20power.png",
+      "episodeNumber": 51,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/9/9c/Beyblade_Burst_Evolution_Episode_51_-_Valt%27s_full_power.png/revision/latest?cb=20201128135127",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/9/9c/Beyblade_Burst_Evolution_Episode_51_-_Valt%27s_full_power.png/revision/latest/scale-to-width-down/360?cb=20201128135127",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Fubuki Sumiye",
+        "Lui Shirosagi",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 96
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:162926",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20Evolution%20Episode%2051%20-%20Valt's%20finall%20launch%20for%20the%20season.png",
+      "episodeNumber": 51,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/a/a5/Beyblade_Burst_Evolution_Episode_51_-_Valt%27s_finall_launch_for_the_season.png/revision/latest?cb=20201128135131",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/a/a5/Beyblade_Burst_Evolution_Episode_51_-_Valt%27s_finall_launch_for_the_season.png/revision/latest/scale-to-width-down/360?cb=20201128135131",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Fubuki Sumiye",
+        "Lui Shirosagi",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 97
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:162927",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20Evolution%20Episode%2051%20-%20Wakiya%20angry%20of%20Kit.png",
+      "episodeNumber": 51,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/2/28/Beyblade_Burst_Evolution_Episode_51_-_Wakiya_angry_of_Kit.png/revision/latest?cb=20201128135133",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/2/28/Beyblade_Burst_Evolution_Episode_51_-_Wakiya_angry_of_Kit.png/revision/latest/scale-to-width-down/360?cb=20201128135133",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Fubuki Sumiye",
+        "Lui Shirosagi",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 98
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:162928",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20Evolution%20Episode%2051%20-%20Valt's%20resistance.png",
+      "episodeNumber": 51,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/6/62/Beyblade_Burst_Evolution_Episode_51_-_Valt%27s_resistance.png/revision/latest?cb=20201128135135",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/6/62/Beyblade_Burst_Evolution_Episode_51_-_Valt%27s_resistance.png/revision/latest/scale-to-width-down/360?cb=20201128135135",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Fubuki Sumiye",
+        "Lui Shirosagi",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 99
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:162929",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20Evolution%20Episode%2051%20-%20We%20aren't%20ready%20yet.png",
+      "episodeNumber": 51,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/4/42/Beyblade_Burst_Evolution_Episode_51_-_We_aren%27t_ready_yet.png/revision/latest?cb=20201128135136",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/4/42/Beyblade_Burst_Evolution_Episode_51_-_We_aren%27t_ready_yet.png/revision/latest/scale-to-width-down/360?cb=20201128135136",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Fubuki Sumiye",
+        "Lui Shirosagi",
+        "Shu Kurenai",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 100
+    }
+  ]
+}

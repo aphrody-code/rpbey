@@ -1,0 +1,10515 @@
+{
+  "beyblade-x": {
+    "Multi Nana-iro": {
+      "notableEpisodes": [
+        1,
+        2,
+        3,
+        4,
+        7,
+        9,
+        11,
+        16,
+        18,
+        19,
+        20,
+        23,
+        26
+      ],
+      "battleEpisodes": [
+        2,
+        3,
+        4,
+        7,
+        9,
+        11,
+        16,
+        18,
+        19,
+        20,
+        23,
+        26
+      ],
+      "debutEpisode": 1,
+      "role": "principal"
+    },
+    "Jaxon Cross": {
+      "notableEpisodes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        8,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        18,
+        20,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29
+      ],
+      "battleEpisodes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        8,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        18,
+        20,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29
+      ],
+      "debutEpisode": 1,
+      "role": "protagoniste"
+    },
+    "Khrome Ryugu": {
+      "notableEpisodes": [
+        1,
+        5,
+        29
+      ],
+      "battleEpisodes": [
+        1,
+        5,
+        29
+      ],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Meiko Myoden": {
+      "notableEpisodes": [
+        4,
+        14
+      ],
+      "battleEpisodes": [
+        4,
+        14
+      ],
+      "debutEpisode": 4,
+      "role": "secondaire"
+    },
+    "Genri Sayo": {
+      "notableEpisodes": [
+        1,
+        2,
+        10,
+        17,
+        18,
+        26,
+        28
+      ],
+      "battleEpisodes": [
+        1,
+        2,
+        10,
+        17,
+        18,
+        26,
+        28
+      ],
+      "debutEpisode": 1,
+      "role": "récurrent"
+    },
+    "Bariki Jinnai": {
+      "notableEpisodes": [
+        1,
+        10,
+        17,
+        18,
+        28
+      ],
+      "battleEpisodes": [
+        10,
+        17,
+        18,
+        28
+      ],
+      "debutEpisode": 1,
+      "role": "récurrent"
+    },
+    "Jian Strong": {
+      "notableEpisodes": [
+        5,
+        7,
+        19,
+        26,
+        28,
+        29
+      ],
+      "battleEpisodes": [
+        7,
+        19,
+        26,
+        28,
+        29
+      ],
+      "debutEpisode": 5,
+      "role": "récurrent"
+    },
+    "Blaze Fujiwara": {
+      "notableEpisodes": [
+        12,
+        17,
+        24,
+        25,
+        26,
+        28
+      ],
+      "battleEpisodes": [
+        17,
+        24,
+        25,
+        26,
+        28
+      ],
+      "debutEpisode": 12,
+      "role": "récurrent"
+    },
+    "Number One": {
+      "notableEpisodes": [
+        5,
+        29
+      ],
+      "battleEpisodes": [
+        29
+      ],
+      "debutEpisode": 5,
+      "role": "secondaire"
+    },
+    "Carlo Maruko": {
+      "notableEpisodes": [
+        12
+      ],
+      "battleEpisodes": [
+        12
+      ],
+      "debutEpisode": 12,
+      "role": "secondaire"
+    },
+    "Nanase": {
+      "notableEpisodes": [
+        2
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 2,
+      "role": "secondaire"
+    },
+    "Arce": {
+      "notableEpisodes": [
+        2
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 2,
+      "role": "secondaire"
+    },
+    "Nijiko": {
+      "notableEpisodes": [
+        2
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 2,
+      "role": "secondaire"
+    },
+    "Hina": {
+      "notableEpisodes": [
+        13,
+        17
+      ],
+      "battleEpisodes": [
+        17
+      ],
+      "debutEpisode": 13,
+      "role": "secondaire"
+    },
+    "Quinn Manju": {
+      "notableEpisodes": [
+        33
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 33,
+      "role": "secondaire"
+    },
+    "Packun": {
+      "notableEpisodes": [
+        31
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 31,
+      "role": "secondaire"
+    },
+    "Ciel Kaminari": {
+      "notableEpisodes": [
+        41
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 41,
+      "role": "secondaire"
+    },
+    "Ginro": {
+      "notableEpisodes": [
+        64
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 64,
+      "role": "secondaire"
+    },
+    "Karla Konjiki": {
+      "notableEpisodes": [
+        55
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 55,
+      "role": "secondaire"
+    },
+    "Omega Shiroboshi": {
+      "notableEpisodes": [
+        64
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 64,
+      "role": "secondaire"
+    },
+    "Iwao Gogo": {
+      "notableEpisodes": [
+        55
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 55,
+      "role": "secondaire"
+    },
+    "Douden": {
+      "notableEpisodes": [
+        43
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 43,
+      "role": "secondaire"
+    },
+    "Gigatani": {
+      "notableEpisodes": [
+        43
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 43,
+      "role": "secondaire"
+    },
+    "Megaoka": {
+      "notableEpisodes": [
+        59
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 59,
+      "role": "secondaire"
+    },
+    "Ai Nekki": {
+      "notableEpisodes": [
+        33
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 33,
+      "role": "secondaire"
+    },
+    "Joka Manju": {
+      "notableEpisodes": [
+        63
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 63,
+      "role": "secondaire"
+    },
+    "Lantz Roji": {
+      "notableEpisodes": [
+        70
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 70,
+      "role": "secondaire"
+    },
+    "Byte": {
+      "notableEpisodes": [
+        67
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 67,
+      "role": "secondaire"
+    },
+    "Prisse Manju": {
+      "notableEpisodes": [
+        63
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 63,
+      "role": "secondaire"
+    },
+    "Pris Manju": {
+      "notableEpisodes": [
+        63
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 63,
+      "role": "secondaire"
+    },
+    "Million Mizu": {
+      "notableEpisodes": [
+        70
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 70,
+      "role": "secondaire"
+    },
+    "Enga Fugazaru": {
+      "notableEpisodes": [
+        72
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 72,
+      "role": "secondaire"
+    },
+    "Number Three": {
+      "notableEpisodes": [
+        73
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 73,
+      "role": "secondaire"
+    },
+    "Jaq Manju": {
+      "notableEpisodes": [
+        63
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 63,
+      "role": "secondaire"
+    },
+    "Nine Kurosu": {
+      "notableEpisodes": [
+        101
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 101,
+      "role": "secondaire"
+    },
+    "Eight Cross": {
+      "notableEpisodes": [
+        101
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 101,
+      "role": "secondaire"
+    },
+    "Four Cross": {
+      "notableEpisodes": [
+        101
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 101,
+      "role": "secondaire"
+    },
+    "One Kurosu": {
+      "notableEpisodes": [
+        103
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 103,
+      "role": "secondaire"
+    },
+    "Five Cross": {
+      "notableEpisodes": [
+        108
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 108,
+      "role": "secondaire"
+    },
+    "Kiwami Miyazukae": {
+      "notableEpisodes": [
+        126
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 126,
+      "role": "secondaire"
+    },
+    "Robin Kazami": {
+      "notableEpisodes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        7,
+        9,
+        11,
+        12,
+        13,
+        15,
+        16,
+        17,
+        18,
+        20,
+        21,
+        22,
+        26,
+        27
+      ],
+      "battleEpisodes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        7,
+        9,
+        11,
+        12,
+        13,
+        15,
+        16,
+        17,
+        18,
+        20,
+        21,
+        22,
+        26,
+        27
+      ],
+      "debutEpisode": 1,
+      "role": "principal"
+    },
+    "Takumi Ishiyama": {
+      "notableEpisodes": [
+        1,
+        2,
+        5,
+        6,
+        10,
+        17,
+        18,
+        27,
+        28,
+        30
+      ],
+      "battleEpisodes": [
+        1,
+        2,
+        5,
+        6,
+        10,
+        17,
+        18,
+        27,
+        28,
+        30
+      ],
+      "debutEpisode": 1,
+      "role": "récurrent"
+    },
+    "Taisho Sushiya": {
+      "notableEpisodes": [
+        4,
+        29
+      ],
+      "battleEpisodes": [
+        29
+      ],
+      "debutEpisode": 4,
+      "role": "secondaire"
+    },
+    "Titus Manju": {
+      "notableEpisodes": [
+        5,
+        6,
+        8,
+        19,
+        26,
+        28
+      ],
+      "battleEpisodes": [
+        5,
+        6,
+        8,
+        19,
+        26,
+        28
+      ],
+      "debutEpisode": 5,
+      "role": "récurrent"
+    },
+    "Toguro Okunaga": {
+      "notableEpisodes": [
+        5,
+        6,
+        7,
+        17,
+        19,
+        26,
+        30
+      ],
+      "battleEpisodes": [
+        6,
+        7,
+        17,
+        19,
+        26,
+        30
+      ],
+      "debutEpisode": 5,
+      "role": "récurrent"
+    },
+    "Warden": {
+      "notableEpisodes": [
+        5,
+        11
+      ],
+      "battleEpisodes": [
+        11
+      ],
+      "debutEpisode": 5,
+      "role": "secondaire"
+    },
+    "Tsuru": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Suzaki": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Yuni Naniwa": {
+      "notableEpisodes": [
+        21,
+        23,
+        26,
+        30
+      ],
+      "battleEpisodes": [
+        21,
+        23,
+        26,
+        30
+      ],
+      "debutEpisode": 21,
+      "role": "récurrent"
+    },
+    "Zonamos Nekoyama": {
+      "notableEpisodes": [
+        15,
+        16,
+        22,
+        26,
+        30
+      ],
+      "battleEpisodes": [
+        16,
+        22,
+        26,
+        30
+      ],
+      "debutEpisode": 15,
+      "role": "récurrent"
+    },
+    "Sigrid Nana-iro": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Rex Jura": {
+      "notableEpisodes": [
+        31
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 31,
+      "role": "secondaire"
+    },
+    "Tenka Shiroboshi": {
+      "notableEpisodes": [
+        52
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 52,
+      "role": "secondaire"
+    },
+    "Reiyu Kuwabara": {
+      "notableEpisodes": [
+        72
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 72,
+      "role": "secondaire"
+    },
+    "Safa": {
+      "notableEpisodes": [
+        15,
+        24
+      ],
+      "battleEpisodes": [
+        24
+      ],
+      "debutEpisode": 15,
+      "role": "secondaire"
+    },
+    "Yeti": {
+      "notableEpisodes": [
+        15,
+        24
+      ],
+      "battleEpisodes": [
+        15,
+        24
+      ],
+      "debutEpisode": 15,
+      "role": "secondaire"
+    },
+    "Tsubasa Takaya": {
+      "notableEpisodes": [
+        65
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 65,
+      "role": "secondaire"
+    },
+    "Yoko Kyubi": {
+      "notableEpisodes": [
+        72
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 72,
+      "role": "secondaire"
+    },
+    "Ryu Isshin": {
+      "notableEpisodes": [
+        72
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 72,
+      "role": "secondaire"
+    },
+    "Sue Manju": {
+      "notableEpisodes": [
+        63
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 63,
+      "role": "secondaire"
+    },
+    "Three Cross": {
+      "notableEpisodes": [
+        101
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 101,
+      "role": "secondaire"
+    },
+    "Two Kurosu": {
+      "notableEpisodes": [
+        124
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 124,
+      "role": "secondaire"
+    },
+    "True Zero-Go": {
+      "notableEpisodes": [
+        124
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 124,
+      "role": "secondaire"
+    },
+    "True Ichi-Go": {
+      "notableEpisodes": [
+        106
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 106,
+      "role": "secondaire"
+    }
+  },
+  "metal-fight-beyblade": {
+    "Gingka Hagane": {
+      "notableEpisodes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        26,
+        28,
+        29,
+        30,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        39,
+        40,
+        43,
+        46,
+        47,
+        50
+      ],
+      "battleEpisodes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        26,
+        28,
+        29,
+        30,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        39,
+        40,
+        43,
+        46,
+        47,
+        50
+      ],
+      "debutEpisode": 1,
+      "role": "protagoniste"
+    },
+    "Ryuga": {
+      "notableEpisodes": [
+        11,
+        13,
+        14,
+        15,
+        20,
+        23,
+        35,
+        36,
+        41,
+        42,
+        43,
+        45,
+        48,
+        49,
+        50
+      ],
+      "battleEpisodes": [
+        13,
+        14,
+        15,
+        20,
+        23,
+        35,
+        36,
+        41,
+        42,
+        43,
+        45,
+        48,
+        49,
+        50
+      ],
+      "debutEpisode": 11,
+      "role": "principal"
+    },
+    "Kyoya Tategami": {
+      "notableEpisodes": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        8,
+        9,
+        10,
+        11,
+        12,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        31,
+        32,
+        41,
+        43,
+        49
+      ],
+      "battleEpisodes": [
+        2,
+        3,
+        4,
+        6,
+        8,
+        9,
+        10,
+        11,
+        12,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        31,
+        32,
+        41,
+        43,
+        49
+      ],
+      "debutEpisode": 1,
+      "role": "protagoniste"
+    },
+    "Doji": {
+      "notableEpisodes": [
+        2,
+        3,
+        11,
+        12,
+        14,
+        46,
+        47,
+        48
+      ],
+      "battleEpisodes": [
+        3,
+        11,
+        12,
+        14,
+        46,
+        47,
+        48
+      ],
+      "debutEpisode": 2,
+      "role": "récurrent"
+    },
+    "Reiji Mizuchi": {
+      "notableEpisodes": [
+        40,
+        41,
+        42,
+        43,
+        44,
+        46,
+        47
+      ],
+      "battleEpisodes": [
+        41,
+        42,
+        43,
+        44,
+        46,
+        47
+      ],
+      "debutEpisode": 40,
+      "role": "récurrent"
+    },
+    "Madoka Amano": {
+      "notableEpisodes": [
+        2,
+        12,
+        22
+      ],
+      "battleEpisodes": [
+        12,
+        22
+      ],
+      "debutEpisode": 2,
+      "role": "secondaire"
+    },
+    "Hikaru Hasama": {
+      "notableEpisodes": [
+        6,
+        7,
+        9,
+        10,
+        20,
+        21,
+        22,
+        23,
+        24,
+        31,
+        34,
+        38,
+        41
+      ],
+      "battleEpisodes": [
+        6,
+        7,
+        9,
+        10,
+        20,
+        21,
+        22,
+        23,
+        24,
+        31,
+        34,
+        38,
+        41
+      ],
+      "debutEpisode": 6,
+      "role": "principal"
+    },
+    "Ryo Hagane": {
+      "notableEpisodes": [
+        14
+      ],
+      "battleEpisodes": [
+        14
+      ],
+      "debutEpisode": 14,
+      "role": "secondaire"
+    },
+    "Face Hunters": {
+      "notableEpisodes": [
+        1,
+        4,
+        6,
+        8,
+        20
+      ],
+      "battleEpisodes": [
+        1,
+        4,
+        6,
+        8,
+        20
+      ],
+      "debutEpisode": 1,
+      "role": "récurrent"
+    },
+    "Tobio Oike": {
+      "notableEpisodes": [
+        25,
+        35,
+        36,
+        40,
+        42
+      ],
+      "battleEpisodes": [
+        25,
+        35,
+        36,
+        40,
+        42
+      ],
+      "debutEpisode": 25,
+      "role": "récurrent"
+    },
+    "Phoenix": {
+      "notableEpisodes": [
+        32,
+        33,
+        36,
+        39,
+        47
+      ],
+      "battleEpisodes": [
+        33,
+        36,
+        39,
+        47
+      ],
+      "debutEpisode": 32,
+      "role": "récurrent"
+    },
+    "Merci": {
+      "notableEpisodes": [
+        8,
+        12
+      ],
+      "battleEpisodes": [
+        8,
+        12
+      ],
+      "debutEpisode": 8,
+      "role": "secondaire"
+    },
+    "Busujima": {
+      "notableEpisodes": [
+        37
+      ],
+      "battleEpisodes": [
+        37
+      ],
+      "debutEpisode": 37,
+      "role": "secondaire"
+    },
+    "Teru Saotome": {
+      "notableEpisodes": [
+        34,
+        40
+      ],
+      "battleEpisodes": [
+        34,
+        40
+      ],
+      "debutEpisode": 34,
+      "role": "secondaire"
+    },
+    "Taraba": {
+      "notableEpisodes": [
+        5,
+        24
+      ],
+      "battleEpisodes": [
+        5,
+        24
+      ],
+      "debutEpisode": 5,
+      "role": "secondaire"
+    },
+    "Kumata Kumade": {
+      "notableEpisodes": [
+        26,
+        35,
+        42
+      ],
+      "battleEpisodes": [
+        26,
+        35,
+        42
+      ],
+      "debutEpisode": 26,
+      "role": "secondaire"
+    },
+    "Kumaji Kumade": {
+      "notableEpisodes": [
+        26,
+        35,
+        42
+      ],
+      "battleEpisodes": [
+        26,
+        35,
+        42
+      ],
+      "debutEpisode": 26,
+      "role": "secondaire"
+    },
+    "Kazuki": {
+      "notableEpisodes": [
+        37
+      ],
+      "battleEpisodes": [
+        37
+      ],
+      "debutEpisode": 37,
+      "role": "secondaire"
+    },
+    "Akira (Metal Saga)": {
+      "notableEpisodes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        9,
+        23,
+        24
+      ],
+      "battleEpisodes": [
+        2,
+        3,
+        4,
+        5,
+        9,
+        23,
+        24
+      ],
+      "debutEpisode": 1,
+      "role": "récurrent"
+    },
+    "Osamu": {
+      "notableEpisodes": [
+        1,
+        2,
+        3,
+        5,
+        7,
+        9,
+        14,
+        19,
+        20,
+        21,
+        23,
+        24
+      ],
+      "battleEpisodes": [
+        2,
+        3,
+        5,
+        7,
+        9,
+        14,
+        19,
+        20,
+        21,
+        23,
+        24
+      ],
+      "debutEpisode": 1,
+      "role": "récurrent"
+    },
+    "Takashi": {
+      "notableEpisodes": [
+        1,
+        2,
+        3,
+        6,
+        19,
+        20,
+        21,
+        23,
+        24
+      ],
+      "battleEpisodes": [
+        2,
+        3,
+        6,
+        19,
+        20,
+        21,
+        23,
+        24
+      ],
+      "debutEpisode": 1,
+      "role": "récurrent"
+    },
+    "Blader DJ (Metal Saga)": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Tsubasa Otori": {
+      "notableEpisodes": [
+        24,
+        26,
+        27,
+        31,
+        32,
+        35,
+        36,
+        38,
+        39,
+        41,
+        45
+      ],
+      "battleEpisodes": [
+        24,
+        26,
+        27,
+        31,
+        32,
+        35,
+        36,
+        38,
+        39,
+        41,
+        45
+      ],
+      "debutEpisode": 24,
+      "role": "récurrent"
+    },
+    "Yui": {
+      "notableEpisodes": [
+        37
+      ],
+      "battleEpisodes": [
+        37
+      ],
+      "debutEpisode": 37,
+      "role": "secondaire"
+    },
+    "Kenta Yumiya": {
+      "notableEpisodes": [
+        1,
+        3,
+        4,
+        5,
+        6,
+        7,
+        9,
+        10,
+        11,
+        12,
+        16,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        27,
+        29,
+        31,
+        32,
+        37,
+        38,
+        40,
+        44,
+        46
+      ],
+      "battleEpisodes": [
+        1,
+        3,
+        4,
+        5,
+        6,
+        7,
+        9,
+        10,
+        11,
+        12,
+        16,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        27,
+        29,
+        31,
+        32,
+        37,
+        38,
+        40,
+        44,
+        46
+      ],
+      "debutEpisode": null,
+      "role": "principal"
+    },
+    "Benkei Hanawa": {
+      "notableEpisodes": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        16,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        28,
+        31,
+        35,
+        38,
+        40,
+        43,
+        50
+      ],
+      "battleEpisodes": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        16,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        28,
+        31,
+        35,
+        38,
+        40,
+        43,
+        50
+      ],
+      "debutEpisode": null,
+      "role": "principal"
+    },
+    "Tetsuya Watarigani": {
+      "notableEpisodes": [
+        5,
+        7,
+        8,
+        9,
+        20,
+        23,
+        24,
+        28,
+        35,
+        40,
+        42
+      ],
+      "battleEpisodes": [
+        5,
+        7,
+        8,
+        9,
+        20,
+        23,
+        24,
+        28,
+        35,
+        40,
+        42
+      ],
+      "debutEpisode": null,
+      "role": "récurrent"
+    },
+    "Echizen": {
+      "notableEpisodes": [
+        5
+      ],
+      "battleEpisodes": [
+        5
+      ],
+      "debutEpisode": null,
+      "role": "secondaire"
+    },
+    "Dan Sodo": {
+      "notableEpisodes": [
+        12,
+        31,
+        35,
+        42
+      ],
+      "battleEpisodes": [
+        12,
+        31,
+        35,
+        42
+      ],
+      "debutEpisode": null,
+      "role": "récurrent"
+    },
+    "Reiki Sodo": {
+      "notableEpisodes": [
+        12,
+        31,
+        35,
+        41,
+        42
+      ],
+      "battleEpisodes": [
+        12,
+        31,
+        35,
+        41,
+        42
+      ],
+      "debutEpisode": null,
+      "role": "récurrent"
+    },
+    "Hyoma": {
+      "notableEpisodes": [
+        16,
+        18,
+        21,
+        23,
+        24,
+        27,
+        32,
+        38,
+        41,
+        46
+      ],
+      "battleEpisodes": [
+        16,
+        18,
+        21,
+        23,
+        24,
+        27,
+        32,
+        38,
+        41,
+        46
+      ],
+      "debutEpisode": null,
+      "role": "récurrent"
+    },
+    "Yu Tendo": {
+      "notableEpisodes": [
+        20,
+        21,
+        22,
+        23,
+        26,
+        27,
+        31,
+        32,
+        40,
+        42,
+        43
+      ],
+      "battleEpisodes": [
+        20,
+        21,
+        22,
+        23,
+        26,
+        27,
+        31,
+        32,
+        40,
+        42,
+        43
+      ],
+      "debutEpisode": null,
+      "role": "récurrent"
+    },
+    "Ryo Onoue": {
+      "notableEpisodes": [
+        25,
+        34
+      ],
+      "battleEpisodes": [
+        25,
+        34
+      ],
+      "debutEpisode": null,
+      "role": "secondaire"
+    },
+    "Kumasuke Kumade": {
+      "notableEpisodes": [
+        26,
+        35,
+        41,
+        42
+      ],
+      "battleEpisodes": [
+        26,
+        35,
+        41,
+        42
+      ],
+      "debutEpisode": null,
+      "role": "récurrent"
+    },
+    "Sora Akatsuki": {
+      "notableEpisodes": [
+        29,
+        37
+      ],
+      "battleEpisodes": [
+        29,
+        37
+      ],
+      "debutEpisode": null,
+      "role": "secondaire"
+    },
+    "Ryutaro Fukami": {
+      "notableEpisodes": [
+        30,
+        35,
+        40,
+        43
+      ],
+      "battleEpisodes": [
+        30,
+        35,
+        40,
+        43
+      ],
+      "debutEpisode": null,
+      "role": "récurrent"
+    },
+    "Django": {
+      "notableEpisodes": [
+        36
+      ],
+      "battleEpisodes": [
+        36
+      ],
+      "debutEpisode": null,
+      "role": "secondaire"
+    }
+  },
+  "metal-fight-beyblade-baku": {
+    "Gingka Hagane": {
+      "notableEpisodes": [
+        1,
+        2,
+        3,
+        6,
+        11,
+        13,
+        16,
+        17,
+        21,
+        23,
+        29,
+        32,
+        36,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50
+      ],
+      "battleEpisodes": [
+        2,
+        3,
+        6,
+        11,
+        13,
+        16,
+        17,
+        21,
+        23,
+        29,
+        32,
+        36,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50
+      ],
+      "debutEpisode": 1,
+      "role": "protagoniste"
+    },
+    "Kyoya Tategami": {
+      "notableEpisodes": [
+        1,
+        5,
+        18,
+        21,
+        23,
+        45,
+        47,
+        48,
+        49
+      ],
+      "battleEpisodes": [
+        5,
+        18,
+        21,
+        23,
+        45,
+        47,
+        48,
+        49
+      ],
+      "debutEpisode": 1,
+      "role": "récurrent"
+    },
+    "Madoka Amano": {
+      "notableEpisodes": [
+        2,
+        17
+      ],
+      "battleEpisodes": [
+        17
+      ],
+      "debutEpisode": 2,
+      "role": "secondaire"
+    },
+    "Hikaru Hasama": {
+      "notableEpisodes": [
+        6,
+        46
+      ],
+      "battleEpisodes": [
+        46
+      ],
+      "debutEpisode": 6,
+      "role": "secondaire"
+    },
+    "Ryo Hagane": {
+      "notableEpisodes": [
+        14
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 14,
+      "role": "secondaire"
+    },
+    "Phoenix": {
+      "notableEpisodes": [
+        32,
+        40
+      ],
+      "battleEpisodes": [
+        40
+      ],
+      "debutEpisode": 32,
+      "role": "secondaire"
+    },
+    "Busujima": {
+      "notableEpisodes": [
+        37
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 37,
+      "role": "secondaire"
+    },
+    "Chaoxin": {
+      "notableEpisodes": [
+        8
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 8,
+      "role": "secondaire"
+    },
+    "Mei-Mei": {
+      "notableEpisodes": [
+        3,
+        17,
+        24,
+        40,
+        45
+      ],
+      "battleEpisodes": [
+        3,
+        17,
+        24,
+        40,
+        45
+      ],
+      "debutEpisode": 3,
+      "role": "récurrent"
+    },
+    "Damian Heart": {
+      "notableEpisodes": [
+        36
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 36,
+      "role": "secondaire"
+    },
+    "Nowaguma": {
+      "notableEpisodes": [
+        13,
+        14
+      ],
+      "battleEpisodes": [
+        13,
+        14
+      ],
+      "debutEpisode": 13,
+      "role": "secondaire"
+    },
+    "Lera": {
+      "notableEpisodes": [
+        13
+      ],
+      "battleEpisodes": [
+        13
+      ],
+      "debutEpisode": 13,
+      "role": "secondaire"
+    },
+    "Aleksey": {
+      "notableEpisodes": [
+        13,
+        15,
+        19
+      ],
+      "battleEpisodes": [
+        13,
+        15,
+        19
+      ],
+      "debutEpisode": 13,
+      "role": "secondaire"
+    },
+    "Anton (Metal Saga)": {
+      "notableEpisodes": [
+        13
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 13,
+      "role": "secondaire"
+    },
+    "Gasur": {
+      "notableEpisodes": [
+        12,
+        19
+      ],
+      "battleEpisodes": [
+        12,
+        19
+      ],
+      "debutEpisode": 12,
+      "role": "secondaire"
+    },
+    "Coach Steel": {
+      "notableEpisodes": [
+        34
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 34,
+      "role": "secondaire"
+    },
+    "Karte": {
+      "notableEpisodes": [
+        12
+      ],
+      "battleEpisodes": [
+        12
+      ],
+      "debutEpisode": 12,
+      "role": "secondaire"
+    },
+    "American DJ": {
+      "notableEpisodes": [
+        38,
+        40
+      ],
+      "battleEpisodes": [
+        40
+      ],
+      "debutEpisode": 38,
+      "role": "secondaire"
+    },
+    "Chinese DJ": {
+      "notableEpisodes": [
+        9
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 9,
+      "role": "secondaire"
+    },
+    "Dashan Wang": {
+      "notableEpisodes": [
+        7,
+        11,
+        17,
+        19,
+        40,
+        45,
+        47
+      ],
+      "battleEpisodes": [
+        7,
+        11,
+        17,
+        19,
+        40,
+        45,
+        47
+      ],
+      "debutEpisode": 7,
+      "role": "récurrent"
+    },
+    "Akira (Metal Saga)": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Blader DJ (Metal Saga)": {
+      "notableEpisodes": [
+        1,
+        40
+      ],
+      "battleEpisodes": [
+        40
+      ],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Russian DJ": {
+      "notableEpisodes": [
+        13
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 13,
+      "role": "secondaire"
+    },
+    "Brazilian DJ": {
+      "notableEpisodes": [
+        30
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 30,
+      "role": "secondaire"
+    },
+    "French DJ": {
+      "notableEpisodes": [
+        24
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 24,
+      "role": "secondaire"
+    },
+    "African DJ": {
+      "notableEpisodes": [
+        18
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 18,
+      "role": "secondaire"
+    },
+    "Italian DJ": {
+      "notableEpisodes": [
+        27
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 27,
+      "role": "secondaire"
+    },
+    "Ryuga": {
+      "notableEpisodes": [
+        11,
+        26,
+        27,
+        28,
+        33,
+        36,
+        37,
+        42
+      ],
+      "battleEpisodes": [
+        26,
+        27,
+        28,
+        33,
+        36,
+        37,
+        42
+      ],
+      "debutEpisode": 11,
+      "role": "récurrent"
+    },
+    "Tsubasa Otori": {
+      "notableEpisodes": [
+        5,
+        6,
+        17,
+        22,
+        24,
+        26,
+        33,
+        46,
+        47,
+        48
+      ],
+      "battleEpisodes": [
+        5,
+        6,
+        17,
+        22,
+        26,
+        33,
+        46,
+        47,
+        48
+      ],
+      "debutEpisode": 24,
+      "role": "récurrent"
+    },
+    "Tobio Oike": {
+      "notableEpisodes": [
+        25
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 25,
+      "role": "secondaire"
+    },
+    "Teru Saotome": {
+      "notableEpisodes": [
+        34
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 34,
+      "role": "secondaire"
+    },
+    "The Masked Bull": {
+      "notableEpisodes": [
+        19,
+        22
+      ],
+      "battleEpisodes": [
+        22
+      ],
+      "debutEpisode": 19,
+      "role": "secondaire"
+    },
+    "Zeo Abyss": {
+      "notableEpisodes": [
+        30,
+        34,
+        35,
+        36,
+        37,
+        41,
+        51
+      ],
+      "battleEpisodes": [
+        34,
+        35,
+        36,
+        37,
+        41,
+        51
+      ],
+      "debutEpisode": 30,
+      "role": "récurrent"
+    },
+    "Toby": {
+      "notableEpisodes": [
+        34,
+        35
+      ],
+      "battleEpisodes": [
+        35
+      ],
+      "debutEpisode": 34,
+      "role": "secondaire"
+    },
+    "Zidane": {
+      "notableEpisodes": [
+        12
+      ],
+      "battleEpisodes": [
+        12
+      ],
+      "debutEpisode": 12,
+      "role": "secondaire"
+    },
+    "Kenta Yumiya": {
+      "notableEpisodes": [
+        2,
+        4,
+        6,
+        20,
+        36,
+        45,
+        46
+      ],
+      "battleEpisodes": [
+        2,
+        4,
+        6,
+        20,
+        36,
+        45,
+        46
+      ],
+      "debutEpisode": null,
+      "role": "récurrent"
+    },
+    "Masamune Kadoya": {
+      "notableEpisodes": [
+        3,
+        4,
+        7,
+        8,
+        13,
+        15,
+        16,
+        17,
+        20,
+        23,
+        34,
+        36,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51
+      ],
+      "battleEpisodes": [
+        3,
+        4,
+        7,
+        8,
+        13,
+        15,
+        16,
+        17,
+        20,
+        23,
+        34,
+        36,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51
+      ],
+      "debutEpisode": null,
+      "role": "principal"
+    },
+    "Chiyun Li": {
+      "notableEpisodes": [
+        3,
+        17,
+        25,
+        40,
+        45
+      ],
+      "battleEpisodes": [
+        3,
+        17,
+        25,
+        40,
+        45
+      ],
+      "debutEpisode": null,
+      "role": "récurrent"
+    },
+    "Yu Tendo": {
+      "notableEpisodes": [
+        4,
+        6,
+        13,
+        15,
+        16,
+        17,
+        22,
+        30,
+        31,
+        46,
+        47
+      ],
+      "battleEpisodes": [
+        4,
+        6,
+        13,
+        15,
+        16,
+        17,
+        22,
+        30,
+        31,
+        46,
+        47
+      ],
+      "debutEpisode": null,
+      "role": "récurrent"
+    },
+    "Benkei Hanawa": {
+      "notableEpisodes": [
+        6,
+        45
+      ],
+      "battleEpisodes": [
+        6,
+        45
+      ],
+      "debutEpisode": null,
+      "role": "secondaire"
+    },
+    "Julian Konzern": {
+      "notableEpisodes": [
+        12,
+        16,
+        19,
+        26,
+        27,
+        29,
+        39,
+        45,
+        47
+      ],
+      "battleEpisodes": [
+        12,
+        16,
+        19,
+        26,
+        27,
+        29,
+        39,
+        45,
+        47
+      ],
+      "debutEpisode": null,
+      "role": "récurrent"
+    },
+    "Wales": {
+      "notableEpisodes": [
+        16,
+        24,
+        26,
+        28,
+        39,
+        46,
+        47
+      ],
+      "battleEpisodes": [
+        16,
+        24,
+        26,
+        28,
+        39,
+        46,
+        47
+      ],
+      "debutEpisode": null,
+      "role": "récurrent"
+    },
+    "Sophie": {
+      "notableEpisodes": [
+        16,
+        24,
+        26,
+        28,
+        39,
+        46,
+        47
+      ],
+      "battleEpisodes": [
+        16,
+        24,
+        26,
+        28,
+        39,
+        46,
+        47
+      ],
+      "debutEpisode": null,
+      "role": "récurrent"
+    },
+    "Nile": {
+      "notableEpisodes": [
+        23,
+        45
+      ],
+      "battleEpisodes": [
+        23,
+        45
+      ],
+      "debutEpisode": null,
+      "role": "secondaire"
+    },
+    "Klaus": {
+      "notableEpisodes": [
+        25,
+        26,
+        27,
+        38,
+        46
+      ],
+      "battleEpisodes": [
+        25,
+        26,
+        27,
+        38,
+        46
+      ],
+      "debutEpisode": null,
+      "role": "récurrent"
+    },
+    "Enso Garcia": {
+      "notableEpisodes": [
+        31,
+        45,
+        46
+      ],
+      "battleEpisodes": [
+        31,
+        45,
+        46
+      ],
+      "debutEpisode": null,
+      "role": "secondaire"
+    },
+    "Selen Garcia": {
+      "notableEpisodes": [
+        31,
+        32,
+        45,
+        46
+      ],
+      "battleEpisodes": [
+        31,
+        32,
+        45,
+        46
+      ],
+      "debutEpisode": null,
+      "role": "récurrent"
+    },
+    "Ian Garcia": {
+      "notableEpisodes": [
+        32,
+        46
+      ],
+      "battleEpisodes": [
+        32,
+        46
+      ],
+      "debutEpisode": null,
+      "role": "secondaire"
+    },
+    "Argo Garcia": {
+      "notableEpisodes": [
+        32,
+        33,
+        45,
+        46
+      ],
+      "battleEpisodes": [
+        32,
+        33,
+        45,
+        46
+      ],
+      "debutEpisode": null,
+      "role": "récurrent"
+    },
+    "Jack (Metal Saga)": {
+      "notableEpisodes": [
+        42
+      ],
+      "battleEpisodes": [
+        42
+      ],
+      "debutEpisode": null,
+      "role": "secondaire"
+    },
+    "Dr. Ziggurat": {
+      "notableEpisodes": [
+        51
+      ],
+      "battleEpisodes": [
+        51
+      ],
+      "debutEpisode": null,
+      "role": "secondaire"
+    }
+  },
+  "metal-fight-beyblade-4d": {
+    "Gingka Hagane": {
+      "notableEpisodes": [
+        1,
+        2,
+        3,
+        5,
+        6,
+        9,
+        10,
+        11,
+        12,
+        21,
+        22,
+        23,
+        24,
+        26,
+        30,
+        31,
+        32,
+        33,
+        34,
+        36,
+        39,
+        40,
+        41,
+        45,
+        50,
+        51,
+        52
+      ],
+      "battleEpisodes": [
+        1,
+        2,
+        3,
+        5,
+        6,
+        9,
+        10,
+        11,
+        12,
+        21,
+        22,
+        23,
+        24,
+        26,
+        30,
+        31,
+        32,
+        33,
+        34,
+        36,
+        39,
+        40,
+        41,
+        45,
+        50,
+        51,
+        52
+      ],
+      "debutEpisode": 1,
+      "role": "protagoniste"
+    },
+    "Ryuga": {
+      "notableEpisodes": [
+        4,
+        5,
+        7,
+        11,
+        13,
+        23,
+        24,
+        26,
+        29,
+        31,
+        32,
+        33,
+        34,
+        35,
+        42,
+        43,
+        44
+      ],
+      "battleEpisodes": [
+        4,
+        5,
+        7,
+        13,
+        23,
+        24,
+        26,
+        29,
+        31,
+        32,
+        33,
+        34,
+        35,
+        42,
+        43,
+        44
+      ],
+      "debutEpisode": 11,
+      "role": "principal"
+    },
+    "Kyoya Tategami": {
+      "notableEpisodes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        9,
+        10,
+        11,
+        19,
+        22,
+        27,
+        30,
+        31,
+        32,
+        33,
+        34,
+        36,
+        39,
+        41,
+        45,
+        52
+      ],
+      "battleEpisodes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        9,
+        10,
+        11,
+        19,
+        22,
+        27,
+        30,
+        31,
+        32,
+        33,
+        34,
+        36,
+        39,
+        41,
+        45,
+        52
+      ],
+      "debutEpisode": 1,
+      "role": "protagoniste"
+    },
+    "Doji": {
+      "notableEpisodes": [
+        2
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 2,
+      "role": "secondaire"
+    },
+    "Hikaru Hasama": {
+      "notableEpisodes": [
+        6
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 6,
+      "role": "secondaire"
+    },
+    "Tsubasa Otori": {
+      "notableEpisodes": [
+        15,
+        17,
+        24,
+        36,
+        37,
+        45,
+        47,
+        48
+      ],
+      "battleEpisodes": [
+        15,
+        17,
+        36,
+        37,
+        45,
+        47,
+        48
+      ],
+      "debutEpisode": 24,
+      "role": "récurrent"
+    },
+    "Ryo Hagane": {
+      "notableEpisodes": [
+        14
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 14,
+      "role": "secondaire"
+    },
+    "Tobio Oike": {
+      "notableEpisodes": [
+        15,
+        25
+      ],
+      "battleEpisodes": [
+        15
+      ],
+      "debutEpisode": 25,
+      "role": "secondaire"
+    },
+    "Busujima": {
+      "notableEpisodes": [
+        37
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 37,
+      "role": "secondaire"
+    },
+    "Teru Saotome": {
+      "notableEpisodes": [
+        34
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 34,
+      "role": "secondaire"
+    },
+    "Chaoxin": {
+      "notableEpisodes": [
+        8,
+        9
+      ],
+      "battleEpisodes": [
+        9
+      ],
+      "debutEpisode": 8,
+      "role": "secondaire"
+    },
+    "Mei-Mei": {
+      "notableEpisodes": [
+        3,
+        9
+      ],
+      "battleEpisodes": [
+        9
+      ],
+      "debutEpisode": 3,
+      "role": "secondaire"
+    },
+    "Pluto": {
+      "notableEpisodes": [
+        1,
+        29,
+        32,
+        37,
+        47,
+        48
+      ],
+      "battleEpisodes": [
+        29,
+        32,
+        37,
+        47,
+        48
+      ],
+      "debutEpisode": 1,
+      "role": "récurrent"
+    },
+    "Nemesis (character)": {
+      "notableEpisodes": [
+        39,
+        49,
+        52
+      ],
+      "battleEpisodes": [
+        39,
+        52
+      ],
+      "debutEpisode": 49,
+      "role": "secondaire"
+    },
+    "Aguma": {
+      "notableEpisodes": [
+        9,
+        10,
+        11,
+        12,
+        19,
+        22,
+        23,
+        26,
+        29,
+        30,
+        31,
+        32,
+        36,
+        45,
+        50
+      ],
+      "battleEpisodes": [
+        9,
+        10,
+        11,
+        12,
+        19,
+        22,
+        23,
+        26,
+        29,
+        30,
+        31,
+        32,
+        36,
+        45,
+        50
+      ],
+      "debutEpisode": 9,
+      "role": "principal"
+    },
+    "Jigsaw": {
+      "notableEpisodes": [
+        16,
+        17
+      ],
+      "battleEpisodes": [
+        16,
+        17
+      ],
+      "debutEpisode": 16,
+      "role": "secondaire"
+    },
+    "Coach Steel": {
+      "notableEpisodes": [
+        14,
+        34
+      ],
+      "battleEpisodes": [
+        14
+      ],
+      "debutEpisode": 34,
+      "role": "secondaire"
+    },
+    "Dashan Wang": {
+      "notableEpisodes": [
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "battleEpisodes": [
+        8,
+        9,
+        10,
+        11
+      ],
+      "debutEpisode": 7,
+      "role": "récurrent"
+    },
+    "Herschel": {
+      "notableEpisodes": [
+        29,
+        30,
+        31,
+        32,
+        34,
+        42
+      ],
+      "battleEpisodes": [
+        30,
+        31,
+        32,
+        34,
+        42
+      ],
+      "debutEpisode": 29,
+      "role": "récurrent"
+    },
+    "Keyser": {
+      "notableEpisodes": [
+        29,
+        30,
+        31,
+        32,
+        34,
+        42
+      ],
+      "battleEpisodes": [
+        30,
+        31,
+        32,
+        34,
+        42
+      ],
+      "debutEpisode": 29,
+      "role": "récurrent"
+    },
+    "Kenta Yumiya": {
+      "notableEpisodes": [
+        1,
+        2,
+        4,
+        6,
+        7,
+        13,
+        23,
+        24,
+        29,
+        33,
+        34,
+        36,
+        40,
+        41,
+        45
+      ],
+      "battleEpisodes": [
+        1,
+        2,
+        4,
+        6,
+        7,
+        13,
+        23,
+        24,
+        29,
+        33,
+        34,
+        36,
+        40,
+        41,
+        45
+      ],
+      "debutEpisode": null,
+      "role": "principal"
+    },
+    "Benkei Hanawa": {
+      "notableEpisodes": [
+        2,
+        9,
+        10,
+        11,
+        19,
+        22,
+        23,
+        25,
+        26,
+        34,
+        41
+      ],
+      "battleEpisodes": [
+        2,
+        9,
+        10,
+        11,
+        19,
+        22,
+        23,
+        25,
+        26,
+        34,
+        41
+      ],
+      "debutEpisode": null,
+      "role": "récurrent"
+    },
+    "Yuki Mizusawa": {
+      "notableEpisodes": [
+        2,
+        4,
+        5,
+        6,
+        9,
+        10,
+        11,
+        12,
+        22,
+        23,
+        24,
+        25,
+        26,
+        30,
+        31,
+        33,
+        34,
+        36,
+        41,
+        45
+      ],
+      "battleEpisodes": [
+        2,
+        4,
+        5,
+        6,
+        9,
+        10,
+        11,
+        12,
+        22,
+        23,
+        24,
+        25,
+        26,
+        30,
+        31,
+        33,
+        34,
+        36,
+        41,
+        45
+      ],
+      "debutEpisode": null,
+      "role": "principal"
+    },
+    "Johannes": {
+      "notableEpisodes": [
+        2,
+        3,
+        8,
+        9,
+        10,
+        13,
+        19,
+        22,
+        23,
+        26,
+        30,
+        31,
+        34,
+        42
+      ],
+      "battleEpisodes": [
+        2,
+        3,
+        8,
+        9,
+        10,
+        13,
+        19,
+        22,
+        23,
+        26,
+        30,
+        31,
+        34,
+        42
+      ],
+      "debutEpisode": null,
+      "role": "principal"
+    },
+    "Bao": {
+      "notableEpisodes": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        19,
+        22,
+        23,
+        26,
+        30,
+        31
+      ],
+      "battleEpisodes": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        19,
+        22,
+        23,
+        26,
+        30,
+        31
+      ],
+      "debutEpisode": null,
+      "role": "principal"
+    },
+    "Chiyun Li": {
+      "notableEpisodes": [
+        9,
+        10,
+        11
+      ],
+      "battleEpisodes": [
+        9,
+        10,
+        11
+      ],
+      "debutEpisode": null,
+      "role": "secondaire"
+    },
+    "Argo Garcia": {
+      "notableEpisodes": [
+        15
+      ],
+      "battleEpisodes": [
+        15
+      ],
+      "debutEpisode": null,
+      "role": "secondaire"
+    },
+    "Ian Garcia": {
+      "notableEpisodes": [
+        15
+      ],
+      "battleEpisodes": [
+        15
+      ],
+      "debutEpisode": null,
+      "role": "secondaire"
+    },
+    "Enso Garcia": {
+      "notableEpisodes": [
+        15
+      ],
+      "battleEpisodes": [
+        15
+      ],
+      "debutEpisode": null,
+      "role": "secondaire"
+    },
+    "Masamune Kadoya": {
+      "notableEpisodes": [
+        16,
+        17,
+        23,
+        24,
+        25,
+        26,
+        30,
+        31,
+        32,
+        33,
+        34,
+        36,
+        37,
+        41,
+        45,
+        47,
+        48
+      ],
+      "battleEpisodes": [
+        16,
+        17,
+        23,
+        24,
+        25,
+        26,
+        30,
+        31,
+        32,
+        33,
+        34,
+        36,
+        37,
+        41,
+        45,
+        47,
+        48
+      ],
+      "debutEpisode": null,
+      "role": "principal"
+    },
+    "King (Metal Series)": {
+      "notableEpisodes": [
+        16,
+        17,
+        23,
+        24,
+        26,
+        30,
+        31,
+        32,
+        33,
+        34,
+        36,
+        41,
+        45,
+        50
+      ],
+      "battleEpisodes": [
+        16,
+        17,
+        23,
+        24,
+        26,
+        30,
+        31,
+        32,
+        33,
+        34,
+        36,
+        41,
+        45,
+        50
+      ],
+      "debutEpisode": null,
+      "role": "principal"
+    },
+    "Jack (Metal Saga)": {
+      "notableEpisodes": [
+        16
+      ],
+      "battleEpisodes": [
+        16
+      ],
+      "debutEpisode": null,
+      "role": "secondaire"
+    },
+    "Beylin Fist": {
+      "notableEpisodes": [
+        19,
+        26,
+        30
+      ],
+      "battleEpisodes": [
+        19,
+        26,
+        30
+      ],
+      "debutEpisode": null,
+      "role": "secondaire"
+    },
+    "Dynamis": {
+      "notableEpisodes": [
+        20,
+        21,
+        22,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        36,
+        41,
+        45,
+        49
+      ],
+      "battleEpisodes": [
+        20,
+        21,
+        22,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        36,
+        41,
+        45,
+        49
+      ],
+      "debutEpisode": null,
+      "role": "principal"
+    },
+    "Chris": {
+      "notableEpisodes": [
+        25,
+        26,
+        29,
+        31,
+        32,
+        33,
+        34,
+        36,
+        41,
+        45
+      ],
+      "battleEpisodes": [
+        25,
+        26,
+        29,
+        31,
+        32,
+        33,
+        34,
+        36,
+        41,
+        45
+      ],
+      "debutEpisode": null,
+      "role": "récurrent"
+    },
+    "Yu Tendo": {
+      "notableEpisodes": [
+        27,
+        28,
+        31,
+        32,
+        33,
+        34,
+        36,
+        37,
+        41,
+        42,
+        45,
+        47,
+        48
+      ],
+      "battleEpisodes": [
+        27,
+        28,
+        31,
+        32,
+        33,
+        34,
+        36,
+        37,
+        41,
+        42,
+        45,
+        47,
+        48
+      ],
+      "debutEpisode": null,
+      "role": "principal"
+    },
+    "Tithi": {
+      "notableEpisodes": [
+        27,
+        28,
+        30,
+        31,
+        32,
+        33,
+        34,
+        36,
+        41,
+        45,
+        50
+      ],
+      "battleEpisodes": [
+        27,
+        28,
+        30,
+        31,
+        32,
+        33,
+        34,
+        36,
+        41,
+        45,
+        50
+      ],
+      "debutEpisode": null,
+      "role": "récurrent"
+    }
+  },
+  "beyblade-shogun-steel": {
+    "Doji": {
+      "notableEpisodes": [
+        2,
+        25
+      ],
+      "battleEpisodes": [
+        25
+      ],
+      "debutEpisode": 2,
+      "role": "secondaire"
+    },
+    "Tsubasa Otori": {
+      "notableEpisodes": [
+        24
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 24,
+      "role": "secondaire"
+    },
+    "Ryo Hagane": {
+      "notableEpisodes": [
+        14
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 14,
+      "role": "secondaire"
+    },
+    "Merci": {
+      "notableEpisodes": [
+        8
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 8,
+      "role": "secondaire"
+    },
+    "Zyro Kurogane": {
+      "notableEpisodes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        7,
+        8,
+        9,
+        11,
+        12,
+        13,
+        14,
+        15,
+        18,
+        19,
+        21,
+        22,
+        23,
+        25,
+        26
+      ],
+      "battleEpisodes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        7,
+        8,
+        9,
+        11,
+        12,
+        13,
+        14,
+        15,
+        18,
+        19,
+        21,
+        22,
+        23,
+        25,
+        26
+      ],
+      "debutEpisode": 1,
+      "role": "protagoniste"
+    },
+    "Shinobu Hiryuin": {
+      "notableEpisodes": [
+        1,
+        3,
+        16,
+        17,
+        19,
+        21,
+        22,
+        23,
+        24,
+        26
+      ],
+      "battleEpisodes": [
+        1,
+        3,
+        16,
+        17,
+        19,
+        21,
+        22,
+        23,
+        24,
+        26
+      ],
+      "debutEpisode": 1,
+      "role": "récurrent"
+    },
+    "Kite Unabara": {
+      "notableEpisodes": [
+        4,
+        5,
+        7,
+        8,
+        11,
+        13,
+        14,
+        15,
+        16,
+        20,
+        21,
+        22
+      ],
+      "battleEpisodes": [
+        4,
+        5,
+        7,
+        8,
+        11,
+        13,
+        14,
+        15,
+        16,
+        20,
+        21,
+        22
+      ],
+      "debutEpisode": 5,
+      "role": "principal"
+    },
+    "Eight Unabara": {
+      "notableEpisodes": [
+        1,
+        2,
+        3,
+        8,
+        10,
+        14,
+        15,
+        21,
+        22,
+        23
+      ],
+      "battleEpisodes": [
+        1,
+        2,
+        8,
+        10,
+        14,
+        15,
+        21,
+        22,
+        23
+      ],
+      "debutEpisode": 3,
+      "role": "récurrent"
+    },
+    "Maru": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Blader Gai": {
+      "notableEpisodes": [
+        3
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 3,
+      "role": "secondaire"
+    },
+    "Takanosuke Shishiya": {
+      "notableEpisodes": [
+        6,
+        8,
+        11,
+        15,
+        16,
+        19,
+        23
+      ],
+      "battleEpisodes": [
+        6,
+        8,
+        11,
+        15,
+        16,
+        19,
+        23
+      ],
+      "debutEpisode": 11,
+      "role": "récurrent"
+    },
+    "Kikura Gen": {
+      "notableEpisodes": [
+        7
+      ],
+      "battleEpisodes": [
+        7
+      ],
+      "debutEpisode": 7,
+      "role": "secondaire"
+    },
+    "Sakyo Kurayami": {
+      "notableEpisodes": [
+        8,
+        9,
+        14,
+        15,
+        16,
+        17,
+        19,
+        23,
+        24
+      ],
+      "battleEpisodes": [
+        8,
+        9,
+        14,
+        15,
+        16,
+        17,
+        19,
+        23,
+        24
+      ],
+      "debutEpisode": 15,
+      "role": "récurrent"
+    },
+    "Akuya Onizaki": {
+      "notableEpisodes": [
+        9,
+        12,
+        15,
+        17
+      ],
+      "battleEpisodes": [
+        9,
+        12,
+        15
+      ],
+      "debutEpisode": 17,
+      "role": "secondaire"
+    },
+    "Yoshio Iwayama": {
+      "notableEpisodes": [
+        10,
+        12,
+        14,
+        15,
+        16,
+        17,
+        21,
+        23,
+        24,
+        26
+      ],
+      "battleEpisodes": [
+        10,
+        12,
+        14,
+        15,
+        16,
+        17,
+        21,
+        23,
+        24,
+        26
+      ],
+      "debutEpisode": 10,
+      "role": "récurrent"
+    },
+    "Kira Hayama": {
+      "notableEpisodes": [
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        21,
+        24,
+        25,
+        26
+      ],
+      "battleEpisodes": [
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        21,
+        25,
+        26
+      ],
+      "debutEpisode": 24,
+      "role": "récurrent"
+    },
+    "Genjuro Kamegaki": {
+      "notableEpisodes": [
+        14,
+        15,
+        18,
+        21,
+        23,
+        28
+      ],
+      "battleEpisodes": [
+        14,
+        15,
+        18,
+        21,
+        23
+      ],
+      "debutEpisode": 28,
+      "role": "récurrent"
+    },
+    "Spike Bourne": {
+      "notableEpisodes": [
+        15,
+        18,
+        21,
+        23,
+        29
+      ],
+      "battleEpisodes": [
+        15,
+        18,
+        21,
+        23
+      ],
+      "debutEpisode": 29,
+      "role": "récurrent"
+    },
+    "Captain Arrow": {
+      "notableEpisodes": [
+        15,
+        16,
+        18,
+        21,
+        23,
+        30
+      ],
+      "battleEpisodes": [
+        15,
+        16,
+        18,
+        21,
+        23
+      ],
+      "debutEpisode": 30,
+      "role": "récurrent"
+    },
+    "Baihu Xiao": {
+      "notableEpisodes": [
+        21,
+        24,
+        39
+      ],
+      "battleEpisodes": [
+        21,
+        24
+      ],
+      "debutEpisode": 39,
+      "role": "secondaire"
+    },
+    "Karura": {
+      "notableEpisodes": [
+        22
+      ],
+      "battleEpisodes": [
+        22
+      ],
+      "debutEpisode": 22,
+      "role": "secondaire"
+    }
+  },
+  "bakuten-shoot-beyblade": {
+    "Kenny": {
+      "notableEpisodes": [
+        1,
+        4,
+        45
+      ],
+      "battleEpisodes": [
+        4,
+        45
+      ],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Max Tate": {
+      "notableEpisodes": [
+        3,
+        5,
+        10,
+        13,
+        14,
+        15,
+        19,
+        22,
+        23,
+        24,
+        25,
+        28,
+        29,
+        32,
+        45,
+        46
+      ],
+      "battleEpisodes": [
+        3,
+        5,
+        10,
+        13,
+        14,
+        15,
+        19,
+        22,
+        23,
+        24,
+        25,
+        28,
+        29,
+        32,
+        45,
+        46
+      ],
+      "debutEpisode": 3,
+      "role": "principal"
+    },
+    "Johnny McGregor": {
+      "notableEpisodes": [
+        33,
+        37,
+        39
+      ],
+      "battleEpisodes": [
+        33,
+        37,
+        39
+      ],
+      "debutEpisode": 37,
+      "role": "secondaire"
+    },
+    "Mariah": {
+      "notableEpisodes": [
+        9,
+        10,
+        12,
+        13,
+        16,
+        29,
+        41,
+        44
+      ],
+      "battleEpisodes": [
+        10,
+        12,
+        13,
+        16,
+        29,
+        41,
+        44
+      ],
+      "debutEpisode": 9,
+      "role": "récurrent"
+    },
+    "Judy Tate": {
+      "notableEpisodes": [
+        19
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 19,
+      "role": "secondaire"
+    },
+    "Emily Watson": {
+      "notableEpisodes": [
+        19,
+        22,
+        29,
+        41
+      ],
+      "battleEpisodes": [
+        19,
+        22,
+        29,
+        41
+      ],
+      "debutEpisode": 19,
+      "role": "récurrent"
+    },
+    "Kevin": {
+      "notableEpisodes": [
+        8,
+        9,
+        11
+      ],
+      "battleEpisodes": [
+        9,
+        11
+      ],
+      "debutEpisode": 8,
+      "role": "secondaire"
+    },
+    "Ian Papov": {
+      "notableEpisodes": [
+        42,
+        43,
+        46
+      ],
+      "battleEpisodes": [
+        42,
+        43,
+        46
+      ],
+      "debutEpisode": 42,
+      "role": "secondaire"
+    },
+    "Bryan Kuznetsov": {
+      "notableEpisodes": [
+        43,
+        46,
+        49
+      ],
+      "battleEpisodes": [
+        46,
+        49
+      ],
+      "debutEpisode": 43,
+      "role": "secondaire"
+    },
+    "Eddy": {
+      "notableEpisodes": [
+        20,
+        27,
+        29,
+        43
+      ],
+      "battleEpisodes": [
+        27,
+        29,
+        43
+      ],
+      "debutEpisode": 20,
+      "role": "secondaire"
+    },
+    "Carlos": {
+      "notableEpisodes": [
+        1,
+        4,
+        29
+      ],
+      "battleEpisodes": [
+        1,
+        4,
+        29
+      ],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Andrew": {
+      "notableEpisodes": [
+        1,
+        18
+      ],
+      "battleEpisodes": [
+        1,
+        18
+      ],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Lupinex": {
+      "notableEpisodes": [
+        32,
+        33
+      ],
+      "battleEpisodes": [
+        32,
+        33
+      ],
+      "debutEpisode": 32,
+      "role": "secondaire"
+    },
+    "Cenotaph": {
+      "notableEpisodes": [
+        31,
+        33
+      ],
+      "battleEpisodes": [
+        31,
+        33
+      ],
+      "debutEpisode": 31,
+      "role": "secondaire"
+    },
+    "Boris Balkov": {
+      "notableEpisodes": [
+        40
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 40,
+      "role": "secondaire"
+    },
+    "Michael Summers": {
+      "notableEpisodes": [
+        22,
+        28,
+        29,
+        41,
+        50
+      ],
+      "battleEpisodes": [
+        28,
+        29,
+        41,
+        50
+      ],
+      "debutEpisode": 22,
+      "role": "récurrent"
+    },
+    "Ryu Granger": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Mr. Dickenson": {
+      "notableEpisodes": [
+        3
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 3,
+      "role": "secondaire"
+    },
+    "Andy": {
+      "notableEpisodes": [
+        19
+      ],
+      "battleEpisodes": [
+        19
+      ],
+      "debutEpisode": 19,
+      "role": "secondaire"
+    },
+    "Billy (2000)": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Bruno": {
+      "notableEpisodes": [
+        13
+      ],
+      "battleEpisodes": [
+        13
+      ],
+      "debutEpisode": 13,
+      "role": "secondaire"
+    },
+    "Rasputin": {
+      "notableEpisodes": [
+        42
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 42,
+      "role": "secondaire"
+    },
+    "Doug": {
+      "notableEpisodes": [
+        13
+      ],
+      "battleEpisodes": [
+        13
+      ],
+      "debutEpisode": 13,
+      "role": "secondaire"
+    },
+    "Pee Wee": {
+      "notableEpisodes": [
+        24
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 24,
+      "role": "secondaire"
+    },
+    "Bruce": {
+      "notableEpisodes": [
+        8
+      ],
+      "battleEpisodes": [
+        8
+      ],
+      "debutEpisode": 8,
+      "role": "secondaire"
+    },
+    "Miguel (The Renegades)": {
+      "notableEpisodes": [
+        23
+      ],
+      "battleEpisodes": [
+        23
+      ],
+      "debutEpisode": 23,
+      "role": "secondaire"
+    },
+    "Pedro": {
+      "notableEpisodes": [
+        23
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 23,
+      "role": "secondaire"
+    },
+    "Jose": {
+      "notableEpisodes": [
+        23
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 23,
+      "role": "secondaire"
+    },
+    "Chucky": {
+      "notableEpisodes": [
+        14
+      ],
+      "battleEpisodes": [
+        14
+      ],
+      "debutEpisode": 14,
+      "role": "secondaire"
+    },
+    "Lee": {
+      "notableEpisodes": [
+        9,
+        13,
+        17,
+        29,
+        41,
+        44,
+        50
+      ],
+      "battleEpisodes": [
+        13,
+        17,
+        29,
+        41,
+        44,
+        50
+      ],
+      "debutEpisode": 9,
+      "role": "récurrent"
+    },
+    "Gary": {
+      "notableEpisodes": [
+        9,
+        13,
+        15,
+        29,
+        41,
+        44
+      ],
+      "battleEpisodes": [
+        13,
+        15,
+        29,
+        41,
+        44
+      ],
+      "debutEpisode": 9,
+      "role": "récurrent"
+    },
+    "Enrique": {
+      "notableEpisodes": [
+        33,
+        35,
+        36
+      ],
+      "battleEpisodes": [
+        33,
+        35,
+        36
+      ],
+      "debutEpisode": 35,
+      "role": "secondaire"
+    },
+    "Ronnie (Charming Princes)": {
+      "notableEpisodes": [
+        13
+      ],
+      "battleEpisodes": [
+        13
+      ],
+      "debutEpisode": 13,
+      "role": "secondaire"
+    },
+    "Frankie": {
+      "notableEpisodes": [
+        25
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 25,
+      "role": "secondaire"
+    },
+    "Fernando": {
+      "notableEpisodes": [
+        24
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 24,
+      "role": "secondaire"
+    },
+    "Axel": {
+      "notableEpisodes": [
+        24
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 24,
+      "role": "secondaire"
+    },
+    "Bobby": {
+      "notableEpisodes": [
+        13
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 13,
+      "role": "secondaire"
+    },
+    "Nicky": {
+      "notableEpisodes": [
+        18
+      ],
+      "battleEpisodes": [
+        18
+      ],
+      "debutEpisode": 18,
+      "role": "secondaire"
+    },
+    "Mario": {
+      "notableEpisodes": [
+        22
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 22,
+      "role": "secondaire"
+    },
+    "Douglas": {
+      "notableEpisodes": [
+        20
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 20,
+      "role": "secondaire"
+    },
+    "Luiz": {
+      "notableEpisodes": [
+        25
+      ],
+      "battleEpisodes": [
+        25
+      ],
+      "debutEpisode": 25,
+      "role": "secondaire"
+    },
+    "Lippy": {
+      "notableEpisodes": [
+        14
+      ],
+      "battleEpisodes": [
+        14
+      ],
+      "debutEpisode": 14,
+      "role": "secondaire"
+    },
+    "Robin": {
+      "notableEpisodes": [
+        13
+      ],
+      "battleEpisodes": [
+        13
+      ],
+      "debutEpisode": 13,
+      "role": "secondaire"
+    },
+    "Diego": {
+      "notableEpisodes": [
+        24
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 24,
+      "role": "secondaire"
+    },
+    "Andre": {
+      "notableEpisodes": [
+        10
+      ],
+      "battleEpisodes": [
+        10
+      ],
+      "debutEpisode": 10,
+      "role": "secondaire"
+    },
+    "Casey": {
+      "notableEpisodes": [
+        2
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 2,
+      "role": "secondaire"
+    },
+    "McSneeze": {
+      "notableEpisodes": [
+        22
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 22,
+      "role": "secondaire"
+    },
+    "Jocelyn Heart": {
+      "notableEpisodes": [
+        22
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 22,
+      "role": "secondaire"
+    },
+    "Antonio": {
+      "notableEpisodes": [
+        21
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 21,
+      "role": "secondaire"
+    },
+    "Steve (All Starz)": {
+      "notableEpisodes": [
+        20
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 20,
+      "role": "secondaire"
+    },
+    "Sanguinex": {
+      "notableEpisodes": [
+        32,
+        33
+      ],
+      "battleEpisodes": [
+        32,
+        33
+      ],
+      "debutEpisode": 32,
+      "role": "secondaire"
+    },
+    "Zomb": {
+      "notableEpisodes": [
+        32,
+        33
+      ],
+      "battleEpisodes": [
+        33
+      ],
+      "debutEpisode": 32,
+      "role": "secondaire"
+    },
+    "Tatsuya Granger": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Spencer": {
+      "notableEpisodes": [
+        44,
+        46,
+        48
+      ],
+      "battleEpisodes": [
+        46,
+        48
+      ],
+      "debutEpisode": 44,
+      "role": "secondaire"
+    },
+    "Tony (2000)": {
+      "notableEpisodes": [
+        19
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 19,
+      "role": "secondaire"
+    },
+    "Voltaire Hiwatari": {
+      "notableEpisodes": [
+        8
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 8,
+      "role": "secondaire"
+    },
+    "Waylan": {
+      "notableEpisodes": [
+        10
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 10,
+      "role": "secondaire"
+    },
+    "Zippy": {
+      "notableEpisodes": [
+        14
+      ],
+      "battleEpisodes": [
+        14
+      ],
+      "debutEpisode": 14,
+      "role": "secondaire"
+    },
+    "Tommy": {
+      "notableEpisodes": [
+        10
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 10,
+      "role": "secondaire"
+    },
+    "Trevor": {
+      "notableEpisodes": [
+        2
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 2,
+      "role": "secondaire"
+    },
+    "Typhoon Lewis": {
+      "notableEpisodes": [
+        22
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 22,
+      "role": "secondaire"
+    }
+  },
+  "beyblade-v-force": {
+    "Tanner Connor": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Kenny": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Dr. Zagart": {
+      "notableEpisodes": [
+        20
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 20,
+      "role": "secondaire"
+    },
+    "King (Original Series)": {
+      "notableEpisodes": [
+        42
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 42,
+      "role": "secondaire"
+    },
+    "Max Tate": {
+      "notableEpisodes": [
+        2,
+        3,
+        9
+      ],
+      "battleEpisodes": [
+        2,
+        9
+      ],
+      "debutEpisode": 3,
+      "role": "secondaire"
+    },
+    "Hilary Tachibana": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Salima": {
+      "notableEpisodes": [
+        17
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 17,
+      "role": "secondaire"
+    },
+    "Goki": {
+      "notableEpisodes": [
+        17
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 17,
+      "role": "secondaire"
+    },
+    "Net": {
+      "notableEpisodes": [
+        34
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 34,
+      "role": "secondaire"
+    },
+    "Ozuma": {
+      "notableEpisodes": [
+        1,
+        2,
+        3
+      ],
+      "battleEpisodes": [
+        1,
+        2,
+        3
+      ],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Dunga": {
+      "notableEpisodes": [
+        5
+      ],
+      "battleEpisodes": [
+        5
+      ],
+      "debutEpisode": 5,
+      "role": "secondaire"
+    },
+    "Mariam": {
+      "notableEpisodes": [
+        2
+      ],
+      "battleEpisodes": [
+        2
+      ],
+      "debutEpisode": 2,
+      "role": "secondaire"
+    },
+    "Joseph": {
+      "notableEpisodes": [
+        2
+      ],
+      "battleEpisodes": [
+        2
+      ],
+      "debutEpisode": 2,
+      "role": "secondaire"
+    },
+    "Kane Yamashita": {
+      "notableEpisodes": [
+        17
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 17,
+      "role": "secondaire"
+    },
+    "Gideon": {
+      "notableEpisodes": [
+        3
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 3,
+      "role": "secondaire"
+    },
+    "Jim": {
+      "notableEpisodes": [
+        17
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 17,
+      "role": "secondaire"
+    },
+    "Doctor B": {
+      "notableEpisodes": [
+        6
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 6,
+      "role": "secondaire"
+    },
+    "Doctor K": {
+      "notableEpisodes": [
+        29
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 29,
+      "role": "secondaire"
+    },
+    "Judy Tate": {
+      "notableEpisodes": [
+        19
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 19,
+      "role": "secondaire"
+    },
+    "Queen": {
+      "notableEpisodes": [
+        42
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 42,
+      "role": "secondaire"
+    },
+    "Gordo": {
+      "notableEpisodes": [
+        42
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 42,
+      "role": "secondaire"
+    },
+    "Foxy": {
+      "notableEpisodes": [
+        31
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 31,
+      "role": "secondaire"
+    },
+    "Chameleon": {
+      "notableEpisodes": [
+        7,
+        9
+      ],
+      "battleEpisodes": [
+        9
+      ],
+      "debutEpisode": 7,
+      "role": "secondaire"
+    },
+    "Bat": {
+      "notableEpisodes": [
+        7,
+        10
+      ],
+      "battleEpisodes": [
+        10
+      ],
+      "debutEpisode": 7,
+      "role": "secondaire"
+    },
+    "Figel": {
+      "notableEpisodes": [
+        7,
+        11
+      ],
+      "battleEpisodes": [
+        11
+      ],
+      "debutEpisode": 7,
+      "role": "secondaire"
+    },
+    "Daryl": {
+      "notableEpisodes": [
+        7,
+        11
+      ],
+      "battleEpisodes": [
+        7,
+        11
+      ],
+      "debutEpisode": 7,
+      "role": "secondaire"
+    },
+    "Dennis": {
+      "notableEpisodes": [
+        36
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 36,
+      "role": "secondaire"
+    },
+    "Denny": {
+      "notableEpisodes": [
+        40
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 40,
+      "role": "secondaire"
+    },
+    "Snakey": {
+      "notableEpisodes": [
+        6
+      ],
+      "battleEpisodes": [
+        6
+      ],
+      "debutEpisode": 6,
+      "role": "secondaire"
+    },
+    "Gerry": {
+      "notableEpisodes": [
+        14
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 14,
+      "role": "secondaire"
+    },
+    "Ryu Granger": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Alan McKenzie": {
+      "notableEpisodes": [
+        28
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 28,
+      "role": "secondaire"
+    },
+    "Mr. Dickenson": {
+      "notableEpisodes": [
+        3
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 3,
+      "role": "secondaire"
+    },
+    "Ms. Kincaid": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Tony (V-Force)": {
+      "notableEpisodes": [
+        34
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 34,
+      "role": "secondaire"
+    },
+    "Team Psykick": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Sanchez": {
+      "notableEpisodes": [
+        44
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 44,
+      "role": "secondaire"
+    },
+    "Marcos": {
+      "notableEpisodes": [
+        44
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 44,
+      "role": "secondaire"
+    },
+    "Sunny Ronny": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Slim": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Fatso": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Saint Shields Elder": {
+      "notableEpisodes": [
+        39
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 39,
+      "role": "secondaire"
+    },
+    "Mrs. Saien": {
+      "notableEpisodes": [
+        2
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 2,
+      "role": "secondaire"
+    },
+    "Scott": {
+      "notableEpisodes": [
+        28
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 28,
+      "role": "secondaire"
+    },
+    "William": {
+      "notableEpisodes": [
+        41
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 41,
+      "role": "secondaire"
+    },
+    "Raymond": {
+      "notableEpisodes": [
+        43
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 43,
+      "role": "secondaire"
+    },
+    "Ganta": {
+      "notableEpisodes": [
+        41
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 41,
+      "role": "secondaire"
+    },
+    "Zeo Zagart": {
+      "notableEpisodes": [
+        30
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 30,
+      "role": "secondaire"
+    },
+    "Wyatt Smithwright": {
+      "notableEpisodes": [
+        5
+      ],
+      "battleEpisodes": [
+        5
+      ],
+      "debutEpisode": 5,
+      "role": "secondaire"
+    }
+  },
+  "beyblade-g-revolution": {
+    "Kenny": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Max Tate": {
+      "notableEpisodes": [
+        3
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 3,
+      "role": "secondaire"
+    },
+    "Hilary Tachibana": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Mystel": {
+      "notableEpisodes": [
+        34
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 34,
+      "role": "secondaire"
+    },
+    "Garland Tzebult": {
+      "notableEpisodes": [
+        33
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 33,
+      "role": "secondaire"
+    },
+    "Crusher": {
+      "notableEpisodes": [
+        33
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 33,
+      "role": "secondaire"
+    },
+    "Ming-Ming": {
+      "notableEpisodes": [
+        32
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 32,
+      "role": "secondaire"
+    },
+    "Tala": {
+      "notableEpisodes": [
+        42
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 42,
+      "role": "secondaire"
+    },
+    "Rick Anderson": {
+      "notableEpisodes": [
+        3
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 3,
+      "role": "secondaire"
+    },
+    "Johnny McGregor": {
+      "notableEpisodes": [
+        37
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 37,
+      "role": "secondaire"
+    },
+    "Mariah": {
+      "notableEpisodes": [
+        9
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 9,
+      "role": "secondaire"
+    },
+    "Julia Fernandez": {
+      "notableEpisodes": [
+        10
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 10,
+      "role": "secondaire"
+    },
+    "Raul Fernandez": {
+      "notableEpisodes": [
+        10
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 10,
+      "role": "secondaire"
+    },
+    "Judy Tate": {
+      "notableEpisodes": [
+        19
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 19,
+      "role": "secondaire"
+    },
+    "Emily Watson": {
+      "notableEpisodes": [
+        19
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 19,
+      "role": "secondaire"
+    },
+    "Kevin": {
+      "notableEpisodes": [
+        8
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 8,
+      "role": "secondaire"
+    },
+    "Bryan Kuznetsov": {
+      "notableEpisodes": [
+        43
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 43,
+      "role": "secondaire"
+    },
+    "Eddy": {
+      "notableEpisodes": [
+        20
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 20,
+      "role": "secondaire"
+    },
+    "Jesse Tzebult": {
+      "notableEpisodes": [
+        36
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 36,
+      "role": "secondaire"
+    },
+    "Todd Tzebult": {
+      "notableEpisodes": [
+        36
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 36,
+      "role": "secondaire"
+    },
+    "Brit Siebald": {
+      "notableEpisodes": [
+        36
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 36,
+      "role": "secondaire"
+    },
+    "Kylie Siebald": {
+      "notableEpisodes": [
+        36
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 36,
+      "role": "secondaire"
+    },
+    "Jamie Tzebult": {
+      "notableEpisodes": [
+        36
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 36,
+      "role": "secondaire"
+    },
+    "Romero": {
+      "notableEpisodes": [
+        11
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 11,
+      "role": "secondaire"
+    },
+    "Jean Paul Barthez": {
+      "notableEpisodes": [
+        7
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 7,
+      "role": "secondaire"
+    },
+    "Boris Balkov": {
+      "notableEpisodes": [
+        40
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 40,
+      "role": "secondaire"
+    },
+    "Spencer": {
+      "notableEpisodes": [
+        44
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 44,
+      "role": "secondaire"
+    },
+    "Michael Summers": {
+      "notableEpisodes": [
+        22
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 22,
+      "role": "secondaire"
+    },
+    "Miguel (Barthez Battalion)": {
+      "notableEpisodes": [
+        7
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 7,
+      "role": "secondaire"
+    },
+    "Mathilda": {
+      "notableEpisodes": [
+        7
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 7,
+      "role": "secondaire"
+    },
+    "Aaron": {
+      "notableEpisodes": [
+        7
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 7,
+      "role": "secondaire"
+    },
+    "Claude": {
+      "notableEpisodes": [
+        7
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 7,
+      "role": "secondaire"
+    },
+    "Brooklyn": {
+      "notableEpisodes": [
+        33
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 33,
+      "role": "secondaire"
+    },
+    "Ryu Granger": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Monica": {
+      "notableEpisodes": [
+        33
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 33,
+      "role": "secondaire"
+    },
+    "Mr. Dickenson": {
+      "notableEpisodes": [
+        3
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 3,
+      "role": "secondaire"
+    },
+    "Tao": {
+      "notableEpisodes": [
+        4
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 4,
+      "role": "secondaire"
+    },
+    "Kotaro": {
+      "notableEpisodes": [
+        5
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 5,
+      "role": "secondaire"
+    },
+    "Lee": {
+      "notableEpisodes": [
+        9
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 9,
+      "role": "secondaire"
+    },
+    "Gary": {
+      "notableEpisodes": [
+        9
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 9,
+      "role": "secondaire"
+    },
+    "Keizou": {
+      "notableEpisodes": [
+        35
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 35,
+      "role": "secondaire"
+    },
+    "Izam": {
+      "notableEpisodes": [
+        35
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 35,
+      "role": "secondaire"
+    },
+    "Gamarra": {
+      "notableEpisodes": [
+        35
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 35,
+      "role": "secondaire"
+    },
+    "Tam-Tam (Drummer)": {
+      "notableEpisodes": [
+        32
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 32,
+      "role": "secondaire"
+    },
+    "Tam-Tam (Bassist)": {
+      "notableEpisodes": [
+        32
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 32,
+      "role": "secondaire"
+    },
+    "Chiru-Chiru": {
+      "notableEpisodes": [
+        32
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 32,
+      "role": "secondaire"
+    }
+  },
+  "beyblade-burst": {
+    "Daigo Kurogami": {
+      "notableEpisodes": [
+        1,
+        3,
+        5,
+        6,
+        7,
+        11,
+        18,
+        21,
+        22,
+        23,
+        27,
+        28,
+        33,
+        37,
+        46,
+        50
+      ],
+      "battleEpisodes": [
+        3,
+        5,
+        6,
+        7,
+        11,
+        18,
+        21,
+        22,
+        23,
+        27,
+        28,
+        33,
+        37,
+        46,
+        50
+      ],
+      "debutEpisode": 1,
+      "role": "principal"
+    },
+    "Hoji Konda": {
+      "notableEpisodes": [
+        6,
+        7,
+        8,
+        23,
+        24,
+        25,
+        27,
+        28,
+        45
+      ],
+      "battleEpisodes": [
+        6,
+        7,
+        8,
+        23,
+        24,
+        25,
+        27,
+        28,
+        45
+      ],
+      "debutEpisode": 6,
+      "role": "récurrent"
+    },
+    "Akira Yamatoga": {
+      "notableEpisodes": [
+        43,
+        47
+      ],
+      "battleEpisodes": [
+        43,
+        47
+      ],
+      "debutEpisode": 43,
+      "role": "secondaire"
+    },
+    "Free De La Hoya": {
+      "notableEpisodes": [
+        2
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 2,
+      "role": "secondaire"
+    },
+    "Gabe Brunai": {
+      "notableEpisodes": [
+        29,
+        31,
+        36,
+        37,
+        43,
+        44,
+        50
+      ],
+      "battleEpisodes": [
+        31,
+        36,
+        37,
+        43,
+        44,
+        50
+      ],
+      "debutEpisode": 29,
+      "role": "récurrent"
+    },
+    "Ben Azuki": {
+      "notableEpisodes": [
+        29,
+        34,
+        35,
+        42,
+        44
+      ],
+      "battleEpisodes": [
+        34,
+        35,
+        42,
+        44
+      ],
+      "debutEpisode": 29,
+      "role": "récurrent"
+    },
+    "Cuza Ackermann": {
+      "notableEpisodes": [
+        8
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 8,
+      "role": "secondaire"
+    },
+    "Bowie": {
+      "notableEpisodes": [
+        31
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 31,
+      "role": "secondaire"
+    },
+    "Freddy": {
+      "notableEpisodes": [
+        31,
+        43
+      ],
+      "battleEpisodes": [
+        43
+      ],
+      "debutEpisode": 31,
+      "role": "secondaire"
+    },
+    "Haruto Aota": {
+      "notableEpisodes": [
+        8,
+        23
+      ],
+      "battleEpisodes": [
+        8,
+        23
+      ],
+      "debutEpisode": 8,
+      "role": "secondaire"
+    },
+    "Akio": {
+      "notableEpisodes": [
+        10
+      ],
+      "battleEpisodes": [
+        10
+      ],
+      "debutEpisode": 10,
+      "role": "secondaire"
+    },
+    "Honey Guten": {
+      "notableEpisodes": [
+        3
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 3,
+      "role": "secondaire"
+    },
+    "Django Del Toro": {
+      "notableEpisodes": [
+        3
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 3,
+      "role": "secondaire"
+    },
+    "Ataru Okinaka": {
+      "notableEpisodes": [
+        3
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 3,
+      "role": "secondaire"
+    },
+    "Ivan": {
+      "notableEpisodes": [
+        3
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 3,
+      "role": "secondaire"
+    },
+    "Ghasem Madal": {
+      "notableEpisodes": [
+        13
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 13,
+      "role": "secondaire"
+    },
+    "Ange Lopez": {
+      "notableEpisodes": [
+        3
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 3,
+      "role": "secondaire"
+    },
+    "Carl": {
+      "notableEpisodes": [
+        8
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 8,
+      "role": "secondaire"
+    },
+    "Clio Delon": {
+      "notableEpisodes": [
+        28
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 28,
+      "role": "secondaire"
+    },
+    "Arthur Lawrence": {
+      "notableEpisodes": [
+        13
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 13,
+      "role": "secondaire"
+    },
+    "George Star": {
+      "notableEpisodes": [
+        13
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 13,
+      "role": "secondaire"
+    },
+    "Allan Renoir": {
+      "notableEpisodes": [
+        12
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 12,
+      "role": "secondaire"
+    },
+    "Gray Eye": {
+      "notableEpisodes": [
+        17
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 17,
+      "role": "secondaire"
+    },
+    "Azure Eye": {
+      "notableEpisodes": [
+        17
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 17,
+      "role": "secondaire"
+    },
+    "Atsuto Takagi": {
+      "notableEpisodes": [
+        6
+      ],
+      "battleEpisodes": [
+        6
+      ],
+      "debutEpisode": 6,
+      "role": "secondaire"
+    },
+    "Gunta Hanami": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Carlos Thunder": {
+      "notableEpisodes": [
+        25
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 25,
+      "role": "secondaire"
+    },
+    "Ichiro Kakitani": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Himeko Midori": {
+      "notableEpisodes": [
+        4
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 4,
+      "role": "secondaire"
+    },
+    "Ana Mark": {
+      "notableEpisodes": [
+        25
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 25,
+      "role": "secondaire"
+    },
+    "Banner Clay": {
+      "notableEpisodes": [
+        25
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 25,
+      "role": "secondaire"
+    },
+    "Heinrich": {
+      "notableEpisodes": [
+        8
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 8,
+      "role": "secondaire"
+    },
+    "Dan Fukiage": {
+      "notableEpisodes": [
+        30
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 30,
+      "role": "secondaire"
+    },
+    "Jean (Burst)": {
+      "notableEpisodes": [
+        32
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 32,
+      "role": "secondaire"
+    },
+    "Gumita": {
+      "notableEpisodes": [
+        2
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 2,
+      "role": "secondaire"
+    },
+    "Benimaru": {
+      "notableEpisodes": [
+        2
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 2,
+      "role": "secondaire"
+    },
+    "Bisuke": {
+      "notableEpisodes": [
+        39
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 39,
+      "role": "secondaire"
+    },
+    "Boa Alcazaba": {
+      "notableEpisodes": [
+        17
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 17,
+      "role": "secondaire"
+    },
+    "Genesis": {
+      "notableEpisodes": [
+        17
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 17,
+      "role": "secondaire"
+    },
+    "Rantaro Kiyama": {
+      "notableEpisodes": [
+        1,
+        2,
+        4,
+        7,
+        14,
+        17,
+        19,
+        22,
+        23,
+        24,
+        25,
+        27,
+        28,
+        34,
+        37,
+        46
+      ],
+      "battleEpisodes": [
+        1,
+        2,
+        4,
+        7,
+        14,
+        17,
+        19,
+        22,
+        23,
+        24,
+        25,
+        27,
+        28,
+        34,
+        37,
+        46
+      ],
+      "debutEpisode": 1,
+      "role": "principal"
+    },
+    "Ken Midori": {
+      "notableEpisodes": [
+        1,
+        2,
+        3,
+        4,
+        8,
+        10,
+        20,
+        21,
+        30,
+        31,
+        34,
+        42,
+        44,
+        45
+      ],
+      "battleEpisodes": [
+        2,
+        3,
+        4,
+        8,
+        10,
+        20,
+        21,
+        30,
+        31,
+        34,
+        42,
+        44,
+        45
+      ],
+      "debutEpisode": 1,
+      "role": "principal"
+    },
+    "Shu Kurenai": {
+      "notableEpisodes": [
+        1,
+        3,
+        4,
+        6,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        27,
+        28,
+        30,
+        33,
+        34,
+        36,
+        37,
+        39,
+        40,
+        42,
+        44,
+        45,
+        48,
+        49
+      ],
+      "battleEpisodes": [
+        1,
+        3,
+        4,
+        6,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        27,
+        28,
+        30,
+        33,
+        34,
+        36,
+        37,
+        39,
+        40,
+        42,
+        44,
+        45,
+        48,
+        49
+      ],
+      "debutEpisode": 1,
+      "role": "protagoniste"
+    },
+    "Melos Nekota": {
+      "notableEpisodes": [
+        3
+      ],
+      "battleEpisodes": [
+        3
+      ],
+      "debutEpisode": 3,
+      "role": "secondaire"
+    },
+    "Nika Aoi": {
+      "notableEpisodes": [
+        1,
+        10,
+        14,
+        25,
+        46
+      ],
+      "battleEpisodes": [
+        10,
+        14,
+        25,
+        46
+      ],
+      "debutEpisode": 1,
+      "role": "récurrent"
+    },
+    "Orochi Ginba": {
+      "notableEpisodes": [
+        1,
+        12,
+        13,
+        22,
+        24,
+        26,
+        31,
+        36,
+        43
+      ],
+      "battleEpisodes": [
+        12,
+        13,
+        22,
+        24,
+        26,
+        31,
+        36,
+        43
+      ],
+      "debutEpisode": 1,
+      "role": "récurrent"
+    },
+    "Naoki Minamo": {
+      "notableEpisodes": [
+        40,
+        41,
+        42
+      ],
+      "battleEpisodes": [
+        40,
+        41,
+        42
+      ],
+      "debutEpisode": 40,
+      "role": "secondaire"
+    },
+    "Lui Shirosagi": {
+      "notableEpisodes": [
+        32,
+        35,
+        38,
+        39,
+        40,
+        44,
+        45,
+        48,
+        49,
+        50,
+        51
+      ],
+      "battleEpisodes": [
+        35,
+        38,
+        39,
+        40,
+        44,
+        45,
+        48,
+        49,
+        50,
+        51
+      ],
+      "debutEpisode": 32,
+      "role": "récurrent"
+    },
+    "Quon Limon": {
+      "notableEpisodes": [
+        29,
+        30,
+        40,
+        43,
+        46
+      ],
+      "battleEpisodes": [
+        29,
+        30,
+        40,
+        43,
+        46
+      ],
+      "debutEpisode": 29,
+      "role": "récurrent"
+    },
+    "Jin Aizawa": {
+      "notableEpisodes": [
+        40,
+        41,
+        42
+      ],
+      "battleEpisodes": [
+        41,
+        42
+      ],
+      "debutEpisode": 40,
+      "role": "secondaire"
+    },
+    "Mick": {
+      "notableEpisodes": [
+        31,
+        35
+      ],
+      "battleEpisodes": [
+        35
+      ],
+      "debutEpisode": 31,
+      "role": "secondaire"
+    },
+    "Ryota Kurogami": {
+      "notableEpisodes": [
+        5
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 5,
+      "role": "secondaire"
+    },
+    "Katana Sakaki": {
+      "notableEpisodes": [
+        29,
+        35,
+        43,
+        50
+      ],
+      "battleEpisodes": [
+        35,
+        43,
+        50
+      ],
+      "debutEpisode": 29,
+      "role": "secondaire"
+    },
+    "Kristina Kuroda": {
+      "notableEpisodes": [
+        2
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 2,
+      "role": "secondaire"
+    },
+    "Shinki Mikuni": {
+      "notableEpisodes": [
+        37,
+        50
+      ],
+      "battleEpisodes": [
+        37,
+        50
+      ],
+      "debutEpisode": 37,
+      "role": "secondaire"
+    },
+    "Paul Orlando": {
+      "notableEpisodes": [
+        2
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 2,
+      "role": "secondaire"
+    },
+    "Joshua Burns": {
+      "notableEpisodes": [
+        21
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 21,
+      "role": "secondaire"
+    },
+    "Norman Tarver": {
+      "notableEpisodes": [
+        39
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 39,
+      "role": "secondaire"
+    },
+    "Ren Wu Sun": {
+      "notableEpisodes": [
+        25
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 25,
+      "role": "secondaire"
+    },
+    "Raul Comas": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Richard Yello": {
+      "notableEpisodes": [
+        17
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 17,
+      "role": "secondaire"
+    },
+    "Kyoji Aranami": {
+      "notableEpisodes": [
+        1,
+        9
+      ],
+      "battleEpisodes": [
+        9
+      ],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Rickson Clay": {
+      "notableEpisodes": [
+        3
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 3,
+      "role": "secondaire"
+    },
+    "Ruck Mar": {
+      "notableEpisodes": [
+        12
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 12,
+      "role": "secondaire"
+    },
+    "Shin Komazaki": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Señor Hanami": {
+      "notableEpisodes": [
+        3
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 3,
+      "role": "secondaire"
+    },
+    "Koji Konda": {
+      "notableEpisodes": [
+        24
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 24,
+      "role": "secondaire"
+    },
+    "Karina Burns": {
+      "notableEpisodes": [
+        24
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 24,
+      "role": "secondaire"
+    },
+    "Momoko Ogi": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Principal Shinoda": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Raita": {
+      "notableEpisodes": [
+        34,
+        44
+      ],
+      "battleEpisodes": [
+        44
+      ],
+      "debutEpisode": 34,
+      "role": "secondaire"
+    },
+    "Jinbei Kuroda": {
+      "notableEpisodes": [
+        20
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 20,
+      "role": "secondaire"
+    },
+    "Kien Yukino": {
+      "notableEpisodes": [
+        30
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 30,
+      "role": "secondaire"
+    },
+    "Minen Himuro": {
+      "notableEpisodes": [
+        30
+      ],
+      "battleEpisodes": [
+        30
+      ],
+      "debutEpisode": 30,
+      "role": "secondaire"
+    },
+    "Rodrick": {
+      "notableEpisodes": [
+        8
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 8,
+      "role": "secondaire"
+    },
+    "Majin Kitahara": {
+      "notableEpisodes": [
+        30
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 30,
+      "role": "secondaire"
+    },
+    "Sara Sanchez": {
+      "notableEpisodes": [
+        11
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 11,
+      "role": "secondaire"
+    },
+    "Jorge": {
+      "notableEpisodes": [
+        16
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 16,
+      "role": "secondaire"
+    },
+    "User:Kingeroyal1/Sandbox": {
+      "notableEpisodes": [
+        24
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 24,
+      "role": "secondaire"
+    },
+    "Valt Aoi": {
+      "notableEpisodes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        14,
+        15,
+        16,
+        17,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        30,
+        31,
+        32,
+        34,
+        35,
+        36,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        46,
+        48,
+        50,
+        51
+      ],
+      "battleEpisodes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        14,
+        15,
+        16,
+        17,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        30,
+        31,
+        32,
+        34,
+        35,
+        36,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        46,
+        48,
+        50,
+        51
+      ],
+      "debutEpisode": 1,
+      "role": "protagoniste"
+    },
+    "Wakiya Murasaki": {
+      "notableEpisodes": [
+        1,
+        5,
+        6,
+        8,
+        9,
+        11,
+        12,
+        14,
+        22,
+        24,
+        25,
+        26,
+        27,
+        28,
+        30,
+        33,
+        35,
+        40,
+        44,
+        45,
+        50
+      ],
+      "battleEpisodes": [
+        5,
+        6,
+        8,
+        9,
+        11,
+        12,
+        14,
+        22,
+        24,
+        25,
+        26,
+        27,
+        28,
+        30,
+        33,
+        35,
+        40,
+        44,
+        45,
+        50
+      ],
+      "debutEpisode": 1,
+      "role": "protagoniste"
+    },
+    "Xander Shakadera": {
+      "notableEpisodes": [
+        14,
+        16,
+        17,
+        21,
+        29,
+        30,
+        33,
+        43,
+        44,
+        46
+      ],
+      "battleEpisodes": [
+        16,
+        17,
+        21,
+        29,
+        30,
+        33,
+        43,
+        44,
+        46
+      ],
+      "debutEpisode": 14,
+      "role": "récurrent"
+    },
+    "Yugo Nansui": {
+      "notableEpisodes": [
+        16,
+        20,
+        22,
+        23,
+        26,
+        33
+      ],
+      "battleEpisodes": [
+        16,
+        20,
+        22,
+        23,
+        26,
+        33
+      ],
+      "debutEpisode": 16,
+      "role": "récurrent"
+    },
+    "Toko Aoi": {
+      "notableEpisodes": [
+        1,
+        10,
+        14,
+        25,
+        46
+      ],
+      "battleEpisodes": [
+        10,
+        14,
+        25,
+        46
+      ],
+      "debutEpisode": 1,
+      "role": "récurrent"
+    },
+    "Zac Kaneguro": {
+      "notableEpisodes": [
+        22,
+        25,
+        31,
+        32,
+        35,
+        42,
+        43,
+        44,
+        47,
+        48
+      ],
+      "battleEpisodes": [
+        25,
+        31,
+        32,
+        35,
+        42,
+        43,
+        44,
+        47,
+        48
+      ],
+      "debutEpisode": 22,
+      "role": "récurrent"
+    },
+    "Ukio Kibuki": {
+      "notableEpisodes": [
+        18,
+        19,
+        20,
+        22,
+        24,
+        33
+      ],
+      "battleEpisodes": [
+        18,
+        19,
+        20,
+        22,
+        24,
+        33
+      ],
+      "debutEpisode": 18,
+      "role": "récurrent"
+    },
+    "Silas Karlisle": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Trad Vasquez": {
+      "notableEpisodes": [
+        2
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 2,
+      "role": "secondaire"
+    },
+    "Theodore Glass": {
+      "notableEpisodes": [
+        4
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 4,
+      "role": "secondaire"
+    },
+    "Silver Eye": {
+      "notableEpisodes": [
+        17
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 17,
+      "role": "secondaire"
+    },
+    "Violet Eye": {
+      "notableEpisodes": [
+        17
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 17,
+      "role": "secondaire"
+    },
+    "Stan Hamburg": {
+      "notableEpisodes": [
+        3
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 3,
+      "role": "secondaire"
+    },
+    "Tsujihara": {
+      "notableEpisodes": [
+        27
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 27,
+      "role": "secondaire"
+    },
+    "Terry Trent": {
+      "notableEpisodes": [
+        21
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 21,
+      "role": "secondaire"
+    },
+    "Shun Fujimaru": {
+      "notableEpisodes": [
+        31
+      ],
+      "battleEpisodes": [
+        31
+      ],
+      "debutEpisode": 31,
+      "role": "secondaire"
+    },
+    "Takuto Enjouji": {
+      "notableEpisodes": [
+        30,
+        40
+      ],
+      "battleEpisodes": [
+        40
+      ],
+      "debutEpisode": 30,
+      "role": "secondaire"
+    },
+    "Xavier Kappa": {
+      "notableEpisodes": [
+        11
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 11,
+      "role": "secondaire"
+    },
+    "Spark Torres": {
+      "notableEpisodes": [
+        11
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 11,
+      "role": "secondaire"
+    },
+    "Spryzen": {
+      "notableEpisodes": [
+        36
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 36,
+      "role": "secondaire"
+    },
+    "Valtryek": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Sasaki": {
+      "notableEpisodes": [
+        6
+      ],
+      "battleEpisodes": [
+        6
+      ],
+      "debutEpisode": null,
+      "role": "secondaire"
+    },
+    "Shindo": {
+      "notableEpisodes": [
+        6
+      ],
+      "battleEpisodes": [
+        6
+      ],
+      "debutEpisode": null,
+      "role": "secondaire"
+    },
+    "Ryota Nasu": {
+      "notableEpisodes": [
+        31
+      ],
+      "battleEpisodes": [
+        31
+      ],
+      "debutEpisode": null,
+      "role": "secondaire"
+    },
+    "Kyo Sandai": {
+      "notableEpisodes": [
+        35,
+        37,
+        50
+      ],
+      "battleEpisodes": [
+        35,
+        37,
+        50
+      ],
+      "debutEpisode": null,
+      "role": "secondaire"
+    }
+  },
+  "beyblade-burst-god": {
+    "Ken Midori": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Daigo Kurogami": {
+      "notableEpisodes": [
+        1,
+        12,
+        13,
+        18,
+        19,
+        28,
+        30,
+        31,
+        32
+      ],
+      "battleEpisodes": [
+        12,
+        13,
+        18,
+        19,
+        28,
+        30,
+        31,
+        32
+      ],
+      "debutEpisode": 1,
+      "role": "récurrent"
+    },
+    "Hoji Konda": {
+      "notableEpisodes": [
+        6
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 6,
+      "role": "secondaire"
+    },
+    "Akira Yamatoga": {
+      "notableEpisodes": [
+        43
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 43,
+      "role": "secondaire"
+    },
+    "Free De La Hoya": {
+      "notableEpisodes": [
+        2,
+        3,
+        5,
+        8,
+        9,
+        10,
+        20,
+        24,
+        31,
+        33,
+        34,
+        36,
+        37,
+        38,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        49,
+        50
+      ],
+      "battleEpisodes": [
+        3,
+        5,
+        8,
+        9,
+        10,
+        20,
+        24,
+        31,
+        33,
+        34,
+        36,
+        37,
+        38,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        49,
+        50
+      ],
+      "debutEpisode": 2,
+      "role": "protagoniste"
+    },
+    "Jin Aizawa": {
+      "notableEpisodes": [
+        40
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 40,
+      "role": "secondaire"
+    },
+    "Cuza Ackermann": {
+      "notableEpisodes": [
+        8,
+        9,
+        18,
+        19,
+        20,
+        21,
+        25,
+        26,
+        28,
+        29,
+        31,
+        32,
+        33,
+        40,
+        41,
+        42,
+        44,
+        45,
+        46,
+        48
+      ],
+      "battleEpisodes": [
+        8,
+        9,
+        18,
+        19,
+        20,
+        21,
+        25,
+        26,
+        28,
+        29,
+        31,
+        32,
+        33,
+        40,
+        41,
+        42,
+        44,
+        45,
+        46,
+        48
+      ],
+      "debutEpisode": 8,
+      "role": "principal"
+    },
+    "Kit Lopez": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Honey Guten": {
+      "notableEpisodes": [
+        3
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 3,
+      "role": "secondaire"
+    },
+    "Django Del Toro": {
+      "notableEpisodes": [
+        3,
+        6,
+        27
+      ],
+      "battleEpisodes": [
+        6,
+        27
+      ],
+      "debutEpisode": 3,
+      "role": "secondaire"
+    },
+    "Ataru Okinaka": {
+      "notableEpisodes": [
+        3,
+        27
+      ],
+      "battleEpisodes": [
+        27
+      ],
+      "debutEpisode": 3,
+      "role": "secondaire"
+    },
+    "Joshua Burns": {
+      "notableEpisodes": [
+        21,
+        22,
+        23,
+        24,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        38,
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "battleEpisodes": [
+        21,
+        22,
+        23,
+        24,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        38,
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "debutEpisode": 21,
+      "role": "principal"
+    },
+    "Ivan": {
+      "notableEpisodes": [
+        3,
+        6,
+        7,
+        10
+      ],
+      "battleEpisodes": [
+        3,
+        6,
+        7,
+        10
+      ],
+      "debutEpisode": 3,
+      "role": "récurrent"
+    },
+    "Ghasem Madal": {
+      "notableEpisodes": [
+        13,
+        14,
+        15,
+        26,
+        28
+      ],
+      "battleEpisodes": [
+        14,
+        15,
+        26,
+        28
+      ],
+      "debutEpisode": 13,
+      "role": "récurrent"
+    },
+    "Ange Lopez": {
+      "notableEpisodes": [
+        3
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 3,
+      "role": "secondaire"
+    },
+    "Carl": {
+      "notableEpisodes": [
+        8
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 8,
+      "role": "secondaire"
+    },
+    "Clio Delon": {
+      "notableEpisodes": [
+        28,
+        30,
+        40,
+        41
+      ],
+      "battleEpisodes": [
+        28,
+        30,
+        40,
+        41
+      ],
+      "debutEpisode": 28,
+      "role": "récurrent"
+    },
+    "Arthur Lawrence": {
+      "notableEpisodes": [
+        13,
+        15,
+        18,
+        26
+      ],
+      "battleEpisodes": [
+        15,
+        18,
+        26
+      ],
+      "debutEpisode": 13,
+      "role": "secondaire"
+    },
+    "George Star": {
+      "notableEpisodes": [
+        13,
+        14,
+        15
+      ],
+      "battleEpisodes": [
+        14,
+        15
+      ],
+      "debutEpisode": 13,
+      "role": "secondaire"
+    },
+    "Allan Renoir": {
+      "notableEpisodes": [
+        12,
+        13
+      ],
+      "battleEpisodes": [
+        13
+      ],
+      "debutEpisode": 12,
+      "role": "secondaire"
+    },
+    "Black Eye": {
+      "notableEpisodes": [
+        17,
+        18
+      ],
+      "battleEpisodes": [
+        18
+      ],
+      "debutEpisode": 17,
+      "role": "secondaire"
+    },
+    "Gray Eye": {
+      "notableEpisodes": [
+        17,
+        18
+      ],
+      "battleEpisodes": [
+        18
+      ],
+      "debutEpisode": 17,
+      "role": "secondaire"
+    },
+    "Azure Eye": {
+      "notableEpisodes": [
+        17,
+        18,
+        19
+      ],
+      "battleEpisodes": [
+        18,
+        19
+      ],
+      "debutEpisode": 17,
+      "role": "secondaire"
+    },
+    "Fubuki Sumiye": {
+      "notableEpisodes": [
+        51
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 51,
+      "role": "secondaire"
+    },
+    "Gunta Hanami": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Carlos Thunder": {
+      "notableEpisodes": [
+        25,
+        27
+      ],
+      "battleEpisodes": [
+        25,
+        27
+      ],
+      "debutEpisode": 25,
+      "role": "secondaire"
+    },
+    "Karina Burns": {
+      "notableEpisodes": [
+        24
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 24,
+      "role": "secondaire"
+    },
+    "Jinbei Kuroda": {
+      "notableEpisodes": [
+        20
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 20,
+      "role": "secondaire"
+    },
+    "Ana Mark": {
+      "notableEpisodes": [
+        25
+      ],
+      "battleEpisodes": [
+        25
+      ],
+      "debutEpisode": 25,
+      "role": "secondaire"
+    },
+    "Banner Clay": {
+      "notableEpisodes": [
+        25
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 25,
+      "role": "secondaire"
+    },
+    "Heinrich": {
+      "notableEpisodes": [
+        8
+      ],
+      "battleEpisodes": [
+        8
+      ],
+      "debutEpisode": 8,
+      "role": "secondaire"
+    },
+    "Jorge": {
+      "notableEpisodes": [
+        16
+      ],
+      "battleEpisodes": [
+        16
+      ],
+      "debutEpisode": 16,
+      "role": "secondaire"
+    },
+    "Jean (Burst)": {
+      "notableEpisodes": [
+        32
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 32,
+      "role": "secondaire"
+    },
+    "Bisuke": {
+      "notableEpisodes": [
+        39
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 39,
+      "role": "secondaire"
+    },
+    "Boa Alcazaba": {
+      "notableEpisodes": [
+        17,
+        33,
+        41,
+        43,
+        44,
+        45,
+        47
+      ],
+      "battleEpisodes": [
+        33,
+        41,
+        43,
+        44,
+        45,
+        47
+      ],
+      "debutEpisode": 17,
+      "role": "récurrent"
+    },
+    "Horikawa": {
+      "notableEpisodes": [
+        25
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 25,
+      "role": "secondaire"
+    },
+    "Rantaro Kiyama": {
+      "notableEpisodes": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7,
+        9,
+        10,
+        11,
+        12,
+        15,
+        17,
+        22,
+        24,
+        26,
+        27,
+        28,
+        29,
+        32,
+        33,
+        39,
+        40
+      ],
+      "battleEpisodes": [
+        2,
+        3,
+        4,
+        6,
+        7,
+        9,
+        10,
+        11,
+        12,
+        15,
+        17,
+        22,
+        24,
+        26,
+        27,
+        28,
+        29,
+        32,
+        33,
+        39,
+        40
+      ],
+      "debutEpisode": 1,
+      "role": "protagoniste"
+    },
+    "Valt Aoi": {
+      "notableEpisodes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        15,
+        16,
+        18,
+        19,
+        20,
+        23,
+        24,
+        25,
+        26,
+        27,
+        29,
+        31,
+        32,
+        33,
+        34,
+        36,
+        37,
+        38,
+        40,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51
+      ],
+      "battleEpisodes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        15,
+        16,
+        18,
+        19,
+        20,
+        23,
+        24,
+        25,
+        26,
+        27,
+        29,
+        31,
+        32,
+        33,
+        34,
+        36,
+        37,
+        38,
+        40,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51
+      ],
+      "debutEpisode": 1,
+      "role": "protagoniste"
+    },
+    "Wakiya Murasaki": {
+      "notableEpisodes": [
+        1,
+        4,
+        6,
+        11,
+        19,
+        22,
+        27,
+        42
+      ],
+      "battleEpisodes": [
+        4,
+        6,
+        11,
+        19,
+        22,
+        27,
+        42
+      ],
+      "debutEpisode": 1,
+      "role": "récurrent"
+    },
+    "Shu Kurenai": {
+      "notableEpisodes": [
+        1,
+        16,
+        36,
+        38,
+        39,
+        40,
+        41,
+        43,
+        44,
+        45,
+        47,
+        49,
+        50,
+        51
+      ],
+      "battleEpisodes": [
+        16,
+        36,
+        38,
+        39,
+        40,
+        41,
+        43,
+        44,
+        45,
+        47,
+        49,
+        50,
+        51
+      ],
+      "debutEpisode": 1,
+      "role": "principal"
+    },
+    "Melos Nekota": {
+      "notableEpisodes": [
+        3
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 3,
+      "role": "secondaire"
+    },
+    "Xander Shakadera": {
+      "notableEpisodes": [
+        14,
+        25,
+        27,
+        29,
+        30,
+        32,
+        33,
+        38,
+        40,
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "battleEpisodes": [
+        25,
+        27,
+        29,
+        30,
+        32,
+        33,
+        38,
+        40,
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "debutEpisode": 14,
+      "role": "principal"
+    },
+    "Yugo Nansui": {
+      "notableEpisodes": [
+        16
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 16,
+      "role": "secondaire"
+    },
+    "Nika Aoi": {
+      "notableEpisodes": [
+        1,
+        27
+      ],
+      "battleEpisodes": [
+        27
+      ],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Toko Aoi": {
+      "notableEpisodes": [
+        1,
+        27
+      ],
+      "battleEpisodes": [
+        27
+      ],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Lui Shirosagi": {
+      "notableEpisodes": [
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        49,
+        50,
+        51
+      ],
+      "battleEpisodes": [
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        49,
+        50,
+        51
+      ],
+      "debutEpisode": 32,
+      "role": "principal"
+    },
+    "Silas Karlisle": {
+      "notableEpisodes": [
+        1,
+        5,
+        6,
+        7,
+        11,
+        12,
+        13,
+        14,
+        15,
+        20,
+        23,
+        25,
+        26,
+        29,
+        30,
+        34,
+        35,
+        40,
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "battleEpisodes": [
+        1,
+        5,
+        6,
+        7,
+        11,
+        12,
+        13,
+        14,
+        15,
+        20,
+        23,
+        25,
+        26,
+        29,
+        30,
+        34,
+        35,
+        40,
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "debutEpisode": 1,
+      "role": "protagoniste"
+    },
+    "Quon Limon": {
+      "notableEpisodes": [
+        29
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 29,
+      "role": "secondaire"
+    },
+    "Kristina Kuroda": {
+      "notableEpisodes": [
+        2,
+        20
+      ],
+      "battleEpisodes": [
+        20
+      ],
+      "debutEpisode": 2,
+      "role": "secondaire"
+    },
+    "Trad Vasquez": {
+      "notableEpisodes": [
+        2
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 2,
+      "role": "secondaire"
+    },
+    "Shasa Guten": {
+      "notableEpisodes": [
+        3,
+        6,
+        7,
+        10,
+        12,
+        23,
+        26,
+        38,
+        40
+      ],
+      "battleEpisodes": [
+        3,
+        6,
+        7,
+        10,
+        12,
+        23,
+        26,
+        38,
+        40
+      ],
+      "debutEpisode": 3,
+      "role": "récurrent"
+    },
+    "Paul Orlando": {
+      "notableEpisodes": [
+        2
+      ],
+      "battleEpisodes": [
+        2
+      ],
+      "debutEpisode": 2,
+      "role": "secondaire"
+    },
+    "Theodore Glass": {
+      "notableEpisodes": [
+        4
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 4,
+      "role": "secondaire"
+    },
+    "Norman Tarver": {
+      "notableEpisodes": [
+        39,
+        41,
+        43,
+        44,
+        45,
+        47,
+        50
+      ],
+      "battleEpisodes": [
+        41,
+        43,
+        44,
+        45,
+        47,
+        50
+      ],
+      "debutEpisode": 39,
+      "role": "récurrent"
+    },
+    "Ren Wu Sun": {
+      "notableEpisodes": [
+        25,
+        29,
+        31,
+        32,
+        33,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "battleEpisodes": [
+        25,
+        29,
+        31,
+        32,
+        33,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "debutEpisode": 25,
+      "role": "récurrent"
+    },
+    "Kurt Baratier": {
+      "notableEpisodes": [
+        39,
+        40,
+        43,
+        44,
+        45,
+        48
+      ],
+      "battleEpisodes": [
+        39,
+        40,
+        43,
+        44,
+        45,
+        48
+      ],
+      "debutEpisode": 39,
+      "role": "récurrent"
+    },
+    "Raul Comas": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Silver Eye": {
+      "notableEpisodes": [
+        17
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 17,
+      "role": "secondaire"
+    },
+    "Richard Yello": {
+      "notableEpisodes": [
+        17,
+        33
+      ],
+      "battleEpisodes": [
+        33
+      ],
+      "debutEpisode": 17,
+      "role": "secondaire"
+    },
+    "Violet Eye": {
+      "notableEpisodes": [
+        17,
+        19
+      ],
+      "battleEpisodes": [
+        19
+      ],
+      "debutEpisode": 17,
+      "role": "secondaire"
+    },
+    "Rickson Clay": {
+      "notableEpisodes": [
+        3,
+        6,
+        7,
+        10,
+        12,
+        26,
+        30,
+        40
+      ],
+      "battleEpisodes": [
+        3,
+        6,
+        7,
+        10,
+        12,
+        26,
+        30,
+        40
+      ],
+      "debutEpisode": 3,
+      "role": "récurrent"
+    },
+    "Stan Hamburg": {
+      "notableEpisodes": [
+        3,
+        6,
+        7,
+        10,
+        11,
+        13,
+        25,
+        27,
+        30
+      ],
+      "battleEpisodes": [
+        6,
+        7,
+        10,
+        11,
+        13,
+        25,
+        27,
+        30
+      ],
+      "debutEpisode": 3,
+      "role": "récurrent"
+    },
+    "Ruck Mar": {
+      "notableEpisodes": [
+        12,
+        13,
+        28,
+        30
+      ],
+      "battleEpisodes": [
+        12,
+        13,
+        28,
+        30
+      ],
+      "debutEpisode": 12,
+      "role": "récurrent"
+    },
+    "Señor Hanami": {
+      "notableEpisodes": [
+        3
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 3,
+      "role": "secondaire"
+    },
+    "Terry Trent": {
+      "notableEpisodes": [
+        21
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 21,
+      "role": "secondaire"
+    },
+    "Rodrick": {
+      "notableEpisodes": [
+        8,
+        9
+      ],
+      "battleEpisodes": [
+        9
+      ],
+      "debutEpisode": 8,
+      "role": "secondaire"
+    },
+    "Xavier Kappa": {
+      "notableEpisodes": [
+        11,
+        28
+      ],
+      "battleEpisodes": [
+        11,
+        28
+      ],
+      "debutEpisode": 11,
+      "role": "secondaire"
+    },
+    "Spark Torres": {
+      "notableEpisodes": [
+        11,
+        28
+      ],
+      "battleEpisodes": [
+        11,
+        28
+      ],
+      "debutEpisode": 11,
+      "role": "secondaire"
+    },
+    "Sara Sanchez": {
+      "notableEpisodes": [
+        11,
+        28
+      ],
+      "battleEpisodes": [
+        11,
+        28
+      ],
+      "debutEpisode": 11,
+      "role": "secondaire"
+    },
+    "Spryzen": {
+      "notableEpisodes": [
+        36
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 36,
+      "role": "secondaire"
+    },
+    "Valtryek": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Muraki": {
+      "notableEpisodes": [
+        2
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 2,
+      "role": "secondaire"
+    },
+    "Pablo": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [
+        1
+      ],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Mark Strong": {
+      "notableEpisodes": [
+        2
+      ],
+      "battleEpisodes": [
+        2
+      ],
+      "debutEpisode": null,
+      "role": "secondaire"
+    },
+    "Anton (Burst)": {
+      "notableEpisodes": [
+        7,
+        26
+      ],
+      "battleEpisodes": [
+        7,
+        26
+      ],
+      "debutEpisode": null,
+      "role": "secondaire"
+    },
+    "Top Wand": {
+      "notableEpisodes": [
+        8,
+        9
+      ],
+      "battleEpisodes": [
+        8,
+        9
+      ],
+      "debutEpisode": null,
+      "role": "secondaire"
+    },
+    "Dylan Summers": {
+      "notableEpisodes": [
+        24,
+        30
+      ],
+      "battleEpisodes": [
+        24,
+        30
+      ],
+      "debutEpisode": null,
+      "role": "secondaire"
+    },
+    "Jeff Peterson": {
+      "notableEpisodes": [
+        26,
+        38
+      ],
+      "battleEpisodes": [
+        26,
+        38
+      ],
+      "debutEpisode": null,
+      "role": "secondaire"
+    }
+  },
+  "beyblade-burst-chouzetsu": {
+    "Rantaro Kiyama": {
+      "notableEpisodes": [
+        1,
+        3
+      ],
+      "battleEpisodes": [
+        3
+      ],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Ken Midori": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Daigo Kurogami": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Nika Aoi": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Lui Shirosagi": {
+      "notableEpisodes": [
+        5,
+        6,
+        14,
+        15,
+        32
+      ],
+      "battleEpisodes": [
+        5,
+        6,
+        14,
+        15
+      ],
+      "debutEpisode": 32,
+      "role": "récurrent"
+    },
+    "Free De La Hoya": {
+      "notableEpisodes": [
+        2,
+        25,
+        26,
+        31,
+        32,
+        43
+      ],
+      "battleEpisodes": [
+        25,
+        26,
+        31,
+        32,
+        43
+      ],
+      "debutEpisode": 2,
+      "role": "récurrent"
+    },
+    "Kit Lopez": {
+      "notableEpisodes": [
+        1,
+        40,
+        45,
+        46,
+        47
+      ],
+      "battleEpisodes": [
+        40,
+        45,
+        46,
+        47
+      ],
+      "debutEpisode": 1,
+      "role": "récurrent"
+    },
+    "Kristina Kuroda": {
+      "notableEpisodes": [
+        2
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 2,
+      "role": "secondaire"
+    },
+    "Ange Lopez": {
+      "notableEpisodes": [
+        3
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 3,
+      "role": "secondaire"
+    },
+    "Kurt Baratier": {
+      "notableEpisodes": [
+        4,
+        5,
+        39
+      ],
+      "battleEpisodes": [
+        4,
+        5
+      ],
+      "debutEpisode": 39,
+      "role": "secondaire"
+    },
+    "Raul Comas": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Ranjiro Kiyama": {
+      "notableEpisodes": [
+        2,
+        3,
+        4,
+        6,
+        8,
+        9,
+        10,
+        14,
+        16,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        26,
+        27,
+        33,
+        39,
+        40,
+        42,
+        47,
+        48
+      ],
+      "battleEpisodes": [
+        3,
+        4,
+        6,
+        8,
+        9,
+        10,
+        14,
+        16,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        26,
+        27,
+        33,
+        39,
+        40,
+        42,
+        47,
+        48
+      ],
+      "debutEpisode": 2,
+      "role": "protagoniste"
+    },
+    "Fubuki Sumiye": {
+      "notableEpisodes": [
+        2,
+        3,
+        4,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        14,
+        20,
+        21,
+        22,
+        23,
+        24,
+        26,
+        27,
+        38,
+        39,
+        42,
+        47,
+        48,
+        51
+      ],
+      "battleEpisodes": [
+        2,
+        3,
+        4,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        14,
+        20,
+        21,
+        22,
+        23,
+        24,
+        26,
+        27,
+        38,
+        39,
+        42,
+        47,
+        48
+      ],
+      "debutEpisode": 51,
+      "role": "principal"
+    },
+    "Naru Akabane": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Kana Akabane": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Hae-jin Oh": {
+      "notableEpisodes": [
+        7,
+        9,
+        10,
+        12,
+        14,
+        16,
+        17,
+        18,
+        20,
+        21,
+        22,
+        23
+      ],
+      "battleEpisodes": [
+        9,
+        10,
+        12,
+        14,
+        16,
+        17,
+        18,
+        20,
+        21,
+        22,
+        23
+      ],
+      "debutEpisode": 7,
+      "role": "récurrent"
+    },
+    "Gunta Hanami": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Phi": {
+      "notableEpisodes": [
+        13,
+        15,
+        16,
+        17,
+        20,
+        22,
+        23,
+        24,
+        26,
+        28,
+        29,
+        37,
+        41,
+        43,
+        46,
+        47,
+        49,
+        50
+      ],
+      "battleEpisodes": [
+        15,
+        16,
+        17,
+        20,
+        22,
+        23,
+        24,
+        26,
+        28,
+        29,
+        37,
+        41,
+        43,
+        46,
+        47,
+        49,
+        50
+      ],
+      "debutEpisode": 13,
+      "role": "principal"
+    },
+    "Laban Vanot": {
+      "notableEpisodes": [
+        13,
+        16,
+        17,
+        20,
+        21,
+        22,
+        23,
+        24,
+        26,
+        28,
+        45
+      ],
+      "battleEpisodes": [
+        16,
+        17,
+        20,
+        21,
+        22,
+        23,
+        24,
+        26,
+        28,
+        45
+      ],
+      "debutEpisode": 13,
+      "role": "récurrent"
+    },
+    "Koji Konda": {
+      "notableEpisodes": [
+        2,
+        7,
+        24,
+        42
+      ],
+      "battleEpisodes": [
+        2,
+        7,
+        42
+      ],
+      "debutEpisode": 24,
+      "role": "secondaire"
+    },
+    "Principal Shinoda": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Gumita": {
+      "notableEpisodes": [
+        2,
+        3,
+        23
+      ],
+      "battleEpisodes": [
+        3,
+        23
+      ],
+      "debutEpisode": 2,
+      "role": "secondaire"
+    },
+    "Kyle Hakim": {
+      "notableEpisodes": [
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        31,
+        32
+      ],
+      "battleEpisodes": [
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        31,
+        32
+      ],
+      "debutEpisode": 18,
+      "role": "récurrent"
+    },
+    "Harumi Hijikawa": {
+      "notableEpisodes": [
+        2
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 2,
+      "role": "secondaire"
+    },
+    "Kimeru Imabune": {
+      "notableEpisodes": [
+        2,
+        7
+      ],
+      "battleEpisodes": [
+        7
+      ],
+      "debutEpisode": 2,
+      "role": "secondaire"
+    },
+    "Benimaru": {
+      "notableEpisodes": [
+        2,
+        3
+      ],
+      "battleEpisodes": [
+        2,
+        3
+      ],
+      "debutEpisode": 2,
+      "role": "secondaire"
+    },
+    "Count Nightfell": {
+      "notableEpisodes": [
+        32,
+        34
+      ],
+      "battleEpisodes": [
+        34
+      ],
+      "debutEpisode": 32,
+      "role": "secondaire"
+    },
+    "Aiger Akabane": {
+      "notableEpisodes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        42,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51
+      ],
+      "battleEpisodes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        42,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51
+      ],
+      "debutEpisode": 1,
+      "role": "protagoniste"
+    },
+    "Hyde": {
+      "notableEpisodes": [
+        29,
+        30,
+        36,
+        37,
+        39,
+        41
+      ],
+      "battleEpisodes": [
+        29,
+        30,
+        36,
+        37,
+        39,
+        41
+      ],
+      "debutEpisode": 29,
+      "role": "récurrent"
+    },
+    "Evel Oxford": {
+      "notableEpisodes": [
+        29,
+        33
+      ],
+      "battleEpisodes": [
+        33
+      ],
+      "debutEpisode": 29,
+      "role": "secondaire"
+    },
+    "Dhaula Giri": {
+      "notableEpisodes": [
+        10
+      ],
+      "battleEpisodes": [
+        10
+      ],
+      "debutEpisode": 10,
+      "role": "secondaire"
+    },
+    "Beyeen": {
+      "notableEpisodes": [
+        16
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 16,
+      "role": "secondaire"
+    },
+    "Achilles": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Hayao Ashida": {
+      "notableEpisodes": [
+        2,
+        7
+      ],
+      "battleEpisodes": [
+        7
+      ],
+      "debutEpisode": 2,
+      "role": "secondaire"
+    },
+    "Pinky": {
+      "notableEpisodes": [
+        20
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 20,
+      "role": "secondaire"
+    },
+    "Bluem": {
+      "notableEpisodes": [
+        20
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 20,
+      "role": "secondaire"
+    },
+    "Green": {
+      "notableEpisodes": [
+        20
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 20,
+      "role": "secondaire"
+    },
+    "Purps": {
+      "notableEpisodes": [
+        20
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 20,
+      "role": "secondaire"
+    },
+    "Muraki": {
+      "notableEpisodes": [
+        2
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 2,
+      "role": "secondaire"
+    },
+    "Damon": {
+      "notableEpisodes": [
+        32
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 32,
+      "role": "secondaire"
+    },
+    "Chen (Burst)": {
+      "notableEpisodes": [
+        10
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 10,
+      "role": "secondaire"
+    },
+    "Horikawa": {
+      "notableEpisodes": [
+        25
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 25,
+      "role": "secondaire"
+    },
+    "User:Kingeroyal1/Sandbox": {
+      "notableEpisodes": [
+        24
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 24,
+      "role": "secondaire"
+    },
+    "Valt Aoi": {
+      "notableEpisodes": [
+        1,
+        4,
+        5,
+        6,
+        13,
+        25,
+        27,
+        28,
+        32,
+        36,
+        37,
+        40,
+        45,
+        51
+      ],
+      "battleEpisodes": [
+        1,
+        4,
+        5,
+        6,
+        13,
+        25,
+        27,
+        28,
+        32,
+        36,
+        37,
+        40,
+        45,
+        51
+      ],
+      "debutEpisode": 1,
+      "role": "principal"
+    },
+    "Wakiya Murasaki": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Shu Kurenai": {
+      "notableEpisodes": [
+        1,
+        20,
+        35,
+        38,
+        46,
+        47,
+        48
+      ],
+      "battleEpisodes": [
+        20,
+        35,
+        38,
+        46,
+        47,
+        48
+      ],
+      "debutEpisode": 1,
+      "role": "récurrent"
+    },
+    "Xander Shakadera": {
+      "notableEpisodes": [
+        14,
+        17,
+        27
+      ],
+      "battleEpisodes": [
+        17,
+        27
+      ],
+      "debutEpisode": 14,
+      "role": "secondaire"
+    },
+    "Toko Aoi": {
+      "notableEpisodes": [
+        1,
+        2,
+        7,
+        9,
+        11,
+        38,
+        42
+      ],
+      "battleEpisodes": [
+        2,
+        7,
+        9,
+        11,
+        38,
+        42
+      ],
+      "debutEpisode": 1,
+      "role": "récurrent"
+    },
+    "Silas Karlisle": {
+      "notableEpisodes": [
+        1,
+        13
+      ],
+      "battleEpisodes": [
+        13
+      ],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Suoh Genji": {
+      "notableEpisodes": [
+        2,
+        6,
+        8,
+        9,
+        10,
+        11,
+        13,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        30,
+        42,
+        48
+      ],
+      "battleEpisodes": [
+        6,
+        8,
+        9,
+        10,
+        11,
+        13,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        30,
+        42,
+        48
+      ],
+      "debutEpisode": 2,
+      "role": "principal"
+    },
+    "Taiga Akabane": {
+      "notableEpisodes": [
+        1,
+        49
+      ],
+      "battleEpisodes": [
+        49
+      ],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Señor Hanami": {
+      "notableEpisodes": [
+        3
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 3,
+      "role": "secondaire"
+    },
+    "Xavier Bogard": {
+      "notableEpisodes": [
+        17,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        26,
+        27,
+        44
+      ],
+      "battleEpisodes": [
+        17,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        26,
+        27,
+        44
+      ],
+      "debutEpisode": 17,
+      "role": "récurrent"
+    },
+    "Tobisuke": {
+      "notableEpisodes": [
+        2,
+        3,
+        23
+      ],
+      "battleEpisodes": [
+        2,
+        3,
+        23
+      ],
+      "debutEpisode": 2,
+      "role": "secondaire"
+    },
+    "Spryzen": {
+      "notableEpisodes": [
+        36
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 36,
+      "role": "secondaire"
+    },
+    "Valtryek": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Reid": {
+      "notableEpisodes": [
+        20
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 20,
+      "role": "secondaire"
+    },
+    "Saruzo": {
+      "notableEpisodes": [
+        8
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 8,
+      "role": "secondaire"
+    }
+  },
+  "beyblade-burst-gt": {
+    "Valt Aoi": {
+      "notableEpisodes": [
+        1,
+        4,
+        26
+      ],
+      "battleEpisodes": [
+        1,
+        4,
+        26
+      ],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Gunta Hanami": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Señor Hanami": {
+      "notableEpisodes": [
+        3
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 3,
+      "role": "secondaire"
+    },
+    "Aiger Akabane": {
+      "notableEpisodes": [
+        1,
+        13,
+        14,
+        15,
+        26
+      ],
+      "battleEpisodes": [
+        13,
+        14,
+        15,
+        26
+      ],
+      "debutEpisode": 1,
+      "role": "récurrent"
+    },
+    "Dante Koryu": {
+      "notableEpisodes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "battleEpisodes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "debutEpisode": 1,
+      "role": "protagoniste"
+    },
+    "Achilles": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Arman Kusaba": {
+      "notableEpisodes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        8,
+        9,
+        13,
+        16,
+        18,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "battleEpisodes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        8,
+        9,
+        13,
+        16,
+        18,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "debutEpisode": 1,
+      "role": "principal"
+    },
+    "Delta Zakuro": {
+      "notableEpisodes": [
+        1,
+        6,
+        7,
+        8,
+        9,
+        10,
+        12,
+        14,
+        15,
+        17,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "battleEpisodes": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        12,
+        14,
+        15,
+        17,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "debutEpisode": 1,
+      "role": "principal"
+    },
+    "Fumiya Kindo": {
+      "notableEpisodes": [
+        2,
+        3,
+        6,
+        12
+      ],
+      "battleEpisodes": [
+        2,
+        3,
+        6,
+        12
+      ],
+      "debutEpisode": 2,
+      "role": "récurrent"
+    },
+    "Valtryek": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Taka Kusaba": {
+      "notableEpisodes": [
+        1,
+        4
+      ],
+      "battleEpisodes": [
+        4
+      ],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Ichika Kindo": {
+      "notableEpisodes": [
+        1,
+        4
+      ],
+      "battleEpisodes": [
+        4
+      ],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Tango Koryu": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Dragon": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Joe Lazure": {
+      "notableEpisodes": [
+        4,
+        5,
+        6,
+        17
+      ],
+      "battleEpisodes": [
+        4,
+        5,
+        6,
+        17
+      ],
+      "debutEpisode": 4,
+      "role": "récurrent"
+    },
+    "Lodin Haijima": {
+      "notableEpisodes": [
+        4,
+        6,
+        7
+      ],
+      "battleEpisodes": [
+        6,
+        7
+      ],
+      "debutEpisode": 4,
+      "role": "secondaire"
+    },
+    "Ken Urame": {
+      "notableEpisodes": [
+        1,
+        4
+      ],
+      "battleEpisodes": [
+        4
+      ],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Devolos": {
+      "notableEpisodes": [
+        8
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 8,
+      "role": "secondaire"
+    },
+    "Pheng Hope": {
+      "notableEpisodes": [
+        9,
+        10,
+        11,
+        12,
+        16
+      ],
+      "battleEpisodes": [
+        9,
+        10,
+        11,
+        12,
+        16
+      ],
+      "debutEpisode": 9,
+      "role": "récurrent"
+    },
+    "Blindt DeVoy": {
+      "notableEpisodes": [
+        9,
+        10,
+        11,
+        12,
+        16,
+        23
+      ],
+      "battleEpisodes": [
+        9,
+        10,
+        11,
+        12,
+        16,
+        23
+      ],
+      "debutEpisode": 9,
+      "role": "récurrent"
+    },
+    "Arthur Peregrine": {
+      "notableEpisodes": [
+        14,
+        15,
+        17,
+        18,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "battleEpisodes": [
+        14,
+        15,
+        17,
+        18,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "debutEpisode": 14,
+      "role": "récurrent"
+    },
+    "Gwyn Reynolds": {
+      "notableEpisodes": [
+        15,
+        17,
+        19,
+        21,
+        23,
+        24,
+        25,
+        26
+      ],
+      "battleEpisodes": [
+        17,
+        19,
+        21,
+        23,
+        24,
+        25,
+        26
+      ],
+      "debutEpisode": 15,
+      "role": "récurrent"
+    },
+    "Genesis": {
+      "notableEpisodes": [
+        17
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 17,
+      "role": "secondaire"
+    },
+    "Ashindra": {
+      "notableEpisodes": [
+        22
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 22,
+      "role": "secondaire"
+    },
+    "Kaio Koryu": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Rogia Koryu": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Another": {
+      "notableEpisodes": [
+        16
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 16,
+      "role": "secondaire"
+    },
+    "Daiki": {
+      "notableEpisodes": [
+        2
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 2,
+      "role": "secondaire"
+    },
+    "Jun": {
+      "notableEpisodes": [
+        2
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 2,
+      "role": "secondaire"
+    }
+  },
+  "beyblade-burst-superking": {
+    "Rantaro Kiyama": {
+      "notableEpisodes": [
+        1,
+        2,
+        3,
+        4,
+        11,
+        12,
+        13,
+        15,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "battleEpisodes": [
+        1,
+        2,
+        3,
+        4,
+        11,
+        12,
+        13,
+        15,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "debutEpisode": 1,
+      "role": "principal"
+    },
+    "Valt Aoi": {
+      "notableEpisodes": [
+        1,
+        4,
+        6,
+        11,
+        12,
+        14,
+        15,
+        16,
+        17,
+        18,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "battleEpisodes": [
+        1,
+        4,
+        6,
+        11,
+        12,
+        14,
+        15,
+        16,
+        17,
+        18,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "debutEpisode": 1,
+      "role": "principal"
+    },
+    "Wakiya Murasaki": {
+      "notableEpisodes": [
+        1,
+        22
+      ],
+      "battleEpisodes": [
+        22
+      ],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Shu Kurenai": {
+      "notableEpisodes": [
+        1,
+        14,
+        17,
+        18,
+        19,
+        20,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "battleEpisodes": [
+        14,
+        17,
+        18,
+        19,
+        20,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "debutEpisode": 1,
+      "role": "récurrent"
+    },
+    "Daigo Kurogami": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Lui Shirosagi": {
+      "notableEpisodes": [
+        6,
+        7,
+        8,
+        9,
+        11,
+        13,
+        14,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        32
+      ],
+      "battleEpisodes": [
+        6,
+        7,
+        8,
+        9,
+        11,
+        13,
+        14,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "debutEpisode": 32,
+      "role": "principal"
+    },
+    "Silas Karlisle": {
+      "notableEpisodes": [
+        1,
+        3,
+        4,
+        11,
+        12,
+        13,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "battleEpisodes": [
+        1,
+        3,
+        4,
+        11,
+        12,
+        13,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "debutEpisode": 1,
+      "role": "principal"
+    },
+    "Free De La Hoya": {
+      "notableEpisodes": [
+        2,
+        4,
+        5,
+        6,
+        9,
+        11,
+        12,
+        14,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "battleEpisodes": [
+        4,
+        5,
+        6,
+        9,
+        11,
+        12,
+        14,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "debutEpisode": 2,
+      "role": "principal"
+    },
+    "Cuza Ackermann": {
+      "notableEpisodes": [
+        8
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 8,
+      "role": "secondaire"
+    },
+    "Ataru Okinaka": {
+      "notableEpisodes": [
+        3
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 3,
+      "role": "secondaire"
+    },
+    "Joshua Burns": {
+      "notableEpisodes": [
+        21
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 21,
+      "role": "secondaire"
+    },
+    "Rickson Clay": {
+      "notableEpisodes": [
+        3
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 3,
+      "role": "secondaire"
+    },
+    "Ranjiro Kiyama": {
+      "notableEpisodes": [
+        2,
+        4,
+        9,
+        10,
+        19,
+        20,
+        21,
+        22,
+        23,
+        25
+      ],
+      "battleEpisodes": [
+        2,
+        4,
+        9,
+        10,
+        19,
+        20,
+        21,
+        22,
+        23,
+        25
+      ],
+      "debutEpisode": 2,
+      "role": "récurrent"
+    },
+    "Gunta Hanami": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Señor Hanami": {
+      "notableEpisodes": [
+        3
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 3,
+      "role": "secondaire"
+    },
+    "Phi": {
+      "notableEpisodes": [
+        13
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 13,
+      "role": "secondaire"
+    },
+    "Aiger Akabane": {
+      "notableEpisodes": [
+        1,
+        11,
+        12,
+        13,
+        14,
+        19,
+        20,
+        21,
+        22,
+        23,
+        25
+      ],
+      "battleEpisodes": [
+        11,
+        12,
+        13,
+        14,
+        19,
+        20,
+        21,
+        22,
+        23,
+        25
+      ],
+      "debutEpisode": 1,
+      "role": "récurrent"
+    },
+    "Dante Koryu": {
+      "notableEpisodes": [
+        1,
+        9,
+        10,
+        11,
+        13,
+        16,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "battleEpisodes": [
+        9,
+        10,
+        11,
+        13,
+        16,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "debutEpisode": 1,
+      "role": "récurrent"
+    },
+    "Arman Kusaba": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Delta Zakuro": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Valtryek": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Dragon": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Arthur Peregrine": {
+      "notableEpisodes": [
+        14
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 14,
+      "role": "secondaire"
+    },
+    "Gwyn Reynolds": {
+      "notableEpisodes": [
+        15
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 15,
+      "role": "secondaire"
+    },
+    "Hikaru Hizashi": {
+      "notableEpisodes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        9,
+        11,
+        12,
+        13,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "battleEpisodes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        9,
+        11,
+        12,
+        13,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "debutEpisode": 1,
+      "role": "protagoniste"
+    },
+    "Hyuga Hizashi": {
+      "notableEpisodes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "battleEpisodes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "debutEpisode": 1,
+      "role": "protagoniste"
+    },
+    "Comets": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Hyperion": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Helios (Burst)": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Reina": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Chuck": {
+      "notableEpisodes": [
+        1,
+        2
+      ],
+      "battleEpisodes": [
+        1,
+        2
+      ],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Guy": {
+      "notableEpisodes": [
+        1,
+        2
+      ],
+      "battleEpisodes": [
+        1,
+        2
+      ],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Lain Valhalla": {
+      "notableEpisodes": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "battleEpisodes": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "debutEpisode": 7,
+      "role": "principal"
+    },
+    "Hashiru Nekota": {
+      "notableEpisodes": [
+        3
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 3,
+      "role": "secondaire"
+    },
+    "Noboru Hizashi": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Terumi Hizashi": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    }
+  },
+  "beyblade-burst-db": {
+    "Valt Aoi": {
+      "notableEpisodes": [
+        1,
+        4,
+        7,
+        8,
+        9,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        22,
+        24,
+        25
+      ],
+      "battleEpisodes": [
+        4,
+        7,
+        8,
+        9,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        22,
+        24,
+        25
+      ],
+      "debutEpisode": 1,
+      "role": "principal"
+    },
+    "Wakiya Murasaki": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Shu Kurenai": {
+      "notableEpisodes": [
+        1,
+        10,
+        11,
+        19,
+        25
+      ],
+      "battleEpisodes": [
+        10,
+        11,
+        19,
+        25
+      ],
+      "debutEpisode": 1,
+      "role": "récurrent"
+    },
+    "Lui Shirosagi": {
+      "notableEpisodes": [
+        1,
+        2,
+        10,
+        12,
+        13,
+        32
+      ],
+      "battleEpisodes": [
+        1,
+        2,
+        10,
+        12,
+        13
+      ],
+      "debutEpisode": 32,
+      "role": "récurrent"
+    },
+    "Free De La Hoya": {
+      "notableEpisodes": [
+        2,
+        5,
+        6,
+        7,
+        11
+      ],
+      "battleEpisodes": [
+        5,
+        6,
+        7,
+        11
+      ],
+      "debutEpisode": 2,
+      "role": "récurrent"
+    },
+    "Gunta Hanami": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Bel Daizora": {
+      "notableEpisodes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "battleEpisodes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "debutEpisode": 1,
+      "role": "protagoniste"
+    },
+    "Ranzo Kiyama": {
+      "notableEpisodes": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        8,
+        9,
+        11,
+        15,
+        16,
+        17,
+        18,
+        20,
+        21
+      ],
+      "battleEpisodes": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        8,
+        9,
+        11,
+        15,
+        16,
+        17,
+        18,
+        20,
+        21
+      ],
+      "debutEpisode": 2,
+      "role": "principal"
+    },
+    "Bashara Suiro": {
+      "notableEpisodes": [
+        1,
+        3,
+        4,
+        7,
+        8,
+        9,
+        11,
+        14,
+        16,
+        17,
+        18,
+        20,
+        21,
+        22,
+        24
+      ],
+      "battleEpisodes": [
+        1,
+        3,
+        4,
+        7,
+        8,
+        9,
+        11,
+        14,
+        16,
+        17,
+        18,
+        20,
+        21,
+        22,
+        24
+      ],
+      "debutEpisode": 1,
+      "role": "principal"
+    },
+    "Rashad Goodman": {
+      "notableEpisodes": [
+        5,
+        8,
+        9,
+        10,
+        11,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        23,
+        24,
+        25,
+        26
+      ],
+      "battleEpisodes": [
+        8,
+        9,
+        10,
+        11,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        23,
+        24,
+        25,
+        26
+      ],
+      "debutEpisode": 5,
+      "role": "principal"
+    },
+    "Belfyre": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Hanna Suiro": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Jinemon Daizora": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Moné Suiro": {
+      "notableEpisodes": [
+        3
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 3,
+      "role": "secondaire"
+    },
+    "Ilya Mao": {
+      "notableEpisodes": [
+        10,
+        11,
+        12,
+        13,
+        16,
+        17,
+        18,
+        20,
+        21,
+        22,
+        25
+      ],
+      "battleEpisodes": [
+        11,
+        12,
+        13,
+        16,
+        17,
+        18,
+        20,
+        21,
+        22,
+        25
+      ],
+      "debutEpisode": 10,
+      "role": "récurrent"
+    },
+    "Phelix Payne": {
+      "notableEpisodes": [
+        20,
+        21,
+        22,
+        23,
+        24
+      ],
+      "battleEpisodes": [
+        21,
+        22,
+        23,
+        24
+      ],
+      "debutEpisode": 20,
+      "role": "récurrent"
+    },
+    "Regnar": {
+      "notableEpisodes": [
+        15
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 15,
+      "role": "secondaire"
+    },
+    "Helm Payne": {
+      "notableEpisodes": [
+        23
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 23,
+      "role": "secondaire"
+    }
+  },
+  "beyblade-burst-quadstrike": {
+    "Valt Aoi": {
+      "notableEpisodes": [
+        1,
+        10,
+        13,
+        14,
+        15,
+        16,
+        17,
+        19,
+        20,
+        21,
+        23,
+        24,
+        25,
+        26
+      ],
+      "battleEpisodes": [
+        10,
+        13,
+        14,
+        15,
+        16,
+        17,
+        19,
+        20,
+        21,
+        23,
+        24,
+        25,
+        26
+      ],
+      "debutEpisode": 1,
+      "role": "principal"
+    },
+    "Wakiya Murasaki": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Ken Midori": {
+      "notableEpisodes": [
+        1,
+        6,
+        7
+      ],
+      "battleEpisodes": [
+        6,
+        7
+      ],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Shu Kurenai": {
+      "notableEpisodes": [
+        1,
+        15,
+        17
+      ],
+      "battleEpisodes": [
+        15,
+        17
+      ],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Xander Shakadera": {
+      "notableEpisodes": [
+        8,
+        9,
+        10,
+        14
+      ],
+      "battleEpisodes": [
+        8,
+        9,
+        10
+      ],
+      "debutEpisode": 14,
+      "role": "secondaire"
+    },
+    "Free De La Hoya": {
+      "notableEpisodes": [
+        2
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 2,
+      "role": "secondaire"
+    },
+    "Kit Lopez": {
+      "notableEpisodes": [
+        1,
+        15,
+        16,
+        19,
+        22
+      ],
+      "battleEpisodes": [
+        15,
+        16,
+        19,
+        22
+      ],
+      "debutEpisode": 1,
+      "role": "récurrent"
+    },
+    "Kristina Kuroda": {
+      "notableEpisodes": [
+        2
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 2,
+      "role": "secondaire"
+    },
+    "Naru Akabane": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Kana Akabane": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Aiger Akabane": {
+      "notableEpisodes": [
+        1,
+        14,
+        15,
+        16,
+        20,
+        21,
+        23,
+        24
+      ],
+      "battleEpisodes": [
+        14,
+        15,
+        16,
+        20,
+        21,
+        23,
+        24
+      ],
+      "debutEpisode": 1,
+      "role": "récurrent"
+    },
+    "Dante Koryu": {
+      "notableEpisodes": [
+        1,
+        3,
+        4,
+        5,
+        22
+      ],
+      "battleEpisodes": [
+        3,
+        4,
+        5,
+        22
+      ],
+      "debutEpisode": 1,
+      "role": "récurrent"
+    },
+    "Hikaru Hizashi": {
+      "notableEpisodes": [
+        1,
+        11,
+        12,
+        13,
+        23
+      ],
+      "battleEpisodes": [
+        11,
+        12,
+        13,
+        23
+      ],
+      "debutEpisode": 1,
+      "role": "récurrent"
+    },
+    "Hyuga Hizashi": {
+      "notableEpisodes": [
+        1,
+        11,
+        12,
+        13,
+        23
+      ],
+      "battleEpisodes": [
+        11,
+        12,
+        13,
+        23
+      ],
+      "debutEpisode": 1,
+      "role": "récurrent"
+    },
+    "Bel Daizora": {
+      "notableEpisodes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        23,
+        26
+      ],
+      "battleEpisodes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        23,
+        26
+      ],
+      "debutEpisode": 1,
+      "role": "protagoniste"
+    },
+    "Ranzo Kiyama": {
+      "notableEpisodes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        9,
+        13,
+        16,
+        17,
+        21,
+        22,
+        24,
+        25,
+        26
+      ],
+      "battleEpisodes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        9,
+        13,
+        16,
+        17,
+        21,
+        22,
+        24,
+        25,
+        26
+      ],
+      "debutEpisode": 2,
+      "role": "principal"
+    },
+    "Hanna Suiro": {
+      "notableEpisodes": [
+        1
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 1,
+      "role": "secondaire"
+    },
+    "Pri Forsythe": {
+      "notableEpisodes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        7,
+        8,
+        9,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "battleEpisodes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        7,
+        8,
+        9,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "debutEpisode": 1,
+      "role": "protagoniste"
+    },
+    "Pax Forsythe": {
+      "notableEpisodes": [
+        1,
+        14,
+        21,
+        24,
+        26
+      ],
+      "battleEpisodes": [
+        14,
+        21,
+        24,
+        26
+      ],
+      "debutEpisode": 1,
+      "role": "récurrent"
+    },
+    "Pandemonium": {
+      "notableEpisodes": [
+        21
+      ],
+      "battleEpisodes": [],
+      "debutEpisode": 21,
+      "role": "secondaire"
+    }
+  }
+}

@@ -191,6 +191,8 @@
         "zod": "catalog:",
       },
       "devDependencies": {
+        "@aphrody/bxc-test": "^0.1.1",
+        "@aphrody/next-playwright": "^0.1.1",
         "@swc/cli": "^0.8.1",
         "@swc/core": "^1.15.40",
         "@types/matter-js": "^0.20.2",
@@ -486,6 +488,7 @@
   ],
   "patchedDependencies": {
     "kysely@0.29.2": "patches/kysely@0.29.2.patch",
+    "@aphrody/bxc-test@0.1.1": "patches/@aphrody%2Fbxc-test@0.1.1.patch",
   },
   "overrides": {
     "@types/react": "19.2.16",
@@ -543,6 +546,8 @@
   "packages": {
     "@aphrody/bxc": ["@aphrody/bxc@0.6.4", "", { "dependencies": { "@aphrody/challonge": "0.1.3", "@aphrody/fut": "0.1.3", "@aphrody/voiranime": "0.1.3", "@aphrody/worldbeyblade": "0.1.3", "@aphrody/x": "1.0.7", "@aphrody/xai": "1.0.1", "@aphrody/xcom": "0.1.3", "@aphrody/zukan": "0.1.3", "@bogeychan/elysia-logger": "^0.1.10", "@elysiajs/cors": "^1.4.2", "@elysiajs/swagger": "^1.3.1", "@libsql/client": "^0.17.3", "@mozilla/readability": "^0.6.0", "bottleneck": "^2.19.5", "class-validator": "^0.15.1", "drizzle-orm": "^0.45.2", "elysia": "^1.4.28", "graphql": "^16.14.0", "graphql-yoga": "^5.21.0", "lru-cache": "^11.5.1", "p-limit": "^7.3.0", "p-queue": "^9.3.0", "p-retry": "^8.0.0", "reflect-metadata": "^0.2.2", "type-graphql": "^2.0.0-rc.3", "zod": "^4.4.3" }, "bin": { "bxc": "bin/bxc" } }, "sha512-U9QV1ezwnp5cFcReAGtIvg08pgMM6rtEcjBTlW4m5MW2fpBQea37M0URXdOpfPVW69OCRwuQRVawh3u9mL2zeA=="],
 
+    "@aphrody/bxc-test": ["@aphrody/bxc-test@0.1.1", "", { "peerDependencies": { "@aphrody/bxc": "^0.6.4" }, "optionalPeers": ["@aphrody/bxc"] }, "sha512-ZJ269Z2VtrKyVOmHaGOkdqUn1/A1oHAKYjLK3/bUcJW4prNNxrvPN2fDl4hl4o4Tg9aO++ywGPwOLTkuXwbC5w=="],
+
     "@aphrody/canvas": ["@aphrody/canvas@0.1.99", "", { "optionalDependencies": { "@aphrody/canvas-linux-x64-gnu": "0.1.99" } }, "sha512-PNx6lZzGmv6xmbs6nY3u9X8PHNmEOG3hcnZvss/HoGuG81r6JQxoGiBoH3JVdB24Dcrt2WW8lRPzGSuRJU9umA=="],
 
     "@aphrody/canvas-linux-x64-gnu": ["@aphrody/canvas-linux-x64-gnu@0.1.99", "", { "os": "linux", "cpu": "x64" }, "sha512-kG1Y2hggfPVboSjj6my9qrrDDVwQBHEXcmG0bCxUQdgK7u6JSaF3xzhw9k93x2gg+MmwJFlaKW9jTr/gZCTYjg=="],
@@ -558,6 +563,8 @@
     "@aphrody/m3-tokens": ["@aphrody/m3-tokens@3.2.2", "", { "dependencies": { "@material/material-color-utilities": "^0.4.0" } }, "sha512-D90/S+XsGLnVmuUome+hHAOLVyiMLpGod72N4diT6NRJtZZFUlmVPhRDMxa/x5feIfvZwLO6HrkHx14lZR8YGg=="],
 
     "@aphrody/material-web": ["@aphrody/material-web@3.2.2", "", { "dependencies": { "@lit/context": "^1.1.6", "lit": "^3.3.3", "three": "^0.184.0", "tslib": "^2.8.1" } }, "sha512-sESWDHxBydB9NIRrHjZwphfD71NSYWfz7ngbq+d6N6XRP2JPNiNHdwFDjNix+QJin8mAtJLJv2IiNCVyPuJ41Q=="],
+
+    "@aphrody/next-playwright": ["@aphrody/next-playwright@0.1.1", "", { "peerDependencies": { "@aphrody/bxc-test": "^0.1.1" }, "optionalPeers": ["@aphrody/bxc-test"] }, "sha512-ESqsE2ygHkQ0IMD/7hQWfOCzrgl5Uyt6Lq1ac4P47O7BC4Up6HLgfPnfhgPiirZh0PqBRUrEe+Ev7mKb0q3Hvg=="],
 
     "@aphrody/voiranime": ["@aphrody/voiranime@0.1.3", "", {}, "sha512-6v7AJd8IkgJ5mvmyTsL4L8lBr/8j1LB3SVYcWNP+F8/zA8aUYUjm+vCvvOVxzRPo/gylmoRn/LWd9MpKmFoFgA=="],
 

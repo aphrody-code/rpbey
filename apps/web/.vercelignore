@@ -1,22 +1,26 @@
-# Évite l'upload massif vers Vercel — toutes les données statiques sont sur
-# cdn.rpbey.fr/static/rpb-dashboard/ (vhost VPS nginx). La lambda fetch via
-# data-cache.ts (env VERCEL=1).
-#
-# On garde data/ accessible pour les imports statiques (ex: tournament-logic.ts
-# import data/beyblade_x_logic_rules.json) — on exclut juste les gros sous-dossiers.
+# Évite l'upload massif vers Vercel — on exclut les GROS sous-dossiers `data/`.
+# Le site est désormais **self-contained** : les FEW fichiers `data/*` lus au
+# runtime sont ré-inclus ci-dessous (`!…`) et tracés dans la lambda (cf.
+# next.config.ts `outputFileTracingIncludes`). Plus aucun fetch `cdn.rpbey.fr`.
 
-data/bey-library/
-data/exports/
+# Gros dossiers : on ignore le CONTENU (`/*`) pour pouvoir ré-inclure des
+# fichiers précis ensuite (une négation ne peut pas ressusciter un fichier si
+# son dossier parent est entièrement exclu).
+data/bey-library/*
+data/exports/*
 data/satr_history/
 data/wb_history/
 data/scrapes/
 data/cleaned/
 data/backups/
-data/pools/
 data/planner/
 data/discord-*.json
 data/all_image_assets.json
 data/lighthouse-trends.db
+
+# Ré-inclusions ciblées (négations) — fichiers requis au runtime, petits :
+!data/exports/participants_map.json
+!data/bey-library/bey-library-complete.json
 .next/
 node_modules/
 *.bak

@@ -1,0 +1,2737 @@
+{
+  "seriesSlug": "bakuten-shoot-beyblade",
+  "generation": "ORIGINAL",
+  "fancaps": {
+    "seriesUrl": "https://beyblade.fandom.com/wiki/Beyblade: 2000 episodes",
+    "label": "Bakuten Shoot Beyblade"
+  },
+  "scrapedAt": "2026-05-29T19:52:18.626Z",
+  "episodes": [
+    {
+      "number": 11,
+      "title": "Beyblade - Episode 11"
+    },
+    {
+      "number": 12,
+      "title": "Beyblade - Episode 12"
+    },
+    {
+      "number": 13,
+      "title": "Beyblade - Episode 13"
+    },
+    {
+      "number": 14,
+      "title": "Beyblade - Episode 14"
+    },
+    {
+      "number": 15,
+      "title": "Beyblade - Episode 15"
+    },
+    {
+      "number": 16,
+      "title": "Beyblade - Episode 16"
+    },
+    {
+      "number": 17,
+      "title": "Beyblade - Episode 17"
+    },
+    {
+      "number": 18,
+      "title": "Beyblade - Episode 18"
+    },
+    {
+      "number": 19,
+      "title": "Beyblade - Episode 19"
+    },
+    {
+      "number": 20,
+      "title": "Beyblade - Episode 20"
+    }
+  ],
+  "frames": [
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:41456",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:E11.1.JPG",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/c/cd/E11.1.JPG/revision/latest?cb=20120128084227",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/c/cd/E11.1.JPG/revision/latest/scale-to-width-down/360?cb=20120128084227",
+      "width": 854,
+      "height": 477,
+      "characterNames": [
+        "Kevin"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 0
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:41457",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:E11.2.JPG",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/a/ab/E11.2.JPG/revision/latest?cb=20120128084227",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/a/ab/E11.2.JPG/revision/latest/scale-to-width-down/360?cb=20120128084227",
+      "width": 855,
+      "height": 477,
+      "characterNames": [
+        "Kevin"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 1
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:41458",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:E11.3.JPG",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/8/80/E11.3.JPG/revision/latest?cb=20120128084227",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/8/80/E11.3.JPG/revision/latest/scale-to-width-down/360?cb=20120128084227",
+      "width": 852,
+      "height": 475,
+      "characterNames": [
+        "Kevin"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 2
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:41459",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:E11.4.JPG",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/7/79/E11.4.JPG/revision/latest?cb=20120128084228",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/7/79/E11.4.JPG/revision/latest/scale-to-width-down/360?cb=20120128084228",
+      "width": 852,
+      "height": 471,
+      "characterNames": [
+        "Kevin"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 3
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:41460",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:E11.5.JPG",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/c/c9/E11.5.JPG/revision/latest?cb=20120128084228",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/c/c9/E11.5.JPG/revision/latest/scale-to-width-down/360?cb=20120128084228",
+      "width": 854,
+      "height": 480,
+      "characterNames": [
+        "Kevin"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 4
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:41465",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:E11.10.JPG",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/5/54/E11.10.JPG/revision/latest?cb=20120128084319",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/5/54/E11.10.JPG/revision/latest/scale-to-width-down/360?cb=20120128084319",
+      "width": 853,
+      "height": 465,
+      "characterNames": [
+        "Kevin"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 5
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:41466",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:E11.11.JPG",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/1/17/E11.11.JPG/revision/latest?cb=20120128084319",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/1/17/E11.11.JPG/revision/latest/scale-to-width-down/360?cb=20120128084319",
+      "width": 853,
+      "height": 475,
+      "characterNames": [
+        "Kevin"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 6
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:41467",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:E11.12.JPG",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/2/29/E11.12.JPG/revision/latest?cb=20120128084319",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/2/29/E11.12.JPG/revision/latest/scale-to-width-down/360?cb=20120128084319",
+      "width": 853,
+      "height": 478,
+      "characterNames": [
+        "Kevin"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 7
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:41468",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:E11.13.JPG",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/d/de/E11.13.JPG/revision/latest?cb=20120128084319",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/d/de/E11.13.JPG/revision/latest/scale-to-width-down/360?cb=20120128084319",
+      "width": 853,
+      "height": 484,
+      "characterNames": [
+        "Kevin"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 8
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:41469",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:E11.14.JPG",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/8/80/E11.14.JPG/revision/latest?cb=20120128084320",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/8/80/E11.14.JPG/revision/latest/scale-to-width-down/360?cb=20120128084320",
+      "width": 853,
+      "height": 478,
+      "characterNames": [
+        "Kevin"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 9
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:41470",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:E11.15.JPG",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/8/81/E11.15.JPG/revision/latest?cb=20120128084320",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/8/81/E11.15.JPG/revision/latest/scale-to-width-down/360?cb=20120128084320",
+      "width": 848,
+      "height": 469,
+      "characterNames": [
+        "Kevin"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 10
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:41471",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:E11.16.JPG",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/b/b5/E11.16.JPG/revision/latest?cb=20120128084320",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/b/b5/E11.16.JPG/revision/latest/scale-to-width-down/360?cb=20120128084320",
+      "width": 844,
+      "height": 468,
+      "characterNames": [
+        "Kevin"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 11
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:41472",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:E11.17.JPG",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/1/1c/E11.17.JPG/revision/latest?cb=20120128084320",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/1/1c/E11.17.JPG/revision/latest/scale-to-width-down/360?cb=20120128084320",
+      "width": 844,
+      "height": 477,
+      "characterNames": [
+        "Kevin"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 12
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:41473",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:E11.18.JPG",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/d/dc/E11.18.JPG/revision/latest?cb=20120128084320",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/d/dc/E11.18.JPG/revision/latest/scale-to-width-down/360?cb=20120128084320",
+      "width": 838,
+      "height": 470,
+      "characterNames": [
+        "Kevin"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 13
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:41474",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:E11.19.JPG",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/9/9a/E11.19.JPG/revision/latest?cb=20120128084320",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/9/9a/E11.19.JPG/revision/latest/scale-to-width-down/360?cb=20120128084320",
+      "width": 854,
+      "height": 454,
+      "characterNames": [
+        "Kevin"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 14
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:41475",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:E11.20.JPG",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/7/78/E11.20.JPG/revision/latest?cb=20120128084630",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/7/78/E11.20.JPG/revision/latest/scale-to-width-down/360?cb=20120128084630",
+      "width": 849,
+      "height": 444,
+      "characterNames": [
+        "Kevin"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 15
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:41476",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:E11.21.JPG",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/7/77/E11.21.JPG/revision/latest?cb=20120128084630",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/7/77/E11.21.JPG/revision/latest/scale-to-width-down/360?cb=20120128084630",
+      "width": 857,
+      "height": 475,
+      "characterNames": [
+        "Kevin"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 16
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:41477",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:E11.23.JPG",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/b/b6/E11.23.JPG/revision/latest?cb=20120128084630",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/b/b6/E11.23.JPG/revision/latest/scale-to-width-down/360?cb=20120128084630",
+      "width": 851,
+      "height": 469,
+      "characterNames": [
+        "Kevin"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 17
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:41478",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:E11.24.JPG",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/9/9b/E11.24.JPG/revision/latest?cb=20120128084630",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/9/9b/E11.24.JPG/revision/latest/scale-to-width-down/360?cb=20120128084630",
+      "width": 854,
+      "height": 476,
+      "characterNames": [
+        "Kevin"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 18
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:41479",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:E11.25.JPG",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/e/ed/E11.25.JPG/revision/latest?cb=20120128084631",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/e/ed/E11.25.JPG/revision/latest/scale-to-width-down/360?cb=20120128084631",
+      "width": 852,
+      "height": 477,
+      "characterNames": [
+        "Kevin"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 19
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:41480",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:E11.26.JPG",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/2/29/E11.26.JPG/revision/latest?cb=20120128084631",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/2/29/E11.26.JPG/revision/latest/scale-to-width-down/360?cb=20120128084631",
+      "width": 853,
+      "height": 464,
+      "characterNames": [
+        "Kevin"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 20
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:41481",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:E11.27.JPG",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/f/f5/E11.27.JPG/revision/latest?cb=20120128084631",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/f/f5/E11.27.JPG/revision/latest/scale-to-width-down/360?cb=20120128084631",
+      "width": 847,
+      "height": 472,
+      "characterNames": [
+        "Kevin"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 21
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:41482",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:E11.28.JPG",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/0/0c/E11.28.JPG/revision/latest?cb=20120128084631",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/0/0c/E11.28.JPG/revision/latest/scale-to-width-down/360?cb=20120128084631",
+      "width": 850,
+      "height": 476,
+      "characterNames": [
+        "Kevin"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 22
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:41483",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:E11.29.JPG",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/6/64/E11.29.JPG/revision/latest?cb=20120128084632",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/6/64/E11.29.JPG/revision/latest/scale-to-width-down/360?cb=20120128084632",
+      "width": 848,
+      "height": 479,
+      "characterNames": [
+        "Kevin"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 23
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:41484",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:E11.30.JPG",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/f/f3/E11.30.JPG/revision/latest?cb=20120128084632",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/f/f3/E11.30.JPG/revision/latest/scale-to-width-down/360?cb=20120128084632",
+      "width": 847,
+      "height": 476,
+      "characterNames": [
+        "Kevin"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 24
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:41485",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:E11.22.JPG",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/d/d6/E11.22.JPG/revision/latest?cb=20120128084730",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/d/d6/E11.22.JPG/revision/latest/scale-to-width-down/360?cb=20120128084730",
+      "width": 852,
+      "height": 474,
+      "characterNames": [
+        "Kevin"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 25
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:41486",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:E11.31.JPG",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/f/fa/E11.31.JPG/revision/latest?cb=20120128084730",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/f/fa/E11.31.JPG/revision/latest/scale-to-width-down/360?cb=20120128084730",
+      "width": 850,
+      "height": 470,
+      "characterNames": [
+        "Kevin"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 26
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:41487",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:E11.32.JPG",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/7/7a/E11.32.JPG/revision/latest?cb=20120128084730",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/7/7a/E11.32.JPG/revision/latest/scale-to-width-down/360?cb=20120128084730",
+      "width": 856,
+      "height": 477,
+      "characterNames": [
+        "Kevin"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 27
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:41488",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:E11.33.JPG",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/a/ac/E11.33.JPG/revision/latest?cb=20120128084731",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/a/ac/E11.33.JPG/revision/latest/scale-to-width-down/360?cb=20120128084731",
+      "width": 850,
+      "height": 479,
+      "characterNames": [
+        "Kevin"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 28
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:41489",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:E11.34.JPG",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/8/81/E11.34.JPG/revision/latest?cb=20120128084731",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/8/81/E11.34.JPG/revision/latest/scale-to-width-down/360?cb=20120128084731",
+      "width": 855,
+      "height": 469,
+      "characterNames": [
+        "Kevin"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 29
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:41490",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:E11.35.JPG",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/e/e3/E11.35.JPG/revision/latest?cb=20120128084731",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/e/e3/E11.35.JPG/revision/latest/scale-to-width-down/360?cb=20120128084731",
+      "width": 851,
+      "height": 472,
+      "characterNames": [
+        "Kevin"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 30
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:41491",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:E11.36.JPG",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/6/6e/E11.36.JPG/revision/latest?cb=20120128084731",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/6/6e/E11.36.JPG/revision/latest/scale-to-width-down/360?cb=20120128084731",
+      "width": 855,
+      "height": 478,
+      "characterNames": [
+        "Kevin"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 31
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:41492",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:E11.37.JPG",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/8/8d/E11.37.JPG/revision/latest?cb=20120128084731",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/8/8d/E11.37.JPG/revision/latest/scale-to-width-down/360?cb=20120128084731",
+      "width": 852,
+      "height": 474,
+      "characterNames": [
+        "Kevin"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 32
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:41493",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:E11.38.JPG",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/8/87/E11.38.JPG/revision/latest?cb=20120128084732",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/8/87/E11.38.JPG/revision/latest/scale-to-width-down/360?cb=20120128084732",
+      "width": 851,
+      "height": 479,
+      "characterNames": [
+        "Kevin"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 33
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:41494",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:E11.39.JPG",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/a/a7/E11.39.JPG/revision/latest?cb=20120128084732",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/a/a7/E11.39.JPG/revision/latest/scale-to-width-down/360?cb=20120128084732",
+      "width": 852,
+      "height": 475,
+      "characterNames": [
+        "Kevin"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 34
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:41495",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:E11.40.JPG",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/6/60/E11.40.JPG/revision/latest?cb=20120128084812",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/6/60/E11.40.JPG/revision/latest/scale-to-width-down/360?cb=20120128084812",
+      "width": 861,
+      "height": 479,
+      "characterNames": [
+        "Kevin"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 35
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:41496",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:E11.41.JPG",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/7/70/E11.41.JPG/revision/latest?cb=20120128084813",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/7/70/E11.41.JPG/revision/latest/scale-to-width-down/360?cb=20120128084813",
+      "width": 854,
+      "height": 476,
+      "characterNames": [
+        "Kevin"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 36
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:41497",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:E11.42.JPG",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/c/c4/E11.42.JPG/revision/latest?cb=20120128084813",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/c/c4/E11.42.JPG/revision/latest/scale-to-width-down/360?cb=20120128084813",
+      "width": 850,
+      "height": 467,
+      "characterNames": [
+        "Kevin"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 37
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:41498",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:E11.43.JPG",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/5/50/E11.43.JPG/revision/latest?cb=20120128084813",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/5/50/E11.43.JPG/revision/latest/scale-to-width-down/360?cb=20120128084813",
+      "width": 851,
+      "height": 474,
+      "characterNames": [
+        "Kevin"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 38
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:41499",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:E11.44.JPG",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/2/25/E11.44.JPG/revision/latest?cb=20120128084814",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/2/25/E11.44.JPG/revision/latest/scale-to-width-down/360?cb=20120128084814",
+      "width": 851,
+      "height": 474,
+      "characterNames": [
+        "Kevin"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 39
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:41500",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:E11.45.JPG",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/e/e9/E11.45.JPG/revision/latest?cb=20120128084814",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/e/e9/E11.45.JPG/revision/latest/scale-to-width-down/360?cb=20120128084814",
+      "width": 851,
+      "height": 472,
+      "characterNames": [
+        "Kevin"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 40
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:41501",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:E11.46.JPG",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/6/62/E11.46.JPG/revision/latest?cb=20120128084814",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/6/62/E11.46.JPG/revision/latest/scale-to-width-down/360?cb=20120128084814",
+      "width": 847,
+      "height": 478,
+      "characterNames": [
+        "Kevin"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 41
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:41502",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:E11.47.JPG",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/a/a1/E11.47.JPG/revision/latest?cb=20120128084814",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/a/a1/E11.47.JPG/revision/latest/scale-to-width-down/360?cb=20120128084814",
+      "width": 854,
+      "height": 468,
+      "characterNames": [
+        "Kevin"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 42
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:41503",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:E11.48.JPG",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/3/31/E11.48.JPG/revision/latest?cb=20120128084814",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/3/31/E11.48.JPG/revision/latest/scale-to-width-down/360?cb=20120128084814",
+      "width": 851,
+      "height": 475,
+      "characterNames": [
+        "Kevin"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 43
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:41504",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:E11.49.JPG",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/0/07/E11.49.JPG/revision/latest?cb=20120128084814",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/0/07/E11.49.JPG/revision/latest/scale-to-width-down/360?cb=20120128084814",
+      "width": 852,
+      "height": 473,
+      "characterNames": [
+        "Kevin"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 44
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:41505",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:E11.50.JPG",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/4/45/E11.50.JPG/revision/latest?cb=20120128084852",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/4/45/E11.50.JPG/revision/latest/scale-to-width-down/360?cb=20120128084852",
+      "width": 845,
+      "height": 475,
+      "characterNames": [
+        "Kevin"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 45
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:41506",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:E11.51.JPG",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/9/9c/E11.51.JPG/revision/latest?cb=20120128090404",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/9/9c/E11.51.JPG/revision/latest/scale-to-width-down/360?cb=20120128090404",
+      "width": 854,
+      "height": 486,
+      "characterNames": [
+        "Kevin"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 46
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:41507",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:E11.52.JPG",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/a/a6/E11.52.JPG/revision/latest?cb=20120128090405",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/a/a6/E11.52.JPG/revision/latest/scale-to-width-down/360?cb=20120128090405",
+      "width": 854,
+      "height": 467,
+      "characterNames": [
+        "Kevin"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 47
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:41508",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:E11.53.JPG",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/4/48/E11.53.JPG/revision/latest?cb=20120128090405",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/4/48/E11.53.JPG/revision/latest/scale-to-width-down/360?cb=20120128090405",
+      "width": 853,
+      "height": 466,
+      "characterNames": [
+        "Kevin"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 48
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:41555",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:E11.100.JPG",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/1/1f/E11.100.JPG/revision/latest?cb=20120128090903",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/1/1f/E11.100.JPG/revision/latest/scale-to-width-down/360?cb=20120128090903",
+      "width": 855,
+      "height": 476,
+      "characterNames": [
+        "Kevin"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 49
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:116488",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:RayMariah01.png",
+      "episodeNumber": 12,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/3/30/RayMariah01.png/revision/latest?cb=20180117032040",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/3/30/RayMariah01.png/revision/latest/scale-to-width-down/360?cb=20180117032040",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Mariah"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 50
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:116489",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:TysonMariah01.png",
+      "episodeNumber": 12,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/4/42/TysonMariah01.png/revision/latest?cb=20180117032048",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/4/42/TysonMariah01.png/revision/latest/scale-to-width-down/360?cb=20180117032048",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Mariah"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 51
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:118889",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:MariahLee01.png",
+      "episodeNumber": 12,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/9/90/MariahLee01.png/revision/latest?cb=20180302022237",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/9/90/MariahLee01.png/revision/latest/scale-to-width-down/360?cb=20180302022237",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Mariah"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 52
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:118890",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:MariahMax01.png",
+      "episodeNumber": 12,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/e/e4/MariahMax01.png/revision/latest?cb=20180302022249",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/e/e4/MariahMax01.png/revision/latest/scale-to-width-down/360?cb=20180302022249",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Mariah"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 53
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:118891",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:RayMariah02.png",
+      "episodeNumber": 12,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/c/ca/RayMariah02.png/revision/latest?cb=20180302022255",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/c/ca/RayMariah02.png/revision/latest/scale-to-width-down/360?cb=20180302022255",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Mariah"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 54
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:119682",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Mariah17.png",
+      "episodeNumber": 12,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/7/7c/Mariah17.png/revision/latest?cb=20180316024538",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/7/7c/Mariah17.png/revision/latest/scale-to-width-down/360?cb=20180316024538",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Mariah"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 55
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:119683",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Mariah15.png",
+      "episodeNumber": 12,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/8/8a/Mariah15.png/revision/latest?cb=20180316024553",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/8/8a/Mariah15.png/revision/latest/scale-to-width-down/360?cb=20180316024553",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Mariah"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 56
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:119684",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Mariah11.png",
+      "episodeNumber": 12,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/1/1e/Mariah11.png/revision/latest?cb=20180316024818",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/1/1e/Mariah11.png/revision/latest/scale-to-width-down/360?cb=20180316024818",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Mariah"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 57
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:119685",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Mariah12.png",
+      "episodeNumber": 12,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/c/ca/Mariah12.png/revision/latest?cb=20180316025021",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/c/ca/Mariah12.png/revision/latest/scale-to-width-down/360?cb=20180316025021",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Mariah"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 58
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:119686",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Mariah13.png",
+      "episodeNumber": 12,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/5/5c/Mariah13.png/revision/latest?cb=20180316025506",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/5/5c/Mariah13.png/revision/latest/scale-to-width-down/360?cb=20180316025506",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Mariah"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 59
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:116607",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:BladeBreakers03.png",
+      "episodeNumber": 13,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/5/56/BladeBreakers03.png/revision/latest?cb=20180120151718",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/5/56/BladeBreakers03.png/revision/latest/scale-to-width-down/360?cb=20180120151718",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Bobby",
+        "Bruno",
+        "Doug",
+        "Gary",
+        "Lee",
+        "Mariah",
+        "Max Tate",
+        "Robin",
+        "Ronnie (Charming Princes)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 60
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:120715",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:MariahGary01.png",
+      "episodeNumber": 13,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/f/f7/MariahGary01.png/revision/latest?cb=20180406003513",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/f/f7/MariahGary01.png/revision/latest/scale-to-width-down/360?cb=20180406003513",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Bobby",
+        "Bruno",
+        "Doug",
+        "Gary",
+        "Lee",
+        "Mariah",
+        "Max Tate",
+        "Robin",
+        "Ronnie (Charming Princes)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 61
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:120716",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:MariahLee03.png",
+      "episodeNumber": 13,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/d/d0/MariahLee03.png/revision/latest?cb=20180406003526",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/d/d0/MariahLee03.png/revision/latest/scale-to-width-down/360?cb=20180406003526",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Bobby",
+        "Bruno",
+        "Doug",
+        "Gary",
+        "Lee",
+        "Mariah",
+        "Max Tate",
+        "Robin",
+        "Ronnie (Charming Princes)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 62
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:120902",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Gary07.png",
+      "episodeNumber": 13,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/a/a2/Gary07.png/revision/latest?cb=20180408172701",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/a/a2/Gary07.png/revision/latest/scale-to-width-down/360?cb=20180408172701",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Bobby",
+        "Bruno",
+        "Doug",
+        "Gary",
+        "Lee",
+        "Mariah",
+        "Max Tate",
+        "Robin",
+        "Ronnie (Charming Princes)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 63
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:120903",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Gary06.png",
+      "episodeNumber": 13,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/a/a4/Gary06.png/revision/latest?cb=20180408172738",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/a/a4/Gary06.png/revision/latest/scale-to-width-down/360?cb=20180408172738",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Bobby",
+        "Bruno",
+        "Doug",
+        "Gary",
+        "Lee",
+        "Mariah",
+        "Max Tate",
+        "Robin",
+        "Ronnie (Charming Princes)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 64
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:120904",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Gary05.png",
+      "episodeNumber": 13,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/4/43/Gary05.png/revision/latest?cb=20180408172752",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/4/43/Gary05.png/revision/latest/scale-to-width-down/360?cb=20180408172752",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Bobby",
+        "Bruno",
+        "Doug",
+        "Gary",
+        "Lee",
+        "Mariah",
+        "Max Tate",
+        "Robin",
+        "Ronnie (Charming Princes)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 65
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:120905",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Gary04.png",
+      "episodeNumber": 13,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/6/67/Gary04.png/revision/latest?cb=20180408173017",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/6/67/Gary04.png/revision/latest/scale-to-width-down/360?cb=20180408173017",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Bobby",
+        "Bruno",
+        "Doug",
+        "Gary",
+        "Lee",
+        "Mariah",
+        "Max Tate",
+        "Robin",
+        "Ronnie (Charming Princes)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 66
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:123771",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:WhiteTigers06.png",
+      "episodeNumber": 13,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/a/a0/WhiteTigers06.png/revision/latest?cb=20180611215121",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/a/a0/WhiteTigers06.png/revision/latest/scale-to-width-down/360?cb=20180611215121",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Bobby",
+        "Bruno",
+        "Doug",
+        "Gary",
+        "Lee",
+        "Mariah",
+        "Max Tate",
+        "Robin",
+        "Ronnie (Charming Princes)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 67
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:125578",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Bobby01.png",
+      "episodeNumber": 13,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/d/df/Bobby01.png/revision/latest?cb=20180727015906",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/d/df/Bobby01.png/revision/latest/scale-to-width-down/360?cb=20180727015906",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Bobby",
+        "Bruno",
+        "Doug",
+        "Gary",
+        "Lee",
+        "Mariah",
+        "Max Tate",
+        "Robin",
+        "Ronnie (Charming Princes)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 68
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:125579",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Bobby02.png",
+      "episodeNumber": 13,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/f/f2/Bobby02.png/revision/latest?cb=20180727015913",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/f/f2/Bobby02.png/revision/latest/scale-to-width-down/360?cb=20180727015913",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Bobby",
+        "Bruno",
+        "Doug",
+        "Gary",
+        "Lee",
+        "Mariah",
+        "Max Tate",
+        "Robin",
+        "Ronnie (Charming Princes)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 69
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:125580",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Bobby03.png",
+      "episodeNumber": 13,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/a/a5/Bobby03.png/revision/latest?cb=20180727015920",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/a/a5/Bobby03.png/revision/latest/scale-to-width-down/360?cb=20180727015920",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Bobby",
+        "Bruno",
+        "Doug",
+        "Gary",
+        "Lee",
+        "Mariah",
+        "Max Tate",
+        "Robin",
+        "Ronnie (Charming Princes)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 70
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:125581",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Bobby04.png",
+      "episodeNumber": 13,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/1/1d/Bobby04.png/revision/latest?cb=20180727015926",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/1/1d/Bobby04.png/revision/latest/scale-to-width-down/360?cb=20180727015926",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Bobby",
+        "Bruno",
+        "Doug",
+        "Gary",
+        "Lee",
+        "Mariah",
+        "Max Tate",
+        "Robin",
+        "Ronnie (Charming Princes)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 71
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:125582",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Bobby05.png",
+      "episodeNumber": 13,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/d/d4/Bobby05.png/revision/latest?cb=20180727015931",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/d/d4/Bobby05.png/revision/latest/scale-to-width-down/360?cb=20180727015931",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Bobby",
+        "Bruno",
+        "Doug",
+        "Gary",
+        "Lee",
+        "Mariah",
+        "Max Tate",
+        "Robin",
+        "Ronnie (Charming Princes)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 72
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:125584",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Bruno01.png",
+      "episodeNumber": 13,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/3/35/Bruno01.png/revision/latest?cb=20180727020407",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/3/35/Bruno01.png/revision/latest/scale-to-width-down/360?cb=20180727020407",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Bobby",
+        "Bruno",
+        "Doug",
+        "Gary",
+        "Lee",
+        "Mariah",
+        "Max Tate",
+        "Robin",
+        "Ronnie (Charming Princes)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 73
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:125585",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Bruno02.png",
+      "episodeNumber": 13,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/9/90/Bruno02.png/revision/latest?cb=20180727020415",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/9/90/Bruno02.png/revision/latest/scale-to-width-down/360?cb=20180727020415",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Bobby",
+        "Bruno",
+        "Doug",
+        "Gary",
+        "Lee",
+        "Mariah",
+        "Max Tate",
+        "Robin",
+        "Ronnie (Charming Princes)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 74
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:125586",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Bruno03.png",
+      "episodeNumber": 13,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/6/6c/Bruno03.png/revision/latest?cb=20180727020423",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/6/6c/Bruno03.png/revision/latest/scale-to-width-down/360?cb=20180727020423",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Bobby",
+        "Bruno",
+        "Doug",
+        "Gary",
+        "Lee",
+        "Mariah",
+        "Max Tate",
+        "Robin",
+        "Ronnie (Charming Princes)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 75
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:125587",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:CharmingPrinces01.png",
+      "episodeNumber": 13,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/8/88/CharmingPrinces01.png/revision/latest?cb=20180727020433",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/8/88/CharmingPrinces01.png/revision/latest/scale-to-width-down/360?cb=20180727020433",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Bobby",
+        "Bruno",
+        "Doug",
+        "Gary",
+        "Lee",
+        "Mariah",
+        "Max Tate",
+        "Robin",
+        "Ronnie (Charming Princes)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 76
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:125588",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:BladeBreakers04.png",
+      "episodeNumber": 13,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/0/0c/BladeBreakers04.png/revision/latest?cb=20180727024222",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/0/0c/BladeBreakers04.png/revision/latest/scale-to-width-down/360?cb=20180727024222",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Bobby",
+        "Bruno",
+        "Doug",
+        "Gary",
+        "Lee",
+        "Mariah",
+        "Max Tate",
+        "Robin",
+        "Ronnie (Charming Princes)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 77
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:125589",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Ronnie01.png",
+      "episodeNumber": 13,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/5/5e/Ronnie01.png/revision/latest?cb=20180727024242",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/5/5e/Ronnie01.png/revision/latest/scale-to-width-down/360?cb=20180727024242",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Bobby",
+        "Bruno",
+        "Doug",
+        "Gary",
+        "Lee",
+        "Mariah",
+        "Max Tate",
+        "Robin",
+        "Ronnie (Charming Princes)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 78
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:125590",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Robin01.png",
+      "episodeNumber": 13,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/9/91/Robin01.png/revision/latest?cb=20180727024251",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/9/91/Robin01.png/revision/latest/scale-to-width-down/360?cb=20180727024251",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Bobby",
+        "Bruno",
+        "Doug",
+        "Gary",
+        "Lee",
+        "Mariah",
+        "Max Tate",
+        "Robin",
+        "Ronnie (Charming Princes)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 79
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:125591",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Robin02.png",
+      "episodeNumber": 13,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/b/bd/Robin02.png/revision/latest?cb=20180727024300",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/b/bd/Robin02.png/revision/latest/scale-to-width-down/360?cb=20180727024300",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Bobby",
+        "Bruno",
+        "Doug",
+        "Gary",
+        "Lee",
+        "Mariah",
+        "Max Tate",
+        "Robin",
+        "Ronnie (Charming Princes)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 80
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:125592",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Ronnie02.png",
+      "episodeNumber": 13,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/9/99/Ronnie02.png/revision/latest?cb=20180727024430",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/9/99/Ronnie02.png/revision/latest/scale-to-width-down/360?cb=20180727024430",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Bobby",
+        "Bruno",
+        "Doug",
+        "Gary",
+        "Lee",
+        "Mariah",
+        "Max Tate",
+        "Robin",
+        "Ronnie (Charming Princes)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 81
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:125593",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Ronnie03.png",
+      "episodeNumber": 13,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/4/4e/Ronnie03.png/revision/latest?cb=20180727024612",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/4/4e/Ronnie03.png/revision/latest/scale-to-width-down/360?cb=20180727024612",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Bobby",
+        "Bruno",
+        "Doug",
+        "Gary",
+        "Lee",
+        "Mariah",
+        "Max Tate",
+        "Robin",
+        "Ronnie (Charming Princes)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 82
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:125594",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Ronnie04.png",
+      "episodeNumber": 13,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/f/f7/Ronnie04.png/revision/latest?cb=20180727024644",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/f/f7/Ronnie04.png/revision/latest/scale-to-width-down/360?cb=20180727024644",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Bobby",
+        "Bruno",
+        "Doug",
+        "Gary",
+        "Lee",
+        "Mariah",
+        "Max Tate",
+        "Robin",
+        "Ronnie (Charming Princes)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 83
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:121414",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Tyson58.png",
+      "episodeNumber": 18,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/c/c8/Tyson58.png/revision/latest?cb=20180416225236",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/c/c8/Tyson58.png/revision/latest/scale-to-width-down/360?cb=20180416225236",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Andrew",
+        "Nicky"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 84
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:121415",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Tyson59.png",
+      "episodeNumber": 18,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/9/9c/Tyson59.png/revision/latest?cb=20180416225310",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/9/9c/Tyson59.png/revision/latest/scale-to-width-down/360?cb=20180416225310",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Andrew",
+        "Nicky"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 85
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:121416",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Tyson60.png",
+      "episodeNumber": 18,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/5/5a/Tyson60.png/revision/latest?cb=20180416225317",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/5/5a/Tyson60.png/revision/latest/scale-to-width-down/360?cb=20180416225317",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Andrew",
+        "Nicky"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 86
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:121417",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Tyson61.png",
+      "episodeNumber": 18,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/1/1d/Tyson61.png/revision/latest?cb=20180416225327",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/1/1d/Tyson61.png/revision/latest/scale-to-width-down/360?cb=20180416225327",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Andrew",
+        "Nicky"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 87
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:121418",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Tyson62.png",
+      "episodeNumber": 18,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/8/84/Tyson62.png/revision/latest?cb=20180416225432",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/8/84/Tyson62.png/revision/latest/scale-to-width-down/360?cb=20180416225432",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Andrew",
+        "Nicky"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 88
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:121419",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Tyson63.png",
+      "episodeNumber": 18,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/6/6b/Tyson63.png/revision/latest?cb=20180416225440",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/6/6b/Tyson63.png/revision/latest/scale-to-width-down/360?cb=20180416225440",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Andrew",
+        "Nicky"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 89
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:121420",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Tyson64.png",
+      "episodeNumber": 18,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/0/0b/Tyson64.png/revision/latest?cb=20180416225631",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/0/0b/Tyson64.png/revision/latest/scale-to-width-down/360?cb=20180416225631",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Andrew",
+        "Nicky"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 90
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:121421",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Tyson65.png",
+      "episodeNumber": 18,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/f/f0/Tyson65.png/revision/latest?cb=20180416225720",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/f/f0/Tyson65.png/revision/latest/scale-to-width-down/360?cb=20180416225720",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Andrew",
+        "Nicky"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 91
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:125756",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:TysonKenny07.png",
+      "episodeNumber": 18,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/e/e1/TysonKenny07.png/revision/latest?cb=20180731015603",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/e/e1/TysonKenny07.png/revision/latest/scale-to-width-down/360?cb=20180731015603",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Andrew",
+        "Nicky"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 92
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:111525",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:JUDY%20TATE%20(2000).png",
+      "episodeNumber": 19,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/2/23/JUDY_TATE_%282000%29.png/revision/latest?cb=20171026080025",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/2/23/JUDY_TATE_%282000%29.png/revision/latest/scale-to-width-down/360?cb=20171026080025",
+      "width": 2133,
+      "height": 1600,
+      "characterNames": [
+        "Andy",
+        "Emily Watson",
+        "Judy Tate",
+        "Max Tate",
+        "Tony (2000)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 93
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:112251",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:JEFF%20(2000).png",
+      "episodeNumber": 19,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/4/42/JEFF_%282000%29.png/revision/latest?cb=20171026075313",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/4/42/JEFF_%282000%29.png/revision/latest/scale-to-width-down/360?cb=20171026075313",
+      "width": 2133,
+      "height": 1600,
+      "characterNames": [
+        "Andy",
+        "Emily Watson",
+        "Judy Tate",
+        "Max Tate",
+        "Tony (2000)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 94
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:112253",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:TONY%20(2000).png",
+      "episodeNumber": 19,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/c/c9/TONY_%282000%29.png/revision/latest?cb=20171026080734",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/c/c9/TONY_%282000%29.png/revision/latest/scale-to-width-down/360?cb=20171026080734",
+      "width": 2133,
+      "height": 1600,
+      "characterNames": [
+        "Andy",
+        "Emily Watson",
+        "Judy Tate",
+        "Max Tate",
+        "Tony (2000)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 95
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:112254",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:ANDY%20(2000).png",
+      "episodeNumber": 19,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/2/29/ANDY_%282000%29.png/revision/latest?cb=20171026080749",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/2/29/ANDY_%282000%29.png/revision/latest/scale-to-width-down/360?cb=20171026080749",
+      "width": 2133,
+      "height": 1600,
+      "characterNames": [
+        "Andy",
+        "Emily Watson",
+        "Judy Tate",
+        "Max Tate",
+        "Tony (2000)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 96
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:116486",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:JudyEmily01.png",
+      "episodeNumber": 19,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/f/f6/JudyEmily01.png/revision/latest?cb=20180117031248",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/f/f6/JudyEmily01.png/revision/latest/scale-to-width-down/360?cb=20180117031248",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Andy",
+        "Emily Watson",
+        "Judy Tate",
+        "Max Tate",
+        "Tony (2000)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 97
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:116487",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Bladebreakers08.png",
+      "episodeNumber": 19,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/b/b8/Bladebreakers08.png/revision/latest?cb=20180117031256",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/b/b8/Bladebreakers08.png/revision/latest/scale-to-width-down/360?cb=20180117031256",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Andy",
+        "Emily Watson",
+        "Judy Tate",
+        "Max Tate",
+        "Tony (2000)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 98
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:121397",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Emily01.png",
+      "episodeNumber": 19,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/e/e3/Emily01.png/revision/latest?cb=20230306224233",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/e/e3/Emily01.png/revision/latest/scale-to-width-down/360?cb=20230306224233",
+      "width": 1195,
+      "height": 900,
+      "characterNames": [
+        "Andy",
+        "Emily Watson",
+        "Judy Tate",
+        "Max Tate",
+        "Tony (2000)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 99
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:121398",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Emily02.png",
+      "episodeNumber": 19,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/3/3b/Emily02.png/revision/latest?cb=20220810011909",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/3/3b/Emily02.png/revision/latest/scale-to-width-down/360?cb=20220810011909",
+      "width": 1193,
+      "height": 900,
+      "characterNames": [
+        "Andy",
+        "Emily Watson",
+        "Judy Tate",
+        "Max Tate",
+        "Tony (2000)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 100
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:121400",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Emily04.png",
+      "episodeNumber": 19,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/f/f4/Emily04.png/revision/latest?cb=20180416221500",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/f/f4/Emily04.png/revision/latest/scale-to-width-down/360?cb=20180416221500",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Andy",
+        "Emily Watson",
+        "Judy Tate",
+        "Max Tate",
+        "Tony (2000)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 101
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:121401",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Emily05.png",
+      "episodeNumber": 19,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/8/81/Emily05.png/revision/latest?cb=20220810012746",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/8/81/Emily05.png/revision/latest/scale-to-width-down/360?cb=20220810012746",
+      "width": 1194,
+      "height": 900,
+      "characterNames": [
+        "Andy",
+        "Emily Watson",
+        "Judy Tate",
+        "Max Tate",
+        "Tony (2000)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 102
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:121402",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Emily06.png",
+      "episodeNumber": 19,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/7/76/Emily06.png/revision/latest?cb=20230306231320",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/7/76/Emily06.png/revision/latest/scale-to-width-down/360?cb=20230306231320",
+      "width": 1194,
+      "height": 900,
+      "characterNames": [
+        "Andy",
+        "Emily Watson",
+        "Judy Tate",
+        "Max Tate",
+        "Tony (2000)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 103
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:121403",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Emily07.png",
+      "episodeNumber": 19,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/2/22/Emily07.png/revision/latest?cb=20180416221522",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/2/22/Emily07.png/revision/latest/scale-to-width-down/360?cb=20180416221522",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Andy",
+        "Emily Watson",
+        "Judy Tate",
+        "Max Tate",
+        "Tony (2000)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 104
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:121404",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Emily08.png",
+      "episodeNumber": 19,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/0/0e/Emily08.png/revision/latest?cb=20180416221543",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/0/0e/Emily08.png/revision/latest/scale-to-width-down/360?cb=20180416221543",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Andy",
+        "Emily Watson",
+        "Judy Tate",
+        "Max Tate",
+        "Tony (2000)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 105
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:121405",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Emily09.png",
+      "episodeNumber": 19,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/b/bd/Emily09.png/revision/latest?cb=20180416221549",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/b/bd/Emily09.png/revision/latest/scale-to-width-down/360?cb=20180416221549",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Andy",
+        "Emily Watson",
+        "Judy Tate",
+        "Max Tate",
+        "Tony (2000)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 106
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:121406",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Tyson70.png",
+      "episodeNumber": 19,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/2/2e/Tyson70.png/revision/latest?cb=20180416223033",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/2/2e/Tyson70.png/revision/latest/scale-to-width-down/360?cb=20180416223033",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Andy",
+        "Emily Watson",
+        "Judy Tate",
+        "Max Tate",
+        "Tony (2000)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 107
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:121407",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Tyson71.png",
+      "episodeNumber": 19,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/d/df/Tyson71.png/revision/latest?cb=20180416223040",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/d/df/Tyson71.png/revision/latest/scale-to-width-down/360?cb=20180416223040",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Andy",
+        "Emily Watson",
+        "Judy Tate",
+        "Max Tate",
+        "Tony (2000)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 108
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:121408",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Tyson72.png",
+      "episodeNumber": 19,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/9/90/Tyson72.png/revision/latest?cb=20180416223050",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/9/90/Tyson72.png/revision/latest/scale-to-width-down/360?cb=20180416223050",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Andy",
+        "Emily Watson",
+        "Judy Tate",
+        "Max Tate",
+        "Tony (2000)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 109
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:121409",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Tyson73.png",
+      "episodeNumber": 19,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/2/23/Tyson73.png/revision/latest?cb=20180416223244",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/2/23/Tyson73.png/revision/latest/scale-to-width-down/360?cb=20180416223244",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Andy",
+        "Emily Watson",
+        "Judy Tate",
+        "Max Tate",
+        "Tony (2000)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 110
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:121410",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Tyson75.png",
+      "episodeNumber": 19,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/d/dc/Tyson75.png/revision/latest?cb=20180416223534",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/d/dc/Tyson75.png/revision/latest/scale-to-width-down/360?cb=20180416223534",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Andy",
+        "Emily Watson",
+        "Judy Tate",
+        "Max Tate",
+        "Tony (2000)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 111
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:121446",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Ray66.png",
+      "episodeNumber": 19,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/b/b8/Ray66.png/revision/latest?cb=20180417014956",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/b/b8/Ray66.png/revision/latest/scale-to-width-down/360?cb=20180417014956",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Andy",
+        "Emily Watson",
+        "Judy Tate",
+        "Max Tate",
+        "Tony (2000)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 112
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:121447",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Ray65.png",
+      "episodeNumber": 19,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/d/d9/Ray65.png/revision/latest?cb=20180417015005",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/d/d9/Ray65.png/revision/latest/scale-to-width-down/360?cb=20180417015005",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Andy",
+        "Emily Watson",
+        "Judy Tate",
+        "Max Tate",
+        "Tony (2000)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 113
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:121448",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Ray64.png",
+      "episodeNumber": 19,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/7/70/Ray64.png/revision/latest?cb=20180417015018",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/7/70/Ray64.png/revision/latest/scale-to-width-down/360?cb=20180417015018",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Andy",
+        "Emily Watson",
+        "Judy Tate",
+        "Max Tate",
+        "Tony (2000)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 114
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:121449",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Ray63.png",
+      "episodeNumber": 19,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/6/63/Ray63.png/revision/latest?cb=20180417015045",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/6/63/Ray63.png/revision/latest/scale-to-width-down/360?cb=20180417015045",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Andy",
+        "Emily Watson",
+        "Judy Tate",
+        "Max Tate",
+        "Tony (2000)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 115
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:121450",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Ray67.png",
+      "episodeNumber": 19,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/d/d0/Ray67.png/revision/latest?cb=20180417015115",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/d/d0/Ray67.png/revision/latest/scale-to-width-down/360?cb=20180417015115",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Andy",
+        "Emily Watson",
+        "Judy Tate",
+        "Max Tate",
+        "Tony (2000)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 116
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:121765",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Emily03.png",
+      "episodeNumber": 19,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/4/4a/Emily03.png/revision/latest?cb=20180424022424",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/4/4a/Emily03.png/revision/latest/scale-to-width-down/360?cb=20180424022424",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Andy",
+        "Emily Watson",
+        "Judy Tate",
+        "Max Tate",
+        "Tony (2000)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 117
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:125409",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:TysonKenny08.png",
+      "episodeNumber": 19,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/f/fd/TysonKenny08.png/revision/latest?cb=20180722170737",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/f/fd/TysonKenny08.png/revision/latest/scale-to-width-down/360?cb=20180722170737",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Andy",
+        "Emily Watson",
+        "Judy Tate",
+        "Max Tate",
+        "Tony (2000)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 118
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:125410",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Tony01.png",
+      "episodeNumber": 19,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/6/69/Tony01.png/revision/latest?cb=20180722170851",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/6/69/Tony01.png/revision/latest/scale-to-width-down/360?cb=20180722170851",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Andy",
+        "Emily Watson",
+        "Judy Tate",
+        "Max Tate",
+        "Tony (2000)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 119
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:125411",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Tony02.png",
+      "episodeNumber": 19,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/9/91/Tony02.png/revision/latest?cb=20180722170904",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/9/91/Tony02.png/revision/latest/scale-to-width-down/360?cb=20180722170904",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Andy",
+        "Emily Watson",
+        "Judy Tate",
+        "Max Tate",
+        "Tony (2000)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 120
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:125412",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Tony03.png",
+      "episodeNumber": 19,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/6/67/Tony03.png/revision/latest?cb=20180722170914",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/6/67/Tony03.png/revision/latest/scale-to-width-down/360?cb=20180722170914",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Andy",
+        "Emily Watson",
+        "Judy Tate",
+        "Max Tate",
+        "Tony (2000)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 121
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:125413",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Tony04.png",
+      "episodeNumber": 19,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/5/5f/Tony04.png/revision/latest?cb=20180722170931",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/5/5f/Tony04.png/revision/latest/scale-to-width-down/360?cb=20180722170931",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Andy",
+        "Emily Watson",
+        "Judy Tate",
+        "Max Tate",
+        "Tony (2000)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 122
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:125414",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Tony05.png",
+      "episodeNumber": 19,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/b/be/Tony05.png/revision/latest?cb=20180722171015",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/b/be/Tony05.png/revision/latest/scale-to-width-down/360?cb=20180722171015",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Andy",
+        "Emily Watson",
+        "Judy Tate",
+        "Max Tate",
+        "Tony (2000)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 123
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:125415",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:TonyAndyEmily01.png",
+      "episodeNumber": 19,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/f/f8/TonyAndyEmily01.png/revision/latest?cb=20180722171029",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/f/f8/TonyAndyEmily01.png/revision/latest/scale-to-width-down/360?cb=20180722171029",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Andy",
+        "Emily Watson",
+        "Judy Tate",
+        "Max Tate",
+        "Tony (2000)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 124
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:125416",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:TonyAndyEmily02.png",
+      "episodeNumber": 19,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/e/ef/TonyAndyEmily02.png/revision/latest?cb=20180722171137",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/e/ef/TonyAndyEmily02.png/revision/latest/scale-to-width-down/360?cb=20180722171137",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Andy",
+        "Emily Watson",
+        "Judy Tate",
+        "Max Tate",
+        "Tony (2000)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 125
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:120402",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Tumblr%20ousie9mrMH1w4q252o1%201280.png",
+      "episodeNumber": 20,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/1/19/Tumblr_ousie9mrMH1w4q252o1_1280.png/revision/latest?cb=20180401014226",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/1/19/Tumblr_ousie9mrMH1w4q252o1_1280.png/revision/latest/scale-to-width-down/360?cb=20180401014226",
+      "width": 800,
+      "height": 480,
+      "characterNames": [
+        "Douglas",
+        "Eddy",
+        "Steve (All Starz)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": false,
+      "sortOrder": 126
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:121411",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Tyson76.png",
+      "episodeNumber": 20,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/d/dc/Tyson76.png/revision/latest?cb=20180416224758",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/d/dc/Tyson76.png/revision/latest/scale-to-width-down/360?cb=20180416224758",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Douglas",
+        "Eddy",
+        "Steve (All Starz)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": false,
+      "sortOrder": 127
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:121412",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Tyson77.png",
+      "episodeNumber": 20,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/3/31/Tyson77.png/revision/latest?cb=20180416224807",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/3/31/Tyson77.png/revision/latest/scale-to-width-down/360?cb=20180416224807",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Douglas",
+        "Eddy",
+        "Steve (All Starz)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": false,
+      "sortOrder": 128
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:121413",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Tyson78.png",
+      "episodeNumber": 20,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/3/3d/Tyson78.png/revision/latest?cb=20180416224831",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/3/3d/Tyson78.png/revision/latest/scale-to-width-down/360?cb=20180416224831",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Douglas",
+        "Eddy",
+        "Steve (All Starz)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": false,
+      "sortOrder": 129
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:121451",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Ray68.png",
+      "episodeNumber": 20,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/2/23/Ray68.png/revision/latest?cb=20180417015300",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/2/23/Ray68.png/revision/latest/scale-to-width-down/360?cb=20180417015300",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Douglas",
+        "Eddy",
+        "Steve (All Starz)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": false,
+      "sortOrder": 130
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:123168",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Eddy2.png",
+      "episodeNumber": 20,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/7/7f/Eddy2.png/revision/latest?cb=20180522015956",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/7/7f/Eddy2.png/revision/latest/scale-to-width-down/360?cb=20180522015956",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Douglas",
+        "Eddy",
+        "Steve (All Starz)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": false,
+      "sortOrder": 131
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:123169",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Eddy3.png",
+      "episodeNumber": 20,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/8/8c/Eddy3.png/revision/latest?cb=20180522020004",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/8/8c/Eddy3.png/revision/latest/scale-to-width-down/360?cb=20180522020004",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Douglas",
+        "Eddy",
+        "Steve (All Starz)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": false,
+      "sortOrder": 132
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:123170",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Eddy04.png",
+      "episodeNumber": 20,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/c/cb/Eddy04.png/revision/latest?cb=20180522020009",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/c/cb/Eddy04.png/revision/latest/scale-to-width-down/360?cb=20180522020009",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Douglas",
+        "Eddy",
+        "Steve (All Starz)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": false,
+      "sortOrder": 133
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:126137",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:EddySteve02.png",
+      "episodeNumber": 20,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/c/ce/EddySteve02.png/revision/latest?cb=20180809001511",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/c/ce/EddySteve02.png/revision/latest/scale-to-width-down/360?cb=20180809001511",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Douglas",
+        "Eddy",
+        "Steve (All Starz)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": false,
+      "sortOrder": 134
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:126138",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:EddySteve04.png",
+      "episodeNumber": 20,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/5/5c/EddySteve04.png/revision/latest?cb=20180809001519",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/5/5c/EddySteve04.png/revision/latest/scale-to-width-down/360?cb=20180809001519",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Douglas",
+        "Eddy",
+        "Steve (All Starz)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": false,
+      "sortOrder": 135
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:126139",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:EddySteve05.png",
+      "episodeNumber": 20,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/c/c0/EddySteve05.png/revision/latest?cb=20180809001527",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/c/c0/EddySteve05.png/revision/latest/scale-to-width-down/360?cb=20180809001527",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Douglas",
+        "Eddy",
+        "Steve (All Starz)"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": false,
+      "sortOrder": 136
+    }
+  ]
+}

@@ -1,0 +1,2206 @@
+{
+  "seriesSlug": "beyblade-shogun-steel",
+  "generation": "METAL",
+  "fancaps": {
+    "seriesUrl": "https://beyblade.fandom.com/wiki/Beyblade: Shogun Steel episodes",
+    "label": "Beyblade: Shogun Steel"
+  },
+  "scrapedAt": "2026-05-29T19:54:04.601Z",
+  "episodes": [
+    {
+      "number": 1,
+      "title": "Beyblade: Shogun Steel - Episode 01"
+    },
+    {
+      "number": 2,
+      "title": "Beyblade: Shogun Steel - Episode 02"
+    },
+    {
+      "number": 3,
+      "title": "Beyblade: Shogun Steel - Episode 03"
+    },
+    {
+      "number": 4,
+      "title": "Beyblade: Shogun Steel - Episode 04"
+    },
+    {
+      "number": 5,
+      "title": "Beyblade: Shogun Steel - Episode 05"
+    },
+    {
+      "number": 6,
+      "title": "Beyblade: Shogun Steel - Episode 06"
+    },
+    {
+      "number": 7,
+      "title": "Beyblade: Shogun Steel - Episode 07"
+    }
+  ],
+  "frames": [
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:104627",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:11.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/5/59/11.png/revision/latest?cb=20151017101845",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/5/59/11.png/revision/latest/scale-to-width-down/360?cb=20151017101845",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Eight Unabara",
+        "Maru",
+        "Shinobu Hiryuin",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 0
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:104628",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:12.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/9/9e/12.png/revision/latest?cb=20151017101914",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/9/9e/12.png/revision/latest/scale-to-width-down/360?cb=20151017101914",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Eight Unabara",
+        "Maru",
+        "Shinobu Hiryuin",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 1
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:104629",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:13.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/c/c0/13.png/revision/latest?cb=20151017101931",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/c/c0/13.png/revision/latest/scale-to-width-down/360?cb=20151017101931",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Eight Unabara",
+        "Maru",
+        "Shinobu Hiryuin",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 2
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:104630",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:14.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/7/7b/14.png/revision/latest?cb=20151017101951",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/7/7b/14.png/revision/latest/scale-to-width-down/360?cb=20151017101951",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Eight Unabara",
+        "Maru",
+        "Shinobu Hiryuin",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 3
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:104716",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:100.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/7/7c/100.png/revision/latest?cb=20151017120616",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/7/7c/100.png/revision/latest/scale-to-width-down/360?cb=20151017120616",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Eight Unabara",
+        "Maru",
+        "Shinobu Hiryuin",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 4
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:104717",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:101.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/b/b5/101.png/revision/latest?cb=20151017120721",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/b/b5/101.png/revision/latest/scale-to-width-down/360?cb=20151017120721",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Eight Unabara",
+        "Maru",
+        "Shinobu Hiryuin",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 5
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:104718",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:102.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/d/df/102.png/revision/latest?cb=20151017120856",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/d/df/102.png/revision/latest/scale-to-width-down/360?cb=20151017120856",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Eight Unabara",
+        "Maru",
+        "Shinobu Hiryuin",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 6
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:104719",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:103.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/6/64/103.png/revision/latest?cb=20151017121020",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/6/64/103.png/revision/latest/scale-to-width-down/360?cb=20151017121020",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Eight Unabara",
+        "Maru",
+        "Shinobu Hiryuin",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 7
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:104720",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:104.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/4/48/104.png/revision/latest?cb=20151017121059",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/4/48/104.png/revision/latest/scale-to-width-down/360?cb=20151017121059",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Eight Unabara",
+        "Maru",
+        "Shinobu Hiryuin",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 8
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107506",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:105.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/0/01/105.png/revision/latest?cb=20160626214300",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/0/01/105.png/revision/latest/scale-to-width-down/360?cb=20160626214300",
+      "width": 1279,
+      "height": 719,
+      "characterNames": [
+        "Eight Unabara",
+        "Maru",
+        "Shinobu Hiryuin",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 9
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107507",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:106.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/3/3a/106.png/revision/latest?cb=20160626214423",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/3/3a/106.png/revision/latest/scale-to-width-down/360?cb=20160626214423",
+      "width": 1279,
+      "height": 719,
+      "characterNames": [
+        "Eight Unabara",
+        "Maru",
+        "Shinobu Hiryuin",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 10
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107508",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:107.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/9/91/107.png/revision/latest?cb=20160626214501",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/9/91/107.png/revision/latest/scale-to-width-down/360?cb=20160626214501",
+      "width": 1279,
+      "height": 719,
+      "characterNames": [
+        "Eight Unabara",
+        "Maru",
+        "Shinobu Hiryuin",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 11
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107509",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:108.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/5/55/108.png/revision/latest?cb=20160626214609",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/5/55/108.png/revision/latest/scale-to-width-down/360?cb=20160626214609",
+      "width": 1279,
+      "height": 719,
+      "characterNames": [
+        "Eight Unabara",
+        "Maru",
+        "Shinobu Hiryuin",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 12
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107510",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:109.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/9/94/109.png/revision/latest?cb=20160626214649",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/9/94/109.png/revision/latest/scale-to-width-down/360?cb=20160626214649",
+      "width": 1279,
+      "height": 719,
+      "characterNames": [
+        "Eight Unabara",
+        "Maru",
+        "Shinobu Hiryuin",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 13
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107511",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:110.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/f/f7/110.png/revision/latest?cb=20160626214739",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/f/f7/110.png/revision/latest/scale-to-width-down/360?cb=20160626214739",
+      "width": 1279,
+      "height": 719,
+      "characterNames": [
+        "Eight Unabara",
+        "Maru",
+        "Shinobu Hiryuin",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 14
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107512",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:112.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/c/c2/112.png/revision/latest?cb=20160626214947",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/c/c2/112.png/revision/latest/scale-to-width-down/360?cb=20160626214947",
+      "width": 1279,
+      "height": 719,
+      "characterNames": [
+        "Eight Unabara",
+        "Maru",
+        "Shinobu Hiryuin",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 15
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107513",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:113.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/3/34/113.png/revision/latest?cb=20160626215051",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/3/34/113.png/revision/latest/scale-to-width-down/360?cb=20160626215051",
+      "width": 1279,
+      "height": 719,
+      "characterNames": [
+        "Eight Unabara",
+        "Maru",
+        "Shinobu Hiryuin",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 16
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107514",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:115.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/e/e1/115.png/revision/latest?cb=20160626215135",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/e/e1/115.png/revision/latest/scale-to-width-down/360?cb=20160626215135",
+      "width": 1279,
+      "height": 719,
+      "characterNames": [
+        "Eight Unabara",
+        "Maru",
+        "Shinobu Hiryuin",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 17
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107515",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:116.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/d/d1/116.png/revision/latest?cb=20160626215209",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/d/d1/116.png/revision/latest/scale-to-width-down/360?cb=20160626215209",
+      "width": 1279,
+      "height": 719,
+      "characterNames": [
+        "Eight Unabara",
+        "Maru",
+        "Shinobu Hiryuin",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 18
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107516",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:117.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/7/79/117.png/revision/latest?cb=20160626215233",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/7/79/117.png/revision/latest/scale-to-width-down/360?cb=20160626215233",
+      "width": 1279,
+      "height": 719,
+      "characterNames": [
+        "Eight Unabara",
+        "Maru",
+        "Shinobu Hiryuin",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 19
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107517",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:118.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/f/fe/118.png/revision/latest?cb=20160626215254",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/f/fe/118.png/revision/latest/scale-to-width-down/360?cb=20160626215254",
+      "width": 1279,
+      "height": 719,
+      "characterNames": [
+        "Eight Unabara",
+        "Maru",
+        "Shinobu Hiryuin",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 20
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107518",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:119.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/5/56/119.png/revision/latest?cb=20160626215410",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/5/56/119.png/revision/latest/scale-to-width-down/360?cb=20160626215410",
+      "width": 1279,
+      "height": 719,
+      "characterNames": [
+        "Eight Unabara",
+        "Maru",
+        "Shinobu Hiryuin",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 21
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107519",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:120.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/7/7b/120.png/revision/latest?cb=20160626215451",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/7/7b/120.png/revision/latest/scale-to-width-down/360?cb=20160626215451",
+      "width": 1279,
+      "height": 719,
+      "characterNames": [
+        "Eight Unabara",
+        "Maru",
+        "Shinobu Hiryuin",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 22
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107520",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:122.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/b/be/122.png/revision/latest?cb=20160626215542",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/b/be/122.png/revision/latest/scale-to-width-down/360?cb=20160626215542",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Eight Unabara",
+        "Maru",
+        "Shinobu Hiryuin",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 23
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107539",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:123.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/8/81/123.png/revision/latest?cb=20160628190128",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/8/81/123.png/revision/latest/scale-to-width-down/360?cb=20160628190128",
+      "width": 1279,
+      "height": 719,
+      "characterNames": [
+        "Eight Unabara",
+        "Maru",
+        "Shinobu Hiryuin",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 24
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107540",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:124.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/a/a8/124.png/revision/latest?cb=20160628190158",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/a/a8/124.png/revision/latest/scale-to-width-down/360?cb=20160628190158",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Eight Unabara",
+        "Maru",
+        "Shinobu Hiryuin",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 25
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107541",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:125.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/2/28/125.png/revision/latest?cb=20160628190226",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/2/28/125.png/revision/latest/scale-to-width-down/360?cb=20160628190226",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Eight Unabara",
+        "Maru",
+        "Shinobu Hiryuin",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 26
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107542",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:126.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/a/af/126.png/revision/latest?cb=20160628190307",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/a/af/126.png/revision/latest/scale-to-width-down/360?cb=20160628190307",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Eight Unabara",
+        "Maru",
+        "Shinobu Hiryuin",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 27
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107543",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:127.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/b/be/127.png/revision/latest?cb=20160628190342",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/b/be/127.png/revision/latest/scale-to-width-down/360?cb=20160628190342",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Eight Unabara",
+        "Maru",
+        "Shinobu Hiryuin",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 28
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107544",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:128.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/3/32/128.png/revision/latest?cb=20160628190453",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/3/32/128.png/revision/latest/scale-to-width-down/360?cb=20160628190453",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Eight Unabara",
+        "Maru",
+        "Shinobu Hiryuin",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 29
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107545",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:129.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/e/ea/129.png/revision/latest?cb=20160628190530",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/e/ea/129.png/revision/latest/scale-to-width-down/360?cb=20160628190530",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Eight Unabara",
+        "Maru",
+        "Shinobu Hiryuin",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 30
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107546",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:130.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/c/ca/130.png/revision/latest?cb=20160628190552",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/c/ca/130.png/revision/latest/scale-to-width-down/360?cb=20160628190552",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Eight Unabara",
+        "Maru",
+        "Shinobu Hiryuin",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 31
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107547",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:131.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/8/83/131.png/revision/latest?cb=20160628190622",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/8/83/131.png/revision/latest/scale-to-width-down/360?cb=20160628190622",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Eight Unabara",
+        "Maru",
+        "Shinobu Hiryuin",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 32
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107548",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:132.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/6/60/132.png/revision/latest?cb=20160628190659",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/6/60/132.png/revision/latest/scale-to-width-down/360?cb=20160628190659",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Eight Unabara",
+        "Maru",
+        "Shinobu Hiryuin",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 33
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107549",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:133.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/6/6c/133.png/revision/latest?cb=20160628190748",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/6/6c/133.png/revision/latest/scale-to-width-down/360?cb=20160628190748",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Eight Unabara",
+        "Maru",
+        "Shinobu Hiryuin",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 34
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107550",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:134.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/3/3e/134.png/revision/latest?cb=20160628190907",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/3/3e/134.png/revision/latest/scale-to-width-down/360?cb=20160628190907",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Eight Unabara",
+        "Maru",
+        "Shinobu Hiryuin",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 35
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107551",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:135.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/7/78/135.png/revision/latest?cb=20160628190936",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/7/78/135.png/revision/latest/scale-to-width-down/360?cb=20160628190936",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Eight Unabara",
+        "Maru",
+        "Shinobu Hiryuin",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 36
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107552",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:136.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/d/de/136.png/revision/latest?cb=20160628191356",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/d/de/136.png/revision/latest/scale-to-width-down/360?cb=20160628191356",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Eight Unabara",
+        "Maru",
+        "Shinobu Hiryuin",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 37
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107553",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:137.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/9/9d/137.png/revision/latest?cb=20160628191417",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/9/9d/137.png/revision/latest/scale-to-width-down/360?cb=20160628191417",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Eight Unabara",
+        "Maru",
+        "Shinobu Hiryuin",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 38
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107554",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:138.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/4/4a/138.png/revision/latest?cb=20160628191441",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/4/4a/138.png/revision/latest/scale-to-width-down/360?cb=20160628191441",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Eight Unabara",
+        "Maru",
+        "Shinobu Hiryuin",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 39
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107555",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:139.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/d/d1/139.png/revision/latest?cb=20160628191506",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/d/d1/139.png/revision/latest/scale-to-width-down/360?cb=20160628191506",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Eight Unabara",
+        "Maru",
+        "Shinobu Hiryuin",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 40
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107556",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:140.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/0/09/140.png/revision/latest?cb=20160628191644",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/0/09/140.png/revision/latest/scale-to-width-down/360?cb=20160628191644",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Eight Unabara",
+        "Maru",
+        "Shinobu Hiryuin",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 41
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107557",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:141.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/6/67/141.png/revision/latest?cb=20160628191657",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/6/67/141.png/revision/latest/scale-to-width-down/360?cb=20160628191657",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Eight Unabara",
+        "Maru",
+        "Shinobu Hiryuin",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 42
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107558",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:142.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/d/d3/142.png/revision/latest?cb=20160628191712",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/d/d3/142.png/revision/latest/scale-to-width-down/360?cb=20160628191712",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Eight Unabara",
+        "Maru",
+        "Shinobu Hiryuin",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 43
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107559",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:143.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/7/7d/143.png/revision/latest?cb=20160628191736",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/7/7d/143.png/revision/latest/scale-to-width-down/360?cb=20160628191736",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Eight Unabara",
+        "Maru",
+        "Shinobu Hiryuin",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 44
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107560",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:144.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/9/9a/144.png/revision/latest?cb=20160628191758",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/9/9a/144.png/revision/latest/scale-to-width-down/360?cb=20160628191758",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Eight Unabara",
+        "Maru",
+        "Shinobu Hiryuin",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 45
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107561",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:145.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/c/c7/145.png/revision/latest?cb=20160628191819",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/c/c7/145.png/revision/latest/scale-to-width-down/360?cb=20160628191819",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Eight Unabara",
+        "Maru",
+        "Shinobu Hiryuin",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 46
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107562",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:146.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/d/db/146.png/revision/latest?cb=20160628191945",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/d/db/146.png/revision/latest/scale-to-width-down/360?cb=20160628191945",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Eight Unabara",
+        "Maru",
+        "Shinobu Hiryuin",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 47
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107563",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:147.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/a/a3/147.png/revision/latest?cb=20160628192005",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/a/a3/147.png/revision/latest/scale-to-width-down/360?cb=20160628192005",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Eight Unabara",
+        "Maru",
+        "Shinobu Hiryuin",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 48
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107564",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:148.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/5/51/148.png/revision/latest?cb=20160628192022",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/5/51/148.png/revision/latest/scale-to-width-down/360?cb=20160628192022",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Eight Unabara",
+        "Maru",
+        "Shinobu Hiryuin",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 49
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107841",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:A1.png",
+      "episodeNumber": 2,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/a/a8/A1.png/revision/latest?cb=20160723175708",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/a/a8/A1.png/revision/latest/scale-to-width-down/360?cb=20160723175708",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Doji",
+        "Eight Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 50
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107842",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:A%20(1).png",
+      "episodeNumber": 2,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/5/5a/A_%281%29.png/revision/latest?cb=20160723175910",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/5/5a/A_%281%29.png/revision/latest/scale-to-width-down/360?cb=20160723175910",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Doji",
+        "Eight Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 51
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107843",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:A%20(2).png",
+      "episodeNumber": 2,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/3/35/A_%282%29.png/revision/latest?cb=20160723180022",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/3/35/A_%282%29.png/revision/latest/scale-to-width-down/360?cb=20160723180022",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Doji",
+        "Eight Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 52
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107844",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:A%20(3).png",
+      "episodeNumber": 2,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/6/66/A_%283%29.png/revision/latest?cb=20160723180106",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/6/66/A_%283%29.png/revision/latest/scale-to-width-down/360?cb=20160723180106",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Doji",
+        "Eight Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 53
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107851",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:A%20(10).png",
+      "episodeNumber": 2,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/4/41/A_%2810%29.png/revision/latest?cb=20160723180753",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/4/41/A_%2810%29.png/revision/latest/scale-to-width-down/360?cb=20160723180753",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Doji",
+        "Eight Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 54
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107852",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:A%20(11).png",
+      "episodeNumber": 2,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/7/7d/A_%2811%29.png/revision/latest?cb=20160723180849",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/7/7d/A_%2811%29.png/revision/latest/scale-to-width-down/360?cb=20160723180849",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Doji",
+        "Eight Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 55
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107853",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:A%20(12).png",
+      "episodeNumber": 2,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/4/42/A_%2812%29.png/revision/latest?cb=20160723180955",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/4/42/A_%2812%29.png/revision/latest/scale-to-width-down/360?cb=20160723180955",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Doji",
+        "Eight Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 56
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107854",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:A%20(13).png",
+      "episodeNumber": 2,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/8/82/A_%2813%29.png/revision/latest?cb=20160723181108",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/8/82/A_%2813%29.png/revision/latest/scale-to-width-down/360?cb=20160723181108",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Doji",
+        "Eight Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 57
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107855",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:A%20(14).png",
+      "episodeNumber": 2,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/f/f9/A_%2814%29.png/revision/latest?cb=20160723181155",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/f/f9/A_%2814%29.png/revision/latest/scale-to-width-down/360?cb=20160723181155",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Doji",
+        "Eight Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 58
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107856",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:A%20(15).png",
+      "episodeNumber": 2,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/e/ea/A_%2815%29.png/revision/latest?cb=20160723181244",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/e/ea/A_%2815%29.png/revision/latest/scale-to-width-down/360?cb=20160723181244",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Doji",
+        "Eight Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 59
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107857",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:A%20(16).png",
+      "episodeNumber": 2,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/7/77/A_%2816%29.png/revision/latest?cb=20160723181342",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/7/77/A_%2816%29.png/revision/latest/scale-to-width-down/360?cb=20160723181342",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Doji",
+        "Eight Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 60
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107858",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:A%20(17).png",
+      "episodeNumber": 2,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/a/a2/A_%2817%29.png/revision/latest?cb=20160723181433",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/a/a2/A_%2817%29.png/revision/latest/scale-to-width-down/360?cb=20160723181433",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Doji",
+        "Eight Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 61
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107859",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:A%20(18).png",
+      "episodeNumber": 2,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/f/f3/A_%2818%29.png/revision/latest?cb=20160723181607",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/f/f3/A_%2818%29.png/revision/latest/scale-to-width-down/360?cb=20160723181607",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Doji",
+        "Eight Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 62
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107860",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:A%20(19).png",
+      "episodeNumber": 2,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/3/3c/A_%2819%29.png/revision/latest?cb=20160723182112",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/3/3c/A_%2819%29.png/revision/latest/scale-to-width-down/360?cb=20160723182112",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Doji",
+        "Eight Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 63
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107861",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:A%20(20).png",
+      "episodeNumber": 2,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/0/07/A_%2820%29.png/revision/latest?cb=20160723182209",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/0/07/A_%2820%29.png/revision/latest/scale-to-width-down/360?cb=20160723182209",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Doji",
+        "Eight Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 64
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107862",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:A%20(21).png",
+      "episodeNumber": 2,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/8/81/A_%2821%29.png/revision/latest?cb=20160723182312",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/8/81/A_%2821%29.png/revision/latest/scale-to-width-down/360?cb=20160723182312",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Doji",
+        "Eight Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 65
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107863",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:A%20(22).png",
+      "episodeNumber": 2,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/6/65/A_%2822%29.png/revision/latest?cb=20160723182419",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/6/65/A_%2822%29.png/revision/latest/scale-to-width-down/360?cb=20160723182419",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Doji",
+        "Eight Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 66
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107864",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:A%20(23).png",
+      "episodeNumber": 2,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/d/dc/A_%2823%29.png/revision/latest?cb=20160723182639",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/d/dc/A_%2823%29.png/revision/latest/scale-to-width-down/360?cb=20160723182639",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Doji",
+        "Eight Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 67
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107865",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:A%20(24).png",
+      "episodeNumber": 2,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/5/51/A_%2824%29.png/revision/latest?cb=20160723182930",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/5/51/A_%2824%29.png/revision/latest/scale-to-width-down/360?cb=20160723182930",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Doji",
+        "Eight Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 68
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107866",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:A%20(25).png",
+      "episodeNumber": 2,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/0/02/A_%2825%29.png/revision/latest?cb=20160723183037",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/0/02/A_%2825%29.png/revision/latest/scale-to-width-down/360?cb=20160723183037",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Doji",
+        "Eight Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 69
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107867",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:A%20(26).png",
+      "episodeNumber": 2,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/e/e7/A_%2826%29.png/revision/latest?cb=20160723183301",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/e/e7/A_%2826%29.png/revision/latest/scale-to-width-down/360?cb=20160723183301",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Doji",
+        "Eight Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 70
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107868",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:A%20(27).png",
+      "episodeNumber": 2,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/e/e8/A_%2827%29.png/revision/latest?cb=20160723183400",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/e/e8/A_%2827%29.png/revision/latest/scale-to-width-down/360?cb=20160723183400",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Doji",
+        "Eight Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 71
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107869",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:A%20(28).png",
+      "episodeNumber": 2,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/0/0d/A_%2828%29.png/revision/latest?cb=20160723183503",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/0/0d/A_%2828%29.png/revision/latest/scale-to-width-down/360?cb=20160723183503",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Doji",
+        "Eight Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 72
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107870",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:A%20(29).png",
+      "episodeNumber": 2,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/0/0b/A_%2829%29.png/revision/latest?cb=20160723183559",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/0/0b/A_%2829%29.png/revision/latest/scale-to-width-down/360?cb=20160723183559",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Doji",
+        "Eight Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 73
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107871",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:A%20(30).png",
+      "episodeNumber": 2,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/a/ad/A_%2830%29.png/revision/latest?cb=20160723183708",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/a/ad/A_%2830%29.png/revision/latest/scale-to-width-down/360?cb=20160723183708",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Doji",
+        "Eight Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 74
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107872",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:A%20(31).png",
+      "episodeNumber": 2,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/3/37/A_%2831%29.png/revision/latest?cb=20160723183729",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/3/37/A_%2831%29.png/revision/latest/scale-to-width-down/360?cb=20160723183729",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Doji",
+        "Eight Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 75
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107873",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:A%20(32).png",
+      "episodeNumber": 2,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/2/24/A_%2832%29.png/revision/latest?cb=20160723183756",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/2/24/A_%2832%29.png/revision/latest/scale-to-width-down/360?cb=20160723183756",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Doji",
+        "Eight Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 76
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107874",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:A%20(33).png",
+      "episodeNumber": 2,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/1/1e/A_%2833%29.png/revision/latest?cb=20160723184036",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/1/1e/A_%2833%29.png/revision/latest/scale-to-width-down/360?cb=20160723184036",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Doji",
+        "Eight Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 77
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107875",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:A%20(34).png",
+      "episodeNumber": 2,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/5/5a/A_%2834%29.png/revision/latest?cb=20160723184141",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/5/5a/A_%2834%29.png/revision/latest/scale-to-width-down/360?cb=20160723184141",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Doji",
+        "Eight Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 78
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107876",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:A%20(35).png",
+      "episodeNumber": 2,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/f/fc/A_%2835%29.png/revision/latest?cb=20160723184246",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/f/fc/A_%2835%29.png/revision/latest/scale-to-width-down/360?cb=20160723184246",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Doji",
+        "Eight Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 79
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107877",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:A%20(36).png",
+      "episodeNumber": 2,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/8/87/A_%2836%29.png/revision/latest?cb=20160723184402",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/8/87/A_%2836%29.png/revision/latest/scale-to-width-down/360?cb=20160723184402",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Doji",
+        "Eight Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 80
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107878",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:A%20(37).png",
+      "episodeNumber": 2,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/e/ed/A_%2837%29.png/revision/latest?cb=20160723184515",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/e/ed/A_%2837%29.png/revision/latest/scale-to-width-down/360?cb=20160723184515",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Doji",
+        "Eight Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 81
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107951",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:A%20(100).png",
+      "episodeNumber": 2,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/7/79/A_%28100%29.png/revision/latest?cb=20160727132658",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/7/79/A_%28100%29.png/revision/latest/scale-to-width-down/360?cb=20160727132658",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Doji",
+        "Eight Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 82
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107952",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:A%20(101).png",
+      "episodeNumber": 2,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/a/aa/A_%28101%29.png/revision/latest?cb=20160727132755",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/a/aa/A_%28101%29.png/revision/latest/scale-to-width-down/360?cb=20160727132755",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Doji",
+        "Eight Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 83
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107953",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:A%20(102).png",
+      "episodeNumber": 2,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/f/fe/A_%28102%29.png/revision/latest?cb=20160727134707",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/f/fe/A_%28102%29.png/revision/latest/scale-to-width-down/360?cb=20160727134707",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Doji",
+        "Eight Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 84
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107954",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:A%20(103).png",
+      "episodeNumber": 2,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/1/1e/A_%28103%29.png/revision/latest?cb=20160727135441",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/1/1e/A_%28103%29.png/revision/latest/scale-to-width-down/360?cb=20160727135441",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Doji",
+        "Eight Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 85
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107955",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:A%20(104).png",
+      "episodeNumber": 2,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/4/40/A_%28104%29.png/revision/latest?cb=20160727135545",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/4/40/A_%28104%29.png/revision/latest/scale-to-width-down/360?cb=20160727135545",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Doji",
+        "Eight Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 86
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107956",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:A%20(105).png",
+      "episodeNumber": 2,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/3/3a/A_%28105%29.png/revision/latest?cb=20160727135714",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/3/3a/A_%28105%29.png/revision/latest/scale-to-width-down/360?cb=20160727135714",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Doji",
+        "Eight Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 87
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107957",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:A%20(106).png",
+      "episodeNumber": 2,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/4/4e/A_%28106%29.png/revision/latest?cb=20160727135833",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/4/4e/A_%28106%29.png/revision/latest/scale-to-width-down/360?cb=20160727135833",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Doji",
+        "Eight Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 88
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107958",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:A%20(107).png",
+      "episodeNumber": 2,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/4/44/A_%28107%29.png/revision/latest?cb=20160727135951",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/4/44/A_%28107%29.png/revision/latest/scale-to-width-down/360?cb=20160727135951",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Doji",
+        "Eight Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 89
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107959",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:A%20(108).png",
+      "episodeNumber": 2,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/8/8a/A_%28108%29.png/revision/latest?cb=20160727140138",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/8/8a/A_%28108%29.png/revision/latest/scale-to-width-down/360?cb=20160727140138",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Doji",
+        "Eight Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 90
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107960",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:A%20(109).png",
+      "episodeNumber": 2,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/e/e6/A_%28109%29.png/revision/latest?cb=20160727140247",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/e/e6/A_%28109%29.png/revision/latest/scale-to-width-down/360?cb=20160727140247",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Doji",
+        "Eight Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 91
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107961",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:A%20(110).png",
+      "episodeNumber": 2,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/7/70/A_%28110%29.png/revision/latest?cb=20160727141319",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/7/70/A_%28110%29.png/revision/latest/scale-to-width-down/360?cb=20160727141319",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Doji",
+        "Eight Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 92
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107962",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:A%20(111).png",
+      "episodeNumber": 2,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/7/76/A_%28111%29.png/revision/latest?cb=20160727141818",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/7/76/A_%28111%29.png/revision/latest/scale-to-width-down/360?cb=20160727141818",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Doji",
+        "Eight Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 93
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107963",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:A%20(112).png",
+      "episodeNumber": 2,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/a/a5/A_%28112%29.png/revision/latest?cb=20160727141934",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/a/a5/A_%28112%29.png/revision/latest/scale-to-width-down/360?cb=20160727141934",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Doji",
+        "Eight Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 94
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107964",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:A%20(113).png",
+      "episodeNumber": 2,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/f/f3/A_%28113%29.png/revision/latest?cb=20160727142117",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/f/f3/A_%28113%29.png/revision/latest/scale-to-width-down/360?cb=20160727142117",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Doji",
+        "Eight Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 95
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107965",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:A%20(114).png",
+      "episodeNumber": 2,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/f/f7/A_%28114%29.png/revision/latest?cb=20160727142251",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/f/f7/A_%28114%29.png/revision/latest/scale-to-width-down/360?cb=20160727142251",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Doji",
+        "Eight Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 96
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107966",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:A%20(115).png",
+      "episodeNumber": 2,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/d/d7/A_%28115%29.png/revision/latest?cb=20160727142411",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/d/d7/A_%28115%29.png/revision/latest/scale-to-width-down/360?cb=20160727142411",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Doji",
+        "Eight Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 97
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:107967",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:A%20(116).png",
+      "episodeNumber": 2,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/d/d6/A_%28116%29.png/revision/latest?cb=20160727142641",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/d/d6/A_%28116%29.png/revision/latest/scale-to-width-down/360?cb=20160727142641",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Doji",
+        "Eight Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 98
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:58616",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:KiteBreakdown%20ZG008.png",
+      "episodeNumber": 4,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/c/c0/KiteBreakdown_ZG008.png/revision/latest?cb=20120528181938",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/c/c0/KiteBreakdown_ZG008.png/revision/latest/scale-to-width-down/360?cb=20120528181938",
+      "width": 1440,
+      "height": 900,
+      "characterNames": [
+        "Kite Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 99
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:58618",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:IfraidSP%20DefeatofReviser.png",
+      "episodeNumber": 4,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/6/6d/IfraidSP_DefeatofReviser.png/revision/latest?cb=20120528182247",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/6/6d/IfraidSP_DefeatofReviser.png/revision/latest/scale-to-width-down/360?cb=20120528182247",
+      "width": 1440,
+      "height": 900,
+      "characterNames": [
+        "Kite Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 100
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:58619",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:EightSad%2001.png",
+      "episodeNumber": 4,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/d/d4/EightSad_01.png/revision/latest?cb=20120528182425",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/d/d4/EightSad_01.png/revision/latest/scale-to-width-down/360?cb=20120528182425",
+      "width": 1440,
+      "height": 900,
+      "characterNames": [
+        "Kite Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 101
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:58620",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Miraculous%20SynochromeProcess.png",
+      "episodeNumber": 4,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/3/3c/Miraculous_SynochromeProcess.png/revision/latest?cb=20120528182608",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/3/3c/Miraculous_SynochromeProcess.png/revision/latest/scale-to-width-down/360?cb=20120528182608",
+      "width": 1440,
+      "height": 900,
+      "characterNames": [
+        "Kite Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 102
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:58622",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:OrojyaReviser.png",
+      "episodeNumber": 4,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/2/2c/OrojyaReviser.png/revision/latest?cb=20120528182752",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/2/2c/OrojyaReviser.png/revision/latest/scale-to-width-down/360?cb=20120528182752",
+      "width": 1440,
+      "height": 900,
+      "characterNames": [
+        "Kite Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 103
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:58623",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:MalScan%20OrojyaReviser.png",
+      "episodeNumber": 4,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/c/c6/MalScan_OrojyaReviser.png/revision/latest?cb=20120528182905",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/c/c6/MalScan_OrojyaReviser.png/revision/latest/scale-to-width-down/360?cb=20120528182905",
+      "width": 1440,
+      "height": 900,
+      "characterNames": [
+        "Kite Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 104
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:58624",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:OrojyaReviser%20Beast.png",
+      "episodeNumber": 4,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/2/29/OrojyaReviser_Beast.png/revision/latest?cb=20120528183110",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/2/29/OrojyaReviser_Beast.png/revision/latest/scale-to-width-down/360?cb=20120528183110",
+      "width": 1440,
+      "height": 900,
+      "characterNames": [
+        "Kite Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 105
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:58625",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:IReviser%20ZeroDefeat.png",
+      "episodeNumber": 4,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/a/a1/IReviser_ZeroDefeat.png/revision/latest?cb=20120528183324",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/a/a1/IReviser_ZeroDefeat.png/revision/latest/scale-to-width-down/360?cb=20120528183324",
+      "width": 1440,
+      "height": 900,
+      "characterNames": [
+        "Kite Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 106
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:59352",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:TheCrimsonChallenge.PNG",
+      "episodeNumber": 5,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/4/45/TheCrimsonChallenge.PNG/revision/latest?cb=20120603122125",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/4/45/TheCrimsonChallenge.PNG/revision/latest/scale-to-width-down/360?cb=20120603122125",
+      "width": 834,
+      "height": 467,
+      "characterNames": [
+        "Kite Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 107
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:59541",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Ren1.PNG",
+      "episodeNumber": 5,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/f/fa/Ren1.PNG/revision/latest?cb=20250420200620",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/f/fa/Ren1.PNG/revision/latest/scale-to-width-down/360?cb=20250420200620",
+      "width": 1921,
+      "height": 1080,
+      "characterNames": [
+        "Kite Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 108
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:59543",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Ren3.PNG",
+      "episodeNumber": 5,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/4/4e/Ren3.PNG/revision/latest?cb=20210502062406",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/4/4e/Ren3.PNG/revision/latest/scale-to-width-down/360?cb=20210502062406",
+      "width": 1915,
+      "height": 1079,
+      "characterNames": [
+        "Kite Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 109
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:165976",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:SalamanderIfritDebut.png",
+      "episodeNumber": 5,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/6/67/SalamanderIfritDebut.png/revision/latest?cb=20210315022357",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/6/67/SalamanderIfritDebut.png/revision/latest/scale-to-width-down/360?cb=20210315022357",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Kite Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 110
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:165977",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:SalamanderIfritDebut2.png",
+      "episodeNumber": 5,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/8/8d/SalamanderIfritDebut2.png/revision/latest?cb=20210315022406",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/8/8d/SalamanderIfritDebut2.png/revision/latest/scale-to-width-down/360?cb=20210315022406",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Kite Unabara",
+        "Zyro Kurogane"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 111
+    }
+  ]
+}

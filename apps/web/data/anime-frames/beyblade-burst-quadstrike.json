@@ -1,0 +1,390 @@
+{
+  "seriesSlug": "beyblade-burst-quadstrike",
+  "generation": "BURST",
+  "fancaps": {
+    "seriesUrl": "https://beyblade.fandom.com/wiki/Beyblade Burst QuadStrike episodes",
+    "label": "Beyblade Burst QuadStrike"
+  },
+  "scrapedAt": "2026-05-29T19:58:07.589Z",
+  "episodes": [
+    {
+      "number": 1,
+      "title": "Beyblade Burst QuadStrike - Episode 01"
+    },
+    {
+      "number": 2,
+      "title": "Beyblade Burst QuadStrike - Episode 02"
+    },
+    {
+      "number": 3,
+      "title": "Beyblade Burst QuadStrike - Episode 03"
+    },
+    {
+      "number": 4,
+      "title": "Beyblade Burst QuadStrike - Episode 04"
+    },
+    {
+      "number": 5,
+      "title": "Beyblade Burst QuadStrike - Episode 05"
+    },
+    {
+      "number": 6,
+      "title": "Beyblade Burst QuadStrike - Episode 06"
+    },
+    {
+      "number": 7,
+      "title": "Beyblade Burst QuadStrike - Episode 07"
+    },
+    {
+      "number": 8,
+      "title": "Beyblade Burst QuadStrike - Episode 08"
+    },
+    {
+      "number": 9,
+      "title": "Beyblade Burst QuadStrike - Episode 09"
+    },
+    {
+      "number": 10,
+      "title": "Beyblade Burst QuadStrike - Episode 10"
+    },
+    {
+      "number": 11,
+      "title": "Beyblade Burst QuadStrike - Episode 11"
+    },
+    {
+      "number": 12,
+      "title": "Beyblade Burst QuadStrike - Episode 12"
+    },
+    {
+      "number": 13,
+      "title": "Beyblade Burst QuadStrike - Episode 13"
+    },
+    {
+      "number": 14,
+      "title": "Beyblade Burst QuadStrike - Episode 14"
+    },
+    {
+      "number": 15,
+      "title": "Beyblade Burst QuadStrike - Episode 15"
+    },
+    {
+      "number": 16,
+      "title": "Beyblade Burst QuadStrike - Episode 16"
+    },
+    {
+      "number": 17,
+      "title": "Beyblade Burst QuadStrike - Episode 17"
+    },
+    {
+      "number": 18,
+      "title": "Beyblade Burst QuadStrike - Episode 18"
+    },
+    {
+      "number": 19,
+      "title": "Beyblade Burst QuadStrike - Episode 19"
+    },
+    {
+      "number": 20,
+      "title": "Beyblade Burst QuadStrike - Episode 20"
+    },
+    {
+      "number": 21,
+      "title": "Beyblade Burst QuadStrike - Episode 21"
+    },
+    {
+      "number": 22,
+      "title": "Beyblade Burst QuadStrike - Episode 22"
+    },
+    {
+      "number": 23,
+      "title": "Beyblade Burst QuadStrike - Episode 23"
+    },
+    {
+      "number": 24,
+      "title": "Beyblade Burst QuadStrike - Episode 24"
+    },
+    {
+      "number": 25,
+      "title": "Beyblade Burst QuadStrike - Episode 25"
+    },
+    {
+      "number": 26,
+      "title": "Beyblade Burst QuadStrike - Episode 26"
+    }
+  ],
+  "frames": [
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:193771",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Burst%20QuadStrike%205-1.jpg",
+      "episodeNumber": 5,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/e/e4/Burst_QuadStrike_5-1.jpg/revision/latest?cb=20250323090316",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/e/e4/Burst_QuadStrike_5-1.jpg/revision/latest/scale-to-width-down/360?cb=20250323090316",
+      "width": 1179,
+      "height": 658,
+      "characterNames": [
+        "Bel Daizora",
+        "Dante Koryu",
+        "Pri Forsythe",
+        "Ranzo Kiyama"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 0
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:193772",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Burst%20Quadstrike%2016-1.jpg",
+      "episodeNumber": 16,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/d/dc/Burst_Quadstrike_16-1.jpg/revision/latest?cb=20250323090435",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/d/dc/Burst_Quadstrike_16-1.jpg/revision/latest/scale-to-width-down/360?cb=20250323090435",
+      "width": 1179,
+      "height": 662,
+      "characterNames": [
+        "Aiger Akabane",
+        "Bel Daizora",
+        "Kit Lopez",
+        "Pri Forsythe",
+        "Ranzo Kiyama",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 1
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:193773",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Burst%20Quadstrike%2024-1.jpg",
+      "episodeNumber": 24,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/7/78/Burst_Quadstrike_24-1.jpg/revision/latest?cb=20250323090755",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/7/78/Burst_Quadstrike_24-1.jpg/revision/latest/scale-to-width-down/360?cb=20250323090755",
+      "width": 1179,
+      "height": 660,
+      "characterNames": [
+        "Aiger Akabane",
+        "Pax Forsythe",
+        "Pri Forsythe",
+        "Ranzo Kiyama",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 2
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:190801",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20QuandStrike%20Episode%2026B%20-%20Gwynn.png",
+      "episodeNumber": 26,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/3/36/Beyblade_Burst_QuandStrike_Episode_26B_-_Gwynn.png/revision/latest?cb=20241027093247",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/3/36/Beyblade_Burst_QuandStrike_Episode_26B_-_Gwynn.png/revision/latest/scale-to-width-down/360?cb=20241027093247",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Bel Daizora",
+        "Pax Forsythe",
+        "Pri Forsythe",
+        "Ranzo Kiyama",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 3
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:190802",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20QuandStrike%20Episode%2026B%20-%20Bombers.png",
+      "episodeNumber": 26,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/a/af/Beyblade_Burst_QuandStrike_Episode_26B_-_Bombers.png/revision/latest?cb=20241027093248",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/a/af/Beyblade_Burst_QuandStrike_Episode_26B_-_Bombers.png/revision/latest/scale-to-width-down/360?cb=20241027093248",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Bel Daizora",
+        "Pax Forsythe",
+        "Pri Forsythe",
+        "Ranzo Kiyama",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 4
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:190803",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20QuandStrike%20Episode%2026B%20-%20Lane.png",
+      "episodeNumber": 26,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/e/ef/Beyblade_Burst_QuandStrike_Episode_26B_-_Lane.png/revision/latest?cb=20241027093248",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/e/ef/Beyblade_Burst_QuandStrike_Episode_26B_-_Lane.png/revision/latest/scale-to-width-down/360?cb=20241027093248",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Bel Daizora",
+        "Pax Forsythe",
+        "Pri Forsythe",
+        "Ranzo Kiyama",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 5
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:190804",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20QuandStrike%20Episode%2026B%20-%20Lui.png",
+      "episodeNumber": 26,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/d/d4/Beyblade_Burst_QuandStrike_Episode_26B_-_Lui.png/revision/latest?cb=20241027093248",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/d/d4/Beyblade_Burst_QuandStrike_Episode_26B_-_Lui.png/revision/latest/scale-to-width-down/360?cb=20241027093248",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Bel Daizora",
+        "Pax Forsythe",
+        "Pri Forsythe",
+        "Ranzo Kiyama",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 6
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:190805",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20QuandStrike%20Episode%2026B%20-%20Free.png",
+      "episodeNumber": 26,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/9/99/Beyblade_Burst_QuandStrike_Episode_26B_-_Free.png/revision/latest?cb=20241027093248",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/9/99/Beyblade_Burst_QuandStrike_Episode_26B_-_Free.png/revision/latest/scale-to-width-down/360?cb=20241027093248",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Bel Daizora",
+        "Pax Forsythe",
+        "Pri Forsythe",
+        "Ranzo Kiyama",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 7
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:190807",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20QuandStrike%20Episode%2026B%20-%20Xander%2C%20Hodji%2C%20Ken%2C%20Daigo%20and%20Ryota.png",
+      "episodeNumber": 26,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/0/0f/Beyblade_Burst_QuandStrike_Episode_26B_-_Xander%2C_Hodji%2C_Ken%2C_Daigo_and_Ryota.png/revision/latest?cb=20241027093249",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/0/0f/Beyblade_Burst_QuandStrike_Episode_26B_-_Xander%2C_Hodji%2C_Ken%2C_Daigo_and_Ryota.png/revision/latest/scale-to-width-down/360?cb=20241027093249",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Bel Daizora",
+        "Pax Forsythe",
+        "Pri Forsythe",
+        "Ranzo Kiyama",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 8
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:190808",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20QuandStrike%20Episode%2026B%20-%20Rantaro%2C%20Wakiya%2C%20Shu.png",
+      "episodeNumber": 26,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/8/85/Beyblade_Burst_QuandStrike_Episode_26B_-_Rantaro%2C_Wakiya%2C_Shu.png/revision/latest?cb=20241027093249",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/8/85/Beyblade_Burst_QuandStrike_Episode_26B_-_Rantaro%2C_Wakiya%2C_Shu.png/revision/latest/scale-to-width-down/360?cb=20241027093249",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Bel Daizora",
+        "Pax Forsythe",
+        "Pri Forsythe",
+        "Ranzo Kiyama",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 9
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:190809",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20QuandStrike%20Episode%2026B%20-%20Quon%2C%20Zac%2C%20Akira%2C%20Gabe.png",
+      "episodeNumber": 26,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/e/ed/Beyblade_Burst_QuandStrike_Episode_26B_-_Quon%2C_Zac%2C_Akira%2C_Gabe.png/revision/latest?cb=20241027093249",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/e/ed/Beyblade_Burst_QuandStrike_Episode_26B_-_Quon%2C_Zac%2C_Akira%2C_Gabe.png/revision/latest/scale-to-width-down/360?cb=20241027093249",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Bel Daizora",
+        "Pax Forsythe",
+        "Pri Forsythe",
+        "Ranzo Kiyama",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 10
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:190810",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20QuandStrike%20Episode%2026B%20-%20Phi%20and%20Hyde.png",
+      "episodeNumber": 26,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/a/a6/Beyblade_Burst_QuandStrike_Episode_26B_-_Phi_and_Hyde.png/revision/latest?cb=20241027093249",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/a/a6/Beyblade_Burst_QuandStrike_Episode_26B_-_Phi_and_Hyde.png/revision/latest/scale-to-width-down/360?cb=20241027093249",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Bel Daizora",
+        "Pax Forsythe",
+        "Pri Forsythe",
+        "Ranzo Kiyama",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 11
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:190811",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Beyblade%20Burst%20QuandStrike%20Episode%2026B%20-%20Victories.png",
+      "episodeNumber": 26,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/b/b8/Beyblade_Burst_QuandStrike_Episode_26B_-_Victories.png/revision/latest?cb=20241027093249",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/b/b8/Beyblade_Burst_QuandStrike_Episode_26B_-_Victories.png/revision/latest/scale-to-width-down/360?cb=20241027093249",
+      "width": 1920,
+      "height": 1080,
+      "characterNames": [
+        "Bel Daizora",
+        "Pax Forsythe",
+        "Pri Forsythe",
+        "Ranzo Kiyama",
+        "Valt Aoi"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 12
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 /**
  * extract-season-colors.ts — couleur dynamique par frame d'ambiance.
  *
- * Pour chaque image curée (servie par cdn.rpbey.fr), extrait la couleur DOMINANTE
+ * Pour chaque image curée (servie par Vercel depuis `public/`), extrait la couleur DOMINANTE
  * (`sharp().stats().dominant`), la convertit en OKLCH, et dérive :
  *   - un ACCENT vibrant lisible sur fond sombre  → `oklch(L C H)` ;
  *   - une TEINTE de voile (`r g b` du dominant)   → pour nuancer le scrim sombre.
@@ -13,18 +13,19 @@
  */
 import sharp from "sharp";
 
-const CDN = "https://cdn.rpbey.fr";
-const URLS: readonly string[] = [
-  `${CDN}/fancaps-anime-full/29133604.jpg`,
-  `${CDN}/fancaps-anime-full/29131028.jpg`,
-  `${CDN}/fancaps-anime-full/29132373.jpg`,
-  `${CDN}/static/data/rpb/seasons/metal-champion.png`,
-  `${CDN}/static/data/rpb/seasons/metal-team.png`,
-  `${CDN}/static/data/rpb/seasons/burst-clash.png`,
-  `${CDN}/static/data/rpb/seasons/burst-valt.png`,
-  `${CDN}/static/data/rpb/seasons/burst-aura.png`,
-  `${CDN}/static/data/rpb/seasons/bakuten-team.png`,
-  `${CDN}/static/data/rpb/seasons/bakuten-team2.png`,
+// Chemins publics servis par Vercel (clé du map = chemin référencé par SectionFrameBg).
+// Plus aucune dépendance `cdn.rpbey.fr` : les images sont rapatriées sous `public/`.
+const PUBLIC_PATHS: readonly string[] = [
+  "/fancaps/29133604.jpg",
+  "/fancaps/29131028.jpg",
+  "/fancaps/29132373.jpg",
+  "/seasons/metal-champion.png",
+  "/seasons/metal-team.png",
+  "/seasons/burst-clash.png",
+  "/seasons/burst-valt.png",
+  "/seasons/burst-aura.png",
+  "/seasons/bakuten-team.png",
+  "/seasons/bakuten-team2.png",
 ];
 
 const OUT = new URL("../src/lib/season-colors.generated.ts", import.meta.url).pathname;
@@ -66,8 +67,10 @@ interface SeasonColor {
   tint: string;
 }
 
-async function colorFor(url: string): Promise<SeasonColor> {
-  const buf = Buffer.from(await (await fetch(url)).arrayBuffer());
+const PUBLIC_DIR = new URL("../public", import.meta.url).pathname;
+
+async function colorFor(publicPath: string): Promise<SeasonColor> {
+  const buf = await Bun.file(`${PUBLIC_DIR}${publicPath}`).bytes();
   const { dominant } = await sharp(buf).stats();
   const { r, g, b } = dominant;
   const { C, H } = rgbToOklch(r, g, b);
@@ -80,12 +83,12 @@ async function colorFor(url: string): Promise<SeasonColor> {
 }
 
 const entries: [string, SeasonColor][] = [];
-for (const u of URLS) {
+for (const p of PUBLIC_PATHS) {
   try {
-    entries.push([u, await colorFor(u)]);
-    console.log("ok", u, entries.at(-1)![1].accent);
+    entries.push([p, await colorFor(p)]);
+    console.log("ok", p, entries.at(-1)![1].accent);
   } catch (e) {
-    console.warn("skip", u, (e as Error).message);
+    console.warn("skip", p, (e as Error).message);
   }
 }
 

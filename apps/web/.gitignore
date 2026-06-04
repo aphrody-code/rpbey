@@ -64,6 +64,9 @@ src/generated/
 
 # Data exports / scraping artifacts (often huge)
 data/exports/
+# …sauf le mapping d'alias participants, requis au runtime (rankings + BTS) —
+# le site est self-contained sur Vercel (plus de fetch cdn.rpbey.fr).
+!data/exports/participants_map.json
 data/cache/
 temp/
 temp_extract/
@@ -87,8 +90,12 @@ bey-library-mirror/
 # Spec OpenAPI émis (dérivé du contrat Zod, régénéré par gen:api)
 openapi.json
 
-# Frames d'anime scrapées (régénérables via scrape-anime-frames.ts ; la DB porte la vérité)
-data/anime-frames/
+# Frames d'anime scrapées (régénérables via scrape-anime-frames.ts ; la DB porte la vérité).
+# Les JSON sont désormais TRACKÉS : servis au runtime par la route ambient depuis le FS
+# bundlé (self-contained Vercel, plus de fetch cdn.rpbey.fr). On n'ignore que les
+# checkpoints/artefacts annexes, pas les corpus `*.json` consommés.
+data/anime-frames/*.tmp
+data/anime-frames/.state.json
 
 # Checkpoint résumable du crawler Fandom (état + entités, régénérable)
 data/.fandom-crawl-state.json

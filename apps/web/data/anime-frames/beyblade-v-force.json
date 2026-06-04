@@ -1,0 +1,922 @@
+{
+  "seriesSlug": "beyblade-v-force",
+  "generation": "ORIGINAL",
+  "fancaps": {
+    "seriesUrl": "https://beyblade.fandom.com/wiki/Beyblade: V-Force episodes",
+    "label": "Beyblade V-Force"
+  },
+  "scrapedAt": "2026-05-29T19:59:04.853Z",
+  "episodes": [
+    {
+      "number": 1,
+      "title": "Beyblade VForce - Episode 01"
+    },
+    {
+      "number": 2,
+      "title": "Beyblade VForce - Episode 02"
+    },
+    {
+      "number": 3,
+      "title": "Beyblade VForce - Episode 03"
+    },
+    {
+      "number": 4,
+      "title": "Beyblade VForce - Episode 04"
+    },
+    {
+      "number": 5,
+      "title": "Beyblade VForce - Episode 05"
+    },
+    {
+      "number": 6,
+      "title": "Beyblade VForce - Episode 06"
+    },
+    {
+      "number": 7,
+      "title": "Beyblade VForce - Episode 07"
+    },
+    {
+      "number": 8,
+      "title": "Beyblade VForce - Episode 08"
+    },
+    {
+      "number": 9,
+      "title": "Beyblade VForce - Episode 09"
+    },
+    {
+      "number": 10,
+      "title": "Beyblade VForce - Episode 10"
+    },
+    {
+      "number": 11,
+      "title": "Beyblade VForce - Episode 11"
+    },
+    {
+      "number": 12,
+      "title": "Beyblade: V-Force - Episode 12"
+    },
+    {
+      "number": 13,
+      "title": "Beyblade: V-Force - Episode 13"
+    },
+    {
+      "number": 14,
+      "title": "Beyblade: V-Force - Episode 14"
+    },
+    {
+      "number": 15,
+      "title": "Beyblade: V-Force - Episode 15"
+    },
+    {
+      "number": 16,
+      "title": "Beyblade: V-Force - Episode 16"
+    },
+    {
+      "number": 17,
+      "title": "Beyblade: V-Force - Episode 17"
+    },
+    {
+      "number": 18,
+      "title": "Beyblade: V-Force - Episode 18"
+    },
+    {
+      "number": 19,
+      "title": "Beyblade: V-Force - Episode 19"
+    },
+    {
+      "number": 20,
+      "title": "Beyblade: V-Force - Episode 20"
+    },
+    {
+      "number": 21,
+      "title": "Beyblade: V-Force - Episode 21"
+    },
+    {
+      "number": 22,
+      "title": "Beyblade: V-Force - Episode 22"
+    },
+    {
+      "number": 23,
+      "title": "Beyblade: V-Force - Episode 23"
+    },
+    {
+      "number": 24,
+      "title": "Beyblade: V-Force - Episode 24"
+    },
+    {
+      "number": 25,
+      "title": "Beyblade: V-Force - Episode 25"
+    },
+    {
+      "number": 26,
+      "title": "Beyblade: V-Force - Episode 26"
+    },
+    {
+      "number": 27,
+      "title": "Beyblade: V-Force - Episode 27"
+    },
+    {
+      "number": 28,
+      "title": "Beyblade: V-Force - Episode 28"
+    },
+    {
+      "number": 29,
+      "title": "Beyblade: V-Force - Episode 29"
+    },
+    {
+      "number": 30,
+      "title": "Beyblade: V-Force - Episode 30"
+    },
+    {
+      "number": 31,
+      "title": "Beyblade: V-Force - Episode 31"
+    },
+    {
+      "number": 32,
+      "title": "Beyblade: V-Force - Episode 32"
+    },
+    {
+      "number": 33,
+      "title": "Beyblade: V-Force - Episode 33"
+    },
+    {
+      "number": 34,
+      "title": "Beyblade: V-Force - Episode 34"
+    },
+    {
+      "number": 35,
+      "title": "Beyblade: V-Force - Episode 35"
+    },
+    {
+      "number": 36,
+      "title": "Beyblade: V-Force - Episode 36"
+    },
+    {
+      "number": 37,
+      "title": "Beyblade: V-Force - Episode 37"
+    },
+    {
+      "number": 38,
+      "title": "Beyblade: V-Force - Episode 38"
+    },
+    {
+      "number": 39,
+      "title": "Beyblade: V-Force - Episode 39"
+    },
+    {
+      "number": 40,
+      "title": "Beyblade: V-Force - Episode 40"
+    },
+    {
+      "number": 41,
+      "title": "Beyblade: V-Force - Episode 41"
+    },
+    {
+      "number": 42,
+      "title": "Beyblade: V-Force - Episode 42"
+    },
+    {
+      "number": 43,
+      "title": "Beyblade: V-Force - Episode 43"
+    },
+    {
+      "number": 44,
+      "title": "Beyblade: V-Force - Episode 44"
+    },
+    {
+      "number": 45,
+      "title": "Beyblade: V-Force - Episode 45"
+    },
+    {
+      "number": 46,
+      "title": "Beyblade: V-Force - Episode 46"
+    },
+    {
+      "number": 47,
+      "title": "Beyblade: V-Force - Episode 47"
+    },
+    {
+      "number": 48,
+      "title": "Beyblade: V-Force - Episode 48"
+    },
+    {
+      "number": 49,
+      "title": "Beyblade: V-Force - Episode 49"
+    },
+    {
+      "number": 50,
+      "title": "Beyblade: V-Force - Episode 50"
+    },
+    {
+      "number": 51,
+      "title": "Beyblade: V-Force - Episode 51"
+    }
+  ],
+  "frames": [
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:178765",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Barney%20poster%201.png",
+      "episodeNumber": 1,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/f/f7/Barney_poster_1.png/revision/latest?cb=20230725142500",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/f/f7/Barney_poster_1.png/revision/latest/scale-to-width-down/360?cb=20230725142500",
+      "width": 1021,
+      "height": 770,
+      "characterNames": [
+        "Fatso",
+        "Hilary Tachibana",
+        "Kenny",
+        "Ms. Kincaid",
+        "Ozuma",
+        "Ryu Granger",
+        "Slim",
+        "Sunny Ronny",
+        "Tanner Connor",
+        "Team Psykick"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 0
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:121276",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Gideon03.png",
+      "episodeNumber": 9,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/1/12/Gideon03.png/revision/latest?cb=20180415033249",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/1/12/Gideon03.png/revision/latest/scale-to-width-down/360?cb=20180415033249",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Chameleon",
+        "Max Tate"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 1
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:134446",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Tumblr%20ltwnxjlIuP1ql914ko2%201280.jpg",
+      "episodeNumber": 9,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/8/8f/Tumblr_ltwnxjlIuP1ql914ko2_1280.jpg/revision/latest?cb=20190212174907",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/8/8f/Tumblr_ltwnxjlIuP1ql914ko2_1280.jpg/revision/latest/scale-to-width-down/360?cb=20190212174907",
+      "width": 1067,
+      "height": 800,
+      "characterNames": [
+        "Chameleon",
+        "Max Tate"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 2
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:134447",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Tumblr%20ltwnxjlIuP1ql914ko1%201280.jpg",
+      "episodeNumber": 9,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/d/d2/Tumblr_ltwnxjlIuP1ql914ko1_1280.jpg/revision/latest?cb=20190212174914",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/d/d2/Tumblr_ltwnxjlIuP1ql914ko1_1280.jpg/revision/latest/scale-to-width-down/360?cb=20190212174914",
+      "width": 1070,
+      "height": 800,
+      "characterNames": [
+        "Chameleon",
+        "Max Tate"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 3
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:116079",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:28d127c9b07c69625ee93c12a6e2969b.jpg",
+      "episodeNumber": 10,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/e/e4/28d127c9b07c69625ee93c12a6e2969b.jpg/revision/latest?cb=20180101024141",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/e/e4/28d127c9b07c69625ee93c12a6e2969b.jpg/revision/latest/scale-to-width-down/360?cb=20180101024141",
+      "width": 815,
+      "height": 591,
+      "characterNames": [
+        "Bat"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 4
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:122825",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:X1080-Mt4.jpg",
+      "episodeNumber": 10,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/c/ca/X1080-Mt4.jpg/revision/latest?cb=20180512233133",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/c/ca/X1080-Mt4.jpg/revision/latest/scale-to-width-down/360?cb=20180512233133",
+      "width": 1440,
+      "height": 1080,
+      "characterNames": [
+        "Bat"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 5
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:127088",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:A2ce3bef7747b32c45b72d52c8100d53.png",
+      "episodeNumber": 10,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/c/c2/A2ce3bef7747b32c45b72d52c8100d53.png/revision/latest?cb=20180829013521",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/c/c2/A2ce3bef7747b32c45b72d52c8100d53.png/revision/latest/scale-to-width-down/360?cb=20180829013521",
+      "width": 946,
+      "height": 661,
+      "characterNames": [
+        "Bat"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 6
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:126279",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:The%20Evil%20Island%20of%20Dr.B.jpg",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/7/75/The_Evil_Island_of_Dr.B.jpg/revision/latest?cb=20180813010855",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/7/75/The_Evil_Island_of_Dr.B.jpg/revision/latest/scale-to-width-down/360?cb=20180813010855",
+      "width": 1280,
+      "height": 720,
+      "characterNames": [
+        "Daryl",
+        "Figel"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 7
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:134068",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Tumblr%20lrj6nbXSX81ql914ko1%201280.jpg",
+      "episodeNumber": 11,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/9/9b/Tumblr_lrj6nbXSX81ql914ko1_1280.jpg/revision/latest?cb=20190202050431",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/9/9b/Tumblr_lrj6nbXSX81ql914ko1_1280.jpg/revision/latest/scale-to-width-down/360?cb=20190202050431",
+      "width": 1076,
+      "height": 800,
+      "characterNames": [
+        "Daryl",
+        "Figel"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": true,
+      "sortOrder": 8
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:40097",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:TEAM%20PSYKICK'S%20NEW%20RECRUIT.png",
+      "episodeNumber": 16,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/6/6c/TEAM_PSYKICK%27S_NEW_RECRUIT.png/revision/latest?cb=20231223001159",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/6/6c/TEAM_PSYKICK%27S_NEW_RECRUIT.png/revision/latest/scale-to-width-down/360?cb=20231223001159",
+      "width": 1920,
+      "height": 1445,
+      "characterNames": [],
+      "tags": [],
+      "caption": null,
+      "isNotable": false,
+      "sortOrder": 9
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:118316",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Tumblr%20opqnswzdUU1w4q252o1%201280.png",
+      "episodeNumber": 23,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/d/d5/Tumblr_opqnswzdUU1w4q252o1_1280.png/revision/latest?cb=20180217041224",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/d/d5/Tumblr_opqnswzdUU1w4q252o1_1280.png/revision/latest/scale-to-width-down/360?cb=20180217041224",
+      "width": 989,
+      "height": 480,
+      "characterNames": [],
+      "tags": [],
+      "caption": null,
+      "isNotable": false,
+      "sortOrder": 10
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:121993",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Tumblr%20opqpg6cgBt1w4q252o1%201280.png",
+      "episodeNumber": 23,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/5/5f/Tumblr_opqpg6cgBt1w4q252o1_1280.png/revision/latest?cb=20180428145447",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/5/5f/Tumblr_opqpg6cgBt1w4q252o1_1280.png/revision/latest/scale-to-width-down/360?cb=20180428145447",
+      "width": 946,
+      "height": 480,
+      "characterNames": [],
+      "tags": [],
+      "caption": null,
+      "isNotable": false,
+      "sortOrder": 11
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:126054",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Ozuma10-1.png",
+      "episodeNumber": 23,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/c/c5/Ozuma10-1.png/revision/latest?cb=20180805021236",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/c/c5/Ozuma10-1.png/revision/latest/scale-to-width-down/360?cb=20180805021236",
+      "width": 801,
+      "height": 600,
+      "characterNames": [],
+      "tags": [],
+      "caption": null,
+      "isNotable": false,
+      "sortOrder": 12
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:126055",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Gideon03-1.png",
+      "episodeNumber": 23,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/5/54/Gideon03-1.png/revision/latest?cb=20180805024355",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/5/54/Gideon03-1.png/revision/latest/scale-to-width-down/360?cb=20180805024355",
+      "width": 801,
+      "height": 600,
+      "characterNames": [],
+      "tags": [],
+      "caption": null,
+      "isNotable": false,
+      "sortOrder": 13
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:134365",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Tumblr%20m08lmj7PjI1ql914ko1%201280.png",
+      "episodeNumber": 23,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/2/2c/Tumblr_m08lmj7PjI1ql914ko1_1280.png/revision/latest?cb=20190211014731",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/2/2c/Tumblr_m08lmj7PjI1ql914ko1_1280.png/revision/latest/scale-to-width-down/360?cb=20190211014731",
+      "width": 1075,
+      "height": 800,
+      "characterNames": [],
+      "tags": [],
+      "caption": null,
+      "isNotable": false,
+      "sortOrder": 14
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:134700",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Tumblr%20lt59gd6N8o1ql914ko1%201280.png",
+      "episodeNumber": 23,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/6/63/Tumblr_lt59gd6N8o1ql914ko1_1280.png/revision/latest?cb=20190218034218",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/6/63/Tumblr_lt59gd6N8o1ql914ko1_1280.png/revision/latest/scale-to-width-down/360?cb=20190218034218",
+      "width": 1068,
+      "height": 800,
+      "characterNames": [],
+      "tags": [],
+      "caption": null,
+      "isNotable": false,
+      "sortOrder": 15
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:135654",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Tumblr%20m08ljgHUWF1ql914ko1%201280.png",
+      "episodeNumber": 23,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/a/a4/Tumblr_m08ljgHUWF1ql914ko1_1280.png/revision/latest?cb=20190312024914",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/a/a4/Tumblr_m08ljgHUWF1ql914ko1_1280.png/revision/latest/scale-to-width-down/360?cb=20190312024914",
+      "width": 1066,
+      "height": 800,
+      "characterNames": [],
+      "tags": [],
+      "caption": null,
+      "isNotable": false,
+      "sortOrder": 16
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:116406",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:KaiandKing01.png",
+      "episodeNumber": 42,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/e/e6/KaiandKing01.png/revision/latest?cb=20180115014917",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/e/e6/KaiandKing01.png/revision/latest/scale-to-width-down/360?cb=20180115014917",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Gordo",
+        "King (Original Series)",
+        "Queen"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": false,
+      "sortOrder": 17
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:116407",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:King01.png",
+      "episodeNumber": 42,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/1/13/King01.png/revision/latest?cb=20180115015129",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/1/13/King01.png/revision/latest/scale-to-width-down/360?cb=20180115015129",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Gordo",
+        "King (Original Series)",
+        "Queen"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": false,
+      "sortOrder": 18
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:116408",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:King02.png",
+      "episodeNumber": 42,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/f/f7/King02.png/revision/latest?cb=20180115015147",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/f/f7/King02.png/revision/latest/scale-to-width-down/360?cb=20180115015147",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Gordo",
+        "King (Original Series)",
+        "Queen"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": false,
+      "sortOrder": 19
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:116409",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:King03.png",
+      "episodeNumber": 42,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/9/94/King03.png/revision/latest?cb=20180115015221",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/9/94/King03.png/revision/latest/scale-to-width-down/360?cb=20180115015221",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Gordo",
+        "King (Original Series)",
+        "Queen"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": false,
+      "sortOrder": 20
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:116410",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:King04.png",
+      "episodeNumber": 42,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/8/88/King04.png/revision/latest?cb=20180115015233",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/8/88/King04.png/revision/latest/scale-to-width-down/360?cb=20180115015233",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Gordo",
+        "King (Original Series)",
+        "Queen"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": false,
+      "sortOrder": 21
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:116412",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:King05.png",
+      "episodeNumber": 42,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/c/ca/King05.png/revision/latest?cb=20180115015306",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/c/ca/King05.png/revision/latest/scale-to-width-down/360?cb=20180115015306",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Gordo",
+        "King (Original Series)",
+        "Queen"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": false,
+      "sortOrder": 22
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:116413",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:King06.png",
+      "episodeNumber": 42,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/0/0f/King06.png/revision/latest?cb=20180115015409",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/0/0f/King06.png/revision/latest/scale-to-width-down/360?cb=20180115015409",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Gordo",
+        "King (Original Series)",
+        "Queen"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": false,
+      "sortOrder": 23
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:120477",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Queen01.png",
+      "episodeNumber": 42,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/c/c3/Queen01.png/revision/latest?cb=20180817012846",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/c/c3/Queen01.png/revision/latest/scale-to-width-down/360?cb=20180817012846",
+      "width": 801,
+      "height": 598,
+      "characterNames": [
+        "Gordo",
+        "King (Original Series)",
+        "Queen"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": false,
+      "sortOrder": 24
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:120478",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Queen02.png",
+      "episodeNumber": 42,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/2/2d/Queen02.png/revision/latest?cb=20180401225855",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/2/2d/Queen02.png/revision/latest/scale-to-width-down/360?cb=20180401225855",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Gordo",
+        "King (Original Series)",
+        "Queen"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": false,
+      "sortOrder": 25
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:120502",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Gordo02.png",
+      "episodeNumber": 42,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/2/23/Gordo02.png/revision/latest?cb=20180402004907",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/2/23/Gordo02.png/revision/latest/scale-to-width-down/360?cb=20180402004907",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Gordo",
+        "King (Original Series)",
+        "Queen"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": false,
+      "sortOrder": 26
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:120503",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Gordo03.png",
+      "episodeNumber": 42,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/0/08/Gordo03.png/revision/latest?cb=20180402004944",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/0/08/Gordo03.png/revision/latest/scale-to-width-down/360?cb=20180402004944",
+      "width": 1024,
+      "height": 600,
+      "characterNames": [
+        "Gordo",
+        "King (Original Series)",
+        "Queen"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": false,
+      "sortOrder": 27
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:120505",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Gordo05.png",
+      "episodeNumber": 42,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/b/be/Gordo05.png/revision/latest?cb=20180812014938",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/b/be/Gordo05.png/revision/latest/scale-to-width-down/360?cb=20180812014938",
+      "width": 801,
+      "height": 600,
+      "characterNames": [
+        "Gordo",
+        "King (Original Series)",
+        "Queen"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": false,
+      "sortOrder": 28
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:120506",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:KingandQueen02.png",
+      "episodeNumber": 42,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/b/b2/KingandQueen02.png/revision/latest?cb=20180817013108",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/b/b2/KingandQueen02.png/revision/latest/scale-to-width-down/360?cb=20180817013108",
+      "width": 805,
+      "height": 600,
+      "characterNames": [
+        "Gordo",
+        "King (Original Series)",
+        "Queen"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": false,
+      "sortOrder": 29
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:120511",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Gordo06.png",
+      "episodeNumber": 42,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/8/8a/Gordo06.png/revision/latest?cb=20180812014740",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/8/8a/Gordo06.png/revision/latest/scale-to-width-down/360?cb=20180812014740",
+      "width": 804,
+      "height": 600,
+      "characterNames": [
+        "Gordo",
+        "King (Original Series)",
+        "Queen"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": false,
+      "sortOrder": 30
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:126437",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:KingandQueen06.png",
+      "episodeNumber": 42,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/6/69/KingandQueen06.png/revision/latest?cb=20180817013005",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/6/69/KingandQueen06.png/revision/latest/scale-to-width-down/360?cb=20180817013005",
+      "width": 801,
+      "height": 600,
+      "characterNames": [
+        "Gordo",
+        "King (Original Series)",
+        "Queen"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": false,
+      "sortOrder": 31
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:126438",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:KingandQueen05.png",
+      "episodeNumber": 42,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/8/87/KingandQueen05.png/revision/latest?cb=20180817013046",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/8/87/KingandQueen05.png/revision/latest/scale-to-width-down/360?cb=20180817013046",
+      "width": 800,
+      "height": 600,
+      "characterNames": [
+        "Gordo",
+        "King (Original Series)",
+        "Queen"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": false,
+      "sortOrder": 32
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:132999",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Image%20(1).jpg",
+      "episodeNumber": 42,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/8/8d/Image_%281%29.jpg/revision/latest?cb=20190112031853",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/8/8d/Image_%281%29.jpg/revision/latest/scale-to-width-down/360?cb=20190112031853",
+      "width": 2048,
+      "height": 1536,
+      "characterNames": [
+        "Gordo",
+        "King (Original Series)",
+        "Queen"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": false,
+      "sortOrder": 33
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:134709",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:Tumblr%20lwvsea3l1A1ql914ko1%201280.png",
+      "episodeNumber": 42,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/3/32/Tumblr_lwvsea3l1A1ql914ko1_1280.png/revision/latest?cb=20190218040248",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/3/32/Tumblr_lwvsea3l1A1ql914ko1_1280.png/revision/latest/scale-to-width-down/360?cb=20190218040248",
+      "width": 1072,
+      "height": 800,
+      "characterNames": [
+        "Gordo",
+        "King (Original Series)",
+        "Queen"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": false,
+      "sortOrder": 34
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:163540",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:2EF8A37C-77CD-4B9F-A7D3-B97925BAB0EF.png",
+      "episodeNumber": 42,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/7/7a/2EF8A37C-77CD-4B9F-A7D3-B97925BAB0EF.png/revision/latest?cb=20201215175806",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/7/7a/2EF8A37C-77CD-4B9F-A7D3-B97925BAB0EF.png/revision/latest/scale-to-width-down/360?cb=20201215175806",
+      "width": 2160,
+      "height": 1620,
+      "characterNames": [
+        "Gordo",
+        "King (Original Series)",
+        "Queen"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": false,
+      "sortOrder": 35
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:163541",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:6A7617C4-A739-4B7C-826B-7996A9B5769E.png",
+      "episodeNumber": 42,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/7/73/6A7617C4-A739-4B7C-826B-7996A9B5769E.png/revision/latest?cb=20201215175942",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/7/73/6A7617C4-A739-4B7C-826B-7996A9B5769E.png/revision/latest/scale-to-width-down/360?cb=20201215175942",
+      "width": 2160,
+      "height": 1620,
+      "characterNames": [
+        "Gordo",
+        "King (Original Series)",
+        "Queen"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": false,
+      "sortOrder": 36
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:163542",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:44ED93EE-F03C-44EF-A829-2D64DB946521.png",
+      "episodeNumber": 42,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/a/a8/44ED93EE-F03C-44EF-A829-2D64DB946521.png/revision/latest?cb=20201215180047",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/a/a8/44ED93EE-F03C-44EF-A829-2D64DB946521.png/revision/latest/scale-to-width-down/360?cb=20201215180047",
+      "width": 2160,
+      "height": 1620,
+      "characterNames": [
+        "Gordo",
+        "King (Original Series)",
+        "Queen"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": false,
+      "sortOrder": 37
+    },
+    {
+      "source": "fandom",
+      "sourceId": "beyblade:163543",
+      "sourceUrl": "https://beyblade.fandom.com/wiki/File:D4300126-E5EE-4C32-B0B7-64FDC95FF6B6.png",
+      "episodeNumber": 42,
+      "imageUrl": "https://static.wikia.nocookie.net/beyblade/images/9/92/D4300126-E5EE-4C32-B0B7-64FDC95FF6B6.png/revision/latest?cb=20201215180115",
+      "thumbUrl": "https://static.wikia.nocookie.net/beyblade/images/9/92/D4300126-E5EE-4C32-B0B7-64FDC95FF6B6.png/revision/latest/scale-to-width-down/360?cb=20201215180115",
+      "width": 2160,
+      "height": 1620,
+      "characterNames": [
+        "Gordo",
+        "King (Original Series)",
+        "Queen"
+      ],
+      "tags": [],
+      "caption": null,
+      "isNotable": false,
+      "sortOrder": 38
+    }
+  ]
+}

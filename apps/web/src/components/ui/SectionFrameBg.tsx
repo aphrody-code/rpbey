@@ -21,31 +21,25 @@ import { SEASON_COLORS } from "@/lib/season-colors.generated";
 
 const AMBIENT_API = "/api/v1/anime/frames/ambient";
 
-// Images d'ambiance CURÉES (HD, vérifiées à l'œil), servies par NOTRE CDN :
-// - beyblade-x : frames fancaps déjà reverse-proxiées par cdn.rpbey.fr ;
-// - metal / burst / bakuten : uploadées sous /static/data/rpb/seasons/.
+// Images d'ambiance CURÉES (HD, vérifiées à l'œil), servies par Vercel (edge,
+// immutable-cached) depuis `public/` — plus aucune dépendance `cdn.rpbey.fr` :
+// - beyblade-x : frames fancaps rapatriées sous `public/fancaps/` ;
+// - metal / burst / bakuten : images de saison sous `public/seasons/`.
 // Une saison curée n'appelle PAS l'échantillon aléatoire (qui tombe sur des caps
 // watermarkés/flous) — on sert la bonne image directement.
-const CDN = "https://cdn.rpbey.fr";
 const CURATED: Record<string, readonly string[]> = {
   "beyblade-x": [
-    `${CDN}/fancaps-anime-full/29133604.jpg`,
-    `${CDN}/fancaps-anime-full/29131028.jpg`,
-    `${CDN}/fancaps-anime-full/29132373.jpg`,
+    "/fancaps/29133604.jpg",
+    "/fancaps/29131028.jpg",
+    "/fancaps/29132373.jpg",
   ],
-  "metal-fight-beyblade": [
-    `${CDN}/static/data/rpb/seasons/metal-champion.png`,
-    `${CDN}/static/data/rpb/seasons/metal-team.png`,
-  ],
+  "metal-fight-beyblade": ["/seasons/metal-champion.png", "/seasons/metal-team.png"],
   "beyblade-burst-chouzetsu": [
-    `${CDN}/static/data/rpb/seasons/burst-clash.png`,
-    `${CDN}/static/data/rpb/seasons/burst-valt.png`,
-    `${CDN}/static/data/rpb/seasons/burst-aura.png`,
+    "/seasons/burst-clash.png",
+    "/seasons/burst-valt.png",
+    "/seasons/burst-aura.png",
   ],
-  "bakuten-shoot-beyblade": [
-    `${CDN}/static/data/rpb/seasons/bakuten-team.png`,
-    `${CDN}/static/data/rpb/seasons/bakuten-team2.png`,
-  ],
+  "bakuten-shoot-beyblade": ["/seasons/bakuten-team.png", "/seasons/bakuten-team2.png"],
 };
 
 // Grain argentique (SVG fractalNoise) — texture/atmosphère, anti-aplat numérique.

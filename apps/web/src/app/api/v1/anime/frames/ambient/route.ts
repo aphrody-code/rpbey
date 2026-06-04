@@ -1,4 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server";
+import { rewriteAssetUrl } from "@/lib/asset-url";
 import { loadJsonSafe } from "@/lib/data-cache";
 
 export const runtime = "nodejs";
@@ -74,9 +75,11 @@ function clean(frames: RawFrame[]): AmbientFrame[] {
     if (!f.imageUrl) continue;
     // On privilégie le paysage (fond plein écran) quand les dimensions sont connues.
     if (f.width && f.height && f.width < f.height) continue;
+    // Réécriture self-contained : toute URL `cdn.rpbey.fr` → origine Vercel
+    // (`/api/assets/...` ou `NEXT_PUBLIC_ASSET_BASE`). Le client ne voit que rpbey.fr.
     out.push({
-      imageUrl: f.imageUrl,
-      thumbUrl: f.thumbUrl ?? null,
+      imageUrl: rewriteAssetUrl(f.imageUrl),
+      thumbUrl: f.thumbUrl ? rewriteAssetUrl(f.thumbUrl) : null,
       width: f.width ?? null,
       height: f.height ?? null,
     });

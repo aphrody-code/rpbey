@@ -10,52 +10,52 @@ export interface SeasonColor {
 }
 
 export const SEASON_COLORS: Record<string, SeasonColor> = {
-  "https://cdn.rpbey.fr/fancaps-anime-full/29133604.jpg": {
+  "/fancaps/29133604.jpg": {
     "accent": "oklch(0.74 0.05 90)",
     "accentSoft": "oklch(0.62 0.043 90)",
     "tint": "40 40 40"
   },
-  "https://cdn.rpbey.fr/fancaps-anime-full/29131028.jpg": {
+  "/fancaps/29131028.jpg": {
     "accent": "oklch(0.74 0.05 248)",
     "accentSoft": "oklch(0.62 0.043 248)",
     "tint": "152 168 184"
   },
-  "https://cdn.rpbey.fr/fancaps-anime-full/29132373.jpg": {
+  "/fancaps/29132373.jpg": {
     "accent": "oklch(0.74 0.081 39)",
     "accentSoft": "oklch(0.62 0.069 39)",
     "tint": "232 184 168"
   },
-  "https://cdn.rpbey.fr/static/data/rpb/seasons/metal-champion.png": {
+  "/seasons/metal-champion.png": {
     "accent": "oklch(0.74 0.05 249)",
     "accentSoft": "oklch(0.62 0.043 249)",
     "tint": "72 88 104"
   },
-  "https://cdn.rpbey.fr/static/data/rpb/seasons/metal-team.png": {
+  "/seasons/metal-team.png": {
     "accent": "oklch(0.74 0.05 90)",
     "accentSoft": "oklch(0.62 0.043 90)",
     "tint": "8 8 8"
   },
-  "https://cdn.rpbey.fr/static/data/rpb/seasons/burst-clash.png": {
+  "/seasons/burst-clash.png": {
     "accent": "oklch(0.74 0.05 66)",
     "accentSoft": "oklch(0.62 0.043 66)",
     "tint": "72 56 40"
   },
-  "https://cdn.rpbey.fr/static/data/rpb/seasons/burst-valt.png": {
+  "/seasons/burst-valt.png": {
     "accent": "oklch(0.74 0.05 17)",
     "accentSoft": "oklch(0.62 0.043 17)",
     "tint": "248 232 232"
   },
-  "https://cdn.rpbey.fr/static/data/rpb/seasons/burst-aura.png": {
+  "/seasons/burst-aura.png": {
     "accent": "oklch(0.74 0.055 327)",
     "accentSoft": "oklch(0.62 0.047 327)",
     "tint": "24 8 24"
   },
-  "https://cdn.rpbey.fr/static/data/rpb/seasons/bakuten-team.png": {
+  "/seasons/bakuten-team.png": {
     "accent": "oklch(0.74 0.05 90)",
     "accentSoft": "oklch(0.62 0.043 90)",
     "tint": "8 8 8"
   },
-  "https://cdn.rpbey.fr/static/data/rpb/seasons/bakuten-team2.png": {
+  "/seasons/bakuten-team2.png": {
     "accent": "oklch(0.74 0.05 90)",
     "accentSoft": "oklch(0.62 0.043 90)",
     "tint": "8 8 8"

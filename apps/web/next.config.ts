@@ -28,15 +28,35 @@ const nextConfig: NextConfig = {
   },
   // Trace dynamic requires that static analysis misses (tiktok-api-dl loads signature.js/webmssdk.js at runtime)
   // Bun's isolated install stores packages under node_modules/.bun/<pkg>@<ver>+<hash>/ — both layouts included.
+  //
+  // + Données runtime self-contained (cf. `lib/data-cache.ts`) : on TRACE les
+  // fichiers `data/*` lus au runtime dans la lambda Vercel (plus aucun fetch
+  // `cdn.rpbey.fr`). On cible précisément les fichiers consommés pour ne PAS
+  // re-bundler tout `data/` (qui dépasse 250 MB — cf. exclusions plus bas).
   outputFileTracingIncludes: {
-    "/**/*": ["./node_modules/@tobyg74/tiktok-api-dl/helper/**"],
+    // Un SEUL glob `/**/*` (les clés dupliquées s'écrasent) : on liste ici TOUS
+    // les fichiers `data/*` lus au runtime (data-cache.ts, bts.ts, ambient route,
+    // rankings) + le helper tiktok. Cible précise → pas de re-bundle du `data/`
+    // complet (>250 MB, cf. exclusions plus bas).
+    "/**/*": [
+      "./node_modules/@tobyg74/tiktok-api-dl/helper/**",
+      "./data/bbx-weekly.json",
+      "./data/beyblade-knowledge.json",
+      "./data/bx-catalog.json",
+      "./data/wbo-combos-enriched.json",
+      "./data/exports/participants_map.json",
+      "./data/bey-library/bey-library-complete.json",
+      "./data/pools/*.json",
+      "./data/anime-frames/*.json",
+    ],
   },
 
-  // Exclut `data/*` du tracing Next : sur Vercel le code lit `public/data/*`
-  // via `fetch` ISR (CDN edge) ou `cdn.rpbey.fr/static/rpb-dashboard/`,
-  // `data/*` n'a aucune raison d'être bundlé dans la lambda
-  // (cause `function_size_exceeded` 250 MB sinon — bey-library 170 MB +
-  // discord-full-scan + exports BTS dépassent la limite).
+  // Exclut les GROS sous-dossiers `data/*` du tracing Next (cause
+  // `function_size_exceeded` 250 MB sinon — bey-library 170 MB + discord-full-scan
+  // + exports BTS dépassent la limite). Les FEW fichiers réellement lus au runtime
+  // sont au contraire FORCÉS dans la lambda via `outputFileTracingIncludes`
+  // ci-dessus (un include précis l'emporte sur un exclude large) — le site est donc
+  // **self-contained** sur Vercel, sans aucun fetch `cdn.rpbey.fr`.
   outputFileTracingExcludes: {
     "*": [
       "data/bey-library/**/*",
@@ -217,26 +237,9 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "i.imgur.com",
       },
-      {
-        protocol: "https",
-        hostname: "cdn.rpbey.fr",
-        pathname: "/api/assets/**",
-      },
-      {
-        protocol: "https",
-        hostname: "cdn.rpbey.fr",
-        pathname: "/fancaps/**",
-      },
-      {
-        protocol: "https",
-        hostname: "cdn.rpbey.fr",
-        pathname: "/fancaps-full/**",
-      },
-      {
-        protocol: "https",
-        hostname: "cdn.rpbey.fr",
-        pathname: "/*.{png,jpg,jpeg,webp,gif,svg}",
-      },
+      // `cdn.rpbey.fr` retiré : assets rapatriés dans `public/` (Vercel edge) ou
+      // proxifiés same-origin via `/api/assets/...` (cf. lib/asset-url.ts). Plus
+      // aucune dépendance image au runtime sur l'hôte CDN.
       {
         protocol: "https",
         hostname: "cdn.rosegriffon.fr",
