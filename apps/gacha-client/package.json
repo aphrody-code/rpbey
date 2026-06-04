@@ -10,12 +10,12 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@discord/embedded-app-sdk": "catalog:",
+    "@discord/embedded-app-sdk": "^2.5.0",
     "colyseus.js": "^0.16.22",
-    "pixi.js": "catalog:"
+    "pixi.js": "^8.18.1"
   },
   "devDependencies": {
-    "typescript": "catalog:",
+    "typescript": "^6.0.3",
     "vite": "^8.0.16"
   }
 }
