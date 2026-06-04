@@ -1,6 +1,6 @@
 #!/usr/bin/env bun
 /**
- * run-404-test.ts — lance `tests/no-404.bxc.test.ts` dans un CWD NEUTRE.
+ * run-404-test.ts — lance `tests/no-404.bxc.e2e.ts` dans un CWD NEUTRE.
  *
  * Pourquoi : `apps/web/bunfig.toml` précharge `happydom.ts` (window global +
  * Same-Origin Policy) pour les tests de composants. Ce preload casse le crawl
@@ -18,7 +18,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 
 const here = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
-const testFile = join(here, "tests", "no-404.bxc.test.ts");
+const testFile = join(here, "tests", "no-404.bxc.e2e.ts");
 const neutralCwd = mkdtempSync(join(tmpdir(), "rpbey-404-"));
 
 // `--timeout` global : le crawl réseau (pages + assets + liens découverts) dépasse

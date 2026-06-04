@@ -16,7 +16,7 @@
     "lint": "oxlint --config .oxlintrc.json src",
     "lint:fix": "oxlint --config .oxlintrc.json --fix src",
     "start": "bun src/index.ts",
-    "type-check": "bunx tsc --noEmit",
+    "type-check": "bun run gen:entries && bunx tsc --noEmit",
     "test": "bun test",
     "test:bridge": "bun test test/discord-activity.test.ts && bun test test/gacha-api.test.ts && bun test test/api-server.test.ts && bun test test/play-command.test.ts"
   },
