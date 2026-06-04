@@ -62,6 +62,16 @@ RUN bun install
 
 # ── build SWC du bot ──
 FROM deps AS build
+# Les paquets du fork discordx (@rpbey/di, @rpbey/discordx, @rpbey/pagination + leurs
+# deps internes @rpbey/{internal,importer}) exposent leurs `exports` via ./dist/ (tsup),
+# mais ce dist/ est gitignore → ABSENT d'un checkout propre (CI). Sans lui, le runtime
+# Bun échoue dès le 1er import : « Cannot find module '@rpbey/di' » → exit(1) → le
+# conteneur ne bind jamais $PORT → Cloud Run « failed to start and listen on PORT ».
+# On les build ICI (turbo gère l'ordre via ^build : di/internal/importer → discordx).
+# Le déploiement manuel passait car le tree VPS dirty embarquait déjà dist/ ; le build
+# Cloud Build hermétique depuis un checkout git propre ne l'a pas.
+WORKDIR /app
+RUN bun run turbo run build --filter=@rpbey/discordx --filter=@rpbey/pagination
 WORKDIR /app/apps/bot
 RUN bun run build
 # Runtime tsconfig SANS l'alias `paths` "@aphrody/x" → ./types/aphrody-x/index.d.ts.

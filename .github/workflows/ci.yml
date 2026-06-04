@@ -23,7 +23,12 @@ concurrency:
 jobs:
   quality:
     name: lint + type-check + test
-    runs-on: ubuntu-latest
+    # ubuntu-24.04 (glibc 2.39) est trop ancien pour le binding natif Skia de
+    # @aphrody/canvas (compilé contre GLIBC_2.43, Ubuntu 26.04 — cf. apps/bot/Dockerfile
+    # FROM ubuntu:26.04). Sous ubuntu-latest le `test:ci` chargeait skia.linux-x64-gnu.node
+    # → « libm.so.6: version GLIBC_2.43 not found » → "Unhandled error between tests".
+    # ubuntu-26.04 (glibc 2.43) matche le VPS + l'image bot et fait charger le binding réel.
+    runs-on: ubuntu-26.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
