@@ -7,12 +7,7 @@ const nextConfig: NextConfig = {
   // Enable React strict mode
   reactStrictMode: true,
 
-  turbopack: {
-    resolveAlias: {
-      react: "../../node_modules/react",
-      "react-dom": "../../node_modules/react-dom",
-    },
-  },
+
 
   // Output standalone pour systemd VPS — Vercel package son runtime, pas de standalone.
   ...(IS_VERCEL
@@ -63,19 +58,16 @@ const nextConfig: NextConfig = {
   outputFileTracingExcludes: {
     "*": [
       "data/bey-library/**/*",
-      "data/exports/**/*",
       "data/satr_history/**/*",
       "data/wb_history/**/*",
       "data/scrapes/**/*",
       "data/cleaned/**/*",
       "data/backups/**/*",
-      "data/pools/**/*",
       "data/planner/**/*",
       "data/discord-*.json",
       "data/all_image_assets.json",
       "data/lighthouse-trends.db",
       "**/data/bey-library/**/*",
-      "**/data/exports/**/*",
     ],
   },
 

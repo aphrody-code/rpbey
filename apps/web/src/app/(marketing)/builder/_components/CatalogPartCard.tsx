@@ -314,6 +314,7 @@ export function CatalogPartCard({ part, isUsed, onClick }: CatalogPartCardProps)
 
             <IconButton
               size="small"
+              component="span"
               onClick={(e) => {
                 e.stopPropagation();
                 setStatsOpen(true);

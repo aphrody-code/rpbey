@@ -47,7 +47,7 @@ export async function listPublicParts(params: PartsFilter) {
   // Masque les lignes placeholder en notation combo WBO (externalId === name) :
   // stats partielles, doublons d'images — clutter dans le builder. Conservées en DB
   // pour que les decks sauvegardés les résolvent encore.
-  conditions.push(ne(schema.parts.externalId, schema.parts.name));
+  conditions.push(sql`${schema.parts.externalId} <> ${schema.parts.name}`);
 
   if (type && type !== "ALL") conditions.push(eq(schema.parts.type, type));
   if (systems && systems.length > 0) conditions.push(inArray(schema.parts.system, systems));
@@ -95,7 +95,7 @@ export async function getPartById(id: string) {
 /** Pièce aléatoire (hors placeholders combo). */
 export async function getRandomPart() {
   return db.query.parts.findFirst({
-    where: ne(schema.parts.externalId, schema.parts.name),
+    where: sql`${schema.parts.externalId} <> ${schema.parts.name}`,
     orderBy: sql`random()`,
   });
 }
