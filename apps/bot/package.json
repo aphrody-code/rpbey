@@ -6,7 +6,7 @@
   "main": "src/index.ts",
   "scripts": {
     "dev": "bun --watch src/index.ts",
-    "patch:dht": "bash scripts/patch-dht-debug.sh",
+    "patch:dht": "bun scripts/patch-dht-debug.ts",
     "prebuild": "bun run gen:entries && bun run patch:dht",
     "gen:entries": "bun scripts/gen-entry-imports.ts",
     "build": "swc -d dist src --config-file .swcrc --strip-leading-paths",

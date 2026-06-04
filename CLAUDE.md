@@ -6,16 +6,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-`rpbey` — monorepo de la communauté Beyblade **République Populaire du Beyblade** (tournois, classements, gacha TCG, économie, duels). Trois applis prod sur le VPS (web, bot, gacha-server) + des packages partagés, le tout en **Bun** (jamais node/npm/tsx) orchestré par **Turborepo**.
+`rpbey` — monorepo de la communauté Beyblade **République Populaire du Beyblade** (tournois, classements, gacha TCG, économie, duels). L'architecture de production est 100 % serverless (web sur Vercel, bot et gacha-server sur Google Cloud Run, base Neon Postgres et médias sur Vercel Blob). Aucun service de production ne tourne sur le VPS.
 
-- `apps/web` (`@rose-griffon/dashboard`) — dashboard **Next.js 16** (App Router, Turbopack, `output: standalone`), MUI v9 + Emotion, better-auth. systemd `rpbey-web.service` :3002, nginx `rpbey.fr`. Détails → **`apps/web/AGENTS.md`**.
-- `apps/bot` (`@rose-griffon/bot`) — **bot Discord** (discordx fork + tsyringe DI + discord.js v14, rendu image Skia). systemd `rpb-bot.service`, API `Bun.serve` :3001. **Aucune IA/LLM** : tout est algorithmique. Détails → **`apps/bot/AGENTS.md`**.
-- `apps/gacha-server` (`@rose-griffon/gacha-server`) — **serveur de jeu gacha** (Colyseus 0.17 sur Bun, transport `BunWebSockets`) : REST économie consommée par le bot + temps réel Discord Activity. systemd `rpbey-gacha.service` :5050 (loopback), nginx `api.rpbey.fr/gacha/` (WSS). Backé par `@rpbey/db`. Détails → **`docs/gacha/server.md`**.
-- `apps/gacha-client` (`@rose-griffon/gacha-client`) — **client Discord Activity** PixiJS v8 (Vite). **Déployé `play.rpbey.fr`** (nginx static `/var/www/play.rpbey.fr`, TLS) via `scripts/deploy-gacha-client.sh`. Jouable navigateur via **proxy login rpbey** (`GET /api/gacha/auth` → session better-auth → JWT Colyseus HS256 signé `BETTER_AUTH_SECRET`). Reste = config Discord Dev Portal (UI, app `1448466858981326939`). Détails → **`docs/gacha/activity-client.md`**.
-- `apps/cdn` (`cdn`) — serveur statique Bun (`server.ts`).
+- `apps/web` (`@rose-griffon/dashboard`) — dashboard **Next.js 16** (App Router, Turbopack) hébergé sur **Vercel** (`rpbey.vercel.app` / `rpbey.fr`). Connecté à **Neon Postgres** et utilisant **Vercel Blob** pour le stockage de médias. Détails → **`apps/web/AGENTS.md`**.
+- `apps/bot` (`@rose-griffon/bot`) — **bot Discord** (discordx fork + tsyringe DI + discord.js v14, rendu image Skia) hébergé sur **Google Cloud Run** (`rpbey-bot` sur le projet GCP `aphrody`, région `europe-west3`). Container persistant en singleton (min=1, max=1) pour la gateway WS permanente. Sans Redis (mentions et état in-process rebackés sur Neon). Détails → **`apps/bot/AGENTS.md`**.
+- `apps/gacha-server` (`@rose-griffon/gacha-server`) — **serveur de jeu gacha** (Colyseus 0.17 sur Bun, transport `BunWebSockets`) hébergé sur **Google Cloud Run** (`rpbey-gacha`). REST économie et salons en temps réel pour Discord Activity. Backé par Neon. Détails → **`docs/gacha/server.md`**.
+- `apps/gacha-client` (`@rose-griffon/gacha-client`) — **client Discord Activity** PixiJS v8 (Vite). Déployé de manière statique sur **Vercel** ou serveurs statiques. Détails → **`docs/gacha/activity-client.md`**.
+- `apps/cdn` (`cdn`) — serveur statique Bun (legacy, remplacé en production par Vercel Blob et CDN Vercel).
 
 > Naming : deux scopes coexistent — `@rose-griffon/*` (apps + challonge) et `@rpbey/*` (packages db/types/di/discordx/pagination). Filtres turbo canoniques : `@rose-griffon/dashboard`, `@rose-griffon/bot`.
-> `apps/bot/CLAUDE.md` est désormais un **pointeur fin** vers `apps/bot/AGENTS.md` (l'ancien contenu Prisma/Neon, d'avant la migration Drizzle du 2026-05-27, a été retiré) — le guide bot canonique reste `apps/bot/AGENTS.md`.
+> `apps/bot/CLAUDE.md` est désormais un **pointeur fin** vers `apps/bot/AGENTS.md` — le guide bot canonique reste `apps/bot/AGENTS.md`.
 
 ## Commandes (racine)
 
@@ -30,7 +30,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 | Test (flake / scope)   | `bun run test:flake` (--randomize --rerun-each=3) · `bun run test:vendored` (discordx fork) · `bun run test:cov` (lcov+junit) |
 | E2E (chromium réel)    | `bun run e2e` (== `CHROME=/usr/local/bin/chromium bun scripts/e2e.ts`)        |
 | Docs (sync/format)     | `bun run docs` (umbrella : map+index+fmt+check) · `docs:check` · `docs:map` · `docs:index` · `docs:fmt` (outil Bun-natif `scripts/docs.ts`) |
-| Réactivation complète  | `bash scripts/reactivate.sh` (Nettoyage caches, bun install, build bot/web et restart systemd) |
+| Réactivation locale    | `bun scripts/reactivate-local.ts` (Nettoyage caches, bun install, build local) |
 
 > Doc structurée : tout fichier sous `docs/` porte un **frontmatter Zod-typé obligatoire** (`title/description/scope/status/last_updated`) ; `docs/README.md` (index) et `docs/REPO_MAP.md` (cartographie) sont **générés**, ne pas les éditer. Le hook `.githooks/pre-commit` régénère + vérifie à chaque commit. Convention complète → **`docs/documentation-system.md`**.
 
@@ -47,7 +47,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ### DB partagée = le fait transverse #1
 
-Les **deux** applis tapent le **même Postgres LOCAL** (socket `/var/run/postgresql`, base `rpb_neon`, user `ubuntu`) via le package **`@rpbey/db`** (Drizzle ORM + postgres-js, ~54 tables, `schema.ts` + `relations.ts`). C'est la **source de vérité unique** du schéma — toute évolution DB passe par ce package, pas par une migration locale à une appli.
+Les applications partagent la **même base de données Neon Postgres** via le package **`@rpbey/db`** (Drizzle ORM + postgres-js, ~54 tables, `schema.ts` + `relations.ts`). C'est la **source de vérité unique** du schéma — toute évolution DB passe par ce package, pas par une migration locale à une appli. Les environnements de production utilisent `DATABASE_URL` (pooled) pour le runtime et `DIRECT_DATABASE_URL` (direct) pour les migrations. Le socket local `/var/run/postgresql` n'est conservé qu'en fallback pour le dev local.
 
 - Le **web** consomme Drizzle directement (`@rpbey/db`).
 - Le **bot** passe par une **façade compatible Prisma** (`apps/bot/src/lib/prisma.ts`, ~900 lignes) qui émule l'API Prisma sur Drizzle, pour ne pas réécrire ~295 call-sites. Dans le bot : utiliser `prisma`/`this.prisma`, **jamais** Drizzle inline.
@@ -81,7 +81,7 @@ Le pipeline de chat utilise un retrieval hybride Beyblade (`server/services/chat
 
 - **`import type` casse la DI tsyringe** : efface `design:paramtypes` → injection `undefined`. Toute classe injectée = `import { Class }`.
 - **`reflect-metadata` en 1ʳᵉ ligne** de `src/index.ts` ; DI réglée **avant** l'import des modules décorés.
-- **Build SWC obligatoire** (décorateurs legacy + `emitDecoratorMetadata`). Conséquence : **pas de `Bun.$`** ni de rewrites TS-direct dans `apps/bot/src/**`. systemd lance `dist/index.js`.
+- **Build SWC obligatoire** (décorateurs legacy + `emitDecoratorMetadata`). Le bot est empaqueté dans un container Docker et déployé sur **Google Cloud Run** en singleton.
 - `src/_entry-imports.generated.ts` — **généré** (`scripts/gen-entry-imports.ts`), gitignored, **ne pas éditer** ; régénérer si on ajoute commande/event.
 - `bun run build` re-symlinke `debug` pour `discord-html-transcripts` (`patch:dht`) — à relancer après chaque `bun install` (sinon crash runtime `Cannot find module 'debug'`).
 - Lock PID singleton : refus de double instance = exit 11.
@@ -89,13 +89,21 @@ Le pipeline de chat utilise un retrieval hybride Beyblade (`server/services/chat
 
 ### Web — déploiement & build (lire `apps/web/AGENTS.md`)
 
-- **`scripts/deploy-web.sh` OBLIGATOIRE après chaque `next build`** : le standalone n'inclut **pas** `public/` ni `data/*` (exclus du tracing). Sans lui → chunks JS 404 (site mort), images/rankings vides. Le script copie `.next/static`, symlinke `public/` → CDN, copie les exports `data/`.
+- **Déploiement sur Vercel** : Le dashboard est directement déployé sur **Vercel** (`rpbey.vercel.app` / `rpbey.fr`).
 - Pièges build : pas d'import runtime de `@rpbey/db` depuis un client component (fuite postgres → bundle) ; `transpilePackages: ["@vidstack/react"]` ; scraper challonge importé via `@/lib/challonge-vendor/scraper` (pas le barrel) ; `ignoreBuildErrors: false` (drift MUI X v9 résorbé → build type-check strict).
-- **Migration API-first** (plan `tingly-wondering-river`) : complète et déployée **en co-localisé** (dette `@rpbey/db` hors DAL = 0, gate transitif global). L'objectif « déployable seul Vercel » est **ABANDONNÉ — on reste sur le VPS** (décision 2026-05-29). NE PAS rechasser RSC→SDK / client→SDK / smoke standalone : c'est du travail mort sur VPS-only (le seam `isRemote`/SDK reste dormant et inerte, inoffensif).
-- **Migration serverless (2026-06-04, `docs/migration/`)** : DB → **Neon** (`packages/db/src/client.ts` lit `DATABASE_URL` pooled, fallback socket ; projet `super-term-89085305`) ; site → **Vercel** (projet `rpbey`, root `apps/web`, `vercel.json` + `build:vercel` = `next build --turbopack` sans `--env-file`) ; crons → **GitHub Actions** (`.github/workflows/cron-*.yml`) ; bot → **Cloud Run** (prêt, bloqué facturation GCP `rgfr-8927d`) ; uploads → **Vercel Blob** (`upload-store.ts`, branche `BLOB_READ_WRITE_TOKEN`). **Le VPS reste l'autorité jusqu'au cutover DNS** (fix-forward). ⚠️ **Patch `kysely@0.29.2`** (`patches/kysely@0.29.2.patch`) : le barrel `dist/index.js` omet `export * from './migration/migrator.js'` → `DEFAULT_MIGRATION_LOCK_TABLE`/`DEFAULT_MIGRATION_TABLE` absents au runtime (présents seulement dans les `.d.ts`), `@better-auth/kysely-adapter` les importe → Turbopack casse le build Vercel. NE PAS retirer le patch.
+- **Migration serverless complète** : DB → **Neon** (`packages/db/src/client.ts` lit `DATABASE_URL` pooled, fallback socket) ; site → **Vercel** (projet `rpbey`, root `apps/web`, `vercel.json` + `build:vercel` = `next build --turbopack` sans `--env-file`) ; crons → **GitHub Actions** (`.github/workflows/cron-*.yml`) ; bot → **Cloud Run** (`rpbey-bot` europe-west3) ; gacha-server → **Cloud Run** (`rpbey-gacha` europe-west3) ; uploads → **Vercel Blob** (`upload-store.ts`, `BLOB_READ_WRITE_TOKEN`). ⚠️ **Patch `kysely@0.29.2`** (`patches/kysely@0.29.2.patch`) : le barrel `dist/index.js` omet `export * from './migration/migrator.js'` → `DEFAULT_MIGRATION_LOCK_TABLE`/`DEFAULT_MIGRATION_TABLE` absents au runtime (présents seulement dans les `.d.ts`), `@better-auth/kysely-adapter` les importe → Turbopack casse le build Vercel. NE PAS retirer le patch.
 - **⚠️ Le gate de vérif DOIT inclure `next build`, pas seulement `tsc`** : un client component qui importe une façade `lib/*` ré-exportant un module server-only casse le bundle browser **sans que `tsc` le voie** (`tsc` valide les types, pas la frontière server/client du bundler). Cas réel : `TvFeed` → `lib/beytube` → `server/dal/stream`.
-- **⚠️ `bun run build:web` SIGILL** (Bun 1.3.14, à la phase « Running TypeScript », reproductible — PAS un OOM, peak ~1,3 GB) → **NODE INTERDIT (owner), build Bun-only.** Contournement : flip temporaire `apps/web/next.config.ts` `typescript.ignoreBuildErrors: false → true` (saute le tsc *interne* de Next = la phase qui crash ; sûr car `bunx tsc --noEmit` valide déjà les types =0 séparément), `bun run build:web`, puis **revert à `false`** (ne pas committer le flip). Résultat : build ~18s, `Generating static pages (N/N)` + standalone + BUILD_ID complets ; un `panic: Segmentation fault at address 0x0` Bun s'affiche en TOUTE FIN (exit 137) = **cosmétique** (crash de sortie après écriture), ignorer si `(N/N)` + BUILD_ID frais + `standalone/apps/web/server.js` présents. Puis `bash scripts/deploy-web.sh` + `sudo systemctl restart rpbey-web.service` + vérifier l'epoch BUILD_ID < ActiveEnterTimestamp (sinon stale). Candidat non testé : `BUN_JSC_useJIT=0 bun run build:web` (désactive le JIT JSC → éviterait le flip).
+- **⚠️ `bun run build:web` local** : Si exécuté localement, peut provoquer des SegFault Bun. Sur Vercel, le build tourne sous Node runtime de manière stable. Pour le build local, le flip temporaire `typescript.ignoreBuildErrors: false → true` dans `apps/web/next.config.ts` peut être utilisé pour contourner le plantage de tsc interne.
 
 ## Style commits
 
 Conventional en français, 1 ligne : `feat|fix|chore|refactor|docs(scope):`. Scopes fréquents : `bot`, `web`, `bridge`, `commands`, `cron`, `audit`, `e2e`, `db`. **Jamais** d'emoji, de `Co-Authored-By` ni de `Generated with…`.
+
+## Tournois & classements (DB)
+
+- **Tournois clés sur le slug** : `tournaments.challongeId` = `B_TS{n}` / `T_SS{n}`, row `id` = `bts{n}` / `tss{n}`. **Jamais** sur l'id numérique Challonge (`17261774`…) — cet ancien jeu était un doublon, **supprimé** le 2026-06-04 (backup `~/rpbey-legacy-bts-backup-*.json`). DB canonique = **Neon `rpbey-eu` Frankfurt** (l'ancien projet Oregon orphelin a été supprimé).
+- **`tournament_participants` a `UNIQUE(tournamentId, challongeParticipantId)`** (ajoutée le 2026-06-04 — manquait ; seule `tournament_matches` l'avait). Son absence laissait `createMany(skipDuplicates)` réinsérer des copies `userId:null` = la corruption B_TS4. Tous les imports en dépendent.
+- **Importer un tournoi** : skill **`tournament-import`** (`.claude/skills/tournament-import/`) → `scripts/tournament-workflow.ts` (`--meta` = annonce, `--scraped` = résultats, dup-safe, lie aux comptes sans en créer). Importeur BTS canonique : `apps/web/scripts/import-bts-tournaments.ts` (le legacy `import-bts-to-db.ts` est cassé — `../src/lib/prisma` supprimé). Source : `apps/web/data/exports/B_TS{n}.json`.
+- **Recalcul classement** (pas de cron) : Stardust → `apps/web/scripts/sync-stardust-canon.ts` (match pondéré par phase : pool 250 / WB 1000 / LB 500 ; firstPlace 15000) ; BTS/global → `apps/web/scripts/recompute-rankings.ts` (`participation 500 + bonus placement + matchWin 1000 ×multiplicateur`). SATR/WB = imports externes séparés. Formules complètes + pipeline : **[`docs/ops-serverless-db-ranking.md`](docs/ops-serverless-db-ranking.md)**.
+- **Challonge** : SPA derrière Cloudflare (`cf_clearance` lié à l'IP → curl/curl-impersonate = 403) ; l'endpoint `/module` est joignable via le vrai navigateur bxc (`window._initialStoreState.TournamentStore`).
+- **Avatars Discord** : `scripts/refresh-discord-avatars.ts` recharge les avatars périmés (hash roté → 404) + re-sync `global_rankings.avatarUrl`.

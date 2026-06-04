@@ -50,7 +50,7 @@
     "bot_test": "cd apps/bot && bun test",
     "scoped_before_commit": ["type_check", "lint", "dal_boundary"],
     "full_before_deploy": ["type_check", "lint", "format_check", "dal_boundary", "build"],
-    "deploy": "bash apps/web/scripts/deploy-web.sh && sudo systemctl restart rpbey-web.service"
+    "deploy": "bun scripts/deploy-vercel.ts"
   },
 
   "shared_resources": {

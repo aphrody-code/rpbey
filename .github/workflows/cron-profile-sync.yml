@@ -1,7 +1,7 @@
 name: Cron — profile sync (Discord enrich + global rankings)
 
 # Remplace le timer systemd `rpbey-profile-sync.timer` (05:00 UTC).
-# Deux temps (cf. scripts/sync-profiles.sh) :
+# Deux temps (cf. scripts/sync-profiles.ts) :
 #   1. Enrichissement Discord REST des comptes liés
 #      (apps/web/scripts/sync-discord-members.ts).
 #   2. Recalcul du classement global tous tournois
