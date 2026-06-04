@@ -107,4 +107,6 @@ jobs:
         run: vercel build --prod --token="$VERCEL_TOKEN"
 
       - name: Deploy (production, prebuilt)
-        run: vercel deploy --prebuilt --prod --yes --token="$VERCEL_TOKEN"
+        # `--archive=tgz` : upload le build en UNE archive plutôt que fichier par
+        # fichier → évite la limite free-tier « api-upload-free » (5000 fichiers/24h).
+        run: vercel deploy --prebuilt --prod --yes --archive=tgz --token="$VERCEL_TOKEN"
