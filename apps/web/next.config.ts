@@ -3,6 +3,21 @@ import path from "node:path";
 
 const IS_VERCEL = process.env.VERCEL === "1";
 
+const tracedDataFiles = [
+  "./node_modules/@tobyg74/tiktok-api-dl/helper/**",
+  "./data/bbx-weekly.json",
+  "./data/beyblade-knowledge.json",
+  "./data/bx-catalog.json",
+  "./data/wbo-combos-enriched.json",
+  "./data/exports/participants_map.json",
+  "./data/exports/B_TS*.json",
+  "./data/bey-library/bey-library-complete.json",
+  "./data/pools/*.json",
+  "./data/anime-frames/*.json",
+  "./data/wb_champions.json",
+  "./data/satr_champions.json",
+];
+
 const nextConfig: NextConfig = {
   // Enable React strict mode
   reactStrictMode: true,
@@ -29,24 +44,9 @@ const nextConfig: NextConfig = {
   // `cdn.rpbey.fr`). On cible précisément les fichiers consommés pour ne PAS
   // re-bundler tout `data/` (qui dépasse 250 MB — cf. exclusions plus bas).
   outputFileTracingIncludes: {
-    // Un SEUL glob `/**/*` (les clés dupliquées s'écrasent) : on liste ici TOUS
-    // les fichiers `data/*` lus au runtime (data-cache.ts, bts.ts, ambient route,
-    // rankings) + le helper tiktok. Cible précise → pas de re-bundle du `data/`
-    // complet (>250 MB, cf. exclusions plus bas).
-    "/**/*": [
-      "./node_modules/@tobyg74/tiktok-api-dl/helper/**",
-      "./data/bbx-weekly.json",
-      "./data/beyblade-knowledge.json",
-      "./data/bx-catalog.json",
-      "./data/wbo-combos-enriched.json",
-      "./data/exports/participants_map.json",
-      "./data/exports/B_TS*.json",
-      "./data/bey-library/bey-library-complete.json",
-      "./data/pools/*.json",
-      "./data/anime-frames/*.json",
-      "./data/wb_champions.json",
-      "./data/satr_champions.json",
-    ],
+    // We match both flat and nested routes to ensure data is available for all pages.
+    "**/*": tracedDataFiles,
+    "/*": tracedDataFiles,
   },
 
   // Exclut les GROS sous-dossiers `data/*` du tracing Next (cause
