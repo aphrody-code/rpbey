@@ -63,10 +63,11 @@ prisma/generated/
 src/generated/
 
 # Data exports / scraping artifacts (often huge)
-data/exports/
+data/exports/*
 # …sauf le mapping d'alias participants, requis au runtime (rankings + BTS) —
 # le site est self-contained sur Vercel (plus de fetch cdn.rpbey.fr).
 !data/exports/participants_map.json
+!data/exports/B_TS*.json
 data/cache/
 temp/
 temp_extract/

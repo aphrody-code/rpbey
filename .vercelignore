@@ -15,15 +15,15 @@ node_modules/
 
 # Gros sous-dossiers data — fetchés depuis le CDN à l'exécution.
 apps/web/data/bey-library/
-apps/web/data/exports/
+# apps/web/data/exports/  <-- Commented out to allow tracing of B_TS*.json and participants_map.json
 apps/web/data/satr_history/
 apps/web/data/wb_history/
 apps/web/data/scrapes/
 apps/web/data/cleaned/
 apps/web/data/backups/
-apps/web/data/pools/
+# apps/web/data/pools/    <-- Commented out to allow tracing of T_SS1.json
 apps/web/data/planner/
-apps/web/data/anime-frames/
+# apps/web/data/anime-frames/ <-- Commented out to allow tracing of anime-frames files
 apps/web/data/discord-*.json
 apps/web/data/*.json.br
 apps/web/data/*.json.gz
