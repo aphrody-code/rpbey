@@ -8,7 +8,15 @@ Monorepo de la communauté Beyblade **République Populaire du Beyblade** (tourn
 - **Bot (apps/bot)** : Bot Discord (discordx + tsyringe + discord.js v14, Skia rendering).
 - **Gacha Server (apps/gacha-server)** : Serveur Colyseus 0.17 (BunWebSockets) pour l'économie TCG.
 - **CDN (apps/cdn)** : Serveur d'images Bun minimaliste.
-- **Base de données** : PostgreSQL local via `@rpbey/db`.
+- **Base de données** : **Neon Postgres** (serverless, région `eu-central-1` Frankfurt), pooled via `@rpbey/db` (`DATABASE_URL`, `prepare:false`) — fallback socket local en dev.
+
+## Déploiement (serverless)
+
+- **Web** → **Vercel** (`fra1`, runtime Bun) via GitHub Actions ; images servies en direct (`images.unoptimized` — l'optimiseur Vercel est plan-capé).
+- **Bot** → **Google Cloud Run** (`europe-west3`, image Docker).
+- CORS ouvert cross-origin partout ; tous les serveurs bind `0.0.0.0:$PORT`.
+- Conventions DB (tournois clés sur le slug `B_TS{n}`/`T_SS{n}`, contrainte unique participants), pipeline tournois + calcul de classement (BTS/global + Stardust) et skill `tournament-import` : voir **[`docs/ops-serverless-db-ranking.md`](docs/ops-serverless-db-ranking.md)**.
+- Le déploiement VPS/systemd historique (`scripts/reactivate.sh`, ci-dessous) reste disponible.
 
 ## Réactivation Propre et Complète
 
