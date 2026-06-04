@@ -9,13 +9,30 @@ import { RankingGroup } from "../commands/Beyblade/RankingGroup.js";
 import { createMockInteraction, mockPrisma } from "./mocks.js";
 
 // Mock canvas utils
-vi.mock("../../lib/canvas-utils.js", () => ({
+vi.mock("../lib/canvas-utils.js", () => ({
   generateProfileCard: vi.fn().mockResolvedValue(Buffer.from("mock-image")),
   generateLeaderboardCard: vi.fn().mockResolvedValue(Buffer.from("mock-leaderboard")),
 }));
 
+// Mock ranking-panel : RankingGroup.leaderboard() appelle defaultSeasonKey() +
+// renderRankingPanel(), qui interrogent la table `ranking_system` via Drizzle.
+// Sans mock, en CI (DATABASE_URL non défini, aucun postgres local) → postgres-js
+// tente le socket par défaut /var/run/postgresql/.s.PGSQL.5432 → ENOENT → le
+// catch renvoie un message string et l'assertion `files: [...]` casse. (Le test
+// passait à tort sur le VPS, qui a un postgres 18 local sur ce socket.) On mocke
+// donc le rendu : la commande est testée sans DB, déterministe sur tout runner.
+vi.mock("../lib/ranking-panel.js", () => ({
+  defaultSeasonKey: vi.fn().mockResolvedValue("2026"),
+  renderRankingPanel: vi.fn().mockResolvedValue({
+    embed: { data: {} },
+    file: { name: "classement.png", attachment: Buffer.from("mock") },
+    components: [],
+    totalPages: 1,
+  }),
+}));
+
 // Mock logger
-vi.mock("../../lib/logger.js", () => ({
+vi.mock("../lib/logger.js", () => ({
   logger: {
     info: vi.fn(),
     error: vi.fn(),

@@ -67,11 +67,18 @@ FROM deps AS build
 # mais ce dist/ est gitignore → ABSENT d'un checkout propre (CI). Sans lui, le runtime
 # Bun échoue dès le 1er import : « Cannot find module '@rpbey/di' » → exit(1) → le
 # conteneur ne bind jamais $PORT → Cloud Run « failed to start and listen on PORT ».
-# On les build ICI (turbo gère l'ordre via ^build : di/internal/importer → discordx).
 # Le déploiement manuel passait car le tree VPS dirty embarquait déjà dist/ ; le build
 # Cloud Build hermétique depuis un checkout git propre ne l'a pas.
-WORKDIR /app
-RUN bun run turbo run build --filter=@rpbey/discordx --filter=@rpbey/pagination
+#
+# On build chaque paquet en DIRECT (`bun run build` = tsup), dans l'ordre des deps
+# internes (internal/importer/di/pagination, sans dep, puis discordx qui dépend de
+# di+internal+importer). PAS via `turbo run build` : turbo.json n'est pas COPYé dans
+# l'image (« Could not find turbo.json » → exit 1). Build direct = zéro dépendance turbo.
+RUN cd /app/packages/discordx/packages/internal   && bun run build \
+ && cd /app/packages/discordx/packages/importer   && bun run build \
+ && cd /app/packages/discordx/packages/di         && bun run build \
+ && cd /app/packages/discordx/packages/pagination && bun run build \
+ && cd /app/packages/discordx/packages/discordx   && bun run build
 WORKDIR /app/apps/bot
 RUN bun run build
 # Runtime tsconfig SANS l'alias `paths` "@aphrody/x" → ./types/aphrody-x/index.d.ts.
