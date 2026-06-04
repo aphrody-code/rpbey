@@ -20,6 +20,7 @@ beforeAll(async () => {
   const port = probe.port;
   probe.stop(true);
 
+  delete process.env.PORT;
   process.env.EMBED_PORT = String(port);
   process.env.TRANSFORMERS_OFFLINE = "1";
   process.env.HF_HUB_OFFLINE = "1";
