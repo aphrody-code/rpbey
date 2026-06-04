@@ -54,6 +54,7 @@
     "data",
     "docs",
     "mobile",
-    "trailer"
+    "trailer",
+    "tests"
   ]
 }
