@@ -80,6 +80,23 @@ Blob au lieu de `/var/www`. Les lectures de rankings passent déjà par Neon.
 - **`@rose-griffon/challonge-core/dist`** (gitignored, pas de build script) :
   prebuilt force-commité (`index.js`/`viewer.js`/scss) pour que le checkout
   Vercel résolve l'export `./viewer` (sinon MODULE_NOT_FOUND au build).
+- **`apps/web/openapi.json`** (généré, gitignored) : force-commité car
+  `src/lib/auth.ts` l'importe (`../../openapi.json`) — absent du checkout CI →
+  `Module not found` au build.
+- **Patch `kysely@0.29.2`** (`patches/`) : barrel `dist/index.js` n'exporte pas
+  le module migrator → `@better-auth/kysely-adapter` casse Turbopack. Patché.
+- **CI deploy `--archive=tgz`** : sans ça, `vercel deploy --prebuilt` upload
+  fichier-par-fichier et dépasse la limite free-tier `api-upload-free`
+  (5000 fichiers/24h).
+
+### ✅ LIVE (vérifié 2026-06-04)
+
+- Run CI `deploy-vercel.yml` **vert** (migrate Neon ✓ / build Vercel ✓ / deploy
+  prod ✓). Build Vercel = **Node runtime** (pas de SIGILL Bun local).
+- Prod : **https://rpbey.vercel.app → HTTP 200**. Pages DB-driven (Neon) OK :
+  `/` (title « RPB - République Populaire du Beyblade »), `/rankings`
+  (« Classements BTS »), `/tournaments`, `/equipes`, `/anime`, `/sondages`,
+  `/notre-equipe` — toutes **200**.
 
 ## Reste human-gated
 
