@@ -184,10 +184,15 @@ async function loadPage(
   routeOrUrl: string,
 ): Promise<{ status: number; html: string }> {
   const url = abs(routeOrUrl) ?? `${BASE}${routeOrUrl}`;
-  // 1) bxc-test (CDP) — statut + DOM.
+  // 1) bxc-test (CDP) — statut HTTP réel + DOM. On borne par un timeout : le
+  // profil `static` happy-dom peut bloquer sur un goto cross-origin → on retombe
+  // alors immédiatement sur `fetch` (oracle fiable, rapide).
   try {
-    const res = await page.goto(routeOrUrl);
-    const status = res?.status ?? 0;
+    const navigated = await Promise.race([
+      page.goto(routeOrUrl),
+      new Promise<null>((r) => setTimeout(() => r(null), 4000)),
+    ]);
+    const status = (navigated as { status?: number } | null)?.status ?? 0;
     if (status > 0) {
       const html = await page.content().catch(() => "");
       return { status, html };
@@ -195,7 +200,7 @@ async function loadPage(
   } catch {
     /* fallback fetch */
   }
-  // 2) fetch — statut + corps brut.
+  // 2) fetch — statut + corps brut (chemin principal robuste, sans SOP).
   try {
     const r = await fetch(url, { redirect: "follow" });
     const ct = r.headers.get("content-type") ?? "";
@@ -249,7 +254,7 @@ test("seed pages return 200 and their assets resolve (no 404/5xx)", async () => 
     nonOk,
     `pages non-200:\n${nonOk.map((b) => `  ${b.status} ${b.url}`).join("\n")}`,
   ).toHaveLength(0);
-});
+}, 180_000);
 
 test("migrated assets (ex-cdn.rpbey.fr) all resolve 200 on Vercel", async () => {
   const failures: Result[] = [];
@@ -269,7 +274,7 @@ test("migrated assets (ex-cdn.rpbey.fr) all resolve 200 on Vercel", async () => 
     failures,
     `migrated assets non-200:\n${failures.map((b) => `  ${b.status} ${b.url}`).join("\n")}`,
   ).toHaveLength(0);
-});
+}, 60_000);
 
 test("no cdn.rpbey.fr URL is rendered into the homepage or ambient API", async () => {
   // Page d'accueil : aucune référence cdn.rpbey.fr dans le HTML rendu.
@@ -287,4 +292,4 @@ test("no cdn.rpbey.fr URL is rendered into the homepage or ambient API", async (
   expect(leaks, `ambient frames still reference cdn.rpbey.fr:\n${leaks.join("\n")}`).toHaveLength(
     0,
   );
-});
+}, 60_000);

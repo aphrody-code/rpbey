@@ -21,7 +21,10 @@ const here = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
 const testFile = join(here, "tests", "no-404.bxc.test.ts");
 const neutralCwd = mkdtempSync(join(tmpdir(), "rpbey-404-"));
 
-const proc = Bun.spawn(["bun", "test", testFile], {
+// `--timeout` global : le crawl réseau (pages + assets + liens découverts) dépasse
+// les 5 s par défaut de bun:test. bxc-test re-exporte `test` via `createTest` et ne
+// propage pas l'arg timeout inline → on le fixe en CLI.
+const proc = Bun.spawn(["bun", "test", "--timeout", "180000", testFile], {
   cwd: neutralCwd,
   stdout: "inherit",
   stderr: "inherit",
