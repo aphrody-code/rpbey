@@ -9,6 +9,8 @@ import type { ScrapedTournament } from "@/lib/brackets/challonge";
 import { challongeToViewerData } from "@/lib/brackets/challonge";
 import type { ViewerData } from "@rose-griffon/challonge-core/viewer";
 
+export const dynamic = "force-dynamic";
+
 interface PageProps {
   params: Promise<{ id: string }>;
 }

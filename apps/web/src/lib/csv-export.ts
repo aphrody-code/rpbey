@@ -25,11 +25,11 @@ export function generateTournamentExport(tournament: any) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const participantsData = tournament.participants.map((p: any) => ({
     Rang: p.finalPlacement || "-",
-    Joueur: p.user.name || p.user.username,
-    Pseudo_Discord: p.user.discordTag || "-",
+    Joueur: p.user?.name || p.user?.username || p.playerName || "Joueur Inconnu",
+    Pseudo_Discord: p.user?.discordTag || "-",
     Victoires: p.wins,
     Defaites: p.losses,
-    Points: p.user.profile?.rankingPoints || 0,
+    Points: p.user?.profile?.rankingPoints || 0,
   }));
 
   return jsonToCsv(participantsData);

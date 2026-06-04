@@ -165,6 +165,65 @@ export async function listAllTournamentsForMarketing() {
   });
 }
 
+export async function getCompletedStardustTournamentForHome() {
+  const row = await db.query.tournaments.findFirst({
+    where: eq(schema.tournaments.challongeId, "T_SS1"),
+    with: {
+      tournamentParticipants: {
+        orderBy: asc(schema.tournamentParticipants.finalPlacement),
+      },
+    },
+  });
+  if (!row) return null;
+
+  const matchesCount = await db
+    .select({ value: count() })
+    .from(schema.tournamentMatches)
+    .where(eq(schema.tournamentMatches.tournamentId, row.id));
+
+  return {
+    ...row,
+    participants: row.tournamentParticipants,
+    matchesCount: matchesCount[0]?.value ?? 0,
+  };
+}
+
+export async function getAllTournamentsForHome() {
+  const rows = await db.query.tournaments.findMany({
+    orderBy: desc(schema.tournaments.date),
+    with: {
+      tournamentParticipants: {
+        orderBy: asc(schema.tournamentParticipants.finalPlacement),
+      },
+      tournamentMatches: {
+        columns: { id: true },
+      },
+    },
+  });
+
+  return rows.map((t) => {
+    const podium = t.tournamentParticipants
+      .filter((p) => p.finalPlacement && p.finalPlacement <= 3)
+      .map((p) => ({
+        name: (p.playerName || "").replace(/✅|✔️/g, "").trim(),
+        rank: p.finalPlacement || 0,
+        wins: p.wins || 0,
+        losses: p.losses || 0,
+      }));
+
+    return {
+      id: t.id,
+      name: t.name,
+      date: new Date(t.date).toISOString(),
+      poster: t.posterUrl || "/logo.webp",
+      participants: t.tournamentParticipants.length,
+      matchesCount: t.tournamentMatches.length,
+      podium,
+      status: t.status,
+    };
+  });
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 // Détail tournoi
 // ─────────────────────────────────────────────────────────────────────────────

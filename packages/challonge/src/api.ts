@@ -21,6 +21,7 @@ import {
   type ScrapedTournament,
   type ScrapedTournamentMetadata,
 } from "./types";
+import { LruCache } from "./core/cache";
 
 // ─── Raw v1 shapes ───────────────────────────────────────────────────────────
 
@@ -188,6 +189,10 @@ export class ChallongeApi {
   private readonly requestTimeoutMs: number;
   private readonly maxRetries: number;
   private readonly onRequest?: ChallongeApiOptions["onRequest"];
+  private readonly tournamentCache = new LruCache<any>({
+    maxBytes: 10 * 1024 * 1024,
+    ttlMs: 5 * 60 * 1000,
+  }); // cache raw API responses
 
   constructor(options: ChallongeApiOptions = {}) {
     const apiKey = options.apiKey ?? process.env.CHALLONGE_API_KEY;
@@ -308,6 +313,9 @@ export class ChallongeApi {
     } = {},
   ): Promise<ChallongeApiTournament> {
     const { includeParticipants = true, includeMatches = true, signal } = opts;
+    const cacheKey = `api:tournament:${idOrSlug}:${includeParticipants ? 1 : 0}:${includeMatches ? 1 : 0}`;
+    const cached = this.tournamentCache.get(cacheKey);
+    if (cached) return cached;
     const json = await this.request<{ tournament: ChallongeApiTournament }>(
       "GET",
       `/tournaments/${idOrSlug}.json`,
@@ -319,6 +327,7 @@ export class ChallongeApi {
         signal,
       },
     );
+    this.tournamentCache.set(cacheKey, json.tournament);
     return json.tournament;
   }
 

@@ -17,7 +17,10 @@ import Link from "next/link";
 import { TournamentCardGrid } from "@/components/cards/TournamentCard";
 import { type TournamentStatus } from "@/components/ui/StatusChip";
 import { loadJsonSafe } from "@/lib/data-cache";
-import { listAllTournamentsForMarketing } from "@/server/dal/tournaments";
+import {
+  listAllTournamentsForMarketing,
+  getCompletedStardustTournamentForHome,
+} from "@/server/dal/tournaments";
 import { createPageMetadata } from "@/lib/seo-utils";
 
 export const dynamic = "force-dynamic";
@@ -52,6 +55,14 @@ const BTS_EDITIONS = [
     date: "2026-05-10",
     poster: "/tournaments/BTS5_poster.gif",
     fallbackCount: 60,
+  },
+  {
+    id: "bts4",
+    file: "B_TS4.json",
+    name: "Bey-Tamashii Séries #4",
+    date: "2026-04-26",
+    poster: "/tournaments/BTS4_poster.webp",
+    fallbackCount: 81,
   },
   {
     id: "bts3",
@@ -127,7 +138,7 @@ export default async function TournamentsPage() {
     matchesCount?: number;
   };
 
-  const [dbTournaments, btsExports] = await Promise.all([
+  const [dbTournaments, btsExports, completedStardust] = await Promise.all([
     listAllTournamentsForMarketing(),
     Promise.all(
       BTS_EDITIONS.map(async (edition) => ({
@@ -135,6 +146,7 @@ export default async function TournamentsPage() {
         data: await loadJsonSafe<BtsExport>(`data/exports/${edition.file}`),
       })),
     ),
+    getCompletedStardustTournamentForHome(),
   ]);
 
   const btsCards: BtsCard[] = [];
@@ -481,7 +493,7 @@ export default async function TournamentsPage() {
         {/* ═══════════════════════════════════════
             SECTION 1.5 — STARDUST SÉRIES (RPB Nord)
             ═══════════════════════════════════════ */}
-        <StardustSeriesSection tournaments={dbTournaments} />
+        <StardustSeriesSection tournaments={dbTournaments} completedStardust={completedStardust} />
 
         {/* ═══════════════════════════════════════
             SECTION 2 — SÉRIES PARTENAIRES
@@ -624,8 +636,23 @@ export default async function TournamentsPage() {
 
 // ── Stardust Series Section (RPB Nord) ──
 
+interface CompletedStardustData {
+  id: string;
+  name: string;
+  date: string;
+  posterUrl: string | null;
+  matchesCount: number;
+  participants: {
+    playerName: string | null;
+    finalPlacement: number | null;
+    wins: number | null;
+    losses: number | null;
+  }[];
+}
+
 type DbTournament = {
   id: string;
+  challongeId: string | null;
   name: string;
   description: string | null;
   date: string;
@@ -643,7 +670,13 @@ type DbTournament = {
   } | null;
 };
 
-function StardustSeriesSection({ tournaments }: { tournaments: DbTournament[] }) {
+function StardustSeriesSection({
+  tournaments,
+  completedStardust,
+}: {
+  tournaments: DbTournament[];
+  completedStardust: CompletedStardustData | null;
+}) {
   const stardustItems = tournaments.filter((t) =>
     (t.category?.name ?? "").toUpperCase().includes("STARDUST"),
   );
@@ -666,11 +699,31 @@ function StardustSeriesSection({ tournaments }: { tournaments: DbTournament[] })
         )}
         {stardustItems
           .filter((t) => t.id !== upcoming?.id)
-          .map((t) => (
-            <Grid key={t.id} size={{ xs: 12, sm: 6, md: 4 }}>
-              <CompletedSeriesCard tournament={t} accent={accent} />
-            </Grid>
-          ))}
+          .map((t) => {
+            const isStardust1 = t.challongeId === "T_SS1";
+            const enriched =
+              isStardust1 && completedStardust
+                ? {
+                    ...t,
+                    participantsCount: completedStardust.participants?.length || 0,
+                    matchesCount: completedStardust.matchesCount || 0,
+                    podium: (completedStardust.participants || [])
+                      .filter((p) => p.finalPlacement && p.finalPlacement <= 3)
+                      .sort((a, b) => (a.finalPlacement || 0) - (b.finalPlacement || 0))
+                      .map((p) => ({
+                        name: (p.playerName || "").replace(/✅|✔️/g, "").trim(),
+                        rank: p.finalPlacement || 0,
+                        wins: p.wins || 0,
+                        losses: p.losses || 0,
+                      })),
+                  }
+                : t;
+            return (
+              <Grid key={t.id} size={{ xs: 12, sm: 6, md: 4 }}>
+                <CompletedSeriesCard tournament={enriched} accent={accent} />
+              </Grid>
+            );
+          })}
       </Grid>
     </Box>
   );
@@ -840,8 +893,20 @@ function UpcomingSeriesCard({ tournament, accent }: { tournament: DbTournament; 
 
 // ── Completed / past tournament card for a RPB series ──
 
-function CompletedSeriesCard({ tournament, accent }: { tournament: DbTournament; accent: string }) {
-  const poster = tournament.posterUrl ?? "/logo.webp";
+function CompletedSeriesCard({
+  tournament,
+  accent,
+}: {
+  tournament: DbTournament & {
+    participantsCount?: number;
+    matchesCount?: number;
+    podium?: { name: string; rank: number; wins: number; losses: number }[];
+  };
+  accent: string;
+}) {
+  const poster =
+    tournament.posterUrl ??
+    (tournament.challongeId === "T_SS1" ? "/tournaments/SS1_poster.webp" : "/logo.webp");
   return (
     <Link
       href={`/tournaments/${tournament.id}`}
@@ -892,18 +957,105 @@ function CompletedSeriesCard({ tournament, accent }: { tournament: DbTournament;
               fontWeight: 800,
               fontSize: { xs: "0.85rem", md: "0.9rem" },
               lineHeight: 1.3,
+              mb: 1,
             }}
             noWrap
           >
             {tournament.name}
           </Typography>
-          <Typography variant="caption" sx={{ color: "text.secondary", fontSize: "0.68rem" }}>
+          <Typography
+            variant="caption"
+            sx={{ color: "text.secondary", fontSize: "0.68rem", display: "block", mb: 1.2 }}
+          >
             {new Date(tournament.date).toLocaleDateString("fr-FR", {
               day: "numeric",
               month: "long",
               year: "numeric",
             })}
           </Typography>
+
+          {/* Render Stats and Podium if available */}
+          {tournament.participantsCount !== undefined && (
+            <>
+              <Stack direction="row" spacing={1} sx={{ mb: 1.5 }}>
+                <Chip
+                  icon={<GroupsIcon sx={{ fontSize: 13 }} />}
+                  label={`${tournament.participantsCount} joueurs`}
+                  size="small"
+                  sx={{
+                    height: 22,
+                    fontSize: "0.65rem",
+                    fontWeight: 700,
+                    bgcolor: alpha(accent, 0.08),
+                    color: "text.secondary",
+                  }}
+                />
+                {tournament.matchesCount !== undefined && tournament.matchesCount > 0 && (
+                  <Chip
+                    label={`${tournament.matchesCount} matchs`}
+                    size="small"
+                    sx={{
+                      height: 22,
+                      fontSize: "0.65rem",
+                      fontWeight: 700,
+                      bgcolor: "rgba(255,255,255,0.04)",
+                      color: "text.secondary",
+                    }}
+                  />
+                )}
+              </Stack>
+
+              {tournament.podium && tournament.podium.length > 0 && (
+                <Stack spacing={0.5}>
+                  {tournament.podium.map((p) => (
+                    <Stack
+                      key={p.rank}
+                      direction="row"
+                      spacing={1}
+                      sx={{
+                        alignItems: "center",
+                        py: 0.4,
+                        px: 1,
+                        borderRadius: 1.5,
+                        bgcolor: p.rank === 1 ? "rgba(255,215,0,0.06)" : "transparent",
+                      }}
+                    >
+                      <Typography
+                        sx={{
+                          fontSize: "0.75rem",
+                          width: 18,
+                          textAlign: "center",
+                        }}
+                      >
+                        {p.rank === 1 ? "🥇" : p.rank === 2 ? "🥈" : "🥉"}
+                      </Typography>
+                      <Typography
+                        variant="caption"
+                        noWrap
+                        sx={{
+                          fontWeight: p.rank === 1 ? 800 : 600,
+                          flex: 1,
+                          fontSize: "0.72rem",
+                          color: p.rank === 1 ? "#fbbf24" : "text.primary",
+                        }}
+                      >
+                        {p.name}
+                      </Typography>
+                      <Typography
+                        variant="caption"
+                        sx={{
+                          fontSize: "0.6rem",
+                          color: "text.disabled",
+                        }}
+                      >
+                        {p.wins}V-{p.losses}D
+                      </Typography>
+                    </Stack>
+                  ))}
+                </Stack>
+              )}
+            </>
+          )}
         </Box>
       </Paper>
     </Link>

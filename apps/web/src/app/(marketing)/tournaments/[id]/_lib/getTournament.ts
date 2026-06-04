@@ -51,7 +51,7 @@ const BTS_META: Record<string, { file: string; name: string; desc: string; date:
     file: "B_TS4.json",
     name: "Bey-Tamashii Séries #4",
     desc: "Quatrième édition des Bey-Tamashii Séries au Dernier Bar avant la Fin du Monde.",
-    date: "2026-04-12",
+    date: "2026-04-26",
   },
   bts5: {
     file: "B_TS5.json",

@@ -19,10 +19,10 @@
  *     top-level pour ne pas charger le CDP (Chrome/bxc-engine) sauf besoin réel.
  */
 
-import {
-  ImpersonatedClient,
-  type ImpersonateProfile,
-  type ImpersonatedResponse,
+import type {
+  ImpersonatedClient as ImpersonatedClientType,
+  ImpersonateProfile,
+  ImpersonatedResponse,
 } from "@aphrody/bxc/ffi/curl-impersonate";
 
 // ---------------------------------------------------------------------------
@@ -103,21 +103,31 @@ export interface ImpersonatedClientEngineOptions {
  * le comportement (profil `chrome131`, `followRedirects: false`, etc.).
  */
 export class ImpersonatedClientEngine implements FetchEngine {
-  readonly #client: ImpersonatedClient;
+  #client: ImpersonatedClientType | null = null;
+  readonly #opts: ImpersonatedClientEngineOptions;
   readonly #defaultProfile: ImpersonateProfile;
 
   constructor(opts: ImpersonatedClientEngineOptions = {}) {
     this.#defaultProfile = opts.profile ?? "chrome131";
-    this.#client = new ImpersonatedClient({
-      profile: this.#defaultProfile,
-      timeoutMs: opts.timeoutMs ?? 25_000,
-      followRedirects: opts.followRedirects ?? false,
-      maxRedirects: opts.maxRedirects ?? 10,
-    });
+    this.#opts = opts;
+  }
+
+  async #getClient(): Promise<ImpersonatedClientType> {
+    if (!this.#client) {
+      const { ImpersonatedClient } = await import("@aphrody/bxc/ffi/curl-impersonate");
+      this.#client = new ImpersonatedClient({
+        profile: this.#defaultProfile,
+        timeoutMs: this.#opts.timeoutMs ?? 25_000,
+        followRedirects: this.#opts.followRedirects ?? false,
+        maxRedirects: this.#opts.maxRedirects ?? 10,
+      });
+    }
+    return this.#client;
   }
 
   async request(url: string, opts: FetchEngineRequest = {}): Promise<RawHttpResponse> {
-    const res: ImpersonatedResponse = await this.#client.fetch(url, {
+    const client = await this.#getClient();
+    const res: ImpersonatedResponse = await client.fetch(url, {
       method: opts.method,
       profile: opts.profile ?? this.#defaultProfile,
       cookies: opts.cookies || undefined,
@@ -136,7 +146,10 @@ export class ImpersonatedClientEngine implements FetchEngine {
   }
 
   close(): void {
-    this.#client.close();
+    if (this.#client) {
+      this.#client.close();
+      this.#client = null;
+    }
   }
 }
 

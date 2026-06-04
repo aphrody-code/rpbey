@@ -14,6 +14,7 @@
 import { ChallongeApi, ChallongeApiError, type ChallongeApiOptions } from "./api";
 import { ChallongeScraper, type ChallongeScraperOptions, type ScrapeOptions } from "./scraper";
 import { type ScrapedLogEntry, type ScrapedStation, type ScrapedTournament } from "./types";
+import { LruCache } from "./core/cache";
 
 export interface ChallongeClientOptions {
   api?: ChallongeApiOptions | false;
@@ -34,6 +35,18 @@ export class ChallongeClient {
   private scraperOpts: ChallongeScraperOptions | null;
   private cachedScraper: ChallongeScraper | null = null;
   private readonly log: (msg: string) => void;
+  private tournamentCache = new LruCache<ScrapedTournament>({
+    maxBytes: 5 * 1024 * 1024,
+    ttlMs: 10 * 60 * 1000,
+  }); // cache everything for 10min / 5MB
+  private logCache = new LruCache<ScrapedLogEntry[]>({
+    maxBytes: 2 * 1024 * 1024,
+    ttlMs: 5 * 60 * 1000,
+  });
+  private stationsCache = new LruCache<ScrapedStation[]>({
+    maxBytes: 1 * 1024 * 1024,
+    ttlMs: 5 * 60 * 1000,
+  });
 
   constructor(options: ChallongeClientOptions = {}) {
     this.log = options.log ?? QUIET;
@@ -80,6 +93,15 @@ export class ChallongeClient {
    *   is visible by the configured API token.
    */
   async fetch(idOrSlug: string | number, options: FetchOptions = {}): Promise<ScrapedTournament> {
+    const key = String(idOrSlug);
+    // check cache first for instant
+    if (!options.transport || options.transport === "auto") {
+      const cached = this.tournamentCache.get(key);
+      if (cached) {
+        this.log(`✓ cache hit for ${key}`);
+        return cached;
+      }
+    }
     const transport = options.transport ?? "auto";
 
     // ── Pure API path ────────────────────────────────────────────────────
@@ -109,6 +131,7 @@ export class ChallongeClient {
           signal: options.signal,
         });
         canonical = this.apiClient.toCanonical(t);
+        this.tournamentCache.set(key, canonical);
         this.log(
           `✓ API: ${canonical.metadata.name} (state=${canonical.metadata.state}, ${canonical.participants.length} parts, ${canonical.matches.length} matches)`,
         );
@@ -140,8 +163,11 @@ export class ChallongeClient {
         });
 
         if (canonical) {
-          return mergeScrapeIntoCanonical(canonical, scrapeResult, options);
+          const merged = mergeScrapeIntoCanonical(canonical, scrapeResult, options);
+          this.tournamentCache.set(key, merged);
+          return merged;
         }
+        this.tournamentCache.set(key, scrapeResult);
         return scrapeResult;
       } catch (err) {
         if (canonical) {
@@ -155,6 +181,7 @@ export class ChallongeClient {
     if (!canonical) {
       throw new Error(`Cannot fetch tournament ${idOrSlug}: API and scraper both unavailable.`);
     }
+    this.tournamentCache.set(key, canonical);
     return canonical;
   }
 
@@ -162,6 +189,12 @@ export class ChallongeClient {
    * Convenience: fetch only the activity log (scraper-only endpoint).
    */
   async fetchLog(idOrSlug: string): Promise<ScrapedLogEntry[]> {
+    const key = String(idOrSlug);
+    const cached = this.logCache.get(key);
+    if (cached) {
+      this.log(`✓ log cache hit for ${key}`);
+      return cached;
+    }
     const result = await this.fetch(idOrSlug, {
       transport: "scrape",
       withLog: true,
@@ -169,6 +202,7 @@ export class ChallongeClient {
       withStations: false,
       withParticipants: false,
     });
+    this.logCache.set(key, result.log);
     return result.log;
   }
 
@@ -176,6 +210,12 @@ export class ChallongeClient {
    * Convenience: fetch live stations (scraper-only endpoint).
    */
   async fetchStations(idOrSlug: string): Promise<ScrapedStation[]> {
+    const key = String(idOrSlug);
+    const cached = this.stationsCache.get(key);
+    if (cached) {
+      this.log(`✓ stations cache hit for ${key}`);
+      return cached;
+    }
     const result = await this.fetch(idOrSlug, {
       transport: "scrape",
       withStations: true,
@@ -183,6 +223,7 @@ export class ChallongeClient {
       withLog: false,
       withParticipants: false,
     });
+    this.stationsCache.set(key, result.stations);
     return result.stations;
   }
 }

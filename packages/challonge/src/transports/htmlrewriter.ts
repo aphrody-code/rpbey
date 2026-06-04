@@ -27,10 +27,7 @@
  *     `FetchAndParseOptions`
  */
 
-import {
-  extractChallongeTournament,
-  type ChallongeTournamentSnapshot,
-} from "@aphrody/challonge";
+import { extractChallongeTournament, type ChallongeTournamentSnapshot } from "@aphrody/challonge";
 import { parseBracketSvg, type BracketMatch } from "../scrapers/bracket-svg";
 import {
   type ScrapedMatch,

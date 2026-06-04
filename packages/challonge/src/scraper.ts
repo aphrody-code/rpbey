@@ -19,10 +19,7 @@
 
 import { BxcTransport, type BxcTransportOptions } from "./transports/bxc";
 import { CurlImpersonateError, isRedirectInfo } from "./transports/curl-impersonate-types";
-import {
-  extractChallongeTournament,
-  type ChallongeTournamentSnapshot,
-} from "@aphrody/challonge";
+import { extractChallongeTournament, type ChallongeTournamentSnapshot } from "@aphrody/challonge";
 import { resolveDefaultCookiePath } from "./utils/cookies";
 import { parseInitialStoreState } from "./extractors/store-state";
 import { type ChallongeSnapshotLike, snapshotToScrapedTournament } from "./mappers/snapshot";
@@ -507,6 +504,27 @@ export class ChallongeScraper {
     const slug = urlIdOrSlug.replace("https://challonge.com/", "").replace(/^\//, "");
     const baseUrl = `https://challonge.com/${slug}`;
     this.opts.log(`[ChallongeScraper] scrape: ${slug}`);
+
+    // Try native .json from Challonge server with cookie for direct interrogation (more native than full HTML scrape)
+    try {
+      const jsonUrl = `https://challonge.com/${slug}.json`;
+      const t = this.getTransport();
+      const resp = await t.fetch(jsonUrl, {
+        extraHeaders: { Accept: "application/json" },
+      });
+      if (!isRedirectInfo(resp) && resp.status === 200) {
+        const ct = resp.headers["content-type"] || "";
+        if (ct.includes("json") || resp.body.trim().startsWith("{")) {
+          const data = JSON.parse(resp.body);
+          if (data && data.tournament) {
+            this.opts.log(`[ChallongeScraper] native .json from server for ${slug}`);
+            // Fallthrough to module for full (logs etc not in basic json), but we hit native
+          }
+        }
+      }
+    } catch (e: any) {
+      this.opts.log(`[ChallongeScraper] native .json probe: ${e.message}`);
+    }
 
     // /module is always fetched (provides TournamentStore)
     const snap = await this.extractStore(slug, signal);

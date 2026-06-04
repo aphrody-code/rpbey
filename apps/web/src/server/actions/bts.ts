@@ -302,7 +302,7 @@ function aggregatePoints(
 }
 
 // Resolver Discord — User.image prioritaire sur portrait Challonge.
-async function loadDiscordImageResolver(): Promise<
+export async function loadDiscordImageResolver(): Promise<
   (playerName: string, challongeUsername: string | null) => string | null
 > {
   const norm = (s: string | null | undefined) =>
@@ -378,6 +378,109 @@ async function loadDiscordImageResolver(): Promise<
     for (const c of cands) {
       const img = imageByKey.get(c);
       if (img) return img;
+    }
+    return null;
+  };
+}
+
+// Résout le userId d'un joueur à partir de son playerName / challongeUsername.
+export async function loadUserIdResolver(): Promise<
+  (playerName: string, challongeUsername: string | null) => string | null
+> {
+  const norm = (s: string | null | undefined) =>
+    s
+      ? s
+          .toLowerCase()
+          .normalize("NFKD")
+          .replace(/[^a-z0-9]/g, "")
+      : "";
+  let users: Awaited<ReturnType<typeof listDiscordUsersForBts>> = [];
+  try {
+    users = await listDiscordUsersForBts();
+  } catch {
+    /* ignore */
+  }
+
+  const userByKey = new Map<string, string>();
+  const setIfFree = (k: string, id: string) => {
+    if (k && id && !userByKey.has(k)) userByKey.set(k, id);
+  };
+  for (const u of users) {
+    if (u.profile?.challongeUsername) setIfFree(norm(u.profile.challongeUsername), u.id);
+  }
+  for (const u of users) {
+    setIfFree(norm(u.username), u.id);
+    setIfFree(norm(u.displayUsername), u.id);
+    setIfFree(norm(u.globalName), u.id);
+    setIfFree(norm(u.nickname), u.id);
+    setIfFree(norm(u.discordTag), u.id);
+    setIfFree(norm(u.profile?.bladerName), u.id);
+    setIfFree(norm(u.name), u.id);
+  }
+
+  let map: Record<
+    string,
+    {
+      primaryName?: string;
+      challongeUsername?: string | null;
+      discordId?: string | null;
+      discordUsername?: string | null;
+      aliases?: string[];
+    }
+  > = {};
+  try {
+    const loaded = await loadJsonSafe<typeof map>("data/exports/participants_map.json");
+    if (loaded) map = loaded;
+  } catch {
+    /* ignore */
+  }
+  const aliasToKey = new Map<string, string>();
+  for (const [k, e] of Object.entries(map)) {
+    const cs = new Set<string>([e.primaryName ?? "", ...(e.aliases ?? [])]);
+    if (e.challongeUsername) cs.add(e.challongeUsername);
+    if (e.discordUsername) cs.add(e.discordUsername);
+    for (const a of cs) {
+      const n = norm(a);
+      if (n) aliasToKey.set(n, k);
+    }
+  }
+
+  const keyToUserId = new Map<string, string>();
+  for (const u of users) {
+    const keysToCheck = [
+      u.profile?.challongeUsername,
+      u.username,
+      u.displayUsername,
+      u.globalName,
+      u.nickname,
+      u.discordTag,
+      u.profile?.bladerName,
+      u.name,
+    ];
+    for (const key of keysToCheck) {
+      if (!key) continue;
+      const mapKey = aliasToKey.get(norm(key));
+      if (mapKey) {
+        keyToUserId.set(mapKey, u.id);
+        break;
+      }
+    }
+  }
+
+  return (playerName: string, challongeUsername: string | null) => {
+    const cands = new Set<string>([norm(playerName)]);
+    if (challongeUsername) cands.add(norm(challongeUsername));
+    const mapKey = aliasToKey.get(norm(playerName));
+    if (mapKey) {
+      const uid = keyToUserId.get(mapKey);
+      if (uid) return uid;
+      if (map[mapKey]?.challongeUsername) cands.add(norm(map[mapKey].challongeUsername));
+      if (map[mapKey]?.discordUsername) cands.add(norm(map[mapKey].discordUsername));
+      for (const a of map[mapKey]?.aliases ?? []) cands.add(norm(a));
+    }
+    for (const c of cands) {
+      const uid = userByKey.get(c);
+      if (uid) return uid;
     }
     return null;
   };

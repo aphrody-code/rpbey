@@ -41,3 +41,25 @@ data/
 *.bak-*
 *.swp
 lint_output.txt
+
+# Docs, agents et utilitaires
+docs/
+.agents/
+.claude/
+.github/
+var/
+var/log/
+var/run/
+
+# Fichiers sources et assets des autres applications (non requis pour le build dashboard)
+apps/bot/src/
+apps/bot/assets/
+apps/bot/dist/
+apps/bot/types/
+apps/cdn/src/
+apps/cdn/assets/
+apps/gacha-server/src/
+apps/gacha-server/deploy/
+apps/gacha-server/test/
+apps/embed-sidecar/src/
+

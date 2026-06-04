@@ -1,6 +1,6 @@
 {
   "name": "@rose-griffon/challonge",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "private": true,
   "description": "Challonge client canonique (API v1 + scraper bxc curl-impersonate Chrome 131 via bun:ffi)",
   "type": "module",
@@ -50,7 +50,7 @@
   },
   "dependencies": {
     "@aphrody/bxc": "catalog:",
-    "@aphrody/challonge": "^0.1.2",
+    "@aphrody/challonge": "^0.1.3",
     "lru-cache": "catalog:",
     "zod": "catalog:"
   },

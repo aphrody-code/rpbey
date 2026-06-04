@@ -36,10 +36,7 @@
  * @module clients/crawler
  */
 
-import {
-  extractChallongeTournament,
-  type ChallongeTournamentSnapshot,
-} from "@aphrody/challonge";
+import { extractChallongeTournament, type ChallongeTournamentSnapshot } from "@aphrody/challonge";
 import { type ChallongeSnapshotLike, snapshotToScrapedTournament } from "../mappers/snapshot";
 import { parseInitialStoreState } from "../extractors/store-state";
 import { parseStandingsTable, storeToStandings } from "../extractors/stores/standings";

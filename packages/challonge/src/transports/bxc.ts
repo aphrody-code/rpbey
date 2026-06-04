@@ -14,10 +14,7 @@
  *   - Configurable profile, timeout, extra headers
  */
 
-import {
-  type isLibAvailable,
-  type ImpersonateProfile,
-} from "@aphrody/bxc/ffi/curl-impersonate";
+import type { isLibAvailable, ImpersonateProfile } from "@aphrody/bxc/ffi/curl-impersonate";
 import { loadCookieJar, resolveDefaultCookiePath } from "../utils/cookies";
 import { LruCache } from "../core/cache";
 import {
@@ -36,7 +33,7 @@ import {
   isPermittedRedirect,
 } from "./curl-impersonate-types";
 
-export { isLibAvailable };
+export type { isLibAvailable };
 
 // ---------------------------------------------------------------------------
 // Constants

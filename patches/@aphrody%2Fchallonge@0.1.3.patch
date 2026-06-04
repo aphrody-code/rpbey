@@ -1,0 +1,80 @@
+diff --git a/src/index.ts b/src/index.ts
+--- a/src/index.ts
++++ b/src/index.ts
+@@ -262,7 +262,7 @@
+ 		"i",
+ 	);
+ 	const m = re1.exec(html) ?? re2.exec(html);
+-	return m ? decodeHtmlEntities(m[1]) : null;
++	return m && m[1] ? decodeHtmlEntities(m[1]) : null;
+ }
+ 
+ function escapeRegex(s: string): string {
+@@ -274,7 +274,7 @@
+ 		`window\\._initialStoreState\\[['"]${escapeRegex(key)}['"]\\]\\s*=\\s*(\\{[\\s\\S]*?\\});`,
+ 	);
+ 	const m = re.exec(html);
+-	if (!m) return null;
++	if (!m || !m[1]) return null;
+ 	try {
+ 		return JSON.parse(m[1]) as T;
+ 	} catch {
+@@ -285,7 +285,7 @@
+ function findGonAssign(html: string, name: string): unknown {
+ 	const re = new RegExp(`gon\\.${escapeRegex(name)}\\s*=\\s*([^;]+);`);
+ 	const m = re.exec(html);
+-	if (!m) return null;
++	if (!m || !m[1]) return null;
+ 	try {
+ 		return JSON.parse(m[1]);
+ 	} catch {
+@@ -297,7 +297,7 @@
+ 	const re =
+ 		/<div[^>]+data-react-class\s*=\s*["']([^"']+)["'][^>]*data-react-props\s*=\s*["']([^"']+)["']/i;
+ 	const m = re.exec(html);
+-	if (!m) return null;
++	if (!m || !m[1] || !m[2]) return null;
+ 	try {
+ 		const propsRaw = decodeHtmlEntities(m[2]);
+ 		return {
+@@ -444,12 +444,17 @@
+ 		const ka = rankKey(a.player_id, a.losses);
+ 		const kb = rankKey(b.player_id, b.losses);
+ 		for (let i = 0; i < ka.length; i++) {
+-			if (ka[i] !== kb[i]) return ka[i] - kb[i];
++			const va = ka[i];
++			const vb = kb[i];
++			if (va !== undefined && vb !== undefined && va !== vb) return va - vb;
+ 		}
+ 		if (b.wins !== a.wins) return b.wins - a.wins;
+ 		return a.seed - b.seed;
+ 	});
+-	for (let i = 0; i < out.length; i++) out[i].rank = i + 1;
++	for (let i = 0; i < out.length; i++) {
++		const entry = out[i];
++		if (entry) entry.rank = i + 1;
++	}
+ 	return out;
+ }
+ 
+@@ -480,7 +485,10 @@
+ 	// Aggregate all matches from matches_by_round + third_place_match + consolation_matches.
+ 	const matches: ChallongeMatch[] = [];
+ 	for (const round of Object.keys(tournamentStore.matches_by_round)) {
+-		for (const m of tournamentStore.matches_by_round[round]) matches.push(m);
++		const roundMatches = tournamentStore.matches_by_round[round];
++		if (roundMatches) {
++			for (const m of roundMatches) matches.push(m);
++		}
+ 	}
+ 	if (tournamentStore.third_place_match)
+ 		matches.push(tournamentStore.third_place_match);
+@@ -527,7 +535,7 @@
+ 
+ 	let canonicalLang: string | null = null;
+ 	const langMatch = ogUrl?.match(/^https?:\/\/[^/]+\/([a-z]{2})\//i);
+-	if (langMatch) canonicalLang = langMatch[1];
++	if (langMatch) canonicalLang = langMatch[1] ?? null;
+ 
+ 	const tournament: ChallongeTournamentMeta = {
+ 		id: tStore.id,

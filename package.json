@@ -37,8 +37,8 @@
       "express": "^5.2.1",
       "@discord/embedded-app-sdk": "^2.5.0",
       "pixi.js": "^8.18.1",
-      "@aphrody/bxc": "^0.6.0",
-      "@aphrody/x": "^1.0.6",
+      "@aphrody/bxc": "^0.6.4",
+      "@aphrody/x": "^1.0.7",
       "@tobyg74/tiktok-api-dl": "^1.3.7",
       "@twurple/api": "^8.1.4",
       "@twurple/auth": "^8.1.4",
@@ -101,6 +101,11 @@
     "zod-validation-error": "^4.0.0"
   },
   "packageManager": "bun@1.3.14",
+  "patchedDependencies": {
+    "kysely@0.29.2": "patches/kysely@0.29.2.patch",
+    "@aphrody/bxc-test@0.1.1": "patches/@aphrody%2Fbxc-test@0.1.1.patch",
+    "@aphrody/challonge@0.1.3": "patches/@aphrody%2Fchallonge@0.1.3.patch"
+  },
   "trustedDependencies": [
     "bun",
     "esbuild",
@@ -113,9 +118,5 @@
     "prisma",
     "@prisma/engines",
     "@tsparticles/engine"
-  ],
-  "patchedDependencies": {
-    "kysely@0.29.2": "patches/kysely@0.29.2.patch",
-    "@aphrody/bxc-test@0.1.1": "patches/@aphrody%2Fbxc-test@0.1.1.patch"
-  }
+  ]
 }

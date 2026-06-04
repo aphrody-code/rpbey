@@ -21,6 +21,7 @@ export interface TournamentShowcaseItem {
   participants: number;
   matchesCount: number;
   podium: { name: string; rank: number; wins: number; losses: number }[];
+  status?: string;
 }
 
 interface TournamentShowcaseProps {
@@ -261,7 +262,7 @@ export function TournamentShowcase({ tournaments = [] }: TournamentShowcaseProps
                     })}
                   </Typography>
 
-                  {t.podium.length === 0 && t.participants === 0 ? (
+                  {t.status === "UPCOMING" || (t.podium.length === 0 && t.participants === 0) ? (
                     /* Upcoming tournament — CTA instead of stats */
                     <Box
                       sx={{
