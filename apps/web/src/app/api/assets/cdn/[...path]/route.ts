@@ -15,7 +15,11 @@ export const runtime = "nodejs";
 export const dynamic = "force-static";
 export const revalidate = false;
 
-const ASSET_ORIGIN = (process.env.ASSET_ORIGIN ?? "https://cdn.rpbey.fr").replace(/\/$/, "");
+// Origine serveur des octets, configurable par env. L'ancien hôte `cdn.rpbey.fr`
+// est DÉCOMMISSIONNÉ : aucun défaut codé en dur. Sans `ASSET_ORIGIN` configuré,
+// la route répond 404 (les assets sont rapatriés dans `public/`) plutôt que de
+// fetcher un hôte mort.
+const ASSET_ORIGIN = (process.env.ASSET_ORIGIN ?? "").replace(/\/$/, "");
 const FETCH_TIMEOUT_MS = 12_000;
 const IMMUTABLE = "public, max-age=31536000, s-maxage=31536000, immutable";
 const ALLOWED_EXT = /\.(?:jpe?g|png|webp|gif|svg|avif|mp4|webm|json|glb|woff2?|ttf|otf)$/i;
@@ -24,6 +28,11 @@ export async function GET(
   _req: NextRequest,
   ctx: { params: Promise<{ path: string[] }> },
 ) {
+  // Sans origine d'asset configurée (cdn.rpbey.fr décommissionné), rien à proxifier.
+  if (!ASSET_ORIGIN) {
+    return NextResponse.json({ error: "not_found" }, { status: 404 });
+  }
+
   const { path } = await ctx.params;
   const rel = (path ?? []).join("/");
   // Anti-traversal + allowlist d'extension.

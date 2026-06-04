@@ -8,12 +8,14 @@ import sharp from "sharp";
  * Stockage persistant des images uploadées (avatars, bannières, deck box, contenu
  * RichText) sur le **CDN** servi par nginx.
  *
- * Pourquoi un service dédié : en prod le standalone Next a `public/` symlinké vers
- * le CDN (éphémère / non-writable) → tout `Bun.write(process.cwd()/public/...)`
- * échouait en 500 (« Erreur lors du téléchargement de l'image »). On écrit donc
- * directement dans `/var/www/cdn/static/data/rpb/uploads/<scope>/` (dir
- * `ubuntu:www-data`, writable par le service `rpbey-web` qui tourne en `ubuntu`)
- * et on renvoie l'URL CDN absolue `https://cdn.rpbey.fr/static/data/rpb/uploads/...`.
+ * Backend de stockage **serverless-first** :
+ * - **Vercel / prod** (`BLOB_READ_WRITE_TOKEN` présent) : **Vercel Blob**. C'est
+ *   le seul stockage persistant en serverless (FS lambda éphémère, read-only hors
+ *   `/tmp`). L'URL Blob CDN est renvoyée telle quelle.
+ * - **Fallback dev / sans Blob** : écriture **best-effort** dans `os.tmpdir()`
+ *   (le seul chemin writable d'une lambda) — éphémère, jamais source de vérité.
+ *   Overridable par env `CDN_UPLOAD_ROOT` + `CDN_UPLOAD_BASE_URL`. Aucun chemin
+ *   `/var/www/...` ni hôte `cdn.rpbey.fr` codé en dur (décommissionnés).
  *
  * Toutes les images sont traitées par **sharp** (libvips, résolu depuis le repo
  * `node_modules`) : resize/crop selon le scope, conversion **WebP**, strip des
@@ -21,9 +23,20 @@ import sharp from "sharp";
  * passe par la DAL (`dal/users`), pas par ce service.
  */
 
-/** Racine disque (writable par `ubuntu`) + base URL publique (nginx). */
-const CDN_UPLOAD_ROOT = "/var/www/cdn/static/data/rpb/uploads";
-const CDN_UPLOAD_BASE_URL = "https://cdn.rpbey.fr/static/data/rpb/uploads";
+import os from "node:os";
+
+/**
+ * Racine disque du fallback (writable). Défaut : `os.tmpdir()/rpbey-uploads`
+ * (éphémère, serverless-safe). Override possible via `CDN_UPLOAD_ROOT`.
+ */
+const CDN_UPLOAD_ROOT =
+  process.env.CDN_UPLOAD_ROOT ?? path.join(os.tmpdir(), "rpbey-uploads");
+
+/**
+ * Base URL publique du fallback. Défaut : chemin same-origin `/uploads`. Override
+ * via `CDN_UPLOAD_BASE_URL` (jamais `cdn.rpbey.fr`, décommissionné).
+ */
+const CDN_UPLOAD_BASE_URL = (process.env.CDN_UPLOAD_BASE_URL ?? "/uploads").replace(/\/$/, "");
 
 export type UploadScope = "avatars" | "banners" | "deckboxes" | "content";
 
@@ -84,8 +97,8 @@ function assertImage(file: File, maxBytes: number) {
  * Backend de stockage :
  * - **Vercel** (`BLOB_READ_WRITE_TOKEN` présent) : **Vercel Blob** — pas de FS
  *   writable sur Vercel, l'URL Blob CDN est renvoyée telle quelle.
- * - **VPS / dev** : écriture FS directe sous `/var/www/cdn/...`, URL nginx
- *   `cdn.rpbey.fr/...`.
+ * - **Fallback dev / sans Blob** : écriture best-effort dans `os.tmpdir()`
+ *   (éphémère), URL `CDN_UPLOAD_BASE_URL` (défaut `/uploads`).
  */
 async function processAndStore(
   scope: UploadScope,

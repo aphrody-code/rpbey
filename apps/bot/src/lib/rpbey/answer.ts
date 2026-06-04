@@ -10,7 +10,9 @@
  */
 import { detectIntent, INTENT_CATEGORY, searchTerms, type Intent } from "./nlp.js";
 
-const WEB_BASE = process.env.RPBEY_WEB_BASE ?? "http://127.0.0.1:3002";
+// Default to the public Vercel origin so the Cloud Run bot reaches it with zero
+// extra config; `RPBEY_WEB_BASE` overrides (preview deployment / local dev).
+const WEB_BASE = process.env.RPBEY_WEB_BASE ?? "https://rpbey.fr";
 
 interface SearchItem {
   id: string;

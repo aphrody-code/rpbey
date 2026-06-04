@@ -23,7 +23,10 @@ const SEARCH_CATEGORIES = [
   { name: "Page", value: "page" },
 ] as const;
 
-const WEB_BASE = "http://127.0.0.1:3002";
+// Serverless: the web app runs on Vercel. Default to the public origin so the
+// Cloud Run bot reaches it with zero extra config; `RPBEY_WEB_BASE` overrides
+// (e.g. a preview deployment or local dev against http://127.0.0.1:3002).
+const WEB_BASE = process.env.RPBEY_WEB_BASE ?? "https://rpbey.fr";
 
 @Discord()
 @injectable()

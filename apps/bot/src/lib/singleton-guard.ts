@@ -12,6 +12,7 @@
  * this guard catches that case and exits cleanly.
  */
 import { closeSync, openSync, readFileSync, unlinkSync, writeSync } from "node:fs";
+import { tmpdir } from "node:os";
 import { resolve } from "node:path";
 
 type Cleanup = () => void;
@@ -39,9 +40,10 @@ function tryCreateLock(path: string): number | null {
 function defaultLockPath(): string {
   // Honor explicit override first (e.g., systemd RuntimeDirectory=/run/rpb-bot).
   if (process.env.BOT_LOCK_FILE) return process.env.BOT_LOCK_FILE;
-  // Fall back to the bot's `data/` dir (listed in ReadWritePaths).
-  // Historical `bot/data/` path was a relic of the monorepo merge — now gone.
-  return resolve(process.cwd(), "data", ".bot.pid");
+  // Default to the OS temp dir (os.tmpdir() → /tmp on Linux / Cloud Run): the
+  // only path guaranteed writable under a serverless read-only root filesystem.
+  // Never write to cwd — the working tree is read-only on Cloud Run / Vercel.
+  return resolve(tmpdir(), "rpb-bot.pid");
 }
 
 export function claimSingletonOrExit(lockPath = defaultLockPath()): Cleanup {

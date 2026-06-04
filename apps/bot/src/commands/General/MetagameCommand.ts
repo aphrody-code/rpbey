@@ -53,15 +53,13 @@ export class MetagameCommand {
 
     try {
       const apiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
-      if (!apiKey) {
-        throw new Error("Missing GEMINI_API_KEY / GOOGLE_API_KEY");
-      }
 
       // Run RAG query directly in-process
       const store = new Store();
       const rag = new BeybladeXRag({
         apiKey,
         model: "gemini-2.5-flash",
+        offlineMock: !apiKey,
       });
 
       // Use a race to enforce the 30s timeout on the API query
@@ -88,7 +86,7 @@ export class MetagameCommand {
         .setTitle("Analyse métagame")
         .setDescription(trimmedAnswer)
         .setFooter({
-          text: "Basé sur les discussions X.com de la communauté RPB · Analyse IA Gemini",
+          text: `Basé sur les discussions X.com de la communauté RPB · Analyse IA Gemini${!apiKey ? " (Offline/Mock)" : ""}`,
         })
         .setTimestamp();
 

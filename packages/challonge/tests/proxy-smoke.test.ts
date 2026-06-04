@@ -32,7 +32,7 @@ let baseUrl = "";
 
 beforeAll(() => {
   // Bun.serve `port: 0` binds to a random ephemeral port — works with any caller.
-  server = startChallongeProxy({ port: 0, development: false });
+  server = startChallongeProxy({ port: 0, development: false, gracefulShutdown: false });
   baseUrl = server.url.href.replace(/\/+$/, "");
 });
 

@@ -20,8 +20,13 @@ export const runtime = "nodejs";
 export const dynamic = "force-static";
 export const revalidate = false;
 
-/** Origine serveur des octets (jamais vue par le navigateur). */
-const ASSET_ORIGIN = (process.env.ASSET_ORIGIN ?? "https://cdn.rpbey.fr").replace(/\/$/, "");
+/**
+ * Origine serveur des octets (jamais vue par le navigateur), configurable par env.
+ * L'ancien hôte `cdn.rpbey.fr` est DÉCOMMISSIONNÉ : aucun défaut codé en dur.
+ * Sans `ASSET_ORIGIN` (ex. bucket B2/Cloudflare), la route répond 404 et les
+ * fonds d'ambiance décoratifs dégradent proprement.
+ */
+const ASSET_ORIGIN = (process.env.ASSET_ORIGIN ?? "").replace(/\/$/, "");
 const FETCH_TIMEOUT_MS = 12_000;
 
 const KIND_TO_PREFIX: Record<string, string> = {
@@ -35,6 +40,11 @@ export async function GET(
   _req: NextRequest,
   ctx: { params: Promise<{ kind: string; file: string }> },
 ) {
+  // Sans origine d'asset configurée (cdn.rpbey.fr décommissionné), rien à proxifier.
+  if (!ASSET_ORIGIN) {
+    return NextResponse.json({ error: "not_found" }, { status: 404 });
+  }
+
   const { kind, file } = await ctx.params;
   const prefix = KIND_TO_PREFIX[kind];
   // Garde-fou : seuls `full`/`thumb` + un nom de fichier image simple sont acceptés.

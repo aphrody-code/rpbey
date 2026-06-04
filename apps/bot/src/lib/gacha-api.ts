@@ -49,7 +49,15 @@ import pg from "pg";
 
 // ─── Config ──────────────────────────────────────────────────────────────────
 
+// Serverless: the gacha/game service runs as a SEPARATE Cloud Run service
+// (europe-west3), so its URL MUST come from env (`GACHA_API_URL`). The former
+// `http://127.0.0.1:5050` loopback default was a VPS co-located relic and is
+// wrong here — loopback never reaches a sibling Cloud Run service. We keep a
+// loopback default ONLY for local dev/tests and warn loudly when it is used.
 const BASE_URL = process.env.GACHA_API_URL ?? "http://127.0.0.1:5050";
+if (!process.env.GACHA_API_URL) {
+  console.warn("[gacha-api] GACHA_API_URL not set — falling back to loopback (local dev only)");
+}
 const SESSION_TTL_MS = 6 * 3_600_000; // 6 hours
 const SESSION_REUSE_MIN_REMAINING_MS = 30 * 60_000; // 30 min — reuse existing session if it has at least 30 min left
 const BOT_USER_AGENT = "rpb-bot/1.0";

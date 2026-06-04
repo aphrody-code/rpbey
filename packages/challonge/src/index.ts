@@ -105,6 +105,7 @@ export {
   resolveDefaultCookiePath,
   isSessionCookieValid,
   hasCfClearance,
+  INLINE_COOKIE_SOURCE,
   type RawCookie,
   type PuppeteerCookie,
 } from "./utils/cookies";

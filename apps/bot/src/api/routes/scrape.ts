@@ -10,6 +10,7 @@
  * instead of the stale services/challonge local duplicate.
  */
 import { mkdir } from "node:fs/promises";
+import { tmpdir } from "node:os";
 import path from "node:path";
 
 import { ChallongeScraper, dumpChallongeRaw } from "@rose-griffon/challonge";
@@ -92,9 +93,11 @@ const dumpLog = withAuth<{ slug: string }>(async (req) => {
     }),
   };
 
-  // Persist dump on disk for audit (optional — ignore failure).
+  // Persist dump on disk for audit (optional — ignore failure). Write under the
+  // OS temp dir (os.tmpdir() → /tmp): the only writable path on a serverless
+  // read-only root filesystem (Cloud Run / Vercel). Never write to cwd.
   try {
-    const dumpDir = path.join(process.cwd(), "data/scrapes");
+    const dumpDir = path.join(tmpdir(), "rpb-bot-scrapes");
     await mkdir(dumpDir, { recursive: true });
     const stamp = new Date().toISOString().replace(/[:.]/g, "-");
     await Bun.write(path.join(dumpDir, `${slugParam}_log_${stamp}.html`), html);

@@ -67,6 +67,9 @@ beforeAll(async () => {
     stderr: "pipe",
     env: {
       ...process.env,
+      // Cloud Run injecte $PORT ; server.ts le lit en priorité. On le force à 0
+      // (port éphémère) pour ne pas dépendre d'un $PORT ambiant hérité du shell.
+      PORT: "0",
       CDN_PORT: "0",
       CDN_HOST: "127.0.0.1",
       CDN_API_KEY: API_KEY,
@@ -300,5 +303,35 @@ describe("manifest absent", () => {
     expect(res.status).toBe(503);
     const body = await res.json();
     expect(body.error).toContain("Manifest");
+  });
+});
+
+describe("CORS — active cross origin partout", () => {
+  test("OPTIONS préflight (route) → 204 + Allow-Origin *", async () => {
+    const res = await fetch(`${base}/upload`, {
+      method: "OPTIONS",
+      headers: { origin: "https://anything.example", "access-control-request-method": "POST" },
+    });
+    expect(res.status).toBe(204);
+    expect(res.headers.get("access-control-allow-origin")).toBe("*");
+    expect(res.headers.get("access-control-allow-methods")).toContain("POST");
+  });
+
+  test("OPTIONS préflight (fallback /api/assets/*) → 204 + Allow-Origin *", async () => {
+    const res = await fetch(`${base}/api/assets/rpb-dashboard/logo.png`, { method: "OPTIONS" });
+    expect(res.status).toBe(204);
+    expect(res.headers.get("access-control-allow-origin")).toBe("*");
+  });
+
+  test("GET asset → Allow-Origin * (lecture cross-origin ouverte)", async () => {
+    const res = await fetch(`${base}/api/assets/rpb-dashboard/logo.png`);
+    expect(res.status).toBe(200);
+    expect(res.headers.get("access-control-allow-origin")).toBe("*");
+  });
+
+  test("réponse d'erreur JSON porte aussi le CORS", async () => {
+    const res = await fetch(`${base}/api/assets/unknown-scope/x.png`);
+    expect(res.status).toBe(404);
+    expect(res.headers.get("access-control-allow-origin")).toBe("*");
   });
 });

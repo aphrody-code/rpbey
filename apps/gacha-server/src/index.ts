@@ -15,7 +15,7 @@ import { monitor } from "@colyseus/monitor";
 import { playground } from "@colyseus/playground";
 import { defineRoom, defineServer } from "colyseus";
 import express from "express";
-import { HOST, PORT } from "./config";
+import { ALLOWED_HEADERS, ALLOWED_METHODS, FALLBACK_ORIGIN, HOST, PORT } from "./config";
 import { configureCors } from "./cors";
 import { mountDiscordToken } from "./discord-token";
 import { mountRest } from "./rest";
@@ -49,6 +49,27 @@ const server = defineServer({
   },
 
   express: (app) => {
+    // CORS OUVERT sur toutes les routes express (REST économie, /discord_token,
+    // /health). Colyseus ne pose son CORS que sur ses endpoints matchmaking ;
+    // les routes express doivent l'avoir explicitement. On reflète l'origine
+    // reçue (compatible credentials / header Authorization) → toute origine est
+    // admise ; `*` si aucune `Origin`. Preflight OPTIONS → 204.
+    app.use((req, res, next) => {
+      const origin = req.headers.origin;
+      res.setHeader("Access-Control-Allow-Origin", origin ?? FALLBACK_ORIGIN);
+      res.setHeader("Access-Control-Allow-Credentials", "true");
+      res.setHeader("Access-Control-Allow-Methods", ALLOWED_METHODS);
+      res.setHeader("Access-Control-Allow-Headers", ALLOWED_HEADERS);
+      res.setHeader("Access-Control-Max-Age", "86400");
+      res.setHeader("Vary", "Origin");
+      if (req.method === "OPTIONS") {
+        res.statusCode = 204;
+        res.end();
+        return;
+      }
+      next();
+    });
+
     app.use(express.json());
 
     app.get("/health", (_req, res) => {
@@ -64,6 +85,16 @@ const server = defineServer({
     if (process.env.NODE_ENV !== "production") app.use("/playground", playground());
     app.use("/monitor", monitor());
   },
+});
+
+// Arrêt gracieux. @colyseus/core enregistre déjà SIGTERM/SIGINT/SIGUSR2 (option
+// `gracefullyShutdown: true` par défaut) qui dispose les rooms en mémoire et
+// appelle ce callback. Cloud Run envoie SIGTERM avant de recycler l'instance ;
+// les rooms étant stateful (état en mémoire, AUCUNE persistance disque), on les
+// laisse se disposer proprement — l'état dérivable est en DB Neon (best-effort
+// en mémoire). On loggue pour l'observabilité.
+server.onShutdown(() => {
+  process.stderr.write("[gacha-server] arrêt gracieux (rooms disposées)\n");
 });
 
 server.listen(PORT, HOST);

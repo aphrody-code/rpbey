@@ -1,14 +1,44 @@
 import { createHash, randomBytes } from "node:crypto";
-import { resolve as pathResolve } from "node:path";
+import { tmpdir } from "node:os";
+import { join as pathJoin, resolve as pathResolve } from "node:path";
 
-const PORT = Number(process.env.CDN_PORT ?? 8804);
-const HOST = process.env.CDN_HOST ?? "127.0.0.1";
-const STORAGE = process.env.CDN_STORAGE ?? "/var/www/cdn/images";
+// Serverless (Cloud Run) : binder 0.0.0.0 + lire $PORT (injecté par la plateforme).
+// `CDN_PORT` reste honoré pour le legacy/tests (CDN_PORT=0 → port éphémère) ;
+// `PORT` (convention Cloud Run) prime quand il est défini.
+const PORT = Number(process.env.PORT ?? process.env.CDN_PORT ?? 8804);
+const HOST = process.env.CDN_HOST ?? "0.0.0.0";
+// FS éphémère uniquement : tout write va sous os.tmpdir() (seul writable en lambda
+// / Cloud Run). Aucune persistance garantie — c'est best-effort par instance.
+const TMP_BASE = pathJoin(tmpdir(), "rpbey-cdn");
+const STORAGE = process.env.CDN_STORAGE ?? pathJoin(TMP_BASE, "images");
 const FALLBACK_PUBLIC_BASE = process.env.CDN_PUBLIC_BASE ?? "https://cdn.rosegriffon.fr";
-const ASSETS_MANIFEST = process.env.CDN_ASSETS_MANIFEST ?? "/var/www/cdn/assets-manifest.json";
+const ASSETS_MANIFEST = process.env.CDN_ASSETS_MANIFEST ?? pathJoin(TMP_BASE, "assets-manifest.json");
 const REPO_ROOT = process.env.CDN_REPO_ROOT ?? pathResolve(import.meta.dir, "../..");
-const VARIANTS_ROOT = process.env.CDN_VARIANTS_ROOT ?? "/var/www/cdn/variants";
+const VARIANTS_ROOT = process.env.CDN_VARIANTS_ROOT ?? pathJoin(TMP_BASE, "variants");
 const API_KEY = process.env.CDN_API_KEY;
+
+// CORS « active cross origin partout » : ces endpoints sont NON-credentialed
+// (auth = header `x-api-key`, jamais de cookie) → on autorise n'importe quelle
+// origine via `*`, sans aucune allow-list par origine.
+const CORS_HEADERS: Record<string, string> = {
+  "access-control-allow-origin": "*",
+  "access-control-allow-methods": "GET, POST, DELETE, OPTIONS",
+  "access-control-allow-headers": "*, Content-Type, X-Api-Key, If-None-Match, Range",
+  "access-control-expose-headers": "ETag, Content-Range, Accept-Ranges, Content-Length",
+  "access-control-max-age": "86400",
+};
+
+/** Fusionne les en-têtes CORS ouverts dans un set d'en-têtes de réponse. */
+function withCors(headers: Record<string, string> = {}): Record<string, string> {
+  return { ...CORS_HEADERS, ...headers };
+}
+
+/** Réponse JSON avec CORS ouvert (helper pour ne jamais oublier les en-têtes). */
+function corsJson(body: unknown, init?: ResponseInit): Response {
+  const res = Response.json(body, init);
+  for (const [k, v] of Object.entries(CORS_HEADERS)) res.headers.set(k, v);
+  return res;
+}
 
 // Mapping scope → root directory absolu autorisé pour l'API /api/assets/<scope>/<path>.
 // Chaque path demandé est résolu puis vérifié pour rester sous le root (anti-traversal).
@@ -141,30 +171,29 @@ function genId(ext: string): string {
 }
 
 function unauthorized() {
-  return Response.json({ error: "Unauthorized" }, { status: 401 });
+  return corsJson({ error: "Unauthorized" }, { status: 401 });
 }
 
 async function serveAssetManifest(req: Request): Promise<Response> {
   const cache = await loadManifestCache();
   if (!cache) {
-    return Response.json(
+    return corsJson(
       { error: "Manifest not generated yet. Run scripts/scan-assets.ts" },
       { status: 503 },
     );
   }
   const ifNone = req.headers.get("if-none-match");
   if (ifNone && ifNone === cache.etag) {
-    return new Response(null, { status: 304, headers: { ETag: cache.etag } });
+    return new Response(null, { status: 304, headers: withCors({ ETag: cache.etag }) });
   }
   return new Response(cache.bytes, {
     status: 200,
-    headers: {
+    headers: withCors({
       "content-type": "application/json; charset=utf-8",
       "content-length": String(cache.bytes.byteLength),
       "cache-control": "public, max-age=300, must-revalidate",
-      "access-control-allow-origin": "*",
       etag: cache.etag,
-    },
+    }),
   });
 }
 
@@ -306,18 +335,18 @@ async function negotiateImageVariant(
 async function serveAssetFile(req: Request, url: URL): Promise<Response> {
   // path = /api/assets/<scope>/<rest>
   const segments = url.pathname.split("/").filter(Boolean);
-  if (segments.length < 4) return new Response("Not Found", { status: 404 });
+  if (segments.length < 4) return new Response("Not Found", { status: 404, headers: withCors() });
   const scope = segments[2] ?? "";
   const rel = segments.slice(3).join("/");
   const root = ASSET_SCOPES[scope];
   if (!root) {
-    return Response.json({ error: `unknown scope: ${scope}` }, { status: 404 });
+    return corsJson({ error: `unknown scope: ${scope}` }, { status: 404 });
   }
 
   // Anti path-traversal : resolve absolu + check stay under root
   const target = pathResolve(root, rel);
   if (!target.startsWith(root + "/") && target !== root) {
-    return Response.json({ error: "forbidden" }, { status: 403 });
+    return corsJson({ error: "forbidden" }, { status: 403 });
   }
 
   let actualPath = target;
@@ -335,23 +364,22 @@ async function serveAssetFile(req: Request, url: URL): Promise<Response> {
   }
 
   const file = Bun.file(actualPath);
-  if (!(await file.exists())) return new Response("Not Found", { status: 404 });
+  if (!(await file.exists())) return new Response("Not Found", { status: 404, headers: withCors() });
   const stat = await file.stat();
-  if (!stat.isFile()) return new Response("Not Found", { status: 404 });
+  if (!stat.isFile()) return new Response("Not Found", { status: 404, headers: withCors() });
   const etag = `"${stat.size.toString(36)}-${stat.mtimeMs.toString(36)}"`;
   const ifNone = req.headers.get("if-none-match");
   if (ifNone && ifNone === etag) {
-    return new Response(null, { status: 304, headers: { ETag: etag } });
+    return new Response(null, { status: 304, headers: withCors({ ETag: etag }) });
   }
 
   const profile = cacheProfileFor(kind);
-  const headers: Record<string, string> = {
+  const headers: Record<string, string> = withCors({
     "content-type": detectAssetMime(actualRel),
     "content-length": String(stat.size),
     "cache-control": profile.cacheControl,
-    "access-control-allow-origin": "*",
     etag,
-  };
+  });
   if (profile.vary) headers.vary = profile.vary;
   if (profile.extra) Object.assign(headers, profile.extra);
 
@@ -374,30 +402,42 @@ async function serveAssetFile(req: Request, url: URL): Promise<Response> {
   return new Response(file, { status: 200, headers });
 }
 
+/** Préflight OPTIONS universel : 204 No Content + CORS ouvert pour toute origine. */
+function preflight(): Response {
+  return new Response(null, { status: 204, headers: withCors() });
+}
+
 const server = Bun.serve({
   hostname: HOST,
   port: PORT,
   routes: {
-    "/health": () =>
-      Response.json({
-        ok: true,
-        storage: STORAGE,
-        assetsManifest: manifestCache
-          ? {
-              bytes: manifestCache.bytes.byteLength,
-              etag: manifestCache.etag,
-            }
-          : null,
-      }),
+    "/health": {
+      OPTIONS: preflight,
+      GET: () =>
+        corsJson({
+          ok: true,
+          storage: STORAGE,
+          assetsManifest: manifestCache
+            ? {
+                bytes: manifestCache.bytes.byteLength,
+                etag: manifestCache.etag,
+              }
+            : null,
+        }),
+    },
 
-    "/api/assets/manifest": (req: Request) => serveAssetManifest(req),
+    "/api/assets/manifest": {
+      OPTIONS: preflight,
+      GET: (req: Request) => serveAssetManifest(req),
+    },
 
     "/api/assets/manifest/refresh": {
+      OPTIONS: preflight,
       POST: async (req: Request) => {
         if (req.headers.get("x-api-key") !== API_KEY) return unauthorized();
         const cache = await loadManifestCache(true);
-        if (!cache) return Response.json({ ok: false, error: "missing" }, { status: 503 });
-        return Response.json({
+        if (!cache) return corsJson({ ok: false, error: "missing" }, { status: 503 });
+        return corsJson({
           ok: true,
           bytes: cache.bytes.byteLength,
           etag: cache.etag,
@@ -407,55 +447,68 @@ const server = Bun.serve({
     },
 
     "/upload": {
+      OPTIONS: preflight,
       POST: async (req) => {
         if (req.headers.get("x-api-key") !== API_KEY) return unauthorized();
 
         const ct = req.headers.get("content-type") ?? "application/octet-stream";
         const ext = MIME_TO_EXT[ct.split(";")[0].trim().toLowerCase()];
         if (!ext)
-          return Response.json({ error: `Unsupported content-type: ${ct}` }, { status: 415 });
+          return corsJson({ error: `Unsupported content-type: ${ct}` }, { status: 415 });
 
         const id = genId(ext);
         const path = `${STORAGE}/${id}`;
 
         const body = await req.arrayBuffer();
-        if (body.byteLength === 0) return Response.json({ error: "Empty body" }, { status: 400 });
+        if (body.byteLength === 0) return corsJson({ error: "Empty body" }, { status: 400 });
         if (body.byteLength > 25 * 1024 * 1024)
-          return Response.json({ error: "File too large (>25MB)" }, { status: 413 });
+          return corsJson({ error: "File too large (>25MB)" }, { status: 413 });
 
         await Bun.write(path, body);
 
         const base = publicBaseFor(req);
-        return Response.json({ id, url: `${base}/${id}` });
+        return corsJson({ id, url: `${base}/${id}` });
       },
     },
 
     "/images/:id": {
+      OPTIONS: preflight,
       DELETE: async (req) => {
         if (req.headers.get("x-api-key") !== API_KEY) return unauthorized();
 
         const id = (req as Request & { params: { id: string } }).params.id;
         if (!/^[a-f0-9]{16}\.(png|jpg|webp|gif|svg)$/.test(id))
-          return Response.json({ error: "Invalid id" }, { status: 400 });
+          return corsJson({ error: "Invalid id" }, { status: 400 });
 
         const file = Bun.file(`${STORAGE}/${id}`);
-        if (!(await file.exists())) return Response.json({ success: false }, { status: 404 });
+        if (!(await file.exists())) return corsJson({ success: false }, { status: 404 });
 
         await Bun.$`rm -f ${STORAGE}/${id}`.quiet();
-        return Response.json({ success: true });
+        return corsJson({ success: true });
       },
     },
   },
 
   fetch(req) {
+    // Préflight CORS universel sur les paths non capturés par `routes`.
+    if (req.method === "OPTIONS") return preflight();
     // Fallback wildcard pour les paths non capturés par routes — utilisé
     // par /api/assets/<scope>/<arbitrary/sub/path.ext>.
     const url = new URL(req.url);
     if (url.pathname.startsWith("/api/assets/")) {
       return serveAssetFile(req, url);
     }
-    return new Response("Not Found", { status: 404 });
+    return new Response("Not Found", { status: 404, headers: withCors() });
   },
 });
 
 console.warn(`cdn listening on http://${server.hostname}:${server.port}`);
+
+// Arrêt gracieux (Cloud Run / SIGTERM) : on draine puis on coupe le serveur.
+function shutdown(signal: string): void {
+  console.warn(`cdn received ${signal}, shutting down`);
+  void server.stop(/* closeActiveConnections */ false);
+  process.exit(0);
+}
+process.on("SIGTERM", () => shutdown("SIGTERM"));
+process.on("SIGINT", () => shutdown("SIGINT"));

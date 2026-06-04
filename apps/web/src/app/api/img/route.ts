@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
 import { existsSync } from "node:fs";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
-import { homedir } from "node:os";
+import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { isAllowedImageHost } from "@/lib/img-proxy";
 import { ALGO_VERSION, removeUniformLightBackground } from "@/server/services/image-bg";
@@ -22,7 +22,11 @@ import { ALGO_VERSION, removeUniformLightBackground } from "@/server/services/im
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const CACHE_DIR = process.env.RPBEY_IMG_CACHE ?? join(homedir(), ".cache", "rpbey-img");
+// Cache disque **best-effort** (jamais source de vérité : sur cache-miss on
+// re-fetch + re-détoure). Défaut `os.tmpdir()` — seul chemin writable d'une
+// lambda Vercel (le FS est read-only ailleurs ; `homedir()` ne tient pas en
+// serverless). Override via `RPBEY_IMG_CACHE`.
+const CACHE_DIR = process.env.RPBEY_IMG_CACHE ?? join(tmpdir(), "rpbey-img");
 const MAX_BYTES = 8 * 1024 * 1024; // 8 Mo : au-delà ce n'est pas une vignette produit
 const FETCH_TIMEOUT_MS = 12_000;
 const UA =

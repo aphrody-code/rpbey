@@ -140,25 +140,29 @@ const CORS_HEADERS: Record<string, string> = {
 /**
  * Compute CORS headers dynamically from the request Origin. Used for the
  * Discord Activity bridge endpoints (`/api/discord/*`) which must accept
- * cross-origin browser requests from `*.discordsays.com` only — NOT `*`.
+ * cross-origin browser requests from ANY origin.
  *
- * Returns headers echoing only allowed origins ; unknown origins get an
- * empty ACAO (request is rejected by the browser CORS check).
+ * These endpoints return credential-bearing JSON (Discord access/refresh
+ * tokens, minted gacha session Bearer) that the browser must be allowed to
+ * read, so we set `Access-Control-Allow-Credentials: true`. Per the CORS
+ * spec, `*` is illegal alongside credentials, so we REFLECT the request
+ * Origin (echo it back) + `Vary: Origin`. There is NO origin allow-listing:
+ * any origin is admitted. The real auth is enforced downstream by the
+ * single-use OAuth code (10 min) / Ed25519 signature, not by CORS.
  */
-const ACTIVITY_ORIGIN_RE =
-  /^https:\/\/(?:[a-z0-9-]+\.discordsays\.com|(?:canary\.|ptb\.)?discord\.com|(?:bot|play)\.rpbey\.fr)$/i;
 function corsHeadersFor(req: Request): Record<string, string> {
-  const origin = req.headers.get("origin") ?? "";
-  const allow = ACTIVITY_ORIGIN_RE.test(origin) ? origin : "";
+  // Reflect any Origin (falls back to `*` when the request carries none).
+  const origin = req.headers.get("origin") ?? "*";
   const h: Record<string, string> = {
     Vary: "Origin",
+    "Access-Control-Allow-Origin": origin,
     "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
     "Access-Control-Allow-Headers":
       "Authorization, Content-Type, X-Requested-With, Accept, If-None-Match",
     "Access-Control-Max-Age": "86400",
   };
-  if (allow) {
-    h["Access-Control-Allow-Origin"] = allow;
+  // Credentials can only be combined with a concrete reflected origin, never `*`.
+  if (origin !== "*") {
     h["Access-Control-Allow-Credentials"] = "true";
   }
   return h;
@@ -320,21 +324,18 @@ export function startApiServer(port = 3001) {
     throw e;
   }
   serverRef = server;
-  const host = process.env.K_SERVICE ? "0.0.0.0" : "127.0.0.1";
-  logger.info(`Bot API server listening on http://${host}:${port} (ws: /ws)`);
+  logger.info(`Bot API server listening on http://0.0.0.0:${port} (ws: /ws)`);
   return server;
 }
 
 function buildServer(port: number): Server<WsData> {
-  // Sur Cloud Run (`K_SERVICE` injecté par la plateforme) il faut écouter sur
-  // `0.0.0.0:$PORT` pour passer le health check « container listening on PORT »,
-  // sinon le déploiement échoue. Sur le VPS on garde le loopback (`127.0.0.1`),
-  // l'exposition publique passant par nginx.
-  const onCloudRun = !!process.env.K_SERVICE;
-  const hostname = onCloudRun ? "0.0.0.0" : "127.0.0.1";
+  // Serverless target (Cloud Run / any container platform) : bind `0.0.0.0:$PORT`
+  // unconditionally so the platform health check « container listening on PORT »
+  // passes. Never bind loopback (`127.0.0.1`) — a loopback bind is unreachable
+  // from the platform's request router and is forbidden in this deployment model.
   return Bun.serve<WsData>({
     port,
-    hostname,
+    hostname: "0.0.0.0",
 
     routes: {
       // WebSocket upgrade — auth via `?key=<BOT_API_KEY>` (browser clients can't set headers).

@@ -182,14 +182,12 @@ export const auth = betterAuth({
   // Le plugin `admin({ adminRoles })` ajouté ci-dessus expose déjà `role` dans la session
   // via `session.user.role`. Pas besoin de mapper manuellement.
 
-  // Trusted origins
-  trustedOrigins: [
-    baseURL,
-    "https://rpbey.fr",
-    "http://localhost:3000",
-    "http://localhost:8000",
-    "rpb-tcg://",
-  ],
+  // Trusted origins — CORS "active cross origin partout" : on admet TOUTE origine
+  // (`"*"` matche n'importe quel host via le wildcard better-auth). Plus aucun
+  // gating par origine ; les flux credentialed restent protégés par le cookie
+  // SameSite + secret de session. Le scheme natif `rpb-tcg://` (deep-link, sans
+  // host → non couvert par `*`) reste listé explicitement.
+  trustedOrigins: ["*", "rpb-tcg://"],
 });
 
 export type Session = typeof auth.$Infer.Session;

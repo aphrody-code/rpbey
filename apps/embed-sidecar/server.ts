@@ -4,7 +4,8 @@
  * Pourquoi un service séparé : le moteur d'inférence (`@huggingface/transformers`
  * → ONNX Runtime natif) ne doit JAMAIS entrer dans le bundle webpack de Next
  * (binaire natif, échec « collect page data »). Le web ne parle à ce sidecar
- * qu'en `fetch` HTTP loopback ; aucune dépendance ONNX côté `apps/web`.
+ * qu'en `fetch` HTTP ; aucune dépendance ONNX côté `apps/web`. Déployé en
+ * serverless (Cloud Run) : bind 0.0.0.0:$PORT, cache poids dans os.tmpdir().
  *
  * Modèle : `Xenova/multilingual-e5-small` (384 dims) — multilingue (FR/EN/JP),
  * CPU-friendly, fort en retrieval. Convention E5 : préfixer `query: ` / `passage: `.
@@ -15,13 +16,13 @@
  * /rerank (le sidecar n'embarque pas le modèle de rerank tant qu'aucun appel ne
  * le demande). Scores ∈ [0,1] (sigmoid du logit), un par passage, dans l'ordre.
  *
- * Endpoints (loopback 127.0.0.1 uniquement) :
+ * Endpoints (bind 0.0.0.0:$PORT — Cloud Run ; CORS ouvert à toute origine) :
  *   GET  /health             -> { ok, model, dim, ready, rerank }
  *   POST /embed {texts,kind}  -> { dim, vectors: number[][] }   (kind: "query"|"passage")
  *   POST /rerank {query,passages} -> { scores: number[] }       (∈ [0,1], len == passages.length)
  */
 
-import { homedir } from "node:os";
+import { tmpdir } from "node:os";
 import { join } from "node:path";
 import {
   AutoModelForSequenceClassification,
@@ -36,14 +37,20 @@ const MODEL = process.env.EMBED_MODEL ?? "Xenova/multilingual-e5-small";
 const DIM = 384;
 // Cross-encoder de reranking (multilingue, scores de pertinence query↔passage).
 const RERANK_MODEL = process.env.RERANK_MODEL ?? "Xenova/bge-reranker-base";
-const PORT = Number(process.env.EMBED_PORT ?? 7077);
+// Cloud Run injecte `PORT` ; `EMBED_PORT` reste un override local. Bind 0.0.0.0
+// (loopback interdit en serverless : le proxy Cloud Run ne joindrait jamais le
+// service). Le port DOIT venir de l'environnement, jamais d'une valeur figée.
+const PORT = Number(process.env.PORT ?? process.env.EMBED_PORT ?? 7077);
+const HOST = process.env.EMBED_HOST ?? "0.0.0.0";
 const MAX_TEXTS = 256;
 const MAX_CHARS = 1200; // ~ borne tokens e5 (512) avec marge
 const MAX_PASSAGES = 64; // cap §3 du contrat RAG (sinon pic mémoire ONNX)
 const RERANK_MAX_CHARS = 2000; // ~512 tokens : la troncature tokenizer fait le reste
 
-env.cacheDir =
-  process.env.EMBED_CACHE_DIR ?? join(process.env.HOME || homedir(), ".cache/rpbey-embed-models");
+// Serverless : le FS est read-only hors `/tmp` (Cloud Run / lambdas). Le cache
+// des poids ONNX doit donc atterrir dans un répertoire temporaire inscriptible
+// par défaut ; `EMBED_CACHE_DIR` permet de pointer un volume persistant si dispo.
+env.cacheDir = process.env.EMBED_CACHE_DIR ?? join(tmpdir(), "rpbey-embed-models");
 env.allowRemoteModels = true;
 
 let extractor: ((input: string[], opts: unknown) => Promise<{ tolist(): number[][] }>) | null =
@@ -115,22 +122,45 @@ async function rerankTexts(query: string, passages: string[]): Promise<number[]>
     .map((row) => row[0]);
 }
 
-Bun.serve({
+// CORS « ouvert partout » : ces endpoints sont non-credentialed (aucun cookie),
+// donc `Access-Control-Allow-Origin: *` admet TOUTE origine. Aucune allow-list,
+// aucun gating par origine — rien n'est rejeté sur ce critère.
+const CORS_HEADERS: Record<string, string> = {
+  "access-control-allow-origin": "*",
+  "access-control-allow-methods": "GET, POST, OPTIONS",
+  "access-control-allow-headers": "*",
+  "access-control-max-age": "86400",
+};
+
+/** Injecte les en-têtes CORS sur chaque réponse sortante. */
+function withCors(res: Response): Response {
+  for (const [k, v] of Object.entries(CORS_HEADERS)) res.headers.set(k, v);
+  return res;
+}
+
+const server = Bun.serve({
   port: PORT,
-  hostname: "127.0.0.1",
+  hostname: HOST,
   idleTimeout: 30,
   async fetch(req): Promise<Response> {
+    // Préflight CORS : 204 sans corps, en-têtes permissifs, pour toute origine.
+    if (req.method === "OPTIONS") {
+      return new Response(null, { status: 204, headers: CORS_HEADERS });
+    }
+
     const url = new URL(req.url);
 
     if (url.pathname === "/health") {
-      return Response.json({
-        ok: loadError == null,
-        model: MODEL,
-        dim: DIM,
-        ready,
-        rerank: RERANK_MODEL,
-        loadError,
-      });
+      return withCors(
+        Response.json({
+          ok: loadError == null,
+          model: MODEL,
+          dim: DIM,
+          ready,
+          rerank: RERANK_MODEL,
+          loadError,
+        }),
+      );
     }
 
     if (url.pathname === "/rerank" && req.method === "POST") {
@@ -138,24 +168,24 @@ Bun.serve({
       try {
         body = (await req.json()) as typeof body;
       } catch {
-        return new Response("JSON invalide", { status: 400 });
+        return withCors(new Response("JSON invalide", { status: 400 }));
       }
       const query = typeof body.query === "string" ? body.query : "";
       const passages = Array.isArray(body.passages)
         ? body.passages.filter((p): p is string => typeof p === "string")
         : [];
       if (!query || passages.length === 0) {
-        return new Response("query + passages[] requis", { status: 400 });
+        return withCors(new Response("query + passages[] requis", { status: 400 }));
       }
       if (passages.length > MAX_PASSAGES) {
-        return new Response(`max ${MAX_PASSAGES} passages par requête`, { status: 413 });
+        return withCors(new Response(`max ${MAX_PASSAGES} passages par requête`, { status: 413 }));
       }
       try {
         const scores = await rerankTexts(query, passages);
-        return Response.json({ scores });
+        return withCors(Response.json({ scores }));
       } catch (e: unknown) {
         const msg = e instanceof Error ? e.message : String(e);
-        return new Response(`rerank error: ${msg}`, { status: 503 });
+        return withCors(new Response(`rerank error: ${msg}`, { status: 503 }));
       }
     }
 
@@ -164,14 +194,14 @@ Bun.serve({
       try {
         body = (await req.json()) as typeof body;
       } catch {
-        return new Response("JSON invalide", { status: 400 });
+        return withCors(new Response("JSON invalide", { status: 400 }));
       }
       const texts = body.texts;
       if (!Array.isArray(texts) || texts.length === 0) {
-        return new Response("texts[] requis", { status: 400 });
+        return withCors(new Response("texts[] requis", { status: 400 }));
       }
       if (texts.length > MAX_TEXTS) {
-        return new Response(`max ${MAX_TEXTS} textes par requête`, { status: 400 });
+        return withCors(new Response(`max ${MAX_TEXTS} textes par requête`, { status: 400 }));
       }
       const kind = body.kind === "query" ? "query" : "passage";
       try {
@@ -180,15 +210,24 @@ Bun.serve({
           pooling: "mean",
           normalize: true,
         });
-        return Response.json({ dim: DIM, vectors: out.tolist() });
+        return withCors(Response.json({ dim: DIM, vectors: out.tolist() }));
       } catch (e: unknown) {
         const msg = e instanceof Error ? e.message : String(e);
-        return new Response(`embed error: ${msg}`, { status: 503 });
+        return withCors(new Response(`embed error: ${msg}`, { status: 503 }));
       }
     }
 
-    return new Response("not found", { status: 404 });
+    return withCors(new Response("not found", { status: 404 }));
   },
 });
 
-console.log(`[embed] sidecar à l'écoute sur http://127.0.0.1:${PORT} (modèle ${MODEL})`);
+// Arrêt gracieux : Cloud Run envoie SIGTERM avant de recycler l'instance.
+function shutdown(signal: string): void {
+  console.log(`[embed] ${signal} reçu — arrêt gracieux du sidecar`);
+  server.stop();
+  process.exit(0);
+}
+process.on("SIGTERM", () => shutdown("SIGTERM"));
+process.on("SIGINT", () => shutdown("SIGINT"));
+
+console.log(`[embed] sidecar à l'écoute sur http://${HOST}:${PORT} (modèle ${MODEL})`);

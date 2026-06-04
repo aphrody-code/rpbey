@@ -2,8 +2,22 @@
 
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 
-const TSH_STATE_FILE = "/root/TournamentStreamHelper/out/program_state.json";
-const TSH_PLAYERS_FILE = "/root/TournamentStreamHelper/user_data/local_players.json";
+/**
+ * Intégration **TournamentStreamHelper** (panneau de contrôle OBS). C'est une
+ * intégration *machine-locale* (VPS/poste OBS) : le FS et le process TSH n'existent
+ * pas en serverless (Vercel) — toutes les fonctions dégradent proprement
+ * (`{ ok: false }` / `running: false`) quand fichiers/process sont absents.
+ *
+ * Chemins & URL **env-driven** (plus aucun `/root/...` ni `localhost` codé en dur) :
+ * `TSH_STATE_FILE`, `TSH_PLAYERS_FILE`, `TSH_LOCAL_URL`. Défauts = layout VPS
+ * historique pour ne rien casser sur la machine OBS.
+ */
+const TSH_STATE_FILE =
+  process.env.TSH_STATE_FILE ?? "/root/TournamentStreamHelper/out/program_state.json";
+const TSH_PLAYERS_FILE =
+  process.env.TSH_PLAYERS_FILE ?? "/root/TournamentStreamHelper/user_data/local_players.json";
+/** URL locale du process TSH (sondée pour l'état "running"). */
+const TSH_LOCAL_URL = process.env.TSH_LOCAL_URL ?? "http://localhost:5000/";
 
 // ─── Read current TSH state ───
 export async function getStreamState() {
@@ -214,7 +228,7 @@ export async function getTshStatus(): Promise<{
   url: string;
 }> {
   try {
-    const res = await fetch("http://localhost:5000/", {
+    const res = await fetch(TSH_LOCAL_URL, {
       signal: AbortSignal.timeout(2000),
     });
     return { running: res.ok, port: 5000, url: "https://rpbey.fr/tsh/" };

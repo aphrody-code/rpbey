@@ -20,6 +20,9 @@ import { AttachmentBuilder } from "discord.js";
 
 import { cacheGet, cacheGetBuffer, cacheSet, cacheSetBuffer, TTL } from "./cache.js";
 
+// Serverless: the gacha/game service is a SEPARATE Cloud Run service — its URL
+// MUST come from env (`GACHA_API_URL`). The loopback default is kept ONLY for
+// local dev/tests (it never reaches a sibling Cloud Run service in prod).
 const BASE_URL = process.env.GACHA_API_URL ?? "http://127.0.0.1:5050";
 const FETCH_TIMEOUT_MS = 20_000;
 
