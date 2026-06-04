@@ -14,8 +14,7 @@
  *   RPBEY_TEST_BASE_URL=https://rpbey.vercel.app bun test tests/no-404.bxc.test.ts
  *   # ou : bun run test:404
  */
-import { afterAll, beforeAll, expect, test } from "@aphrody/bxc-test";
-import { TestPage } from "@aphrody/bxc-test";
+import { afterAll, beforeAll, expect, test, TestPage } from "@aphrody/bxc-test";
 
 const BASE = (process.env.RPBEY_TEST_BASE_URL ?? "https://rpbey.vercel.app").replace(/\/$/, "");
 const ORIGIN = new URL(BASE).origin;
