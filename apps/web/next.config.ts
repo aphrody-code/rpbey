@@ -45,6 +45,7 @@ const nextConfig: NextConfig = {
       "./data/bx-catalog.json",
       "./data/wbo-combos-enriched.json",
       "./data/exports/participants_map.json",
+      "./data/exports/B_TS*.json",
       "./data/bey-library/bey-library-complete.json",
       "./data/pools/*.json",
       "./data/anime-frames/*.json",
@@ -86,7 +87,7 @@ const nextConfig: NextConfig = {
     "@rose-griffon/challonge",
     "@rose-griffon/challonge-core",
     "@aphrody/challonge",
-    "@aphrody/bxc"
+    "@aphrody/bxc",
   ],
 
   // Disable Node.js compression — Nginx handles gzip
@@ -314,6 +315,15 @@ const nextConfig: NextConfig = {
             value: "GET, HEAD, OPTIONS",
           },
         ],
+      },
+    ];
+  },
+  async redirects() {
+    return [
+      {
+        source: "/ranking",
+        destination: "/rankings",
+        permanent: true,
       },
     ];
   },
