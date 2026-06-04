@@ -1,13 +1,15 @@
 import { logger } from "./logger.js";
-import { redis } from "./redis.js";
 
 /**
- * Cache Redis générique pour le bot (lectures chaudes + rendus canvas).
+ * Cache générique in-process pour le bot (lectures chaudes + rendus canvas).
  *
- * Toutes les clés sont préfixées `rpb:cache:` pour rester isolées des autres
- * usages Redis (mentions, sessions). Le cache est *best-effort* : toute erreur
- * Redis est avalée et journalisée, jamais propagée — une panne Redis dégrade la
- * latence mais ne casse jamais une commande.
+ * Sur Cloud Run le bot est un singleton (min=1 / max=1) : une seule instance →
+ * un cache mémoire local suffit, plus aucun Redis. Les valeurs sont stockées dans
+ * une `Map` avec TTL (expiration paresseuse à la lecture + balayage périodique).
+ * Le cache est *best-effort* : toute erreur est avalée et journalisée, jamais
+ * propagée — une panne de cache dégrade la latence mais ne casse jamais une commande.
+ * Au redémarrage de l'instance le cache repart vide (sans conséquence : il se
+ * reremplit à la première lecture).
  *
  * Conventions de clé : `<domaine>:<id>[:<variante>]`
  *   ex. `rank:global:1234`, `seasons:wb`, `card:profile:<userId>:<hash>`.
@@ -17,20 +19,44 @@ const PREFIX = "rpb:cache:";
 
 const k = (key: string): string => PREFIX + key;
 
-/** Lecture brute (string) — `null` si absent ou erreur Redis. */
+interface Entry {
+  value: string;
+  expiresAt: number; // epoch ms
+}
+
+const store = new Map<string, Entry>();
+
+// Balayage périodique des clés expirées pour borner la mémoire (le bot tourne
+// 24/7 ; sans GC la Map croîtrait sans fin). `unref()` pour ne pas retenir l'event loop.
+const SWEEP_INTERVAL_MS = 60_000;
+const sweeper = setInterval(() => {
+  const now = Date.now();
+  for (const [key, entry] of store) {
+    if (entry.expiresAt <= now) store.delete(key);
+  }
+}, SWEEP_INTERVAL_MS);
+if (typeof sweeper.unref === "function") sweeper.unref();
+
+/** Lecture brute (string) — `null` si absent ou expiré. */
 export async function cacheGet(key: string): Promise<string | null> {
   try {
-    return await redis.get(k(key));
+    const entry = store.get(k(key));
+    if (!entry) return null;
+    if (entry.expiresAt <= Date.now()) {
+      store.delete(k(key));
+      return null;
+    }
+    return entry.value;
   } catch (err) {
     logger.warn(`[cache] get ${key} failed: ${(err as Error).message}`);
     return null;
   }
 }
 
-/** Écriture avec TTL (secondes) via SETEX atomique. Best-effort. */
+/** Écriture avec TTL (secondes). Best-effort. */
 export async function cacheSet(key: string, value: string, ttlSeconds: number): Promise<void> {
   try {
-    await redis.send("SETEX", [k(key), String(Math.max(1, ttlSeconds)), value]);
+    store.set(k(key), { value, expiresAt: Date.now() + Math.max(1, ttlSeconds) * 1000 });
   } catch (err) {
     logger.warn(`[cache] set ${key} failed: ${(err as Error).message}`);
   }
@@ -40,17 +66,16 @@ export async function cacheSet(key: string, value: string, ttlSeconds: number): 
 export async function cacheDel(...keys: string[]): Promise<void> {
   if (keys.length === 0) return;
   try {
-    await Promise.all(keys.map((key) => redis.del(k(key))));
+    for (const key of keys) store.delete(k(key));
   } catch (err) {
     logger.warn(`[cache] del failed: ${(err as Error).message}`);
   }
 }
 
 /**
- * Get-or-compute mémoïsé en Redis pour des valeurs JSON-sérialisables.
- * En cas de miss (ou panne Redis), exécute `compute()` et met en cache le
- * résultat. Une valeur `undefined` retournée par `compute()` n'est pas mise en
- * cache.
+ * Get-or-compute mémoïsé pour des valeurs JSON-sérialisables.
+ * En cas de miss, exécute `compute()` et met en cache le résultat. Une valeur
+ * `undefined` retournée par `compute()` n'est pas mise en cache.
  */
 export async function cached<T>(
   key: string,
@@ -73,8 +98,9 @@ export async function cached<T>(
 }
 
 /**
- * Cache binaire (PNG canvas, etc.) encodé base64 en Redis.
- * Survit aux redémarrages du process (contrairement à un cache mémoire ETag).
+ * Cache binaire (PNG canvas, etc.) encodé base64.
+ * Note : contrairement à l'ancien backend Redis, il ne survit pas au redémarrage
+ * de l'instance (mémoire process) — sans conséquence, le rendu se régénère au miss.
  */
 export async function cacheGetBuffer(key: string): Promise<Buffer | null> {
   const b64 = await cacheGet(`bin:${key}`);

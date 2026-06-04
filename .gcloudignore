@@ -1,0 +1,109 @@
+# .gcloudignore — contexte uploadé par `gcloud builds submit` (image bot Cloud Run).
+#
+# IMPORTANT : quand ce fichier existe, gcloud l'utilise SEUL (il n'enchaîne plus sur
+# .gitignore, ni sur les .gitignore imbriqués). C'est volontaire : le .gitignore
+# imbriqué packages/discordx/.gitignore exclut `dist/`, or les forks discordx
+# (@rpbey/di, @rpbey/discordx, …) sont des paquets *prébuildés* dont le `dist/` n'est
+# PAS rebuildé par `bun install` → il DOIT être uploadé, sinon le runtime échoue
+# avec « Cannot find module '@rpbey/di' ». On garde donc tout `packages/**` (dist inclus).
+
+# ── Secrets — JAMAIS uploadés ──
+.env
+.env.*
+!.env.example
+*.env.local
+secrets/
+.secrets/
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+id_rsa*
+id_ed25519*
+*.sa.json
+credentials-*.json
+*-credentials.json
+*.cookies.txt
+storage/credentials/
+storage/cookies/
+.htpasswd
+*.htpasswd
+
+# ── VCS & tooling ──
+.git/
+.github/
+.claude/
+.vercel
+.turbo/
+**/.turbo/
+.cursor/
+
+# ── Deps & artefacts lourds (réinstallés/rebuildés dans l'image) ──
+node_modules/
+**/node_modules/
+.bun/
+.bun-cache/
+
+# Artefacts/assets lourds des AUTRES apps (le bot n'en a pas besoin). On exclut
+# UNIQUEMENT les sous-dossiers lourds — JAMAIS un dossier workspace entier, sinon
+# son package.json disparaît et `bun install --frozen-lockfile` re-résout le graphe
+# workspace → « lockfile had changes, but lockfile is frozen ». Tous les
+# apps/*/package.json et packages/*/package.json DOIVENT rester.
+apps/web/.next/
+apps/web/dist/
+apps/web/out/
+apps/web/data/
+apps/web/public/
+apps/cdn/assets/
+apps/dust/
+apps/gacha-client/dist/
+apps/embed-sidecar/dist/
+**/.next/
+**/coverage/
+*.tsbuildinfo
+
+# Le dist/ du bot est rebuildé dans l'image (`bun run build`) → inutile à uploader.
+apps/bot/dist/
+
+# ── Rust / Python / binaires ──
+target/
+**/target/
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# ── bxc : vendor binaries + history (re-téléchargeables, trop lourds) ──
+packages/bxc/vendor/
+packages/bxc/.git-history/
+packages/bxc/dist/
+packages/bxc/cookies/
+
+# ── Assets binaires lourds ──
+roms/
+nds/roms/
+staging-nds/
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+*.7z
+*.sqlite
+*.db
+*.dump
+*.sql.gz
+*.sql.zst
+
+# ── Logs / temp ──
+*.log
+logs/
+*.pid
+*.tmp
+.tmp/
+tmp/
+.DS_Store
+Thumbs.db
+
+# NOTE : packages/** (y compris packages/discordx/**/dist) est volontairement
+# CONSERVÉ — ne PAS ajouter de règle `dist/` globale ici.

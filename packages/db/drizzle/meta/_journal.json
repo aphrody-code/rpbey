@@ -50,6 +50,13 @@
       "when": 1780747200000,
       "tag": "0006_awards_editions",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1780534487955,
+      "tag": "0007_bot_serverless_state",
+      "breakpoints": true
     }
   ]
 }

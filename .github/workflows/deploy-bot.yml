@@ -1,11 +1,16 @@
 name: Deploy bot to Cloud Run
 
-# Bot Discord @rose-griffon/bot → Google Cloud Run (projet rgfr-8927d, EU).
+# Bot Discord @rose-griffon/bot → Google Cloud Run (projet aphrody, europe-west3 /
+# Frankfurt — co-localisé avec la base Neon Frankfurt, ~1 ms bot↔DB).
 # Container persistant (gateway Discord 24/7) : min-instances=1, max=1 (singleton,
-# lock PID), no-cpu-throttling. Build = Cloud Build avec le CONTEXTE racine du
+# lock PID), --no-cpu-throttling. Build = Cloud Build avec le CONTEXTE racine du
 # monorepo + apps/bot/Dockerfile. Secrets injectés depuis GCP Secret Manager.
 #
-# Voir docs/migration/cloud-run-bot.md (caveat voix/UDP, Redis managé requis).
+# 100 % serverless : plus aucun Redis (mentions/scan-meta rebackés Postgres Neon,
+# cache + pub/sub in-process — cf. apps/bot/src/lib/{redis,cache,events-pubsub}.ts).
+#
+# Caveat voix/UDP : Cloud Run ne route pas l'UDP → pas de voice/lavalink. La gateway
+# et les slash commands fonctionnent. Voir docs/migration/cloud-run-bot.md.
 
 on:
   push:
@@ -23,10 +28,10 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  GCP_PROJECT: rgfr-8927d
-  REGION: europe-west1
+  GCP_PROJECT: aphrody
+  REGION: europe-west3
   SERVICE: rpbey-bot
-  IMAGE: europe-west1-docker.pkg.dev/rgfr-8927d/rpbey/rpbey-bot
+  IMAGE: europe-west3-docker.pkg.dev/aphrody/rpbey/rpbey-bot
 
 jobs:
   deploy:
@@ -38,6 +43,8 @@ jobs:
       - id: auth
         uses: google-github-actions/auth@v2
         with:
+          # SA key JSON stockée dans le secret repo GCP_SA_KEY (déjà configuré).
+          # Alternative : Workload Identity Federation (workload_identity_provider).
           credentials_json: ${{ secrets.GCP_SA_KEY }}
 
       - uses: google-github-actions/setup-gcloud@v2
@@ -70,7 +77,18 @@ jobs:
             --cpu=1 --memory=1Gi \
             --port=8080 \
             --no-allow-unauthenticated \
-            --set-secrets="DISCORD_TOKEN=DISCORD_TOKEN:latest,DATABASE_URL=DATABASE_URL:latest,BETTER_AUTH_SECRET=BETTER_AUTH_SECRET:latest,CHALLONGE_API_KEY=CHALLONGE_API_KEY:latest,BOT_API_KEY=BOT_API_KEY:latest"
+            --set-secrets="\
+            DISCORD_TOKEN=DISCORD_TOKEN:latest,\
+            DATABASE_URL=DATABASE_URL:latest,\
+            DIRECT_DATABASE_URL=DIRECT_DATABASE_URL:latest,\
+            DISCORD_CLIENT_ID=DISCORD_CLIENT_ID:latest,\
+            DISCORD_CLIENT_SECRET=DISCORD_CLIENT_SECRET:latest,\
+            DISCORD_PUBLIC_KEY=DISCORD_PUBLIC_KEY:latest,\
+            DISCORD_GUILD_ID=DISCORD_GUILD_ID:latest,\
+            GUILD_ID=GUILD_ID:latest,\
+            BOT_API_KEY=BOT_API_KEY:latest,\
+            BETTER_AUTH_SECRET=BETTER_AUTH_SECRET:latest,\
+            CHALLONGE_API_KEY=CHALLONGE_API_KEY:latest"
 
       - name: Describe
         run: gcloud run services describe "$SERVICE" --project="$GCP_PROJECT" --region="$REGION" --format='value(status.url,status.conditions[0].status)'

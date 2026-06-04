@@ -1,0 +1,35 @@
+# Docker build context exclusions (apps/bot/Dockerfile, contexte = racine monorepo).
+# Empêche les secrets (.env) et les artefacts lourds (node_modules/dist/target)
+# d'entrer dans l'image ou d'être uploadés par `gcloud builds submit`.
+# Les deps sont (ré)installées dans l'image via `bun install --frozen-lockfile`.
+
+# Secrets — JAMAIS dans l'image (injectés au runtime via Secret Manager).
+**/.env
+**/.env.*
+!**/.env.example
+
+# Deps & build artefacts (réinstallés/rebuildés dans l'image).
+**/node_modules
+**/.next
+**/.turbo
+**/coverage
+**/target
+
+# dist/ des apps (le bot rebuild le sien via `bun run build`). On exclut app par
+# app — JAMAIS un `**/dist` global, qui supprimerait le dist PRÉBUILDÉ des forks
+# discordx (@rpbey/di, …) → runtime « Cannot find module '@rpbey/di' ».
+apps/*/dist
+packages/bxc/dist
+packages/bxc/forks
+
+# VCS & tooling local.
+.git
+.github
+**/*.log
+**/.DS_Store
+
+# IMPORTANT :
+#  - NE PAS ignorer packages/discordx/**/dist : forks prébuildés, requis au runtime
+#    (résolus via les symlinks node_modules/@rpbey/*). Pas de règle `dist` globale.
+#  - NE PAS ignorer patches/ (référencé par package.json#patchedDependencies)
+#    ni bun.lock / package.json / bunfig.toml (requis par bun install).

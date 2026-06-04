@@ -3,7 +3,7 @@
 # `_GH_PACKAGES_TOKEN` (via Secret Manager côté CI, jamais en clair dans le repo).
 #
 # Usage (depuis la racine du repo) :
-#   gcloud builds submit --project rgfr-8927d --region europe-west1 \
+#   gcloud builds submit --project aphrody --region europe-west3 \
 #     --config apps/bot/cloudbuild.yaml \
 #     --substitutions=_IMAGE=<ar-image>:<tag>,_GH_PACKAGES_TOKEN=<token> .
 steps:

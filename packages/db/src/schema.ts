@@ -2784,3 +2784,26 @@ export const approvalRequests = pgTable(
       .onDelete("cascade"),
   ],
 );
+
+// ─── Bot serverless state (ex-Redis) ────────────────────────────────────────
+// Sur Cloud Run (singleton min=1/max=1) il n'y a qu'une instance : l'état
+// jadis stocké dans Redis (compteur de mentions + méta de scan) est reback en
+// Postgres Neon. Tables minimales, pas de FK (les *_id sont des snowflakes
+// Discord bruts, pas forcément présents dans `users`).
+export const botMentions = pgTable(
+  "bot_mentions",
+  {
+    fromId: text("from_id").notNull(),
+    toId: text("to_id").notNull(),
+    count: integer().default(0).notNull(),
+  },
+  (table) => [primaryKey({ columns: [table.fromId, table.toId], name: "bot_mentions_pkey" })],
+);
+
+// Clé/valeur single-row pour la méta du dernier scan de mentions
+// (`channelsScanned`, `messagesScanned`, `lastScan`). Remplace le hash
+// `rpb:mentions:meta`.
+export const botScanMeta = pgTable("bot_scan_meta", {
+  k: text().primaryKey().notNull(),
+  v: text().notNull(),
+});
