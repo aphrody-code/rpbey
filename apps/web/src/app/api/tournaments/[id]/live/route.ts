@@ -11,8 +11,8 @@
  */
 
 import { type NextRequest, NextResponse } from "next/server";
-import { ChallongeApi } from "@/lib/challonge-vendor/api";
-import { ChallongeReverse } from "@/lib/challonge-vendor/reverse";
+import { ChallongeApi } from "@rose-griffon/challonge/api";
+import { ChallongeReverse } from "@rose-griffon/challonge/reverse";
 import { requireStaff } from "@/lib/auth-utils";
 import {
   getTournamentChallongeRef,
@@ -58,25 +58,6 @@ export async function GET(_request: NextRequest, { params }: RouteParams) {
   try {
     const { id } = await params;
 
-    if (id === "bts2" || id === "bts3") {
-      const fileName = id === "bts2" ? "B_TS2.json" : "B_TS3.json";
-      const { readFileSync, existsSync } = await import("node:fs");
-      const { join } = await import("node:path");
-      const filePath = join(process.cwd(), "data/exports", fileName);
-      if (existsSync(filePath)) {
-        const data = JSON.parse(readFileSync(filePath, "utf-8"));
-        return NextResponse.json({
-          data: {
-            standings: (data.participants as Array<{ rank: number; name: string }>)
-              .filter((p) => p.rank > 0)
-              .sort((a, b) => a.rank - b.rank),
-            stations: [],
-            activityLog: [],
-            lastUpdated: data.scrapedAt,
-          },
-        });
-      }
-    }
 
     const tournament = await getTournamentForLive(id);
 
