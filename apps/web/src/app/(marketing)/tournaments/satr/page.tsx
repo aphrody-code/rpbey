@@ -1,5 +1,4 @@
-import { readFile } from "node:fs/promises";
-import { join } from "node:path";
+import { loadJsonSafe } from "@/lib/data-cache";
 import { Box, Container, Paper, Typography } from "@mui/material";
 import Image from "next/image";
 import { Suspense } from "react";
@@ -48,14 +47,9 @@ function satrSeasonForTournament(tournament: string): number | null {
 }
 
 async function getChampions(season: number): Promise<Champion[]> {
-  try {
-    const path = join(process.cwd(), "data", "satr_champions.json");
-    const content = await readFile(path, "utf-8");
-    const all = JSON.parse(content) as Champion[];
-    return all.filter((c) => satrSeasonForTournament(c.tournament) === season);
-  } catch {
-    return [];
-  }
+  const all = await loadJsonSafe<Champion[]>("data/satr_champions.json");
+  if (!all) return [];
+  return all.filter((c) => satrSeasonForTournament(c.tournament) === season);
 }
 
 export default async function SatrPage({ searchParams }: SatrPageProps) {

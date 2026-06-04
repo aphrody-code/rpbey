@@ -215,7 +215,7 @@ export function BotConsole({ initialStatus, initialLogs }: Props) {
       <ConfirmDialog
         open={confirmOpen}
         title="Redemarrer le bot Discord ?"
-        message="Le service rpb-bot.service va etre redemarrepar systemd. Les commandes en cours seront interrompues (~5 s)."
+        message="Le conteneur du bot Discord (Cloud Run) va être redémarré. Les commandes en cours seront interrompues (~5 s)."
         confirmText="Redemarrer"
         cancelText="Annuler"
         confirmColor="error"

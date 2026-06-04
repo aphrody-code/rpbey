@@ -4,7 +4,7 @@ description: "Index arborescent généré de toute la doc sous docs/."
 scope:
   - docs
 status: "generated"
-last_updated: "2026-06-03"
+last_updated: "2026-06-04"
 ---
 # Documentation — index
 
@@ -20,6 +20,8 @@ Cartographie du repo (apps/packages) : [REPO_MAP.md](REPO_MAP.md).
 - [Best practices du pipeline de données rpbey](data-pipeline-best-practices.md) `stable` — Référentiel opinioné — scraping → validation → consolidation → recherche hybride/RAG → observabilité — confronté à l'état réel du pipeline rpbey, avec backlog d'actions priorisé.
 - [Système de documentation (structuré, automatisé, sync)](documentation-system.md) `stable` — Convention frontmatter, commandes docs.ts et hook git qui gardent la doc typée et synchronisée avec le code.
 - [Métagame WBO — extraction & données consommées par rpbey](metagame-wbo.md) `stable` — Pipeline d'extraction des classements et du métagame WBO (Wayback Machine) consommé par le dashboard rpbey.
+- [Ops — Serverless, DB, Tournaments & Ranking (2026-06)](ops-serverless-db-ranking.md) `stable` — Operational reference for the serverless migration, the Neon DB conventions, and the tournament + ranking pipeline.
+- [Autopilot Plan](PLAN.md) `stable` — Plan d'action pour la finalisation de la migration serverless et les reliquats cosmétiques.
 - [Sondages, Tier Lists & Beyblade Awards](polls-awards.md) `draft` — Système de vote communautaire de rpbey : sondages (choix unique/multiple/notation), tier lists S→F, et le concept phare Beyblade Awards France (éditions, nominés Discord/X, résultats réels 2025 importés du Google Form). Schéma DB, API, DAL, UI et invariants (enveloppe SWR, vote anonyme).
 - [Assistant RAG conversationnel & UI d'ambiance](rag-assistant-ui.md) `stable` — Couche de consommation du RAG rpbey : backend de chat « Rpbey » (retrieval hybride déterministe) — UI retirée du site, conservé en background — et fonds d'ambiance par page/section (frames d'animé, parallaxe au scroll) tirés du corpus.
 - [Stratégie SEO — devenir le site Beyblade n°1 en France](seo-strategy.md) `draft` — Plan SEO actionnable pour rpbey.fr, fondé sur la veille concurrentielle de x-rank.fr et beyblade-espace.fr (2026-05-30) : forces, failles exploitables, et feuille de route technique + contenu pour dominer le référencement Beyblade FR.
@@ -64,7 +66,7 @@ Cartographie du repo (apps/packages) : [REPO_MAP.md](REPO_MAP.md).
 - [Système Gacha — RPBey](gacha/README.md) `stable` — Documentation canonique du gacha TCG Beyblade : trois surfaces web, bot, serveur sur une DB partagée.
 - [Gacha — Règles & mécaniques](gacha/rules.md) `stable` — Raretés, coûts, pity, daily/streak, duel, économie/dette, badges, fusion et roster bannière 1.
 - [Gacha server — références (Colyseus / Discord Activity)](gacha/server-references.md) `stable` — Liens de référence Colyseus 0.17, Discord Activity template, PixiJS et notes d'intégration réseau.
-- [Serveur gacha `:5050` — `apps/gacha-server` (Colyseus / Bun)](gacha/server.md) `stable` — Serveur de jeu gacha Colyseus/Bun : REST économie, salle temps réel, CORS, déploiement systemd/nginx.
+- [Serveur gacha — `apps/gacha-server` (Colyseus / Bun)](gacha/server.md) `stable` — Serveur de jeu gacha Colyseus/Bun : REST économie, salle temps réel, CORS, hébergement Google Cloud Run.
 - [Gacha — Couche web (`apps/web`, Next.js `:3002`)](gacha/web.md) `stable` — Routes API gacha Next.js (legacy + v1), DAL Drizzle, service, server actions et pages dashboard.
 
 ## m3
@@ -78,10 +80,10 @@ Cartographie du repo (apps/packages) : [REPO_MAP.md](REPO_MAP.md).
 ## migration
 
 - [Migration CDN — cdn.service (Bun) → Vercel Blob + reads CDN](migration/cdn.md) `stable` — Plan + état de la migration du serveur d'images Bun (apps/cdn, cdn.service) : les uploads écrivant sur /var/www passent à Vercel Blob (upload-store.ts), les lectures d'assets statiques restent servies par cdn.rpbey.fr (HTTP, joignable depuis Vercel). Le serveur Bun reste l'autorité VPS jusqu'au cutover.
-- [Migration Bot — apps/bot → Google Cloud Run](migration/cloud-run-bot.md) `stable` — Plan + procédure pour héberger le bot Discord @rose-griffon/bot (discordx + discord.js gateway, build SWC) sur Google Cloud Run (projet rgfr-8927d, région EU) : Dockerfile Bun, min-instances=1 + no-cpu-throttling pour la gateway persistante, secrets via Secret Manager, et caveat voix/lavalink (UDP).
+- [Migration Bot — apps/bot → Google Cloud Run (LIVE)](migration/cloud-run-bot.md) `stable` — Bot Discord @rose-griffon/bot (discordx + discord.js gateway, build SWC) déployé sur Google Cloud Run, projet aphrody, région europe-west3 (Frankfurt). 100 % serverless : zéro Redis (mentions/scan-meta rebackés Postgres Neon, cache + pub/sub in-process), singleton min=1/max=1 no-cpu-throttling pour la gateway persistante, secrets via Secret Manager. Caveat voix/lavalink (UDP).
 - [Migration DB — Postgres local → Neon (managed)](migration/neon.md) `stable` — Plan + procédure de migration de la base rpb_neon (socket local /var/run/postgresql) vers Neon Postgres managé (projet rpbey, org aphrody) : dump/restore, rewiring du client Drizzle sur DATABASE_URL, vérification par row-counts, secrets CI.
 - [Migration Site — apps/web (Next.js 16) → Vercel](migration/vercel.md) `stable` — Plan + procédure pour héberger le dashboard @rose-griffon/dashboard sur Vercel (team aphrody) : projet lié à apps/web, env (DATABASE_URL Neon + auth/discord/twitch), workflow deploy-vercel.yml (setup-bun canary), et découplage des exports JSON locaux (B_TS*.json, /var/www, data/).
 
 ## nextjs
 
-- [Next.js — notes build rpbey (apps/web)](nextjs/README.md) `stable` — Pièges de build Next.js App Router pour le dashboard rpbey (VPS standalone). La doc Next.js complète est bundlée et version-matchée — voir ci-dessous.
+- [Next.js — notes build rpbey (apps/web)](nextjs/README.md) `stable` — Pièges de build Next.js App Router pour le dashboard rpbey (Vercel). La doc Next.js complète est bundlée et version-matchée — voir ci-dessous.

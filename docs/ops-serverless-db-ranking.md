@@ -1,3 +1,14 @@
+---
+title: "Ops — Serverless, DB, Tournaments & Ranking (2026-06)"
+description: "Operational reference for the serverless migration, the Neon DB conventions, and the tournament + ranking pipeline."
+scope:
+  - apps/web
+  - apps/bot
+  - packages/db
+status: "stable"
+last_updated: "2026-06-04"
+---
+
 # Ops — Serverless, DB, Tournaments & Ranking (2026-06)
 
 Operational reference for the serverless migration, the Neon DB conventions, and the tournament + ranking pipeline. Companion to `CLAUDE.md` / `AGENTS.md`.

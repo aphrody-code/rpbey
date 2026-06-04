@@ -5,7 +5,7 @@ scope:
   - apps
   - packages
 status: "generated"
-last_updated: "2026-06-03"
+last_updated: "2026-06-04"
 ---
 # Cartographie du monorepo (REPO_MAP)
 
@@ -23,7 +23,7 @@ Index de la doc : [README.md](README.md). Total : 6 apps, 6 packages.
 | `@rose-griffon/embed-sidecar`<br/>`apps/embed-sidecar` | — | server.ts | — | — |
 | `@rose-griffon/gacha-client`<br/>`apps/gacha-client` | — | — | — | — |
 | `@rose-griffon/gacha-server`<br/>`apps/gacha-server` | Serveur de jeu gacha (REST :5050) — recréé depuis le contrat client apps/bot/src/lib/gacha-api.ts. Backé par la DB partagée @rpbey/db. | — | Colyseus, Drizzle | `@rpbey/api-contract` `@rpbey/db` |
-| `@rose-griffon/dashboard`<br/>`apps/web` | Dashboard officiel de la République Populaire du Beyblade | — | Next.js, React, Drizzle, better-auth, MUI, postgres-js, Zod | `@rose-griffon/challonge-core` `@rpbey/api-client` `@rpbey/api-contract` `@rpbey/db` `@rpbey/types` |
+| `@rose-griffon/dashboard`<br/>`apps/web` | Dashboard officiel de la République Populaire du Beyblade | — | Next.js, React, Drizzle, better-auth, MUI, postgres-js, Zod | `@rose-griffon/challonge` `@rose-griffon/challonge-core` `@rpbey/api-client` `@rpbey/api-contract` `@rpbey/db` `@rpbey/types` |
 
 ## Packages
 
@@ -40,5 +40,5 @@ Index de la doc : [README.md](README.md). Total : 6 apps, 6 packages.
 
 - `@rose-griffon/bot` → `@rose-griffon/challonge`, `@rpbey/api-contract`, `@rpbey/db`, `@rpbey/di`, `@rpbey/discordx`, `@rpbey/pagination`, `@rpbey/types`
 - `@rose-griffon/gacha-server` → `@rpbey/api-contract`, `@rpbey/db`
-- `@rose-griffon/dashboard` → `@rose-griffon/challonge-core`, `@rpbey/api-client`, `@rpbey/api-contract`, `@rpbey/db`, `@rpbey/types`
+- `@rose-griffon/dashboard` → `@rose-griffon/challonge`, `@rose-griffon/challonge-core`, `@rpbey/api-client`, `@rpbey/api-contract`, `@rpbey/db`, `@rpbey/types`
 - `@rpbey/types` → `@rpbey/db`

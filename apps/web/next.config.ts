@@ -48,6 +48,8 @@ const nextConfig: NextConfig = {
       "./data/bey-library/bey-library-complete.json",
       "./data/pools/*.json",
       "./data/anime-frames/*.json",
+      "./data/wb_champions.json",
+      "./data/satr_champions.json",
     ],
   },
 
@@ -79,7 +81,13 @@ const nextConfig: NextConfig = {
   // @vidstack/react ship du JSX non-transpilé dans ses chunks .js : Turbopack
   // ne transforme pas node_modules par défaut → panic `Expected ';', got '{'`
   // (`<SlotClone>`). Le forcer dans le pipeline de transpilation le corrige.
-  transpilePackages: ["@vidstack/react"],
+  transpilePackages: [
+    "@vidstack/react",
+    "@rose-griffon/challonge",
+    "@rose-griffon/challonge-core",
+    "@aphrody/challonge",
+    "@aphrody/bxc"
+  ],
 
   // Disable Node.js compression — Nginx handles gzip
   compress: false,
@@ -113,16 +121,11 @@ const nextConfig: NextConfig = {
     "crawlee",
     "turndown",
     "@tobyg74/tiktok-api-dl",
-    // challonge core/htmlrewriter tire puppeteer-extra : externaliser pour que
-    // Turbopack le require() nativement (sinon crash eval `utils.isObject`).
-    "@rose-griffon/challonge",
-    "@rose-griffon/challonge-core",
-    "@aphrody/bxc",
   ],
 
   // Experimental features
   experimental: {
-    cpus: 12,
+    cpus: 2,
     // Cache Turbopack persistant entre builds (gain 2-5x sur incremental).
     // Réactivé sur Next 16.3 canary (le panic JSX radix <SlotClone> de 16.2.6
     // est corrigé upstream). Combiné à `next build --turbopack`.

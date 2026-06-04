@@ -227,13 +227,13 @@ export async function actionImportTournament(slug: string) {
 // 4. Sync Bey-Library
 export async function actionTriggerSyncParts() {
   if (!(await requireAdmin())) throw new Error("Forbidden");
-  const fs = await import("node:fs/promises");
-  const path = await import("node:path");
+  const { loadJsonSafe } = await import("@/lib/data-cache");
 
   try {
-    const DATA_FILE = path.join(process.cwd(), "data/bey-library/bey-library.json");
-    const rawData = await fs.readFile(DATA_FILE, "utf-8");
-    const scrapedParts = JSON.parse(rawData);
+    const scrapedParts = await loadJsonSafe<any[]>("data/bey-library/bey-library-complete.json");
+    if (!scrapedParts) {
+      throw new Error("Impossible de charger data/bey-library/bey-library-complete.json");
+    }
 
     for (const part of scrapedParts) {
       const system = part.code?.startsWith("UX") ? "UX" : part.code?.startsWith("CX") ? "CX" : "BX";
@@ -242,11 +242,11 @@ export async function actionTriggerSyncParts() {
         name: part.name,
         imageUrl: part.imageUrl,
         system,
-        attack: part.specs.Attack || "50",
-        defense: part.specs.Defense || "50",
-        stamina: part.specs.Stamina || "50",
-        dash: part.specs.Dash || "50",
-        burst: part.specs.Burst || "50",
+        attack: part.specs?.Attack || "50",
+        defense: part.specs?.Defense || "50",
+        stamina: part.specs?.Stamina || "50",
+        dash: part.specs?.Dash || "50",
+        burst: part.specs?.Burst || "50",
       });
     }
     return {

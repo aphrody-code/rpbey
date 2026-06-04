@@ -402,6 +402,19 @@ function buildServer(port: number): Server<WsData> {
         });
       },
 
+      "/api/admin/restart": {
+        POST: async (req: Request) => {
+          const authError = authenticate(req);
+          if (authError) return authError;
+          logger.info("Redémarrage demandé via API. Arrêt du processus dans 1 seconde...");
+          setTimeout(() => {
+            process.exit(0);
+          }, 1000);
+          return Response.json({ success: true, message: "Redémarrage en cours..." }, { headers: CORS_HEADERS });
+        },
+        OPTIONS: () => new Response(null, { status: 204, headers: CORS_HEADERS }),
+      },
+
       "/api/status": {
         GET: async (req: Request) => {
           const authError = authenticate(req);
