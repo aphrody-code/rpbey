@@ -143,6 +143,8 @@ const nextConfig: NextConfig = {
         process.env.NEXT_PUBLIC_APP_URL?.replace("https://", "").replace("http://", "") ||
           "localhost:3000",
         "rpbey.fr",
+        "rpbey.vercel.app",
+        "*.vercel.app",
         "localhost:3000",
         "localhost:3001",
         "localhost:8000",
@@ -158,12 +160,23 @@ const nextConfig: NextConfig = {
     process.env.NEXT_PUBLIC_APP_URL?.replace("https://", "").replace("http://", "").split(":")[0] ||
       "localhost",
     "rpbey.fr",
+    "rpbey.vercel.app",
+    "*.vercel.app",
     "127.0.0.1",
     "51.77.147.152",
   ],
 
   // Image optimization
   images: {
+    // Vercel renvoie `402 OPTIMIZED_IMAGE_REQUEST_PAYMENT_REQUIRED` sur
+    // `/_next/image?...` (plan Hobby : l'optimiseur d'images est facturé/quota
+    // épuisé) → TOUTES les `<Image>` optimisées tombaient en 402, donc rien ne
+    // s'affichait. Les assets locaux sont DÉJÀ en .webp pré-optimisé (public/)
+    // et servis par l'edge CDN Vercel en 200 ; les distants sont des miniatures.
+    // On bypasse donc l'optimiseur : `<Image>` émet le `src` d'origine, servi
+    // tel quel (200, gratuit, déterministe). `remotePatterns` reste validé pour
+    // l'allowlisting des hôtes distants.
+    unoptimized: true,
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 60 * 60 * 24 * 30, // 30 days
     deviceSizes: [640, 828, 1080, 1200, 1920],
