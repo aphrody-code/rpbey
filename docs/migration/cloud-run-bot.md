@@ -3,7 +3,7 @@ title: "Migration Bot — apps/bot → Google Cloud Run (LIVE)"
 description: "Bot Discord @rose-griffon/bot (discordx + discord.js gateway, build SWC) déployé sur Google Cloud Run, projet aphrody, région europe-west3 (Frankfurt). 100 % serverless : zéro Redis (mentions/scan-meta rebackés Postgres Neon, cache + pub/sub in-process), singleton min=1/max=1 no-cpu-throttling pour la gateway persistante, secrets via Secret Manager. Caveat voix/lavalink (UDP)."
 scope:
   - apps/bot
-status: "live"
+status: "stable"
 last_updated: "2026-06-04"
 related_symbols:
   - Dockerfile

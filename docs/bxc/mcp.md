@@ -4,7 +4,7 @@ description: "Serveur MCP stdio bxc-native-mcp : installation, 6 outils exposés
 scope:
   - packages/challonge
 status: "stable"
-last_updated: "2026-06-02"
+last_updated: "2026-06-04"
 related_symbols:
   - bxc_scrape_markdown
   - bxc_search

@@ -48,9 +48,7 @@ const EXACT: Record<string, string> = {
 };
 
 /** Prefix swaps: `<from><suffix>` → `<to><suffix>` (suffix + subpath preserved). */
-const PREFIX: Array<{ from: string; to: string }> = [
-  { from: "@aphrody-code/", to: "@aphrody/" },
-];
+const PREFIX: Array<{ from: string; to: string }> = [{ from: "@aphrody-code/", to: "@aphrody/" }];
 
 // Files we rewrite string literals in. package.json gets dep-key treatment too.
 const SCAN_GLOB = "**/*.{ts,tsx,mts,cts,js,jsx,mjs,cjs,json,scss,sass,css}";
@@ -170,7 +168,12 @@ if (values.verify) {
   // Known @aphrody suffixes: explicit --known, else everything under node_modules/@aphrody.
   let known = new Set<string>();
   if (values.known) {
-    known = new Set(values.known.split(",").map((s) => s.trim()).filter(Boolean));
+    known = new Set(
+      values.known
+        .split(",")
+        .map((s) => s.trim())
+        .filter(Boolean),
+    );
   } else {
     const nm = join(root, "node_modules", "@aphrody");
     try {
@@ -192,7 +195,9 @@ if (values.verify) {
     }
   }
   if (values.fix && staleRemaining > 0) {
-    warnings.push(`VERIFY FAILED: ${staleRemaining} files still reference @aphrody-code/ after --fix`);
+    warnings.push(
+      `VERIFY FAILED: ${staleRemaining} files still reference @aphrody-code/ after --fix`,
+    );
   }
 }
 
@@ -203,7 +208,14 @@ for (const h of allHits) (byFile.get(h.file) ?? byFile.set(h.file, []).get(h.fil
 if (values.json) {
   console.log(
     JSON.stringify(
-      { root, mode: values.fix ? "fix" : "check", filesScanned, filesChanged, hits: allHits, warnings },
+      {
+        root,
+        mode: values.fix ? "fix" : "check",
+        filesScanned,
+        filesChanged,
+        hits: allHits,
+        warnings,
+      },
       null,
       2,
     ),

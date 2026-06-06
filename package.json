@@ -82,10 +82,13 @@
     "clean": "rm -rf node_modules apps/*/node_modules packages/*/node_modules .turbo apps/*/.turbo packages/*/.turbo"
   },
   "devDependencies": {
+    "@google-cloud/gcloud-mcp": "latest",
     "@happy-dom/global-registrator": "^20.9.0",
     "@hey-api/openapi-ts": "^0.98.1",
+    "@neondatabase/mcp-server-neon": "latest",
     "@types/bun": "^1.3.14",
     "@types/node": "^25.9.1",
+    "@upstash/context7-mcp": "latest",
     "oxfmt": "^0.53.0",
     "oxlint": "^1.68.0",
     "turbo": "^2.9.16",

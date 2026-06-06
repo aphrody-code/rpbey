@@ -55,10 +55,10 @@ async function run() {
     const standings = dbParticipants
       .filter((p) => p.finalPlacement && p.finalPlacement > 0)
       .map((p) => {
-        const jsonPlayer = 
-          jsonMap.get((p.playerName || "").toLowerCase()) || 
+        const jsonPlayer =
+          jsonMap.get((p.playerName || "").toLowerCase()) ||
           jsonMap.get(String(p.challongeParticipantId));
-        
+
         return {
           rank: p.finalPlacement,
           name: p.playerName,

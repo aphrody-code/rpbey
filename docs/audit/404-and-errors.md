@@ -4,7 +4,7 @@ description: "Détail des erreurs réseau (404, 500, ORB, 429) relevées lors de
 scope:
   - apps/web
 status: "stable"
-last_updated: "2026-06-02"
+last_updated: "2026-06-04"
 related_symbols:
   - /api/auth/get-session
   - /comparateur/[slug]

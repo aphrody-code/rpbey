@@ -106,7 +106,11 @@ async function main() {
     .from(schema.users)
     .where(isNotNull(schema.users.discordId));
   const staff = await db
-    .select({ id: schema.staffMembers.id, discordId: schema.staffMembers.discordId, name: schema.staffMembers.name })
+    .select({
+      id: schema.staffMembers.id,
+      discordId: schema.staffMembers.discordId,
+      name: schema.staffMembers.name,
+    })
     .from(schema.staffMembers)
     .where(isNotNull(schema.staffMembers.discordId));
 
@@ -188,7 +192,11 @@ async function main() {
   }
 
   let recovered = 0;
-  const targets: Array<{ table: "users" | "staff_members" | "global_rankings"; col: string; idCol: string }> = [
+  const targets: Array<{
+    table: "users" | "staff_members" | "global_rankings";
+    col: string;
+    idCol: string;
+  }> = [
     { table: "users", col: "image", idCol: "id" },
     { table: "staff_members", col: "imageUrl", idCol: "id" },
     { table: "global_rankings", col: "avatarUrl", idCol: "id" },

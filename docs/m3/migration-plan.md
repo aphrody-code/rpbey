@@ -4,7 +4,7 @@ description: "Stratégie, véhicule, phasage en vagues, gates et risques pour mi
 scope:
   - apps/web
 status: draft
-last_updated: "2026-06-02"
+last_updated: "2026-06-04"
 related_symbols:
   - ThemeRegistry
   - createTheme

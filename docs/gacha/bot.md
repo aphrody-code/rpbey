@@ -4,7 +4,7 @@ description: "Client gacha du bot Discord : authentification Bearer, endpoints a
 scope:
   - apps/bot
 status: "stable"
-last_updated: "2026-06-02"
+last_updated: "2026-06-04"
 related_symbols:
   - gacha-api.ts
   - gacha-images.ts

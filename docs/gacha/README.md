@@ -5,7 +5,7 @@ scope:
   - apps/gacha-server
   - apps/web
 status: "stable"
-last_updated: "2026-06-02"
+last_updated: "2026-06-04"
 related_symbols:
   - gacha_cards
   - card_inventory
@@ -34,32 +34,32 @@ Documentation canonique et complète du **gacha TCG Beyblade** de la République
 
 ## Vue d'ensemble
 
-Le gacha est un jeu de cartes communautaire (thème Beyblade : *Metal Fusion / Bakuten Shoot / Burst*). Il existe **trois surfaces** qui partagent **le même Postgres** (`@rpbey/db`, base `rpb_neon`, socket `/var/run/postgresql`) :
+Le gacha est un jeu de cartes communautaire (thème Beyblade : *Metal Fusion / Bakuten Shoot / Burst*). Il existe **trois surfaces** qui partagent **la même base de données Neon Postgres** (`@rpbey/db`) :
 
 ```
-                         ┌─────────────────────────────┐
-                         │   Postgres partagé rpb_neon  │
-                         │  users · sessions · profiles │
-                         │  gacha_cards · gacha_drops    │
-                         │  card_inventory · card_wishlists
-                         │  currency_transactions · …    │
-                         └──────────────┬──────────────┘
-            ┌───────────────────────────┼───────────────────────────┐
-            │ Drizzle (DAL)             │ Drizzle (sessions⋈users)   │ façade Prisma
-   ┌────────┴─────────┐      ┌──────────┴──────────┐       ┌─────────┴──────────┐
-   │ apps/web  :3002  │      │ apps/gacha-server   │       │ apps/bot           │
-   │ Next.js dashboard│      │ :5050 (Colyseus/Bun)│◄──────┤ slash commands     │
-   │ /api/gacha/*     │      │  Discord Activity / │ Bearer│ /gacha /duel /jeu  │
-   │ /api/v1/gacha/*  │      │  jeu temps réel     │ HTTP  │ gacha-api.ts client│
-   │ mobile (Bearer)  │      │ /api/gacha/pull …   │ loop  │ + Prisma direct    │
-   └──────────────────┘      └─────────────────────┘       └────────────────────┘
+                     ┌─────────────────────────────┐
+                     │  Postgres partagé Neon DB   │
+                     │  users · sessions · profiles │
+                     │  gacha_cards · gacha_drops    │
+                     │  card_inventory · card_wishlists
+                     │  currency_transactions · …    │
+                     └──────────────┬──────────────┘
+        ┌───────────────────────────┼───────────────────────────┐
+        │ Drizzle (DAL)             │ Drizzle (sessions⋈users)   │ façade Prisma
+┌───────┴──────────┐      ┌─────────┴──────────┐       ┌────────┴──────────┐
+│ apps/web         │      │ apps/gacha-server  │       │ apps/bot          │
+│ Next.js dashboard│      │ Colyseus/Bun       │◄──────┤ slash commands    │
+│ (Vercel)         │      │ (Cloud Run)        │ Bearer│ (Cloud Run)       │
+│ /api/gacha/*     │      │ /api/gacha/pull …  │ HTTP  │ gacha-api.ts client│
+│ /api/v1/gacha/*  │      │ jeu temps réel     │       │ + Prisma direct   │
+└──────────────────┘      └────────────────────┘       └───────────────────┘
 ```
 
 ### Les 3 surfaces (à ne PAS confondre)
 
-1. **`apps/web` (Next.js, `:3002`)** — dashboard web + API mobile (Bearer). Routes `/api/gacha/*` (legacy, authentifiées) et `/api/v1/gacha/*` (publiques, contrat Zod → SDK). Accès DB direct via **Drizzle DAL** (`server/dal/gacha.ts`). Coût pull simple = **100**. Voir [web.md](./web.md).
-2. **Serveur gacha `:5050` — `apps/gacha-server`** — service de jeu **dans le monorepo** (Colyseus 0.17 sur Bun, transport `BunWebSockets`) : REST économie + temps réel Discord Activity. Le bot en est le **client** via `apps/bot/src/lib/gacha-api.ts` (`GACHA_API_URL`, défaut `http://127.0.0.1:5050`). Endpoints `/api/gacha/pull` (coût **50**), `/api/gacha/pull10`, `/api/gacha/sell`, `/api/gacha/fusion`, badges, leaderboard… Auth = **sessions Bearer mintées par le bot** dans la table `sessions` partagée (validées via Drizzle `sessions ⋈ users`). systemd loopback + nginx `/gacha/` (WSS). Voir [server.md](./server.md).
-3. **`apps/bot` (Discord)** — slash commands `/gacha *`, `/duel`, `/jeu`, `/play`. Appelle le serveur `:5050` (gacha-api) **ou** tape la DB en direct (façade Prisma) pour `parier`, `donner`, duel rapide, dette. Voir [bot.md](./bot.md).
+1. **`apps/web` (Next.js)** — dashboard web + API mobile (Bearer). Routes `/api/gacha/*` (legacy, authentifiées) et `/api/v1/gacha/*` (publiques, contrat Zod → SDK). Accès DB direct via **Drizzle DAL** (`server/dal/gacha.ts`). Coût pull simple = **100**. Hébergé sur **Vercel**. Voir [web.md](./web.md).
+2. **Serveur gacha — `apps/gacha-server`** — service de jeu (Colyseus 0.17 sur Bun, transport `BunWebSockets`) : REST économie + temps réel Discord Activity. Le bot en est le **client** via `apps/bot/src/lib/gacha-api.ts` (l'URL est configurée via `GACHA_API_URL`). Endpoints `/api/gacha/pull` (coût **50**), `/api/gacha/pull10`, `/api/gacha/sell`, `/api/gacha/fusion`, badges, leaderboard… Auth = **sessions Bearer** validées via Drizzle. Hébergé sur **Google Cloud Run**. Voir [server.md](./server.md).
+3. **`apps/bot` (Discord)** — slash commands `/gacha *`, `/duel`, `/jeu`, `/play`. Appelle le serveur gacha (gacha-api) ou tape la DB Neon en direct (façade Prisma) pour `parier`, `donner`, duel rapide, dette. Hébergé sur **Google Cloud Run**. Voir [bot.md](./bot.md).
 
 ### Divergence assumée — deux économies
 
@@ -81,7 +81,7 @@ Ce sont des chemins identiques sur des services distincts. Les deux écrivent `p
 | Web constantes | `apps/web/src/app/api/gacha/helpers.ts` |
 | Contrat Zod | `packages/api-contract/src/gacha.ts` |
 | Serveur :5050 | `apps/gacha-server/src/{index,handlers,rest,cors,auth,config,discord-token,game,http}.ts`, `rooms/GachaRoom.ts` |
-| Serveur déploiement | `apps/gacha-server/deploy/{rpbey-gacha.service,nginx-gacha.location.conf}` |
+| Serveur déploiement | `apps/gacha-server/deploy/` (Fichiers legacy systemd/nginx) |
 | Bot client :5050 | `apps/bot/src/lib/gacha-api.ts` |
 | Bot images (Skia) | `apps/bot/src/lib/gacha-images.ts` |
 | Bot commandes | `apps/bot/src/commands/General/{EconomyGroup,DuelCommand,GameGroup,PlayCommand}.ts` |

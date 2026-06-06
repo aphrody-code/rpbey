@@ -4,7 +4,7 @@ description: "Par type de page : url pattern, statut CF live, stores _initialSto
 scope:
   - packages/challonge
 status: "stable"
-last_updated: "2026-06-02"
+last_updated: "2026-06-04"
 related_symbols:
   - ChallongeScraper
   - parseStandingsTable

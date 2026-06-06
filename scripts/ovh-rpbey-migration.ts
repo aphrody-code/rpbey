@@ -13,7 +13,9 @@ const appSecret = process.env.OVH_APPLICATION_SECRET || "";
 const ck = process.env.OVH_CONSUMER_KEY || "";
 
 if (!ak || !appSecret || !ck) {
-  console.error("Missing OVH credentials in environment (OVH_APPLICATION_KEY, OVH_APPLICATION_SECRET, OVH_CONSUMER_KEY)");
+  console.error(
+    "Missing OVH credentials in environment (OVH_APPLICATION_KEY, OVH_APPLICATION_SECRET, OVH_CONSUMER_KEY)",
+  );
   process.exit(1);
 }
 
@@ -63,10 +65,9 @@ async function run() {
 
   // 2. Identify records to delete (A records for play, api, ws, bot, cdn pointing to 51.77.147.152)
   const targetsToDelete = ["play", "api", "ws", "bot", "cdn"];
-  const toDelete = records.filter(r => 
-    r.fieldType === "A" && 
-    targetsToDelete.includes(r.subDomain) && 
-    r.target === "51.77.147.152"
+  const toDelete = records.filter(
+    (r) =>
+      r.fieldType === "A" && targetsToDelete.includes(r.subDomain) && r.target === "51.77.147.152",
   );
 
   console.log(`Found ${toDelete.length} legacy VPS A records to delete:`);
@@ -82,13 +83,15 @@ async function run() {
   }
 
   // 4. Check if play CNAME already exists, if not create it
-  const playCname = records.find(r => r.fieldType === "CNAME" && r.subDomain === "play");
+  const playCname = records.find((r) => r.fieldType === "CNAME" && r.subDomain === "play");
   if (playCname) {
     if (playCname.target !== "cname.vercel-dns.com.") {
-      console.log(`Updating existing play CNAME record to point to cname.vercel-dns.com. (current: ${playCname.target})...`);
+      console.log(
+        `Updating existing play CNAME record to point to cname.vercel-dns.com. (current: ${playCname.target})...`,
+      );
       await ovh("PUT", `/domain/zone/${ZONE}/record/${playCname.id}`, {
         target: "cname.vercel-dns.com.",
-        ttl: 60
+        ttl: 60,
       });
       console.log(`Updated successfully.`);
     } else {
@@ -100,7 +103,7 @@ async function run() {
       fieldType: "CNAME",
       subDomain: "play",
       target: "cname.vercel-dns.com.",
-      ttl: 60
+      ttl: 60,
     });
     console.log(`Created successfully.`);
   }

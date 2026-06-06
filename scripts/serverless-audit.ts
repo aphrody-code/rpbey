@@ -5,7 +5,8 @@ import os from "node:os";
 // Config & Paths
 const REPO_ROOT = resolve(import.meta.dir, "..");
 const WEB_SRC = join(REPO_ROOT, "apps/web/src");
-const REPORT_PATH = "/home/ubuntu/.gemini/antigravity-cli/brain/6cd85547-15f7-47a8-bb5b-d00b11d384ae/serverless_audit_report.md";
+const REPORT_PATH =
+  "/home/ubuntu/.gemini/antigravity-cli/brain/6cd85547-15f7-47a8-bb5b-d00b11d384ae/serverless_audit_report.md";
 
 interface AuditViolation {
   file: string;
@@ -48,17 +49,26 @@ async function auditFile(filePath: string) {
 
   // Check client component leaks
   if (isClientComponent) {
-    if (content.includes("@rpbey/db") || content.includes("@/lib/db") || content.includes("drizzle-orm")) {
+    if (
+      content.includes("@rpbey/db") ||
+      content.includes("@/lib/db") ||
+      content.includes("drizzle-orm")
+    ) {
       // Find line number
       lines.forEach((lineText, idx) => {
-        if (lineText.includes("@rpbey/db") || lineText.includes("@/lib/db") || lineText.includes("drizzle-orm")) {
+        if (
+          lineText.includes("@rpbey/db") ||
+          lineText.includes("@/lib/db") ||
+          lineText.includes("drizzle-orm")
+        ) {
           violations.push({
             file: relativePath,
             line: idx + 1,
             rule: "CLIENT_DB_LEAK",
             snippet: lineText.trim(),
             severity: "HIGH",
-            details: "Client components cannot directly import database logic or credentials, as it exposes secrets and causes bundling issues on the client."
+            details:
+              "Client components cannot directly import database logic or credentials, as it exposes secrets and causes bundling issues on the client.",
           });
         }
       });
@@ -89,13 +99,16 @@ async function auditFile(filePath: string) {
         rule: "FORBIDDEN_FS_WRITE",
         snippet: trimmed,
         severity: "HIGH",
-        details: "Vercel Serverless environment has a read-only filesystem except for /tmp. Ensure any write operation targets /tmp or os.tmpdir()."
+        details:
+          "Vercel Serverless environment has a read-only filesystem except for /tmp. Ensure any write operation targets /tmp or os.tmpdir().",
       });
     }
 
     // 2. Hardcoded local addresses
     if (
-      (trimmed.includes("localhost:") || trimmed.includes("127.0.0.1:") || trimmed.includes("51.77.147.152")) &&
+      (trimmed.includes("localhost:") ||
+        trimmed.includes("127.0.0.1:") ||
+        trimmed.includes("51.77.147.152")) &&
       !trimmed.includes("allowedOrigins") &&
       !trimmed.includes("allowedDevOrigins") &&
       !trimmed.includes("NEXT_PUBLIC_APP_URL") &&
@@ -108,7 +121,8 @@ async function auditFile(filePath: string) {
         rule: "HARDCODED_LOCAL_HOST",
         snippet: trimmed,
         severity: "MEDIUM",
-        details: "Avoid hardcoding localhost, loopback addresses, or the legacy VPS IP in production runtime code. Use relative paths or environment variables."
+        details:
+          "Avoid hardcoding localhost, loopback addresses, or the legacy VPS IP in production runtime code. Use relative paths or environment variables.",
       });
     }
 
@@ -129,7 +143,8 @@ async function auditFile(filePath: string) {
         rule: "VPS_INFRA_LEFTOVER",
         snippet: trimmed,
         severity: "HIGH",
-        details: "Systemd service commands (systemctl, pm2) or raw TCP listening bind attempts violate serverless abstractions. Serverless apps rely on environment-driven port bindings."
+        details:
+          "Systemd service commands (systemctl, pm2) or raw TCP listening bind attempts violate serverless abstractions. Serverless apps rely on environment-driven port bindings.",
       });
     }
 
@@ -141,7 +156,8 @@ async function auditFile(filePath: string) {
         rule: "DEPRECATED_CACHE",
         snippet: trimmed,
         severity: "LOW",
-        details: "Next.js 16 deprecates unstable_cache. Consider migrating to the new 'use cache' directive."
+        details:
+          "Next.js 16 deprecates unstable_cache. Consider migrating to the new 'use cache' directive.",
       });
     }
 
@@ -159,7 +175,8 @@ async function auditFile(filePath: string) {
         rule: "DIRECT_CHALLONGE_FETCH",
         snippet: trimmed,
         severity: "HIGH",
-        details: "Challonge SPA is Cloudflare-gated. Raw fetch/axios directly from serverless will result in 403 Forbidden. Scrapes must be routed via bxc browsers/proxies."
+        details:
+          "Challonge SPA is Cloudflare-gated. Raw fetch/axios directly from serverless will result in 403 Forbidden. Scrapes must be routed via bxc browsers/proxies.",
       });
     }
 
@@ -183,7 +200,8 @@ async function auditFile(filePath: string) {
         rule: "TIMESTAMP_MODE_MISMATCH",
         snippet: trimmed,
         severity: "HIGH",
-        details: "Timestamp invariant violation: inserting a raw Date object into a non-auth table (string mode) will trigger a runtime error. Call .toISOString() on the Date object."
+        details:
+          "Timestamp invariant violation: inserting a raw Date object into a non-auth table (string mode) will trigger a runtime error. Call .toISOString() on the Date object.",
       });
     }
 
@@ -204,7 +222,8 @@ async function auditFile(filePath: string) {
         rule: "TIMESTAMP_MODE_MISMATCH",
         snippet: trimmed,
         severity: "HIGH",
-        details: "Timestamp invariant violation: inserting an ISO string into an auth table (date mode) will trigger a runtime error. Pass a raw Date object."
+        details:
+          "Timestamp invariant violation: inserting an ISO string into an auth table (date mode) will trigger a runtime error. Pass a raw Date object.",
       });
     }
   });
@@ -216,7 +235,9 @@ async function run() {
 
   await walk(WEB_SRC, auditFile);
 
-  console.log(`Scan completed! Scanned ${filesScanned} files. Found ${violations.length} violations.`);
+  console.log(
+    `Scan completed! Scanned ${filesScanned} files. Found ${violations.length} violations.`,
+  );
 
   // Write report
   const highViolations = violations.filter((v) => v.severity === "HIGH");
@@ -239,7 +260,8 @@ async function run() {
     markdown += `🎉 No serverless compatibility issues detected! The codebase is clean.\n`;
   } else {
     for (const v of violations) {
-      const severityIcon = v.severity === "HIGH" ? "🔴 HIGH" : v.severity === "MEDIUM" ? "🟡 MEDIUM" : "🟢 LOW";
+      const severityIcon =
+        v.severity === "HIGH" ? "🔴 HIGH" : v.severity === "MEDIUM" ? "🟡 MEDIUM" : "🟢 LOW";
       markdown += `### [${severityIcon}] ${v.rule} in [${v.file}](file:///${join(REPO_ROOT, v.file)}#L${v.line})\n`;
       markdown += `**Line ${v.line}:**\n`;
       markdown += `\`\`\`typescript\n${v.snippet}\n\`\`\`\n`;

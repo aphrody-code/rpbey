@@ -4,7 +4,7 @@ description: "Liens de référence Colyseus 0.17, Discord Activity template, Pix
 scope:
   - apps/gacha-server
 status: "stable"
-last_updated: "2026-05-30"
+last_updated: "2026-06-04"
 related_symbols:
   - GachaRoom
   - BunWebSockets
@@ -48,18 +48,18 @@ Le serveur de jeu gacha (`apps/gacha-server`, REST + temps réel `:5050`) et son
 
 > Le serveur recréé vit dans `apps/gacha-server` (cf. [bot.md](./bot.md) et le code). Le client Discord Activity (Pixi/React) reste à intégrer dans `apps/gacha-client` à partir du template ci-dessus.
 
-## Déploiement & exposition réseau
+## Déploiement & exposition réseau (Cloud Run)
 
-### Service
+Le serveur gacha est hébergé en production sur **Google Cloud Run** en europe-west3.
 
-- systemd **`rpbey-gacha.service`** (`apps/gacha-server/deploy/rpbey-gacha.service`) — `bun src/index.ts`, bind **`127.0.0.1:5050`** (loopback), partage `apps/bot/.env` (AUTH_SECRET pour le JWT Colyseus). DB via le socket local (défauts `@rpbey/db`, aucune var requise). Durcissement JIT-safe (cf. unité). `enable --now`.
-- Le bot consomme le serveur en **loopback** (`GACHA_API_URL` défaut `http://127.0.0.1:5050`) — aucun port public requis pour ce chemin.
+### Service & Ports
 
-### Ports / proxy public (Discord Activity)
+- Le bot consomme le serveur gacha en résolvant l'URL configurée dans `GACHA_API_URL` (qui pointe vers l'adresse HTTPS de production Cloud Run). Le fallback local `http://127.0.0.1:5050` n'est conservé que pour le développement.
+- En production, Colyseus écoute sur le port fourni par `$PORT` (8080 par défaut).
 
-- `5050` reste **loopback** (jamais exposé brut ; pas d'entrée ufw).
-- Exposition HTTPS/WSS via **nginx `api.rpbey.fr`** → `location /gacha/` (snippet `apps/gacha-server/deploy/nginx-gacha.location.conf`, upstream `gacha_rt`). Préfixe `/gacha/` retiré, upgrade WebSocket (`$connection_upgrade`), placé avant le `location /` du bot (:3001).
-  - REST : `https://api.rpbey.fr/gacha/api/gacha/*` · Token : `…/gacha/discord_token` · WS : `wss://api.rpbey.fr/gacha/...`
+### Exposition publique (Discord Activity)
+
+- L'adresse HTTPS de Cloud Run sert de point d'entrée pour la Discord Activity. Les routes de l'Activity mappent `/api` vers l'endpoint Cloud Run du gacha-server.
 
 ### CORS
 

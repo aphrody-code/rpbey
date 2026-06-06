@@ -4,7 +4,7 @@ description: "Documentation vendorée du runtime Bun 1.3.x utilisé par tout le 
 scope:
   - bunfig.toml
 status: "stable"
-last_updated: "2026-06-01"
+last_updated: "2026-06-04"
 related_symbols:
   - Bun.serve
   - Bun.RedisClient
@@ -39,4 +39,4 @@ Doc complète Bun récupérée le **2026-06-01**. Cible runtime : **Bun 1.3.x** 
 ## Rappels rpbey
 
 - `bunfig.toml` racine : `linker = "hoisted"` (obligatoire pour builder Next), scopes GitHub Packages (`@aphrody-code`/`@rpbey` via `$GITHUB_TOKEN`), cache dir absolu.
-- `bun` global VPS partagé avec rpb-bot/cdn/shenron → un `bun upgrade` impacte tout au prochain restart de service.
+- L'utilisation de `bun` en production est confinée aux conteneurs Docker isolés (Cloud Run) et aux environnements managés (Vercel), garantissant un partitionnement strict sans impact mutuel.

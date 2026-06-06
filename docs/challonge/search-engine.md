@@ -4,7 +4,7 @@ description: "Endpoints de recherche et découverte de tournois Challonge : XHR 
 scope:
   - packages/challonge
 status: "stable"
-last_updated: "2026-06-02"
+last_updated: "2026-06-04"
 related_symbols:
   - ChallongeApi
   - findGameByName

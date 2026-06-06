@@ -5,7 +5,7 @@ scope:
   - packages/challonge
   - scripts
 status: "stable"
-last_updated: "2026-06-02"
+last_updated: "2026-06-04"
 related_symbols:
   - Browser.newPage
   - bxc-engine

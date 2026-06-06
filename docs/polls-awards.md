@@ -5,7 +5,7 @@ scope:
   - packages/db
   - apps/web
 status: "draft"
-last_updated: "2026-06-02"
+last_updated: "2026-06-04"
 related_symbols:
   - polls
   - pollOptions

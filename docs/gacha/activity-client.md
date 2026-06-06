@@ -4,7 +4,7 @@ description: "Client de jeu gacha embarqué dans Discord (Activity) : rendu Pixi
 scope:
   - apps/gacha-client
 status: "stable"
-last_updated: "2026-05-30"
+last_updated: "2026-06-04"
 related_symbols:
   - GachaApp
   - RevealScene

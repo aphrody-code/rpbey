@@ -4,7 +4,7 @@ description: "Volume, composants, idiomes de style, système de thème et surfac
 scope:
   - apps/web
 status: "draft"
-last_updated: "2026-06-02"
+last_updated: "2026-06-04"
 related_symbols:
   - ThemeRegistry
   - DataTable

@@ -6,7 +6,7 @@ scope:
   - apps/web/scripts
   - apps/web/src/lib/search-rank.ts
 status: "stable"
-last_updated: "2026-06-02"
+last_updated: "2026-06-04"
 related_symbols:
   - buildGlobalSearchIndex
   - getSearchCorpus

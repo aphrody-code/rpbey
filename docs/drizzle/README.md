@@ -4,7 +4,7 @@ description: "Documentation vendorée de Drizzle ORM 0.45.2 et drizzle-kit 0.31.
 scope:
   - packages/db
 status: "stable"
-last_updated: "2026-05-30"
+last_updated: "2026-06-04"
 related_symbols:
   - drizzle()
   - pgEnum
@@ -51,5 +51,5 @@ sed -n '1674,1720p' llms-full.txt           # lire une fenêtre précise
 ## Rappels spécifiques rpbey (issus du fact-check + bench)
 
 - **Colonnes en camelCase quotées** (`"createdAt"`, `"userId"`) — héritage Prisma (seules les _tables_ ont `@@map` snake_case). → **NE PAS** mettre `casing: "snake_case"` ; `drizzle-kit pull` reflète l'existant.
-- Driver = **postgres.js sur unix socket** (`host=/var/run/postgresql`, peer auth `ubuntu`, `prepare: true`).
+- Driver = **postgres.js sur Neon Postgres** en production (avec `DATABASE_URL` pour le pooler PgBouncer et `DIRECT_DATABASE_URL` pour les migrations/restore), avec un fallback en socket unix local (`host=/var/run/postgresql`) pour le développement local.
 - Pas de perf à attendre vs Prisma 7 : Drizzle choisi pour contrôle SQL / Bun-natif / migrations légères.

@@ -4,7 +4,7 @@ description: "Diagnostic visuel (captures prod), écart vs M3, et plan d'exécut
 scope:
   - apps/web
 status: "draft"
-last_updated: "2026-06-02"
+last_updated: "2026-06-04"
 related_symbols:
   - SearchClient
   - SerpResults

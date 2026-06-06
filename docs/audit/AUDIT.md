@@ -4,7 +4,7 @@ description: "Rapport d'audit Chromium prod rpbey.fr (27 routes, desktop + mobil
 scope:
   - apps/web
 status: "stable"
-last_updated: "2026-06-02"
+last_updated: "2026-06-04"
 related_symbols:
   - /comparateur/[slug]
   - /parts

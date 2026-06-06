@@ -1,6 +1,6 @@
 ---
 title: "Next.js — notes build rpbey (apps/web)"
-description: "Pièges de build Next.js App Router pour le dashboard rpbey (VPS standalone). La doc Next.js complète est bundlée et version-matchée — voir ci-dessous."
+description: "Pièges de build Next.js App Router pour le dashboard rpbey (Vercel). La doc Next.js complète est bundlée et version-matchée — voir ci-dessous."
 scope:
   - apps/web
 status: "stable"
@@ -32,20 +32,22 @@ related_symbols:
    `Expected ';', got '{'` (`<SlotClone>`). Fix : `transpilePackages: ["@vidstack/react"]` dans `next.config.ts`.
 3. **`experimental.turbopackFileSystemCacheForBuild`** : laissé `false` (a produit des chunks JSX
    corrompus sur build clean ; réactiver si patché upstream).
-4. **`output: "standalone"`** quand `!process.env.VERCEL` : le serveur est `.next/standalone/apps/web/server.js`
-   (lancé via `bun server.js`, lit `PORT`/`HOSTNAME`), **pas** `next start`. Après build, copier :
-   `cp -r .next/static .next/standalone/apps/web/.next/static` et `cp -r public .next/standalone/apps/web/public`.
+4. **`output: "standalone"`** : Utilisé uniquement pour les tests locaux hors Vercel. Le serveur est `.next/standalone/apps/web/server.js`.
 5. **`serverExternalPackages`** : `postgres`, `puppeteer-extra*`, transitives (`is-plain-object`, …), `@tobyg74/tiktok-api-dl`.
 6. **`typescript.ignoreBuildErrors: true`** (drift types MUI X v9 + React 19) — le type-check réel passe par `bunx tsc --noEmit` (0 erreur), pas par le build.
 7. **Binaire `next` hoisté** : `linker=hoisted` → `next` est à `~/rpbey/node_modules/.bin/next` (pas dans `apps/web/node_modules/.bin`).
 
 ## Build
 
+Le build de production tourne sur Vercel avec le runtime Node.js via le script de build :
+```bash
+bun run build:vercel
+```
+
+Pour compiler localement à des fins de test (hors production) :
 ```bash
 cd ~/rpbey/apps/web
-PGHOST=/var/run/postgresql PGDATABASE=rpb_neon PGUSER=ubuntu NODE_ENV=production \
-  /home/ubuntu/rpbey/node_modules/.bin/next build
-# succès = .next/BUILD_ID présent + .next/standalone/apps/web/server.js
+bun run build
 ```
 
 Turbopack est le bundler par défaut (Next 16). `next build` ne lance plus le linter (Next 16+).

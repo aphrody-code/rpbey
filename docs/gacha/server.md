@@ -1,24 +1,23 @@
 ---
-title: "Serveur gacha `:5050` — `apps/gacha-server` (Colyseus / Bun)"
-description: "Serveur de jeu gacha Colyseus/Bun : REST économie, salle temps réel, CORS, déploiement systemd/nginx."
+title: "Serveur gacha — `apps/gacha-server` (Colyseus / Bun)"
+description: "Serveur de jeu gacha Colyseus/Bun : REST économie, salle temps réel, CORS, hébergement Google Cloud Run."
 scope:
   - apps/gacha-server
 status: "stable"
-last_updated: "2026-05-30"
+last_updated: "2026-06-04"
 related_symbols:
   - GachaRoom
   - mountRest
   - configureCors
-  - rpbey-gacha.service
   - handlers.ts
   - ranking.ts
 ---
 
-# Serveur gacha `:5050` — `apps/gacha-server` (Colyseus / Bun)
+# Serveur gacha — `apps/gacha-server` (Colyseus / Bun)
 
 Serveur de jeu gacha : **REST économie** (consommée par le bot) + **temps réel** (Discord Activity). Recréé dans le monorepo (`apps/gacha-server`) depuis le contrat client `apps/bot/src/lib/gacha-api.ts`. Bâti sur **Colyseus 0.17** (transport `BunWebSockets`), backé par la DB partagée `@rpbey/db`.
 
-> Historique : le `:5050` d'origine n'existait plus (ni VPS, ni GitHub, ni git history). Recréé end-to-end le 2026-05-29. Liens framework → [server-references.md](./server-references.md).
+> Historique : le serveur d'origine n'existait plus (ni VPS, ni GitHub, ni git history). Recréé end-to-end le 2026-05-29. Liens framework → [server-references.md](./server-references.md).
 
 ## Arborescence
 
@@ -38,8 +37,8 @@ Serveur de jeu gacha : **REST économie** (consommée par le bot) + **temps rée
 | `test/smoke.ts` | Smoke auto-contenu (spawn serveur + session test + endpoints + CORS), `bun run smoke` |
 | `test/concurrency.ts` | Test de concurrence du verrou `SELECT … FOR UPDATE` (8 pulls parallèles → pas d'overspend), `bun test/concurrency.ts` |
 | `test/gacha-algorithms.test.ts` | Tests unitaires purs (31 cas) : distribution taux de base, soft-pity SR+/LEGENDARY, hard-pity, RNG injectable/déterministe, monotonie, tiers ranking, percentile, decay |
-| `deploy/rpbey-gacha.service` | Unité systemd (loopback :5050) |
-| `deploy/nginx-gacha.location.conf` | Snippet nginx `/gacha/` (WSS) pour api.rpbey.fr |
+| `deploy/rpbey-gacha.service` | (Legacy) Unité systemd |
+| `deploy/nginx-gacha.location.conf` | (Legacy) Snippet nginx `/gacha/` (WSS) |
 
 ## Endpoints REST (contrat = `gacha-api.ts`)
 
@@ -83,16 +82,16 @@ Colyseus pose un CORS **permissif** au niveau du serveur HTTP brut (`prependList
 - reflet de l'origine **uniquement** si autorisée — `isAllowedOrigin` : `*.discordsays.com`, `rpbey-*.vercel.app` (previews du projet uniquement), `rpbey.fr`/`www`/`bot`/`play`, `discord.com`, `localhost:3002`, + `GACHA_EXTRA_ORIGINS` (CSV) ;
 - sinon → origine canonique fixe `https://rpbey.fr` (un navigateur tiers reçoit un ACAO ≠ son origine → bloqué).
 
-## Déploiement
+## Déploiement (Cloud Run)
 
-- **systemd** `rpbey-gacha.service` : `bun src/index.ts`, bind **`127.0.0.1:5050`** (loopback, jamais brut), partage `apps/bot/.env` (AUTH_SECRET → JWT Colyseus), DB via socket local (défauts `@rpbey/db`), durcissement JIT-safe.
-  ```
-  sudo cp apps/gacha-server/deploy/rpbey-gacha.service /etc/systemd/system/
-  sudo systemctl daemon-reload && sudo systemctl enable --now rpbey-gacha
-  ```
-- **nginx** `api.rpbey.fr` → `location /gacha/` (upstream `gacha_rt`, préfixe retiré, upgrade WSS, avant le `location /` du bot) :
-  - REST `https://api.rpbey.fr/gacha/api/gacha/*` · Token `…/gacha/discord_token` · WS `wss://api.rpbey.fr/gacha/...`
-- **Bot** : `GACHA_API_URL` défaut `http://127.0.0.1:5050` → consomme le serveur en **loopback** (aucun port public requis pour ce chemin).
+Le serveur gacha est hébergé en production sur **Google Cloud Run** (`rpbey-gacha`, région `europe-west3`) et communique avec le bot Discord via une URL cloud-to-cloud sécurisée.
+
+- **Variables d'environnement** :
+  - `DATABASE_URL` : Neon Postgres (pooled).
+  - `AUTH_SECRET` / `BETTER_AUTH_SECRET` : Clé de validation des JWT Colyseus.
+- **Port** : Écoute sur le port fourni par `$PORT` (8080 par défaut).
+- **Bot** : Le bot consomme les API du serveur gacha en résolvant l'URL configurée dans `GACHA_API_URL` (pointant vers le service Cloud Run du gacha).
+- **CORS** : Les origines autorisées incluent `rpbey.fr` (et ses variantes Vercel) ainsi que `*.discordsays.com` pour la Discord Activity.
 
 ## Vérif
 

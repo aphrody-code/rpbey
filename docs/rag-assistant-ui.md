@@ -9,7 +9,7 @@ scope:
   - apps/web/src/components/ui/SectionFrameBg.tsx
   - apps/web/src/app/api/v1/anime/frames/ambient
 status: "stable"
-last_updated: "2026-06-01"
+last_updated: "2026-06-04"
 related_symbols:
   - prepareTurn
   - answerQuestion

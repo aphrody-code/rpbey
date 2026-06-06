@@ -8,7 +8,7 @@ scope:
   - apps/web/src/server/services/entity-graph.ts
   - apps/web/src/server/services/global-search.ts
 status: "stable"
-last_updated: "2026-05-30"
+last_updated: "2026-06-04"
 related_symbols:
   - canonicalKey
   - lookupTier
