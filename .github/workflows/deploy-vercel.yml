@@ -100,13 +100,16 @@ jobs:
       - name: Install Vercel CLI
         run: bun install -g vercel@latest
 
+      # Le token est lu nativement depuis l'env `VERCEL_TOKEN` (défini au niveau du
+      # job) — ne pas le passer en `--token=` (best-practice skill vercel-cli-with-tokens :
+      # un secret en argument fuite dans les process listings / logs de commande).
       - name: Pull Vercel env (production)
-        run: vercel pull --yes --environment=production --token="$VERCEL_TOKEN"
+        run: vercel pull --yes --environment=production
 
       - name: Build (Vercel)
-        run: vercel build --prod --token="$VERCEL_TOKEN"
+        run: vercel build --prod
 
       - name: Deploy (production, prebuilt)
         # `--archive=tgz` : upload le build en UNE archive plutôt que fichier par
         # fichier → évite la limite free-tier « api-upload-free » (5000 fichiers/24h).
-        run: vercel deploy --prebuilt --prod --yes --archive=tgz --token="$VERCEL_TOKEN"
+        run: vercel deploy --prebuilt --prod --yes --archive=tgz
