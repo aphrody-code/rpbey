@@ -7,10 +7,12 @@ casse au runtime.
 ## 1. Ce que c'est
 
 Bot Discord communauté Beyblade (tournois, classements, gacha TCG, économie,
-duels). Stack : **Bun** + **discordx** (fork `@rpbey/discordx`) + **tsyringe** DI
+duels) hébergé sur **Google Cloud Run** (service `rpbey-bot`, région `europe-west3`).
+Stack : **Bun** + **discordx** (fork `@rpbey/discordx`) + **tsyringe** DI
 (`@rpbey/di`) + **discord.js v14.26.3**. Rendu d'images via `@aphrody-code/canvas`
-(Skia natif) + `sharp`. DB **Postgres local** (socket unix) via **Drizzle**
-(`@rpbey/db`). Cache **Redis** (client Bun natif). **Aucune IA/LLM** : toute
+(Skia natif) + `sharp`. DB **Neon Postgres** managée via **Drizzle**
+(`@rpbey/db`) utilisant la variable `DATABASE_URL` (pooled). Le cache et pub/sub
+sont gérés **in-process** (Redis retiré de l'infrastructure de production). **Aucune IA/LLM** : toute
 « intelligence » est algorithmique (scoring combat, probabilités gacha, ELO,
 seuils de rôles).
 
@@ -116,12 +118,7 @@ Tâches : LiveTournamentSync (5min), PreTournamentSync (horaire), TournamentRemi
 
 ## 9. API & lien avec le dashboard Next
 
-`lib/api-server.ts` (`Bun.serve`, port 3001) : `/health` `/ready` `/metrics`
-publics ; routes scrape/tournois protégées (Bearer `BOT_API_KEY`) ; WebSocket `/ws`
-(topics `logs`/`bot-events`/`discord-events`). Le dashboard Next consomme status/logs
-(REST) + un pont SSE. **DB partagée** : bot et web lisent/écrivent le même Postgres
-(`users`, `tournaments`, `*Rankings`, gacha…). Auth web = better-auth (tables
-`users/accounts/sessions`) que le bot lit pour résoudre discordId → id.
+`lib/api-server.ts` (`Bun.serve`) écoute sur le port défini par `$PORT` (ou 8080 par défaut sur Google Cloud Run) : `/health`, `/ready`, `/metrics` publics ; routes scrape/tournois protégées (Bearer `BOT_API_KEY`) ; WebSocket `/ws` (topics `logs`/`bot-events`/`discord-events`). Le dashboard Next consomme status/logs (REST) + un pont SSE. **DB partagée** : le bot et le dashboard Next partagent la même base **Neon Postgres** (`users`, `tournaments`, `*Rankings`, gacha…). Auth web = better-auth (tables `users/accounts/sessions`) que le bot lit pour résoudre discordId → id.
 
 ## 10. Pièges durs (invariants runtime)
 
@@ -137,14 +134,16 @@ publics ; routes scrape/tournois protégées (Bearer `BOT_API_KEY`) ; WebSocket 
 5. **`.env` Bun substitue `$VAR`** : échappe `\$` (les quotes simples ne protègent pas).
 6. **Bun only** : pas de `node`/`npm`/`tsx`.
 
-## 11. Build & validation
+## 11. Build & validation (Local & Production)
 
+Pour le développement local :
 ```bash
 cd ~/rpbey/apps/bot
 bunx tsc --noEmit     # type-check → 0 erreur attendu
 bun run build         # SWC → dist/ (~106 fichiers)
-bun run start         # lance le bot (Bun 1.3+)
+bun run start         # lance le bot localement (Bun 1.3+)
 ```
 
-Toute modif doit laisser `tsc` à 0 **et** `bun run build` vert. Pas de commit
-automatique par un agent sans demande explicite.
+En production :
+- Le déploiement est automatisé via la GitHub Action `.github/workflows/deploy-bot.yml` lors d'un push sur `main`.
+- Elle utilise Cloud Build pour empaqueter le bot dans une image Docker et la déployer sur Google Cloud Run.

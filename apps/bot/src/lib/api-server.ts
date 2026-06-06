@@ -410,7 +410,10 @@ function buildServer(port: number): Server<WsData> {
           setTimeout(() => {
             process.exit(0);
           }, 1000);
-          return Response.json({ success: true, message: "Redémarrage en cours..." }, { headers: CORS_HEADERS });
+          return Response.json(
+            { success: true, message: "Redémarrage en cours..." },
+            { headers: CORS_HEADERS },
+          );
         },
         OPTIONS: () => new Response(null, { status: 204, headers: CORS_HEADERS }),
       },

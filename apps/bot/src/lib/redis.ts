@@ -194,7 +194,11 @@ class InProcessRedis {
 
   async hset(key: string, field: string, value: string): Promise<number> {
     if (key === MENTIONS_KEY) {
-      await setMentions(field.slice(0, field.indexOf(":")), field.slice(field.indexOf(":") + 1), Number(value));
+      await setMentions(
+        field.slice(0, field.indexOf(":")),
+        field.slice(field.indexOf(":") + 1),
+        Number(value),
+      );
       return 1;
     }
     if (key === META_KEY) {
