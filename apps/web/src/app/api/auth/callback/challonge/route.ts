@@ -1,6 +1,7 @@
 import { cookies, headers } from "next/headers";
 import { NextResponse } from "next/server";
-import { CHALLONGE_OAUTH_STATE_COOKIE } from "@/app/api/auth/challonge/route";
+
+const CHALLONGE_OAUTH_STATE_COOKIE = "challonge_oauth_state";
 import { auth } from "@/lib/auth";
 import { getChallongeService } from "@/lib/challonge";
 import { upsertChallongeAccount, upsertChallongeProfile } from "@/server/dal/auth";

@@ -107,6 +107,7 @@ export function isCXBlade(slot: BeySlot): boolean {
 function getNextStep(slot: BeySlot): BuilderStep {
   if (!slot.blade) return "BLADE";
   if (isCXBlade(slot)) {
+    if (!slot.overBlade) return "OVER_BLADE";
     if (!slot.lockChip) return "LOCK_CHIP";
     if (!slot.assistBlade) return "ASSIST_BLADE";
   }
@@ -115,11 +116,11 @@ function getNextStep(slot: BeySlot): BuilderStep {
   return "BLADE";
 }
 
-function isSlotComplete(slot: BeySlot): boolean {
+export function isSlotComplete(slot: BeySlot): boolean {
   const baseComplete = !!slot.blade && !!slot.ratchet && !!slot.bit;
   if (!baseComplete) return false;
   if (isCXBlade(slot)) {
-    return !!slot.lockChip && !!slot.assistBlade;
+    return !!slot.overBlade && !!slot.lockChip && !!slot.assistBlade;
   }
   return true;
 }
@@ -479,6 +480,31 @@ export function clearDraft() {
   }
 }
 
+function safeBtoa(str: string): string {
+  try {
+    return btoa(
+      encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, (_, p1) =>
+        String.fromCharCode(parseInt(p1, 16)),
+      ),
+    );
+  } catch {
+    return "";
+  }
+}
+
+function safeAtob(str: string): string {
+  try {
+    return decodeURIComponent(
+      atob(str)
+        .split("")
+        .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
+        .join(""),
+    );
+  } catch {
+    return "";
+  }
+}
+
 // --- URL Sharing Helper ---
 function encodeState(state: BuilderState): string {
   const data = {
@@ -493,7 +519,7 @@ function encodeState(state: BuilderState): string {
     })),
   };
   try {
-    return btoa(JSON.stringify(data));
+    return safeBtoa(JSON.stringify(data));
   } catch {
     return "";
   }
@@ -515,7 +541,9 @@ interface SharedDeck {
 
 function decodeShare(code: string): SharedDeck | null {
   try {
-    const data = JSON.parse(atob(code)) as SharedDeck;
+    const raw = safeAtob(code);
+    if (!raw) return null;
+    const data = JSON.parse(raw) as SharedDeck;
     if (!data || !Array.isArray(data.b)) return null;
     return data;
   } catch {
@@ -540,6 +568,8 @@ const BuilderContext = createContext<BuilderContextValue | null>(null);
 export function BuilderProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(builderReducer, initialState);
   const hasRestoredDraft = useRef(false);
+  const isReadyToPersist = useRef(false);
+
   // Restore from a ?share= link (priority) or the localStorage draft on mount.
   useEffect(() => {
     if (hasRestoredDraft.current) return;
@@ -576,9 +606,10 @@ export function BuilderProvider({ children }: { children: ReactNode }) {
                 beys,
               },
             });
+            isReadyToPersist.current = true;
           })
           .catch(() => {
-            /* fall back to empty builder */
+            isReadyToPersist.current = true;
           });
         return;
       }
@@ -588,6 +619,7 @@ export function BuilderProvider({ children }: { children: ReactNode }) {
     if (draft) {
       dispatch({ type: "RESTORE_DRAFT", draft });
     }
+    isReadyToPersist.current = true;
   }, []);
 
   // Keyboard Shortcuts
@@ -624,15 +656,11 @@ export function BuilderProvider({ children }: { children: ReactNode }) {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-  // Persist to localStorage on every relevant change (skip first render)
-  const isFirstPersist = useRef(true);
+  // Persist to localStorage on every relevant change (skip until restored)
   useEffect(() => {
-    if (isFirstPersist.current) {
-      isFirstPersist.current = false;
-      return;
-    }
+    if (!isReadyToPersist.current) return;
     saveDraft(state);
-  }, [state.beys, state.deckName, state.deckId, state.isActive, state]);
+  }, [state.beys, state.deckName, state.deckId, state.isActive]);
 
   const usedPartIds = useMemo(() => {
     const ids = new Set<string>();

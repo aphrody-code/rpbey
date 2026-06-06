@@ -8,6 +8,8 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import { type Metadata } from "next";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Politique de Confidentialité",
   description: "Politique de confidentialité et conditions d'utilisation de la RPB.",

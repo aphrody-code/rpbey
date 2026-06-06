@@ -5,6 +5,8 @@ import { getSeriesDetail } from "@/server/services/anime";
 import { SeriesDetail } from "../_components/SeriesDetail";
 import SeriesCrosslinks from "../_components/SeriesCrosslinks";
 
+export const dynamic = "force-dynamic";
+
 interface Props {
   params: Promise<{ slug: string }>;
 }

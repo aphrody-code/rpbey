@@ -28,11 +28,7 @@ const AMBIENT_API = "/api/v1/anime/frames/ambient";
 // Une saison curée n'appelle PAS l'échantillon aléatoire (qui tombe sur des caps
 // watermarkés/flous) — on sert la bonne image directement.
 const CURATED: Record<string, readonly string[]> = {
-  "beyblade-x": [
-    "/fancaps/29133604.jpg",
-    "/fancaps/29131028.jpg",
-    "/fancaps/29132373.jpg",
-  ],
+  "beyblade-x": ["/fancaps/29133604.jpg", "/fancaps/29131028.jpg", "/fancaps/29132373.jpg"],
   "metal-fight-beyblade": ["/seasons/metal-champion.png", "/seasons/metal-team.png"],
   "beyblade-burst-chouzetsu": [
     "/seasons/burst-clash.png",

@@ -35,7 +35,7 @@ function expandPattern(pattern: string): string[] {
     const parts = pattern.split("/");
     let baseDir = ".";
     let startIndex = 0;
-    
+
     if (parts[0] === "." || parts[0] === "..") {
       baseDir = parts[0];
       startIndex = 1;
@@ -43,7 +43,7 @@ function expandPattern(pattern: string): string[] {
       baseDir = "/";
       startIndex = 1;
     }
-    
+
     while (startIndex < parts.length) {
       const part = parts[startIndex];
       if (part !== undefined && !part.includes("*")) {
@@ -53,10 +53,10 @@ function expandPattern(pattern: string): string[] {
         break;
       }
     }
-    
+
     const remainingPattern = parts.slice(startIndex).join("/");
     const searchPath = path.resolve(baseSearchDir, baseDir);
-    
+
     if (!fs.existsSync(searchPath)) {
       continue;
     }
@@ -67,19 +67,22 @@ function expandPattern(pattern: string): string[] {
       const entries = fs.readdirSync(dir, { withFileTypes: true });
       for (const entry of entries) {
         const fullPath = path.join(dir, entry.name);
-        
+
         if (entry.isDirectory()) {
           scan(fullPath);
         } else if (entry.isFile()) {
           const pathSuffix = path.relative(searchPath, fullPath);
           const normalizedSuffix = pathSuffix.replace(/\\/g, "/");
-          
-          const regexStr = "^" + remainingPattern
-            .replace(/\./g, "\\.")
-            .replace(/\*\*/g, ".*")
-            .replace(/(?<!\.)\*/g, "[^/]*") + "$";
+
+          const regexStr =
+            "^" +
+            remainingPattern
+              .replace(/\./g, "\\.")
+              .replace(/\*\*/g, ".*")
+              .replace(/(?<!\.)\*/g, "[^/]*") +
+            "$";
           const regex = new RegExp(regexStr);
-          
+
           if (regex.test(normalizedSuffix)) {
             const relativeToConfig = "./" + path.relative(__dirname, fullPath);
             currentResults.push(relativeToConfig);
@@ -103,8 +106,6 @@ const tracedDataFiles = rawTracedDataFiles.flatMap(expandPattern);
 const nextConfig: NextConfig = {
   // Enable React strict mode
   reactStrictMode: true,
-
-
 
   // Output standalone pour systemd VPS — Vercel package son runtime, pas de standalone.
   ...(IS_VERCEL

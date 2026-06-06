@@ -2,6 +2,8 @@ import { type Metadata } from "next";
 import { FrameBackdrop } from "@/components/ui/FrameBackdrop";
 import { BuilderClient } from "./_components/BuilderClient";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "DECK BUILDER | Créez votre Deck Beyblade X",
   description:

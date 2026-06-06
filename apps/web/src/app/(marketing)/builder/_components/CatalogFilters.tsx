@@ -57,7 +57,7 @@ export function CatalogFilters({
 
       <Box
         sx={{
-          width: 1,
+          width: "1px",
           height: 28,
           borderRight: "1px solid",
           borderColor: "divider",
@@ -93,7 +93,7 @@ export function CatalogFilters({
 
       <Box
         sx={{
-          width: 1,
+          width: "1px",
           height: 28,
           borderRight: "1px solid",
           borderColor: "divider",

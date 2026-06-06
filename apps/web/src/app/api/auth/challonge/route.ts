@@ -3,8 +3,7 @@ import { connection, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { getChallongeService } from "@/lib/challonge";
 
-/** Nom du cookie httpOnly portant le nonce anti-CSRF du flux OAuth Challonge. */
-export const CHALLONGE_OAUTH_STATE_COOKIE = "challonge_oauth_state";
+const CHALLONGE_OAUTH_STATE_COOKIE = "challonge_oauth_state";
 
 export async function GET(request: Request) {
   await connection();

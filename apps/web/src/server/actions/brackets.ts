@@ -1,11 +1,11 @@
 "use server";
 
 import { unstable_cache as cache } from "next/cache";
-import { ChallongeApi } from "@/lib/challonge-vendor/api";
+import { ChallongeApi } from "@rose-griffon/challonge/api";
 import {
   fetchAndParseAsScrapedTournament,
   fetchPublicTournamentJson,
-} from "@/lib/challonge-vendor/transports/htmlrewriter";
+} from "@rose-griffon/challonge/htmlrewriter";
 
 import { challongeToViewerData } from "@/lib/brackets/challonge";
 import type { ViewerData } from "@/lib/brackets/types";

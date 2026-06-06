@@ -29,8 +29,7 @@ import os from "node:os";
  * Racine disque du fallback (writable). Défaut : `os.tmpdir()/rpbey-uploads`
  * (éphémère, serverless-safe). Override possible via `CDN_UPLOAD_ROOT`.
  */
-const CDN_UPLOAD_ROOT =
-  process.env.CDN_UPLOAD_ROOT ?? path.join(os.tmpdir(), "rpbey-uploads");
+const CDN_UPLOAD_ROOT = process.env.CDN_UPLOAD_ROOT ?? path.join(os.tmpdir(), "rpbey-uploads");
 
 /**
  * Base URL publique du fallback. Défaut : chemin same-origin `/uploads`. Override

@@ -4,7 +4,7 @@
  */
 // Scraper puppeteer importé depuis son module direct (hors barrel) — sinon tout
 // import du barrel évalue puppeteer-extra (crash `utils.isObject` Turbopack).
-export { ChallongeScraper, type ChallongeScraperOptions } from "@/lib/challonge-vendor/scraper";
+export { ChallongeScraper, type ChallongeScraperOptions } from "@rose-griffon/challonge/scraper";
 export {
   type ScrapedLogEntry,
   type ScrapedMatch,
@@ -18,4 +18,4 @@ export {
   setsToLegacyString,
   sumSetWinsForPlayer,
   sumSetWinsForPlayer1,
-} from "@/lib/challonge-vendor";
+} from "@rose-griffon/challonge";

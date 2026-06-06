@@ -23,8 +23,7 @@ import {
   getAbsoluteImageUrl,
 } from "@/lib/seo-utils";
 
-export const dynamic = "force-static";
-export const revalidate = 3600;
+export const dynamic = "force-dynamic";
 export const dynamicParams = true;
 
 const REGION_LABEL: Record<string, string> = {
@@ -205,11 +204,11 @@ export default async function ProductComparePage({
             borderRadius: 5,
             position: "relative",
             overflow: "hidden",
-            border: "1px solid",
-            borderColor: "divider",
+            border: "1px solid rgba(255, 255, 255, 0.08)",
             background:
-              "linear-gradient(135deg, color-mix(in srgb, var(--rpb-primary) 8%, transparent), color-mix(in srgb, var(--rpb-secondary) 6%, transparent))",
-            boxShadow: "0 10px 40px -15px rgba(0,0,0,0.3)",
+              "linear-gradient(135deg, color-mix(in srgb, var(--rpb-primary) 12%, transparent), color-mix(in srgb, var(--rpb-secondary) 8%, transparent))",
+            backdropFilter: "blur(24px)",
+            boxShadow: "0 20px 50px -12px rgba(0, 0, 0, 0.45)",
             "&::after": {
               content: '""',
               position: "absolute",
@@ -462,20 +461,21 @@ export default async function ProductComparePage({
                   p: { xs: 1.5, md: 2.25 },
                   borderRadius: 4,
                   border: "1px solid",
-                  borderColor: i === 0 ? "rgba(34,197,94,0.45)" : "divider",
+                  borderColor: i === 0 ? "rgba(34,197,94,0.55)" : "rgba(255,255,255,0.08)",
                   background:
                     i === 0
-                      ? "rgba(34,197,94,0.06)"
-                      : "var(--mui-palette-surface-high, rgba(255,255,255,0.02))",
-                  boxShadow: i === 0 ? "0 4px 20px -5px rgba(34,197,94,0.12)" : "none",
+                      ? "linear-gradient(135deg, rgba(34,197,94,0.1) 0%, rgba(34,197,94,0.02) 100%)"
+                      : "linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%)",
+                  backdropFilter: "blur(8px)",
+                  boxShadow: i === 0 ? "0 8px 32px -6px rgba(34,197,94,0.18)" : "none",
                   transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
                   "&:hover": {
-                    transform: "translateX(6px)",
+                    transform: "translateY(-2px) translateX(4px)",
                     borderColor: i === 0 ? "#22c55e" : accent,
                     boxShadow:
                       i === 0
-                        ? "0 6px 24px -4px rgba(34,197,94,0.2)"
-                        : `0 6px 20px -5px color-mix(in srgb, var(--rpb-primary) 15%, transparent)`,
+                        ? "0 10px 30px -4px rgba(34,197,94,0.3)"
+                        : `0 10px 24px -6px color-mix(in srgb, var(--rpb-primary) 20%, transparent)`,
                   },
                 }}
               >

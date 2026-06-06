@@ -40,23 +40,27 @@ function getAppRoutes() {
   const pageFiles = findFiles(appDir, /^page\.(tsx|ts|jsx|js)$/);
   const routeFiles = findFiles(appDir, /^route\.(tsx|ts|jsx|js)$/);
 
-  const pages = pageFiles.map(f => {
-    let route = "/" + relative(appDir, f)
-      .replace(/\/page\.(tsx|ts|jsx|js)$/, "")
-      .replace(/page\.(tsx|ts|jsx|js)$/, "")
-      .replace(/\/\([^)]+\)/g, "")
-      .replace(/^\([^)]+\)/g, "");
-    
+  const pages = pageFiles.map((f) => {
+    let route =
+      "/" +
+      relative(appDir, f)
+        .replace(/\/page\.(tsx|ts|jsx|js)$/, "")
+        .replace(/page\.(tsx|ts|jsx|js)$/, "")
+        .replace(/\/\([^)]+\)/g, "")
+        .replace(/^\([^)]+\)/g, "");
+
     route = route.replace(/\/+/g, "/").replace(/\/$/, "");
     if (!route) route = "/";
     return route;
   });
 
-  const apis = routeFiles.map(f => {
-    let route = "/" + relative(appDir, f)
-      .replace(/\/route\.(tsx|ts|jsx|js)$/, "")
-      .replace(/route\.(tsx|ts|jsx|js)$/, "");
-    
+  const apis = routeFiles.map((f) => {
+    let route =
+      "/" +
+      relative(appDir, f)
+        .replace(/\/route\.(tsx|ts|jsx|js)$/, "")
+        .replace(/route\.(tsx|ts|jsx|js)$/, "");
+
     route = route.replace(/\/+/g, "/").replace(/\/$/, "");
     if (!route) route = "/";
     return route;
@@ -225,8 +229,9 @@ async function checkAsset(url: string, from: string) {
 
   // Permettre les 404 sur les proxies d'assets externes (fancaps/cdn) car ils dégradent proprement
   const parsedUrl = new URL(target, BASE);
-  const isExpected404 = parsedUrl.pathname.startsWith("/api/assets/fancaps/") || 
-                        parsedUrl.pathname.startsWith("/api/assets/cdn/");
+  const isExpected404 =
+    parsedUrl.pathname.startsWith("/api/assets/fancaps/") ||
+    parsedUrl.pathname.startsWith("/api/assets/cdn/");
 
   let res: Response;
   try {
@@ -247,25 +252,30 @@ async function checkAsset(url: string, from: string) {
 async function injectAuthCookie(p: TestPage) {
   if (adminSessionToken) {
     const urlObj = new URL(BASE);
-    await adaptPage(p).context().addCookies([
-      {
-        name: "rpb-auth.session_token",
-        value: adminSessionToken,
-        domain: urlObj.hostname,
-        path: "/",
-      },
-      {
-        name: "__Secure-rpb-auth.session_token",
-        value: adminSessionToken,
-        domain: urlObj.hostname,
-        path: "/",
-        secure: true,
-      },
-    ]);
+    await adaptPage(p)
+      .context()
+      .addCookies([
+        {
+          name: "rpb-auth.session_token",
+          value: adminSessionToken,
+          domain: urlObj.hostname,
+          path: "/",
+        },
+        {
+          name: "__Secure-rpb-auth.session_token",
+          value: adminSessionToken,
+          domain: urlObj.hostname,
+          path: "/",
+          secure: true,
+        },
+      ]);
   }
 }
 
-async function loadPage(p: TestPage, routeOrUrl: string): Promise<{ status: number; html: string }> {
+async function loadPage(
+  p: TestPage,
+  routeOrUrl: string,
+): Promise<{ status: number; html: string }> {
   const url = abs(routeOrUrl) ?? `${BASE}${routeOrUrl}`;
   try {
     const navigated = await Promise.race([
@@ -283,7 +293,8 @@ async function loadPage(p: TestPage, routeOrUrl: string): Promise<{ status: numb
   try {
     const headers: Record<string, string> = {};
     if (adminSessionToken) {
-      headers["Cookie"] = `rpb-auth.session_token=${adminSessionToken}; __Secure-rpb-auth.session_token=${adminSessionToken}`;
+      headers["Cookie"] =
+        `rpb-auth.session_token=${adminSessionToken}; __Secure-rpb-auth.session_token=${adminSessionToken}`;
     }
     const r = await fetch(url, { headers, redirect: "follow" });
     const ct = r.headers.get("content-type") ?? "";
@@ -309,7 +320,7 @@ for (const profile of PROFILES) {
 
     for (const route of routesToTest) {
       const { status, html } = await loadPage(p, route);
-      
+
       // Les routes admin et dashboard non-auth peuvent rediriger vers sign-in (status 302/303 ou 200 sur sign-in)
       // Si adminSessionToken existe, elles devraient être 200.
       if (status >= 500) {
@@ -353,8 +364,11 @@ test("API routes validation (returns status < 500)", async () => {
     // Un retour correct est n'importe quel code de statut < 500 (200, 401, 403, 404, 405 sont tous valides et non des crashs)
     if (res.status >= 500) {
       const parsedUrl = new URL(url);
-      const isBotOffline = res.status === 503 && (parsedUrl.pathname.startsWith("/api/bot/") || parsedUrl.pathname.startsWith("/api/v1/bot/"));
-      
+      const isBotOffline =
+        res.status === 503 &&
+        (parsedUrl.pathname.startsWith("/api/bot/") ||
+          parsedUrl.pathname.startsWith("/api/v1/bot/"));
+
       let isConfigMissing = false;
       if (res.status === 500 && parsedUrl.pathname === "/api/external/v1/leaderboard") {
         try {
@@ -412,5 +426,7 @@ test("Migrated assets resolve properly", async () => {
       okCount.asset++;
     }
   }
-  expect(bad.filter((b) => b.via === "asset" && MIGRATED_ASSETS.includes(new URL(b.url).pathname))).toHaveLength(0);
+  expect(
+    bad.filter((b) => b.via === "asset" && MIGRATED_ASSETS.includes(new URL(b.url).pathname)),
+  ).toHaveLength(0);
 }, 60_000);

@@ -18,15 +18,18 @@ export const FX_TO_EUR: Record<string, number> = {
   JPY: 0.0054,
 };
 
-const PRODUCT_CODE_RE = /\b([BUC]X-\d{2,3}(?:-[A-Z0-9]+)?|[BUC]X-\d{2,3}[A-Z]?)\b/i;
-const COMBO_CODE_RE = /\b(\d-\d{2}[A-Z]{1,3})\b/i;
+const PRODUCT_CODE_RE = /\b([BUC]X-?\d{2,3}(?:-[A-Z0-9]+)?|[BUC]X-?\d{2,3}[A-Z]?)\b/i;
+const COMBO_CODE_RE = /\b(\d-?\d{2}[A-Z]{1,3})\b/i;
 
 export function normalizeName(title: string): string {
   return title
     .toLowerCase()
     .normalize("NFKD")
     .replace(/[^a-z0-9]+/g, " ")
-    .replace(/\b(beyblade|bey|toupie|takara|tomy|booster|starter|pack|x)\b/g, " ")
+    .replace(
+      /\b(beyblade|bey|toupie|takara|tomy|takaratomy|hasbro|booster|starter|pack|x|neuf|new|import|japan|japon|version|officiel|officielle|authentique)\b/g,
+      " ",
+    )
     .replace(/\s+/g, " ")
     .trim();
 }
@@ -34,16 +37,22 @@ export function normalizeName(title: string): string {
 export function groupKey(title: string): { key: string; code: string | null } {
   const prodCodeMatch = title.match(PRODUCT_CODE_RE);
   if (prodCodeMatch && prodCodeMatch[1]) {
-    const code = prodCodeMatch[1].toUpperCase();
+    let code = prodCodeMatch[1].toUpperCase();
+    if (!code.includes("-")) {
+      code = code.slice(0, 2) + "-" + code.slice(2);
+    }
     return { key: code, code };
   }
   const comboCodeMatch = title.match(COMBO_CODE_RE);
   if (comboCodeMatch && comboCodeMatch[1]) {
-    const code = comboCodeMatch[1].toUpperCase();
+    let code = comboCodeMatch[1].toUpperCase();
+    if (!code.includes("-")) {
+      code = code.slice(0, 1) + "-" + code.slice(1);
+    }
     return { key: code, code };
   }
-  const n = normalizeName(title);
-  return { key: n || title.toLowerCase().trim(), code: null };
+  const n = normalizeName(title).replace(/\s+/g, "");
+  return { key: n || title.toLowerCase().replace(/\s+/g, ""), code: null };
 }
 
 export function slugify(s: string): string {

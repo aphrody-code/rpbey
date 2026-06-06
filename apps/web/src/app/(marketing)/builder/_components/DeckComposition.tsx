@@ -24,7 +24,7 @@ import { type Deck } from "@/components/deck/DeckCard";
 import { useSession } from "@/lib/auth-client";
 import { validateDeck } from "@/lib/tournament-logic";
 import { BeySlotCard } from "./BeySlotCard";
-import { clearDraft, isCXBlade, useBuilder } from "./BuilderContext";
+import { clearDraft, isCXBlade, isSlotComplete, useBuilder } from "./BuilderContext";
 import { DeckSynergy } from "./DeckSynergy";
 
 export function DeckComposition() {
@@ -34,14 +34,7 @@ export function DeckComposition() {
   const [isSaving, setIsSaving] = useState(false);
   const [boxOpen, setBoxOpen] = useState(false);
 
-  const allComplete = state.beys.every((b) => {
-    const baseComplete = !!b.blade && !!b.ratchet && !!b.bit;
-    if (!baseComplete) return false;
-    if (isCXBlade(b)) {
-      return !!b.lockChip && !!b.assistBlade;
-    }
-    return true;
-  });
+  const allComplete = state.beys.every(isSlotComplete);
 
   const previewDeck = useMemo(() => {
     return {

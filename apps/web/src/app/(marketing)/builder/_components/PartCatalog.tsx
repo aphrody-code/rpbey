@@ -129,6 +129,14 @@ export function PartCatalog() {
     fetchParts(1);
   }, [fetchParts]);
 
+  // Synchronize activeStep if it is not valid for the current tabs (e.g., when switching slots)
+  useEffect(() => {
+    const isValidStep = TABS.some((t) => t.value === state.activeStep);
+    if (!isValidStep && TABS[0]) {
+      dispatch({ type: "SET_ACTIVE_STEP", step: TABS[0].value });
+    }
+  }, [TABS, state.activeStep, dispatch]);
+
   const handleTabChange = (_: unknown, value: number) => {
     const tab = TABS[value];
     if (tab) dispatch({ type: "SET_ACTIVE_STEP", step: tab.value });

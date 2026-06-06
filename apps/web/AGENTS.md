@@ -6,11 +6,7 @@ runtime (c'est la cause de la majorité des bugs de la migration Prisma→Drizzl
 
 ## 1. Stack
 
-Next.js 16 (App Router, **Turbopack**, `output: "standalone"` hors Vercel) · **Bun**
-runtime (`bun .next/standalone/apps/web/server.js`) · **Drizzle** (`@rpbey/db`) sur
-**Postgres LOCAL** (socket `/var/run/postgresql`, base `rpb_neon`, user `ubuntu`) ·
-**MUI v9** + Emotion · **better-auth** (Discord OAuth + email) · servi par nginx
-(`rpbey.fr` → `127.0.0.1:3002`). Types partagés : `@rpbey/types` (type-only).
+Next.js 16 (App Router, **Turbopack**) hébergé sur **Vercel** (`rpbey.vercel.app` / `rpbey.fr`) · **Drizzle** (`@rpbey/db`) connecté à la base managée **Neon Postgres** (connexion `DATABASE_URL` avec pooler PgBouncer pour le runtime, et `DIRECT_DATABASE_URL` pour les migrations) · **MUI v9** + Emotion · **better-auth** (Discord OAuth + email) · Stockage des uploads médias sur **Vercel Blob** (`BLOB_READ_WRITE_TOKEN`). Types partagés : `@rpbey/types` (type-only). Le runtime local utilise Bun, tandis que la production sur Vercel s'exécute sous Node.js.
 
 ## 2. 🔑 Règle timestamp (invariant #1)
 
@@ -37,48 +33,30 @@ migré, manipule des **strings ISO**.
   `formatDateTime`/`safeIso` tolèrent déjà `Date | string`.
 - En cas de doute : `bun -e "import{schema}from'@rpbey/db';console.log(schema.<table>.<col>.columnType)"`.
 
-## 3. Déploiement — `scripts/deploy-web.sh` (OBLIGATOIRE après chaque build)
+## 3. Déploiement — Vercel (Production)
 
-`next build` régénère `.next/standalone/` et **n'y inclut PAS** `public/` ni les
-`data/*` exclus du tracing (`outputFileTracingExcludes`, anti-250 MB Vercel). Sans
-`deploy-web.sh` → **JS chunks 404 (site mort), images 404, rankings/tournois vides**.
-Le script (idempotent) :
+Le site est hébergé en production sur **Vercel** via le projet lié `rpbey`. Le déploiement est entièrement automatisé via la GitHub Action `.github/workflows/deploy-vercel.yml` lors d'un push sur `main`.
 
-1. copie `.next/static` → standalone (chunks hash-matchés au `server.js` du build) + pré-crée `.next/cache` (sinon le runtime ISR `mkdir` est bloqué par systemd `ProtectSystem=strict` → `EROFS` en boucle + `InvariantError` manifest en cascade) ;
-2. symlink `public/` → `apps/cdn/assets/rpb-dashboard` (logos, parts, partners) ;
-3. copie `data/exports/B_TS*.json` (depuis le CDN — **pas** un symlink hors-racine, Turbopack le rejette au build) + `data/bey-library/` ;
-4. `rm -rf $SA/data && ln -s apps/web/data` (sinon nested symlink dans le dir réel du build) ;
-5. copie le helper `@tobyg74/tiktok-api-dl/helper` dans le standalone (non tracé, lu via `__dirname`).
-
-**Déploiement en UNE commande** (recommandé) :
-
+### Déploiement manuel :
 ```bash
-bash ~/rpbey/scripts/ship-web.sh   # build turbopack → deploy-web.sh → restart → healthcheck
+# Lancer le build et déployer en production
+vercel deploy --prod
 ```
 
-Ou les étapes manuelles :
+### Notes de build & configuration :
+1. **Root Directory** : Configuré sur `apps/web` dans l'interface Vercel.
+2. **Build Command** : Défini sur `bun run build:vercel` (qui lance `next build --turbopack` sans utiliser de fichiers `.env` locaux).
+3. **Découplage des données locales** :
+   - `B_TS*.json` et le catalogue de pièces sont directement importés ou versionnés dans `apps/web/data/` pour être inclus statiquement par Next.js.
+   - Les médias dynamiques ou téléversés (avatars, deckboxes, etc.) utilisent **Vercel Blob** (`@vercel/blob` via le token `BLOB_READ_WRITE_TOKEN`).
+   - Le middleware/DAL lit les données de classement et les tournois en direct depuis la base managée **Neon Postgres**.
+4. **Vercel Cache** : Le dossier `.next/cache` est géré de façon transparente par Vercel.
 
-```bash
-cd ~/rpbey/apps/web && bun run build          # = next build --turbopack (cf. §3bis)
-bash ~/rpbey/scripts/deploy-web.sh            # ← ne JAMAIS oublier
-sudo systemctl restart rpbey-web.service
-```
+## 3bis. Build local et Dev
 
-Le serveur standalone fait `chdir` vers `.next/standalone/apps/web` → tout `readFile("data/…")`
-résout là (couvert par le symlink `data`).
-
-## 3bis. Build Turbopack + Next canary (perf)
-
-- **Next est pinné en canary** (`16.3.0-canary.32` dans le catalog racine) — politique « canary/nightly partout ». Le canary corrige le panic JSX radix `<SlotClone>` qui bloquait le FS cache Turbopack en 16.2.6.
-- **Build = `next build --turbopack`** (script `build`) + `experimental.turbopackFileSystemCacheForBuild: true`. Mesuré : compile **cold ~25 s, warm ~1.1 s** (vs ~41 s webpack). Ne pas revenir à webpack sans raison.
-- Libs server-only lourdes dans `serverExternalPackages` (googleapis, puppeteer, xlsx, cheerio, sharp…) → pas bundlées = compile plus rapide.
-- **`.next/cache` Turbopack peut devenir STALE** : un build _warm_ échoue sur un import fantôme d'une version revertée d'un fichier, gelée dans le cache (vécu : `import { getPartsRandom }` supprimé sur disque mais toujours dans le cache). Signature = **`bunx tsc --noEmit` = 0 mais `next build` casse** sur un export « doesn't exist » (Turbopack bundle le `src`, `tsc` lit les `.d.ts`). Fix : `rm -rf apps/web/.next/cache` puis rebuild cold. À soupçonner après un fichier édité/reverté par une session parallèle.
-
-## 3ter. Standalone sur VPS — nginx & systemd
-
-- **`/_next/static/` servi DIRECTEMENT par nginx** (location `alias` vers `.next/standalone/apps/web/.next/static/`, `Cache-Control: public, max-age=31536000, immutable`, `try_files … @bunproxy`) → offload Bun, cache 1 an. `/home/ubuntu` est en 755 donc le worker nginx (`nobody`) peut lire. Conf : `/etc/nginx/conf.d/rpbey.fr.conf` (backups `.bak-*`). Toujours `sudo nginx -t` avant `reload`.
-- Le reste (`location /`) proxie vers `127.0.0.1:3002` avec `proxy_buffering off` (requis pour les SSE `/api/bot/events`, `/api/admin/analytics/stream`).
-- systemd `rpbey-web.service` : `Restart=always`, `User=ubuntu`. **Ne pas** mettre `NoNewPrivileges` (casse le `sudo systemctl` du route handler admin `/api/admin/bot/restart`).
+Pour le développement local :
+- Lancer le serveur local avec `bun run dev` (ou `bun run dev:web` depuis la racine du monorepo).
+- Pour simuler un build de production en standalone (identique à l'ancienne configuration VPS), utiliser `bun run build` suivi de `bash scripts/deploy-web.sh` pour copier les assets statiques, puis démarrer le serveur via `bun .next/standalone/apps/web/server.js`. *Note : Cette étape n'est requise que pour des tests locaux de conformité, elle n'est plus déployée en production sur le VPS.*
 
 ## 4. Pièges build (cf. `~/rpbey/docs/nextjs/README.md`)
 
@@ -116,12 +94,11 @@ CHROME=/usr/local/bin/chromium bun ~/rpbey/scripts/shoot.ts   # → .shots/*.png
 
 QA : un 500 sur une page = bug ; les `failedReq` externes (avatars discord/challonge ORB,
 prefetch `_rsc`, 429 get-session sous martèlement) sont du bruit headless, pas des erreurs serveur.
-Vérifier le serveur : `journalctl -u rpbey-web.service | grep -iE "⨯|digest|toISOString|instance of Date"`.
+Vérifier les logs : Consulter la console Vercel (Runtime Logs) ou la console GCP Cloud Run pour identifier les erreurs.
 
 ## 7. Rollback
 
-Vercel (`rpb-dashboard`) + Neon sont **gardés intacts** : re-pointer le DNS apex
-`rpbey.fr` → `76.76.21.21` restaure l'ancienne prod en cas de besoin.
+Le rollback se fait directement depuis le tableau de bord Vercel en réactivant une version de déploiement précédente stable.
 
 ## 8. Sécurité — server actions
 

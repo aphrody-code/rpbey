@@ -302,7 +302,41 @@ function buildQueryTerms(query: string, corpus: Corpus): QueryTerm[] {
     if (cur == null || w > cur) terms.set(t, w);
   };
 
-  for (const t of base) add(t, 1);
+  for (const t of base) {
+    add(t, 1);
+
+    // 1. Code produit BX/UX/CX (ex: bx-34 ou bx34)
+    const codeMatch = t.match(/^([buc]x)-?(\d{2,3})([a-z]?)$/i);
+    if (codeMatch && codeMatch[1] && codeMatch[2]) {
+      const prefix = codeMatch[1].toLowerCase();
+      const num = codeMatch[2];
+      const suffix = (codeMatch[3] ?? "").toLowerCase();
+      add(`${prefix}-${num}${suffix}`, 1.0);
+      add(`${prefix}${num}${suffix}`, 1.0);
+    }
+
+    // 2. Code combo (ex: 3-60lf ou 360lf)
+    const comboCodeMatch = t.match(/^(\d)-?(\d{2})([a-z]{1,3})$/i);
+    if (comboCodeMatch && comboCodeMatch[1] && comboCodeMatch[2] && comboCodeMatch[3]) {
+      const num1 = comboCodeMatch[1];
+      const num2 = comboCodeMatch[2];
+      const bit = comboCodeMatch[3].toLowerCase();
+      add(`${num1}-${num2}${bit}`, 1.0);
+      add(`${num1}${num2}${bit}`, 1.0);
+      add(`${num1}-${num2}`, 1.0);
+      add(`${num1}${num2}`, 1.0);
+      add(bit, 1.0);
+    }
+
+    // 3. Code ratchet seul (ex: 3-60 ou 360)
+    const ratchetMatch = t.match(/^(\d)-?(\d{2})$/);
+    if (ratchetMatch && ratchetMatch[1] && ratchetMatch[2]) {
+      const num1 = ratchetMatch[1];
+      const num2 = ratchetMatch[2];
+      add(`${num1}-${num2}`, 1.0);
+      add(`${num1}${num2}`, 1.0);
+    }
+  }
 
   // Synonymes (poids réduit).
   for (const syn of expandSynonyms(normQuery)) {

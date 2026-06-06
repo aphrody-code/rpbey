@@ -12,7 +12,7 @@
  * sans rebuild). Par défaut : lecture FS bundlée.
  */
 
-import { readFile } from "node:fs/promises";
+import { readFile, stat } from "node:fs/promises";
 import { join } from "node:path";
 import { cache } from "react";
 
@@ -41,7 +41,58 @@ const REMOTE_BASE = (
   ""
 ).replace(/\/$/, "");
 
-const store = new Map<string, unknown>();
+type CacheEntry<T> =
+  | {
+      value: T;
+      lastChecked: number;
+      isRemote: true;
+    }
+  | {
+      value: T;
+      mtimeMs: number;
+      lastChecked: number;
+      isRemote: false;
+    };
+
+const store = new Map<string, CacheEntry<any>>();
+
+async function getFileMtime(normalized: string): Promise<number> {
+  const candidates = [
+    join(process.cwd(), normalized),
+    join(process.cwd(), "public", normalized),
+    join(process.cwd(), "apps", "web", normalized),
+  ];
+  for (const filePath of candidates) {
+    try {
+      const st = await stat(filePath);
+      return st.mtimeMs;
+    } catch {
+      // continue
+    }
+  }
+  throw new Error(`not found: ${normalized}`);
+}
+
+async function getFileStatsAndContent(
+  normalized: string,
+): Promise<{ content: string; mtimeMs: number }> {
+  const candidates = [
+    join(process.cwd(), normalized),
+    join(process.cwd(), "public", normalized),
+    join(process.cwd(), "apps", "web", normalized),
+  ];
+  let lastErr: unknown = null;
+  for (const filePath of candidates) {
+    try {
+      const st = await stat(filePath);
+      const content = await readFileText(filePath);
+      return { content, mtimeMs: st.mtimeMs };
+    } catch (err) {
+      lastErr = err;
+    }
+  }
+  throw lastErr ?? new Error(`not found: ${normalized}`);
+}
 
 async function loadFromFs(normalized: string): Promise<string> {
   // data/ + public/data/ supportés (selon où le fichier atterrit dans la lambda).
@@ -64,8 +115,32 @@ async function loadFromFs(normalized: string): Promise<string> {
 
 async function loadJsonUncached<T = JsonValue>(relPath: string): Promise<T> {
   const normalized = relPath.replace(/^\.?\//, "");
-  const hit = store.get(normalized);
-  if (hit !== undefined) return hit as T;
+  const now = Date.now();
+
+  const cached = store.get(normalized);
+  if (cached) {
+    if (cached.isRemote) {
+      // Pour les requêtes distantes, TTL de 10 secondes
+      if (now - cached.lastChecked < 10000) {
+        return cached.value as T;
+      }
+    } else {
+      // Pour les lectures FS, TTL de 2 secondes avant de vérifier le mtime
+      if (now - cached.lastChecked < 2000) {
+        return cached.value as T;
+      }
+      // Vérifier le mtime du fichier
+      try {
+        const mtimeMs = await getFileMtime(normalized);
+        if (mtimeMs === cached.mtimeMs) {
+          cached.lastChecked = now;
+          return cached.value as T;
+        }
+      } catch {
+        // continue
+      }
+    }
+  }
 
   // Override HTTP explicite (miroir/Blob) — sinon lecture FS bundlée.
   if (REMOTE_BASE) {
@@ -73,13 +148,22 @@ async function loadJsonUncached<T = JsonValue>(relPath: string): Promise<T> {
     const res = await fetch(url, { next: { revalidate: 3600 } });
     if (!res.ok) throw new Error(`fetch ${url} → ${res.status}`);
     const parsed = (await res.json()) as T;
-    store.set(normalized, parsed);
+    store.set(normalized, {
+      value: parsed,
+      lastChecked: now,
+      isRemote: true,
+    });
     return parsed;
   }
 
-  const raw = await loadFromFs(normalized);
-  const parsed = JSON.parse(raw) as T;
-  store.set(normalized, parsed);
+  const { content, mtimeMs } = await getFileStatsAndContent(normalized);
+  const parsed = JSON.parse(content) as T;
+  store.set(normalized, {
+    value: parsed,
+    mtimeMs,
+    lastChecked: now,
+    isRemote: false,
+  });
   return parsed;
 }
 

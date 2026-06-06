@@ -58,7 +58,6 @@ export async function GET(_request: NextRequest, { params }: RouteParams) {
   try {
     const { id } = await params;
 
-
     const tournament = await getTournamentForLive(id);
 
     if (!tournament) {

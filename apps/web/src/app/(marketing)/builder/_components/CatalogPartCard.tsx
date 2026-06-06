@@ -141,22 +141,47 @@ export function CatalogPartCard({ part, isUsed, onClick }: CatalogPartCardProps)
         height: "100%",
         transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
         opacity: isUsed ? 0.45 : 1,
-        pointerEvents: isUsed ? "none" : "auto",
         borderRadius: 4,
         borderColor: isUsed ? "divider" : alpha(color, 0.1),
         bgcolor: isUsed ? alpha("#000", 0.02) : "background.paper",
         "&:hover": {
           transform: isUsed ? "none" : "translateY(-6px)",
           boxShadow: isUsed ? "none" : `0 12px 30px -10px ${alpha(color, 0.45)}`,
-          borderColor: color,
+          borderColor: isUsed ? "divider" : color,
           "& .part-image-box": {
-            transform: "scale(1.1) rotate(5deg)",
+            transform: isUsed ? "none" : "scale(1.1) rotate(5deg)",
           },
         },
         position: "relative",
         overflow: "visible",
       }}
     >
+      <IconButton
+        size="small"
+        onClick={(e) => {
+          e.stopPropagation();
+          setStatsOpen(true);
+        }}
+        sx={{
+          position: "absolute",
+          top: 8,
+          left: 8,
+          zIndex: 5,
+          color: "text.disabled",
+          bgcolor: (theme) => alpha(theme.palette.background.paper, 0.8),
+          backdropFilter: "blur(4px)",
+          border: "1px solid",
+          borderColor: "divider",
+          "&:hover": {
+            color: color,
+            bgcolor: (theme) => alpha(theme.palette.background.paper, 0.95),
+            borderColor: color,
+          },
+        }}
+      >
+        <InfoOutlined sx={{ fontSize: 16 }} />
+      </IconButton>
+
       <CardActionArea onClick={onClick} disabled={isUsed} sx={{ height: "100%", borderRadius: 4 }}>
         <CardContent
           sx={{
@@ -311,26 +336,6 @@ export function CatalogPartCard({ part, isUsed, onClick }: CatalogPartCardProps)
                 );
               })}
             </Box>
-
-            <IconButton
-              size="small"
-              component="span"
-              onClick={(e) => {
-                e.stopPropagation();
-                setStatsOpen(true);
-              }}
-              sx={{
-                p: 0.3,
-                color: "text.disabled",
-                "&:hover": {
-                  color: color,
-                  bgcolor: alpha(color, 0.1),
-                },
-                ml: 0.5,
-              }}
-            >
-              <InfoOutlined sx={{ fontSize: 16 }} />
-            </IconButton>
           </Box>
         </CardContent>
       </CardActionArea>

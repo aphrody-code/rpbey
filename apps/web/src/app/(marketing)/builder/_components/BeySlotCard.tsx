@@ -5,7 +5,7 @@ import { Avatar, Box, Chip, IconButton, Typography } from "@mui/material";
 import { alpha, keyframes } from "@mui/material/styles";
 import { StatRadar } from "@/components/ui/StatRadar";
 import { type Part } from "@/lib/types";
-import { type BuilderStep, isCXBlade, useBuilder } from "./BuilderContext";
+import { type BuilderStep, isCXBlade, isSlotComplete, useBuilder } from "./BuilderContext";
 
 const pulse = keyframes`
   0% { box-shadow: 0 0 0 0 rgba(var(--rpb-primary-rgb), 0.4); }
@@ -86,9 +86,7 @@ export function BeySlotCard({ slotIndex }: BeySlotCardProps) {
   const rows = isCX ? CX_ROWS : BASE_ROWS;
 
   const filledCount = rows.filter((r) => !!bey[r.key]).length;
-  const isComplete = isCX
-    ? !!bey.blade && !!bey.lockChip && !!bey.assistBlade && !!bey.ratchet && !!bey.bit
-    : !!bey.blade && !!bey.ratchet && !!bey.bit;
+  const isComplete = isSlotComplete(bey);
 
   const stats = calculateStats(
     bey.blade,

@@ -9,6 +9,8 @@ import Typography from "@mui/material/Typography";
 import { getAnimeFrames, getSeriesDetail } from "@/server/services/anime";
 import { GalerieClient } from "./_components/GalerieClient";
 
+export const dynamic = "force-dynamic";
+
 interface Props {
   params: Promise<{ slug: string }>;
   searchParams: Promise<{

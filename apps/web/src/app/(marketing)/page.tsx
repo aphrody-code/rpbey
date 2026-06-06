@@ -1,18 +1,17 @@
 import { type MetaPartPreview, type RankingBoard } from "@/components/marketing";
-import { type TournamentShowcaseItem } from "@/components/marketing/TournamentShowcase";
 import { loadJsonSafe } from "@/lib/data-cache";
 import { createPageMetadata } from "@/lib/seo-utils";
-import { getBtsRanking } from "@/server/actions/bts";
+import { getBtsRanking, loadDiscordImageResolver, loadUserIdResolver } from "@/server/actions/bts";
 import { getContent } from "@/server/actions/cms";
 import {
   getActiveHomeTournament,
+  getCurrentSeason,
   getFeaturedHomeVideos,
   getHomeRankingBoards,
-  getNextBtsTournament,
-  getNextStardustTournament,
   getPartImages,
   type HomeRankingRow,
 } from "@/server/dal/cms";
+import { getAllTournamentsForHome } from "@/server/dal/tournaments";
 import HomeClient from "./HomeClient";
 
 export const dynamic = "force-dynamic";
@@ -123,34 +122,52 @@ const RANKING_TOP = 12;
 
 // Tous les classements RPB pour le carrousel de la homepage. Mêmes sources que
 // les pages dédiées : BTS (getBtsRanking), WB/SATR/Stardust (tables synchronisées).
-async function getRankingBoards(): Promise<RankingBoard[]> {
+async function getRankingBoards(activeSeason: any): Promise<RankingBoard[]> {
+  const [imageResolver, userIdResolver] = await Promise.all([
+    loadDiscordImageResolver().catch(() => () => null as string | null),
+    loadUserIdResolver().catch(() => () => null as string | null),
+  ]);
+
+  let seasonNum = 2; // Default fallback
+  if (activeSeason) {
+    const match =
+      activeSeason.slug.match(/saison-(\d+)/i) || activeSeason.name.match(/saison\s*(\d+)/i);
+    if (match) {
+      seasonNum = Number(match[1]);
+    } else if (activeSeason.slug.includes("mars-2026")) {
+      seasonNum = 2;
+    }
+  }
+
+  const seasonLabel = activeSeason ? activeSeason.name : "Saison 2";
+
   const normalizeDbRow = (r: HomeRankingRow) => ({
     id: r.id,
-    userId: null,
+    userId: userIdResolver(r.playerName, null),
     playerName: r.playerName,
     points: r.score,
     wins: r.wins,
     losses: r.losses,
     tournamentWins: 0,
-    avatarUrl: null,
+    avatarUrl: imageResolver(r.playerName, null),
   });
 
   const [bts, boards] = await Promise.all([
-    getBtsRanking(2, { pageSize: RANKING_TOP })
+    getBtsRanking(seasonNum as any, { pageSize: RANKING_TOP })
       .then((res) =>
         res.entries.slice(0, RANKING_TOP).map((e) => ({
           id: `bts-${e.rank}-${e.playerName}`,
-          userId: null,
+          userId: userIdResolver(e.playerName, null),
           playerName: e.playerName,
           points: e.points,
           wins: e.wins,
           losses: e.losses,
           tournamentWins: e.tournamentWins,
-          avatarUrl: e.avatarUrl,
+          avatarUrl: e.avatarUrl || imageResolver(e.playerName, null),
         })),
       )
       .catch(() => []),
-    getHomeRankingBoards(2, RANKING_TOP).catch(() => ({
+    getHomeRankingBoards(seasonNum, RANKING_TOP).catch(() => ({
       wb: [],
       satr: [],
       stardust: [],
@@ -161,7 +178,7 @@ async function getRankingBoards(): Promise<RankingBoard[]> {
     {
       key: "global",
       label: "Global",
-      sublabel: "Classement officiel BTS · Saison 2",
+      sublabel: `Classement officiel BTS · ${seasonLabel}`,
       color: "var(--rpb-primary)",
       href: "/rankings",
       entries: bts,
@@ -169,7 +186,7 @@ async function getRankingBoards(): Promise<RankingBoard[]> {
     {
       key: "wb",
       label: "Wild Breakers",
-      sublabel: "Circuit Wild Breakers · Saison 2",
+      sublabel: `Circuit Wild Breakers · ${seasonLabel}`,
       color: "#a78bfa",
       href: "/tournaments/wb",
       entries: boards.wb.map(normalizeDbRow),
@@ -177,7 +194,7 @@ async function getRankingBoards(): Promise<RankingBoard[]> {
     {
       key: "satr",
       label: "SATR",
-      sublabel: "Circuit SATR · Saison 2",
+      sublabel: `Circuit SATR · ${seasonLabel}`,
       color: "var(--rpb-secondary)",
       href: "/tournaments/satr",
       entries: boards.satr.map(normalizeDbRow),
@@ -193,124 +210,17 @@ async function getRankingBoards(): Promise<RankingBoard[]> {
   ];
 }
 
-const BTS_EDITIONS = [
-  {
-    id: "bts3",
-    file: "B_TS3.json",
-    name: "Bey-Tamashii Séries #3",
-    date: "2026-03-01",
-    poster: "/tournaments/BTS3_poster.webp",
-    fallbackCount: 73,
-  },
-  {
-    id: "bts2",
-    file: "B_TS2.json",
-    name: "Bey-Tamashii Séries #2",
-    date: "2026-02-08",
-    poster: "/tournaments/BTS2.webp",
-    fallbackCount: 60,
-  },
-  {
-    id: "bts1",
-    file: "B_TS1.json",
-    name: "Bey-Tamashii Séries #1",
-    date: "2026-01-11",
-    poster: "/tournaments/BTS1_poster.webp",
-    fallbackCount: 69,
-  },
-];
-
-async function getBtsTournaments(): Promise<TournamentShowcaseItem[]> {
-  type BtsExport = {
-    participants?: {
-      name: string;
-      rank: number;
-      exactWins?: number;
-      exactLosses?: number;
-    }[];
-    participantsCount?: number;
-    matchesCount?: number;
-  };
-
-  const loaded = await Promise.all(
-    BTS_EDITIONS.map(async (edition) => ({
-      edition,
-      data: await loadJsonSafe<BtsExport>(`data/exports/${edition.file}`),
-    })),
-  );
-
-  const cards: TournamentShowcaseItem[] = [];
-  for (const { edition, data } of loaded) {
-    if (!data) continue;
-    const participants = data.participants || [];
-    const podium = participants
-      .filter((p) => p.rank <= 3)
-      .sort((a, b) => a.rank - b.rank)
-      .map((p) => ({
-        name: p.name.replace(/✅|✔️/g, "").trim(),
-        rank: p.rank,
-        wins: p.exactWins || 0,
-        losses: p.exactLosses || 0,
-      }));
-    cards.push({
-      id: edition.id,
-      name: edition.name,
-      date: edition.date,
-      poster: edition.poster,
-      participants: data.participantsCount || edition.fallbackCount,
-      matchesCount: data.matchesCount || 0,
-      podium,
-    });
-  }
-  return cards;
-}
-
 export default async function HomePage() {
-  const [
-    activeTournament,
-    heroContent,
-    rankingBoards,
-    metaParts,
-    recentVideos,
-    btsTournaments,
-    nextBts,
-    nextStardust,
-  ] = await Promise.all([
-    getActiveHomeTournament(),
-    getContent("home-hero-text"),
-    // Tous les classements RPB (BTS + WB + SATR + Stardust) pour le carrousel.
-    getRankingBoards(),
-    getTopMetaParts(),
-    getFeaturedHomeVideos(12).catch(() => []),
-    getBtsTournaments(),
-    getNextBtsTournament(),
-    getNextStardustTournament(),
-  ]);
-
-  if (nextBts) {
-    const edition = nextBts.name.match(/#(\d+)/)?.[1];
-    btsTournaments.unshift({
-      id: nextBts.id,
-      name: nextBts.name,
-      date: new Date(nextBts.date).toISOString(),
-      poster: edition ? `/tournaments/BTS${edition}_poster.webp` : "/logo.webp",
-      participants: 0,
-      matchesCount: 0,
-      podium: [],
-    });
-  }
-
-  if (nextStardust) {
-    btsTournaments.unshift({
-      id: nextStardust.id,
-      name: nextStardust.name,
-      date: new Date(nextStardust.date).toISOString(),
-      poster: nextStardust.posterUrl ?? "/stardust-logo.webp",
-      participants: 0,
-      matchesCount: 0,
-      podium: [],
-    });
-  }
+  const activeSeason = await getCurrentSeason();
+  const [activeTournament, heroContent, rankingBoards, metaParts, recentVideos, tournaments] =
+    await Promise.all([
+      getActiveHomeTournament(),
+      getContent("home-hero-text"),
+      getRankingBoards(activeSeason),
+      getTopMetaParts(),
+      getFeaturedHomeVideos(12).catch(() => []),
+      getAllTournamentsForHome(),
+    ]);
 
   return (
     <HomeClient
@@ -320,7 +230,7 @@ export default async function HomePage() {
       metaParts={metaParts}
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       recentVideos={recentVideos as any}
-      tournaments={btsTournaments}
+      tournaments={tournaments}
     />
   );
 }

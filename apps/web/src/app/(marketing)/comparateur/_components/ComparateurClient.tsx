@@ -16,8 +16,8 @@ import {
   useTheme,
 } from "@mui/material";
 import { AnimatePresence, motion } from "framer-motion";
-import { useCallback, useMemo, useState } from "react";
-import Fuse from "fuse.js";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { globalSearch } from "@rpbey/api-client";
 import { Close } from "@mui/icons-material";
 import type { BxCatalog, BxProductGroup, BxShop, BxProduct, RecommendedProduct } from "./types";
 import { FilterBar, type FilterState } from "./compare/FilterBar";
@@ -41,6 +41,30 @@ interface Props {
 }
 
 const TAB_LABELS = ["Meilleurs prix", "Recommandations", "Tous les produits", "Boutiques"] as const;
+
+// Préfixe d'id des produits catalogue dans l'index de recherche globale
+// (`server/services/global-search.ts` §1 : `group-${group.key}`). Sert à remapper
+// un résultat `globalSearch` (catégorie `product`) vers le `BxProductGroup` local.
+const GROUP_ID_PREFIX = "group-";
+
+/**
+ * Repli local : ensemble des clés de groupes dont le nom ou le code contient la
+ * requête (sous-chaîne normalisée). Affiché instantanément le temps que le SDK
+ * réponde, et conservé si l'appel API échoue — la recherche reste fonctionnelle.
+ */
+function localMatchKeys(groups: BxProductGroup[], query: string): Set<string> {
+  const nq = normalizeText(query);
+  const keys = new Set<string>();
+  for (const g of groups) {
+    if (
+      normalizeText(g.name).includes(nq) ||
+      (g.code != null && normalizeText(g.code).includes(nq))
+    ) {
+      keys.add(g.key);
+    }
+  }
+  return keys;
+}
 
 export function ComparateurClient({
   products,
@@ -103,33 +127,48 @@ export function ComparateurClient({
   const compareKeys = useMemo(() => new Set(compareList.map((g) => g.key)), [compareList]);
   const canAddMore = compareList.length < MAX_COMPARE;
 
-  // ── Fuse index for groups (used in tab 0) ──
-  const groupFuse = useMemo(
-    () =>
-      new Fuse(groups, {
-        keys: [
-          { name: "name", weight: 0.8 },
-          { name: "code", weight: 0.2 },
-        ],
-        threshold: 0.35,
-        ignoreLocation: true,
-        getFn: (obj, path) => {
-          const keys = Array.isArray(path) ? path : (path as string).split(".");
-          let v: unknown = obj;
-          for (const k of keys) {
-            if (v == null) return "";
-            v = (v as Record<string, unknown>)[k];
+  // ── Recherche produits via le SDK (`globalSearch`, catégorie `product`) ──────────
+  // Le champ de recherche du comparateur interroge l'API canonique (ranking BM25F
+  // serveur, cohérent avec /search) au lieu d'un index Fuse local. On ne retient que
+  // l'ENSEMBLE des clés de groupes catalogue correspondants — l'ordre d'affichage
+  // reste piloté par le sélecteur de tri (`GroupsGrid`). `null` = aucune recherche
+  // active (tous les groupes). Debounce 150 ms ; repli local instantané pendant le
+  // fetch et en cas d'échec API.
+  const [searchKeys, setSearchKeys] = useState<Set<string> | null>(null);
+
+  useEffect(() => {
+    const q = filters.search.trim();
+    if (!q) {
+      setSearchKeys(null);
+      return;
+    }
+    // Feedback immédiat : filtrage local le temps que le SDK réponde.
+    setSearchKeys(localMatchKeys(groups, q));
+    const tid = setTimeout(async () => {
+      try {
+        const res = await globalSearch({ query: { q, category: "product", limit: 300 } });
+        if (res.data?.ok) {
+          const next = new Set<string>();
+          for (const item of res.data.data.data ?? []) {
+            if (item.id.startsWith(GROUP_ID_PREFIX)) {
+              next.add(item.id.slice(GROUP_ID_PREFIX.length));
+            }
           }
-          return typeof v === "string" ? normalizeText(v) : v != null ? String(v) : "";
-        },
-      }),
-    [groups],
-  );
+          // Les items « product » sans contrepartie catalogue (beys encyclopédiques
+          // du wiki) ne mappent aucun groupe : si rien ne matche le catalogue, on
+          // conserve le repli local plutôt que de vider la liste.
+          if (next.size > 0) setSearchKeys(next);
+        }
+      } catch {
+        // Dégradation gracieuse : on garde le repli local déjà appliqué.
+      }
+    }, 150);
+    return () => clearTimeout(tid);
+  }, [filters.search, groups]);
 
   // ── Filtered groups for tab 0 ──
   const filteredGroups = useMemo(() => {
-    const q = filters.search.trim();
-    let list = q ? groupFuse.search(normalizeText(q)).map((r) => r.item) : groups;
+    let list = searchKeys ? groups.filter((g) => searchKeys.has(g.key)) : groups;
     if (filters.region !== "all")
       list = list.filter((g) => g.offers.some((o) => o.region === filters.region));
     if (filters.productType !== "all")
@@ -138,7 +177,7 @@ export function ComparateurClient({
       list = list.filter((g) => g.cheapestEur == null || g.cheapestEur <= filters.priceRange[1]);
     if (filters.availableOnly) list = list.filter((g) => g.offers.some((o) => o.available));
     return list;
-  }, [groups, groupFuse, filters, maxPrice]);
+  }, [groups, searchKeys, filters, maxPrice]);
 
   // ── Handlers ──
   const handleGroupClick = useCallback((g: BxProductGroup) => {

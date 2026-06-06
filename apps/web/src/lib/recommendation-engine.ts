@@ -311,9 +311,15 @@ export async function getRecommendations(
     const title = group.name;
 
     // A. Match DB product via code (BX/UX/CX-XX) — lookup O(1).
-    const codeMatch = title.match(/\b([BUC]X-\d{2,3}[A-Z]?)\b/i);
-    const matchedDbProduct =
-      (codeMatch?.[1] ? dbProductByCode.get(codeMatch[1].toUpperCase()) : undefined) ?? null;
+    const codeMatch = title.match(/\b([BUC]X-?\d{2,3}[A-Z]?)\b/i);
+    let matchedDbProduct = null;
+    if (codeMatch?.[1]) {
+      let code = codeMatch[1].toUpperCase();
+      if (!code.includes("-")) {
+        code = code.slice(0, 2) + "-" + code.slice(2);
+      }
+      matchedDbProduct = dbProductByCode.get(code) ?? null;
+    }
 
     // B. Collecte des pièces incluses.
     const matchedPartsMap = new Map<string, (typeof dbParts)[number]>();

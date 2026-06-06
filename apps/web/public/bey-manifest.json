@@ -1,1 +1,2398 @@
-{"stats":{"totalFiles":390,"models":238,"textures":152},"categories":["BX_Blades","Bits","Blades_Xover","CX_AssistBlade","CX_MainBlades","Chip","Ratchets","UX_Blades"],"models":[{"path":"/data_bey/BX_Blades/BearScratch/BearScratch_Metal.obj","name":"BearScratch_Metal","type":"model","category":"BX_Blades","subcategory":"BearScratch"},{"path":"/data_bey/BX_Blades/BearScratch/BearScratch_Plastic.obj","name":"BearScratch_Plastic","type":"model","category":"BX_Blades","subcategory":"BearScratch"},{"path":"/data_bey/BX_Blades/BlackShell/BlackShell_Plastic.obj","name":"BlackShell_Plastic","type":"model","category":"BX_Blades","subcategory":"BlackShell"},{"path":"/data_bey/BX_Blades/BlackShell/BlaskShell_Metal.obj","name":"BlaskShell_Metal","type":"model","category":"BX_Blades","subcategory":"BlackShell"},{"path":"/data_bey/BX_Blades/CobaltDragoon/CobaltDragoon_Metal.obj","name":"CobaltDragoon_Metal","type":"model","category":"BX_Blades","subcategory":"CobaltDragoon"},{"path":"/data_bey/BX_Blades/CobaltDragoon/CobaltDragoon_Plastic.obj","name":"CobaltDragoon_Plastic","type":"model","category":"BX_Blades","subcategory":"CobaltDragoon"},{"path":"/data_bey/BX_Blades/CobaltDrake/CobaltDrake_Metal.obj","name":"CobaltDrake_Metal","type":"model","category":"BX_Blades","subcategory":"CobaltDrake"},{"path":"/data_bey/BX_Blades/CobaltDrake/CobaltDrake_Plastic.obj","name":"CobaltDrake_Plastic","type":"model","category":"BX_Blades","subcategory":"CobaltDrake"},{"path":"/data_bey/BX_Blades/CrimsonGaruda/CrimsonGaruda_Metal.obj","name":"CrimsonGaruda_Metal","type":"model","category":"BX_Blades","subcategory":"CrimsonGaruda"},{"path":"/data_bey/BX_Blades/CrimsonGaruda/CrimsonGaruda_Plastic.obj","name":"CrimsonGaruda_Plastic","type":"model","category":"BX_Blades","subcategory":"CrimsonGaruda"},{"path":"/data_bey/BX_Blades/CrocCrunch/CrocCrunch_Metal.obj","name":"CrocCrunch_Metal","type":"model","category":"BX_Blades","subcategory":"CrocCrunch"},{"path":"/data_bey/BX_Blades/CrocCrunch/CrocCrunch_Plastic.obj","name":"CrocCrunch_Plastic","type":"model","category":"BX_Blades","subcategory":"CrocCrunch"},{"path":"/data_bey/BX_Blades/DranDagger/DranDagger_Metal.obj","name":"DranDagger_Metal","type":"model","category":"BX_Blades","subcategory":"DranDagger"},{"path":"/data_bey/BX_Blades/DranDagger/DranDagger_Plastic.obj","name":"DranDagger_Plastic","type":"model","category":"BX_Blades","subcategory":"DranDagger"},{"path":"/data_bey/BX_Blades/DranSword/DranSword_Metal.obj","name":"DranSword_Metal","type":"model","category":"BX_Blades","subcategory":"DranSword"},{"path":"/data_bey/BX_Blades/DranSword/DranSword_Plastic.obj","name":"DranSword_Plastic","type":"model","category":"BX_Blades","subcategory":"DranSword"},{"path":"/data_bey/BX_Blades/HellsChain/HellsChain_Metal.obj","name":"HellsChain_Metal","type":"model","category":"BX_Blades","subcategory":"HellsChain"},{"path":"/data_bey/BX_Blades/HellsChain/HellsChain_Plastic.obj","name":"HellsChain_Plastic","type":"model","category":"BX_Blades","subcategory":"HellsChain"},{"path":"/data_bey/BX_Blades/HellsScythe/HellsScythe_Metal.obj","name":"HellsScythe_Metal","type":"model","category":"BX_Blades","subcategory":"HellsScythe"},{"path":"/data_bey/BX_Blades/HellsScythe/HellsScythe_Plastic.obj","name":"HellsScythe_Plastic","type":"model","category":"BX_Blades","subcategory":"HellsScythe"},{"path":"/data_bey/BX_Blades/KnightLance/KnightLance_Metal.obj","name":"KnightLance_Metal","type":"model","category":"BX_Blades","subcategory":"KnightLance"},{"path":"/data_bey/BX_Blades/KnightLance/KnightLance_Plastic.obj","name":"KnightLance_Plastic","type":"model","category":"BX_Blades","subcategory":"KnightLance"},{"path":"/data_bey/BX_Blades/KnightShield/KnightShield_Metal.obj","name":"KnightShield_Metal","type":"model","category":"BX_Blades","subcategory":"KnightShield"},{"path":"/data_bey/BX_Blades/KnightShield/KnightShield_Plastic.obj","name":"KnightShield_Plastic","type":"model","category":"BX_Blades","subcategory":"KnightShield"},{"path":"/data_bey/BX_Blades/KongYell/KongYell_Metal.obj","name":"KongYell_Metal","type":"model","category":"BX_Blades","subcategory":"KongYell"},{"path":"/data_bey/BX_Blades/KongYell/KongYell_Plastic.obj","name":"KongYell_Plastic","type":"model","category":"BX_Blades","subcategory":"KongYell"},{"path":"/data_bey/BX_Blades/LeonClaw/LeonClaw_Metal.obj","name":"LeonClaw_Metal","type":"model","category":"BX_Blades","subcategory":"LeonClaw"},{"path":"/data_bey/BX_Blades/LeonClaw/LeonClaw_Plastic.obj","name":"LeonClaw_Plastic","type":"model","category":"BX_Blades","subcategory":"LeonClaw"},{"path":"/data_bey/BX_Blades/MammothTusk/MammothTusk_Metal.obj","name":"MammothTusk_Metal","type":"model","category":"BX_Blades","subcategory":"MammothTusk"},{"path":"/data_bey/BX_Blades/MammothTusk/MammothTusk_Plastic.obj","name":"MammothTusk_Plastic","type":"model","category":"BX_Blades","subcategory":"MammothTusk"},{"path":"/data_bey/BX_Blades/PhoenixFeather/PhoenixFeather_Metal.obj","name":"PhoenixFeather_Metal","type":"model","category":"BX_Blades","subcategory":"PhoenixFeather"},{"path":"/data_bey/BX_Blades/PhoenixFeather/PhoenixFeather_Plastic.obj","name":"PhoenixFeather_Plastic","type":"model","category":"BX_Blades","subcategory":"PhoenixFeather"},{"path":"/data_bey/BX_Blades/PhoenixWing/PhoenixWing_Metal.obj","name":"PhoenixWing_Metal","type":"model","category":"BX_Blades","subcategory":"PhoenixWing"},{"path":"/data_bey/BX_Blades/PhoenixWing/PhoenixWing_Plastic.obj","name":"PhoenixWing_Plastic","type":"model","category":"BX_Blades","subcategory":"PhoenixWing"},{"path":"/data_bey/BX_Blades/PteraSwing/PteraSwing_Metal.obj","name":"PteraSwing_Metal","type":"model","category":"BX_Blades","subcategory":"PteraSwing"},{"path":"/data_bey/BX_Blades/PteraSwing/PteraSwing_Plastic.obj","name":"PteraSwing_Plastic","type":"model","category":"BX_Blades","subcategory":"PteraSwing"},{"path":"/data_bey/BX_Blades/RhinoHorn/RhinoHorn_Metal.obj","name":"RhinoHorn_Metal","type":"model","category":"BX_Blades","subcategory":"RhinoHorn"},{"path":"/data_bey/BX_Blades/RhinoHorn/RhinoHorn_Plastic.obj","name":"RhinoHorn_Plastic","type":"model","category":"BX_Blades","subcategory":"RhinoHorn"},{"path":"/data_bey/BX_Blades/SamuraiSteel/SamuraiSteel_Metal.obj","name":"SamuraiSteel_Metal","type":"model","category":"BX_Blades","subcategory":"SamuraiSteel"},{"path":"/data_bey/BX_Blades/SamuraiSteel/SamuraiSteel_Plastic.obj","name":"SamuraiSteel_Plastic","type":"model","category":"BX_Blades","subcategory":"SamuraiSteel"},{"path":"/data_bey/BX_Blades/SharkEdge/SharkEdge_Metal.obj","name":"SharkEdge_Metal","type":"model","category":"BX_Blades","subcategory":"SharkEdge"},{"path":"/data_bey/BX_Blades/SharkEdge/SharkEdge_Plastic.obj","name":"SharkEdge_Plastic","type":"model","category":"BX_Blades","subcategory":"SharkEdge"},{"path":"/data_bey/BX_Blades/SharkGill/SharkGill_Metal.obj","name":"SharkGill_Metal","type":"model","category":"BX_Blades","subcategory":"SharkGill"},{"path":"/data_bey/BX_Blades/SharkGill/SharkGill_Plastic.obj","name":"SharkGill_Plastic","type":"model","category":"BX_Blades","subcategory":"SharkGill"},{"path":"/data_bey/BX_Blades/ShinobiKnife/ShinobiKnife_Metal.obj","name":"ShinobiKnife_Metal","type":"model","category":"BX_Blades","subcategory":"ShinobiKnife"},{"path":"/data_bey/BX_Blades/ShinobiKnife/ShinobiKnife_Plastic.obj","name":"ShinobiKnife_Plastic","type":"model","category":"BX_Blades","subcategory":"ShinobiKnife"},{"path":"/data_bey/BX_Blades/SphinxCowl/SphinxCowl_Metal.obj","name":"SphinxCowl_Metal","type":"model","category":"BX_Blades","subcategory":"SphinxCowl"},{"path":"/data_bey/BX_Blades/SphinxCowl/SphinxCowl_Plastic.obj","name":"SphinxCowl_Plastic","type":"model","category":"BX_Blades","subcategory":"SphinxCowl"},{"path":"/data_bey/BX_Blades/TyrannoBeat/TyrannoBeat_Metal.obj","name":"TyrannoBeat_Metal","type":"model","category":"BX_Blades","subcategory":"TyrannoBeat"},{"path":"/data_bey/BX_Blades/TyrannoBeat/TyrannoBeat_Plastic.obj","name":"TyrannoBeat_Plastic","type":"model","category":"BX_Blades","subcategory":"TyrannoBeat"},{"path":"/data_bey/BX_Blades/TyrannoRoar/TyrannoRoar_Metal.obj","name":"TyrannoRoar_Metal","type":"model","category":"BX_Blades","subcategory":"TyrannoRoar"},{"path":"/data_bey/BX_Blades/TyrannoRoar/TyrannoRoar_Plastic.obj","name":"TyrannoRoar_Plastic","type":"model","category":"BX_Blades","subcategory":"TyrannoRoar"},{"path":"/data_bey/BX_Blades/UnicornSting/UnicornSting_Metal.obj","name":"UnicornSting_Metal","type":"model","category":"BX_Blades","subcategory":"UnicornSting"},{"path":"/data_bey/BX_Blades/UnicornSting/UnicornSting_Plastic.obj","name":"UnicornSting_Plastic","type":"model","category":"BX_Blades","subcategory":"UnicornSting"},{"path":"/data_bey/BX_Blades/ViperTail/ViperTail_Metal.obj","name":"ViperTail_Metal","type":"model","category":"BX_Blades","subcategory":"ViperTail"},{"path":"/data_bey/BX_Blades/ViperTail/ViperTail_Plastic.obj","name":"ViperTail_Plastic","type":"model","category":"BX_Blades","subcategory":"ViperTail"},{"path":"/data_bey/BX_Blades/WeissTiger/WeissTiger_Metal.obj","name":"WeissTiger_Metal","type":"model","category":"BX_Blades","subcategory":"WeissTiger"},{"path":"/data_bey/BX_Blades/WeissTiger/WeissTiger_Plastic.obj","name":"WeissTiger_Plastic","type":"model","category":"BX_Blades","subcategory":"WeissTiger"},{"path":"/data_bey/BX_Blades/WhaleWave/WhaleWave_Metal.obj","name":"WhaleWave_Metal","type":"model","category":"BX_Blades","subcategory":"WhaleWave"},{"path":"/data_bey/BX_Blades/WhaleWave/WhaleWave_Plastic.obj","name":"WhaleWave_Plastic","type":"model","category":"BX_Blades","subcategory":"WhaleWave"},{"path":"/data_bey/BX_Blades/WizardArrow/WizardArrow_Metal.obj","name":"WizardArrow_Metal","type":"model","category":"BX_Blades","subcategory":"WizardArrow"},{"path":"/data_bey/BX_Blades/WizardArrow/WizardArrow_Plastic.obj","name":"WizardArrow_Plastic","type":"model","category":"BX_Blades","subcategory":"WizardArrow"},{"path":"/data_bey/BX_Blades/WyvernGale/WyvernGale_Metal.obj","name":"WyvernGale_Metal","type":"model","category":"BX_Blades","subcategory":"WyvernGale"},{"path":"/data_bey/BX_Blades/WyvernGale/WyvernGale_Plastic.obj","name":"WyvernGale_Plastic","type":"model","category":"BX_Blades","subcategory":"WyvernGale"},{"path":"/data_bey/Bits/Full/A.obj","name":"A","type":"model","category":"Bits","subcategory":"Full"},{"path":"/data_bey/Bits/Full/B.obj","name":"B","type":"model","category":"Bits","subcategory":"Full"},{"path":"/data_bey/Bits/Full/C.obj","name":"C","type":"model","category":"Bits","subcategory":"Full"},{"path":"/data_bey/Bits/Full/D.obj","name":"D","type":"model","category":"Bits","subcategory":"Full"},{"path":"/data_bey/Bits/Full/DB.obj","name":"DB","type":"model","category":"Bits","subcategory":"Full"},{"path":"/data_bey/Bits/Full/E.obj","name":"E","type":"model","category":"Bits","subcategory":"Full"},{"path":"/data_bey/Bits/Full/F.obj","name":"F","type":"model","category":"Bits","subcategory":"Full"},{"path":"/data_bey/Bits/Full/FB.obj","name":"FB","type":"model","category":"Bits","subcategory":"Full"},{"path":"/data_bey/Bits/Full/GB.obj","name":"GB","type":"model","category":"Bits","subcategory":"Full"},{"path":"/data_bey/Bits/Full/GF.obj","name":"GF","type":"model","category":"Bits","subcategory":"Full"},{"path":"/data_bey/Bits/Full/GN.obj","name":"GN","type":"model","category":"Bits","subcategory":"Full"},{"path":"/data_bey/Bits/Full/H.obj","name":"H","type":"model","category":"Bits","subcategory":"Full"},{"path":"/data_bey/Bits/Full/K.obj","name":"K","type":"model","category":"Bits","subcategory":"Full"},{"path":"/data_bey/Bits/Full/L.obj","name":"L","type":"model","category":"Bits","subcategory":"Full"},{"path":"/data_bey/Bits/Full/LF.obj","name":"LF","type":"model","category":"Bits","subcategory":"Full"},{"path":"/data_bey/Bits/Full/LO.obj","name":"LO","type":"model","category":"Bits","subcategory":"Full"},{"path":"/data_bey/Bits/Full/LR.obj","name":"LR","type":"model","category":"Bits","subcategory":"Full"},{"path":"/data_bey/Bits/Full/MN.obj","name":"MN","type":"model","category":"Bits","subcategory":"Full"},{"path":"/data_bey/Bits/Full/N.obj","name":"N","type":"model","category":"Bits","subcategory":"Full"},{"path":"/data_bey/Bits/Full/O.obj","name":"O","type":"model","category":"Bits","subcategory":"Full"},{"path":"/data_bey/Bits/Full/P.obj","name":"P","type":"model","category":"Bits","subcategory":"Full"},{"path":"/data_bey/Bits/Full/Q.obj","name":"Q","type":"model","category":"Bits","subcategory":"Full"},{"path":"/data_bey/Bits/Full/R.obj","name":"R","type":"model","category":"Bits","subcategory":"Full"},{"path":"/data_bey/Bits/Full/RA.obj","name":"RA","type":"model","category":"Bits","subcategory":"Full"},{"path":"/data_bey/Bits/Full/T.obj","name":"T","type":"model","category":"Bits","subcategory":"Full"},{"path":"/data_bey/Bits/Full/TP.obj","name":"TP","type":"model","category":"Bits","subcategory":"Full"},{"path":"/data_bey/Bits/Full/U.obj","name":"U","type":"model","category":"Bits","subcategory":"Full"},{"path":"/data_bey/Bits/Full/V.obj","name":"V","type":"model","category":"Bits","subcategory":"Full"},{"path":"/data_bey/Bits/Full/W.obj","name":"W","type":"model","category":"Bits","subcategory":"Full"},{"path":"/data_bey/Bits/In Parts/Accel.obj","name":"Accel","type":"model","category":"Bits","subcategory":"In Parts"},{"path":"/data_bey/Bits/In Parts/Ball.obj","name":"Ball","type":"model","category":"Bits","subcategory":"In Parts"},{"path":"/data_bey/Bits/In Parts/Base_Att-Bal.obj","name":"Base_Att-Bal","type":"model","category":"Bits","subcategory":"In Parts"},{"path":"/data_bey/Bits/In Parts/Base_Def-Sta.obj","name":"Base_Def-Sta","type":"model","category":"Bits","subcategory":"In Parts"},{"path":"/data_bey/Bits/In Parts/Bound Spike.obj","name":"Bound Spike","type":"model","category":"Bits","subcategory":"In Parts"},{"path":"/data_bey/Bits/In Parts/Cyclone.obj","name":"Cyclone","type":"model","category":"Bits","subcategory":"In Parts"},{"path":"/data_bey/Bits/In Parts/Disk Ball.obj","name":"Disk Ball","type":"model","category":"Bits","subcategory":"In Parts"},{"path":"/data_bey/Bits/In Parts/Dot.obj","name":"Dot","type":"model","category":"Bits","subcategory":"In Parts"},{"path":"/data_bey/Bits/In Parts/Elevate.obj","name":"Elevate","type":"model","category":"Bits","subcategory":"In Parts"},{"path":"/data_bey/Bits/In Parts/Flat.obj","name":"Flat","type":"model","category":"Bits","subcategory":"In Parts"},{"path":"/data_bey/Bits/In Parts/Free Ball.obj","name":"Free Ball","type":"model","category":"Bits","subcategory":"In Parts"},{"path":"/data_bey/Bits/In Parts/Gear Ball.obj","name":"Gear Ball","type":"model","category":"Bits","subcategory":"In Parts"},{"path":"/data_bey/Bits/In Parts/Gear Flat.obj","name":"Gear Flat","type":"model","category":"Bits","subcategory":"In Parts"},{"path":"/data_bey/Bits/In Parts/Gear Needle.obj","name":"Gear Needle","type":"model","category":"Bits","subcategory":"In Parts"},{"path":"/data_bey/Bits/In Parts/Gear Point.obj","name":"Gear Point","type":"model","category":"Bits","subcategory":"In Parts"},{"path":"/data_bey/Bits/In Parts/Hexa.obj","name":"Hexa","type":"model","category":"Bits","subcategory":"In Parts"},{"path":"/data_bey/Bits/In Parts/High Needle.obj","name":"High Needle","type":"model","category":"Bits","subcategory":"In Parts"},{"path":"/data_bey/Bits/In Parts/High Taper.obj","name":"High Taper","type":"model","category":"Bits","subcategory":"In Parts"},{"path":"/data_bey/Bits/In Parts/Level.obj","name":"Level","type":"model","category":"Bits","subcategory":"In Parts"},{"path":"/data_bey/Bits/In Parts/Low Flat.obj","name":"Low Flat","type":"model","category":"Bits","subcategory":"In Parts"},{"path":"/data_bey/Bits/In Parts/Metal Needle.obj","name":"Metal Needle","type":"model","category":"Bits","subcategory":"In Parts"},{"path":"/data_bey/Bits/In Parts/Needle.obj","name":"Needle","type":"model","category":"Bits","subcategory":"In Parts"},{"path":"/data_bey/Bits/In Parts/Orb.obj","name":"Orb","type":"model","category":"Bits","subcategory":"In Parts"},{"path":"/data_bey/Bits/In Parts/Point.obj","name":"Point","type":"model","category":"Bits","subcategory":"In Parts"},{"path":"/data_bey/Bits/In Parts/Quake.obj","name":"Quake","type":"model","category":"Bits","subcategory":"In Parts"},{"path":"/data_bey/Bits/In Parts/Rubber Accel.obj","name":"Rubber Accel","type":"model","category":"Bits","subcategory":"In Parts"},{"path":"/data_bey/Bits/In Parts/Rush.obj","name":"Rush","type":"model","category":"Bits","subcategory":"In Parts"},{"path":"/data_bey/Bits/In Parts/Spike.obj","name":"Spike","type":"model","category":"Bits","subcategory":"In Parts"},{"path":"/data_bey/Bits/In Parts/Taper.obj","name":"Taper","type":"model","category":"Bits","subcategory":"In Parts"},{"path":"/data_bey/Bits/In Parts/Trans Point.obj","name":"Trans Point","type":"model","category":"Bits","subcategory":"In Parts"},{"path":"/data_bey/Bits/In Parts/Unite.obj","name":"Unite","type":"model","category":"Bits","subcategory":"In Parts"},{"path":"/data_bey/Bits/In Parts/Vortex.obj","name":"Vortex","type":"model","category":"Bits","subcategory":"In Parts"},{"path":"/data_bey/Bits/In Parts/Wall Ball.obj","name":"Wall Ball","type":"model","category":"Bits","subcategory":"In Parts"},{"path":"/data_bey/Blades_Xover/DragoonStorm/DragoonStorm_BottomLayer.obj","name":"DragoonStorm_BottomLayer","type":"model","category":"Blades_Xover","subcategory":"DragoonStorm"},{"path":"/data_bey/Blades_Xover/DragoonStorm/DragoonStorm_Metal.obj","name":"DragoonStorm_Metal","type":"model","category":"Blades_Xover","subcategory":"DragoonStorm"},{"path":"/data_bey/Blades_Xover/DragoonStorm/DragoonStorm_TopLayer.obj","name":"DragoonStorm_TopLayer","type":"model","category":"Blades_Xover","subcategory":"DragoonStorm"},{"path":"/data_bey/Blades_Xover/DranzerSpiral/DranzerSpiral_BottomLayer.obj","name":"DranzerSpiral_BottomLayer","type":"model","category":"Blades_Xover","subcategory":"DranzerSpiral"},{"path":"/data_bey/Blades_Xover/DranzerSpiral/DranzerSpiral_Metal.obj","name":"DranzerSpiral_Metal","type":"model","category":"Blades_Xover","subcategory":"DranzerSpiral"},{"path":"/data_bey/Blades_Xover/DranzerSpiral/DranzerSpiral_TopLayer.obj","name":"DranzerSpiral_TopLayer","type":"model","category":"Blades_Xover","subcategory":"DranzerSpiral"},{"path":"/data_bey/Blades_Xover/DrigerSlash/DrigerSlash_BottomLayer.obj","name":"DrigerSlash_BottomLayer","type":"model","category":"Blades_Xover","subcategory":"DrigerSlash"},{"path":"/data_bey/Blades_Xover/DrigerSlash/DrigerSlash_Metal.obj","name":"DrigerSlash_Metal","type":"model","category":"Blades_Xover","subcategory":"DrigerSlash"},{"path":"/data_bey/Blades_Xover/DrigerSlash/DrigerSlash_TopLayer.obj","name":"DrigerSlash_TopLayer","type":"model","category":"Blades_Xover","subcategory":"DrigerSlash"},{"path":"/data_bey/Blades_Xover/StormPegasis/StormPegasis_BottomLayer.obj","name":"StormPegasis_BottomLayer","type":"model","category":"Blades_Xover","subcategory":"StormPegasis"},{"path":"/data_bey/Blades_Xover/StormPegasis/StormPegasis_Metal.obj","name":"StormPegasis_Metal","type":"model","category":"Blades_Xover","subcategory":"StormPegasis"},{"path":"/data_bey/Blades_Xover/StormPegasis/StormPegasis_TopLayer.obj","name":"StormPegasis_TopLayer","type":"model","category":"Blades_Xover","subcategory":"StormPegasis"},{"path":"/data_bey/Blades_Xover/VictoryValkyrie/VictoryValkyrie_BottomLayer.obj","name":"VictoryValkyrie_BottomLayer","type":"model","category":"Blades_Xover","subcategory":"VictoryValkyrie"},{"path":"/data_bey/Blades_Xover/VictoryValkyrie/VictoryValkyrie_Metal.obj","name":"VictoryValkyrie_Metal","type":"model","category":"Blades_Xover","subcategory":"VictoryValkyrie"},{"path":"/data_bey/Blades_Xover/VictoryValkyrie/VictoryValkyrie_TopLayer1.obj","name":"VictoryValkyrie_TopLayer1","type":"model","category":"Blades_Xover","subcategory":"VictoryValkyrie"},{"path":"/data_bey/Blades_Xover/VictoryValkyrie/VictoryValkyrie_TopLayer2.obj","name":"VictoryValkyrie_TopLayer2","type":"model","category":"Blades_Xover","subcategory":"VictoryValkyrie"},{"path":"/data_bey/CX_AssistBlade/Assault.obj","name":"Assault","type":"model","category":"CX_AssistBlade"},{"path":"/data_bey/CX_AssistBlade/Bumper.obj","name":"Bumper","type":"model","category":"CX_AssistBlade"},{"path":"/data_bey/CX_AssistBlade/Massive.obj","name":"Massive","type":"model","category":"CX_AssistBlade"},{"path":"/data_bey/CX_AssistBlade/Round.obj","name":"Round","type":"model","category":"CX_AssistBlade"},{"path":"/data_bey/CX_AssistBlade/Slash.obj","name":"Slash","type":"model","category":"CX_AssistBlade"},{"path":"/data_bey/CX_AssistBlade/Turn_Base.obj","name":"Turn_Base","type":"model","category":"CX_AssistBlade"},{"path":"/data_bey/CX_AssistBlade/Turn_Disk.obj","name":"Turn_Disk","type":"model","category":"CX_AssistBlade"},{"path":"/data_bey/CX_AssistBlade/Wheel.obj","name":"Wheel","type":"model","category":"CX_AssistBlade"},{"path":"/data_bey/CX_MainBlades/Arc/Arc_Metal.obj","name":"Arc_Metal","type":"model","category":"CX_MainBlades","subcategory":"Arc"},{"path":"/data_bey/CX_MainBlades/Arc/Arc_Plastic.obj","name":"Arc_Plastic","type":"model","category":"CX_MainBlades","subcategory":"Arc"},{"path":"/data_bey/CX_MainBlades/Blast/Blast_Metal.obj","name":"Blast_Metal","type":"model","category":"CX_MainBlades","subcategory":"Blast"},{"path":"/data_bey/CX_MainBlades/Blast/Blast_Plastic.obj","name":"Blast_Plastic","type":"model","category":"CX_MainBlades","subcategory":"Blast"},{"path":"/data_bey/CX_MainBlades/Brave/Brave_Metal.obj","name":"Brave_Metal","type":"model","category":"CX_MainBlades","subcategory":"Brave"},{"path":"/data_bey/CX_MainBlades/Brave/Brave_Plastic.obj","name":"Brave_Plastic","type":"model","category":"CX_MainBlades","subcategory":"Brave"},{"path":"/data_bey/CX_MainBlades/Dark/Dark_Metal.obj","name":"Dark_Metal","type":"model","category":"CX_MainBlades","subcategory":"Dark"},{"path":"/data_bey/CX_MainBlades/Dark/Dark_Plastic.obj","name":"Dark_Plastic","type":"model","category":"CX_MainBlades","subcategory":"Dark"},{"path":"/data_bey/CX_MainBlades/Flame/Flame_Metal.obj","name":"Flame_Metal","type":"model","category":"CX_MainBlades","subcategory":"Flame"},{"path":"/data_bey/CX_MainBlades/Flame/Flame_Plastic.obj","name":"Flame_Plastic","type":"model","category":"CX_MainBlades","subcategory":"Flame"},{"path":"/data_bey/CX_MainBlades/Reaper/Reaper_Metal.obj","name":"Reaper_Metal","type":"model","category":"CX_MainBlades","subcategory":"Reaper"},{"path":"/data_bey/CX_MainBlades/Reaper/Reaper_Plastic.obj","name":"Reaper_Plastic","type":"model","category":"CX_MainBlades","subcategory":"Reaper"},{"path":"/data_bey/CX_MainBlades/Volt/Volt_Metal.obj","name":"Volt_Metal","type":"model","category":"CX_MainBlades","subcategory":"Volt"},{"path":"/data_bey/CX_MainBlades/Volt/Volt_Plastic.obj","name":"Volt_Plastic","type":"model","category":"CX_MainBlades","subcategory":"Volt"},{"path":"/data_bey/Chip/Caps [Left].obj","name":"Caps [Left]","type":"model","category":"Chip"},{"path":"/data_bey/Chip/Caps.obj","name":"Caps","type":"model","category":"Chip"},{"path":"/data_bey/Chip/GearChip [Left].obj","name":"GearChip [Left]","type":"model","category":"Chip"},{"path":"/data_bey/Chip/GearChip.obj","name":"GearChip","type":"model","category":"Chip"},{"path":"/data_bey/Chip/LockChip [Left].obj","name":"LockChip [Left]","type":"model","category":"Chip"},{"path":"/data_bey/Chip/LockChip.obj","name":"LockChip","type":"model","category":"Chip"},{"path":"/data_bey/Chip/Metal LockChip_Base [Left].obj","name":"Metal LockChip_Base [Left]","type":"model","category":"Chip"},{"path":"/data_bey/Chip/Metal LockChip_Base.obj","name":"Metal LockChip_Base","type":"model","category":"Chip"},{"path":"/data_bey/Chip/Metal LockChip_Plate [Left].obj","name":"Metal LockChip_Plate [Left]","type":"model","category":"Chip"},{"path":"/data_bey/Chip/Metal LockChip_Plate.obj","name":"Metal LockChip_Plate","type":"model","category":"Chip"},{"path":"/data_bey/Ratchets/1.obj","name":"1","type":"model","category":"Ratchets"},{"path":"/data_bey/Ratchets/2.obj","name":"2","type":"model","category":"Ratchets"},{"path":"/data_bey/Ratchets/3-85.obj","name":"3-85","type":"model","category":"Ratchets"},{"path":"/data_bey/Ratchets/3.obj","name":"3","type":"model","category":"Ratchets"},{"path":"/data_bey/Ratchets/4-55.obj","name":"4-55","type":"model","category":"Ratchets"},{"path":"/data_bey/Ratchets/4.obj","name":"4","type":"model","category":"Ratchets"},{"path":"/data_bey/Ratchets/5.obj","name":"5","type":"model","category":"Ratchets"},{"path":"/data_bey/Ratchets/6.obj","name":"6","type":"model","category":"Ratchets"},{"path":"/data_bey/Ratchets/60.obj","name":"60","type":"model","category":"Ratchets"},{"path":"/data_bey/Ratchets/7.obj","name":"7","type":"model","category":"Ratchets"},{"path":"/data_bey/Ratchets/70.obj","name":"70","type":"model","category":"Ratchets"},{"path":"/data_bey/Ratchets/80.obj","name":"80","type":"model","category":"Ratchets"},{"path":"/data_bey/Ratchets/9.obj","name":"9","type":"model","category":"Ratchets"},{"path":"/data_bey/Ratchets/Base_Clips.obj","name":"Base_Clips","type":"model","category":"Ratchets"},{"path":"/data_bey/Ratchets/Base_Part_55.obj","name":"Base_Part_55","type":"model","category":"Ratchets"},{"path":"/data_bey/Ratchets/Base_Part_60.obj","name":"Base_Part_60","type":"model","category":"Ratchets"},{"path":"/data_bey/Ratchets/Base_Part_70.obj","name":"Base_Part_70","type":"model","category":"Ratchets"},{"path":"/data_bey/Ratchets/Base_Part_80.obj","name":"Base_Part_80","type":"model","category":"Ratchets"},{"path":"/data_bey/Ratchets/Base_Part_85.obj","name":"Base_Part_85","type":"model","category":"Ratchets"},{"path":"/data_bey/Ratchets/Turbo/Tr.obj","name":"Tr","type":"model","category":"Ratchets","subcategory":"Turbo"},{"path":"/data_bey/Ratchets/Turbo/Tr_Base.obj","name":"Tr_Base","type":"model","category":"Ratchets","subcategory":"Turbo"},{"path":"/data_bey/Ratchets/Turbo/Tr_Bit.obj","name":"Tr_Bit","type":"model","category":"Ratchets","subcategory":"Turbo"},{"path":"/data_bey/Ratchets/Turbo/Tr_Gimmick.obj","name":"Tr_Gimmick","type":"model","category":"Ratchets","subcategory":"Turbo"},{"path":"/data_bey/Ratchets/Turbo/Tr_Heigh.obj","name":"Tr_Heigh","type":"model","category":"Ratchets","subcategory":"Turbo"},{"path":"/data_bey/Ratchets/Turbo/Tr_Tip.obj","name":"Tr_Tip","type":"model","category":"Ratchets","subcategory":"Turbo"},{"path":"/data_bey/UX_Blades/AeroPegasus/AeroPegasus_GearChip.obj","name":"AeroPegasus_GearChip","type":"model","category":"UX_Blades","subcategory":"AeroPegasus"},{"path":"/data_bey/UX_Blades/AeroPegasus/AeroPegasus_Metal.obj","name":"AeroPegasus_Metal","type":"model","category":"UX_Blades","subcategory":"AeroPegasus"},{"path":"/data_bey/UX_Blades/AeroPegasus/AeroPegasus_Plastic.obj","name":"AeroPegasus_Plastic","type":"model","category":"UX_Blades","subcategory":"AeroPegasus"},{"path":"/data_bey/UX_Blades/DranBuster/DranBuster_GearChip.obj","name":"DranBuster_GearChip","type":"model","category":"UX_Blades","subcategory":"DranBuster"},{"path":"/data_bey/UX_Blades/DranBuster/DranBuster_Metal.obj","name":"DranBuster_Metal","type":"model","category":"UX_Blades","subcategory":"DranBuster"},{"path":"/data_bey/UX_Blades/DranBuster/DranBuster_Plastic.obj","name":"DranBuster_Plastic","type":"model","category":"UX_Blades","subcategory":"DranBuster"},{"path":"/data_bey/UX_Blades/HellsHammer/HellsHammer_GearChip.obj","name":"HellsHammer_GearChip","type":"model","category":"UX_Blades","subcategory":"HellsHammer"},{"path":"/data_bey/UX_Blades/HellsHammer/HellsHammer_Metal.obj","name":"HellsHammer_Metal","type":"model","category":"UX_Blades","subcategory":"HellsHammer"},{"path":"/data_bey/UX_Blades/HellsHammer/HellsHammer_Plastic.obj","name":"HellsHammer_Plastic","type":"model","category":"UX_Blades","subcategory":"HellsHammer"},{"path":"/data_bey/UX_Blades/ImpactDrake/ImpactDrake_GearChip.obj","name":"ImpactDrake_GearChip","type":"model","category":"UX_Blades","subcategory":"ImpactDrake"},{"path":"/data_bey/UX_Blades/ImpactDrake/ImpactDrake_Metal.obj","name":"ImpactDrake_Metal","type":"model","category":"UX_Blades","subcategory":"ImpactDrake"},{"path":"/data_bey/UX_Blades/ImpactDrake/ImpactDrake_Rubber.obj","name":"ImpactDrake_Rubber","type":"model","category":"UX_Blades","subcategory":"ImpactDrake"},{"path":"/data_bey/UX_Blades/KnightMail/KnightMail_GearChip.obj","name":"KnightMail_GearChip","type":"model","category":"UX_Blades","subcategory":"KnightMail"},{"path":"/data_bey/UX_Blades/KnightMail/KnightMail_Gimmick.obj","name":"KnightMail_Gimmick","type":"model","category":"UX_Blades","subcategory":"KnightMail"},{"path":"/data_bey/UX_Blades/KnightMail/KnightMail_Metal.obj","name":"KnightMail_Metal","type":"model","category":"UX_Blades","subcategory":"KnightMail"},{"path":"/data_bey/UX_Blades/KnightMail/KnightMail_Plastic.obj","name":"KnightMail_Plastic","type":"model","category":"UX_Blades","subcategory":"KnightMail"},{"path":"/data_bey/UX_Blades/LeonCrest/LeonCrest_GearChip.obj","name":"LeonCrest_GearChip","type":"model","category":"UX_Blades","subcategory":"LeonCrest"},{"path":"/data_bey/UX_Blades/LeonCrest/LeonCrest_Metal.obj","name":"LeonCrest_Metal","type":"model","category":"UX_Blades","subcategory":"LeonCrest"},{"path":"/data_bey/UX_Blades/LeonCrest/LeonCrest_Plastic.obj","name":"LeonCrest_Plastic","type":"model","category":"UX_Blades","subcategory":"LeonCrest"},{"path":"/data_bey/UX_Blades/PhoenixRudder/PhoenixRudder_GearChip.obj","name":"PhoenixRudder_GearChip","type":"model","category":"UX_Blades","subcategory":"PhoenixRudder"},{"path":"/data_bey/UX_Blades/PhoenixRudder/PhoenixRudder_Metal.obj","name":"PhoenixRudder_Metal","type":"model","category":"UX_Blades","subcategory":"PhoenixRudder"},{"path":"/data_bey/UX_Blades/PhoenixRudder/PhoenixRudder_Plastic.obj","name":"PhoenixRudder_Plastic","type":"model","category":"UX_Blades","subcategory":"PhoenixRudder"},{"path":"/data_bey/UX_Blades/SamuraiSaber/SamuraiSaber_GearChip.obj","name":"SamuraiSaber_GearChip","type":"model","category":"UX_Blades","subcategory":"SamuraiSaber"},{"path":"/data_bey/UX_Blades/SamuraiSaber/SamuraiSaber_Gimmick.obj","name":"SamuraiSaber_Gimmick","type":"model","category":"UX_Blades","subcategory":"SamuraiSaber"},{"path":"/data_bey/UX_Blades/SamuraiSaber/SamuraiSaber_Metal.obj","name":"SamuraiSaber_Metal","type":"model","category":"UX_Blades","subcategory":"SamuraiSaber"},{"path":"/data_bey/UX_Blades/SamuraiSaber/SamuraiSaber_Plastic.obj","name":"SamuraiSaber_Plastic","type":"model","category":"UX_Blades","subcategory":"SamuraiSaber"},{"path":"/data_bey/UX_Blades/ShinobiShadow/ShinobiShadow_GearChip.obj","name":"ShinobiShadow_GearChip","type":"model","category":"UX_Blades","subcategory":"ShinobiShadow"},{"path":"/data_bey/UX_Blades/ShinobiShadow/ShinobiShadow_Metal.obj","name":"ShinobiShadow_Metal","type":"model","category":"UX_Blades","subcategory":"ShinobiShadow"},{"path":"/data_bey/UX_Blades/ShinobiShadow/ShinobiShadow_Plastic.obj","name":"ShinobiShadow_Plastic","type":"model","category":"UX_Blades","subcategory":"ShinobiShadow"},{"path":"/data_bey/UX_Blades/SilverWolf/SilverWolf_GearChip.obj","name":"SilverWolf_GearChip","type":"model","category":"UX_Blades","subcategory":"SilverWolf"},{"path":"/data_bey/UX_Blades/SilverWolf/SilverWolf_Gimmick.obj","name":"SilverWolf_Gimmick","type":"model","category":"UX_Blades","subcategory":"SilverWolf"},{"path":"/data_bey/UX_Blades/SilverWolf/SilverWolf_Metal.obj","name":"SilverWolf_Metal","type":"model","category":"UX_Blades","subcategory":"SilverWolf"},{"path":"/data_bey/UX_Blades/SilverWolf/SilverWolf_Plastic.obj","name":"SilverWolf_Plastic","type":"model","category":"UX_Blades","subcategory":"SilverWolf"},{"path":"/data_bey/UX_Blades/WizardRod/WizardRod_GearChip.obj","name":"WizardRod_GearChip","type":"model","category":"UX_Blades","subcategory":"WizardRod"},{"path":"/data_bey/UX_Blades/WizardRod/WizardRod_Metal.obj","name":"WizardRod_Metal","type":"model","category":"UX_Blades","subcategory":"WizardRod"},{"path":"/data_bey/UX_Blades/WizardRod/WizardRod_Plastic.obj","name":"WizardRod_Plastic","type":"model","category":"UX_Blades","subcategory":"WizardRod"},{"path":"/data_bey/UX_Blades/WyvernHover/WyvernHover_GearChip.obj","name":"WyvernHover_GearChip","type":"model","category":"UX_Blades","subcategory":"WyvernHover"},{"path":"/data_bey/UX_Blades/WyvernHover/WyvernHover_Metal.obj","name":"WyvernHover_Metal","type":"model","category":"UX_Blades","subcategory":"WyvernHover"},{"path":"/data_bey/UX_Blades/WyvernHover/WyvernHover_Plastic.obj","name":"WyvernHover_Plastic","type":"model","category":"UX_Blades","subcategory":"WyvernHover"}],"textures":[{"path":"/data_bey/Texture/AP.png","name":"AP","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/BS.png","name":"BS","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/BS2.png","name":"BS2","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/BX14_KnightShield_4-60lf.png","name":"BX14_KnightShield_4-60lf","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Black_CD2.png","name":"Black_CD2","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Black_DS.png","name":"Black_DS","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Black_DS2.png","name":"Black_DS2","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Black_KL.png","name":"Black_KL","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Black_SC.png","name":"Black_SC","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Black_SE.png","name":"Black_SE","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Black_SS.png","name":"Black_SS","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Black_VT.png","name":"Black_VT","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Black_WG.png","name":"Black_WG","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Black_WW.png","name":"Black_WW","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Blue_HC.png","name":"Blue_HC","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Blue_HH.png","name":"Blue_HH","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Blue_KS.png","name":"Blue_KS","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Blue_PW.png","name":"Blue_PW","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Blue_SC.png","name":"Blue_SC","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Blue_VT.png","name":"Blue_VT","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Blue_WA.png","name":"Blue_WA","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Brown_WA.png","name":"Brown_WA","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/CD1.png","name":"CD1","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/CD2.png","name":"CD2","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/CG.png","name":"CG","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Cheese_BS.png","name":"Cheese_BS","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Cobalt_DS.png","name":"Cobalt_DS","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Copper_DS.png","name":"Copper_DS","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/DB.png","name":"DB","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/DD.png","name":"DD","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/DS.png","name":"DS","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/DS2.png","name":"DS2","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/DS3.png","name":"DS3","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/DeepBlue_DB.png","name":"DeepBlue_DB","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Giants_DD.png","name":"Giants_DD","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Gold_DS.png","name":"Gold_DS","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Gold_HS.png","name":"Gold_HS","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Gold_KS.png","name":"Gold_KS","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Gold_LC1.png","name":"Gold_LC1","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Gold_VT.png","name":"Gold_VT","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Gold_WR.png","name":"Gold_WR","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/GreenBlue_PW.png","name":"GreenBlue_PW","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Green_HC.png","name":"Green_HC","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Green_HS.png","name":"Green_HS","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Green_SE.png","name":"Green_SE","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Green_TB.png","name":"Green_TB","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Green_WA.png","name":"Green_WA","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Green_WR.png","name":"Green_WR","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/HC.png","name":"HC","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/HH.png","name":"HH","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/HS.png","name":"HS","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/KL.png","name":"KL","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/KM.png","name":"KM","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/KS.png","name":"KS","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/LC1.png","name":"LC1","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/LC2.png","name":"LC2","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/LL.png","name":"LL","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Ocean_SE.png","name":"Ocean_SE","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Orange_DD.png","name":"Orange_DD","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Orange_US.png","name":"Orange_US","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Orange_WA.png","name":"Orange_WA","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/PF.png","name":"PF","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/PR.png","name":"PR","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/PS.png","name":"PS","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/PW.png","name":"PW","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Persona.png","name":"Persona","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Piss_WR.png","name":"Piss_WR","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Purple_KS.png","name":"Purple_KS","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Purple_RH.png","name":"Purple_RH","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Purple_VT.png","name":"Purple_VT","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Purple_WA.png","name":"Purple_WA","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/RH.png","name":"RH","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Red_DB.png","name":"Red_DB","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Red_DS.png","name":"Red_DS","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Red_KS.png","name":"Red_KS","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Red_LC1.png","name":"Red_LC1","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Red_TB.png","name":"Red_TB","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Red_WA.png","name":"Red_WA","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/SC.png","name":"SC","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/SE.png","name":"SE","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/SS.png","name":"SS","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/SS2.png","name":"SS2","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/SW.png","name":"SW","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Silver_DS.png","name":"Silver_DS","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Stadium_DS.png","name":"Stadium_DS","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/TB.png","name":"TB","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Texture (White)/AEROPEGASUS.png","name":"AEROPEGASUS","type":"texture","category":"Texture","subcategory":"Texture (White)"},{"path":"/data_bey/Texture/Texture (White)/BEARSCRATCH.png","name":"BEARSCRATCH","type":"texture","category":"Texture","subcategory":"Texture (White)"},{"path":"/data_bey/Texture/Texture (White)/BLACKSHELL.png","name":"BLACKSHELL","type":"texture","category":"Texture","subcategory":"Texture (White)"},{"path":"/data_bey/Texture/Texture (White)/CERBERUSFLAME.png","name":"CERBERUSFLAME","type":"texture","category":"Texture","subcategory":"Texture (White)"},{"path":"/data_bey/Texture/Texture (White)/COBALTDRAGOON.png","name":"COBALTDRAGOON","type":"texture","category":"Texture","subcategory":"Texture (White)"},{"path":"/data_bey/Texture/Texture (White)/COBALTDRAKE.png","name":"COBALTDRAKE","type":"texture","category":"Texture","subcategory":"Texture (White)"},{"path":"/data_bey/Texture/Texture (White)/CRIMSONGARUDA.png","name":"CRIMSONGARUDA","type":"texture","category":"Texture","subcategory":"Texture (White)"},{"path":"/data_bey/Texture/Texture (White)/DRANARC.png","name":"DRANARC","type":"texture","category":"Texture","subcategory":"Texture (White)"},{"path":"/data_bey/Texture/Texture (White)/DRANBRAVE.png","name":"DRANBRAVE","type":"texture","category":"Texture","subcategory":"Texture (White)"},{"path":"/data_bey/Texture/Texture (White)/DRANBUSTER.png","name":"DRANBUSTER","type":"texture","category":"Texture","subcategory":"Texture (White)"},{"path":"/data_bey/Texture/Texture (White)/DRANDAGGER.png","name":"DRANDAGGER","type":"texture","category":"Texture","subcategory":"Texture (White)"},{"path":"/data_bey/Texture/Texture (White)/DRANSWORD.png","name":"DRANSWORD","type":"texture","category":"Texture","subcategory":"Texture (White)"},{"path":"/data_bey/Texture/Texture (White)/DRANZERSPIRAL.png","name":"DRANZERSPIRAL","type":"texture","category":"Texture","subcategory":"Texture (White)"},{"path":"/data_bey/Texture/Texture (White)/DRIGERSLASH.png","name":"DRIGERSLASH","type":"texture","category":"Texture","subcategory":"Texture (White)"},{"path":"/data_bey/Texture/Texture (White)/FC_BARCELONA.png","name":"FC_BARCELONA","type":"texture","category":"Texture","subcategory":"Texture (White)"},{"path":"/data_bey/Texture/Texture (White)/FOXBRUSH.png","name":"FOXBRUSH","type":"texture","category":"Texture","subcategory":"Texture (White)"},{"path":"/data_bey/Texture/Texture (White)/HELLSCHAIN.png","name":"HELLSCHAIN","type":"texture","category":"Texture","subcategory":"Texture (White)"},{"path":"/data_bey/Texture/Texture (White)/HELLSHUMMER.png","name":"HELLSHUMMER","type":"texture","category":"Texture","subcategory":"Texture (White)"},{"path":"/data_bey/Texture/Texture (White)/HELLSREAPER.png","name":"HELLSREAPER","type":"texture","category":"Texture","subcategory":"Texture (White)"},{"path":"/data_bey/Texture/Texture (White)/HELLSSCYTHE.png","name":"HELLSSCYTHE","type":"texture","category":"Texture","subcategory":"Texture (White)"},{"path":"/data_bey/Texture/Texture (White)/KNIGHTLANCE.png","name":"KNIGHTLANCE","type":"texture","category":"Texture","subcategory":"Texture (White)"},{"path":"/data_bey/Texture/Texture (White)/KNIGHTMAIL.png","name":"KNIGHTMAIL","type":"texture","category":"Texture","subcategory":"Texture (White)"},{"path":"/data_bey/Texture/Texture (White)/KNIGHTSHIELD.png","name":"KNIGHTSHIELD","type":"texture","category":"Texture","subcategory":"Texture (White)"},{"path":"/data_bey/Texture/Texture (White)/LEONCLAW.png","name":"LEONCLAW","type":"texture","category":"Texture","subcategory":"Texture (White)"},{"path":"/data_bey/Texture/Texture (White)/LEONCREST.png","name":"LEONCREST","type":"texture","category":"Texture","subcategory":"Texture (White)"},{"path":"/data_bey/Texture/Texture (White)/LIGHTNING L-DRAGO.png","name":"LIGHTNING L-DRAGO","type":"texture","category":"Texture","subcategory":"Texture (White)"},{"path":"/data_bey/Texture/Texture (White)/PEGASUSBLAST.png","name":"PEGASUSBLAST","type":"texture","category":"Texture","subcategory":"Texture (White)"},{"path":"/data_bey/Texture/Texture (White)/PHOENIXFEATHER.png","name":"PHOENIXFEATHER","type":"texture","category":"Texture","subcategory":"Texture (White)"},{"path":"/data_bey/Texture/Texture (White)/PHOENIXRUDDER.png","name":"PHOENIXRUDDER","type":"texture","category":"Texture","subcategory":"Texture (White)"},{"path":"/data_bey/Texture/Texture (White)/PHOENIXWING.png","name":"PHOENIXWING","type":"texture","category":"Texture","subcategory":"Texture (White)"},{"path":"/data_bey/Texture/Texture (White)/PTERASWING.png","name":"PTERASWING","type":"texture","category":"Texture","subcategory":"Texture (White)"},{"path":"/data_bey/Texture/Texture (White)/RHINOHORN.png","name":"RHINOHORN","type":"texture","category":"Texture","subcategory":"Texture (White)"},{"path":"/data_bey/Texture/Texture (White)/RHINOREAPER.png","name":"RHINOREAPER","type":"texture","category":"Texture","subcategory":"Texture (White)"},{"path":"/data_bey/Texture/Texture (White)/SAMURAICALIBUR.png","name":"SAMURAICALIBUR","type":"texture","category":"Texture","subcategory":"Texture (White)"},{"path":"/data_bey/Texture/Texture (White)/SAMURAISABER.png","name":"SAMURAISABER","type":"texture","category":"Texture","subcategory":"Texture (White)"},{"path":"/data_bey/Texture/Texture (White)/SHARKEDGE.png","name":"SHARKEDGE","type":"texture","category":"Texture","subcategory":"Texture (White)"},{"path":"/data_bey/Texture/Texture (White)/SHARKSCALE.png","name":"SHARKSCALE","type":"texture","category":"Texture","subcategory":"Texture (White)"},{"path":"/data_bey/Texture/Texture (White)/SHINOBISHADOW.png","name":"SHINOBISHADOW","type":"texture","category":"Texture","subcategory":"Texture (White)"},{"path":"/data_bey/Texture/Texture (White)/SPECIALCROSSBEYHELLSSCYTHE.png","name":"SPECIALCROSSBEYHELLSSCYTHE","type":"texture","category":"Texture","subcategory":"Texture (White)"},{"path":"/data_bey/Texture/Texture (White)/SPHINXCOWL.png","name":"SPHINXCOWL","type":"texture","category":"Texture","subcategory":"Texture (White)"},{"path":"/data_bey/Texture/Texture (White)/TYRANNOBEAT.png","name":"TYRANNOBEAT","type":"texture","category":"Texture","subcategory":"Texture (White)"},{"path":"/data_bey/Texture/Texture (White)/TYRANNOROAR.png","name":"TYRANNOROAR","type":"texture","category":"Texture","subcategory":"Texture (White)"},{"path":"/data_bey/Texture/Texture (White)/UNICORNSTING.png","name":"UNICORNSTING","type":"texture","category":"Texture","subcategory":"Texture (White)"},{"path":"/data_bey/Texture/Texture (White)/VIPERTAIL.png","name":"VIPERTAIL","type":"texture","category":"Texture","subcategory":"Texture (White)"},{"path":"/data_bey/Texture/Texture (White)/WEISSTIGER.png","name":"WEISSTIGER","type":"texture","category":"Texture","subcategory":"Texture (White)"},{"path":"/data_bey/Texture/Texture (White)/WHALEWAVE.png","name":"WHALEWAVE","type":"texture","category":"Texture","subcategory":"Texture (White)"},{"path":"/data_bey/Texture/Texture (White)/WIZARDARC.png","name":"WIZARDARC","type":"texture","category":"Texture","subcategory":"Texture (White)"},{"path":"/data_bey/Texture/Texture (White)/WIZARDARROW.png","name":"WIZARDARROW","type":"texture","category":"Texture","subcategory":"Texture (White)"},{"path":"/data_bey/Texture/Texture (White)/WIZARDROD.png","name":"WIZARDROD","type":"texture","category":"Texture","subcategory":"Texture (White)"},{"path":"/data_bey/Texture/Texture (White)/WYVERNGALE.png","name":"WYVERNGALE","type":"texture","category":"Texture","subcategory":"Texture (White)"},{"path":"/data_bey/Texture/US.png","name":"US","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/VT.png","name":"VT","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/WA.png","name":"WA","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/WG.png","name":"WG","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/WR.png","name":"WR","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/WT.png","name":"WT","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/WW.png","name":"WW","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/White_WW.png","name":"White_WW","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Yellow_HS.png","name":"Yellow_HS","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Yellow_KL.png","name":"Yellow_KL","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Yellow_SE.png","name":"Yellow_SE","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Yellow_SS.png","name":"Yellow_SS","type":"texture","category":"Texture"},{"path":"/data_bey/Texture/Yellow_WG.png","name":"Yellow_WG","type":"texture","category":"Texture"},{"path":"/data_bey/resources/drawing0.png","name":"drawing0","type":"texture","category":"resources"},{"path":"/data_bey/resources/drawing1.png","name":"drawing1","type":"texture","category":"resources"},{"path":"/data_bey/resources/drawing2.png","name":"drawing2","type":"texture","category":"resources"}]}
+{
+  "stats": { "totalFiles": 390, "models": 238, "textures": 152 },
+  "categories": [
+    "BX_Blades",
+    "Bits",
+    "Blades_Xover",
+    "CX_AssistBlade",
+    "CX_MainBlades",
+    "Chip",
+    "Ratchets",
+    "UX_Blades"
+  ],
+  "models": [
+    {
+      "path": "/data_bey/BX_Blades/BearScratch/BearScratch_Metal.obj",
+      "name": "BearScratch_Metal",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "BearScratch"
+    },
+    {
+      "path": "/data_bey/BX_Blades/BearScratch/BearScratch_Plastic.obj",
+      "name": "BearScratch_Plastic",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "BearScratch"
+    },
+    {
+      "path": "/data_bey/BX_Blades/BlackShell/BlackShell_Plastic.obj",
+      "name": "BlackShell_Plastic",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "BlackShell"
+    },
+    {
+      "path": "/data_bey/BX_Blades/BlackShell/BlaskShell_Metal.obj",
+      "name": "BlaskShell_Metal",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "BlackShell"
+    },
+    {
+      "path": "/data_bey/BX_Blades/CobaltDragoon/CobaltDragoon_Metal.obj",
+      "name": "CobaltDragoon_Metal",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "CobaltDragoon"
+    },
+    {
+      "path": "/data_bey/BX_Blades/CobaltDragoon/CobaltDragoon_Plastic.obj",
+      "name": "CobaltDragoon_Plastic",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "CobaltDragoon"
+    },
+    {
+      "path": "/data_bey/BX_Blades/CobaltDrake/CobaltDrake_Metal.obj",
+      "name": "CobaltDrake_Metal",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "CobaltDrake"
+    },
+    {
+      "path": "/data_bey/BX_Blades/CobaltDrake/CobaltDrake_Plastic.obj",
+      "name": "CobaltDrake_Plastic",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "CobaltDrake"
+    },
+    {
+      "path": "/data_bey/BX_Blades/CrimsonGaruda/CrimsonGaruda_Metal.obj",
+      "name": "CrimsonGaruda_Metal",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "CrimsonGaruda"
+    },
+    {
+      "path": "/data_bey/BX_Blades/CrimsonGaruda/CrimsonGaruda_Plastic.obj",
+      "name": "CrimsonGaruda_Plastic",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "CrimsonGaruda"
+    },
+    {
+      "path": "/data_bey/BX_Blades/CrocCrunch/CrocCrunch_Metal.obj",
+      "name": "CrocCrunch_Metal",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "CrocCrunch"
+    },
+    {
+      "path": "/data_bey/BX_Blades/CrocCrunch/CrocCrunch_Plastic.obj",
+      "name": "CrocCrunch_Plastic",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "CrocCrunch"
+    },
+    {
+      "path": "/data_bey/BX_Blades/DranDagger/DranDagger_Metal.obj",
+      "name": "DranDagger_Metal",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "DranDagger"
+    },
+    {
+      "path": "/data_bey/BX_Blades/DranDagger/DranDagger_Plastic.obj",
+      "name": "DranDagger_Plastic",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "DranDagger"
+    },
+    {
+      "path": "/data_bey/BX_Blades/DranSword/DranSword_Metal.obj",
+      "name": "DranSword_Metal",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "DranSword"
+    },
+    {
+      "path": "/data_bey/BX_Blades/DranSword/DranSword_Plastic.obj",
+      "name": "DranSword_Plastic",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "DranSword"
+    },
+    {
+      "path": "/data_bey/BX_Blades/HellsChain/HellsChain_Metal.obj",
+      "name": "HellsChain_Metal",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "HellsChain"
+    },
+    {
+      "path": "/data_bey/BX_Blades/HellsChain/HellsChain_Plastic.obj",
+      "name": "HellsChain_Plastic",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "HellsChain"
+    },
+    {
+      "path": "/data_bey/BX_Blades/HellsScythe/HellsScythe_Metal.obj",
+      "name": "HellsScythe_Metal",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "HellsScythe"
+    },
+    {
+      "path": "/data_bey/BX_Blades/HellsScythe/HellsScythe_Plastic.obj",
+      "name": "HellsScythe_Plastic",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "HellsScythe"
+    },
+    {
+      "path": "/data_bey/BX_Blades/KnightLance/KnightLance_Metal.obj",
+      "name": "KnightLance_Metal",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "KnightLance"
+    },
+    {
+      "path": "/data_bey/BX_Blades/KnightLance/KnightLance_Plastic.obj",
+      "name": "KnightLance_Plastic",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "KnightLance"
+    },
+    {
+      "path": "/data_bey/BX_Blades/KnightShield/KnightShield_Metal.obj",
+      "name": "KnightShield_Metal",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "KnightShield"
+    },
+    {
+      "path": "/data_bey/BX_Blades/KnightShield/KnightShield_Plastic.obj",
+      "name": "KnightShield_Plastic",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "KnightShield"
+    },
+    {
+      "path": "/data_bey/BX_Blades/KongYell/KongYell_Metal.obj",
+      "name": "KongYell_Metal",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "KongYell"
+    },
+    {
+      "path": "/data_bey/BX_Blades/KongYell/KongYell_Plastic.obj",
+      "name": "KongYell_Plastic",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "KongYell"
+    },
+    {
+      "path": "/data_bey/BX_Blades/LeonClaw/LeonClaw_Metal.obj",
+      "name": "LeonClaw_Metal",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "LeonClaw"
+    },
+    {
+      "path": "/data_bey/BX_Blades/LeonClaw/LeonClaw_Plastic.obj",
+      "name": "LeonClaw_Plastic",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "LeonClaw"
+    },
+    {
+      "path": "/data_bey/BX_Blades/MammothTusk/MammothTusk_Metal.obj",
+      "name": "MammothTusk_Metal",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "MammothTusk"
+    },
+    {
+      "path": "/data_bey/BX_Blades/MammothTusk/MammothTusk_Plastic.obj",
+      "name": "MammothTusk_Plastic",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "MammothTusk"
+    },
+    {
+      "path": "/data_bey/BX_Blades/PhoenixFeather/PhoenixFeather_Metal.obj",
+      "name": "PhoenixFeather_Metal",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "PhoenixFeather"
+    },
+    {
+      "path": "/data_bey/BX_Blades/PhoenixFeather/PhoenixFeather_Plastic.obj",
+      "name": "PhoenixFeather_Plastic",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "PhoenixFeather"
+    },
+    {
+      "path": "/data_bey/BX_Blades/PhoenixWing/PhoenixWing_Metal.obj",
+      "name": "PhoenixWing_Metal",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "PhoenixWing"
+    },
+    {
+      "path": "/data_bey/BX_Blades/PhoenixWing/PhoenixWing_Plastic.obj",
+      "name": "PhoenixWing_Plastic",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "PhoenixWing"
+    },
+    {
+      "path": "/data_bey/BX_Blades/PteraSwing/PteraSwing_Metal.obj",
+      "name": "PteraSwing_Metal",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "PteraSwing"
+    },
+    {
+      "path": "/data_bey/BX_Blades/PteraSwing/PteraSwing_Plastic.obj",
+      "name": "PteraSwing_Plastic",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "PteraSwing"
+    },
+    {
+      "path": "/data_bey/BX_Blades/RhinoHorn/RhinoHorn_Metal.obj",
+      "name": "RhinoHorn_Metal",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "RhinoHorn"
+    },
+    {
+      "path": "/data_bey/BX_Blades/RhinoHorn/RhinoHorn_Plastic.obj",
+      "name": "RhinoHorn_Plastic",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "RhinoHorn"
+    },
+    {
+      "path": "/data_bey/BX_Blades/SamuraiSteel/SamuraiSteel_Metal.obj",
+      "name": "SamuraiSteel_Metal",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "SamuraiSteel"
+    },
+    {
+      "path": "/data_bey/BX_Blades/SamuraiSteel/SamuraiSteel_Plastic.obj",
+      "name": "SamuraiSteel_Plastic",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "SamuraiSteel"
+    },
+    {
+      "path": "/data_bey/BX_Blades/SharkEdge/SharkEdge_Metal.obj",
+      "name": "SharkEdge_Metal",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "SharkEdge"
+    },
+    {
+      "path": "/data_bey/BX_Blades/SharkEdge/SharkEdge_Plastic.obj",
+      "name": "SharkEdge_Plastic",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "SharkEdge"
+    },
+    {
+      "path": "/data_bey/BX_Blades/SharkGill/SharkGill_Metal.obj",
+      "name": "SharkGill_Metal",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "SharkGill"
+    },
+    {
+      "path": "/data_bey/BX_Blades/SharkGill/SharkGill_Plastic.obj",
+      "name": "SharkGill_Plastic",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "SharkGill"
+    },
+    {
+      "path": "/data_bey/BX_Blades/ShinobiKnife/ShinobiKnife_Metal.obj",
+      "name": "ShinobiKnife_Metal",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "ShinobiKnife"
+    },
+    {
+      "path": "/data_bey/BX_Blades/ShinobiKnife/ShinobiKnife_Plastic.obj",
+      "name": "ShinobiKnife_Plastic",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "ShinobiKnife"
+    },
+    {
+      "path": "/data_bey/BX_Blades/SphinxCowl/SphinxCowl_Metal.obj",
+      "name": "SphinxCowl_Metal",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "SphinxCowl"
+    },
+    {
+      "path": "/data_bey/BX_Blades/SphinxCowl/SphinxCowl_Plastic.obj",
+      "name": "SphinxCowl_Plastic",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "SphinxCowl"
+    },
+    {
+      "path": "/data_bey/BX_Blades/TyrannoBeat/TyrannoBeat_Metal.obj",
+      "name": "TyrannoBeat_Metal",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "TyrannoBeat"
+    },
+    {
+      "path": "/data_bey/BX_Blades/TyrannoBeat/TyrannoBeat_Plastic.obj",
+      "name": "TyrannoBeat_Plastic",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "TyrannoBeat"
+    },
+    {
+      "path": "/data_bey/BX_Blades/TyrannoRoar/TyrannoRoar_Metal.obj",
+      "name": "TyrannoRoar_Metal",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "TyrannoRoar"
+    },
+    {
+      "path": "/data_bey/BX_Blades/TyrannoRoar/TyrannoRoar_Plastic.obj",
+      "name": "TyrannoRoar_Plastic",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "TyrannoRoar"
+    },
+    {
+      "path": "/data_bey/BX_Blades/UnicornSting/UnicornSting_Metal.obj",
+      "name": "UnicornSting_Metal",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "UnicornSting"
+    },
+    {
+      "path": "/data_bey/BX_Blades/UnicornSting/UnicornSting_Plastic.obj",
+      "name": "UnicornSting_Plastic",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "UnicornSting"
+    },
+    {
+      "path": "/data_bey/BX_Blades/ViperTail/ViperTail_Metal.obj",
+      "name": "ViperTail_Metal",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "ViperTail"
+    },
+    {
+      "path": "/data_bey/BX_Blades/ViperTail/ViperTail_Plastic.obj",
+      "name": "ViperTail_Plastic",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "ViperTail"
+    },
+    {
+      "path": "/data_bey/BX_Blades/WeissTiger/WeissTiger_Metal.obj",
+      "name": "WeissTiger_Metal",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "WeissTiger"
+    },
+    {
+      "path": "/data_bey/BX_Blades/WeissTiger/WeissTiger_Plastic.obj",
+      "name": "WeissTiger_Plastic",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "WeissTiger"
+    },
+    {
+      "path": "/data_bey/BX_Blades/WhaleWave/WhaleWave_Metal.obj",
+      "name": "WhaleWave_Metal",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "WhaleWave"
+    },
+    {
+      "path": "/data_bey/BX_Blades/WhaleWave/WhaleWave_Plastic.obj",
+      "name": "WhaleWave_Plastic",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "WhaleWave"
+    },
+    {
+      "path": "/data_bey/BX_Blades/WizardArrow/WizardArrow_Metal.obj",
+      "name": "WizardArrow_Metal",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "WizardArrow"
+    },
+    {
+      "path": "/data_bey/BX_Blades/WizardArrow/WizardArrow_Plastic.obj",
+      "name": "WizardArrow_Plastic",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "WizardArrow"
+    },
+    {
+      "path": "/data_bey/BX_Blades/WyvernGale/WyvernGale_Metal.obj",
+      "name": "WyvernGale_Metal",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "WyvernGale"
+    },
+    {
+      "path": "/data_bey/BX_Blades/WyvernGale/WyvernGale_Plastic.obj",
+      "name": "WyvernGale_Plastic",
+      "type": "model",
+      "category": "BX_Blades",
+      "subcategory": "WyvernGale"
+    },
+    {
+      "path": "/data_bey/Bits/Full/A.obj",
+      "name": "A",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "Full"
+    },
+    {
+      "path": "/data_bey/Bits/Full/B.obj",
+      "name": "B",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "Full"
+    },
+    {
+      "path": "/data_bey/Bits/Full/C.obj",
+      "name": "C",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "Full"
+    },
+    {
+      "path": "/data_bey/Bits/Full/D.obj",
+      "name": "D",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "Full"
+    },
+    {
+      "path": "/data_bey/Bits/Full/DB.obj",
+      "name": "DB",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "Full"
+    },
+    {
+      "path": "/data_bey/Bits/Full/E.obj",
+      "name": "E",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "Full"
+    },
+    {
+      "path": "/data_bey/Bits/Full/F.obj",
+      "name": "F",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "Full"
+    },
+    {
+      "path": "/data_bey/Bits/Full/FB.obj",
+      "name": "FB",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "Full"
+    },
+    {
+      "path": "/data_bey/Bits/Full/GB.obj",
+      "name": "GB",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "Full"
+    },
+    {
+      "path": "/data_bey/Bits/Full/GF.obj",
+      "name": "GF",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "Full"
+    },
+    {
+      "path": "/data_bey/Bits/Full/GN.obj",
+      "name": "GN",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "Full"
+    },
+    {
+      "path": "/data_bey/Bits/Full/H.obj",
+      "name": "H",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "Full"
+    },
+    {
+      "path": "/data_bey/Bits/Full/K.obj",
+      "name": "K",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "Full"
+    },
+    {
+      "path": "/data_bey/Bits/Full/L.obj",
+      "name": "L",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "Full"
+    },
+    {
+      "path": "/data_bey/Bits/Full/LF.obj",
+      "name": "LF",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "Full"
+    },
+    {
+      "path": "/data_bey/Bits/Full/LO.obj",
+      "name": "LO",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "Full"
+    },
+    {
+      "path": "/data_bey/Bits/Full/LR.obj",
+      "name": "LR",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "Full"
+    },
+    {
+      "path": "/data_bey/Bits/Full/MN.obj",
+      "name": "MN",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "Full"
+    },
+    {
+      "path": "/data_bey/Bits/Full/N.obj",
+      "name": "N",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "Full"
+    },
+    {
+      "path": "/data_bey/Bits/Full/O.obj",
+      "name": "O",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "Full"
+    },
+    {
+      "path": "/data_bey/Bits/Full/P.obj",
+      "name": "P",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "Full"
+    },
+    {
+      "path": "/data_bey/Bits/Full/Q.obj",
+      "name": "Q",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "Full"
+    },
+    {
+      "path": "/data_bey/Bits/Full/R.obj",
+      "name": "R",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "Full"
+    },
+    {
+      "path": "/data_bey/Bits/Full/RA.obj",
+      "name": "RA",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "Full"
+    },
+    {
+      "path": "/data_bey/Bits/Full/T.obj",
+      "name": "T",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "Full"
+    },
+    {
+      "path": "/data_bey/Bits/Full/TP.obj",
+      "name": "TP",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "Full"
+    },
+    {
+      "path": "/data_bey/Bits/Full/U.obj",
+      "name": "U",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "Full"
+    },
+    {
+      "path": "/data_bey/Bits/Full/V.obj",
+      "name": "V",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "Full"
+    },
+    {
+      "path": "/data_bey/Bits/Full/W.obj",
+      "name": "W",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "Full"
+    },
+    {
+      "path": "/data_bey/Bits/In Parts/Accel.obj",
+      "name": "Accel",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "In Parts"
+    },
+    {
+      "path": "/data_bey/Bits/In Parts/Ball.obj",
+      "name": "Ball",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "In Parts"
+    },
+    {
+      "path": "/data_bey/Bits/In Parts/Base_Att-Bal.obj",
+      "name": "Base_Att-Bal",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "In Parts"
+    },
+    {
+      "path": "/data_bey/Bits/In Parts/Base_Def-Sta.obj",
+      "name": "Base_Def-Sta",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "In Parts"
+    },
+    {
+      "path": "/data_bey/Bits/In Parts/Bound Spike.obj",
+      "name": "Bound Spike",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "In Parts"
+    },
+    {
+      "path": "/data_bey/Bits/In Parts/Cyclone.obj",
+      "name": "Cyclone",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "In Parts"
+    },
+    {
+      "path": "/data_bey/Bits/In Parts/Disk Ball.obj",
+      "name": "Disk Ball",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "In Parts"
+    },
+    {
+      "path": "/data_bey/Bits/In Parts/Dot.obj",
+      "name": "Dot",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "In Parts"
+    },
+    {
+      "path": "/data_bey/Bits/In Parts/Elevate.obj",
+      "name": "Elevate",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "In Parts"
+    },
+    {
+      "path": "/data_bey/Bits/In Parts/Flat.obj",
+      "name": "Flat",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "In Parts"
+    },
+    {
+      "path": "/data_bey/Bits/In Parts/Free Ball.obj",
+      "name": "Free Ball",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "In Parts"
+    },
+    {
+      "path": "/data_bey/Bits/In Parts/Gear Ball.obj",
+      "name": "Gear Ball",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "In Parts"
+    },
+    {
+      "path": "/data_bey/Bits/In Parts/Gear Flat.obj",
+      "name": "Gear Flat",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "In Parts"
+    },
+    {
+      "path": "/data_bey/Bits/In Parts/Gear Needle.obj",
+      "name": "Gear Needle",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "In Parts"
+    },
+    {
+      "path": "/data_bey/Bits/In Parts/Gear Point.obj",
+      "name": "Gear Point",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "In Parts"
+    },
+    {
+      "path": "/data_bey/Bits/In Parts/Hexa.obj",
+      "name": "Hexa",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "In Parts"
+    },
+    {
+      "path": "/data_bey/Bits/In Parts/High Needle.obj",
+      "name": "High Needle",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "In Parts"
+    },
+    {
+      "path": "/data_bey/Bits/In Parts/High Taper.obj",
+      "name": "High Taper",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "In Parts"
+    },
+    {
+      "path": "/data_bey/Bits/In Parts/Level.obj",
+      "name": "Level",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "In Parts"
+    },
+    {
+      "path": "/data_bey/Bits/In Parts/Low Flat.obj",
+      "name": "Low Flat",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "In Parts"
+    },
+    {
+      "path": "/data_bey/Bits/In Parts/Metal Needle.obj",
+      "name": "Metal Needle",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "In Parts"
+    },
+    {
+      "path": "/data_bey/Bits/In Parts/Needle.obj",
+      "name": "Needle",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "In Parts"
+    },
+    {
+      "path": "/data_bey/Bits/In Parts/Orb.obj",
+      "name": "Orb",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "In Parts"
+    },
+    {
+      "path": "/data_bey/Bits/In Parts/Point.obj",
+      "name": "Point",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "In Parts"
+    },
+    {
+      "path": "/data_bey/Bits/In Parts/Quake.obj",
+      "name": "Quake",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "In Parts"
+    },
+    {
+      "path": "/data_bey/Bits/In Parts/Rubber Accel.obj",
+      "name": "Rubber Accel",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "In Parts"
+    },
+    {
+      "path": "/data_bey/Bits/In Parts/Rush.obj",
+      "name": "Rush",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "In Parts"
+    },
+    {
+      "path": "/data_bey/Bits/In Parts/Spike.obj",
+      "name": "Spike",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "In Parts"
+    },
+    {
+      "path": "/data_bey/Bits/In Parts/Taper.obj",
+      "name": "Taper",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "In Parts"
+    },
+    {
+      "path": "/data_bey/Bits/In Parts/Trans Point.obj",
+      "name": "Trans Point",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "In Parts"
+    },
+    {
+      "path": "/data_bey/Bits/In Parts/Unite.obj",
+      "name": "Unite",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "In Parts"
+    },
+    {
+      "path": "/data_bey/Bits/In Parts/Vortex.obj",
+      "name": "Vortex",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "In Parts"
+    },
+    {
+      "path": "/data_bey/Bits/In Parts/Wall Ball.obj",
+      "name": "Wall Ball",
+      "type": "model",
+      "category": "Bits",
+      "subcategory": "In Parts"
+    },
+    {
+      "path": "/data_bey/Blades_Xover/DragoonStorm/DragoonStorm_BottomLayer.obj",
+      "name": "DragoonStorm_BottomLayer",
+      "type": "model",
+      "category": "Blades_Xover",
+      "subcategory": "DragoonStorm"
+    },
+    {
+      "path": "/data_bey/Blades_Xover/DragoonStorm/DragoonStorm_Metal.obj",
+      "name": "DragoonStorm_Metal",
+      "type": "model",
+      "category": "Blades_Xover",
+      "subcategory": "DragoonStorm"
+    },
+    {
+      "path": "/data_bey/Blades_Xover/DragoonStorm/DragoonStorm_TopLayer.obj",
+      "name": "DragoonStorm_TopLayer",
+      "type": "model",
+      "category": "Blades_Xover",
+      "subcategory": "DragoonStorm"
+    },
+    {
+      "path": "/data_bey/Blades_Xover/DranzerSpiral/DranzerSpiral_BottomLayer.obj",
+      "name": "DranzerSpiral_BottomLayer",
+      "type": "model",
+      "category": "Blades_Xover",
+      "subcategory": "DranzerSpiral"
+    },
+    {
+      "path": "/data_bey/Blades_Xover/DranzerSpiral/DranzerSpiral_Metal.obj",
+      "name": "DranzerSpiral_Metal",
+      "type": "model",
+      "category": "Blades_Xover",
+      "subcategory": "DranzerSpiral"
+    },
+    {
+      "path": "/data_bey/Blades_Xover/DranzerSpiral/DranzerSpiral_TopLayer.obj",
+      "name": "DranzerSpiral_TopLayer",
+      "type": "model",
+      "category": "Blades_Xover",
+      "subcategory": "DranzerSpiral"
+    },
+    {
+      "path": "/data_bey/Blades_Xover/DrigerSlash/DrigerSlash_BottomLayer.obj",
+      "name": "DrigerSlash_BottomLayer",
+      "type": "model",
+      "category": "Blades_Xover",
+      "subcategory": "DrigerSlash"
+    },
+    {
+      "path": "/data_bey/Blades_Xover/DrigerSlash/DrigerSlash_Metal.obj",
+      "name": "DrigerSlash_Metal",
+      "type": "model",
+      "category": "Blades_Xover",
+      "subcategory": "DrigerSlash"
+    },
+    {
+      "path": "/data_bey/Blades_Xover/DrigerSlash/DrigerSlash_TopLayer.obj",
+      "name": "DrigerSlash_TopLayer",
+      "type": "model",
+      "category": "Blades_Xover",
+      "subcategory": "DrigerSlash"
+    },
+    {
+      "path": "/data_bey/Blades_Xover/StormPegasis/StormPegasis_BottomLayer.obj",
+      "name": "StormPegasis_BottomLayer",
+      "type": "model",
+      "category": "Blades_Xover",
+      "subcategory": "StormPegasis"
+    },
+    {
+      "path": "/data_bey/Blades_Xover/StormPegasis/StormPegasis_Metal.obj",
+      "name": "StormPegasis_Metal",
+      "type": "model",
+      "category": "Blades_Xover",
+      "subcategory": "StormPegasis"
+    },
+    {
+      "path": "/data_bey/Blades_Xover/StormPegasis/StormPegasis_TopLayer.obj",
+      "name": "StormPegasis_TopLayer",
+      "type": "model",
+      "category": "Blades_Xover",
+      "subcategory": "StormPegasis"
+    },
+    {
+      "path": "/data_bey/Blades_Xover/VictoryValkyrie/VictoryValkyrie_BottomLayer.obj",
+      "name": "VictoryValkyrie_BottomLayer",
+      "type": "model",
+      "category": "Blades_Xover",
+      "subcategory": "VictoryValkyrie"
+    },
+    {
+      "path": "/data_bey/Blades_Xover/VictoryValkyrie/VictoryValkyrie_Metal.obj",
+      "name": "VictoryValkyrie_Metal",
+      "type": "model",
+      "category": "Blades_Xover",
+      "subcategory": "VictoryValkyrie"
+    },
+    {
+      "path": "/data_bey/Blades_Xover/VictoryValkyrie/VictoryValkyrie_TopLayer1.obj",
+      "name": "VictoryValkyrie_TopLayer1",
+      "type": "model",
+      "category": "Blades_Xover",
+      "subcategory": "VictoryValkyrie"
+    },
+    {
+      "path": "/data_bey/Blades_Xover/VictoryValkyrie/VictoryValkyrie_TopLayer2.obj",
+      "name": "VictoryValkyrie_TopLayer2",
+      "type": "model",
+      "category": "Blades_Xover",
+      "subcategory": "VictoryValkyrie"
+    },
+    {
+      "path": "/data_bey/CX_AssistBlade/Assault.obj",
+      "name": "Assault",
+      "type": "model",
+      "category": "CX_AssistBlade"
+    },
+    {
+      "path": "/data_bey/CX_AssistBlade/Bumper.obj",
+      "name": "Bumper",
+      "type": "model",
+      "category": "CX_AssistBlade"
+    },
+    {
+      "path": "/data_bey/CX_AssistBlade/Massive.obj",
+      "name": "Massive",
+      "type": "model",
+      "category": "CX_AssistBlade"
+    },
+    {
+      "path": "/data_bey/CX_AssistBlade/Round.obj",
+      "name": "Round",
+      "type": "model",
+      "category": "CX_AssistBlade"
+    },
+    {
+      "path": "/data_bey/CX_AssistBlade/Slash.obj",
+      "name": "Slash",
+      "type": "model",
+      "category": "CX_AssistBlade"
+    },
+    {
+      "path": "/data_bey/CX_AssistBlade/Turn_Base.obj",
+      "name": "Turn_Base",
+      "type": "model",
+      "category": "CX_AssistBlade"
+    },
+    {
+      "path": "/data_bey/CX_AssistBlade/Turn_Disk.obj",
+      "name": "Turn_Disk",
+      "type": "model",
+      "category": "CX_AssistBlade"
+    },
+    {
+      "path": "/data_bey/CX_AssistBlade/Wheel.obj",
+      "name": "Wheel",
+      "type": "model",
+      "category": "CX_AssistBlade"
+    },
+    {
+      "path": "/data_bey/CX_MainBlades/Arc/Arc_Metal.obj",
+      "name": "Arc_Metal",
+      "type": "model",
+      "category": "CX_MainBlades",
+      "subcategory": "Arc"
+    },
+    {
+      "path": "/data_bey/CX_MainBlades/Arc/Arc_Plastic.obj",
+      "name": "Arc_Plastic",
+      "type": "model",
+      "category": "CX_MainBlades",
+      "subcategory": "Arc"
+    },
+    {
+      "path": "/data_bey/CX_MainBlades/Blast/Blast_Metal.obj",
+      "name": "Blast_Metal",
+      "type": "model",
+      "category": "CX_MainBlades",
+      "subcategory": "Blast"
+    },
+    {
+      "path": "/data_bey/CX_MainBlades/Blast/Blast_Plastic.obj",
+      "name": "Blast_Plastic",
+      "type": "model",
+      "category": "CX_MainBlades",
+      "subcategory": "Blast"
+    },
+    {
+      "path": "/data_bey/CX_MainBlades/Brave/Brave_Metal.obj",
+      "name": "Brave_Metal",
+      "type": "model",
+      "category": "CX_MainBlades",
+      "subcategory": "Brave"
+    },
+    {
+      "path": "/data_bey/CX_MainBlades/Brave/Brave_Plastic.obj",
+      "name": "Brave_Plastic",
+      "type": "model",
+      "category": "CX_MainBlades",
+      "subcategory": "Brave"
+    },
+    {
+      "path": "/data_bey/CX_MainBlades/Dark/Dark_Metal.obj",
+      "name": "Dark_Metal",
+      "type": "model",
+      "category": "CX_MainBlades",
+      "subcategory": "Dark"
+    },
+    {
+      "path": "/data_bey/CX_MainBlades/Dark/Dark_Plastic.obj",
+      "name": "Dark_Plastic",
+      "type": "model",
+      "category": "CX_MainBlades",
+      "subcategory": "Dark"
+    },
+    {
+      "path": "/data_bey/CX_MainBlades/Flame/Flame_Metal.obj",
+      "name": "Flame_Metal",
+      "type": "model",
+      "category": "CX_MainBlades",
+      "subcategory": "Flame"
+    },
+    {
+      "path": "/data_bey/CX_MainBlades/Flame/Flame_Plastic.obj",
+      "name": "Flame_Plastic",
+      "type": "model",
+      "category": "CX_MainBlades",
+      "subcategory": "Flame"
+    },
+    {
+      "path": "/data_bey/CX_MainBlades/Reaper/Reaper_Metal.obj",
+      "name": "Reaper_Metal",
+      "type": "model",
+      "category": "CX_MainBlades",
+      "subcategory": "Reaper"
+    },
+    {
+      "path": "/data_bey/CX_MainBlades/Reaper/Reaper_Plastic.obj",
+      "name": "Reaper_Plastic",
+      "type": "model",
+      "category": "CX_MainBlades",
+      "subcategory": "Reaper"
+    },
+    {
+      "path": "/data_bey/CX_MainBlades/Volt/Volt_Metal.obj",
+      "name": "Volt_Metal",
+      "type": "model",
+      "category": "CX_MainBlades",
+      "subcategory": "Volt"
+    },
+    {
+      "path": "/data_bey/CX_MainBlades/Volt/Volt_Plastic.obj",
+      "name": "Volt_Plastic",
+      "type": "model",
+      "category": "CX_MainBlades",
+      "subcategory": "Volt"
+    },
+    {
+      "path": "/data_bey/Chip/Caps [Left].obj",
+      "name": "Caps [Left]",
+      "type": "model",
+      "category": "Chip"
+    },
+    { "path": "/data_bey/Chip/Caps.obj", "name": "Caps", "type": "model", "category": "Chip" },
+    {
+      "path": "/data_bey/Chip/GearChip [Left].obj",
+      "name": "GearChip [Left]",
+      "type": "model",
+      "category": "Chip"
+    },
+    {
+      "path": "/data_bey/Chip/GearChip.obj",
+      "name": "GearChip",
+      "type": "model",
+      "category": "Chip"
+    },
+    {
+      "path": "/data_bey/Chip/LockChip [Left].obj",
+      "name": "LockChip [Left]",
+      "type": "model",
+      "category": "Chip"
+    },
+    {
+      "path": "/data_bey/Chip/LockChip.obj",
+      "name": "LockChip",
+      "type": "model",
+      "category": "Chip"
+    },
+    {
+      "path": "/data_bey/Chip/Metal LockChip_Base [Left].obj",
+      "name": "Metal LockChip_Base [Left]",
+      "type": "model",
+      "category": "Chip"
+    },
+    {
+      "path": "/data_bey/Chip/Metal LockChip_Base.obj",
+      "name": "Metal LockChip_Base",
+      "type": "model",
+      "category": "Chip"
+    },
+    {
+      "path": "/data_bey/Chip/Metal LockChip_Plate [Left].obj",
+      "name": "Metal LockChip_Plate [Left]",
+      "type": "model",
+      "category": "Chip"
+    },
+    {
+      "path": "/data_bey/Chip/Metal LockChip_Plate.obj",
+      "name": "Metal LockChip_Plate",
+      "type": "model",
+      "category": "Chip"
+    },
+    { "path": "/data_bey/Ratchets/1.obj", "name": "1", "type": "model", "category": "Ratchets" },
+    { "path": "/data_bey/Ratchets/2.obj", "name": "2", "type": "model", "category": "Ratchets" },
+    {
+      "path": "/data_bey/Ratchets/3-85.obj",
+      "name": "3-85",
+      "type": "model",
+      "category": "Ratchets"
+    },
+    { "path": "/data_bey/Ratchets/3.obj", "name": "3", "type": "model", "category": "Ratchets" },
+    {
+      "path": "/data_bey/Ratchets/4-55.obj",
+      "name": "4-55",
+      "type": "model",
+      "category": "Ratchets"
+    },
+    { "path": "/data_bey/Ratchets/4.obj", "name": "4", "type": "model", "category": "Ratchets" },
+    { "path": "/data_bey/Ratchets/5.obj", "name": "5", "type": "model", "category": "Ratchets" },
+    { "path": "/data_bey/Ratchets/6.obj", "name": "6", "type": "model", "category": "Ratchets" },
+    { "path": "/data_bey/Ratchets/60.obj", "name": "60", "type": "model", "category": "Ratchets" },
+    { "path": "/data_bey/Ratchets/7.obj", "name": "7", "type": "model", "category": "Ratchets" },
+    { "path": "/data_bey/Ratchets/70.obj", "name": "70", "type": "model", "category": "Ratchets" },
+    { "path": "/data_bey/Ratchets/80.obj", "name": "80", "type": "model", "category": "Ratchets" },
+    { "path": "/data_bey/Ratchets/9.obj", "name": "9", "type": "model", "category": "Ratchets" },
+    {
+      "path": "/data_bey/Ratchets/Base_Clips.obj",
+      "name": "Base_Clips",
+      "type": "model",
+      "category": "Ratchets"
+    },
+    {
+      "path": "/data_bey/Ratchets/Base_Part_55.obj",
+      "name": "Base_Part_55",
+      "type": "model",
+      "category": "Ratchets"
+    },
+    {
+      "path": "/data_bey/Ratchets/Base_Part_60.obj",
+      "name": "Base_Part_60",
+      "type": "model",
+      "category": "Ratchets"
+    },
+    {
+      "path": "/data_bey/Ratchets/Base_Part_70.obj",
+      "name": "Base_Part_70",
+      "type": "model",
+      "category": "Ratchets"
+    },
+    {
+      "path": "/data_bey/Ratchets/Base_Part_80.obj",
+      "name": "Base_Part_80",
+      "type": "model",
+      "category": "Ratchets"
+    },
+    {
+      "path": "/data_bey/Ratchets/Base_Part_85.obj",
+      "name": "Base_Part_85",
+      "type": "model",
+      "category": "Ratchets"
+    },
+    {
+      "path": "/data_bey/Ratchets/Turbo/Tr.obj",
+      "name": "Tr",
+      "type": "model",
+      "category": "Ratchets",
+      "subcategory": "Turbo"
+    },
+    {
+      "path": "/data_bey/Ratchets/Turbo/Tr_Base.obj",
+      "name": "Tr_Base",
+      "type": "model",
+      "category": "Ratchets",
+      "subcategory": "Turbo"
+    },
+    {
+      "path": "/data_bey/Ratchets/Turbo/Tr_Bit.obj",
+      "name": "Tr_Bit",
+      "type": "model",
+      "category": "Ratchets",
+      "subcategory": "Turbo"
+    },
+    {
+      "path": "/data_bey/Ratchets/Turbo/Tr_Gimmick.obj",
+      "name": "Tr_Gimmick",
+      "type": "model",
+      "category": "Ratchets",
+      "subcategory": "Turbo"
+    },
+    {
+      "path": "/data_bey/Ratchets/Turbo/Tr_Heigh.obj",
+      "name": "Tr_Heigh",
+      "type": "model",
+      "category": "Ratchets",
+      "subcategory": "Turbo"
+    },
+    {
+      "path": "/data_bey/Ratchets/Turbo/Tr_Tip.obj",
+      "name": "Tr_Tip",
+      "type": "model",
+      "category": "Ratchets",
+      "subcategory": "Turbo"
+    },
+    {
+      "path": "/data_bey/UX_Blades/AeroPegasus/AeroPegasus_GearChip.obj",
+      "name": "AeroPegasus_GearChip",
+      "type": "model",
+      "category": "UX_Blades",
+      "subcategory": "AeroPegasus"
+    },
+    {
+      "path": "/data_bey/UX_Blades/AeroPegasus/AeroPegasus_Metal.obj",
+      "name": "AeroPegasus_Metal",
+      "type": "model",
+      "category": "UX_Blades",
+      "subcategory": "AeroPegasus"
+    },
+    {
+      "path": "/data_bey/UX_Blades/AeroPegasus/AeroPegasus_Plastic.obj",
+      "name": "AeroPegasus_Plastic",
+      "type": "model",
+      "category": "UX_Blades",
+      "subcategory": "AeroPegasus"
+    },
+    {
+      "path": "/data_bey/UX_Blades/DranBuster/DranBuster_GearChip.obj",
+      "name": "DranBuster_GearChip",
+      "type": "model",
+      "category": "UX_Blades",
+      "subcategory": "DranBuster"
+    },
+    {
+      "path": "/data_bey/UX_Blades/DranBuster/DranBuster_Metal.obj",
+      "name": "DranBuster_Metal",
+      "type": "model",
+      "category": "UX_Blades",
+      "subcategory": "DranBuster"
+    },
+    {
+      "path": "/data_bey/UX_Blades/DranBuster/DranBuster_Plastic.obj",
+      "name": "DranBuster_Plastic",
+      "type": "model",
+      "category": "UX_Blades",
+      "subcategory": "DranBuster"
+    },
+    {
+      "path": "/data_bey/UX_Blades/HellsHammer/HellsHammer_GearChip.obj",
+      "name": "HellsHammer_GearChip",
+      "type": "model",
+      "category": "UX_Blades",
+      "subcategory": "HellsHammer"
+    },
+    {
+      "path": "/data_bey/UX_Blades/HellsHammer/HellsHammer_Metal.obj",
+      "name": "HellsHammer_Metal",
+      "type": "model",
+      "category": "UX_Blades",
+      "subcategory": "HellsHammer"
+    },
+    {
+      "path": "/data_bey/UX_Blades/HellsHammer/HellsHammer_Plastic.obj",
+      "name": "HellsHammer_Plastic",
+      "type": "model",
+      "category": "UX_Blades",
+      "subcategory": "HellsHammer"
+    },
+    {
+      "path": "/data_bey/UX_Blades/ImpactDrake/ImpactDrake_GearChip.obj",
+      "name": "ImpactDrake_GearChip",
+      "type": "model",
+      "category": "UX_Blades",
+      "subcategory": "ImpactDrake"
+    },
+    {
+      "path": "/data_bey/UX_Blades/ImpactDrake/ImpactDrake_Metal.obj",
+      "name": "ImpactDrake_Metal",
+      "type": "model",
+      "category": "UX_Blades",
+      "subcategory": "ImpactDrake"
+    },
+    {
+      "path": "/data_bey/UX_Blades/ImpactDrake/ImpactDrake_Rubber.obj",
+      "name": "ImpactDrake_Rubber",
+      "type": "model",
+      "category": "UX_Blades",
+      "subcategory": "ImpactDrake"
+    },
+    {
+      "path": "/data_bey/UX_Blades/KnightMail/KnightMail_GearChip.obj",
+      "name": "KnightMail_GearChip",
+      "type": "model",
+      "category": "UX_Blades",
+      "subcategory": "KnightMail"
+    },
+    {
+      "path": "/data_bey/UX_Blades/KnightMail/KnightMail_Gimmick.obj",
+      "name": "KnightMail_Gimmick",
+      "type": "model",
+      "category": "UX_Blades",
+      "subcategory": "KnightMail"
+    },
+    {
+      "path": "/data_bey/UX_Blades/KnightMail/KnightMail_Metal.obj",
+      "name": "KnightMail_Metal",
+      "type": "model",
+      "category": "UX_Blades",
+      "subcategory": "KnightMail"
+    },
+    {
+      "path": "/data_bey/UX_Blades/KnightMail/KnightMail_Plastic.obj",
+      "name": "KnightMail_Plastic",
+      "type": "model",
+      "category": "UX_Blades",
+      "subcategory": "KnightMail"
+    },
+    {
+      "path": "/data_bey/UX_Blades/LeonCrest/LeonCrest_GearChip.obj",
+      "name": "LeonCrest_GearChip",
+      "type": "model",
+      "category": "UX_Blades",
+      "subcategory": "LeonCrest"
+    },
+    {
+      "path": "/data_bey/UX_Blades/LeonCrest/LeonCrest_Metal.obj",
+      "name": "LeonCrest_Metal",
+      "type": "model",
+      "category": "UX_Blades",
+      "subcategory": "LeonCrest"
+    },
+    {
+      "path": "/data_bey/UX_Blades/LeonCrest/LeonCrest_Plastic.obj",
+      "name": "LeonCrest_Plastic",
+      "type": "model",
+      "category": "UX_Blades",
+      "subcategory": "LeonCrest"
+    },
+    {
+      "path": "/data_bey/UX_Blades/PhoenixRudder/PhoenixRudder_GearChip.obj",
+      "name": "PhoenixRudder_GearChip",
+      "type": "model",
+      "category": "UX_Blades",
+      "subcategory": "PhoenixRudder"
+    },
+    {
+      "path": "/data_bey/UX_Blades/PhoenixRudder/PhoenixRudder_Metal.obj",
+      "name": "PhoenixRudder_Metal",
+      "type": "model",
+      "category": "UX_Blades",
+      "subcategory": "PhoenixRudder"
+    },
+    {
+      "path": "/data_bey/UX_Blades/PhoenixRudder/PhoenixRudder_Plastic.obj",
+      "name": "PhoenixRudder_Plastic",
+      "type": "model",
+      "category": "UX_Blades",
+      "subcategory": "PhoenixRudder"
+    },
+    {
+      "path": "/data_bey/UX_Blades/SamuraiSaber/SamuraiSaber_GearChip.obj",
+      "name": "SamuraiSaber_GearChip",
+      "type": "model",
+      "category": "UX_Blades",
+      "subcategory": "SamuraiSaber"
+    },
+    {
+      "path": "/data_bey/UX_Blades/SamuraiSaber/SamuraiSaber_Gimmick.obj",
+      "name": "SamuraiSaber_Gimmick",
+      "type": "model",
+      "category": "UX_Blades",
+      "subcategory": "SamuraiSaber"
+    },
+    {
+      "path": "/data_bey/UX_Blades/SamuraiSaber/SamuraiSaber_Metal.obj",
+      "name": "SamuraiSaber_Metal",
+      "type": "model",
+      "category": "UX_Blades",
+      "subcategory": "SamuraiSaber"
+    },
+    {
+      "path": "/data_bey/UX_Blades/SamuraiSaber/SamuraiSaber_Plastic.obj",
+      "name": "SamuraiSaber_Plastic",
+      "type": "model",
+      "category": "UX_Blades",
+      "subcategory": "SamuraiSaber"
+    },
+    {
+      "path": "/data_bey/UX_Blades/ShinobiShadow/ShinobiShadow_GearChip.obj",
+      "name": "ShinobiShadow_GearChip",
+      "type": "model",
+      "category": "UX_Blades",
+      "subcategory": "ShinobiShadow"
+    },
+    {
+      "path": "/data_bey/UX_Blades/ShinobiShadow/ShinobiShadow_Metal.obj",
+      "name": "ShinobiShadow_Metal",
+      "type": "model",
+      "category": "UX_Blades",
+      "subcategory": "ShinobiShadow"
+    },
+    {
+      "path": "/data_bey/UX_Blades/ShinobiShadow/ShinobiShadow_Plastic.obj",
+      "name": "ShinobiShadow_Plastic",
+      "type": "model",
+      "category": "UX_Blades",
+      "subcategory": "ShinobiShadow"
+    },
+    {
+      "path": "/data_bey/UX_Blades/SilverWolf/SilverWolf_GearChip.obj",
+      "name": "SilverWolf_GearChip",
+      "type": "model",
+      "category": "UX_Blades",
+      "subcategory": "SilverWolf"
+    },
+    {
+      "path": "/data_bey/UX_Blades/SilverWolf/SilverWolf_Gimmick.obj",
+      "name": "SilverWolf_Gimmick",
+      "type": "model",
+      "category": "UX_Blades",
+      "subcategory": "SilverWolf"
+    },
+    {
+      "path": "/data_bey/UX_Blades/SilverWolf/SilverWolf_Metal.obj",
+      "name": "SilverWolf_Metal",
+      "type": "model",
+      "category": "UX_Blades",
+      "subcategory": "SilverWolf"
+    },
+    {
+      "path": "/data_bey/UX_Blades/SilverWolf/SilverWolf_Plastic.obj",
+      "name": "SilverWolf_Plastic",
+      "type": "model",
+      "category": "UX_Blades",
+      "subcategory": "SilverWolf"
+    },
+    {
+      "path": "/data_bey/UX_Blades/WizardRod/WizardRod_GearChip.obj",
+      "name": "WizardRod_GearChip",
+      "type": "model",
+      "category": "UX_Blades",
+      "subcategory": "WizardRod"
+    },
+    {
+      "path": "/data_bey/UX_Blades/WizardRod/WizardRod_Metal.obj",
+      "name": "WizardRod_Metal",
+      "type": "model",
+      "category": "UX_Blades",
+      "subcategory": "WizardRod"
+    },
+    {
+      "path": "/data_bey/UX_Blades/WizardRod/WizardRod_Plastic.obj",
+      "name": "WizardRod_Plastic",
+      "type": "model",
+      "category": "UX_Blades",
+      "subcategory": "WizardRod"
+    },
+    {
+      "path": "/data_bey/UX_Blades/WyvernHover/WyvernHover_GearChip.obj",
+      "name": "WyvernHover_GearChip",
+      "type": "model",
+      "category": "UX_Blades",
+      "subcategory": "WyvernHover"
+    },
+    {
+      "path": "/data_bey/UX_Blades/WyvernHover/WyvernHover_Metal.obj",
+      "name": "WyvernHover_Metal",
+      "type": "model",
+      "category": "UX_Blades",
+      "subcategory": "WyvernHover"
+    },
+    {
+      "path": "/data_bey/UX_Blades/WyvernHover/WyvernHover_Plastic.obj",
+      "name": "WyvernHover_Plastic",
+      "type": "model",
+      "category": "UX_Blades",
+      "subcategory": "WyvernHover"
+    }
+  ],
+  "textures": [
+    { "path": "/data_bey/Texture/AP.png", "name": "AP", "type": "texture", "category": "Texture" },
+    { "path": "/data_bey/Texture/BS.png", "name": "BS", "type": "texture", "category": "Texture" },
+    {
+      "path": "/data_bey/Texture/BS2.png",
+      "name": "BS2",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/BX14_KnightShield_4-60lf.png",
+      "name": "BX14_KnightShield_4-60lf",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Black_CD2.png",
+      "name": "Black_CD2",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Black_DS.png",
+      "name": "Black_DS",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Black_DS2.png",
+      "name": "Black_DS2",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Black_KL.png",
+      "name": "Black_KL",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Black_SC.png",
+      "name": "Black_SC",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Black_SE.png",
+      "name": "Black_SE",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Black_SS.png",
+      "name": "Black_SS",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Black_VT.png",
+      "name": "Black_VT",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Black_WG.png",
+      "name": "Black_WG",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Black_WW.png",
+      "name": "Black_WW",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Blue_HC.png",
+      "name": "Blue_HC",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Blue_HH.png",
+      "name": "Blue_HH",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Blue_KS.png",
+      "name": "Blue_KS",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Blue_PW.png",
+      "name": "Blue_PW",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Blue_SC.png",
+      "name": "Blue_SC",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Blue_VT.png",
+      "name": "Blue_VT",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Blue_WA.png",
+      "name": "Blue_WA",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Brown_WA.png",
+      "name": "Brown_WA",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/CD1.png",
+      "name": "CD1",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/CD2.png",
+      "name": "CD2",
+      "type": "texture",
+      "category": "Texture"
+    },
+    { "path": "/data_bey/Texture/CG.png", "name": "CG", "type": "texture", "category": "Texture" },
+    {
+      "path": "/data_bey/Texture/Cheese_BS.png",
+      "name": "Cheese_BS",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Cobalt_DS.png",
+      "name": "Cobalt_DS",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Copper_DS.png",
+      "name": "Copper_DS",
+      "type": "texture",
+      "category": "Texture"
+    },
+    { "path": "/data_bey/Texture/DB.png", "name": "DB", "type": "texture", "category": "Texture" },
+    { "path": "/data_bey/Texture/DD.png", "name": "DD", "type": "texture", "category": "Texture" },
+    { "path": "/data_bey/Texture/DS.png", "name": "DS", "type": "texture", "category": "Texture" },
+    {
+      "path": "/data_bey/Texture/DS2.png",
+      "name": "DS2",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/DS3.png",
+      "name": "DS3",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/DeepBlue_DB.png",
+      "name": "DeepBlue_DB",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Giants_DD.png",
+      "name": "Giants_DD",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Gold_DS.png",
+      "name": "Gold_DS",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Gold_HS.png",
+      "name": "Gold_HS",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Gold_KS.png",
+      "name": "Gold_KS",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Gold_LC1.png",
+      "name": "Gold_LC1",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Gold_VT.png",
+      "name": "Gold_VT",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Gold_WR.png",
+      "name": "Gold_WR",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/GreenBlue_PW.png",
+      "name": "GreenBlue_PW",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Green_HC.png",
+      "name": "Green_HC",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Green_HS.png",
+      "name": "Green_HS",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Green_SE.png",
+      "name": "Green_SE",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Green_TB.png",
+      "name": "Green_TB",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Green_WA.png",
+      "name": "Green_WA",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Green_WR.png",
+      "name": "Green_WR",
+      "type": "texture",
+      "category": "Texture"
+    },
+    { "path": "/data_bey/Texture/HC.png", "name": "HC", "type": "texture", "category": "Texture" },
+    { "path": "/data_bey/Texture/HH.png", "name": "HH", "type": "texture", "category": "Texture" },
+    { "path": "/data_bey/Texture/HS.png", "name": "HS", "type": "texture", "category": "Texture" },
+    { "path": "/data_bey/Texture/KL.png", "name": "KL", "type": "texture", "category": "Texture" },
+    { "path": "/data_bey/Texture/KM.png", "name": "KM", "type": "texture", "category": "Texture" },
+    { "path": "/data_bey/Texture/KS.png", "name": "KS", "type": "texture", "category": "Texture" },
+    {
+      "path": "/data_bey/Texture/LC1.png",
+      "name": "LC1",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/LC2.png",
+      "name": "LC2",
+      "type": "texture",
+      "category": "Texture"
+    },
+    { "path": "/data_bey/Texture/LL.png", "name": "LL", "type": "texture", "category": "Texture" },
+    {
+      "path": "/data_bey/Texture/Ocean_SE.png",
+      "name": "Ocean_SE",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Orange_DD.png",
+      "name": "Orange_DD",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Orange_US.png",
+      "name": "Orange_US",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Orange_WA.png",
+      "name": "Orange_WA",
+      "type": "texture",
+      "category": "Texture"
+    },
+    { "path": "/data_bey/Texture/PF.png", "name": "PF", "type": "texture", "category": "Texture" },
+    { "path": "/data_bey/Texture/PR.png", "name": "PR", "type": "texture", "category": "Texture" },
+    { "path": "/data_bey/Texture/PS.png", "name": "PS", "type": "texture", "category": "Texture" },
+    { "path": "/data_bey/Texture/PW.png", "name": "PW", "type": "texture", "category": "Texture" },
+    {
+      "path": "/data_bey/Texture/Persona.png",
+      "name": "Persona",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Piss_WR.png",
+      "name": "Piss_WR",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Purple_KS.png",
+      "name": "Purple_KS",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Purple_RH.png",
+      "name": "Purple_RH",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Purple_VT.png",
+      "name": "Purple_VT",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Purple_WA.png",
+      "name": "Purple_WA",
+      "type": "texture",
+      "category": "Texture"
+    },
+    { "path": "/data_bey/Texture/RH.png", "name": "RH", "type": "texture", "category": "Texture" },
+    {
+      "path": "/data_bey/Texture/Red_DB.png",
+      "name": "Red_DB",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Red_DS.png",
+      "name": "Red_DS",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Red_KS.png",
+      "name": "Red_KS",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Red_LC1.png",
+      "name": "Red_LC1",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Red_TB.png",
+      "name": "Red_TB",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Red_WA.png",
+      "name": "Red_WA",
+      "type": "texture",
+      "category": "Texture"
+    },
+    { "path": "/data_bey/Texture/SC.png", "name": "SC", "type": "texture", "category": "Texture" },
+    { "path": "/data_bey/Texture/SE.png", "name": "SE", "type": "texture", "category": "Texture" },
+    { "path": "/data_bey/Texture/SS.png", "name": "SS", "type": "texture", "category": "Texture" },
+    {
+      "path": "/data_bey/Texture/SS2.png",
+      "name": "SS2",
+      "type": "texture",
+      "category": "Texture"
+    },
+    { "path": "/data_bey/Texture/SW.png", "name": "SW", "type": "texture", "category": "Texture" },
+    {
+      "path": "/data_bey/Texture/Silver_DS.png",
+      "name": "Silver_DS",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Stadium_DS.png",
+      "name": "Stadium_DS",
+      "type": "texture",
+      "category": "Texture"
+    },
+    { "path": "/data_bey/Texture/TB.png", "name": "TB", "type": "texture", "category": "Texture" },
+    {
+      "path": "/data_bey/Texture/Texture (White)/AEROPEGASUS.png",
+      "name": "AEROPEGASUS",
+      "type": "texture",
+      "category": "Texture",
+      "subcategory": "Texture (White)"
+    },
+    {
+      "path": "/data_bey/Texture/Texture (White)/BEARSCRATCH.png",
+      "name": "BEARSCRATCH",
+      "type": "texture",
+      "category": "Texture",
+      "subcategory": "Texture (White)"
+    },
+    {
+      "path": "/data_bey/Texture/Texture (White)/BLACKSHELL.png",
+      "name": "BLACKSHELL",
+      "type": "texture",
+      "category": "Texture",
+      "subcategory": "Texture (White)"
+    },
+    {
+      "path": "/data_bey/Texture/Texture (White)/CERBERUSFLAME.png",
+      "name": "CERBERUSFLAME",
+      "type": "texture",
+      "category": "Texture",
+      "subcategory": "Texture (White)"
+    },
+    {
+      "path": "/data_bey/Texture/Texture (White)/COBALTDRAGOON.png",
+      "name": "COBALTDRAGOON",
+      "type": "texture",
+      "category": "Texture",
+      "subcategory": "Texture (White)"
+    },
+    {
+      "path": "/data_bey/Texture/Texture (White)/COBALTDRAKE.png",
+      "name": "COBALTDRAKE",
+      "type": "texture",
+      "category": "Texture",
+      "subcategory": "Texture (White)"
+    },
+    {
+      "path": "/data_bey/Texture/Texture (White)/CRIMSONGARUDA.png",
+      "name": "CRIMSONGARUDA",
+      "type": "texture",
+      "category": "Texture",
+      "subcategory": "Texture (White)"
+    },
+    {
+      "path": "/data_bey/Texture/Texture (White)/DRANARC.png",
+      "name": "DRANARC",
+      "type": "texture",
+      "category": "Texture",
+      "subcategory": "Texture (White)"
+    },
+    {
+      "path": "/data_bey/Texture/Texture (White)/DRANBRAVE.png",
+      "name": "DRANBRAVE",
+      "type": "texture",
+      "category": "Texture",
+      "subcategory": "Texture (White)"
+    },
+    {
+      "path": "/data_bey/Texture/Texture (White)/DRANBUSTER.png",
+      "name": "DRANBUSTER",
+      "type": "texture",
+      "category": "Texture",
+      "subcategory": "Texture (White)"
+    },
+    {
+      "path": "/data_bey/Texture/Texture (White)/DRANDAGGER.png",
+      "name": "DRANDAGGER",
+      "type": "texture",
+      "category": "Texture",
+      "subcategory": "Texture (White)"
+    },
+    {
+      "path": "/data_bey/Texture/Texture (White)/DRANSWORD.png",
+      "name": "DRANSWORD",
+      "type": "texture",
+      "category": "Texture",
+      "subcategory": "Texture (White)"
+    },
+    {
+      "path": "/data_bey/Texture/Texture (White)/DRANZERSPIRAL.png",
+      "name": "DRANZERSPIRAL",
+      "type": "texture",
+      "category": "Texture",
+      "subcategory": "Texture (White)"
+    },
+    {
+      "path": "/data_bey/Texture/Texture (White)/DRIGERSLASH.png",
+      "name": "DRIGERSLASH",
+      "type": "texture",
+      "category": "Texture",
+      "subcategory": "Texture (White)"
+    },
+    {
+      "path": "/data_bey/Texture/Texture (White)/FC_BARCELONA.png",
+      "name": "FC_BARCELONA",
+      "type": "texture",
+      "category": "Texture",
+      "subcategory": "Texture (White)"
+    },
+    {
+      "path": "/data_bey/Texture/Texture (White)/FOXBRUSH.png",
+      "name": "FOXBRUSH",
+      "type": "texture",
+      "category": "Texture",
+      "subcategory": "Texture (White)"
+    },
+    {
+      "path": "/data_bey/Texture/Texture (White)/HELLSCHAIN.png",
+      "name": "HELLSCHAIN",
+      "type": "texture",
+      "category": "Texture",
+      "subcategory": "Texture (White)"
+    },
+    {
+      "path": "/data_bey/Texture/Texture (White)/HELLSHUMMER.png",
+      "name": "HELLSHUMMER",
+      "type": "texture",
+      "category": "Texture",
+      "subcategory": "Texture (White)"
+    },
+    {
+      "path": "/data_bey/Texture/Texture (White)/HELLSREAPER.png",
+      "name": "HELLSREAPER",
+      "type": "texture",
+      "category": "Texture",
+      "subcategory": "Texture (White)"
+    },
+    {
+      "path": "/data_bey/Texture/Texture (White)/HELLSSCYTHE.png",
+      "name": "HELLSSCYTHE",
+      "type": "texture",
+      "category": "Texture",
+      "subcategory": "Texture (White)"
+    },
+    {
+      "path": "/data_bey/Texture/Texture (White)/KNIGHTLANCE.png",
+      "name": "KNIGHTLANCE",
+      "type": "texture",
+      "category": "Texture",
+      "subcategory": "Texture (White)"
+    },
+    {
+      "path": "/data_bey/Texture/Texture (White)/KNIGHTMAIL.png",
+      "name": "KNIGHTMAIL",
+      "type": "texture",
+      "category": "Texture",
+      "subcategory": "Texture (White)"
+    },
+    {
+      "path": "/data_bey/Texture/Texture (White)/KNIGHTSHIELD.png",
+      "name": "KNIGHTSHIELD",
+      "type": "texture",
+      "category": "Texture",
+      "subcategory": "Texture (White)"
+    },
+    {
+      "path": "/data_bey/Texture/Texture (White)/LEONCLAW.png",
+      "name": "LEONCLAW",
+      "type": "texture",
+      "category": "Texture",
+      "subcategory": "Texture (White)"
+    },
+    {
+      "path": "/data_bey/Texture/Texture (White)/LEONCREST.png",
+      "name": "LEONCREST",
+      "type": "texture",
+      "category": "Texture",
+      "subcategory": "Texture (White)"
+    },
+    {
+      "path": "/data_bey/Texture/Texture (White)/LIGHTNING L-DRAGO.png",
+      "name": "LIGHTNING L-DRAGO",
+      "type": "texture",
+      "category": "Texture",
+      "subcategory": "Texture (White)"
+    },
+    {
+      "path": "/data_bey/Texture/Texture (White)/PEGASUSBLAST.png",
+      "name": "PEGASUSBLAST",
+      "type": "texture",
+      "category": "Texture",
+      "subcategory": "Texture (White)"
+    },
+    {
+      "path": "/data_bey/Texture/Texture (White)/PHOENIXFEATHER.png",
+      "name": "PHOENIXFEATHER",
+      "type": "texture",
+      "category": "Texture",
+      "subcategory": "Texture (White)"
+    },
+    {
+      "path": "/data_bey/Texture/Texture (White)/PHOENIXRUDDER.png",
+      "name": "PHOENIXRUDDER",
+      "type": "texture",
+      "category": "Texture",
+      "subcategory": "Texture (White)"
+    },
+    {
+      "path": "/data_bey/Texture/Texture (White)/PHOENIXWING.png",
+      "name": "PHOENIXWING",
+      "type": "texture",
+      "category": "Texture",
+      "subcategory": "Texture (White)"
+    },
+    {
+      "path": "/data_bey/Texture/Texture (White)/PTERASWING.png",
+      "name": "PTERASWING",
+      "type": "texture",
+      "category": "Texture",
+      "subcategory": "Texture (White)"
+    },
+    {
+      "path": "/data_bey/Texture/Texture (White)/RHINOHORN.png",
+      "name": "RHINOHORN",
+      "type": "texture",
+      "category": "Texture",
+      "subcategory": "Texture (White)"
+    },
+    {
+      "path": "/data_bey/Texture/Texture (White)/RHINOREAPER.png",
+      "name": "RHINOREAPER",
+      "type": "texture",
+      "category": "Texture",
+      "subcategory": "Texture (White)"
+    },
+    {
+      "path": "/data_bey/Texture/Texture (White)/SAMURAICALIBUR.png",
+      "name": "SAMURAICALIBUR",
+      "type": "texture",
+      "category": "Texture",
+      "subcategory": "Texture (White)"
+    },
+    {
+      "path": "/data_bey/Texture/Texture (White)/SAMURAISABER.png",
+      "name": "SAMURAISABER",
+      "type": "texture",
+      "category": "Texture",
+      "subcategory": "Texture (White)"
+    },
+    {
+      "path": "/data_bey/Texture/Texture (White)/SHARKEDGE.png",
+      "name": "SHARKEDGE",
+      "type": "texture",
+      "category": "Texture",
+      "subcategory": "Texture (White)"
+    },
+    {
+      "path": "/data_bey/Texture/Texture (White)/SHARKSCALE.png",
+      "name": "SHARKSCALE",
+      "type": "texture",
+      "category": "Texture",
+      "subcategory": "Texture (White)"
+    },
+    {
+      "path": "/data_bey/Texture/Texture (White)/SHINOBISHADOW.png",
+      "name": "SHINOBISHADOW",
+      "type": "texture",
+      "category": "Texture",
+      "subcategory": "Texture (White)"
+    },
+    {
+      "path": "/data_bey/Texture/Texture (White)/SPECIALCROSSBEYHELLSSCYTHE.png",
+      "name": "SPECIALCROSSBEYHELLSSCYTHE",
+      "type": "texture",
+      "category": "Texture",
+      "subcategory": "Texture (White)"
+    },
+    {
+      "path": "/data_bey/Texture/Texture (White)/SPHINXCOWL.png",
+      "name": "SPHINXCOWL",
+      "type": "texture",
+      "category": "Texture",
+      "subcategory": "Texture (White)"
+    },
+    {
+      "path": "/data_bey/Texture/Texture (White)/TYRANNOBEAT.png",
+      "name": "TYRANNOBEAT",
+      "type": "texture",
+      "category": "Texture",
+      "subcategory": "Texture (White)"
+    },
+    {
+      "path": "/data_bey/Texture/Texture (White)/TYRANNOROAR.png",
+      "name": "TYRANNOROAR",
+      "type": "texture",
+      "category": "Texture",
+      "subcategory": "Texture (White)"
+    },
+    {
+      "path": "/data_bey/Texture/Texture (White)/UNICORNSTING.png",
+      "name": "UNICORNSTING",
+      "type": "texture",
+      "category": "Texture",
+      "subcategory": "Texture (White)"
+    },
+    {
+      "path": "/data_bey/Texture/Texture (White)/VIPERTAIL.png",
+      "name": "VIPERTAIL",
+      "type": "texture",
+      "category": "Texture",
+      "subcategory": "Texture (White)"
+    },
+    {
+      "path": "/data_bey/Texture/Texture (White)/WEISSTIGER.png",
+      "name": "WEISSTIGER",
+      "type": "texture",
+      "category": "Texture",
+      "subcategory": "Texture (White)"
+    },
+    {
+      "path": "/data_bey/Texture/Texture (White)/WHALEWAVE.png",
+      "name": "WHALEWAVE",
+      "type": "texture",
+      "category": "Texture",
+      "subcategory": "Texture (White)"
+    },
+    {
+      "path": "/data_bey/Texture/Texture (White)/WIZARDARC.png",
+      "name": "WIZARDARC",
+      "type": "texture",
+      "category": "Texture",
+      "subcategory": "Texture (White)"
+    },
+    {
+      "path": "/data_bey/Texture/Texture (White)/WIZARDARROW.png",
+      "name": "WIZARDARROW",
+      "type": "texture",
+      "category": "Texture",
+      "subcategory": "Texture (White)"
+    },
+    {
+      "path": "/data_bey/Texture/Texture (White)/WIZARDROD.png",
+      "name": "WIZARDROD",
+      "type": "texture",
+      "category": "Texture",
+      "subcategory": "Texture (White)"
+    },
+    {
+      "path": "/data_bey/Texture/Texture (White)/WYVERNGALE.png",
+      "name": "WYVERNGALE",
+      "type": "texture",
+      "category": "Texture",
+      "subcategory": "Texture (White)"
+    },
+    { "path": "/data_bey/Texture/US.png", "name": "US", "type": "texture", "category": "Texture" },
+    { "path": "/data_bey/Texture/VT.png", "name": "VT", "type": "texture", "category": "Texture" },
+    { "path": "/data_bey/Texture/WA.png", "name": "WA", "type": "texture", "category": "Texture" },
+    { "path": "/data_bey/Texture/WG.png", "name": "WG", "type": "texture", "category": "Texture" },
+    { "path": "/data_bey/Texture/WR.png", "name": "WR", "type": "texture", "category": "Texture" },
+    { "path": "/data_bey/Texture/WT.png", "name": "WT", "type": "texture", "category": "Texture" },
+    { "path": "/data_bey/Texture/WW.png", "name": "WW", "type": "texture", "category": "Texture" },
+    {
+      "path": "/data_bey/Texture/White_WW.png",
+      "name": "White_WW",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Yellow_HS.png",
+      "name": "Yellow_HS",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Yellow_KL.png",
+      "name": "Yellow_KL",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Yellow_SE.png",
+      "name": "Yellow_SE",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Yellow_SS.png",
+      "name": "Yellow_SS",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/Texture/Yellow_WG.png",
+      "name": "Yellow_WG",
+      "type": "texture",
+      "category": "Texture"
+    },
+    {
+      "path": "/data_bey/resources/drawing0.png",
+      "name": "drawing0",
+      "type": "texture",
+      "category": "resources"
+    },
+    {
+      "path": "/data_bey/resources/drawing1.png",
+      "name": "drawing1",
+      "type": "texture",
+      "category": "resources"
+    },
+    {
+      "path": "/data_bey/resources/drawing2.png",
+      "name": "drawing2",
+      "type": "texture",
+      "category": "resources"
+    }
+  ]
+}

@@ -13,8 +13,8 @@ import {
   parseModuleToScrapedTournament,
   type FetchAndParseOptions,
   type HtmlRewriterModuleData,
-} from "@/lib/challonge-vendor/transports/htmlrewriter";
-import type { ScrapedTournament } from "@/lib/challonge-vendor/types";
+} from "@rose-griffon/challonge/htmlrewriter";
+import type { ScrapedTournament } from "@rose-griffon/challonge/types";
 
 import { challongeToViewerData } from "./challonge";
 import type { ViewerData } from "./types";

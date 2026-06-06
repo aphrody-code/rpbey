@@ -269,12 +269,14 @@ export function computeRankings(input: ComputeRankingsInput): ComputeRankingsRes
       else if (participant.finalPlacement === 3) points += config.thirdPlace;
       else if (participant.finalPlacement && participant.finalPlacement <= 8) points += config.top8;
 
-      // RPB : toutes les victoires comptent identique (pas de distinction WB/LB).
-      const matchWins = tournament.tournamentMatches.filter(
-        (m) =>
-          (m.winnerId === participant.userId || m.winnerName === participant.playerName) &&
-          m.state === "complete",
-      );
+      const matchWins = tournament.tournamentMatches.filter((m) => {
+        if (m.state !== "complete") return false;
+        if (resolvedUserId && m.winnerId === resolvedUserId) return true;
+        if (participant.playerName && m.winnerName) {
+          return normalizeName(m.winnerName) === normalizeName(participant.playerName);
+        }
+        return false;
+      });
       points += matchWins.length * config.matchWinWinner;
 
       // Enrichit le userId/avatar si on en a un meilleur (résolu ou explicite).

@@ -19,7 +19,7 @@ import type {
   ScrapedMatch,
   ScrapedParticipant,
   ScrapedTournament,
-} from "@/lib/challonge-vendor/types";
+} from "@rose-griffon/challonge/types";
 
 import type { Match, Participant, Stage, ViewerData } from "./types";
 import { Status } from "./types";

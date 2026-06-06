@@ -24,10 +24,7 @@ const FETCH_TIMEOUT_MS = 12_000;
 const IMMUTABLE = "public, max-age=31536000, s-maxage=31536000, immutable";
 const ALLOWED_EXT = /\.(?:jpe?g|png|webp|gif|svg|avif|mp4|webm|json|glb|woff2?|ttf|otf)$/i;
 
-export async function GET(
-  _req: NextRequest,
-  ctx: { params: Promise<{ path: string[] }> },
-) {
+export async function GET(_req: NextRequest, ctx: { params: Promise<{ path: string[] }> }) {
   // Sans origine d'asset configurée (cdn.rpbey.fr décommissionné), rien à proxifier.
   if (!ASSET_ORIGIN) {
     return NextResponse.json({ error: "not_found" }, { status: 404 });
