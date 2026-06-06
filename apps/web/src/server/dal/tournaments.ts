@@ -16,6 +16,7 @@ import {
 import { DiscordRoleMapping, type RoleType } from "@/lib/role-colors";
 import { type TeamGroup } from "@/lib/discord-types";
 import { type BotMember } from "@/types";
+import { loadJsonSafe } from "@/lib/data-cache";
 
 /**
  * Data Access Layer — tournois (tournaments / participants / matches / pools / live)
@@ -188,40 +189,247 @@ export async function getCompletedStardustTournamentForHome() {
   };
 }
 
-export async function getAllTournamentsForHome() {
-  const rows = await db.query.tournaments.findMany({
-    orderBy: desc(schema.tournaments.date),
-    with: {
-      tournamentParticipants: {
-        orderBy: asc(schema.tournamentParticipants.finalPlacement),
-      },
-      tournamentMatches: {
-        columns: { id: true },
-      },
-    },
-  });
+const BTS_EDITIONS_FOR_HOME = [
+  {
+    id: "bts5",
+    file: "B_TS5.json",
+    name: "Bey-Tamashii Séries #5",
+    date: "2026-05-10",
+    poster: "/tournaments/BTS5_poster.gif",
+    fallbackCount: 60,
+  },
+  {
+    id: "bts4",
+    file: "B_TS4.json",
+    name: "Bey-Tamashii Séries #4",
+    date: "2026-04-26",
+    poster: "/tournaments/BTS4_poster.webp",
+    fallbackCount: 81,
+  },
+  {
+    id: "bts3",
+    file: "B_TS3.json",
+    name: "Bey-Tamashii Séries #3",
+    date: "2026-03-01",
+    poster: "/tournaments/BTS3_poster.webp",
+    fallbackCount: 73,
+  },
+  {
+    id: "bts2",
+    file: "B_TS2.json",
+    name: "Bey-Tamashii Séries #2",
+    date: "2026-02-08",
+    poster: "/tournaments/BTS2.webp",
+    fallbackCount: 60,
+  },
+  {
+    id: "bts1",
+    file: "B_TS1.json",
+    name: "Bey-Tamashii Séries #1",
+    date: "2026-01-11",
+    poster: "/tournaments/BTS1_poster.webp",
+    fallbackCount: 69,
+  },
+];
 
-  return rows.map((t) => {
-    const podium = t.tournamentParticipants
-      .filter((p) => p.finalPlacement && p.finalPlacement <= 3)
+function mapDbStatusForHome(status: string): string {
+  const mapping: Record<string, string> = {
+    UPCOMING: "upcoming",
+    PENDING: "pending",
+    ACTIVE: "underway",
+    UNDERWAY: "underway",
+    COMPLETE: "complete",
+    ARCHIVED: "complete",
+    CANCELLED: "cancelled",
+  };
+  return mapping[status] || "pending";
+}
+
+export async function getAllTournamentsForHome() {
+  type BtsExport = {
+    participants?: {
+      name: string;
+      rank: number;
+      exactWins?: number;
+      exactLosses?: number;
+    }[];
+    participantsCount?: number;
+    matchesCount?: number;
+  };
+
+  const [dbTournaments, btsExports, completedStardust] = await Promise.all([
+    db.query.tournaments.findMany({
+      orderBy: desc(schema.tournaments.date),
+      with: {
+        tournamentParticipants: {
+          orderBy: asc(schema.tournamentParticipants.finalPlacement),
+        },
+        tournamentMatches: {
+          columns: { id: true },
+        },
+        tournamentCategory: {
+          columns: { id: true, name: true, color: true, logoUrl: true },
+        },
+      },
+    }),
+    Promise.all(
+      BTS_EDITIONS_FOR_HOME.map(async (edition) => ({
+        edition,
+        data: await loadJsonSafe<BtsExport>(`data/exports/${edition.file}`),
+      })),
+    ),
+    getCompletedStardustTournamentForHome(),
+  ]);
+
+  // 1. Process BTS JSON Tournaments
+  const btsCards: any[] = [];
+  for (const { edition, data } of btsExports) {
+    if (!data) continue;
+    const participants = data.participants || [];
+    const podium = participants
+      .filter((p) => p.rank <= 3)
+      .sort((a, b) => a.rank - b.rank)
       .map((p) => ({
-        name: (p.playerName || "").replace(/✅|✔️/g, "").trim(),
-        rank: p.finalPlacement || 0,
-        wins: p.wins || 0,
-        losses: p.losses || 0,
+        name: p.name.replace(/✅|✔️/g, "").trim(),
+        rank: p.rank,
+        wins: p.exactWins || 0,
+        losses: p.exactLosses || 0,
       }));
 
-    return {
-      id: t.id,
-      name: t.name,
-      date: new Date(t.date).toISOString(),
-      poster: t.posterUrl || "/logo.webp",
-      participants: t.tournamentParticipants.length,
-      matchesCount: t.tournamentMatches.length,
+    btsCards.push({
+      id: edition.id,
+      name: edition.name,
+      date: new Date(edition.date).toISOString(),
+      poster: edition.poster,
+      participants: data.participantsCount || edition.fallbackCount,
+      matchesCount: data.matchesCount || 0,
       podium,
-      status: t.status,
-    };
-  });
+      status: "complete",
+    });
+  }
+
+  // Find upcoming BTS tournament from DB
+  const nextBts = dbTournaments.find(
+    (t) =>
+      t.name.toLowerCase().includes("bey-tamashii") &&
+      (t.status === "UPCOMING" ||
+        t.status === "REGISTRATION_OPEN" ||
+        t.status === "CHECKIN" ||
+        t.status === "UNDERWAY"),
+  );
+
+  const nextBtsItem = nextBts
+    ? {
+        id: nextBts.id,
+        name: nextBts.name,
+        date: new Date(nextBts.date).toISOString(),
+        poster: nextBts.posterUrl || "/logo.webp",
+        participants: nextBts.tournamentParticipants.length,
+        matchesCount: nextBts.tournamentMatches.length,
+        podium: [],
+        status: mapDbStatusForHome(nextBts.status),
+      }
+    : null;
+
+  // 2. Process Stardust Tournaments
+  const stardustItems = dbTournaments.filter((t) =>
+    (t.tournamentCategory?.name ?? "").toUpperCase().includes("STARDUST"),
+  );
+
+  const mappedStardust = stardustItems
+    .filter((t) => mapDbStatusForHome(t.status) !== "cancelled")
+    .map((t) => {
+      const isStardust1 = t.challongeId === "T_SS1";
+      if (isStardust1 && completedStardust) {
+        const podium = (completedStardust.participants || [])
+          .filter((p) => p.finalPlacement && p.finalPlacement <= 3)
+          .sort((a, b) => (a.finalPlacement || 0) - (b.finalPlacement || 0))
+          .map((p) => ({
+            name: (p.playerName || "").replace(/✅|✔️/g, "").trim(),
+            rank: p.finalPlacement || 0,
+            wins: p.wins || 0,
+            losses: p.losses || 0,
+          }));
+        return {
+          id: t.id,
+          name: t.name,
+          date: new Date(t.date).toISOString(),
+          poster: t.posterUrl || "/tournaments/SS1_poster.webp",
+          participants: completedStardust.participants?.length || 0,
+          matchesCount: completedStardust.matchesCount || 0,
+          podium,
+          status: mapDbStatusForHome(t.status),
+        };
+      } else {
+        const podium = t.tournamentParticipants
+          .filter((p) => p.finalPlacement && p.finalPlacement <= 3)
+          .sort((a, b) => (a.finalPlacement || 0) - (b.finalPlacement || 0))
+          .map((p) => ({
+            name: (p.playerName || "").replace(/✅|✔️/g, "").trim(),
+            rank: p.finalPlacement || 0,
+            wins: p.wins || 0,
+            losses: p.losses || 0,
+          }));
+        return {
+          id: t.id,
+          name: t.name,
+          date: new Date(t.date).toISOString(),
+          poster: t.posterUrl || "/logo.webp",
+          participants: t.tournamentParticipants.length,
+          matchesCount: t.tournamentMatches.length,
+          podium,
+          status: mapDbStatusForHome(t.status),
+        };
+      }
+    });
+
+  // 3. Process Generic DB Tournaments
+  const dbScrapedIds = new Set(BTS_EDITIONS_FOR_HOME.map((e) => e.id));
+  const dbScrapedNames = new Set(BTS_EDITIONS_FOR_HOME.map((e) => e.name.toLowerCase()));
+
+  const otherDbItems = dbTournaments
+    .filter((t) => {
+      const idStr = String(t.id);
+      if (dbScrapedIds.has(idStr) || dbScrapedNames.has(t.name.toLowerCase())) return false;
+      if (nextBts && t.id === nextBts.id) return false;
+      if ((t.tournamentCategory?.name ?? "").toUpperCase().includes("STARDUST")) return false;
+      const status = mapDbStatusForHome(t.status);
+      return status !== "cancelled";
+    })
+    .map((t) => {
+      const podium = t.tournamentParticipants
+        .filter((p) => p.finalPlacement && p.finalPlacement <= 3)
+        .sort((a, b) => (a.finalPlacement || 0) - (b.finalPlacement || 0))
+        .map((p) => ({
+          name: (p.playerName || "").replace(/✅|✔️/g, "").trim(),
+          rank: p.finalPlacement || 0,
+          wins: p.wins || 0,
+          losses: p.losses || 0,
+        }));
+      return {
+        id: t.id,
+        name: t.name,
+        date: new Date(t.date).toISOString(),
+        poster: t.posterUrl || "/logo.webp",
+        participants: t.tournamentParticipants.length,
+        matchesCount: t.tournamentMatches.length,
+        podium,
+        status: mapDbStatusForHome(t.status),
+      };
+    });
+
+  // 4. Merge & Sort (Newest to Oldest)
+  const merged: any[] = [];
+  if (nextBtsItem) {
+    merged.push(nextBtsItem);
+  }
+  merged.push(...btsCards);
+  merged.push(...mappedStardust);
+  merged.push(...otherDbItems);
+
+  merged.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+  return merged;
 }
 
 // ─────────────────────────────────────────────────────────────────────────────

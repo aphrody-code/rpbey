@@ -28,6 +28,9 @@ const home = process.env.HOME || homedir();
 const ENGINE_BIN =
   process.env.BXC_ENGINE_BIN ?? join(home, "bxc/rust-bridge/target/release/bxc-engine");
 if (!process.env.BXC_CHROME_BIN) process.env.BXC_CHROME_BIN = "/usr/local/bin/chromium";
+if (!process.env.LIBCURL_IMPERSONATE_PATH) {
+  process.env.LIBCURL_IMPERSONATE_PATH = join(home, ".bxc/bin/libcurl-impersonate.so");
+}
 
 export type Profile = "static" | "http" | "fast" | "stealth";
 
@@ -97,7 +100,7 @@ async function fetchOnce(url: string, o: FetchOptions): Promise<FetchResult | nu
             timeoutMs: o.navTimeoutMs,
           }
         : undefined,
-    spawnOpts: needsEngine ? { binaryPath: o.engineBin ?? ENGINE_BIN } : undefined,
+    spawnOpts: needsEngine ? (o.engineBin ? { binaryPath: o.engineBin } : undefined) : undefined,
   });
   try {
     const nav = await page.goto(url, {
