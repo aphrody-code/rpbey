@@ -12,7 +12,8 @@ const HOST = process.env.CDN_HOST ?? "0.0.0.0";
 const TMP_BASE = pathJoin(tmpdir(), "rpbey-cdn");
 const STORAGE = process.env.CDN_STORAGE ?? pathJoin(TMP_BASE, "images");
 const FALLBACK_PUBLIC_BASE = process.env.CDN_PUBLIC_BASE ?? "https://cdn.rosegriffon.fr";
-const ASSETS_MANIFEST = process.env.CDN_ASSETS_MANIFEST ?? pathJoin(TMP_BASE, "assets-manifest.json");
+const ASSETS_MANIFEST =
+  process.env.CDN_ASSETS_MANIFEST ?? pathJoin(TMP_BASE, "assets-manifest.json");
 const REPO_ROOT = process.env.CDN_REPO_ROOT ?? pathResolve(import.meta.dir, "../..");
 const VARIANTS_ROOT = process.env.CDN_VARIANTS_ROOT ?? pathJoin(TMP_BASE, "variants");
 const API_KEY = process.env.CDN_API_KEY;
@@ -364,7 +365,8 @@ async function serveAssetFile(req: Request, url: URL): Promise<Response> {
   }
 
   const file = Bun.file(actualPath);
-  if (!(await file.exists())) return new Response("Not Found", { status: 404, headers: withCors() });
+  if (!(await file.exists()))
+    return new Response("Not Found", { status: 404, headers: withCors() });
   const stat = await file.stat();
   if (!stat.isFile()) return new Response("Not Found", { status: 404, headers: withCors() });
   const etag = `"${stat.size.toString(36)}-${stat.mtimeMs.toString(36)}"`;
@@ -453,8 +455,7 @@ const server = Bun.serve({
 
         const ct = req.headers.get("content-type") ?? "application/octet-stream";
         const ext = MIME_TO_EXT[ct.split(";")[0].trim().toLowerCase()];
-        if (!ext)
-          return corsJson({ error: `Unsupported content-type: ${ct}` }, { status: 415 });
+        if (!ext) return corsJson({ error: `Unsupported content-type: ${ct}` }, { status: 415 });
 
         const id = genId(ext);
         const path = `${STORAGE}/${id}`;
