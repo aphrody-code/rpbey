@@ -1074,6 +1074,7 @@ function NextBtsTournamentCard({
     location: string | null;
     description: string | null;
     status: string;
+    posterUrl: string | null;
     challongeUrl: string | null;
     maxPlayers: number;
     _count: { participants: number };
@@ -1090,9 +1091,12 @@ function NextBtsTournamentCard({
     timeZone: "Europe/Paris",
   });
 
-  // Determine poster — match the naming convention
+  // Determine poster — prefer the row's own posterUrl (DB). The edition-derived
+  // path mis-maps special editions (e.g. "Hors-Série #1" → BTS1's poster), so it
+  // only serves as a fallback for legacy rows without a posterUrl.
   const edition = tournament.name.match(/#(\d+)/)?.[1];
-  const poster = edition ? `/tournaments/BTS${edition}_poster.webp` : "/logo.webp";
+  const poster =
+    tournament.posterUrl ?? (edition ? `/tournaments/BTS${edition}_poster.webp` : "/logo.webp");
 
   return (
     <Link
