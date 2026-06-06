@@ -4,7 +4,6 @@ import * as React from "react";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { AnimatePresence, MotionConfig, motion, useReducedMotion } from "framer-motion";
-import { globalSearch } from "@rpbey/api-client";
 import type { GlobalSearchItem, SearchCategory } from "@rpbey/api-contract";
 import { facetCounts, normalize, rankSearch, suggest } from "@/lib/search-rank";
 import type { BxProductGroup, RecommendedProduct } from "../../comparateur/_components/types";
@@ -69,46 +68,25 @@ export function SearchClient({ groups, recommendations }: SearchClientProps) {
   const [query, setQuery] = React.useState(initialQ);
   const [category, setCategory] = React.useState<SearchCategory | "all">("all");
 
-  // ── Index de recherche via le SDK (GET /api/v1/search, sans q = index complet) ──
+  // ── Index complet chargé UNE seule fois depuis l'endpoint mis en cache ─────────
+  // (CDN Vercel + navigateur). Toute la recherche est ensuite rankée CÔTÉ CLIENT
+  // (`rankSearch` = le même BM25F que le serveur ; sur Vercel le serveur n'ajoute
+  // aucun voisin vectoriel — pas de Redis en runtime Node). Conséquence : zéro
+  // aller-retour réseau par frappe → résultats **instantanés** dès l'index chargé.
   const [searchIndex, setSearchIndex] = React.useState<GlobalSearchItem[]>([]);
   const [indexLoading, setIndexLoading] = React.useState(true);
 
   React.useEffect(() => {
-    globalSearch()
-      .then((res) => {
-        const items = res.data?.data?.data;
-        if (res.data?.ok && Array.isArray(items)) {
-          setSearchIndex(items as GlobalSearchItem[]);
-        }
+    const ctrl = new AbortController();
+    fetch("/api/search/global", { signal: ctrl.signal })
+      .then((r) => r.json())
+      .then((json: { data?: GlobalSearchItem[] }) => {
+        if (Array.isArray(json.data)) setSearchIndex(json.data);
       })
       .catch(() => {})
       .finally(() => setIndexLoading(false));
+    return () => ctrl.abort();
   }, []);
-
-  // ── Recherche live : debounce 150ms, déclenché à chaque frappe ───────────────
-  // Pertinence globale de la vue « Tous » (ranking serveur BM25F sur l'index complet).
-  const [liveResults, setLiveResults] = React.useState<GlobalSearchItem[]>([]);
-
-  React.useEffect(() => {
-    if (!query.trim()) {
-      setLiveResults([]);
-      return;
-    }
-    const tid = setTimeout(async () => {
-      try {
-        const res = await globalSearch({ query: { q: query, limit: 60 } });
-        const payload = res.data?.data;
-        if (res.data?.ok && payload) {
-          setLiveResults((payload.data ?? []) as GlobalSearchItem[]);
-        } else {
-          setLiveResults(rankSearch(searchIndex, query, { limit: 60 }));
-        }
-      } catch {
-        setLiveResults(rankSearch(searchIndex, query, { limit: 60 }));
-      }
-    }, 150);
-    return () => clearTimeout(tid);
-  }, [query, searchIndex]);
 
   // ── Suggestions autocomplétion ────────────────────────────────────────────
   const suggestions = React.useMemo(
@@ -122,22 +100,19 @@ export function SearchClient({ groups, recommendations }: SearchClientProps) {
   // tombés dans le top-N global), donc le compteur de l'onglet ⇔ les résultats.
   const results = React.useMemo((): GlobalSearchItem[] => {
     if (!query.trim()) return [];
-    if (category === "all") {
-      return liveResults.length > 0 ? liveResults : rankSearch(searchIndex, query, { limit: 60 });
-    }
-    const pool = searchIndex.length > 0 ? searchIndex : liveResults;
+    // Ranking synchrone sur l'index en mémoire → instantané, aucune latence réseau.
+    if (category === "all") return rankSearch(searchIndex, query, { limit: 60 });
     // Limite haute (couvre le max de facette observé, ex. combos) → le compteur
     // de l'onglet correspond aux résultats affichés.
-    return rankSearch(pool, query, { category, limit: 300 });
-  }, [liveResults, searchIndex, query, category]);
+    return rankSearch(searchIndex, query, { category, limit: 300 });
+  }, [searchIndex, query, category]);
 
   // ── Compteurs de facette = MÊME source que les vues catégorie (index complet) ──
   // → le nombre affiché sur chaque onglet == le nombre de résultats au clic.
   const facets = React.useMemo((): Record<string, number> => {
     if (!query.trim()) return {};
-    const pool = searchIndex.length > 0 ? searchIndex : liveResults;
-    return facetCounts(pool, query);
-  }, [searchIndex, liveResults, query]);
+    return facetCounts(searchIndex, query);
+  }, [searchIndex, query]);
 
   // ── Knowledge Panel : entité produit matchée ──────────────────────────────
   const matchedGroup = React.useMemo((): BxProductGroup | null => {
