@@ -1,0 +1,24 @@
+# Cloud Build : build de l'image gacha-server depuis le CONTEXTE racine du monorepo
+# (-f apps/gacha-server/Dockerfile). Le token GitHub Packages est passé en substitution
+# `_GH_PACKAGES_TOKEN`.
+#
+# Usage (depuis la racine du repo) :
+#   gcloud builds submit --project aphrody --region europe-west3 \
+#     --config apps/gacha-server/cloudbuild.yaml \
+#     --substitutions=_IMAGE=<ar-image>:<tag>,_GH_PACKAGES_TOKEN=<token> .
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - -f
+      - apps/gacha-server/Dockerfile
+      - --build-arg
+      - GH_PACKAGES_TOKEN=${_GH_PACKAGES_TOKEN}
+      - -t
+      - ${_IMAGE}
+      - .
+images:
+  - ${_IMAGE}
+options:
+  machineType: E2_HIGHCPU_8
+timeout: 2400s
