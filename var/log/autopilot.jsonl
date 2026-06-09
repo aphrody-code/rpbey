@@ -1,0 +1,23 @@
+{"ts":"2026-06-04T23:19:20+08:00","tick":1,"task":"(1a) Cée apps/web/codegen.ts pou GaphQL typed documents","claude":"Err: Timeout after 300s","gemini":"Err: Timeout after 60s"}
+{"ts":"2026-06-04T23:26:59+08:00","tick":1,"task":"(1a) Cée apps/web/codegen.ts pou GaphQL typed documents","claude":"Err: Timeout after 300s","gemini":"Err: Timeout after 60s"}
+{"ts":"2026-06-04T15:51:29.071Z","tick":1,"task":"(1b) Recâbler le comparateur client sur le SDK : ComparateurClient → globalSearch","claude":"Error running command: TypeError [ERR_INVALID_ARG_TYPE]: stdio must be an array of 'inherit', 'pipe', 'ignore', Bun.file(pathOrFd), number, or null","gemini":"Error running command: TypeError [ERR_INVALID_ARG_TYPE]: stdio must be an array of 'inherit', 'pipe', 'ignore', Bun.file(pathOrFd), number, or null"}
+{"ts":"2026-06-04T15:52:29.765Z","tick":2,"task":"(1b) Recâbler bey-library client sur le SDK : bey-library → listParts","claude":"Error running command: TypeError [ERR_INVALID_ARG_TYPE]: stdio must be an array of 'inherit', 'pipe', 'ignore', Bun.file(pathOrFd), number, or null","gemini":"Error running command: TypeError [ERR_INVALID_ARG_TYPE]: stdio must be an array of 'inherit', 'pipe', 'ignore', Bun.file(pathOrFd), number, or null"}
+{"ts":"2026-06-04T15:53:30.369Z","tick":3,"task":"(harness) Créer scripts/contract-smoke.ts pour valider chaque route vs Zod","claude":"Error running command: TypeError [ERR_INVALID_ARG_TYPE]: stdio must be an array of 'inherit', 'pipe', 'ignore', Bun.file(pathOrFd), number, or null","gemini":"Error running command: TypeError [ERR_INVALID_ARG_TYPE]: stdio must be an array of 'inherit', 'pipe', 'ignore', Bun.file(pathOrFd), number, or null"}
+{"ts":"2026-06-04T15:54:31.222Z","tick":4,"task":"(cache) Migrer les unstable_cache restants vers 'use cache' dans lib/twitch, lib/tiktok et actions/brackets","claude":"Error running command: TypeError [ERR_INVALID_ARG_TYPE]: stdio must be an array of 'inherit', 'pipe', 'ignore', Bun.file(pathOrFd), number, or null","gemini":"Error running command: TypeError [ERR_INVALID_ARG_TYPE]: stdio must be an array of 'inherit', 'pipe', 'ignore', Bun.file(pathOrFd), number, or null"}
+{"ts":"2026-06-04T15:55:32.030Z","tick":5,"task":"(cache) Activer cacheComponents par périmètre validé","claude":"Error running command: TypeError [ERR_INVALID_ARG_TYPE]: stdio must be an array of 'inherit', 'pipe', 'ignore', Bun.file(pathOrFd), number, or null","gemini":"Error running command: TypeError [ERR_INVALID_ARG_TYPE]: stdio must be an array of 'inherit', 'pipe', 'ignore', Bun.file(pathOrFd), number, or null"}
+{"ts":"2026-06-04T15:56:32.761Z","tick":6,"task":"(vercel) Tester le build de production front contre une API distante","claude":"Error running command: TypeError [ERR_INVALID_ARG_TYPE]: stdio must be an array of 'inherit', 'pipe', 'ignore', Bun.file(pathOrFd), number, or null","gemini":"Error running command: TypeError [ERR_INVALID_ARG_TYPE]: stdio must be an array of 'inherit', 'pipe', 'ignore', Bun.file(pathOrFd), number, or null"}
+{"ts":"2026-06-04T15:57:33.383Z","tick":7,"task":"Idle","claude":"","gemini":"No tasks found"}
+{"ts":"2026-06-04T15:58:33.415Z","tick":8,"task":"Idle","claude":"","gemini":"No tasks found"}
+{"ts":"2026-06-04T15:59:33.438Z","tick":9,"task":"Idle","claude":"","gemini":"No tasks found"}
+{"ts":"2026-06-04T16:00:33.476Z","tick":10,"task":"Idle","claude":"","gemini":"No tasks found"}
+{"ts":"2026-06-04T16:01:33.502Z","tick":11,"task":"Idle","claude":"","gemini":"No tasks found"}
+{"ts":"2026-06-04T16:02:33.532Z","tick":12,"task":"Idle","claude":"","gemini":"No tasks found"}
+{"ts":"2026-06-04T16:03:33.543Z","tick":13,"task":"Idle","claude":"","gemini":"No tasks found"}
+{"ts":"2026-06-04T16:04:33.576Z","tick":14,"task":"Idle","claude":"","gemini":"No tasks found"}
+{"ts":"2026-06-04T16:05:33.604Z","tick":15,"task":"Idle","claude":"","gemini":"No tasks found"}
+{"ts":"2026-06-04T16:06:33.636Z","tick":16,"task":"Idle","claude":"","gemini":"No tasks found"}
+{"ts":"2026-06-04T16:07:33.668Z","tick":17,"task":"Idle","claude":"","gemini":"No tasks found"}
+{"ts":"2026-06-04T16:08:33.687Z","tick":18,"task":"Idle","claude":"","gemini":"No tasks found"}
+{"ts":"2026-06-04T16:09:33.720Z","tick":19,"task":"Idle","claude":"","gemini":"No tasks found"}
+{"ts":"2026-06-04T16:10:33.748Z","tick":20,"task":"Idle","claude":"","gemini":"No tasks found"}
+{"ts":"2026-06-04T16:11:33.764Z","tick":21,"task":"Idle","claude":"","gemini":"No tasks found"}
