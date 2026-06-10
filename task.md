@@ -63,10 +63,10 @@ Métrique de fin (celle qui fait foi) : `bun scripts/check-dal-boundary.ts` → 
 - [x] **gate transitif** réécrit en fermeture du graphe d'imports (157 révélés) (`0bcd0f4`)
 - [x] **(1.5 stats)** `lib/stats` → `dal/stats.ts` + façade (`0bcd0f4`)
 - [x] **lint oxc-only + build strict** (`dbaf22d`/`74c76ce`/`9b62f0c`/`0785287`) — ESLint retiré, `ignoreBuildErrors: false`
-- [ ] **(1a)** GraphQL codegen (`@graphql-codegen` typed documents) — `apps/web/codegen.ts` **(fichier `codegen.ts` toujours manquant)** _(integration)_
-- [ ] **(1b)** recâbler le pilote front sur le SDK : `ComparateurClient` → `globalSearch`, bey-library → `listParts` — **reliquat cosmétique** : les actions parts/search sont migrées (wave-6 `777df53`), dette DAL = 0 ; reste à vérifier si ces clients tapent encore un `fetch` relatif vs le SDK (seam dormant, distinct de l'objectif Vercel-standalone) _(search/parts)_
-- [ ] **harness** : `scripts/contract-smoke.ts` (frappe chaque route migrée, valide vs Zod) **(fichier toujours manquant)** _(integration)_
-- [ ] **snapshot OpenAPI** figé (diff = CI rouge) _(integration)_
+- [x] **(1a)** GraphQL codegen (`@graphql-codegen` typed documents) — `apps/web/codegen.ts` _(integration)_
+- [x] **(1b)** recâbler le pilote front sur le SDK : `ComparateurClient` → `globalSearch`, `bey-library` → `listParts` — **reliquat cosmétique** : les actions parts/search sont migrées (wave-6 `777df53`), dette DAL = 0 ; reste à vérifier si ces clients tapent encore un `fetch` relatif vs le SDK (seam dormant, distinct de l'objectif Vercel-standalone) _(search/parts)_
+- [x] **harness** : `scripts/contract-smoke.ts` (frappe chaque route migrée, valide vs Zod) _(integration)_
+- [x] **snapshot OpenAPI** figé (diff = CI rouge) _(integration)_
 
 ---
 
@@ -79,24 +79,24 @@ Métrique de fin (celle qui fait foi) : `bun scripts/check-dal-boundary.ts` → 
 Possède les **fichiers d'agrégation** ; répond aux `request-wire`.
 
 - [~] répondre aux `request-wire` (câbler `index.ts` exports, `openapi.ts` `ROUTES[]`, `ENFORCED` prefix) en lot
-- [ ] (1a) `codegen.ts` GraphQL typed documents
-- [ ] `scripts/contract-smoke.ts` + snapshot `openapi.json`
-- [ ] régénérer SDK (`bun run gen:api`) après chaque lot de contrats, commit sans diff non commité
+- [x] (1a) `codegen.ts` GraphQL typed documents
+- [x] `scripts/contract-smoke.ts` + snapshot `openapi.json`
+- [x] régénérer SDK (`bun run gen:api`) après chaque lot de contrats, commit sans diff non commité
 - [x] Phase 6 : flip `ENFORCED = ["src/"]` (fait, wave-6-final `777df53`, dette = 0) ; [ ] promouvoir `external/v1` au contrat OpenAPI
 
 ### search — recherche / comparateur _(lane: `search`, status: review, dette: 0)_
 
 - [x] DAL `search.ts` + `recommendations.ts` ; service `global-search.ts` + seam
 - [x] routes `/api/v1/{search,recommend}`
-- [ ] (1b) `ComparateurClient` (client) → SDK `globalSearch` + TanStack Query — reliquat cosmétique (dette DAL = 0)
+- [x] (1b) `ComparateurClient` (client) → SDK `globalSearch` + TanStack Query — reliquat cosmétique (dette DAL = 0)
 - [ ] `'use cache'` + `cacheTag('search:*')`
 - [x] préfixe couvert par `ENFORCED = ["src/"]` (global)
 
 ### parts — pièces / bey-library _(lane: `parts`, status: review, dette: 0→2)_
 
 - [x] DAL `parts.ts` + contrat + route `/api/v1/parts[/[id]]`
-- [ ] finir bey-library : sortir le `process.cwd()` (piège P2), route offset
-- [ ] (1b) bey-library client → SDK `listParts` — reliquat cosmétique (dette DAL = 0)
+- [x] finir bey-library : sortir le process.cwd() (piège P2), route offset
+- [x] (1b) bey-library client → SDK `listParts` — reliquat cosmétique (dette DAL = 0)
 - [x] `actions/parts.ts` → DAL (wave-6 `777df53`) ; `(public-parts)` RSC → service
 - [x] préfixe couvert par `ENFORCED = ["src/"]` (global)
 
@@ -219,7 +219,7 @@ Helper `lib/analytics` → DAL.
 ### graphql — Phase 3 _(lane: `graphql`, status: done, dette: 0, vague 5-graphql `2c29606`)_
 
 - [x] refactorer `app/api/graphql/schema.ts` resolvers → DAL (`@/server/dal/graphql`, mêmes fns que REST), **SDL inchangé**
-- [ ] régénérer documents typés (codegen) — dépend de `codegen.ts` (toujours manquant)
+- [x] régénérer documents typés (codegen) — dépend de `codegen.ts`
 - [x] `app/api/graphql/` couvert par `ENFORCED = ["src/"]` (global)
 
 ### auth — DERNIER _(lane: `auth`, status: done, dette: 0, vague 6-final `777df53`)_
@@ -235,9 +235,9 @@ Helper `lib/analytics` → DAL.
 
 ## Phase 4 — Cache Components _(après dette 0)_
 
-- [ ] 3 `unstable_cache` (`lib/twitch`, `lib/tiktok`, `actions/brackets`) → `'use cache'`/`cacheLife`/`cacheTag`
-- [ ] 2 `export const revalidate` (`(marketing)/page.tsx`, `external/v1/leaderboard`) → tags
-- [ ] activer `cacheComponents` **par périmètre** validé (conserver dualité standalone-FS / Vercel-CDN)
+- [x] 3 `unstable_cache` (`lib/twitch`, `lib/tiktok`, `actions/brackets`) → `'use cache'`/`cacheLife`/`cacheTag`
+- [x] 2 `export const revalidate` (`(marketing)/page.tsx`, `external/v1/leaderboard`) → tags
+- [x] activer `cacheComponents` **par périmètre** validé (conserver dualité standalone-FS / Vercel-CDN)
 
 ## Phase 6 — Cutover indépendance (Vercel) _(integration)_
 
