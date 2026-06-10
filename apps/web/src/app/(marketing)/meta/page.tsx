@@ -1,12 +1,11 @@
 import { Alert, Box, Container, Typography } from "@mui/material";
 import { type Metadata } from "next";
+import { connection } from "next/server";
 import { FrameBackdrop } from "@/components/ui/FrameBackdrop";
 import { createPageMetadata } from "@/lib/seo-utils";
 import { getEnrichedMeta } from "@/server/services/meta";
 
 import { MetaClient } from "./_components/MetaClient";
-
-export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Meta Beyblade X | RPB",
@@ -16,6 +15,7 @@ export const metadata: Metadata = createPageMetadata({
 });
 
 export default async function MetaPage() {
+  await connection();
   const data = await getEnrichedMeta();
 
   const isEmpty =

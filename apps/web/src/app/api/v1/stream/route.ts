@@ -2,9 +2,6 @@ import { StreamListResponseSchema, StreamQuerySchema } from "@rpbey/api-contract
 import { getRoute } from "@/server/api/handler";
 import { getBeyTubeFeatured, getRpbYoutubeVideos } from "@/server/dal/stream";
 
-export const dynamic = "force-dynamic";
-export const runtime = "nodejs";
-
 /**
  * `/api/v1/stream` — feed vidéo de la communauté RPB TV.
  * Sans `channelId` (ou `featured=true`) : vidéos BeyTube mises en avant.

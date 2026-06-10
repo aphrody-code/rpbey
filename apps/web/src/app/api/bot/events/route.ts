@@ -1,9 +1,6 @@
 import { type NextRequest } from "next/server";
 import { BOT_API_KEY, getBotApiUrl } from "@/lib/bot-config";
 
-export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
-
 /**
  * Server-Sent Events bridge to the bot's WebSocket.
  *

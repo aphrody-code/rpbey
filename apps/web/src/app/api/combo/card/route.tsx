@@ -8,9 +8,6 @@ import type { NextRequest } from "next/server";
 import { loadGoogleSansFonts } from "@/lib/og/fonts";
 import { getComboParts } from "@/server/dal/decks";
 
-export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
-
 const TYPE_COLORS: Record<string, string> = {
   ATTACK: "#ef4444",
   DEFENSE: "#3b82f6",

@@ -2,9 +2,6 @@ import { AnimeFramesQuerySchema, AnimeFramesResponseSchema } from "@rpbey/api-co
 import { getRoute } from "@/server/api/handler";
 import { listAnimeFrames } from "@/server/dal/anime";
 
-export const dynamic = "force-dynamic";
-export const runtime = "nodejs";
-
 /**
  * GET /api/v1/anime/frames — galerie publique de frames d'anime (captures fancaps
  * re-hébergées). Filtres : série (slug), épisode, personnage, marquant, recherche.

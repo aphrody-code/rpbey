@@ -1,6 +1,6 @@
 import { ApiClient } from "@twurple/api";
 import { AppTokenAuthProvider } from "@twurple/auth";
-import { unstable_cache } from "next/cache";
+import { cacheLife, cacheTag } from "next/cache";
 
 const clientId = process.env.TWITCH_CLIENT_ID || "";
 const clientSecret = process.env.TWITCH_CLIENT_SECRET || "";
@@ -111,69 +111,70 @@ export async function getLatestRPBVideo(): Promise<VideoInfo | null> {
     return null;
   }
 }
+async function getCachedClips(limit: number): Promise<VideoInfo[]> {
+  "use cache";
+  cacheTag("twitch");
+  cacheLife({ revalidate: 3600 });
+  if (!clientId || !clientSecret) return [];
+
+  try {
+    const user = await twitchClient.users.getUserByName(channelName);
+    if (!user) return [];
+
+    const clips = await twitchClient.clips.getClipsForBroadcaster(user.id, {
+      limit,
+    });
+
+    return clips.data.map((clip) => ({
+      id: clip.id,
+      title: clip.title,
+      url: clip.url,
+      thumbnailUrl: clip.thumbnailUrl.replace("{width}", "640").replace("{height}", "360"),
+      duration: `${Math.round(clip.duration).toString()}s`,
+      publishedAt: clip.creationDate,
+      viewCount: clip.views,
+      channelLogo: user.profilePictureUrl,
+    }));
+  } catch (error) {
+    console.error("Error fetching Twitch clips:", error);
+    return [];
+  }
+}
 
 export async function getRPBClips(limit = 6): Promise<VideoInfo[]> {
-  return unstable_cache(
-    async () => {
-      if (!clientId || !clientSecret) return [];
+  return getCachedClips(limit);
+}
 
-      try {
-        const user = await twitchClient.users.getUserByName(channelName);
-        if (!user) return [];
+async function getCachedVideos(limit: number): Promise<VideoInfo[]> {
+  "use cache";
+  cacheTag("twitch");
+  cacheLife({ revalidate: 3600 });
+  if (!clientId || !clientSecret) return [];
 
-        const clips = await twitchClient.clips.getClipsForBroadcaster(user.id, {
-          limit,
-        });
+  try {
+    const user = await twitchClient.users.getUserByName(channelName);
+    if (!user) return [];
 
-        return clips.data.map((clip) => ({
-          id: clip.id,
-          title: clip.title,
-          url: clip.url,
-          thumbnailUrl: clip.thumbnailUrl.replace("{width}", "640").replace("{height}", "360"),
-          duration: `${Math.round(clip.duration).toString()}s`,
-          publishedAt: clip.creationDate,
-          viewCount: clip.views,
-          channelLogo: user.profilePictureUrl,
-        }));
-      } catch (error) {
-        console.error("Error fetching Twitch clips:", error);
-        return [];
-      }
-    },
-    [`twitch-clips-${limit}`],
-    { revalidate: 3600, tags: ["twitch"] },
-  )();
+    const videos = await twitchClient.videos.getVideosByUser(user.id, {
+      limit,
+      type: "archive",
+    });
+
+    return videos.data.map((video) => ({
+      id: video.id,
+      title: video.title,
+      url: video.url,
+      thumbnailUrl: video.thumbnailUrl.replace("%{width}", "640").replace("%{height}", "360"),
+      duration: video.duration,
+      publishedAt: video.publishDate,
+      viewCount: video.views,
+    }));
+  } catch (error) {
+    console.error("Error fetching Twitch videos:", error);
+    return [];
+  }
 }
 
 export async function getRPBVideos(limit = 6): Promise<VideoInfo[]> {
-  return unstable_cache(
-    async () => {
-      if (!clientId || !clientSecret) return [];
-
-      try {
-        const user = await twitchClient.users.getUserByName(channelName);
-        if (!user) return [];
-
-        const videos = await twitchClient.videos.getVideosByUser(user.id, {
-          limit,
-          type: "archive",
-        });
-
-        return videos.data.map((video) => ({
-          id: video.id,
-          title: video.title,
-          url: video.url,
-          thumbnailUrl: video.thumbnailUrl.replace("%{width}", "640").replace("%{height}", "360"),
-          duration: video.duration,
-          publishedAt: video.publishDate,
-          viewCount: video.views,
-        }));
-      } catch (error) {
-        console.error("Error fetching Twitch videos:", error);
-        return [];
-      }
-    },
-    [`twitch-videos-${limit}`],
-    { revalidate: 3600, tags: ["twitch"] },
-  )();
+  return getCachedVideos(limit);
 }

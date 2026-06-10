@@ -5,8 +5,6 @@ import { createPageMetadata } from "@/lib/seo-utils";
 import { getPoll } from "@/server/dal/polls";
 import { readVoter } from "@/server/api/voter";
 
-export const dynamic = "force-dynamic";
-
 export async function generateMetadata({
   params,
 }: {

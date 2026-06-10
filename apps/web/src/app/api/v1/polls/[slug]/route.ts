@@ -3,9 +3,6 @@ import { jsonErr, jsonOk } from "@/server/api/handler";
 import { getPoll } from "@/server/dal/polls";
 import { readVoter } from "@/server/api/voter";
 
-export const dynamic = "force-dynamic";
-export const runtime = "nodejs";
-
 export async function GET(_request: Request, ctx: { params: Promise<{ slug: string }> }) {
   try {
     const { slug } = await ctx.params;

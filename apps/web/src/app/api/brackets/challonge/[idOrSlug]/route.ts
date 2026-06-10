@@ -6,8 +6,6 @@ interface RouteParams {
   params: Promise<{ idOrSlug: string }>;
 }
 
-export const dynamic = "force-dynamic";
-
 export async function GET(_req: Request, { params }: RouteParams): Promise<Response> {
   const { idOrSlug } = await params;
   const result = await convertChallongeToBrackets(idOrSlug);

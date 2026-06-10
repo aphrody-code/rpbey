@@ -3,9 +3,6 @@ import { BotLogsQuerySchema, BotLogsResponseSchema, getBotLogs } from "@/lib/bot
 import { jsonErr, jsonOk } from "@/server/api/handler";
 import { z } from "zod";
 
-export const dynamic = "force-dynamic";
-export const runtime = "nodejs";
-
 /**
  * BFF — logs du bot Discord (proxy typé de `:3001/api/logs`).
  * GATÉ ADMIN : les logs internes ne doivent pas être lisibles anonymement.

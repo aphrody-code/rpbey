@@ -2,9 +2,6 @@ import { GachaCardsQuerySchema, GachaCardsResponseSchema } from "@rpbey/api-cont
 import { getRoute } from "@/server/api/handler";
 import { getGachaCards } from "@/server/services/gacha";
 
-export const dynamic = "force-dynamic";
-export const runtime = "nodejs";
-
 export const GET = getRoute({
   query: GachaCardsQuerySchema,
   response: GachaCardsResponseSchema,

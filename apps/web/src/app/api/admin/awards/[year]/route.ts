@@ -5,9 +5,6 @@ import { auth } from "@/lib/auth";
 import { isStaffUser } from "@/lib/auth-utils";
 import { updateEdition } from "@/server/dal/polls";
 
-export const dynamic = "force-dynamic";
-export const runtime = "nodejs";
-
 export async function PATCH(request: Request, ctx: { params: Promise<{ year: string }> }) {
   const session = await auth.api.getSession({ headers: await headers() });
   if (!session?.user || !isStaffUser(session.user)) {

@@ -2,9 +2,6 @@ import { NextResponse } from "next/server";
 import { requireAdmin } from "@/lib/auth-utils";
 import { getBotApiUrl, BOT_API_KEY } from "@/lib/bot-config";
 
-export const dynamic = "force-dynamic";
-export const runtime = "nodejs";
-
 /**
  * Redémarre le conteneur Discord bot en prod (Cloud Run) via son API HTTP.
  * Réservé aux admins (better-auth + rôle).

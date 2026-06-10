@@ -3,9 +3,6 @@ import { TeamInviteInputSchema } from "@rpbey/api-contract";
 import { inviteToTeam } from "@/server/dal/teams";
 import { currentUserId, teamErrorResponse, unauthorized } from "@/server/api/teams-http";
 
-export const dynamic = "force-dynamic";
-export const runtime = "nodejs";
-
 export async function POST(request: Request, ctx: { params: Promise<{ id: string }> }) {
   const userId = await currentUserId();
   if (!userId) return unauthorized();

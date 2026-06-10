@@ -12,8 +12,6 @@ export const metadata: Metadata = createPageMetadata({
   path: "/anime",
 });
 
-export const dynamic = "force-dynamic";
-
 export default async function AnimePage() {
   const [featured, seriesByGeneration] = await Promise.all([
     getFeaturedSeries(),

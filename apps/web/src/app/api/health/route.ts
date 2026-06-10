@@ -1,9 +1,6 @@
 import { NextResponse } from "next/server";
 import { pingDatabase } from "@/server/dal/infra";
 
-export const dynamic = "force-dynamic";
-export const runtime = "nodejs";
-
 export async function GET() {
   const checks: Record<string, "ok" | "error"> = {};
 

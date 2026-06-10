@@ -6,9 +6,6 @@ import { TeamUpdateInputSchema } from "@rpbey/api-contract";
 import { deleteTeam, updateTeam } from "@/server/dal/teams";
 import { currentUserId, teamErrorResponse, unauthorized } from "@/server/api/teams-http";
 
-export const dynamic = "force-dynamic";
-export const runtime = "nodejs";
-
 export async function PATCH(request: Request, ctx: { params: Promise<{ id: string }> }) {
   const userId = await currentUserId();
   if (!userId) return unauthorized();

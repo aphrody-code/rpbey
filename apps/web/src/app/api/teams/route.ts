@@ -9,9 +9,6 @@ import { TeamCreateInputSchema } from "@rpbey/api-contract";
 import { createTeam, getMyInvites, getMyTeam } from "@/server/dal/teams";
 import { currentUserId, teamErrorResponse, unauthorized } from "@/server/api/teams-http";
 
-export const dynamic = "force-dynamic";
-export const runtime = "nodejs";
-
 export async function GET() {
   const userId = await currentUserId();
   if (!userId) return unauthorized();

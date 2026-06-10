@@ -20,9 +20,11 @@ export async function getDiscordStats(): Promise<DiscordStats> {
       fetch(`${getBotApiUrl()}/api/status`, {
         headers: { "x-api-key": BOT_API_KEY },
         next: { revalidate: 60 },
+        signal: AbortSignal.timeout(3000),
       }).catch(() => null),
       fetch("https://discord.com/api/v9/invites/rpb?with_counts=true", {
         next: { revalidate: 60 },
+        signal: AbortSignal.timeout(3000),
       }).catch(() => null),
     ]);
 

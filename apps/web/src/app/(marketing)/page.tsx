@@ -1,3 +1,4 @@
+import { cacheLife, cacheTag } from "next/cache";
 import { type MetaPartPreview, type RankingBoard } from "@/components/marketing";
 import { loadJsonSafe } from "@/lib/data-cache";
 import { createPageMetadata } from "@/lib/seo-utils";
@@ -13,9 +14,6 @@ import {
 } from "@/server/dal/cms";
 import { getAllTournamentsForHome } from "@/server/dal/tournaments";
 import HomeClient from "./HomeClient";
-
-export const dynamic = "force-dynamic";
-export const revalidate = 60;
 
 export const metadata = createPageMetadata({
   title: "RPB - République Populaire du Beyblade",
@@ -211,6 +209,10 @@ async function getRankingBoards(activeSeason: any): Promise<RankingBoard[]> {
 }
 
 export default async function HomePage() {
+  "use cache";
+  cacheTag("home");
+  cacheLife({ revalidate: 60 });
+
   const activeSeason = await getCurrentSeason();
   const [activeTournament, heroContent, rankingBoards, metaParts, recentVideos, tournaments] =
     await Promise.all([

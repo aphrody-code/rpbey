@@ -14,9 +14,6 @@ import { ImageResponse } from "next/og";
 import { loadGoogleSansFonts } from "@/lib/og/fonts";
 import { getStardustOgStats } from "@/server/dal/gacha";
 
-export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
-
 const WIDTH = 1200;
 const HEIGHT = 630;
 const ACCENT = "#60A5FA";

@@ -2,9 +2,6 @@ import { PublicUserResponseSchema } from "@rpbey/api-contract";
 import { jsonErr, jsonOk } from "@/server/api/handler";
 import { getPublicUser } from "@/server/dal/users";
 
-export const dynamic = "force-dynamic";
-export const runtime = "nodejs";
-
 export async function GET(_request: Request, ctx: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await ctx.params;

@@ -2,9 +2,6 @@ import { NextResponse } from "next/server";
 import { requireAdmin } from "@/lib/auth-utils";
 import { getAnalyticsSummary } from "@/lib/analytics";
 
-export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
-
 /**
  * Admin-gated CSV export of the analytics summary snapshot.
  * Returns: pageviews counters, top pages, top referrers, recent events.

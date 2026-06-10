@@ -1,4 +1,3 @@
-export const dynamic = "force-dynamic";
 import { connection } from "next/server";
 import ProfileClient from "./ProfileClient";
 

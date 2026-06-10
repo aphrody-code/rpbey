@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 
-export const dynamic = "force-dynamic";
-
 /**
  * Document de découverte Agent Auth Protocol (§3.1). Les agents IA le lisent à
  * `/.well-known/agent-configuration` pour découvrir le provider RPB, ses modes,

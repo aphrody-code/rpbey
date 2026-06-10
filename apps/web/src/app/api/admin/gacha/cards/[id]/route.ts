@@ -6,9 +6,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { requireAdmin } from "@/lib/auth-utils";
 import { deleteGachaCard, updateGachaCard, type GachaCardInput } from "@/server/dal/gacha";
 
-export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
-
 export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   if (!(await requireAdmin())) {
     return NextResponse.json({ error: "Non autorisé" }, { status: 401 });

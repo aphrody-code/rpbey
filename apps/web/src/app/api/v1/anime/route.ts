@@ -2,9 +2,6 @@ import { AnimeListQuerySchema, AnimeSeriesListResponseSchema } from "@rpbey/api-
 import { getRoute } from "@/server/api/handler";
 import { listFeaturedSeries, listPublishedSeries } from "@/server/dal/anime";
 
-export const dynamic = "force-dynamic";
-export const runtime = "nodejs";
-
 export const GET = getRoute({
   query: AnimeListQuerySchema,
   response: AnimeSeriesListResponseSchema,

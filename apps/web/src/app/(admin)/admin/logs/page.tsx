@@ -11,7 +11,6 @@ import { getBotCommands, getBotLogs, getBotStatus } from "@/lib/bot";
 import { BotConsole } from "./_components/BotConsole";
 
 export const metadata: Metadata = { title: "Console & Logs" };
-export const dynamic = "force-dynamic";
 
 export default async function AdminLogsPage() {
   const [status, logs, commands] = await Promise.all([

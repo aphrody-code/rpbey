@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Image from "next/image";
 import { useState } from "react";
-import { type StreamInfo } from "@/lib/twitch";
+import type { StreamInfo } from "@/lib/twitch";
 
 interface LiveBannerProps {
   stream: StreamInfo;

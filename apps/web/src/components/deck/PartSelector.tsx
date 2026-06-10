@@ -11,6 +11,7 @@ import Chip from "@mui/material/Chip";
 import CircularProgress from "@mui/material/CircularProgress";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
+import { listParts } from "@rpbey/api-client";
 import { useCallback, useEffect, useState } from "react";
 import { type BeyType, type Part, type PartType } from "@/lib/types";
 
@@ -29,15 +30,15 @@ interface PartSelectorProps {
 function getBeyTypeColor(beyType: BeyType | null): string {
   switch (beyType) {
     case "ATTACK":
-      return "#ef4444"; // red
+      return "#ff4d4d";
     case "DEFENSE":
-      return "#3b82f6"; // blue
+      return "#3399ff";
     case "STAMINA":
-      return "#22c55e"; // green
+      return "#ffcc00";
     case "BALANCE":
-      return "#a855f7"; // purple
+      return "#00cc66";
     default:
-      return "#6b7280"; // gray
+      return "#999999";
   }
 }
 
@@ -78,15 +79,16 @@ export function PartSelector({
     async (search?: string) => {
       setLoading(true);
       try {
-        const params = new URLSearchParams({ type });
-        if (search) params.set("search", search);
+        const res = await listParts({
+          query: {
+            type,
+            search: search || undefined,
+            pageSize: 100,
+          },
+        });
 
-        const response = await fetch(`/api/parts?${params}`);
-        const result = await response.json();
-
-        if (result.data) {
-          // Sort by name for consistency
-          setOptions(result.data);
+        if (res.data?.ok) {
+          setOptions(res.data.data.parts as any);
         }
       } catch (err) {
         console.error("Failed to fetch parts:", err);

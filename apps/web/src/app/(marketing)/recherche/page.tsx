@@ -1,7 +1,5 @@
 import { redirect } from "next/navigation";
 
-export const dynamic = "force-dynamic";
-
 /** Alias FR → route canonique `/search` (préserve `?q=`). */
 export default async function RechercheAlias({
   searchParams,

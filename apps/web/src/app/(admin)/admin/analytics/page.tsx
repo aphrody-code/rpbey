@@ -5,8 +5,6 @@ import { requireAdmin } from "@/lib/auth-utils";
 import { getAnalyticsSummary } from "@/lib/analytics";
 import { AnalyticsDashboard } from "@/components/admin/AnalyticsDashboard";
 
-export const dynamic = "force-dynamic";
-
 export const metadata: Metadata = {
   title: "Analytics temps réel",
   description: "Trafic en direct, pages vues, top pages, referrers et événements métier de la RPB.",

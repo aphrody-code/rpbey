@@ -2,9 +2,6 @@ import { type NextRequest } from "next/server";
 import { requireAdmin } from "@/lib/auth-utils";
 import { getAnalyticsSummary } from "@/lib/analytics";
 
-export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
-
 /**
  * Server-Sent Events stream of the analytics summary for the admin dashboard.
  *

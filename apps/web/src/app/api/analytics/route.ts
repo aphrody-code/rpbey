@@ -3,9 +3,6 @@ import { headers } from "next/headers";
 import { auth } from "@/lib/auth";
 import { anonSessionId, clientIpFromHeaders, recordEvent } from "@/lib/analytics";
 
-export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
-
 /**
  * Beacon endpoint for client-side pageviews + lightweight custom events.
  *

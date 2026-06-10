@@ -1,9 +1,6 @@
 import { NextResponse } from "next/server";
 import { getSearchCorpus } from "@/server/services/search-corpus";
 
-export const dynamic = "force-dynamic";
-export const runtime = "nodejs";
-
 /**
  * Index de recherche unifié `{ success, count, data }` — chargé UNE fois par la
  * page /search puis ranké 100 % côté client (résultats instantanés, zéro

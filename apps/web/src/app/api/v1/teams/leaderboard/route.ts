@@ -2,9 +2,6 @@ import { TeamLeaderboardQuerySchema, TeamLeaderboardResponseSchema } from "@rpbe
 import { getRoute } from "@/server/api/handler";
 import { getTeamsLeaderboard } from "@/server/dal/teams";
 
-export const dynamic = "force-dynamic";
-export const runtime = "nodejs";
-
 export const GET = getRoute({
   query: TeamLeaderboardQuerySchema,
   response: TeamLeaderboardResponseSchema,

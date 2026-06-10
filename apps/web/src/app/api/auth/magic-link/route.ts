@@ -6,8 +6,6 @@ import {
   findValidSessionByToken,
 } from "@/server/dal/auth";
 
-export const dynamic = "force-dynamic";
-
 /** Comparaison à temps constant (Web API, pas de node:crypto). */
 function timingSafeEqualStr(a: string, b: string): boolean {
   const ea = new TextEncoder().encode(a);

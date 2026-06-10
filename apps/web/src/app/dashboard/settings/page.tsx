@@ -1,4 +1,3 @@
-export const dynamic = "force-dynamic";
 import { Box } from "@mui/material";
 import { AccountSettings } from "@/components/dashboard/settings/AccountSettings";
 

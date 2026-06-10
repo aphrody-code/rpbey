@@ -27,8 +27,6 @@ export const metadata = createPageMetadata({
   path: "/reglement",
 });
 
-export const dynamic = "force-dynamic";
-
 const RULES = [
   {
     icon: <Handshake />,

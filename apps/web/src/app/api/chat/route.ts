@@ -1,9 +1,6 @@
 import { type NextRequest } from "next/server";
 import { type ChatTurn, prepareTurn } from "@/server/services/chat";
 
-export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
-
 /**
  * POST /api/chat — chat RAG Beyblade avec MÉMOIRE conversationnelle + STREAMING.
  * Body `{ message: string, history?: {role,content}[] }`.

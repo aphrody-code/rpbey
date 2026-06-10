@@ -1,5 +1,5 @@
 import { GetUserPosts } from "@tobyg74/tiktok-api-dl";
-import { unstable_cache } from "next/cache";
+import { cacheLife, cacheTag } from "next/cache";
 import { type TikTokVideo } from "@/lib/tiktok-types";
 
 export { type TikTokVideo };
@@ -67,10 +67,11 @@ function getFallbackVideos(_username: string): TikTokVideo[] {
   return [];
 }
 
-const getCachedTikTokVideos = unstable_cache(
-  async (username: string) => fetchTikTokVideos(username),
-  ["tiktok-videos-v1"],
-  { revalidate: 3600, tags: ["tiktok"] },
-);
+async function getCachedTikTokVideos(username: string) {
+  "use cache";
+  cacheTag("tiktok");
+  cacheLife({ revalidate: 3600 });
+  return fetchTikTokVideos(username);
+}
 
 export const getTikTokVideos = (username: string) => getCachedTikTokVideos(username);

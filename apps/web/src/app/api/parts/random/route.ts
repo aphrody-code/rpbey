@@ -1,8 +1,6 @@
 import { connection, NextResponse } from "next/server";
 import { getRandomPartByType } from "@/server/dal/parts";
 
-export const dynamic = "force-dynamic";
-
 export async function GET() {
   await connection();
   try {

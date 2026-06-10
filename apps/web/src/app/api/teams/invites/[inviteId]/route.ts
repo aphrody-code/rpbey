@@ -3,9 +3,6 @@ import { z } from "zod";
 import { respondToInvite } from "@/server/dal/teams";
 import { currentUserId, teamErrorResponse, unauthorized } from "@/server/api/teams-http";
 
-export const dynamic = "force-dynamic";
-export const runtime = "nodejs";
-
 const BodySchema = z.object({ accept: z.boolean() });
 
 export async function POST(request: Request, ctx: { params: Promise<{ inviteId: string }> }) {

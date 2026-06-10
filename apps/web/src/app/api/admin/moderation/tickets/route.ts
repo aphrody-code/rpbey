@@ -5,9 +5,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { requireAdmin } from "@/lib/auth-utils";
 import { listTickets } from "@/server/dal/moderation";
 
-export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
-
 export async function GET(req: NextRequest) {
   if (!(await requireAdmin())) {
     return NextResponse.json({ error: "Non autorisé" }, { status: 401 });

@@ -10,9 +10,6 @@ import { getWarningCount } from "@/server/dal/moderation";
  * dernier warning. Ni la raison ni l'identité du modérateur ne sont exposées.
  */
 
-export const dynamic = "force-dynamic";
-export const runtime = "nodejs";
-
 export const GET = getRoute({
   query: WarningCountQuerySchema,
   response: WarningCountResponseSchema,

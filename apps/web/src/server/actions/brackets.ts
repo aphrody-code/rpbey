@@ -1,6 +1,6 @@
 "use server";
 
-import { unstable_cache as cache } from "next/cache";
+import { cacheLife, cacheTag } from "next/cache";
 import { ChallongeApi } from "@rose-griffon/challonge/api";
 import {
   fetchAndParseAsScrapedTournament,
@@ -146,21 +146,26 @@ async function fetchViaTransport(
   return fetchViaHtmlRewriter(idOrSlug);
 }
 
-const fetchCachedAuto = cache(
-  (idOrSlug: string): Promise<ChallongeImportResult> => fetchViaTransport(idOrSlug, "auto"),
-  ["challonge-to-brackets-auto"],
-  { revalidate: 300, tags: [CACHE_TAG] },
-);
-const fetchCachedApi = cache(
-  (idOrSlug: string): Promise<ChallongeImportResult> => fetchViaTransport(idOrSlug, "api"),
-  ["challonge-to-brackets-api"],
-  { revalidate: 300, tags: [CACHE_TAG] },
-);
-const fetchCachedHtml = cache(
-  (idOrSlug: string): Promise<ChallongeImportResult> => fetchViaTransport(idOrSlug, "htmlrewriter"),
-  ["challonge-to-brackets-htmlrewriter"],
-  { revalidate: 300, tags: [CACHE_TAG] },
-);
+async function fetchCachedAuto(idOrSlug: string): Promise<ChallongeImportResult> {
+  "use cache";
+  cacheTag(CACHE_TAG);
+  cacheLife({ revalidate: 300 });
+  return fetchViaTransport(idOrSlug, "auto");
+}
+
+async function fetchCachedApi(idOrSlug: string): Promise<ChallongeImportResult> {
+  "use cache";
+  cacheTag(CACHE_TAG);
+  cacheLife({ revalidate: 300 });
+  return fetchViaTransport(idOrSlug, "api");
+}
+
+async function fetchCachedHtml(idOrSlug: string): Promise<ChallongeImportResult> {
+  "use cache";
+  cacheTag(CACHE_TAG);
+  cacheLife({ revalidate: 300 });
+  return fetchViaTransport(idOrSlug, "htmlrewriter");
+}
 
 /**
  * Convertit un tournoi Challonge en `ViewerData` natif `@rose-griffon/challonge-core`.

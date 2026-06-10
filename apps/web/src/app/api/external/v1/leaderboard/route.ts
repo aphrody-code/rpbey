@@ -1,8 +1,14 @@
 import crypto from "node:crypto";
 import { NextResponse } from "next/server";
 import { getExternalLeaderboardSnapshot } from "@/server/dal/rankings";
+import { cacheLife, cacheTag } from "next/cache";
 
-export const revalidate = 60; // Cache for 1 minute
+async function getCachedLeaderboardSnapshot() {
+  "use cache";
+  cacheTag("leaderboard");
+  cacheLife({ revalidate: 60 });
+  return getExternalLeaderboardSnapshot();
+}
 
 export async function OPTIONS() {
   return new NextResponse(null, {
@@ -36,7 +42,7 @@ export async function GET(request: Request) {
 
   try {
     const { rankingConfig, tournamentRows, players, activeSeasonRow } =
-      await getExternalLeaderboardSnapshot();
+      await getCachedLeaderboardSnapshot();
 
     const tournaments = tournamentRows.map((t) => ({
       ...t,

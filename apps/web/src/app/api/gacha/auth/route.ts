@@ -17,8 +17,6 @@ import { mintGachaWebSession } from "@/server/dal/gacha-auth";
  * Pas connecté → 401 (le client invite à se connecter sur rpbey.fr). Aucun mode invité :
  * seules les origines Discord/play légitimes reçoivent les en-têtes CORS+credentials.
  */
-export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
 
 const ALLOWED_ORIGINS = [/^https:\/\/play\.rpbey\.fr$/, /^https:\/\/[a-z0-9-]+\.discordsays\.com$/];
 

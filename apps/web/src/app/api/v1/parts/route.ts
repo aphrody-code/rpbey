@@ -2,9 +2,6 @@ import { PartsQuerySchema, PartsListResponseSchema } from "@rpbey/api-contract";
 import { getRoute } from "@/server/api/handler";
 import { listPublicParts } from "@/server/dal/parts";
 
-export const dynamic = "force-dynamic";
-export const runtime = "nodejs";
-
 export const GET = getRoute({
   query: PartsQuerySchema,
   response: PartsListResponseSchema,

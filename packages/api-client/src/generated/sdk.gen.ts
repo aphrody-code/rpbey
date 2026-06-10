@@ -2,7 +2,7 @@
 
 import * as z from 'zod';
 
-import type { Client, Options as Options2, TDataShape } from './client';
+import type { Client, Options as Options2, RequestResult, TDataShape } from './client';
 import { client } from './client.gen';
 import type { BotCommandsData, BotCommandsErrors, BotCommandsResponses, BotLogsData, BotLogsErrors, BotLogsResponses, BotStatusData, BotStatusErrors, BotStatusResponses, GachaCardsData, GachaCardsErrors, GachaCardsResponses, GachaDropsData, GachaDropsErrors, GachaDropsResponses, GachaLeaderboardData, GachaLeaderboardErrors, GachaLeaderboardResponses, GetAnimeSeriesData, GetAnimeSeriesErrors, GetAnimeSeriesResponses, GetMetaData, GetMetaErrors, GetMetaResponses, GetPollData, GetPollErrors, GetPollResponses, GetPublicUserData, GetPublicUserErrors, GetPublicUserResponses, GetRankingsData, GetRankingsErrors, GetRankingsResponses, GetRecommendationsData, GetRecommendationsErrors, GetRecommendationsResponses, GetSharedDeckData, GetSharedDeckErrors, GetSharedDeckResponses, GetTeamData, GetTeamErrors, GetTeamMembersData, GetTeamMembersErrors, GetTeamMembersResponses, GetTeamResponses, GetTierListData, GetTierListErrors, GetTierListResponses, GetTournamentData, GetTournamentErrors, GetTournamentResponses, GetUserMatchesData, GetUserMatchesErrors, GetUserMatchesResponses, GlobalSearchData, GlobalSearchErrors, GlobalSearchResponses, ListAnimeFramesData, ListAnimeFramesErrors, ListAnimeFramesResponses, ListAnimeSeriesByGenerationData, ListAnimeSeriesByGenerationErrors, ListAnimeSeriesByGenerationResponses, ListAnimeSeriesData, ListAnimeSeriesErrors, ListAnimeSeriesResponses, ListAwardsEditionsData, ListAwardsEditionsErrors, ListAwardsEditionsResponses, ListContentBlocksData, ListContentBlocksErrors, ListContentBlocksResponses, ListPartsData, ListPartsErrors, ListPartsResponses, ListPollsData, ListPollsErrors, ListPollsResponses, ListStaffMembersData, ListStaffMembersErrors, ListStaffMembersResponses, ListStreamVideosData, ListStreamVideosErrors, ListStreamVideosResponses, ListTeamsData, ListTeamsErrors, ListTeamsResponses, ListTierListsData, ListTierListsErrors, ListTierListsResponses, ListTournamentsData, ListTournamentsErrors, ListTournamentsResponses, ModerationSummaryData, ModerationSummaryErrors, ModerationSummaryResponses, ModerationWarningCountData, ModerationWarningCountErrors, ModerationWarningCountResponses, SearchAnimeData, SearchAnimeErrors, SearchAnimeResponses, TeamsLeaderboardData, TeamsLeaderboardErrors, TeamsLeaderboardResponses, TrackAnalyticsEventData, TrackAnalyticsEventErrors, TrackAnalyticsEventResponses } from './types.gen';
 import { zBotCommandsResponse, zBotLogsQuery, zBotLogsResponse, zBotStatusResponse, zGachaCardsQuery, zGachaCardsResponse, zGachaDropsResponse, zGachaLeaderboardQuery, zGachaLeaderboardResponse, zGetAnimeSeriesPath, zGetAnimeSeriesResponse, zGetMetaResponse, zGetPollPath, zGetPollResponse, zGetPublicUserPath, zGetPublicUserResponse, zGetRankingsQuery, zGetRankingsResponse, zGetRecommendationsQuery, zGetRecommendationsResponse, zGetSharedDeckQuery, zGetSharedDeckResponse, zGetTeamMembersPath, zGetTeamMembersResponse, zGetTeamPath, zGetTeamResponse, zGetTierListPath, zGetTierListResponse, zGetTournamentPath, zGetTournamentResponse, zGetUserMatchesPath, zGetUserMatchesQuery, zGetUserMatchesResponse, zGlobalSearchQuery, zGlobalSearchResponse, zListAnimeFramesQuery, zListAnimeFramesResponse, zListAnimeSeriesByGenerationResponse, zListAnimeSeriesQuery, zListAnimeSeriesResponse, zListAwardsEditionsResponse, zListContentBlocksQuery, zListContentBlocksResponse, zListPartsQuery, zListPartsResponse, zListPollsQuery, zListPollsResponse, zListStaffMembersResponse, zListStreamVideosQuery, zListStreamVideosResponse, zListTeamsQuery, zListTeamsResponse, zListTierListsQuery, zListTierListsResponse, zListTournamentsQuery, zListTournamentsResponse, zModerationSummaryResponse, zModerationWarningCountQuery, zModerationWarningCountResponse, zSearchAnimeQuery, zSearchAnimeResponse, zTeamsLeaderboardQuery, zTeamsLeaderboardResponse, zTrackAnalyticsEventBody, zTrackAnalyticsEventResponse } from './zod.gen';
@@ -24,7 +24,7 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
 /**
  * Recommandations produits pondérées (méta-relevance / hype / prix).
  */
-export const getRecommendations = <ThrowOnError extends boolean = false>(options?: Options<GetRecommendationsData, ThrowOnError>) => (options?.client ?? client).get<GetRecommendationsResponses, GetRecommendationsErrors, ThrowOnError>({
+export const getRecommendations = <ThrowOnError extends boolean = false>(options?: Options<GetRecommendationsData, ThrowOnError>): RequestResult<GetRecommendationsResponses, GetRecommendationsErrors, ThrowOnError> => (options?.client ?? client).get<GetRecommendationsResponses, GetRecommendationsErrors, ThrowOnError>({
     requestValidator: async (data) => await z.object({
         body: z.never().optional(),
         path: z.never().optional(),
@@ -38,7 +38,7 @@ export const getRecommendations = <ThrowOnError extends boolean = false>(options
 /**
  * Recherche globale Beyblade toutes saisons (produits, beys, pièces, combos, tournois, bladers, anime, lexique, sites). `q` absent = index complet ; sinon classement BM25F + facettes.
  */
-export const globalSearch = <ThrowOnError extends boolean = false>(options?: Options<GlobalSearchData, ThrowOnError>) => (options?.client ?? client).get<GlobalSearchResponses, GlobalSearchErrors, ThrowOnError>({
+export const globalSearch = <ThrowOnError extends boolean = false>(options?: Options<GlobalSearchData, ThrowOnError>): RequestResult<GlobalSearchResponses, GlobalSearchErrors, ThrowOnError> => (options?.client ?? client).get<GlobalSearchResponses, GlobalSearchErrors, ThrowOnError>({
     requestValidator: async (data) => await z.object({
         body: z.never().optional(),
         path: z.never().optional(),
@@ -52,7 +52,7 @@ export const globalSearch = <ThrowOnError extends boolean = false>(options?: Opt
 /**
  * Méta-analyse hebdomadaire des pièces Beyblade X (tournois WBO), enrichie stats/images.
  */
-export const getMeta = <ThrowOnError extends boolean = false>(options?: Options<GetMetaData, ThrowOnError>) => (options?.client ?? client).get<GetMetaResponses, GetMetaErrors, ThrowOnError>({
+export const getMeta = <ThrowOnError extends boolean = false>(options?: Options<GetMetaData, ThrowOnError>): RequestResult<GetMetaResponses, GetMetaErrors, ThrowOnError> => (options?.client ?? client).get<GetMetaResponses, GetMetaErrors, ThrowOnError>({
     requestValidator: async (data) => await z.object({
         body: z.never().optional(),
         path: z.never().optional(),
@@ -66,7 +66,7 @@ export const getMeta = <ThrowOnError extends boolean = false>(options?: Options<
 /**
  * Catalogue public des pièces Beyblade X (filtres + pagination).
  */
-export const listParts = <ThrowOnError extends boolean = false>(options?: Options<ListPartsData, ThrowOnError>) => (options?.client ?? client).get<ListPartsResponses, ListPartsErrors, ThrowOnError>({
+export const listParts = <ThrowOnError extends boolean = false>(options?: Options<ListPartsData, ThrowOnError>): RequestResult<ListPartsResponses, ListPartsErrors, ThrowOnError> => (options?.client ?? client).get<ListPartsResponses, ListPartsErrors, ThrowOnError>({
     requestValidator: async (data) => await z.object({
         body: z.never().optional(),
         path: z.never().optional(),
@@ -80,7 +80,7 @@ export const listParts = <ThrowOnError extends boolean = false>(options?: Option
 /**
  * Classements RPB (SATR / Wild Breakers / Stardust par saison ou carrière, ou leaderboard global pondéré).
  */
-export const getRankings = <ThrowOnError extends boolean = false>(options?: Options<GetRankingsData, ThrowOnError>) => (options?.client ?? client).get<GetRankingsResponses, GetRankingsErrors, ThrowOnError>({
+export const getRankings = <ThrowOnError extends boolean = false>(options?: Options<GetRankingsData, ThrowOnError>): RequestResult<GetRankingsResponses, GetRankingsErrors, ThrowOnError> => (options?.client ?? client).get<GetRankingsResponses, GetRankingsErrors, ThrowOnError>({
     requestValidator: async (data) => await z.object({
         body: z.never().optional(),
         path: z.never().optional(),
@@ -94,7 +94,7 @@ export const getRankings = <ThrowOnError extends boolean = false>(options?: Opti
 /**
  * Profil joueur public (compte + profil agrégé) par identifiant.
  */
-export const getPublicUser = <ThrowOnError extends boolean = false>(options: Options<GetPublicUserData, ThrowOnError>) => (options.client ?? client).get<GetPublicUserResponses, GetPublicUserErrors, ThrowOnError>({
+export const getPublicUser = <ThrowOnError extends boolean = false>(options: Options<GetPublicUserData, ThrowOnError>): RequestResult<GetPublicUserResponses, GetPublicUserErrors, ThrowOnError> => (options.client ?? client).get<GetPublicUserResponses, GetPublicUserErrors, ThrowOnError>({
     requestValidator: async (data) => await z.object({
         body: z.never().optional(),
         path: zGetPublicUserPath,
@@ -108,7 +108,7 @@ export const getPublicUser = <ThrowOnError extends boolean = false>(options: Opt
 /**
  * Historique de matchs paginé d'un joueur.
  */
-export const getUserMatches = <ThrowOnError extends boolean = false>(options: Options<GetUserMatchesData, ThrowOnError>) => (options.client ?? client).get<GetUserMatchesResponses, GetUserMatchesErrors, ThrowOnError>({
+export const getUserMatches = <ThrowOnError extends boolean = false>(options: Options<GetUserMatchesData, ThrowOnError>): RequestResult<GetUserMatchesResponses, GetUserMatchesErrors, ThrowOnError> => (options.client ?? client).get<GetUserMatchesResponses, GetUserMatchesErrors, ThrowOnError>({
     requestValidator: async (data) => await z.object({
         body: z.never().optional(),
         path: zGetUserMatchesPath,
@@ -122,7 +122,7 @@ export const getUserMatches = <ThrowOnError extends boolean = false>(options: Op
 /**
  * Liste publique des tournois RPB (cartes avec catégorie + compteurs), filtrable par statut et paginable.
  */
-export const listTournaments = <ThrowOnError extends boolean = false>(options?: Options<ListTournamentsData, ThrowOnError>) => (options?.client ?? client).get<ListTournamentsResponses, ListTournamentsErrors, ThrowOnError>({
+export const listTournaments = <ThrowOnError extends boolean = false>(options?: Options<ListTournamentsData, ThrowOnError>): RequestResult<ListTournamentsResponses, ListTournamentsErrors, ThrowOnError> => (options?.client ?? client).get<ListTournamentsResponses, ListTournamentsErrors, ThrowOnError>({
     requestValidator: async (data) => await z.object({
         body: z.never().optional(),
         path: z.never().optional(),
@@ -136,7 +136,7 @@ export const listTournaments = <ThrowOnError extends boolean = false>(options?: 
 /**
  * Détail d'un tournoi (ligne + participants + matches) par id, challongeId ou slug.
  */
-export const getTournament = <ThrowOnError extends boolean = false>(options: Options<GetTournamentData, ThrowOnError>) => (options.client ?? client).get<GetTournamentResponses, GetTournamentErrors, ThrowOnError>({
+export const getTournament = <ThrowOnError extends boolean = false>(options: Options<GetTournamentData, ThrowOnError>): RequestResult<GetTournamentResponses, GetTournamentErrors, ThrowOnError> => (options.client ?? client).get<GetTournamentResponses, GetTournamentErrors, ThrowOnError>({
     requestValidator: async (data) => await z.object({
         body: z.never().optional(),
         path: zGetTournamentPath,
@@ -150,7 +150,7 @@ export const getTournament = <ThrowOnError extends boolean = false>(options: Opt
 /**
  * Feed BeyTube de la communauté (vidéos mises en avant, triées par date).
  */
-export const listStreamVideos = <ThrowOnError extends boolean = false>(options?: Options<ListStreamVideosData, ThrowOnError>) => (options?.client ?? client).get<ListStreamVideosResponses, ListStreamVideosErrors, ThrowOnError>({
+export const listStreamVideos = <ThrowOnError extends boolean = false>(options?: Options<ListStreamVideosData, ThrowOnError>): RequestResult<ListStreamVideosResponses, ListStreamVideosErrors, ThrowOnError> => (options?.client ?? client).get<ListStreamVideosResponses, ListStreamVideosErrors, ThrowOnError>({
     requestValidator: async (data) => await z.object({
         body: z.never().optional(),
         path: z.never().optional(),
@@ -164,7 +164,7 @@ export const listStreamVideos = <ThrowOnError extends boolean = false>(options?:
 /**
  * Séries d'anime Beyblade publiées (lecture publique), filtrables par génération et `featured`.
  */
-export const listAnimeSeries = <ThrowOnError extends boolean = false>(options?: Options<ListAnimeSeriesData, ThrowOnError>) => (options?.client ?? client).get<ListAnimeSeriesResponses, ListAnimeSeriesErrors, ThrowOnError>({
+export const listAnimeSeries = <ThrowOnError extends boolean = false>(options?: Options<ListAnimeSeriesData, ThrowOnError>): RequestResult<ListAnimeSeriesResponses, ListAnimeSeriesErrors, ThrowOnError> => (options?.client ?? client).get<ListAnimeSeriesResponses, ListAnimeSeriesErrors, ThrowOnError>({
     requestValidator: async (data) => await z.object({
         body: z.never().optional(),
         path: z.never().optional(),
@@ -178,7 +178,7 @@ export const listAnimeSeries = <ThrowOnError extends boolean = false>(options?: 
 /**
  * Séries d'anime regroupées par génération (ORIGINAL / METAL / BURST / X).
  */
-export const listAnimeSeriesByGeneration = <ThrowOnError extends boolean = false>(options?: Options<ListAnimeSeriesByGenerationData, ThrowOnError>) => (options?.client ?? client).get<ListAnimeSeriesByGenerationResponses, ListAnimeSeriesByGenerationErrors, ThrowOnError>({
+export const listAnimeSeriesByGeneration = <ThrowOnError extends boolean = false>(options?: Options<ListAnimeSeriesByGenerationData, ThrowOnError>): RequestResult<ListAnimeSeriesByGenerationResponses, ListAnimeSeriesByGenerationErrors, ThrowOnError> => (options?.client ?? client).get<ListAnimeSeriesByGenerationResponses, ListAnimeSeriesByGenerationErrors, ThrowOnError>({
     requestValidator: async (data) => await z.object({
         body: z.never().optional(),
         path: z.never().optional(),
@@ -192,7 +192,7 @@ export const listAnimeSeriesByGeneration = <ThrowOnError extends boolean = false
 /**
  * Recherche de séries et épisodes d'anime publiés par texte libre.
  */
-export const searchAnime = <ThrowOnError extends boolean = false>(options: Options<SearchAnimeData, ThrowOnError>) => (options.client ?? client).get<SearchAnimeResponses, SearchAnimeErrors, ThrowOnError>({
+export const searchAnime = <ThrowOnError extends boolean = false>(options: Options<SearchAnimeData, ThrowOnError>): RequestResult<SearchAnimeResponses, SearchAnimeErrors, ThrowOnError> => (options.client ?? client).get<SearchAnimeResponses, SearchAnimeErrors, ThrowOnError>({
     requestValidator: async (data) => await z.object({
         body: z.never().optional(),
         path: z.never().optional(),
@@ -206,7 +206,7 @@ export const searchAnime = <ThrowOnError extends boolean = false>(options: Optio
 /**
  * Galerie publique de frames d'anime (captures), filtrable par série, épisode, personnage, « marquant » ou recherche libre. Pagination par curseur.
  */
-export const listAnimeFrames = <ThrowOnError extends boolean = false>(options?: Options<ListAnimeFramesData, ThrowOnError>) => (options?.client ?? client).get<ListAnimeFramesResponses, ListAnimeFramesErrors, ThrowOnError>({
+export const listAnimeFrames = <ThrowOnError extends boolean = false>(options?: Options<ListAnimeFramesData, ThrowOnError>): RequestResult<ListAnimeFramesResponses, ListAnimeFramesErrors, ThrowOnError> => (options?.client ?? client).get<ListAnimeFramesResponses, ListAnimeFramesErrors, ThrowOnError>({
     requestValidator: async (data) => await z.object({
         body: z.never().optional(),
         path: z.never().optional(),
@@ -220,7 +220,7 @@ export const listAnimeFrames = <ThrowOnError extends boolean = false>(options?: 
 /**
  * Détail d'une série d'anime par slug (épisodes publiés + sources actives).
  */
-export const getAnimeSeries = <ThrowOnError extends boolean = false>(options: Options<GetAnimeSeriesData, ThrowOnError>) => (options.client ?? client).get<GetAnimeSeriesResponses, GetAnimeSeriesErrors, ThrowOnError>({
+export const getAnimeSeries = <ThrowOnError extends boolean = false>(options: Options<GetAnimeSeriesData, ThrowOnError>): RequestResult<GetAnimeSeriesResponses, GetAnimeSeriesErrors, ThrowOnError> => (options.client ?? client).get<GetAnimeSeriesResponses, GetAnimeSeriesErrors, ThrowOnError>({
     requestValidator: async (data) => await z.object({
         body: z.never().optional(),
         path: zGetAnimeSeriesPath,
@@ -234,7 +234,7 @@ export const getAnimeSeries = <ThrowOnError extends boolean = false>(options: Op
 /**
  * Blocs de contenu éditorial (lecture publique) ; `?slug=` filtre sur un bloc précis.
  */
-export const listContentBlocks = <ThrowOnError extends boolean = false>(options?: Options<ListContentBlocksData, ThrowOnError>) => (options?.client ?? client).get<ListContentBlocksResponses, ListContentBlocksErrors, ThrowOnError>({
+export const listContentBlocks = <ThrowOnError extends boolean = false>(options?: Options<ListContentBlocksData, ThrowOnError>): RequestResult<ListContentBlocksResponses, ListContentBlocksErrors, ThrowOnError> => (options?.client ?? client).get<ListContentBlocksResponses, ListContentBlocksErrors, ThrowOnError>({
     requestValidator: async (data) => await z.object({
         body: z.never().optional(),
         path: z.never().optional(),
@@ -248,7 +248,7 @@ export const listContentBlocks = <ThrowOnError extends boolean = false>(options?
 /**
  * Membres du staff actifs (page « notre équipe »).
  */
-export const listStaffMembers = <ThrowOnError extends boolean = false>(options?: Options<ListStaffMembersData, ThrowOnError>) => (options?.client ?? client).get<ListStaffMembersResponses, ListStaffMembersErrors, ThrowOnError>({
+export const listStaffMembers = <ThrowOnError extends boolean = false>(options?: Options<ListStaffMembersData, ThrowOnError>): RequestResult<ListStaffMembersResponses, ListStaffMembersErrors, ThrowOnError> => (options?.client ?? client).get<ListStaffMembersResponses, ListStaffMembersErrors, ThrowOnError>({
     requestValidator: async (data) => await z.object({
         body: z.never().optional(),
         path: z.never().optional(),
@@ -262,7 +262,7 @@ export const listStaffMembers = <ThrowOnError extends boolean = false>(options?:
 /**
  * Lecture publique d'un deck partageable par identifiant (`?id=`), read-only.
  */
-export const getSharedDeck = <ThrowOnError extends boolean = false>(options: Options<GetSharedDeckData, ThrowOnError>) => (options.client ?? client).get<GetSharedDeckResponses, GetSharedDeckErrors, ThrowOnError>({
+export const getSharedDeck = <ThrowOnError extends boolean = false>(options: Options<GetSharedDeckData, ThrowOnError>): RequestResult<GetSharedDeckResponses, GetSharedDeckErrors, ThrowOnError> => (options.client ?? client).get<GetSharedDeckResponses, GetSharedDeckErrors, ThrowOnError>({
     requestValidator: async (data) => await z.object({
         body: z.never().optional(),
         path: z.never().optional(),
@@ -276,7 +276,7 @@ export const getSharedDeck = <ThrowOnError extends boolean = false>(options: Opt
 /**
  * Ingestion publique anonyme d'un événement analytics (pageview / événement métier), best-effort.
  */
-export const trackAnalyticsEvent = <ThrowOnError extends boolean = false>(options: Options<TrackAnalyticsEventData, ThrowOnError>) => (options.client ?? client).post<TrackAnalyticsEventResponses, TrackAnalyticsEventErrors, ThrowOnError>({
+export const trackAnalyticsEvent = <ThrowOnError extends boolean = false>(options: Options<TrackAnalyticsEventData, ThrowOnError>): RequestResult<TrackAnalyticsEventResponses, TrackAnalyticsEventErrors, ThrowOnError> => (options.client ?? client).post<TrackAnalyticsEventResponses, TrackAnalyticsEventErrors, ThrowOnError>({
     requestValidator: async (data) => await z.object({
         body: zTrackAnalyticsEventBody,
         path: z.never().optional(),
@@ -294,7 +294,7 @@ export const trackAnalyticsEvent = <ThrowOnError extends boolean = false>(option
 /**
  * Catalogue public des cartes gacha TCG (filtres rareté/série/drop + recherche).
  */
-export const gachaCards = <ThrowOnError extends boolean = false>(options?: Options<GachaCardsData, ThrowOnError>) => (options?.client ?? client).get<GachaCardsResponses, GachaCardsErrors, ThrowOnError>({
+export const gachaCards = <ThrowOnError extends boolean = false>(options?: Options<GachaCardsData, ThrowOnError>): RequestResult<GachaCardsResponses, GachaCardsErrors, ThrowOnError> => (options?.client ?? client).get<GachaCardsResponses, GachaCardsErrors, ThrowOnError>({
     requestValidator: async (data) => await z.object({
         body: z.never().optional(),
         path: z.never().optional(),
@@ -308,7 +308,7 @@ export const gachaCards = <ThrowOnError extends boolean = false>(options?: Optio
 /**
  * Collections (drops) gacha saisonnières publiques, avec compteur de cartes.
  */
-export const gachaDrops = <ThrowOnError extends boolean = false>(options?: Options<GachaDropsData, ThrowOnError>) => (options?.client ?? client).get<GachaDropsResponses, GachaDropsErrors, ThrowOnError>({
+export const gachaDrops = <ThrowOnError extends boolean = false>(options?: Options<GachaDropsData, ThrowOnError>): RequestResult<GachaDropsResponses, GachaDropsErrors, ThrowOnError> => (options?.client ?? client).get<GachaDropsResponses, GachaDropsErrors, ThrowOnError>({
     requestValidator: async (data) => await z.object({
         body: z.never().optional(),
         path: z.never().optional(),
@@ -322,7 +322,7 @@ export const gachaDrops = <ThrowOnError extends boolean = false>(options?: Optio
 /**
  * Classement public gacha (BeyCoins / collection / duels), paginable.
  */
-export const gachaLeaderboard = <ThrowOnError extends boolean = false>(options?: Options<GachaLeaderboardData, ThrowOnError>) => (options?.client ?? client).get<GachaLeaderboardResponses, GachaLeaderboardErrors, ThrowOnError>({
+export const gachaLeaderboard = <ThrowOnError extends boolean = false>(options?: Options<GachaLeaderboardData, ThrowOnError>): RequestResult<GachaLeaderboardResponses, GachaLeaderboardErrors, ThrowOnError> => (options?.client ?? client).get<GachaLeaderboardResponses, GachaLeaderboardErrors, ThrowOnError>({
     requestValidator: async (data) => await z.object({
         body: z.never().optional(),
         path: z.never().optional(),
@@ -336,7 +336,7 @@ export const gachaLeaderboard = <ThrowOnError extends boolean = false>(options?:
 /**
  * Statut du bot Discord (proxy server-to-server `:3001`) ; `null` si injoignable.
  */
-export const botStatus = <ThrowOnError extends boolean = false>(options?: Options<BotStatusData, ThrowOnError>) => (options?.client ?? client).get<BotStatusResponses, BotStatusErrors, ThrowOnError>({
+export const botStatus = <ThrowOnError extends boolean = false>(options?: Options<BotStatusData, ThrowOnError>): RequestResult<BotStatusResponses, BotStatusErrors, ThrowOnError> => (options?.client ?? client).get<BotStatusResponses, BotStatusErrors, ThrowOnError>({
     requestValidator: async (data) => await z.object({
         body: z.never().optional(),
         path: z.never().optional(),
@@ -350,7 +350,7 @@ export const botStatus = <ThrowOnError extends boolean = false>(options?: Option
 /**
  * Derniers logs du bot Discord (`tail` borné 1..2000, curseur ISO `since` optionnel).
  */
-export const botLogs = <ThrowOnError extends boolean = false>(options?: Options<BotLogsData, ThrowOnError>) => (options?.client ?? client).get<BotLogsResponses, BotLogsErrors, ThrowOnError>({
+export const botLogs = <ThrowOnError extends boolean = false>(options?: Options<BotLogsData, ThrowOnError>): RequestResult<BotLogsResponses, BotLogsErrors, ThrowOnError> => (options?.client ?? client).get<BotLogsResponses, BotLogsErrors, ThrowOnError>({
     requestValidator: async (data) => await z.object({
         body: z.never().optional(),
         path: z.never().optional(),
@@ -364,7 +364,7 @@ export const botLogs = <ThrowOnError extends boolean = false>(options?: Options<
 /**
  * Commandes applicatives enregistrées par le bot Discord.
  */
-export const botCommands = <ThrowOnError extends boolean = false>(options?: Options<BotCommandsData, ThrowOnError>) => (options?.client ?? client).get<BotCommandsResponses, BotCommandsErrors, ThrowOnError>({
+export const botCommands = <ThrowOnError extends boolean = false>(options?: Options<BotCommandsData, ThrowOnError>): RequestResult<BotCommandsResponses, BotCommandsErrors, ThrowOnError> => (options?.client ?? client).get<BotCommandsResponses, BotCommandsErrors, ThrowOnError>({
     requestValidator: async (data) => await z.object({
         body: z.never().optional(),
         path: z.never().optional(),
@@ -378,7 +378,7 @@ export const botCommands = <ThrowOnError extends boolean = false>(options?: Opti
 /**
  * Cliché agrégé ANONYMISÉ de la modération (warnings/tickets/reminders, distributions).
  */
-export const moderationSummary = <ThrowOnError extends boolean = false>(options?: Options<ModerationSummaryData, ThrowOnError>) => (options?.client ?? client).get<ModerationSummaryResponses, ModerationSummaryErrors, ThrowOnError>({
+export const moderationSummary = <ThrowOnError extends boolean = false>(options?: Options<ModerationSummaryData, ThrowOnError>): RequestResult<ModerationSummaryResponses, ModerationSummaryErrors, ThrowOnError> => (options?.client ?? client).get<ModerationSummaryResponses, ModerationSummaryErrors, ThrowOnError>({
     requestValidator: async (data) => await z.object({
         body: z.never().optional(),
         path: z.never().optional(),
@@ -392,7 +392,7 @@ export const moderationSummary = <ThrowOnError extends boolean = false>(options?
 /**
  * Compteur de warnings d'un membre Discord (`discordId`), sans PII.
  */
-export const moderationWarningCount = <ThrowOnError extends boolean = false>(options: Options<ModerationWarningCountData, ThrowOnError>) => (options.client ?? client).get<ModerationWarningCountResponses, ModerationWarningCountErrors, ThrowOnError>({
+export const moderationWarningCount = <ThrowOnError extends boolean = false>(options: Options<ModerationWarningCountData, ThrowOnError>): RequestResult<ModerationWarningCountResponses, ModerationWarningCountErrors, ThrowOnError> => (options.client ?? client).get<ModerationWarningCountResponses, ModerationWarningCountErrors, ThrowOnError>({
     requestValidator: async (data) => await z.object({
         body: z.never().optional(),
         path: z.never().optional(),
@@ -406,7 +406,7 @@ export const moderationWarningCount = <ThrowOnError extends boolean = false>(opt
 /**
  * Annuaire public des équipes communautaires (clans) — recherche, filtre région/recrutement, tri (points/membres/récent/victoires), paginé.
  */
-export const listTeams = <ThrowOnError extends boolean = false>(options?: Options<ListTeamsData, ThrowOnError>) => (options?.client ?? client).get<ListTeamsResponses, ListTeamsErrors, ThrowOnError>({
+export const listTeams = <ThrowOnError extends boolean = false>(options?: Options<ListTeamsData, ThrowOnError>): RequestResult<ListTeamsResponses, ListTeamsErrors, ThrowOnError> => (options?.client ?? client).get<ListTeamsResponses, ListTeamsErrors, ThrowOnError>({
     requestValidator: async (data) => await z.object({
         body: z.never().optional(),
         path: z.never().optional(),
@@ -420,7 +420,7 @@ export const listTeams = <ThrowOnError extends boolean = false>(options?: Option
 /**
  * Classement des équipes par points cumulés (membres agrégés).
  */
-export const teamsLeaderboard = <ThrowOnError extends boolean = false>(options?: Options<TeamsLeaderboardData, ThrowOnError>) => (options?.client ?? client).get<TeamsLeaderboardResponses, TeamsLeaderboardErrors, ThrowOnError>({
+export const teamsLeaderboard = <ThrowOnError extends boolean = false>(options?: Options<TeamsLeaderboardData, ThrowOnError>): RequestResult<TeamsLeaderboardResponses, TeamsLeaderboardErrors, ThrowOnError> => (options?.client ?? client).get<TeamsLeaderboardResponses, TeamsLeaderboardErrors, ThrowOnError>({
     requestValidator: async (data) => await z.object({
         body: z.never().optional(),
         path: z.never().optional(),
@@ -434,7 +434,7 @@ export const teamsLeaderboard = <ThrowOnError extends boolean = false>(options?:
 /**
  * Détail public d'une équipe par slug (profil + membres + stats agrégées).
  */
-export const getTeam = <ThrowOnError extends boolean = false>(options: Options<GetTeamData, ThrowOnError>) => (options.client ?? client).get<GetTeamResponses, GetTeamErrors, ThrowOnError>({
+export const getTeam = <ThrowOnError extends boolean = false>(options: Options<GetTeamData, ThrowOnError>): RequestResult<GetTeamResponses, GetTeamErrors, ThrowOnError> => (options.client ?? client).get<GetTeamResponses, GetTeamErrors, ThrowOnError>({
     requestValidator: async (data) => await z.object({
         body: z.never().optional(),
         path: zGetTeamPath,
@@ -448,7 +448,7 @@ export const getTeam = <ThrowOnError extends boolean = false>(options: Options<G
 /**
  * Roster d'une équipe (membres + rôles + stats compétitives).
  */
-export const getTeamMembers = <ThrowOnError extends boolean = false>(options: Options<GetTeamMembersData, ThrowOnError>) => (options.client ?? client).get<GetTeamMembersResponses, GetTeamMembersErrors, ThrowOnError>({
+export const getTeamMembers = <ThrowOnError extends boolean = false>(options: Options<GetTeamMembersData, ThrowOnError>): RequestResult<GetTeamMembersResponses, GetTeamMembersErrors, ThrowOnError> => (options.client ?? client).get<GetTeamMembersResponses, GetTeamMembersErrors, ThrowOnError>({
     requestValidator: async (data) => await z.object({
         body: z.never().optional(),
         path: zGetTeamMembersPath,
@@ -462,7 +462,7 @@ export const getTeamMembers = <ThrowOnError extends boolean = false>(options: Op
 /**
  * Sondages communautaires publics (filtres catégorie/saison/featured, paginé).
  */
-export const listPolls = <ThrowOnError extends boolean = false>(options?: Options<ListPollsData, ThrowOnError>) => (options?.client ?? client).get<ListPollsResponses, ListPollsErrors, ThrowOnError>({
+export const listPolls = <ThrowOnError extends boolean = false>(options?: Options<ListPollsData, ThrowOnError>): RequestResult<ListPollsResponses, ListPollsErrors, ThrowOnError> => (options?.client ?? client).get<ListPollsResponses, ListPollsErrors, ThrowOnError>({
     requestValidator: async (data) => await z.object({
         body: z.never().optional(),
         path: z.never().optional(),
@@ -476,7 +476,7 @@ export const listPolls = <ThrowOnError extends boolean = false>(options?: Option
 /**
  * Détail d'un sondage par slug (options + résultats agrégés + votes du visiteur).
  */
-export const getPoll = <ThrowOnError extends boolean = false>(options: Options<GetPollData, ThrowOnError>) => (options.client ?? client).get<GetPollResponses, GetPollErrors, ThrowOnError>({
+export const getPoll = <ThrowOnError extends boolean = false>(options: Options<GetPollData, ThrowOnError>): RequestResult<GetPollResponses, GetPollErrors, ThrowOnError> => (options.client ?? client).get<GetPollResponses, GetPollErrors, ThrowOnError>({
     requestValidator: async (data) => await z.object({
         body: z.never().optional(),
         path: zGetPollPath,
@@ -490,7 +490,7 @@ export const getPoll = <ThrowOnError extends boolean = false>(options: Options<G
 /**
  * Tier lists communautaires publiques (filtres type/saison/featured, paginé).
  */
-export const listTierLists = <ThrowOnError extends boolean = false>(options?: Options<ListTierListsData, ThrowOnError>) => (options?.client ?? client).get<ListTierListsResponses, ListTierListsErrors, ThrowOnError>({
+export const listTierLists = <ThrowOnError extends boolean = false>(options?: Options<ListTierListsData, ThrowOnError>): RequestResult<ListTierListsResponses, ListTierListsErrors, ThrowOnError> => (options?.client ?? client).get<ListTierListsResponses, ListTierListsErrors, ThrowOnError>({
     requestValidator: async (data) => await z.object({
         body: z.never().optional(),
         path: z.never().optional(),
@@ -504,7 +504,7 @@ export const listTierLists = <ThrowOnError extends boolean = false>(options?: Op
 /**
  * Détail d'une tier list (sujets + tier communautaire agrégé + placement du visiteur).
  */
-export const getTierList = <ThrowOnError extends boolean = false>(options: Options<GetTierListData, ThrowOnError>) => (options.client ?? client).get<GetTierListResponses, GetTierListErrors, ThrowOnError>({
+export const getTierList = <ThrowOnError extends boolean = false>(options: Options<GetTierListData, ThrowOnError>): RequestResult<GetTierListResponses, GetTierListErrors, ThrowOnError> => (options.client ?? client).get<GetTierListResponses, GetTierListErrors, ThrowOnError>({
     requestValidator: async (data) => await z.object({
         body: z.never().optional(),
         path: zGetTierListPath,
@@ -518,7 +518,7 @@ export const getTierList = <ThrowOnError extends boolean = false>(options: Optio
 /**
  * Éditions publiées des Beyblade Awards (vidéo de résultats + catégories).
  */
-export const listAwardsEditions = <ThrowOnError extends boolean = false>(options?: Options<ListAwardsEditionsData, ThrowOnError>) => (options?.client ?? client).get<ListAwardsEditionsResponses, ListAwardsEditionsErrors, ThrowOnError>({
+export const listAwardsEditions = <ThrowOnError extends boolean = false>(options?: Options<ListAwardsEditionsData, ThrowOnError>): RequestResult<ListAwardsEditionsResponses, ListAwardsEditionsErrors, ThrowOnError> => (options?.client ?? client).get<ListAwardsEditionsResponses, ListAwardsEditionsErrors, ThrowOnError>({
     requestValidator: async (data) => await z.object({
         body: z.never().optional(),
         path: z.never().optional(),

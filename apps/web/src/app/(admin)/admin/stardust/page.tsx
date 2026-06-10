@@ -20,8 +20,6 @@ import {
 import { formatDateTime } from "@/lib/utils";
 import StardustSyncActions from "./_components/StardustSyncActions";
 
-export const dynamic = "force-dynamic";
-
 export default async function AdminStardustPage() {
   const [rankingCount, bladerCount, tournamentCount, lastUpdatedAt] = await Promise.all([
     countSeasonRankings("stardust"),

@@ -38,8 +38,6 @@ import {
   getBtsSeasonTournaments,
 } from "@/server/actions/bts";
 
-export const dynamic = "force-dynamic";
-
 export const metadata = createPageMetadata({
   title: "Classements BTS | RPB",
   description:

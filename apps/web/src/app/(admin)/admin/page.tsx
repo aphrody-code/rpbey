@@ -19,11 +19,11 @@ import { getBotStatus } from "@/lib/bot";
 import { getDiscordStats } from "@/lib/discord-data";
 import { formatDateTime } from "@/lib/utils";
 import { getAdminOverview } from "@/server/dal/infra";
+import { connection } from "next/server";
 import AdminOverviewIntegrations from "./_components/AdminOverviewIntegrations";
 
-export const dynamic = "force-dynamic";
-
 export default async function AdminDashboardPage() {
+  await connection();
   // Fetch all necessary data in parallel (DB agrégée via la DAL infra).
   const [overview, discordStats, botStatus] = await Promise.all([
     getAdminOverview(),

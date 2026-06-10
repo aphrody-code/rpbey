@@ -3,8 +3,6 @@ import { headers } from "next/headers";
 import { getStaffMembers } from "@/server/services/cms";
 import { TeamClientContent } from "./TeamClientContent";
 
-export const dynamic = "force-dynamic";
-
 export const metadata = {
   title: "Notre Équipe | RPB",
   description: "Découvrez les passionnés qui font vivre la République Populaire du Beyblade.",

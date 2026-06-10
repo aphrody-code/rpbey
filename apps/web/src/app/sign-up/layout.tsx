@@ -5,8 +5,6 @@ export const metadata: Metadata = {
   description: "Créer un compte RPB",
 };
 
-export const dynamic = "force-dynamic";
-
 export default function SignUpLayout({ children }: { children: React.ReactNode }) {
   return <>{children}</>;
 }

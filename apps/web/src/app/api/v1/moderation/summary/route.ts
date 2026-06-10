@@ -11,9 +11,6 @@ import { getModerationSummary } from "@/server/dal/moderation";
  * migration de la lane `auth`.
  */
 
-export const dynamic = "force-dynamic";
-export const runtime = "nodejs";
-
 export const GET = getRoute({
   response: ModerationSummarySchema,
   async handle() {

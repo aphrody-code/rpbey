@@ -11,10 +11,6 @@ import { type NextRequest, NextResponse } from "next/server";
  * traversal, pas d'hôte arbitraire — l'origine est figée serveur-side).
  */
 
-export const runtime = "nodejs";
-export const dynamic = "force-static";
-export const revalidate = false;
-
 // Origine serveur des octets, configurable par env. L'ancien hôte `cdn.rpbey.fr`
 // est DÉCOMMISSIONNÉ : aucun défaut codé en dur. Sans `ASSET_ORIGIN` configuré,
 // la route répond 404 (les assets sont rapatriés dans `public/`) plutôt que de

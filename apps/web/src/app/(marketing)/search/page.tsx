@@ -1,11 +1,10 @@
 import { type Metadata } from "next";
 import { Suspense } from "react";
+import { connection } from "next/server";
 import { computeGroups, groupSlug, loadCatalog } from "@/lib/bx-catalog";
 import { getRecommendations } from "@/server/services/recommend";
 import { createPageMetadata } from "@/lib/seo-utils";
 import { SearchClient } from "./_components/SearchClient";
-
-export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Recherche Beyblade — le moteur de recherche RPB (toutes saisons)",
@@ -15,6 +14,7 @@ export const metadata: Metadata = createPageMetadata({
 });
 
 export default async function SearchPage() {
+  await connection();
   const catalog = await loadCatalog();
   const groups = catalog ? computeGroups(catalog) : [];
   for (const g of groups) {

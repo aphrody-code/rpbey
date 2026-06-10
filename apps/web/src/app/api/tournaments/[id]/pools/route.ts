@@ -73,8 +73,6 @@ interface PoolStructure {
   participantsCount: number;
 }
 
-export const dynamic = "force-dynamic";
-
 export async function GET(_req: Request, { params }: RouteParams): Promise<Response> {
   const { id: idOrChallongeId } = await params;
 

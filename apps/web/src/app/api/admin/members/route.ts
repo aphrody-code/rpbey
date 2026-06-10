@@ -4,9 +4,6 @@ import { auth } from "@/lib/auth";
 import { isStaffUser } from "@/lib/auth-utils";
 import { listDiscordMembers, listXMembers } from "@/server/dal/polls";
 
-export const dynamic = "force-dynamic";
-export const runtime = "nodejs";
-
 const X_COMMUNITY_URL = "https://x.com/i/communities/1809671339109658814";
 
 export async function GET(request: Request) {

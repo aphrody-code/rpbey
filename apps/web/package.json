@@ -20,6 +20,7 @@
     "emit-openapi": "bun scripts/emit-openapi.ts",
     "gen:api": "bun scripts/emit-openapi.ts && bunx @hey-api/openapi-ts",
     "gen:api:check": "bun scripts/check-sdk-drift.ts",
+    "codegen": "bun --preload ./scripts/_preload-server-only.ts scripts/dump-schema.ts && graphql-codegen --config codegen.ts",
     "bot:dev": "turbo run dev --filter rpb-bot",
     "bot:build": "turbo run build --filter rpb-bot",
     "bot:start": "turbo run start --filter rpb-bot",
@@ -123,6 +124,8 @@
   "devDependencies": {
     "@aphrody/bxc-test": "^0.1.1",
     "@aphrody/next-playwright": "^0.1.1",
+    "@graphql-codegen/cli": "^7.1.2",
+    "@graphql-codegen/client-preset": "^6.0.1",
     "@swc/cli": "^0.8.1",
     "@swc/core": "^1.15.40",
     "@types/matter-js": "^0.20.2",
@@ -140,6 +143,7 @@
     "playwright-extra": "^4.3.6",
     "puppeteer-extra-plugin-stealth": "^2.11.2",
     "schema-dts": "^2.0.0",
+    "server-only": "^0.0.1",
     "typescript": "catalog:",
     "unfetch": "^5.0.0",
     "vitest": "catalog:testing"

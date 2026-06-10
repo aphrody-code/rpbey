@@ -13,9 +13,6 @@ import type { NextRequest } from "next/server";
 import { loadGoogleSansFonts } from "@/lib/og/fonts";
 import { getGachaCard } from "@/server/dal/gacha";
 
-export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
-
 const ELEMENT_ICONS: Record<string, { emoji: string; color: string }> = {
   FEU: { emoji: "🔥", color: "#ef4444" },
   EAU: { emoji: "💧", color: "#3b82f6" },

@@ -2,9 +2,6 @@ import { RecommendQuerySchema, RecommendResponseSchema } from "@rpbey/api-contra
 import { getRoute } from "@/server/api/handler";
 import { getRecommendations } from "@/lib/recommendation-engine";
 
-export const dynamic = "force-dynamic";
-export const runtime = "nodejs";
-
 export const GET = getRoute({
   query: RecommendQuerySchema,
   response: RecommendResponseSchema,

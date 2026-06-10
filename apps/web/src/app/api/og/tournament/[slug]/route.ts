@@ -28,9 +28,6 @@ import {
   type ChallongeSource,
 } from "@/lib/og/tournament-card";
 
-export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
-
 type Theme = "light" | "dark";
 type Format = "png" | "webp" | "avif";
 type Transport = "auto" | "api" | "htmlrewriter";

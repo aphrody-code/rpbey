@@ -13,8 +13,6 @@ import {
 } from "@/lib/seo-utils";
 import { ComparateurClient } from "./_components/ComparateurClient";
 
-export const dynamic = "force-dynamic";
-
 export const metadata: Metadata = createPageMetadata({
   title: "Comparateur de prix Beyblade X — Bey, Launcher, Stadium, Blade, Ratchet, Bit | RPB",
   description:

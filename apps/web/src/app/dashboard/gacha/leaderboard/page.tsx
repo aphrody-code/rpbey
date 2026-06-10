@@ -1,4 +1,3 @@
-export const dynamic = "force-dynamic";
 import { type Metadata } from "next";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
@@ -11,8 +10,6 @@ export const metadata: Metadata = {
   title: "Classement | Gacha Dashboard",
   description: "Classement gacha : pièces, victoires, MMR et collection.",
 };
-
-export const revalidate = 60;
 
 export default async function GachaLeaderboardPage() {
   const session = await auth.api.getSession({

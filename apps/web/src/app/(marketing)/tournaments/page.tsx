@@ -23,8 +23,6 @@ import {
 } from "@/server/dal/tournaments";
 import { createPageMetadata } from "@/lib/seo-utils";
 
-export const dynamic = "force-dynamic";
-
 export const metadata: Metadata = createPageMetadata({
   title: "Tournois | RPB",
   description:

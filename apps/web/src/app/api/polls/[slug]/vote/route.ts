@@ -3,9 +3,6 @@ import { PollVoteInputSchema } from "@rpbey/api-contract";
 import { getPoll, PollError, votePoll } from "@/server/dal/polls";
 import { resolveVoter } from "@/server/api/voter";
 
-export const dynamic = "force-dynamic";
-export const runtime = "nodejs";
-
 export async function POST(request: Request, ctx: { params: Promise<{ slug: string }> }) {
   try {
     const { slug } = await ctx.params;

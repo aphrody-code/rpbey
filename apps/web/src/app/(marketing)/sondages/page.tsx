@@ -11,8 +11,6 @@ export const metadata: Metadata = createPageMetadata({
   path: "/sondages",
 });
 
-export const dynamic = "force-dynamic";
-
 export default async function SondagesPage() {
   const [awards, polls, tierLists, awardsLeaders] = await Promise.all([
     listPolls({ page: 1, pageSize: 100, category: AWARDS_CATEGORY }),

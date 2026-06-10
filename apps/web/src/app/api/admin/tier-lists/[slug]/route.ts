@@ -4,9 +4,6 @@ import { auth } from "@/lib/auth";
 import { isStaffUser } from "@/lib/auth-utils";
 import { deleteTierList } from "@/server/dal/polls";
 
-export const dynamic = "force-dynamic";
-export const runtime = "nodejs";
-
 export async function DELETE(_request: Request, ctx: { params: Promise<{ slug: string }> }) {
   const session = await auth.api.getSession({ headers: await headers() });
   if (!session?.user || !isStaffUser(session.user)) {

@@ -19,8 +19,6 @@ import {
 import { formatDateTime } from "@/lib/utils";
 import SatrSyncActions from "./_components/SatrSyncActions";
 
-export const dynamic = "force-dynamic";
-
 export default async function AdminSatrPage() {
   const [rankingCount, bladerCount, lastUpdatedAt] = await Promise.all([
     countSeasonRankings("satr"),

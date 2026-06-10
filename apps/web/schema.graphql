@@ -1,0 +1,330 @@
+enum BeyType {
+  ATTACK
+  DEFENSE
+  STAMINA
+  BALANCE
+}
+
+enum PartType {
+  BLADE
+  RATCHET
+  BIT
+}
+
+enum TournamentStatus {
+  UPCOMING
+  PENDING
+  ACTIVE
+  COMPLETE
+  CANCELLED
+}
+
+type Blader {
+  id: ID!
+  playerName: String!
+  points: Int!
+  wins: Int!
+  losses: Int!
+  tournamentWins: Int!
+  tournamentsCount: Int!
+  avatarUrl: String
+  winRate: Float!
+}
+
+type Season {
+  id: ID!
+  name: String!
+  slug: String!
+  isActive: Boolean!
+  startDate: String!
+  endDate: String
+  entries(limit: Int = 50, offset: Int = 0): [SeasonEntry!]!
+}
+
+type SeasonEntry {
+  id: ID!
+  playerName: String
+  points: Int!
+  wins: Int!
+  losses: Int!
+  tournamentWins: Int!
+  rank: Int
+}
+
+type Part {
+  id: ID!
+  externalId: String!
+  name: String!
+  nameJp: String
+  type: PartType!
+  beyType: BeyType
+  weight: Float
+  attack: String
+  defense: String
+  stamina: String
+  burst: String
+  dash: String
+  imageUrl: String
+  rarity: String
+  spinDirection: String
+  system: String
+}
+
+type Beyblade {
+  id: ID!
+  code: String!
+  name: String!
+  nameEn: String
+  nameFr: String
+  beyType: BeyType
+  totalAttack: Int
+  totalDefense: Int
+  totalStamina: Int
+  totalBurst: Int
+  totalDash: Int
+  totalWeight: Float
+  imageUrl: String
+  blade: Part!
+  ratchet: Part!
+  bit: Part!
+}
+
+type Tournament {
+  id: ID!
+  name: String!
+  description: String
+  date: String!
+  location: String
+  format: String!
+  maxPlayers: Int!
+  status: TournamentStatus!
+  challongeUrl: String
+  participantCount: Int!
+  category: TournamentCategory
+}
+
+type TournamentCategory {
+  id: ID!
+  name: String!
+  multiplier: Float!
+  color: String
+}
+
+type Profile {
+  id: ID!
+  bladerName: String
+  favoriteType: BeyType
+  bio: String
+  wins: Int!
+  losses: Int!
+  tournamentWins: Int!
+  rankingPoints: Int!
+  challongeUsername: String
+  user: PublicUser
+}
+
+type PublicUser {
+  id: ID!
+  name: String
+  image: String
+  discordTag: String
+}
+
+type AnimeSeries {
+  id: ID!
+  slug: String!
+  title: String!
+  titleFr: String
+  titleJp: String
+  generation: String!
+  synopsis: String
+  posterUrl: String
+  bannerUrl: String
+  year: Int!
+  episodeCount: Int!
+}
+
+type AnimeFrame {
+  id: ID!
+  seriesId: ID!
+  episodeNumber: Int
+  imageUrl: String!
+  thumbUrl: String
+  sourceUrl: String
+  width: Int
+  height: Int
+  characterNames: [String!]!
+  tags: [String!]!
+  caption: String
+  isNotable: Boolean!
+}
+
+enum GachaRarity {
+  COMMON
+  RARE
+  SUPER_RARE
+  LEGENDARY
+  SECRET
+}
+
+type GachaCard {
+  id: ID!
+  slug: String!
+  name: String!
+  nameJp: String
+  series: String!
+  rarity: String!
+  element: String
+  imageUrl: String
+  beyblade: String
+  description: String
+  att: Int!
+  def: Int!
+  end: Int!
+  equilibre: Int!
+  specialMove: String
+  artistName: String
+  isActive: Boolean!
+  dropId: String
+}
+
+type GachaDrop {
+  id: ID!
+  slug: String!
+  name: String!
+  theme: String
+  season: Int!
+  maxCards: Int
+  startDate: String
+  endDate: String
+  isActive: Boolean!
+  imageUrl: String
+  cardCount: Int!
+}
+
+type GachaLeaderboardEntry {
+  rank: Int!
+  userId: ID!
+  name: String
+  image: String
+  currency: Int!
+  duelWins: Int!
+  duelRating: Int!
+  cardCount: Int!
+}
+
+type GachaProfile {
+  id: ID!
+  userId: ID!
+  bladerName: String
+  wins: Int!
+  losses: Int!
+  tournamentWins: Int!
+  cardCount: Int!
+  totalCards: Int!
+}
+
+type Query {
+  """
+  Top bladers from the global ranking
+  """
+  rankings(limit: Int = 50, offset: Int = 0): [Blader!]!
+
+  """
+  Get a blader by name
+  """
+  blader(name: String!): Blader
+
+  """
+  All ranking seasons
+  """
+  seasons: [Season!]!
+
+  """
+  A single season by slug
+  """
+  season(slug: String!): Season
+
+  """
+  All parts, optionally filtered by type
+  """
+  parts(type: PartType, limit: Int = 100, offset: Int = 0): [Part!]!
+
+  """
+  A single part by externalId
+  """
+  part(externalId: String!): Part
+
+  """
+  All beyblades
+  """
+  beyblades(limit: Int = 100, offset: Int = 0): [Beyblade!]!
+
+  """
+  A beyblade by code
+  """
+  beyblade(code: String!): Beyblade
+
+  """
+  Tournaments, optionally filtered by status
+  """
+  tournaments(status: TournamentStatus, limit: Int = 20, offset: Int = 0): [Tournament!]!
+
+  """
+  A tournament by ID
+  """
+  tournament(id: ID!): Tournament
+
+  """
+  A blader profile by user ID
+  """
+  profile(userId: ID!): Profile
+
+  """
+  Search bladers by name
+  """
+  searchBladers(query: String!, limit: Int = 10): [Blader!]!
+
+  """
+  All published anime series
+  """
+  animeSeries: [AnimeSeries!]!
+
+  """
+  Anime frame gallery (screencaps), filterable by series slug / episode / character / notable / free text
+  """
+  animeFrames(
+    series: String
+    episode: Int
+    character: String
+    notable: Boolean
+    q: String
+    limit: Int = 60
+  ): [AnimeFrame!]!
+
+  """
+  Public gacha card catalogue (active cards), filterable by rarity / drop / series / search
+  """
+  gachaCards(
+    rarity: GachaRarity
+    dropId: String
+    series: String
+    search: String
+    limit: Int = 200
+  ): [GachaCard!]!
+
+  """
+  Seasonal gacha collections (drops) with card counts
+  """
+  gachaDrops: [GachaDrop!]!
+
+  """
+  Gacha leaderboard (BeyCoins / collection / duels)
+  """
+  gachaLeaderboard(limit: Int = 100): [GachaLeaderboardEntry!]!
+
+  """
+  A player's gacha profile (currency, streak, duels, card count) by user ID
+  """
+  gachaProfile(userId: ID!): GachaProfile
+}

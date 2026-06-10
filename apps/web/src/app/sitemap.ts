@@ -1,9 +1,5 @@
-import fs from "node:fs";
-import path from "node:path";
 import { type MetadataRoute } from "next";
 import { listSitemapAnime, listSitemapProfiles, listSitemapTournaments } from "@/server/dal/infra";
-
-export const dynamic = "force-dynamic";
 
 // MIGRATED from: export const revalidate = 3600;
 // → Dynamic by default with Cache Components.
@@ -66,22 +62,12 @@ const STATIC_ROUTES: Record<
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://rpbey.fr";
-  const cwd = process.cwd();
 
-  // Static routes with actual file modification times
+  // Static routes
   const routes = Object.entries(STATIC_ROUTES).map(([route, config]) => {
-    let lastModified = new Date();
-    try {
-      const fullPath = path.join(cwd, config.file);
-      const stats = fs.statSync(fullPath);
-      lastModified = stats.mtime;
-    } catch {
-      console.warn(`Could not get stats for ${config.file}, using current date.`);
-    }
-
     return {
       url: `${baseUrl}${route}`,
-      lastModified,
+      lastModified: new Date(),
       changeFrequency: config.freq,
       priority: config.priority,
     };

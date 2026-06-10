@@ -8,9 +8,6 @@ import { auth } from "@/lib/auth";
 import { isStaffUser } from "@/lib/auth-utils";
 import { deletePoll, updatePollAdmin } from "@/server/dal/polls";
 
-export const dynamic = "force-dynamic";
-export const runtime = "nodejs";
-
 async function staff() {
   const session = await auth.api.getSession({ headers: await headers() });
   return session?.user && isStaffUser(session.user) ? session.user : null;

@@ -23,9 +23,6 @@ import {
   getAbsoluteImageUrl,
 } from "@/lib/seo-utils";
 
-export const dynamic = "force-dynamic";
-export const dynamicParams = true;
-
 const REGION_LABEL: Record<string, string> = {
   FR: "France",
   BE: "Belgique",
@@ -63,6 +60,8 @@ const native = (v: number | null | undefined, c: string) =>
         currency: c === "?" ? "EUR" : c,
         maximumFractionDigits: c === "JPY" ? 0 : 2,
       }).format(v);
+
+const CURRENT_YEAR = new Date().getFullYear();
 
 async function findGroup(slug: string): Promise<BxProductGroup | null> {
   const catalog = await loadCatalog();
@@ -113,8 +112,7 @@ export default async function ProductComparePage({
   const savePct =
     low != null && high != null && high > low ? Math.round((1 - low / high) * 100) : 0;
 
-  const currentYear = new Date().getFullYear();
-  const priceValidUntil = `${currentYear + 1}-12-31`;
+  const priceValidUntil = `${CURRENT_YEAR + 1}-12-31`;
 
   const productLd: WithContext<Product> = {
     "@context": "https://schema.org",

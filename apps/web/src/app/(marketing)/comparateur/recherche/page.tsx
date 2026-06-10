@@ -1,7 +1,5 @@
 import { redirect } from "next/navigation";
 
-export const dynamic = "force-dynamic";
-
 /**
  * Ancienne URL de la recherche. Le moteur canonique est `/search` (entrée de
  * navigation, SEO). On redirige en préservant la requête (`?q=`).

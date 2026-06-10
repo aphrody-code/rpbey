@@ -1,9 +1,6 @@
 import { computeGroups, groupSlug, loadCatalog } from "@/lib/bx-catalog";
 import { baseUrl as SITE } from "@/lib/seo-utils";
 
-export const dynamic = "force-dynamic";
-export const revalidate = 3600;
-
 /**
  * /llms.txt — standard d'indexation pour LLM (ChatGPT, Claude, Gemini,
  * Perplexity…). Décrit le site et ses pages clés en Markdown propre, bas-token,

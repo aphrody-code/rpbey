@@ -169,7 +169,7 @@ const nextConfig: NextConfig = {
   compress: false,
 
   // Cache Components (Next.js 16+)
-  cacheComponents: false, // Disabled due to instability with external scraping
+  cacheComponents: true,
 
   // External packages for server — packages listed in Next.js' built-in
   // server-external-packages.jsonc (puppeteer, pg, jsdom, sharp, canvas, etc.)

@@ -7,8 +7,6 @@ import { listCurrencyTransactions } from "@/server/dal/gacha";
 import type { TransactionType } from "@/lib/types";
 import { HistoryClient } from "./_components/HistoryClient";
 
-export const dynamic = "force-dynamic";
-
 export const metadata: Metadata = {
   title: "Historique | Gacha Dashboard",
   description: "Historique de vos transactions de pièces gacha.",

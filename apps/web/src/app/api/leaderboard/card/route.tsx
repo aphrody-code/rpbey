@@ -7,9 +7,6 @@ import { ImageResponse } from "next/og";
 import { loadGoogleSansFonts } from "@/lib/og/fonts";
 import { getActiveSeasonTop10 } from "@/server/dal/gacha";
 
-export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
-
 function ellipsize(text: string, max: number): string {
   if (text.length <= max) return text;
   return `${text.slice(0, Math.max(1, max - 1))}…`;

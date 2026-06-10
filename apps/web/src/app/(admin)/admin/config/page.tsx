@@ -5,8 +5,6 @@ import { redirect } from "next/navigation";
 import { getBotConfig, listDiscordChannels, listDiscordRoles } from "@/server/dal/bot-config";
 import { BotConfigEditor } from "./_components/BotConfigEditor";
 
-export const dynamic = "force-dynamic";
-
 export default async function AdminConfigPage() {
   const session = await requireAdmin();
   if (!session) redirect("/");

@@ -2,8 +2,6 @@ import { type NextRequest, NextResponse } from "next/server";
 import { rewriteAssetUrl } from "@/lib/asset-url";
 import { loadJsonSafe } from "@/lib/data-cache";
 
-export const runtime = "nodejs";
-
 /**
  * GET /api/v1/anime/frames/ambient?series=<slug>&count=<n>
  *

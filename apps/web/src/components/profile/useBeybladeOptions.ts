@@ -1,5 +1,6 @@
 "use client";
 
+import { gql } from "@/gql";
 import useSWR from "swr";
 
 export interface BeybladeOption {
@@ -9,24 +10,27 @@ export interface BeybladeOption {
   beyType: string | null;
 }
 
-const QUERY = `query ProfileBeyblades {
-  beyblades(limit: 100) {
-    id
-    name
-    imageUrl
-    beyType
+const QUERY = gql(`
+  query ProfileBeyblades {
+    beyblades(limit: 100) {
+      id
+      name
+      imageUrl
+      beyType
+    }
   }
-}`;
+`);
 
 interface GraphqlBeybladesResponse {
   data?: { beyblades?: BeybladeOption[] };
 }
 
 const fetcher = async (): Promise<BeybladeOption[]> => {
+  const queryStr = QUERY.loc?.source.body ?? "";
   const res = await fetch("/api/graphql", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ query: QUERY }),
+    body: JSON.stringify({ query: queryStr }),
   });
   const json = (await res.json()) as GraphqlBeybladesResponse;
   return json.data?.beyblades ?? [];

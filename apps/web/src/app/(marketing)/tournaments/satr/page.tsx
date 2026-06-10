@@ -15,8 +15,6 @@ import { getBladerAggregateStats, listSeasonRankingsAll } from "@/server/dal/ran
 import { getRankings } from "@/server/services/rankings";
 import { getSatrSeasonStats } from "@/server/actions/satr";
 
-export const dynamic = "force-dynamic";
-
 export const metadata = {
   title: "Classement SAtR | Sun After The Reign",
   description: "Le classement officiel des Beyblade Battle Tournaments de Sun After the Reign.",

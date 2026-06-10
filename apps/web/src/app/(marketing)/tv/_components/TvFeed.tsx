@@ -11,7 +11,7 @@ import { fr } from "date-fns/locale";
 import { Suspense, use, useState } from "react";
 import { type BeyTubeVideo } from "@rpbey/api-contract";
 import { type TikTokVideo } from "@/lib/tiktok-types";
-import { type StreamInfo, type VideoInfo } from "@/lib/twitch";
+import type { StreamInfo, VideoInfo } from "@/lib/twitch";
 import { LiveBanner } from "./LiveBanner";
 import { TikTokMiniCard } from "./TikTokMiniCard";
 import { VideoCard } from "./VideoCard";

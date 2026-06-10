@@ -15,10 +15,7 @@ import { type NextRequest, NextResponse } from "next/server";
  * pas le code client.
  */
 
-export const runtime = "nodejs";
 // Cache HTTP géré par les headers (immutable). On laisse Next router/cacher.
-export const dynamic = "force-static";
-export const revalidate = false;
 
 /**
  * Origine serveur des octets (jamais vue par le navigateur), configurable par env.

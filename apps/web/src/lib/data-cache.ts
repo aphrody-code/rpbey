@@ -29,6 +29,10 @@ async function readFileText(filePath: string): Promise<string> {
   return bun ? await bun.file(filePath).text() : await readFile(filePath, "utf8");
 }
 
+async function getFileStat(filePath: string) {
+  return await stat(filePath);
+}
+
 /**
  * Origine HTTP optionnelle pour les données (override). Vide par défaut → lecture
  * FS bundlée (self-contained Vercel). `NEXT_PUBLIC_ASSET_BASE` doit pointer une
@@ -57,14 +61,15 @@ type CacheEntry<T> =
 const store = new Map<string, CacheEntry<any>>();
 
 async function getFileMtime(normalized: string): Promise<number> {
+  const rest = normalized.startsWith("data/") ? normalized.substring(5) : normalized;
   const candidates = [
-    join(process.cwd(), normalized),
-    join(process.cwd(), "public", normalized),
-    join(process.cwd(), "apps", "web", normalized),
+    join(/* turbopackIgnore: true */ process.cwd(), "data", rest),
+    join(/* turbopackIgnore: true */ process.cwd(), "public", "data", rest),
+    join(/* turbopackIgnore: true */ process.cwd(), "apps", "web", "data", rest),
   ];
   for (const filePath of candidates) {
     try {
-      const st = await stat(filePath);
+      const st = await getFileStat(filePath);
       return st.mtimeMs;
     } catch {
       // continue
@@ -76,15 +81,16 @@ async function getFileMtime(normalized: string): Promise<number> {
 async function getFileStatsAndContent(
   normalized: string,
 ): Promise<{ content: string; mtimeMs: number }> {
+  const rest = normalized.startsWith("data/") ? normalized.substring(5) : normalized;
   const candidates = [
-    join(process.cwd(), normalized),
-    join(process.cwd(), "public", normalized),
-    join(process.cwd(), "apps", "web", normalized),
+    join(/* turbopackIgnore: true */ process.cwd(), "data", rest),
+    join(/* turbopackIgnore: true */ process.cwd(), "public", "data", rest),
+    join(/* turbopackIgnore: true */ process.cwd(), "apps", "web", "data", rest),
   ];
   let lastErr: unknown = null;
   for (const filePath of candidates) {
     try {
-      const st = await stat(filePath);
+      const st = await getFileStat(filePath);
       const content = await readFileText(filePath);
       return { content, mtimeMs: st.mtimeMs };
     } catch (err) {
@@ -97,10 +103,11 @@ async function getFileStatsAndContent(
 async function loadFromFs(normalized: string): Promise<string> {
   // data/ + public/data/ supportés (selon où le fichier atterrit dans la lambda).
   // turbopackIgnore : empêche le NFT tracer Turbopack de tracer tout le CWD.
+  const rest = normalized.startsWith("data/") ? normalized.substring(5) : normalized;
   const candidates = [
-    join(/* turbopackIgnore: true */ process.cwd(), normalized),
-    join(/* turbopackIgnore: true */ process.cwd(), "public", normalized),
-    join(/* turbopackIgnore: true */ process.cwd(), "apps", "web", normalized),
+    join(/* turbopackIgnore: true */ process.cwd(), "data", rest),
+    join(/* turbopackIgnore: true */ process.cwd(), "public", "data", rest),
+    join(/* turbopackIgnore: true */ process.cwd(), "apps", "web", "data", rest),
   ];
   let lastErr: unknown = null;
   for (const filePath of candidates) {
@@ -115,7 +122,7 @@ async function loadFromFs(normalized: string): Promise<string> {
 
 async function loadJsonUncached<T = JsonValue>(relPath: string): Promise<T> {
   const normalized = relPath.replace(/^\.?\//, "");
-  const now = Date.now();
+  const now = performance.now();
 
   const cached = store.get(normalized);
   if (cached) {

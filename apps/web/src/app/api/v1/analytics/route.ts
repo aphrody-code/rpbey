@@ -12,9 +12,6 @@ import { anonSessionId, clientIpFromHeaders, recordEvent } from "@/server/dal/an
  * (jamais d'échec remonté au client) ; renvoie un accusé `{ accepted: true }`.
  */
 
-export const dynamic = "force-dynamic";
-export const runtime = "nodejs";
-
 export const POST = mutationRoute({
   body: AnalyticsTrackInputSchema,
   response: AnalyticsTrackResponseSchema,

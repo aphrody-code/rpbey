@@ -9,8 +9,6 @@ import { getEpisodeByNumber } from "@/server/dal/anime";
 import { EpisodePlayerSection } from "../../_components/EpisodePlayerSection";
 import { EpisodeSidebar } from "../../_components/EpisodeSidebar";
 
-export const dynamic = "force-dynamic";
-
 interface Props {
   params: Promise<{ slug: string; episode: string }>;
 }

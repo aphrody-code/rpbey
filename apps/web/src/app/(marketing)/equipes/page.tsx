@@ -10,8 +10,6 @@ export const metadata: Metadata = createPageMetadata({
   path: "/equipes",
 });
 
-export const dynamic = "force-dynamic";
-
 export default async function EquipesPage() {
   const [initialList, leaderboard] = await Promise.all([
     listTeams({ page: 1, pageSize: 24, sort: "points" }),

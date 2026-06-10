@@ -6,8 +6,6 @@
 import { connection, type NextRequest, NextResponse } from "next/server";
 import { listPartsByOffset } from "@/server/dal/parts";
 
-export const dynamic = "force-dynamic";
-
 export async function GET(request: NextRequest) {
   await connection();
   try {

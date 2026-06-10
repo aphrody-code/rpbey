@@ -19,9 +19,6 @@ import { ALGO_VERSION, removeUniformLightBackground } from "@/server/services/im
  * (l'image s'affiche quand même). Un marqueur `.skip` évite de retraiter.
  */
 
-export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
-
 // Cache disque **best-effort** (jamais source de vérité : sur cache-miss on
 // re-fetch + re-détoure). Défaut `os.tmpdir()` — seul chemin writable d'une
 // lambda Vercel (le FS est read-only ailleurs ; `homedir()` ne tient pas en

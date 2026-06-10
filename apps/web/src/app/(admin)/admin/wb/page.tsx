@@ -19,8 +19,6 @@ import {
 import { formatDateTime } from "@/lib/utils";
 import WbSyncActions from "./_components/WbSyncActions";
 
-export const dynamic = "force-dynamic";
-
 export default async function AdminWbPage() {
   const [rankingCount, bladerCount, lastUpdatedAt] = await Promise.all([
     countSeasonRankings("wb"),

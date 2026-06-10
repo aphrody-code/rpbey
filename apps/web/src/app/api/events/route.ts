@@ -1,9 +1,6 @@
 import { type NextRequest } from "next/server";
 import type { RedisClient } from "bun";
 
-export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
-
 /**
  * Server-Sent Events endpoint for business events published by the bot.
  *

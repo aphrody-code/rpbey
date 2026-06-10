@@ -18,8 +18,6 @@ import { getStardustSeasonStats } from "@/server/actions/stardust";
 
 const ACCENT = "#60A5FA";
 
-export const dynamic = "force-dynamic";
-
 export const metadata = createPageMetadata({
   title: "Stardust Séries | Classement RPB Nord",
   description: "Classement officiel des Stardust Séries — la compétition régionale RPB Nord.",

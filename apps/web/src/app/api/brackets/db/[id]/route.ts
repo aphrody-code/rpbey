@@ -26,8 +26,6 @@ interface RouteParams {
   params: Promise<{ id: string }>;
 }
 
-export const dynamic = "force-dynamic";
-
 // Mappe les IDs tournois vers leurs exports JSON "Max Data" (BTS)
 const JSON_MAPPING: Record<string, string> = {
   bts1: "B_TS1.json",

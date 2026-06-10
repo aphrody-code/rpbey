@@ -28,8 +28,6 @@ const ChallongeIcon = (props: SvgIconProps) => (
   </svg>
 );
 
-export const dynamic = "force-dynamic";
-
 export const metadata = {
   title: "Ultim Bataille | Wild Breakers",
   description: "Le classement officiel des Ultim Batailles de Wild Breakers.",

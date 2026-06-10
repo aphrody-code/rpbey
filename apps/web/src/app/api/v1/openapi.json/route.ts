@@ -1,7 +1,5 @@
 import { buildOpenApiDocument } from "@rpbey/api-contract/openapi";
 
-export const dynamic = "force-static";
-export const runtime = "nodejs";
 
 /**
  * Spec OpenAPI 3.1 de la surface `/api/v1`, dérivé du contrat Zod.

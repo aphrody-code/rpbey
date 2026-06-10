@@ -6,9 +6,6 @@ import { TeamMessageInputSchema } from "@rpbey/api-contract";
 import { getMessages, isTeamMember, postMessage } from "@/server/dal/teams";
 import { currentUserId, teamErrorResponse, unauthorized } from "@/server/api/teams-http";
 
-export const dynamic = "force-dynamic";
-export const runtime = "nodejs";
-
 export async function GET(request: Request, ctx: { params: Promise<{ id: string }> }) {
   const userId = await currentUserId();
   if (!userId) return unauthorized();

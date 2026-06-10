@@ -8,9 +8,6 @@ import type { NextRequest } from "next/server";
 import { loadInterFonts } from "@/lib/og/fonts";
 import { getUserStats, userExists } from "@/server/dal/users";
 
-export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
-
 interface RouteParams {
   params: Promise<{ id: string }>;
 }

@@ -7,9 +7,6 @@ import {
   type BotConfigSection,
 } from "@/server/dal/bot-config";
 
-export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
-
 const GUILD_ID = process.env.GUILD_ID ?? process.env.DISCORD_GUILD_ID ?? "";
 
 export async function GET() {

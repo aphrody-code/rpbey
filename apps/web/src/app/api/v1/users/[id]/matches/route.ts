@@ -3,9 +3,6 @@ import { z } from "zod";
 import { jsonErr, jsonOk } from "@/server/api/handler";
 import { getUserMatches } from "@/server/dal/users";
 
-export const dynamic = "force-dynamic";
-export const runtime = "nodejs";
-
 export async function GET(request: Request, ctx: { params: Promise<{ id: string }> }) {
   const url = new URL(request.url);
   const parsed = UserMatchesQuerySchema.safeParse(Object.fromEntries(url.searchParams.entries()));

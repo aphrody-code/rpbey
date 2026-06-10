@@ -4,9 +4,6 @@ import { searchVectorIds } from "@/server/services/embeddings";
 import { getSearchCorpus } from "@/server/services/search-corpus";
 import { facetCounts, fuseHybrid, rankSearch } from "@/lib/search-rank";
 
-export const dynamic = "force-dynamic";
-export const runtime = "nodejs";
-
 export const GET = getRoute({
   query: SearchQuerySchema,
   response: SearchResponseSchema,

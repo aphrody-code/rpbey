@@ -7,9 +7,6 @@ import { requireAdmin } from "@/lib/auth-utils";
 import { createGachaCard, listGachaCards, type GachaCardInput } from "@/server/dal/gacha";
 import type { CardRarity } from "@/lib/types";
 
-export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
-
 export async function GET(req: NextRequest) {
   if (!(await requireAdmin())) {
     return NextResponse.json({ error: "Non autorisé" }, { status: 401 });
